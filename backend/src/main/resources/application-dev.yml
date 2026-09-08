@@ -1,0 +1,9 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+logging:
+  level:
+    com.kizuna: DEBUG
+    org.springframework.web: DEBUG

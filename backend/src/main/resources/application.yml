@@ -1,0 +1,75 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: kizuna-backend
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+
+# Custom Kizuna Application Configuration
+kizuna:
+  firebase:
+    # Path to Firebase Service Account JSON file (relative, absolute, or classpath)
+    config-path: ${FIREBASE_CONFIG_PATH:classpath:firebase-service-account.json}
+    # Base64 encoded Service Account JSON (ideal for Docker / Cloud Run / CI-CD)
+    credentials-base64: ${FIREBASE_CREDENTIALS_BASE64:}
+    # Google Cloud Project ID
+    project-id: ${FIREBASE_PROJECT_ID:kizuna-nihongo-app}
+    # Firestore emulator configuration (for local testing without real GCP project)
+    emulator:
+      enabled: ${FIRESTORE_EMULATOR_ENABLED:false}
+      host: ${FIRESTORE_EMULATOR_HOST:localhost:8088}
+  cors:
+    # Multiplatform origins (React Vite dev server, Capacitor, Ionic, mobile webviews)
+    allowed-origins:
+      - "http://localhost:5173"
+      - "http://localhost:3000"
+      - "http://127.0.0.1:5173"
+      - "capacitor://localhost"
+      - "ionic://localhost"
+      - "http://localhost"
+    allowed-methods:
+      - "GET"
+      - "POST"
+      - "PUT"
+      - "PATCH"
+      - "DELETE"
+      - "OPTIONS"
+    allowed-headers:
+      - "*"
+    allow-credentials: true
+    max-age: 3600
+
+# Springdoc OpenAPI / Swagger UI
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    tags-sorter: alpha
+    operations-sorter: method
+  show-actuator: true
+
+# Actuator Endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+# Logging
+logging:
+  level:
+    root: INFO
+    com.kizuna: DEBUG
+    org.springframework.security: INFO
