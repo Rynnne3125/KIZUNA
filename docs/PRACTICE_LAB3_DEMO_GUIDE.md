@@ -1,123 +1,107 @@
-# 🧪 HƯỚNG DẪN THỰC HÀNH & KỊCH BẢN DEMO (PRACTICE LAB 3)
-## BÀI THỰC HÀNH CHƯƠNG 3: DEMO CÁC VÍ DỤ MINH HỌA & KIỂM CHỨNG YÊU CẦU SẢN PHẨM
+# 🧪 HƯỚNG DẪN THỰC HÀNH & KỊCH BẢN DEMO ĐỒ ÁN (PRACTICE LAB 3)
+## BÀI THỰC HÀNH CHƯƠNG 3: KIỂM CHỨNG BẢN ĐỒ HÀNH TRÌNH & VÒNG LẶP HỌC TẬP TÍCH HỢP AI
 **Học phần:** CS2028 - AI Product Development: End to End (Chuyên đề 4)  
 **Trường:** Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn (VKU) - Đại học Đà Nẵng  
-**Mục tiêu bài thực hành:** Vận hành Base Project, kiểm chứng các yêu cầu và User Stories đã đặc tả trong PRD  
+**Mục tiêu kịch bản:** Demo một chuyến đi học tập ngắn nhưng hoàn chỉnh theo đúng định hướng sản phẩm  
 
 ---
 
-## 1. MỤC TIÊU CỦA BÀI THỰC HÀNH 3
-1. Chứng minh hệ thống **Base Project KIZUNA** có khả năng vận hành thực tế (Operational Codebase).
-2. Kiểm chứng các Use Cases và Acceptance Criteria đã viết trong [`3.4_USER_STORIES_AND_ACCEPTANCE_CRITERIA.md`](file:///D:/Documents/KIZUNA/docs/3.4_USER_STORIES_AND_ACCEPTANCE_CRITERIA.md).
-3. Thể hiện sự phối hợp nhịp nhàng giữa Frontend React Vite và Backend Spring Boot + Firestore.
+## 1. MỤC TIÊU VÀ KỊCH BẢN CHUYẾN ĐI MẪU (DEMO ODYSSEY ROADMAP)
 
----
+Để bảo vệ và báo cáo xuất sắc trước hội đồng/giảng viên, nhóm thiết kế một kịch bản demo tinh gọn qua **5 chặng trải nghiệm liên hoàn**:
 
-## 2. CHUẨN BỊ MÔI TRƯỜNG VÀ KHỞI CHẠY (QUICK START)
-
-### Bước 1: Khởi động Backend Spring Boot
-Mở một cửa sổ PowerShell tại thư mục dự án:
-```powershell
-cd D:\Documents\KIZUNA\backend
-.\mvnw.cmd spring-boot:run
 ```
-*Dấu hiệu thành công:* Terminal xuất hiện thông báo `Tomcat started on port 8080 (http)` và `Started KizunaBackendApplication in ... seconds`.
-
-### Bước 2: Khởi động Frontend React Vite
-Mở một cửa sổ PowerShell thứ hai:
-```powershell
-cd D:\Documents\KIZUNA\frontend
-npm run dev
+[Chặng 1 & 2: Bảng chữ cái] ──► [Chặng 3: Mốc Giao tiếp N4] ──► [AI Sinh Biến thể & Góp ý] ──► [Ôn lỗi sai ngày hôm sau] ──► [Bản đồ Mở khóa mốc mới]
 ```
-*Dấu hiệu thành công:* Terminal hiển thị liên kết local `http://localhost:5173/`.
-
-### Bước 3: Mở trình duyệt
-Truy cập: **`http://localhost:5173/`** để xem giao diện chính của ứng dụng KIZUNA.
 
 ---
 
-## 3. KỊCH BẢN 5 BƯỚC DEMO TRỰC TIẾP TRÊN HỆ THỐNG (DEMO SCENARIOS)
+## 2. KỊCH BẢN 5 BƯỚC DEMO CHI TIẾT
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor SV as Sinh viên / Giảng viên
-    participant Web as Giao diện Web KIZUNA
-    participant API as Backend Spring Boot (8080)
-    participant Swagger as Swagger UI Docs
+    actor SV as Sinh viên thuyết trình / Giảng viên
+    participant Map as Bản đồ Hành trình KIZUNA
+    participant Milestone as Màn hình Mốc "Đổi lịch hẹn"
+    participant AI as AI Sensei & Guardrail Engine
+    participant Progress as Động cơ Firestore Progress
 
-    SV->>Web: 1. Xem trạng thái kết nối Backend
-    Web-->>SV: Banner xanh: "Backend Spring Boot 3.4.2 & Firestore: Đang hoạt động"
+    SV->>Map: 1. Khám phá Bản đồ: Xem Chặng 1, 2 và Chặng 3
+    Map-->>SV: Thấy Chặng 1 & 2 đã hoàn thành, Mốc 3 "Đổi lịch hẹn" đang mở khóa
     
-    SV->>Web: 2. Chọn Tab cấp độ "N5"
-    Web->>API: GET /api/v1/kanji?jlptLevel=N5
-    API-->>Web: Trả về danh sách Hán tự (日, 本, 人, 学,...)
-    Web-->>SV: Hiển thị lưới thẻ Kanji với số nét và âm On/Kun
+    SV->>Milestone: 2. Nhấn vào Mốc 3 bắt đầu vòng lặp
+    Milestone-->>SV: Bước 1: Nghe audio đổi lịch -> Bước 2: Học từ cốt lõi (都合, 変更)
     
-    SV->>Web: 3. Nhấn "Ôn tập SRS" tại thẻ chữ "日"
-    Web-->>SV: Màn hình Flashcard lật mặt sau
-    SV->>Web: Bấm chấm điểm "4 - Nhớ tốt"
-    Web->>API: POST /api/v1/progress (SM-2 SRS)
-    API-->>Web: Trả về chu kỳ ôn tập mới & +10 XP
-    Web-->>SV: Thông báo cộng điểm thành công!
+    SV->>Milestone: 3. Tự gõ tin nhắn đổi lịch ở Bước 5
+    Milestone->>AI: Gửi câu viết của SV tới AI Sensei
+    AI-->>Milestone: Góp ý chi tiết về cách dùng trợ từ và đề xuất câu tự nhiên hơn
     
-    SV->>Web: 4. Bấm nút "AI Sensei"
-    Web-->>SV: Mở Modal Trợ lý AI
-    SV->>Web: Bấm gợi ý "Phân biệt cách dùng âm On và Kun"
-    Web-->>SV: Hiển thị phản hồi có cấu trúc 3 phần từ AI
+    SV->>Milestone: 4. Cố tình chọn sai 1 câu trắc nghiệm để test thuật toán
+    Milestone->>Progress: Ghi nhận lỗi sai từ "都合" vào pendingRevisitQuests
     
-    SV->>Swagger: 5. Mở http://localhost:8080/swagger-ui.html
-    Swagger-->>SV: Kiểm tra API Docs sống và thử nghiệm trực tiếp
+    SV->>Map: 5. Quay lại Bản đồ (Mô phỏng ngày hôm sau)
+    Progress-->>Map: Kích hoạt biểu tượng "Nhiệm vụ quay lại luyện tập" cạnh Mốc 3
+    SV->>Map: Hoàn thành nhanh 3 câu ôn tập -> Mốc kế tiếp tự động mở khóa!
 ```
-
-### Kịch bản Demo 1: Kiểm tra trạng thái hệ thống (Health Check)
-- **Hành động:** Quan sát thanh thông báo đầu trang Web KIZUNA.
-- **Kết quả mong đợi:** Thanh trạng thái hiển thị màu xanh lá cây:  
-  `Backend Spring Boot 3.4.2 & Firestore: Đang hoạt động (Port 8080)`.
-- **Kiểm chứng qua dòng lệnh:**
-  ```powershell
-  curl.exe http://localhost:8080/api/v1/health
-  ```
-  Trả về JSON: `{"success":true,"code":"SUCCESS","data":{"status":"UP",...}}`.
-
-### Kịch bản Demo 2: Tra cứu & Lọc Hán tự Kanji (User Story US-03)
-- **Hành động:** Click vào các tab cấp độ `N5`, `N4`, `N3` trên giao diện.
-- **Kết quả mong đợi:** 
-  - Lưới thẻ tự động cập nhật danh sách các chữ Hán tự tương ứng.
-  - Mỗi thẻ Kanji thể hiện rõ nét ký tự chữ to, nghĩa tiếng Việt màu đỏ ruby đặc trưng, số nét bút, âm On, âm Kun và các từ ghép thực tế.
-
-### Kịch bản Demo 3: Trải nghiệm Spaced Repetition Flashcard (User Story US-05)
-- **Hành động:** Bấm vào nút **"Ôn tập SRS"** tại thẻ chữ **"日"**.
-- **Kết quả mong đợi:**
-  1. Giao diện chuyển sang màn hình Flashcard trọng tâm.
-  2. Click vào thẻ: Thẻ xoay lật mặt sau, hiển thị đầy đủ giải nghĩa và bộ thủ cấu tạo.
-  3. Bấm nút **"4 - Nhớ tốt"**: Hệ thống tính toán theo thuật toán SuperMemo SM-2, điểm kinh nghiệm XP trên Navbar được cộng thêm, hiển thị thông báo chúc mừng màu xanh lá.
-
-### Kịch bản Demo 4: Tương tác cùng Trợ lý Học tập AI Sensei (User Story US-07)
-- **Hành động:** Bấm vào nút **"AI Sensei"** có biểu tượng ngôi sao lấp lánh trên thanh điều hướng Navbar.
-- **Kết quả mong đợi:**
-  1. Hộp thoại modal xuất hiện với giao diện thân thiện.
-  2. Bấm vào nút gợi ý: *"Phân biệt cách dùng âm On và Kun trong thực tế"*.
-  3. AI Sensei hiển thị câu trả lời có cấu trúc 3 phần chặt chẽ:
-     - 💡 **Phân tích ngữ cảnh & Ý nghĩa**
-     - 🇯🇵 **Ví dụ hội thoại song ngữ Nhật - Việt**
-     - ⚠️ **Lưu ý tránh nhầm lẫn của người Việt**
-
-### Kịch bản Demo 5: Kiểm chứng Tài liệu API Sống (OpenAPI / Swagger UI)
-- **Hành động:** Mở tab trình duyệt mới tại địa chỉ: **`http://localhost:8080/swagger-ui.html`**.
-- **Kết quả mong đợi:**
-  - Giao diện Swagger UI hiển thị 5 cụm API: `Authentication`, `Health Check`, `Kanji`, `Vocabulary`, `Study Progress (SRS)`.
-  - Có sẵn nút **Authorize** hỗ trợ dán Firebase Bearer Token để test bảo mật trực tiếp.
 
 ---
 
-## 4. BẢNG CHECKLIST TỰ ĐÁNH GIÁ KHI NỘP BÀI THỰC HÀNH
+### Bước 1: Trải nghiệm 2 Chặng Bảng Chữ Cái (Hiragana & Katakana)
+- **Hành động:** 
+  - Mở Bản đồ Hành trình KIZUNA trên giao diện Web hoặc Mobile.
+  - Quan sát **Chặng 1: "Chuẩn bị lên đường"** (Nhận mặt chữ Hiragana, ghép âm thành từ ngắn như *さくら*, *ありがとう*).
+  - Quan sát **Chặng 2: "Bắt đầu khám phá"** (Đọc từ mượn Katakana, tên món ăn quen thuộc như *ラーメン*, *コーヒー*).
+- **Điểm nhấn thuyết trình:** Thể hiện việc chặng bảng chữ cái không ép người học phải nhồi nhét ngữ pháp hay Kanji phức tạp, chỉ tập trung vào phản xạ đọc tự nhiên.
 
-| STT | Nội dung tiêu chí kiểm tra | Tình trạng | Ghi chú |
-| :---: | :--- | :---: | :--- |
-| 1 | Khởi động Backend không phát sinh lỗi (Zero compilation error) | ✅ ĐẠT | Java 17 + Spring Boot 3.4.2 |
-| 2 | Khởi động Frontend thành công, tải trang tức thì | ✅ ĐẠT | React 18 + TypeScript + Vite |
-| 3 | Thể hiện đúng giao diện thẩm mỹ phong cách tiếng Nhật | ✅ ĐẠT | Phông chữ Noto Sans JP chuẩn xác |
-| 4 | Cài đặt chính xác thuật toán Spaced Repetition SM-2 | ✅ ĐẠT | Cài đặt trong `ProgressServiceImpl.java` |
-| 5 | Giao tiếp API chuẩn cấu trúc `ApiResponse<T>` | ✅ ĐẠT | Có metadata `code`, `message`, `timestamp` |
-| 6 | Tài liệu PRD và User Stories đầy đủ trong thư mục `docs/` | ✅ ĐẠT | Đầy đủ 5 file đặc tả theo đề cương |
+---
+
+### Bước 2: Bước vào Mốc Giao tiếp N4: *"Đổi lịch hẹn"* (Chặng 3)
+- **Hành động:** Nhấn vào Mốc 3 trên bản đồ.
+- **Quan sát vòng lặp trải nghiệm tại mốc:**
+  1. **Nghe hội thoại:** Đoạn audio ngắn hai đồng nghiệp nói về việc bận đột xuất vào thứ Hai.
+  2. **Học từ & mẫu câu cốt lõi:** Nhận diện 2 từ vựng chính (`都合`, `変更`) và cấu trúc lịch sự `〜ていただけますか`.
+  3. **Phân biệt sắc thái:** Bài tập đối chiếu cách nói thân mật với bạn bè vs cách nói lịch sự trong môi trường làm việc.
+
+---
+
+### Bước 3: Tương tác cùng AI Sensei (Sinh biến thể & Chấm câu viết)
+- **Hành động 1 (Làm bài tập do AI tạo):**
+  - Hệ thống gọi AI sinh ra một câu hỏi tình huống mới: *"Nếu bạn muốn dời lịch hẹn sang thứ Tư tuần sau thì nên nhắn tin thế nào?"*.
+  - **Chứng minh ranh giới AI (Guardrail):** Chỉ ra rằng toàn bộ từ vựng trong câu hỏi đều nằm trong whitelist của mốc N4, không bị lẫn từ khó N2/N1.
+- **Hành động 2 (Học viên tự viết câu):**
+  - Học viên gõ câu: *"来週の月曜日は都合が悪いですから、火曜日に変更してください。"*.
+  - AI Sensei phản hồi phân tích: Câu đúng ngữ pháp nhưng có phần áp đặt, đề xuất đổi sang thể nhờ vả lịch sự `〜ていただけないでしょうか`.
+
+---
+
+### Bước 4: Kiểm chứng "Nhiệm vụ quay lại luyện tập" (Spaced Re-engagement)
+- **Hành động:**
+  - Trong quá trình làm bài, cố tình trả lời sai từ `都合` (chọn nhầm nghĩa).
+  - Hệ thống ghi nhận lỗi sai vào danh sách ôn tập.
+  - Sử dụng công cụ mô phỏng thời gian (Fast-forward to Next Day).
+- **Kết quả trên Bản đồ:**
+  - Bản đồ không bắt người học phải chơi lại từ đầu mốc.
+  - Một biểu tượng trạm dừng chân phụ màu cam **"Nhiệm vụ quay lại luyện tập"** xuất hiện ngay tại vị trí mốc cũ.
+  - Học viên nhấp vào giải quyết nhanh 3 câu hỏi ôn tập từ `都合` để xóa cờ lỗi sai và nhận thưởng +15 XP.
+
+---
+
+### Bước 5: Mở khóa Mốc mới trên Bản đồ Hành trình
+- **Hành động:** Sau khi hoàn thành xuất sắc vòng lặp và nhiệm vụ ôn tập, học viên xem lại Bản đồ.
+- **Kết quả:**
+  - Mốc 3 đổi sang trạng thái `COMPLETED` màu xanh lá cây rực rỡ.
+  - Mốc 4: *"Giải thích lý do & Cảm ơn"* tự động phát sáng và chuyển sang trạng thái `UNLOCKED`.
+  - Toàn bộ thanh tiến độ chặng được cập nhật thời gian thực trên Firestore.
+
+---
+
+## 3. CHECKLIST ĐÁNH GIÁ ĐỒ ÁN (DÀNH CHO GIẢNG VIÊN CHẤM ĐIỂM)
+
+| Tiêu chí đánh giá | Kết quả kiểm chứng | Điểm quy đổi Rubric |
+| :--- | :---: | :---: |
+| **Tính trọn vẹn của Lộ trình (Journey-based):** Có cấu trúc Chặng → Mốc rõ ràng | ✅ ĐẠT | CLO4 (35%) |
+| **Gameplay phục vụ việc học:** Mở mốc vì dùng được kiến thức, không bấm lướt | ✅ ĐẠT | CLO3, CLO4 |
+| **Ranh giới AI an toàn (Guardrails):** Bài tập AI không vượt quá whitelist mốc | ✅ ĐẠT | CLO1, CLO2, CLO3 |
+| **Ôn tập Spaced Repetition thông minh:** Có nhiệm vụ quay lại luyện tập trên bản đồ | ✅ ĐẠT | CLO3, CLO4 |
+| **Đa nền tảng mượt mà:** Đồng bộ dữ liệu người học tức thời trên Firestore | ✅ ĐẠT | CLO4 (35%) |

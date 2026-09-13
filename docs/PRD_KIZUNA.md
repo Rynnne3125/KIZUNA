@@ -1,139 +1,119 @@
 # 📜 TÀI LIỆU YÊU CẦU SẢN PHẨM (PRD - PRODUCT REQUIREMENTS DOCUMENT)
-## DỰ ÁN: KIZUNA (絆) - ỨNG DỤNG HỌC TIẾNG NHẬT ĐA NỀN TẢNG HỖ TRỢ BỞI AI
-**Học phần:** CS2028 - Chuyên đề 4: AI Product Development: End to End  
+## DỰ ÁN: KIZUNA (絆) - HÀNH TRÌNH HỌC TIẾNG NHẬT ĐA NỀN TẢNG HỖ TRỢ BỞI AI
+**Học phần:** CS2028 - AI Product Development: End to End (Chuyên đề 4)  
 **Trường:** Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn (VKU) - Đại học Đà Nẵng  
 **Giảng viên phụ trách:** ThS. Lê Thành Công  
-**Phiên bản tài liệu:** v1.0.0 (Cột mốc Chương 3: AI trong Phân tích Yêu cầu & Sản phẩm)  
+**Phiên bản tài liệu:** v2.0.0 (Cập nhật Kiến trúc Hành trình & Ranh giới Kiểm soát AI)  
 
 ---
 
-## 1. KHÁM PHÁ SẢN PHẨM (PRODUCT DISCOVERY - MỤC 3.1)
+## 1. KHÁM PHÁ SẢN PHẨM & TẦM NHÌN MỚI (PRODUCT DISCOVERY)
 
-### 1.1. Bối cảnh & Vấn đề thực tế (Problem Statement)
-Người học tiếng Nhật tại Việt Nam (đặc biệt là sinh viên ngành CNTT chuẩn bị làm việc với đối tác Nhật Bản) thường gặp các rào cản lớn:
-- **Khối lượng Hán tự (Kanji) và từ vựng quá lớn:** Dễ học trước quên sau nếu không có cơ chế lặp lại ngắt quãng (Spaced Repetition).
-- **Thiếu môi trường tương tác và phản hồi:** Các ứng dụng truyền thống (Anki, Quizlet) chỉ đơn thuần là flashcard tĩnh, không giải thích ngữ cảnh dùng từ tự nhiên hoặc giải đáp thắc mắc ngữ pháp theo từng câu hỏi cụ thể.
-- **Rời rạc giữa nền tảng Web và Mobile:** Người học muốn học bài dài trên Laptop (Web) và tranh thủ ôn flashcard 5-10 phút trên điện thoại (Mobile/PWA), nhưng tiến độ thường không đồng bộ mượt mà thời gian thực.
+### 1.1. Bước chuyển dịch mô hình sản phẩm (Paradigm Shift)
+- **Mô hình truyền thống (Cũ):** Người học mở danh sách các khóa học tĩnh (N5, N4, N3...) rồi lần lượt học từng bài lý thuyết rời rạc. Cách tiếp cận này tạo cảm giác nặng nề, thiếu định hướng và khiến hơn 60% học viên bỏ cuộc ngay ở giai đoạn đầu.
+- **Mô hình KIZUNA (Mới - Journey-based Learning):** 
+  - Xem việc học tiếng Nhật như **một chuyến du hành (Journey)** tiến về một điểm đến cụ thể (sống, du lịch, hoặc làm việc tại Nhật Bản).
+  - Các giáo trình, khóa học truyền thống chỉ là **nguồn tư liệu kiến thức (Knowledge Base)** để đội ngũ phát triển chắt lọc, biên tập thành các **Chặng (Stages)** và **Mốc (Milestones)** trực quan trên bản đồ.
+  - Người học luôn nhìn thấy vị trí hiện tại của mình trên hành trình, mục tiêu phía trước và động lực mở khóa từng vùng đất tri thức mới.
 
-### 1.2. Tuyên ngôn giá trị (Value Proposition)
-**KIZUNA (絆 - Sự gắn kết)** là nền tảng học tiếng Nhật đa nền tảng kết hợp sức mạnh của **Trí tuệ nhân tạo (AI-Native Learning Companion)** và **Thuật toán Spaced Repetition (SuperMemo SM-2)**:
-- Học từ vựng, ngữ pháp và Kanji chuẩn lộ trình JLPT (N5 -> N1).
-- Trợ lý học tập AI (AI Sensei) giải thích ngữ cảnh chi tiết, sửa lỗi đặt câu và sinh bài tập theo năng lực cá nhân hóa.
-- Đồng bộ đa nền tảng tức thời thông qua đám mây Google Firestore và Firebase Auth.
+### 1.2. Mô hình tổ chức 5 cấp độ (5-Tier Architecture)
+```
+Hành trình (Journey)
+   └── Chặng (Stage)
+         └── Mốc (Milestone / Checkpoint)
+               └── Bài học & Nhiệm vụ nhỏ (Quests / Micro-tasks)
+                     └── Nhiệm vụ Ôn tập Ngắt quãng (Spaced Re-engagement Quest)
+```
 
-### 1.3. Chân dung người dùng mục tiêu (User Personas)
-1. **Persona 1 - Sinh viên IT định hướng làm việc tại Nhật (Primary Persona)**
-   - *Tên:* Nguyễn Văn An (21 tuổi, sinh viên năm 3 CNTT).
-   - *Mục tiêu:* Đạt JLPT N3/N2 trong vòng 1 năm để phỏng vấn kỹ sư cầu nối (BrSE).
-   - *Điểm đau (Pain point):* Thiếu thời gian, học Kanji rất nhanh nản, cần ví dụ thực tế liên quan đến chuyên ngành và đời sống Nhật Bản.
-2. **Persona 2 - Người đi làm tự học tiếng Nhật (Secondary Persona)**
-   - *Tên:* Trần Thị Mai (25 tuổi, nhân viên văn phòng).
-   - *Mục tiêu:* Giao tiếp cơ bản và thi đỗ JLPT N5-N4.
-   - *Điểm đau:* Thích học trên điện thoại khi đi xe buýt hoặc giải lao, cần lộ trình chia nhỏ 15 phút mỗi ngày.
+### 1.3. Lộ trình Hành trình Mẫu (Journey Roadmap)
 
----
+| Chặng | Chủ đề hành trình | Nguồn kiến thức chắt lọc | Các mốc điển hình (Milestones) |
+| :--- | :--- | :--- | :--- |
+| **Chặng 1: Chuẩn bị lên đường** | Làm quen tiếng Nhật cơ bản | Bảng chữ cái Hiragana | Nhận mặt chữ → Ghép âm → Đọc từ đơn → Đọc câu ngắn chào hỏi |
+| **Chặng 2: Bắt đầu khám phá** | Đọc những từ thường gặp quanh đời sống | Bảng chữ Katakana & Kiến thức nền | Đọc tên món ăn Nhật → Địa danh nổi tiếng → Từ mượn ngoại lai → Thử thách tổng hợp 2 bảng chữ |
+| **Chặng 3: Sinh hoạt hằng ngày** | Giao tiếp và xử lý tình huống cơ bản | Kiến thức nền và ngữ pháp/từ vựng N4 | Tự giới thiệu bản thân → Hỏi đường đi tàu điện → Đổi lịch hẹn → Giải thích lý do |
+| **Chặng 4: Tự tin khám phá** | Hiểu nội dung dài và diễn đạt tự nhiên | Lộ trình N3 | Đọc thông báo đời sống → Nghe hội thoại tự nhiên → Nêu ý kiến cá nhân → Giải quyết tình huống phát sinh |
+| **Nhánh: Đi làm tại Nhật** *(Specialized Branch)* | Giao tiếp môi trường công sở | Tiếng Nhật thương mại (Business Japanese) | Chào hỏi chuẩn tác phong công ty → Viết email/tin nhắn trao đổi → Báo cáo HORENSO → Thỏa thuận dời lịch công tác |
 
-## 2. PHẠM VI SẢN PHẨM & YÊU CẦU HỆ THỐNG (MỤC 3.2 & 3.3)
-
-### 2.1. Yêu cầu Chức năng (Functional Requirements - FR)
-- **FR-01: Xác thực & Quản lý Hồ sơ Đa Nền Tảng (Authentication & Profile)**
-  - Đăng nhập một chạm bằng Google, Apple, hoặc Email/Password thông qua Firebase Authentication.
-  - Tự động đồng bộ hồ sơ, chuỗi ngày học (Daily Streak), cấp độ mục tiêu JLPT và điểm kinh nghiệm (XP) vào Firestore.
-- **FR-02: Kho Tri thức Tiếng Nhật (Kanji & Vocabulary Hub)**
-  - Tra cứu và lọc Hán tự theo cấp độ JLPT (N5 -> N1), xem âm On/Kun, số nét, bộ thủ và từ ghép ví dụ.
-  - Học từ vựng theo chủ đề và bài học, hỗ trợ Furigana, Romaji và phát âm mẫu.
-- **FR-03: Ôn tập Thông minh (Spaced Repetition System - SRS)**
-  - Áp dụng thuật toán SuperMemo SM-2 đánh giá chất lượng ghi nhớ (thang điểm 0 - 5).
-  - Tự động lên lịch ôn tập cho từng thẻ (`nextReviewDate`), thông báo các thẻ đến hạn trong ngày.
-- **FR-04: Trợ lý Học tập AI (AI Sensei - Generative AI Feature)**
-  - Tích hợp mô hình LLM (Gemini/OpenAI API) đóng vai trò gia sư AI:
-    - Giải thích ngữ pháp và phân biệt các từ đồng nghĩa (ví dụ: phân biệt 「みる」, 「観る」, 「診る」).
-    - Đặt câu ví dụ tự động phù hợp với trình độ người học.
-    - Chữa lỗi ngữ pháp và giải thích cặn kẽ tại sao sai.
-- **FR-05: Thống kê & Gamification**
-  - Bảng thống kê tiến độ học tập: Số từ đã thuộc, số từ đang học, biểu đồ duy trì streak.
-
-### 2.2. Yêu cầu Phi chức năng (Non-Functional Requirements - NFR)
-- **NFR-01: Tính đa nền tảng (Cross-Platform Compatibility):** Giao diện Responsive tối ưu cho cả Web Browser (Desktop/Tablet) và Mobile WebView (PWA/Capacitor).
-- **NFR-02: Hiệu năng (Performance):** Thời gian phản hồi API trung bình $\le 200\text{ms}$; truy vấn Firestore được đánh chỉ mục (index) tối ưu.
-- **NFR-03: Bảo mật (Security):** Kiến trúc Stateless API bảo vệ bởi Spring Security; xác thực mọi request nhạy cảm bằng Firebase ID Token JWT.
-- **NFR-04: Độ tin cậy của AI (AI Reliability & Hallucination Mitigation):**
-  - Áp dụng kỹ thuật Prompt Engineering chặt chẽ: System prompt định hình persona giáo viên tiếng Nhật chuẩn mực, ép đầu ra dạng JSON có cấu trúc (`Structured Outputs`), hạn chế tối đa ảo giác thông tin (Hallucination).
+> [!NOTE]
+> **Tính linh hoạt của Chặng:** Chặng không nhất thiết phải trùng với ranh giới của một chứng chỉ JLPT. Ở chặng 1 & 2 (Hiragana/Katakana), hệ thống không ép buộc học viên phải nhồi nhét ngữ pháp hay Kanji phức tạp, mà chỉ tập trung tối đa vào mục tiêu nhận diện và phản xạ đọc.
 
 ---
 
-## 3. USER STORIES VÀ TIÊU CHÍ CHẤP NHẬN (USER STORIES & ACCEPTANCE CRITERIA - MỤC 3.4)
+## 2. GAMEPLAY PHỤC VỤ VIỆC HỌC & VÒNG LẶP TẠI MỖI MỐC (MILESTONE MICRO-LOOP)
 
-Tuân thủ nguyên tắc **INVEST** và định dạng tiêu chí chấp nhận theo cú pháp **Gherkin (Given - When - Then)**:
+### 2.1. Vòng lặp trải nghiệm tại mỗi mốc (Milestone Experience Loop)
+Tại mỗi mốc trên bản đồ (ví dụ: Mốc *"Đổi lịch hẹn"*), người học không chỉ "bấm qua màn hình" mà phải trải qua một vòng luyện tập khép kín:
 
-### User Story 1: Đăng nhập và Đồng bộ Đa Nền Tảng (US-01)
-* **Là một:** Người học tiếng Nhật  
-* **Tôi muốn:** Đăng nhập vào KIZUNA bằng tài khoản Google trên cả máy tính lẫn điện thoại  
-* **Để:** Lưu trữ toàn bộ dữ liệu học tập và chuỗi ngày học xuyên suốt các thiết bị mà không cần nhớ mật khẩu mới.
-* **Tiêu chí chấp nhận (Acceptance Criteria):**
-  ```gherkin
-  Scenario: Đăng nhập thành công lần đầu bằng Google
-    Given Người dùng truy cập vào ứng dụng Web hoặc Mobile chưa đăng nhập
-    When Người dùng nhấn nút "Đăng nhập với Google" và xác thực thành công qua Firebase
-    Then Client nhận được Firebase ID Token
-    And Gửi request GET /api/v1/auth/me với header "Authorization: Bearer <token>"
-    And Hệ thống tự động tạo mới bản ghi UserProfile trên Firestore với targetJlptLevel="N5", streak=1
-    And Trả về HTTP 200 kèm thông tin hồ sơ người dùng.
+```mermaid
+graph TD
+    Step1["1. Nghe đoạn hội thoại thực tế"] --> Step2["2. Học từ vựng & mẫu câu cần thiết"]
+    Step2 --> Step3["3. Phân biệt 2 cách nói (Lịch sự vs Thân mật)"]
+    Step3 --> Step4["4. Dịch câu phản xạ"]
+    Step4 --> Step5["5. Tự viết tin nhắn / câu trả lời thực tế"]
+    Step5 --> Step6["6. Nhận góp ý tức thời từ AI Sensei"]
+    Step6 --> Step7{"7. Vượt qua thử thách mốc?"}
+    Step7 -- Đạt yêu cầu --> Unlock["Mở khóa mốc tiếp theo trên bản đồ"]
+    Step7 -- Chưa đạt --> Retry["Gợi ý ôn luyện lại phần thiếu sót"]
+```
 
-  Scenario: Truy cập tài nguyên bảo mật khi Token không hợp lệ hoặc hết hạn
-    Given Người dùng gửi request kèm Token đã hết hạn hoặc giả mạo
-    When Request đến bộ lọc FirebaseAuthenticationFilter của Backend
-    Then Hệ thống từ chối xác thực
-    And Trả về mã lỗi HTTP 401 Unauthorized với format JSON ApiResponse chuẩn.
-  ```
-
-### User Story 2: Ôn tập Thẻ Từ vựng / Kanji với Thuật toán SRS (US-02)
-* **Là một:** Người học  
-* **Tôi muốn:** Được ôn lại các thẻ từ vựng đến hạn và tự chấm điểm mức độ nhớ từ 0 đến 5  
-* **Để:** Não bộ ghi nhớ lâu dài theo quy luật đường cong lãng quên của Ebbinghaus.
-* **Tiêu chí chấp nhận (Acceptance Criteria):**
-  ```gherkin
-  Scenario: Ôn tập thẻ thành công với mức nhớ tốt (Quality = 4)
-    Given Người dùng đang mở một thẻ từ vựng "先生" (せんせい)
-    When Người dùng lật mặt sau và chọn mức đánh giá Quality = 4
-    And Gửi POST /api/v1/progress kèm itemId="先生", itemType="VOCABULARY", quality=4
-    Then Thuật toán SM-2 tính toán intervalDays tăng lên (ví dụ: từ 1 ngày lên 6 ngày)
-    And Thuộc tính nextReviewDate được cập nhật sang 6 ngày tiếp theo
-    And Điểm kinh nghiệm XP của người dùng được cộng thêm 10 điểm
-    And Trả về HTTP 200 kèm UserProgress mới nhất.
-
-  Scenario: Đánh giá không nhớ từ (Quality = 1)
-    Given Người dùng không nhớ nghĩa từ vựng
-    When Chọn mức đánh giá Quality = 1
-    Then Thuật toán SM-2 reset repetitionCount về 0 và intervalDays về 1 ngày
-    And Thẻ được xếp vào danh sách cần học lại trong ngày hôm sau.
-  ```
-
-### User Story 3: Nhận giải thích từ Trợ lý AI Sensei (US-03)
-* **Là một:** Người học tiếng Nhật  
-* **Tôi muốn:** Hỏi AI Sensei về sự khác biệt giữa hai mẫu ngữ pháp hoặc nhờ đặt câu ví dụ  
-* **Để:** Hiểu sâu bản chất ngôn ngữ thay vì chỉ học vẹt nghĩa tiếng Việt.
-* **Tiêu chí chấp nhận (Acceptance Criteria):**
-  ```gherkin
-  Scenario: Yêu cầu AI phân tích từ vựng trong ngữ cảnh
-    Given Người dùng bấm vào nút "Hỏi AI Sensei" tại thẻ Kanji "日"
-    When Client gửi yêu cầu hỏi AI giải thích cách dùng âm On và âm Kun trong thực tế
-    Then AI phản hồi câu trả lời súc tích, có giải nghĩa Kanji, Furigana, và ví dụ song ngữ Nhật - Việt
-    And Định dạng trả về đúng cấu trúc JSON quy định, không bị chèn văn bản rác.
-  ```
+### 2.2. Cơ chế "Nhiệm vụ quay lại luyện tập" (Spaced Re-engagement Quest)
+- Thay vì bắt người học phải chơi lại nguyên cả chặng khi quên từ, hệ thống áp dụng thuật toán lặp lại ngắt quãng (Spaced Repetition).
+- Những từ, mẫu câu người dùng làm sai tại các mốc trước sẽ tự động biến thành **"Nhiệm vụ quay lại luyện tập"** xuất hiện trên bản đồ sau 1, 3, hoặc 7 ngày.
+- **Ý nghĩa trải nghiệm:** Người học luôn có cảm giác đang tiến về phía trước tới vùng đất mới, nhưng thỉnh thoảng nhận một tín hiệu ghé lại trạm kiểm soát cũ để gia cố kiến thức bị hổng.
 
 ---
 
-## 4. ĐẶC TẢ TÍNH NĂNG & THIẾT KẾ KỸ THUẬT (FEATURE SPECIFICATION - MỤC 3.5)
+## 3. RANH GIỚI KIỂM SOÁT AI (AI BOUNDARIES & QUALITY GUARDRAILS)
 
-### 4.1. Kiến trúc Tổng thể Đa Nền Tảng (Fullstack Architecture)
-- **Frontend Layer:** React 18/19 + TypeScript + Vite + Tailwind CSS + Lucide Icons. Sẵn sàng đóng gói sang Mobile qua Capacitor hoặc Progressive Web App (PWA).
-- **API Gateway & Backend Service:** Java 17 + Spring Boot 3.4.2 (Clean Layered Architecture: Controller -> Service -> Repository -> Firestore Driver).
-- **Database & Identity:** Google Cloud Firestore (NoSQL Document Store) + Firebase Authentication.
-- **AI Integration (LLM Engine):** Tích hợp qua Google Gemini API / Vertex AI SDK với Prompt Templates được thiết kế theo tiêu chuẩn Chương 2.
+Đây là ranh giới kỹ thuật cốt lõi giúp đồ án vững chắc về mặt học thuật và thực tiễn:
 
-### 4.2. Cấu trúc Tài liệu Dữ liệu Firestore (Collections Schema)
-1. Collection `users`: Khóa tài liệu = `uid`. Chứa thông tin tài khoản, streak, xp, targetJlptLevel.
-2. Collection `kanji`: Khóa tài liệu = ký tự Kanji (ví dụ: `日`, `本`). Chứa meanings, onyomi, kunyomi, strokeCount, jlptLevel, examples.
-3. Collection `vocabularies`: Khóa tài liệu = `UUID`. Chứa term, reading, meanings, wordType, jlptLevel, audioUrl, examples.
-4. Collection `user_progress`: Khóa tài liệu = `{userId}_{itemType}_{itemId}`. Chứa intervalDays, easeFactor, repetitionCount, nextReviewDate.
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 1. LỚP TRI THỨC CHUẨN (Human-Curated Knowledge Base - 100% Deterministic)   │
+│    - Con người biên soạn và làm chủ: Bản đồ, mục tiêu mốc, từ vựng chuẩn,   │
+│      ngữ pháp trọng tâm, tiêu chí mở khóa và đáp án mẫu.                    │
+└──────────────────────────────────────┬──────────────────────────────────────┘
+                                       │ Whitelist phạm vi kiến thức
+                                       ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 2. ĐỘNG CƠ TẠO BIẾN THỂ AI (Controlled AI Variation Engine)                 │
+│    - AI tạo biến thể bài tập: Đổi ngữ cảnh câu hỏi, thay đổi đối tượng giao │
+│      tiếp, đưa tình huống thực hành mở, chấm và góp ý câu viết của học viên.│
+└──────────────────────────────────────┬──────────────────────────────────────┘
+                                       │ Dữ liệu đầu ra cần kiểm chứng
+                                       ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 3. HÀNG RÀO KIỂM CHỨNG CHẤT LƯỢNG (AI Output Guardrails & Verification)     │
+│    - Kiểm tra độ an toàn: Không dùng từ vựng vượt trình độ của mốc.         │
+│    - Kiểm tra đáp án: Đảm bảo có rubric chấm rõ ràng, không bịa đặt kiến thức│
+│    - Không đưa trực tiếp raw content từ web/AI vào app khi chưa qua kiểm duyệt│
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 4. YÊU CẦU HỆ THỐNG MỞ RỘNG (SYSTEM REQUIREMENTS)
+
+### 4.1. Yêu cầu Chức năng (Functional Requirements)
+- **FR-01 (Bản đồ Hành trình):** Hiển thị trực quan bản đồ với các chặng và mốc; thể hiện trạng thái mốc: `LOCKED` (khóa), `UNLOCKED` (đang học), `COMPLETED` (hoàn thành), `NEEDS_REVIEW` (có nhiệm vụ quay lại).
+- **FR-02 (Vòng lặp Mốc):** Điều phối chuỗi nhiệm vụ tại mốc (Nghe -> Học từ -> Phân biệt -> Dịch -> Viết -> Chấm điểm).
+- **FR-03 (Sinh biến thể bài tập AI):** API Backend gọi LLM sinh câu hỏi thực hành dựa trên `milestone_context`, đảm bảo chỉ sử dụng từ vựng nằm trong whitelist của mốc.
+- **FR-04 (Động cơ Góp ý AI):** AI phân tích câu trả lời mở của học viên, chỉ ra lỗi ngữ pháp/trợ từ và gợi ý cách diễn đạt tự nhiên hơn.
+- **FR-05 (Spaced Re-engagement):** Quản lý danh sách lỗi sai và kích hoạt nhiệm vụ quay lại luyện tập theo chu kỳ ngày.
+
+### 4.2. Yêu cầu Phi chức năng (Non-Functional Requirements)
+- **NFR-01 (Scope Containment):** 100% câu hỏi do AI tạo ra phải được kiểm chứng không chứa từ vựng nằm ngoài danh mục đã học quá 10%.
+- **NFR-02 (Seamless Offline/Online):** Tiến độ bản đồ được lưu đồng bộ trên Firestore, cho phép học offline một phần trên thiết bị di động và tự động sync khi có mạng.
+- **NFR-03 (Responsive Map UX):** Bản đồ hành trình tương tác mượt mà trên cả trình duyệt Web Desktop và màn hình cảm ứng di động.
+
+---
+
+## 5. PHẠM VI DEMO ĐỒ ÁN TINH GỌN (LEAN DEMO SCOPE)
+
+Để đảm bảo chất lượng bảo vệ đồ án kết thúc học phần, nhóm tập trung hiện thực hóa kịch bản trọn vẹn:
+1. **Chặng 1 & 2:** Trải nghiệm nhận diện và ghép từ 2 bảng chữ cái Hiragana & Katakana.
+2. **Chặng 3:** Trải nghiệm 2 mốc giao tiếp N4 trọng điểm: *“Tự giới thiệu bản thân”* và *“Đổi lịch hẹn”*.
+3. **Thực hành AI:** AI sinh biến thể bài tập đổi lịch và chấm câu trả lời viết của học viên.
+4. **Ôn tập Spaced Review:** Mô phỏng nhiệm vụ quay lại ôn tập lỗi sai vào ngày hôm sau.
+5. **Cập nhật Bản đồ:** Mốc tiếp theo tự động mở khóa sau khi học viên chứng minh năng lực sử dụng kiến thức.
