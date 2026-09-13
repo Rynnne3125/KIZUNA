@@ -109,11 +109,64 @@ graph TD
 
 ---
 
-## 5. PHẠM VI DEMO ĐỒ ÁN TINH GỌN (LEAN DEMO SCOPE)
+---
+
+## 5. KIẾN TRÚC HỆ THỐNG & PHÂN HỆ KHÁCH HÀNG (MULTI-CLIENT ARCHITECTURE)
+
+Hệ thống được thiết kế theo mô hình **Unified Backend - Dual Frontend**:
+
+```mermaid
+graph TD
+    subgraph Clients["TẦNG GIAO DIỆN (FRONTEND)"]
+        AdminWeb["Admin Portal (Web Desktop)<br>- Quản lý Bản đồ, Chặng & Mốc<br>- Biên soạn Whitelist tri thức<br>- Kiểm duyệt câu hỏi & Audit AI<br>- Thống kê & Quản lý User"]
+        UserClient["User Client (Đa Nền Tảng: Web & APK)<br>- Trải nghiệm Bản đồ Hành trình<br>- Vòng lặp học tập tại Mốc<br>- Tương tác AI Sensei<br>- Nhiệm vụ quay lại luyện tập"]
+    end
+
+    subgraph Backend["TẦNG DỊCH VỤ (SHARED BACKEND - SPRING BOOT 3.4)"]
+        SecurityGateway["Spring Security + Firebase RBAC Filter"]
+        AdminAPI["/api/v1/admin/** (ROLE_ADMIN)<br>- Quản lý Hành trình, Chặng, Mốc<br>- Sandbox kiểm tra Prompt AI<br>- Giám sát hệ thống"]
+        UserAPI["/api/v1/user/** & /api/v1/** (ROLE_USER)<br>- Tương tác Mốc & Vòng lặp<br>- Nộp bài tập & Ôn tập SM-2<br>- Đồng bộ tiến độ hành trình"]
+    end
+
+    subgraph Data["TẦNG DỮ LIỆU & DỊCH VỤ CLOUD"]
+        Firestore["Google Cloud Firestore (NoSQL)"]
+        FirebaseAuth["Firebase Authentication (Custom Claims: role)"]
+        LLMEngine["Google Gemini / LLM Engine"]
+    end
+
+    AdminWeb -->|HTTPS / Bearer JWT| SecurityGateway
+    UserClient -->|HTTPS / Bearer JWT| SecurityGateway
+    SecurityGateway --> AdminAPI
+    SecurityGateway --> UserAPI
+    AdminAPI --> Firestore
+    AdminAPI --> LLMEngine
+    UserAPI --> Firestore
+    UserAPI --> LLMEngine
+    SecurityGateway -.-> FirebaseAuth
+```
+
+### 5.1. Backend dùng chung (Single Unified Backend):
+- Một mã nguồn Spring Boot duy nhất quản lý toàn bộ nghiệp vụ, dữ liệu và bảo mật.
+- Kiểm soát truy cập dựa trên vai trò (Role-Based Access Control - RBAC) thông qua Firebase Custom Claims:
+  - `ROLE_ADMIN`: Toàn quyền quản trị nội dung bài học, cấu hình whitelist, kiểm duyệt bài tập do AI tạo và xem thống kê tổng thể.
+  - `ROLE_USER`: Chỉ truy cập dữ liệu học tập cá nhân, lộ trình hành trình và nộp kết quả ôn tập.
+
+### 5.2. Frontend phân tách rõ rệt (Dual Frontend System):
+1. **Phân hệ Admin (Admin Web Portal):**
+   - Định hướng thiết bị: Chuyên dụng cho **Web Desktop/Laptop** (màn hình lớn).
+   - Mục đích: Phục vụ giáo viên, biên tập viên nội dung thao tác với các bảng dữ liệu lớn, trình soạn thảo bản đồ (Journey Editor), thiết lập quy tắc whitelist cho từng mốc và sandbox thử nghiệm prompt AI.
+2. **Phân hệ User (User Multi-Platform Client):**
+   - Định hướng thiết bị: **Đa nền tảng linh hoạt** - chạy mượt mà trên **Web Browser** và sẵn sàng đóng gói xuất bản thành file cài đặt **Android APK** (thông qua Capacitor / PWA wrapper).
+   - Mục đích: Phục vụ người học với giao diện tối ưu hóa cho cảm ứng 1 chạm trên điện thoại di động (Mobile-First UI), điều hướng bản đồ trực quan và làm bài tập mọi lúc mọi nơi.
+
+---
+
+## 6. PHẠM VI DEMO ĐỒ ÁN TINH GỌN (LEAN DEMO SCOPE)
 
 Để đảm bảo chất lượng bảo vệ đồ án kết thúc học phần, nhóm tập trung hiện thực hóa kịch bản trọn vẹn:
-1. **Chặng 1 & 2:** Trải nghiệm nhận diện và ghép từ 2 bảng chữ cái Hiragana & Katakana.
-2. **Chặng 3:** Trải nghiệm 2 mốc giao tiếp N4 trọng điểm: *“Tự giới thiệu bản thân”* và *“Đổi lịch hẹn”*.
-3. **Thực hành AI:** AI sinh biến thể bài tập đổi lịch và chấm câu trả lời viết của học viên.
-4. **Ôn tập Spaced Review:** Mô phỏng nhiệm vụ quay lại ôn tập lỗi sai vào ngày hôm sau.
-5. **Cập nhật Bản đồ:** Mốc tiếp theo tự động mở khóa sau khi học viên chứng minh năng lực sử dụng kiến thức.
+1. **Admin Web:** Đăng nhập tài khoản Admin, tạo 1 Mốc mới kèm thiết lập Whitelist từ vựng và xem AI sinh thử bài tập mẫu trong trang quản trị.
+2. **User Client (Web/APK):** Đăng nhập tài khoản học viên, thấy Mốc mới xuất hiện trên Bản đồ Hành trình.
+3. **Thực hành Mốc:** Trải nghiệm vòng lặp tại Mốc N4, làm bài tập biến thể AI và nộp câu viết tự do.
+4. **Ôn tập Spaced Review:** Kiểm chứng nhiệm vụ quay lại luyện tập lỗi sai xuất hiện trên bản đồ vào ngày hôm sau.
+5. **Cập nhật Tiến độ:** Bản đồ tự động ghi nhận hoàn thành và mở khóa mốc tiếp theo.
+
