@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
 
 @Repository
 public class UserRepository {
@@ -41,7 +42,4 @@ public class UserRepository {
         return new ArrayList<>(userStorage.values());
     }
 
-    public void deleteById(String id) {
-        userStorage.remove(id);
-    }
 }

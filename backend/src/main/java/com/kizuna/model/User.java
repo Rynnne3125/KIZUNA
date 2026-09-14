@@ -9,6 +9,9 @@ public class User {
     private String email;
     private String role; // "ROLE_ADMIN" or "ROLE_USER"
     private boolean enabled;
+    // Bổ sung vào phần khai báo biến
+    private boolean isDeleted = false;
+
 
     public User() {
     }
@@ -77,5 +80,13 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+    // Bổ sung Getter và Setter ở dưới
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.isDeleted = deleted;
     }
 }
