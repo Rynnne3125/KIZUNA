@@ -1,0 +1,16 @@
+server:
+  port: 3000
+
+spring:
+  application:
+    name: kizuna-backend
+
+kizuna:
+  jwt:
+    # 256-bit secret key in base64/hex for HMAC-SHA256
+    secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+    expiration-ms: 86400000 # 24 hours in milliseconds
+  firebase:
+    project-id: "ebook-fdc02"
+    service-account-path: "firebase-service-account.json"
+    database-url: "https://ebook-fdc02-default-rtdb.firebaseio.com"
