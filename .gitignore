@@ -53,3 +53,12 @@ yarn-error.log*
 
 ### Firebase ###
 .firebase/
+
+### Environment Variables ###
+.env
+.env.local
+.env.*.local
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
