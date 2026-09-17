@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "ebook-fdc02"
+  },
+  "targets": {
+    "ebook-fdc02": {
+      "hosting": {
+        "kizuna-6756a": [
+          "kizuna-6756a"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
