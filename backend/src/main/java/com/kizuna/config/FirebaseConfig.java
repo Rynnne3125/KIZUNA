@@ -5,141 +5,66 @@ import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.FirestoreOptions;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.cloud.FirestoreClient;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.ClassPathResource;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 
-@Slf4j
 @Configuration
 public class FirebaseConfig {
 
-    @Value("${kizuna.firebase.config-path:classpath:firebase-service-account.json}")
-    private String configPath;
+    private static final Logger logger = LoggerFactory.getLogger(FirebaseConfig.class);
 
-    @Value("${kizuna.firebase.credentials-base64:}")
-    private String credentialsBase64;
-
-    @Value("${kizuna.firebase.project-id:kizuna-nihongo-app}")
+    @Value("${kizuna.firebase.project-id:ebook-fdc02}")
     private String projectId;
 
-    @Value("${kizuna.firebase.emulator.enabled:false}")
-    private boolean emulatorEnabled;
+    @Value("${kizuna.firebase.service-account-path:firebase-service-account.json}")
+    private String serviceAccountPath;
 
-    @Value("${kizuna.firebase.emulator.host:localhost:8088}")
-    private String emulatorHost;
-
-    private final ResourceLoader resourceLoader;
-
-    public FirebaseConfig(ResourceLoader resourceLoader) {
-        this.resourceLoader = resourceLoader;
-    }
+    @Value("${kizuna.firebase.database-url:https://ebook-fdc02-default-rtdb.firebaseio.com}")
+    private String databaseUrl;
 
     @Bean
-    public FirebaseApp firebaseApp() {
-        if (!FirebaseApp.getApps().isEmpty()) {
-            return FirebaseApp.getInstance();
-        }
-
+    public Firestore firestore() {
         try {
-            GoogleCredentials credentials = resolveCredentials();
-
-            FirebaseOptions.Builder optionsBuilder = FirebaseOptions.builder()
-                    .setProjectId(projectId);
-
-            if (credentials != null) {
-                optionsBuilder.setCredentials(credentials);
-            }
-
-            FirebaseApp app = FirebaseApp.initializeApp(optionsBuilder.build());
-            log.info("FirebaseApp successfully initialized for project: {}", projectId);
-            return app;
-        } catch (Exception e) {
-            log.warn("Could not initialize FirebaseApp with provided credentials ({}). " +
-                     "Falling back to default initialization. Ensure proper Firebase config for production.", e.getMessage());
-            try {
-                FirebaseOptions fallbackOptions = FirebaseOptions.builder()
-                        .setProjectId(projectId)
-                        .setCredentials(GoogleCredentials.newBuilder().build())
-                        .build();
-                return FirebaseApp.initializeApp(fallbackOptions);
-            } catch (Exception ex) {
-                log.error("Failed to initialize fallback FirebaseApp: {}", ex.getMessage());
-                return null;
-            }
-        }
-    }
-
-    @Bean
-    public Firestore firestore(FirebaseApp firebaseApp) {
-        if (emulatorEnabled) {
-            log.info("Connecting to Firestore Emulator at {}", emulatorHost);
-            return FirestoreOptions.newBuilder()
-                    .setProjectId(projectId)
-                    .setHost(emulatorHost)
-                    .setCredentials(GoogleCredentials.newBuilder().build())
-                    .build()
-                    .getService();
-        }
-
-        if (firebaseApp != null) {
-            try {
-                return FirestoreClient.getFirestore(firebaseApp);
-            } catch (Exception e) {
-                log.warn("Error getting Firestore from FirebaseApp: {}. Creating fallback Firestore client.", e.getMessage());
-            }
-        }
-
-        return FirestoreOptions.newBuilder()
-                .setProjectId(projectId)
-                .build()
-                .getService();
-    }
-
-    @Bean
-    public FirebaseAuth firebaseAuth(FirebaseApp firebaseApp) {
-        if (firebaseApp != null) {
-            return FirebaseAuth.getInstance(firebaseApp);
-        }
-        return null;
-    }
-
-    private GoogleCredentials resolveCredentials() throws Exception {
-        // 1. Check Base64 encoded credentials (Environment variable / Secret manager)
-        if (credentialsBase64 != null && !credentialsBase64.trim().isEmpty()) {
-            log.info("Loading Firebase credentials from Base64 environment variable");
-            byte[] decodedBytes = Base64.getDecoder().decode(credentialsBase64.trim());
-            return GoogleCredentials.fromStream(new ByteArrayInputStream(decodedBytes));
-        }
-
-        // 2. Check file path (classpath or filesystem)
-        if (configPath != null && !configPath.trim().isEmpty()) {
-            Resource resource = resourceLoader.getResource(configPath.trim());
+            ClassPathResource resource = new ClassPathResource(serviceAccountPath);
             if (resource.exists()) {
-                log.info("Loading Firebase credentials from file: {}", configPath);
-                try (InputStream is = resource.getInputStream()) {
-                    return GoogleCredentials.fromStream(is);
+                try (InputStream serviceAccount = resource.getInputStream()) {
+                    FirebaseOptions options = FirebaseOptions.builder()
+                            .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                            .setProjectId(projectId)
+                            .setDatabaseUrl(databaseUrl)
+                            .build();
+
+                    if (FirebaseApp.getApps().isEmpty()) {
+                        FirebaseApp.initializeApp(options);
+                        logger.info("FirebaseApp initialized successfully with Service Account from: {}", serviceAccountPath);
+                    }
+                    return FirestoreClient.getFirestore();
                 }
             } else {
-                log.warn("Firebase credentials file does not exist at '{}'. Checking Google Application Default Credentials.", configPath);
-            }
-        }
+                logger.warn("Firebase Service Account key '{}' not found in resources. Initializing Firestore via Project ID: '{}'.",
+                        serviceAccountPath, projectId);
+                logger.info("NOTE: For live Firestore backend operations, place your Firebase Service Account JSON (from Firebase Console -> Project Settings -> Service accounts) into 'backend/src/main/resources/{}'",
+                        serviceAccountPath);
 
-        // 3. Fallback to Google Application Default Credentials (GCP environment)
-        try {
-            return GoogleCredentials.getApplicationDefault();
+                // Fallback: Initialize Firestore with Project ID (supports ADC / Google Cloud environment)
+                FirestoreOptions firestoreOptions = FirestoreOptions.newBuilder()
+                        .setProjectId(projectId)
+                        .build();
+                return firestoreOptions.getService();
+            }
         } catch (Exception e) {
-            log.info("Google Application Default Credentials not found. Using unauthenticated credentials for dev/local.");
-            return GoogleCredentials.newBuilder().build();
+            logger.warn("Unable to fully initialize Firebase/Firestore: {}. Falling back to standard configuration.", e.getMessage());
+            FirestoreOptions firestoreOptions = FirestoreOptions.newBuilder()
+                    .setProjectId(projectId)
+                    .build();
+            return firestoreOptions.getService();
         }
     }
 }

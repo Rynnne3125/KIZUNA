@@ -1,247 +1,154 @@
-import { useState, useEffect } from 'react';
-import { Navbar } from './components/Navbar';
-import { KanjiCard } from './components/KanjiCard';
-import { FlashcardReview } from './components/FlashcardReview';
-import { AiSenseiModal } from './components/AiSenseiModal';
-import { Kanji, ProgressSummary } from './types';
-import { api } from './services/api';
-import { initAuthListener, loginWithGoogle, logoutUser } from './services/firebase';
-import { User } from 'firebase/auth';
-import { BookOpen, Layers, CheckCircle2, Server, BrainCircuit } from 'lucide-react';
+import React, { useState } from 'react';
+import { firebaseConfig } from './config/firebase';
 
-const FALLBACK_KANJI: Kanji[] = [
-  {
-    id: '日',
-    character: '日',
-    meanings: ['Mặt trời', 'Ngày', 'Nhật Bản'],
-    onyomi: ['ニチ', 'ジツ'],
-    kunyomi: ['ひ', '-び', '-か'],
-    strokeCount: 4,
-    jlptLevel: 'N5',
-    radicals: ['日'],
-    examples: [
-      { word: '日本', reading: 'にほん', meaning: 'Nhật Bản' },
-      { word: '日曜日', reading: 'にちようび', meaning: 'Chủ nhật' }
-    ]
-  },
-  {
-    id: '本',
-    character: '本',
-    meanings: ['Sách', 'Gốc', 'Nguồn cội'],
-    onyomi: ['ホン'],
-    kunyomi: ['もと'],
-    strokeCount: 5,
-    jlptLevel: 'N5',
-    radicals: ['木'],
-    examples: [
-      { word: '本', reading: 'ほん', meaning: 'Quyển sách' },
-      { word: '本人', reading: 'ほんにん', meaning: 'Bản thân người đó' }
-    ]
-  },
-  {
-    id: '人',
-    character: '人',
-    meanings: ['Người', 'Nhân'],
-    onyomi: ['ジン', 'ニン'],
-    kunyomi: ['ひと'],
-    strokeCount: 2,
-    jlptLevel: 'N5',
-    radicals: ['人'],
-    examples: [
-      { word: '日本人', reading: 'にほんじん', meaning: 'Người Nhật' },
-      { word: '三人', reading: 'さんにん', meaning: '3 người' }
-    ]
-  },
-  {
-    id: '学',
-    character: '学',
-    meanings: ['Học', 'Trường học'],
-    onyomi: ['ガク'],
-    kunyomi: ['まな.ぶ'],
-    strokeCount: 8,
-    jlptLevel: 'N5',
-    radicals: ['子'],
-    examples: [
-      { word: '学生', reading: 'がくせい', meaning: 'Học sinh, sinh viên' },
-      { word: '大学', reading: 'だいがく', meaning: 'Đại học' }
-    ]
-  }
-];
+export default function App() {
+  const [activeTab, setActiveTab] = useState<'overview' | 'admin' | 'user'>('overview');
+  const [loginRole, setLoginRole] = useState<'admin' | 'user'>('admin');
+  const [tokenResult, setTokenResult] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-export function App() {
-  const [user, setUser] = useState<User | null>(null);
-  const [kanjiList, setKanjiList] = useState<Kanji[]>(FALLBACK_KANJI);
-  const [selectedJlpt, setSelectedJlpt] = useState<string>('N5');
-  const [studyingKanji, setStudyingKanji] = useState<Kanji | null>(null);
-  const [aiModalOpen, setAiModalOpen] = useState(false);
-  const [aiQuery, setAiQuery] = useState('');
-  const [backendOnline, setBackendOnline] = useState(false);
-  const [summary, setSummary] = useState<ProgressSummary>({
-    totalStudied: 12,
-    dueForReviewToday: 4,
-    masteredCount: 6,
-    learningCount: 6,
-    dailyStreak: 3,
-    totalXp: 180
-  });
+  const handleTestLogin = async () => {
+    setLoading(true);
+    setTokenResult(null);
+    try {
+      const credentials = loginRole === 'admin'
+        ? { username: 'admin', password: 'admin123' }
+        : { username: 'user', password: 'user123' };
 
-  useEffect(() => {
-    // Auth state listener
-    const unsubscribe = initAuthListener((u) => setUser(u));
-
-    // Check backend health
-    api.checkHealth()
-      .then((res) => {
-        if (res.success) {
-          setBackendOnline(true);
-        }
-      })
-      .catch(() => setBackendOnline(false));
-
-    // Fetch Kanji from Backend
-    api.getKanjiList(selectedJlpt)
-      .then((data) => {
-        if (data && data.length > 0) {
-          setKanjiList(data);
-        }
-      })
-      .catch(() => {
-        // Keeps fallback data
+      const response = await fetch('http://localhost:3000/api/v1/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials)
       });
-
-    return () => unsubscribe();
-  }, [selectedJlpt]);
-
-  const handleAskAi = (char: string) => {
-    setAiQuery(`Phân tích cách dùng Hán tự "${char}" và đặt 2 câu ví dụ giao tiếp thực tế`);
-    setAiModalOpen(true);
+      const data = await response.json();
+      setTokenResult(JSON.stringify(data, null, 2));
+    } catch (err: any) {
+      setTokenResult(`Lỗi kết nối Backend (Port 3000): ${err.message}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <Navbar
-        user={user}
-        onLogin={loginWithGoogle}
-        onLogout={logoutUser}
-        onOpenAiSensei={() => { setAiQuery(''); setAiModalOpen(true); }}
-        streak={summary.dailyStreak}
-        xp={summary.totalXp}
-      />
+    <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', maxWidth: 900, margin: '40px auto', padding: 24, color: '#1f2937' }}>
+      <header style={{ borderBottom: '2px solid #e5e7eb', paddingBottom: 16, marginBottom: 24 }}>
+        <h1 style={{ margin: '0 0 8px 0', fontSize: 28, color: '#dc2626' }}>
+          ⛩️ KIZUNA (絆) - Cross-Platform Japanese Learning
+        </h1>
+        <p style={{ margin: 0, color: '#4b5563' }}>
+          Ứng dụng học tiếng Nhật đa nền tảng kết hợp Spring Boot 3.4 (Port 3000) và Firebase Firestore (Project: {firebaseConfig.projectId})
+        </p>
+      </header>
 
-      <main className="container" style={{ flex: 1, padding: '32px 20px' }}>
-        {/* Backend & Environment Banner */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: backendOnline ? '#f0fdf4' : '#fef2f2', border: `1px solid ${backendOnline ? '#bbf7d0' : '#fecaca'}`, padding: '12px 18px', borderRadius: '14px', marginBottom: '28px', fontSize: '0.88rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: backendOnline ? '#15803d' : '#b91c1c', fontWeight: 600 }}>
-            <Server size={18} />
-            <span>Backend Spring Boot 3.4.2 & Firestore: {backendOnline ? 'Đang hoạt động (Port 8080)' : 'Chưa kết nối (Đang dùng dữ liệu Local)'}</span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)' }}>
-            <BrainCircuit size={16} />
-            <span>CS2028: AI Product Development</span>
-          </div>
-        </div>
+      {/* Badges */}
+      <div style={{ display: 'flex', gap: 12, marginBottom: 24, flexWrap: 'wrap' }}>
+        <span style={{ background: '#dcfce7', color: '#15803d', padding: '6px 12px', borderRadius: 999, fontSize: 13, fontWeight: 600 }}>
+          ● Backend: Port 3000 (Bearer Token Auth)
+        </span>
+        <span style={{ background: '#fef3c7', color: '#b45309', padding: '6px 12px', borderRadius: 999, fontSize: 13, fontWeight: 600 }}>
+          🔥 Firebase: {firebaseConfig.projectId}
+        </span>
+        <span style={{ background: '#e0e7ff', color: '#4338ca', padding: '6px 12px', borderRadius: 999, fontSize: 13, fontWeight: 600 }}>
+          🚀 Hosting Target: kizuna-6756a
+        </span>
+        <span style={{ background: '#f3e8ff', color: '#7e22ce', padding: '6px 12px', borderRadius: 999, fontSize: 13, fontWeight: 600 }}>
+          📱 Android Package: com.kizuna
+        </span>
+      </div>
 
-        {/* View Mode: Studying Flashcard or Main Dashboard */}
-        {studyingKanji ? (
-          <FlashcardReview
-            kanji={studyingKanji}
-            onBack={() => setStudyingKanji(null)}
-            onCompleted={() => {
-              setStudyingKanji(null);
-              setSummary(prev => ({ ...prev, totalXp: prev.totalXp + 15, totalStudied: prev.totalStudied + 1 }));
+      {/* Navigation tabs */}
+      <div style={{ display: 'flex', gap: 8, marginBottom: 24, borderBottom: '1px solid #e5e7eb' }}>
+        {(['overview', 'admin', 'user'] as const).map(tab => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            style={{
+              padding: '10px 18px',
+              border: 'none',
+              background: 'none',
+              cursor: 'pointer',
+              fontWeight: 600,
+              fontSize: 15,
+              borderBottom: activeTab === tab ? '3px solid #dc2626' : '3px solid transparent',
+              color: activeTab === tab ? '#dc2626' : '#6b7280'
             }}
-          />
-        ) : (
-          <div>
-            {/* Hero / Statistics Section */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px', marginBottom: '32px' }}>
-              <div className="card" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#e0f2fe', color: '#0284c7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <BookOpen size={24} />
-                </div>
-                <div>
-                  <div style={{ fontSize: '1.4rem', fontWeight: 800 }}>{summary.totalStudied}</div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Từ vựng & Kanji đã học</div>
-                </div>
-              </div>
+          >
+            {tab === 'overview' && 'Tổng Quan & Test Auth'}
+            {tab === 'admin' && 'Phân Hệ Admin'}
+            {tab === 'user' && 'Phân Hệ User (Học Viên)'}
+          </button>
+        ))}
+      </div>
 
-              <div className="card" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#fef3c7', color: '#d97706', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Layers size={24} />
-                </div>
-                <div>
-                  <div style={{ fontSize: '1.4rem', fontWeight: 800 }}>{summary.dueForReviewToday}</div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Cần ôn tập hôm nay (SRS)</div>
-                </div>
-              </div>
-
-              <div className="card" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#dcfce7', color: '#16a34a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <CheckCircle2 size={24} />
-                </div>
-                <div>
-                  <div style={{ fontSize: '1.4rem', fontWeight: 800 }}>{summary.masteredCount}</div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Đã ghi nhớ thành thạo</div>
-                </div>
-              </div>
+      {/* Tab content */}
+      {activeTab === 'overview' && (
+        <div>
+          <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: 12, padding: 20, marginBottom: 24 }}>
+            <h3 style={{ margin: '0 0 12px 0' }}>🧪 Thử Nghiệm API Đăng Nhập & Lấy Bearer Token</h3>
+            <p style={{ margin: '0 0 16px 0', fontSize: 14, color: '#4b5563' }}>
+              Kiểm tra trực tiếp xác thực với Spring Boot Backend chạy tại <code>http://localhost:3000</code>.
+            </p>
+            <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 16 }}>
+              <label style={{ fontSize: 14, fontWeight: 500 }}>Chọn quyền test:</label>
+              <select
+                value={loginRole}
+                onChange={e => setLoginRole(e.target.value as any)}
+                style={{ padding: '6px 12px', borderRadius: 6, border: '1px solid #d1d5db', fontSize: 14 }}
+              >
+                <option value="admin">Admin (ROLE_ADMIN - admin / admin123)</option>
+                <option value="user">User (ROLE_USER - user / user123)</option>
+              </select>
+              <button
+                onClick={handleTestLogin}
+                disabled={loading}
+                style={{
+                  background: '#dc2626',
+                  color: '#fff',
+                  border: 'none',
+                  padding: '8px 16px',
+                  borderRadius: 6,
+                  fontWeight: 600,
+                  cursor: 'pointer'
+                }}
+              >
+                {loading ? 'Đang gọi API...' : 'Đăng nhập lấy Token'}
+              </button>
             </div>
 
-            {/* Level Selector Tabs */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
-              <div>
-                <h2 style={{ fontSize: '1.4rem', fontWeight: 800 }}>Hán Tự (Kanji) Cần Học</h2>
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Lựa chọn cấp độ JLPT để luyện tập theo phương pháp Spaced Repetition</p>
-              </div>
-
-              <div style={{ display: 'flex', gap: '8px', background: '#f1f5f9', padding: '4px', borderRadius: '12px' }}>
-                {['N5', 'N4', 'N3', 'N2', 'N1'].map((lvl) => (
-                  <button
-                    key={lvl}
-                    onClick={() => setSelectedJlpt(lvl)}
-                    className="btn"
-                    style={{
-                      padding: '6px 16px',
-                      borderRadius: '8px',
-                      background: selectedJlpt === lvl ? 'white' : 'transparent',
-                      color: selectedJlpt === lvl ? 'var(--primary)' : 'var(--text-muted)',
-                      boxShadow: selectedJlpt === lvl ? '0 2px 6px rgba(0,0,0,0.08)' : 'none',
-                    }}
-                  >
-                    {lvl}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Kanji Cards Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
-              {kanjiList.map((k) => (
-                <KanjiCard
-                  key={k.id}
-                  kanji={k}
-                  onAskAi={handleAskAi}
-                  onStudy={(item) => setStudyingKanji(item)}
-                />
-              ))}
-            </div>
+            {tokenResult && (
+              <pre style={{ background: '#1e293b', color: '#f8fafc', padding: 16, borderRadius: 8, overflowX: 'auto', fontSize: 13 }}>
+                {tokenResult}
+              </pre>
+            )}
           </div>
-        )}
-      </main>
-
-      {/* AI Sensei Modal */}
-      <AiSenseiModal
-        isOpen={aiModalOpen}
-        onClose={() => setAiModalOpen(false)}
-        initialQuery={aiQuery}
-      />
-
-      <footer style={{ borderTop: '1px solid var(--border)', padding: '24px 0', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-        <div className="container">
-          <p>© 2026 KIZUNA (絆) - Dự án Chuyên đề 4: AI Product Development: End to End. VKU - Đại học Đà Nẵng.</p>
         </div>
-      </footer>
+      )}
+
+      {activeTab === 'admin' && (
+        <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: 12, padding: 20 }}>
+          <h3 style={{ margin: '0 0 12px 0', color: '#991b1b' }}>🛡️ Admin Portal (Web Desktop)</h3>
+          <p style={{ margin: '0 0 8px 0', fontSize: 14 }}>Dành cho giáo viên và biên tập viên nội dung học:</p>
+          <ul style={{ fontSize: 14, lineHeight: 1.8, color: '#374151' }}>
+            <li>Quản lý Bản đồ Hành trình, Chặng & Mốc học tiếng Nhật (Kanji, Từ vựng, Ngữ pháp).</li>
+            <li>Thiết lập danh sách Whitelist tri thức cho từng mốc.</li>
+            <li>Sandbox kiểm tra Prompt cho AI Sensei & Kiểm duyệt câu hỏi ôn tập.</li>
+            <li>Theo dõi số liệu người học và tiến độ toàn hệ thống.</li>
+          </ul>
+        </div>
+      )}
+
+      {activeTab === 'user' && (
+        <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: 12, padding: 20 }}>
+          <h3 style={{ margin: '0 0 12px 0', color: '#15803d' }}>🎒 User Learning Client (Đa Nền Tảng: Web & APK)</h3>
+          <p style={{ margin: '0 0 8px 0', fontSize: 14 }}>Dành cho người học tiếng Nhật:</p>
+          <ul style={{ fontSize: 14, lineHeight: 1.8, color: '#374151' }}>
+            <li>Trải nghiệm bản đồ hành trình tương tác 1 chạm trực quan.</li>
+            <li>Thực hành làm bài tập biến thể sinh bởi AI Sensei.</li>
+            <li>Thuật toán Spaced Repetition (SRS SM-2) gợi ý ôn tập thông minh hàng ngày.</li>
+            <li>Tích lũy kinh nghiệm (XP), duy trì chuỗi học liên tục (Daily Streak).</li>
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
-
-export default App;

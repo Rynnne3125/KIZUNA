@@ -1,13 +1,17 @@
 package com.kizuna.service;
 
-import com.kizuna.dto.response.UserProfileResponse;
-import com.kizuna.security.FirebaseUserPrincipal;
+import com.kizuna.dto.request.LoginRequest;
+import com.kizuna.dto.response.LoginResponse;
+import com.kizuna.dto.response.UserResponse;
+import com.kizuna.model.User;
 
 public interface UserService {
 
-    UserProfileResponse syncFirebaseUser(FirebaseUserPrincipal principal);
+    LoginResponse login(LoginRequest loginRequest);
 
-    UserProfileResponse getCurrentProfile(String uid);
+    UserResponse getCurrentUser(String username);
 
-    UserProfileResponse updateTargetLevel(String uid, String targetLevel);
+    User findByUsername(String username);
+
+    void initDefaultUsers();
 }

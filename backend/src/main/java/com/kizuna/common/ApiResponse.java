@@ -1,62 +1,70 @@
 package com.kizuna.common;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
 
-import java.time.Instant;
-
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResponse<T> {
 
     private boolean success;
-    private String code;
     private String message;
     private T data;
-    @Builder.Default
-    private Instant timestamp = Instant.now();
+    private LocalDateTime timestamp;
 
-    public static <T> ApiResponse<T> success(T data) {
-        return ApiResponse.<T>builder()
-                .success(true)
-                .code("SUCCESS")
-                .message("Operation completed successfully")
-                .data(data)
-                .timestamp(Instant.now())
-                .build();
+    public ApiResponse() {
+        this.timestamp = LocalDateTime.now();
+    }
+
+    public ApiResponse(boolean success, String message, T data) {
+        this.success = success;
+        this.message = message;
+        this.data = data;
+        this.timestamp = LocalDateTime.now();
     }
 
     public static <T> ApiResponse<T> success(String message, T data) {
-        return ApiResponse.<T>builder()
-                .success(true)
-                .code("SUCCESS")
-                .message(message)
-                .data(data)
-                .timestamp(Instant.now())
-                .build();
+        return new ApiResponse<>(true, message, data);
     }
 
-    public static <T> ApiResponse<T> error(String code, String message) {
-        return ApiResponse.<T>builder()
-                .success(false)
-                .code(code)
-                .message(message)
-                .timestamp(Instant.now())
-                .build();
+    public static <T> ApiResponse<T> success(T data) {
+        return new ApiResponse<>(true, "Success", data);
     }
 
-    public static <T> ApiResponse<T> error(ErrorCode errorCode) {
-        return ApiResponse.<T>builder()
-                .success(false)
-                .code(errorCode.getCode())
-                .message(errorCode.getMessage())
-                .timestamp(Instant.now())
-                .build();
+    public static <T> ApiResponse<T> error(String message) {
+        return new ApiResponse<>(false, message, null);
+    }
+
+    public static <T> ApiResponse<T> error(String message, T data) {
+        return new ApiResponse<>(false, message, data);
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 }
