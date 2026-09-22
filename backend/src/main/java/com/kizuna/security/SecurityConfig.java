@@ -77,6 +77,10 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/health/**").permitAll()
                         .requestMatchers("/error").permitAll()
 
+                        // Shared endpoints for both USER and ADMIN
+                        .requestMatchers("/api/v1/curriculum/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/api/v1/leaderboard/**").hasAnyRole("USER", "ADMIN")
+
                         // Role-based authorization
                         .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/user/**").hasRole("USER")

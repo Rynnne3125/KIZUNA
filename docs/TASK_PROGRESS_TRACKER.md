@@ -7,15 +7,15 @@
 
 ---
 
-## 📊 Tổng Quan Trạng Thái Tiến Độ Dự Án
+### 📊 Tổng Quan Trạng Thái Tiến Độ Dự Án
 
 `
-[██████████░░░░░░░░░░] 50% Hoàn Thành Toàn Diện
+[██████████████░░░░░░] 70% Hoàn Thành Toàn Diện
 `
 
 - **Phase 0 (Khung Dữ Liệu & Chuẩn Bị):** [x] 100% HOÀN TẤT (Firestore Seed: 4 Chặng, 28 Mốc, 728 Từ vựng, 300 Kanji, 112 Quests).
-- **Phase 1 (Backend Core Learning API):** [ ] 0% CHUẨN BỊ THỰC HIỆN.
-- **Phase 2 (Frontend Bản Đồ Hành Trình):** [ ] 0% CHƯA BẮT ĐẦU.
+- **Phase 1 (Backend Core Learning API & Phân Quyền RBAC):** [x] 100% HOÀN TẤT (Full RBAC User/Admin/Shared, Cách ly User Progress, SM-2 SRS, Leaderboard, AI Audit, 23 Tests Pass).
+- **Phase 2 (Frontend Bản Đồ Hành Trình):** [ ] 0% CHUẨN BỊ THỰC HIỆN.
 - **Phase 3 (Frontend Phòng Luyện Tập 4 Bài Học):** [ ] 0% CHƯA BẮT ĐẦU.
 - **Phase 4 (Tích Hợp AI Sensei Gemini):** [ ] 0% CHƯA BẮT ĐẦU.
 - **Phase 5 (Leaderboard, Mobile Package & Demo):** [ ] 0% CHƯA BẮT ĐẦU.
@@ -34,7 +34,7 @@
   - Viết Integration Tests xác thực thành công các chức năng người dùng.
 - [x] **Task 0.2 - Thiết kế Cấu trúc Database & Sơ đồ ERD:**
   - Định hình mô hình dữ liệu lai (Hybrid Architecture) trên Firestore.
-  - Hoàn thiện ERD 10 Collection liên kết và cập nhật vào docs/PRD_KIZUNA.md và docs/3.5_FEATURE_SPECIFICATIONS.md.
+  - Hoàn thiện ERD 10 Collection liên kết và cập nhật vào docs/PRD_KIZUNA.md và docs/ERD_DATABASE_DESIGN.md.
 - [x] **Task 0.3 - Số Hóa & Cào Dữ Liệu Giáo Trình NEJ Vol 1 & 2:**
   - Bóc tách toàn bộ 24 Unit sách NEJ kết hợp bảng chữ cái và mốc cầu nối thành 4 Chặng và 28 Mốc học.
   - Số hóa trọn vẹn **300 chữ Hán mục tiêu NEJ** (Trang 2 & 3 Vol 1) với số nét, bộ thủ, On/Kun, Hán Việt, Mnemonic, từ ghép.
@@ -47,54 +47,48 @@
 
 ---
 
-### 🟡 GIAI ĐOẠN 1: BACKEND SERVICE LAYER CHO NGHIỆP VỤ HỌC TẬP (CORE LEARNING API)
-> **Mục tiêu:** Xây dựng các API nghiệp vụ phục vụ việc điều phối bản đồ hành trình, nộp bài, tính điểm năng động và quản lý thuật toán lặp lại ngắt quãng SM-2.
+### 🟢 GIAI ĐOẠN 1: BACKEND SERVICE LAYER CHO NGHIỆP VỤ HỌC TẬP & RBAC (ĐÃ HOÀN TẤT 100%)
+> **Mục tiêu:** Xây dựng đầy đủ các API nghiệp vụ phục vụ việc điều phối bản đồ hành trình, nộp bài, tính điểm năng động, quản lý thuật toán SM-2, CRUD giáo trình và cách ly dữ liệu user_progress.
 
-- [ ] **Task 1.1 - Journey Map Service & Controller:**
+- [x] **Task 1.1 - Journey Map Service & Controller:**
   - **Mô tả:** Xây dựng API trả về toàn bộ bản đồ hành trình kèm trạng thái cá nhân hóa của học viên.
-  - **Endpoint:** GET /api/v1/journey/map
-  - **Logic:**
-    - Đọc dữ liệu 4 chặng (stages) và 28 mốc (milestones).
-    - Nối với bảng tiến độ học viên user_progress theo userId.
-    - Trả về từng mốc kèm cờ: LOCKED, UNLOCKED, IN_PROGRESS, COMPLETED, số bài học đã hoàn thành / 4.
-  - **Tiêu chí nghiệm thu (Acceptance Criteria):** Học viên mới vào thấy Mốc 1 mở khóa, các mốc sau khóa; học viên đã học hiển thị đúng tiến độ.
+  - **Endpoint:** `GET /api/v1/user/journey/map`
+  - **Đã hoàn thành:** Đọc 4 chặng, 28 mốc, tự động mở khóa mốc 1 cho học viên mới, trả về trạng thái từng mốc (`LOCKED`, `UNLOCKED`, `IN_PROGRESS`, `COMPLETED`), số bài hoàn thành / 4.
 
-- [ ] **Task 1.2 - Milestone Quest Detail API:**
+- [x] **Task 1.2 - Milestone Quest Detail API:**
   - **Mô tả:** Lấy thông tin chi tiết mốc và nội dung 4 bài học để học viên vào phòng học.
-  - **Endpoint:** GET /api/v1/milestones/{milestoneId}/quests
-  - **Logic:**
-    - Kiểm tra quyền truy cập: mốc phải ở trạng thái UNLOCKED hoặc COMPLETED.
-    - Trả về danh sách 4 bài học: Bài 1 (SRS Deck), Bài 2 (Gatekeeper), Bài 3 (Scramble & Board), Bài 4 (Practice).
-    - Đính kèm thông tin quest hiện tại học viên cần làm tiếp.
+  - **Endpoint:** `GET /api/v1/user/milestones/{id}/quests`
+  - **Đã hoàn thành:** Kiểm tra quyền truy cập: mốc phải ở trạng thái UNLOCKED/IN_PROGRESS/COMPLETED; nếu mốc bị LOCKED trả về mã lỗi HTTP `400 Bad Request`.
 
-- [ ] **Task 1.3 - Quest Submission & Progress Evaluator API:**
+- [x] **Task 1.3 - Quest Submission & Progress Evaluator API:**
   - **Mô tả:** Nhận kết quả nộp bài của từng bài học, chấm điểm, tích lũy Điểm Năng Động và mở khóa mốc tiếp theo.
-  - **Endpoint:** POST /api/v1/milestones/{milestoneId}/quests/{questId}/submit
-  - **Logic:**
-    - **Bài 1 (SRS):** Ghi nhận đã xem hết các thẻ từ vựng/kanji -> Thưởng 25 XP, 10 Active Points.
-    - **Bài 2 (Gatekeeper):** Kiểm tra đạt 100% (vòng lặp hoàn tất) -> Thưởng 35 XP, 15 Active Points. Nếu có từ sai trong quá trình làm, tự động đẩy vào hàng đợi user_srs_items.
-    - **Bài 3 (Grammar):** Kiểm tra các câu ghép thẻ từ -> Thưởng 45 XP, 20 Active Points.
-    - **Bài 4 (Practice & Về đích):** Kiểm tra câu hỏi điền khuyết -> Thưởng 50 XP, 25 Active Points.
-    - **Tự động chuyển trạng thái:** Khi hoàn tất Bài 4:
-      - Đánh dấu mốc hiện tại là COMPLETED.
-      - Tự động chuyển mốc kế tiếp sang UNLOCKED trong user_progress.
-      - Cập nhật tổng ctivePoints, 	otalXp, và chuỗi currentStreak trong collection users.
+  - **Endpoint:** `POST /api/v1/user/milestones/{milestoneId}/quests/{questIndex}/submit`
+  - **Đã hoàn thành:**
+    - Quest 1 (SRS): Thưởng 25 XP, 10 Active Points.
+    - Quest 2 (Gatekeeper): Thưởng 35 XP, 15 Active Points. Tự động đưa từ sai vào hàng đợi `user_srs_items`.
+    - Quest 3 (Grammar): Thưởng 45 XP, 20 Active Points.
+    - Quest 4 (Practice & Về đích): Thưởng 50 XP, 25 Active Points. Tự động chuyển mốc hiện tại sang `COMPLETED`, mở khóa mốc kế tiếp sang `UNLOCKED` trong bảng riêng `user_progress`. Cập nhật tổng Active Points, totalXp, currentStreak và sync lên Leaderboard.
+    - **Quy tắc an toàn:** Không chỉnh sửa dữ liệu giáo trình gốc trong Firestore, toàn bộ tiến trình học lưu vào `user_progress`.
 
-- [ ] **Task 1.4 - Spaced Repetition (SM-2) Engine Service:**
-  - **Mô tả:** Xây dựng thuật toán ngắt quãng khoa học SuperMemo-2 cho các từ vựng và chữ Hán học viên từng làm sai.
+- [x] **Task 1.4 - Spaced Repetition (SM-2) Engine Service:**
+  - **Mô tả:** Triển khai thuật toán lặp lại ngắt quãng SuperMemo-2 cho từ vựng và chữ Hán học viên từng làm sai.
   - **Endpoints:**
-    - GET /api/v1/srs/today: Lấy danh sách thẻ đến hạn ôn tập hôm nay (
-extReviewDate <= now).
-    - POST /api/v1/srs/{itemId}/review: Gửi kết quả nhớ thẻ (Điểm chất lượng nhớ 0-5) -> Tính toán lại intervalDays, easeFactor, và 
-extReviewDate mới.
+    - `GET /api/v1/user/srs/today`: Lấy danh sách thẻ đến hạn ôn tập hôm nay (`nextReviewDate <= now`).
+    - `POST /api/v1/user/srs/{itemId}/review`: Gửi điểm nhớ thẻ (0-5 sao) -> tính toán lại `intervalDays`, `easeFactor` ($EF' = \max(1.3, EF + \dots)$), và `nextReviewDate`. Thưởng +5 Active Points.
 
-- [ ] **Task 1.5 - Leaderboard Service & Dynamic Ranking API:**
-  - **Mô tả:** Cung cấp bảng xếp hạng học viên theo Điểm Năng Động và chuỗi học tập bền bỉ.
-  - **Endpoint:** GET /api/v1/leaderboard (Hỗ trợ lọc theo weekly hoặc ll-time).
-  - **Logic:** Lấy Top 50 học viên sắp xếp theo ctivePoints DESC, trả về vị trí hạng, tên, avatar, streak.
+- [x] **Task 1.5 - Leaderboard Service & Dynamic Ranking API:**
+  - **Mô tả:** Bảng xếp hạng học viên theo Điểm Năng Động (Active Points) và chuỗi học tập bền bỉ.
+  - **Endpoint:** `GET /api/v1/leaderboard` (hỗ trợ lọc `type=weekly` hoặc `all-time`, truy cập chung cho cả User và Admin).
+  - **Đã hoàn thành:** Trả về Top 50 kèm vị trí thứ hạng của chính người dùng hiện tại.
 
-- [ ] **Task 1.6 - Automated Backend Integration Tests:**
-  - **Mô tả:** Viết test suite giả lập luồng học hoàn chỉnh: Học viên mới -> Xem map -> Làm bài 1, 2, 3, 4 -> Mở mốc mới -> Kiểm tra điểm năng động và bảng xếp hạng.
+- [x] **Task 1.6 - Automated Backend Integration Tests & Phân Quyền RBAC:**
+  - **Mô tả:** Viết test suite giả lập luồng học hoàn chỉnh và xác thực phân quyền 3 cấp.
+  - **Đã hoàn thành:** Bộ test 23 bài kiểm thử đạt **100% BUILD SUCCESSFUL** xác thực:
+    - `401 Unauthorized` khi thiếu Token.
+    - `403 Forbidden` khi User gọi Admin API hoặc Admin gọi User API.
+    - `404 Not Found` khi tìm tài nguyên không tồn tại.
+    - `400 Bad Request` khi nộp mốc LOCKED hoặc payload sai.
+    - Luồng nộp 4 Quests mở mốc tiếp theo và bảo toàn cách ly dữ liệu `user_progress`.
 
 ---
 

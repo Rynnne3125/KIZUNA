@@ -11,7 +11,12 @@ public class User {
     private boolean enabled;
     // Bổ sung vào phần khai báo biến
     private boolean isDeleted = false;
-
+    private int activePoints = 0;
+    private int totalXp = 0;
+    private int currentStreak = 0;
+    private int longestStreak = 0;
+    private String avatarUrl = "";
+    private String level = "N5";
 
     public User() {
     }
@@ -81,12 +86,59 @@ public class User {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-    // Bổ sung Getter và Setter ở dưới
     public boolean isDeleted() {
         return isDeleted;
     }
 
     public void setDeleted(boolean deleted) {
         this.isDeleted = deleted;
+    }
+
+    public int getActivePoints() {
+        return activePoints;
+    }
+
+    public void setActivePoints(int activePoints) {
+        this.activePoints = activePoints;
+    }
+
+    public int getTotalXp() {
+        return totalXp;
+    }
+
+    public void setTotalXp(int totalXp) {
+        this.totalXp = totalXp;
+    }
+
+    public int getCurrentStreak() {
+        return currentStreak;
+    }
+
+    public void setCurrentStreak(int currentStreak) {
+        this.currentStreak = currentStreak;
+    }
+
+    public int getLongestStreak() {
+        return longestStreak;
+    }
+
+    public void setLongestStreak(int longestStreak) {
+        this.longestStreak = longestStreak;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 }
