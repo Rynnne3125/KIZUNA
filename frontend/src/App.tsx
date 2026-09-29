@@ -19,7 +19,6 @@ export default function App() {
   const [user, setUser] = useState<User | null>(() => authService.getCurrentUser());
   const [activeTab, setActiveTab] = useState<UserNavTab>('home');
 
-  // Auto-initialize demo session if user not logged in
   useEffect(() => {
     if (!user) {
       const demoUser = authService.getCurrentUser();
@@ -50,16 +49,37 @@ export default function App() {
     if (updated) {
       setUser({ ...updated });
     } else {
-      // If guest, create admin demo
       authService.login({ username: 'admin' }).then(res => {
         setUser(res.user);
       });
     }
   };
 
+  // If user is in admin mode, completely override the layout
+  if (activeTab === 'admin') {
+    return (
+      <AdminDashboardPage
+        user={user}
+        onGoHome={() => handleTabChange('home')}
+        onSwitchToAdmin={handleRoleToggle}
+        onLoginDifferent={() => handleTabChange('login')}
+        onLogout={handleLogout}
+      />
+    );
+  }
+
+  // If user is in login mode, show the standalone Login Page (no navbar/footer)
+  if (activeTab === 'login') {
+    return (
+      <LoginPage
+        onLoginSuccess={handleLoginSuccess}
+        onCancel={() => handleTabChange('home')}
+      />
+    );
+  }
+
   return (
     <div className="app-container">
-      {/* Top Banner & Navigation Header */}
       <UserNavbar
         activeTab={activeTab}
         onTabChange={handleTabChange}
@@ -68,17 +88,7 @@ export default function App() {
         onRoleToggle={handleRoleToggle}
       />
 
-      {/* Main Body Content */}
       <main className="main-content">
-        {/* Dedicated Login / Register Page */}
-        {activeTab === 'login' && (
-          <LoginPage
-            onLoginSuccess={handleLoginSuccess}
-            onCancel={() => handleTabChange('home')}
-          />
-        )}
-
-        {/* Dedicated Home Page (Centered on User Learning Progress) */}
         {activeTab === 'home' && (
           <HomePage
             user={user}
@@ -86,20 +96,12 @@ export default function App() {
             onOpenAuth={() => handleTabChange('login')}
           />
         )}
-
-        {/* Learning Pages */}
         {activeTab === 'vocab' && <VocabPage />}
-
         {activeTab === 'grammar' && <GrammarPage />}
-
         {activeTab === 'kanji' && <KanjiPage />}
-
         {activeTab === 'roadmap' && <RoadmapPage />}
-
         {activeTab === 'library' && <LibraryPage />}
-
         {activeTab === 'exam' && <ExamPage />}
-
         {activeTab === 'profile' && (
           <ProfilePage
             user={user}
@@ -108,46 +110,17 @@ export default function App() {
             onOpenAuth={() => handleTabChange('login')}
           />
         )}
-
-        {/* Dedicated Admin Portal (Protected with RBAC & 403 Forbidden Screen) */}
-        {activeTab === 'admin' && (
-          <div>
-            {user?.role === 'ROLE_ADMIN' && (
-              <AdminNavbar
-                user={user}
-                onGoHome={() => handleTabChange('home')}
-                onLogout={handleLogout}
-                onRoleToggle={handleRoleToggle}
-              />
-            )}
-            <AdminDashboardPage
-              user={user}
-              onGoHome={() => handleTabChange('home')}
-              onSwitchToAdmin={handleRoleToggle}
-              onLoginDifferent={() => handleTabChange('login')}
-            />
-          </div>
-        )}
       </main>
 
-      {/* Footer */}
-      <footer style={{
-        background: '#ffffff',
-        borderTop: '1px solid var(--border-color)',
-        padding: '24px 16px',
-        textAlign: 'center',
-        color: '#64748b',
-        fontSize: 13,
-        marginTop: 'auto'
-      }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ fontWeight: 800, color: '#dc2626' }}>⛩️ KIZUNA (絆)</span>
-            <span>• Nền tảng học tiếng Nhật đa nền tảng hỗ trợ bởi AI</span>
+      <footer className="bg-white border-t p-6 text-center text-slate-500 text-sm mt-auto">
+        <div className="max-w-7xl mx-auto flex justify-between items-center flex-wrap gap-3">
+          <div className="flex items-center gap-2">
+            <span className="font-extrabold text-orange-600">KIZUNA</span>
+            <span>- Nền tảng học tiếng Nhật</span>
           </div>
-          <div style={{ display: 'flex', gap: 12, fontSize: 12 }}>
-            <span className="badge badge-success">Backend: Spring Boot 3.4 (JWT Bearer)</span>
-            <span className="badge badge-secondary">Database: Google Cloud Firestore</span>
+          <div className="flex gap-3 text-xs">
+            <span className="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-semibold">Spring Boot 3</span>
+            <span className="bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full font-semibold">Firestore</span>
           </div>
         </div>
       </footer>
