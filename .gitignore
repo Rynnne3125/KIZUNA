@@ -60,6 +60,9 @@ yarn-error.log*
 
 ### Scratch & Temp Folders ###
 scratch/
+.openjlpt_cache/
+frontend/.openjlpt_cache/
+
 
 ### Environment Variables ###
 .env
