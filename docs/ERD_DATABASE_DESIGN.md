@@ -184,6 +184,42 @@ erDiagram
         timestamp createdAt "Thời điểm gửi khiếu nại"
         timestamp resolvedAt "Thời điểm Admin phán quyết"
     }
+
+    LISTENING_ITEMS {
+        string id PK "Mã bài nghe Choukai (vd: listening_n5_m1_q1)"
+        string milestoneId FK "Khóa ngoại tới MILESTONES.id"
+        string jlptLevel "Cấp độ N5..N1"
+        string mondaiName "Tên Mondai / Hội thoại"
+        string setting "Bối cảnh tình huống nghe"
+        string questionPrompt "Câu hỏi nghe hiểu"
+        json dialogue "Transcript hội thoại (speaker, jp, vi)"
+        array options "Các phương án trả lời"
+        int correctAnswer "Chỉ số đáp án đúng"
+        string explanationVi "Giải thích chi tiết đáp án"
+    }
+
+    VIDEO_LESSONS {
+        string id PK "Mã bài học video (vd: video_916)"
+        string youtubeVideoId "Mã video YouTube"
+        string title "Tiêu đề tiếng Nhật"
+        string titleEn "Tiêu đề dịch nghĩa"
+        string jlptLevel "Cấp độ JLPT (N5..N1)"
+        string category "Chủ đề (conversation, anime, news...)"
+        string channelName "Tên kênh giảng dạy"
+        int durationSeconds "Thời lượng (giây)"
+        int segmentCount "Số câu phụ đề tương tác"
+    }
+
+    LIBRARY_ITEMS {
+        string id PK "Mã học liệu thư viện (vd: lib_kanji-n4-jf)"
+        string slug "Định danh URL trên thư viện"
+        string jlptLevel "Cấp độ N5..N1 hoặc ALL"
+        string type "course, mock, vocabulary_book, skill_category"
+        string eyebrow "Nhãn phân loại học liệu"
+        string title "Tên giáo trình / Bộ đề"
+        string description "Mô tả chi tiết nội dung"
+        string routeTo "Đường dẫn điều hướng"
+    }
 ```
 
 ---
