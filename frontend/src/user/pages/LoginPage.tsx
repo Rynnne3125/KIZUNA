@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Card, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/admin/components/ui/card';
+import { Input } from '@/admin/components/ui/input';
+import { Label } from '@/admin/components/ui/label';
+import { Button } from '@/admin/components/ui/button';
 import { Shield, Mail, Lock, User, LogIn, UserPlus, Heart, Star } from 'lucide-react';
 
 export interface LoginPageProps {

@@ -3,11 +3,11 @@ import { AdminForbidden403 } from '../exception/AdminForbidden403';
 import { useAdminData } from '../hooks/useAdminData';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/admin/components/ui/card';
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/admin/components/ui/table';
+import { Badge } from '@/admin/components/ui/badge';
+import { Button } from '@/admin/components/ui/button';
+import { Input } from '@/admin/components/ui/input';
 import { 
   Users, Bot, LayoutDashboard, Search, LogOut, Settings, 
   Database, ShieldAlert, Menu, Bell, Filter, Moon, Sun, 
