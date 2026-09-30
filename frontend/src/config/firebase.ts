@@ -2,9 +2,8 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
-// Cấu hình Firebase nạp an toàn từ Biến Môi trường (.env)
 export const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || '',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || 'dummy_api_key_for_ui_testing',
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || 'ebook-fdc02.firebaseapp.com',
   databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL || 'https://ebook-fdc02-default-rtdb.firebaseio.com',
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || 'ebook-fdc02',
@@ -13,11 +12,15 @@ export const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID || '1:657175691442:android:556972cc7268478ed949ab'
 };
 
-// Khởi tạo Firebase App cho Web Client
-export const app = initializeApp(firebaseConfig);
+let app, db, auth;
 
-// Khởi tạo Cloud Firestore và Authentication
-export const db = getFirestore(app);
-export const auth = getAuth(app);
+try {
+  app = initializeApp(firebaseConfig);
+  db = getFirestore(app);
+  auth = getAuth(app);
+} catch (error) {
+  console.warn("Firebase initialization failed. Please check your .env configuration.", error);
+}
 
+export { app, db, auth };
 export default app;
