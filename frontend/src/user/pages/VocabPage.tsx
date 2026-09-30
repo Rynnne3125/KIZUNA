@@ -89,7 +89,7 @@ export const VocabPage: React.FC = () => {
                     <div style={{ fontSize: 36, fontWeight: 800, color: '#0f172a', marginBottom: 6 }}>
                       {item.term}
                     </div>
-                    <div style={{ fontSize: 16, color: '#dc2626', fontWeight: 600, marginBottom: 8 }}>
+                    <div style={{ fontSize: 16, color: '#16a34a', fontWeight: 600, marginBottom: 8 }}>
                       {item.reading}
                     </div>
                     {item.sinoVietnamese && (

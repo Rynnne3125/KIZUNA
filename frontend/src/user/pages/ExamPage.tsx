@@ -153,7 +153,7 @@ export const ExamPage: React.FC = () => {
               fontWeight: 700,
               color: '#1e293b',
               marginBottom: 16,
-              borderLeft: '4px solid #dc2626'
+              borderLeft: '4px solid #16a34a'
             }}>
               Phần {qs.part === 1 ? 'Kiến Thức Ngôn Ngữ & Đọc Hiểu' : 'Nghe Hiểu (Choukai)'}: {qs.title}
             </div>
@@ -188,7 +188,7 @@ export const ExamPage: React.FC = () => {
                   >
                     {/* Question Stem */}
                     <div style={{ fontSize: 15, fontWeight: 600, color: '#0f172a', marginBottom: 12 }}>
-                      <span style={{ color: '#dc2626', marginRight: 6 }}>Câu {q.index || (qIdx + 1)}.</span>
+                      <span style={{ color: '#16a34a', marginRight: 6 }}>Câu {q.index || (qIdx + 1)}.</span>
                       <span dangerouslySetInnerHTML={{ __html: q.question }} />
                     </div>
 
@@ -243,7 +243,7 @@ export const ExamPage: React.FC = () => {
                               width: 22,
                               height: 22,
                               borderRadius: '50%',
-                              background: isChosen ? '#dc2626' : '#f1f5f9',
+                              background: isChosen ? '#16a34a' : '#f1f5f9',
                               color: isChosen ? '#fff' : '#64748b',
                               display: 'inline-flex',
                               alignItems: 'center',
@@ -320,10 +320,10 @@ export const ExamPage: React.FC = () => {
               onClick={() => setLevelFilter(lvl)}
               className="btn btn-sm"
               style={{
-                background: levelFilter === lvl ? '#dc2626' : '#ffffff',
+                background: levelFilter === lvl ? '#16a34a' : '#ffffff',
                 color: levelFilter === lvl ? '#ffffff' : '#475569',
                 border: '1px solid',
-                borderColor: levelFilter === lvl ? '#dc2626' : 'var(--border-color)',
+                borderColor: levelFilter === lvl ? '#16a34a' : 'var(--border-color)',
                 fontWeight: 700
               }}
             >

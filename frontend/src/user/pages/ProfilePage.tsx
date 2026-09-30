@@ -98,7 +98,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
             <div style={{ fontSize: 12, color: '#64748b' }}>Kinh Nghiệm (XP)</div>
           </div>
           <div style={{ background: '#f8fafc', padding: 14, borderRadius: 'var(--radius-sm)', textAlign: 'center' }}>
-            <div style={{ fontSize: 18, fontWeight: 800, color: '#dc2626' }}>{user.level || 'N5'}</div>
+            <div style={{ fontSize: 18, fontWeight: 800, color: '#16a34a' }}>{user.level || 'N5'}</div>
             <div style={{ fontSize: 12, color: '#64748b' }}>Cấp độ JLPT</div>
           </div>
         </div>

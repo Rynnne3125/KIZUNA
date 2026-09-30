@@ -46,7 +46,7 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
           <button
             onClick={onOpenAuth}
             className="btn btn-primary btn-lg"
-            style={{ background: '#dc2626', borderColor: '#b91c1c' }}
+            style={{ background: '#16a34a', borderColor: '#15803d' }}
           >
             Đăng nhập để lưu tiến độ 🚀
           </button>
@@ -77,7 +77,7 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
       {/* =========================================================================
           TRỌNG TÂM CHÍNH GIỮA: KHU VỰC TIẾN ĐỘ CỦA USER
           ========================================================================= */}
-      <div className="kizuna-card" style={{ padding: 28, marginBottom: 28, border: '2px solid #fecaca', background: '#fff' }}>
+      <div className="kizuna-card" style={{ padding: 28, marginBottom: 28, border: '2px solid #bbf7d0', background: '#fff' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 12 }}>
           <div>
             <span className="badge badge-primary" style={{ marginBottom: 6 }}>
@@ -94,7 +94,7 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
           <button
             onClick={() => onNavigate('roadmap')}
             className="btn btn-primary btn-lg"
-            style={{ boxShadow: '0 4px 14px rgba(220, 38, 38, 0.35)' }}
+            style={{ boxShadow: '0 4px 14px rgba(22, 163, 74, 0.25)' }}
           >
             Tiếp tục bài học ngay ➔
           </button>
@@ -104,7 +104,7 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
         <div style={{ marginBottom: 24 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, fontWeight: 700, marginBottom: 6 }}>
             <span style={{ color: '#0f172a' }}>Tiến độ Chặng 1 (Nhập Môn)</span>
-            <span style={{ color: '#dc2626' }}>65% hoàn thành (Bài 2/4 Quest)</span>
+            <span style={{ color: '#16a34a' }}>65% hoàn thành (Bài 2/4 Quest)</span>
           </div>
           <div className="progress-bar-bg" style={{ height: 12 }}>
             <div className="progress-bar-fill" style={{ width: '65%' }}></div>

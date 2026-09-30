@@ -68,7 +68,7 @@ export const RoadmapPage: React.FC = () => {
                         key={ms.id}
                         style={{
                           background: isCompleted ? '#f0fdf4' : isUnlocked ? '#ffffff' : '#f8fafc',
-                          border: isCompleted ? '1.5px solid #86efac' : isUnlocked ? '2px solid #dc2626' : '1px solid #e2e8f0',
+                          border: isCompleted ? '1.5px solid #86efac' : isUnlocked ? '2px solid #16a34a' : '1px solid #e2e8f0',
                           borderRadius: 'var(--radius-md)',
                           padding: 16,
                           position: 'relative',

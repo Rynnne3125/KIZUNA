@@ -56,14 +56,14 @@ export const KanjiPage: React.FC = () => {
                       padding: '14px 8px',
                       textAlign: 'center',
                       cursor: 'pointer',
-                      border: isSelected ? '2px solid #dc2626' : '1px solid var(--border-color)',
-                      background: isSelected ? '#fee2e2' : '#ffffff'
+                      border: isSelected ? '2px solid #16a34a' : '1px solid var(--border-color)',
+                      background: isSelected ? '#ecfdf5' : '#ffffff'
                     }}
                   >
                     <div style={{ fontSize: 32, fontWeight: 800, color: '#0f172a' }}>
                       {item.kanji}
                     </div>
-                    <div style={{ fontSize: 11, fontWeight: 700, color: '#dc2626', marginTop: 4 }}>
+                    <div style={{ fontSize: 11, fontWeight: 700, color: '#16a34a', marginTop: 4 }}>
                       {item.sinoVietnamese}
                     </div>
                   </div>
@@ -79,15 +79,15 @@ export const KanjiPage: React.FC = () => {
                 <div style={{
                   width: 90,
                   height: 90,
-                  background: '#fef2f2',
-                  border: '2px solid #fecaca',
+                  background: '#f0fdf4',
+                  border: '2px solid #bbf7d0',
                   borderRadius: 'var(--radius-md)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   fontSize: 54,
                   fontWeight: 900,
-                  color: '#dc2626'
+                  color: '#16a34a'
                 }}>
                   {selectedKanji.kanji}
                 </div>
@@ -116,7 +116,7 @@ export const KanjiPage: React.FC = () => {
               }}>
                 <div>
                   <span style={{ fontSize: 11, fontWeight: 700, color: '#64748b' }}>ÂM ON (Katakana):</span>
-                  <div style={{ fontSize: 15, fontWeight: 700, color: '#dc2626', marginTop: 2 }}>
+                  <div style={{ fontSize: 15, fontWeight: 700, color: '#16a34a', marginTop: 2 }}>
                     {selectedKanji.onyomi || '—'}
                   </div>
                 </div>

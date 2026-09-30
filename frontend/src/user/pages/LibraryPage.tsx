@@ -82,7 +82,7 @@ export const LibraryPage: React.FC = () => {
             className="btn btn-sm"
             style={{
               background: activeTab === 'audio' ? '#ffffff' : 'transparent',
-              color: activeTab === 'audio' ? '#dc2626' : '#64748b',
+              color: activeTab === 'audio' ? '#16a34a' : '#64748b',
               boxShadow: activeTab === 'audio' ? 'var(--shadow-sm)' : 'none'
             }}
           >
@@ -93,7 +93,7 @@ export const LibraryPage: React.FC = () => {
             className="btn btn-sm"
             style={{
               background: activeTab === 'video' ? '#ffffff' : 'transparent',
-              color: activeTab === 'video' ? '#dc2626' : '#64748b',
+              color: activeTab === 'video' ? '#16a34a' : '#64748b',
               boxShadow: activeTab === 'video' ? 'var(--shadow-sm)' : 'none'
             }}
           >
@@ -127,7 +127,7 @@ export const LibraryPage: React.FC = () => {
                 </div>
                 {item.dialogue.map((d, i) => (
                   <div key={i} style={{ marginBottom: 8, fontSize: 13 }}>
-                    <strong style={{ color: '#dc2626' }}>{d.speaker}:</strong>{' '}
+                    <strong style={{ color: '#16a34a' }}>{d.speaker}:</strong>{' '}
                     <span style={{ color: '#0f172a', fontWeight: 600 }}>{d.jp}</span>
                     <div style={{ color: '#64748b', fontSize: 12, marginLeft: 16 }}>{d.vi}</div>
                   </div>
