@@ -11,7 +11,8 @@ import { Input } from '@/admin/components/ui/input';
 import { 
   Users, Bot, LayoutDashboard, Search, LogOut, Settings, 
   Database, ShieldAlert, Menu, Bell, Filter, Moon, Sun, 
-  TrendingUp, Activity, CheckCircle, XCircle
+  TrendingUp, Activity, CheckCircle, XCircle, BookOpen, 
+  GraduationCap, FileText, Layers, Map
 } from 'lucide-react';
 import { DonutChart, BarList, AreaChart } from '@tremor/react';
 
@@ -24,13 +25,13 @@ export interface AdminDashboardPageProps {
 }
 
 const chartData = [
-  { date: 'Mon', 'Active Users': 120, 'New Signups': 15 },
-  { date: 'Tue', 'Active Users': 132, 'New Signups': 20 },
-  { date: 'Wed', 'Active Users': 180, 'New Signups': 45 },
-  { date: 'Thu', 'Active Users': 195, 'New Signups': 30 },
-  { date: 'Fri', 'Active Users': 240, 'New Signups': 65 },
-  { date: 'Sat', 'Active Users': 210, 'New Signups': 50 },
-  { date: 'Sun', 'Active Users': 280, 'New Signups': 80 },
+  { date: 'T2', 'Người dùng HĐ': 120, 'Đăng ký mới': 15 },
+  { date: 'T3', 'Người dùng HĐ': 132, 'Đăng ký mới': 20 },
+  { date: 'T4', 'Người dùng HĐ': 180, 'Đăng ký mới': 45 },
+  { date: 'T5', 'Người dùng HĐ': 195, 'Đăng ký mới': 30 },
+  { date: 'T6', 'Người dùng HĐ': 240, 'Đăng ký mới': 65 },
+  { date: 'T7', 'Người dùng HĐ': 210, 'Đăng ký mới': 50 },
+  { date: 'CN', 'Người dùng HĐ': 280, 'Đăng ký mới': 80 },
 ];
 
 export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
@@ -40,7 +41,10 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
   onLoginDifferent,
   onLogout
 }) => {
-  const { stats, users, audits, loading } = useAdminData();
+  const { 
+    stats, users, audits, stages, milestones, vocabulary, grammar, kanji, exams, loading 
+  } = useAdminData();
+  
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [activeMenu, setActiveMenu] = useState('overview');
   const [searchTerm, setSearchTerm] = useState('');
@@ -67,22 +71,24 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
   }
 
   const roleDistribution = [
-    { name: 'Admins', value: stats?.totalAdmins || 3, color: 'red-500' },
-    { name: 'Learners', value: stats?.totalLearners || 1240, color: 'orange-500' },
+    { name: 'Quản trị viên', value: stats?.totalAdmins || 0, color: 'red-500' },
+    { name: 'Học viên', value: stats?.totalLearners || 0, color: 'orange-500' },
   ];
 
   const contentStats = [
-    { name: 'Exams', value: stats?.totalExamsAvailable || 85 },
-    { name: 'Stages', value: stats?.totalStages || 34 },
-    { name: 'Milestones', value: stats?.totalMilestones || 182 },
+    { name: 'Đề thi', value: exams.length },
+    { name: 'Chặng học', value: stages.length },
+    { name: 'Cột mốc', value: milestones.length },
+    { name: 'Từ vựng', value: vocabulary.length },
+    { name: 'Ngữ pháp', value: grammar.length },
+    { name: 'Kanji', value: kanji.length },
   ];
 
   const filteredUsers = users.filter(u => 
-    u.fullName.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    u.email.toLowerCase().includes(searchTerm.toLowerCase())
+    (u.fullName || '').toLowerCase().includes(searchTerm.toLowerCase()) || 
+    (u.email || '').toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Reusable Bento Box Component with Glassmorphism & Hover effects
   const BentoBox = ({ children, className = '', colSpan = 'col-span-12', delay = 0 }: { children: React.ReactNode, className?: string, colSpan?: string, delay?: number }) => (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -100,26 +106,23 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
   const renderOverview = () => (
     <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pb-12">
-      
-      {/* 1. Welcome Banner */}
       <BentoBox colSpan="md:col-span-8" className="bg-gradient-to-br from-red-500/10 to-transparent dark:from-red-900/20 justify-center">
         <h2 className="text-3xl font-extrabold text-slate-800 dark:text-slate-100 mb-2">
-          Welcome back, {user.fullName}
+          Chào mừng trở lại, {user.fullName}
         </h2>
         <p className="text-slate-500 dark:text-slate-400 max-w-lg leading-relaxed">
-          Your dashboard is looking great today. System activity is up by 12%, and there are {stats?.pendingAiAudits || 5} AI audits waiting for your review.
+          Bảng điều khiển của bạn hôm nay trông rất tuyệt. Hoạt động hệ thống tăng 12%, và có {stats?.pendingAiAudits || 0} bài kiểm tra AI đang chờ đánh giá.
         </p>
         <div className="mt-6 flex gap-4">
-          <motion.button whileTap={{ scale: 0.95 }} className="bg-red-600 text-white px-6 py-2.5 rounded-full font-semibold shadow-lg shadow-red-500/30 hover:bg-red-700 transition-colors">
-            Review Audits
+          <motion.button whileTap={{ scale: 0.95 }} onClick={() => setActiveMenu('audits')} className="bg-red-600 text-white px-6 py-2.5 rounded-full font-semibold shadow-lg shadow-red-500/30 hover:bg-red-700 transition-colors">
+            Xem bài kiểm tra
           </motion.button>
           <motion.button whileTap={{ scale: 0.95 }} className="bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-6 py-2.5 rounded-full font-semibold shadow-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
-            View Reports
+            Xem báo cáo
           </motion.button>
         </div>
       </BentoBox>
 
-      {/* 2. Total Users Metric */}
       <BentoBox colSpan="md:col-span-4" delay={0.1}>
         <div className="flex justify-between items-start mb-6">
           <div className="p-3 bg-red-100 dark:bg-red-500/20 rounded-2xl text-red-600 dark:text-red-400">
@@ -130,19 +133,18 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
           </Badge>
         </div>
         <div className="mt-auto">
-          <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Total Network</p>
+          <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Tổng thành viên</p>
           <h3 className="text-5xl font-black text-slate-800 dark:text-white">
-            {((stats?.totalLearners || 1240) + (stats?.totalAdmins || 3)).toLocaleString()}
+            {((stats?.totalLearners || 0) + (stats?.totalAdmins || 0)).toLocaleString()}
           </h3>
         </div>
       </BentoBox>
 
-      {/* 3. Main Chart */}
       <BentoBox colSpan="md:col-span-8" className="h-[400px]" delay={0.2}>
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h3 className="text-lg font-bold text-slate-800 dark:text-white">Platform Activity</h3>
-            <p className="text-sm text-slate-500 dark:text-slate-400">Daily active users & signups over time</p>
+            <h3 className="text-lg font-bold text-slate-800 dark:text-white">Hoạt động nền tảng</h3>
+            <p className="text-sm text-slate-500 dark:text-slate-400">Số người dùng hoạt động & đăng ký mới hàng ngày</p>
           </div>
           <Activity className="w-5 h-5 text-red-500" />
         </div>
@@ -150,7 +152,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
           <AreaChart
             data={chartData}
             index="date"
-            categories={['Active Users', 'New Signups']}
+            categories={['Người dùng HĐ', 'Đăng ký mới']}
             colors={['red', 'amber']}
             valueFormatter={(num) => num.toString()}
             showLegend={true}
@@ -164,7 +166,6 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
       </BentoBox>
 
       <div className="col-span-12 md:col-span-4 flex flex-col gap-6">
-        {/* 4. Curriculum Metric */}
         <BentoBox className="flex-1" delay={0.3}>
           <div className="flex justify-between items-start">
             <div className="p-3 bg-orange-100 dark:bg-orange-500/20 rounded-2xl text-orange-600 dark:text-orange-400">
@@ -172,44 +173,43 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
             </div>
           </div>
           <div className="mt-auto pt-6">
-            <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Curriculum Nodes</p>
+            <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Dữ liệu học tập</p>
             <h3 className="text-4xl font-black text-slate-800 dark:text-white">
-              {(stats?.totalStages || 34) + (stats?.totalMilestones || 182)}
+              {stages.length + milestones.length}
             </h3>
           </div>
         </BentoBox>
 
-        {/* 5. Audits Metric */}
         <BentoBox className="flex-1" delay={0.4}>
           <div className="flex justify-between items-start">
             <div className="p-3 bg-rose-100 dark:bg-rose-500/20 rounded-2xl text-rose-600 dark:text-rose-400">
               <Bot className="w-6 h-6" />
             </div>
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-rose-500"></span>
-            </span>
+            {stats?.pendingAiAudits && stats.pendingAiAudits > 0 ? (
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-rose-500"></span>
+              </span>
+            ) : null}
           </div>
           <div className="mt-auto pt-6">
-            <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Pending Audits</p>
+            <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Chờ duyệt AI</p>
             <h3 className="text-4xl font-black text-slate-800 dark:text-white">
-              {stats?.pendingAiAudits || 5}
+              {stats?.pendingAiAudits || 0}
             </h3>
           </div>
         </BentoBox>
       </div>
 
-      {/* 6. Demographics */}
       <BentoBox colSpan="md:col-span-5" delay={0.5}>
-        <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-6">Demographics</h3>
+        <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-6">Thành phần người dùng</h3>
         <div className="flex-1 flex items-center justify-center">
           <DonutChart data={roleDistribution} category="value" index="name" colors={['red', 'orange']} className="w-48 h-48" showAnimation={true} animationDuration={1000} />
         </div>
       </BentoBox>
 
-      {/* 7. Content Dist */}
       <BentoBox colSpan="md:col-span-7" delay={0.6}>
-        <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-6">Content Distribution</h3>
+        <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-6">Phân bố nội dung</h3>
         <BarList data={contentStats} className="mt-4" color="red" />
       </BentoBox>
     </div>
@@ -219,17 +219,14 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
     <BentoBox colSpan="col-span-12">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-slate-800 dark:text-white">User Management</h2>
-          <p className="text-slate-500 dark:text-slate-400">Advanced datatable with seamless filtering.</p>
+          <h2 className="text-2xl font-bold text-slate-800 dark:text-white">Quản lý người dùng</h2>
+          <p className="text-slate-500 dark:text-slate-400">Quản lý danh sách người dùng, phân quyền và trạng thái.</p>
         </div>
         <div className="flex items-center gap-3 w-full sm:w-auto">
           <div className="relative flex-1 sm:flex-none">
             <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
-            <Input placeholder="Search users..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-9 w-full sm:w-[280px] bg-slate-50 dark:bg-slate-800 border-transparent rounded-xl" />
+            <Input placeholder="Tìm kiếm người dùng..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-9 w-full sm:w-[280px] bg-slate-50 dark:bg-slate-800 border-transparent rounded-xl" />
           </div>
-          <motion.button whileTap={{ scale: 0.95 }} className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-4 py-2 rounded-xl flex items-center font-medium hover:bg-slate-200 dark:hover:bg-slate-700 transition">
-            <Filter className="w-4 h-4 mr-2"/> Filter
-          </motion.button>
         </div>
       </div>
       
@@ -237,11 +234,11 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
         <Table>
           <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
             <TableRow className="border-slate-100 dark:border-slate-800">
-              <TableHead className="py-4 pl-6 text-slate-500 dark:text-slate-400">User Profile</TableHead>
-              <TableHead className="text-slate-500 dark:text-slate-400">Role</TableHead>
-              <TableHead className="text-slate-500 dark:text-slate-400">Experience</TableHead>
-              <TableHead className="text-slate-500 dark:text-slate-400">Status</TableHead>
-              <TableHead className="text-right pr-6 text-slate-500 dark:text-slate-400">Actions</TableHead>
+              <TableHead className="py-4 pl-6 text-slate-500 dark:text-slate-400">Hồ sơ người dùng</TableHead>
+              <TableHead className="text-slate-500 dark:text-slate-400">Vai trò</TableHead>
+              <TableHead className="text-slate-500 dark:text-slate-400">Kinh nghiệm</TableHead>
+              <TableHead className="text-slate-500 dark:text-slate-400">Trạng thái</TableHead>
+              <TableHead className="text-right pr-6 text-slate-500 dark:text-slate-400">Hành động</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -251,27 +248,29 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                   <TableCell className="py-4 pl-6">
                     <div className="flex items-center gap-4">
                       <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-400 to-rose-600 text-white flex items-center justify-center font-bold shadow-md shadow-red-500/20">
-                        {u.fullName.charAt(0)}
+                        {u.fullName ? u.fullName.charAt(0) : 'U'}
                       </div>
                       <div>
-                        <div className="font-semibold text-slate-900 dark:text-white">{u.fullName}</div>
-                        <div className="text-xs text-slate-500 dark:text-slate-400">{u.email}</div>
+                        <div className="font-semibold text-slate-900 dark:text-white">{u.fullName || 'Người dùng ẩn danh'}</div>
+                        <div className="text-xs text-slate-500 dark:text-slate-400">{u.email || 'Không có email'}</div>
                       </div>
                     </div>
                   </TableCell>
                   <TableCell>
                     <Badge variant="outline" className={u.role === 'ROLE_ADMIN' ? 'border-red-200 bg-red-50 text-red-700 dark:bg-red-500/10 dark:text-red-400 dark:border-red-900' : 'border-slate-200 bg-slate-50 text-slate-600 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700'}>
-                      {u.role === 'ROLE_ADMIN' ? 'Admin' : 'Learner'}
+                      {u.role === 'ROLE_ADMIN' ? 'Admin' : 'Học viên'}
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="font-medium text-slate-900 dark:text-white">{u.level}</div>
-                    <div className="text-xs text-slate-500 dark:text-slate-400">{u.totalXp} XP</div>
+                    <div className="font-medium text-slate-900 dark:text-white">{u.level || 'N/A'}</div>
+                    <div className="text-xs text-slate-500 dark:text-slate-400">{u.totalXp || 0} XP</div>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
                       <span className={`w-2 h-2 rounded-full ${u.status === 'ACTIVE' ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]' : 'bg-rose-500'}`}></span>
-                      <span className={`text-sm font-medium ${u.status === 'ACTIVE' ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>{u.status}</span>
+                      <span className={`text-sm font-medium ${u.status === 'ACTIVE' ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
+                        {u.status === 'ACTIVE' ? 'Hoạt động' : 'Bị khóa'}
+                      </span>
                     </div>
                   </TableCell>
                   <TableCell className="text-right pr-6">
@@ -281,6 +280,13 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                   </TableCell>
                 </motion.tr>
               ))}
+              {filteredUsers.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center py-8 text-slate-500">
+                    Không tìm thấy người dùng nào
+                  </TableCell>
+                </TableRow>
+              )}
             </AnimatePresence>
           </TableBody>
         </Table>
@@ -290,7 +296,15 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
   const renderAudits = () => (
     <div className="grid grid-cols-1 gap-6">
-      {audits.map((audit, index) => (
+      <div className="mb-2">
+        <h2 className="text-2xl font-bold text-slate-800 dark:text-white">Kiểm duyệt AI</h2>
+        <p className="text-slate-500 dark:text-slate-400">Đánh giá các bài nộp của học viên bị AI chấm điểm thấp hoặc có khiếu nại.</p>
+      </div>
+      {audits.length === 0 ? (
+         <BentoBox>
+           <p className="text-center py-8 text-slate-500">Không có bài nào cần kiểm duyệt.</p>
+         </BentoBox>
+      ) : audits.map((audit, index) => (
         <BentoBox key={audit.id} delay={index * 0.1}>
           <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-6">
             <div className="flex items-center gap-4">
@@ -299,11 +313,11 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
               </div>
               <div>
                 <h4 className="text-lg font-bold text-slate-900 dark:text-white">{audit.milestoneTitle}</h4>
-                <p className="text-sm text-slate-500 dark:text-slate-400">Student: <span className="font-semibold text-slate-700 dark:text-slate-300">@{audit.username}</span> • {audit.submittedAt}</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">Học viên: <span className="font-semibold text-slate-700 dark:text-slate-300">@{audit.username}</span> • {audit.submittedAt}</p>
               </div>
             </div>
             <div className="flex items-center gap-4 bg-slate-50 dark:bg-slate-800/50 px-5 py-3 rounded-2xl border border-slate-100 dark:border-slate-800">
-              <div className="text-sm font-semibold text-slate-500 dark:text-slate-400">AI Score</div>
+              <div className="text-sm font-semibold text-slate-500 dark:text-slate-400">Điểm AI</div>
               <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">{audit.aiScore}</div>
             </div>
           </div>
@@ -311,7 +325,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50/50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-100 dark:border-slate-800">
             <div className="space-y-4">
               <div>
-                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3">User Submission</div>
+                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3">Bài làm của học viên</div>
                 <div className="text-sm font-medium text-slate-800 dark:text-slate-200 leading-relaxed">
                   "{audit.userSubmission}"
                 </div>
@@ -319,7 +333,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
             </div>
             <div className="space-y-6">
               <div>
-                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3">AI Reasoning</div>
+                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3">Lý do của AI</div>
                 <div className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                   {audit.aiFeedback}
                 </div>
@@ -327,7 +341,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
               {audit.studentAppealReason && (
                 <div className="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/50 rounded-xl relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-1 h-full bg-amber-400"></div>
-                  <div className="text-[11px] font-bold text-amber-600 dark:text-amber-500 uppercase tracking-widest mb-2">Appeal Note</div>
+                  <div className="text-[11px] font-bold text-amber-600 dark:text-amber-500 uppercase tracking-widest mb-2">Ghi chú khiếu nại</div>
                   <div className="text-sm text-amber-900 dark:text-amber-200">
                     {audit.studentAppealReason}
                   </div>
@@ -338,10 +352,10 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
           
           <div className="mt-6 flex justify-end gap-4">
             <motion.button whileTap={{ scale: 0.95 }} className="px-5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition flex items-center gap-2">
-              <XCircle className="w-4 h-4" /> Reject Appeal
+              <XCircle className="w-4 h-4" /> Từ chối
             </motion.button>
             <motion.button whileTap={{ scale: 0.95 }} className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-500 text-white font-semibold shadow-lg shadow-red-500/25 hover:shadow-red-500/40 transition flex items-center gap-2">
-              <CheckCircle className="w-4 h-4" /> Override & Approve
+              <CheckCircle className="w-4 h-4" /> Phê duyệt
             </motion.button>
           </div>
         </BentoBox>
@@ -349,10 +363,231 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
     </div>
   );
 
+  const renderStages = () => (
+    <BentoBox colSpan="col-span-12">
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-slate-800 dark:text-white">Quản lý Chặng học (Stages)</h2>
+        <p className="text-slate-500 dark:text-slate-400">Quản lý lộ trình học tổng thể, màu sắc và thứ tự (Tổng: {stages.length})</p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {stages.map((stage, idx) => {
+          const colors = stage.colorGradient || ['#cbd5e1', '#94a3b8'];
+          return (
+            <motion.div key={stage.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.05 }} className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-md transition">
+              <div className="h-2 w-full" style={{ background: `linear-gradient(to right, ${colors[0]}, ${colors[1] || colors[0]})` }}></div>
+              <div className="p-5">
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="font-bold text-lg text-slate-800 dark:text-white">{stage.title || `Chặng ${stage.order_index || stage.orderIndex}`}</h3>
+                  <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                    Thứ tự: {stage.order_index || stage.orderIndex || 0}
+                  </Badge>
+                </div>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">{stage.description || 'Chưa có mô tả'}</p>
+                <div className="flex gap-2">
+                  <span className="text-xs px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-md">ID: {stage.id}</span>
+                </div>
+                <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-end">
+                  <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20">Chỉnh sửa</Button>
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </BentoBox>
+  );
+
+  const renderMilestones = () => (
+    <BentoBox colSpan="col-span-12">
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-slate-800 dark:text-white">Quản lý Cột mốc (Milestones)</h2>
+        <p className="text-slate-500 dark:text-slate-400">Các bài học và thử thách cụ thể trong từng chặng (Tổng: {milestones.length})</p>
+      </div>
+      <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
+        <Table>
+          <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
+            <TableRow>
+              <TableHead>Tiêu đề</TableHead>
+              <TableHead>Chặng / Ngữ cảnh</TableHead>
+              <TableHead>Phần thưởng (XP)</TableHead>
+              <TableHead className="text-right">Hành động</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {milestones.map((m, idx) => (
+              <TableRow key={m.id}>
+                <TableCell className="font-medium text-slate-800 dark:text-white">
+                  <div>{m.title || `Cột mốc ${m.order_index || m.orderIndex}`}</div>
+                  <div className="text-xs text-slate-400 font-normal">ID: {m.id}</div>
+                </TableCell>
+                <TableCell>
+                  <div className="text-sm text-slate-600 dark:text-slate-300">{m.stage_id || m.stageId}</div>
+                  <div className="text-xs text-slate-400">{m.communicationContext || 'N/A'}</div>
+                </TableCell>
+                <TableCell>
+                  <Badge variant="outline" className="border-orange-200 text-orange-600 bg-orange-50 dark:bg-orange-500/10 dark:text-orange-400">{m.xpReward || 0} XP</Badge>
+                </TableCell>
+                <TableCell className="text-right">
+                  <Button variant="ghost" size="icon" className="text-slate-400 hover:text-red-500"><Settings className="w-4 h-4" /></Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    </BentoBox>
+  );
+
+  const renderVocabulary = () => (
+    <BentoBox colSpan="col-span-12">
+      <div className="mb-6 flex justify-between items-center">
+        <div>
+          <h2 className="text-2xl font-bold text-slate-800 dark:text-white">Kho Từ vựng</h2>
+          <p className="text-slate-500 dark:text-slate-400">Quản lý từ vựng, kanji, nghĩa tiếng Việt (Tổng: {vocabulary.length})</p>
+        </div>
+        <Button className="bg-red-500 hover:bg-red-600 text-white">Thêm từ mới</Button>
+      </div>
+      <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
+        <Table>
+          <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
+            <TableRow>
+              <TableHead>Từ (Kanji)</TableHead>
+              <TableHead>Cách đọc (Kana)</TableHead>
+              <TableHead>Nghĩa Tiếng Việt</TableHead>
+              <TableHead>Loại từ</TableHead>
+              <TableHead className="text-right">Hành động</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {vocabulary.map((v) => (
+              <TableRow key={v.id}>
+                <TableCell className="font-bold text-lg text-slate-800 dark:text-white">{v.term || v.kanji}</TableCell>
+                <TableCell className="text-slate-600 dark:text-slate-300">{v.reading || v.kana}</TableCell>
+                <TableCell className="text-slate-600 dark:text-slate-300">{v.vietnameseMeaning || v.meaning}</TableCell>
+                <TableCell>
+                  <Badge variant="secondary" className="bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400">{v.wordType || 'N/A'}</Badge>
+                </TableCell>
+                <TableCell className="text-right">
+                  <Button variant="ghost" size="icon" className="text-slate-400 hover:text-red-500"><Settings className="w-4 h-4" /></Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    </BentoBox>
+  );
+
+  const renderGrammar = () => (
+    <BentoBox colSpan="col-span-12">
+      <div className="mb-6 flex justify-between items-center">
+        <div>
+          <h2 className="text-2xl font-bold text-slate-800 dark:text-white">Ngữ pháp</h2>
+          <p className="text-slate-500 dark:text-slate-400">Quản lý cấu trúc ngữ pháp (Tổng: {grammar.length})</p>
+        </div>
+        <Button className="bg-red-500 hover:bg-red-600 text-white">Thêm ngữ pháp</Button>
+      </div>
+      <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
+        <Table>
+          <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
+            <TableRow>
+              <TableHead>Mẫu câu</TableHead>
+              <TableHead>Ý nghĩa</TableHead>
+              <TableHead>Cấp độ</TableHead>
+              <TableHead className="text-right">Hành động</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {grammar.map((g) => (
+              <TableRow key={g.id}>
+                <TableCell className="font-bold text-slate-800 dark:text-white">{g.pattern || g.title}</TableCell>
+                <TableCell className="text-slate-600 dark:text-slate-300 max-w-xs truncate">{g.titleVi || g.meaning || g.explanation}</TableCell>
+                <TableCell>
+                  <Badge variant="outline" className="border-purple-200 text-purple-600 bg-purple-50 dark:bg-purple-500/10 dark:text-purple-400">{g.level || 'N/A'}</Badge>
+                </TableCell>
+                <TableCell className="text-right">
+                  <Button variant="ghost" size="icon" className="text-slate-400 hover:text-red-500"><Settings className="w-4 h-4" /></Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    </BentoBox>
+  );
+
+  const renderExams = () => (
+    <BentoBox colSpan="col-span-12">
+      <div className="mb-6 flex justify-between items-center">
+        <div>
+          <h2 className="text-2xl font-bold text-slate-800 dark:text-white">Đề thi JLPT</h2>
+          <p className="text-slate-500 dark:text-slate-400">Quản lý kho đề thi (Tổng: {exams.length})</p>
+        </div>
+        <Button className="bg-red-500 hover:bg-red-600 text-white">Upload Đề thi</Button>
+      </div>
+      <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
+        <Table>
+          <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
+            <TableRow>
+              <TableHead>Tên đề thi</TableHead>
+              <TableHead>Cấp độ</TableHead>
+              <TableHead>Thời gian</TableHead>
+              <TableHead>Số câu hỏi</TableHead>
+              <TableHead className="text-right">Hành động</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {exams.map((e) => (
+              <TableRow key={e.id}>
+                <TableCell className="font-bold text-slate-800 dark:text-white">{e.label || e.title || e.id}</TableCell>
+                <TableCell>
+                  <Badge className="bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 hover:bg-red-100 border border-red-200 dark:border-red-800">{e.level || 'N/A'}</Badge>
+                </TableCell>
+                <TableCell className="text-slate-600 dark:text-slate-300">{e.durationMinutes ? `${e.durationMinutes} phút` : 'N/A'}</TableCell>
+                <TableCell className="text-slate-600 dark:text-slate-300">{e.totalQuestions || e.questionCount || 0} câu</TableCell>
+                <TableCell className="text-right">
+                  <Button variant="ghost" size="sm" className="text-slate-500 hover:text-red-500 mr-2">Chi tiết</Button>
+                  <Button variant="ghost" size="icon" className="text-slate-400 hover:text-red-500"><Settings className="w-4 h-4" /></Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    </BentoBox>
+  );
+
+  const renderKanji = () => (
+    <BentoBox colSpan="col-span-12">
+      <div className="mb-6 flex justify-between items-center">
+        <div>
+          <h2 className="text-2xl font-bold text-slate-800 dark:text-white">Từ điển Kanji</h2>
+          <p className="text-slate-500 dark:text-slate-400">Quản lý Hán tự (Tổng: {kanji.length})</p>
+        </div>
+        <Button className="bg-red-500 hover:bg-red-600 text-white">Thêm Kanji</Button>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        {kanji.map((k) => (
+          <motion.div key={k.id} whileHover={{ y: -5 }} className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 text-center shadow-sm">
+            <div className="text-4xl font-serif text-slate-800 dark:text-white mb-2">{k.kanji || k.id}</div>
+            <div className="text-sm font-bold text-red-500 mb-1">{k.sinoVietnamese || k.hanviet || 'N/A'}</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1">{k.vietnameseMeaning || k.meaning || 'N/A'}</div>
+          </motion.div>
+        ))}
+      </div>
+    </BentoBox>
+  );
+
   const menuItems = [
-    { id: 'overview', icon: LayoutDashboard, label: 'Dashboard' },
-    { id: 'users', icon: Users, label: 'Datatable' },
-    { id: 'audits', icon: Bot, label: 'AI Resolution' },
+    { id: 'overview', icon: LayoutDashboard, label: 'Tổng quan' },
+    { id: 'users', icon: Users, label: 'Người dùng' },
+    { id: 'audits', icon: Bot, label: 'Kiểm duyệt AI' },
+    { id: 'stages', icon: Map, label: 'Chặng học' },
+    { id: 'milestones', icon: Layers, label: 'Cột mốc' },
+    { id: 'vocabulary', icon: BookOpen, label: 'Từ vựng' },
+    { id: 'grammar', icon: FileText, label: 'Ngữ pháp' },
+    { id: 'kanji', icon: FileText, label: 'Kanji' },
+    { id: 'exams', icon: GraduationCap, label: 'Đề thi JLPT' },
   ];
 
   return (
@@ -389,7 +624,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
           <AnimatePresence>
             {isSidebarOpen && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="px-3 text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
-                Main Menu
+                Menu Chính
               </motion.div>
             )}
           </AnimatePresence>
@@ -432,7 +667,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
             <AnimatePresence>
               {isSidebarOpen && (
                 <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="ml-4 font-semibold text-sm whitespace-nowrap">
-                  Exit to User
+                  Trở lại
                 </motion.span>
               )}
             </AnimatePresence>
@@ -457,25 +692,22 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
           </div>
           
           <div className="flex items-center gap-4">
-            {/* Theme Toggle */}
             <motion.button whileTap={{ scale: 0.9 }} onClick={() => setIsDark(!isDark)} className="w-10 h-10 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 shadow-sm transition-colors">
               {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </motion.button>
 
-            {/* Notification */}
             <motion.button whileTap={{ scale: 0.9 }} className="w-10 h-10 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 shadow-sm transition-colors relative">
               <Bell className="w-5 h-5" />
               <span className="absolute top-2 right-2.5 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white dark:border-slate-900 animate-pulse"></span>
             </motion.button>
 
-            {/* Profile */}
             <div className="flex items-center gap-3 pl-4 ml-2 border-l border-slate-200 dark:border-slate-800">
               <div className="text-right hidden md:block">
-                <div className="text-sm font-bold text-slate-800 dark:text-white">{user.fullName}</div>
+                <div className="text-sm font-bold text-slate-800 dark:text-white">{user.fullName || user.username || 'Admin'}</div>
                 <div className="text-xs font-medium text-red-500">{user.role}</div>
               </div>
               <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-red-500 to-orange-500 text-white flex items-center justify-center font-bold shadow-lg shadow-red-500/20 border-2 border-white dark:border-slate-800 cursor-pointer">
-                {user.fullName?.charAt(0) || 'A'}
+                {(user.fullName || user.username || 'A').charAt(0).toUpperCase()}
               </div>
             </div>
           </div>
@@ -494,6 +726,12 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                   {activeMenu === 'overview' && renderOverview()}
                   {activeMenu === 'users' && renderUsers()}
                   {activeMenu === 'audits' && renderAudits()}
+                  {activeMenu === 'stages' && renderStages()}
+                  {activeMenu === 'milestones' && renderMilestones()}
+                  {activeMenu === 'vocabulary' && renderVocabulary()}
+                  {activeMenu === 'grammar' && renderGrammar()}
+                  {activeMenu === 'kanji' && renderKanji()}
+                  {activeMenu === 'exams' && renderExams()}
                 </motion.div>
               </AnimatePresence>
             </div>
