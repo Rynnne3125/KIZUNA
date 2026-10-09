@@ -2,25 +2,23 @@ import React, { useState } from 'react';
 import { User } from '../types/auth';
 import { 
   Home, BookOpen, FileText, Languages, Map, Film, 
-  Target, UserCheck, Shield, LogOut, Menu, X, Flame, Star, Sparkles, RefreshCw
+  Target, UserCheck, Shield, LogOut, Menu, X, Flame, Star, Sparkles
 } from 'lucide-react';
 
-export type UserNavTab = 'home' | 'login' | 'vocab' | 'grammar' | 'kanji' | 'roadmap' | 'library' | 'exam' | 'profile' | 'admin';
+export type UserNavTab = 'home' | 'vocab' | 'grammar' | 'kanji' | 'roadmap' | 'library' | 'exam' | 'profile' | 'admin';
 
 interface UserNavbarProps {
   activeTab: UserNavTab;
   onTabChange: (tab: UserNavTab) => void;
   user: User | null;
   onLogout: () => void;
-  onRoleToggle: () => void;
 }
 
 export const UserNavbar: React.FC<UserNavbarProps> = ({
   activeTab,
   onTabChange,
   user,
-  onLogout,
-  onRoleToggle
+  onLogout
 }) => {
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
 
@@ -77,7 +75,7 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
             <>
               <div className="flex items-center gap-1 bg-amber-50 text-amber-800 border border-amber-200/80 px-2 py-0.5 rounded-full text-xs font-bold">
                 <Flame className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                <span>{user.currentStreak || 1}d</span>
+                <span>{user.currentStreak || 0}d</span>
               </div>
               <img
                 src={user.avatarUrl || 'https://api.dicebear.com/7.x/avataaars/svg?seed=kizuna'}
@@ -140,13 +138,13 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
                   />
                   <div className="min-w-0 flex-1">
                     <div className="font-bold text-slate-800 text-sm truncate">{user.fullName || user.username}</div>
-                    <div className="text-xs text-emerald-700 font-medium">Cấp độ: {user.level || 'N5'}</div>
+                    <div className="text-xs text-emerald-700 font-medium">Bậc: {user.level || 'Tân binh'}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-1.5 justify-between text-xs">
                   <span className="bg-amber-100/80 text-amber-900 px-2 py-0.5 rounded-full font-bold flex items-center gap-1 text-[11px]">
                     <Flame className="w-3 h-3 text-amber-600 fill-amber-600" />
-                    <span>{user.currentStreak || 1} ngày</span>
+                    <span>{user.currentStreak || 0} ngày</span>
                   </span>
                   <span className="bg-emerald-100/80 text-emerald-900 px-2 py-0.5 rounded-full font-bold flex items-center gap-1 text-[11px]">
                     <Star className="w-3 h-3 text-emerald-600 fill-emerald-600" />
@@ -185,42 +183,33 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
                 );
               })}
 
-              {/* Admin Portal Tab */}
-              <div className="pt-2 border-t border-slate-100 mt-2">
-                <button
-                  onClick={() => handleNavClick('admin')}
-                  className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
-                    activeTab === 'admin' 
-                      ? 'bg-emerald-800 text-white shadow-xs' 
-                      : 'text-emerald-900 hover:bg-emerald-50'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <Shield className="w-5 h-5 text-emerald-600" />
-                    <span>Trang Quản Trị</span>
-                  </div>
-                  {user?.role === 'ROLE_ADMIN' ? (
+              {/* Admin Portal Tab - Chỉ hiển thị cho tài khoản có quyền Quản trị viên */}
+              {user?.role === 'ROLE_ADMIN' && (
+                <div className="pt-2 border-t border-slate-100 mt-2">
+                  <button
+                    onClick={() => handleNavClick('admin')}
+                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
+                      activeTab === 'admin' 
+                        ? 'bg-emerald-800 text-white shadow-xs' 
+                        : 'text-emerald-900 hover:bg-emerald-50'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <Shield className="w-5 h-5 text-emerald-600" />
+                      <span>Trang Quản Trị</span>
+                    </div>
                     <span className="text-[10px] bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded-full font-bold">Admin</span>
-                  ) : (
-                    <span className="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-bold">Khóa</span>
-                  )}
-                </button>
-              </div>
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Drawer Footer */}
             {user && (
-              <div className="p-3 border-t border-emerald-50 space-y-2 bg-slate-50/50">
-                <button
-                  onClick={onRoleToggle}
-                  className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-700 bg-white border border-slate-200 hover:bg-emerald-50 hover:text-emerald-800 transition-colors"
-                >
-                  <RefreshCw className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>Role: {user.role === 'ROLE_ADMIN' ? '👑 Admin' : '🎒 Học viên'} (Đổi role)</span>
-                </button>
+              <div className="p-3 border-t border-emerald-50 bg-slate-50/50">
                 <button
                   onClick={() => { setIsMobileDrawerOpen(false); onLogout(); }}
-                  className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 transition-colors"
+                  className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
                 >
                   <LogOut className="w-4 h-4" />
                   <span>Đăng xuất</span>
@@ -290,7 +279,7 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
                 <Flame className="w-4 h-4 text-amber-500 fill-amber-500 shrink-0" />
                 <div className="truncate">
                   <div className="text-[10px] text-slate-500 leading-none">Streak</div>
-                  <div className="font-bold text-amber-900 leading-tight">{user.currentStreak || 1} ngày</div>
+                  <div className="font-bold text-amber-900 leading-tight">{user.currentStreak || 0} ngày</div>
                 </div>
               </div>
               <div className="bg-white/80 border border-emerald-100/60 rounded-xl p-1.5 flex items-center gap-1.5">
@@ -302,15 +291,6 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
               </div>
             </div>
 
-            {/* Quick Role Switcher for Test */}
-            <button
-              onClick={onRoleToggle}
-              title="Chuyển nhanh quyền Admin / Học viên để kiểm thử phân quyền"
-              className="mt-2.5 w-full flex items-center justify-center gap-1.5 py-1 px-2 rounded-lg text-[11px] font-bold text-slate-700 bg-white border border-emerald-200/80 hover:bg-emerald-50 hover:text-emerald-800 transition-colors shadow-2xs cursor-pointer"
-            >
-              <span>{user.role === 'ROLE_ADMIN' ? '👑 Admin (Quản trị)' : '🎒 Học viên'}</span>
-              <span className="text-emerald-600 opacity-80">(Đổi)</span>
-            </button>
           </div>
         )}
 
@@ -347,35 +327,33 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
             );
           })}
 
-          {/* Admin Management Section */}
-          <div className="pt-3 mt-3 border-t border-emerald-50">
-            <div className="px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-400">
-              Hệ thống
-            </div>
-            <button
-              onClick={() => onTabChange('admin')}
-              className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
-                activeTab === 'admin' 
-                  ? 'bg-emerald-50 text-emerald-900 font-bold border-l-4 border-emerald-700 shadow-2xs' 
-                  : 'text-slate-600 hover:text-emerald-800 hover:bg-slate-50/80'
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <Shield className={`w-5 h-5 ${activeTab === 'admin' ? 'text-emerald-700' : 'text-slate-400'}`} />
-                <span>Trang Quản Trị</span>
+          {/* Admin Management Section - Chỉ hiển thị cho Quản trị viên */}
+          {user?.role === 'ROLE_ADMIN' && (
+            <div className="pt-3 mt-3 border-t border-emerald-50">
+              <div className="px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                Hệ thống
               </div>
-              {user?.role === 'ROLE_ADMIN' ? (
+              <button
+                onClick={() => onTabChange('admin')}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
+                  activeTab === 'admin' 
+                    ? 'bg-emerald-50 text-emerald-900 font-bold border-l-4 border-emerald-700 shadow-2xs' 
+                    : 'text-slate-600 hover:text-emerald-800 hover:bg-slate-50/80'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <Shield className={`w-5 h-5 ${activeTab === 'admin' ? 'text-emerald-700' : 'text-slate-400'}`} />
+                  <span>Trang Quản Trị</span>
+                </div>
                 <span className="text-[10px] bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded-full font-bold">Admin</span>
-              ) : (
-                <span className="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-bold">🔒 Khóa</span>
-              )}
-            </button>
-          </div>
+              </button>
+            </div>
+          )}
         </nav>
 
         {/* Sidebar Footer */}
         <div className="p-3 border-t border-emerald-50 bg-slate-50/40">
-          {user ? (
+          {user && (
             <button
               onClick={onLogout}
               className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-bold text-slate-600 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
@@ -383,17 +361,7 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
               <LogOut className="w-4 h-4" />
               <span>Đăng xuất</span>
             </button>
-          ) : (
-            <button
-              onClick={() => onTabChange('login')}
-              className="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs cursor-pointer"
-            >
-              <span>Đăng nhập ngay</span>
-            </button>
           )}
-          <div className="text-[10px] text-center text-slate-400 mt-1">
-            KIZUNA • Spring Boot & Firestore
-          </div>
         </div>
       </aside>
 
@@ -401,7 +369,10 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
           4. MOBILE APP BOTTOM NAVIGATION BAR (< 1024px)
           Fixed floating bar for native mobile app feel
           ========================================================================= */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-emerald-100/90 shadow-lg px-2 py-1.5 flex justify-around items-center">
+      <nav 
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-emerald-100/90 shadow-lg px-2 pt-1.5 flex justify-around items-center"
+        style={{ paddingBottom: 'max(0.6rem, env(safe-area-inset-bottom, 0.6rem))' }}
+      >
         {[
           { id: 'home' as UserNavTab, label: 'Trang chủ', icon: <Home className="w-5 h-5" /> },
           { id: 'vocab' as UserNavTab, label: 'Từ vựng', icon: <BookOpen className="w-5 h-5" /> },

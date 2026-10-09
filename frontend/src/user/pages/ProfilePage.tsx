@@ -1,171 +1,123 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { User } from '../types/auth';
-import { authService } from '../services/authService';
+import { Flame, Star, Award, BookOpen, LogOut, User as UserIcon } from 'lucide-react';
 
 interface ProfilePageProps {
   user: User | null;
   onLogout: () => void;
-  onRoleToggle: () => void;
-  onOpenAuth: () => void;
 }
 
 export const ProfilePage: React.FC<ProfilePageProps> = ({
   user,
-  onLogout,
-  onRoleToggle,
-  onOpenAuth
+  onLogout
 }) => {
-  const [copied, setCopied] = useState(false);
-  const token = authService.getToken();
-
-  const handleCopyToken = () => {
-    if (token) {
-      navigator.clipboard.writeText(token);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
-
   if (!user) {
     return (
-      <div style={{ maxWidth: 500, margin: '60px auto', textAlign: 'center' }} className="kizuna-card">
-        <div style={{ padding: 32 }}>
-          <div style={{ fontSize: 48, marginBottom: 12 }}>👤</div>
-          <h2 style={{ fontSize: 20, fontWeight: 800, marginBottom: 8 }}>Bạn chưa đăng nhập</h2>
-          <p style={{ color: '#64748b', fontSize: 14, marginBottom: 20 }}>
-            Vui lòng đăng nhập để xem thông tin hồ sơ và lưu tiến trình học tập của bạn.
-          </p>
-          <button onClick={onOpenAuth} className="btn btn-primary">
-            Đăng nhập / Đăng ký ngay
-          </button>
+      <div className="max-w-md mx-auto my-16 text-center bg-white p-8 rounded-3xl border border-emerald-100 shadow-md">
+        <div className="w-16 h-16 mx-auto mb-4 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center">
+          <UserIcon className="w-8 h-8" />
         </div>
+        <h2 className="text-xl font-bold text-slate-800 mb-2">Bạn chưa đăng nhập</h2>
+        <p className="text-slate-500 text-sm mb-6">
+          Vui lòng đăng nhập để xem thông tin hồ sơ và lưu tiến trình học tập của bạn.
+        </p>
       </div>
     );
   }
 
   return (
-    <div style={{ maxWidth: 760, margin: '0 auto' }}>
-      <div style={{ marginBottom: 24 }}>
-        <span className="badge badge-primary" style={{ marginBottom: 6 }}>
-          👤 HỒ SƠ NGƯỜI DÙNG KIZUNA
-        </span>
-        <h1 style={{ fontSize: 24, fontWeight: 800, color: '#0f172a' }}>
-          Quản Lý Tài Khoản & Quyền Truy Cập
+    <div className="max-w-3xl mx-auto space-y-6">
+      <div>
+        <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-full text-xs font-bold mb-2">
+          <UserIcon className="w-3.5 h-3.5" />
+          <span>HỒ SƠ HỌC VIÊN KIZUNA</span>
+        </div>
+        <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+          Quản Lý Tài Khoản Cá Nhân
         </h1>
       </div>
 
-      <div className="kizuna-card" style={{ padding: 28, marginBottom: 24 }}>
+      <div className="bg-white rounded-3xl border border-emerald-100 shadow-md p-6 sm:p-8">
         {/* User Info Header */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 20, marginBottom: 24, flexWrap: 'wrap' }}>
+        <div className="flex items-center gap-5 mb-8 pb-6 border-b border-slate-100 flex-wrap">
           <img
             src={user.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.username}`}
             alt="Avatar"
-            style={{
-              width: 80,
-              height: 80,
-              borderRadius: '50%',
-              background: '#f1f5f9',
-              border: '3px solid #e2e8f0'
-            }}
+            className="w-20 h-20 rounded-2xl object-cover bg-emerald-50 border-2 border-emerald-200 shadow-xs"
           />
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <h2 style={{ fontSize: 22, fontWeight: 800, color: '#0f172a', margin: 0 }}>
+          <div className="flex-1 min-w-[200px]">
+            <div className="flex items-center gap-2.5 flex-wrap">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900">
                 {user.fullName || user.username}
               </h2>
-              <span className={`badge ${user.role === 'ROLE_ADMIN' ? 'badge-primary' : 'badge-secondary'}`}>
-                {user.role}
+              <span className={`text-xs px-2.5 py-0.5 rounded-full font-bold ${
+                user.role === 'ROLE_ADMIN' 
+                  ? 'bg-rose-100 text-rose-800 border border-rose-200' 
+                  : 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+              }`}>
+                {user.role === 'ROLE_ADMIN' ? 'Ban Quản Trị' : 'Học Viên'}
               </span>
             </div>
-            <div style={{ color: '#64748b', fontSize: 14, marginTop: 4 }}>
+            <div className="text-slate-500 text-sm mt-1">
               @{user.username} • {user.email}
             </div>
           </div>
         </div>
 
         {/* Stats Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 12, marginBottom: 28 }}>
-          <div style={{ background: '#f8fafc', padding: 14, borderRadius: 'var(--radius-sm)', textAlign: 'center' }}>
-            <div style={{ fontSize: 18, fontWeight: 800, color: '#b45309' }}>🔥 {user.currentStreak || 1}</div>
-            <div style={{ fontSize: 12, color: '#64748b' }}>Ngày Streak</div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-8">
+          <div className="bg-amber-50/70 border border-amber-200/60 p-4 rounded-2xl text-center">
+            <div className="flex items-center justify-center gap-1.5 text-amber-700 font-extrabold text-xl mb-1">
+              <Flame className="w-5 h-5 fill-amber-500 text-amber-500" />
+              <span>{user.currentStreak || 0}</span>
+            </div>
+            <div className="text-xs text-amber-900/80 font-medium">Chuỗi Streak</div>
           </div>
-          <div style={{ background: '#f8fafc', padding: 14, borderRadius: 'var(--radius-sm)', textAlign: 'center' }}>
-            <div style={{ fontSize: 18, fontWeight: 800, color: '#4338ca' }}>⭐ {user.activePoints || 0}</div>
-            <div style={{ fontSize: 12, color: '#64748b' }}>Điểm Năng Động</div>
+
+          <div className="bg-emerald-50/70 border border-emerald-200/60 p-4 rounded-2xl text-center">
+            <div className="flex items-center justify-center gap-1.5 text-emerald-700 font-extrabold text-xl mb-1">
+              <Star className="w-5 h-5 fill-emerald-500 text-emerald-500" />
+              <span>{user.activePoints || 0}</span>
+            </div>
+            <div className="text-xs text-emerald-900/80 font-medium">Điểm Năng Động</div>
           </div>
-          <div style={{ background: '#f8fafc', padding: 14, borderRadius: 'var(--radius-sm)', textAlign: 'center' }}>
-            <div style={{ fontSize: 18, fontWeight: 800, color: '#059669' }}>🏆 {user.totalXp || 0}</div>
-            <div style={{ fontSize: 12, color: '#64748b' }}>Kinh Nghiệm (XP)</div>
+
+          <div className="bg-indigo-50/70 border border-indigo-200/60 p-4 rounded-2xl text-center">
+            <div className="flex items-center justify-center gap-1.5 text-indigo-700 font-extrabold text-xl mb-1">
+              <Award className="w-5 h-5 text-indigo-600" />
+              <span>{user.totalXp || 0}</span>
+            </div>
+            <div className="text-xs text-indigo-900/80 font-medium">Kinh Nghiệm (XP)</div>
           </div>
-          <div style={{ background: '#f8fafc', padding: 14, borderRadius: 'var(--radius-sm)', textAlign: 'center' }}>
-            <div style={{ fontSize: 18, fontWeight: 800, color: '#16a34a' }}>{user.level || 'N5'}</div>
-            <div style={{ fontSize: 12, color: '#64748b' }}>Cấp độ JLPT</div>
+
+          <div className="bg-teal-50/70 border border-teal-200/60 p-4 rounded-2xl text-center">
+            <div className="flex items-center justify-center gap-1.5 text-teal-700 font-extrabold text-xl mb-1">
+              <BookOpen className="w-5 h-5 text-teal-600" />
+              <span>{user.level || 'Tân binh'}</span>
+            </div>
+            <div className="text-xs text-teal-900/80 font-medium">Bậc Xếp Hạng</div>
           </div>
         </div>
 
-        {/* Role Toggle for Testing Permissions & 403 */}
-        <div style={{
-          background: '#fef3c7',
-          border: '1px solid #fde68a',
-          padding: 16,
-          borderRadius: 'var(--radius-md)',
-          marginBottom: 24
-        }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: '#92400e', marginBottom: 4 }}>
-            ⚡ Kiểm thử phân quyền RBAC & Màn hình 403 Forbidden:
-          </div>
-          <p style={{ fontSize: 13, color: '#78350f', marginBottom: 12 }}>
-            Bấm nút dưới đây để hoán đổi nhanh giữa vai trò <strong>ROLE_USER</strong> và <strong>ROLE_ADMIN</strong>. Khi là ROLE_USER, bạn sẽ bị chặn 403 khi vào Trang Quản Trị.
+        {/* Security & Session Info */}
+        <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 sm:p-5 mb-8 text-xs sm:text-sm text-slate-600 space-y-2">
+          <div className="font-bold text-slate-800 text-sm">Bảo mật & Phiên làm việc:</div>
+          <p>
+            Tài khoản được bảo vệ và đồng bộ tiến độ tự động trên máy chủ KIZUNA.
           </p>
-          <button
-            onClick={onRoleToggle}
-            className="btn btn-secondary btn-sm"
-            style={{ borderColor: '#d97706', color: '#92400e', background: '#fff', fontWeight: 700 }}
-          >
-            Chuyển sang vai trò {user.role === 'ROLE_ADMIN' ? 'ROLE_USER (Học viên)' : 'ROLE_ADMIN (Quản trị viên)'}
-          </button>
-        </div>
-
-        {/* Bearer Token Preview */}
-        <div style={{ marginBottom: 28 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-            <span style={{ fontSize: 13, fontWeight: 700, color: '#475569' }}>
-              🔑 Mã Xác Thực (JWT Bearer Token):
-            </span>
-            <button
-              onClick={handleCopyToken}
-              className="btn btn-secondary btn-sm"
-              style={{ fontSize: 11, padding: '2px 8px' }}
-            >
-              {copied ? '✓ Đã sao chép' : 'Sao chép token'}
-            </button>
-          </div>
-          <div style={{
-            background: '#1e293b',
-            color: '#38bdf8',
-            fontFamily: 'monospace',
-            padding: 12,
-            borderRadius: 'var(--radius-sm)',
-            fontSize: 12,
-            wordBreak: 'break-all',
-            maxHeight: 100,
-            overflowY: 'auto'
-          }}>
-            Bearer {token || 'Chưa có token'}
-          </div>
-          <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 4 }}>
-            Token này được tự động gửi trong header <code>Authorization: Bearer &lt;token&gt;</code> cho mọi request API.
-          </div>
+          <p className="text-slate-500 text-xs">
+            Phiên đăng nhập duy trì tối đa 24 giờ. Khi hết hạn hoặc khi bấm đăng xuất, phiên làm việc sẽ được xóa an toàn khỏi trình duyệt.
+          </p>
         </div>
 
         {/* Logout Button */}
-        <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: 20 }}>
+        <div className="pt-4 border-t border-slate-100 flex justify-end">
           <button
             onClick={onLogout}
-            className="btn btn-secondary"
-            style={{ color: '#dc2626', borderColor: '#fca5a5' }}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-rose-600 hover:text-white bg-rose-50 hover:bg-rose-600 border border-rose-200 font-bold text-xs sm:text-sm transition-all cursor-pointer"
           >
-            🚪 Đăng xuất khỏi hệ thống
+            <LogOut className="w-4 h-4" />
+            <span>Đăng xuất tài khoản</span>
           </button>
         </div>
       </div>

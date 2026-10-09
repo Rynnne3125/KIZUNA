@@ -24,16 +24,46 @@ export interface Milestone {
 
 export interface VocabularyItem {
   id: string;
-  milestoneId?: string;
   term: string;
+  kanji?: string;
   reading: string;
+  hiragana?: string;
   sinoVietnamese?: string;
   vietnameseMeaning: string;
+  meaning_vi?: string;
+  meaningEn?: string;
   wordType?: string;
+  part_of_speech?: string;
+  jlptLevel?: string;
+  level?: string;
+  bookId?: string;
+  bookName?: string;
+  chapterTitle?: string;
+  unitId?: string;
+  unitTitle?: string;
+  unitOrder?: number;
   exampleSentenceJp?: string;
   exampleSentenceVi?: string;
-  level?: string;
+  nejSource?: string;
+  milestoneId?: string;
 }
+
+export interface VocabularyUnit {
+  unitId: string;
+  unitTitle: string;
+  chapterTitle?: string;
+  wordCount: number;
+}
+
+export interface VocabularyBook {
+  bookId: string;
+  bookName: string;
+  description: string;
+  totalWords: number;
+  units: VocabularyUnit[];
+}
+
+export type VocabularyCatalog = Record<'N5' | 'N4' | 'N3' | 'N2' | 'N1', VocabularyBook[]>;
 
 export interface GrammarItem {
   id: string;

@@ -11,15 +11,15 @@ import { Input } from '@/admin/components/ui/input';
 import { 
   Users, Bot, LayoutDashboard, Search, LogOut, Settings, 
   Database, ShieldAlert, Menu, Bell, Filter, Moon, Sun, 
-  TrendingUp, Activity, CheckCircle, XCircle
+  TrendingUp, Activity, CheckCircle, XCircle, Home, Trophy, Plus, Trash2, Save
 } from 'lucide-react';
 import { DonutChart, BarList, AreaChart } from '@tremor/react';
+import { rankingService } from '@/user/services/rankingService';
+import { RankTier, UserLeaderboardItem } from '@/user/types/ranking';
 
 export interface AdminDashboardPageProps {
   user: { fullName?: string; username?: string; role?: string } | null;
   onGoHome: () => void;
-  onSwitchToAdmin: () => void;
-  onLoginDifferent: () => void;
   onLogout?: () => void;
 }
 
@@ -36,8 +36,6 @@ const chartData = [
 export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
   user,
   onGoHome,
-  onSwitchToAdmin,
-  onLoginDifferent,
   onLogout
 }) => {
   const { stats, users, audits, loading } = useAdminData();
@@ -54,14 +52,75 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
     }
   }, [isDark]);
 
+  // Ranking System States & Handlers
+  const [rankTiers, setRankTiers] = useState<RankTier[]>([]);
+  const [leaderboard, setLeaderboard] = useState<UserLeaderboardItem[]>([]);
+  const [savingTiers, setSavingTiers] = useState(false);
+  const [rankSaveMsg, setRankSaveMsg] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function loadRankingData() {
+      const tiers = await rankingService.getRankTiers();
+      setRankTiers(tiers);
+      const lb = await rankingService.getLearnerLeaderboard(tiers);
+      setLeaderboard(lb);
+    }
+    loadRankingData();
+  }, []);
+
+  const handleTierChange = (index: number, field: keyof RankTier, value: any) => {
+    setRankTiers(prev => {
+      const updated = [...prev];
+      updated[index] = { ...updated[index], [field]: value };
+      return updated;
+    });
+  };
+
+  const handleAddTier = () => {
+    const nextMin = rankTiers.length > 0 ? Math.max(...rankTiers.map(t => t.minPoints)) + 500 : 0;
+    const newTier: RankTier = {
+      id: `tier_${Date.now()}`,
+      name: `Bậc mới ${rankTiers.length + 1}`,
+      minPoints: nextMin,
+      badge: '⭐',
+      color: '#059669',
+      description: 'Mô tả năng lực chuẩn giao tiếp...'
+    };
+    setRankTiers(prev => [...prev, newTier]);
+  };
+
+  const handleDeleteTier = (index: number) => {
+    if (rankTiers.length <= 1) return;
+    setRankTiers(prev => prev.filter((_, idx) => idx !== index));
+  };
+
+  const handleSaveTiers = async () => {
+    setSavingTiers(true);
+    setRankSaveMsg(null);
+    try {
+      const ok = await rankingService.saveRankTiers(rankTiers);
+      if (ok) {
+        setRankSaveMsg('Đã lưu cấu hình mốc điểm xếp hạng lên Firestore thành công!');
+        const lb = await rankingService.getLearnerLeaderboard(rankTiers);
+        setLeaderboard(lb);
+      } else {
+        setRankSaveMsg('Không thể lưu mốc rank. Vui lòng thử lại.');
+      }
+    } catch {
+      setRankSaveMsg('Lỗi khi lưu lên Firestore.');
+    } finally {
+      setSavingTiers(false);
+      setTimeout(() => setRankSaveMsg(null), 4000);
+    }
+  };
+
   if (!user || user.role !== 'ROLE_ADMIN') {
     return (
       <AdminForbidden403
         userRole={user?.role}
         userName={user?.fullName || user?.username}
         onGoHome={onGoHome}
-        onSwitchToAdmin={onSwitchToAdmin}
-        onLoginDifferent={onLoginDifferent}
+        onLogout={onLogout}
       />
     );
   }
@@ -288,10 +347,25 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
     </BentoBox>
   );
 
-  const renderAudits = () => (
-    <div className="grid grid-cols-1 gap-6">
-      {audits.map((audit, index) => (
-        <BentoBox key={audit.id} delay={index * 0.1}>
+  const renderAudits = () => {
+    if (audits.length === 0) {
+      return (
+        <BentoBox colSpan="col-span-12" className="text-center py-16">
+          <div className="w-16 h-16 mx-auto mb-4 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 rounded-2xl flex items-center justify-center">
+            <CheckCircle className="w-8 h-8" />
+          </div>
+          <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-2">Hàng đợi kiểm duyệt trống</h3>
+          <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto">
+            Hiện tại không có bài nộp hoặc khiếu nại kiểm duyệt AI Sensei nào cần xử lý từ cơ sở dữ liệu.
+          </p>
+        </BentoBox>
+      );
+    }
+
+    return (
+      <div className="grid grid-cols-1 gap-6">
+        {audits.map((audit, index) => (
+          <BentoBox key={audit.id} delay={index * 0.1}>
           <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-6">
             <div className="flex items-center gap-4">
               <div className="p-3 bg-red-100 dark:bg-red-500/20 rounded-2xl text-red-600 dark:text-red-400">
@@ -347,11 +421,215 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
         </BentoBox>
       ))}
     </div>
-  );
+    );
+  };
+
+  const renderRanking = () => {
+    return (
+      <div className="space-y-6 pb-12">
+        {/* Header alert / notification */}
+        {rankSaveMsg && (
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            className="p-4 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 rounded-2xl flex items-center justify-between"
+          >
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-5 h-5 text-emerald-600" />
+              <span className="font-semibold text-sm">{rankSaveMsg}</span>
+            </div>
+            <button onClick={() => setRankSaveMsg(null)} className="text-xs underline text-emerald-700 cursor-pointer">Đóng</button>
+          </motion.div>
+        )}
+
+        {/* Section 1: Cấu hình mốc rank */}
+        <BentoBox colSpan="col-span-12">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div>
+              <div className="flex items-center gap-2.5">
+                <Trophy className="w-6 h-6 text-amber-500" />
+                <h3 className="text-xl font-extrabold text-slate-800 dark:text-slate-100">
+                  Cấu Hình Mốc Điểm Bảng Xếp Hạng (Rank Tiers)
+                </h3>
+              </div>
+              <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mt-1">
+                Admin tùy chỉnh tên bậc, mốc Điểm Năng Động (Active Points) tối thiểu và mô tả. Lưu trực tiếp lên Firestore.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <Button
+                variant="outline"
+                onClick={handleAddTier}
+                className="rounded-xl border-dashed border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 cursor-pointer"
+              >
+                <Plus className="w-4 h-4 mr-1.5" /> Thêm Bậc
+              </Button>
+              <Button
+                onClick={handleSaveTiers}
+                disabled={savingTiers}
+                className="rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-bold shadow-md shadow-red-500/20 cursor-pointer"
+              >
+                <Save className="w-4 h-4 mr-1.5" /> {savingTiers ? 'Đang lưu Firestore...' : 'Lưu Cấu Hình Mốc Rank'}
+              </Button>
+            </div>
+          </div>
+
+          {/* List of tiers editable */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {rankTiers.map((tier, idx) => (
+              <div 
+                key={tier.id || idx}
+                className="bg-white/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 space-y-3 relative group"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">{tier.badge || '🌱'}</span>
+                    <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Cấp {idx + 1}</span>
+                  </div>
+                  {rankTiers.length > 1 && (
+                    <button
+                      onClick={() => handleDeleteTier(idx)}
+                      title="Xóa bậc rank này"
+                      className="text-slate-400 hover:text-rose-500 p-1 rounded-lg transition-colors cursor-pointer"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase">Tên Bậc Rank</label>
+                  <Input
+                    value={tier.name}
+                    onChange={e => handleTierChange(idx, 'name', e.target.value)}
+                    placeholder="VD: Tân binh"
+                    className="h-9 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 font-semibold text-sm rounded-xl"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase">Điểm tối thiểu</label>
+                    <Input
+                      type="number"
+                      min={0}
+                      value={tier.minPoints}
+                      onChange={e => handleTierChange(idx, 'minPoints', parseInt(e.target.value) || 0)}
+                      className="h-9 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 font-bold text-sm rounded-xl"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase">Biểu tượng / Icon</label>
+                    <Input
+                      value={tier.badge}
+                      onChange={e => handleTierChange(idx, 'badge', e.target.value)}
+                      className="h-9 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-sm rounded-xl text-center"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase">Mô tả năng lực</label>
+                  <Input
+                    value={tier.description}
+                    onChange={e => handleTierChange(idx, 'description', e.target.value)}
+                    placeholder="Mô tả mục tiêu năng lực..."
+                    className="h-9 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-xs rounded-xl"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </BentoBox>
+
+        {/* Section 2: Bảng Xếp Hạng Học Viên Thực Tế (Live Preview - Only role user) */}
+        <BentoBox colSpan="col-span-12">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+            <div>
+              <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                <span>Bảng Xếp Hạng Học Viên Thực Tế (Từ Firestore)</span>
+                <Badge className="bg-emerald-100 text-emerald-800 border-emerald-200 dark:bg-emerald-950 dark:text-emerald-300">
+                  {leaderboard.length} Học Viên
+                </Badge>
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Chỉ người dùng role học viên (ROLE_USER) mới được tham gia xếp hạng. Tài khoản Admin đã được lọc bỏ.
+              </p>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow className="border-b border-slate-200 dark:border-slate-800">
+                  <TableHead className="w-16 font-bold text-xs uppercase">Hạng</TableHead>
+                  <TableHead className="font-bold text-xs uppercase">Học Viên</TableHead>
+                  <TableHead className="font-bold text-xs uppercase">Bậc Xếp Hạng</TableHead>
+                  <TableHead className="font-bold text-xs uppercase text-right">Điểm Năng Động</TableHead>
+                  <TableHead className="font-bold text-xs uppercase text-right">Streak</TableHead>
+                  <TableHead className="font-bold text-xs uppercase text-right">Kinh Nghiệm</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {leaderboard.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={6} className="text-center py-8 text-slate-400">
+                      Chưa có học viên nào trong hệ thống.
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  leaderboard.map(item => (
+                    <TableRow key={item.id} className="border-b border-slate-100 dark:border-slate-800/60 hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
+                      <TableCell className="font-black text-slate-700 dark:text-slate-300">
+                        {item.position === 1 && <span className="text-xl">🥇</span>}
+                        {item.position === 2 && <span className="text-xl">🥈</span>}
+                        {item.position === 3 && <span className="text-xl">🥉</span>}
+                        {item.position > 3 && <span className="text-slate-500 font-mono">#{item.position}</span>}
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center gap-3">
+                          <img
+                            src={item.avatarUrl}
+                            alt={item.fullName}
+                            className="w-9 h-9 rounded-xl object-cover bg-emerald-50 border border-emerald-200"
+                          />
+                          <div>
+                            <div className="font-bold text-slate-900 dark:text-slate-100 text-sm">{item.fullName}</div>
+                            <div className="text-xs text-slate-400">@{item.username} • {item.email}</div>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
+                          <span>{item.rankTier.badge}</span>
+                          <span>{item.rankTier.name}</span>
+                        </span>
+                      </TableCell>
+                      <TableCell className="text-right font-black text-emerald-600 dark:text-emerald-400 text-sm">
+                        ⭐ {item.activePoints.toLocaleString()} pts
+                      </TableCell>
+                      <TableCell className="text-right text-xs text-slate-600 dark:text-slate-300 font-bold">
+                        🔥 {item.currentStreak} ngày
+                      </TableCell>
+                      <TableCell className="text-right text-xs text-slate-500 font-mono">
+                        {item.totalXp.toLocaleString()} XP
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </BentoBox>
+      </div>
+    );
+  };
 
   const menuItems = [
     { id: 'overview', icon: LayoutDashboard, label: 'Dashboard' },
     { id: 'users', icon: Users, label: 'Datatable' },
+    { id: 'ranking', icon: Trophy, label: 'Quản lý Rank' },
     { id: 'audits', icon: Bot, label: 'AI Resolution' },
   ];
 
@@ -420,23 +698,38 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
           })}
         </div>
 
-        <div className="p-6 border-t border-slate-200 dark:border-slate-800">
+        <div className="p-4 border-t border-slate-200 dark:border-slate-800 space-y-2">
           <button 
-            onClick={() => {
-              if (onLogout) onLogout();
-              else onGoHome();
-            }}
-            className="w-full flex items-center h-12 px-4 rounded-xl text-slate-500 dark:text-slate-400 hover:bg-red-50 dark:hover:bg-red-500/10 hover:text-red-600 dark:hover:text-red-400 transition-colors group"
+            onClick={onGoHome}
+            title="Chuyển sang giao diện Học viên"
+            className="w-full flex items-center h-11 px-3.5 rounded-xl text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 transition-colors group cursor-pointer"
           >
-            <LogOut className="w-5 h-5 shrink-0 group-hover:-translate-x-1 transition-transform" />
+            <Home className="w-5 h-5 shrink-0" />
             <AnimatePresence>
               {isSidebarOpen && (
-                <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="ml-4 font-semibold text-sm whitespace-nowrap">
-                  Exit to User
+                <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="ml-3 font-semibold text-xs whitespace-nowrap">
+                  Giao diện Học viên
                 </motion.span>
               )}
             </AnimatePresence>
           </button>
+
+          {onLogout && (
+            <button 
+              onClick={onLogout}
+              title="Đăng xuất khỏi hệ thống"
+              className="w-full flex items-center h-11 px-3.5 rounded-xl text-slate-500 dark:text-slate-400 hover:bg-red-50 dark:hover:bg-red-500/10 hover:text-red-600 dark:hover:text-red-400 transition-colors group cursor-pointer"
+            >
+              <LogOut className="w-5 h-5 shrink-0 group-hover:-translate-x-1 transition-transform" />
+              <AnimatePresence>
+                {isSidebarOpen && (
+                  <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="ml-3 font-semibold text-xs whitespace-nowrap">
+                    Đăng xuất
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
+          )}
         </div>
       </motion.aside>
 
@@ -474,9 +767,18 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                 <div className="text-sm font-bold text-slate-800 dark:text-white">{user.fullName}</div>
                 <div className="text-xs font-medium text-red-500">{user.role}</div>
               </div>
-              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-red-500 to-orange-500 text-white flex items-center justify-center font-bold shadow-lg shadow-red-500/20 border-2 border-white dark:border-slate-800 cursor-pointer">
+              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-red-500 to-orange-500 text-white flex items-center justify-center font-bold shadow-lg shadow-red-500/20 border-2 border-white dark:border-slate-800">
                 {user.fullName?.charAt(0) || 'A'}
               </div>
+              {onLogout && (
+                <button
+                  onClick={onLogout}
+                  title="Đăng xuất khỏi hệ thống"
+                  className="w-10 h-10 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-center text-slate-500 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/20 shadow-sm transition-colors cursor-pointer"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              )}
             </div>
           </div>
         </header>
@@ -493,6 +795,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                 <motion.div key={activeMenu} initial={{ opacity: 0, filter: 'blur(10px)', scale: 0.98 }} animate={{ opacity: 1, filter: 'blur(0px)', scale: 1 }} exit={{ opacity: 0, filter: 'blur(10px)', scale: 0.98 }} transition={{ duration: 0.3, ease: 'easeOut' }}>
                   {activeMenu === 'overview' && renderOverview()}
                   {activeMenu === 'users' && renderUsers()}
+                  {activeMenu === 'ranking' && renderRanking()}
                   {activeMenu === 'audits' && renderAudits()}
                 </motion.div>
               </AnimatePresence>

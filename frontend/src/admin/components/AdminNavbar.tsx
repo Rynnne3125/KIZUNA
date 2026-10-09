@@ -4,14 +4,12 @@ export interface AdminNavbarProps {
   user: { fullName?: string; username?: string; role?: string } | null;
   onGoHome: () => void;
   onLogout: () => void;
-  onRoleToggle: () => void;
 }
 
 export const AdminNavbar: React.FC<AdminNavbarProps> = ({
   user,
   onGoHome,
-  onLogout,
-  onRoleToggle
+  onLogout
 }) => {
   return (
     <div style={{
@@ -45,19 +43,11 @@ export const AdminNavbar: React.FC<AdminNavbarProps> = ({
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <button
-          onClick={onRoleToggle}
-          title="Chuyển đổi quyền nhanh để test màn hình 403"
-          className="btn btn-sm"
-          style={{ background: 'rgba(255,255,255,0.15)', color: '#ffffff', border: 'none' }}
-        >
-          🔄 Đổi sang ROLE_USER
-        </button>
-        <button
           onClick={onGoHome}
           className="btn btn-sm"
           style={{ background: '#3b82f6', color: '#ffffff', border: 'none' }}
         >
-          🎒 Về giao diện Học viên
+          Về giao diện Học viên
         </button>
         {user && (
           <button

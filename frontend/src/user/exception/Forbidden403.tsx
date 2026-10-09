@@ -1,109 +1,71 @@
 import React from 'react';
 import { User } from '../types/auth';
+import { ShieldAlert, Home, LogOut } from 'lucide-react';
 
 export interface Forbidden403Props {
   user: User | null;
   onGoHome: () => void;
-  onSwitchToAdmin: () => void;
-  onLoginDifferent: () => void;
+  onLogout?: () => void;
 }
 
 export const Forbidden403: React.FC<Forbidden403Props> = ({
   user,
   onGoHome,
-  onSwitchToAdmin,
-  onLoginDifferent
+  onLogout
 }) => {
   return (
-    <div style={{
-      maxWidth: 640,
-      margin: '60px auto',
-      padding: '40px 24px',
-      textAlign: 'center',
-      background: '#ffffff',
-      borderRadius: 'var(--radius-lg)',
-      border: '1px solid #fecaca',
-      boxShadow: 'var(--shadow-md)'
-    }}>
-      <div style={{
-        width: 80,
-        height: 80,
-        margin: '0 auto 24px auto',
-        background: '#fee2e2',
-        color: '#dc2626',
-        borderRadius: '50%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: 38,
-        border: '4px solid #fca5a5'
-      }}>
-        ⛔
+    <div className="max-w-lg mx-auto my-16 p-8 text-center bg-white rounded-3xl border border-rose-200 shadow-xl">
+      <div className="w-16 h-16 mx-auto mb-5 bg-rose-50 text-rose-600 rounded-2xl flex items-center justify-center border border-rose-200">
+        <ShieldAlert className="w-8 h-8" />
       </div>
 
-      <div style={{
-        display: 'inline-block',
-        background: '#fee2e2',
-        color: '#991b1b',
-        fontSize: 13,
-        fontWeight: 800,
-        padding: '4px 12px',
-        borderRadius: 999,
-        marginBottom: 12,
-        letterSpacing: '1px'
-      }}>
-        HTTP 403 FORBIDDEN
+      <div className="inline-block bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1 rounded-full mb-3 tracking-wider uppercase">
+        403 Forbidden
       </div>
 
-      <h2 style={{ fontSize: 24, fontWeight: 800, color: '#1e293b', marginBottom: 12 }}>
-        Quyền Truy Cập Bị Từ Chối!
+      <h2 className="text-2xl font-extrabold text-slate-900 mb-3">
+        Quyền Truy Cập Bị Từ Chối
       </h2>
 
-      <p style={{ fontSize: 15, color: '#475569', lineHeight: 1.6, marginBottom: 20 }}>
-        Khu vực này yêu cầu đặc quyền <strong>ROLE_ADMIN</strong> để quản lý hệ thống và biên tập nội dung.
+      <p className="text-sm text-slate-600 leading-relaxed mb-6">
+        Khu vực này yêu cầu đặc quyền <strong>ROLE_ADMIN</strong>. Bạn không có quyền truy cập vào chức năng này.
       </p>
 
-      {user ? (
-        <div style={{
-          background: '#f8fafc',
-          border: '1px solid #e2e8f0',
-          borderRadius: 'var(--radius-md)',
-          padding: '16px',
-          marginBottom: 28,
-          textAlign: 'left',
-          fontSize: 14
-        }}>
-          <div style={{ marginBottom: 6 }}>
-            <span style={{ color: '#64748b' }}>Tài khoản hiện tại:</span>{' '}
-            <strong style={{ color: '#0f172a' }}>{user.fullName || user.username}</strong>
+      {user && (
+        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 mb-6 text-left text-xs sm:text-sm space-y-2">
+          <div className="flex justify-between">
+            <span className="text-slate-500">Tài khoản hiện tại:</span>
+            <span className="font-bold text-slate-800">{user.fullName || user.username}</span>
           </div>
-          <div style={{ marginBottom: 6 }}>
-            <span style={{ color: '#64748b' }}>Vai trò hiện có:</span>{' '}
-            <span className="badge badge-warning" style={{ fontSize: 12 }}>{user.role}</span>
+          <div className="flex justify-between">
+            <span className="text-slate-500">Vai trò hiện có:</span>
+            <span className="bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded text-xs">{user.role}</span>
           </div>
-          <div>
-            <span style={{ color: '#64748b' }}>Yêu cầu:</span>{' '}
-            <span className="badge badge-primary" style={{ fontSize: 12 }}>ROLE_ADMIN</span>
+          <div className="flex justify-between">
+            <span className="text-slate-500">Yêu cầu quyền:</span>
+            <span className="bg-rose-100 text-rose-900 font-bold px-2 py-0.5 rounded text-xs">ROLE_ADMIN</span>
           </div>
         </div>
-      ) : (
-        <p style={{ color: '#dc2626', fontSize: 14, marginBottom: 24 }}>
-          Bạn chưa đăng nhập vào hệ thống KIZUNA. Vui lòng đăng nhập với tài khoản Admin.
-        </p>
       )}
 
-      <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-        <button onClick={onGoHome} className="btn btn-secondary">
-          🏠 Quay về Trang Chủ
+      <div className="flex gap-3 justify-center flex-wrap">
+        <button 
+          onClick={onGoHome} 
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm transition-colors cursor-pointer"
+        >
+          <Home className="w-4 h-4" />
+          <span>Về Trang Chủ</span>
         </button>
 
-        <button onClick={onSwitchToAdmin} className="btn btn-primary">
-          ⚡ Chuyển sang ROLE_ADMIN để thử nghiệm
-        </button>
-
-        <button onClick={onLoginDifferent} className="btn btn-secondary" style={{ color: '#4f46e5' }}>
-          🔑 Đăng nhập tài khoản khác
-        </button>
+        {onLogout && (
+          <button 
+            onClick={onLogout} 
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-700 hover:text-rose-600 border border-slate-200 font-bold text-xs sm:text-sm transition-colors cursor-pointer"
+          >
+            <LogOut className="w-4 h-4" />
+            <span>Đăng xuất</span>
+          </button>
+        )}
       </div>
     </div>
   );
