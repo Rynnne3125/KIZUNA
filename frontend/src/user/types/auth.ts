@@ -21,14 +21,15 @@ export interface AuthState {
 }
 
 export interface LoginCredentials {
-  username: string;
+  email: string;
+  username?: string;
   password?: string;
 }
 
 export interface RegisterData {
-  username: string;
-  password?: string;
   fullName: string;
   email: string;
+  password?: string;
+  username?: string;
   role?: Role;
 }

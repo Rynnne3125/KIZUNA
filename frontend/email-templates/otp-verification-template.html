@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Mã xác thực OTP KIZUNA</title>
+  <style type="text/css">
+    /* CLIENT-SPECIFIC RESETS */
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+    table { border-collapse: collapse !important; }
+    body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+
+    /* MOBILE RESPONSIVE STYLES */
+    @media screen and (max-width: 600px) {
+      .email-wrapper {
+        padding: 12px 8px !important;
+      }
+      .email-card {
+        width: 100% !important;
+        border-radius: 16px !important;
+      }
+      .content-padding {
+        padding: 24px 20px !important;
+      }
+      .header-padding {
+        padding: 24px 20px 16px 20px !important;
+      }
+      .footer-padding {
+        padding: 20px 16px !important;
+      }
+      .otp-box {
+        padding: 18px 12px !important;
+        margin: 20px 0 !important;
+      }
+      .otp-code {
+        font-size: 28px !important;
+        letter-spacing: 5px !important;
+      }
+      .brand-title {
+        font-size: 20px !important;
+      }
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f5f7f4; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #1e293b;">
+
+  <!-- Wrapper Table -->
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="email-wrapper" style="background-color: #f5f7f4; padding: 35px 12px;">
+    <tr>
+      <td align="center">
+        
+        <!-- Main Container Card (Fluid on Mobile, 560px max on Desktop) -->
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="email-card" style="max-width: 560px; width: 100%; background-color: #ffffff; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
+          
+          <!-- Top Accent Green Bar -->
+          <tr>
+            <td height="5" style="background: linear-gradient(90deg, #16a34a, #10b981, #059669); line-height: 5px; font-size: 5px;">&nbsp;</td>
+          </tr>
+
+          <!-- Header Section with Logo -->
+          <tr>
+            <td class="header-padding" style="padding: 28px 32px 18px 32px; text-align: center; background-color: #ffffff;">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center">
+                <tr>
+                  <td style="vertical-align: middle; padding-right: 10px;">
+                    <!-- Logo Icon Emblem -->
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #16a34a, #059669); border-radius: 12px; line-height: 40px; text-align: center; color: #ffffff; font-size: 20px; font-weight: bold; box-shadow: 0 3px 8px rgba(22, 163, 74, 0.25);">
+                      絆
+                    </div>
+                  </td>
+                  <td style="vertical-align: middle; text-align: left;">
+                    <div class="brand-title" style="font-size: 22px; font-weight: 800; color: #064e3b; letter-spacing: -0.5px; line-height: 26px;">
+                      KIZUNA <span style="font-size: 15px; color: #16a34a; font-weight: bold;">絆</span>
+                    </div>
+                    <div style="font-size: 11px; color: #64748b; font-weight: 500;">
+                      Nền tảng học tiếng Nhật thông minh
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Divider Line -->
+          <tr>
+            <td style="padding: 0 24px;">
+              <div style="border-top: 1px solid #f1f5f9; height: 1px; width: 100%;"></div>
+            </td>
+          </tr>
+
+          <!-- Body Content -->
+          <tr>
+            <td class="content-padding" style="padding: 26px 32px 32px 32px; text-align: left;">
+              
+              <!-- Greeting -->
+              <h2 style="margin: 0 0 14px 0; font-size: 17px; font-weight: 700; color: #0f172a;">
+                Xin chào <span style="color: #16a34a;">{{to_name}}</span>,
+              </h2>
+
+              <p style="margin: 0 0 18px 0; font-size: 14px; line-height: 1.6; color: #475569;">
+                Cảm ơn bạn đã đăng ký tham gia <strong>KIZUNA</strong>! Dưới đây là mã xác thực OTP (One-Time Password) để hoàn tất kích hoạt tài khoản của bạn:
+              </p>
+
+              <!-- OTP Highlight Box (Optimized for Mobile Screens) -->
+              <div class="otp-box" style="margin: 24px 0; padding: 22px 16px; background-color: #f0fdf4; border: 1.5px dashed #86efac; border-radius: 16px; text-align: center;">
+                <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #166534; margin-bottom: 6px;">
+                  MÃ XÁC THỰC CỦA BẠN
+                </div>
+                
+                <!-- 6-digit Code Display -->
+                <div class="otp-code" style="font-family: 'Courier New', Courier, monospace; font-size: 34px; font-weight: 800; color: #15803d; letter-spacing: 7px; margin: 4px 0 8px 0; line-height: 1.2;">
+                  {{otp_code}}
+                </div>
+
+                <div style="font-size: 12px; color: #15803d; font-weight: 500;">
+                  ⏱️ Mã có hiệu lực trong vòng <strong>5 phút</strong>
+                </div>
+              </div>
+
+              <!-- Security Notices Card -->
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f8fafc; border-radius: 12px; padding: 12px 14px; margin-bottom: 20px; border: 1px solid #e2e8f0;">
+                <tr>
+                  <td style="vertical-align: top; width: 18px; padding-right: 10px;">
+                    <span style="font-size: 15px;">🛡️</span>
+                  </td>
+                  <td style="font-size: 12px; color: #64748b; line-height: 1.5;">
+                    <strong style="color: #334155;">Lưu ý an toàn:</strong> Không chia sẻ mã OTP này cho bất kỳ ai. Nhân viên KIZUNA sẽ không bao giờ hỏi mã của bạn.
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #64748b;">
+                Chúc bạn có những giờ học bổ ích và thú vị cùng KIZUNA Sensei!
+              </p>
+
+              <div style="margin-top: 20px; font-size: 13px; color: #334155; font-weight: 600;">
+                Trân trọng,<br>
+                <span style="color: #16a34a; font-weight: 700;">Đội ngũ phát triển KIZUNA (絆)</span>
+              </div>
+
+            </td>
+          </tr>
+
+          <!-- Footer Section (Mobile Friendly) -->
+          <tr>
+            <td class="footer-padding" style="background-color: #fafbf9; padding: 20px 24px; border-top: 1px solid #f1f5f9; text-align: center;">
+              
+              <div style="font-size: 12px; font-weight: 600; color: #064e3b; margin-bottom: 4px;">
+                一期一会 (Ichigo Ichie) — Trân trọng từng cơ hội học tập
+              </div>
+
+              <div style="font-size: 11px; color: #94a3b8; line-height: 1.5;">
+                Email gửi tự động từ: <a href="mailto:phongtt.23it@vku.udn.vn" style="color: #16a34a; text-decoration: none; font-weight: 600;">phongtt.23it@vku.udn.vn</a><br>
+                Đại học CNTT & Truyền thông Việt - Hàn (VKU)<br>
+                © 2026 KIZUNA Japanese Learning Platform
+              </div>
+
+            </td>
+          </tr>
+
+        </table>
+        <!-- End Main Container Card -->
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

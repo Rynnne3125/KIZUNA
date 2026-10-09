@@ -49,11 +49,11 @@ export const GrammarPage: React.FC = () => {
                   style={{
                     padding: 16,
                     cursor: 'pointer',
-                    border: isSelected ? '2px solid #dc2626' : '1px solid var(--border-color)',
-                    background: isSelected ? '#fef2f2' : '#ffffff'
+                    border: isSelected ? '2px solid #16a34a' : '1px solid var(--border-color)',
+                    background: isSelected ? '#ecfdf5' : '#ffffff'
                   }}
                 >
-                  <div style={{ fontSize: 16, fontWeight: 800, color: '#dc2626', marginBottom: 4 }}>
+                  <div style={{ fontSize: 16, fontWeight: 800, color: '#16a34a', marginBottom: 4 }}>
                     {item.pattern}
                   </div>
                   <div style={{ fontSize: 14, fontWeight: 600, color: '#1e293b' }}>
@@ -69,7 +69,7 @@ export const GrammarPage: React.FC = () => {
               <span className="badge badge-primary" style={{ marginBottom: 12 }}>
                 Chi tiết cấu trúc
               </span>
-              <h2 style={{ fontSize: 22, fontWeight: 800, color: '#dc2626', marginBottom: 8 }}>
+              <h2 style={{ fontSize: 22, fontWeight: 800, color: '#16a34a', marginBottom: 8 }}>
                 {selectedItem.pattern}
               </h2>
               <div style={{ fontSize: 16, fontWeight: 700, color: '#1e293b', marginBottom: 20 }}>

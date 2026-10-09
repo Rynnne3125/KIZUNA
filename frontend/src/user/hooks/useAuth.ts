@@ -49,14 +49,6 @@ export function useAuth() {
     setUser(null);
   }, []);
 
-  const toggleRole = useCallback(() => {
-    const updated = authService.toggleRoleForTest();
-    if (updated) {
-      setUser({ ...updated });
-    }
-    return updated;
-  }, []);
-
   return {
     user,
     setUser,
@@ -66,7 +58,6 @@ export function useAuth() {
     error,
     login,
     register,
-    logout,
-    toggleRole
+    logout
   };
 }

@@ -3,58 +3,55 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent } from '@/admin/components/ui/card';
 import { Input } from '@/admin/components/ui/input';
 import { Label } from '@/admin/components/ui/label';
-import { Button } from '@/admin/components/ui/button';
-import { Shield, Mail, Lock, User, LogIn, UserPlus, Heart, Star } from 'lucide-react';
+import { 
+  Mail, Lock, User, LogIn, UserPlus, Star, 
+  CheckCircle2, ArrowRight, RefreshCw, KeyRound, Sparkles, AlertCircle, MailCheck
+} from 'lucide-react';
+import { authService } from '../services/authService';
+import { User as KizunaUser } from '../types/auth';
 
 export interface LoginPageProps {
-  onLoginSuccess: (user: any) => void;
+  onLoginSuccess: (user: KizunaUser) => void;
   onCancel?: () => void;
 }
 
-// Particle system for the mascot
-const MascotParticles = ({ isDay }: { isDay: boolean }) => {
-  const [particles, setParticles] = useState<{ id: number; x: number; y: number; scale: number; isHeart: boolean }[]>([]);
+// Particle emitter with soft matcha / golden particles
+const MascotParticles = () => {
+  const [particles, setParticles] = useState<{ id: number; x: number; y: number; scale: number }[]>([]);
 
   useEffect(() => {
-    // Generate particles continuously
     const interval = setInterval(() => {
       setParticles(prev => {
         const newParticle = {
           id: Date.now() + Math.random(),
-          x: (Math.random() - 0.5) * 200, 
-          y: (Math.random() - 0.5) * 50, 
-          scale: 0.8 + Math.random() * 0.7, 
-          isHeart: isDay
+          x: (Math.random() - 0.5) * 180,
+          y: (Math.random() - 0.5) * 40,
+          scale: 0.7 + Math.random() * 0.6,
         };
-        // Keep only the last 15 particles
-        return [...prev.slice(-14), newParticle];
+        return [...prev.slice(-12), newParticle];
       });
-    }, 400); // New particle every 400ms
+    }, 450);
     return () => clearInterval(interval);
-  }, [isDay]);
+  }, []);
 
   return (
-    <div className="absolute inset-0 pointer-events-none z-50 flex items-center justify-center">
+    <div className="absolute inset-0 pointer-events-none z-40 flex items-center justify-center">
       <AnimatePresence>
         {particles.map(p => (
           <motion.div
             key={p.id}
-            initial={{ opacity: 0, x: 0, y: 50, scale: 0 }}
+            initial={{ opacity: 0, x: 0, y: 30, scale: 0 }}
             animate={{ 
-              opacity: [0, 1, 0.8, 0], 
+              opacity: [0, 0.9, 0.7, 0], 
               x: p.x, 
-              y: p.y - 250 - (Math.random() * 100), // float much higher
+              y: p.y - 200 - (Math.random() * 80),
               scale: p.scale 
             }}
             exit={{ opacity: 0, scale: 0 }}
-            transition={{ duration: 3.5, ease: "easeOut" }}
+            transition={{ duration: 3.2, ease: "easeOut" }}
             className="absolute"
           >
-            {p.isHeart ? (
-              <Heart className="text-pink-400 fill-pink-400/60 w-8 h-8 drop-shadow-md" />
-            ) : (
-              <Star className="text-yellow-300 fill-yellow-300/60 w-8 h-8 drop-shadow-md" />
-            )}
+            <Sparkles className="text-emerald-400 fill-emerald-300/40 w-6 h-6 drop-shadow-xs" />
           </motion.div>
         ))}
       </AnimatePresence>
@@ -66,230 +63,504 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
-  // Day-Night Cycle state (toggles every 15 seconds)
-  const [isDayTime, setIsDayTime] = useState(true);
+  const [successMsg, setSuccessMsg] = useState<string | null>(null);
 
-  // Form states
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  // Form states - Login (Đăng nhập chuẩn bằng EMAIL)
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
 
-  useEffect(() => {
-    const cycle = setInterval(() => {
-      setIsDayTime(prev => !prev);
-    }, 15000);
-    return () => clearInterval(cycle);
-  }, []);
+  // Form states - Register
+  const [regFullName, setRegFullName] = useState('');
+  const [regEmail, setRegEmail] = useState('');
+  const [regPassword, setRegPassword] = useState('');
+  const [regStep, setRegStep] = useState<'FORM' | 'OTP'>('FORM');
+  const [otpCode, setOtpCode] = useState('');
+  const [resendCooldown, setResendCooldown] = useState(0);
 
-  const handleLogin = (e: React.FormEvent) => {
+  // Countdown timer for OTP resend (60s)
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (resendCooldown > 0) {
+      timer = setTimeout(() => setResendCooldown(prev => prev - 1), 1000);
+    }
+    return () => clearTimeout(timer);
+  }, [resendCooldown]);
+
+  // Handle Login with Email
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!loginEmail.trim() || !loginPassword.trim()) {
+      setError('Vui lòng nhập đầy đủ địa chỉ Email và Mật khẩu.');
+      return;
+    }
+
     setLoading(true);
     setError(null);
-    
-    setTimeout(() => {
-      if (username === 'admin' && password === 'admin123') {
-        onLoginSuccess({ id: 'usr_admin', username: 'admin', fullName: 'Kizuna Administrator', role: 'ROLE_ADMIN' });
-      } else if (username === 'user' && password === 'user123') {
-        onLoginSuccess({ id: 'usr_001', username: 'user', fullName: 'Học viên Test', role: 'ROLE_USER' });
-      } else {
-        setError('Tài khoản hoặc mật khẩu không chính xác.');
-        setLoading(false);
-      }
-    }, 1500); 
+
+    try {
+      const res = await authService.login({ 
+        email: loginEmail.trim().toLowerCase(), 
+        password: loginPassword.trim() 
+      });
+      const isAdmin = res.user.role === 'ROLE_ADMIN';
+      setSuccessMsg(isAdmin 
+        ? 'Đăng nhập thành công! Đang chuyển đến trang quản trị...'
+        : 'Đăng nhập thành công! Đang chuyển đến trang chủ...'
+      );
+      setTimeout(() => {
+        onLoginSuccess(res.user);
+      }, 500);
+    } catch (err: any) {
+      setError(err.message || 'Email hoặc mật khẩu không chính xác.');
+      setLoading(false);
+    }
   };
 
-  const handleQuickFill = (u: string, p: string) => {
-    setUsername(u);
-    setPassword(p);
+  // Step 1: Request OTP email for Registration
+  const handleRequestOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSuccessMsg(null);
+
+    if (!regFullName.trim() || !regEmail.trim() || !regPassword.trim()) {
+      setError('Vui lòng điền đầy đủ tất cả thông tin đăng ký.');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(regEmail.trim())) {
+      setError('Định dạng email không hợp lệ. Vui lòng nhập đúng email (ví dụ: name@example.com).');
+      return;
+    }
+
+    if (regPassword.length < 6) {
+      setError('Mật khẩu phải chứa tối thiểu 6 ký tự để đảm bảo an toàn.');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await authService.sendRegistrationOtp(regEmail, regFullName);
+      setRegStep('OTP');
+      setResendCooldown(60);
+      setSuccessMsg(null);
+    } catch (err: any) {
+      setError(err.message || 'Không thể gửi mã xác thực. Vui lòng thử lại sau.');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // Generate fixed background particles for the left side
-  const leftParticles = Array.from({ length: 20 }).map((_, i) => ({
-    id: i,
-    left: `${Math.random() * 100}%`,
-    top: `${Math.random() * 100}%`,
-    duration: 10 + Math.random() * 20,
-    delay: Math.random() * 5
-  }));
+  // Resend OTP email
+  const handleResendOtp = async () => {
+    if (resendCooldown > 0) return;
+    setLoading(true);
+    setError(null);
+    try {
+      await authService.sendRegistrationOtp(regEmail, regFullName);
+      setResendCooldown(60);
+      setSuccessMsg('Hãy kiểm tra hòm thư email của bạn.');
+    } catch (err: any) {
+      setError(err.message || 'Lỗi khi gửi lại mã OTP.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Step 2: Check OTP from user input and create account in Firestore
+  const handleVerifyOtpAndCreate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    const cleanOtp = otpCode.trim();
+    if (!cleanOtp || cleanOtp.length !== 6) {
+      setError('Vui lòng nhập đầy đủ 6 chữ số mã xác thực từ email.');
+      return;
+    }
+
+    // Kiểm tra tính hợp lệ của mã OTP
+    const verifyRes = authService.verifyOtp(regEmail, cleanOtp);
+    if (!verifyRes.valid) {
+      setError(verifyRes.error || 'Mã OTP không chính xác hoặc đã hết hạn.');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // Đăng ký và lưu Firestore collection 'users'
+      const res = await authService.register({
+        fullName: regFullName.trim(),
+        email: regEmail.trim(),
+        password: regPassword.trim(),
+        role: 'ROLE_USER'
+      });
+
+      setSuccessMsg('Xác thực mã OTP thành công! Tài khoản của bạn đã được kích hoạt.');
+      setTimeout(() => {
+        onLoginSuccess(res.user);
+      }, 800);
+    } catch (err: any) {
+      setError(err.message || 'Lỗi tạo tài khoản. Vui lòng thử lại sau.');
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="flex min-h-screen w-full font-sans overflow-hidden bg-[#fdfaf6]">
+    <div className="flex min-h-screen w-full font-sans overflow-x-hidden kanji-paper-bg">
       
       {/* ======================= LEFT: FORM SECTION ======================= */}
-      <div className="w-full lg:w-1/2 relative flex flex-col justify-center items-center p-6 sm:p-12 z-10 bg-[#fdfaf6]">
+      <div className="w-full lg:w-1/2 relative flex flex-col justify-center items-center p-4 sm:p-8 lg:p-12 z-10">
         
-        {/* Left Side Floating Particles */}
-        {leftParticles.map(p => (
-          <motion.div
-            key={`left-p-${p.id}`}
-            animate={{ 
-              y: [0, -30, 0],
-              opacity: [0.2, 0.5, 0.2],
-              scale: [1, 1.2, 1]
-            }}
-            transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute rounded-full bg-orange-400/20 blur-[1px]"
-            style={{ left: p.left, top: p.top, width: 8 + (p.id % 4), height: 8 + (p.id % 4) }}
-          />
-        ))}
-
         {onCancel && (
           <button 
             onClick={onCancel}
-            className="absolute top-6 left-6 flex items-center gap-2 text-slate-500 hover:text-orange-600 transition-colors font-medium bg-white/50 backdrop-blur-md px-4 py-2 rounded-xl shadow-sm border border-slate-200 z-20"
+            className="absolute top-6 left-6 flex items-center gap-2 text-slate-600 hover:text-emerald-700 transition-colors font-medium bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl shadow-xs border border-emerald-100 z-20 text-xs sm:text-sm cursor-pointer"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Quay lại
           </button>
         )}
 
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <div className="absolute -top-32 -left-32 w-96 h-96 bg-orange-200/40 rounded-full blur-[100px]" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-pink-200/30 rounded-full blur-[100px]" />
-        </div>
-
         <motion.div 
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="w-full max-w-md relative z-10"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="w-full max-w-md relative z-10 my-auto"
         >
-          <div className="mb-10 text-center lg:text-left">
-            <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-pink-500 mb-2">
-              KIZUNA
-            </h1>
-            <p className="text-slate-500 font-medium">
-              Đăng nhập để tiếp tục hành trình học tiếng Nhật của bạn.
+          {/* Logo & Header */}
+          <div className="mb-6 text-center">
+            <div className="inline-flex items-center justify-center gap-2.5 mb-2">
+              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-600 to-green-700 flex items-center justify-center text-white font-extrabold text-2xl shadow-md shadow-emerald-600/20">
+                絆
+              </div>
+              <h1 className="text-3xl font-extrabold text-emerald-950 tracking-tight">
+                KIZUNA
+              </h1>
+            </div>
+            <p className="text-slate-600 text-sm font-medium">
+              Nền tảng học tiếng Nhật thông minh & Rèn luyện phản xạ chuẩn bản xứ
             </p>
           </div>
 
-          <Card className="border border-white/50 bg-white/70 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-2xl rounded-3xl overflow-hidden">
-            <div className="flex bg-slate-50/50 border-b border-slate-100 p-2 gap-2">
+          {/* Form Card (Crisp White Contrasting with Kanji Paper Background) */}
+          <Card className="border border-emerald-100 bg-white shadow-xl shadow-emerald-950/5 rounded-3xl overflow-hidden">
+            {/* Toggle Tabs */}
+            <div className="flex bg-slate-50 border-b border-emerald-50 p-1.5 gap-1.5">
               <button 
-                onClick={() => { setIsLoginMode(true); setError(null); }}
-                className={`flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all ${isLoginMode ? 'bg-white text-orange-600 shadow-sm' : 'text-slate-500 hover:text-slate-800'}`}
+                type="button"
+                onClick={() => { 
+                  setIsLoginMode(true); 
+                  setError(null); 
+                  setSuccessMsg(null); 
+                  setRegStep('FORM');
+                }}
+                className={`flex-1 py-2.5 rounded-2xl text-sm font-bold transition-all cursor-pointer ${
+                  isLoginMode 
+                    ? 'bg-emerald-600 text-white shadow-sm' 
+                    : 'text-slate-600 hover:text-emerald-800 hover:bg-white/60'
+                }`}
               >
                 Đăng nhập
               </button>
               <button 
-                onClick={() => { setIsLoginMode(false); setError(null); }}
-                className={`flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all ${!isLoginMode ? 'bg-white text-pink-600 shadow-sm' : 'text-slate-500 hover:text-slate-800'}`}
+                type="button"
+                onClick={() => { 
+                  setIsLoginMode(false); 
+                  setError(null); 
+                  setSuccessMsg(null); 
+                }}
+                className={`flex-1 py-2.5 rounded-2xl text-sm font-bold transition-all cursor-pointer ${
+                  !isLoginMode 
+                    ? 'bg-emerald-600 text-white shadow-sm' 
+                    : 'text-slate-600 hover:text-emerald-800 hover:bg-white/60'
+                }`}
               >
-                Đăng ký
+                Đăng ký tài khoản
               </button>
             </div>
 
-            {/* Sync form sizes by fixing min-height */}
-            <CardContent className="p-6 sm:p-8 min-h-[420px] relative">
+            <CardContent className="p-6 sm:p-8 min-h-[380px] relative flex flex-col justify-center">
+              
+              {/* Error Message Alert */}
+              {error && (
+                <motion.div 
+                  initial={{ opacity: 0, y: -6 }} 
+                  animate={{ opacity: 1, y: 0 }} 
+                  className="mb-4 text-xs sm:text-sm font-medium text-rose-700 bg-rose-50 p-3 rounded-xl border border-rose-200 flex items-start gap-2"
+                >
+                  <AlertCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
+                  <span>{error}</span>
+                </motion.div>
+              )}
+
+              {/* Success Message Alert */}
+              {successMsg && (
+                <motion.div 
+                  initial={{ opacity: 0, y: -6 }} 
+                  animate={{ opacity: 1, y: 0 }} 
+                  className="mb-4 text-xs sm:text-sm font-medium text-emerald-800 bg-emerald-50 p-3 rounded-xl border border-emerald-200 flex items-start gap-2"
+                >
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span>{successMsg}</span>
+                </motion.div>
+              )}
+
               <AnimatePresence mode="wait">
                 {isLoginMode ? (
+                  /* ================= 1. ĐĂNG NHẬP CHUẨN BẰNG EMAIL ================= */
                   <motion.form 
                     key="login"
-                    initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}
+                    initial={{ opacity: 0, x: -12 }} 
+                    animate={{ opacity: 1, x: 0 }} 
+                    exit={{ opacity: 0, x: 12 }}
                     transition={{ duration: 0.2 }}
                     onSubmit={handleLogin} 
-                    className="space-y-5 absolute inset-0 p-6 sm:p-8"
+                    autoComplete="off"
+                    className="space-y-4"
                   >
-                    <div className="bg-orange-50/80 border border-orange-100 rounded-2xl p-4 mb-2">
-                      <p className="text-xs text-orange-800/80 font-bold uppercase tracking-wider mb-3">Truy cập nhanh</p>
-                      <div className="flex gap-2">
-                        <Button type="button" size="sm" variant="outline" className="flex-1 bg-white text-indigo-600 border-indigo-200 hover:bg-indigo-50 rounded-xl shadow-sm" onClick={() => handleQuickFill('admin', 'admin123')}>
-                          <Shield className="w-3.5 h-3.5 mr-1.5"/> Admin
-                        </Button>
-                        <Button type="button" size="sm" variant="outline" className="flex-1 bg-white text-emerald-600 border-emerald-200 hover:bg-emerald-50 rounded-xl shadow-sm" onClick={() => handleQuickFill('user', 'user123')}>
-                          <User className="w-3.5 h-3.5 mr-1.5"/> Học viên
-                        </Button>
-                      </div>
-                    </div>
+                    {/* Fake hidden inputs to intercept Chrome auto-populating saved passwords from other localhost sites */}
+                    <input type="text" name="chrome_anti_autofill_user" style={{ display: 'none' }} tabIndex={-1} aria-hidden="true" autoComplete="off" />
+                    <input type="password" name="chrome_anti_autofill_pwd" style={{ display: 'none' }} tabIndex={-1} aria-hidden="true" autoComplete="off" />
 
-                    {error && (
-                      <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="text-sm font-medium text-rose-500 bg-rose-50 p-3 rounded-xl border border-rose-100">
-                        {error}
-                      </motion.div>
-                    )}
-
-                    <div className="space-y-2 group">
-                      <Label htmlFor="username" className="text-slate-600 font-semibold text-xs uppercase tracking-wide">Tên đăng nhập</Label>
+                    <div className="space-y-1.5 group">
+                      <Label htmlFor="login-email" className="text-slate-700 font-semibold text-xs uppercase tracking-wide">
+                        Địa chỉ Email
+                      </Label>
                       <div className="relative">
-                        <User className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400 group-focus-within:text-orange-500 transition-colors" />
+                        <Mail className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400 group-focus-within:text-emerald-600 transition-colors" />
                         <Input 
-                          id="username" value={username} onChange={e => setUsername(e.target.value)} required placeholder="Nhập tài khoản..." 
-                          className="pl-10 h-11 bg-white/50 border-slate-200 hover:border-orange-200 focus-visible:border-orange-500 focus-visible:ring-4 focus-visible:ring-orange-500/10 rounded-xl transition-all" 
+                          id="login-email" 
+                          type="email"
+                          name="login_email"
+                          autoComplete="username"
+                          value={loginEmail} 
+                          onChange={e => setLoginEmail(e.target.value)} 
+                          required 
+                          placeholder="name@example.com" 
+                          className="pl-10 h-11 bg-white border-slate-200 hover:border-emerald-300 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl transition-all" 
                         />
                       </div>
                     </div>
 
-                    <div className="space-y-2 group">
-                      <Label htmlFor="password" className="text-slate-600 font-semibold text-xs uppercase tracking-wide">Mật khẩu</Label>
+                    <div className="space-y-1.5 group">
+                      <Label htmlFor="login-password" className="text-slate-700 font-semibold text-xs uppercase tracking-wide">
+                        Mật khẩu
+                      </Label>
                       <div className="relative">
-                        <Lock className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400 group-focus-within:text-orange-500 transition-colors" />
+                        <Lock className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400 group-focus-within:text-emerald-600 transition-colors" />
                         <Input 
-                          id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} onFocus={() => setIsPasswordFocused(true)} onBlur={() => setIsPasswordFocused(false)} required placeholder="••••••••" 
-                          className="pl-10 h-11 bg-white/50 border-slate-200 hover:border-orange-200 focus-visible:border-orange-500 focus-visible:ring-4 focus-visible:ring-orange-500/10 rounded-xl transition-all" 
+                          id="login-password" 
+                          type="password" 
+                          name="login_password"
+                          autoComplete="current-password"
+                          value={loginPassword} 
+                          onChange={e => setLoginPassword(e.target.value)} 
+                          onFocus={() => setIsPasswordFocused(true)} 
+                          onBlur={() => setIsPasswordFocused(false)} 
+                          required 
+                          placeholder="••••••••" 
+                          className="pl-10 h-11 bg-white border-slate-200 hover:border-emerald-300 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl transition-all" 
                         />
                       </div>
                     </div>
 
                     <div className="pt-2">
-                      <motion.button 
-                        whileTap={{ scale: 0.97 }} type="submit" disabled={loading} layout
-                        className="w-full relative h-12 flex items-center justify-center bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white rounded-xl shadow-lg shadow-orange-500/25 font-semibold text-[15px] overflow-hidden transition-colors"
+                      <button 
+                        type="submit" 
+                        disabled={loading}
+                        className="w-full h-11 sm:h-12 flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 disabled:opacity-60 text-white rounded-xl shadow-md shadow-emerald-600/25 font-bold text-sm sm:text-[15px] transition-all cursor-pointer"
                       >
-                        <AnimatePresence mode="wait">
-                          {loading ? (
-                            <motion.div key="loading" initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.5 }} className="flex items-center gap-2">
-                              <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                              </svg>
-                              <span>Đang xử lý...</span>
-                            </motion.div>
-                          ) : (
-                            <motion.div key="text" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center">
-                              <LogIn className="w-4 h-4 mr-2" /> Đăng nhập
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </motion.button>
+                        {loading ? (
+                          <div className="flex items-center gap-2">
+                            <RefreshCw className="animate-spin h-4 w-4" />
+                            <span>Đang xác thực...</span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center">
+                            <LogIn className="w-4 h-4 mr-2" /> Đăng nhập KIZUNA ➔
+                          </div>
+                        )}
+                      </button>
+                    </div>
+                  </motion.form>
+                ) : regStep === 'FORM' ? (
+                  /* ================= 2. ĐĂNG KÝ BƯỚC 1: NHẬP EMAIL & THÔNG TIN ================= */
+                  <motion.form 
+                    key="register-form"
+                    initial={{ opacity: 0, x: 12 }} 
+                    animate={{ opacity: 1, x: 0 }} 
+                    exit={{ opacity: 0, x: -12 }}
+                    transition={{ duration: 0.2 }}
+                    onSubmit={handleRequestOtp} 
+                    autoComplete="off"
+                    className="space-y-3.5"
+                  >
+                    {/* Fake hidden inputs to intercept Chrome auto-populating saved passwords */}
+                    <input type="text" name="chrome_anti_autofill_reg_user" style={{ display: 'none' }} tabIndex={-1} aria-hidden="true" autoComplete="off" />
+                    <input type="password" name="chrome_anti_autofill_reg_pwd" style={{ display: 'none' }} tabIndex={-1} aria-hidden="true" autoComplete="off" />
+
+                    <div className="space-y-1 group">
+                      <Label htmlFor="reg-fullname" className="text-slate-700 font-semibold text-xs uppercase tracking-wide">
+                        Họ và tên
+                      </Label>
+                      <div className="relative">
+                        <User className="absolute left-3.5 top-3 h-4 w-4 text-slate-400 group-focus-within:text-emerald-600" />
+                        <Input 
+                          id="reg-fullname" 
+                          type="text"
+                          name="reg_fullname"
+                          autoComplete="name"
+                          value={regFullName}
+                          onChange={e => setRegFullName(e.target.value)}
+                          required 
+                          placeholder="Ví dụ: Nguyễn Văn A" 
+                          className="pl-10 h-10 bg-white border-slate-200 hover:border-emerald-300 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl" 
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-1 group">
+                      <Label htmlFor="reg-email" className="text-slate-700 font-semibold text-xs uppercase tracking-wide">
+                        Email nhận mã OTP xác thực
+                      </Label>
+                      <div className="relative">
+                        <Mail className="absolute left-3.5 top-3 h-4 w-4 text-slate-400 group-focus-within:text-emerald-600" />
+                        <Input 
+                          id="reg-email" 
+                          type="email" 
+                          name="reg_email"
+                          autoComplete="email"
+                          value={regEmail}
+                          onChange={e => setRegEmail(e.target.value)}
+                          required 
+                          placeholder="name@example.com" 
+                          className="pl-10 h-10 bg-white border-slate-200 hover:border-emerald-300 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl" 
+                        />
+                      </div>
+                      <p className="text-[11px] text-slate-500">Dùng để nhận mã xác thực kích hoạt tài khoản.</p>
+                    </div>
+
+                    <div className="space-y-1 group">
+                      <Label htmlFor="reg-pass" className="text-slate-700 font-semibold text-xs uppercase tracking-wide">
+                        Mật khẩu
+                      </Label>
+                      <div className="relative">
+                        <Lock className="absolute left-3.5 top-3 h-4 w-4 text-slate-400 group-focus-within:text-emerald-600" />
+                        <Input 
+                          id="reg-pass" 
+                          type="password" 
+                          name="reg_password"
+                          autoComplete="new-password"
+                          value={regPassword} 
+                          onChange={e => setRegPassword(e.target.value)} 
+                          onFocus={() => setIsPasswordFocused(true)} 
+                          onBlur={() => setIsPasswordFocused(false)} 
+                          required 
+                          placeholder="Tối thiểu 6 ký tự" 
+                          className="pl-10 h-10 bg-white border-slate-200 hover:border-emerald-300 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl" 
+                        />
+                      </div>
+                    </div>
+
+                    <div className="pt-2">
+                      <button 
+                        type="submit" 
+                        disabled={loading}
+                        className="w-full h-11 sm:h-12 flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 disabled:opacity-60 text-white rounded-xl shadow-md shadow-emerald-600/25 font-bold text-sm sm:text-[15px] transition-all cursor-pointer"
+                      >
+                        {loading ? (
+                          <div className="flex items-center gap-2">
+                            <RefreshCw className="animate-spin h-4 w-4" />
+                            <span>Đang gửi mã OTP đến email...</span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center">
+                            <span>Gửi mã OTP xác thực email</span>
+                            <ArrowRight className="w-4 h-4 ml-2" />
+                          </div>
+                        )}
+                      </button>
                     </div>
                   </motion.form>
                 ) : (
+                  /* ================= 3. ĐĂNG KÝ BƯỚC 2: CHECK MÃ OTP THẬT TỪ HỘP THƯ ================= */
                   <motion.form 
-                    key="register"
-                    initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
+                    key="register-otp"
+                    initial={{ opacity: 0, scale: 0.97 }} 
+                    animate={{ opacity: 1, scale: 1 }} 
+                    exit={{ opacity: 0, scale: 0.97 }}
                     transition={{ duration: 0.2 }}
-                    onSubmit={e => e.preventDefault()} 
-                    className="space-y-4 absolute inset-0 p-6 sm:p-8 flex flex-col justify-center"
+                    onSubmit={handleVerifyOtpAndCreate} 
+                    className="space-y-4"
                   >
-                    <div className="space-y-2 group">
-                      <Label htmlFor="reg-name" className="text-slate-600 font-semibold text-xs uppercase tracking-wide">Họ và tên</Label>
-                      <Input id="reg-name" required placeholder="Nguyễn Văn A" className="h-11 bg-white/50 border-pink-200 focus-visible:border-pink-500 focus-visible:ring-4 focus-visible:ring-pink-500/10 rounded-xl" />
-                    </div>
-                    
-                    <div className="space-y-2 group">
-                      <Label htmlFor="reg-email" className="text-slate-600 font-semibold text-xs uppercase tracking-wide">Email</Label>
-                      <div className="relative">
-                        <Mail className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400 group-focus-within:text-pink-500" />
-                        <Input id="reg-email" type="email" required placeholder="name@example.com" className="pl-10 h-11 bg-white/50 border-pink-200 focus-visible:border-pink-500 focus-visible:ring-4 focus-visible:ring-pink-500/10 rounded-xl" />
+                    {/* Thông báo kiểm tra email đơn giản */}
+                    <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-2xl p-4 text-center">
+                      <div className="flex items-center justify-center gap-2 text-emerald-900 font-semibold text-sm">
+                        <MailCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+                        <span>Hãy kiểm tra hòm thư email của bạn</span>
                       </div>
                     </div>
 
-                    <div className="space-y-2 group">
-                      <Label htmlFor="reg-pass" className="text-slate-600 font-semibold text-xs uppercase tracking-wide">Mật khẩu</Label>
-                      <div className="relative">
-                        <Lock className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400 group-focus-within:text-pink-500" />
-                        <Input id="reg-pass" type="password" required placeholder="••••••••" onFocus={() => setIsPasswordFocused(true)} onBlur={() => setIsPasswordFocused(false)} className="pl-10 h-11 bg-white/50 border-pink-200 focus-visible:border-pink-500 focus-visible:ring-4 focus-visible:ring-pink-500/10 rounded-xl" />
-                      </div>
+                    {/* 6-Digit OTP Code Input */}
+                    <div className="space-y-1.5">
+                      <Label htmlFor="otp-input" className="text-slate-700 font-bold text-xs uppercase tracking-wide">
+                        Nhập mã OTP xác thực (6 chữ số)
+                      </Label>
+                      <Input 
+                        id="otp-input" 
+                        type="text" 
+                        name="kizuna_otp_code"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
+                        autoComplete="one-time-code"
+                        maxLength={6} 
+                        value={otpCode}
+                        onChange={e => setOtpCode(e.target.value.replace(/\D/g, ''))}
+                        required 
+                        autoFocus
+                        placeholder="••••••" 
+                        className="text-center font-mono text-2xl tracking-[0.4em] font-extrabold h-12 bg-white border-emerald-300 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/15 rounded-xl"
+                      />
                     </div>
 
-                    <div className="pt-4">
-                      <motion.button 
-                        whileTap={{ scale: 0.97 }} type="button" 
-                        className="w-full h-12 flex items-center justify-center bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 text-white rounded-xl shadow-lg shadow-pink-500/25 font-semibold text-[15px]"
+                    {/* Submit Button: Verify & Create in Firestore */}
+                    <button 
+                      type="submit" 
+                      disabled={loading || otpCode.length !== 6}
+                      className="w-full h-11 sm:h-12 flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 disabled:opacity-50 text-white rounded-xl shadow-md shadow-emerald-600/25 font-bold text-sm sm:text-[15px] transition-all cursor-pointer"
+                    >
+                      {loading ? (
+                        <div className="flex items-center gap-2">
+                          <RefreshCw className="animate-spin h-4 w-4" />
+                          <span>Đang kích hoạt tài khoản...</span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center">
+                          <CheckCircle2 className="w-4 h-4 mr-2" /> Xác thực & Hoàn tất tạo tài khoản
+                        </div>
+                      )}
+                    </button>
+
+                    {/* Resend & Back controls */}
+                    <div className="flex items-center justify-between text-xs pt-1 text-slate-500">
+                      <button 
+                        type="button" 
+                        onClick={() => { setRegStep('FORM'); setError(null); }}
+                        className="text-slate-600 hover:text-emerald-700 underline font-medium cursor-pointer"
                       >
-                        <UserPlus className="w-4 h-4 mr-2" /> Tạo tài khoản mới
-                      </motion.button>
+                        ← Thay đổi địa chỉ email
+                      </button>
+                      <button 
+                        type="button" 
+                        onClick={handleResendOtp}
+                        disabled={resendCooldown > 0 || loading}
+                        className="text-emerald-700 hover:text-emerald-800 font-bold disabled:text-slate-400 cursor-pointer"
+                      >
+                        {resendCooldown > 0 ? `Gửi lại sau (${resendCooldown}s)` : 'Gửi lại mã OTP'}
+                      </button>
                     </div>
                   </motion.form>
                 )}
@@ -299,55 +570,41 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
         </motion.div>
       </div>
 
-      {/* ======================= RIGHT: MASCOT & BRANDING SECTION ======================= */}
-      <motion.div 
-        animate={{ 
-          background: isDayTime 
-            ? 'linear-gradient(135deg, #fdfbfb 0%, #faedde 50%, #f4e6d6 100%)' // Day: Pastel Cream
-            : 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%)'  // Night: Deep purple/indigo
-        }}
-        transition={{ duration: 2, ease: "easeInOut" }}
-        className="hidden lg:flex w-1/2 relative overflow-hidden items-center justify-center"
-      >
+      {/* ======================= RIGHT: MASCOT & JAPANESE ZEN THEME ======================= */}
+      <div className="hidden lg:flex w-1/2 relative overflow-hidden items-center justify-center bg-gradient-to-br from-emerald-900/90 via-teal-950 to-slate-950 p-12">
         
-        {/* Day-Night Cycle Rotating Circle */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="absolute w-[500px] h-[500px] rounded-full border-[2px] border-white/20 border-dashed opacity-50 z-0"
-        >
-          {/* Sun Element */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-yellow-300 rounded-full shadow-[0_0_50px_rgba(253,224,71,0.8)] flex items-center justify-center">
-             <div className="w-12 h-12 bg-yellow-400 rounded-full"></div>
-          </div>
-          {/* Moon Element */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-16 h-16 bg-slate-200 rounded-full shadow-[0_0_50px_rgba(226,232,240,0.8)] flex items-center justify-center overflow-hidden">
-             <div className="w-12 h-12 bg-white rounded-full relative">
-               <div className="absolute top-1 right-2 w-8 h-8 bg-slate-200 rounded-full shadow-inner"></div>
-             </div>
-          </div>
-        </motion.div>
+        {/* Subtle Kanji Grid Overlay */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#a7f3d0_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
-        {/* Mascot Container */}
-        <div className="relative z-10 flex flex-col items-center">
+        {/* Ambient Halo Glow */}
+        <div className="absolute w-[450px] h-[450px] rounded-full bg-emerald-500/15 blur-[120px] pointer-events-none"></div>
+
+        <div className="relative z-10 flex flex-col items-center max-w-lg text-center">
           
-          <motion.div animate={{ y: [0, -15, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="relative">
-            
+          <motion.div 
+            animate={{ y: [0, -12, 0] }} 
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} 
+            className="relative mb-6"
+          >
             {/* Particle Emitter */}
-            <MascotParticles isDay={isDayTime} />
+            <MascotParticles />
 
-            {/* The interactive reaction container (Hide eyes) */}
+            {/* Mascot reaction */}
             <motion.div
               animate={isPasswordFocused ? { 
-                rotateY: 180, scale: 0.95, filter: 'drop-shadow(0 0 15px rgba(255,255,255,0.4))'
+                rotateY: 180, scale: 0.95, filter: 'drop-shadow(0 0 20px rgba(16,185,129,0.3))'
               } : { 
-                rotateY: 0, scale: 1, filter: 'drop-shadow(0 0 25px rgba(255,255,255,0.2))'
+                rotateY: 0, scale: 1, filter: 'drop-shadow(0 0 30px rgba(16,185,129,0.15))'
               }}
               transition={{ type: "spring", stiffness: 100, damping: 15 }}
               style={{ transformStyle: 'preserve-3d' }}
-              className="w-96 h-96 relative flex items-center justify-center z-30"
+              className="w-72 h-72 sm:w-80 sm:h-80 relative flex items-center justify-center z-30"
             >
-              <img src="https://i.ibb.co/VY2n4HCx/otter-sitting-on-orange-cushion-nobg-only-character.webp" alt="Kizuna Mascot" className="w-full h-full object-contain pointer-events-none" />
+              <img 
+                src="https://i.ibb.co/VY2n4HCx/otter-sitting-on-orange-cushion-nobg-only-character.webp" 
+                alt="Kizuna Mascot" 
+                className="w-full h-full object-contain pointer-events-none" 
+              />
               
               <AnimatePresence>
                 {isPasswordFocused && (
@@ -355,7 +612,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                     initial={{ opacity: 0, scale: 0, rotateY: 180 }}
                     animate={{ opacity: 1, scale: 1, rotateY: 180 }}
                     exit={{ opacity: 0, scale: 0, rotateY: 180 }}
-                    className="absolute -top-6 -right-10 bg-white text-orange-600 px-4 py-2 rounded-2xl rounded-bl-none font-bold text-sm shadow-xl"
+                    className="absolute -top-4 -right-6 bg-white text-emerald-900 px-4 py-2 rounded-2xl rounded-bl-none font-bold text-xs shadow-xl border border-emerald-100"
                   >
                     Tớ không nhìn lén mật khẩu đâu nhé! 🫣
                   </motion.div>
@@ -363,24 +620,35 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
               </AnimatePresence>
             </motion.div>
             
-            {/* Soft shadow under the mascot */}
+            {/* Soft shadow under mascot */}
             <motion.div 
-              animate={{ scale: [1, 0.8, 1], opacity: [0.3, 0.1, 0.3] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="w-48 h-6 bg-black/30 rounded-[100%] mx-auto mt-8 blur-md"
+              animate={{ scale: [1, 0.85, 1], opacity: [0.35, 0.2, 0.35] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} 
+              className="w-44 h-5 bg-black/40 rounded-[100%] mx-auto mt-4 blur-md"
             />
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-center mt-12 relative z-30">
-            <h2 className={`text-3xl font-extrabold mb-3 tracking-tight transition-colors duration-1000 ${isDayTime ? 'text-orange-900' : 'text-white/90'}`}>
-              Học tiếng Nhật không hề cô đơn
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ delay: 0.2, duration: 0.7 }}
+            className="text-white"
+          >
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold mb-3 border border-emerald-500/30">
+              <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Học tiếng Nhật không hề cô đơn</span>
+            </div>
+            
+            <h2 className="text-2xl sm:text-3xl font-extrabold mb-3 tracking-tight text-emerald-50">
+              Cùng KIZUNA Chinh Phục JLPT
             </h2>
-            <p className={`font-medium max-w-md mx-auto text-sm leading-relaxed transition-colors duration-1000 ${isDayTime ? 'text-orange-800/80' : 'text-white/80'}`}>
-              Trải nghiệm môi trường giáo dục cá nhân hóa với sự đồng hành của AI Sensei và cộng đồng học viên sôi động.
+            <p className="font-normal text-emerald-100/80 text-sm leading-relaxed max-w-sm mx-auto">
+              Lộ trình bài bản chuẩn NEJ & Mimi Oboeru, đồng hành cùng AI Sensei và hệ thống lưu trữ tiến độ thông minh.
             </p>
           </motion.div>
+
         </div>
-      </motion.div>
+      </div>
 
     </div>
   );

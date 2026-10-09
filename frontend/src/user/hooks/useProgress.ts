@@ -15,17 +15,17 @@ export interface ProgressSummary {
 
 export function useProgress(user: User | null): ProgressSummary {
   return useMemo(() => {
-    const streak = user?.currentStreak || 1;
+    const streak = user?.currentStreak || 0;
     const points = user?.activePoints || 0;
     const xp = user?.totalXp || 0;
-    const level = user?.level || 'N5';
+    const level = user?.level || 'Tân binh';
 
-    // Simulated progress metrics based on XP & points
-    const completionPercentage = Math.min(100, Math.round((xp / 10000) * 100)) || 18;
-    const vocabLearned = Math.min(800, Math.round(xp / 12)) || 56;
-    const kanjiLearned = Math.min(300, Math.round(xp / 35)) || 25;
-    const grammarLearned = Math.min(120, Math.round(xp / 60)) || 14;
-    const examsCompleted = Math.max(1, Math.floor(points / 500));
+    // Tính toán tiến độ dựa trên XP thực tế, không dùng mock số ảo khi XP = 0
+    const completionPercentage = xp > 0 ? Math.min(100, Math.round((xp / 10000) * 100)) : 0;
+    const vocabLearned = xp > 0 ? Math.min(800, Math.round(xp / 12)) : 0;
+    const kanjiLearned = xp > 0 ? Math.min(300, Math.round(xp / 35)) : 0;
+    const grammarLearned = xp > 0 ? Math.min(120, Math.round(xp / 60)) : 0;
+    const examsCompleted = points > 0 ? Math.floor(points / 500) : 0;
 
     return {
       completionPercentage,
