@@ -284,6 +284,30 @@ export const kizunaService = {
     return [];
   },
 
+  /**
+   * Lấy danh sách toàn bộ chữ Hán trực tiếp theo cấp độ JLPT (N5 -> N1)
+   * Tải từ /data/kanji/levels/[level].json (0 Firestore read)
+   */
+  async getKanjiByLevel(level: 'N5' | 'N4' | 'N3' | 'N2' | 'N1'): Promise<KanjiItem[]> {
+    const lvlKey = level.toLowerCase();
+    const cacheKey = `kizuna_kanji_level_${lvlKey}`;
+    const cached = getSessionCache<KanjiItem[]>(cacheKey);
+    if (cached && cached.length > 0) return cached;
+
+    try {
+      const res = await fetch(`/data/kanji/levels/${lvlKey}.json`);
+      if (res.ok) {
+        const items: KanjiItem[] = await res.json();
+        setSessionCache(cacheKey, items);
+        return items;
+      }
+    } catch (e) {
+      console.warn(`Fetch kanji level ${level} failed:`, e);
+    }
+
+    return [];
+  },
+
   async getKanji(): Promise<KanjiItem[]> {
     const cached = getSessionCache<KanjiItem[]>('kizuna_kanji_cache');
     if (cached) return cached;

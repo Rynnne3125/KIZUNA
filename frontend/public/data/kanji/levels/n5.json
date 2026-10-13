@@ -1,0 +1,7434 @@
+[
+  {
+    "id": "kanji_n5_0001",
+    "kanji_id": "kanji_n5_0001",
+    "milestoneId": "ms_minna_b01",
+    "milestone_id": "ms_minna_b01",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 1,
+    "kanjiNumber": 1,
+    "kanji": "一",
+    "character": "一",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "一",
+    "onyomi": "イチ",
+    "kunyomi": "ひと.つ",
+    "sinoVietnamese": "NHẤT",
+    "vietnameseMeaning": "Một",
+    "meaning_vi": "Một",
+    "mnemonicStory": "Chữ NHẤT (Một - 一) nét gạch ngang duy nhất tượng trưng cho khởi nguyên của vạn vật và số 1.",
+    "exampleCompounds": [
+      {
+        "word": "一人で",
+        "reading": "ひとりで",
+        "meaning": "một mình",
+        "type": "TrT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "一緒に",
+        "reading": "いっしょに",
+        "meaning": "cùng nhau",
+        "type": "TrT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "一番",
+        "reading": "いちばん",
+        "meaning": "nhất, số một",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "一つ",
+        "reading": "ひとつ",
+        "meaning": "1 cái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "一生懸命",
+        "reading": "いっしょうけんめい",
+        "meaning": "hết sức cố gắng, toàn tâm toàn ý",
+        "type": "PV",
+        "level": "N5",
+        "lesson": 1
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0002",
+    "kanji_id": "kanji_n5_0002",
+    "milestoneId": "ms_minna_b02",
+    "milestone_id": "ms_minna_b02",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 2,
+    "kanjiNumber": 2,
+    "kanji": "二",
+    "character": "二",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "二",
+    "onyomi": "ニ",
+    "kunyomi": "ふた.つ",
+    "sinoVietnamese": "NHỊ",
+    "vietnameseMeaning": "Hai",
+    "meaning_vi": "Hai",
+    "mnemonicStory": "Chữ NHỊ (Hai - 二) hai nét gạch ngang song song đại diện cho trời và đất, số 2.",
+    "exampleCompounds": [
+      {
+        "word": "二つ",
+        "reading": "ふたつ",
+        "meaning": "2 cái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "二日酔い",
+        "reading": "ふつかよい",
+        "meaning": "say rượu hôm sau",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "二酸化炭素",
+        "reading": "にさんかたんそ",
+        "meaning": "Carbon dioxide / CO2",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 2
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0003",
+    "kanji_id": "kanji_n5_0003",
+    "milestoneId": "ms_minna_b03",
+    "milestone_id": "ms_minna_b03",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 3,
+    "kanjiNumber": 3,
+    "kanji": "三",
+    "character": "三",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "三",
+    "onyomi": "サン",
+    "kunyomi": "み.つ",
+    "sinoVietnamese": "TAM",
+    "vietnameseMeaning": "Ba",
+    "meaning_vi": "Ba",
+    "mnemonicStory": "Chữ TAM (Ba - 三) ba nét gạch ngang đại diện cho tam tài: Thiên - Địa - Nhân (Trời, Đất, Con người).",
+    "exampleCompounds": [
+      {
+        "word": "三つ",
+        "reading": "みっつ",
+        "meaning": "3 cái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "三段論法",
+        "reading": "さんだんろんぽう",
+        "meaning": "Tam đoạn luận / syllogism",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 3
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0004",
+    "kanji_id": "kanji_n5_0004",
+    "milestoneId": "ms_minna_b04",
+    "milestone_id": "ms_minna_b04",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 4,
+    "kanjiNumber": 4,
+    "kanji": "四",
+    "character": "四",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "四",
+    "onyomi": "シ",
+    "kunyomi": "よ.つ",
+    "sinoVietnamese": "TỨ",
+    "vietnameseMeaning": "Bốn",
+    "meaning_vi": "Bốn",
+    "mnemonicStory": "Chữ TỨ (Bốn - 四) tượng hình bốn phương trời được bao quanh bởi ranh giới (囗) và hai cánh cửa (儿).",
+    "exampleCompounds": [
+      {
+        "word": "四つ",
+        "reading": "よっつ",
+        "meaning": "4 cái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 4
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0005",
+    "kanji_id": "kanji_n5_0005",
+    "milestoneId": "ms_minna_b05",
+    "milestone_id": "ms_minna_b05",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 5,
+    "kanjiNumber": 5,
+    "kanji": "五",
+    "character": "五",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "五",
+    "onyomi": "ゴ",
+    "kunyomi": "いつ.つ",
+    "sinoVietnamese": "NGŨ",
+    "vietnameseMeaning": "Năm",
+    "meaning_vi": "Năm",
+    "mnemonicStory": "Chữ NGŨ (Năm - 五) tượng hình hai mặt trời đất giao thoa ở giữa, đại diện cho ngũ hành.",
+    "exampleCompounds": [
+      {
+        "word": "五つ",
+        "reading": "いつつ",
+        "meaning": "5 cái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 5
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0006",
+    "kanji_id": "kanji_n5_0006",
+    "milestoneId": "ms_minna_b06",
+    "milestone_id": "ms_minna_b06",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 6,
+    "kanjiNumber": 6,
+    "kanji": "六",
+    "character": "六",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "六",
+    "onyomi": "ロク",
+    "kunyomi": "む.つ",
+    "sinoVietnamese": "LỤC",
+    "vietnameseMeaning": "Sáu",
+    "meaning_vi": "Sáu",
+    "mnemonicStory": "Chữ LỤC (Sáu - 六) tượng hình mái nhà dựng trên bốn phương, số 6 hài hòa.",
+    "exampleCompounds": [
+      {
+        "word": "六つ",
+        "reading": "むっつ",
+        "meaning": "6 cái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 6
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0007",
+    "kanji_id": "kanji_n5_0007",
+    "milestoneId": "ms_minna_b07",
+    "milestone_id": "ms_minna_b07",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 7,
+    "kanjiNumber": 7,
+    "kanji": "七",
+    "character": "七",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "七",
+    "onyomi": "シチ",
+    "kunyomi": "なな.つ",
+    "sinoVietnamese": "THẤT",
+    "vietnameseMeaning": "Bảy",
+    "meaning_vi": "Bảy",
+    "mnemonicStory": "Chữ THẤT (Bảy - 七) tượng hình đường cắt qua ranh giới, số 7 thần bí.",
+    "exampleCompounds": [
+      {
+        "word": "七つ",
+        "reading": "ななつ",
+        "meaning": "7 cái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0008",
+    "kanji_id": "kanji_n5_0008",
+    "milestoneId": "ms_minna_b08",
+    "milestone_id": "ms_minna_b08",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 8,
+    "kanjiNumber": 8,
+    "kanji": "八",
+    "character": "八",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "八",
+    "onyomi": "ハチ",
+    "kunyomi": "や.つ",
+    "sinoVietnamese": "BÁT",
+    "vietnameseMeaning": "Tám",
+    "meaning_vi": "Tám",
+    "mnemonicStory": "Chữ BÁT (Tám - 八) tượng hình hai nét xòe rộng sang hai bên, mang ý nghĩa phát tài rộng mở.",
+    "exampleCompounds": [
+      {
+        "word": "八つ",
+        "reading": "やっつ",
+        "meaning": "8 cái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0009",
+    "kanji_id": "kanji_n5_0009",
+    "milestoneId": "ms_minna_b09",
+    "milestone_id": "ms_minna_b09",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 9,
+    "kanjiNumber": 9,
+    "kanji": "九",
+    "character": "九",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "九",
+    "onyomi": "キュウ",
+    "kunyomi": "ここの.つ",
+    "sinoVietnamese": "CỬU",
+    "vietnameseMeaning": "Chín",
+    "meaning_vi": "Chín",
+    "mnemonicStory": "Chữ CỬU (Chín - 九) tượng hình cánh tay uốn cong vươn cao tột cùng, con số cực dương.",
+    "exampleCompounds": [
+      {
+        "word": "九つ",
+        "reading": "ここのつ",
+        "meaning": "9 cái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 9
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0010",
+    "kanji_id": "kanji_n5_0010",
+    "milestoneId": "ms_minna_b10",
+    "milestone_id": "ms_minna_b10",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 10,
+    "kanjiNumber": 10,
+    "kanji": "十",
+    "character": "十",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "十",
+    "onyomi": "ジュウ",
+    "kunyomi": "とお",
+    "sinoVietnamese": "THẬP",
+    "vietnameseMeaning": "Mười",
+    "meaning_vi": "Mười",
+    "mnemonicStory": "Chữ THẬP (Mười - 十) nét ngang nét dọc giao nhau trọn vẹn thập toàn thập mỹ, số 10.",
+    "exampleCompounds": [
+      {
+        "word": "十",
+        "reading": "とお",
+        "meaning": "10 cái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0011",
+    "kanji_id": "kanji_n5_0011",
+    "milestoneId": "ms_minna_b11",
+    "milestone_id": "ms_minna_b11",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 11,
+    "kanjiNumber": 11,
+    "kanji": "百",
+    "character": "百",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "百",
+    "onyomi": "ヒャク",
+    "kunyomi": "",
+    "sinoVietnamese": "BÁCH",
+    "vietnameseMeaning": "Trăm",
+    "meaning_vi": "Trăm",
+    "mnemonicStory": "Chữ BÁCH (Một trăm - 百) số 1 (一) đứng trên chữ Bạch (白 - trắng), biểu thị số 100 tròn vẹn tinh khôi.",
+    "exampleCompounds": [
+      {
+        "word": "百",
+        "reading": "ひゃく",
+        "meaning": "trăm",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 11
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0012",
+    "kanji_id": "kanji_n5_0012",
+    "milestoneId": "ms_minna_b12",
+    "milestone_id": "ms_minna_b12",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 12,
+    "kanjiNumber": 12,
+    "kanji": "千",
+    "character": "千",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "千",
+    "onyomi": "セン",
+    "kunyomi": "ち",
+    "sinoVietnamese": "THIÊN",
+    "vietnameseMeaning": "Nghìn",
+    "meaning_vi": "Nghìn",
+    "mnemonicStory": "Chữ THIÊN (Một nghìn - 千) chữ Nhân (人) có nét gạch ngang chỉ bước chân đi xa ngàn dặm.",
+    "exampleCompounds": [
+      {
+        "word": "千",
+        "reading": "せん",
+        "meaning": "nghìn",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 12
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0013",
+    "kanji_id": "kanji_n5_0013",
+    "milestoneId": "ms_minna_b13",
+    "milestone_id": "ms_minna_b13",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 13,
+    "kanjiNumber": 13,
+    "kanji": "万",
+    "character": "万",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "万",
+    "onyomi": "マン",
+    "kunyomi": "",
+    "sinoVietnamese": "VẠN",
+    "vietnameseMeaning": "Vạn",
+    "meaning_vi": "Vạn",
+    "mnemonicStory": "Chữ VẠN (Mười nghìn - 万) nét vẽ uốn rộng bao quát muôn hình vạn trạng, số 10,000.",
+    "exampleCompounds": [
+      {
+        "word": "万",
+        "reading": "まん",
+        "meaning": "vạn",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 13
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0014",
+    "kanji_id": "kanji_n5_0014",
+    "milestoneId": "ms_minna_b14",
+    "milestone_id": "ms_minna_b14",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 14,
+    "kanjiNumber": 14,
+    "kanji": "円",
+    "character": "円",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "円",
+    "onyomi": "エン",
+    "kunyomi": "まる.い",
+    "sinoVietnamese": "VIÊN",
+    "vietnameseMeaning": "Tròn, Yên",
+    "meaning_vi": "Tròn, Yên",
+    "mnemonicStory": "Chữ VIÊN (Đồng Yên, tròn - 円) tượng hình đồng tiền kim loại đúc hình tròn bao bọc tài lộc.",
+    "exampleCompounds": [
+      {
+        "word": "円",
+        "reading": "～えん",
+        "meaning": "yên",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 14
+      },
+      {
+        "word": "もし宝くじで1億円当たったら",
+        "reading": "もしたからくじでいちおくえんあたったら",
+        "meaning": "nếu trúng xổ số 100 triệu yên",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 14
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0015",
+    "kanji_id": "kanji_n5_0015",
+    "milestoneId": "ms_minna_b15",
+    "milestone_id": "ms_minna_b15",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 15,
+    "kanjiNumber": 15,
+    "kanji": "日",
+    "character": "日",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "日",
+    "onyomi": "ニチ",
+    "kunyomi": "ひ",
+    "sinoVietnamese": "NHẬT",
+    "vietnameseMeaning": "Ngày, Mặt trời",
+    "meaning_vi": "Ngày, Mặt trời",
+    "mnemonicStory": "Chữ NHẬT (Mặt trời, ngày - 日) tượng hình thái dương tròn có vệt sáng ở giữa, nguồn cội ánh sáng và ngày tháng.",
+    "exampleCompounds": [
+      {
+        "word": "日本",
+        "reading": "にほん",
+        "meaning": "Nhật Bản",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 15
+      },
+      {
+        "word": "日本語",
+        "reading": "にほんご",
+        "meaning": "tiếng Nhật",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 15
+      },
+      {
+        "word": "昨日",
+        "reading": "きのう",
+        "meaning": "hôm qua",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 15
+      },
+      {
+        "word": "今日",
+        "reading": "きょう",
+        "meaning": "hôm nay",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 15
+      },
+      {
+        "word": "明日",
+        "reading": "あした",
+        "meaning": "ngày mai",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 15
+      },
+      {
+        "word": "毎日",
+        "reading": "まいにち",
+        "meaning": "mỗi ngày",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 15
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0016",
+    "kanji_id": "kanji_n5_0016",
+    "milestoneId": "ms_minna_b16",
+    "milestone_id": "ms_minna_b16",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 16,
+    "kanjiNumber": 16,
+    "kanji": "月",
+    "character": "月",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "月",
+    "onyomi": "ゲツ",
+    "kunyomi": "つき",
+    "sinoVietnamese": "NGUYỆT",
+    "vietnameseMeaning": "Tháng, Trăng",
+    "meaning_vi": "Tháng, Trăng",
+    "mnemonicStory": "Chữ NGUYỆT (Mặt trăng, tháng - 月) tượng hình vầng trăng lưỡi liềm sáng vằng vặc trên bầu trời đêm.",
+    "exampleCompounds": [
+      {
+        "word": "月曜日",
+        "reading": "げつようび",
+        "meaning": "thứ Hai",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "先月",
+        "reading": "せんげつ",
+        "meaning": "tháng trước",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "今月",
+        "reading": "こんげつ",
+        "meaning": "tháng này",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "来月",
+        "reading": "らいげつ",
+        "meaning": "tháng sau",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "何月",
+        "reading": "なんがつ",
+        "meaning": "tháng mấy",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "～か月",
+        "reading": "～かげつ",
+        "meaning": "~ tháng",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 16
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0017",
+    "kanji_id": "kanji_n5_0017",
+    "milestoneId": "ms_minna_b17",
+    "milestone_id": "ms_minna_b17",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 17,
+    "kanjiNumber": 17,
+    "kanji": "火",
+    "character": "火",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "火",
+    "onyomi": "カ",
+    "kunyomi": "ひ",
+    "sinoVietnamese": "HỎA",
+    "vietnameseMeaning": "Lửa",
+    "meaning_vi": "Lửa",
+    "mnemonicStory": "Chữ HỎA (Lửa - 火) tượng hình đống lửa bốc cháy với hai tàn than hoa bay bập bùng hai bên.",
+    "exampleCompounds": [
+      {
+        "word": "火曜日",
+        "reading": "かようび",
+        "meaning": "thứ Ba",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0018",
+    "kanji_id": "kanji_n5_0018",
+    "milestoneId": "ms_minna_b18",
+    "milestone_id": "ms_minna_b18",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 18,
+    "kanjiNumber": 18,
+    "kanji": "水",
+    "character": "水",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "水",
+    "onyomi": "スイ",
+    "kunyomi": "みず",
+    "sinoVietnamese": "THỦY",
+    "vietnameseMeaning": "Nước",
+    "meaning_vi": "Nước",
+    "mnemonicStory": "Chữ THỦY (Nước - 水) tượng hình dòng sông chảy xiết với các giọt nước gợn sóng bắn sang hai bên.",
+    "exampleCompounds": [
+      {
+        "word": "水曜日",
+        "reading": "すいようび",
+        "meaning": "thứ Tư",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "水",
+        "reading": "みず",
+        "meaning": "nước",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "洪水",
+        "reading": "こうずい",
+        "meaning": "Lũ lụt",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "水素エネルギー",
+        "reading": "すいそエネルギー",
+        "meaning": "Năng lượng hydrogen",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 18
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0019",
+    "kanji_id": "kanji_n5_0019",
+    "milestoneId": "ms_minna_b19",
+    "milestone_id": "ms_minna_b19",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 19,
+    "kanjiNumber": 19,
+    "kanji": "木",
+    "character": "木",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "木",
+    "onyomi": "モク",
+    "kunyomi": "き",
+    "sinoVietnamese": "MỘC",
+    "vietnameseMeaning": "Cây",
+    "meaning_vi": "Cây",
+    "mnemonicStory": "Chữ MỘC (Cây, gỗ - 木) tượng hình thân cây đứng thẳng có cành vươn lên trên và rễ cắm sâu xuống đất.",
+    "exampleCompounds": [
+      {
+        "word": "木曜日",
+        "reading": "もくようび",
+        "meaning": "thứ Năm",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "木",
+        "reading": "き",
+        "meaning": "cây",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0020",
+    "kanji_id": "kanji_n5_0020",
+    "milestoneId": "ms_minna_b20",
+    "milestone_id": "ms_minna_b20",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 20,
+    "kanjiNumber": 20,
+    "kanji": "金",
+    "character": "金",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "金",
+    "onyomi": "キン",
+    "kunyomi": "かね",
+    "sinoVietnamese": "KIM",
+    "vietnameseMeaning": "Vàng, Tiền",
+    "meaning_vi": "Vàng, Tiền",
+    "mnemonicStory": "Chữ KIM (Vàng, tiền - 金) quặng vàng quý giá được cất giữ sâu dưới lòng đất (土) và chân núi (人).",
+    "exampleCompounds": [
+      {
+        "word": "金曜日",
+        "reading": "きんようび",
+        "meaning": "thứ Sáu",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "お金",
+        "reading": "おかね",
+        "meaning": "tiền",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "細かいお金",
+        "reading": "こまかいおかね",
+        "meaning": "tiền lẻ",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "貯金します",
+        "reading": "ちょきんします",
+        "meaning": "tiết kiệm tiền",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "金利",
+        "reading": "きんり",
+        "meaning": "Lãi suất",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "金融政策",
+        "reading": "きんゆうせいさく",
+        "meaning": "Chính sách tiền tệ",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "配当金",
+        "reading": "はいとうきん",
+        "meaning": "Cổ tức / tiền chia cổ tức",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "金",
+        "reading": "きん",
+        "meaning": "Vàng / tiền",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 20
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0021",
+    "kanji_id": "kanji_n5_0021",
+    "milestoneId": "ms_minna_b21",
+    "milestone_id": "ms_minna_b21",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 21,
+    "kanjiNumber": 21,
+    "kanji": "土",
+    "character": "土",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "土",
+    "onyomi": "ド",
+    "kunyomi": "つち",
+    "sinoVietnamese": "THỔ",
+    "vietnameseMeaning": "Đất",
+    "meaning_vi": "Đất",
+    "mnemonicStory": "Chữ THỔ (Đất đai - 土) nét ngang biểu thị mặt đất, nét dọc là mầm cây vươn lên từ lòng đất.",
+    "exampleCompounds": [
+      {
+        "word": "土曜日",
+        "reading": "どようび",
+        "meaning": "thứ Bảy",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "お土産",
+        "reading": "おみやげ",
+        "meaning": "quà",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "[お]土産",
+        "reading": "[お]みやげ",
+        "meaning": "quà",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "土壌汚染",
+        "reading": "どじょうおせん",
+        "meaning": "Ô nhiễm đất",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "土",
+        "reading": "ど",
+        "meaning": "Đất",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 21
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0022",
+    "kanji_id": "kanji_n5_0022",
+    "milestoneId": "ms_minna_b22",
+    "milestone_id": "ms_minna_b22",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 22,
+    "kanjiNumber": 22,
+    "kanji": "年",
+    "character": "年",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "年",
+    "onyomi": "ネン",
+    "kunyomi": "とし",
+    "sinoVietnamese": "NIÊN",
+    "vietnameseMeaning": "Năm",
+    "meaning_vi": "Năm",
+    "mnemonicStory": "Chữ NIÊN (Năm, tuổi - 年) tượng hình người gánh bó lúa trĩu hạt sau mùa thu hoạch tròn một năm.",
+    "exampleCompounds": [
+      {
+        "word": "去年",
+        "reading": "きょねん",
+        "meaning": "năm ngoái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "今年",
+        "reading": "ことし",
+        "meaning": "năm nay",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "来年",
+        "reading": "らいねん",
+        "meaning": "năm sau",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "～年",
+        "reading": "～ねん",
+        "meaning": "năm ~",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 22
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0023",
+    "kanji_id": "kanji_n5_0023",
+    "milestoneId": "ms_minna_b23",
+    "milestone_id": "ms_minna_b23",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 23,
+    "kanjiNumber": 23,
+    "kanji": "時",
+    "character": "時",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "時",
+    "onyomi": "ジ",
+    "kunyomi": "とき",
+    "sinoVietnamese": "THỜI",
+    "vietnameseMeaning": "Thời gian",
+    "meaning_vi": "Thời gian",
+    "mnemonicStory": "Chữ THỜI (Thời gian, giờ - 時) được ghép từ bộ Nhật (日 - mặt trời) và chữ Tự (寺 - chùa). Dùng bóng mặt trời chiếu qua mái chùa để đo lường thời gian.",
+    "exampleCompounds": [
+      {
+        "word": "時計",
+        "reading": "とけい",
+        "meaning": "đồng hồ",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "～時",
+        "reading": "～じ",
+        "meaning": "~ giờ",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "何時",
+        "reading": "なんじ",
+        "meaning": "mấy giờ",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "時々",
+        "reading": "ときどき",
+        "meaning": "thỉnh thoảng",
+        "type": "TrT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "時間",
+        "reading": "じかん",
+        "meaning": "thời gian",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "時刻表",
+        "reading": "じこくひょう",
+        "meaning": "bảng giờ chạy",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "時効",
+        "reading": "じこう",
+        "meaning": "Thời hiệu / thời gian quy định của pháp luật",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "時",
+        "reading": "じ",
+        "meaning": "Thời / thời gian",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 23
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0024",
+    "kanji_id": "kanji_n5_0024",
+    "milestoneId": "ms_minna_b24",
+    "milestone_id": "ms_minna_b24",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 24,
+    "kanjiNumber": 24,
+    "kanji": "分",
+    "character": "分",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "分",
+    "onyomi": "ブン",
+    "kunyomi": "わ.ける",
+    "sinoVietnamese": "PHÂN",
+    "vietnameseMeaning": "Phút, Chia",
+    "meaning_vi": "Phút, Chia",
+    "mnemonicStory": "Chữ PHÂN (Phút, Chia - 分) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng phút, chia trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "～分",
+        "reading": "～ふん",
+        "meaning": "~ phút",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "何分",
+        "reading": "なんぷん",
+        "meaning": "mấy phút",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "分かりました",
+        "reading": "わかりました",
+        "meaning": "tôi hiểu rồi",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "分かります",
+        "reading": "わかります",
+        "meaning": "hiểu",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "自分で",
+        "reading": "じぶんで",
+        "meaning": "tự mình",
+        "type": "TrT",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "損益分岐点",
+        "reading": "そんえきぶんきてん",
+        "meaning": "Điểm hòa vốn",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "仮処分",
+        "reading": "かりしょぶん",
+        "meaning": "Lệnh tạm thời / biện pháp tạm thời",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "精神分析",
+        "reading": "せいしんぶんせき",
+        "meaning": "Phân tâm học / psychoanalysis",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "分",
+        "reading": "ぶん",
+        "meaning": "Phân / chia",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 24
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0025",
+    "kanji_id": "kanji_n5_0025",
+    "milestoneId": "ms_minna_b25",
+    "milestone_id": "ms_minna_b25",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 25,
+    "kanjiNumber": 25,
+    "kanji": "半",
+    "character": "半",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "半",
+    "onyomi": "ハン",
+    "kunyomi": "なか.ば",
+    "sinoVietnamese": "BÁN",
+    "vietnameseMeaning": "Nửa",
+    "meaning_vi": "Nửa",
+    "mnemonicStory": "Chữ BÁN (Nửa - 半) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng nửa trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "半",
+        "reading": "はん",
+        "meaning": "rưỡi, nửa",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 25
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0026",
+    "kanji_id": "kanji_n5_0026",
+    "milestoneId": "ms_minna_b01",
+    "milestone_id": "ms_minna_b01",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 1,
+    "kanjiNumber": 26,
+    "kanji": "今",
+    "character": "今",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "今",
+    "onyomi": "コン",
+    "kunyomi": "いま",
+    "sinoVietnamese": "KIM",
+    "vietnameseMeaning": "Bây giờ",
+    "meaning_vi": "Bây giờ",
+    "mnemonicStory": "Chữ KIM (Hiện tại, bây giờ - 今) chiếc nắp (亼) chụp lại thời khắc này, chỉ thời điểm hiện tại.",
+    "exampleCompounds": [
+      {
+        "word": "今",
+        "reading": "いま",
+        "meaning": "bây giờ",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "今日",
+        "reading": "きょう",
+        "meaning": "hôm nay",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "今朝",
+        "reading": "けさ",
+        "meaning": "sáng nay",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "今晩",
+        "reading": "こんばん",
+        "meaning": "tối nay",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "今週",
+        "reading": "こんしゅう",
+        "meaning": "tuần này",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "今月",
+        "reading": "こんげつ",
+        "meaning": "tháng này",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0027",
+    "kanji_id": "kanji_n5_0027",
+    "milestoneId": "ms_minna_b02",
+    "milestone_id": "ms_minna_b02",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 2,
+    "kanjiNumber": 27,
+    "kanji": "前",
+    "character": "前",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "前",
+    "onyomi": "ゼン",
+    "kunyomi": "まえ",
+    "sinoVietnamese": "TIỀN",
+    "vietnameseMeaning": "Trước",
+    "meaning_vi": "Trước",
+    "mnemonicStory": "Chữ TIỀN (Trước - 前) được ghép từ thuyền (舟) và đao (刂), cỗ thuyền tiến thẳng lên phía trước.",
+    "exampleCompounds": [
+      {
+        "word": "午前",
+        "reading": "ごぜん",
+        "meaning": "sáng, AM",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "前",
+        "reading": "まえ",
+        "meaning": "trước",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "名前",
+        "reading": "なまえ",
+        "meaning": "tên",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "前提",
+        "reading": "ぜんてい",
+        "meaning": "tiền đề, điều kiện tiên quyết",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 2
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0028",
+    "kanji_id": "kanji_n5_0028",
+    "milestoneId": "ms_minna_b03",
+    "milestone_id": "ms_minna_b03",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 3,
+    "kanjiNumber": 28,
+    "kanji": "後",
+    "character": "後",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "後",
+    "onyomi": "ゴ",
+    "kunyomi": "あと",
+    "sinoVietnamese": "HẬU",
+    "vietnameseMeaning": "Sau",
+    "meaning_vi": "Sau",
+    "mnemonicStory": "Chữ HẬU (Sau - 後) bước chân chậm chạp (彳) bị quấn sợi dây (幺) đi lùi ở phía sau.",
+    "exampleCompounds": [
+      {
+        "word": "午後",
+        "reading": "ごご",
+        "meaning": "chiều, PM",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "後ろ",
+        "reading": "うしろ",
+        "meaning": "sau",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "後で",
+        "reading": "あとで",
+        "meaning": "sau, sau đó",
+        "type": "TrT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "後輩",
+        "reading": "こうはい",
+        "meaning": "đàn em",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "後悔",
+        "reading": "こうかい",
+        "meaning": "sự hối hận, sự tiếc nuối",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0029",
+    "kanji_id": "kanji_n5_0029",
+    "milestoneId": "ms_minna_b04",
+    "milestone_id": "ms_minna_b04",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 4,
+    "kanjiNumber": 29,
+    "kanji": "午",
+    "character": "午",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "午",
+    "onyomi": "ゴ",
+    "kunyomi": "",
+    "sinoVietnamese": "NGỌ",
+    "vietnameseMeaning": "Trưa",
+    "meaning_vi": "Trưa",
+    "mnemonicStory": "Chữ NGỌ (Trưa - 午) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng trưa trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "午前",
+        "reading": "ごぜん",
+        "meaning": "sáng, AM",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 4
+      },
+      {
+        "word": "午後",
+        "reading": "ごご",
+        "meaning": "chiều, PM",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 4
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0030",
+    "kanji_id": "kanji_n5_0030",
+    "milestoneId": "ms_minna_b05",
+    "milestone_id": "ms_minna_b05",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 5,
+    "kanjiNumber": 30,
+    "kanji": "間",
+    "character": "間",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "間",
+    "onyomi": "カン",
+    "kunyomi": "あいだ",
+    "sinoVietnamese": "GIAN",
+    "vietnameseMeaning": "Khoảng",
+    "meaning_vi": "Khoảng",
+    "mnemonicStory": "Chữ GIAN (Khoảng giữa - 間) được ghép từ bộ Môn (門 - cánh cửa) và bộ Nhật (日 - mặt trời). Tia nắng mặt trời lọt qua khoảng hở giữa hai cánh cửa.",
+    "exampleCompounds": [
+      {
+        "word": "時間",
+        "reading": "じかん",
+        "meaning": "thời gian",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "間",
+        "reading": "あいだ",
+        "meaning": "giữa (2 vật)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "～週間",
+        "reading": "～しゅうかん",
+        "meaning": "~ tuần",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "間違えます",
+        "reading": "まちがえます",
+        "meaning": "nhầm, mắc lỗi",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "間接",
+        "reading": "かんせつ",
+        "meaning": "gián tiếp",
+        "type": "PV",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "間に合います",
+        "reading": "まにあいます",
+        "meaning": "kịp thời gian, không trễ",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "間取り",
+        "reading": "まどり",
+        "meaning": "Sơ đồ mặt bằng / phân chia phòng",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "空間",
+        "reading": "くうかん",
+        "meaning": "Không gian",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 5
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0031",
+    "kanji_id": "kanji_n5_0031",
+    "milestoneId": "ms_minna_b06",
+    "milestone_id": "ms_minna_b06",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 6,
+    "kanjiNumber": 31,
+    "kanji": "毎",
+    "character": "毎",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "毎",
+    "onyomi": "マイ",
+    "kunyomi": "",
+    "sinoVietnamese": "MỖI",
+    "vietnameseMeaning": "Mỗi",
+    "meaning_vi": "Mỗi",
+    "mnemonicStory": "Chữ MỖI (Mỗi - 毎) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng mỗi trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "毎朝",
+        "reading": "まいあさ",
+        "meaning": "mỗi sáng",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 6
+      },
+      {
+        "word": "毎晩",
+        "reading": "まいばん",
+        "meaning": "mỗi tối",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 6
+      },
+      {
+        "word": "毎日",
+        "reading": "まいにち",
+        "meaning": "mỗi ngày",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 6
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0032",
+    "kanji_id": "kanji_n5_0032",
+    "milestoneId": "ms_minna_b07",
+    "milestone_id": "ms_minna_b07",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 7,
+    "kanjiNumber": 32,
+    "kanji": "週",
+    "character": "週",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "週",
+    "onyomi": "シュウ",
+    "kunyomi": "",
+    "sinoVietnamese": "CHU",
+    "vietnameseMeaning": "Tuần",
+    "meaning_vi": "Tuần",
+    "mnemonicStory": "Chữ CHU (Tuần - 週) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng tuần trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "先週",
+        "reading": "せんしゅう",
+        "meaning": "tuần trước",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "今週",
+        "reading": "こんしゅう",
+        "meaning": "tuần này",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "来週",
+        "reading": "らいしゅう",
+        "meaning": "tuần sau",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "～週間",
+        "reading": "～しゅうかん",
+        "meaning": "~ tuần",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "週末",
+        "reading": "しゅうまつ",
+        "meaning": "cuối tuần",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0033",
+    "kanji_id": "kanji_n5_0033",
+    "milestoneId": "ms_minna_b08",
+    "milestone_id": "ms_minna_b08",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 8,
+    "kanjiNumber": 33,
+    "kanji": "先",
+    "character": "先",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "先",
+    "onyomi": "セン",
+    "kunyomi": "さき",
+    "sinoVietnamese": "TIÊN",
+    "vietnameseMeaning": "Trước, Tiên",
+    "meaning_vi": "Trước, Tiên",
+    "mnemonicStory": "Chữ TIÊN (Trước, đi trước - 先) được ghép từ chữ Sinh (生) và đôi chân (儿). Người đi trước, sinh ra trước ta chính là Tiên sinh (thầy giáo).",
+    "exampleCompounds": [
+      {
+        "word": "先生",
+        "reading": "せんせい",
+        "meaning": "thầy giáo, cô giáo, giáo viên",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "先週",
+        "reading": "せんしゅう",
+        "meaning": "tuần trước",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "先月",
+        "reading": "せんげつ",
+        "meaning": "tháng trước",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "先",
+        "reading": "さき",
+        "meaning": "trước",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "お先に",
+        "reading": "おさきに",
+        "meaning": "xin phép trước",
+        "type": "TrT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "先輩",
+        "reading": "せんぱい",
+        "meaning": "đàn anh",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "取引先",
+        "reading": "とりひきさき",
+        "meaning": "Đối tác / khách hàng",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 8
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0034",
+    "kanji_id": "kanji_n5_0034",
+    "milestoneId": "ms_minna_b09",
+    "milestone_id": "ms_minna_b09",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 9,
+    "kanjiNumber": 34,
+    "kanji": "来",
+    "character": "来",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "来",
+    "onyomi": "ライ",
+    "kunyomi": "く.る",
+    "sinoVietnamese": "LAI",
+    "vietnameseMeaning": "Đến",
+    "meaning_vi": "Đến",
+    "mnemonicStory": "Chữ LAI (Đến, tương lai - 来) tượng hình bông lúa mì từ phương xa được mang đến cho con người.",
+    "exampleCompounds": [
+      {
+        "word": "～から来ました",
+        "reading": "～からきました",
+        "meaning": "tôi đến từ ~",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 9
+      },
+      {
+        "word": "来週",
+        "reading": "らいしゅう",
+        "meaning": "tuần sau",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 9
+      },
+      {
+        "word": "来月",
+        "reading": "らいげつ",
+        "meaning": "tháng sau",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 9
+      },
+      {
+        "word": "来年",
+        "reading": "らいねん",
+        "meaning": "năm sau",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 9
+      },
+      {
+        "word": "来ます",
+        "reading": "きます",
+        "meaning": "đến",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 9
+      },
+      {
+        "word": "持って来ます",
+        "reading": "もってきます",
+        "meaning": "mang đến",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 9
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0035",
+    "kanji_id": "kanji_n5_0035",
+    "milestoneId": "ms_minna_b10",
+    "milestone_id": "ms_minna_b10",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 10,
+    "kanjiNumber": 35,
+    "kanji": "生",
+    "character": "生",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "生",
+    "onyomi": "セイ",
+    "kunyomi": "い.きる",
+    "sinoVietnamese": "SINH",
+    "vietnameseMeaning": "Sống, Sinh",
+    "meaning_vi": "Sống, Sinh",
+    "mnemonicStory": "Chữ SINH (Sinh sống, sinh ra - 生) tượng hình mầm cây non mọc nhú lên từ lòng đất, biểu tượng của sự sống.",
+    "exampleCompounds": [
+      {
+        "word": "先生",
+        "reading": "せんせい",
+        "meaning": "thầy giáo, cô giáo, giáo viên",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "学生",
+        "reading": "がくせい",
+        "meaning": "học sinh, sinh viên",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "誕生日",
+        "reading": "たんじょうび",
+        "meaning": "sinh nhật",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "生活",
+        "reading": "せいかつ",
+        "meaning": "cuộc sống",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "生け花",
+        "reading": "いけばな",
+        "meaning": "nghệ thuật cắm hoa",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "生まれます",
+        "reading": "うまれます",
+        "meaning": "sinh ra",
+        "type": "ĐT2",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "多文化共生",
+        "reading": "たぶんかきょうせい",
+        "meaning": "Cùng chung sống đa văn hóa",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "再生可能エネルギー",
+        "reading": "さいせいかのうエネルギー",
+        "meaning": "Năng lượng tái tạo",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "生態系",
+        "reading": "せいたいけい",
+        "meaning": "Hệ sinh thái",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "生物多様性",
+        "reading": "せいぶつたようせい",
+        "meaning": "Đa dạng sinh học",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0036",
+    "kanji_id": "kanji_n5_0036",
+    "milestoneId": "ms_minna_b11",
+    "milestone_id": "ms_minna_b11",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 11,
+    "kanjiNumber": 36,
+    "kanji": "人",
+    "character": "人",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "人",
+    "onyomi": "ジン",
+    "kunyomi": "ひと",
+    "sinoVietnamese": "NHÂN",
+    "vietnameseMeaning": "Người",
+    "meaning_vi": "Người",
+    "mnemonicStory": "Chữ NHÂN (Người - 人) tượng hình hai chân người đang đứng tựa vào nhau cùng bước tới.",
+    "exampleCompounds": [
+      {
+        "word": "あの人",
+        "reading": "あのひと",
+        "meaning": "người kia, người đó",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "人",
+        "reading": "ひと",
+        "meaning": "người",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "一人で",
+        "reading": "ひとりで",
+        "meaning": "một mình",
+        "type": "TrT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "ご主人",
+        "reading": "ごしゅじん",
+        "meaning": "chồng (người khác)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "男の人",
+        "reading": "おとこのひと",
+        "meaning": "đàn ông",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "女の人",
+        "reading": "おんなのひと",
+        "meaning": "phụ nữ",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "人格",
+        "reading": "じんかく",
+        "meaning": "Nhân cách / tính cách",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "著名人",
+        "reading": "ちょめいじん",
+        "meaning": "Người nổi tiếng / nhân vật nổi danh",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "法人格",
+        "reading": "ほうじんかく",
+        "meaning": "Tư cách pháp nhân",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "人工知能",
+        "reading": "じんこうちのう",
+        "meaning": "Trí tuệ nhân tạo / AI",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 11
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0037",
+    "kanji_id": "kanji_n5_0037",
+    "milestoneId": "ms_minna_b12",
+    "milestone_id": "ms_minna_b12",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 12,
+    "kanjiNumber": 37,
+    "kanji": "子",
+    "character": "子",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "子",
+    "onyomi": "シ",
+    "kunyomi": "こ",
+    "sinoVietnamese": "TỬ",
+    "vietnameseMeaning": "Con",
+    "meaning_vi": "Con",
+    "mnemonicStory": "Chữ TỬ (Con, đứa trẻ - 子) hình ảnh đứa trẻ sơ sinh đang quấn tã vung vẩy hai cánh tay.",
+    "exampleCompounds": [
+      {
+        "word": "椅子",
+        "reading": "いす",
+        "meaning": "ghế",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "子ども",
+        "reading": "こども",
+        "meaning": "con",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "男の子",
+        "reading": "おとこのこ",
+        "meaning": "con trai",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "女の子",
+        "reading": "おんなのこ",
+        "meaning": "con gái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "お菓子",
+        "reading": "おかし",
+        "meaning": "bánh kẹo",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "電子辞書",
+        "reading": "でんしじしょ",
+        "meaning": "từ điển điện tử",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "少子化",
+        "reading": "しょうしか",
+        "meaning": "Suy giảm dân số trẻ em",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "遺伝子",
+        "reading": "いでんし",
+        "meaning": "Gen / gene",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "子",
+        "reading": "し",
+        "meaning": "Con / trẻ em",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 12
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0038",
+    "kanji_id": "kanji_n5_0038",
+    "milestoneId": "ms_minna_b13",
+    "milestone_id": "ms_minna_b13",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 13,
+    "kanjiNumber": 38,
+    "kanji": "女",
+    "character": "女",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "女",
+    "onyomi": "ジョ",
+    "kunyomi": "おんな",
+    "sinoVietnamese": "NỮ",
+    "vietnameseMeaning": "Nữ",
+    "meaning_vi": "Nữ",
+    "mnemonicStory": "Chữ NỮ (Phụ nữ - 女) người phụ nữ dịu dàng quỳ gối bắt chéo hai tay trước ngực.",
+    "exampleCompounds": [
+      {
+        "word": "彼女",
+        "reading": "かのじょ",
+        "meaning": "cô ấy, người yêu (nữ)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "女の人",
+        "reading": "おんなのひと",
+        "meaning": "phụ nữ",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "女の子",
+        "reading": "おんなのこ",
+        "meaning": "con gái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 13
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0039",
+    "kanji_id": "kanji_n5_0039",
+    "milestoneId": "ms_minna_b14",
+    "milestone_id": "ms_minna_b14",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 14,
+    "kanjiNumber": 39,
+    "kanji": "男",
+    "character": "男",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "男",
+    "onyomi": "ダン",
+    "kunyomi": "おとこ",
+    "sinoVietnamese": "NAM",
+    "vietnameseMeaning": "Nam",
+    "meaning_vi": "Nam",
+    "mnemonicStory": "Chữ NAM (Đàn ông - 男) được ghép từ bộ Điền (田 - đồng ruộng) và bộ Lực (力 - sức mạnh). Người dùng sức lực cày bừa trên đồng ruộng chính là người đàn ông.",
+    "exampleCompounds": [
+      {
+        "word": "男の人",
+        "reading": "おとこのひと",
+        "meaning": "đàn ông",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 14
+      },
+      {
+        "word": "男の子",
+        "reading": "おとこのこ",
+        "meaning": "con trai",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 14
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0040",
+    "kanji_id": "kanji_n5_0040",
+    "milestoneId": "ms_minna_b15",
+    "milestone_id": "ms_minna_b15",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 15,
+    "kanjiNumber": 40,
+    "kanji": "父",
+    "character": "父",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "父",
+    "onyomi": "フ",
+    "kunyomi": "ちち",
+    "sinoVietnamese": "PHỤ",
+    "vietnameseMeaning": "Cha",
+    "meaning_vi": "Cha",
+    "mnemonicStory": "Chữ PHỤ (Cha - 父) bàn tay cầm chiếc roi nghiêm khắc chỉ dạy con cái của người cha.",
+    "exampleCompounds": [
+      {
+        "word": "父",
+        "reading": "ちち",
+        "meaning": "bố (mình)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 15
+      },
+      {
+        "word": "お父さん",
+        "reading": "おとうさん",
+        "meaning": "bố (người khác)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 15
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0041",
+    "kanji_id": "kanji_n5_0041",
+    "milestoneId": "ms_minna_b16",
+    "milestone_id": "ms_minna_b16",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 16,
+    "kanjiNumber": 41,
+    "kanji": "母",
+    "character": "母",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "母",
+    "onyomi": "ボ",
+    "kunyomi": "はは",
+    "sinoVietnamese": "MẪU",
+    "vietnameseMeaning": "Mẹ",
+    "meaning_vi": "Mẹ",
+    "mnemonicStory": "Chữ MẪU (Mẹ - 母) người phụ nữ đang vạch áo cho hai đứa con thơ bú dòng sữa mẹ ngọt ngào.",
+    "exampleCompounds": [
+      {
+        "word": "母",
+        "reading": "はは",
+        "meaning": "mẹ (mình)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "お母さん",
+        "reading": "おかあさん",
+        "meaning": "mẹ (người khác)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0042",
+    "kanji_id": "kanji_n5_0042",
+    "milestoneId": "ms_minna_b17",
+    "milestone_id": "ms_minna_b17",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 17,
+    "kanjiNumber": 42,
+    "kanji": "友",
+    "character": "友",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "友",
+    "onyomi": "ユウ",
+    "kunyomi": "とも",
+    "sinoVietnamese": "HỮU",
+    "vietnameseMeaning": "Bạn",
+    "meaning_vi": "Bạn",
+    "mnemonicStory": "Chữ HỮU (Bạn bè - 友) hai bàn tay phải (又) nắm chặt lấy nhau thắt chặt tình bạn bè bằng hữu.",
+    "exampleCompounds": [
+      {
+        "word": "友達",
+        "reading": "ともだち",
+        "meaning": "bạn bè",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0043",
+    "kanji_id": "kanji_n5_0043",
+    "milestoneId": "ms_minna_b18",
+    "milestone_id": "ms_minna_b18",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 18,
+    "kanjiNumber": 43,
+    "kanji": "学",
+    "character": "学",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "学",
+    "onyomi": "ガク",
+    "kunyomi": "まな.ぶ",
+    "sinoVietnamese": "HỌC",
+    "vietnameseMeaning": "Học",
+    "meaning_vi": "Học",
+    "mnemonicStory": "Chữ HỌC (Học tập - 学) được ghép từ mái nhà (冖) và đứa con (子). Đứa trẻ ngồi ngoan ngoãn dưới mái nhà để tiếp thu kiến thức.",
+    "exampleCompounds": [
+      {
+        "word": "学生",
+        "reading": "がくせい",
+        "meaning": "học sinh, sinh viên",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "大学",
+        "reading": "だいがく",
+        "meaning": "trường đại học",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "学校",
+        "reading": "がっこう",
+        "meaning": "trường học",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "見学します",
+        "reading": "けんがくします",
+        "meaning": "tham quan",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "文学",
+        "reading": "ぶんがく",
+        "meaning": "văn học",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "科学",
+        "reading": "かがく",
+        "meaning": "khoa học",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "薬理学",
+        "reading": "やくりがく",
+        "meaning": "Dược lý học",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "機械学習",
+        "reading": "きかいがくしゅう",
+        "meaning": "Học máy / machine learning",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "形而上学",
+        "reading": "けいじじょうがく",
+        "meaning": "Siêu hình học",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 18
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0044",
+    "kanji_id": "kanji_n5_0044",
+    "milestoneId": "ms_minna_b19",
+    "milestone_id": "ms_minna_b19",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 19,
+    "kanjiNumber": 44,
+    "kanji": "校",
+    "character": "校",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "校",
+    "onyomi": "コウ",
+    "kunyomi": "",
+    "sinoVietnamese": "HIỆU",
+    "vietnameseMeaning": "Trường",
+    "meaning_vi": "Trường",
+    "mnemonicStory": "Chữ HIỆU (Trường học - 校) được ghép từ bộ Mộc (木 - bàn ghế gỗ) và chữ Giao (交 - giao lưu, kết bạn). Nơi có bàn ghế gỗ để học sinh giao lưu học tập là trường học.",
+    "exampleCompounds": [
+      {
+        "word": "学校",
+        "reading": "がっこう",
+        "meaning": "trường học",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "高校",
+        "reading": "こうこう",
+        "meaning": "trường cấp 3",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0045",
+    "kanji_id": "kanji_n5_0045",
+    "milestoneId": "ms_minna_b20",
+    "milestone_id": "ms_minna_b20",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 20,
+    "kanjiNumber": 45,
+    "kanji": "大",
+    "character": "大",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "大",
+    "onyomi": "ダイ",
+    "kunyomi": "おお.きい",
+    "sinoVietnamese": "ĐẠI",
+    "vietnameseMeaning": "Lớn",
+    "meaning_vi": "Lớn",
+    "mnemonicStory": "Chữ ĐẠI (To lớn - 大) hình ảnh con người dang rộng hai tay và hai chân, biểu tượng của sự to lớn.",
+    "exampleCompounds": [
+      {
+        "word": "大学",
+        "reading": "だいがく",
+        "meaning": "trường đại học",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "大変ですね",
+        "reading": "たいへんですね",
+        "meaning": "vất vả nhỉ",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "大きい",
+        "reading": "おおきい",
+        "meaning": "to, lớn",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "お大事に",
+        "reading": "おだいじに",
+        "meaning": "giữ gìn sức khỏe",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "大切[な]",
+        "reading": "たいせつ[な]",
+        "meaning": "quan trọng",
+        "type": "TT-na",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "大丈夫[な]",
+        "reading": "だいじょうぶ[な]",
+        "meaning": "không sao, ổn",
+        "type": "TT-na",
+        "level": "N5",
+        "lesson": 20
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0046",
+    "kanji_id": "kanji_n5_0046",
+    "milestoneId": "ms_minna_b21",
+    "milestone_id": "ms_minna_b21",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 21,
+    "kanjiNumber": 46,
+    "kanji": "小",
+    "character": "小",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "小",
+    "onyomi": "ショウ",
+    "kunyomi": "ちい.さい",
+    "sinoVietnamese": "TIỂU",
+    "vietnameseMeaning": "Nhỏ",
+    "meaning_vi": "Nhỏ",
+    "mnemonicStory": "Chữ TIỂU (Nhỏ bé - 小) một vật nhỏ ở giữa bị tách chia làm hai bên thu bé lại.",
+    "exampleCompounds": [
+      {
+        "word": "小さい",
+        "reading": "ちいさい",
+        "meaning": "nhỏ, bé",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 21
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0047",
+    "kanji_id": "kanji_n5_0047",
+    "milestoneId": "ms_minna_b22",
+    "milestone_id": "ms_minna_b22",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 22,
+    "kanjiNumber": 47,
+    "kanji": "中",
+    "character": "中",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "中",
+    "onyomi": "チュウ",
+    "kunyomi": "なか",
+    "sinoVietnamese": "TRUNG",
+    "vietnameseMeaning": "Giữa",
+    "meaning_vi": "Giữa",
+    "mnemonicStory": "Chữ TRUNG (Ở giữa, trong - 中) nét sổ thẳng xuyên qua chính giữa một chiếc hộp chữ nhật.",
+    "exampleCompounds": [
+      {
+        "word": "中国",
+        "reading": "ちゅうごく",
+        "meaning": "Trung Quốc",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "中",
+        "reading": "なか",
+        "meaning": "trong, giữa",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "世界中",
+        "reading": "せかいじゅう",
+        "meaning": "khắp thế giới, toàn thế giới",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "途中",
+        "reading": "とちゅう",
+        "meaning": "giữa chừng, nửa đường",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "中級",
+        "reading": "ちゅうきゅう",
+        "meaning": "trung cấp, trình độ trung gian",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0048",
+    "kanji_id": "kanji_n5_0048",
+    "milestoneId": "ms_minna_b23",
+    "milestone_id": "ms_minna_b23",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 23,
+    "kanjiNumber": 48,
+    "kanji": "上",
+    "character": "上",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "上",
+    "onyomi": "ジョウ",
+    "kunyomi": "うえ",
+    "sinoVietnamese": "THƯỢNG",
+    "vietnameseMeaning": "Trên",
+    "meaning_vi": "Trên",
+    "mnemonicStory": "Chữ THƯỢNG (Trên - 上) nét dọc đứng vươn lên phía trên vạch ngang chuẩn mốc.",
+    "exampleCompounds": [
+      {
+        "word": "上手[な]",
+        "reading": "じょうず[な]",
+        "meaning": "giỏi",
+        "type": "TT-na",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "上",
+        "reading": "うえ",
+        "meaning": "trên",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "上着",
+        "reading": "うわぎ",
+        "meaning": "áo khoác",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "以上です",
+        "reading": "いじょうです",
+        "meaning": "hết rồi",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "上司",
+        "reading": "じょうし",
+        "meaning": "cấp trên, thượng cấp",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "上手になります",
+        "reading": "じょうずになります",
+        "meaning": "trở nên giỏi hơn, thành thạo hơn",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "売上",
+        "reading": "うりあげ",
+        "meaning": "Doanh thu",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "上告",
+        "reading": "じょうこく",
+        "meaning": "Kháng cáo lên tòa tối cao",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "形而上学",
+        "reading": "けいじじょうがく",
+        "meaning": "Siêu hình học",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 23
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0049",
+    "kanji_id": "kanji_n5_0049",
+    "milestoneId": "ms_minna_b24",
+    "milestone_id": "ms_minna_b24",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 24,
+    "kanjiNumber": 49,
+    "kanji": "下",
+    "character": "下",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "下",
+    "onyomi": "カ",
+    "kunyomi": "した",
+    "sinoVietnamese": "HẠ",
+    "vietnameseMeaning": "Dưới",
+    "meaning_vi": "Dưới",
+    "mnemonicStory": "Chữ HẠ (Dưới - 下) nét chấm chúc xuống phía dưới vạch ngang chuẩn mốc.",
+    "exampleCompounds": [
+      {
+        "word": "地下",
+        "reading": "ちか",
+        "meaning": "tầng hầm",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "地下鉄",
+        "reading": "ちかてつ",
+        "meaning": "tàu điện ngầm",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "下手[な]",
+        "reading": "へた[な]",
+        "meaning": "kém",
+        "type": "TT-na",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "下",
+        "reading": "した",
+        "meaning": "dưới",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "下着",
+        "reading": "したぎ",
+        "meaning": "đồ lót",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "部下",
+        "reading": "ぶか",
+        "meaning": "cấp dưới, thuộc cấp",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "血圧降下薬",
+        "reading": "けつあつこうかやく",
+        "meaning": "Thuốc hạ huyết áp",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 24
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0050",
+    "kanji_id": "kanji_n5_0050",
+    "milestoneId": "ms_minna_b25",
+    "milestone_id": "ms_minna_b25",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 25,
+    "kanjiNumber": 50,
+    "kanji": "右",
+    "character": "右",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "右",
+    "onyomi": "ウ",
+    "kunyomi": "みぎ",
+    "sinoVietnamese": "HỮU",
+    "vietnameseMeaning": "Phải",
+    "meaning_vi": "Phải",
+    "mnemonicStory": "Chữ HỮU (Bên phải - 右) bàn tay phải (𠂇) đưa thức ăn vào miệng (口).",
+    "exampleCompounds": [
+      {
+        "word": "右",
+        "reading": "みぎ",
+        "meaning": "phải",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 25
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0051",
+    "kanji_id": "kanji_n5_0051",
+    "milestoneId": "ms_minna_b01",
+    "milestone_id": "ms_minna_b01",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 1,
+    "kanjiNumber": 51,
+    "kanji": "左",
+    "character": "左",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "左",
+    "onyomi": "サ",
+    "kunyomi": "ひだり",
+    "sinoVietnamese": "TẢ",
+    "vietnameseMeaning": "Trái",
+    "meaning_vi": "Trái",
+    "mnemonicStory": "Chữ TẢ (Bên trái - 左) bàn tay trái (𠂇) cầm chiếc thước thợ (工) hỗ trợ công việc.",
+    "exampleCompounds": [
+      {
+        "word": "左",
+        "reading": "ひだり",
+        "meaning": "trái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0052",
+    "kanji_id": "kanji_n5_0052",
+    "milestoneId": "ms_minna_b02",
+    "milestone_id": "ms_minna_b02",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 2,
+    "kanjiNumber": 52,
+    "kanji": "外",
+    "character": "外",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "外",
+    "onyomi": "ガイ",
+    "kunyomi": "そと",
+    "sinoVietnamese": "NGOẠI",
+    "vietnameseMeaning": "Ngoài",
+    "meaning_vi": "Ngoài",
+    "mnemonicStory": "Chữ NGOẠI (Ngoài - 外) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng ngoài trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "外",
+        "reading": "ほか",
+        "meaning": "ngoài",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "外国",
+        "reading": "がいこく",
+        "meaning": "nước ngoài",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "郊外",
+        "reading": "こうがい",
+        "meaning": "ngoại ô",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "意外な",
+        "reading": "いがいな",
+        "meaning": "bất ngờ, không ngờ",
+        "type": "TT-na",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "予想外の",
+        "reading": "よそうがいの",
+        "meaning": "ngoài dự kiến, bất ngờ",
+        "type": "TT",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "外交",
+        "reading": "がいこう",
+        "meaning": "Ngoại giao",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "外観",
+        "reading": "がいかん",
+        "meaning": "Ngoại thất / vẻ ngoài",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "外貨準備",
+        "reading": "がいかじゅんび",
+        "meaning": "Dự trữ ngoại hối",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 2
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0053",
+    "kanji_id": "kanji_n5_0053",
+    "milestoneId": "ms_minna_b03",
+    "milestone_id": "ms_minna_b03",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 3,
+    "kanjiNumber": 53,
+    "kanji": "北",
+    "character": "北",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "北",
+    "onyomi": "ホク",
+    "kunyomi": "きた",
+    "sinoVietnamese": "BẮC",
+    "vietnameseMeaning": "Bắc",
+    "meaning_vi": "Bắc",
+    "mnemonicStory": "Chữ BẮC (Bắc - 北) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng bắc trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "北",
+        "reading": "きた",
+        "meaning": "phía bắc",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "北口",
+        "reading": "きたぐち",
+        "meaning": "cổng phía bắc",
+        "type": "noun",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "北海道",
+        "reading": "ほっかいどう",
+        "meaning": "Hokkaido (đảo phía bắc Nhật Bản)",
+        "type": "proper",
+        "level": "N5",
+        "lesson": 3
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0054",
+    "kanji_id": "kanji_n5_0054",
+    "milestoneId": "ms_minna_b04",
+    "milestone_id": "ms_minna_b04",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 4,
+    "kanjiNumber": 54,
+    "kanji": "南",
+    "character": "南",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "南",
+    "onyomi": "ナン",
+    "kunyomi": "みなみ",
+    "sinoVietnamese": "NAM",
+    "vietnameseMeaning": "Nam",
+    "meaning_vi": "Nam",
+    "mnemonicStory": "Chữ NAM (Nam - 南) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng nam trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "南",
+        "reading": "みなみ",
+        "meaning": "phía nam",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 4
+      },
+      {
+        "word": "南口",
+        "reading": "みなみぐち",
+        "meaning": "cổng phía nam",
+        "type": "noun",
+        "level": "N5",
+        "lesson": 4
+      },
+      {
+        "word": "南米",
+        "reading": "なんべい",
+        "meaning": "Nam Mỹ",
+        "type": "proper",
+        "level": "N5",
+        "lesson": 4
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0055",
+    "kanji_id": "kanji_n5_0055",
+    "milestoneId": "ms_minna_b05",
+    "milestone_id": "ms_minna_b05",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 5,
+    "kanjiNumber": 55,
+    "kanji": "東",
+    "character": "東",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "東",
+    "onyomi": "トウ",
+    "kunyomi": "ひがし",
+    "sinoVietnamese": "ĐÔNG",
+    "vietnameseMeaning": "Đông",
+    "meaning_vi": "Đông",
+    "mnemonicStory": "Chữ ĐÔNG (Đông - 東) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng đông trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "東",
+        "reading": "ひがし",
+        "meaning": "phía đông",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "東口",
+        "reading": "ひがしぐち",
+        "meaning": "cổng phía đông",
+        "type": "noun",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "東京",
+        "reading": "とうきょう",
+        "meaning": "Tokyo",
+        "type": "proper",
+        "level": "N5",
+        "lesson": 5
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0056",
+    "kanji_id": "kanji_n5_0056",
+    "milestoneId": "ms_minna_b06",
+    "milestone_id": "ms_minna_b06",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 6,
+    "kanjiNumber": 56,
+    "kanji": "西",
+    "character": "西",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "西",
+    "onyomi": "セイ",
+    "kunyomi": "にし",
+    "sinoVietnamese": "TÂY",
+    "vietnameseMeaning": "Tây",
+    "meaning_vi": "Tây",
+    "mnemonicStory": "Chữ TÂY (Tây - 西) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng tây trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "関西",
+        "reading": "かんさい",
+        "meaning": "vùng Kansai",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 6
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0057",
+    "kanji_id": "kanji_n5_0057",
+    "milestoneId": "ms_minna_b07",
+    "milestone_id": "ms_minna_b07",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 7,
+    "kanjiNumber": 57,
+    "kanji": "口",
+    "character": "口",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "口",
+    "onyomi": "コウ",
+    "kunyomi": "くち",
+    "sinoVietnamese": "KHẨU",
+    "vietnameseMeaning": "Miệng",
+    "meaning_vi": "Miệng",
+    "mnemonicStory": "Chữ KHẨU (Miệng - 口) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng miệng trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "口",
+        "reading": "くち",
+        "meaning": "miệng",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "人口",
+        "reading": "じんこう",
+        "meaning": "dân số",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0058",
+    "kanji_id": "kanji_n5_0058",
+    "milestoneId": "ms_minna_b08",
+    "milestone_id": "ms_minna_b08",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 8,
+    "kanjiNumber": 58,
+    "kanji": "目",
+    "character": "目",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "目",
+    "onyomi": "モク",
+    "kunyomi": "め",
+    "sinoVietnamese": "MỤC",
+    "vietnameseMeaning": "Mắt",
+    "meaning_vi": "Mắt",
+    "mnemonicStory": "Chữ MỤC (Mắt - 目) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng mắt trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "目",
+        "reading": "め",
+        "meaning": "mắt",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "～目",
+        "reading": "～め",
+        "meaning": "thứ ~",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "目標",
+        "reading": "もくひょう",
+        "meaning": "mục tiêu",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "目的",
+        "reading": "もくてき",
+        "meaning": "mục đích, mục tiêu",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "〜のに (目的)",
+        "reading": "〜のに (もくてき)",
+        "meaning": "để ~ (diễn đạt mục đích, ý nghĩa)",
+        "type": "MT",
+        "level": "N5",
+        "lesson": 8
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0059",
+    "kanji_id": "kanji_n5_0059",
+    "milestoneId": "ms_minna_b09",
+    "milestone_id": "ms_minna_b09",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 9,
+    "kanjiNumber": 59,
+    "kanji": "耳",
+    "character": "耳",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "耳",
+    "onyomi": "ジ",
+    "kunyomi": "みみ",
+    "sinoVietnamese": "NHĨ",
+    "vietnameseMeaning": "Tai",
+    "meaning_vi": "Tai",
+    "mnemonicStory": "Chữ NHĨ (Tai - 耳) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng tai trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "耳",
+        "reading": "みみ",
+        "meaning": "tai",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 9
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0060",
+    "kanji_id": "kanji_n5_0060",
+    "milestoneId": "ms_minna_b10",
+    "milestone_id": "ms_minna_b10",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 10,
+    "kanjiNumber": 60,
+    "kanji": "手",
+    "character": "手",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "手",
+    "onyomi": "シュ",
+    "kunyomi": "て",
+    "sinoVietnamese": "THỦ",
+    "vietnameseMeaning": "Tay",
+    "meaning_vi": "Tay",
+    "mnemonicStory": "Chữ THỦ (Tay - 手) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng tay trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "手帳",
+        "reading": "てちょう",
+        "meaning": "sổ tay (lịch)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "お手洗い",
+        "reading": "おてあらい",
+        "meaning": "nhà vệ sinh (lịch sự)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "手紙",
+        "reading": "てがみ",
+        "meaning": "thư",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "手",
+        "reading": "て",
+        "meaning": "tay",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "上手[な]",
+        "reading": "じょうず[な]",
+        "meaning": "giỏi",
+        "type": "TT-na",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "下手[な]",
+        "reading": "へた[な]",
+        "meaning": "kém",
+        "type": "TT-na",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "手術",
+        "reading": "しゅじゅつ",
+        "meaning": "Phẫu thuật",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0061",
+    "kanji_id": "kanji_n5_0061",
+    "milestoneId": "ms_minna_b11",
+    "milestone_id": "ms_minna_b11",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 11,
+    "kanjiNumber": 61,
+    "kanji": "足",
+    "character": "足",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "足",
+    "onyomi": "ソク",
+    "kunyomi": "あし",
+    "sinoVietnamese": "TÚC",
+    "vietnameseMeaning": "Chân",
+    "meaning_vi": "Chân",
+    "mnemonicStory": "Chữ TÚC (Chân - 足) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng chân trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "足",
+        "reading": "あし",
+        "meaning": "chân",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 11
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0062",
+    "kanji_id": "kanji_n5_0062",
+    "milestoneId": "ms_minna_b12",
+    "milestone_id": "ms_minna_b12",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 12,
+    "kanjiNumber": 62,
+    "kanji": "体",
+    "character": "体",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "体",
+    "onyomi": "タイ",
+    "kunyomi": "からだ",
+    "sinoVietnamese": "THỂ",
+    "vietnameseMeaning": "Thân thể",
+    "meaning_vi": "Thân thể",
+    "mnemonicStory": "Chữ THỂ (Thân thể - 体) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng thân thể trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "体",
+        "reading": "からだ",
+        "meaning": "cơ thể",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "体温",
+        "reading": "たいおん",
+        "meaning": "Nhiệt độ cơ thể",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "抗体",
+        "reading": "こうたい",
+        "meaning": "Kháng thể",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "染色体",
+        "reading": "せんしょくたい",
+        "meaning": "Nhiễm sắc thể",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 12
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0063",
+    "kanji_id": "kanji_n5_0063",
+    "milestoneId": "ms_minna_b13",
+    "milestone_id": "ms_minna_b13",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 13,
+    "kanjiNumber": 63,
+    "kanji": "入",
+    "character": "入",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "入",
+    "onyomi": "ニュウ",
+    "kunyomi": "い.る",
+    "sinoVietnamese": "NHẬP",
+    "vietnameseMeaning": "Vào",
+    "meaning_vi": "Vào",
+    "mnemonicStory": "Chữ NHẬP (Vào - 入) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng vào trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "入ります",
+        "reading": "はいります",
+        "meaning": "vào",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "入れます",
+        "reading": "いれます",
+        "meaning": "cho vào",
+        "type": "ĐT2",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "記入します",
+        "reading": "きにゅうします",
+        "meaning": "điền vào (biểu mẫu)",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "入院します",
+        "reading": "にゅういんします",
+        "meaning": "nhập viện",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "輸入",
+        "reading": "ゆにゅう",
+        "meaning": "Nhập khẩu",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "入院",
+        "reading": "にゅういん",
+        "meaning": "Nhập viện",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 13
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0064",
+    "kanji_id": "kanji_n5_0064",
+    "milestoneId": "ms_minna_b14",
+    "milestone_id": "ms_minna_b14",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 14,
+    "kanjiNumber": 64,
+    "kanji": "出",
+    "character": "出",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "出",
+    "onyomi": "シュツ",
+    "kunyomi": "で.る",
+    "sinoVietnamese": "XUẤT",
+    "vietnameseMeaning": "Ra",
+    "meaning_vi": "Ra",
+    "mnemonicStory": "Chữ XUẤT (Ra - 出) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng ra trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "出ます",
+        "reading": "でます",
+        "meaning": "ra",
+        "type": "ĐT2",
+        "level": "N5",
+        "lesson": 14
+      },
+      {
+        "word": "出します",
+        "reading": "だします",
+        "meaning": "gửi (thư)",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 14
+      },
+      {
+        "word": "出かけます",
+        "reading": "でかけます",
+        "meaning": "ra ngoài",
+        "type": "ĐT2",
+        "level": "N5",
+        "lesson": 14
+      },
+      {
+        "word": "出張します",
+        "reading": "しゅっちょうします",
+        "meaning": "đi công tác",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 14
+      },
+      {
+        "word": "輸出",
+        "reading": "ゆしゅつ",
+        "meaning": "Xuất khẩu",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 14
+      },
+      {
+        "word": "出汁",
+        "reading": "だし",
+        "meaning": "Nước dùng (súp dashi)",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 14
+      },
+      {
+        "word": "排出権取引",
+        "reading": "はいしゅつけんとりひき",
+        "meaning": "Giao dịch quota khí thải",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 14
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0065",
+    "kanji_id": "kanji_n5_0065",
+    "milestoneId": "ms_minna_b15",
+    "milestone_id": "ms_minna_b15",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 15,
+    "kanjiNumber": 65,
+    "kanji": "立",
+    "character": "立",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "立",
+    "onyomi": "リツ",
+    "kunyomi": "た.つ",
+    "sinoVietnamese": "LẬP",
+    "vietnameseMeaning": "Đứng",
+    "meaning_vi": "Đứng",
+    "mnemonicStory": "Chữ LẬP (Đứng - 立) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng đứng trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "立ちます",
+        "reading": "たちます",
+        "meaning": "đứng",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 15
+      },
+      {
+        "word": "役に立ちます",
+        "reading": "やくにたちます",
+        "meaning": "có ích",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 15
+      },
+      {
+        "word": "立場",
+        "reading": "たちば",
+        "meaning": "lập trường",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 15
+      },
+      {
+        "word": "独立します",
+        "reading": "どくりつします",
+        "meaning": "độc lập, tự lập",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 15
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0066",
+    "kanji_id": "kanji_n5_0066",
+    "milestoneId": "ms_minna_b16",
+    "milestone_id": "ms_minna_b16",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 16,
+    "kanjiNumber": 66,
+    "kanji": "休",
+    "character": "休",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "休",
+    "onyomi": "キュウ",
+    "kunyomi": "やす.む",
+    "sinoVietnamese": "HƯU",
+    "vietnameseMeaning": "Nghỉ",
+    "meaning_vi": "Nghỉ",
+    "mnemonicStory": "Chữ HƯU (Nghỉ ngơi - 休) được ghép từ bộ Nhân đứng (亻 - người) và bộ Mộc (木 - cái cây). Người tựa lưng vào cây là lúc đang nghỉ ngơi.",
+    "exampleCompounds": [
+      {
+        "word": "休み",
+        "reading": "やすみ",
+        "meaning": "ngày nghỉ",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "昼休み",
+        "reading": "ひるやすみ",
+        "meaning": "nghỉ trưa",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "休みます",
+        "reading": "やすみます",
+        "meaning": "nghỉ",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "夏休み",
+        "reading": "なつやすみ",
+        "meaning": "nghỉ hè",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0067",
+    "kanji_id": "kanji_n5_0067",
+    "milestoneId": "ms_minna_b17",
+    "milestone_id": "ms_minna_b17",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 17,
+    "kanjiNumber": 67,
+    "kanji": "見",
+    "character": "見",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "見",
+    "onyomi": "ケン",
+    "kunyomi": "み.る",
+    "sinoVietnamese": "KIẾN",
+    "vietnameseMeaning": "Nhìn",
+    "meaning_vi": "Nhìn",
+    "mnemonicStory": "Chữ KIẾN (Nhìn thấy - 見) được ghép từ bộ Mục (目 - đôi mắt) đặt trên đôi chân (儿 - nhân đi). Đôi chân bước đi và đôi mắt mở to nhìn ngắm vạn vật.",
+    "exampleCompounds": [
+      {
+        "word": "見せてください",
+        "reading": "みせてください",
+        "meaning": "cho xem",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "見ます",
+        "reading": "みます",
+        "meaning": "xem, nhìn",
+        "type": "ĐT2",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "お花見",
+        "reading": "おはなみ",
+        "meaning": "ngắm hoa",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "見せます",
+        "reading": "みせます",
+        "meaning": "cho xem",
+        "type": "ĐT2",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "見学します",
+        "reading": "けんがくします",
+        "meaning": "tham quan",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "意見",
+        "reading": "いけん",
+        "meaning": "ý kiến",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "見積もり",
+        "reading": "みつもり",
+        "meaning": "Báo giá / ước tính",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "偏見",
+        "reading": "へんけん",
+        "meaning": "Thành kiến / định kiến",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 17
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0068",
+    "kanji_id": "kanji_n5_0068",
+    "milestoneId": "ms_minna_b18",
+    "milestone_id": "ms_minna_b18",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 18,
+    "kanjiNumber": 68,
+    "kanji": "聞",
+    "character": "聞",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "聞",
+    "onyomi": "ブン",
+    "kunyomi": "き.く",
+    "sinoVietnamese": "VĂN",
+    "vietnameseMeaning": "Nghe",
+    "meaning_vi": "Nghe",
+    "mnemonicStory": "Chữ VĂN (Nghe - 聞) được ghép từ bộ Môn (門 - cánh cửa) và bộ Nhĩ (耳 - cái tai). Ghé tai áp sát vào cánh cửa để lắng nghe âm thanh vọng lại.",
+    "exampleCompounds": [
+      {
+        "word": "新聞",
+        "reading": "しんぶん",
+        "meaning": "báo, tin tức",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "聞きます",
+        "reading": "ききます",
+        "meaning": "nghe",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "聞こえます",
+        "reading": "きこえます",
+        "meaning": "nghe thấy được",
+        "type": "ĐT2",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "〜そうです (伝聞)",
+        "reading": "〜そうです",
+        "meaning": "nghe nói ~ (truyền đạt lại thông tin)",
+        "type": "MT",
+        "level": "N5",
+        "lesson": 18
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0069",
+    "kanji_id": "kanji_n5_0069",
+    "milestoneId": "ms_minna_b19",
+    "milestone_id": "ms_minna_b19",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 19,
+    "kanjiNumber": 69,
+    "kanji": "読",
+    "character": "読",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "読",
+    "onyomi": "ドク",
+    "kunyomi": "よ.む",
+    "sinoVietnamese": "ĐỘC",
+    "vietnameseMeaning": "Đọc",
+    "meaning_vi": "Đọc",
+    "mnemonicStory": "Chữ ĐỘC (Đọc - 読) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng đọc trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "読みます",
+        "reading": "よみます",
+        "meaning": "đọc",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "読解力",
+        "reading": "どっかいりょく",
+        "meaning": "khả năng đọc hiểu",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0070",
+    "kanji_id": "kanji_n5_0070",
+    "milestoneId": "ms_minna_b20",
+    "milestone_id": "ms_minna_b20",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 20,
+    "kanjiNumber": 70,
+    "kanji": "書",
+    "character": "書",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "書",
+    "onyomi": "ショ",
+    "kunyomi": "か.く",
+    "sinoVietnamese": "THƯ",
+    "vietnameseMeaning": "Viết",
+    "meaning_vi": "Viết",
+    "mnemonicStory": "Chữ THƯ (Viết - 書) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng viết trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "辞書",
+        "reading": "じしょ",
+        "meaning": "từ điển",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "図書館",
+        "reading": "としょかん",
+        "meaning": "thư viện",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "書きます",
+        "reading": "かきます",
+        "meaning": "viết, vẽ",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "書留",
+        "reading": "かきとめ",
+        "meaning": "thư bảo đảm",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "電子辞書",
+        "reading": "でんしじしょ",
+        "meaning": "từ điển điện tử",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "辞書を引きます",
+        "reading": "じしょをひきます",
+        "meaning": "tra từ điển",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "契約書",
+        "reading": "けいやくしょ",
+        "meaning": "Hợp đồng (văn bản)",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "書道",
+        "reading": "しょどう",
+        "meaning": "Thư pháp",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "遺言書",
+        "reading": "いごんしょ",
+        "meaning": "Di chúc",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 20
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0071",
+    "kanji_id": "kanji_n5_0071",
+    "milestoneId": "ms_minna_b21",
+    "milestone_id": "ms_minna_b21",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 21,
+    "kanjiNumber": 71,
+    "kanji": "話",
+    "character": "話",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "話",
+    "onyomi": "ワ",
+    "kunyomi": "はな.す",
+    "sinoVietnamese": "THOẠI",
+    "vietnameseMeaning": "Nói chuyện",
+    "meaning_vi": "Nói chuyện",
+    "mnemonicStory": "Chữ THOẠI (Nói chuyện - 話) được ghép từ bộ Ngôn (言 - lời nói) và chữ Thiệt (舌 - cái lưỡi). Chiếc lưỡi uốn lượn thốt ra lời nói để trò chuyện, đàm thoại.",
+    "exampleCompounds": [
+      {
+        "word": "電話",
+        "reading": "でんわ",
+        "meaning": "điện thoại",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "話します",
+        "reading": "はなします",
+        "meaning": "nói",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "電話します",
+        "reading": "でんわします",
+        "meaning": "gọi điện thoại",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "話",
+        "reading": "はなし",
+        "meaning": "câu chuyện",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "お世話になりました",
+        "reading": "おせわになりました",
+        "meaning": "cảm ơn đã giúp đỡ",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "民話",
+        "reading": "みんわ",
+        "meaning": "Truyện dân gian",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "神話",
+        "reading": "しんわ",
+        "meaning": "Thần thoại",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 21
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0072",
+    "kanji_id": "kanji_n5_0072",
+    "milestoneId": "ms_minna_b22",
+    "milestone_id": "ms_minna_b22",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 22,
+    "kanjiNumber": 72,
+    "kanji": "言",
+    "character": "言",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "言",
+    "onyomi": "ゲン",
+    "kunyomi": "い.う",
+    "sinoVietnamese": "NGÔN",
+    "vietnameseMeaning": "Nói",
+    "meaning_vi": "Nói",
+    "mnemonicStory": "Chữ NGÔN (Nói - 言) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng nói trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "言います",
+        "reading": "いいます",
+        "meaning": "nói",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "失言",
+        "reading": "しつげん",
+        "meaning": "nói nhầm, nói hớ, lỡ miệng",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "伝言",
+        "reading": "でんごん",
+        "meaning": "nhắn tin, truyền đạt lời nhắn",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "〜ように言いました",
+        "reading": "〜ようにいいました",
+        "meaning": "nói với ~ hãy ~ (truyền đạt mệnh lệnh/yêu cầu)",
+        "type": "MT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "〜と言っていました",
+        "reading": "〜といっていました",
+        "meaning": "đã nói rằng ~ (báo cáo lại lời nói)",
+        "type": "MT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "遺言書",
+        "reading": "いごんしょ",
+        "meaning": "Di chúc",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 22
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0073",
+    "kanji_id": "kanji_n5_0073",
+    "milestoneId": "ms_minna_b23",
+    "milestone_id": "ms_minna_b23",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 23,
+    "kanjiNumber": 73,
+    "kanji": "語",
+    "character": "語",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "語",
+    "onyomi": "ゴ",
+    "kunyomi": "かた.る",
+    "sinoVietnamese": "NGỮ",
+    "vietnameseMeaning": "Ngôn ngữ",
+    "meaning_vi": "Ngôn ngữ",
+    "mnemonicStory": "Chữ NGỮ (Ngôn ngữ - 語) được ghép từ bộ Ngôn (言 - lời nói), bộ Ngũ (五 - số 5) và bộ Khẩu (口 - cái miệng). Năm cái miệng cùng cất lên tiếng nói tạo thành ngôn ngữ.",
+    "exampleCompounds": [
+      {
+        "word": "英語",
+        "reading": "えいご",
+        "meaning": "tiếng Anh",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "～語",
+        "reading": "～ご",
+        "meaning": "tiếng ~",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "日本語",
+        "reading": "にほんご",
+        "meaning": "tiếng Nhật",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "敬語",
+        "reading": "けいご",
+        "meaning": "kính ngữ, ngôn ngữ lịch sự",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "丁寧語",
+        "reading": "ていねいご",
+        "meaning": "thể lịch sự (です・ます)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "尊敬語",
+        "reading": "そんけいご",
+        "meaning": "kính ngữ (tôn trọng người nghe)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0074",
+    "kanji_id": "kanji_n5_0074",
+    "milestoneId": "ms_minna_b24",
+    "milestone_id": "ms_minna_b24",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 24,
+    "kanjiNumber": 74,
+    "kanji": "食",
+    "character": "食",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "食",
+    "onyomi": "ショク",
+    "kunyomi": "た.べる",
+    "sinoVietnamese": "THỰC",
+    "vietnameseMeaning": "Ăn",
+    "meaning_vi": "Ăn",
+    "mnemonicStory": "Chữ THỰC (Ăn - 食) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng ăn trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "食堂",
+        "reading": "しょくどう",
+        "meaning": "nhà ăn",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "食べます",
+        "reading": "たべます",
+        "meaning": "ăn",
+        "type": "ĐT2",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "食べ物",
+        "reading": "たべもの",
+        "meaning": "thức ăn",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "定食",
+        "reading": "ていしょく",
+        "meaning": "cơm phần",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "食事します",
+        "reading": "しょくじします",
+        "meaning": "dùng bữa",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "食べ過ぎます",
+        "reading": "たべすぎます",
+        "meaning": "ăn quá nhiều",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "発酵食品",
+        "reading": "はっこうしょくひん",
+        "meaning": "Thực phẩm lên men",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "食材",
+        "reading": "しょくざい",
+        "meaning": "Nguyên liệu thực phẩm",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "食感",
+        "reading": "しょっかん",
+        "meaning": "Độ giòn / cảm giác khi ăn",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 24
+      },
+      {
+        "word": "食欲",
+        "reading": "しょくよく",
+        "meaning": "Cảm giác thèm ăn / ăn ngon miệng",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 24
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0075",
+    "kanji_id": "kanji_n5_0075",
+    "milestoneId": "ms_minna_b25",
+    "milestone_id": "ms_minna_b25",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 25,
+    "kanjiNumber": 75,
+    "kanji": "飲",
+    "character": "飲",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "飲",
+    "onyomi": "イン",
+    "kunyomi": "の.む",
+    "sinoVietnamese": "ẨM",
+    "vietnameseMeaning": "Uống",
+    "meaning_vi": "Uống",
+    "mnemonicStory": "Chữ ẨM (Uống - 飲) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng uống trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "飲みます",
+        "reading": "のみます",
+        "meaning": "uống",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 25
+      },
+      {
+        "word": "飲み物",
+        "reading": "のみもの",
+        "meaning": "đồ uống",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 25
+      },
+      {
+        "word": "飲み過ぎます",
+        "reading": "のみすぎます",
+        "meaning": "uống quá nhiều",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 25
+      },
+      {
+        "word": "飲まさせられます",
+        "reading": "のまさせられます",
+        "meaning": "bị bắt uống",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 25
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0076",
+    "kanji_id": "kanji_n5_0076",
+    "milestoneId": "ms_minna_b01",
+    "milestone_id": "ms_minna_b01",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 1,
+    "kanjiNumber": 76,
+    "kanji": "行",
+    "character": "行",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "行",
+    "onyomi": "コウ",
+    "kunyomi": "い.く",
+    "sinoVietnamese": "HÀNH",
+    "vietnameseMeaning": "Đi",
+    "meaning_vi": "Đi",
+    "mnemonicStory": "Chữ HÀNH (Đi lại, thực hiện - 行) tượng hình ngã tư đường lớn, nơi người và xe cộ đi lại tấp nập.",
+    "exampleCompounds": [
+      {
+        "word": "銀行員",
+        "reading": "ぎんこういん",
+        "meaning": "nhân viên ngân hàng",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "銀行",
+        "reading": "ぎんこう",
+        "meaning": "ngân hàng",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "急行",
+        "reading": "きゅうこう",
+        "meaning": "tàu nhanh",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "飛行機",
+        "reading": "ひこうき",
+        "meaning": "máy bay",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "行きます",
+        "reading": "いきます",
+        "meaning": "đi",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "旅行",
+        "reading": "りょこう",
+        "meaning": "du lịch",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "行動",
+        "reading": "こうどう",
+        "meaning": "Hành vi / hành động",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "不法行為",
+        "reading": "ふほうこうい",
+        "meaning": "Hành vi bất hợp pháp / vi phạm pháp luật",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "債務不履行",
+        "reading": "さいむふりこう",
+        "meaning": "Không thực hiện nghĩa vụ hợp đồng",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 1
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0077",
+    "kanji_id": "kanji_n5_0077",
+    "milestoneId": "ms_minna_b02",
+    "milestone_id": "ms_minna_b02",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 2,
+    "kanjiNumber": 77,
+    "kanji": "買",
+    "character": "買",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "買",
+    "onyomi": "バイ",
+    "kunyomi": "か.う",
+    "sinoVietnamese": "MÃI",
+    "vietnameseMeaning": "Mua",
+    "meaning_vi": "Mua",
+    "mnemonicStory": "Chữ MÃI (Mua - 買) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng mua trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "買います",
+        "reading": "かいます",
+        "meaning": "mua",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "買い物します",
+        "reading": "かいものします",
+        "meaning": "mua sắm",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "企業買収",
+        "reading": "きぎょうばいしゅう",
+        "meaning": "Thâu tóm / mua lại doanh nghiệp",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 2
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0078",
+    "kanji_id": "kanji_n5_0078",
+    "milestoneId": "ms_minna_b03",
+    "milestone_id": "ms_minna_b03",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 3,
+    "kanjiNumber": 78,
+    "kanji": "会",
+    "character": "会",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "会",
+    "onyomi": "カイ",
+    "kunyomi": "あ.う",
+    "sinoVietnamese": "HỘI",
+    "vietnameseMeaning": "Gặp",
+    "meaning_vi": "Gặp",
+    "mnemonicStory": "Chữ HỘI (Gặp - 会) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng gặp trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "会社員",
+        "reading": "かいしゃいん",
+        "meaning": "nhân viên công ty",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "会社",
+        "reading": "かいしゃ",
+        "meaning": "công ty",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "会議室",
+        "reading": "かいぎしつ",
+        "meaning": "phòng họp",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "会議",
+        "reading": "かいぎ",
+        "meaning": "cuộc họp",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "会います",
+        "reading": "あいます",
+        "meaning": "gặp",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "社会",
+        "reading": "しゃかい",
+        "meaning": "xã hội",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "国会",
+        "reading": "こっかい",
+        "meaning": "Quốc hội",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "社会保障",
+        "reading": "しゃかいほしょう",
+        "meaning": "An sinh xã hội",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "株主総会",
+        "reading": "かぶぬしそうかい",
+        "meaning": "Đại hội cổ đông",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "会",
+        "reading": "かい",
+        "meaning": "Hội / gặp",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 3
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0079",
+    "kanji_id": "kanji_n5_0079",
+    "milestoneId": "ms_minna_b04",
+    "milestone_id": "ms_minna_b04",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 4,
+    "kanjiNumber": 79,
+    "kanji": "何",
+    "character": "何",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "何",
+    "onyomi": "カ",
+    "kunyomi": "なに",
+    "sinoVietnamese": "HÀ",
+    "vietnameseMeaning": "Gì",
+    "meaning_vi": "Gì",
+    "mnemonicStory": "Chữ HÀ (Gì - 何) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng gì trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "何歳",
+        "reading": "なんさい",
+        "meaning": "mấy tuổi",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 4
+      },
+      {
+        "word": "何",
+        "reading": "なん",
+        "meaning": "cái gì",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 4
+      },
+      {
+        "word": "何階",
+        "reading": "なんかい／なんがい",
+        "meaning": "tầng mấy",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 4
+      },
+      {
+        "word": "何時",
+        "reading": "なんじ",
+        "meaning": "mấy giờ",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 4
+      },
+      {
+        "word": "何分",
+        "reading": "なんぷん",
+        "meaning": "mấy phút",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 4
+      },
+      {
+        "word": "何曜日",
+        "reading": "なんようび",
+        "meaning": "thứ mấy",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 4
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0080",
+    "kanji_id": "kanji_n5_0080",
+    "milestoneId": "ms_minna_b05",
+    "milestone_id": "ms_minna_b05",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 5,
+    "kanjiNumber": 80,
+    "kanji": "新",
+    "character": "新",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "新",
+    "onyomi": "シン",
+    "kunyomi": "あたら.しい",
+    "sinoVietnamese": "TÂN",
+    "vietnameseMeaning": "Mới",
+    "meaning_vi": "Mới",
+    "mnemonicStory": "Chữ TÂN (Mới - 新) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng mới trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "新聞",
+        "reading": "しんぶん",
+        "meaning": "báo, tin tức",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "新幹線",
+        "reading": "しんかんせん",
+        "meaning": "tàu siêu tốc",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "新しい",
+        "reading": "あたらしい",
+        "meaning": "mới",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "新",
+        "reading": "しん",
+        "meaning": "Tân / mới",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 5
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0081",
+    "kanji_id": "kanji_n5_0081",
+    "milestoneId": "ms_minna_b06",
+    "milestone_id": "ms_minna_b06",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 6,
+    "kanjiNumber": 81,
+    "kanji": "古",
+    "character": "古",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "古",
+    "onyomi": "コ",
+    "kunyomi": "ふる.い",
+    "sinoVietnamese": "CỔ",
+    "vietnameseMeaning": "Cũ",
+    "meaning_vi": "Cũ",
+    "mnemonicStory": "Chữ CỔ (Cũ - 古) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng cũ trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "古い",
+        "reading": "ふるい",
+        "meaning": "cũ",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 6
+      },
+      {
+        "word": "古い物",
+        "reading": "ふるいもの",
+        "meaning": "đồ cổ",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 6
+      },
+      {
+        "word": "古典",
+        "reading": "こてん",
+        "meaning": "Cổ điển / văn học cổ",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 6
+      },
+      {
+        "word": "古",
+        "reading": "こ",
+        "meaning": "Cổ / xưa",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 6
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0082",
+    "kanji_id": "kanji_n5_0082",
+    "milestoneId": "ms_minna_b07",
+    "milestone_id": "ms_minna_b07",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 7,
+    "kanjiNumber": 82,
+    "kanji": "長",
+    "character": "長",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "長",
+    "onyomi": "チョウ",
+    "kunyomi": "なが.い",
+    "sinoVietnamese": "TRƯỜNG",
+    "vietnameseMeaning": "Dài",
+    "meaning_vi": "Dài",
+    "mnemonicStory": "Chữ TRƯỜNG (Dài - 長) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng dài trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "長い",
+        "reading": "ながい",
+        "meaning": "dài",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "成長",
+        "reading": "せいちょう",
+        "meaning": "sự trưởng thành, lớn lên, phát triển",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "部長",
+        "reading": "ぶちょう",
+        "meaning": "trưởng phòng, trưởng bộ phận",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "社長",
+        "reading": "しゃちょう",
+        "meaning": "giám đốc, tổng giám đốc công ty",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "課長",
+        "reading": "かちょう",
+        "meaning": "trưởng khoa, trưởng ban",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "成長します",
+        "reading": "せいちょうします",
+        "meaning": "lớn lên, trưởng thành, phát triển",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "長",
+        "reading": "ちょう",
+        "meaning": "Trường / dài",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 7
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0083",
+    "kanji_id": "kanji_n5_0083",
+    "milestoneId": "ms_minna_b08",
+    "milestone_id": "ms_minna_b08",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 8,
+    "kanjiNumber": 83,
+    "kanji": "高",
+    "character": "高",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "高",
+    "onyomi": "コウ",
+    "kunyomi": "たか.い",
+    "sinoVietnamese": "CAO",
+    "vietnameseMeaning": "Cao",
+    "meaning_vi": "Cao",
+    "mnemonicStory": "Chữ CAO (Cao - 高) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng cao trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "高い",
+        "reading": "たかい",
+        "meaning": "cao, đắt",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "高校",
+        "reading": "こうこう",
+        "meaning": "trường cấp 3",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "背が高い",
+        "reading": "せがたかい",
+        "meaning": "cao (chiều cao người)",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "最高",
+        "reading": "さいこう",
+        "meaning": "cao nhất, tuyệt vời nhất",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "高齢化",
+        "reading": "こうれいか",
+        "meaning": "già hoá dân số",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0084",
+    "kanji_id": "kanji_n5_0084",
+    "milestoneId": "ms_minna_b09",
+    "milestone_id": "ms_minna_b09",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 9,
+    "kanjiNumber": 84,
+    "kanji": "安",
+    "character": "安",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "安",
+    "onyomi": "アン",
+    "kunyomi": "やす.い",
+    "sinoVietnamese": "AN",
+    "vietnameseMeaning": "Rẻ, Yên",
+    "meaning_vi": "Rẻ, Yên",
+    "mnemonicStory": "Chữ AN (Rẻ, Yên - 安) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng rẻ, yên trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "安い",
+        "reading": "やすい",
+        "meaning": "rẻ",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 9
+      },
+      {
+        "word": "安心します",
+        "reading": "あんしんします",
+        "meaning": "yên tâm, an lòng",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 9
+      },
+      {
+        "word": "安ければ",
+        "reading": "やすければ",
+        "meaning": "nếu rẻ thì",
+        "type": "MT",
+        "level": "N5",
+        "lesson": 9
+      },
+      {
+        "word": "不安",
+        "reading": "ふあん",
+        "meaning": "Lo lắng / bất an",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 9
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0085",
+    "kanji_id": "kanji_n5_0085",
+    "milestoneId": "ms_minna_b10",
+    "milestone_id": "ms_minna_b10",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 10,
+    "kanjiNumber": 85,
+    "kanji": "多",
+    "character": "多",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "多",
+    "onyomi": "タ",
+    "kunyomi": "おお.い",
+    "sinoVietnamese": "ĐA",
+    "vietnameseMeaning": "Nhiều",
+    "meaning_vi": "Nhiều",
+    "mnemonicStory": "Chữ ĐA (Nhiều - 多) được ghép từ hai chữ Tịch (夕 - chiều tối) chồng lên nhau, nhiều đêm trôi qua.",
+    "exampleCompounds": [
+      {
+        "word": "多い",
+        "reading": "おおい",
+        "meaning": "nhiều",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "多分",
+        "reading": "たぶん",
+        "meaning": "có lẽ, chắc là",
+        "type": "PV",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "多文化共生",
+        "reading": "たぶんかきょうせい",
+        "meaning": "Cùng chung sống đa văn hóa",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "生物多様性",
+        "reading": "せいぶつたようせい",
+        "meaning": "Đa dạng sinh học",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "生物多様性保全",
+        "reading": "せいぶつたようせいほぜん",
+        "meaning": "Bảo tồn đa dạng sinh học",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0086",
+    "kanji_id": "kanji_n5_0086",
+    "milestoneId": "ms_minna_b11",
+    "milestone_id": "ms_minna_b11",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 11,
+    "kanjiNumber": 86,
+    "kanji": "少",
+    "character": "少",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "少",
+    "onyomi": "ショウ",
+    "kunyomi": "すこ.し",
+    "sinoVietnamese": "THIỂU",
+    "vietnameseMeaning": "Ít",
+    "meaning_vi": "Ít",
+    "mnemonicStory": "Chữ THIỂU (Ít - 少) chữ Tiểu (小) có thêm nét phẩy bớt đi, chỉ số lượng ít ỏi.",
+    "exampleCompounds": [
+      {
+        "word": "少し",
+        "reading": "すこし",
+        "meaning": "một chút",
+        "type": "TrT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "少ない",
+        "reading": "すくない",
+        "meaning": "ít",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "もう少し",
+        "reading": "もうすこし",
+        "meaning": "thêm chút nữa",
+        "type": "TrT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "少しずつ",
+        "reading": "すこしずつ",
+        "meaning": "từng chút một, dần dần",
+        "type": "PV",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "少子化",
+        "reading": "しょうしか",
+        "meaning": "tỷ lệ sinh thấp, ít con",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "少",
+        "reading": "しょう",
+        "meaning": "Ít / trẻ",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 11
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0087",
+    "kanji_id": "kanji_n5_0087",
+    "milestoneId": "ms_minna_b12",
+    "milestone_id": "ms_minna_b12",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 12,
+    "kanjiNumber": 87,
+    "kanji": "白",
+    "character": "白",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "白",
+    "onyomi": "ハク",
+    "kunyomi": "しろ.い",
+    "sinoVietnamese": "BẠCH",
+    "vietnameseMeaning": "Trắng",
+    "meaning_vi": "Trắng",
+    "mnemonicStory": "Chữ BẠCH (Màu trắng - 白) mặt trời ló dạng hé ra tia sáng (丶) trắng tinh khôi buổi bình minh.",
+    "exampleCompounds": [
+      {
+        "word": "白い",
+        "reading": "しろい",
+        "meaning": "trắng",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "面白い",
+        "reading": "おもしろい",
+        "meaning": "thú vị",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "告白",
+        "reading": "こくはく",
+        "meaning": "Tỏ tình / thú nhận",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 12
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0088",
+    "kanji_id": "kanji_n5_0088",
+    "milestoneId": "ms_minna_b13",
+    "milestone_id": "ms_minna_b13",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 13,
+    "kanjiNumber": 88,
+    "kanji": "名",
+    "character": "名",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "名",
+    "onyomi": "メイ",
+    "kunyomi": "な",
+    "sinoVietnamese": "DANH",
+    "vietnameseMeaning": "Tên",
+    "meaning_vi": "Tên",
+    "mnemonicStory": "Chữ DANH (Tên - 名) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng tên trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "名刺",
+        "reading": "めいし",
+        "meaning": "danh thiếp",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "有名[な]",
+        "reading": "ゆうめい[な]",
+        "meaning": "nổi tiếng",
+        "type": "TT-na",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "名前",
+        "reading": "なまえ",
+        "meaning": "tên",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "有名な",
+        "reading": "ゆうめいな",
+        "meaning": "nổi tiếng",
+        "type": "TT-na",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "署名",
+        "reading": "しょめい",
+        "meaning": "chữ ký, ký tên",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "名所",
+        "reading": "めいしょ",
+        "meaning": "địa danh nổi tiếng, thắng cảnh",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "著名人",
+        "reading": "ちょめいじん",
+        "meaning": "Người nổi tiếng / nhân vật nổi danh",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 13
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0089",
+    "kanji_id": "kanji_n5_0089",
+    "milestoneId": "ms_minna_b14",
+    "milestone_id": "ms_minna_b14",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 14,
+    "kanjiNumber": 89,
+    "kanji": "国",
+    "character": "国",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "国",
+    "onyomi": "コク",
+    "kunyomi": "くに",
+    "sinoVietnamese": "QUỐC",
+    "vietnameseMeaning": "Nước",
+    "meaning_vi": "Nước",
+    "mnemonicStory": "Chữ QUỐC (Nước - 国) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng nước trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "韓国",
+        "reading": "かんこく",
+        "meaning": "Hàn Quốc",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 14
+      },
+      {
+        "word": "中国",
+        "reading": "ちゅうごく",
+        "meaning": "Trung Quốc",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 14
+      },
+      {
+        "word": "国",
+        "reading": "くに",
+        "meaning": "đất nước",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 14
+      },
+      {
+        "word": "外国",
+        "reading": "がいこく",
+        "meaning": "nước ngoài",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 14
+      },
+      {
+        "word": "国際",
+        "reading": "こくさい",
+        "meaning": "quốc tế",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 14
+      },
+      {
+        "word": "国会",
+        "reading": "こっかい",
+        "meaning": "Quốc hội",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 14
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0090",
+    "kanji_id": "kanji_n5_0090",
+    "milestoneId": "ms_minna_b15",
+    "milestone_id": "ms_minna_b15",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 15,
+    "kanjiNumber": 90,
+    "kanji": "山",
+    "character": "山",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "山",
+    "onyomi": "サン",
+    "kunyomi": "やま",
+    "sinoVietnamese": "SƠN",
+    "vietnameseMeaning": "Núi",
+    "meaning_vi": "Núi",
+    "mnemonicStory": "Chữ SƠN (Núi - 山) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng núi trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "山",
+        "reading": "やま",
+        "meaning": "núi",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 15
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0091",
+    "kanji_id": "kanji_n5_0091",
+    "milestoneId": "ms_minna_b16",
+    "milestone_id": "ms_minna_b16",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 16,
+    "kanjiNumber": 91,
+    "kanji": "川",
+    "character": "川",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "川",
+    "onyomi": "セン",
+    "kunyomi": "かわ",
+    "sinoVietnamese": "XUYÊN",
+    "vietnameseMeaning": "Sông",
+    "meaning_vi": "Sông",
+    "mnemonicStory": "Chữ XUYÊN (Sông - 川) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng sông trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "川",
+        "reading": "かわ",
+        "meaning": "sông",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0092",
+    "kanji_id": "kanji_n5_0092",
+    "milestoneId": "ms_minna_b17",
+    "milestone_id": "ms_minna_b17",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 17,
+    "kanjiNumber": 92,
+    "kanji": "天",
+    "character": "天",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "天",
+    "onyomi": "テン",
+    "kunyomi": "あめ",
+    "sinoVietnamese": "THIÊN",
+    "vietnameseMeaning": "Trời",
+    "meaning_vi": "Trời",
+    "mnemonicStory": "Chữ THIÊN (Trời - 天) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng trời trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "天気",
+        "reading": "てんき",
+        "meaning": "thời tiết",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "天ぷら",
+        "reading": "てんぷら",
+        "meaning": "tempura",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "天気予報",
+        "reading": "てんきよほう",
+        "meaning": "dự báo thời tiết",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "天気がよければ",
+        "reading": "てんきがよければ",
+        "meaning": "nếu thời tiết đẹp thì",
+        "type": "MT",
+        "level": "N5",
+        "lesson": 17
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0093",
+    "kanji_id": "kanji_n5_0093",
+    "milestoneId": "ms_minna_b18",
+    "milestone_id": "ms_minna_b18",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 18,
+    "kanjiNumber": 93,
+    "kanji": "気",
+    "character": "気",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "気",
+    "onyomi": "キ",
+    "kunyomi": "",
+    "sinoVietnamese": "KHÍ",
+    "vietnameseMeaning": "Khí, Tinh thần",
+    "meaning_vi": "Khí, Tinh thần",
+    "mnemonicStory": "Chữ KHÍ (Khí, Tinh thần - 気) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng khí, tinh thần trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "電気",
+        "reading": "でんき",
+        "meaning": "điện, đèn điện",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "ほんの気持ちです",
+        "reading": "ほんのきもちです",
+        "meaning": "chỉ là chút lòng thành",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "元気[な]",
+        "reading": "げんき[な]",
+        "meaning": "khỏe mạnh",
+        "type": "TT-na",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "お元気ですか",
+        "reading": "おげんきですか",
+        "meaning": "anh/chị có khỏe không?",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "天気",
+        "reading": "てんき",
+        "meaning": "thời tiết",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "病気",
+        "reading": "びょうき",
+        "meaning": "bệnh",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "景気",
+        "reading": "けいき",
+        "meaning": "Tình hình kinh tế / cảnh khí",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "換気",
+        "reading": "かんき",
+        "meaning": "Thông gió / thông khí",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "景気循環",
+        "reading": "けいきじゅんかん",
+        "meaning": "Chu kỳ kinh tế",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 18
+      },
+      {
+        "word": "気候変動適応",
+        "reading": "きこうへんどうてきおう",
+        "meaning": "Thích ứng biến đổi khí hậu",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 18
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0094",
+    "kanji_id": "kanji_n5_0094",
+    "milestoneId": "ms_minna_b19",
+    "milestone_id": "ms_minna_b19",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 19,
+    "kanjiNumber": 94,
+    "kanji": "雨",
+    "character": "雨",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "雨",
+    "onyomi": "ウ",
+    "kunyomi": "あめ",
+    "sinoVietnamese": "VŨ",
+    "vietnameseMeaning": "Mưa",
+    "meaning_vi": "Mưa",
+    "mnemonicStory": "Chữ VŨ (Mưa - 雨) vòm trời giăng mây che phủ và bốn giọt nước mưa rơi xuống mặt đất.",
+    "exampleCompounds": [
+      {
+        "word": "雨",
+        "reading": "あめ",
+        "meaning": "mưa",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "梅雨",
+        "reading": "つゆ",
+        "meaning": "mùa mưa",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "雨が降っても",
+        "reading": "あめがふっても",
+        "meaning": "dù trời mưa đi nữa",
+        "type": "MT",
+        "level": "N5",
+        "lesson": 19
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0095",
+    "kanji_id": "kanji_n5_0095",
+    "milestoneId": "ms_minna_b20",
+    "milestone_id": "ms_minna_b20",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 20,
+    "kanjiNumber": 95,
+    "kanji": "花",
+    "character": "花",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "花",
+    "onyomi": "カ",
+    "kunyomi": "はな",
+    "sinoVietnamese": "HOA",
+    "vietnameseMeaning": "Hoa",
+    "meaning_vi": "Hoa",
+    "mnemonicStory": "Chữ HOA (Bông hoa - 花) được ghép từ bộ Thảo đầu (艹 - cây cỏ) và chữ Hóa (化 - biến đổi). Cây cỏ biến đổi rực rỡ nhất chính là lúc nở hoa.",
+    "exampleCompounds": [
+      {
+        "word": "お花見",
+        "reading": "おはなみ",
+        "meaning": "ngắm hoa",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "花",
+        "reading": "はな",
+        "meaning": "hoa",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "生け花",
+        "reading": "いけばな",
+        "meaning": "nghệ thuật cắm hoa",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 20
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0096",
+    "kanji_id": "kanji_n5_0096",
+    "milestoneId": "ms_minna_b21",
+    "milestone_id": "ms_minna_b21",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 21,
+    "kanjiNumber": 96,
+    "kanji": "電",
+    "character": "電",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "電",
+    "onyomi": "デン",
+    "kunyomi": "",
+    "sinoVietnamese": "ĐIỆN",
+    "vietnameseMeaning": "Điện",
+    "meaning_vi": "Điện",
+    "mnemonicStory": "Chữ ĐIỆN (Điện, tia sét - 電) được ghép từ bộ Vũ (雨 - cơn mưa) và tia chớp (申). Tia chớp lóe sáng giữa cơn mưa chính là điện năng thiên nhiên.",
+    "exampleCompounds": [
+      {
+        "word": "電気",
+        "reading": "でんき",
+        "meaning": "điện, đèn điện",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "電話",
+        "reading": "でんわ",
+        "meaning": "điện thoại",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "電車",
+        "reading": "でんしゃ",
+        "meaning": "tàu điện",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "電池",
+        "reading": "でんち",
+        "meaning": "pin",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "電子辞書",
+        "reading": "でんしじしょ",
+        "meaning": "từ điển điện tử",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "電話します",
+        "reading": "でんわします",
+        "meaning": "gọi điện thoại",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "太陽光発電",
+        "reading": "たいようこうはつでん",
+        "meaning": "Phát điện bằng năng lượng mặt trời",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "風力発電",
+        "reading": "ふうりょくはつでん",
+        "meaning": "Phát điện bằng sức gió",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "電",
+        "reading": "でん",
+        "meaning": "Điện",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 21
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0097",
+    "kanji_id": "kanji_n5_0097",
+    "milestoneId": "ms_minna_b22",
+    "milestone_id": "ms_minna_b22",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 22,
+    "kanjiNumber": 97,
+    "kanji": "車",
+    "character": "車",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "車",
+    "onyomi": "シャ",
+    "kunyomi": "くるま",
+    "sinoVietnamese": "XA",
+    "vietnameseMeaning": "Xe",
+    "meaning_vi": "Xe",
+    "mnemonicStory": "Chữ XA (Xe cộ - 車) tượng hình cỗ xe thời cổ nhìn từ trên cao với trục xe và hai bánh đối xứng.",
+    "exampleCompounds": [
+      {
+        "word": "自動車",
+        "reading": "じどうしゃ",
+        "meaning": "xe hơi, ô tô",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "電車",
+        "reading": "でんしゃ",
+        "meaning": "tàu điện",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "自転車",
+        "reading": "じてんしゃ",
+        "meaning": "xe đạp",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "車",
+        "reading": "くるま",
+        "meaning": "xe hơi",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "駐車場",
+        "reading": "ちゅうしゃじょう",
+        "meaning": "bãi đỗ xe",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0098",
+    "kanji_id": "kanji_n5_0098",
+    "milestoneId": "ms_minna_b23",
+    "milestone_id": "ms_minna_b23",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 23,
+    "kanjiNumber": 98,
+    "kanji": "道",
+    "character": "道",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "道",
+    "onyomi": "ドウ",
+    "kunyomi": "みち",
+    "sinoVietnamese": "ĐẠO",
+    "vietnameseMeaning": "Đường",
+    "meaning_vi": "Đường",
+    "mnemonicStory": "Chữ ĐẠO (Đường - 道) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng đường trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "道",
+        "reading": "みち",
+        "meaning": "đường",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "近道",
+        "reading": "ちかみち",
+        "meaning": "đường tắt, con đường ngắn nhất",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "茶道",
+        "reading": "さどう",
+        "meaning": "Nghệ thuật trà đạo",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "書道",
+        "reading": "しょどう",
+        "meaning": "Thư pháp",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 23
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0099",
+    "kanji_id": "kanji_n5_0099",
+    "milestoneId": "ms_minna_b24",
+    "milestone_id": "ms_minna_b24",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 24,
+    "kanjiNumber": 99,
+    "kanji": "駅",
+    "character": "駅",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "駅",
+    "onyomi": "エキ",
+    "kunyomi": "",
+    "sinoVietnamese": "DỊCH",
+    "vietnameseMeaning": "Ga tàu",
+    "meaning_vi": "Ga tàu",
+    "mnemonicStory": "Chữ DỊCH (Ga tàu - 駅) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng ga tàu trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "駅",
+        "reading": "えき",
+        "meaning": "nhà ga",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 24
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0100",
+    "kanji_id": "kanji_n5_0100",
+    "milestoneId": "ms_minna_b25",
+    "milestone_id": "ms_minna_b25",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 25,
+    "kanjiNumber": 100,
+    "kanji": "店",
+    "character": "店",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "店",
+    "onyomi": "テン",
+    "kunyomi": "みせ",
+    "sinoVietnamese": "ĐIẾM",
+    "vietnameseMeaning": "Cửa hàng",
+    "meaning_vi": "Cửa hàng",
+    "mnemonicStory": "Chữ ĐIẾM (Cửa hàng - 店) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng cửa hàng trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "店",
+        "reading": "みせ",
+        "meaning": "cửa hàng",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 25
+      },
+      {
+        "word": "喫茶店",
+        "reading": "きっさてん",
+        "meaning": "quán cà phê",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 25
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0101",
+    "kanji_id": "kanji_n5_0101",
+    "milestoneId": "ms_minna_b01",
+    "milestone_id": "ms_minna_b01",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 1,
+    "kanjiNumber": 101,
+    "kanji": "社",
+    "character": "社",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "社",
+    "onyomi": "シャ",
+    "kunyomi": "",
+    "sinoVietnamese": "XÃ",
+    "vietnameseMeaning": "Công ty",
+    "meaning_vi": "Công ty",
+    "mnemonicStory": "Chữ XÃ (Công ty - 社) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng công ty trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "社員",
+        "reading": "しゃいん",
+        "meaning": "nhân viên công ty ~",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "会社員",
+        "reading": "かいしゃいん",
+        "meaning": "nhân viên công ty",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "会社",
+        "reading": "かいしゃ",
+        "meaning": "công ty",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "社会",
+        "reading": "しゃかい",
+        "meaning": "xã hội",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "社長",
+        "reading": "しゃちょう",
+        "meaning": "giám đốc, tổng giám đốc công ty",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "社会保障",
+        "reading": "しゃかいほしょう",
+        "meaning": "An sinh xã hội",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "社",
+        "reading": "しゃ",
+        "meaning": "Xã / công ty",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 1
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0102",
+    "kanji_id": "kanji_n5_0102",
+    "milestoneId": "ms_minna_b02",
+    "milestone_id": "ms_minna_b02",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 2,
+    "kanjiNumber": 102,
+    "kanji": "本",
+    "character": "本",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "本",
+    "onyomi": "ホン",
+    "kunyomi": "もと",
+    "sinoVietnamese": "BẢN",
+    "vietnameseMeaning": "Sách, Gốc",
+    "meaning_vi": "Sách, Gốc",
+    "mnemonicStory": "Chữ BẢN (Gốc rễ, sách - 本) được ghép từ bộ Mộc (木 - cây) với nét gạch ngang ở gốc rễ, chỉ nguồn cội cơ bản.",
+    "exampleCompounds": [
+      {
+        "word": "日本",
+        "reading": "にほん",
+        "meaning": "Nhật Bản",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "本",
+        "reading": "ほん",
+        "meaning": "sách",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "日本語",
+        "reading": "にほんご",
+        "meaning": "tiếng Nhật",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "本屋",
+        "reading": "ほんや",
+        "meaning": "hiệu sách",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "本当ですか",
+        "reading": "ほんとうですか",
+        "meaning": "thật à?",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "本当に",
+        "reading": "ほんとうに",
+        "meaning": "thực sự",
+        "type": "TrT",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "資本コスト",
+        "reading": "しほんコスト",
+        "meaning": "Chi phí vốn",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "本質",
+        "reading": "ほんしつ",
+        "meaning": "Bản chất / cốt lõi",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 2
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0103",
+    "kanji_id": "kanji_n5_0103",
+    "milestoneId": "ms_minna_b03",
+    "milestone_id": "ms_minna_b03",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 3,
+    "kanjiNumber": 103,
+    "kanji": "明",
+    "character": "明",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "明",
+    "onyomi": "メイ",
+    "kunyomi": "あか.るい",
+    "sinoVietnamese": "MINH",
+    "vietnameseMeaning": "Sáng",
+    "meaning_vi": "Sáng",
+    "mnemonicStory": "Chữ MINH (Sáng sủa - 明) được ghép từ bộ Nhật (日 - mặt trời) và bộ Nguyệt (月 - mặt trăng). Mặt trời và mặt trăng cùng chiếu sáng tạo nên sự sáng sủa, minh bạch.",
+    "exampleCompounds": [
+      {
+        "word": "明日",
+        "reading": "あした",
+        "meaning": "ngày mai",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "明るい",
+        "reading": "あかるい",
+        "meaning": "sáng",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "説明します",
+        "reading": "せつめいします",
+        "meaning": "giải thích",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "発明",
+        "reading": "はつめい",
+        "meaning": "phát minh, sáng chế",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "発明されます",
+        "reading": "はつめいされます",
+        "meaning": "được phát minh",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "説明",
+        "reading": "せつめい",
+        "meaning": "giải thích, thuyết minh",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "照明",
+        "reading": "しょうめい",
+        "meaning": "Chiếu sáng",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "明",
+        "reading": "めい",
+        "meaning": "Minh / sáng",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 3
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0104",
+    "kanji_id": "kanji_n5_0104",
+    "milestoneId": "ms_minna_b04",
+    "milestone_id": "ms_minna_b04",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 4,
+    "kanjiNumber": 104,
+    "kanji": "魚",
+    "character": "魚",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "魚",
+    "onyomi": "ギョ",
+    "kunyomi": "さかな",
+    "sinoVietnamese": "NGƯ",
+    "vietnameseMeaning": "Cá",
+    "meaning_vi": "Cá",
+    "mnemonicStory": "Chữ NGƯ (Cá - 魚) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng cá trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "魚",
+        "reading": "さかな",
+        "meaning": "cá",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 4
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0105",
+    "kanji_id": "kanji_n5_0105",
+    "milestoneId": "ms_minna_b05",
+    "milestone_id": "ms_minna_b05",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 5,
+    "kanjiNumber": 105,
+    "kanji": "肉",
+    "character": "肉",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "肉",
+    "onyomi": "ニク",
+    "kunyomi": "",
+    "sinoVietnamese": "NHỤC",
+    "vietnameseMeaning": "Thịt",
+    "meaning_vi": "Thịt",
+    "mnemonicStory": "Chữ NHỤC (Thịt - 肉) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng thịt trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "肉",
+        "reading": "にく",
+        "meaning": "thịt",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 5
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0106",
+    "kanji_id": "kanji_n5_0106",
+    "milestoneId": "ms_minna_b06",
+    "milestone_id": "ms_minna_b06",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 6,
+    "kanjiNumber": 106,
+    "kanji": "林",
+    "character": "林",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "林",
+    "onyomi": "リン",
+    "kunyomi": "はやし",
+    "sinoVietnamese": "LÂM",
+    "vietnameseMeaning": "Rừng nhỏ",
+    "meaning_vi": "Rừng nhỏ",
+    "mnemonicStory": "Chữ LÂM (Rừng thưa - 林) được ghép từ 2 bộ Mộc (木 - cây cối). Hai cái cây đứng cạnh nhau tạo nên cánh rừng nhỏ.",
+    "exampleCompounds": [
+      {
+        "word": "森林破壊",
+        "reading": "しんりんはかい",
+        "meaning": "Phá rừng",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 6
+      },
+      {
+        "word": "林",
+        "reading": "りん",
+        "meaning": "Rừng",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 6
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0107",
+    "kanji_id": "kanji_n5_0107",
+    "milestoneId": "ms_minna_b07",
+    "milestone_id": "ms_minna_b07",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 7,
+    "kanjiNumber": 107,
+    "kanji": "森",
+    "character": "森",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "森",
+    "onyomi": "シン",
+    "kunyomi": "もり",
+    "sinoVietnamese": "SÂM",
+    "vietnameseMeaning": "Rừng",
+    "meaning_vi": "Rừng",
+    "mnemonicStory": "Chữ SÂM (Rừng rậm - 森) được ghép từ 3 bộ Mộc (木 - cây cối). Ba cái cây cùng mọc tạo thành khu rừng già rậm rạp um tùm.",
+    "exampleCompounds": [
+      {
+        "word": "森林破壊",
+        "reading": "しんりんはかい",
+        "meaning": "Phá rừng",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "森",
+        "reading": "しん",
+        "meaning": "Rừng rậm",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 7
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0108",
+    "kanji_id": "kanji_n5_0108",
+    "milestoneId": "ms_minna_b08",
+    "milestone_id": "ms_minna_b08",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 8,
+    "kanjiNumber": 108,
+    "kanji": "米",
+    "character": "米",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "米",
+    "onyomi": "ベイ",
+    "kunyomi": "こめ",
+    "sinoVietnamese": "MỄ",
+    "vietnameseMeaning": "Gạo",
+    "meaning_vi": "Gạo",
+    "mnemonicStory": "Chữ MỄ (Gạo - 米) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng gạo trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "お米",
+        "reading": "おこめ",
+        "meaning": "gạo",
+        "type": "noun",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "米国",
+        "reading": "べいこく",
+        "meaning": "nước Mỹ",
+        "type": "proper",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "玄米",
+        "reading": "げんまい",
+        "meaning": "gạo lứt",
+        "type": "noun",
+        "level": "N5",
+        "lesson": 8
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0109",
+    "kanji_id": "kanji_n5_0109",
+    "milestoneId": "ms_minna_b09",
+    "milestone_id": "ms_minna_b09",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 9,
+    "kanjiNumber": 109,
+    "kanji": "牛",
+    "character": "牛",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "牛",
+    "onyomi": "ギュウ",
+    "kunyomi": "うし",
+    "sinoVietnamese": "NGƯU",
+    "vietnameseMeaning": "Bò",
+    "meaning_vi": "Bò",
+    "mnemonicStory": "Chữ NGƯU (Bò - 牛) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng bò trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "牛乳",
+        "reading": "ぎゅうにゅう",
+        "meaning": "sữa bò",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 9
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0110",
+    "kanji_id": "kanji_n5_0110",
+    "milestoneId": "ms_minna_b10",
+    "milestone_id": "ms_minna_b10",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 10,
+    "kanjiNumber": 110,
+    "kanji": "石",
+    "character": "石",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "石",
+    "onyomi": "セキ",
+    "kunyomi": "いし",
+    "sinoVietnamese": "THẠCH",
+    "vietnameseMeaning": "Đá",
+    "meaning_vi": "Đá",
+    "mnemonicStory": "Chữ THẠCH (Đá - 石) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng đá trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "懐石料理",
+        "reading": "かいせきりょうり",
+        "meaning": "Ẩm thực kaiseki (Nhật cao cấp)",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0111",
+    "kanji_id": "kanji_n5_0111",
+    "milestoneId": "ms_minna_b11",
+    "milestone_id": "ms_minna_b11",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 11,
+    "kanjiNumber": 111,
+    "kanji": "岩",
+    "character": "岩",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "岩",
+    "onyomi": "ガン",
+    "kunyomi": "いわ",
+    "sinoVietnamese": "NHAM",
+    "vietnameseMeaning": "Đá lớn",
+    "meaning_vi": "Đá lớn",
+    "mnemonicStory": "Chữ NHAM (Đá lớn - 岩) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng đá lớn trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "岩",
+        "reading": "いわ",
+        "meaning": "tảng đá, đá tảng",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "岩手",
+        "reading": "いわて",
+        "meaning": "Iwate (tỉnh)",
+        "type": "proper",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "溶岩",
+        "reading": "ようがん",
+        "meaning": "dung nham",
+        "type": "noun",
+        "level": "N5",
+        "lesson": 11
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0112",
+    "kanji_id": "kanji_n5_0112",
+    "milestoneId": "ms_minna_b12",
+    "milestone_id": "ms_minna_b12",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 12,
+    "kanjiNumber": 112,
+    "kanji": "物",
+    "character": "物",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "物",
+    "onyomi": "ブツ・モツ",
+    "kunyomi": "もの",
+    "sinoVietnamese": "VẬT",
+    "vietnameseMeaning": "Vật, đồ vật",
+    "meaning_vi": "Vật, đồ vật",
+    "mnemonicStory": "Chữ VẬT (Vật, đồ vật - 物) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng vật, đồ vật trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "果物",
+        "reading": "くだもの",
+        "meaning": "trái cây",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "荷物",
+        "reading": "にもつ",
+        "meaning": "hành lý",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "食べ物",
+        "reading": "たべもの",
+        "meaning": "thức ăn",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "飲み物",
+        "reading": "のみもの",
+        "meaning": "đồ uống",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "物",
+        "reading": "もの",
+        "meaning": "đồ vật",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "買い物します",
+        "reading": "かいものします",
+        "meaning": "mua sắm",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "生物多様性",
+        "reading": "せいぶつたようせい",
+        "meaning": "Đa dạng sinh học",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "唯物論",
+        "reading": "ゆいぶつろん",
+        "meaning": "Chủ nghĩa duy vật",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 12
+      },
+      {
+        "word": "生物多様性保全",
+        "reading": "せいぶつたようせいほぜん",
+        "meaning": "Bảo tồn đa dạng sinh học",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 12
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0113",
+    "kanji_id": "kanji_n5_0113",
+    "milestoneId": "ms_minna_b13",
+    "milestone_id": "ms_minna_b13",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 13,
+    "kanjiNumber": 113,
+    "kanji": "元",
+    "character": "元",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "元",
+    "onyomi": "ゲン",
+    "kunyomi": "もと",
+    "sinoVietnamese": "NGUYÊN",
+    "vietnameseMeaning": "Gốc rễ, nguồn gốc",
+    "meaning_vi": "Gốc rễ, nguồn gốc",
+    "mnemonicStory": "Chữ NGUYÊN (Gốc rễ, nguồn gốc - 元) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng gốc rễ, nguồn gốc trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "元気[な]",
+        "reading": "げんき[な]",
+        "meaning": "khỏe mạnh",
+        "type": "TT-na",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "お元気ですか",
+        "reading": "おげんきですか",
+        "meaning": "anh/chị có khỏe không?",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "元気がない",
+        "reading": "げんきがない",
+        "meaning": "không khỏe, ủ rũ",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "どうぞお元気で",
+        "reading": "どうぞおげんきで",
+        "meaning": "chúc khỏe",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "元気そうです",
+        "reading": "げんきそうです",
+        "meaning": "trông có vẻ khoẻ mạnh",
+        "type": "MT",
+        "level": "N5",
+        "lesson": 13
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0114",
+    "kanji_id": "kanji_n5_0114",
+    "milestoneId": "ms_minna_b14",
+    "milestone_id": "ms_minna_b14",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 14,
+    "kanjiNumber": 114,
+    "kanji": "働",
+    "character": "働",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "働",
+    "onyomi": "ドウ",
+    "kunyomi": "はたら.く",
+    "sinoVietnamese": "ĐỘNG",
+    "vietnameseMeaning": "Làm việc",
+    "meaning_vi": "Làm việc",
+    "mnemonicStory": "Chữ ĐỘNG (Làm việc - 働) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng làm việc trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "働きます",
+        "reading": "はたらきます",
+        "meaning": "làm việc",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 14
+      },
+      {
+        "word": "働かせます",
+        "reading": "はたらかせます",
+        "meaning": "bắt làm việc (cho làm việc)",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 14
+      },
+      {
+        "word": "労働問題",
+        "reading": "ろうどうもんだい",
+        "meaning": "Vấn đề lao động",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 14
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0115",
+    "kanji_id": "kanji_n5_0115",
+    "milestoneId": "ms_minna_b15",
+    "milestone_id": "ms_minna_b15",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 15,
+    "kanjiNumber": 115,
+    "kanji": "乗",
+    "character": "乗",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "乗",
+    "onyomi": "ジョウ",
+    "kunyomi": "の.る",
+    "sinoVietnamese": "THỪA",
+    "vietnameseMeaning": "Lên xe, cưỡi",
+    "meaning_vi": "Lên xe, cưỡi",
+    "mnemonicStory": "Chữ THỪA (Lên xe, cưỡi - 乗) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng lên xe, cưỡi trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "乗り場",
+        "reading": "のりば",
+        "meaning": "trạm, bến",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 15
+      },
+      {
+        "word": "乗ります",
+        "reading": "のります",
+        "meaning": "lên (xe)",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 15
+      },
+      {
+        "word": "乗り換えます",
+        "reading": "のりかえます",
+        "meaning": "đổi xe",
+        "type": "ĐT2",
+        "level": "N5",
+        "lesson": 15
+      },
+      {
+        "word": "乗り物",
+        "reading": "のりもの",
+        "meaning": "phương tiện đi lại",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 15
+      },
+      {
+        "word": "乗り越えます",
+        "reading": "のりこえます",
+        "meaning": "vượt qua, chinh phục",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 15
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0116",
+    "kanji_id": "kanji_n5_0116",
+    "milestoneId": "ms_minna_b16",
+    "milestone_id": "ms_minna_b16",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 16,
+    "kanjiNumber": 116,
+    "kanji": "寒",
+    "character": "寒",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "寒",
+    "onyomi": "カン",
+    "kunyomi": "さむ.い",
+    "sinoVietnamese": "HÀN",
+    "vietnameseMeaning": "Lạnh",
+    "meaning_vi": "Lạnh",
+    "mnemonicStory": "Chữ HÀN (Lạnh - 寒) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng lạnh trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "寒い",
+        "reading": "さむい",
+        "meaning": "lạnh",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "寒い日",
+        "reading": "さむいひ",
+        "meaning": "ngày lạnh",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0117",
+    "kanji_id": "kanji_n5_0117",
+    "milestoneId": "ms_minna_b17",
+    "milestone_id": "ms_minna_b17",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 17,
+    "kanjiNumber": 117,
+    "kanji": "茶",
+    "character": "茶",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "茶",
+    "onyomi": "チャ",
+    "kunyomi": "",
+    "sinoVietnamese": "TRÀ",
+    "vietnameseMeaning": "Trà",
+    "meaning_vi": "Trà",
+    "mnemonicStory": "Chữ TRÀ (Trà - 茶) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng trà trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "お茶",
+        "reading": "おちゃ",
+        "meaning": "trà",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "紅茶",
+        "reading": "こうちゃ",
+        "meaning": "hồng trà",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "喫茶店",
+        "reading": "きっさてん",
+        "meaning": "quán cà phê",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "[お]茶",
+        "reading": "[お]ちゃ",
+        "meaning": "trà",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "茶道",
+        "reading": "さどう",
+        "meaning": "Nghệ thuật trà đạo",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 17
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0118",
+    "kanji_id": "kanji_n5_0118",
+    "milestoneId": "ms_minna_b18",
+    "milestone_id": "ms_minna_b18",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 18,
+    "kanjiNumber": 118,
+    "kanji": "京",
+    "character": "京",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "京",
+    "onyomi": "キョウ",
+    "kunyomi": "",
+    "sinoVietnamese": "KINH",
+    "vietnameseMeaning": "Kinh đô",
+    "meaning_vi": "Kinh đô",
+    "mnemonicStory": "Chữ KINH (Kinh đô - 京) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng kinh đô trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "京語",
+        "reading": "キョウ",
+        "meaning": "Kinh đô (Kinh)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 18
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0119",
+    "kanji_id": "kanji_n5_0119",
+    "milestoneId": "ms_minna_b19",
+    "milestone_id": "ms_minna_b19",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 19,
+    "kanjiNumber": 119,
+    "kanji": "着",
+    "character": "着",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "着",
+    "onyomi": "チャク",
+    "kunyomi": "き.る",
+    "sinoVietnamese": "TRƯỚC",
+    "vietnameseMeaning": "Mặc, đến nơi",
+    "meaning_vi": "Mặc, đến nơi",
+    "mnemonicStory": "Chữ TRƯỚC (Mặc, đến nơi - 着) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng mặc, đến nơi trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "上着",
+        "reading": "うわぎ",
+        "meaning": "áo khoác",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "下着",
+        "reading": "したぎ",
+        "meaning": "đồ lót",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "着ます",
+        "reading": "きます",
+        "meaning": "mặc (áo)",
+        "type": "ĐT2",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "着きます",
+        "reading": "つきます",
+        "meaning": "đến (nơi)",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "着実に",
+        "reading": "ちゃくじつに",
+        "meaning": "chắc chắn, vững chắc, từng bước",
+        "type": "PV",
+        "level": "N5",
+        "lesson": 19
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0120",
+    "kanji_id": "kanji_n5_0120",
+    "milestoneId": "ms_minna_b20",
+    "milestone_id": "ms_minna_b20",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 20,
+    "kanjiNumber": 120,
+    "kanji": "近",
+    "character": "近",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "近",
+    "onyomi": "キン",
+    "kunyomi": "ちか.い",
+    "sinoVietnamese": "CẬN",
+    "vietnameseMeaning": "Gần",
+    "meaning_vi": "Gần",
+    "mnemonicStory": "Chữ CẬN (Gần - 近) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng gần trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "近く",
+        "reading": "ちかく",
+        "meaning": "gần",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "近い",
+        "reading": "ちかい",
+        "meaning": "gần",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 20
+      },
+      {
+        "word": "最近",
+        "reading": "さいきん",
+        "meaning": "gần đây",
+        "type": "TrT",
+        "level": "N5",
+        "lesson": 20
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0121",
+    "kanji_id": "kanji_n5_0121",
+    "milestoneId": "ms_minna_b21",
+    "milestone_id": "ms_minna_b21",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 21,
+    "kanjiNumber": 121,
+    "kanji": "酒",
+    "character": "酒",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "酒",
+    "onyomi": "シュ",
+    "kunyomi": "さけ",
+    "sinoVietnamese": "TỬU",
+    "vietnameseMeaning": "Rượu",
+    "meaning_vi": "Rượu",
+    "mnemonicStory": "Chữ TỬU (Rượu - 酒) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng rượu trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "酒",
+        "reading": "さけ",
+        "meaning": "rượu, sake",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0122",
+    "kanji_id": "kanji_n5_0122",
+    "milestoneId": "ms_minna_b22",
+    "milestone_id": "ms_minna_b22",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 22,
+    "kanjiNumber": 122,
+    "kanji": "紙",
+    "character": "紙",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "紙",
+    "onyomi": "シ",
+    "kunyomi": "かみ",
+    "sinoVietnamese": "CHỈ",
+    "vietnameseMeaning": "Giấy",
+    "meaning_vi": "Giấy",
+    "mnemonicStory": "Chữ CHỈ (Giấy - 紙) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng giấy trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "手紙",
+        "reading": "てがみ",
+        "meaning": "thư",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "紙",
+        "reading": "かみ",
+        "meaning": "giấy",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0123",
+    "kanji_id": "kanji_n5_0123",
+    "milestoneId": "ms_minna_b23",
+    "milestone_id": "ms_minna_b23",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 23,
+    "kanjiNumber": 123,
+    "kanji": "犬",
+    "character": "犬",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "犬",
+    "onyomi": "ケン",
+    "kunyomi": "いぬ",
+    "sinoVietnamese": "KHUYỂN",
+    "vietnameseMeaning": "Chó",
+    "meaning_vi": "Chó",
+    "mnemonicStory": "Chữ KHUYỂN (Chó - 犬) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng chó trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "犬",
+        "reading": "いぬ",
+        "meaning": "chó",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0124",
+    "kanji_id": "kanji_n5_0124",
+    "milestoneId": "ms_minna_b24",
+    "milestone_id": "ms_minna_b24",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 24,
+    "kanjiNumber": 124,
+    "kanji": "田",
+    "character": "田",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "田",
+    "onyomi": "デン",
+    "kunyomi": "た",
+    "sinoVietnamese": "ĐIỀN",
+    "vietnameseMeaning": "Ruộng",
+    "meaning_vi": "Ruộng",
+    "mnemonicStory": "Chữ ĐIỀN (Ruộng - 田) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng ruộng trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "田舎",
+        "reading": "いなか",
+        "meaning": "vùng quê",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 24
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0125",
+    "kanji_id": "kanji_n5_0125",
+    "milestoneId": "ms_minna_b25",
+    "milestone_id": "ms_minna_b25",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 25,
+    "kanjiNumber": 125,
+    "kanji": "弟",
+    "character": "弟",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "弟",
+    "onyomi": "テイ",
+    "kunyomi": "おとうと",
+    "sinoVietnamese": "ĐỆ",
+    "vietnameseMeaning": "Em trai",
+    "meaning_vi": "Em trai",
+    "mnemonicStory": "Chữ ĐỆ (Em trai - 弟) sợi dây quấn quanh thân tre từ trên xuống dưới, em trai đứng ở bậc dưới.",
+    "exampleCompounds": [
+      {
+        "word": "弟",
+        "reading": "おとうと",
+        "meaning": "em trai (mình)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 25
+      },
+      {
+        "word": "兄弟",
+        "reading": "きょうだい",
+        "meaning": "anh chị em",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 25
+      },
+      {
+        "word": "弟さん",
+        "reading": "おとうとさん",
+        "meaning": "em trai (người khác)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 25
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0126",
+    "kanji_id": "kanji_n5_0126",
+    "milestoneId": "ms_minna_b01",
+    "milestone_id": "ms_minna_b01",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 1,
+    "kanjiNumber": 126,
+    "kanji": "兄",
+    "character": "兄",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "兄",
+    "onyomi": "ケイ",
+    "kunyomi": "あに",
+    "sinoVietnamese": "HUYNH",
+    "vietnameseMeaning": "Anh trai",
+    "meaning_vi": "Anh trai",
+    "mnemonicStory": "Chữ HUYNH (Anh trai - 兄) cái miệng lớn (口) trên đôi chân (儿), người anh cả thay cha mẹ cất lời dạy bảo các em.",
+    "exampleCompounds": [
+      {
+        "word": "兄",
+        "reading": "あに",
+        "meaning": "anh trai (mình)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "兄弟",
+        "reading": "きょうだい",
+        "meaning": "anh chị em",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      },
+      {
+        "word": "お兄さん",
+        "reading": "おにいさん",
+        "meaning": "anh trai (người khác)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 1
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0127",
+    "kanji_id": "kanji_n5_0127",
+    "milestoneId": "ms_minna_b02",
+    "milestone_id": "ms_minna_b02",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 2,
+    "kanjiNumber": 127,
+    "kanji": "妹",
+    "character": "妹",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "妹",
+    "onyomi": "マイ",
+    "kunyomi": "いもうと",
+    "sinoVietnamese": "MUỘI",
+    "vietnameseMeaning": "Em gái",
+    "meaning_vi": "Em gái",
+    "mnemonicStory": "Chữ MUỘI (Em gái - 妹) người con gái (女) còn non nớt chưa trưởng thành (未 - vị).",
+    "exampleCompounds": [
+      {
+        "word": "妹",
+        "reading": "いもうと",
+        "meaning": "em gái (mình)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 2
+      },
+      {
+        "word": "妹さん",
+        "reading": "いもうとさん",
+        "meaning": "em gái (người khác)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 2
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0128",
+    "kanji_id": "kanji_n5_0128",
+    "milestoneId": "ms_minna_b03",
+    "milestone_id": "ms_minna_b03",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 3,
+    "kanjiNumber": 128,
+    "kanji": "短",
+    "character": "短",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "短",
+    "onyomi": "タン",
+    "kunyomi": "みじか.い",
+    "sinoVietnamese": "ĐOẢN",
+    "vietnameseMeaning": "Ngắn",
+    "meaning_vi": "Ngắn",
+    "mnemonicStory": "Chữ ĐOẢN (Ngắn - 短) mang kết cấu tượng hình 8 nét. Các nét vẽ tượng trưng cho hình tượng ngắn trong đời sống cổ xưa.",
+    "exampleCompounds": [
+      {
+        "word": "短い",
+        "reading": "みじかい",
+        "meaning": "ngắn",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "短歌",
+        "reading": "たんか",
+        "meaning": "Thơ tanka (thể thơ Nhật)",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 3
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]
