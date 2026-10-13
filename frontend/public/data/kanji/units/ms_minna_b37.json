@@ -1,0 +1,661 @@
+[
+  {
+    "id": "kanji_n4_0140",
+    "kanji_id": "kanji_n4_0140",
+    "milestoneId": "ms_minna_b37",
+    "milestone_id": "ms_minna_b37",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "lessonNumber": 37,
+    "kanjiNumber": 140,
+    "kanji": "思",
+    "character": "思",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "思",
+    "onyomi": "シ",
+    "kunyomi": "おも.う",
+    "sinoVietnamese": "TƯ",
+    "vietnameseMeaning": "Nghĩ",
+    "meaning_vi": "Nghĩ",
+    "mnemonicStory": "Chữ Hán [思] (Tư) nghĩa là \"Nghĩ\" — Âm On: シ, Âm Kun: おも.う.",
+    "exampleCompounds": [
+      {
+        "word": "思います",
+        "reading": "おもいます",
+        "meaning": "nghĩ, cho rằng",
+        "type": "ĐT1",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "〜と思います",
+        "reading": "〜とおもいます",
+        "meaning": "tôi nghĩ rằng ~ (diễn đạt ý kiến cá nhân)",
+        "type": "MT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "思い出します",
+        "reading": "おもいだします",
+        "meaning": "nhớ lại, hồi tưởng",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "〜ようと思っています",
+        "reading": "〜ようとおもっています",
+        "meaning": "đang có ý định ~, dự định sẽ ~",
+        "type": "MT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "思われます",
+        "reading": "おもわれます",
+        "meaning": "được cho là, có vẻ như (khách quan)",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "片思い",
+        "reading": "かたおもい",
+        "meaning": "Tình đơn phương",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "相思相愛",
+        "reading": "そうしそうあい",
+        "meaning": "Yêu nhau (cả hai)",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "集団思考",
+        "reading": "しゅうだんしこう",
+        "meaning": "Tư duy tập thể / groupthink",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0165",
+    "kanji_id": "kanji_n4_0165",
+    "milestoneId": "ms_minna_b37",
+    "milestone_id": "ms_minna_b37",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "lessonNumber": 37,
+    "kanjiNumber": 165,
+    "kanji": "問",
+    "character": "問",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "問",
+    "onyomi": "モン",
+    "kunyomi": "と.う",
+    "sinoVietnamese": "VẤN",
+    "vietnameseMeaning": "Hỏi",
+    "meaning_vi": "Hỏi",
+    "mnemonicStory": "Chữ Hán [問] (Vấn) nghĩa là \"Hỏi\" — Âm On: モン, Âm Kun: と.う.",
+    "exampleCompounds": [
+      {
+        "word": "問題",
+        "reading": "もんだい",
+        "meaning": "vấn đề, câu hỏi",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "ご質問",
+        "reading": "ごしつもん",
+        "meaning": "câu hỏi (lịch sự)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "環境問題",
+        "reading": "かんきょうもんだい",
+        "meaning": "Vấn đề môi trường",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "労働問題",
+        "reading": "ろうどうもんだい",
+        "meaning": "Vấn đề lao động",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "プラスチック問題",
+        "reading": "プラスチックもんだい",
+        "meaning": "Vấn đề nhựa",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "問",
+        "reading": "もん",
+        "meaning": "Vấn đề / hỏi",
+        "type": "kanji",
+        "level": "N4",
+        "lesson": 37
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0190",
+    "kanji_id": "kanji_n4_0190",
+    "milestoneId": "ms_minna_b37",
+    "milestone_id": "ms_minna_b37",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "lessonNumber": 37,
+    "kanjiNumber": 190,
+    "kanji": "意",
+    "character": "意",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "意",
+    "onyomi": "イ",
+    "kunyomi": "",
+    "sinoVietnamese": "Ý",
+    "vietnameseMeaning": "Ý nghĩa, Tâm ý",
+    "meaning_vi": "Ý nghĩa, Tâm ý",
+    "mnemonicStory": "Chữ Hán [意] (Ý) nghĩa là \"Ý nghĩa, Tâm ý\" — Âm On: イ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "意見",
+        "reading": "いけん",
+        "meaning": "ý kiến",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "注意",
+        "reading": "ちゅうい",
+        "meaning": "chú ý, cẩn thận, lưu ý",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "用意します",
+        "reading": "よういします",
+        "meaning": "chuẩn bị, sắp xếp sẵn",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "ご意見",
+        "reading": "ごいけん",
+        "meaning": "ý kiến (lịch sự)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "不注意な",
+        "reading": "ふちゅういな",
+        "meaning": "bất cẩn, sơ ý",
+        "type": "TT-na",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "合意",
+        "reading": "ごうい",
+        "meaning": "Đồng ý / thỏa thuận",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "意識",
+        "reading": "いしき",
+        "meaning": "Ý thức / nhận thức",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "無意識",
+        "reading": "むいしき",
+        "meaning": "Vô thức",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "自由意志",
+        "reading": "じゆういし",
+        "meaning": "Ý chí tự do / tự do ý chí",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0215",
+    "kanji_id": "kanji_n4_0215",
+    "milestoneId": "ms_minna_b37",
+    "milestone_id": "ms_minna_b37",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "lessonNumber": 37,
+    "kanjiNumber": 215,
+    "kanji": "銀",
+    "character": "銀",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "銀",
+    "onyomi": "ギン",
+    "kunyomi": "",
+    "sinoVietnamese": "NGÂN",
+    "vietnameseMeaning": "Bạc, Ngân hàng",
+    "meaning_vi": "Bạc, Ngân hàng",
+    "mnemonicStory": "Chữ Hán [銀] (Ngân) nghĩa là \"Bạc, Ngân hàng\" — Âm On: ギン, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "銀行員",
+        "reading": "ぎんこういん",
+        "meaning": "nhân viên ngân hàng",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "銀行",
+        "reading": "ぎんこう",
+        "meaning": "ngân hàng",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0240",
+    "kanji_id": "kanji_n4_0240",
+    "milestoneId": "ms_minna_b37",
+    "milestone_id": "ms_minna_b37",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "lessonNumber": 37,
+    "kanjiNumber": 240,
+    "kanji": "集",
+    "character": "集",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "集",
+    "onyomi": "シュウ",
+    "kunyomi": "あつ.める",
+    "sinoVietnamese": "TẬP",
+    "vietnameseMeaning": "Tập hợp, Thu thập",
+    "meaning_vi": "Tập hợp, Thu thập",
+    "mnemonicStory": "Chữ Hán [集] (Tập) nghĩa là \"Tập hợp, Thu thập\" — Âm On: シュウ, Âm Kun: あつ.める.",
+    "exampleCompounds": [
+      {
+        "word": "集めます",
+        "reading": "あつめます",
+        "meaning": "thu thập",
+        "type": "ĐT2",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "集団思考",
+        "reading": "しゅうだんしこう",
+        "meaning": "Tư duy tập thể / groupthink",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0265",
+    "kanji_id": "kanji_n4_0265",
+    "milestoneId": "ms_minna_b37",
+    "milestone_id": "ms_minna_b37",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "lessonNumber": 37,
+    "kanjiNumber": 265,
+    "kanji": "発",
+    "character": "発",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "発",
+    "onyomi": "ハツ",
+    "kunyomi": "",
+    "sinoVietnamese": "PHÁT",
+    "vietnameseMeaning": "Xuất phát, Phát ra",
+    "meaning_vi": "Xuất phát, Phát ra",
+    "mnemonicStory": "Chữ Hán [発] (Phát) nghĩa là \"Xuất phát, Phát ra\" — Âm On: ハツ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "発明",
+        "reading": "はつめい",
+        "meaning": "phát minh, sáng chế",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "発明されます",
+        "reading": "はつめいされます",
+        "meaning": "được phát minh",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "発展",
+        "reading": "はってん",
+        "meaning": "phát triển, mở rộng",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "発展します",
+        "reading": "はってんします",
+        "meaning": "phát triển",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "発注",
+        "reading": "はっちゅう",
+        "meaning": "Đặt hàng",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "発酵食品",
+        "reading": "はっこうしょくひん",
+        "meaning": "Thực phẩm lên men",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "太陽光発電",
+        "reading": "たいようこうはつでん",
+        "meaning": "Phát điện bằng năng lượng mặt trời",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "風力発電",
+        "reading": "ふうりょくはつでん",
+        "meaning": "Phát điện bằng sức gió",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0290",
+    "kanji_id": "kanji_n4_0290",
+    "milestoneId": "ms_minna_b37",
+    "milestone_id": "ms_minna_b37",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "lessonNumber": 37,
+    "kanjiNumber": 290,
+    "kanji": "緑",
+    "character": "緑",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "緑",
+    "onyomi": "リョク",
+    "kunyomi": "みどり",
+    "sinoVietnamese": "LỤC",
+    "vietnameseMeaning": "Màu xanh lá",
+    "meaning_vi": "Màu xanh lá",
+    "mnemonicStory": "Chữ Hán [緑] (Lục) nghĩa là \"Màu xanh lá\" — Âm On: リョク, Âm Kun: みどり.",
+    "exampleCompounds": [
+      {
+        "word": "緑語",
+        "reading": "リョク",
+        "meaning": "Màu xanh lá (Lục)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0315",
+    "kanji_id": "kanji_n4_0315",
+    "milestoneId": "ms_minna_b37",
+    "milestone_id": "ms_minna_b37",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "lessonNumber": 37,
+    "kanjiNumber": 315,
+    "kanji": "計",
+    "character": "計",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "計",
+    "onyomi": "ケイ",
+    "kunyomi": "はか.る",
+    "sinoVietnamese": "KẾ",
+    "vietnameseMeaning": "Đo lường, Kế hoạch",
+    "meaning_vi": "Đo lường, Kế hoạch",
+    "mnemonicStory": "Chữ Hán [計] (Kế) nghĩa là \"Đo lường, Kế hoạch\" — Âm On: ケイ, Âm Kun: はか.る.",
+    "exampleCompounds": [
+      {
+        "word": "時計",
+        "reading": "とけい",
+        "meaning": "đồng hồ",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "計画",
+        "reading": "けいかく",
+        "meaning": "kế hoạch, dự án",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "設計",
+        "reading": "せっけい",
+        "meaning": "Thiết kế (kiến trúc)",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "原価計算",
+        "reading": "げんかけいさん",
+        "meaning": "Tính giá thành",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0340",
+    "kanji_id": "kanji_n4_0340",
+    "milestoneId": "ms_minna_b37",
+    "milestone_id": "ms_minna_b37",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "lessonNumber": 37,
+    "kanjiNumber": 340,
+    "kanji": "者",
+    "character": "者",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "者",
+    "onyomi": "シャ",
+    "kunyomi": "もの",
+    "sinoVietnamese": "GIẢ",
+    "vietnameseMeaning": "Người",
+    "meaning_vi": "Người",
+    "mnemonicStory": "Chữ Hán [者] (Giả) nghĩa là \"Người\" — Âm On: シャ, Âm Kun: もの.",
+    "exampleCompounds": [
+      {
+        "word": "医者",
+        "reading": "いしゃ",
+        "meaning": "bác sĩ",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "研究者",
+        "reading": "けんきゅうしゃ",
+        "meaning": "nhà nghiên cứu",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "歯医者",
+        "reading": "はいしゃ",
+        "meaning": "nha sĩ",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "担当者",
+        "reading": "たんとうしゃ",
+        "meaning": "người phụ trách",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "責任者",
+        "reading": "せきにんしゃ",
+        "meaning": "người chịu trách nhiệm",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      },
+      {
+        "word": "患者",
+        "reading": "かんじゃ",
+        "meaning": "Bệnh nhân",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 37
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0365",
+    "kanji_id": "kanji_n4_0365",
+    "milestoneId": "ms_minna_b37",
+    "milestone_id": "ms_minna_b37",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "lessonNumber": 37,
+    "kanjiNumber": 365,
+    "kanji": "虫",
+    "character": "虫",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "虫",
+    "onyomi": "チュウ",
+    "kunyomi": "むし",
+    "sinoVietnamese": "TRÙNG",
+    "vietnameseMeaning": "Côn trùng, sâu bọ",
+    "meaning_vi": "Côn trùng, sâu bọ",
+    "mnemonicStory": "Chữ Hán [虫] (Trùng) nghĩa là \"Côn trùng, sâu bọ\" — Âm On: チュウ, Âm Kun: むし.",
+    "exampleCompounds": [
+      {
+        "word": "虫語",
+        "reading": "チュウ",
+        "meaning": "Côn trùng, sâu bọ (Trùng)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0390",
+    "kanji_id": "kanji_n4_0390",
+    "milestoneId": "ms_minna_b37",
+    "milestone_id": "ms_minna_b37",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "lessonNumber": 37,
+    "kanjiNumber": 390,
+    "kanji": "列",
+    "character": "列",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "列",
+    "onyomi": "レツ",
+    "kunyomi": "",
+    "sinoVietnamese": "LIỆT",
+    "vietnameseMeaning": "Hàng, dãy",
+    "meaning_vi": "Hàng, dãy",
+    "mnemonicStory": "Chữ Hán [列] (Liệt) nghĩa là \"Hàng, dãy\" — Âm On: レツ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "列語",
+        "reading": "レツ",
+        "meaning": "Hàng, dãy (Liệt)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 37
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

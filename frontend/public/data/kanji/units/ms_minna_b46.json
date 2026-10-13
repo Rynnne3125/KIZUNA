@@ -1,0 +1,436 @@
+[
+  {
+    "id": "kanji_n4_0149",
+    "kanji_id": "kanji_n4_0149",
+    "milestoneId": "ms_minna_b46",
+    "milestone_id": "ms_minna_b46",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "lessonNumber": 46,
+    "kanjiNumber": 149,
+    "kanji": "起",
+    "character": "起",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "起",
+    "onyomi": "キ",
+    "kunyomi": "お.きる",
+    "sinoVietnamese": "KHỞI",
+    "vietnameseMeaning": "Thức dậy",
+    "meaning_vi": "Thức dậy",
+    "mnemonicStory": "Chữ Hán [起] (Khởi) nghĩa là \"Thức dậy\" — Âm On: キ, Âm Kun: お.きる.",
+    "exampleCompounds": [
+      {
+        "word": "起きます",
+        "reading": "おきます",
+        "meaning": "thức dậy",
+        "type": "ĐT2",
+        "level": "N4",
+        "lesson": 46
+      },
+      {
+        "word": "早く起きれば",
+        "reading": "はやくおきれば",
+        "meaning": "nếu dậy sớm thì",
+        "type": "MT",
+        "level": "N4",
+        "lesson": 46
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0174",
+    "kanji_id": "kanji_n4_0174",
+    "milestoneId": "ms_minna_b46",
+    "milestone_id": "ms_minna_b46",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "lessonNumber": 46,
+    "kanjiNumber": 174,
+    "kanji": "秋",
+    "character": "秋",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "秋",
+    "onyomi": "シュウ",
+    "kunyomi": "あき",
+    "sinoVietnamese": "THU",
+    "vietnameseMeaning": "Thu",
+    "meaning_vi": "Thu",
+    "mnemonicStory": "Chữ Hán [秋] (Thu) nghĩa là \"Thu\" — Âm On: シュウ, Âm Kun: あき.",
+    "exampleCompounds": [
+      {
+        "word": "秋",
+        "reading": "あき",
+        "meaning": "mùa thu",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 46
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0199",
+    "kanji_id": "kanji_n4_0199",
+    "milestoneId": "ms_minna_b46",
+    "milestone_id": "ms_minna_b46",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "lessonNumber": 46,
+    "kanjiNumber": 199,
+    "kanji": "科",
+    "character": "科",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "科",
+    "onyomi": "カ",
+    "kunyomi": "",
+    "sinoVietnamese": "KHOA",
+    "vietnameseMeaning": "Khoa, Môn học",
+    "meaning_vi": "Khoa, Môn học",
+    "mnemonicStory": "Chữ Hán [科] (Khoa) nghĩa là \"Khoa, Môn học\" — Âm On: カ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "科学",
+        "reading": "かがく",
+        "meaning": "khoa học",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 46
+      },
+      {
+        "word": "科",
+        "reading": "か",
+        "meaning": "Khoa / bộ môn",
+        "type": "kanji",
+        "level": "N4",
+        "lesson": 46
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0224",
+    "kanji_id": "kanji_n4_0224",
+    "milestoneId": "ms_minna_b46",
+    "milestone_id": "ms_minna_b46",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "lessonNumber": 46,
+    "kanjiNumber": 224,
+    "kanji": "再",
+    "character": "再",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "再",
+    "onyomi": "サイ",
+    "kunyomi": "ふたた.び",
+    "sinoVietnamese": "TÁI",
+    "vietnameseMeaning": "Lại, Một lần nữa",
+    "meaning_vi": "Lại, Một lần nữa",
+    "mnemonicStory": "Chữ Hán [再] (Tái) nghĩa là \"Lại, Một lần nữa\" — Âm On: サイ, Âm Kun: ふたた.び.",
+    "exampleCompounds": [
+      {
+        "word": "再生可能エネルギー",
+        "reading": "さいせいかのうエネルギー",
+        "meaning": "Năng lượng tái tạo",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 46
+      },
+      {
+        "word": "再",
+        "reading": "さい",
+        "meaning": "Tái / lại",
+        "type": "kanji",
+        "level": "N4",
+        "lesson": 46
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0249",
+    "kanji_id": "kanji_n4_0249",
+    "milestoneId": "ms_minna_b46",
+    "milestone_id": "ms_minna_b46",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "lessonNumber": 46,
+    "kanjiNumber": 249,
+    "kanji": "続",
+    "character": "続",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "続",
+    "onyomi": "ゾク",
+    "kunyomi": "つづ.く",
+    "sinoVietnamese": "TỤC",
+    "vietnameseMeaning": "Tiếp tục",
+    "meaning_vi": "Tiếp tục",
+    "mnemonicStory": "Chữ Hán [続] (Tục) nghĩa là \"Tiếp tục\" — Âm On: ゾク, Âm Kun: つづ.く.",
+    "exampleCompounds": [
+      {
+        "word": "続けます",
+        "reading": "つづけます",
+        "meaning": "tiếp tục",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 46
+      },
+      {
+        "word": "手続き",
+        "reading": "てつづき",
+        "meaning": "thủ tục, thủ tục hành chính",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 46
+      },
+      {
+        "word": "続けていきます",
+        "reading": "つづけていきます",
+        "meaning": "sẽ tiếp tục",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 46
+      },
+      {
+        "word": "持続可能",
+        "reading": "じぞくかのう",
+        "meaning": "Bền vững",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 46
+      },
+      {
+        "word": "相続",
+        "reading": "そうぞく",
+        "meaning": "Thừa kế / kế thừa",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 46
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0274",
+    "kanji_id": "kanji_n4_0274",
+    "milestoneId": "ms_minna_b46",
+    "milestone_id": "ms_minna_b46",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "lessonNumber": 46,
+    "kanjiNumber": 274,
+    "kanji": "味",
+    "character": "味",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "味",
+    "onyomi": "ミ",
+    "kunyomi": "あじ",
+    "sinoVietnamese": "VỊ",
+    "vietnameseMeaning": "Vị, Hương vị",
+    "meaning_vi": "Vị, Hương vị",
+    "mnemonicStory": "Chữ Hán [味] (Vị) nghĩa là \"Vị, Hương vị\" — Âm On: ミ, Âm Kun: あじ.",
+    "exampleCompounds": [
+      {
+        "word": "調味料",
+        "reading": "ちょうみりょう",
+        "meaning": "Gia vị / nước chấm",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 46
+      },
+      {
+        "word": "風味",
+        "reading": "ふうみ",
+        "meaning": "Hương vị / mùi vị",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 46
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0299",
+    "kanji_id": "kanji_n4_0299",
+    "milestoneId": "ms_minna_b46",
+    "milestone_id": "ms_minna_b46",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "lessonNumber": 46,
+    "kanjiNumber": 299,
+    "kanji": "有",
+    "character": "有",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "有",
+    "onyomi": "ユウ",
+    "kunyomi": "あ.る",
+    "sinoVietnamese": "HỮU",
+    "vietnameseMeaning": "Có, Tồn tại",
+    "meaning_vi": "Có, Tồn tại",
+    "mnemonicStory": "Chữ Hán [有] (Hữu) nghĩa là \"Có, Tồn tại\" — Âm On: ユウ, Âm Kun: あ.る.",
+    "exampleCompounds": [
+      {
+        "word": "有名[な]",
+        "reading": "ゆうめい[な]",
+        "meaning": "nổi tiếng",
+        "type": "TT-na",
+        "level": "N4",
+        "lesson": 46
+      },
+      {
+        "word": "有名な",
+        "reading": "ゆうめいな",
+        "meaning": "nổi tiếng",
+        "type": "TT-na",
+        "level": "N4",
+        "lesson": 46
+      },
+      {
+        "word": "有罪",
+        "reading": "ゆうざい",
+        "meaning": "Có tội / phạm tội",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 46
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0324",
+    "kanji_id": "kanji_n4_0324",
+    "milestoneId": "ms_minna_b46",
+    "milestone_id": "ms_minna_b46",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "lessonNumber": 46,
+    "kanjiNumber": 324,
+    "kanji": "冊",
+    "character": "冊",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "冊",
+    "onyomi": "サツ",
+    "kunyomi": "",
+    "sinoVietnamese": "SÁCH",
+    "vietnameseMeaning": "Quyển, cuốn sách",
+    "meaning_vi": "Quyển, cuốn sách",
+    "mnemonicStory": "Chữ Hán [冊] (Sách) nghĩa là \"Quyển, cuốn sách\" — Âm On: サツ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "冊語",
+        "reading": "サツ",
+        "meaning": "Quyển, cuốn sách (Sách)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 46
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0349",
+    "kanji_id": "kanji_n4_0349",
+    "milestoneId": "ms_minna_b46",
+    "milestone_id": "ms_minna_b46",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "lessonNumber": 46,
+    "kanjiNumber": 349,
+    "kanji": "画",
+    "character": "画",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "画",
+    "onyomi": "ガ",
+    "kunyomi": "",
+    "sinoVietnamese": "HỌA",
+    "vietnameseMeaning": "Tranh vẽ, nét vẽ",
+    "meaning_vi": "Tranh vẽ, nét vẽ",
+    "mnemonicStory": "Chữ Hán [画] (Họa) nghĩa là \"Tranh vẽ, nét vẽ\" — Âm On: ガ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "映画",
+        "reading": "えいが",
+        "meaning": "phim",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 46
+      },
+      {
+        "word": "漫画",
+        "reading": "まんが",
+        "meaning": "truyện tranh",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 46
+      },
+      {
+        "word": "計画",
+        "reading": "けいかく",
+        "meaning": "kế hoạch, dự án",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 46
+      },
+      {
+        "word": "画",
+        "reading": "が",
+        "meaning": "Tranh / vẽ",
+        "type": "kanji",
+        "level": "N4",
+        "lesson": 46
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0374",
+    "kanji_id": "kanji_n4_0374",
+    "milestoneId": "ms_minna_b46",
+    "milestone_id": "ms_minna_b46",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "lessonNumber": 46,
+    "kanjiNumber": 374,
+    "kanji": "玉",
+    "character": "玉",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "玉",
+    "onyomi": "ギョク",
+    "kunyomi": "たま",
+    "sinoVietnamese": "NGỌC",
+    "vietnameseMeaning": "Viên ngọc, hình tròn",
+    "meaning_vi": "Viên ngọc, hình tròn",
+    "mnemonicStory": "Chữ Hán [玉] (Ngọc) nghĩa là \"Viên ngọc, hình tròn\" — Âm On: ギョク, Âm Kun: たま.",
+    "exampleCompounds": [
+      {
+        "word": "玉語",
+        "reading": "ギョク",
+        "meaning": "Viên ngọc, hình tròn (Ngọc)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 46
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

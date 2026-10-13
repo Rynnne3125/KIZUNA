@@ -1,0 +1,552 @@
+[
+  {
+    "id": "kanji_n2_0848",
+    "kanji_id": "kanji_n2_0848",
+    "milestoneId": "ms_n2_s7_l2",
+    "milestone_id": "ms_n2_s7_l2",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "lessonNumber": 114,
+    "kanjiNumber": 848,
+    "kanji": "境",
+    "character": "境",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "strokeCount": 8,
+    "radicals": "境",
+    "onyomi": "キョウ",
+    "kunyomi": "さかい",
+    "sinoVietnamese": "CẢNH",
+    "vietnameseMeaning": "Biên giới, Cảnh trạng",
+    "meaning_vi": "Biên giới, Cảnh trạng",
+    "mnemonicStory": "Chữ Hán [境] (Cảnh) nghĩa là \"Biên giới, Cảnh trạng\" — Âm On: キョウ, Âm Kun: さかい.",
+    "exampleCompounds": [
+      {
+        "word": "環境",
+        "reading": "かんきょう",
+        "meaning": "môi trường",
+        "type": "DT",
+        "level": "N2",
+        "lesson": 114
+      },
+      {
+        "word": "環境問題",
+        "reading": "かんきょうもんだい",
+        "meaning": "Vấn đề môi trường",
+        "type": "vocab",
+        "level": "N2",
+        "lesson": 114
+      },
+      {
+        "word": "環境保全",
+        "reading": "かんきょうほぜん",
+        "meaning": "Bảo tồn môi trường",
+        "type": "vocab",
+        "level": "N2",
+        "lesson": 114
+      },
+      {
+        "word": "環境影響評価",
+        "reading": "かんきょうえいきょうひょうか",
+        "meaning": "Đánh giá tác động môi trường",
+        "type": "vocab",
+        "level": "N2",
+        "lesson": 114
+      },
+      {
+        "word": "境",
+        "reading": "きょう",
+        "meaning": "Cảnh / ranh giới",
+        "type": "kanji",
+        "level": "N2",
+        "lesson": 114
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n2_0884",
+    "kanji_id": "kanji_n2_0884",
+    "milestoneId": "ms_n2_s7_l2",
+    "milestone_id": "ms_n2_s7_l2",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "lessonNumber": 114,
+    "kanjiNumber": 884,
+    "kanji": "燃",
+    "character": "燃",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "strokeCount": 8,
+    "radicals": "燃",
+    "onyomi": "ネン",
+    "kunyomi": "も.える",
+    "sinoVietnamese": "NHIÊN",
+    "vietnameseMeaning": "Cháy, Nhiên liệu",
+    "meaning_vi": "Cháy, Nhiên liệu",
+    "mnemonicStory": "Chữ Hán [燃] (Nhiên) nghĩa là \"Cháy, Nhiên liệu\" — Âm On: ネン, Âm Kun: も.える.",
+    "exampleCompounds": [
+      {
+        "word": "燃語",
+        "reading": "ネン",
+        "meaning": "Cháy, Nhiên liệu (Nhiên)",
+        "type": "DT",
+        "level": "N2",
+        "lesson": 114
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n2_0920",
+    "kanji_id": "kanji_n2_0920",
+    "milestoneId": "ms_n2_s7_l2",
+    "milestone_id": "ms_n2_s7_l2",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "lessonNumber": 114,
+    "kanjiNumber": 920,
+    "kanji": "罰",
+    "character": "罰",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "strokeCount": 8,
+    "radicals": "罰",
+    "onyomi": "バツ",
+    "kunyomi": "",
+    "sinoVietnamese": "PHẠT",
+    "vietnameseMeaning": "Trừng phạt, Phạt",
+    "meaning_vi": "Trừng phạt, Phạt",
+    "mnemonicStory": "Chữ Hán [罰] (Phạt) nghĩa là \"Trừng phạt, Phạt\" — Âm On: バツ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "罰則",
+        "reading": "ばっそく",
+        "meaning": "Hình phạt / chế tài",
+        "type": "vocab",
+        "level": "N2",
+        "lesson": 114
+      },
+      {
+        "word": "罰",
+        "reading": "ばつ",
+        "meaning": "Phạt / hình phạt",
+        "type": "kanji",
+        "level": "N2",
+        "lesson": 114
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n2_0956",
+    "kanji_id": "kanji_n2_0956",
+    "milestoneId": "ms_n2_s7_l2",
+    "milestone_id": "ms_n2_s7_l2",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "lessonNumber": 114,
+    "kanjiNumber": 956,
+    "kanji": "診",
+    "character": "診",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "strokeCount": 8,
+    "radicals": "診",
+    "onyomi": "シン",
+    "kunyomi": "み.る",
+    "sinoVietnamese": "CHẨN",
+    "vietnameseMeaning": "Khám bệnh, Chẩn đoán",
+    "meaning_vi": "Khám bệnh, Chẩn đoán",
+    "mnemonicStory": "Chữ Hán [診] (Chẩn) nghĩa là \"Khám bệnh, Chẩn đoán\" — Âm On: シン, Âm Kun: み.る.",
+    "exampleCompounds": [
+      {
+        "word": "診察",
+        "reading": "しんさつ",
+        "meaning": "khám bệnh",
+        "type": "DT",
+        "level": "N2",
+        "lesson": 114
+      },
+      {
+        "word": "診断",
+        "reading": "しんだん",
+        "meaning": "chẩn đoán",
+        "type": "DT",
+        "level": "N2",
+        "lesson": 114
+      },
+      {
+        "word": "診",
+        "reading": "しん",
+        "meaning": "Khám",
+        "type": "kanji",
+        "level": "N2",
+        "lesson": 114
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n2_0992",
+    "kanji_id": "kanji_n2_0992",
+    "milestoneId": "ms_n2_s7_l2",
+    "milestone_id": "ms_n2_s7_l2",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "lessonNumber": 114,
+    "kanjiNumber": 992,
+    "kanji": "含",
+    "character": "含",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "strokeCount": 8,
+    "radicals": "含",
+    "onyomi": "ガン",
+    "kunyomi": "ふく.む",
+    "sinoVietnamese": "HÀM",
+    "vietnameseMeaning": "Chứa đựng, Bao gồm",
+    "meaning_vi": "Chứa đựng, Bao gồm",
+    "mnemonicStory": "Chữ Hán [含] (Hàm) nghĩa là \"Chứa đựng, Bao gồm\" — Âm On: ガン, Âm Kun: ふく.む.",
+    "exampleCompounds": [
+      {
+        "word": "含語",
+        "reading": "ガン",
+        "meaning": "Chứa đựng, Bao gồm (Hàm)",
+        "type": "DT",
+        "level": "N2",
+        "lesson": 114
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n2_1028",
+    "kanji_id": "kanji_n2_1028",
+    "milestoneId": "ms_n2_s7_l2",
+    "milestone_id": "ms_n2_s7_l2",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "lessonNumber": 114,
+    "kanjiNumber": 1028,
+    "kanji": "障",
+    "character": "障",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "strokeCount": 8,
+    "radicals": "障",
+    "onyomi": "ショウ",
+    "kunyomi": "さわ.る",
+    "sinoVietnamese": "CHƯỚNG",
+    "vietnameseMeaning": "Cản trở, Chướng ngại",
+    "meaning_vi": "Cản trở, Chướng ngại",
+    "mnemonicStory": "Chữ Hán [障] (Chướng) nghĩa là \"Cản trở, Chướng ngại\" — Âm On: ショウ, Âm Kun: さわ.る.",
+    "exampleCompounds": [
+      {
+        "word": "故障",
+        "reading": "こしょう",
+        "meaning": "hỏng hóc",
+        "type": "DT",
+        "level": "N2",
+        "lesson": 114
+      },
+      {
+        "word": "障害",
+        "reading": "しょうがい",
+        "meaning": "chướng ngại, trở ngại",
+        "type": "DT",
+        "level": "N2",
+        "lesson": 114
+      },
+      {
+        "word": "社会保障",
+        "reading": "しゃかいほしょう",
+        "meaning": "An sinh xã hội",
+        "type": "vocab",
+        "level": "N2",
+        "lesson": 114
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n2_1064",
+    "kanji_id": "kanji_n2_1064",
+    "milestoneId": "ms_n2_s7_l2",
+    "milestone_id": "ms_n2_s7_l2",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "lessonNumber": 114,
+    "kanjiNumber": 1064,
+    "kanji": "絞",
+    "character": "絞",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "strokeCount": 8,
+    "radicals": "絞",
+    "onyomi": "コウ",
+    "kunyomi": "しぼ.る",
+    "sinoVietnamese": "GIẢO",
+    "vietnameseMeaning": "Vắt, Bóp, Thu hẹp",
+    "meaning_vi": "Vắt, Bóp, Thu hẹp",
+    "mnemonicStory": "Chữ Hán [絞] (Giảo) nghĩa là \"Vắt, Bóp, Thu hẹp\" — Âm On: コウ, Âm Kun: しぼ.る.",
+    "exampleCompounds": [
+      {
+        "word": "絞語",
+        "reading": "コウ",
+        "meaning": "Vắt, Bóp, Thu hẹp (Giảo)",
+        "type": "DT",
+        "level": "N2",
+        "lesson": 114
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n2_1100",
+    "kanji_id": "kanji_n2_1100",
+    "milestoneId": "ms_n2_s7_l2",
+    "milestone_id": "ms_n2_s7_l2",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "lessonNumber": 114,
+    "kanjiNumber": 1100,
+    "kanji": "描",
+    "character": "描",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "strokeCount": 8,
+    "radicals": "描",
+    "onyomi": "ビョウ",
+    "kunyomi": "えが.く",
+    "sinoVietnamese": "MIÊU",
+    "vietnameseMeaning": "Vẽ, Mô tả, Phác họa",
+    "meaning_vi": "Vẽ, Mô tả, Phác họa",
+    "mnemonicStory": "Chữ Hán [描] (Miêu) nghĩa là \"Vẽ, Mô tả, Phác họa\" — Âm On: ビョウ, Âm Kun: えが.く.",
+    "exampleCompounds": [
+      {
+        "word": "描語",
+        "reading": "ビョウ",
+        "meaning": "Vẽ, Mô tả, Phác họa (Miêu)",
+        "type": "DT",
+        "level": "N2",
+        "lesson": 114
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n2_1136",
+    "kanji_id": "kanji_n2_1136",
+    "milestoneId": "ms_n2_s7_l2",
+    "milestone_id": "ms_n2_s7_l2",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "lessonNumber": 114,
+    "kanjiNumber": 1136,
+    "kanji": "埋",
+    "character": "埋",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "strokeCount": 8,
+    "radicals": "埋",
+    "onyomi": "マイ",
+    "kunyomi": "う.める",
+    "sinoVietnamese": "MAI",
+    "vietnameseMeaning": "Chôn vùi, lấp",
+    "meaning_vi": "Chôn vùi, lấp",
+    "mnemonicStory": "Chữ Hán [埋] (Mai) nghĩa là \"Chôn vùi, lấp\" — Âm On: マイ, Âm Kun: う.める.",
+    "exampleCompounds": [
+      {
+        "word": "埋語",
+        "reading": "マイ",
+        "meaning": "Chôn vùi, lấp (Mai)",
+        "type": "DT",
+        "level": "N2",
+        "lesson": 114
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n2_1172",
+    "kanji_id": "kanji_n2_1172",
+    "milestoneId": "ms_n2_s7_l2",
+    "milestone_id": "ms_n2_s7_l2",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "lessonNumber": 114,
+    "kanjiNumber": 1172,
+    "kanji": "非",
+    "character": "非",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "strokeCount": 8,
+    "radicals": "非",
+    "onyomi": "ヒ",
+    "kunyomi": "",
+    "sinoVietnamese": "PHI",
+    "vietnameseMeaning": "Sai trái, phi lý",
+    "meaning_vi": "Sai trái, phi lý",
+    "mnemonicStory": "Chữ Hán [非] (Phi) nghĩa là \"Sai trái, phi lý\" — Âm On: ヒ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "非語",
+        "reading": "ヒ",
+        "meaning": "Sai trái, phi lý (Phi)",
+        "type": "DT",
+        "level": "N2",
+        "lesson": 114
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n2_1208",
+    "kanji_id": "kanji_n2_1208",
+    "milestoneId": "ms_n2_s7_l2",
+    "milestone_id": "ms_n2_s7_l2",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "lessonNumber": 114,
+    "kanjiNumber": 1208,
+    "kanji": "眼",
+    "character": "眼",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "strokeCount": 8,
+    "radicals": "眼",
+    "onyomi": "ガン",
+    "kunyomi": "め",
+    "sinoVietnamese": "NHÃN",
+    "vietnameseMeaning": "Mắt, ánh nhìn",
+    "meaning_vi": "Mắt, ánh nhìn",
+    "mnemonicStory": "Chữ Hán [眼] (Nhãn) nghĩa là \"Mắt, ánh nhìn\" — Âm On: ガン, Âm Kun: め.",
+    "exampleCompounds": [
+      {
+        "word": "眼鏡",
+        "reading": "めがね",
+        "meaning": "kính",
+        "type": "DT",
+        "level": "N2",
+        "lesson": 114
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n2_1244",
+    "kanji_id": "kanji_n2_1244",
+    "milestoneId": "ms_n2_s7_l2",
+    "milestone_id": "ms_n2_s7_l2",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "lessonNumber": 114,
+    "kanjiNumber": 1244,
+    "kanji": "釣",
+    "character": "釣",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "strokeCount": 8,
+    "radicals": "釣",
+    "onyomi": "チョウ",
+    "kunyomi": "つ.る",
+    "sinoVietnamese": "ĐIẾU",
+    "vietnameseMeaning": "Câu cá",
+    "meaning_vi": "Câu cá",
+    "mnemonicStory": "Chữ Hán [釣] (Điếu) nghĩa là \"Câu cá\" — Âm On: チョウ, Âm Kun: つ.る.",
+    "exampleCompounds": [
+      {
+        "word": "釣り",
+        "reading": "つり",
+        "meaning": "câu cá",
+        "type": "DT",
+        "level": "N2",
+        "lesson": 114
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n2_1280",
+    "kanji_id": "kanji_n2_1280",
+    "milestoneId": "ms_n2_s7_l2",
+    "milestone_id": "ms_n2_s7_l2",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "lessonNumber": 114,
+    "kanjiNumber": 1280,
+    "kanji": "序",
+    "character": "序",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "strokeCount": 8,
+    "radicals": "序",
+    "onyomi": "ジョ",
+    "kunyomi": "",
+    "sinoVietnamese": "TỰ",
+    "vietnameseMeaning": "Thứ tự, mở đầu",
+    "meaning_vi": "Thứ tự, mở đầu",
+    "mnemonicStory": "Chữ Hán [序] (Tự) nghĩa là \"Thứ tự, mở đầu\" — Âm On: ジョ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "序語",
+        "reading": "ジョ",
+        "meaning": "Thứ tự, mở đầu (Tự)",
+        "type": "DT",
+        "level": "N2",
+        "lesson": 114
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n2_1316",
+    "kanji_id": "kanji_n2_1316",
+    "milestoneId": "ms_n2_s7_l2",
+    "milestone_id": "ms_n2_s7_l2",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "lessonNumber": 114,
+    "kanjiNumber": 1316,
+    "kanji": "尊",
+    "character": "尊",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "strokeCount": 8,
+    "radicals": "尊",
+    "onyomi": "ソン",
+    "kunyomi": "とうと.い",
+    "sinoVietnamese": "TÔN",
+    "vietnameseMeaning": "Tôn kính, quý trọng",
+    "meaning_vi": "Tôn kính, quý trọng",
+    "mnemonicStory": "Chữ Hán [尊] (Tôn) nghĩa là \"Tôn kính, quý trọng\" — Âm On: ソン, Âm Kun: とうと.い.",
+    "exampleCompounds": [
+      {
+        "word": "尊敬します",
+        "reading": "そんけいします",
+        "meaning": "kính trọng, ngưỡng mộ",
+        "type": "ĐT",
+        "level": "N2",
+        "lesson": 114
+      },
+      {
+        "word": "尊敬語",
+        "reading": "そんけいご",
+        "meaning": "kính ngữ (tôn trọng người nghe)",
+        "type": "DT",
+        "level": "N2",
+        "lesson": 114
+      },
+      {
+        "word": "自尊心",
+        "reading": "じそんしん",
+        "meaning": "Lòng tự trọng / tự ái",
+        "type": "vocab",
+        "level": "N2",
+        "lesson": 114
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

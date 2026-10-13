@@ -1,0 +1,534 @@
+[
+  {
+    "id": "kanji_n3_0394",
+    "kanji_id": "kanji_n3_0394",
+    "milestoneId": "ms_n3_s1_l2",
+    "milestone_id": "ms_n3_s1_l2",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "lessonNumber": 52,
+    "kanjiNumber": 394,
+    "kanji": "経",
+    "character": "経",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "経",
+    "onyomi": "ケイ",
+    "kunyomi": "へ.る",
+    "sinoVietnamese": "KINH",
+    "vietnameseMeaning": "Kinh tế",
+    "meaning_vi": "Kinh tế",
+    "mnemonicStory": "Chữ Hán [経] (Kinh) nghĩa là \"Kinh tế\" — Âm On: ケイ, Âm Kun: へ.る.",
+    "exampleCompounds": [
+      {
+        "word": "経済",
+        "reading": "けいざい",
+        "meaning": "kinh tế",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 52
+      },
+      {
+        "word": "経験",
+        "reading": "けいけん",
+        "meaning": "kinh nghiệm",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 52
+      },
+      {
+        "word": "経験から学びます",
+        "reading": "けいけんからまなびます",
+        "meaning": "học từ kinh nghiệm",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 52
+      },
+      {
+        "word": "経費",
+        "reading": "けいひ",
+        "meaning": "Chi phí / kinh phí",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 52
+      },
+      {
+        "word": "バブル経済",
+        "reading": "バブルけいざい",
+        "meaning": "Kinh tế bong bóng",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 52
+      },
+      {
+        "word": "経常収支",
+        "reading": "けいじょうしゅうし",
+        "meaning": "Cán cân vãng lai",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 52
+      },
+      {
+        "word": "グリーン経済",
+        "reading": "グリーンけいざい",
+        "meaning": "Kinh tế xanh",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 52
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0432",
+    "kanji_id": "kanji_n3_0432",
+    "milestoneId": "ms_n3_s1_l2",
+    "milestone_id": "ms_n3_s1_l2",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "lessonNumber": 52,
+    "kanjiNumber": 432,
+    "kanji": "願",
+    "character": "願",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "願",
+    "onyomi": "ガン",
+    "kunyomi": "ねが.う",
+    "sinoVietnamese": "NGUYỆN",
+    "vietnameseMeaning": "Ước nguyện, Cầu xin",
+    "meaning_vi": "Ước nguyện, Cầu xin",
+    "mnemonicStory": "Chữ Hán [願] (Nguyện) nghĩa là \"Ước nguyện, Cầu xin\" — Âm On: ガン, Âm Kun: ねが.う.",
+    "exampleCompounds": [
+      {
+        "word": "どうぞよろしくお願いします",
+        "reading": "どうぞよろしくおねがいします",
+        "meaning": "rất mong được sự giúp đỡ",
+        "type": "TGT",
+        "level": "N3",
+        "lesson": 52
+      },
+      {
+        "word": "これで お願いします",
+        "reading": "これでおねがいします",
+        "meaning": "làm ơn theo cái này",
+        "type": "KH",
+        "level": "N3",
+        "lesson": 52
+      },
+      {
+        "word": "よろしくお願いいたします",
+        "reading": "よろしくおねがいいたします",
+        "meaning": "nhờ anh/chị nhiều (rất trang trọng)",
+        "type": "MT",
+        "level": "N3",
+        "lesson": 52
+      },
+      {
+        "word": "よろしくお願いします",
+        "reading": "よろしくおねがいします",
+        "meaning": "nhờ bạn nhiều nhé, mong được quan tâm",
+        "type": "MT",
+        "level": "N3",
+        "lesson": 52
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0470",
+    "kanji_id": "kanji_n3_0470",
+    "milestoneId": "ms_n3_s1_l2",
+    "milestone_id": "ms_n3_s1_l2",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "lessonNumber": 52,
+    "kanjiNumber": 470,
+    "kanji": "努",
+    "character": "努",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "努",
+    "onyomi": "ド",
+    "kunyomi": "つと.める",
+    "sinoVietnamese": "NỖ",
+    "vietnameseMeaning": "Cố gắng, Nỗ lực",
+    "meaning_vi": "Cố gắng, Nỗ lực",
+    "mnemonicStory": "Chữ Hán [努] (Nỗ) nghĩa là \"Cố gắng, Nỗ lực\" — Âm On: ド, Âm Kun: つと.める.",
+    "exampleCompounds": [
+      {
+        "word": "努力",
+        "reading": "どりょく",
+        "meaning": "nỗ lực, cố gắng",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 52
+      },
+      {
+        "word": "努力します",
+        "reading": "どりょくします",
+        "meaning": "nỗ lực, cố gắng",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 52
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0508",
+    "kanji_id": "kanji_n3_0508",
+    "milestoneId": "ms_n3_s1_l2",
+    "milestone_id": "ms_n3_s1_l2",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "lessonNumber": 52,
+    "kanjiNumber": 508,
+    "kanji": "池",
+    "character": "池",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "池",
+    "onyomi": "チ",
+    "kunyomi": "いけ",
+    "sinoVietnamese": "TRÌ",
+    "vietnameseMeaning": "Ao, Hồ nhỏ",
+    "meaning_vi": "Ao, Hồ nhỏ",
+    "mnemonicStory": "Chữ Hán [池] (Trì) nghĩa là \"Ao, Hồ nhỏ\" — Âm On: チ, Âm Kun: いけ.",
+    "exampleCompounds": [
+      {
+        "word": "電池",
+        "reading": "でんち",
+        "meaning": "pin",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 52
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0546",
+    "kanji_id": "kanji_n3_0546",
+    "milestoneId": "ms_n3_s1_l2",
+    "milestone_id": "ms_n3_s1_l2",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "lessonNumber": 52,
+    "kanjiNumber": 546,
+    "kanji": "押",
+    "character": "押",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "押",
+    "onyomi": "オウ",
+    "kunyomi": "お.す",
+    "sinoVietnamese": "ÁP",
+    "vietnameseMeaning": "Đẩy, Ấn",
+    "meaning_vi": "Đẩy, Ấn",
+    "mnemonicStory": "Chữ Hán [押] (Áp) nghĩa là \"Đẩy, Ấn\" — Âm On: オウ, Âm Kun: お.す.",
+    "exampleCompounds": [
+      {
+        "word": "押します",
+        "reading": "おします",
+        "meaning": "ấn, đẩy",
+        "type": "ĐT1",
+        "level": "N3",
+        "lesson": 52
+      },
+      {
+        "word": "差押え",
+        "reading": "さしおさえ",
+        "meaning": "Kê biên / tịch thu",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 52
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0584",
+    "kanji_id": "kanji_n3_0584",
+    "milestoneId": "ms_n3_s1_l2",
+    "milestone_id": "ms_n3_s1_l2",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "lessonNumber": 52,
+    "kanjiNumber": 584,
+    "kanji": "祝",
+    "character": "祝",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "祝",
+    "onyomi": "シュク",
+    "kunyomi": "いわ.う",
+    "sinoVietnamese": "CHÚC",
+    "vietnameseMeaning": "Chúc mừng, Kỷ niệm",
+    "meaning_vi": "Chúc mừng, Kỷ niệm",
+    "mnemonicStory": "Chữ Hán [祝] (Chúc) nghĩa là \"Chúc mừng, Kỷ niệm\" — Âm On: シュク, Âm Kun: いわ.う.",
+    "exampleCompounds": [
+      {
+        "word": "お祝い",
+        "reading": "おいわい",
+        "meaning": "lễ chúc mừng",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 52
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0622",
+    "kanji_id": "kanji_n3_0622",
+    "milestoneId": "ms_n3_s1_l2",
+    "milestone_id": "ms_n3_s1_l2",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "lessonNumber": 52,
+    "kanjiNumber": 622,
+    "kanji": "案",
+    "character": "案",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "案",
+    "onyomi": "アン",
+    "kunyomi": "",
+    "sinoVietnamese": "ÁN",
+    "vietnameseMeaning": "Kế hoạch, Đề án",
+    "meaning_vi": "Kế hoạch, Đề án",
+    "mnemonicStory": "Chữ Hán [案] (Án) nghĩa là \"Kế hoạch, Đề án\" — Âm On: アン, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "案内します",
+        "reading": "あんないします",
+        "meaning": "hướng dẫn",
+        "type": "ĐT3",
+        "level": "N3",
+        "lesson": 52
+      },
+      {
+        "word": "ご案内します",
+        "reading": "ごあんないします",
+        "meaning": "hướng dẫn, dẫn đường (lịch sự)",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 52
+      },
+      {
+        "word": "提案します",
+        "reading": "ていあんします",
+        "meaning": "đề xuất, đề nghị",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 52
+      },
+      {
+        "word": "提案",
+        "reading": "ていあん",
+        "meaning": "Đề xuất / đề nghị",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 52
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0660",
+    "kanji_id": "kanji_n3_0660",
+    "milestoneId": "ms_n3_s1_l2",
+    "milestone_id": "ms_n3_s1_l2",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "lessonNumber": 52,
+    "kanjiNumber": 660,
+    "kanji": "迎",
+    "character": "迎",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "迎",
+    "onyomi": "ゲイ",
+    "kunyomi": "むか.える",
+    "sinoVietnamese": "NGHÊNH",
+    "vietnameseMeaning": "Đón tiếp, nghênh đón",
+    "meaning_vi": "Đón tiếp, nghênh đón",
+    "mnemonicStory": "Chữ Hán [迎] (Nghênh) nghĩa là \"Đón tiếp, nghênh đón\" — Âm On: ゲイ, Âm Kun: むか.える.",
+    "exampleCompounds": [
+      {
+        "word": "迎えます",
+        "reading": "むかえます",
+        "meaning": "đón",
+        "type": "ĐT2",
+        "level": "N3",
+        "lesson": 52
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0698",
+    "kanji_id": "kanji_n3_0698",
+    "milestoneId": "ms_n3_s1_l2",
+    "milestone_id": "ms_n3_s1_l2",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "lessonNumber": 52,
+    "kanjiNumber": 698,
+    "kanji": "浴",
+    "character": "浴",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "浴",
+    "onyomi": "ヨク",
+    "kunyomi": "あ.びる",
+    "sinoVietnamese": "DỤC",
+    "vietnameseMeaning": "Tắm, đắm mình",
+    "meaning_vi": "Tắm, đắm mình",
+    "mnemonicStory": "Chữ Hán [浴] (Dục) nghĩa là \"Tắm, đắm mình\" — Âm On: ヨク, Âm Kun: あ.びる.",
+    "exampleCompounds": [
+      {
+        "word": "浴びます",
+        "reading": "あびます",
+        "meaning": "tắm",
+        "type": "ĐT2",
+        "level": "N3",
+        "lesson": 52
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0736",
+    "kanji_id": "kanji_n3_0736",
+    "milestoneId": "ms_n3_s1_l2",
+    "milestone_id": "ms_n3_s1_l2",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "lessonNumber": 52,
+    "kanjiNumber": 736,
+    "kanji": "穴",
+    "character": "穴",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "穴",
+    "onyomi": "ケツ",
+    "kunyomi": "あな",
+    "sinoVietnamese": "HUYỆT",
+    "vietnameseMeaning": "Hang, hố, lỗ",
+    "meaning_vi": "Hang, hố, lỗ",
+    "mnemonicStory": "Chữ Hán [穴] (Huyệt) nghĩa là \"Hang, hố, lỗ\" — Âm On: ケツ, Âm Kun: あな.",
+    "exampleCompounds": [
+      {
+        "word": "穴場",
+        "reading": "あなば",
+        "meaning": "nơi ít người biết nhưng tuyệt vời",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 52
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0774",
+    "kanji_id": "kanji_n3_0774",
+    "milestoneId": "ms_n3_s1_l2",
+    "milestone_id": "ms_n3_s1_l2",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "lessonNumber": 52,
+    "kanjiNumber": 774,
+    "kanji": "許",
+    "character": "許",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "許",
+    "onyomi": "キョ",
+    "kunyomi": "ゆる.す",
+    "sinoVietnamese": "HỨA",
+    "vietnameseMeaning": "Cho phép, tha thứ",
+    "meaning_vi": "Cho phép, tha thứ",
+    "mnemonicStory": "Chữ Hán [許] (Hứa) nghĩa là \"Cho phép, tha thứ\" — Âm On: キョ, Âm Kun: ゆる.す.",
+    "exampleCompounds": [
+      {
+        "word": "運転免許",
+        "reading": "うんてんめんきょ",
+        "meaning": "bằng lái xe",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 52
+      },
+      {
+        "word": "許可",
+        "reading": "きょか",
+        "meaning": "sự cho phép, giấy phép",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 52
+      },
+      {
+        "word": "特許",
+        "reading": "とっきょ",
+        "meaning": "Bằng sáng chế / patent",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 52
+      },
+      {
+        "word": "許",
+        "reading": "きょ",
+        "meaning": "Cho phép / cấp phép",
+        "type": "kanji",
+        "level": "N3",
+        "lesson": 52
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0812",
+    "kanji_id": "kanji_n3_0812",
+    "milestoneId": "ms_n3_s1_l2",
+    "milestone_id": "ms_n3_s1_l2",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "lessonNumber": 52,
+    "kanjiNumber": 812,
+    "kanji": "管",
+    "character": "管",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "管",
+    "onyomi": "カン",
+    "kunyomi": "くだ",
+    "sinoVietnamese": "QUẢN",
+    "vietnameseMeaning": "Ống, quản lý",
+    "meaning_vi": "Ống, quản lý",
+    "mnemonicStory": "Chữ Hán [管] (Quản) nghĩa là \"Ống, quản lý\" — Âm On: カン, Âm Kun: くだ.",
+    "exampleCompounds": [
+      {
+        "word": "管理します",
+        "reading": "かんりします",
+        "meaning": "quản lý, điều hành",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 52
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

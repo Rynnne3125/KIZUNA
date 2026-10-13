@@ -1,0 +1,311 @@
+[
+  {
+    "id": "kanji_n5_0021",
+    "kanji_id": "kanji_n5_0021",
+    "milestoneId": "ms_minna_b21",
+    "milestone_id": "ms_minna_b21",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 21,
+    "kanjiNumber": 21,
+    "kanji": "土",
+    "character": "土",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "土",
+    "onyomi": "ド",
+    "kunyomi": "つち",
+    "sinoVietnamese": "THỔ",
+    "vietnameseMeaning": "Đất",
+    "meaning_vi": "Đất",
+    "mnemonicStory": "Chữ Hán [土] (Thổ) nghĩa là \"Đất\" — Âm On: ド, Âm Kun: つち.",
+    "exampleCompounds": [
+      {
+        "word": "土曜日",
+        "reading": "どようび",
+        "meaning": "thứ Bảy",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "お土産",
+        "reading": "おみやげ",
+        "meaning": "quà",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "[お]土産",
+        "reading": "[お]みやげ",
+        "meaning": "quà",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "土壌汚染",
+        "reading": "どじょうおせん",
+        "meaning": "Ô nhiễm đất",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "土",
+        "reading": "ど",
+        "meaning": "Đất",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 21
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0046",
+    "kanji_id": "kanji_n5_0046",
+    "milestoneId": "ms_minna_b21",
+    "milestone_id": "ms_minna_b21",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 21,
+    "kanjiNumber": 46,
+    "kanji": "小",
+    "character": "小",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "小",
+    "onyomi": "ショウ",
+    "kunyomi": "ちい.さい",
+    "sinoVietnamese": "TIỂU",
+    "vietnameseMeaning": "Nhỏ",
+    "meaning_vi": "Nhỏ",
+    "mnemonicStory": "Chữ Hán [小] (Tiểu) nghĩa là \"Nhỏ\" — Âm On: ショウ, Âm Kun: ちい.さい.",
+    "exampleCompounds": [
+      {
+        "word": "小さい",
+        "reading": "ちいさい",
+        "meaning": "nhỏ, bé",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 21
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0071",
+    "kanji_id": "kanji_n5_0071",
+    "milestoneId": "ms_minna_b21",
+    "milestone_id": "ms_minna_b21",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 21,
+    "kanjiNumber": 71,
+    "kanji": "話",
+    "character": "話",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "話",
+    "onyomi": "ワ",
+    "kunyomi": "はな.す",
+    "sinoVietnamese": "THOẠI",
+    "vietnameseMeaning": "Nói chuyện",
+    "meaning_vi": "Nói chuyện",
+    "mnemonicStory": "Chữ Hán [話] (Thoại) nghĩa là \"Nói chuyện\" — Âm On: ワ, Âm Kun: はな.す.",
+    "exampleCompounds": [
+      {
+        "word": "電話",
+        "reading": "でんわ",
+        "meaning": "điện thoại",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "話します",
+        "reading": "はなします",
+        "meaning": "nói",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "電話します",
+        "reading": "でんわします",
+        "meaning": "gọi điện thoại",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "話",
+        "reading": "はなし",
+        "meaning": "câu chuyện",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "お世話になりました",
+        "reading": "おせわになりました",
+        "meaning": "cảm ơn đã giúp đỡ",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "民話",
+        "reading": "みんわ",
+        "meaning": "Truyện dân gian",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "神話",
+        "reading": "しんわ",
+        "meaning": "Thần thoại",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 21
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0096",
+    "kanji_id": "kanji_n5_0096",
+    "milestoneId": "ms_minna_b21",
+    "milestone_id": "ms_minna_b21",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 21,
+    "kanjiNumber": 96,
+    "kanji": "電",
+    "character": "電",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "電",
+    "onyomi": "デン",
+    "kunyomi": "",
+    "sinoVietnamese": "ĐIỆN",
+    "vietnameseMeaning": "Điện",
+    "meaning_vi": "Điện",
+    "mnemonicStory": "Chữ Hán [電] (Điện) nghĩa là \"Điện\" — Âm On: デン, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "電気",
+        "reading": "でんき",
+        "meaning": "điện, đèn điện",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "電話",
+        "reading": "でんわ",
+        "meaning": "điện thoại",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "電車",
+        "reading": "でんしゃ",
+        "meaning": "tàu điện",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "電池",
+        "reading": "でんち",
+        "meaning": "pin",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "電子辞書",
+        "reading": "でんしじしょ",
+        "meaning": "từ điển điện tử",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "電話します",
+        "reading": "でんわします",
+        "meaning": "gọi điện thoại",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "太陽光発電",
+        "reading": "たいようこうはつでん",
+        "meaning": "Phát điện bằng năng lượng mặt trời",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "風力発電",
+        "reading": "ふうりょくはつでん",
+        "meaning": "Phát điện bằng sức gió",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 21
+      },
+      {
+        "word": "電",
+        "reading": "でん",
+        "meaning": "Điện",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 21
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0121",
+    "kanji_id": "kanji_n5_0121",
+    "milestoneId": "ms_minna_b21",
+    "milestone_id": "ms_minna_b21",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 21,
+    "kanjiNumber": 121,
+    "kanji": "酒",
+    "character": "酒",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "酒",
+    "onyomi": "シュ",
+    "kunyomi": "さけ",
+    "sinoVietnamese": "TỬU",
+    "vietnameseMeaning": "Rượu",
+    "meaning_vi": "Rượu",
+    "mnemonicStory": "Chữ Hán [酒] (Tửu) nghĩa là \"Rượu\" — Âm On: シュ, Âm Kun: さけ.",
+    "exampleCompounds": [
+      {
+        "word": "酒",
+        "reading": "さけ",
+        "meaning": "rượu, sake",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 21
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

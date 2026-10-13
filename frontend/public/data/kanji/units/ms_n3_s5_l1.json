@@ -1,0 +1,493 @@
+[
+  {
+    "id": "kanji_n3_0409",
+    "kanji_id": "kanji_n3_0409",
+    "milestoneId": "ms_n3_s5_l1",
+    "milestone_id": "ms_n3_s5_l1",
+    "stageId": "stage_n3_5",
+    "stage_id": "stage_n3_5",
+    "lessonNumber": 67,
+    "kanjiNumber": 409,
+    "kanji": "認",
+    "character": "認",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "認",
+    "onyomi": "ニン",
+    "kunyomi": "みと.める",
+    "sinoVietnamese": "NHẬN",
+    "vietnameseMeaning": "Nhận ra",
+    "meaning_vi": "Nhận ra",
+    "mnemonicStory": "Chữ Hán [認] (Nhận) nghĩa là \"Nhận ra\" — Âm On: ニン, Âm Kun: みと.める.",
+    "exampleCompounds": [
+      {
+        "word": "確認",
+        "reading": "かくにん",
+        "meaning": "xác nhận, kiểm tra",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 67
+      },
+      {
+        "word": "確認します",
+        "reading": "かくにんします",
+        "meaning": "xác nhận",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 67
+      },
+      {
+        "word": "承認します",
+        "reading": "しょうにんします",
+        "meaning": "phê duyệt, chấp thuận",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 67
+      },
+      {
+        "word": "認知",
+        "reading": "にんち",
+        "meaning": "Nhận thức",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 67
+      },
+      {
+        "word": "認識論",
+        "reading": "にんしきろん",
+        "meaning": "Nhận thức luận",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 67
+      },
+      {
+        "word": "認知的不協和",
+        "reading": "にんちてきふきょうわ",
+        "meaning": "Bất hòa nhận thức / cognitive dissonance",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 67
+      },
+      {
+        "word": "認知療法",
+        "reading": "にんちりょうほう",
+        "meaning": "Liệu pháp nhận thức",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 67
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0447",
+    "kanji_id": "kanji_n3_0447",
+    "milestoneId": "ms_n3_s5_l1",
+    "milestone_id": "ms_n3_s5_l1",
+    "stageId": "stage_n3_5",
+    "stage_id": "stage_n3_5",
+    "lessonNumber": 67,
+    "kanjiNumber": 447,
+    "kanji": "終",
+    "character": "終",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "終",
+    "onyomi": "シュウ",
+    "kunyomi": "お.わる",
+    "sinoVietnamese": "CHUNG",
+    "vietnameseMeaning": "Kết thúc",
+    "meaning_vi": "Kết thúc",
+    "mnemonicStory": "Chữ Hán [終] (Chung) nghĩa là \"Kết thúc\" — Âm On: シュウ, Âm Kun: お.わる.",
+    "exampleCompounds": [
+      {
+        "word": "終わります",
+        "reading": "おわります",
+        "meaning": "kết thúc",
+        "type": "ĐT1",
+        "level": "N3",
+        "lesson": 67
+      },
+      {
+        "word": "最終",
+        "reading": "さいしゅう",
+        "meaning": "cuối cùng, sau cùng",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 67
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0485",
+    "kanji_id": "kanji_n3_0485",
+    "milestoneId": "ms_n3_s5_l1",
+    "milestone_id": "ms_n3_s5_l1",
+    "stageId": "stage_n3_5",
+    "stage_id": "stage_n3_5",
+    "lessonNumber": 67,
+    "kanjiNumber": 485,
+    "kanji": "首",
+    "character": "首",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "首",
+    "onyomi": "シュ",
+    "kunyomi": "くび",
+    "sinoVietnamese": "THỦ",
+    "vietnameseMeaning": "Cổ, Người đứng đầu",
+    "meaning_vi": "Cổ, Người đứng đầu",
+    "mnemonicStory": "Chữ Hán [首] (Thủ) nghĩa là \"Cổ, Người đứng đầu\" — Âm On: シュ, Âm Kun: くび.",
+    "exampleCompounds": [
+      {
+        "word": "首相",
+        "reading": "しゅしょう",
+        "meaning": "thủ tướng",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 67
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0523",
+    "kanji_id": "kanji_n3_0523",
+    "milestoneId": "ms_n3_s5_l1",
+    "milestone_id": "ms_n3_s5_l1",
+    "stageId": "stage_n3_5",
+    "stage_id": "stage_n3_5",
+    "lessonNumber": 67,
+    "kanjiNumber": 523,
+    "kanji": "悔",
+    "character": "悔",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "悔",
+    "onyomi": "カイ",
+    "kunyomi": "く.やむ",
+    "sinoVietnamese": "HỐI",
+    "vietnameseMeaning": "Hối hận, Tiếc nuối",
+    "meaning_vi": "Hối hận, Tiếc nuối",
+    "mnemonicStory": "Chữ Hán [悔] (Hối) nghĩa là \"Hối hận, Tiếc nuối\" — Âm On: カイ, Âm Kun: く.やむ.",
+    "exampleCompounds": [
+      {
+        "word": "後悔",
+        "reading": "こうかい",
+        "meaning": "sự hối hận, sự tiếc nuối",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 67
+      },
+      {
+        "word": "後悔します",
+        "reading": "こうかいします",
+        "meaning": "hối hận",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 67
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0561",
+    "kanji_id": "kanji_n3_0561",
+    "milestoneId": "ms_n3_s5_l1",
+    "milestone_id": "ms_n3_s5_l1",
+    "stageId": "stage_n3_5",
+    "stage_id": "stage_n3_5",
+    "lessonNumber": 67,
+    "kanjiNumber": 561,
+    "kanji": "暖",
+    "character": "暖",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "暖",
+    "onyomi": "ダン",
+    "kunyomi": "あたた.かい",
+    "sinoVietnamese": "NOÃN",
+    "vietnameseMeaning": "Ấm (thời tiết)",
+    "meaning_vi": "Ấm (thời tiết)",
+    "mnemonicStory": "Chữ Hán [暖] (Noãn) nghĩa là \"Ấm (thời tiết)\" — Âm On: ダン, Âm Kun: あたた.かい.",
+    "exampleCompounds": [
+      {
+        "word": "暖かい",
+        "reading": "あたたかい",
+        "meaning": "ấm áp",
+        "type": "TT-i",
+        "level": "N3",
+        "lesson": 67
+      },
+      {
+        "word": "暖かくなってきました",
+        "reading": "あたたかくなってきました",
+        "meaning": "dần dần trở nên ấm hơn",
+        "type": "MT",
+        "level": "N3",
+        "lesson": 67
+      },
+      {
+        "word": "地球温暖化",
+        "reading": "ちきゅうおんだんか",
+        "meaning": "Nóng lên toàn cầu",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 67
+      },
+      {
+        "word": "暖",
+        "reading": "だん",
+        "meaning": "Ấm áp",
+        "type": "kanji",
+        "level": "N3",
+        "lesson": 67
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0599",
+    "kanji_id": "kanji_n3_0599",
+    "milestoneId": "ms_n3_s5_l1",
+    "milestone_id": "ms_n3_s5_l1",
+    "stageId": "stage_n3_5",
+    "stage_id": "stage_n3_5",
+    "lessonNumber": 67,
+    "kanjiNumber": 599,
+    "kanji": "胃",
+    "character": "胃",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "胃",
+    "onyomi": "イ",
+    "kunyomi": "",
+    "sinoVietnamese": "VỊ",
+    "vietnameseMeaning": "Dạ dày",
+    "meaning_vi": "Dạ dày",
+    "mnemonicStory": "Chữ Hán [胃] (Vị) nghĩa là \"Dạ dày\" — Âm On: イ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "胃",
+        "reading": "い",
+        "meaning": "Dạ dày",
+        "type": "kanji",
+        "level": "N3",
+        "lesson": 67
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0637",
+    "kanji_id": "kanji_n3_0637",
+    "milestoneId": "ms_n3_s5_l1",
+    "milestone_id": "ms_n3_s5_l1",
+    "stageId": "stage_n3_5",
+    "stage_id": "stage_n3_5",
+    "lessonNumber": 67,
+    "kanjiNumber": 637,
+    "kanji": "製",
+    "character": "製",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "製",
+    "onyomi": "セイ",
+    "kunyomi": "",
+    "sinoVietnamese": "CHẾ",
+    "vietnameseMeaning": "Chế tạo, sản xuất",
+    "meaning_vi": "Chế tạo, sản xuất",
+    "mnemonicStory": "Chữ Hán [製] (Chế) nghĩa là \"Chế tạo, sản xuất\" — Âm On: セイ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "製品",
+        "reading": "せいひん",
+        "meaning": "sản phẩm",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 67
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0675",
+    "kanji_id": "kanji_n3_0675",
+    "milestoneId": "ms_n3_s5_l1",
+    "milestone_id": "ms_n3_s5_l1",
+    "stageId": "stage_n3_5",
+    "stage_id": "stage_n3_5",
+    "lessonNumber": 67,
+    "kanjiNumber": 675,
+    "kanji": "素",
+    "character": "素",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "素",
+    "onyomi": "ソ",
+    "kunyomi": "もと",
+    "sinoVietnamese": "TỐ",
+    "vietnameseMeaning": "Yếu tố, nguyên chất",
+    "meaning_vi": "Yếu tố, nguyên chất",
+    "mnemonicStory": "Chữ Hán [素] (Tố) nghĩa là \"Yếu tố, nguyên chất\" — Âm On: ソ, Âm Kun: もと.",
+    "exampleCompounds": [
+      {
+        "word": "素敵[な]",
+        "reading": "すてき[な]",
+        "meaning": "tuyệt vời, đẹp",
+        "type": "TT-na",
+        "level": "N3",
+        "lesson": 67
+      },
+      {
+        "word": "素晴らしい",
+        "reading": "すばらしい",
+        "meaning": "tuyệt vời",
+        "type": "TT-i",
+        "level": "N3",
+        "lesson": 67
+      },
+      {
+        "word": "素材",
+        "reading": "そざい",
+        "meaning": "Vật liệu / chất liệu",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 67
+      },
+      {
+        "word": "二酸化炭素",
+        "reading": "にさんかたんそ",
+        "meaning": "Carbon dioxide / CO2",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 67
+      },
+      {
+        "word": "脱炭素化",
+        "reading": "だつたんそか",
+        "meaning": "Phi carbon hóa / khử carbon",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 67
+      },
+      {
+        "word": "水素エネルギー",
+        "reading": "すいそエネルギー",
+        "meaning": "Năng lượng hydrogen",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 67
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0713",
+    "kanji_id": "kanji_n3_0713",
+    "milestoneId": "ms_n3_s5_l1",
+    "milestone_id": "ms_n3_s5_l1",
+    "stageId": "stage_n3_5",
+    "stage_id": "stage_n3_5",
+    "lessonNumber": 67,
+    "kanjiNumber": 713,
+    "kanji": "座",
+    "character": "座",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "座",
+    "onyomi": "ザ",
+    "kunyomi": "すわ.る",
+    "sinoVietnamese": "TỌA",
+    "vietnameseMeaning": "Chỗ ngồi, ngồi",
+    "meaning_vi": "Chỗ ngồi, ngồi",
+    "mnemonicStory": "Chữ Hán [座] (Tọa) nghĩa là \"Chỗ ngồi, ngồi\" — Âm On: ザ, Âm Kun: すわ.る.",
+    "exampleCompounds": [
+      {
+        "word": "座ります",
+        "reading": "すわります",
+        "meaning": "ngồi",
+        "type": "ĐT1",
+        "level": "N3",
+        "lesson": 67
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0751",
+    "kanji_id": "kanji_n3_0751",
+    "milestoneId": "ms_n3_s5_l1",
+    "milestone_id": "ms_n3_s5_l1",
+    "stageId": "stage_n3_5",
+    "stage_id": "stage_n3_5",
+    "lessonNumber": 67,
+    "kanjiNumber": 751,
+    "kanji": "席",
+    "character": "席",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "席",
+    "onyomi": "セキ",
+    "kunyomi": "",
+    "sinoVietnamese": "TỊCH",
+    "vietnameseMeaning": "Chỗ ngồi, ghế",
+    "meaning_vi": "Chỗ ngồi, ghế",
+    "mnemonicStory": "Chữ Hán [席] (Tịch) nghĩa là \"Chỗ ngồi, ghế\" — Âm On: セキ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "欠席します",
+        "reading": "けっせきします",
+        "meaning": "vắng mặt, nghỉ học/nghỉ làm",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 67
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0789",
+    "kanji_id": "kanji_n3_0789",
+    "milestoneId": "ms_n3_s5_l1",
+    "milestone_id": "ms_n3_s5_l1",
+    "stageId": "stage_n3_5",
+    "stage_id": "stage_n3_5",
+    "lessonNumber": 67,
+    "kanjiNumber": 789,
+    "kanji": "奥",
+    "character": "奥",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "奥",
+    "onyomi": "オウ",
+    "kunyomi": "おく",
+    "sinoVietnamese": "ÁO",
+    "vietnameseMeaning": "Bên trong, sâu kín",
+    "meaning_vi": "Bên trong, sâu kín",
+    "mnemonicStory": "Chữ Hán [奥] (Áo) nghĩa là \"Bên trong, sâu kín\" — Âm On: オウ, Âm Kun: おく.",
+    "exampleCompounds": [
+      {
+        "word": "奥さん",
+        "reading": "おくさん",
+        "meaning": "vợ (người khác)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 67
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

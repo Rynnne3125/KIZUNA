@@ -1,0 +1,351 @@
+[
+  {
+    "id": "kanji_n5_0023",
+    "kanji_id": "kanji_n5_0023",
+    "milestoneId": "ms_minna_b23",
+    "milestone_id": "ms_minna_b23",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 23,
+    "kanjiNumber": 23,
+    "kanji": "時",
+    "character": "時",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "時",
+    "onyomi": "ジ",
+    "kunyomi": "とき",
+    "sinoVietnamese": "THỜI",
+    "vietnameseMeaning": "Thời gian",
+    "meaning_vi": "Thời gian",
+    "mnemonicStory": "Chữ Hán [時] (Thời) nghĩa là \"Thời gian\" — Âm On: ジ, Âm Kun: とき.",
+    "exampleCompounds": [
+      {
+        "word": "時計",
+        "reading": "とけい",
+        "meaning": "đồng hồ",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "～時",
+        "reading": "～じ",
+        "meaning": "~ giờ",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "何時",
+        "reading": "なんじ",
+        "meaning": "mấy giờ",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "時々",
+        "reading": "ときどき",
+        "meaning": "thỉnh thoảng",
+        "type": "TrT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "時間",
+        "reading": "じかん",
+        "meaning": "thời gian",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "時刻表",
+        "reading": "じこくひょう",
+        "meaning": "bảng giờ chạy",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "時効",
+        "reading": "じこう",
+        "meaning": "Thời hiệu / thời gian quy định của pháp luật",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "時",
+        "reading": "じ",
+        "meaning": "Thời / thời gian",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 23
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0048",
+    "kanji_id": "kanji_n5_0048",
+    "milestoneId": "ms_minna_b23",
+    "milestone_id": "ms_minna_b23",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 23,
+    "kanjiNumber": 48,
+    "kanji": "上",
+    "character": "上",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "上",
+    "onyomi": "ジョウ",
+    "kunyomi": "うえ",
+    "sinoVietnamese": "THƯỢNG",
+    "vietnameseMeaning": "Trên",
+    "meaning_vi": "Trên",
+    "mnemonicStory": "Chữ Hán [上] (Thượng) nghĩa là \"Trên\" — Âm On: ジョウ, Âm Kun: うえ.",
+    "exampleCompounds": [
+      {
+        "word": "上手[な]",
+        "reading": "じょうず[な]",
+        "meaning": "giỏi",
+        "type": "TT-na",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "上",
+        "reading": "うえ",
+        "meaning": "trên",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "上着",
+        "reading": "うわぎ",
+        "meaning": "áo khoác",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "以上です",
+        "reading": "いじょうです",
+        "meaning": "hết rồi",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "上司",
+        "reading": "じょうし",
+        "meaning": "cấp trên, thượng cấp",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "上手になります",
+        "reading": "じょうずになります",
+        "meaning": "trở nên giỏi hơn, thành thạo hơn",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "売上",
+        "reading": "うりあげ",
+        "meaning": "Doanh thu",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "上告",
+        "reading": "じょうこく",
+        "meaning": "Kháng cáo lên tòa tối cao",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "形而上学",
+        "reading": "けいじじょうがく",
+        "meaning": "Siêu hình học",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 23
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0073",
+    "kanji_id": "kanji_n5_0073",
+    "milestoneId": "ms_minna_b23",
+    "milestone_id": "ms_minna_b23",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 23,
+    "kanjiNumber": 73,
+    "kanji": "語",
+    "character": "語",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "語",
+    "onyomi": "ゴ",
+    "kunyomi": "かた.る",
+    "sinoVietnamese": "NGỮ",
+    "vietnameseMeaning": "Ngôn ngữ",
+    "meaning_vi": "Ngôn ngữ",
+    "mnemonicStory": "Chữ Hán [語] (Ngữ) nghĩa là \"Ngôn ngữ\" — Âm On: ゴ, Âm Kun: かた.る.",
+    "exampleCompounds": [
+      {
+        "word": "英語",
+        "reading": "えいご",
+        "meaning": "tiếng Anh",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "～語",
+        "reading": "～ご",
+        "meaning": "tiếng ~",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "日本語",
+        "reading": "にほんご",
+        "meaning": "tiếng Nhật",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "敬語",
+        "reading": "けいご",
+        "meaning": "kính ngữ, ngôn ngữ lịch sự",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "丁寧語",
+        "reading": "ていねいご",
+        "meaning": "thể lịch sự (です・ます)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "尊敬語",
+        "reading": "そんけいご",
+        "meaning": "kính ngữ (tôn trọng người nghe)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0098",
+    "kanji_id": "kanji_n5_0098",
+    "milestoneId": "ms_minna_b23",
+    "milestone_id": "ms_minna_b23",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 23,
+    "kanjiNumber": 98,
+    "kanji": "道",
+    "character": "道",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "道",
+    "onyomi": "ドウ",
+    "kunyomi": "みち",
+    "sinoVietnamese": "ĐẠO",
+    "vietnameseMeaning": "Đường",
+    "meaning_vi": "Đường",
+    "mnemonicStory": "Chữ Hán [道] (Đạo) nghĩa là \"Đường\" — Âm On: ドウ, Âm Kun: みち.",
+    "exampleCompounds": [
+      {
+        "word": "道",
+        "reading": "みち",
+        "meaning": "đường",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "近道",
+        "reading": "ちかみち",
+        "meaning": "đường tắt, con đường ngắn nhất",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "茶道",
+        "reading": "さどう",
+        "meaning": "Nghệ thuật trà đạo",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 23
+      },
+      {
+        "word": "書道",
+        "reading": "しょどう",
+        "meaning": "Thư pháp",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 23
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0123",
+    "kanji_id": "kanji_n5_0123",
+    "milestoneId": "ms_minna_b23",
+    "milestone_id": "ms_minna_b23",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 23,
+    "kanjiNumber": 123,
+    "kanji": "犬",
+    "character": "犬",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "犬",
+    "onyomi": "ケン",
+    "kunyomi": "いぬ",
+    "sinoVietnamese": "KHUYỂN",
+    "vietnameseMeaning": "Chó",
+    "meaning_vi": "Chó",
+    "mnemonicStory": "Chữ Hán [犬] (Khuyển) nghĩa là \"Chó\" — Âm On: ケン, Âm Kun: いぬ.",
+    "exampleCompounds": [
+      {
+        "word": "犬",
+        "reading": "いぬ",
+        "meaning": "chó",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 23
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

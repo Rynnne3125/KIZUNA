@@ -1,0 +1,462 @@
+[
+  {
+    "id": "kanji_n3_0400",
+    "kanji_id": "kanji_n3_0400",
+    "milestoneId": "ms_n3_s2_l4",
+    "milestone_id": "ms_n3_s2_l4",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 58,
+    "kanjiNumber": 400,
+    "kanji": "規",
+    "character": "規",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "規",
+    "onyomi": "キ",
+    "kunyomi": "",
+    "sinoVietnamese": "QUY",
+    "vietnameseMeaning": "Quy tắc",
+    "meaning_vi": "Quy tắc",
+    "mnemonicStory": "Chữ Hán [規] (Quy) nghĩa là \"Quy tắc\" — Âm On: キ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "規則",
+        "reading": "きそく",
+        "meaning": "Quy tắc / quy định",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 58
+      },
+      {
+        "word": "規",
+        "reading": "き",
+        "meaning": "Quy / quy tắc",
+        "type": "kanji",
+        "level": "N3",
+        "lesson": 58
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0438",
+    "kanji_id": "kanji_n3_0438",
+    "milestoneId": "ms_n3_s2_l4",
+    "milestone_id": "ms_n3_s2_l4",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 58,
+    "kanjiNumber": 438,
+    "kanji": "疑",
+    "character": "疑",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "疑",
+    "onyomi": "ギ",
+    "kunyomi": "うたが.う",
+    "sinoVietnamese": "NGHI",
+    "vietnameseMeaning": "Nghi ngờ",
+    "meaning_vi": "Nghi ngờ",
+    "mnemonicStory": "Chữ Hán [疑] (Nghi) nghĩa là \"Nghi ngờ\" — Âm On: ギ, Âm Kun: うたが.う.",
+    "exampleCompounds": [
+      {
+        "word": "疑語",
+        "reading": "ギ",
+        "meaning": "Nghi ngờ (Nghi)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 58
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0476",
+    "kanji_id": "kanji_n3_0476",
+    "milestoneId": "ms_n3_s2_l4",
+    "milestone_id": "ms_n3_s2_l4",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 58,
+    "kanjiNumber": 476,
+    "kanji": "税",
+    "character": "税",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "税",
+    "onyomi": "ゼイ",
+    "kunyomi": "",
+    "sinoVietnamese": "THUẾ",
+    "vietnameseMeaning": "Thuế",
+    "meaning_vi": "Thuế",
+    "mnemonicStory": "Chữ Hán [税] (Thuế) nghĩa là \"Thuế\" — Âm On: ゼイ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "税制",
+        "reading": "ぜいせい",
+        "meaning": "Chế độ thuế",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 58
+      },
+      {
+        "word": "炭素税",
+        "reading": "たんそぜい",
+        "meaning": "Thuế carbon",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 58
+      },
+      {
+        "word": "税",
+        "reading": "ぜい",
+        "meaning": "Thuế",
+        "type": "kanji",
+        "level": "N3",
+        "lesson": 58
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0514",
+    "kanji_id": "kanji_n3_0514",
+    "milestoneId": "ms_n3_s2_l4",
+    "milestone_id": "ms_n3_s2_l4",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 58,
+    "kanjiNumber": 514,
+    "kanji": "府",
+    "character": "府",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "府",
+    "onyomi": "フ",
+    "kunyomi": "",
+    "sinoVietnamese": "PHỦ",
+    "vietnameseMeaning": "Phủ, Chính phủ",
+    "meaning_vi": "Phủ, Chính phủ",
+    "mnemonicStory": "Chữ Hán [府] (Phủ) nghĩa là \"Phủ, Chính phủ\" — Âm On: フ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "府語",
+        "reading": "フ",
+        "meaning": "Phủ, Chính phủ (Phủ)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 58
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0552",
+    "kanji_id": "kanji_n3_0552",
+    "milestoneId": "ms_n3_s2_l4",
+    "milestone_id": "ms_n3_s2_l4",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 58,
+    "kanjiNumber": 552,
+    "kanji": "直",
+    "character": "直",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "直",
+    "onyomi": "チョク",
+    "kunyomi": "なお.す",
+    "sinoVietnamese": "TRỰC",
+    "vietnameseMeaning": "Thẳng, Sửa lại",
+    "meaning_vi": "Thẳng, Sửa lại",
+    "mnemonicStory": "Chữ Hán [直] (Trực) nghĩa là \"Thẳng, Sửa lại\" — Âm On: チョク, Âm Kun: なお.す.",
+    "exampleCompounds": [
+      {
+        "word": "直します",
+        "reading": "なおします",
+        "meaning": "sửa",
+        "type": "ĐT1",
+        "level": "N3",
+        "lesson": 58
+      },
+      {
+        "word": "直接",
+        "reading": "ちょくせつ",
+        "meaning": "trực tiếp",
+        "type": "PV",
+        "level": "N3",
+        "lesson": 58
+      },
+      {
+        "word": "やり直します",
+        "reading": "やりなおします",
+        "meaning": "làm lại, làm lại từ đầu",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 58
+      },
+      {
+        "word": "直感",
+        "reading": "ちょっかん",
+        "meaning": "trực giác, trực cảm",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 58
+      },
+      {
+        "word": "産地直送",
+        "reading": "さんちちょくそう",
+        "meaning": "Gửi thẳng từ nơi sản xuất",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 58
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0590",
+    "kanji_id": "kanji_n3_0590",
+    "milestoneId": "ms_n3_s2_l4",
+    "milestone_id": "ms_n3_s2_l4",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 58,
+    "kanjiNumber": 590,
+    "kanji": "漁",
+    "character": "漁",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "漁",
+    "onyomi": "ギョ",
+    "kunyomi": "りょう",
+    "sinoVietnamese": "NGƯ",
+    "vietnameseMeaning": "Đánh cá, Ngư nghiệp",
+    "meaning_vi": "Đánh cá, Ngư nghiệp",
+    "mnemonicStory": "Chữ Hán [漁] (Ngư) nghĩa là \"Đánh cá, Ngư nghiệp\" — Âm On: ギョ, Âm Kun: りょう.",
+    "exampleCompounds": [
+      {
+        "word": "漁語",
+        "reading": "ギョ",
+        "meaning": "Đánh cá, Ngư nghiệp (Ngư)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 58
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0628",
+    "kanji_id": "kanji_n3_0628",
+    "milestoneId": "ms_n3_s2_l4",
+    "milestone_id": "ms_n3_s2_l4",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 58,
+    "kanjiNumber": 628,
+    "kanji": "固",
+    "character": "固",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "固",
+    "onyomi": "コ",
+    "kunyomi": "かた.める",
+    "sinoVietnamese": "CỐ",
+    "vietnameseMeaning": "Cứng, Củng cố",
+    "meaning_vi": "Cứng, Củng cố",
+    "mnemonicStory": "Chữ Hán [固] (Cố) nghĩa là \"Cứng, Củng cố\" — Âm On: コ, Âm Kun: かた.める.",
+    "exampleCompounds": [
+      {
+        "word": "固定費",
+        "reading": "こていひ",
+        "meaning": "Chi phí cố định",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 58
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0666",
+    "kanji_id": "kanji_n3_0666",
+    "milestoneId": "ms_n3_s2_l4",
+    "milestone_id": "ms_n3_s2_l4",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 58,
+    "kanjiNumber": 666,
+    "kanji": "給",
+    "character": "給",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "給",
+    "onyomi": "キュウ",
+    "kunyomi": "たま.う",
+    "sinoVietnamese": "CẤP",
+    "vietnameseMeaning": "Cung cấp, tiền lương",
+    "meaning_vi": "Cung cấp, tiền lương",
+    "mnemonicStory": "Chữ Hán [給] (Cấp) nghĩa là \"Cung cấp, tiền lương\" — Âm On: キュウ, Âm Kun: たま.う.",
+    "exampleCompounds": [
+      {
+        "word": "給料",
+        "reading": "きゅうりょう",
+        "meaning": "lương, tiền lương",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 58
+      },
+      {
+        "word": "給",
+        "reading": "きゅう",
+        "meaning": "Cấp / lương",
+        "type": "kanji",
+        "level": "N3",
+        "lesson": 58
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0704",
+    "kanji_id": "kanji_n3_0704",
+    "milestoneId": "ms_n3_s2_l4",
+    "milestone_id": "ms_n3_s2_l4",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 58,
+    "kanjiNumber": 704,
+    "kanji": "袋",
+    "character": "袋",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "袋",
+    "onyomi": "タイ",
+    "kunyomi": "ふくろ",
+    "sinoVietnamese": "ĐẠI",
+    "vietnameseMeaning": "Túi, bao",
+    "meaning_vi": "Túi, bao",
+    "mnemonicStory": "Chữ Hán [袋] (Đại) nghĩa là \"Túi, bao\" — Âm On: タイ, Âm Kun: ふくろ.",
+    "exampleCompounds": [
+      {
+        "word": "袋語",
+        "reading": "タイ",
+        "meaning": "Túi, bao (Đại)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 58
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0742",
+    "kanji_id": "kanji_n3_0742",
+    "milestoneId": "ms_n3_s2_l4",
+    "milestone_id": "ms_n3_s2_l4",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 58,
+    "kanjiNumber": 742,
+    "kanji": "介",
+    "character": "介",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "介",
+    "onyomi": "カイ",
+    "kunyomi": "",
+    "sinoVietnamese": "GIỚI",
+    "vietnameseMeaning": "Ở giữa, giới thiệu",
+    "meaning_vi": "Ở giữa, giới thiệu",
+    "mnemonicStory": "Chữ Hán [介] (Giới) nghĩa là \"Ở giữa, giới thiệu\" — Âm On: カイ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "紹介します",
+        "reading": "しょうかいします",
+        "meaning": "giới thiệu",
+        "type": "ĐT3",
+        "level": "N3",
+        "lesson": 58
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0780",
+    "kanji_id": "kanji_n3_0780",
+    "milestoneId": "ms_n3_s2_l4",
+    "milestone_id": "ms_n3_s2_l4",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 58,
+    "kanjiNumber": 780,
+    "kanji": "布",
+    "character": "布",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "布",
+    "onyomi": "フ",
+    "kunyomi": "ぬの",
+    "sinoVietnamese": "BỐ",
+    "vietnameseMeaning": "Vải, ban bố",
+    "meaning_vi": "Vải, ban bố",
+    "mnemonicStory": "Chữ Hán [布] (Bố) nghĩa là \"Vải, ban bố\" — Âm On: フ, Âm Kun: ぬの.",
+    "exampleCompounds": [
+      {
+        "word": "財布",
+        "reading": "さいふ",
+        "meaning": "ví tiền, bóp",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 58
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0818",
+    "kanji_id": "kanji_n3_0818",
+    "milestoneId": "ms_n3_s2_l4",
+    "milestone_id": "ms_n3_s2_l4",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 58,
+    "kanjiNumber": 818,
+    "kanji": "雰",
+    "character": "雰",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "雰",
+    "onyomi": "フン",
+    "kunyomi": "",
+    "sinoVietnamese": "PHÂN",
+    "vietnameseMeaning": "Bầu không khí",
+    "meaning_vi": "Bầu không khí",
+    "mnemonicStory": "Chữ Hán [雰] (Phân) nghĩa là \"Bầu không khí\" — Âm On: フン, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "雰囲気",
+        "reading": "ふんいき",
+        "meaning": "không khí, bầu không khí, khí quyển",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 58
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

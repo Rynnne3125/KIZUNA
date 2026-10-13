@@ -1,0 +1,295 @@
+[
+  {
+    "id": "kanji_n5_0011",
+    "kanji_id": "kanji_n5_0011",
+    "milestoneId": "ms_minna_b11",
+    "milestone_id": "ms_minna_b11",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 11,
+    "kanjiNumber": 11,
+    "kanji": "百",
+    "character": "百",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "百",
+    "onyomi": "ヒャク",
+    "kunyomi": "",
+    "sinoVietnamese": "BÁCH",
+    "vietnameseMeaning": "Trăm",
+    "meaning_vi": "Trăm",
+    "mnemonicStory": "Chữ Hán [百] (Bách) nghĩa là \"Trăm\" — Âm On: ヒャク, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "百",
+        "reading": "ひゃく",
+        "meaning": "trăm",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 11
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0036",
+    "kanji_id": "kanji_n5_0036",
+    "milestoneId": "ms_minna_b11",
+    "milestone_id": "ms_minna_b11",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 11,
+    "kanjiNumber": 36,
+    "kanji": "人",
+    "character": "人",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "人",
+    "onyomi": "ジン",
+    "kunyomi": "ひと",
+    "sinoVietnamese": "NHÂN",
+    "vietnameseMeaning": "Người",
+    "meaning_vi": "Người",
+    "mnemonicStory": "Chữ Hán [人] (Nhân) nghĩa là \"Người\" — Âm On: ジン, Âm Kun: ひと.",
+    "exampleCompounds": [
+      {
+        "word": "あの人",
+        "reading": "あのひと",
+        "meaning": "người kia, người đó",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "人",
+        "reading": "ひと",
+        "meaning": "người",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "一人で",
+        "reading": "ひとりで",
+        "meaning": "một mình",
+        "type": "TrT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "ご主人",
+        "reading": "ごしゅじん",
+        "meaning": "chồng (người khác)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "男の人",
+        "reading": "おとこのひと",
+        "meaning": "đàn ông",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "女の人",
+        "reading": "おんなのひと",
+        "meaning": "phụ nữ",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "人格",
+        "reading": "じんかく",
+        "meaning": "Nhân cách / tính cách",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "著名人",
+        "reading": "ちょめいじん",
+        "meaning": "Người nổi tiếng / nhân vật nổi danh",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "法人格",
+        "reading": "ほうじんかく",
+        "meaning": "Tư cách pháp nhân",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "人工知能",
+        "reading": "じんこうちのう",
+        "meaning": "Trí tuệ nhân tạo / AI",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 11
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0061",
+    "kanji_id": "kanji_n5_0061",
+    "milestoneId": "ms_minna_b11",
+    "milestone_id": "ms_minna_b11",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 11,
+    "kanjiNumber": 61,
+    "kanji": "足",
+    "character": "足",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "足",
+    "onyomi": "ソク",
+    "kunyomi": "あし",
+    "sinoVietnamese": "TÚC",
+    "vietnameseMeaning": "Chân",
+    "meaning_vi": "Chân",
+    "mnemonicStory": "Chữ Hán [足] (Túc) nghĩa là \"Chân\" — Âm On: ソク, Âm Kun: あし.",
+    "exampleCompounds": [
+      {
+        "word": "足",
+        "reading": "あし",
+        "meaning": "chân",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 11
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0086",
+    "kanji_id": "kanji_n5_0086",
+    "milestoneId": "ms_minna_b11",
+    "milestone_id": "ms_minna_b11",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 11,
+    "kanjiNumber": 86,
+    "kanji": "少",
+    "character": "少",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "少",
+    "onyomi": "ショウ",
+    "kunyomi": "すこ.し",
+    "sinoVietnamese": "THIỂU",
+    "vietnameseMeaning": "Ít",
+    "meaning_vi": "Ít",
+    "mnemonicStory": "Chữ Hán [少] (Thiểu) nghĩa là \"Ít\" — Âm On: ショウ, Âm Kun: すこ.し.",
+    "exampleCompounds": [
+      {
+        "word": "少し",
+        "reading": "すこし",
+        "meaning": "một chút",
+        "type": "TrT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "少ない",
+        "reading": "すくない",
+        "meaning": "ít",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "もう少し",
+        "reading": "もうすこし",
+        "meaning": "thêm chút nữa",
+        "type": "TrT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "少しずつ",
+        "reading": "すこしずつ",
+        "meaning": "từng chút một, dần dần",
+        "type": "PV",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "少子化",
+        "reading": "しょうしか",
+        "meaning": "tỷ lệ sinh thấp, ít con",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "少",
+        "reading": "しょう",
+        "meaning": "Ít / trẻ",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 11
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0111",
+    "kanji_id": "kanji_n5_0111",
+    "milestoneId": "ms_minna_b11",
+    "milestone_id": "ms_minna_b11",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 11,
+    "kanjiNumber": 111,
+    "kanji": "岩",
+    "character": "岩",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "岩",
+    "onyomi": "ガン",
+    "kunyomi": "いわ",
+    "sinoVietnamese": "NHAM",
+    "vietnameseMeaning": "Đá lớn",
+    "meaning_vi": "Đá lớn",
+    "mnemonicStory": "Chữ Hán [岩] (Nham) nghĩa là \"Đá lớn\" — Âm On: ガン, Âm Kun: いわ.",
+    "exampleCompounds": [
+      {
+        "word": "岩",
+        "reading": "いわ",
+        "meaning": "tảng đá, đá tảng",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "岩手",
+        "reading": "いわて",
+        "meaning": "Iwate (tỉnh)",
+        "type": "proper",
+        "level": "N5",
+        "lesson": 11
+      },
+      {
+        "word": "溶岩",
+        "reading": "ようがん",
+        "meaning": "dung nham",
+        "type": "noun",
+        "level": "N5",
+        "lesson": 11
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

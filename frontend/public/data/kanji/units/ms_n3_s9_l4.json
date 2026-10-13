@@ -1,0 +1,429 @@
+[
+  {
+    "id": "kanji_n3_0427",
+    "kanji_id": "kanji_n3_0427",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 85,
+    "kanjiNumber": 427,
+    "kanji": "負",
+    "character": "負",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "負",
+    "onyomi": "フ",
+    "kunyomi": "ま.ける",
+    "sinoVietnamese": "PHỤ",
+    "vietnameseMeaning": "Thua, Gánh chịu",
+    "meaning_vi": "Thua, Gánh chịu",
+    "mnemonicStory": "Chữ Hán [負] (Phụ) nghĩa là \"Thua, Gánh chịu\" — Âm On: フ, Âm Kun: ま.ける.",
+    "exampleCompounds": [
+      {
+        "word": "負けます",
+        "reading": "まけます",
+        "meaning": "thua",
+        "type": "ĐT2",
+        "level": "N3",
+        "lesson": 85
+      },
+      {
+        "word": "負債",
+        "reading": "ふさい",
+        "meaning": "Nợ / khoản nợ",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 85
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0465",
+    "kanji_id": "kanji_n3_0465",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 85,
+    "kanjiNumber": 465,
+    "kanji": "治",
+    "character": "治",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "治",
+    "onyomi": "チ",
+    "kunyomi": "なお.る",
+    "sinoVietnamese": "TRỊ",
+    "vietnameseMeaning": "Chữa trị, Trị quốc",
+    "meaning_vi": "Chữa trị, Trị quốc",
+    "mnemonicStory": "Chữ Hán [治] (Trị) nghĩa là \"Chữa trị, Trị quốc\" — Âm On: チ, Âm Kun: なお.る.",
+    "exampleCompounds": [
+      {
+        "word": "政治",
+        "reading": "せいじ",
+        "meaning": "chính trị",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 85
+      },
+      {
+        "word": "治療",
+        "reading": "ちりょう",
+        "meaning": "Điều trị",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 85
+      },
+      {
+        "word": "治",
+        "reading": "ち",
+        "meaning": "Chữa trị / trị liệu",
+        "type": "kanji",
+        "level": "N3",
+        "lesson": 85
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0503",
+    "kanji_id": "kanji_n3_0503",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 85,
+    "kanjiNumber": 503,
+    "kanji": "波",
+    "character": "波",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "波",
+    "onyomi": "ハ",
+    "kunyomi": "なみ",
+    "sinoVietnamese": "BA",
+    "vietnameseMeaning": "Sóng",
+    "meaning_vi": "Sóng",
+    "mnemonicStory": "Chữ Hán [波] (Ba) nghĩa là \"Sóng\" — Âm On: ハ, Âm Kun: なみ.",
+    "exampleCompounds": [
+      {
+        "word": "波",
+        "reading": "は",
+        "meaning": "Sóng",
+        "type": "kanji",
+        "level": "N3",
+        "lesson": 85
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0541",
+    "kanji_id": "kanji_n3_0541",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 85,
+    "kanjiNumber": 541,
+    "kanji": "焼",
+    "character": "焼",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "焼",
+    "onyomi": "ショウ",
+    "kunyomi": "や.く",
+    "sinoVietnamese": "THIÊU",
+    "vietnameseMeaning": "Đốt, Nướng, Cháy",
+    "meaning_vi": "Đốt, Nướng, Cháy",
+    "mnemonicStory": "Chữ Hán [焼] (Thiêu) nghĩa là \"Đốt, Nướng, Cháy\" — Âm On: ショウ, Âm Kun: や.く.",
+    "exampleCompounds": [
+      {
+        "word": "すき焼き",
+        "reading": "すきやき",
+        "meaning": "sukiyaki",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 85
+      },
+      {
+        "word": "やきもちを焼く",
+        "reading": "やきもちをやく",
+        "meaning": "Ghen",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 85
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0579",
+    "kanji_id": "kanji_n3_0579",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 85,
+    "kanjiNumber": 579,
+    "kanji": "野",
+    "character": "野",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "野",
+    "onyomi": "ヤ",
+    "kunyomi": "の",
+    "sinoVietnamese": "DÃ",
+    "vietnameseMeaning": "Đồng nội, Dã ngoại",
+    "meaning_vi": "Đồng nội, Dã ngoại",
+    "mnemonicStory": "Chữ Hán [野] (Dã) nghĩa là \"Đồng nội, Dã ngoại\" — Âm On: ヤ, Âm Kun: の.",
+    "exampleCompounds": [
+      {
+        "word": "野菜",
+        "reading": "やさい",
+        "meaning": "rau",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 85
+      },
+      {
+        "word": "野球",
+        "reading": "やきゅう",
+        "meaning": "bóng chày",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 85
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0617",
+    "kanji_id": "kanji_n3_0617",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 85,
+    "kanjiNumber": 617,
+    "kanji": "類",
+    "character": "類",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "類",
+    "onyomi": "ルイ",
+    "kunyomi": "たぐ.い",
+    "sinoVietnamese": "LOẠI",
+    "vietnameseMeaning": "Loại, Phân loại",
+    "meaning_vi": "Loại, Phân loại",
+    "mnemonicStory": "Chữ Hán [類] (Loại) nghĩa là \"Loại, Phân loại\" — Âm On: ルイ, Âm Kun: たぐ.い.",
+    "exampleCompounds": [
+      {
+        "word": "書類",
+        "reading": "しょるい",
+        "meaning": "tài liệu, giấy tờ",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 85
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0655",
+    "kanji_id": "kanji_n3_0655",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 85,
+    "kanjiNumber": 655,
+    "kanji": "仲",
+    "character": "仲",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "仲",
+    "onyomi": "チュウ",
+    "kunyomi": "なか",
+    "sinoVietnamese": "TRỌNG",
+    "vietnameseMeaning": "Quan hệ, ở giữa",
+    "meaning_vi": "Quan hệ, ở giữa",
+    "mnemonicStory": "Chữ Hán [仲] (Trọng) nghĩa là \"Quan hệ, ở giữa\" — Âm On: チュウ, Âm Kun: なか.",
+    "exampleCompounds": [
+      {
+        "word": "仲語",
+        "reading": "チュウ",
+        "meaning": "Quan hệ, ở giữa (Trọng)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 85
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0693",
+    "kanji_id": "kanji_n3_0693",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 85,
+    "kanjiNumber": 693,
+    "kanji": "展",
+    "character": "展",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "展",
+    "onyomi": "テン",
+    "kunyomi": "",
+    "sinoVietnamese": "TRIỂN",
+    "vietnameseMeaning": "Mở rộng, trưng bày",
+    "meaning_vi": "Mở rộng, trưng bày",
+    "mnemonicStory": "Chữ Hán [展] (Triển) nghĩa là \"Mở rộng, trưng bày\" — Âm On: テン, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "発展",
+        "reading": "はってん",
+        "meaning": "phát triển, mở rộng",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 85
+      },
+      {
+        "word": "発展します",
+        "reading": "はってんします",
+        "meaning": "phát triển",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 85
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0731",
+    "kanji_id": "kanji_n3_0731",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 85,
+    "kanjiNumber": 731,
+    "kanji": "妻",
+    "character": "妻",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "妻",
+    "onyomi": "サイ",
+    "kunyomi": "つま",
+    "sinoVietnamese": "THÊ",
+    "vietnameseMeaning": "Vợ",
+    "meaning_vi": "Vợ",
+    "mnemonicStory": "Chữ Hán [妻] (Thê) nghĩa là \"Vợ\" — Âm On: サイ, Âm Kun: つま.",
+    "exampleCompounds": [
+      {
+        "word": "妻",
+        "reading": "つま",
+        "meaning": "vợ (mình)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 85
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0769",
+    "kanji_id": "kanji_n3_0769",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 85,
+    "kanjiNumber": 769,
+    "kanji": "央",
+    "character": "央",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "央",
+    "onyomi": "オウ",
+    "kunyomi": "",
+    "sinoVietnamese": "ƯƠNG",
+    "vietnameseMeaning": "Ở giữa, trung tâm",
+    "meaning_vi": "Ở giữa, trung tâm",
+    "mnemonicStory": "Chữ Hán [央] (Ương) nghĩa là \"Ở giữa, trung tâm\" — Âm On: オウ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "央語",
+        "reading": "オウ",
+        "meaning": "Ở giữa, trung tâm (Ương)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 85
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0807",
+    "kanji_id": "kanji_n3_0807",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 85,
+    "kanjiNumber": 807,
+    "kanji": "敬",
+    "character": "敬",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "敬",
+    "onyomi": "ケイ",
+    "kunyomi": "うやま.う",
+    "sinoVietnamese": "KÍNH",
+    "vietnameseMeaning": "Kính trọng, tôn kính",
+    "meaning_vi": "Kính trọng, tôn kính",
+    "mnemonicStory": "Chữ Hán [敬] (Kính) nghĩa là \"Kính trọng, tôn kính\" — Âm On: ケイ, Âm Kun: うやま.う.",
+    "exampleCompounds": [
+      {
+        "word": "尊敬します",
+        "reading": "そんけいします",
+        "meaning": "kính trọng, ngưỡng mộ",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 85
+      },
+      {
+        "word": "敬語",
+        "reading": "けいご",
+        "meaning": "kính ngữ, ngôn ngữ lịch sự",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 85
+      },
+      {
+        "word": "尊敬語",
+        "reading": "そんけいご",
+        "meaning": "kính ngữ (tôn trọng người nghe)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 85
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

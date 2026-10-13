@@ -1,0 +1,263 @@
+[
+  {
+    "id": "kanji_n5_0007",
+    "kanji_id": "kanji_n5_0007",
+    "milestoneId": "ms_minna_b07",
+    "milestone_id": "ms_minna_b07",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 7,
+    "kanjiNumber": 7,
+    "kanji": "七",
+    "character": "七",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "七",
+    "onyomi": "シチ",
+    "kunyomi": "なな.つ",
+    "sinoVietnamese": "THẤT",
+    "vietnameseMeaning": "Bảy",
+    "meaning_vi": "Bảy",
+    "mnemonicStory": "Chữ Hán [七] (Thất) nghĩa là \"Bảy\" — Âm On: シチ, Âm Kun: なな.つ.",
+    "exampleCompounds": [
+      {
+        "word": "七つ",
+        "reading": "ななつ",
+        "meaning": "7 cái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0032",
+    "kanji_id": "kanji_n5_0032",
+    "milestoneId": "ms_minna_b07",
+    "milestone_id": "ms_minna_b07",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 7,
+    "kanjiNumber": 32,
+    "kanji": "週",
+    "character": "週",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "週",
+    "onyomi": "シュウ",
+    "kunyomi": "",
+    "sinoVietnamese": "CHU",
+    "vietnameseMeaning": "Tuần",
+    "meaning_vi": "Tuần",
+    "mnemonicStory": "Chữ Hán [週] (Chu) nghĩa là \"Tuần\" — Âm On: シュウ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "先週",
+        "reading": "せんしゅう",
+        "meaning": "tuần trước",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "今週",
+        "reading": "こんしゅう",
+        "meaning": "tuần này",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "来週",
+        "reading": "らいしゅう",
+        "meaning": "tuần sau",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "～週間",
+        "reading": "～しゅうかん",
+        "meaning": "~ tuần",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "週末",
+        "reading": "しゅうまつ",
+        "meaning": "cuối tuần",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0057",
+    "kanji_id": "kanji_n5_0057",
+    "milestoneId": "ms_minna_b07",
+    "milestone_id": "ms_minna_b07",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 7,
+    "kanjiNumber": 57,
+    "kanji": "口",
+    "character": "口",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "口",
+    "onyomi": "コウ",
+    "kunyomi": "くち",
+    "sinoVietnamese": "KHẨU",
+    "vietnameseMeaning": "Miệng",
+    "meaning_vi": "Miệng",
+    "mnemonicStory": "Chữ Hán [口] (Khẩu) nghĩa là \"Miệng\" — Âm On: コウ, Âm Kun: くち.",
+    "exampleCompounds": [
+      {
+        "word": "口",
+        "reading": "くち",
+        "meaning": "miệng",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "人口",
+        "reading": "じんこう",
+        "meaning": "dân số",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0082",
+    "kanji_id": "kanji_n5_0082",
+    "milestoneId": "ms_minna_b07",
+    "milestone_id": "ms_minna_b07",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 7,
+    "kanjiNumber": 82,
+    "kanji": "長",
+    "character": "長",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "長",
+    "onyomi": "チョウ",
+    "kunyomi": "なが.い",
+    "sinoVietnamese": "TRƯỜNG",
+    "vietnameseMeaning": "Dài",
+    "meaning_vi": "Dài",
+    "mnemonicStory": "Chữ Hán [長] (Trường) nghĩa là \"Dài\" — Âm On: チョウ, Âm Kun: なが.い.",
+    "exampleCompounds": [
+      {
+        "word": "長い",
+        "reading": "ながい",
+        "meaning": "dài",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "成長",
+        "reading": "せいちょう",
+        "meaning": "sự trưởng thành, lớn lên, phát triển",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "部長",
+        "reading": "ぶちょう",
+        "meaning": "trưởng phòng, trưởng bộ phận",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "社長",
+        "reading": "しゃちょう",
+        "meaning": "giám đốc, tổng giám đốc công ty",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "課長",
+        "reading": "かちょう",
+        "meaning": "trưởng khoa, trưởng ban",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "成長します",
+        "reading": "せいちょうします",
+        "meaning": "lớn lên, trưởng thành, phát triển",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "長",
+        "reading": "ちょう",
+        "meaning": "Trường / dài",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 7
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0107",
+    "kanji_id": "kanji_n5_0107",
+    "milestoneId": "ms_minna_b07",
+    "milestone_id": "ms_minna_b07",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 7,
+    "kanjiNumber": 107,
+    "kanji": "森",
+    "character": "森",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "森",
+    "onyomi": "シン",
+    "kunyomi": "もり",
+    "sinoVietnamese": "SÂM",
+    "vietnameseMeaning": "Rừng",
+    "meaning_vi": "Rừng",
+    "mnemonicStory": "Chữ Hán [森] (Sâm) nghĩa là \"Rừng\" — Âm On: シン, Âm Kun: もり.",
+    "exampleCompounds": [
+      {
+        "word": "森林破壊",
+        "reading": "しんりんはかい",
+        "meaning": "Phá rừng",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 7
+      },
+      {
+        "word": "森",
+        "reading": "しん",
+        "meaning": "Rừng rậm",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 7
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

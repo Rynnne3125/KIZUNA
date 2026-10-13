@@ -1,0 +1,460 @@
+[
+  {
+    "id": "kanji_n4_0147",
+    "kanji_id": "kanji_n4_0147",
+    "milestoneId": "ms_minna_b44",
+    "milestone_id": "ms_minna_b44",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 44,
+    "kanjiNumber": 147,
+    "kanji": "歩",
+    "character": "歩",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "歩",
+    "onyomi": "ホ",
+    "kunyomi": "ある.く",
+    "sinoVietnamese": "BỘ",
+    "vietnameseMeaning": "Đi bộ",
+    "meaning_vi": "Đi bộ",
+    "mnemonicStory": "Chữ Hán [歩] (Bộ) nghĩa là \"Đi bộ\" — Âm On: ホ, Âm Kun: ある.く.",
+    "exampleCompounds": [
+      {
+        "word": "歩いて",
+        "reading": "あるいて",
+        "meaning": "đi bộ",
+        "type": "TrT",
+        "level": "N4",
+        "lesson": 44
+      },
+      {
+        "word": "散歩します",
+        "reading": "さんぽします",
+        "meaning": "đi dạo",
+        "type": "ĐT3",
+        "level": "N4",
+        "lesson": 44
+      },
+      {
+        "word": "歩きます",
+        "reading": "あるきます",
+        "meaning": "đi bộ",
+        "type": "ĐT1",
+        "level": "N4",
+        "lesson": 44
+      },
+      {
+        "word": "進歩",
+        "reading": "しんぽ",
+        "meaning": "tiến bộ, tiến triển",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 44
+      },
+      {
+        "word": "進歩します",
+        "reading": "しんぽします",
+        "meaning": "tiến bộ, phát triển",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 44
+      },
+      {
+        "word": "食べ歩き",
+        "reading": "たべあるき",
+        "meaning": "Ăn dọc đường / ăn thử nhiều nơi",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 44
+      },
+      {
+        "word": "歩",
+        "reading": "ほ",
+        "meaning": "Bước / tiến bộ",
+        "type": "kanji",
+        "level": "N4",
+        "lesson": 44
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0172",
+    "kanji_id": "kanji_n4_0172",
+    "milestoneId": "ms_minna_b44",
+    "milestone_id": "ms_minna_b44",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 44,
+    "kanjiNumber": 172,
+    "kanji": "春",
+    "character": "春",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "春",
+    "onyomi": "シュン",
+    "kunyomi": "はる",
+    "sinoVietnamese": "XUÂN",
+    "vietnameseMeaning": "Xuân",
+    "meaning_vi": "Xuân",
+    "mnemonicStory": "Chữ Hán [春] (Xuân) nghĩa là \"Xuân\" — Âm On: シュン, Âm Kun: はる.",
+    "exampleCompounds": [
+      {
+        "word": "春",
+        "reading": "はる",
+        "meaning": "mùa xuân",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 44
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0197",
+    "kanji_id": "kanji_n4_0197",
+    "milestoneId": "ms_minna_b44",
+    "milestone_id": "ms_minna_b44",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 44,
+    "kanjiNumber": 197,
+    "kanji": "音",
+    "character": "音",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "音",
+    "onyomi": "オン",
+    "kunyomi": "おと",
+    "sinoVietnamese": "ÂM",
+    "vietnameseMeaning": "Âm thanh",
+    "meaning_vi": "Âm thanh",
+    "mnemonicStory": "Chữ Hán [音] (Âm) nghĩa là \"Âm thanh\" — Âm On: オン, Âm Kun: おと.",
+    "exampleCompounds": [
+      {
+        "word": "音楽",
+        "reading": "おんがく",
+        "meaning": "âm nhạc",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 44
+      },
+      {
+        "word": "音",
+        "reading": "おと",
+        "meaning": "âm thanh",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 44
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0222",
+    "kanji_id": "kanji_n4_0222",
+    "milestoneId": "ms_minna_b44",
+    "milestone_id": "ms_minna_b44",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 44,
+    "kanjiNumber": 222,
+    "kanji": "谷",
+    "character": "谷",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "谷",
+    "onyomi": "コク",
+    "kunyomi": "たに",
+    "sinoVietnamese": "CỐC",
+    "vietnameseMeaning": "Thung lũng",
+    "meaning_vi": "Thung lũng",
+    "mnemonicStory": "Chữ Hán [谷] (Cốc) nghĩa là \"Thung lũng\" — Âm On: コク, Âm Kun: たに.",
+    "exampleCompounds": [
+      {
+        "word": "谷語",
+        "reading": "コク",
+        "meaning": "Thung lũng (Cốc)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 44
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0247",
+    "kanji_id": "kanji_n4_0247",
+    "milestoneId": "ms_minna_b44",
+    "milestone_id": "ms_minna_b44",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 44,
+    "kanjiNumber": 247,
+    "kanji": "全",
+    "character": "全",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "全",
+    "onyomi": "ゼン",
+    "kunyomi": "すべ.て",
+    "sinoVietnamese": "TOÀN",
+    "vietnameseMeaning": "Toàn bộ, Hoàn toàn",
+    "meaning_vi": "Toàn bộ, Hoàn toàn",
+    "mnemonicStory": "Chữ Hán [全] (Toàn) nghĩa là \"Toàn bộ, Hoàn toàn\" — Âm On: ゼン, Âm Kun: すべ.て.",
+    "exampleCompounds": [
+      {
+        "word": "全然",
+        "reading": "ぜんぜん",
+        "meaning": "hoàn toàn không",
+        "type": "TrT",
+        "level": "N4",
+        "lesson": 44
+      },
+      {
+        "word": "全く",
+        "reading": "まったく",
+        "meaning": "hoàn toàn (kết hợp với phủ định)",
+        "type": "PV",
+        "level": "N4",
+        "lesson": 44
+      },
+      {
+        "word": "全部",
+        "reading": "ぜんぶ",
+        "meaning": "tất cả, toàn bộ",
+        "type": "PV",
+        "level": "N4",
+        "lesson": 44
+      },
+      {
+        "word": "環境保全",
+        "reading": "かんきょうほぜん",
+        "meaning": "Bảo tồn môi trường",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 44
+      },
+      {
+        "word": "生物多様性保全",
+        "reading": "せいぶつたようせいほぜん",
+        "meaning": "Bảo tồn đa dạng sinh học",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 44
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0272",
+    "kanji_id": "kanji_n4_0272",
+    "milestoneId": "ms_minna_b44",
+    "milestone_id": "ms_minna_b44",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 44,
+    "kanjiNumber": 272,
+    "kanji": "別",
+    "character": "別",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "別",
+    "onyomi": "ベツ",
+    "kunyomi": "わか.れる",
+    "sinoVietnamese": "BIỆT",
+    "vietnameseMeaning": "Khác, Chia tay",
+    "meaning_vi": "Khác, Chia tay",
+    "mnemonicStory": "Chữ Hán [別] (Biệt) nghĩa là \"Khác, Chia tay\" — Âm On: ベツ, Âm Kun: わか.れる.",
+    "exampleCompounds": [
+      {
+        "word": "別々に",
+        "reading": "べつべつに",
+        "meaning": "riêng biệt",
+        "type": "TrT",
+        "level": "N4",
+        "lesson": 44
+      },
+      {
+        "word": "特別な",
+        "reading": "とくべつな",
+        "meaning": "đặc biệt",
+        "type": "TT-na",
+        "level": "N4",
+        "lesson": 44
+      },
+      {
+        "word": "別れ",
+        "reading": "わかれ",
+        "meaning": "Chia tay / ly biệt",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 44
+      },
+      {
+        "word": "差別",
+        "reading": "さべつ",
+        "meaning": "Phân biệt đối xử",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 44
+      },
+      {
+        "word": "別",
+        "reading": "べつ",
+        "meaning": "Phân biệt / riêng biệt",
+        "type": "kanji",
+        "level": "N4",
+        "lesson": 44
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0297",
+    "kanji_id": "kanji_n4_0297",
+    "milestoneId": "ms_minna_b44",
+    "milestone_id": "ms_minna_b44",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 44,
+    "kanjiNumber": 297,
+    "kanji": "族",
+    "character": "族",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "族",
+    "onyomi": "ゾク",
+    "kunyomi": "",
+    "sinoVietnamese": "TỘC",
+    "vietnameseMeaning": "Gia tộc, Tộc người",
+    "meaning_vi": "Gia tộc, Tộc người",
+    "mnemonicStory": "Chữ Hán [族] (Tộc) nghĩa là \"Gia tộc, Tộc người\" — Âm On: ゾク, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "家族",
+        "reading": "かぞく",
+        "meaning": "gia đình",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 44
+      },
+      {
+        "word": "ご家族",
+        "reading": "ごかぞく",
+        "meaning": "gia đình (lịch sự)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 44
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0322",
+    "kanji_id": "kanji_n4_0322",
+    "milestoneId": "ms_minna_b44",
+    "milestone_id": "ms_minna_b44",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 44,
+    "kanjiNumber": 322,
+    "kanji": "毛",
+    "character": "毛",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "毛",
+    "onyomi": "モウ",
+    "kunyomi": "け",
+    "sinoVietnamese": "MAO",
+    "vietnameseMeaning": "Lông, tóc, sợi len",
+    "meaning_vi": "Lông, tóc, sợi len",
+    "mnemonicStory": "Chữ Hán [毛] (Mao) nghĩa là \"Lông, tóc, sợi len\" — Âm On: モウ, Âm Kun: け.",
+    "exampleCompounds": [
+      {
+        "word": "毛語",
+        "reading": "モウ",
+        "meaning": "Lông, tóc, sợi len (Mao)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 44
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0347",
+    "kanji_id": "kanji_n4_0347",
+    "milestoneId": "ms_minna_b44",
+    "milestone_id": "ms_minna_b44",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 44,
+    "kanjiNumber": 347,
+    "kanji": "暑",
+    "character": "暑",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "暑",
+    "onyomi": "ショ",
+    "kunyomi": "あつ.い",
+    "sinoVietnamese": "THỬ",
+    "vietnameseMeaning": "Nóng bức",
+    "meaning_vi": "Nóng bức",
+    "mnemonicStory": "Chữ Hán [暑] (Thử) nghĩa là \"Nóng bức\" — Âm On: ショ, Âm Kun: あつ.い.",
+    "exampleCompounds": [
+      {
+        "word": "暑い",
+        "reading": "あつい",
+        "meaning": "nóng (thời tiết)",
+        "type": "TT-i",
+        "level": "N4",
+        "lesson": 44
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0372",
+    "kanji_id": "kanji_n4_0372",
+    "milestoneId": "ms_minna_b44",
+    "milestone_id": "ms_minna_b44",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 44,
+    "kanjiNumber": 372,
+    "kanji": "皿",
+    "character": "皿",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "皿",
+    "onyomi": "ベイ",
+    "kunyomi": "さら",
+    "sinoVietnamese": "MÃNH",
+    "vietnameseMeaning": "Cái đĩa, dĩa",
+    "meaning_vi": "Cái đĩa, dĩa",
+    "mnemonicStory": "Chữ Hán [皿] (Mãnh) nghĩa là \"Cái đĩa, dĩa\" — Âm On: ベイ, Âm Kun: さら.",
+    "exampleCompounds": [
+      {
+        "word": "皿語",
+        "reading": "ベイ",
+        "meaning": "Cái đĩa, dĩa (Mãnh)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 44
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

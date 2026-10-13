@@ -1,0 +1,231 @@
+[
+  {
+    "id": "kanji_n5_0009",
+    "kanji_id": "kanji_n5_0009",
+    "milestoneId": "ms_minna_b09",
+    "milestone_id": "ms_minna_b09",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 9,
+    "kanjiNumber": 9,
+    "kanji": "九",
+    "character": "九",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "九",
+    "onyomi": "キュウ",
+    "kunyomi": "ここの.つ",
+    "sinoVietnamese": "CỬU",
+    "vietnameseMeaning": "Chín",
+    "meaning_vi": "Chín",
+    "mnemonicStory": "Chữ Hán [九] (Cửu) nghĩa là \"Chín\" — Âm On: キュウ, Âm Kun: ここの.つ.",
+    "exampleCompounds": [
+      {
+        "word": "九つ",
+        "reading": "ここのつ",
+        "meaning": "9 cái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 9
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0034",
+    "kanji_id": "kanji_n5_0034",
+    "milestoneId": "ms_minna_b09",
+    "milestone_id": "ms_minna_b09",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 9,
+    "kanjiNumber": 34,
+    "kanji": "来",
+    "character": "来",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "来",
+    "onyomi": "ライ",
+    "kunyomi": "く.る",
+    "sinoVietnamese": "LAI",
+    "vietnameseMeaning": "Đến",
+    "meaning_vi": "Đến",
+    "mnemonicStory": "Chữ Hán [来] (Lai) nghĩa là \"Đến\" — Âm On: ライ, Âm Kun: く.る.",
+    "exampleCompounds": [
+      {
+        "word": "～から来ました",
+        "reading": "～からきました",
+        "meaning": "tôi đến từ ~",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 9
+      },
+      {
+        "word": "来週",
+        "reading": "らいしゅう",
+        "meaning": "tuần sau",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 9
+      },
+      {
+        "word": "来月",
+        "reading": "らいげつ",
+        "meaning": "tháng sau",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 9
+      },
+      {
+        "word": "来年",
+        "reading": "らいねん",
+        "meaning": "năm sau",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 9
+      },
+      {
+        "word": "来ます",
+        "reading": "きます",
+        "meaning": "đến",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 9
+      },
+      {
+        "word": "持って来ます",
+        "reading": "もってきます",
+        "meaning": "mang đến",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 9
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0059",
+    "kanji_id": "kanji_n5_0059",
+    "milestoneId": "ms_minna_b09",
+    "milestone_id": "ms_minna_b09",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 9,
+    "kanjiNumber": 59,
+    "kanji": "耳",
+    "character": "耳",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "耳",
+    "onyomi": "ジ",
+    "kunyomi": "みみ",
+    "sinoVietnamese": "NHĨ",
+    "vietnameseMeaning": "Tai",
+    "meaning_vi": "Tai",
+    "mnemonicStory": "Chữ Hán [耳] (Nhĩ) nghĩa là \"Tai\" — Âm On: ジ, Âm Kun: みみ.",
+    "exampleCompounds": [
+      {
+        "word": "耳",
+        "reading": "みみ",
+        "meaning": "tai",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 9
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0084",
+    "kanji_id": "kanji_n5_0084",
+    "milestoneId": "ms_minna_b09",
+    "milestone_id": "ms_minna_b09",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 9,
+    "kanjiNumber": 84,
+    "kanji": "安",
+    "character": "安",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "安",
+    "onyomi": "アン",
+    "kunyomi": "やす.い",
+    "sinoVietnamese": "AN",
+    "vietnameseMeaning": "Rẻ, Yên",
+    "meaning_vi": "Rẻ, Yên",
+    "mnemonicStory": "Chữ Hán [安] (An) nghĩa là \"Rẻ, Yên\" — Âm On: アン, Âm Kun: やす.い.",
+    "exampleCompounds": [
+      {
+        "word": "安い",
+        "reading": "やすい",
+        "meaning": "rẻ",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 9
+      },
+      {
+        "word": "安心します",
+        "reading": "あんしんします",
+        "meaning": "yên tâm, an lòng",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 9
+      },
+      {
+        "word": "安ければ",
+        "reading": "やすければ",
+        "meaning": "nếu rẻ thì",
+        "type": "MT",
+        "level": "N5",
+        "lesson": 9
+      },
+      {
+        "word": "不安",
+        "reading": "ふあん",
+        "meaning": "Lo lắng / bất an",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 9
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0109",
+    "kanji_id": "kanji_n5_0109",
+    "milestoneId": "ms_minna_b09",
+    "milestone_id": "ms_minna_b09",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 9,
+    "kanjiNumber": 109,
+    "kanji": "牛",
+    "character": "牛",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "牛",
+    "onyomi": "ギュウ",
+    "kunyomi": "うし",
+    "sinoVietnamese": "NGƯU",
+    "vietnameseMeaning": "Bò",
+    "meaning_vi": "Bò",
+    "mnemonicStory": "Chữ Hán [牛] (Ngưu) nghĩa là \"Bò\" — Âm On: ギュウ, Âm Kun: うし.",
+    "exampleCompounds": [
+      {
+        "word": "牛乳",
+        "reading": "ぎゅうにゅう",
+        "meaning": "sữa bò",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 9
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

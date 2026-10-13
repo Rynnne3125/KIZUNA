@@ -1,0 +1,557 @@
+[
+  {
+    "id": "kanji_n4_0132",
+    "kanji_id": "kanji_n4_0132",
+    "milestoneId": "ms_minna_b29",
+    "milestone_id": "ms_minna_b29",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 29,
+    "kanjiNumber": 132,
+    "kanji": "正",
+    "character": "正",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "正",
+    "onyomi": "セイ",
+    "kunyomi": "ただ.しい",
+    "sinoVietnamese": "CHÍNH",
+    "vietnameseMeaning": "Đúng",
+    "meaning_vi": "Đúng",
+    "mnemonicStory": "Chữ Hán [正] (Chính) nghĩa là \"Đúng\" — Âm On: セイ, Âm Kun: ただ.しい.",
+    "exampleCompounds": [
+      {
+        "word": "正月",
+        "reading": "しょうがつ",
+        "meaning": "tháng Giêng, Tết",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0157",
+    "kanji_id": "kanji_n4_0157",
+    "milestoneId": "ms_minna_b29",
+    "milestone_id": "ms_minna_b29",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 29,
+    "kanjiNumber": 157,
+    "kanji": "返",
+    "character": "返",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "返",
+    "onyomi": "ヘン",
+    "kunyomi": "かえ.す",
+    "sinoVietnamese": "PHẢN",
+    "vietnameseMeaning": "Trả lại",
+    "meaning_vi": "Trả lại",
+    "mnemonicStory": "Chữ Hán [返] (Phản) nghĩa là \"Trả lại\" — Âm On: ヘン, Âm Kun: かえ.す.",
+    "exampleCompounds": [
+      {
+        "word": "返します",
+        "reading": "かえします",
+        "meaning": "trả lại",
+        "type": "ĐT1",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "取り返します",
+        "reading": "とりかえします",
+        "meaning": "lấy lại, khắc phục",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 29
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0182",
+    "kanji_id": "kanji_n4_0182",
+    "milestoneId": "ms_minna_b29",
+    "milestone_id": "ms_minna_b29",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 29,
+    "kanjiNumber": 182,
+    "kanji": "所",
+    "character": "所",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "所",
+    "onyomi": "ショ",
+    "kunyomi": "ところ",
+    "sinoVietnamese": "SỞ",
+    "vietnameseMeaning": "Nơi",
+    "meaning_vi": "Nơi",
+    "mnemonicStory": "Chữ Hán [所] (Sở) nghĩa là \"Nơi\" — Âm On: ショ, Âm Kun: ところ.",
+    "exampleCompounds": [
+      {
+        "word": "事務所",
+        "reading": "じむしょ",
+        "meaning": "văn phòng",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "所",
+        "reading": "ところ",
+        "meaning": "nơi, chỗ",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "住所",
+        "reading": "じゅうしょ",
+        "meaning": "địa chỉ",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "市役所",
+        "reading": "しやくしょ",
+        "meaning": "tòa thị chính",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "台所",
+        "reading": "だいどころ",
+        "meaning": "nhà bếp",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "名所",
+        "reading": "めいしょ",
+        "meaning": "địa danh nổi tiếng, thắng cảnh",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0207",
+    "kanji_id": "kanji_n4_0207",
+    "milestoneId": "ms_minna_b29",
+    "milestone_id": "ms_minna_b29",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 29,
+    "kanjiNumber": 207,
+    "kanji": "官",
+    "character": "官",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "官",
+    "onyomi": "カン",
+    "kunyomi": "",
+    "sinoVietnamese": "QUAN",
+    "vietnameseMeaning": "Quan chức",
+    "meaning_vi": "Quan chức",
+    "mnemonicStory": "Chữ Hán [官] (Quan) nghĩa là \"Quan chức\" — Âm On: カン, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "官語",
+        "reading": "カン",
+        "meaning": "Quan chức (Quan)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0232",
+    "kanji_id": "kanji_n4_0232",
+    "milestoneId": "ms_minna_b29",
+    "milestone_id": "ms_minna_b29",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 29,
+    "kanjiNumber": 232,
+    "kanji": "私",
+    "character": "私",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "私",
+    "onyomi": "シ",
+    "kunyomi": "わたし",
+    "sinoVietnamese": "TƯ",
+    "vietnameseMeaning": "Tôi, Riêng tư",
+    "meaning_vi": "Tôi, Riêng tư",
+    "mnemonicStory": "Chữ Hán [私] (Tư) nghĩa là \"Tôi, Riêng tư\" — Âm On: シ, Âm Kun: わたし.",
+    "exampleCompounds": [
+      {
+        "word": "私",
+        "reading": "わたし",
+        "meaning": "tôi",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "私たち",
+        "reading": "わたしたち",
+        "meaning": "chúng tôi, chúng ta",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0257",
+    "kanji_id": "kanji_n4_0257",
+    "milestoneId": "ms_minna_b29",
+    "milestone_id": "ms_minna_b29",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 29,
+    "kanjiNumber": 257,
+    "kanji": "通",
+    "character": "通",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "通",
+    "onyomi": "ツウ",
+    "kunyomi": "とお.る",
+    "sinoVietnamese": "THÔNG",
+    "vietnameseMeaning": "Thông qua, Đi qua",
+    "meaning_vi": "Thông qua, Đi qua",
+    "mnemonicStory": "Chữ Hán [通] (Thông) nghĩa là \"Thông qua, Đi qua\" — Âm On: ツウ, Âm Kun: とお.る.",
+    "exampleCompounds": [
+      {
+        "word": "普通",
+        "reading": "ふつう",
+        "meaning": "tàu thường",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "交通",
+        "reading": "こうつう",
+        "meaning": "giao thông",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "普通形",
+        "reading": "ふつうけい",
+        "meaning": "thể thông thường (thể từ điển/ngắn gọn)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0282",
+    "kanji_id": "kanji_n4_0282",
+    "milestoneId": "ms_minna_b29",
+    "milestone_id": "ms_minna_b29",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 29,
+    "kanjiNumber": 282,
+    "kanji": "曜",
+    "character": "曜",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "曜",
+    "onyomi": "ヨウ",
+    "kunyomi": "",
+    "sinoVietnamese": "DIỆU",
+    "vietnameseMeaning": "Ngày trong tuần",
+    "meaning_vi": "Ngày trong tuần",
+    "mnemonicStory": "Chữ Hán [曜] (Diệu) nghĩa là \"Ngày trong tuần\" — Âm On: ヨウ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "月曜日",
+        "reading": "げつようび",
+        "meaning": "thứ Hai",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "火曜日",
+        "reading": "かようび",
+        "meaning": "thứ Ba",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "水曜日",
+        "reading": "すいようび",
+        "meaning": "thứ Tư",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "木曜日",
+        "reading": "もくようび",
+        "meaning": "thứ Năm",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "金曜日",
+        "reading": "きんようび",
+        "meaning": "thứ Sáu",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "土曜日",
+        "reading": "どようび",
+        "meaning": "thứ Bảy",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0307",
+    "kanji_id": "kanji_n4_0307",
+    "milestoneId": "ms_minna_b29",
+    "milestone_id": "ms_minna_b29",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 29,
+    "kanjiNumber": 307,
+    "kanji": "難",
+    "character": "難",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "難",
+    "onyomi": "ナン",
+    "kunyomi": "むずか.しい",
+    "sinoVietnamese": "NAN",
+    "vietnameseMeaning": "Khó, Nan giải",
+    "meaning_vi": "Khó, Nan giải",
+    "mnemonicStory": "Chữ Hán [難] (Nan) nghĩa là \"Khó, Nan giải\" — Âm On: ナン, Âm Kun: むずか.しい.",
+    "exampleCompounds": [
+      {
+        "word": "難しい",
+        "reading": "むずかしい",
+        "meaning": "khó",
+        "type": "TT-i",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "困難",
+        "reading": "こんなん",
+        "meaning": "khó khăn, trở ngại",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "難民",
+        "reading": "なんみん",
+        "meaning": "Người tị nạn",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "気候難民",
+        "reading": "きこうなんみん",
+        "meaning": "Người tị nạn khí hậu",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 29
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0332",
+    "kanji_id": "kanji_n4_0332",
+    "milestoneId": "ms_minna_b29",
+    "milestone_id": "ms_minna_b29",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 29,
+    "kanjiNumber": 332,
+    "kanji": "客",
+    "character": "客",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "客",
+    "onyomi": "キャク",
+    "kunyomi": "",
+    "sinoVietnamese": "KHÁCH",
+    "vietnameseMeaning": "Khách hàng, khách",
+    "meaning_vi": "Khách hàng, khách",
+    "mnemonicStory": "Chữ Hán [客] (Khách) nghĩa là \"Khách hàng, khách\" — Âm On: キャク, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "客観性",
+        "reading": "きゃっかんせい",
+        "meaning": "Tính khách quan",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 29
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0357",
+    "kanji_id": "kanji_n4_0357",
+    "milestoneId": "ms_minna_b29",
+    "milestone_id": "ms_minna_b29",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 29,
+    "kanjiNumber": 357,
+    "kanji": "業",
+    "character": "業",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "業",
+    "onyomi": "ギョウ",
+    "kunyomi": "わざ",
+    "sinoVietnamese": "NGHIỆP",
+    "vietnameseMeaning": "Nghề nghiệp, sự nghiệp",
+    "meaning_vi": "Nghề nghiệp, sự nghiệp",
+    "mnemonicStory": "Chữ Hán [業] (Nghiệp) nghĩa là \"Nghề nghiệp, sự nghiệp\" — Âm On: ギョウ, Âm Kun: わざ.",
+    "exampleCompounds": [
+      {
+        "word": "残業します",
+        "reading": "ざんぎょうします",
+        "meaning": "tăng ca",
+        "type": "ĐT3",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "卒業します",
+        "reading": "そつぎょうします",
+        "meaning": "tốt nghiệp",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "残業",
+        "reading": "ざんぎょう",
+        "meaning": "làm thêm giờ, tăng ca",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "残業させられます",
+        "reading": "ざんぎょうさせられます",
+        "meaning": "bị bắt làm thêm giờ",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "卒業",
+        "reading": "そつぎょう",
+        "meaning": "tốt nghiệp",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "業績",
+        "reading": "ぎょうせき",
+        "meaning": "Kết quả kinh doanh / thành tích",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "企業買収",
+        "reading": "きぎょうばいしゅう",
+        "meaning": "Thâu tóm / mua lại doanh nghiệp",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 29
+      },
+      {
+        "word": "業",
+        "reading": "ぎょう",
+        "meaning": "Nghiệp / công việc",
+        "type": "kanji",
+        "level": "N4",
+        "lesson": 29
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0382",
+    "kanji_id": "kanji_n4_0382",
+    "milestoneId": "ms_minna_b29",
+    "milestone_id": "ms_minna_b29",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 29,
+    "kanjiNumber": 382,
+    "kanji": "傘",
+    "character": "傘",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "傘",
+    "onyomi": "サン",
+    "kunyomi": "かさ",
+    "sinoVietnamese": "TẢN",
+    "vietnameseMeaning": "Cái ô, cái dù",
+    "meaning_vi": "Cái ô, cái dù",
+    "mnemonicStory": "Chữ Hán [傘] (Tản) nghĩa là \"Cái ô, cái dù\" — Âm On: サン, Âm Kun: かさ.",
+    "exampleCompounds": [
+      {
+        "word": "傘",
+        "reading": "かさ",
+        "meaning": "ô, dù",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 29
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

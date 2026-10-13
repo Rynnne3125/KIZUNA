@@ -1,0 +1,501 @@
+[
+  {
+    "id": "kanji_n4_0131",
+    "kanji_id": "kanji_n4_0131",
+    "milestoneId": "ms_minna_b28",
+    "milestone_id": "ms_minna_b28",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 28,
+    "kanjiNumber": 131,
+    "kanji": "字",
+    "character": "字",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "字",
+    "onyomi": "ジ",
+    "kunyomi": "あざ",
+    "sinoVietnamese": "TỰ",
+    "vietnameseMeaning": "Chữ",
+    "meaning_vi": "Chữ",
+    "mnemonicStory": "Chữ Hán [字] (Tự) nghĩa là \"Chữ\" — Âm On: ジ, Âm Kun: あざ.",
+    "exampleCompounds": [
+      {
+        "word": "字",
+        "reading": "じ",
+        "meaning": "chữ",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      },
+      {
+        "word": "漢字",
+        "reading": "かんじ",
+        "meaning": "chữ Hán",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      },
+      {
+        "word": "ローマ字",
+        "reading": "ろーまじ",
+        "meaning": "chữ La-tinh",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      },
+      {
+        "word": "赤字",
+        "reading": "あかじ",
+        "meaning": "Thâm hụt / lỗ",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 28
+      },
+      {
+        "word": "黒字",
+        "reading": "くろじ",
+        "meaning": "Thặng dư / có lãi",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 28
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0156",
+    "kanji_id": "kanji_n4_0156",
+    "milestoneId": "ms_minna_b28",
+    "milestone_id": "ms_minna_b28",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 28,
+    "kanjiNumber": 156,
+    "kanji": "借",
+    "character": "借",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "借",
+    "onyomi": "シャク",
+    "kunyomi": "か.りる",
+    "sinoVietnamese": "TÁ",
+    "vietnameseMeaning": "Mượn",
+    "meaning_vi": "Mượn",
+    "mnemonicStory": "Chữ Hán [借] (Tá) nghĩa là \"Mượn\" — Âm On: シャク, Âm Kun: か.りる.",
+    "exampleCompounds": [
+      {
+        "word": "借ります",
+        "reading": "かります",
+        "meaning": "mượn",
+        "type": "ĐT2",
+        "level": "N4",
+        "lesson": 28
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0181",
+    "kanji_id": "kanji_n4_0181",
+    "milestoneId": "ms_minna_b28",
+    "milestone_id": "ms_minna_b28",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 28,
+    "kanjiNumber": 181,
+    "kanji": "場",
+    "character": "場",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "場",
+    "onyomi": "ジョウ",
+    "kunyomi": "ば",
+    "sinoVietnamese": "TRƯỜNG",
+    "vietnameseMeaning": "Nơi chốn",
+    "meaning_vi": "Nơi chốn",
+    "mnemonicStory": "Chữ Hán [場] (Trường) nghĩa là \"Nơi chốn\" — Âm On: ジョウ, Âm Kun: ば.",
+    "exampleCompounds": [
+      {
+        "word": "売り場",
+        "reading": "うりば",
+        "meaning": "quầy bán hàng",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      },
+      {
+        "word": "乗り場",
+        "reading": "のりば",
+        "meaning": "trạm, bến",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      },
+      {
+        "word": "駐車場",
+        "reading": "ちゅうしゃじょう",
+        "meaning": "bãi đỗ xe",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      },
+      {
+        "word": "立場",
+        "reading": "たちば",
+        "meaning": "lập trường",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      },
+      {
+        "word": "職場",
+        "reading": "しょくば",
+        "meaning": "nơi làm việc, chỗ công tác",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      },
+      {
+        "word": "穴場",
+        "reading": "あなば",
+        "meaning": "nơi ít người biết nhưng tuyệt vời",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      },
+      {
+        "word": "場",
+        "reading": "ば",
+        "meaning": "Trường / nơi",
+        "type": "kanji",
+        "level": "N4",
+        "lesson": 28
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0206",
+    "kanji_id": "kanji_n4_0206",
+    "milestoneId": "ms_minna_b28",
+    "milestone_id": "ms_minna_b28",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 28,
+    "kanjiNumber": 206,
+    "kanji": "完",
+    "character": "完",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "完",
+    "onyomi": "カン",
+    "kunyomi": "",
+    "sinoVietnamese": "HOÀN",
+    "vietnameseMeaning": "Hoàn toàn",
+    "meaning_vi": "Hoàn toàn",
+    "mnemonicStory": "Chữ Hán [完] (Hoàn) nghĩa là \"Hoàn toàn\" — Âm On: カン, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "完語",
+        "reading": "カン",
+        "meaning": "Hoàn toàn (Hoàn)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0231",
+    "kanji_id": "kanji_n4_0231",
+    "milestoneId": "ms_minna_b28",
+    "milestone_id": "ms_minna_b28",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 28,
+    "kanjiNumber": 231,
+    "kanji": "写",
+    "character": "写",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "写",
+    "onyomi": "シャ",
+    "kunyomi": "うつ.す",
+    "sinoVietnamese": "TẢ",
+    "vietnameseMeaning": "Chụp, Sao chép",
+    "meaning_vi": "Chụp, Sao chép",
+    "mnemonicStory": "Chữ Hán [写] (Tả) nghĩa là \"Chụp, Sao chép\" — Âm On: シャ, Âm Kun: うつ.す.",
+    "exampleCompounds": [
+      {
+        "word": "写真",
+        "reading": "しゃしん",
+        "meaning": "ảnh",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0256",
+    "kanji_id": "kanji_n4_0256",
+    "milestoneId": "ms_minna_b28",
+    "milestone_id": "ms_minna_b28",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 28,
+    "kanjiNumber": 256,
+    "kanji": "鳥",
+    "character": "鳥",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "鳥",
+    "onyomi": "チョウ",
+    "kunyomi": "とり",
+    "sinoVietnamese": "ĐIỂU",
+    "vietnameseMeaning": "Chim",
+    "meaning_vi": "Chim",
+    "mnemonicStory": "Chữ Hán [鳥] (Điểu) nghĩa là \"Chim\" — Âm On: チョウ, Âm Kun: とり.",
+    "exampleCompounds": [
+      {
+        "word": "鳥語",
+        "reading": "チョウ",
+        "meaning": "Chim (Điểu)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0281",
+    "kanji_id": "kanji_n4_0281",
+    "milestoneId": "ms_minna_b28",
+    "milestone_id": "ms_minna_b28",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 28,
+    "kanjiNumber": 281,
+    "kanji": "用",
+    "character": "用",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "用",
+    "onyomi": "ヨウ",
+    "kunyomi": "もち.いる",
+    "sinoVietnamese": "DỤNG",
+    "vietnameseMeaning": "Sử dụng, Việc",
+    "meaning_vi": "Sử dụng, Việc",
+    "mnemonicStory": "Chữ Hán [用] (Dụng) nghĩa là \"Sử dụng, Việc\" — Âm On: ヨウ, Âm Kun: もち.いる.",
+    "exampleCompounds": [
+      {
+        "word": "用事",
+        "reading": "ようじ",
+        "meaning": "việc bận",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      },
+      {
+        "word": "用意します",
+        "reading": "よういします",
+        "meaning": "chuẩn bị, sắp xếp sẵn",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 28
+      },
+      {
+        "word": "副作用",
+        "reading": "ふくさよう",
+        "meaning": "Tác dụng phụ",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 28
+      },
+      {
+        "word": "引用",
+        "reading": "いんよう",
+        "meaning": "Trích dẫn",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 28
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0306",
+    "kanji_id": "kanji_n4_0306",
+    "milestoneId": "ms_minna_b28",
+    "milestone_id": "ms_minna_b28",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 28,
+    "kanjiNumber": 306,
+    "kanji": "遅",
+    "character": "遅",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "遅",
+    "onyomi": "チ",
+    "kunyomi": "おそ.い",
+    "sinoVietnamese": "TRÌ",
+    "vietnameseMeaning": "Chậm, Muộn",
+    "meaning_vi": "Chậm, Muộn",
+    "mnemonicStory": "Chữ Hán [遅] (Trì) nghĩa là \"Chậm, Muộn\" — Âm On: チ, Âm Kun: おそ.い.",
+    "exampleCompounds": [
+      {
+        "word": "遅い",
+        "reading": "おそい",
+        "meaning": "chậm, muộn",
+        "type": "TT-i",
+        "level": "N4",
+        "lesson": 28
+      },
+      {
+        "word": "遅刻します",
+        "reading": "ちこくします",
+        "meaning": "đến trễ, trễ giờ",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 28
+      },
+      {
+        "word": "遅れます",
+        "reading": "おくれます",
+        "meaning": "trễ, muộn",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 28
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0331",
+    "kanji_id": "kanji_n4_0331",
+    "milestoneId": "ms_minna_b28",
+    "milestone_id": "ms_minna_b28",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 28,
+    "kanjiNumber": 331,
+    "kanji": "絵",
+    "character": "絵",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "絵",
+    "onyomi": "カイ",
+    "kunyomi": "",
+    "sinoVietnamese": "HỘI",
+    "vietnameseMeaning": "Tranh vẽ",
+    "meaning_vi": "Tranh vẽ",
+    "mnemonicStory": "Chữ Hán [絵] (Hội) nghĩa là \"Tranh vẽ\" — Âm On: カイ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "絵",
+        "reading": "え",
+        "meaning": "tranh",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0356",
+    "kanji_id": "kanji_n4_0356",
+    "milestoneId": "ms_minna_b28",
+    "milestone_id": "ms_minna_b28",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 28,
+    "kanjiNumber": 356,
+    "kanji": "室",
+    "character": "室",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "室",
+    "onyomi": "シツ",
+    "kunyomi": "むろ",
+    "sinoVietnamese": "THẤT",
+    "vietnameseMeaning": "Phòng, nhà",
+    "meaning_vi": "Phòng, nhà",
+    "mnemonicStory": "Chữ Hán [室] (Thất) nghĩa là \"Phòng, nhà\" — Âm On: シツ, Âm Kun: むろ.",
+    "exampleCompounds": [
+      {
+        "word": "教室",
+        "reading": "きょうしつ",
+        "meaning": "phòng học",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      },
+      {
+        "word": "会議室",
+        "reading": "かいぎしつ",
+        "meaning": "phòng họp",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0381",
+    "kanji_id": "kanji_n4_0381",
+    "milestoneId": "ms_minna_b28",
+    "milestone_id": "ms_minna_b28",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 28,
+    "kanjiNumber": 381,
+    "kanji": "船",
+    "character": "船",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "船",
+    "onyomi": "セン",
+    "kunyomi": "ふね",
+    "sinoVietnamese": "THUYỀN",
+    "vietnameseMeaning": "Tàu, thuyền",
+    "meaning_vi": "Tàu, thuyền",
+    "mnemonicStory": "Chữ Hán [船] (Thuyền) nghĩa là \"Tàu, thuyền\" — Âm On: セン, Âm Kun: ふね.",
+    "exampleCompounds": [
+      {
+        "word": "船",
+        "reading": "ふね",
+        "meaning": "tàu thủy",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      },
+      {
+        "word": "船便",
+        "reading": "ふなびん",
+        "meaning": "thư đường biển",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 28
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

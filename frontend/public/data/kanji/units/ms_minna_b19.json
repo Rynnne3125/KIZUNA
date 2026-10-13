@@ -1,0 +1,239 @@
+[
+  {
+    "id": "kanji_n5_0019",
+    "kanji_id": "kanji_n5_0019",
+    "milestoneId": "ms_minna_b19",
+    "milestone_id": "ms_minna_b19",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 19,
+    "kanjiNumber": 19,
+    "kanji": "木",
+    "character": "木",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "木",
+    "onyomi": "モク",
+    "kunyomi": "き",
+    "sinoVietnamese": "MỘC",
+    "vietnameseMeaning": "Cây",
+    "meaning_vi": "Cây",
+    "mnemonicStory": "Chữ Hán [木] (Mộc) nghĩa là \"Cây\" — Âm On: モク, Âm Kun: き.",
+    "exampleCompounds": [
+      {
+        "word": "木曜日",
+        "reading": "もくようび",
+        "meaning": "thứ Năm",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "木",
+        "reading": "き",
+        "meaning": "cây",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0044",
+    "kanji_id": "kanji_n5_0044",
+    "milestoneId": "ms_minna_b19",
+    "milestone_id": "ms_minna_b19",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 19,
+    "kanjiNumber": 44,
+    "kanji": "校",
+    "character": "校",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "校",
+    "onyomi": "コウ",
+    "kunyomi": "",
+    "sinoVietnamese": "HIỆU",
+    "vietnameseMeaning": "Trường",
+    "meaning_vi": "Trường",
+    "mnemonicStory": "Chữ Hán [校] (Hiệu) nghĩa là \"Trường\" — Âm On: コウ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "学校",
+        "reading": "がっこう",
+        "meaning": "trường học",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "高校",
+        "reading": "こうこう",
+        "meaning": "trường cấp 3",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0069",
+    "kanji_id": "kanji_n5_0069",
+    "milestoneId": "ms_minna_b19",
+    "milestone_id": "ms_minna_b19",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 19,
+    "kanjiNumber": 69,
+    "kanji": "読",
+    "character": "読",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "読",
+    "onyomi": "ドク",
+    "kunyomi": "よ.む",
+    "sinoVietnamese": "ĐỘC",
+    "vietnameseMeaning": "Đọc",
+    "meaning_vi": "Đọc",
+    "mnemonicStory": "Chữ Hán [読] (Độc) nghĩa là \"Đọc\" — Âm On: ドク, Âm Kun: よ.む.",
+    "exampleCompounds": [
+      {
+        "word": "読みます",
+        "reading": "よみます",
+        "meaning": "đọc",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "読解力",
+        "reading": "どっかいりょく",
+        "meaning": "khả năng đọc hiểu",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0094",
+    "kanji_id": "kanji_n5_0094",
+    "milestoneId": "ms_minna_b19",
+    "milestone_id": "ms_minna_b19",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 19,
+    "kanjiNumber": 94,
+    "kanji": "雨",
+    "character": "雨",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "雨",
+    "onyomi": "ウ",
+    "kunyomi": "あめ",
+    "sinoVietnamese": "VŨ",
+    "vietnameseMeaning": "Mưa",
+    "meaning_vi": "Mưa",
+    "mnemonicStory": "Chữ Hán [雨] (Vũ) nghĩa là \"Mưa\" — Âm On: ウ, Âm Kun: あめ.",
+    "exampleCompounds": [
+      {
+        "word": "雨",
+        "reading": "あめ",
+        "meaning": "mưa",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "梅雨",
+        "reading": "つゆ",
+        "meaning": "mùa mưa",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "雨が降っても",
+        "reading": "あめがふっても",
+        "meaning": "dù trời mưa đi nữa",
+        "type": "MT",
+        "level": "N5",
+        "lesson": 19
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0119",
+    "kanji_id": "kanji_n5_0119",
+    "milestoneId": "ms_minna_b19",
+    "milestone_id": "ms_minna_b19",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 19,
+    "kanjiNumber": 119,
+    "kanji": "着",
+    "character": "着",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "着",
+    "onyomi": "チャク",
+    "kunyomi": "き.る",
+    "sinoVietnamese": "TRƯỚC",
+    "vietnameseMeaning": "Mặc, đến nơi",
+    "meaning_vi": "Mặc, đến nơi",
+    "mnemonicStory": "Chữ Hán [着] (Trước) nghĩa là \"Mặc, đến nơi\" — Âm On: チャク, Âm Kun: き.る.",
+    "exampleCompounds": [
+      {
+        "word": "上着",
+        "reading": "うわぎ",
+        "meaning": "áo khoác",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "下着",
+        "reading": "したぎ",
+        "meaning": "đồ lót",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "着ます",
+        "reading": "きます",
+        "meaning": "mặc (áo)",
+        "type": "ĐT2",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "着きます",
+        "reading": "つきます",
+        "meaning": "đến (nơi)",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 19
+      },
+      {
+        "word": "着実に",
+        "reading": "ちゃくじつに",
+        "meaning": "chắc chắn, vững chắc, từng bước",
+        "type": "PV",
+        "level": "N5",
+        "lesson": 19
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

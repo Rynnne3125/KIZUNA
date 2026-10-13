@@ -1,0 +1,549 @@
+[
+  {
+    "id": "kanji_n4_0133",
+    "kanji_id": "kanji_n4_0133",
+    "milestoneId": "ms_minna_b30",
+    "milestone_id": "ms_minna_b30",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 30,
+    "kanjiNumber": 133,
+    "kanji": "世",
+    "character": "世",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "世",
+    "onyomi": "セイ",
+    "kunyomi": "よ",
+    "sinoVietnamese": "THẾ",
+    "vietnameseMeaning": "Thế giới",
+    "meaning_vi": "Thế giới",
+    "mnemonicStory": "Chữ Hán [世] (Thế) nghĩa là \"Thế giới\" — Âm On: セイ, Âm Kun: よ.",
+    "exampleCompounds": [
+      {
+        "word": "世界",
+        "reading": "せかい",
+        "meaning": "thế giới",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "お世話になりました",
+        "reading": "おせわになりました",
+        "meaning": "cảm ơn đã giúp đỡ",
+        "type": "KH",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "世界中",
+        "reading": "せかいじゅう",
+        "meaning": "khắp thế giới, toàn thế giới",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "世話",
+        "reading": "せわ",
+        "meaning": "sự chăm sóc, giúp đỡ",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "お世話様でした",
+        "reading": "おせわさまでした",
+        "meaning": "cảm ơn vì đã vất vả (xã giao)",
+        "type": "MT",
+        "level": "N4",
+        "lesson": 30
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0158",
+    "kanji_id": "kanji_n4_0158",
+    "milestoneId": "ms_minna_b30",
+    "milestone_id": "ms_minna_b30",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 30,
+    "kanjiNumber": 158,
+    "kanji": "教",
+    "character": "教",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "教",
+    "onyomi": "キョウ",
+    "kunyomi": "おし.える",
+    "sinoVietnamese": "GIÁO",
+    "vietnameseMeaning": "Dạy",
+    "meaning_vi": "Dạy",
+    "mnemonicStory": "Chữ Hán [教] (Giáo) nghĩa là \"Dạy\" — Âm On: キョウ, Âm Kun: おし.える.",
+    "exampleCompounds": [
+      {
+        "word": "教師",
+        "reading": "きょうし",
+        "meaning": "giáo viên (tự xưng)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "教室",
+        "reading": "きょうしつ",
+        "meaning": "phòng học",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "教えます",
+        "reading": "おしえます",
+        "meaning": "dạy",
+        "type": "ĐT2",
+        "level": "N4",
+        "lesson": 30
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0183",
+    "kanji_id": "kanji_n4_0183",
+    "milestoneId": "ms_minna_b30",
+    "milestone_id": "ms_minna_b30",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 30,
+    "kanjiNumber": 183,
+    "kanji": "地",
+    "character": "地",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "地",
+    "onyomi": "チ",
+    "kunyomi": "",
+    "sinoVietnamese": "ĐỊA",
+    "vietnameseMeaning": "Đất",
+    "meaning_vi": "Đất",
+    "mnemonicStory": "Chữ Hán [地] (Địa) nghĩa là \"Đất\" — Âm On: チ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "地下",
+        "reading": "ちか",
+        "meaning": "tầng hầm",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "地下鉄",
+        "reading": "ちかてつ",
+        "meaning": "tàu điện ngầm",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "地図",
+        "reading": "ちず",
+        "meaning": "bản đồ",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "地震",
+        "reading": "じしん",
+        "meaning": "động đất",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "観光地",
+        "reading": "かんこうち",
+        "meaning": "điểm du lịch, danh lam thắng cảnh",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "地図を見れば",
+        "reading": "ちずをみれば",
+        "meaning": "nếu xem bản đồ thì",
+        "type": "MT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "産地直送",
+        "reading": "さんちちょくそう",
+        "meaning": "Gửi thẳng từ nơi sản xuất",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "地球温暖化",
+        "reading": "ちきゅうおんだんか",
+        "meaning": "Nóng lên toàn cầu",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "地",
+        "reading": "ち",
+        "meaning": "Đất / địa",
+        "type": "kanji",
+        "level": "N4",
+        "lesson": 30
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0208",
+    "kanji_id": "kanji_n4_0208",
+    "milestoneId": "ms_minna_b30",
+    "milestone_id": "ms_minna_b30",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 30,
+    "kanjiNumber": 208,
+    "kanji": "顔",
+    "character": "顔",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "顔",
+    "onyomi": "ガン",
+    "kunyomi": "かお",
+    "sinoVietnamese": "NHAN",
+    "vietnameseMeaning": "Khuôn mặt",
+    "meaning_vi": "Khuôn mặt",
+    "mnemonicStory": "Chữ Hán [顔] (Nhan) nghĩa là \"Khuôn mặt\" — Âm On: ガン, Âm Kun: かお.",
+    "exampleCompounds": [
+      {
+        "word": "顔",
+        "reading": "かお",
+        "meaning": "mặt",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0233",
+    "kanji_id": "kanji_n4_0233",
+    "milestoneId": "ms_minna_b30",
+    "milestone_id": "ms_minna_b30",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 30,
+    "kanjiNumber": 233,
+    "kanji": "始",
+    "character": "始",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "始",
+    "onyomi": "シ",
+    "kunyomi": "はじ.める",
+    "sinoVietnamese": "THỦY",
+    "vietnameseMeaning": "Bắt đầu",
+    "meaning_vi": "Bắt đầu",
+    "mnemonicStory": "Chữ Hán [始] (Thủy) nghĩa là \"Bắt đầu\" — Âm On: シ, Âm Kun: はじ.める.",
+    "exampleCompounds": [
+      {
+        "word": "始語",
+        "reading": "シ",
+        "meaning": "Bắt đầu (Thủy)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0258",
+    "kanji_id": "kanji_n4_0258",
+    "milestoneId": "ms_minna_b30",
+    "milestone_id": "ms_minna_b30",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 30,
+    "kanjiNumber": 258,
+    "kanji": "低",
+    "character": "低",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "低",
+    "onyomi": "テイ",
+    "kunyomi": "ひく.い",
+    "sinoVietnamese": "ĐÊ",
+    "vietnameseMeaning": "Thấp",
+    "meaning_vi": "Thấp",
+    "mnemonicStory": "Chữ Hán [低] (Đê) nghĩa là \"Thấp\" — Âm On: テイ, Âm Kun: ひく.い.",
+    "exampleCompounds": [
+      {
+        "word": "低い",
+        "reading": "ひくい",
+        "meaning": "thấp",
+        "type": "TT-i",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "最低",
+        "reading": "さいてい",
+        "meaning": "thấp nhất, tệ nhất",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0283",
+    "kanji_id": "kanji_n4_0283",
+    "milestoneId": "ms_minna_b30",
+    "milestone_id": "ms_minna_b30",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 30,
+    "kanjiNumber": 283,
+    "kanji": "様",
+    "character": "様",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "様",
+    "onyomi": "ヨウ",
+    "kunyomi": "さま",
+    "sinoVietnamese": "DẠNG",
+    "vietnameseMeaning": "Vẻ, Dạng, ...-sama",
+    "meaning_vi": "Vẻ, Dạng, ...-sama",
+    "mnemonicStory": "Chữ Hán [様] (Dạng) nghĩa là \"Vẻ, Dạng, ...-sama\" — Âm On: ヨウ, Âm Kun: さま.",
+    "exampleCompounds": [
+      {
+        "word": "様子",
+        "reading": "ようす",
+        "meaning": "tình hình, vẻ ngoài, dáng vẻ",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "〜そうです (様態)",
+        "reading": "〜そうです",
+        "meaning": "trông có vẻ ~, nhìn thấy thì ~ (dự đoán từ ngoại hình)",
+        "type": "MT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "お世話様でした",
+        "reading": "おせわさまでした",
+        "meaning": "cảm ơn vì đã vất vả (xã giao)",
+        "type": "MT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "生物多様性",
+        "reading": "せいぶつたようせい",
+        "meaning": "Đa dạng sinh học",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "生物多様性保全",
+        "reading": "せいぶつたようせいほぜん",
+        "meaning": "Bảo tồn đa dạng sinh học",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 30
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0308",
+    "kanji_id": "kanji_n4_0308",
+    "milestoneId": "ms_minna_b30",
+    "milestone_id": "ms_minna_b30",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 30,
+    "kanjiNumber": 308,
+    "kanji": "軽",
+    "character": "軽",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "軽",
+    "onyomi": "ケイ",
+    "kunyomi": "かる.い",
+    "sinoVietnamese": "KHINH",
+    "vietnameseMeaning": "Nhẹ",
+    "meaning_vi": "Nhẹ",
+    "mnemonicStory": "Chữ Hán [軽] (Khinh) nghĩa là \"Nhẹ\" — Âm On: ケイ, Âm Kun: かる.い.",
+    "exampleCompounds": [
+      {
+        "word": "軽い",
+        "reading": "かるい",
+        "meaning": "nhẹ",
+        "type": "TT-i",
+        "level": "N4",
+        "lesson": 30
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0333",
+    "kanji_id": "kanji_n4_0333",
+    "milestoneId": "ms_minna_b30",
+    "milestone_id": "ms_minna_b30",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 30,
+    "kanjiNumber": 333,
+    "kanji": "歯",
+    "character": "歯",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "歯",
+    "onyomi": "シ",
+    "kunyomi": "は",
+    "sinoVietnamese": "XỈ",
+    "vietnameseMeaning": "Răng",
+    "meaning_vi": "Răng",
+    "mnemonicStory": "Chữ Hán [歯] (Xỉ) nghĩa là \"Răng\" — Âm On: シ, Âm Kun: は.",
+    "exampleCompounds": [
+      {
+        "word": "歯医者",
+        "reading": "はいしゃ",
+        "meaning": "nha sĩ",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "歯",
+        "reading": "は",
+        "meaning": "răng",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0358",
+    "kanji_id": "kanji_n4_0358",
+    "milestoneId": "ms_minna_b30",
+    "milestone_id": "ms_minna_b30",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 30,
+    "kanjiNumber": 358,
+    "kanji": "留",
+    "character": "留",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "留",
+    "onyomi": "リュウ",
+    "kunyomi": "と.まる",
+    "sinoVietnamese": "LƯU",
+    "vietnameseMeaning": "Ở lại, giữ lại",
+    "meaning_vi": "Ở lại, giữ lại",
+    "mnemonicStory": "Chữ Hán [留] (Lưu) nghĩa là \"Ở lại, giữ lại\" — Âm On: リュウ, Âm Kun: と.まる.",
+    "exampleCompounds": [
+      {
+        "word": "書留",
+        "reading": "かきとめ",
+        "meaning": "thư bảo đảm",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "留学",
+        "reading": "りゅうがく",
+        "meaning": "du học",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "留学します",
+        "reading": "りゅうがくします",
+        "meaning": "du học",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 30
+      },
+      {
+        "word": "内部留保",
+        "reading": "ないぶりゅうほ",
+        "meaning": "Lợi nhuận giữ lại",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 30
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0383",
+    "kanji_id": "kanji_n4_0383",
+    "milestoneId": "ms_minna_b30",
+    "milestone_id": "ms_minna_b30",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "lessonNumber": 30,
+    "kanjiNumber": 383,
+    "kanji": "油",
+    "character": "油",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "油",
+    "onyomi": "ユ",
+    "kunyomi": "あぶら",
+    "sinoVietnamese": "DU",
+    "vietnameseMeaning": "Dầu mỡ",
+    "meaning_vi": "Dầu mỡ",
+    "mnemonicStory": "Chữ Hán [油] (Du) nghĩa là \"Dầu mỡ\" — Âm On: ユ, Âm Kun: あぶら.",
+    "exampleCompounds": [
+      {
+        "word": "油語",
+        "reading": "ユ",
+        "meaning": "Dầu mỡ (Du)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 30
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

@@ -1,6 +1,6 @@
 import { db } from '../../config/firebase';
 import { collection, getDocs, doc, getDoc, query, where, limit } from 'firebase/firestore';
-import { Stage, Milestone, VocabularyItem, VocabularyCatalog, GrammarItem, GrammarCatalog, KanjiItem, Exam } from '../types/kizuna';
+import { Stage, Milestone, VocabularyItem, VocabularyCatalog, GrammarItem, GrammarCatalog, KanjiItem, KanjiCatalog, Exam } from '../types/kizuna';
 import { VOCABULARY_CATALOG } from '../data/vocabularyCatalog';
 
 function getSessionCache<T>(key: string): T | null {
@@ -239,9 +239,61 @@ export const kizunaService = {
     return fallback;
   },
 
+  /**
+   * Lấy danh mục chữ Hán phân cấp theo cấp độ N5 -> N1 và các bài học
+   * 0 Firestore read (tải từ static JSON cache)
+   */
+  async getKanjiCatalog(): Promise<KanjiCatalog | null> {
+    const cacheKey = 'kizuna_kanji_catalog_cache';
+    const cached = getSessionCache<KanjiCatalog>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      const res = await fetch('/data/kanji/catalog.json');
+      if (res.ok) {
+        const data: KanjiCatalog = await res.json();
+        setSessionCache(cacheKey, data);
+        return data;
+      }
+    } catch (e) {
+      console.warn('Fetch kanji catalog error:', e);
+    }
+    return null;
+  },
+
+  /**
+   * Lấy danh sách chữ Hán theo bài học (Unit) cụ thể
+   * Tải từ /data/kanji/units/[unitId].json (0 Firestore read)
+   */
+  async getKanjiByUnit(unitId: string): Promise<KanjiItem[]> {
+    const cacheKey = `kizuna_kanji_unit_${unitId}`;
+    const cached = getSessionCache<KanjiItem[]>(cacheKey);
+    if (cached && cached.length > 0) return cached;
+
+    try {
+      const res = await fetch(`/data/kanji/units/${unitId}.json`);
+      if (res.ok) {
+        const items: KanjiItem[] = await res.json();
+        setSessionCache(cacheKey, items);
+        return items;
+      }
+    } catch (e) {
+      console.warn(`Fetch kanji unit ${unitId} failed:`, e);
+    }
+
+    return [];
+  },
+
   async getKanji(): Promise<KanjiItem[]> {
     const cached = getSessionCache<KanjiItem[]>('kizuna_kanji_cache');
     if (cached) return cached;
+
+    // Lấy thử từ Unit đầu tiên của N5
+    const firstUnit = await this.getKanjiByUnit('ms_minna_b01');
+    if (firstUnit.length > 0) {
+      setSessionCache('kizuna_kanji_cache', firstUnit);
+      return firstUnit;
+    }
 
     try {
       const q = query(collection(db, 'kanji_dictionary'), limit(50));

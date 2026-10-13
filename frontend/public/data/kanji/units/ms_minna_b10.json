@@ -1,0 +1,319 @@
+[
+  {
+    "id": "kanji_n5_0010",
+    "kanji_id": "kanji_n5_0010",
+    "milestoneId": "ms_minna_b10",
+    "milestone_id": "ms_minna_b10",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 10,
+    "kanjiNumber": 10,
+    "kanji": "十",
+    "character": "十",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "十",
+    "onyomi": "ジュウ",
+    "kunyomi": "とお",
+    "sinoVietnamese": "THẬP",
+    "vietnameseMeaning": "Mười",
+    "meaning_vi": "Mười",
+    "mnemonicStory": "Chữ Hán [十] (Thập) nghĩa là \"Mười\" — Âm On: ジュウ, Âm Kun: とお.",
+    "exampleCompounds": [
+      {
+        "word": "十",
+        "reading": "とお",
+        "meaning": "10 cái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0035",
+    "kanji_id": "kanji_n5_0035",
+    "milestoneId": "ms_minna_b10",
+    "milestone_id": "ms_minna_b10",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 10,
+    "kanjiNumber": 35,
+    "kanji": "生",
+    "character": "生",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "生",
+    "onyomi": "セイ",
+    "kunyomi": "い.きる",
+    "sinoVietnamese": "SINH",
+    "vietnameseMeaning": "Sống, Sinh",
+    "meaning_vi": "Sống, Sinh",
+    "mnemonicStory": "Chữ Hán [生] (Sinh) nghĩa là \"Sống, Sinh\" — Âm On: セイ, Âm Kun: い.きる.",
+    "exampleCompounds": [
+      {
+        "word": "先生",
+        "reading": "せんせい",
+        "meaning": "thầy giáo, cô giáo, giáo viên",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "学生",
+        "reading": "がくせい",
+        "meaning": "học sinh, sinh viên",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "誕生日",
+        "reading": "たんじょうび",
+        "meaning": "sinh nhật",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "生活",
+        "reading": "せいかつ",
+        "meaning": "cuộc sống",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "生け花",
+        "reading": "いけばな",
+        "meaning": "nghệ thuật cắm hoa",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "生まれます",
+        "reading": "うまれます",
+        "meaning": "sinh ra",
+        "type": "ĐT2",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "多文化共生",
+        "reading": "たぶんかきょうせい",
+        "meaning": "Cùng chung sống đa văn hóa",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "再生可能エネルギー",
+        "reading": "さいせいかのうエネルギー",
+        "meaning": "Năng lượng tái tạo",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "生態系",
+        "reading": "せいたいけい",
+        "meaning": "Hệ sinh thái",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "生物多様性",
+        "reading": "せいぶつたようせい",
+        "meaning": "Đa dạng sinh học",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0060",
+    "kanji_id": "kanji_n5_0060",
+    "milestoneId": "ms_minna_b10",
+    "milestone_id": "ms_minna_b10",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 10,
+    "kanjiNumber": 60,
+    "kanji": "手",
+    "character": "手",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "手",
+    "onyomi": "シュ",
+    "kunyomi": "て",
+    "sinoVietnamese": "THỦ",
+    "vietnameseMeaning": "Tay",
+    "meaning_vi": "Tay",
+    "mnemonicStory": "Chữ Hán [手] (Thủ) nghĩa là \"Tay\" — Âm On: シュ, Âm Kun: て.",
+    "exampleCompounds": [
+      {
+        "word": "手帳",
+        "reading": "てちょう",
+        "meaning": "sổ tay (lịch)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "お手洗い",
+        "reading": "おてあらい",
+        "meaning": "nhà vệ sinh (lịch sự)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "手紙",
+        "reading": "てがみ",
+        "meaning": "thư",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "手",
+        "reading": "て",
+        "meaning": "tay",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "上手[な]",
+        "reading": "じょうず[な]",
+        "meaning": "giỏi",
+        "type": "TT-na",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "下手[な]",
+        "reading": "へた[な]",
+        "meaning": "kém",
+        "type": "TT-na",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "手術",
+        "reading": "しゅじゅつ",
+        "meaning": "Phẫu thuật",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0085",
+    "kanji_id": "kanji_n5_0085",
+    "milestoneId": "ms_minna_b10",
+    "milestone_id": "ms_minna_b10",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 10,
+    "kanjiNumber": 85,
+    "kanji": "多",
+    "character": "多",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "多",
+    "onyomi": "タ",
+    "kunyomi": "おお.い",
+    "sinoVietnamese": "ĐA",
+    "vietnameseMeaning": "Nhiều",
+    "meaning_vi": "Nhiều",
+    "mnemonicStory": "Chữ Hán [多] (Đa) nghĩa là \"Nhiều\" — Âm On: タ, Âm Kun: おお.い.",
+    "exampleCompounds": [
+      {
+        "word": "多い",
+        "reading": "おおい",
+        "meaning": "nhiều",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "多分",
+        "reading": "たぶん",
+        "meaning": "có lẽ, chắc là",
+        "type": "PV",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "多文化共生",
+        "reading": "たぶんかきょうせい",
+        "meaning": "Cùng chung sống đa văn hóa",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "生物多様性",
+        "reading": "せいぶつたようせい",
+        "meaning": "Đa dạng sinh học",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      },
+      {
+        "word": "生物多様性保全",
+        "reading": "せいぶつたようせいほぜん",
+        "meaning": "Bảo tồn đa dạng sinh học",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0110",
+    "kanji_id": "kanji_n5_0110",
+    "milestoneId": "ms_minna_b10",
+    "milestone_id": "ms_minna_b10",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 10,
+    "kanjiNumber": 110,
+    "kanji": "石",
+    "character": "石",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "石",
+    "onyomi": "セキ",
+    "kunyomi": "いし",
+    "sinoVietnamese": "THẠCH",
+    "vietnameseMeaning": "Đá",
+    "meaning_vi": "Đá",
+    "mnemonicStory": "Chữ Hán [石] (Thạch) nghĩa là \"Đá\" — Âm On: セキ, Âm Kun: いし.",
+    "exampleCompounds": [
+      {
+        "word": "懐石料理",
+        "reading": "かいせきりょうり",
+        "meaning": "Ẩm thực kaiseki (Nhật cao cấp)",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 10
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]
