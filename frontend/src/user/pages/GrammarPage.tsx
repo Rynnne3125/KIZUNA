@@ -3,8 +3,8 @@ import { kizunaService } from '../services/kizunaService';
 import { GrammarItem, GrammarBook, GrammarUnit, GrammarCatalog } from '../types/kizuna';
 
 type JlptLevelKey = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
-// 3 Dạng bài tập: 1 là Thẻ lật (Ôn tập), 2 là Nghĩa dịch sang Mẫu câu (Luyện dịch), 3 là Công thức ghép từ (Gõ ghi nhớ)
-type StudyMode = 'list' | 'flip' | 'vi_to_ja' | 'structure_quiz';
+// 2 Dạng bài tập: 1 là Thẻ lật (Ôn tập), 2 là Nhìn câu ví dụ chọn mẫu ngữ pháp (Luyện ghi nhớ)
+type StudyMode = 'list' | 'flip' | 'quiz';
 
 // Phân cấp danh xưng tiếng Nhật truyền thống cho từng bậc N
 const LEVEL_LABELS: Record<JlptLevelKey, { kanji: string; vi: string; desc: string }> = {
@@ -14,6 +14,19 @@ const LEVEL_LABELS: Record<JlptLevelKey, { kanji: string; vi: string; desc: stri
   N2: { kanji: '中上級', vi: 'Trung thượng cấp', desc: 'Văn phong văn phòng, thương mại & xã luận' },
   N1: { kanji: '上級', vi: 'Thượng cấp', desc: 'Ngữ pháp nghị luận cao cấp & văn kiện học thuật' }
 };
+
+interface GrammarQuizOption {
+  pattern: string;
+  titleVi: string;
+  isCorrect: boolean;
+}
+
+interface GrammarQuizQuestion {
+  item: GrammarItem;
+  exampleJp: string;
+  exampleVi: string;
+  options: GrammarQuizOption[];
+}
 
 // Component Animation Hoa anh đào rơi động chuẩn phong cách Nhật Bản
 const SakuraFallingBackground: React.FC = () => {
@@ -90,17 +103,17 @@ export const GrammarPage: React.FC = () => {
   const [flipStudyList, setFlipStudyList] = useState<GrammarItem[]>([]);
   const [flipFinished, setFlipFinished] = useState(false);
 
-  // --- State Dạng 2 & Dạng 3: Thẻ Ôn tập Nhập liệu & Bỏ qua ---
+  // --- State Dạng 2: Bài tập Luyện Ghi Nhớ (Nhìn ví dụ chọn mẫu ngữ pháp) ---
+  const [quizQuestions, setQuizQuestions] = useState<GrammarQuizQuestion[]>([]);
   const [quizActiveIndex, setQuizActiveIndex] = useState(0);
-  const [quizInput, setQuizInput] = useState('');
+  const [quizSelectedOptionIndex, setQuizSelectedOptionIndex] = useState<number | null>(null);
   const [quizAnswerChecked, setQuizAnswerChecked] = useState(false);
   const [quizIsCorrect, setQuizIsCorrect] = useState(false);
   const [quizIsSkipped, setQuizIsSkipped] = useState(false);
-  const [quizWrongItems, setQuizWrongItems] = useState<GrammarItem[]>([]);
-  const [quizSkippedItems, setQuizSkippedItems] = useState<GrammarItem[]>([]);
+  const [quizWrongQuestions, setQuizWrongQuestions] = useState<GrammarQuizQuestion[]>([]);
+  const [quizSkippedQuestions, setQuizSkippedQuestions] = useState<GrammarQuizQuestion[]>([]);
   const [quizCorrectCount, setQuizCorrectCount] = useState(0);
   const [quizFinished, setQuizFinished] = useState(false);
-  const [quizStudyList, setQuizStudyList] = useState<GrammarItem[]>([]);
 
   // Thứ tự học: sắp xếp ngẫu nhiên hoặc theo thứ tự mặc định
   const [isShuffle, setIsShuffle] = useState(false);
@@ -112,6 +125,32 @@ export const GrammarPage: React.FC = () => {
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     return arr;
+  };
+
+  // Tạo bộ câu hỏi trắc nghiệm nhìn ví dụ chọn mẫu ngữ pháp (4 lựa chọn hoặc ít hơn tùy bài)
+  const buildQuizQuestions = (items: GrammarItem[]): GrammarQuizQuestion[] => {
+    return items.map(item => {
+      const exampleJp = item.masterExampleJp || (item.examples && item.examples[0]?.sentence) || item.pattern;
+      const exampleVi = item.masterExampleVi || (item.examples && item.examples[0]?.translation) || item.titleVi;
+
+      // Chọn các mẫu câu nhiễu từ các mẫu khác trong bài
+      const otherItems = items.filter(it => it.id !== item.id);
+      const shuffledOthers = shuffleArray(otherItems);
+      const maxDistractors = Math.min(3, shuffledOthers.length);
+      const distractors = shuffledOthers.slice(0, maxDistractors);
+
+      const options: GrammarQuizOption[] = shuffleArray([
+        { pattern: item.pattern, titleVi: item.titleVi, isCorrect: true },
+        ...distractors.map(d => ({ pattern: d.pattern, titleVi: d.titleVi, isCorrect: false }))
+      ]);
+
+      return {
+        item,
+        exampleJp,
+        exampleVi,
+        options
+      };
+    });
   };
 
   // Tải catalog lúc mount
@@ -138,7 +177,7 @@ export const GrammarPage: React.FC = () => {
 
         const studyItems = isShuffle ? shuffleArray(items) : items;
 
-        // Reset Dạng 1
+        // Reset Dạng 1: Flashcard
         setFlipStudyList(studyItems);
         setFlipActiveIndex(0);
         setIsFlipped(false);
@@ -146,15 +185,16 @@ export const GrammarPage: React.FC = () => {
         setLearningIds(new Set());
         setFlipFinished(false);
 
-        // Reset Dạng 2 & 3
-        setQuizStudyList(studyItems);
+        // Reset Dạng 2: Trắc nghiệm nhìn ví dụ chọn mẫu câu
+        const questions = buildQuizQuestions(studyItems);
+        setQuizQuestions(questions);
         setQuizActiveIndex(0);
-        setQuizInput('');
+        setQuizSelectedOptionIndex(null);
         setQuizAnswerChecked(false);
         setQuizIsCorrect(false);
         setQuizIsSkipped(false);
-        setQuizWrongItems([]);
-        setQuizSkippedItems([]);
+        setQuizWrongQuestions([]);
+        setQuizSkippedQuestions([]);
         setQuizCorrectCount(0);
         setQuizFinished(false);
 
@@ -269,50 +309,19 @@ export const GrammarPage: React.FC = () => {
     setFlipFinished(false);
   };
 
-  // Chuẩn hóa chuỗi so sánh mẫu ngữ pháp (bỏ tilde, khoảng trắng, dấu ngoặc)
-  const normalizePatternStr = (str: string) => {
-    return str
-      .replace(/[〜～~]/g, '')
-      .replace(/[\(\)（）\s+・／/]/g, '')
-      .toLowerCase()
-      .trim();
-  };
+  // --- LOGIC CHO DẠNG 2: BÀI TẬP NHÌN VÍ DỤ CHỌN MẪU NGỮ PHÁP ---
+  const handleSelectQuizOption = (optionIndex: number) => {
+    if (quizAnswerChecked || quizQuestions.length === 0) return;
 
-  // --- LOGIC CHO DẠNG 2 & 3: ÔN TẬP & BỎ QUA ---
-  const handleCheckQuizAnswer = (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-    if (quizAnswerChecked || quizStudyList.length === 0) return;
+    const currentQuestion = quizQuestions[quizActiveIndex];
+    if (!currentQuestion) return;
 
-    const currentItem = quizStudyList[quizActiveIndex];
-    if (!currentItem) return;
+    const selectedOpt = currentQuestion.options[optionIndex];
+    if (!selectedOpt) return;
 
-    const cleanInput = normalizePatternStr(quizInput);
-    if (!cleanInput) return;
+    const isCorrect = selectedOpt.isCorrect;
 
-    const cleanPattern = normalizePatternStr(currentItem.pattern);
-    const cleanStructure = normalizePatternStr(currentItem.structure || '');
-    const cleanMasterJp = normalizePatternStr(currentItem.masterExampleJp);
-
-    let isCorrect = false;
-
-    if (currentMode === 'vi_to_ja') {
-      isCorrect = (
-        cleanInput === cleanPattern ||
-        cleanPattern.includes(cleanInput) ||
-        cleanInput.includes(cleanPattern) ||
-        cleanInput === cleanStructure ||
-        (cleanInput.length >= 3 && cleanStructure.includes(cleanInput))
-      );
-    } else {
-      // Gõ ghi nhớ: từ công thức/gợi ý gõ mẫu câu
-      isCorrect = (
-        cleanInput === cleanPattern ||
-        cleanPattern.includes(cleanInput) ||
-        cleanInput.includes(cleanPattern) ||
-        cleanInput === cleanMasterJp
-      );
-    }
-
+    setQuizSelectedOptionIndex(optionIndex);
     setQuizIsCorrect(isCorrect);
     setQuizIsSkipped(false);
     setQuizAnswerChecked(true);
@@ -320,26 +329,26 @@ export const GrammarPage: React.FC = () => {
     if (isCorrect) {
       setQuizCorrectCount(prev => prev + 1);
     } else {
-      setQuizWrongItems(prev => [...prev, currentItem]);
+      setQuizWrongQuestions(prev => [...prev, currentQuestion]);
     }
   };
 
   const handleSkipQuizCard = () => {
-    if (quizAnswerChecked || quizStudyList.length === 0) return;
-    const currentItem = quizStudyList[quizActiveIndex];
-    if (!currentItem) return;
+    if (quizAnswerChecked || quizQuestions.length === 0) return;
+    const currentQuestion = quizQuestions[quizActiveIndex];
+    if (!currentQuestion) return;
 
     setQuizIsSkipped(true);
     setQuizIsCorrect(false);
     setQuizAnswerChecked(true);
-    setQuizSkippedItems(prev => [...prev, currentItem]);
+    setQuizSkippedQuestions(prev => [...prev, currentQuestion]);
   };
 
   const handleNextQuizQuestion = () => {
     setSlideDirection('next');
-    if (quizActiveIndex + 1 < quizStudyList.length) {
+    if (quizActiveIndex + 1 < quizQuestions.length) {
       setQuizActiveIndex(quizActiveIndex + 1);
-      setQuizInput('');
+      setQuizSelectedOptionIndex(null);
       setQuizAnswerChecked(false);
       setQuizIsCorrect(false);
       setQuizIsSkipped(false);
@@ -350,37 +359,39 @@ export const GrammarPage: React.FC = () => {
 
   const restartAllQuiz = () => {
     const list = isShuffle ? shuffleArray(unitGrammarList) : unitGrammarList;
-    setQuizStudyList(list);
+    const questions = buildQuizQuestions(list);
+    setQuizQuestions(questions);
     setQuizActiveIndex(0);
-    setQuizInput('');
+    setQuizSelectedOptionIndex(null);
     setQuizAnswerChecked(false);
     setQuizIsCorrect(false);
     setQuizIsSkipped(false);
-    setQuizWrongItems([]);
-    setQuizSkippedItems([]);
+    setQuizWrongQuestions([]);
+    setQuizSkippedQuestions([]);
     setQuizCorrectCount(0);
     setQuizFinished(false);
   };
 
   const restartWrongOrSkippedQuiz = () => {
-    const combinedMap = new Map<string, GrammarItem>();
-    [...quizWrongItems, ...quizSkippedItems].forEach(item => combinedMap.set(item.id, item));
-    let retryList = Array.from(combinedMap.values());
-    if (retryList.length === 0) {
+    const combinedMap = new Map<string, GrammarQuizQuestion>();
+    [...quizWrongQuestions, ...quizSkippedQuestions].forEach(q => combinedMap.set(q.item.id, q));
+    let retryQuestions = Array.from(combinedMap.values());
+    if (retryQuestions.length === 0) {
       restartAllQuiz();
       return;
     }
-    if (isShuffle) {
-      retryList = shuffleArray(retryList);
-    }
-    setQuizStudyList(retryList);
+    // Tái tạo lại câu hỏi và xáo trộn các lựa chọn
+    const retryItems = retryQuestions.map(q => q.item);
+    const rebuilt = buildQuizQuestions(isShuffle ? shuffleArray(retryItems) : retryItems);
+
+    setQuizQuestions(rebuilt);
     setQuizActiveIndex(0);
-    setQuizInput('');
+    setQuizSelectedOptionIndex(null);
     setQuizAnswerChecked(false);
     setQuizIsCorrect(false);
     setQuizIsSkipped(false);
-    setQuizWrongItems([]);
-    setQuizSkippedItems([]);
+    setQuizWrongQuestions([]);
+    setQuizSkippedQuestions([]);
     setQuizCorrectCount(0);
     setQuizFinished(false);
   };
@@ -396,22 +407,23 @@ export const GrammarPage: React.FC = () => {
       setFlipActiveIndex(0);
       setIsFlipped(false);
       setFlipFinished(false);
-    } else if (currentMode === 'vi_to_ja' || currentMode === 'structure_quiz') {
+    } else if (currentMode === 'quiz') {
       const nextList = nextShuffle ? shuffleArray(unitGrammarList) : [...unitGrammarList];
-      setQuizStudyList(nextList);
+      const questions = buildQuizQuestions(nextList);
+      setQuizQuestions(questions);
       setQuizActiveIndex(0);
-      setQuizInput('');
+      setQuizSelectedOptionIndex(null);
       setQuizAnswerChecked(false);
       setQuizIsCorrect(false);
       setQuizIsSkipped(false);
-      setQuizWrongItems([]);
-      setQuizSkippedItems([]);
+      setQuizWrongQuestions([]);
+      setQuizSkippedQuestions([]);
       setQuizCorrectCount(0);
       setQuizFinished(false);
     }
   };
 
-  // Tự động chuyển thẻ tiếp theo sau 5 giây hiển thị kết quả ở Dạng 2 & 3
+  // Tự động chuyển thẻ tiếp theo sau 5 giây hiển thị kết quả ở Dạng 2
   useEffect(() => {
     if (!quizAnswerChecked || quizFinished) return;
 
@@ -420,13 +432,14 @@ export const GrammarPage: React.FC = () => {
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, [quizAnswerChecked, quizActiveIndex, quizFinished, quizStudyList.length]);
+  }, [quizAnswerChecked, quizActiveIndex, quizFinished, quizQuestions.length]);
 
-  // Lắng nghe tương tác phím Tab, mũi tên và Enter cho thẻ bài học
+  // Lắng nghe tương tác phím: 1, 2, 3, 4, Tab, Enter và mũi tên
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement;
       const isInput = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable;
+      if (isInput) return;
 
       if (currentMode === 'flip' && !flipFinished && flipStudyList.length > 0) {
         // Nhấn Tab để bỏ qua thẻ ôn tập (đánh dấu chưa thuộc và chuyển tiếp)
@@ -435,8 +448,6 @@ export const GrammarPage: React.FC = () => {
           handleMarkFlipResult(false);
           return;
         }
-
-        if (isInput) return;
 
         if (e.key === 'ArrowRight') {
           e.preventDefault();
@@ -460,8 +471,11 @@ export const GrammarPage: React.FC = () => {
           e.preventDefault();
           handleFlipCard();
         }
-      } else if ((currentMode === 'vi_to_ja' || currentMode === 'structure_quiz') && !quizFinished) {
-        // Nhấn Tab để bỏ qua thẻ khi đang làm bài tập
+      } else if (currentMode === 'quiz' && !quizFinished && quizQuestions.length > 0) {
+        const currentQ = quizQuestions[quizActiveIndex];
+        const numOptions = currentQ ? currentQ.options.length : 0;
+
+        // Phím Tab: Bỏ qua khi chưa chọn, hoặc chuyển tiếp khi đã kiểm tra
         if (e.key === 'Tab') {
           e.preventDefault();
           if (!quizAnswerChecked) {
@@ -472,17 +486,35 @@ export const GrammarPage: React.FC = () => {
           return;
         }
 
-        // Nhấn Enter để chuyển sang thẻ tiếp theo khi đã hiển thị kết quả
+        // Phím Enter: Chuyển tiếp khi đã kiểm tra
         if (quizAnswerChecked && e.key === 'Enter') {
           e.preventDefault();
           handleNextQuizQuestion();
+          return;
+        }
+
+        // Phím 1, 2, 3, 4 hoặc A, B, C, D: Chọn phương án tương ứng
+        if (!quizAnswerChecked) {
+          if ((e.key === '1' || e.key.toLowerCase() === 'a') && numOptions >= 1) {
+            e.preventDefault();
+            handleSelectQuizOption(0);
+          } else if ((e.key === '2' || e.key.toLowerCase() === 'b') && numOptions >= 2) {
+            e.preventDefault();
+            handleSelectQuizOption(1);
+          } else if ((e.key === '3' || e.key.toLowerCase() === 'c') && numOptions >= 3) {
+            e.preventDefault();
+            handleSelectQuizOption(2);
+          } else if ((e.key === '4' || e.key.toLowerCase() === 'd') && numOptions >= 4) {
+            e.preventDefault();
+            handleSelectQuizOption(3);
+          }
         }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentMode, isFlipped, flipActiveIndex, flipStudyList, flipFinished, quizAnswerChecked, quizActiveIndex, quizStudyList, quizFinished]);
+  }, [currentMode, isFlipped, flipActiveIndex, flipStudyList, flipFinished, quizAnswerChecked, quizActiveIndex, quizQuestions, quizFinished]);
 
   // Filter ngữ pháp
   const filteredList = useMemo(() => {
@@ -497,6 +529,7 @@ export const GrammarPage: React.FC = () => {
   }, [unitGrammarList, searchTerm]);
 
   const currentLevelBooks = (catalog && catalog[selectedLevel]) || [];
+  const currentQuestion = quizQuestions[quizActiveIndex];
 
   return (
     <div style={{
@@ -908,7 +941,7 @@ export const GrammarPage: React.FC = () => {
         </div>
       )}
 
-      {/* 4. KHÔNG GIAN HỌC UNIT (DANH SÁCH + 3 CHẾ ĐỘ THẺ) */}
+      {/* 4. KHÔNG GIAN HỌC UNIT (DANH SÁCH + 2 BÀI TẬP: ÔN TẬP & LUYỆN GHI NHỚ) */}
       {selectedBook && selectedUnit && (
         <div>
           {/* Header của bài học */}
@@ -947,7 +980,7 @@ export const GrammarPage: React.FC = () => {
               </button>
             </div>
 
-            {/* Tabs chuyển chế độ: Danh sách + 3 dạng bài tập (1, 2, 3) */}
+            {/* Tabs chuyển chế độ: Danh sách + 2 bài tập (1: Ôn tập, 2: Luyện ghi nhớ) */}
             <div style={{
               display: 'flex',
               gap: 8,
@@ -1005,10 +1038,10 @@ export const GrammarPage: React.FC = () => {
                 <span>Ôn tập</span>
               </button>
 
-              {/* DẠNG 2: LUYỆN DỊCH (Ý nghĩa tiếng Việt gõ Mẫu câu tiếng Nhật) */}
+              {/* DẠNG 2: LUYỆN GHI NHỚ (Nhìn ví dụ chọn mẫu ngữ pháp) */}
               <button
                 onClick={() => {
-                  setCurrentMode('vi_to_ja');
+                  setCurrentMode('quiz');
                   restartAllQuiz();
                 }}
                 style={{
@@ -1018,9 +1051,9 @@ export const GrammarPage: React.FC = () => {
                   fontWeight: 700,
                   border: 'none',
                   cursor: 'pointer',
-                  background: currentMode === 'vi_to_ja' ? '#2563eb' : '#faf8f5',
-                  color: currentMode === 'vi_to_ja' ? '#ffffff' : '#78716c',
-                  borderBottom: currentMode === 'vi_to_ja' ? '2px solid #2563eb' : '1px solid #e7e3da',
+                  background: currentMode === 'quiz' ? '#2563eb' : '#faf8f5',
+                  color: currentMode === 'quiz' ? '#ffffff' : '#78716c',
+                  borderBottom: currentMode === 'quiz' ? '2px solid #2563eb' : '1px solid #e7e3da',
                   display: 'flex',
                   alignItems: 'center',
                   gap: 7,
@@ -1028,45 +1061,13 @@ export const GrammarPage: React.FC = () => {
                 }}
               >
                 <span style={{
-                  background: currentMode === 'vi_to_ja' ? 'rgba(255,255,255,0.25)' : '#ede7de',
+                  background: currentMode === 'quiz' ? 'rgba(255,255,255,0.25)' : '#ede7de',
                   padding: '2px 7px',
                   borderRadius: 5,
                   fontSize: 12,
                   fontWeight: 900
                 }}>2</span>
-                <span>Luyện dịch</span>
-              </button>
-
-              {/* DẠNG 3: GÕ GHI NHỚ (Từ Công thức ghép từ gõ Mẫu câu tiếng Nhật) */}
-              <button
-                onClick={() => {
-                  setCurrentMode('structure_quiz');
-                  restartAllQuiz();
-                }}
-                style={{
-                  padding: '8px 16px',
-                  borderRadius: 8,
-                  fontSize: 13,
-                  fontWeight: 700,
-                  border: 'none',
-                  cursor: 'pointer',
-                  background: currentMode === 'structure_quiz' ? '#2d6d4b' : '#faf8f5',
-                  color: currentMode === 'structure_quiz' ? '#ffffff' : '#78716c',
-                  borderBottom: currentMode === 'structure_quiz' ? '2px solid #2d6d4b' : '1px solid #e7e3da',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 7,
-                  transition: 'all 0.15s ease'
-                }}
-              >
-                <span style={{
-                  background: currentMode === 'structure_quiz' ? 'rgba(255,255,255,0.25)' : '#ede7de',
-                  padding: '2px 7px',
-                  borderRadius: 5,
-                  fontSize: 12,
-                  fontWeight: 900
-                }}>3</span>
-                <span>Gõ ghi nhớ</span>
+                <span>Luyện ghi nhớ</span>
               </button>
             </div>
           </div>
@@ -1185,7 +1186,7 @@ export const GrammarPage: React.FC = () => {
                           {/* Chi tiết 6 thành phần ngữ pháp (Khi mở rộng) */}
                           {isExpanded && (
                             <div style={{ padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 18 }}>
-                              {/* 1. Công thức ghép từ (Structure) */}
+                              {/* 1. Cấu trúc / Công thức ghép (Structure) */}
                               {item.structure && (
                                 <div>
                                   <div style={{ fontSize: 12, fontWeight: 800, color: '#78716c', textTransform: 'uppercase', marginBottom: 6, letterSpacing: '0.5px' }}>
@@ -1353,7 +1354,7 @@ export const GrammarPage: React.FC = () => {
                   {!flipFinished ? (
                     <div style={{ maxWidth: 640, margin: '0 auto' }}>
                       {/* Tiến trình và chế độ sắp xếp */}
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, fontSize: 13, color: '#78716c', flexWrap: 'wrap', gap: 8 }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, fontSize: 13, color: '#78716c', flexWrap: 'gap', gap: 8 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                           <span style={{ fontWeight: 600 }}>Thẻ {flipActiveIndex + 1} / {flipStudyList.length}</span>
                           <button
@@ -1755,15 +1756,15 @@ export const GrammarPage: React.FC = () => {
                 </div>
               )}
 
-              {/* CHẾ ĐỘ 2 & 3: BÀI TẬP LUYỆN DỊCH & GÕ GHI NHỚ */}
-              {(currentMode === 'vi_to_ja' || currentMode === 'structure_quiz') && (
+              {/* CHẾ ĐỘ 2: DẠNG 2 - LUYỆN GHI NHỚ (Nhìn câu ví dụ chọn mẫu ngữ pháp) */}
+              {currentMode === 'quiz' && (
                 <div>
-                  {!quizFinished ? (
+                  {!quizFinished && currentQuestion ? (
                     <div style={{ maxWidth: 640, margin: '0 auto' }}>
                       {/* Tiến trình và chế độ sắp xếp */}
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, fontSize: 13, color: '#78716c', flexWrap: 'wrap', gap: 8 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                          <span style={{ fontWeight: 600 }}>Thẻ {quizActiveIndex + 1} / {quizStudyList.length}</span>
+                          <span style={{ fontWeight: 600 }}>Câu {quizActiveIndex + 1} / {quizQuestions.length}</span>
                           <button
                             onClick={handleToggleShuffle}
                             style={{
@@ -1786,295 +1787,357 @@ export const GrammarPage: React.FC = () => {
                           </button>
                         </div>
                         <div>
-                          Đúng: <strong style={{ color: '#2d6d4b' }}>{quizCorrectCount}</strong> | Sai & Bỏ qua: <strong style={{ color: '#c53d32' }}>{quizWrongItems.length + quizSkippedItems.length}</strong>
+                          Đúng: <strong style={{ color: '#2d6d4b' }}>{quizCorrectCount}</strong> | Sai & Bỏ qua: <strong style={{ color: '#c53d32' }}>{quizWrongQuestions.length + quizSkippedQuestions.length}</strong>
                         </div>
                       </div>
                       <div style={{ width: '100%', height: 4, background: '#e7e3da', borderRadius: 2, marginBottom: 16, overflow: 'hidden' }}>
                         <div style={{
-                          width: `${((quizActiveIndex + 1) / quizStudyList.length) * 100}%`,
+                          width: `${((quizActiveIndex + 1) / quizQuestions.length) * 100}%`,
                           height: '100%',
-                          background: currentMode === 'vi_to_ja' ? '#2563eb' : '#2d6d4b',
+                          background: '#2563eb',
                           transition: 'width 0.2s ease'
                         }} />
                       </div>
 
-                      {/* Khung thẻ câu hỏi có kích thước và vẻ ngoài đồng nhất với Dạng 1, hiệu ứng lướt mượt mà */}
-                      {quizStudyList[quizActiveIndex] && (
-                        <div
-                          key={quizActiveIndex}
-                          style={{
-                            background: 'linear-gradient(150deg, #ffffff 0%, #fdfbf7 100%)',
-                            borderRadius: 20,
-                            border: '1.5px solid #e7dfd5',
-                            minHeight: 380,
-                            padding: '40px 32px',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            textAlign: 'center',
-                            position: 'relative',
-                            boxShadow: '0 12px 30px -4px rgba(44, 30, 20, 0.06), 0 4px 10px -2px rgba(44, 30, 20, 0.03)',
-                            overflow: 'hidden',
-                            animation: 'cardSlideInNext 0.32s cubic-bezier(0.22, 1, 0.36, 1) both'
-                          }}
-                        >
-                          {/* Animation hoa anh đào rơi động trên nền thẻ */}
-                          <SakuraFallingBackground />
+                      {/* Khung thẻ câu hỏi trắc nghiệm nhìn ví dụ */}
+                      <div
+                        key={quizActiveIndex}
+                        style={{
+                          background: 'linear-gradient(150deg, #ffffff 0%, #fdfbf7 100%)',
+                          borderRadius: 20,
+                          border: '1.5px solid #e7dfd5',
+                          minHeight: 380,
+                          padding: '36px 28px',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          textAlign: 'center',
+                          position: 'relative',
+                          boxShadow: '0 12px 30px -4px rgba(44, 30, 20, 0.06), 0 4px 10px -2px rgba(44, 30, 20, 0.03)',
+                          overflow: 'hidden',
+                          animation: `${slideDirection === 'next' ? 'cardSlideInNext' : 'cardSlideInPrev'} 0.32s cubic-bezier(0.22, 1, 0.36, 1) both`
+                        }}
+                      >
+                        <SakuraFallingBackground />
 
-                          {/* Hanko Seal chế độ */}
-                          <span style={{
+                        {/* Hanko Seal chế độ */}
+                        <span style={{
+                          position: 'absolute',
+                          top: 16,
+                          left: 16,
+                          fontSize: 11,
+                          fontWeight: 900,
+                          color: '#2563eb',
+                          background: 'rgba(239, 246, 255, 0.9)',
+                          border: '1px solid #bfdbfe',
+                          padding: '2px 8px',
+                          borderRadius: 4,
+                          fontFamily: 'serif',
+                          zIndex: 2
+                        }}>
+                          2 · 記憶 (LUYỆN GHI NHỚ)
+                        </span>
+
+                        {/* Nút phát âm câu ví dụ */}
+                        <button
+                          onClick={() => speakJapanese(currentQuestion.exampleJp)}
+                          title="Phát âm câu ví dụ"
+                          style={{
                             position: 'absolute',
                             top: 16,
-                            left: 16,
-                            fontSize: 11,
-                            fontWeight: 900,
-                            color: currentMode === 'vi_to_ja' ? '#2563eb' : '#2d6d4b',
-                            background: currentMode === 'vi_to_ja' ? 'rgba(248, 250, 255, 0.85)' : 'rgba(241, 248, 243, 0.85)',
-                            border: `1px solid ${currentMode === 'vi_to_ja' ? '#bfdbfe' : '#c6e2ce'}`,
-                            padding: '2px 8px',
-                            borderRadius: 4,
-                            fontFamily: 'serif',
+                            right: 16,
+                            background: '#faf8f5',
+                            border: '1px solid #d6d3d1',
+                            padding: '5px 12px',
+                            borderRadius: 20,
+                            cursor: 'pointer',
+                            fontSize: 12,
+                            fontWeight: 600,
+                            color: '#44403c',
                             zIndex: 2
-                          }}>
-                            {currentMode === 'vi_to_ja' ? '2 · 和訳 (LUYỆN DỊCH)' : '3 · 構文 (GHI NHỚ)'}
-                          </span>
+                          }}
+                        >
+                          🔊 Nghe câu
+                        </button>
 
-                          {/* Nút phát âm */}
-                          {quizAnswerChecked && (
-                            <button
-                              onClick={() => speakJapanese(quizStudyList[quizActiveIndex].pattern)}
-                              title="Phát âm"
-                              style={{
-                                position: 'absolute',
-                                top: 16,
-                                right: 16,
-                                background: '#faf8f5',
-                                border: '1px solid #d6d3d1',
-                                padding: '5px 12px',
-                                borderRadius: 20,
-                                cursor: 'pointer',
-                                fontSize: 12,
-                                fontWeight: 600,
-                                color: '#44403c',
-                                zIndex: 2
-                              }}
-                            >
-                              Phát âm
-                            </button>
+                        {/* Nội dung câu ví dụ điển hình */}
+                        <div style={{ position: 'relative', zIndex: 2, width: '100%', maxWidth: 560 }}>
+                          <div style={{ fontSize: 11, fontWeight: 800, color: '#78716c', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 6 }}>
+                            例文 · CÂU VÍ DỤ ĐIỂN HÌNH
+                          </div>
+
+                          <div style={{
+                            fontSize: 23,
+                            fontWeight: 900,
+                            color: '#1c2536',
+                            lineHeight: 1.5,
+                            fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif",
+                            marginBottom: 8
+                          }}>
+                            {currentQuestion.exampleJp}
+                          </div>
+
+                          <div style={{
+                            fontSize: 14,
+                            color: '#57534e',
+                            marginBottom: 16,
+                            lineHeight: 1.4
+                          }}>
+                            {currentQuestion.exampleVi}
+                          </div>
+
+                          <div style={{
+                            fontSize: 12,
+                            fontWeight: 700,
+                            color: '#9c2a2a',
+                            background: '#fef2f2',
+                            padding: '4px 12px',
+                            borderRadius: 16,
+                            display: 'inline-block',
+                            marginBottom: 20,
+                            border: '1px solid #fee2e2'
+                          }}>
+                            Chọn mẫu ngữ pháp được sử dụng trong câu trên:
+                          </div>
+
+                          {/* 4 Lựa chọn (hoặc ít hơn tùy bài) */}
+                          <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: currentQuestion.options.length <= 2 ? '1fr' : 'repeat(auto-fit, minmax(240px, 1fr))',
+                            gap: 10,
+                            width: '100%',
+                            marginBottom: 16
+                          }}>
+                            {currentQuestion.options.map((opt, optIdx) => {
+                              const optionLetter = String.fromCharCode(65 + optIdx); // 'A', 'B', 'C', 'D'
+                              const isSelected = quizSelectedOptionIndex === optIdx;
+
+                              let optBg = '#ffffff';
+                              let optBorder = '1.5px solid #e2e8f0';
+                              let optTextColor = '#1c2536';
+                              let badgeBg = '#f1f5f9';
+                              let badgeColor = '#475569';
+
+                              if (quizAnswerChecked) {
+                                if (opt.isCorrect) {
+                                  optBg = '#f0fdf4';
+                                  optBorder = '1.5px solid #22c55e';
+                                  optTextColor = '#15803d';
+                                  badgeBg = '#22c55e';
+                                  badgeColor = '#ffffff';
+                                } else if (isSelected && !opt.isCorrect) {
+                                  optBg = '#fef2f2';
+                                  optBorder = '1.5px solid #ef4444';
+                                  optTextColor = '#b91c1c';
+                                  badgeBg = '#ef4444';
+                                  badgeColor = '#ffffff';
+                                } else {
+                                  optBg = '#fafafa';
+                                  optBorder = '1.5px solid #f1f5f9';
+                                  optTextColor = '#94a3b8';
+                                }
+                              }
+
+                              return (
+                                <button
+                                  key={optIdx}
+                                  type="button"
+                                  disabled={quizAnswerChecked}
+                                  onClick={() => handleSelectQuizOption(optIdx)}
+                                  style={{
+                                    background: optBg,
+                                    border: optBorder,
+                                    borderRadius: 10,
+                                    padding: '12px 14px',
+                                    textAlign: 'left',
+                                    cursor: quizAnswerChecked ? 'default' : 'pointer',
+                                    transition: 'all 0.15s ease',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 10,
+                                    boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
+                                  }}
+                                  onMouseEnter={e => {
+                                    if (!quizAnswerChecked) {
+                                      e.currentTarget.style.borderColor = '#2563eb';
+                                      e.currentTarget.style.transform = 'translateY(-1px)';
+                                    }
+                                  }}
+                                  onMouseLeave={e => {
+                                    if (!quizAnswerChecked) {
+                                      e.currentTarget.style.borderColor = '#e2e8f0';
+                                      e.currentTarget.style.transform = 'translateY(0)';
+                                    }
+                                  }}
+                                >
+                                  <span style={{
+                                    width: 26,
+                                    height: 26,
+                                    borderRadius: 6,
+                                    background: badgeBg,
+                                    color: badgeColor,
+                                    fontSize: 12,
+                                    fontWeight: 900,
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    flexShrink: 0
+                                  }}>
+                                    {optionLetter}
+                                  </span>
+
+                                  <div style={{ flex: 1, minWidth: 0 }}>
+                                    <div style={{
+                                      fontSize: 15,
+                                      fontWeight: 800,
+                                      color: optTextColor,
+                                      fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif",
+                                      whiteSpace: 'nowrap',
+                                      overflow: 'hidden',
+                                      textOverflow: 'ellipsis'
+                                    }}>
+                                      {opt.pattern}
+                                    </div>
+                                    <div style={{
+                                      fontSize: 11,
+                                      color: quizAnswerChecked && !opt.isCorrect && !isSelected ? '#94a3b8' : '#64748b',
+                                      whiteSpace: 'nowrap',
+                                      overflow: 'hidden',
+                                      textOverflow: 'ellipsis'
+                                    }}>
+                                      {opt.titleVi}
+                                    </div>
+                                  </div>
+
+                                  {quizAnswerChecked && opt.isCorrect && (
+                                    <span style={{ color: '#16a34a', fontWeight: 900, fontSize: 16 }}>✓</span>
+                                  )}
+                                  {quizAnswerChecked && isSelected && !opt.isCorrect && (
+                                    <span style={{ color: '#dc2626', fontWeight: 900, fontSize: 16 }}>✗</span>
+                                  )}
+                                </button>
+                              );
+                            })}
+                          </div>
+
+                          {/* Khi CHƯA kiểm tra: Nút Bỏ qua */}
+                          {!quizAnswerChecked && (
+                            <div style={{ display: 'flex', justifyContent: 'center', gap: 10 }}>
+                              <button
+                                type="button"
+                                onClick={handleSkipQuizCard}
+                                style={{
+                                  padding: '8px 20px',
+                                  background: '#faf8f5',
+                                  color: '#78716c',
+                                  border: '1px solid #d6d3d1',
+                                  borderRadius: 8,
+                                  fontWeight: 700,
+                                  fontSize: 12,
+                                  cursor: 'pointer'
+                                }}
+                              >
+                                Bỏ qua (Tab)
+                              </button>
+                            </div>
                           )}
 
-                          {/* Nội dung câu hỏi */}
-                          <div style={{ position: 'relative', zIndex: 2, width: '100%' }}>
-                            {currentMode === 'vi_to_ja' ? (
-                              <div style={{ marginBottom: 24, maxWidth: 520, margin: '0 auto 24px auto' }}>
-                                <div style={{ fontSize: 12, fontWeight: 700, color: '#78716c', textTransform: 'uppercase', marginBottom: 6 }}>
-                                  Ý nghĩa tiếng Việt:
-                                </div>
-                                <div style={{ fontSize: 24, fontWeight: 900, color: '#9c2a2a', marginBottom: 8 }}>
-                                  {quizStudyList[quizActiveIndex].titleVi}
-                                </div>
-                                <div style={{ fontSize: 13, color: '#57534e', lineHeight: 1.5 }}>
-                                  {quizStudyList[quizActiveIndex].explanation}
-                                </div>
+                          {/* Khi ĐÃ kiểm tra: Khung kết quả chi tiết & Thanh đếm ngược 5s */}
+                          {quizAnswerChecked && (
+                            <div style={{
+                              width: '100%',
+                              padding: '16px 20px',
+                              borderRadius: 12,
+                              background: quizIsCorrect ? '#f1f8f3' : quizIsSkipped ? '#fffbeb' : '#fdf2f0',
+                              border: `1.5px solid ${quizIsCorrect ? '#c6e2ce' : quizIsSkipped ? '#fde68a' : '#f3d5d2'}`,
+                              textAlign: 'center',
+                              boxShadow: '0 4px 14px rgba(0,0,0,0.03)',
+                              animation: 'resultSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) both'
+                            }}>
+                              {/* Badge trạng thái */}
+                              <div style={{
+                                display: 'inline-block',
+                                padding: '3px 12px',
+                                borderRadius: 12,
+                                fontWeight: 800,
+                                fontSize: 12,
+                                background: quizIsCorrect ? 'rgba(45, 109, 75, 0.12)' : quizIsSkipped ? 'rgba(217, 119, 6, 0.12)' : 'rgba(197, 61, 50, 0.12)',
+                                color: quizIsCorrect ? '#2d6d4b' : quizIsSkipped ? '#b45309' : '#c53d32',
+                                marginBottom: 6
+                              }}>
+                                {quizIsCorrect ? 'Chính xác' : quizIsSkipped ? 'Đã bỏ qua' : 'Chưa chính xác'}
                               </div>
-                            ) : (
-                              <div style={{ marginBottom: 24, maxWidth: 520, margin: '0 auto 24px auto' }}>
-                                <div style={{ fontSize: 12, fontWeight: 700, color: '#78716c', textTransform: 'uppercase', marginBottom: 6 }}>
-                                  Công thức ghép từ gợi ý:
-                                </div>
+
+                              <div style={{ fontSize: 18, fontWeight: 900, color: '#1c2536', fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif" }}>
+                                {currentQuestion.item.pattern} · <span style={{ color: '#9c2a2a' }}>{currentQuestion.item.titleVi}</span>
+                              </div>
+
+                              {currentQuestion.item.structure && (
                                 <div style={{
-                                  fontSize: 20,
-                                  fontWeight: 800,
+                                  fontSize: 13,
+                                  fontWeight: 700,
                                   color: '#1e3a8a',
-                                  background: '#eff6ff',
-                                  padding: '10px 16px',
-                                  borderRadius: 8,
-                                  border: '1px solid #bfdbfe',
+                                  background: 'rgba(239, 246, 255, 0.7)',
+                                  padding: '4px 10px',
+                                  borderRadius: 6,
                                   display: 'inline-block',
-                                  marginBottom: 8,
+                                  margin: '6px 0',
                                   fontFamily: 'monospace'
                                 }}>
-                                  {quizStudyList[quizActiveIndex].structure || quizStudyList[quizActiveIndex].pattern}
+                                  {currentQuestion.item.structure}
                                 </div>
-                                <div style={{ fontSize: 14, fontWeight: 700, color: '#9c2a2a' }}>
-                                  {quizStudyList[quizActiveIndex].titleVi}
-                                </div>
+                              )}
+
+                              <div style={{ fontSize: 13, color: '#334155', lineHeight: 1.5, textAlign: 'left', marginTop: 4 }}>
+                                {currentQuestion.item.explanation}
                               </div>
-                            )}
 
-                            {/* Khi CHƯA kiểm tra: Hiển thị form nhập */}
-                            {!quizAnswerChecked ? (
-                              <form onSubmit={handleCheckQuizAnswer} style={{ width: '100%', maxWidth: 440, margin: '0 auto' }}>
-                                <div style={{ marginBottom: 14 }}>
-                                  <input
-                                    key={quizActiveIndex}
-                                    type="text"
-                                    autoFocus
-                                    placeholder={currentMode === 'vi_to_ja' ? 'Nhập mẫu câu tiếng Nhật...' : 'Gõ mẫu câu tiếng Nhật tương ứng...'}
-                                    value={quizInput}
-                                    onChange={e => setQuizInput(e.target.value)}
-                                    onKeyDown={e => {
-                                      if (e.key === 'Tab') {
-                                        e.preventDefault();
-                                        handleSkipQuizCard();
-                                      }
-                                    }}
-                                    style={{
-                                      width: '100%',
-                                      padding: '12px 16px',
-                                      fontSize: 16,
-                                      borderRadius: 10,
-                                      border: '2px solid #d6d3d1',
-                                      outline: 'none',
-                                      textAlign: 'center',
-                                      background: '#faf8f5',
-                                      transition: 'border 0.2s ease'
-                                    }}
-                                  />
-                                </div>
-
-                                <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
-                                  <button
-                                    type="button"
-                                    onClick={handleSkipQuizCard}
-                                    style={{
-                                      padding: '10px 20px',
-                                      background: '#faf8f5',
-                                      color: '#78716c',
-                                      border: '1px solid #d6d3d1',
-                                      borderRadius: 8,
-                                      fontWeight: 700,
-                                      fontSize: 13,
-                                      cursor: 'pointer'
-                                    }}
-                                  >
-                                    Bỏ qua (Tab)
-                                  </button>
-
-                                  <button
-                                    type="submit"
-                                    disabled={!quizInput.trim()}
-                                    style={{
-                                      padding: '10px 26px',
-                                      background: currentMode === 'vi_to_ja' ? '#2563eb' : '#2d6d4b',
-                                      color: '#ffffff',
-                                      fontWeight: 700,
-                                      fontSize: 13,
-                                      borderRadius: 8,
-                                      border: 'none',
-                                      cursor: quizInput.trim() ? 'pointer' : 'not-allowed',
-                                      opacity: quizInput.trim() ? 1 : 0.6
-                                    }}
-                                  >
-                                    Kiểm tra
-                                  </button>
-                                </div>
-                              </form>
-                            ) : (
-                              /* Khi ĐÃ kiểm tra: Hiển thị kết quả ngay dưới mẫu câu, không còn khung nhập */
-                              <div style={{
-                                width: '100%',
-                                maxWidth: 500,
-                                margin: '0 auto',
-                                padding: '18px 22px',
-                                borderRadius: 12,
-                                background: quizIsCorrect ? '#f1f8f3' : quizIsSkipped ? '#fffbeb' : '#fdf2f0',
-                                border: `1.5px solid ${quizIsCorrect ? '#c6e2ce' : quizIsSkipped ? '#fde68a' : '#f3d5d2'}`,
-                                textAlign: 'center',
-                                position: 'relative',
-                                zIndex: 2,
-                                boxShadow: '0 4px 14px rgba(0,0,0,0.03)',
-                                animation: 'resultSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) both'
-                              }}>
-                                {/* Badge trạng thái */}
-                                <div style={{
-                                  display: 'inline-block',
-                                  padding: '3px 12px',
-                                  borderRadius: 12,
-                                  fontWeight: 800,
-                                  fontSize: 12,
-                                  background: quizIsCorrect ? 'rgba(45, 109, 75, 0.12)' : quizIsSkipped ? 'rgba(217, 119, 6, 0.12)' : 'rgba(197, 61, 50, 0.12)',
-                                  color: quizIsCorrect ? '#2d6d4b' : quizIsSkipped ? '#b45309' : '#c53d32',
-                                  marginBottom: 8
-                                }}>
-                                  {quizIsCorrect ? 'Chính xác' : quizIsSkipped ? 'Đã bỏ qua' : 'Chưa chính xác'}
-                                </div>
-
-                                {!quizIsCorrect && !quizIsSkipped && quizInput.trim() && (
-                                  <div style={{ fontSize: 13, color: '#78716c', marginBottom: 8 }}>
-                                    Bạn đã nhập: <span style={{ textDecoration: 'line-through', color: '#c53d32', fontWeight: 600 }}>{quizInput}</span>
-                                  </div>
-                                )}
-
-                                {/* Chi tiết mẫu câu đáp án chuẩn */}
-                                <div style={{ marginBottom: 8 }}>
-                                  <div style={{ fontSize: 24, fontWeight: 900, color: '#1c2536', fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif" }}>
-                                    {quizStudyList[quizActiveIndex].pattern}
-                                  </div>
-                                  <div style={{ fontSize: 14, fontWeight: 700, color: '#9c2a2a', marginTop: 3 }}>
-                                    {quizStudyList[quizActiveIndex].titleVi}
-                                  </div>
-                                </div>
-
-                                {quizStudyList[quizActiveIndex].masterExampleJp && (
-                                  <div style={{
-                                    marginTop: 10,
-                                    paddingTop: 10,
-                                    borderTop: '1px dashed #d6d3d1',
+                              {/* Nút Tiếp theo và thanh đếm ngược 5 giây */}
+                              <div style={{ marginTop: 12 }}>
+                                <button
+                                  type="button"
+                                  onClick={handleNextQuizQuestion}
+                                  style={{
+                                    padding: '8px 26px',
+                                    background: '#1c2536',
+                                    color: '#ffffff',
+                                    fontWeight: 700,
                                     fontSize: 13,
-                                    textAlign: 'left'
-                                  }}>
-                                    <div style={{ fontWeight: 600, color: '#1c2536', marginBottom: 2 }}>
-                                      {quizStudyList[quizActiveIndex].masterExampleJp}
-                                    </div>
-                                    <div style={{ color: '#78716c', fontSize: 12 }}>
-                                      {quizStudyList[quizActiveIndex].masterExampleVi}
-                                    </div>
-                                  </div>
-                                )}
+                                    borderRadius: 8,
+                                    border: 'none',
+                                    cursor: 'pointer'
+                                  }}
+                                >
+                                  Tiếp theo (Enter)
+                                </button>
 
-                                {/* Nút Tiếp theo và thanh đếm ngược 5 giây */}
-                                <div style={{ marginTop: 14 }}>
-                                  <button
-                                    type="button"
-                                    onClick={handleNextQuizQuestion}
-                                    style={{
-                                      padding: '9px 28px',
-                                      background: '#1c2536',
-                                      color: '#ffffff',
-                                      fontWeight: 700,
-                                      fontSize: 14,
-                                      borderRadius: 8,
-                                      border: 'none',
-                                      cursor: 'pointer'
-                                    }}
-                                  >
-                                    Tiếp theo (Enter)
-                                  </button>
-
+                                <div style={{
+                                  height: 3,
+                                  background: 'rgba(0,0,0,0.06)',
+                                  borderRadius: 2,
+                                  marginTop: 10,
+                                  overflow: 'hidden'
+                                }}>
                                   <div style={{
-                                    height: 3,
-                                    background: 'rgba(0,0,0,0.06)',
-                                    borderRadius: 2,
-                                    marginTop: 12,
-                                    overflow: 'hidden'
-                                  }}>
-                                    <div style={{
-                                      height: '100%',
-                                      background: quizIsCorrect ? '#2d6d4b' : '#c53d32',
-                                      animation: 'autoCountdown5s 5s linear forwards'
-                                    }} />
-                                  </div>
+                                    height: '100%',
+                                    background: quizIsCorrect ? '#2d6d4b' : '#c53d32',
+                                    animation: 'autoCountdown5s 5s linear forwards'
+                                  }} />
                                 </div>
                               </div>
-                            )}
-                          </div>
+                            </div>
+                          )}
                         </div>
-                      )}
+                      </div>
+
+                      {/* Hướng dẫn phím bấm */}
+                      <div style={{ textAlign: 'center', marginTop: 10, fontSize: 12, color: '#a8a29e' }}>
+                        Bấm phím 1, 2, 3, 4 hoặc A, B, C, D để chọn đáp án · Phím Tab để bỏ qua · Phím Enter để chuyển tiếp
+                      </div>
                     </div>
                   ) : (
-                    /* Tổng kết Dạng 2 & 3 */
+                    /* Tổng kết Dạng 2 */
                     <div style={{
                       maxWidth: 480,
                       margin: '0 auto',
@@ -2100,7 +2163,7 @@ export const GrammarPage: React.FC = () => {
                         完
                       </div>
                       <h3 style={{ fontSize: 20, fontWeight: 800, color: '#1c2536', marginBottom: 6 }}>
-                        Hoàn thành bài tập ngữ pháp
+                        Hoàn thành bài luyện ghi nhớ ngữ pháp
                       </h3>
 
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, margin: '20px 0' }}>
@@ -2114,13 +2177,13 @@ export const GrammarPage: React.FC = () => {
                         <div style={{ background: '#fdf2f0', border: '1px solid #f3d5d2', borderRadius: 8, padding: 14 }}>
                           <div style={{ fontSize: 11, fontWeight: 700, color: '#c53d32' }}>要復習 · SAI & BỎ QUA</div>
                           <div style={{ fontSize: 26, fontWeight: 900, color: '#c53d32', marginTop: 4 }}>
-                            {quizWrongItems.length + quizSkippedItems.length}
+                            {quizWrongQuestions.length + quizSkippedQuestions.length}
                           </div>
                         </div>
                       </div>
 
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                        {(quizWrongItems.length > 0 || quizSkippedItems.length > 0) && (
+                        {(quizWrongQuestions.length > 0 || quizSkippedQuestions.length > 0) && (
                           <button
                             onClick={restartWrongOrSkippedQuiz}
                             style={{
@@ -2134,7 +2197,7 @@ export const GrammarPage: React.FC = () => {
                               cursor: 'pointer'
                             }}
                           >
-                            🔄 Làm lại các câu sai & bỏ qua ({quizWrongItems.length + quizSkippedItems.length} câu)
+                            🔄 Làm lại các câu sai & bỏ qua ({quizWrongQuestions.length + quizSkippedQuestions.length} câu)
                           </button>
                         )}
 
