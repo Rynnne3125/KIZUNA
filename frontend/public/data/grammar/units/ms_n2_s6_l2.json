@@ -1,0 +1,166 @@
+[
+  {
+    "id": "gram_n2_0497",
+    "grammar_id": "gram_n2_0497",
+    "milestoneId": "ms_n2_s6_l2",
+    "milestone_id": "ms_n2_s6_l2",
+    "stageId": "stage_n2_6",
+    "stage_id": "stage_n2_6",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 110,
+    "pattern": "〜にとどまらず（N／Vる こと＋にとどまらず）",
+    "titleVi": "Không dừng lại ở X (mà còn lan rộng/leo thang đến Y) — nhấn mạnh phạm vi mở rộng",
+    "structure": "〜にとどまらず（N／Vる こと＋にとどまらず）",
+    "explanation": "Mẫu câu 「〜にとどまらず」 diễn tả ý nghĩa không chỉ dừng lại ở một phạm vi, đối tượng hay mức độ ban đầu X, mà còn lan rộng, phát triển hoặc leo thang sang một phạm vi lớn hơn nhiều Y. Cấu trúc này thường kết hợp trực tiếp với Danh từ chỉ phạm vi/thời gian/không gian hoặc 「Động từ thể từ điển + こと」, vế sau bắt buộc phải là phạm vi rộng hơn và hay đi kèm với trợ từ 「〜も／〜さえ／〜にまで」. Đây là cách diễn đạt trang trọng, khách quan, thường xuất hiện trong văn viết, báo chí, tin tức hoặc các bài thuyết trình, phát biểu.",
+    "nuanceReason": "Khác với 「〜だけでなく／〜ばかりか」 dùng được cho việc bổ sung thông tin thông thường, 「〜にとどまらず」 bắt buộc phải thể hiện sự mở rộng hoặc lan tỏa rõ rệt về mặt không gian, thời gian, mức độ hoặc phạm vi ảnh hưởng.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "この大気汚染の問題は、一地域の健康被害にとどまらず、地球規模の気候変動にまで深刻な影響を及ぼしている。",
+    "masterExampleVi": "Vấn đề ô nhiễm không khí này không dừng lại ở tổn hại sức khỏe của một khu vực, mà còn gây ảnh hưởng nghiêm trọng tới tận biến đổi khí hậu trên quy mô toàn cầu.",
+    "examples": [
+      {
+        "sentence": "この大気汚染の問題は、一地域の健康被害にとどまらず、地球規模の気候変動にまで深刻な影響を及ぼしている。",
+        "translation": "Vấn đề ô nhiễm không khí này không dừng lại ở tổn hại sức khỏe của một khu vực, mà còn gây ảnh hưởng nghiêm trọng tới tận biến đổi khí hậu trên quy mô toàn cầu.",
+        "reading": ""
+      },
+      {
+        "sentence": "そのアニメ作品の人気は日本国内にとどまらず、世界中の若者の間にも熱狂的なファンを生み出している。",
+        "translation": "Sức hút của tác phẩm anime đó không chỉ dừng lại ở trong nước Nhật, mà còn tạo ra lượng người hâm mộ cuồng nhiệt trong giới trẻ khắp thế giới.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0498",
+    "grammar_id": "gram_n2_0498",
+    "milestoneId": "ms_n2_s6_l2",
+    "milestone_id": "ms_n2_s6_l2",
+    "stageId": "stage_n2_6",
+    "stage_id": "stage_n2_6",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 110,
+    "pattern": "〜にとどまらず＋（にも／さえ／にまで）— cấu trúc bắt buộc",
+    "titleVi": "にとどまらず không bao giờ đứng một mình cuối câu — luôn phải kéo theo vế mở rộng phía sau",
+    "structure": "〜にとどまらず＋（にも／さえ／にまで）— cấu trúc bắt buộc",
+    "explanation": "Cấu trúc 「〜にとどまらず」 mang ý nghĩa \"không chỉ dừng lại ở phạm vi X mà còn lan rộng, mở rộng ra cả Y (ở quy mô lớn hơn hoặc mức độ sâu hơn)\". Điểm mấu chốt về mặt ngữ pháp là mẫu này không bao giờ đứng độc lập ở cuối câu để ngắt câu, mà bắt buộc phải kéo theo vế sau chứa các trợ từ nhấn mạnh sự lan tỏa như 「にも」「さえ」「にまで」 đi kèm vị ngữ. Mẫu câu này mang sắc thái trang trọng, thường xuất hiện trong văn viết, báo cáo, thời sự khi muốn nhấn mạnh một hiện tượng hay tầm ảnh hưởng đã vượt xa khỏi giới hạn ban đầu.",
+    "nuanceReason": "So với 「〜のみならず」 hay 「〜ばかりか」, 「〜にとどまらず」 nhấn mạnh rõ rệt vào tính chất lan tỏa, bùng phát từ phạm vi hạn hẹp ban đầu sang một quy mô rộng lớn hơn nhiều.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "このアニメの人気は日本国内にとどまらず、アジア諸国や欧米にまで広がっている。",
+    "masterExampleVi": "Độ nổi tiếng của bộ phim hoạt hình này không chỉ dừng lại ở trong nước Nhật mà còn lan rộng sang tận các nước châu Á và Âu Mỹ.",
+    "examples": [
+      {
+        "sentence": "このアニメの人気は日本国内にとどまらず、アジア諸国や欧米にまで広がっている。",
+        "translation": "Độ nổi tiếng của bộ phim hoạt hình này không chỉ dừng lại ở trong nước Nhật mà còn lan rộng sang tận các nước châu Á và Âu Mỹ.",
+        "reading": ""
+      },
+      {
+        "sentence": "今回の豪雨による被害は農業にとどまらず、観光業や交通インフラにさえ深刻な影響を及ぼしている。",
+        "translation": "Thiệt hại do đợt mưa lớn lần này không chỉ dừng lại ở ngành nông nghiệp mà thậm chí còn gây ảnh hưởng nghiêm trọng đến cả ngành du lịch và cơ sở hạ tầng giao thông.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0499",
+    "grammar_id": "gram_n2_0499",
+    "milestoneId": "ms_n2_s6_l2",
+    "milestone_id": "ms_n2_s6_l2",
+    "stageId": "stage_n2_6",
+    "stage_id": "stage_n2_6",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 110,
+    "pattern": "〜に限[かぎ]ったことではない",
+    "titleVi": "Không phải chỉ riêng X (mà nhiều nơi/nhiều người/nhiều lúc khác cũng vậy) — phủ định tính cá biệt",
+    "structure": "〜に限[かぎ]ったことではない",
+    "explanation": "Mẫu câu này mang ý nghĩa \"không chỉ riêng đối tượng hay thời điểm X mà những nơi khác, người khác, lúc khác cũng vậy\", nhằm phủ định tính cá biệt và khẳng định tính phổ biến của một hiện tượng. Ngữ pháp này thường đi sau danh từ chỉ người, tổ chức, ngành nghề hoặc mốc thời gian, kết hợp cùng các phó từ như 「今に」「一人に」「〜だけに」. Đây là cách diễn đạt mang tính trang trọng, thường được dùng khi bình luận, phân tích các vấn đề xã hội hoặc khó khăn mang tính cơ cấu.",
+    "nuanceReason": "Mẫu này thường đi với những vấn đề tiêu cực hoặc mang tính phê phán, và có thể thay thế bằng 「〜に限った話ではない」 trong văn phong tự nhiên.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "少子高齢化による人手不足は、介護業界に限ったことではなく、運輸や建設など多くの分野で深刻化している。",
+    "masterExampleVi": "Tình trạng thiếu hụt nhân lực do già hóa dân số và giảm tỷ lệ sinh không phải chuyện riêng của ngành điều dưỡng, mà đang ngày càng trầm trọng ở nhiều lĩnh vực như vận tải và xây dựng.",
+    "examples": [
+      {
+        "sentence": "少子高齢化による人手不足は、介護業界に限ったことではなく、運輸や建設など多くの分野で深刻化している。",
+        "translation": "Tình trạng thiếu hụt nhân lực do già hóa dân số và giảm tỷ lệ sinh không phải chuyện riêng của ngành điều dưỡng, mà đang ngày càng trầm trọng ở nhiều lĩnh vực như vận tải và xây dựng.",
+        "reading": ""
+      },
+      {
+        "sentence": "ネット上での誹謗中傷は、有名人に限ったことではなく、一般の人々も被害を受けるリスクにさらされている。",
+        "translation": "Việc bị vu khống, xúc phạm trên mạng không chỉ giới hạn ở người nổi tiếng, mà người bình thường cũng phải đối mặt với nguy cơ trở thành nạn nhân.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0500",
+    "grammar_id": "gram_n2_0500",
+    "milestoneId": "ms_n2_s6_l2",
+    "milestone_id": "ms_n2_s6_l2",
+    "stageId": "stage_n2_6",
+    "stage_id": "stage_n2_6",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 110,
+    "pattern": "使[つか]い分[わ]け：にとどまらず ≠ に限[かぎ]ったことではない ≠ どころか／はもとより（N2）",
+    "titleVi": "Phân biệt: にとどまらず (phạm vi leo thang, cần vế にまで／さえ) ≠ に限ったことではない (phủ định tính cá biệt, kết luận tổng quát) ≠ どころか (đảo chiều kỳ vọng, N2) ≠ はもとより (liệt kê đã-biết, N2)",
+    "structure": "使[つか]い分[わ]け：にとどまらず ≠ に限[かぎ]ったことではない ≠ どころか／はもとより（N2）",
+    "explanation": "「にとどまらず」được dùng để diễn tả sự việc không chỉ dừng lại ở phạm vi hẹp ban đầu mà tiếp tục lan rộng, leo thang sang quy mô lớn hơn (thường đi kèm vế 「にまで／さえ」). Trong khi đó, 「に限ったことではない」dùng để phủ định tính cá biệt của một đối tượng nhằm khẳng định đây là vấn đề chung, hiện tượng phổ biến của nhiều đối tượng khác. Khác với 「どころか」(thực tế đảo chiều hoàn toàn so với kỳ vọng) hay 「はもとより」(đưa ra điều đã biết/đương nhiên rồi bổ sung điều khác), hai mẫu này tập trung vào mức độ lan tỏa hoặc tính chất phổ quát của sự việc.",
+    "nuanceReason": "Ghi nhớ: 「にとどまらず」nhấn mạnh vào quá trình bành trướng phạm vi (vế sau hay đi với にまで／へと), trong khi 「に限ったことではない」nhấn mạnh bản chất sự việc không phải ngoại lệ đơn lẻ.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "AIの活用はIT業界にとどまらず、医療や農業の現場にまで急速に広がっている。",
+    "masterExampleVi": "Việc ứng dụng AI không dừng lại ở ngành IT mà còn đang lan rộng nhanh chóng sang tận các lĩnh vực y tế và nông nghiệp.",
+    "examples": [
+      {
+        "sentence": "AIの活用はIT業界にとどまらず、医療や農業の現場にまで急速に広がっている。",
+        "translation": "Việc ứng dụng AI không dừng lại ở ngành IT mà còn đang lan rộng nhanh chóng sang tận các lĩnh vực y tế và nông nghiệp.",
+        "reading": ""
+      },
+      {
+        "sentence": "若者の離職率の高さは我が社に限ったことではなく、業界全体が直面している深刻な課題だ。",
+        "translation": "Tỷ lệ nghỉ việc cao của giới trẻ không phải là chuyện riêng của công ty chúng ta, mà là vấn đề nghiêm trọng mà toàn ngành đang phải đối mặt.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0501",
+    "grammar_id": "gram_n2_0501",
+    "milestoneId": "ms_n2_s6_l2",
+    "milestone_id": "ms_n2_s6_l2",
+    "stageId": "stage_n2_6",
+    "stage_id": "stage_n2_6",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 110,
+    "pattern": "〜ことか",
+    "titleVi": "cảm thán \"… vô cùng / biết bao\"",
+    "structure": "〜ことか",
+    "explanation": "Cấu trúc thuộc [N2] Chặng 6 · Bài 110 (㉒): Dùng để cảm thán \"… vô cùng / biết bao\".",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜ことか（N2）",
+    "masterExampleVi": "cảm thán \"… vô cùng / biết bao\"",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

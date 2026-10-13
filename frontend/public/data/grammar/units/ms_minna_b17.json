@@ -1,0 +1,242 @@
+[
+  {
+    "id": "gram_n5_0069",
+    "grammar_id": "gram_n5_0069",
+    "milestoneId": "ms_minna_b17",
+    "milestone_id": "ms_minna_b17",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 17,
+    "pattern": "Vないでください",
+    "titleVi": "xin đừng làm (yêu cầu phủ định)",
+    "structure": "Vないでください",
+    "explanation": "ない-form + でください = yêu cầu lịch sự không làm điều gì. Đây là phủ định của Vてください. Lịch sự hơn: Vないでいただけますか.",
+    "nuanceReason": "Vないで (bỏ ください) dùng khi thân mật hoặc ra lệnh nhẹ: 走らないで (đừng chạy).",
+    "commonMistake": "[Sai]: 使わなくてください。 -> [Đúng]: 使わないでください。. Phủ định yêu cầu là Vないでください (dùng ない-form + でください). Không nhầm với Vなくてもいいです (không cần làm).",
+    "kitsuPrompt": "Đóng vai người hướng dẫn ở bảo tàng/thư viện, yêu cầu tôi không làm 5 việc bằng Vないでください.",
+    "masterExampleJp": "ここでタバコを吸わないでください。",
+    "masterExampleVi": "Xin đừng hút thuốc ở đây.",
+    "examples": [
+      {
+        "sentence": "ここでタバコを吸わないでください。",
+        "translation": "Xin đừng hút thuốc ở đây."
+      },
+      {
+        "sentence": "写真を撮らないでください。",
+        "translation": "Xin đừng chụp ảnh."
+      },
+      {
+        "sentence": "心配しないでください。",
+        "translation": "Xin đừng lo lắng."
+      },
+      {
+        "sentence": "ドアを閉めないでください。",
+        "translation": "Xin đừng đóng cửa."
+      }
+    ],
+    "dialogue": {
+      "title": "Đề nghị trong bệnh viện",
+      "lines": [
+        {
+          "speaker": "Y tá",
+          "text": "この部屋では携帯電話を使わないでください。",
+          "translation": "Xin đừng dùng điện thoại trong phòng này."
+        },
+        {
+          "speaker": "Bệnh nhân",
+          "text": "わかりました。食事はしてもいいですか。",
+          "translation": "Tôi hiểu. Tôi có thể ăn không?"
+        },
+        {
+          "speaker": "Y tá",
+          "text": "今は食べないでください。検査の前ですから。",
+          "translation": "Bây giờ xin đừng ăn. Vì trước khi xét nghiệm."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0070",
+    "grammar_id": "gram_n5_0070",
+    "milestoneId": "ms_minna_b17",
+    "milestone_id": "ms_minna_b17",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 17,
+    "pattern": "Vなければなりません",
+    "titleVi": "phải làm V (nghĩa vụ)",
+    "structure": "Vなければなりません",
+    "explanation": "ない-form → なければ + なりません = \"phải làm\". Cấu trúc dài, trong hội thoại thường rút gọn thành Vなきゃ hoặc Vなければ。 (bỏ なりません).",
+    "nuanceReason": "Dạng thân mật: なければ → なきゃ hoặc なくちゃ. Ví dụ: 行かなきゃ (phải đi thôi).",
+    "commonMistake": "[Sai]: 行かなければいけません vs 行かなければなりません -> [Đúng]: 行かなければなりません (sách giáo khoa) = 行かなければいけません (tự nhiên hơn trong hội thoại). Cả hai đúng. なりません phổ biến trong văn viết/sách GK. いけません tự nhiên hơn trong hội thoại. なきゃ là dạng thân mật nhất.",
+    "kitsuPrompt": "Hỏi tôi về quy định ở trường/công ty, tôi trả lời với Vなければなりません.",
+    "masterExampleJp": "毎日薬を飲まなければなりません。",
+    "masterExampleVi": "Tôi phải uống thuốc mỗi ngày.",
+    "examples": [
+      {
+        "sentence": "毎日薬を飲まなければなりません。",
+        "translation": "Tôi phải uống thuốc mỗi ngày."
+      },
+      {
+        "sentence": "明日までにレポートを出さなければなりません。",
+        "translation": "Tôi phải nộp báo cáo trước ngày mai."
+      },
+      {
+        "sentence": "早く起きなければなりません。",
+        "translation": "Tôi phải dậy sớm."
+      },
+      {
+        "sentence": "宿題をしなきゃ。",
+        "translation": "Phải làm bài tập thôi. (thân mật)"
+      }
+    ],
+    "dialogue": {
+      "title": "Deadline công việc",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "今日残業しますか。",
+          "translation": "Hôm nay bạn làm thêm giờ không?"
+        },
+        {
+          "speaker": "B",
+          "text": "はい、明日の朝までにこの報告書を提出しなければなりません。",
+          "translation": "Có, tôi phải nộp bản báo cáo này trước sáng mai."
+        },
+        {
+          "speaker": "A",
+          "text": "大変ですね。頑張って！",
+          "translation": "Vất vả nhỉ. Cố lên!"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0071",
+    "grammar_id": "gram_n5_0071",
+    "milestoneId": "ms_minna_b17",
+    "milestone_id": "ms_minna_b17",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 17,
+    "pattern": "Vなくてもいいです",
+    "titleVi": "không cần làm cũng được",
+    "structure": "Vなくてもいいです",
+    "explanation": "ない-form → なくて + もいいです = không cần thiết phải làm. Phủ định của Vなければなりません. Dùng để cho phép ai không làm việc gì.",
+    "nuanceReason": "なくてもいい = không cần; なくていい (bỏ も) cũng đúng nhưng ít trang trọng hơn.",
+    "commonMistake": "[Sai]: Vなくてもいいです vs Vなければなりません (nhầm hướng) -> [Đúng]: 来なくてもいいです = không cần đến. 来なければなりません = phải đến.. Hai cấu trúc đối lập nhau: なくてもいい = cho phép không làm. なければならない = bắt buộc phải làm. Học song song để không nhầm.",
+    "kitsuPrompt": "Đóng vai sếp, giải phóng tôi khỏi 5 nghĩa vụ bằng Vなくてもいいです.",
+    "masterExampleJp": "明日は来なくてもいいですよ。",
+    "masterExampleVi": "Ngày mai bạn không cần đến cũng được đấy.",
+    "examples": [
+      {
+        "sentence": "明日は来なくてもいいですよ。",
+        "translation": "Ngày mai bạn không cần đến cũng được đấy."
+      },
+      {
+        "sentence": "全部食べなくてもいいです。",
+        "translation": "Không cần ăn hết cũng được."
+      },
+      {
+        "sentence": "スーツを着なくてもいいですか。",
+        "translation": "Tôi không cần mặc suit được không?"
+      },
+      {
+        "sentence": "急がなくてもいいですよ。",
+        "translation": "Bạn không cần vội đâu."
+      }
+    ],
+    "dialogue": {
+      "title": "Trước ngày nghỉ",
+      "lines": [
+        {
+          "speaker": "Sếp",
+          "text": "明日は休みだから、スーツを着なくてもいいですよ。",
+          "translation": "Ngày mai là ngày nghỉ nên bạn không cần mặc suit đâu."
+        },
+        {
+          "speaker": "NV",
+          "text": "えっ、本当ですか。じゃあ、早く来なくてもいいですか。",
+          "translation": "Ồ thật à. Vậy tôi không cần đến sớm không?"
+        },
+        {
+          "speaker": "Sếp",
+          "text": "そうですね、でも10時までには来てください。",
+          "translation": "Ừ, nhưng hãy đến trước 10 giờ nhé."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0072",
+    "grammar_id": "gram_n5_0072",
+    "milestoneId": "ms_minna_b17",
+    "milestone_id": "ms_minna_b17",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 17,
+    "pattern": "Nまでに",
+    "titleVi": "trước thời hạn N / không muộn hơn N",
+    "structure": "Nまでに",
+    "explanation": "まで = \"đến tận/cho đến\"; までに = \"trước (deadline)\". Phân biệt: まで (đến tận N, dùng với hành động liên tục) vs までに (trước hạn N, dùng với hành động hoàn thành).",
+    "nuanceReason": "まで (cho đến, liên tục): 5時まで勉強する. までに (trước hạn, kết thúc): 5時までに終わらせる.",
+    "commonMistake": "[Sai]: 5時まで提出してください。(khi muốn nói deadline là 5 giờ) -> [Đúng]: 5時までに提出してください。. まで = liên tục đến 5 giờ (ví dụ: làm việc đến 5 giờ). までに = phải hoàn thành trước 5 giờ (deadline). Thêm に là bắt buộc khi nói deadline.",
+    "kitsuPrompt": "Hỏi tôi deadline của 3 việc khác nhau, tôi trả lời với Nまでに.",
+    "masterExampleJp": "5時までに帰ってください。",
+    "masterExampleVi": "Xin hãy về trước 5 giờ.",
+    "examples": [
+      {
+        "sentence": "5時までに帰ってください。",
+        "translation": "Xin hãy về trước 5 giờ."
+      },
+      {
+        "sentence": "来週の月曜日までにレポートを出してください。",
+        "translation": "Hãy nộp báo cáo trước thứ Hai tuần sau."
+      },
+      {
+        "sentence": "試験が始まるまでに着いてください。",
+        "translation": "Hãy đến trước khi thi bắt đầu."
+      },
+      {
+        "sentence": "5時まで図書館で勉強します。",
+        "translation": "Tôi học ở thư viện đến tận 5 giờ. (không phải までに)"
+      }
+    ],
+    "dialogue": {
+      "title": "Deadline nộp bài",
+      "lines": [
+        {
+          "speaker": "Thầy",
+          "text": "レポートは金曜日までに提出してください。",
+          "translation": "Hãy nộp báo cáo trước thứ Sáu."
+        },
+        {
+          "speaker": "SV",
+          "text": "先生、土曜日までに出してもいいですか。",
+          "translation": "Thầy ơi, con nộp đến thứ Bảy có được không?"
+        },
+        {
+          "speaker": "Thầy",
+          "text": "だめです。金曜日の5時までに必ず出してください。",
+          "translation": "Không được. Nhất định nộp trước 5 giờ thứ Sáu."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

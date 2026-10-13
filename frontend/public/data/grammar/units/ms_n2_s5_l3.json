@@ -1,0 +1,142 @@
+[
+  {
+    "id": "gram_n2_0484",
+    "grammar_id": "gram_n2_0484",
+    "milestoneId": "ms_n2_s5_l3",
+    "milestone_id": "ms_n2_s5_l3",
+    "stageId": "stage_n2_5",
+    "stage_id": "stage_n2_5",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 107,
+    "pattern": "〜をおいて（ほかに）〜ない",
+    "titleVi": "Ngoài X ra thì không còn ai/gì khác — phủ định tuyệt đối, hàm khen sự duy nhất",
+    "structure": "〜をおいて（ほかに）〜ない",
+    "explanation": "Mẫu 「〜をおいて（ほかに）〜ない」 dùng sau danh từ để biểu thị ý nghĩa \"ngoài đối tượng X này ra thì không có ai/gì khác có thể làm được hoặc sánh bằng\". Vế sau luôn luôn bắt buộc phải đi với các từ phủ định tuyệt đối như 「ない」「いない」. Mẫu câu này mang sắc thái đánh giá rất cao, khâm phục hoặc ca ngợi tính độc nhất vô nhị của đối tượng, thường xuất hiện trong các bài phát biểu trang trọng, giới thiệu nhân vật ưu tú hoặc đề cử phương án tối ưu.",
+    "nuanceReason": "Khác với 「〜以外に（〜ない）」 có thể dùng trung tính cho mọi trường hợp, 「〜をおいて（ほかに）〜ない」 chỉ đi trực tiếp với Danh từ và luôn mang hàm ý ca ngợi sự độc nhất, tuyệt đối không đi với vế sau khẳng định.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "次の大型プロジェクトを成功に導けるリーダーは、豊富な経験と統率力を備えた彼女をおいてほかにいない。",
+    "masterExampleVi": "Người lãnh đạo có thể dẫn dắt dự án lớn tiếp theo đến thành công thì ngoài cô ấy - người sở hữu cả kinh nghiệm phong phú lẫn năng lực lãnh đạo - ra không có ai khác.",
+    "examples": [
+      {
+        "sentence": "次の大型プロジェクトを成功に導けるリーダーは、豊富な経験と統率力を備えた彼女をおいてほかにいない。",
+        "translation": "Người lãnh đạo có thể dẫn dắt dự án lớn tiếp theo đến thành công thì ngoài cô ấy - người sở hữu cả kinh nghiệm phong phú lẫn năng lực lãnh đạo - ra không có ai khác.",
+        "reading": ""
+      },
+      {
+        "sentence": "伝統の技と最先端の技術が見事に融合したこの作品を作れるのは、あの工房をおいてほかにないだろう。",
+        "translation": "Nơi có thể tạo ra tác phẩm kết hợp tuyệt mỹ giữa kỹ nghệ truyền thống và công nghệ tối tân thế này thì ngoài xưởng thủ công đó ra có lẽ chẳng còn nơi nào khác.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0485",
+    "grammar_id": "gram_n2_0485",
+    "milestoneId": "ms_n2_s5_l3",
+    "milestone_id": "ms_n2_s5_l3",
+    "stageId": "stage_n2_5",
+    "stage_id": "stage_n2_5",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 107,
+    "pattern": "〜ならではの＋N",
+    "titleVi": "Chỉ riêng X mới có được N này — đặc trưng/phẩm chất riêng có, khen ngợi, đứng trước danh từ",
+    "structure": "〜ならではの＋N",
+    "explanation": "Mẫu 「〜ならではの＋N」 diễn tả ý nghĩa \"chỉ riêng X mới có được N đặc sắc/tuyệt vời như vậy\", làm nổi bật giá trị độc đáo hoặc phẩm chất vượt trội mang tính độc quyền của chủ thể. Cấu trúc này hầu như luôn mang sắc thái khen ngợi, tán thưởng và được dùng nhiều trong quảng cáo, giới thiệu văn hóa, nghệ thuật hoặc dịch vụ cao cấp. Khi bổ nghĩa trực tiếp cho danh từ đứng sau, ta dùng 「〜ならではの＋N」; còn nếu đặt ở cuối câu vị ngữ thì sẽ chuyển thành dạng 「〜ならではだ」 hoặc 「〜ならではのものだ」.",
+    "nuanceReason": "Khác với 「〜特有の」 mang tính trung tính (dùng được cho cả điều tốt lẫn điều xấu/bệnh tật), 「〜ならではの」 chỉ dùng riêng cho các điểm mạnh, nét đẹp độc đáo đáng tự hào.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "満天の星空を眺めながら入る露天風呂は、この温泉宿ならではの贅沢だ。",
+    "masterExampleVi": "Vừa ngâm mình trong bồn tắm lộ thiên vừa ngắm nhìn bầu trời đầy sao là sự xa hoa chỉ riêng lữ quán suối nước nóng này mới có được.",
+    "examples": [
+      {
+        "sentence": "満天の星空を眺めながら入る露天風呂は、この温泉宿ならではの贅沢だ。",
+        "translation": "Vừa ngâm mình trong bồn tắm lộ thiên vừa ngắm nhìn bầu trời đầy sao là sự xa hoa chỉ riêng lữ quán suối nước nóng này mới có được.",
+        "reading": ""
+      },
+      {
+        "sentence": "失敗を恐れずに斬新なアイデアへ果敢に挑戦できるのは、ベンチャー企業ならではの強みと言える。",
+        "translation": "Việc có thể dũng cảm thử thách những ý tưởng mới lạ mà không sợ thất bại chính là thế mạnh đặc trưng chỉ riêng các công ty khởi nghiệp mới có.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0486",
+    "grammar_id": "gram_n2_0486",
+    "milestoneId": "ms_n2_s5_l3",
+    "milestone_id": "ms_n2_s5_l3",
+    "stageId": "stage_n2_5",
+    "stage_id": "stage_n2_5",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 107,
+    "pattern": "〜ならではだ（文末[ぶんまつ]）",
+    "titleVi": "Đúng là chỉ có X mới làm được — dùng ở cuối câu khi KHÔNG có danh từ theo sau",
+    "structure": "〜ならではだ（文末[ぶんまつ]）",
+    "explanation": "Mẫu câu 「〜ならではだ」 đứng ở cuối câu mang ý nghĩa \"đúng là chỉ có X mới có được/làm được\", khẳng định phẩm chất hoặc giá trị độc đáo chỉ thuộc về đối tượng đó. Cấu trúc này thường đi sau danh từ chỉ người, nơi chốn hoặc tổ chức để khen ngợi, bày tỏ sự thán phục trước nét đặc trưng tiêu biểu khó nơi nào sánh bằng. Khác với dạng bổ nghĩa danh từ 「〜ならではの＋N」, dạng này đóng vai trò vị ngữ kết thúc câu nhằm nhấn mạnh trọn vẹn tính chất đặc thù ấy.",
+    "nuanceReason": "Cần phân biệt với 「〜をおいて〜ない」 (nhấn mạnh không có ai/lựa chọn nào khác để thay thế), trong khi 「〜ならではだ」 tập trung ca ngợi nét đặc trưng, bản sắc riêng biệt vốn có của đối tượng.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "こんなに温かみのある接客ができるのは、老舗旅館ならではだ。",
+    "masterExampleVi": "Có thể phục vụ khách chu đáo và ấm áp đến nhường này đúng là phong cách chỉ riêng lữ quán lâu đời mới làm được.",
+    "examples": [
+      {
+        "sentence": "こんなに温かみのある接客ができるのは、老舗旅館ならではだ。",
+        "translation": "Có thể phục vụ khách chu đáo và ấm áp đến nhường này đúng là phong cách chỉ riêng lữ quán lâu đời mới làm được.",
+        "reading": ""
+      },
+      {
+        "sentence": "この深みのある重低音の響きは、高級オーディオメーカーならではだ。",
+        "translation": "Âm bass sâu lắng và đầy đặn như thế này quả đúng là đẳng cấp chỉ có ở hãng âm thanh cao cấp.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0487",
+    "grammar_id": "gram_n2_0487",
+    "milestoneId": "ms_n2_s5_l3",
+    "milestone_id": "ms_n2_s5_l3",
+    "stageId": "stage_n2_5",
+    "stage_id": "stage_n2_5",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 107,
+    "pattern": "使[つか]い分[わ]け：をおいて（ない） ≠ ならでは（の） ≠ にかけては",
+    "titleVi": "をおいて…ない = phủ định tuyệt đối \"không ai khác ngoài X\" (排他); ならでは = đặc trưng riêng có của X (khen phẩm chất, không cần phủ định); にかけては = về khoản/lĩnh vực nào đó X giỏi nhất (không bắt buộc phủ định, không dùng cho tranh cãi)",
+    "structure": "使[つか]い分[わ]け：をおいて（ない） ≠ ならでは（の） ≠ にかけては",
+    "explanation": "「〜をおいて（…ない）」mang tính bài trừ tuyệt đối, khẳng định ngoài đối tượng X ra thì không có ai hoặc cái gì khác có thể thay thế hay làm được (bắt buộc đi kèm vế phủ định phía sau). Trong khi đó,「〜ならでは（の）」nhấn mạnh nét đặc sắc, giá trị độc đáo chỉ riêng đối tượng X mới có nhằm mục đích ngợi khen mà không cần vế phủ định. Còn「〜にかけては」lại dùng để chỉ ra năng lực vượt trội, sở trường xuất sắc nhất ở một lĩnh vực cụ thể của đối tượng mà không mang tính loại trừ cực đoan.",
+    "nuanceReason": "Cần lưu ý「〜をおいて…ない」luôn bắt buộc kết thúc bằng vế phủ định (いない、ない) và đi kèm danh từ chỉ người/vật được đánh giá cao, trong khi「〜ならでは」thường đứng trước danh từ ở dạng「ならではのN」để ca ngợi phẩm chất tốt đẹp.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "次の大型プロジェクトのリーダーを任せられる人物は、豊富な海外経験を持つ山田部長をおいて他にはいない。",
+    "masterExampleVi": "Người có thể tin tưởng giao phó trọng trách trưởng dự án lớn tiếp theo thì ngoài trưởng phòng Yamada với bề dày kinh nghiệm ở nước ngoài ra không còn ai khác.",
+    "examples": [
+      {
+        "sentence": "次の大型プロジェクトのリーダーを任せられる人物は、豊富な海外経験を持つ山田部長をおいて他にはいない。",
+        "translation": "Người có thể tin tưởng giao phó trọng trách trưởng dự án lớn tiếp theo thì ngoài trưởng phòng Yamada với bề dày kinh nghiệm ở nước ngoài ra không còn ai khác.",
+        "reading": ""
+      },
+      {
+        "sentence": "職人が丹精込めて手作りしたこの家具には、既製品にはない無垢材ならではの温もりが感じられる。",
+        "translation": "Món đồ nội thất do nghệ nhân dồn tâm huyết làm thủ công này mang lại cảm giác ấm áp đặc trưng chỉ có ở gỗ nguyên khối mà hàng sản xuất sẵn không thể có.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

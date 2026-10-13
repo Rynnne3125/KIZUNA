@@ -1,0 +1,107 @@
+[
+  {
+    "id": "gram_n3_0306",
+    "grammar_id": "gram_n3_0306",
+    "milestoneId": "ms_n3_s7_l3",
+    "milestone_id": "ms_n3_s7_l3",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 77,
+    "pattern": "～以来",
+    "titleVi": "Kể từ khi, từ lúc ~ đến nay",
+    "structure": "～以来",
+    "explanation": "Mẫu「～以来」được dùng để diễn tả ý nghĩa \"kể từ một mốc thời điểm hoặc sự kiện trong quá khứ, một trạng thái hoặc hành động đã kéo dài liên tục cho tới tận hiện tại\". Mẫu ngữ pháp này kết hợp với động từ thể て (Vて以来) hoặc danh từ chỉ sự kiện/mốc thời gian (N + 以来). Vế sau của câu luôn là hành động hoặc trạng thái tiếp diễn liên tục, không dùng cho sự việc chỉ xảy ra một lần.",
+    "nuanceReason": "Khác với「～てから」có thể dùng cho cả quá khứ gần và các hành động làm nối tiếp nhau theo thứ tự,「～以来」yêu cầu mốc thời gian xảy ra cách hiện tại một khoảng thời gian nhất định và vế sau bắt buộc phải là trạng thái kéo dài liên tục đến nay.",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "大学を卒業して以来、彼とは一度も連絡を取っていない。",
+    "masterExampleVi": "Kể từ khi tốt nghiệp đại học đến nay, tôi chưa từng liên lạc với anh ấy lần nào.",
+    "examples": [
+      {
+        "sentence": "大学を卒業して以来、彼とは一度も連絡を取っていない。",
+        "translation": "Kể từ khi tốt nghiệp đại học đến nay, tôi chưa từng liên lạc với anh ấy lần nào.",
+        "reading": ""
+      },
+      {
+        "sentence": "去年大きな病気をして以来、健康のために毎日野菜を多く食べるようにしている。",
+        "translation": "Kể từ sau trận ốm nặng năm ngoái đến nay, tôi luôn cố gắng ăn nhiều rau mỗi ngày vì sức khỏe.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0307",
+    "grammar_id": "gram_n3_0307",
+    "milestoneId": "ms_n3_s7_l3",
+    "milestone_id": "ms_n3_s7_l3",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 77,
+    "pattern": "～度に／たびに",
+    "titleVi": "Mỗi lần, hễ",
+    "structure": "～度に／たびに",
+    "explanation": "Mẫu ngữ pháp này diễn tả ý nghĩa \"mỗi lần... thì luôn...\" hoặc \"cứ hễ... là lại...\", chỉ một hành động hay sự việc hễ xảy ra thì kéo theo một kết quả hoặc cảm xúc tương tự lặp lại. Cấu trúc kết hợp với động từ thể từ điển (Vる) hoặc danh từ đi kèm の (Nの). Mẫu câu thường nhấn mạnh tính quy luật cá nhân hoặc trải nghiệm lặp lại, không dùng cho các thói quen sinh hoạt hiển nhiên hàng ngày.",
+    "nuanceReason": "Vế sau của「～たびに」không dùng câu thể hiện ý chí, mệnh lệnh hay nhờ vả trực tiếp (như ～てください, ～よう) đối với hành động của thời điểm hiện tại.",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "母は旅行に行くたびに、家族や近所の人たちにお土産をたくさん買ってくる。",
+    "masterExampleVi": "Mẹ tôi cứ mỗi lần đi du lịch là lại mua rất nhiều quà lưu niệm cho gia đình và hàng xóm.",
+    "examples": [
+      {
+        "sentence": "母は旅行に行くたびに、家族や近所の人たちにお土産をたくさん買ってくる。",
+        "translation": "Mẹ tôi cứ mỗi lần đi du lịch là lại mua rất nhiều quà lưu niệm cho gia đình và hàng xóm.",
+        "reading": ""
+      },
+      {
+        "sentence": "新入社員の山田さんは、失敗のたびに落ち込んでいるが、確実に成長している。",
+        "translation": "Nhân viên mới Yamada cứ mỗi lần thất bại là lại suy sụp, nhưng cậu ấy đang tiến bộ rõ rệt.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0308",
+    "grammar_id": "gram_n3_0308",
+    "milestoneId": "ms_n3_s7_l3",
+    "milestone_id": "ms_n3_s7_l3",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 77,
+    "pattern": "～間に／間は",
+    "titleVi": "Trong khoảng thời gian (xảy ra điều khác)",
+    "structure": "～間に／間は",
+    "explanation": "Mẫu ngữ pháp 「～間に／間は」dùng để diễn tả một hành động, sự việc hoặc trạng thái diễn ra trong một khoảng thời gian nhất định của vế trước. Trong đó, 「～間に」được dùng khi vế sau là một hành động mang tính thời điểm, xảy ra tại một lúc nào đó trong khoảng thời gian diễn ra vế đầu. Ngược lại, 「～間（は）」dùng khi hành động hoặc trạng thái ở vế sau kéo dài liên tục trong suốt toàn bộ khoảng thời gian đó. Mẫu này đi kèm với động từ thể từ điển, thể ている hoặc danh từ kết hợp với trợ từ の.",
+    "nuanceReason": "Cần phân biệt rõ: 「～間に」dùng cho hành động mang tính thời điểm/khoảnh khắc, còn 「～間（は）」dùng cho hành động hoặc trạng thái diễn ra liên tục, kéo dài suốt cả khoảng thời gian đó.",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "子供が昼寝をしている間に、たまっていた洗濯や掃除を済ませた。",
+    "masterExampleVi": "Trong lúc con đang ngủ trưa, tôi đã tranh thủ làm xong đống việc giặt giũ và dọn dẹp còn tồn đọng.",
+    "examples": [
+      {
+        "sentence": "子供が昼寝をしている間に、たまっていた洗濯や掃除を済ませた。",
+        "translation": "Trong lúc con đang ngủ trưa, tôi đã tranh thủ làm xong đống việc giặt giũ và dọn dẹp còn tồn đọng.",
+        "reading": ""
+      },
+      {
+        "sentence": "日本に留学している間は、できるだけたくさんの人と日本語で話すようにしている。",
+        "translation": "Trong suốt thời gian du học tại Nhật Bản, tôi luôn cố gắng trò chuyện bằng tiếng Nhật với càng nhiều người càng tốt.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "id": "gram_n4_0172",
+    "grammar_id": "gram_n4_0172",
+    "milestoneId": "ms_minna_b49",
+    "milestone_id": "ms_minna_b49",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 49,
+    "pattern": "V受身形 (尊敬)",
+    "titleVi": "kính ngữ nhẹ bằng dạng bị động",
+    "structure": "V受身形 (尊敬)",
+    "explanation": "V bị động (受身形) cũng được dùng làm kính ngữ mức nhẹ — phổ biến trong văn nói công sở. Lịch sự hơn thể thông thường nhưng nhẹ hơn お〜になる.",
+    "nuanceReason": "V受身(尊敬) = kính ngữ. Cách nhận biết: không có tác nhân に, chủ ngữ là người trên.",
+    "commonMistake": "[Sai]: 先生は学生に来られました。 -> [Đúng]: 先生は来られました。. V受身 dùng làm kính ngữ thì KHÔNG có tác nhân đi kèm に; nếu thêm 学生に vào thì câu biến thành bị động thực sự nghĩa là bị học sinh làm gì đó, khác hoàn toàn nghĩa kính ngữ đơn giản là thầy đã đến/về. Cách phân biệt: xem có tác nhân rõ ràng bằng に hay không, và chủ ngữ có phải người trên trong ngữ cảnh lịch sự hay không.",
+    "kitsuPrompt": "Hỏi tôi về cấp trên trong cuộc họp. Tôi sẽ dùng 受身形(尊敬) để mô tả hành động của họ.",
+    "masterExampleJp": "部長はもう帰られましたか。",
+    "masterExampleVi": "Trưởng phòng về rồi ạ?",
+    "examples": [
+      {
+        "sentence": "部長はもう帰られましたか。",
+        "translation": "Trưởng phòng về rồi ạ?"
+      },
+      {
+        "sentence": "先生はいつ来られますか。",
+        "translation": "Thầy đến lúc nào ạ?"
+      },
+      {
+        "sentence": "社長が来られたとき、知らせてください。",
+        "translation": "Khi giám đốc đến xin hãy báo cho tôi."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：山田部長はいらっしゃいますか。\nB：先ほど外に出られました。もうすぐ戻られると思います。",
+      "vi": "A: Trưởng phòng Yamada có ở đây không?\nB: Ngài vừa ra ngoài. Tôi nghĩ sẽ quay lại ngay."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0173",
+    "grammar_id": "gram_n4_0173",
+    "milestoneId": "ms_minna_b49",
+    "milestone_id": "ms_minna_b49",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 49,
+    "pattern": "おVますになります",
+    "titleVi": "kính ngữ chuẩn (お〜になる)",
+    "structure": "おVますになります",
+    "explanation": "お + V stem (ます form) + になる = kính ngữ chuẩn cho người trên. Lịch sự hơn V受身. Không dùng được với tất cả động từ (động từ ngắn, thuần Nhật dùng được tốt hơn).",
+    "nuanceReason": "Động từ Hán tự → ご〜になる: ご利用になる, ご確認になる. Động từ thuần Nhật → お〜になる: お読みになる.",
+    "commonMistake": "[Sai]: 社長はもうおいるになりますか。 -> [Đúng]: 社長はもういらっしゃいますか。. いる không chia theo mẫu お〜になる vì đã có kính ngữ đặc biệt riêng là いらっしゃる. Tương tự, 食べる không dùng ご食べになる mà phải dùng kính ngữ đặc biệt 召し上がる/お召し上がりになる — một số động từ thông dụng luôn ưu tiên dạng kính ngữ đặc biệt thay vì quy tắc お〜になる.",
+    "kitsuPrompt": "Đóng vai nhân viên lễ tân. Dùng お〜になる để hỏi khách hàng/cấp trên.",
+    "masterExampleJp": "先生はもうお帰りになりましたか。",
+    "masterExampleVi": "Thầy về rồi ạ?",
+    "examples": [
+      {
+        "sentence": "先生はもうお帰りになりましたか。",
+        "translation": "Thầy về rồi ạ?"
+      },
+      {
+        "sentence": "社長がお書きになった手紙です。",
+        "translation": "Đây là bức thư giám đốc đã viết."
+      },
+      {
+        "sentence": "こちらでお待ちになってください。",
+        "translation": "Xin vui lòng chờ ở đây ạ."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：社長、この書類はもうお読みになりましたか。\nB：はい、先ほど読みました。",
+      "vi": "A: Giám đốc, ngài đã đọc tài liệu này chưa ạ?\nB: Rồi, vừa đọc xong."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0174",
+    "grammar_id": "gram_n4_0174",
+    "milestoneId": "ms_minna_b49",
+    "milestone_id": "ms_minna_b49",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 49,
+    "pattern": "特別な尊敬語",
+    "titleVi": "kính ngữ đặc biệt (bất quy tắc)",
+    "structure": "特別な尊敬語",
+    "explanation": "Một số động từ thông dụng có kính ngữ đặc biệt, không theo quy tắc. Cần học thuộc: いる/行く/来る→いらっしゃる, 食べる/飲む→召し上がる, 言う→おっしゃる, する→なさる, 見る→ご覧になる, くれる→くださる.",
+    "nuanceReason": "Bảng kính ngữ đặc biệt:\nいる/行く/来る → いらっしゃる\n食べる/飲む → 召し上がる\n言う → おっしゃる\nする → なさる\n見る → ご覧になる\nもらう → いただく (謙譲)\nくれる → くださる\nあげる → 差し上げる (謙譲)",
+    "commonMistake": "[Sai]: 先生が晩ご飯を食べました。 -> [Đúng]: 先生が晩ご飯を召し上がりました。. Khi nói về hành động của người trên (thầy giáo, giám đốc...) cần dùng kính ngữ đặc biệt thay vì động từ thường: 食べる→召し上がる, 言う→おっしゃる. Dùng động từ thường như 食べました/言いました với người trên bị coi là thiếu lịch sự.",
+    "kitsuPrompt": "Đóng vai học sinh gặp thầy giáo. Dùng ít nhất 3 kính ngữ đặc biệt trong đoạn hội thoại.",
+    "masterExampleJp": "社長はどこにいらっしゃいますか。",
+    "masterExampleVi": "Giám đốc đang ở đâu ạ?",
+    "examples": [
+      {
+        "sentence": "社長はどこにいらっしゃいますか。",
+        "translation": "Giám đốc đang ở đâu ạ?"
+      },
+      {
+        "sentence": "何をおっしゃいましたか。",
+        "translation": "Ngài đã nói gì ạ?"
+      },
+      {
+        "sentence": "この書類をご覧になってください。",
+        "translation": "Xin ngài xem tài liệu này ạ."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：部長、コーヒーはいかがですか。\nB：ありがとう。じゃ、いただきます。",
+      "vi": "A: Trưởng phòng, cà phê có được không ạ?\nB: Cảm ơn. Vậy tôi nhận."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

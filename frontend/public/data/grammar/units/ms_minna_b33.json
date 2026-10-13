@@ -1,0 +1,162 @@
+[
+  {
+    "id": "gram_n4_0122",
+    "grammar_id": "gram_n4_0122",
+    "milestoneId": "ms_minna_b33",
+    "milestone_id": "ms_minna_b33",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 33,
+    "pattern": "V命令形",
+    "titleVi": "Hãy làm! (mệnh lệnh mạnh)",
+    "structure": "V命令形",
+    "explanation": "Thể mệnh lệnh (imperative) rất thô, mạnh. Nhóm I: âm cuối い→え (書く→書け, 話す→話せ). Nhóm II: bỏ る+ろ (食べる→食べろ). Nhóm III: しろ／来い. Dùng trong biển báo, thể thao, tình huống khẩn cấp.",
+    "nuanceReason": "Không dùng trong hội thoại lịch sự thông thường. Thay bằng 〜てください hoặc 〜なさい (dịu hơn).",
+    "commonMistake": "[Sai]: 毎朝五時に起きますろ。 -> [Đúng]: 毎朝五時に起きろ。. Thể mệnh lệnh (V命令形) không được tạo bằng cách chia từ dạng ます rồi thêm ろ. Với động từ nhóm II (bỏ る, thêm ろ): 起きる→起きろ, 食べる→食べろ. Nhiều học viên nhầm lẫn ghép ますれ hoặc ますろ vào sau thể ます, nhưng thể mệnh lệnh phải chia trực tiếp từ thể từ điển, không qua thể ます.",
+    "kitsuPrompt": "Đóng vai huấn luyện viên thể thao, dùng V命令形 để chỉ đạo tôi trong buổi tập.",
+    "masterExampleJp": "早く起きろ！",
+    "masterExampleVi": "Dậy mau lên!",
+    "examples": [
+      {
+        "sentence": "早く起きろ！",
+        "translation": "Dậy mau lên!"
+      },
+      {
+        "sentence": "止まれ！（道路標識）",
+        "translation": "Dừng lại! (biển báo)"
+      },
+      {
+        "sentence": "頑張れ！",
+        "translation": "Cố lên!"
+      }
+    ],
+    "dialogue": {
+      "jp": "（コーチ）：もっと走れ！諦めるな！\n（選手）：はい！",
+      "vi": "(Huấn luyện viên): Chạy thêm nào! Đừng bỏ cuộc!\n(Vận động viên): Vâng!"
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0123",
+    "grammar_id": "gram_n4_0123",
+    "milestoneId": "ms_minna_b33",
+    "milestone_id": "ms_minna_b33",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 33,
+    "pattern": "Vるな (禁止)",
+    "titleVi": "Cấm làm! (cấm tuyệt đối, mạnh)",
+    "structure": "Vるな (禁止)",
+    "explanation": "V thể từ điển + な biểu thị lệnh cấm rất mạnh. Dùng trong biển báo, tình huống nguy hiểm, hoặc giữa bạn bè thân mật (nửa đùa). Không dùng với người trên.",
+    "nuanceReason": "Trong văn nói thân mật: 走るなよ (nhẹ hơn). Lịch sự hơn: 走らないでください.",
+    "commonMistake": "[Sai]: そこに入るなです。 -> [Đúng]: そこに入るな。. な trong Vるな (禁止) là trợ từ chỉ mệnh lệnh cấm đặt cuối câu, bản thân nó đã mang tính kết thúc câu và sắc thái mạnh/thô, nên không thể thêm です phía sau như một danh từ hay tính từ. Nếu muốn lịch sự hơn thì phải đổi hẳn cấu trúc, dùng 〜ないでください chứ không phải gắn です vào Vるな.",
+    "kitsuPrompt": "Mô tả một công trường xây dựng. Hãy đặt 3 biển cấm khác nhau bằng Vるな.",
+    "masterExampleJp": "立入禁止：入るな。",
+    "masterExampleVi": "Cấm vào! (biển báo)",
+    "examples": [
+      {
+        "sentence": "立入禁止：入るな。",
+        "translation": "Cấm vào! (biển báo)"
+      },
+      {
+        "sentence": "危ないから、触るな！",
+        "translation": "Nguy hiểm đó, đừng chạm vào!"
+      },
+      {
+        "sentence": "嘘をつくな！",
+        "translation": "Đừng nói dối!"
+      }
+    ],
+    "dialogue": {
+      "jp": "A：（工事現場）危ないから、ここに入るな！\nB：すみません、知りませんでした。",
+      "vi": "A: (Công trường xây dựng) Nguy hiểm lắm, đừng vào đây!\nB: Xin lỗi, tôi không biết."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0124",
+    "grammar_id": "gram_n4_0124",
+    "milestoneId": "ms_minna_b33",
+    "milestone_id": "ms_minna_b33",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 33,
+    "pattern": "Nと読みます／書きます",
+    "titleVi": "đọc là ~ / viết là ~ (giải thích ký tự)",
+    "structure": "Nと読みます／書きます",
+    "explanation": "Dùng と để trích dẫn cách đọc hoặc cách viết của một từ/ký tự. Rất hữu ích khi giới thiệu từ mới hoặc giải thích chữ Hán.",
+    "nuanceReason": "Cũng dùng: 〜と言います（gọi là, nói là）cho từ vựng/tên gọi.",
+    "commonMistake": "[Sai]: この字を「やま」と読みます。 -> [Đúng]: この字は「やま」と読みます。. Trong mẫu Nと読みます／書きます, danh từ chỉ chủ đề đang được giải thích cách đọc/viết phải đi với trợ từ は (hoặc lược bỏ trợ từ trong văn nói: この字、「やま」と読みます), không dùng を vì đây không phải là tân ngữ của hành động 読む mà là chủ đề đang được nói đến.",
+    "kitsuPrompt": "Hỏi tôi tên tiếng Nhật của một thứ gì đó. Tôi sẽ trả lời bằng 〜と読みます / と書きます.",
+    "masterExampleJp": "この漢字は「やま」と読みます。",
+    "masterExampleVi": "Chữ Hán này đọc là \"yama\".",
+    "examples": [
+      {
+        "sentence": "この漢字は「やま」と読みます。",
+        "translation": "Chữ Hán này đọc là \"yama\"."
+      },
+      {
+        "sentence": "名前は漢字で「山田」と書きます。",
+        "translation": "Tên viết bằng chữ Hán là \"Yamada\"."
+      },
+      {
+        "sentence": "「寿司」は「すし」と読みます。",
+        "translation": "\"寿司\" đọc là \"sushi\"."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：この字、何と読みますか。\nB：「いずみ」と読みます。私の名前です。",
+      "vi": "A: Chữ này đọc là gì?\nB: Đọc là \"Izumi\". Đó là tên tôi."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0125",
+    "grammar_id": "gram_n4_0125",
+    "milestoneId": "ms_minna_b33",
+    "milestone_id": "ms_minna_b33",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 33,
+    "pattern": "〜というN",
+    "titleVi": "N gọi là ~ / N có tên là ~",
+    "structure": "〜というN",
+    "explanation": "〜という + N dùng để giải thích hoặc giới thiệu một khái niệm, tên gọi, hoặc thông tin chưa biết với người nghe. Rất phổ biến trong văn nói.",
+    "nuanceReason": "Dùng để giải thích tên người, địa danh, khái niệm lạ. こと/の có thể thêm: 〜ということ (việc được gọi là ~).",
+    "commonMistake": "[Sai]: 「居酒屋」というな店に行きたいです。 -> [Đúng]: 「居酒屋」というお店に行きたいです。. Trong mẫu 〜というN, sau という phải là danh từ (N) đi ngay liền, không được chèn thêm な vào giữa という và danh từ. な chỉ dùng sau tính từ na-keiyoushi (như 静かな), còn という là một cụm cố định đóng vai trò định ngữ cho danh từ theo sau, cấu trúc đúng luôn là 「〜」という + N.",
+    "kitsuPrompt": "Hỏi tôi về một từ tiếng Việt thú vị. Tôi sẽ dùng 〜というのは〜ことです để giải thích.",
+    "masterExampleJp": "「居酒屋」というお店に行ってみたいです。",
+    "masterExampleVi": "Tôi muốn thử đến cửa hàng gọi là \"izakaya\".",
+    "examples": [
+      {
+        "sentence": "「居酒屋」というお店に行ってみたいです。",
+        "translation": "Tôi muốn thử đến cửa hàng gọi là \"izakaya\"."
+      },
+      {
+        "sentence": "「わびさび」という考え方は日本独特です。",
+        "translation": "Khái niệm gọi là \"wabi-sabi\" là nét riêng của Nhật Bản."
+      },
+      {
+        "sentence": "キムさんという友だちがいます。",
+        "translation": "Tôi có người bạn tên là Kim."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：「花見」って何ですか。\nB：「花見」というのは、桜の木の下でお酒を飲んだり、食事をしたりすることです。",
+      "vi": "A: \"Hanami\" là gì vậy?\nB: \"Hanami\" là việc uống rượu, ăn uống dưới cây anh đào."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

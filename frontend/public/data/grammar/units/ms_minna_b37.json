@@ -1,0 +1,122 @@
+[
+  {
+    "id": "gram_n4_0135",
+    "grammar_id": "gram_n4_0135",
+    "milestoneId": "ms_minna_b37",
+    "milestone_id": "ms_minna_b37",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 37,
+    "pattern": "V受身形",
+    "titleVi": "thể bị động (bị/được ai làm gì)",
+    "structure": "V受身形",
+    "explanation": "Thể bị động (passive voice): Nhóm I: âm cuối い→あ+れる (書く→書かれる, 飲む→飲まれる). Nhóm II: bỏ る+られる (食べる→食べられる). Nhóm III: される, 来られる. Tác nhân dùng に (người) hoặc によって (trong văn viết).",
+    "nuanceReason": "Tiếng Nhật không chia rõ \"bị\" (tiêu cực) và \"được\" (tích cực) trong cấu trúc — ngữ cảnh quyết định.",
+    "commonMistake": "[Sai]: このケーキ、子どもに全部食べれるました。 -> [Đúng]: このケーキ、子どもに全部食べられました。. Động từ nhóm II khi chia thể bị động phải giữ nguyên ら trong られる (食べる→食べられる), không được bỏ ら thành 食べれる (đó là dạng rút gọn ら抜き言葉 dùng cho thể khả năng, không phải bị động). Ngoài ra cần phân biệt: nhóm I chia bằng đổi âm cuối い→あ+れる (飲む→飲まれる là đúng), còn nhóm II luôn thêm られる chứ không rút gọn.",
+    "kitsuPrompt": "Hỏi tôi về những lần bị ai đó làm phiền hoặc làm điều gì đó. Tôi sẽ dùng bị động.",
+    "masterExampleJp": "先生に名前を呼ばれました。",
+    "masterExampleVi": "Tôi được thầy gọi tên.",
+    "examples": [
+      {
+        "sentence": "先生に名前を呼ばれました。",
+        "translation": "Tôi được thầy gọi tên."
+      },
+      {
+        "sentence": "犬に手を噛まれました。",
+        "translation": "Tay tôi bị chó cắn."
+      },
+      {
+        "sentence": "この映画は多くの人に見られています。",
+        "translation": "Bộ phim này được nhiều người xem."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：どうしたんですか、その傷は？\nB：自転車に乗っていたとき、車にぶつけられました。",
+      "vi": "A: Vết thương đó sao vậy?\nB: Khi đang đi xe đạp tôi bị xe hơi đâm vào."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0136",
+    "grammar_id": "gram_n4_0136",
+    "milestoneId": "ms_minna_b37",
+    "milestone_id": "ms_minna_b37",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 37,
+    "pattern": "Nが／はVられます (社会・歴史)",
+    "titleVi": "được ~ (bị động khách quan / lịch sử)",
+    "structure": "Nが／はVられます (社会・歴史)",
+    "explanation": "Bị động khách quan dùng khi tác nhân không quan trọng hoặc không xác định — phổ biến trong văn viết, tin tức, lịch sử. Tương đương passive voice trong tiếng Anh.",
+    "nuanceReason": "によって thay cho に khi tác nhân là tổ chức/sự kiện lớn: 政府によって発表された (được chính phủ công bố).",
+    "commonMistake": "[Sai]: 先生によって漢字の書き方を教えられました。 -> [Đúng]: 先生に漢字の書き方を教えられました。. Học viên hay nhầm lẫn giữa に và によって khi chỉ tác nhân trong câu bị động: に dùng cho tác nhân là NGƯỜI cụ thể trong quan hệ gần gũi, đời thường (先生に教えられた), còn によって chỉ dùng khi tác nhân là tổ chức lớn, tác giả tác phẩm, hoặc trong văn phong trang trọng/học thuật (例：この本は有名な作家によって書かれた). Dùng によって cho một việc đơn giản như thầy giáo dạy học trò nghe quá trang trọng, không tự nhiên.",
+    "kitsuPrompt": "Hỏi tôi về một di tích lịch sử. Tôi sẽ mô tả bằng bị động khách quan.",
+    "masterExampleJp": "この建物は1900年に建てられました。",
+    "masterExampleVi": "Tòa nhà này được xây năm 1900.",
+    "examples": [
+      {
+        "sentence": "この建物は1900年に建てられました。",
+        "translation": "Tòa nhà này được xây năm 1900."
+      },
+      {
+        "sentence": "毎年、多くの観光客がこの祭りに招待されます。",
+        "translation": "Mỗi năm nhiều khách du lịch được mời đến lễ hội này."
+      },
+      {
+        "sentence": "新しいルールが発表されました。",
+        "translation": "Quy tắc mới đã được công bố."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：あの建物はいつ建てられましたか。\nB：明治時代に建てられたと書いてあります。",
+      "vi": "A: Tòa nhà đó được xây khi nào?\nB: Có ghi là được xây vào thời Meiji."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0137",
+    "grammar_id": "gram_n4_0137",
+    "milestoneId": "ms_minna_b37",
+    "milestone_id": "ms_minna_b37",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 37,
+    "pattern": "迷惑の受身",
+    "titleVi": "bị động \"phiền\" (chịu hậu quả không mong muốn)",
+    "structure": "迷惑の受身",
+    "explanation": "迷惑受身: Chủ thể bị ảnh hưởng tiêu cực bởi hành động của người/vật khác. Đặc biệt: có thể dùng với cả nội động từ (雨に降られる — bị mưa). Không có trong tiếng Anh/Việt.",
+    "nuanceReason": "Cấu trúc: (Chủ thể) は (tác nhân) に (hành động gây phiền) られる. Hành động không nhất thiết nhắm vào chủ thể.",
+    "commonMistake": "[Sai]: 傘を忘れて、雨が降られて、びしょ濡れになりました。 -> [Đúng]: 傘を忘れて、雨に降られて、びしょ濡れになりました。. 迷惑の受身 (bị động chịu ảnh hưởng) với động từ tự nhiên như 降る (mưa rơi) không thể lấy chính hiện tượng đó (雨) làm chủ ngữ với trợ từ が, vì chủ ngữ của câu bị động phải là NGƯỜI CHỊU ẢNH HƯỞNG, còn tác nhân gây phiền (雨) phải đứng sau với trợ từ に. Vì vậy phải nói 私は雨に降られた chứ không được nói 雨が降られた.",
+    "kitsuPrompt": "Hỏi tôi về những tình huống tôi bị phiền hà bởi người khác hoặc thời tiết. Tôi sẽ dùng 迷惑受身.",
+    "masterExampleJp": "隣の人にピアノを弾かれて、眠れませんでした。",
+    "masterExampleVi": "Người hàng xóm đánh đàn piano làm tôi không ngủ được.",
+    "examples": [
+      {
+        "sentence": "隣の人にピアノを弾かれて、眠れませんでした。",
+        "translation": "Người hàng xóm đánh đàn piano làm tôi không ngủ được."
+      },
+      {
+        "sentence": "子どもに泣かれて、困りました。",
+        "translation": "Đứa trẻ khóc làm tôi bối rối."
+      },
+      {
+        "sentence": "急に友だちに来られて、部屋が片付いていなかった。",
+        "translation": "Bạn bất ngờ đến làm tôi bối rối vì phòng chưa dọn."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：昨日、どうして眠そうですか。\nB：夜中に赤ちゃんに泣かれて、全然眠れませんでした。",
+      "vi": "A: Hôm qua sao trông buồn ngủ vậy?\nB: Đêm hôm qua em bé khóc suốt nên tôi không ngủ được chút nào."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

@@ -1,0 +1,170 @@
+[
+  {
+    "id": "gram_n4_0107",
+    "grammar_id": "gram_n4_0107",
+    "milestoneId": "ms_minna_b28",
+    "milestone_id": "ms_minna_b28",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 28,
+    "pattern": "V1stemながらV2",
+    "titleVi": "vừa V1 vừa V2 (đồng thời)",
+    "structure": "V1stemながらV2",
+    "explanation": "V1のmasu-stem + ながら + V2 diễn tả hai hành động xảy ra cùng lúc của cùng một người. V2 là hành động chính, V1 là hành động phụ/nền. V1 thường là hành động nhỏ hơn, ít quan trọng hơn.",
+    "nuanceReason": "V1 và V2 phải có cùng chủ thể. Sai: 私が歩きながら、彼が話しました. Đúng: 彼は話しながら歩きました.",
+    "commonMistake": "[Sai]: 彼と話しながら、私は歩きました。(hai chủ thể khác nhau) -> [Đúng]: 彼と話しながら歩きました。(cùng chủ thể). ながら yêu cầu cùng một chủ thể thực hiện cả hai hành động. Không thể dùng ながら khi V1 và V2 do hai người khác nhau thực hiện.",
+    "kitsuPrompt": "Hỏi tôi về thói quen đa nhiệm (làm gì trong khi ăn, đi học, nấu ăn...). Tôi sẽ dùng 〜ながら.",
+    "masterExampleJp": "音楽を聞きながら料理します。",
+    "masterExampleVi": "Vừa nghe nhạc vừa nấu ăn.",
+    "examples": [
+      {
+        "sentence": "音楽を聞きながら料理します。",
+        "translation": "Vừa nghe nhạc vừa nấu ăn."
+      },
+      {
+        "sentence": "歩きながらスマホを見るのは危ないです。",
+        "translation": "Vừa đi vừa xem điện thoại rất nguy hiểm."
+      },
+      {
+        "sentence": "先生の話を聞きながら、ノートを取ります。",
+        "translation": "Vừa nghe giáo viên nói vừa ghi chép."
+      }
+    ],
+    "dialogue": {
+      "title": "Tán gẫu giờ nghỉ trưa",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "いつも昼ごはんを食べながら何をしていますか。",
+          "translation": "Bạn thường làm gì trong khi ăn trưa?"
+        },
+        {
+          "speaker": "B",
+          "text": "ニュースを見ながら食べることが多いです。",
+          "translation": "Thường vừa xem tin tức vừa ăn."
+        },
+        {
+          "speaker": "A",
+          "text": "私はYouTubeを見ながら食べています。",
+          "translation": "Tôi vừa xem YouTube vừa ăn."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0108",
+    "grammar_id": "gram_n4_0108",
+    "milestoneId": "ms_minna_b28",
+    "milestone_id": "ms_minna_b28",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 28,
+    "pattern": "Vています (習慣)",
+    "titleVi": "thói quen / trạng thái kéo dài",
+    "structure": "Vています (習慣)",
+    "explanation": "Vています có ba nghĩa: (1) đang làm (tiến hành), (2) thói quen/nghề nghiệp/tình trạng kéo dài, (3) kết quả còn lưu lại. Nghĩa thói quen thường kèm 毎日/毎朝... hoặc context nghề nghiệp.",
+    "nuanceReason": "Phân biệt: 電車に乗っています (đang trên tàu — tiến hành) vs 毎日電車に乗っています (thói quen dùng tàu). Context là chìa khóa.",
+    "commonMistake": "[Sai]: 毎日運動しています。(khi muốn nói \"hôm nay đang tập\") -> [Đúng]: 今、運動しています。(đang tập) vs 毎日運動しています。(thói quen). 毎日 + Vています → thói quen. 今 + Vています → đang làm ngay bây giờ. Dấu hiệu thời gian quyết định nghĩa.",
+    "kitsuPrompt": "Hỏi tôi về thói quen hàng ngày và nghề nghiệp. Tôi sẽ dùng Vています để mô tả.",
+    "masterExampleJp": "毎朝6時に起きています。",
+    "masterExampleVi": "Tôi có thói quen dậy lúc 6 giờ sáng.",
+    "examples": [
+      {
+        "sentence": "毎朝6時に起きています。",
+        "translation": "Tôi có thói quen dậy lúc 6 giờ sáng."
+      },
+      {
+        "sentence": "銀行で働いています。",
+        "translation": "Tôi làm việc ở ngân hàng."
+      },
+      {
+        "sentence": "3年間日本語を勉強しています。",
+        "translation": "Tôi đang học tiếng Nhật 3 năm rồi."
+      }
+    ],
+    "dialogue": {
+      "title": "Làm quen tại buổi networking",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "お仕事は何をしていらっしゃいますか。",
+          "translation": "Bạn đang làm công việc gì ạ?"
+        },
+        {
+          "speaker": "B",
+          "text": "IT会社でプログラマーをしています。",
+          "translation": "Tôi làm lập trình viên ở công ty IT."
+        },
+        {
+          "speaker": "A",
+          "text": "趣味は何かされていますか。",
+          "translation": "Bạn có sở thích gì không?"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0109",
+    "grammar_id": "gram_n4_0109",
+    "milestoneId": "ms_minna_b28",
+    "milestone_id": "ms_minna_b28",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 28,
+    "pattern": "Vやすい／Vにくい",
+    "titleVi": "dễ / khó V",
+    "structure": "Vやすい／Vにくい",
+    "explanation": "Vのmasu-stem + やすい (dễ V) / にくい (khó V). Dùng để nhận xét tính chất của đồ vật, sách, thức ăn... theo góc độ \"dễ/khó sử dụng/thực hiện\".",
+    "nuanceReason": "やすい/にくい chia như い-adjective: やすい → やすくない, やすかった. Thường nói về thiết kế, tính năng của vật — không nói về người.",
+    "commonMistake": "[Sai]: 彼はわかりにくいです。(muốn nói \"anh ấy khó hiểu\") -> [Đúng]: 彼の説明はわかりにくいです。(lời giải thích của anh ấy khó hiểu). やすい/にくい thường gắn với đồ vật/hành động, không phải người. Thay vì nói người, hãy nói về hành động/thuộc tính cụ thể.",
+    "kitsuPrompt": "Cho tôi đánh giá về các đồ vật xung quanh (sách, app, quần áo). Tôi sẽ dùng やすい/にくい.",
+    "masterExampleJp": "この靴は歩きやすいです。",
+    "masterExampleVi": "Đôi giày này dễ đi lắm.",
+    "examples": [
+      {
+        "sentence": "この靴は歩きやすいです。",
+        "translation": "Đôi giày này dễ đi lắm."
+      },
+      {
+        "sentence": "先生の字は読みにくいです。",
+        "translation": "Chữ của giáo viên khó đọc."
+      },
+      {
+        "sentence": "このアプリは使いやすくて、気に入っています。",
+        "translation": "App này dễ dùng nên tôi thích."
+      }
+    ],
+    "dialogue": {
+      "title": "Mua giày mới",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "この靴、履きやすいですか。",
+          "translation": "Đôi giày này có dễ mang không?"
+        },
+        {
+          "speaker": "B",
+          "text": "うーん、少し大きくて脱ぎにくいです。",
+          "translation": "Ừm, hơi to một chút nên khó cởi."
+        },
+        {
+          "speaker": "A",
+          "text": "では、こちらはいかがですか。歩きやすいですよ。",
+          "translation": "Vậy đôi này thì sao? Đi bộ dễ lắm đấy."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

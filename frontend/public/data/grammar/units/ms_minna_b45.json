@@ -1,0 +1,82 @@
+[
+  {
+    "id": "gram_n4_0160",
+    "grammar_id": "gram_n4_0160",
+    "milestoneId": "ms_minna_b45",
+    "milestone_id": "ms_minna_b45",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 45,
+    "pattern": "V／A／Nのばあいは",
+    "titleVi": "trong trường hợp ~ (điều kiện giả định)",
+    "structure": "V／A／Nのばあいは",
+    "explanation": "〜場合は biểu thị \"trong trường hợp ~\" — điều kiện giả định hoặc hướng dẫn cho tình huống cụ thể. Thường dùng trong văn bản hành chính, hướng dẫn an toàn, quy tắc.",
+    "nuanceReason": "Khác với たら (điều kiện thực tế): 場合は thường dùng cho tình huống giả định, quy tắc. Cũng dùng: 〜ばあいでも (ngay cả trong trường hợp).",
+    "commonMistake": "[Sai]: 遅刻する場合、連絡してください。 -> [Đúng]: 遅刻する場合は、連絡してください。. Mẫu 〜場合は cần trợ từ は để nhấn mạnh đây là chủ đề của tình huống/điều kiện đang nói tới. Bỏ は câu vẫn hiểu được nhưng trở nên nhạt và không tự nhiên, đặc biệt trong văn bản hướng dẫn, quy tắc, thông báo hành chính nơi 〜場合は, 〜してください là cấu trúc chuẩn.",
+    "kitsuPrompt": "Tôi đóng vai nhân viên khách sạn. Hỏi tôi về các quy định phòng cháy. Tôi sẽ dùng 〜場合は.",
+    "masterExampleJp": "遅刻する場合は、事前に連絡してください。",
+    "masterExampleVi": "Trong trường hợp đến muộn hãy liên lạc trước.",
+    "examples": [
+      {
+        "sentence": "遅刻する場合は、事前に連絡してください。",
+        "translation": "Trong trường hợp đến muộn hãy liên lạc trước."
+      },
+      {
+        "sentence": "急病の場合は、すぐに119番に電話してください。",
+        "translation": "Trong trường hợp bệnh đột ngột hãy gọi ngay 119."
+      },
+      {
+        "sentence": "不合格の場合は、もう一度受けられます。",
+        "translation": "Trong trường hợp trượt có thể thi lại một lần nữa."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：パスワードを忘れた場合は、どうすればいいですか。\nB：このボタンを押して、メールアドレスを入力してください。",
+      "vi": "A: Trong trường hợp quên mật khẩu thì làm thế nào?\nB: Hãy nhấn nút này rồi nhập địa chỉ email."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0161",
+    "grammar_id": "gram_n4_0161",
+    "milestoneId": "ms_minna_b45",
+    "milestone_id": "ms_minna_b45",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 45,
+    "pattern": "〜のに (逆接)",
+    "titleVi": "mặc dù ~ nhưng ~ (bất ngờ, thất vọng)",
+    "structure": "〜のに (逆接)",
+    "explanation": "のに (đối lập) biểu thị sự tương phản bất ngờ — thường kèm cảm xúc bực bội, thất vọng, tiếc nuối. Vế trước là mệnh đề bình thường, のに là liên từ giữa hai vế.",
+    "nuanceReason": "のに (đối lập) ≠ のに (mục đích = để làm). Phân biệt theo ngữ cảnh. せっかく〜のに = tiếc rằng dù đã cố công ~ nhưng...",
+    "commonMistake": "[Sai]: 彼は学生だのに、もう働いています。 -> [Đúng]: 彼は学生なのに、もう働いています。. Khi danh từ đứng trước のに (đối lập), phải thêm な chứ không giữ だ: N + なのに (không phải N + だのに), vì のに vốn nối vào thể ngắn な của Nな/だ giống tính từ đuôi な. Ngoài ra, のに bắt buộc vế sau phải mang tính bất ngờ/trái kỳ vọng so với vế trước — nếu hai vế không có sự tương phản rõ ràng (ví dụ chỉ mô tả trạng thái bình thường nối tiếp nhau) thì dùng のに sẽ nghe khó hiểu hoặc sai ngữ dụng.",
+    "kitsuPrompt": "Hỏi tôi về điều gì đó tôi đã cố gắng nhưng không thành. Tôi sẽ dùng のに để thể hiện sự tiếc nuối.",
+    "masterExampleJp": "こんなに練習したのに、試験に落ちました。",
+    "masterExampleVi": "Dù đã luyện tập nhiều như vậy nhưng lại trượt thi.",
+    "examples": [
+      {
+        "sentence": "こんなに練習したのに、試験に落ちました。",
+        "translation": "Dù đã luyện tập nhiều như vậy nhưng lại trượt thi."
+      },
+      {
+        "sentence": "もう9時なのに、彼はまだ来ていません。",
+        "translation": "Dù đã 9 giờ rồi nhưng anh ấy vẫn chưa đến."
+      },
+      {
+        "sentence": "せっかく作ったのに、食べてくれませんでした。",
+        "translation": "Dù đã cất công làm nhưng anh ấy không ăn."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：あれ、傘を持ってきたのに、雨が降らなかったね。\nB：でも、持ってきて良かったよ。午後から降るかもしれないから。",
+      "vi": "A: Ơ, mang ô theo rồi mà trời không mưa nhỉ.\nB: Nhưng may mang theo đấy. Chiều có thể mưa mà."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

@@ -1,0 +1,190 @@
+[
+  {
+    "id": "gram_n3_0215",
+    "grammar_id": "gram_n3_0215",
+    "milestoneId": "ms_n3_s3_l2",
+    "milestone_id": "ms_n3_s3_l2",
+    "stageId": "stage_n3_3",
+    "stage_id": "stage_n3_3",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 60,
+    "pattern": "〜ように（目的[もくてき]：非意志[ひいし]・可能[かのう]・否定[ひてい]）",
+    "titleVi": "ように mục đích — dùng với động từ KHÔNG ý chí hoặc khả năng/phủ định",
+    "structure": "〜ように（目的[もくてき]：非意志[ひいし]・可能[かのう]・否定[ひてい]）",
+    "explanation": "Mẫu 「〜ように」 dùng để biểu thị mục đích hướng tới một trạng thái mong muốn, có nghĩa là \"để / để có thể / để không...\". Vế trước 「ように」 bắt buộc đi với động từ thể khả năng, động từ phi ý chí hoặc động từ ở thể phủ định (〜ない). Mẫu câu này diễn tả việc người nói thực hiện hành động nhằm tạo điều kiện cho một kết quả khách quan diễn ra hoặc phòng tránh sự cố. Không dùng mẫu này trực tiếp với động từ thể từ điển mang tính ý chí có chủ đích của cùng một chủ ngữ.",
+    "nuanceReason": "Khác với 「〜ために」 (yêu cầu hai vế cùng chủ ngữ và mang ý chí mạnh mẽ), 「〜ように」 tập trung vào việc tạo ra điều kiện hoặc trạng thái và có thể dùng khi hai vế khác chủ ngữ.",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "後ろの席の人にもよく聞こえるように、マイクを使って話してください。",
+    "masterExampleVi": "Xin hãy dùng micro để nói cho những người ở hàng ghế sau cũng có thể nghe rõ.",
+    "examples": [
+      {
+        "sentence": "後ろの席の人にもよく聞こえるように、マイクを使って話してください。",
+        "translation": "Xin hãy dùng micro để nói cho những người ở hàng ghế sau cũng có thể nghe rõ.",
+        "reading": ""
+      },
+      {
+        "sentence": "試験当日に遅刻しないように、いつもより30分早く家を出た。",
+        "translation": "Để không bị muộn vào ngày thi, tôi đã rời nhà sớm hơn thường ngày 30 phút.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0216",
+    "grammar_id": "gram_n3_0216",
+    "milestoneId": "ms_n3_s3_l2",
+    "milestone_id": "ms_n3_s3_l2",
+    "stageId": "stage_n3_3",
+    "stage_id": "stage_n3_3",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 60,
+    "pattern": "〜ために（目的[もくてき]：意志[いし]動詞[どうし]）",
+    "titleVi": "ために mục đích — dùng với động từ Ý CHÍ, thường cùng chủ thể",
+    "structure": "〜ために（目的[もくてき]：意志[いし]動詞[どうし]）",
+    "explanation": "Mẫu câu「〜ために」được dùng để biểu thị mục đích trực tiếp, rõ ràng của hành động, có nghĩa là \"để / nhằm mục đích...\". Trước「ために」bắt buộc là động từ thể từ điển mang tính ý chí (hành động người nói chủ động thực hiện hoặc kiểm soát được), đồng thời chủ ngữ của hai vế câu phải cùng là một đối tượng. Vế sau diễn tả hành động có chủ đích, nỗ lực hoặc chuẩn bị cụ thể nhằm hiện thực hóa mục đích ở vế trước.",
+    "nuanceReason": "Nếu vế mục đích là động từ thể khả năng, thể phủ định (V-ない) hoặc động từ vô ý chí, ta phải chuyển sang dùng mẫu「〜ように」thay vì「〜ために」.",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "新車を買うために、毎月５万円ずつ貯金しています。",
+    "masterExampleVi": "Để mua một chiếc xe mới, mỗi tháng tôi đều tiết kiệm 5 vạn yên.",
+    "examples": [
+      {
+        "sentence": "新車を買うために、毎月５万円ずつ貯金しています。",
+        "translation": "Để mua một chiếc xe mới, mỗi tháng tôi đều tiết kiệm 5 vạn yên.",
+        "reading": ""
+      },
+      {
+        "sentence": "将来自分の店を開くために、有名なレストランで修行を積んでいる。",
+        "translation": "Để sau này mở quán của riêng mình, tôi đang tích lũy kinh nghiệm tu nghiệp tại một nhà hàng nổi tiếng.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0217",
+    "grammar_id": "gram_n3_0217",
+    "milestoneId": "ms_n3_s3_l2",
+    "milestone_id": "ms_n3_s3_l2",
+    "stageId": "stage_n3_3",
+    "stage_id": "stage_n3_3",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 60,
+    "pattern": "ように ≠ ために の 使[つか]い分[わ]け",
+    "titleVi": "Phân biệt: ように (phi ý chí / khả năng / phủ định) ≠ ために (ý chí rõ ràng)",
+    "structure": "ように ≠ ために の 使[つか]い分[わ]け",
+    "explanation": "「〜ために」dùng khi vế trước là động từ mang tính ý chí rõ ràng, biểu thị mục đích mà người nói chủ động thực hiện hành động để đạt được (hai vế thường cùng chủ ngữ). Ngược lại, 「〜ように」đi với động từ khả năng, tự động từ hoặc thể phủ định (ない形) để biểu thị mục tiêu hướng tới sự thay đổi trạng thái hoặc kết quả mong muốn. Nói cách khác, 「ために」nhấn mạnh vào hành vi có chủ đích, còn 「ように」nhấn mạnh vào trạng thái hoặc khả năng được hình thành.",
+    "nuanceReason": "Khi diễn đạt mục đích mang nghĩa phủ định \"để không...\" (V-ない), ta hầu như luôn dùng「〜ないように」thay vì「〜ないために」.",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "後ろの席の人にもよく聞こえるように、マイクを使って話しました。",
+    "masterExampleVi": "Tôi đã dùng micro để nói sao cho người ngồi ở hàng ghế phía sau cũng có thể nghe rõ.",
+    "examples": [
+      {
+        "sentence": "後ろの席の人にもよく聞こえるように、マイクを使って話しました。",
+        "translation": "Tôi đã dùng micro để nói sao cho người ngồi ở hàng ghế phía sau cũng có thể nghe rõ.",
+        "reading": ""
+      },
+      {
+        "sentence": "将来自分の店を持つために、毎月少しずつ貯金をしています。",
+        "translation": "Để tương lai mở được quán riêng của mình, mỗi tháng tôi đều tiết kiệm một ít tiền.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0218",
+    "grammar_id": "gram_n3_0218",
+    "milestoneId": "ms_n3_s3_l2",
+    "milestone_id": "ms_n3_s3_l2",
+    "stageId": "stage_n3_3",
+    "stage_id": "stage_n3_3",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 60,
+    "pattern": "〜ようにする・〜ようになる",
+    "titleVi": "ようにする = cố gắng để đạt trạng thái; ようになる = dần dần trở thành",
+    "structure": "〜ようにする・〜ようになる",
+    "explanation": "「〜ようにする」dùng để diễn tả sự nỗ lực, cố gắng có ý chí nhằm thực hiện một hành động hoặc duy trì một thói quen tốt đều đặn. Ngược lại, 「〜ようになる」biểu thị sự biến đổi dần dần về mặt trạng thái, thói quen hoặc năng lực theo thời gian (từ chưa thể thành có thể) một cách tự nhiên. Về cách kết hợp, 「〜ようにする」thường đi với động từ thể từ điển hoặc thể ない biểu thị hành động có ý chí, trong khi 「〜ようになる」thường đi cùng động từ thể khả năng hoặc động từ không mang ý chí.",
+    "nuanceReason": "Phân biệt 「〜ようにする」(nỗ lực duy trì thói quen qua quá trình) với 「〜ことにする」(đưa ra quyết định dứt khoát thực hiện một hành động tại thời điểm nói).",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "健康のために、野菜を多く食べて、塩分を控えるようにする。",
+    "masterExampleVi": "Để giữ gìn sức khỏe, tôi cố gắng ăn nhiều rau và hạn chế lượng muối.",
+    "examples": [
+      {
+        "sentence": "健康のために、野菜を多く食べて、塩分を控えるようにする。",
+        "translation": "Để giữ gìn sức khỏe, tôi cố gắng ăn nhiều rau và hạn chế lượng muối.",
+        "reading": ""
+      },
+      {
+        "sentence": "日本語学校で熱心に勉強を続ければ、誰でも半年ほどで日常会話ができるようになる。",
+        "translation": "Nếu chăm chỉ học tập tại trường tiếng Nhật, ai cũng sẽ dần nói được hội thoại hàng ngày sau khoảng nửa năm.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0219",
+    "grammar_id": "gram_n3_0219",
+    "milestoneId": "ms_n3_s3_l2",
+    "milestone_id": "ms_n3_s3_l2",
+    "stageId": "stage_n3_3",
+    "stage_id": "stage_n3_3",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 60,
+    "pattern": "〜ように（mục đích）",
+    "titleVi": "phân biệt mục đích ý chí vs không ý chí",
+    "structure": "〜ように（mục đích）",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 3 · Bài 60 (⑩): Dùng để phân biệt mục đích ý chí vs không ý chí.",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜ように（mục đích）（N3）",
+    "masterExampleVi": "phân biệt mục đích ý chí vs không ý chí",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0220",
+    "grammar_id": "gram_n3_0220",
+    "milestoneId": "ms_n3_s3_l2",
+    "milestone_id": "ms_n3_s3_l2",
+    "stageId": "stage_n3_3",
+    "stage_id": "stage_n3_3",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 60,
+    "pattern": "〜ために（mục đích）",
+    "titleVi": "phân biệt mục đích ý chí vs không ý chí",
+    "structure": "〜ために（mục đích）",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 3 · Bài 60 (⑩): Dùng để phân biệt mục đích ý chí vs không ý chí.",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜ために（mục đích）（N3）",
+    "masterExampleVi": "phân biệt mục đích ý chí vs không ý chí",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

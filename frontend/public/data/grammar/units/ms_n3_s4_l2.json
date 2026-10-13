@@ -1,0 +1,155 @@
+[
+  {
+    "id": "gram_n3_0233",
+    "grammar_id": "gram_n3_0233",
+    "milestoneId": "ms_n3_s4_l2",
+    "milestone_id": "ms_n3_s4_l2",
+    "stageId": "stage_n3_4",
+    "stage_id": "stage_n3_4",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 64,
+    "pattern": "〜ようだ（推量[すいりょう]）",
+    "titleVi": "Suy đoán từ bằng chứng quan sát của chính mình",
+    "structure": "〜ようだ（推量[すいりょう]）",
+    "explanation": "Mẫu câu 「〜ようだ」 dùng để diễn đạt sự suy đoán, phán đoán có căn cứ của người nói dựa trên những thông tin thu nhận từ giác quan (thấy, nghe, ngửi, nếm, chạm) hoặc từ tình huống thực tế xung quanh. Cấu trúc kết nối: Thể thông thường (V/A/N) + ようだ (lưu ý: tính từ đuôi な giữ nguyên な, danh từ chuyển thành Nの). Sắc thái thể hiện sự suy luận khách quan, logic hơn nhưng vẫn mang tính phỏng đoán cá nhân, dùng được trong cả văn viết và hội thoại lịch sự.",
+    "nuanceReason": "Khác với 「〜そうだ」 biểu thị cảm nhận trực quan tức thì ngay khi nhìn vào sự vật (trông có vẻ), 「〜ようだ」 thể hiện quá trình suy luận từ các dấu hiệu, bằng chứng gián tiếp mà người nói quan sát được.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "外を歩いている人がみんな傘を差しているから、雨が降っているようだ。",
+    "masterExampleVi": "Thấy mọi người đi ngoài đường ai cũng che ô nên có vẻ như trời đang mưa.",
+    "examples": [
+      {
+        "sentence": "外を歩いている人がみんな傘を差しているから、雨が降っているようだ。",
+        "translation": "Thấy mọi người đi ngoài đường ai cũng che ô nên có vẻ như trời đang mưa.",
+        "reading": ""
+      },
+      {
+        "sentence": "パソコンの画面が急に真っ暗になって動かない。どうやら故障したようだ。",
+        "translation": "Màn hình máy tính tự nhiên tối đen và không hoạt động được, có vẻ như đã bị hỏng rồi.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0234",
+    "grammar_id": "gram_n3_0234",
+    "milestoneId": "ms_n3_s4_l2",
+    "milestone_id": "ms_n3_s4_l2",
+    "stageId": "stage_n3_4",
+    "stage_id": "stage_n3_4",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 64,
+    "pattern": "まるで〜ようだ（比喩[ひゆ]）",
+    "titleVi": "Ví von, so sánh: \"Cứ như là…\"",
+    "structure": "まるで〜ようだ（比喩[ひゆ]）",
+    "explanation": "Mẫu câu 「まるで〜ようだ」 được dùng để ví von, so sánh một sự vật, sự việc với một điều gì khác có nét tương đồng mang tính hình tượng (nghĩa là \"cứ như là...\"). Phó từ 「まるで」 có tác dụng nhấn mạnh mức độ giống nhau đến ngỡ ngàng, mặc dù thực tế không phải là như vậy. Cấu trúc này thường kết hợp với danh từ theo dạng 「まるで + N + のようだ」 hoặc mệnh đề thể thông thường trước 「ようだ」. Mẫu câu này rất phổ biến trong cả văn học miêu tả lẫn giao tiếp hàng ngày khi muốn biểu đạt cảm xúc ngạc nhiên, thích thú.",
+    "nuanceReason": "Trong văn nói thân mật hàng ngày, người Nhật thường dùng 「まるで〜みたいだ」 thay cho 「まるで〜ようだ」 để câu chuyện trở nên tự nhiên, gần gũi hơn.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "今日は4月なのにとても寒くて、まるで真冬のようだ。",
+    "masterExampleVi": "Hôm nay dù đã là tháng 4 rồi mà trời rất lạnh, cứ như thể đang giữa mùa đông vậy.",
+    "examples": [
+      {
+        "sentence": "今日は4月なのにとても寒くて、まるで真冬のようだ。",
+        "translation": "Hôm nay dù đã là tháng 4 rồi mà trời rất lạnh, cứ như thể đang giữa mùa đông vậy.",
+        "reading": ""
+      },
+      {
+        "sentence": "合格通知を受け取った瞬間は嬉しすぎて、まるで夢を見ているようだった。",
+        "translation": "Khoảnh khắc nhận được giấy báo đỗ tôi vui sướng đến mức cứ như là đang nằm mơ vậy.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0235",
+    "grammar_id": "gram_n3_0235",
+    "milestoneId": "ms_n3_s4_l2",
+    "milestone_id": "ms_n3_s4_l2",
+    "stageId": "stage_n3_4",
+    "stage_id": "stage_n3_4",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 64,
+    "pattern": "〜みたいだ（口語[こうご]）",
+    "titleVi": "Tương đương ようだ nhưng khẩu ngữ thân mật; N+みたいだ (không cần の)",
+    "structure": "〜みたいだ（口語[こうご]）",
+    "explanation": "「〜みたいだ」được dùng trong văn nói hàng ngày để diễn đạt suy đoán dựa trên cảm nhận trực tiếp (trông có vẻ, dường như) hoặc dùng để ví von, so sánh (giống như là). Mẫu này có ý nghĩa tương đương với「〜ようだ」nhưng mang sắc thái khẩu ngữ, thân mật và gần gũi hơn. Khi kết hợp, danh từ và tính từ đuôi な đi trực tiếp với「みたいだ」mà không cần thêm trợ từ「の」hay「な」.",
+    "nuanceReason": "「〜みたいだ」chỉ dùng trong khẩu ngữ thân mật hàng ngày; trong văn viết trang trọng, báo cáo hoặc khi nói lịch sự cần đổi sang「〜ようだ」.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "隣の部屋から物音がしないね。山田さんはもう寝たみたいだ。",
+    "masterExampleVi": "Không có tiếng động nào từ phòng bên cạnh nhỉ. Có vẻ như anh Yamada đã đi ngủ rồi.",
+    "examples": [
+      {
+        "sentence": "隣の部屋から物音がしないね。山田さんはもう寝たみたいだ。",
+        "translation": "Không có tiếng động nào từ phòng bên cạnh nhỉ. Có vẻ như anh Yamada đã đi ngủ rồi.",
+        "reading": ""
+      },
+      {
+        "sentence": "彼女はいつも明るくて、まるで太陽みたいだ。",
+        "translation": "Cô ấy lúc nào cũng tươi sáng, hệt như mặt trời vậy.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0236",
+    "grammar_id": "gram_n3_0236",
+    "milestoneId": "ms_n3_s4_l2",
+    "milestone_id": "ms_n3_s4_l2",
+    "stageId": "stage_n3_4",
+    "stage_id": "stage_n3_4",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 64,
+    "pattern": "〜ようだ",
+    "titleVi": "suy đoán có căn cứ, ví von \"như là\"",
+    "structure": "〜ようだ",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 4 · Bài 64 (⑭): Dùng để suy đoán có căn cứ, ví von \"như là\".",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜ようだ（N3）",
+    "masterExampleVi": "suy đoán có căn cứ, ví von \"như là\"",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0237",
+    "grammar_id": "gram_n3_0237",
+    "milestoneId": "ms_n3_s4_l2",
+    "milestone_id": "ms_n3_s4_l2",
+    "stageId": "stage_n3_4",
+    "stage_id": "stage_n3_4",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 64,
+    "pattern": "〜みたいだ",
+    "titleVi": "suy đoán có căn cứ, ví von \"như là\"",
+    "structure": "〜みたいだ",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 4 · Bài 64 (⑭): Dùng để suy đoán có căn cứ, ví von \"như là\".",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜みたいだ（N3）",
+    "masterExampleVi": "suy đoán có căn cứ, ví von \"như là\"",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

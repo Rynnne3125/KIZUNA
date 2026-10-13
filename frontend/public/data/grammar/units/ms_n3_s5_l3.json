@@ -1,0 +1,190 @@
+[
+  {
+    "id": "gram_n3_0262",
+    "grammar_id": "gram_n3_0262",
+    "milestoneId": "ms_n3_s5_l3",
+    "milestone_id": "ms_n3_s5_l3",
+    "stageId": "stage_n3_5",
+    "stage_id": "stage_n3_5",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 69,
+    "pattern": "〜として（は）",
+    "titleVi": "Với tư cách là / trong vai trò là ~",
+    "structure": "〜として（は）",
+    "explanation": "Mẫu ngữ pháp này dùng để biểu thị tư cách, vai trò, lập trường của con người hoặc công dụng, mục đích của sự vật, sự việc. Đi trực tiếp sau danh từ, cấu trúc này mang ý nghĩa 'với tư cách là...', 'trong vai trò là...' hoặc 'dưới danh nghĩa là...'. Mẫu câu được sử dụng phổ biến trong cả giao tiếp đời sống lẫn các tình huống trang trọng khi muốn nhấn mạnh hành động, nghĩa vụ xuất phát từ vị thế đó.",
+    "nuanceReason": "Khi muốn bổ nghĩa trực tiếp cho một danh từ đứng sau, mẫu này chuyển sang dạng 「〜としての ＋ Danh từ」 (ví dụ: 先生としての責任 - trách nhiệm với tư cách là một giáo viên).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "彼は留学生として日本に来て、日本語学校で２年間勉強しました。",
+    "masterExampleVi": "Anh ấy đã đến Nhật với tư cách là du học sinh và học tại trường tiếng Nhật trong 2 năm.",
+    "examples": [
+      {
+        "sentence": "彼は留学生として日本に来て、日本語学校で２年間勉強しました。",
+        "translation": "Anh ấy đã đến Nhật với tư cách là du học sinh và học tại trường tiếng Nhật trong 2 năm.",
+        "reading": ""
+      },
+      {
+        "sentence": "このお菓子はお土産として買ったので、皆さんで分けて食べてください。",
+        "translation": "Hộp bánh này tôi mua làm quà lưu niệm, nên mọi người hãy chia nhau ăn nhé.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0263",
+    "grammar_id": "gram_n3_0263",
+    "milestoneId": "ms_n3_s5_l3",
+    "milestone_id": "ms_n3_s5_l3",
+    "stageId": "stage_n3_5",
+    "stage_id": "stage_n3_5",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 69,
+    "pattern": "〜としての ＋ N",
+    "titleVi": "~ với tư cách là … (bổ nghĩa danh từ — cần の)",
+    "structure": "〜としての ＋ N",
+    "explanation": "Mẫu ngữ pháp「〜としての＋N」được dùng để bổ nghĩa trực tiếp cho danh từ đứng sau, biểu đạt ý nghĩa \"với tư cách, vai trò, lập trường hoặc danh nghĩa là...\". Mẫu câu này thường đi kèm với các danh từ chỉ nghề nghiệp, chức vụ, tư cách xã hội hoặc thuộc tính của sự vật nhằm thể hiện thái độ, trách nhiệm, nghĩa vụ hoặc đặc trưng gắn liền với vị thế đó. Đây là cách diễn đạt mang sắc thái trang trọng, khách quan, rất phổ biến trong văn viết, báo chí và các tình huống giao tiếp công việc.",
+    "nuanceReason": "Phân biệt với「〜として」:「〜として」đóng vai trò như trạng từ bổ nghĩa cho động từ/vị ngữ phía sau, còn khi đứng trực tiếp trước danh từ để làm định ngữ thì bắt buộc phải đổi sang「〜としての」.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "彼は医者としての誇りを持って、毎日患者の治療にあたっている。",
+    "masterExampleVi": "Anh ấy luôn giữ niềm tự hào với tư cách là một bác sĩ và tận tụy điều trị cho bệnh nhân mỗi ngày.",
+    "examples": [
+      {
+        "sentence": "彼は医者としての誇りを持って、毎日患者の治療にあたっている。",
+        "translation": "Anh ấy luôn giữ niềm tự hào với tư cách là một bác sĩ và tận tụy điều trị cho bệnh nhân mỗi ngày.",
+        "reading": ""
+      },
+      {
+        "sentence": "京都は観光地としての魅力だけでなく、歴史的な価値も非常に高い。",
+        "translation": "Kyoto không chỉ có sức hút với tư cách là một điểm du lịch mà giá trị lịch sử cũng vô cùng to lớn.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0264",
+    "grammar_id": "gram_n3_0264",
+    "milestoneId": "ms_n3_s5_l3",
+    "milestone_id": "ms_n3_s5_l3",
+    "stageId": "stage_n3_5",
+    "stage_id": "stage_n3_5",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 69,
+    "pattern": "〜にとって（は）",
+    "titleVi": "Đối với ~ thì / theo lập trường của ~ (đánh giá chủ quan)",
+    "structure": "〜にとって（は）",
+    "explanation": "Mẫu câu này đi sau danh từ chỉ người hoặc tổ chức để diễn đạt ý nghĩa \"đối với / xét từ góc độ, lập trường của ai đó mà nói\". Vế sau của câu luôn là những từ ngữ biểu thị sự đánh giá, phán đoán chủ quan hoặc cảm nhận về mức độ (như quan trọng, khó khăn, cần thiết...). Ngữ pháp này được dùng phổ biến cả trong văn nói và văn viết khi muốn nêu bật giá trị hay ảnh hưởng của một sự việc đối với chủ thể. Lưu ý rằng vế sau không đi cùng các động từ chỉ hành vi trực tiếp hướng vào đối tượng.",
+    "nuanceReason": "Cần phân biệt 「〜にとって」 (đứng trên góc độ ai đó để đưa ra đánh giá, vế sau không dùng động từ hành động) với 「〜に対して」 (hướng hành vi/thái độ tới đối tượng) và 「〜として」 (với tư cách, vai trò).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "忙しい現代人にとって、十分な睡眠を取ることは何よりも大切です。",
+    "masterExampleVi": "Đối với người hiện đại bận rộn, việc ngủ đủ giấc là điều quan trọng hơn bất cứ thứ gì.",
+    "examples": [
+      {
+        "sentence": "忙しい現代人にとって、十分な睡眠を取ることは何よりも大切です。",
+        "translation": "Đối với người hiện đại bận rộn, việc ngủ đủ giấc là điều quan trọng hơn bất cứ thứ gì.",
+        "reading": ""
+      },
+      {
+        "sentence": "漢字圏以外の国の学習者にとって、漢字を覚えるのは非常に難しい。",
+        "translation": "Đối với người học đến từ các quốc gia không dùng chữ Hán, việc ghi nhớ chữ Hán là vô cùng khó khăn.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0265",
+    "grammar_id": "gram_n3_0265",
+    "milestoneId": "ms_n3_s5_l3",
+    "milestone_id": "ms_n3_s5_l3",
+    "stageId": "stage_n3_5",
+    "stage_id": "stage_n3_5",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 69,
+    "pattern": "〜にとっての ＋ N",
+    "titleVi": "… đối với ~ (bổ nghĩa danh từ — bắt buộc の)",
+    "structure": "〜にとっての ＋ N",
+    "explanation": "Mẫu 「〜にとっての＋N」 dùng để bổ nghĩa trực tiếp cho danh từ đứng sau, biểu thị ý nghĩa hoặc giá trị của sự vật, sự việc từ lập trường và góc nhìn của đối tượng được nhắc đến. Mẫu câu thường mang sắc thái nhận định, đánh giá chủ quan của người nói hoặc chủ thể (như xem cái gì đó là quan trọng, là cơ hội, là thử thách...). Danh từ đứng sau thường là các từ chỉ giá trị, mục tiêu, thử thách như 存在, チャンス, 試練, 目標, 課題. Khi đứng liền trước danh từ để làm định ngữ, bắt buộc phải có trợ từ 「の」.",
+    "nuanceReason": "Tránh nhầm với 「〜に対しての＋N」 vốn dùng để chỉ đối tượng tiếp nhận hành vi hoặc thái độ, còn 「〜にとっての＋N」 chỉ đánh giá, quan điểm từ lập trường của chủ thể.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "この大会での優勝は、彼らにとっての最大の目標です。",
+    "masterExampleVi": "Việc vô địch ở giải đấu này là mục tiêu lớn nhất đối với họ.",
+    "examples": [
+      {
+        "sentence": "この大会での優勝は、彼らにとっての最大の目標です。",
+        "translation": "Việc vô địch ở giải đấu này là mục tiêu lớn nhất đối với họ.",
+        "reading": ""
+      },
+      {
+        "sentence": "海外生活は、私にとっての大きな挑戦でした。",
+        "translation": "Cuộc sống ở nước ngoài từng là một thử thách lớn đối với tôi.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0266",
+    "grammar_id": "gram_n3_0266",
+    "milestoneId": "ms_n3_s5_l3",
+    "milestone_id": "ms_n3_s5_l3",
+    "stageId": "stage_n3_5",
+    "stage_id": "stage_n3_5",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 69,
+    "pattern": "〜として",
+    "titleVi": "\"với tư cách…\", \"đối với… thì\"",
+    "structure": "〜として",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 5 · Bài 69 (⑲): Dùng để \"với tư cách…\", \"đối với… thì\".",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜として（N3）",
+    "masterExampleVi": "\"với tư cách…\", \"đối với… thì\"",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0267",
+    "grammar_id": "gram_n3_0267",
+    "milestoneId": "ms_n3_s5_l3",
+    "milestone_id": "ms_n3_s5_l3",
+    "stageId": "stage_n3_5",
+    "stage_id": "stage_n3_5",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 69,
+    "pattern": "〜にとって",
+    "titleVi": "\"với tư cách…\", \"đối với… thì\"",
+    "structure": "〜にとって",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 5 · Bài 69 (⑲): Dùng để \"với tư cách…\", \"đối với… thì\".",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜にとって（N3）",
+    "masterExampleVi": "\"với tư cách…\", \"đối với… thì\"",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

@@ -1,0 +1,142 @@
+[
+  {
+    "id": "gram_n2_0525",
+    "grammar_id": "gram_n2_0525",
+    "milestoneId": "ms_n2_s7_l3",
+    "milestone_id": "ms_n2_s7_l3",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 115,
+    "pattern": "～を余儀なくされる",
+    "titleVi": "Bị buộc phải ~",
+    "structure": "～を余儀なくされる",
+    "explanation": "Mẫu câu này biểu thị ý nghĩa 'bị rơi vào tình thế buộc phải làm gì hoặc chịu một kết quả không mong muốn' do hoàn cảnh bên ngoài tác động. Ngữ pháp này đi trực tiếp sau Danh từ chỉ hành động mang tính biến động lớn (như hoãn lại, từ chức, thu hẹp, nhập viện...) do tình huống bất khả kháng, không còn sự lựa chọn nào khác. Đây là mẫu câu trang trọng, thường xuất hiện trong văn viết, báo chí và các bản tin thời sự.",
+    "nuanceReason": "Khác với 「〜ざるを得ない」 (người nói tự nhận thức theo lý trí/tâm lý rằng không còn cách nào khác ngoài làm việc đó), 「〜を余儀なくされる」 đi với Danh từ để nhấn mạnh hoàn cảnh khách quan bên ngoài ép buộc rơi vào tình thế bất lợi, mang phong cách văn viết trang trọng hơn.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "業績の悪化により、同社は事業の縮小や人員削減を余儀なくされた。",
+    "masterExampleVi": "Do tình hình kinh doanh sa sút, công ty đó đã buộc phải thu hẹp quy mô và cắt giảm nhân sự.",
+    "examples": [
+      {
+        "sentence": "業績の悪化により、同社は事業の縮小や人員削減を余儀なくされた。",
+        "translation": "Do tình hình kinh doanh sa sút, công ty đó đã buộc phải thu hẹp quy mô và cắt giảm nhân sự.",
+        "reading": ""
+      },
+      {
+        "sentence": "突然の怪我により、彼は長年目指していた全国大会への出場辞退を余儀なくされた。",
+        "translation": "Do chấn thương đột ngột, anh ấy đã buộc phải rút lui khỏi giải đấu toàn quốc mà mình ấp ủ bấy lâu.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0526",
+    "grammar_id": "gram_n2_0526",
+    "milestoneId": "ms_n2_s7_l3",
+    "milestone_id": "ms_n2_s7_l3",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 115,
+    "pattern": "～ものではない",
+    "titleVi": "Không nên ~ (phê phán đạo đức)",
+    "structure": "～ものではない",
+    "explanation": "Mẫu ngữ pháp này dùng để đưa ra lời khuyên, lời răn dạy hoặc phê phán mang tính đạo đức và chuẩn mực xã hội rằng không nên làm một việc gì đó. Cấu trúc được kết hợp bởi động từ thể từ điển (V-る + ものではない). Vì mang sắc thái giáo huấn của bề trên đối với người dưới hoặc phát biểu về lẽ thường, mẫu này tuyệt đối không dùng để khuyên bảo người có vai vế cao hơn.",
+    "nuanceReason": "Trong hội thoại giao tiếp thân mật hàng ngày, mẫu câu này thường được nói rút gọn thành ～もんじゃない.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "他人の悪口を陰で言うものではない。",
+    "masterExampleVi": "Không nên nói xấu sau lưng người khác.",
+    "examples": [
+      {
+        "sentence": "他人の悪口を陰で言うものではない。",
+        "translation": "Không nên nói xấu sau lưng người khác.",
+        "reading": ""
+      },
+      {
+        "sentence": "いくら親しい間柄でも、礼儀を忘れるものではない。",
+        "translation": "Dù là mối quan hệ thân thiết đến đâu cũng không nên quên đi phép lịch sự tối thiểu.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0527",
+    "grammar_id": "gram_n2_0527",
+    "milestoneId": "ms_n2_s7_l3",
+    "milestone_id": "ms_n2_s7_l3",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 115,
+    "pattern": "～次第で",
+    "titleVi": "Tùy thuộc vào ~",
+    "structure": "～次第で",
+    "explanation": "Mẫu câu này mang ý nghĩa \"tùy thuộc vào N mà...\", diễn tả một sự việc, kết quả hay quyết định sẽ thay đổi hoặc phụ thuộc vào yếu tố đứng trước. Khi dùng dưới dạng 「～次第では」, vế sau thường nêu ra một khả năng hoặc tình huống cụ thể có thể xảy ra. Đây là cách diễn đạt mang tính trang trọng, xuất hiện phổ biến trong môi trường công sở, giao tiếp lịch sự và các thông báo bằng văn bản.",
+    "nuanceReason": "Cần phân biệt 「N + 次第で/次第では」(tùy thuộc vào...) với mẫu 「V-ます(bỏ ます) + 次第」(ngay sau khi... thì sẽ...) để tránh nhầm lẫn về ý nghĩa và cách nối.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "物事は考え方次第で、良くも悪くもなる。",
+    "masterExampleVi": "Mọi sự việc tùy thuộc vào cách suy nghĩ mà có thể trở nên tốt hơn hoặc xấu đi.",
+    "examples": [
+      {
+        "sentence": "物事は考え方次第で、良くも悪くもなる。",
+        "translation": "Mọi sự việc tùy thuộc vào cách suy nghĩ mà có thể trở nên tốt hơn hoặc xấu đi.",
+        "reading": ""
+      },
+      {
+        "sentence": "明日の検査の結果次第では、再手術を受ける必要があります。",
+        "translation": "Tùy thuộc vào kết quả xét nghiệm ngày mai mà có thể sẽ phải phẫu thuật lại.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0528",
+    "grammar_id": "gram_n2_0528",
+    "milestoneId": "ms_n2_s7_l3",
+    "milestone_id": "ms_n2_s7_l3",
+    "stageId": "stage_n2_7",
+    "stage_id": "stage_n2_7",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 115,
+    "pattern": "～に伴って",
+    "titleVi": "Cùng với ~ / Theo đà ~",
+    "structure": "～に伴って",
+    "explanation": "Mẫu 「～に伴って」 dùng để diễn tả rằng cùng với sự thay đổi, phát triển hoặc biến chuyển của một sự việc A thì sự việc B cũng đồng thời thay đổi hoặc xảy ra theo. Cấu trúc kết nối thường là Danh từ hoặc Động từ thể từ điển (V-る + の) đi trực tiếp với 「に伴って」. Mẫu câu này mang sắc thái trang trọng, khách quan, thường được sử dụng trong văn viết, bản tin thời sự hoặc báo cáo về các hiện tượng xã hội, tự nhiên.",
+    "nuanceReason": "So với 「～につれて」, 「～に伴って」 trang trọng hơn và ngoài biểu thị hai sự việc cùng biến đổi song hành, nó còn có thể chỉ quan hệ nhân quả (sự việc A phát sinh kéo theo B xảy ra).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "少子高齢化が進むのに伴って、医療や介護にかかる費用が増加している。",
+    "masterExampleVi": "Cùng với sự gia tăng của già hóa dân số và giảm tỷ lệ sinh, chi phí dành cho y tế và chăm sóc người cao tuổi cũng đang tăng lên.",
+    "examples": [
+      {
+        "sentence": "少子高齢化が進むのに伴って、医療や介護にかかる費用が増加している。",
+        "translation": "Cùng với sự gia tăng của già hóa dân số và giảm tỷ lệ sinh, chi phí dành cho y tế và chăm sóc người cao tuổi cũng đang tăng lên.",
+        "reading": ""
+      },
+      {
+        "sentence": "都市開発が進むのに伴って、周辺の自然環境が失われつつある。",
+        "translation": "Cùng với việc phát triển đô thị được đẩy mạnh, môi trường tự nhiên ở các khu vực xung quanh đang dần biến mất.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

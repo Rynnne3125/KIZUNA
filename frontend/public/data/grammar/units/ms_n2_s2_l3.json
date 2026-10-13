@@ -1,0 +1,190 @@
+[
+  {
+    "id": "gram_n2_0414",
+    "grammar_id": "gram_n2_0414",
+    "milestoneId": "ms_n2_s2_l3",
+    "milestone_id": "ms_n2_s2_l3",
+    "stageId": "stage_n2_2",
+    "stage_id": "stage_n2_2",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 95,
+    "pattern": "Vる ＋ や否[いな]や",
+    "titleVi": "Vừa…là ngay lập tức… (văn viết/báo chí, tường thuật khách quan)",
+    "structure": "Vる ＋ や否[いな]や",
+    "explanation": "Mẫu câu 「〜や否や」 diễn tả một sự việc vừa mới xảy ra thì ngay lập tức sự việc tiếp theo diễn ra gần như cùng lúc. Cấu trúc này mang sắc thái trang trọng, thường xuất hiện trong văn viết, phóng sự, tin tức báo chí hoặc lời văn tường thuật khách quan. Vế sau luôn là hành động/sự việc diễn ra trong thực tế (thường chia ở thì quá khứ), tuyệt đối không dùng với các mẫu câu thể hiện ý chí, mệnh lệnh, nguyện vọng hay rủ rê của người nói (như 〜たい, 〜てください, 〜ましょう).",
+    "nuanceReason": "So với 「〜が早いか」 (vế sau thường là hành vi chủ ý) và 「〜なり」 (chủ ngữ hai vế thường là ngôi thứ 3 cùng một người), 「〜や否や」 mang tính tường thuật khách quan cao nhất và nhấn mạnh khoảng cách thời gian giữa hai sự việc gần như bằng không.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "人気歌手の限定コンサートチケットは、発売が開始されるや否や、瞬く間に売り切れてしまった。",
+    "masterExampleVi": "Vé buổi hòa nhạc giới hạn của ca sĩ nổi tiếng vừa mở bán là ngay lập tức được bán hết sạch trong chớp mắt.",
+    "examples": [
+      {
+        "sentence": "人気歌手の限定コンサートチケットは、発売が開始されるや否や、瞬く間に売り切れてしまった。",
+        "translation": "Vé buổi hòa nhạc giới hạn của ca sĩ nổi tiếng vừa mở bán là ngay lập tức được bán hết sạch trong chớp mắt.",
+        "reading": ""
+      },
+      {
+        "sentence": "彼は連日の残業で疲労困憊だったのか、ベッドに横たわるや否や、深い眠りに落ちてしまった。",
+        "translation": "Có lẽ vì kiệt sức do tăng ca nhiều ngày liên tiếp, anh ấy vừa ngả lưng xuống giường là ngay lập tức chìm vào giấc ngủ sâu.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0415",
+    "grammar_id": "gram_n2_0415",
+    "milestoneId": "ms_n2_s2_l3",
+    "milestone_id": "ms_n2_s2_l3",
+    "stageId": "stage_n2_2",
+    "stage_id": "stage_n2_2",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 95,
+    "pattern": "Vる ＋ が早[はや]いか",
+    "titleVi": "Vừa mới…đã ngay lập tức… (nhấn phản xạ cực nhanh, gần như đồng thời)",
+    "structure": "Vる ＋ が早[はや]いか",
+    "explanation": "Mẫu 「Vる ＋ が早いか」 dùng để diễn tả một hành động, sự việc ở vế sau diễn ra gần như tức khắc, chớp nhoáng ngay sau khi hành động ở vế trước vừa xuất hiện. Ngữ pháp này thường được người nói sử dụng với tư cách người quan sát khách quan để tường thuật lại chuỗi hành vi diễn ra với tốc độ phản xạ cực nhanh. Vế sau luôn luôn là một sự việc có thật đã hoàn tất trong quá khứ, tuyệt đối không dùng các cấu trúc biểu thị ý chí, nguyện vọng, mệnh lệnh hay phỏng đoán tương lai.",
+    "nuanceReason": "So với 「〜や否や」 (văn viết trang trọng, dùng được cho cả hiện tượng tự nhiên) và 「〜なり」 (bắt buộc hai vế cùng một chủ ngữ ngôi thứ ba), 「〜が早いか」 đặc biệt nhấn mạnh tốc độ phản xạ chớp nhoáng và hành động cạnh tranh, gấp gáp của con người.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "終業のチャイムが鳴るが早いか、生徒たちは一斉に教室を飛び出して運動場へ向かった。",
+    "masterExampleVi": "Chuông báo tan học vừa mới reng một cái là học sinh đồng loạt lao ra khỏi lớp chạy thẳng về phía sân vận động.",
+    "examples": [
+      {
+        "sentence": "終業のチャイムが鳴るが早いか、生徒たちは一斉に教室を飛び出して運動場へ向かった。",
+        "translation": "Chuông báo tan học vừa mới reng một cái là học sinh đồng loạt lao ra khỏi lớp chạy thẳng về phía sân vận động.",
+        "reading": ""
+      },
+      {
+        "sentence": "デパートの扉が開くが早いか、開店を待っていた客たちが限定福袋の売り場へ殺到した。",
+        "translation": "Cửa trung tâm thương mại vừa mở ra một cái là dòng người chờ sẵn lập tức ùa vào khu bán túi may mắn giới hạn.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0416",
+    "grammar_id": "gram_n2_0416",
+    "milestoneId": "ms_n2_s2_l3",
+    "milestone_id": "ms_n2_s2_l3",
+    "stageId": "stage_n2_2",
+    "stage_id": "stage_n2_2",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 95,
+    "pattern": "Vる ＋ なり",
+    "titleVi": "Vừa…thì (bất ngờ) lập tức… (hành động sau ngoài dự đoán, cùng một chủ thể)",
+    "structure": "Vる ＋ なり",
+    "explanation": "Mẫu 「〜なり」 diễn tả một hành động vừa diễn ra thì ngay lập tức có một hành động khác bất ngờ tiếp nối. Điểm mấu chốt là chủ ngữ của cả hai vế trước và sau bắt buộc phải là cùng một chủ thể (thường là ngôi thứ ba). Vế sau miêu tả hành vi mang tính bộc phát hoặc ngoài dự tính của người quan sát, tuyệt đối không dùng câu mệnh lệnh, ý chí hay rủ rê. Mẫu câu này mang sắc thái văn tường thuật, phóng sự hoặc tiểu thuyết nhằm tạo cảm giác dồn dập, kịch tính.",
+    "nuanceReason": "Cần phân biệt rõ 「V-る ＋ なり」 (vừa... đã lập tức) với mẫu ngữ pháp N1 khác là 「V-た ＋ なり」 (kể từ khi làm gì thì giữ nguyên trạng thái đó suốt).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "彼はひどく疲れていたのか、ベッドに横たわるなり、ぐっすり眠ってしまった。",
+    "masterExampleVi": "Có lẽ vì quá mệt mỏi nên anh ấy vừa đặt lưng xuống giường là đã ngủ say như chết.",
+    "examples": [
+      {
+        "sentence": "彼はひどく疲れていたのか、ベッドに横たわるなり、ぐっすり眠ってしまった。",
+        "translation": "Có lẽ vì quá mệt mỏi nên anh ấy vừa đặt lưng xuống giường là đã ngủ say như chết.",
+        "reading": ""
+      },
+      {
+        "sentence": "息子は母親の顔を見るなり、堪えきれずに大声で泣き出した。",
+        "translation": "Đứa con trai vừa nhìn thấy mặt mẹ là đã không kìm được mà òa khóc nức nở.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0417",
+    "grammar_id": "gram_n2_0417",
+    "milestoneId": "ms_n2_s2_l3",
+    "milestone_id": "ms_n2_s2_l3",
+    "stageId": "stage_n2_2",
+    "stage_id": "stage_n2_2",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 95,
+    "pattern": "や否[いな]や ／ が早[はや]いか ／ なり の 使[つか]い分[わ]け",
+    "titleVi": "Cả 3 đều thuật lại việc ĐÃ xảy ra: や否や = trung tính/khách quan (báo chí); が早いか = nhấn tốc độ phản xạ; なり = nhấn bất ngờ + BẮT BUỘC cùng chủ thể. Khác hẳn 次第[しだい]（N2, B71）: 次第 dùng cho việc CHƯA xảy ra, vế sau LÀ ý chí/kế hoạch.",
+    "structure": "や否[いな]や ／ が早[はや]いか ／ なり の 使[つか]い分[わ]け",
+    "explanation": "Cả ba mẫu 「〜や否や」「〜が早いか」「〜なり」 đều diễn tả hành động ở vế sau xảy ra gần như tức khắc ngay sau khi hành động ở vế trước vừa hoàn tất trong quá khứ. Trong đó, 「〜や否や」 mang tính khách quan, trung tính thường dùng trong văn phong phóng sự, tin tức báo chí; 「〜が早いか」 nhấn mạnh vào tốc độ phản xạ chớp nhoáng của hành động; còn 「〜なり」 thể hiện sự việc bất ngờ, đường đột và bắt buộc hai vế phải cùng một chủ thể (thường là ngôi thứ ba). Khác hoàn toàn với 「〜次第」(N2) dùng cho sự việc chưa xảy ra, cả ba mẫu này đều chỉ dùng tường thuật lại sự việc đã xảy ra.",
+    "nuanceReason": "Vế sau của cả 3 mẫu 「〜や否や」「〜が早いか」「〜なり」 đều miêu tả sự việc đã xảy ra trong quá khứ nên tuyệt đối không đi với các đuôi câu thể hiện ý chí, nguyện vọng, nhờ vả hay mệnh lệnh như 〜たい、〜つもり、〜てください.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "非常ベルが鳴り響くや否や、館内の客は係員の誘導に従って一斉に避難を始めた。",
+    "masterExampleVi": "Chuông báo động vừa réo vang một cái là khách trong tòa nhà lập tức đồng loạt sơ tán theo hướng dẫn của nhân viên.",
+    "examples": [
+      {
+        "sentence": "非常ベルが鳴り響くや否や、館内の客は係員の誘導に従って一斉に避難を始めた。",
+        "translation": "Chuông báo động vừa réo vang một cái là khách trong tòa nhà lập tức đồng loạt sơ tán theo hướng dẫn của nhân viên.",
+        "reading": ""
+      },
+      {
+        "sentence": "開店のシャッターが上がるが早いか、待機していた大勢のファンが限定グッズ売り場へ駆け込んだ。",
+        "translation": "Cửa cuốn mở ra một cái là dòng người hâm mộ xếp hàng chờ sẵn lập tức lao ngay vào quầy bán đồ phiên bản giới hạn.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0418",
+    "grammar_id": "gram_n2_0418",
+    "milestoneId": "ms_n2_s2_l3",
+    "milestone_id": "ms_n2_s2_l3",
+    "stageId": "stage_n2_2",
+    "stage_id": "stage_n2_2",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 95,
+    "pattern": "〜以上（は）",
+    "titleVi": "\"đã… thì đương nhiên phải…\" (quyết tâm)",
+    "structure": "〜以上（は）",
+    "explanation": "Cấu trúc thuộc [N2] Chặng 2 · Bài 95 (⑦): Dùng để \"đã… thì đương nhiên phải…\" (quyết tâm).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜以上（は）（N2）",
+    "masterExampleVi": "\"đã… thì đương nhiên phải…\" (quyết tâm)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0419",
+    "grammar_id": "gram_n2_0419",
+    "milestoneId": "ms_n2_s2_l3",
+    "milestone_id": "ms_n2_s2_l3",
+    "stageId": "stage_n2_2",
+    "stage_id": "stage_n2_2",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 95,
+    "pattern": "〜上は",
+    "titleVi": "\"đã… thì đương nhiên phải…\" (quyết tâm)",
+    "structure": "〜上は",
+    "explanation": "Cấu trúc thuộc [N2] Chặng 2 · Bài 95 (⑦): Dùng để \"đã… thì đương nhiên phải…\" (quyết tâm).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜上は（N2）",
+    "masterExampleVi": "\"đã… thì đương nhiên phải…\" (quyết tâm)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

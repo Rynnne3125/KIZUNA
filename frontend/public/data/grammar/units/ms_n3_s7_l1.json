@@ -1,0 +1,225 @@
+[
+  {
+    "id": "gram_n3_0297",
+    "grammar_id": "gram_n3_0297",
+    "milestoneId": "ms_n3_s7_l1",
+    "milestone_id": "ms_n3_s7_l1",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 75,
+    "pattern": "～以上は／以上",
+    "titleVi": "Khi đã, vì đã (trách nhiệm sau quyết định)",
+    "structure": "～以上は／以上",
+    "explanation": "Mẫu câu diễn tả ý nghĩa 'Một khi đã... / Vì đã... thì đương nhiên phải...', nhấn mạnh mối quan hệ nhân quả mang tính tất yếu về mặt trách nhiệm hoặc đạo lý. Vế trước nêu lên một sự thật, quyết định hoặc cam kết đã được xác lập (thường đi với thể V-た hoặc Nである). Vế sau luôn thể hiện ý chí, quyết tâm mạnh mẽ, nghĩa vụ hoặc phán đoán tất yếu như 〜べきだ, 〜つもりだ, 〜なければならない.",
+    "nuanceReason": "So với mẫu đồng nghĩa「〜からには」,「〜以上（は）」mang sắc thái trang trọng hơn và nhấn mạnh nhiều hơn vào nghĩa vụ, trách nhiệm xã hội hoặc lập trường của người nói.",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "このプロジェクトのリーダーを引き受けた以上、最後までやり抜く覚悟です。",
+    "masterExampleVi": "Một khi đã nhận làm trưởng dự án này, tôi xác định tâm lý sẽ nỗ lực hoàn thành đến cùng.",
+    "examples": [
+      {
+        "sentence": "このプロジェクトのリーダーを引き受けた以上、最後までやり抜く覚悟です。",
+        "translation": "Một khi đã nhận làm trưởng dự án này, tôi xác định tâm lý sẽ nỗ lực hoàn thành đến cùng.",
+        "reading": ""
+      },
+      {
+        "sentence": "日本への留学を決意した以上は、目標の大学院に合格するまで決して諦めない。",
+        "translation": "Một khi đã quyết tâm đi du học Nhật Bản, tôi tuyệt đối sẽ không bỏ cuộc cho tới khi thi đỗ vào trường cao học mục tiêu.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0298",
+    "grammar_id": "gram_n3_0298",
+    "milestoneId": "ms_n3_s7_l1",
+    "milestone_id": "ms_n3_s7_l1",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 75,
+    "pattern": "～さえ～ば",
+    "titleVi": "Chỉ cần ~ là, miễn là ~ thì",
+    "structure": "～さえ～ば",
+    "explanation": "Mẫu ngữ pháp này dùng để biểu thị ý nghĩa \"chỉ cần đáp ứng được một điều kiện tối thiểu này thì kết quả vế sau sẽ thành hiện thực hoặc mọi chuyện sẽ ổn\". Cấu trúc này nhấn mạnh tính quyết định của một điều kiện duy nhất và bỏ qua các yếu tố khác. Về cách nối, thường gặp dạng Danh từ + さえ + thể điều kiện (ば/なら) hoặc Động từ thể ます (bỏ ます) + さえすれば.",
+    "nuanceReason": "Mẫu「～さえ～ば」nhấn mạnh vào điều kiện tiên quyết mang tính tối thiểu nhất để đạt được kết quả, khác với「～だけで」chỉ đơn thuần giới hạn phạm vi hành động.",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "体調さえ良ければ、少しぐらい忙しくても頑張れます。",
+    "masterExampleVi": "Chỉ cần sức khỏe tốt thì dù có bận rộn một chút tôi vẫn có thể cố gắng được.",
+    "examples": [
+      {
+        "sentence": "体調さえ良ければ、少しぐらい忙しくても頑張れます。",
+        "translation": "Chỉ cần sức khỏe tốt thì dù có bận rộn một chút tôi vẫn có thể cố gắng được.",
+        "reading": ""
+      },
+      {
+        "sentence": "道さえ間違えなければ、ここから30分で駅に着くはずです。",
+        "translation": "Chỉ cần không đi nhầm đường thì từ đây chắc mất khoảng 30 phút là tới ga.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0299",
+    "grammar_id": "gram_n3_0299",
+    "milestoneId": "ms_n3_s7_l1",
+    "milestone_id": "ms_n3_s7_l1",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 75,
+    "pattern": "～からには／からは",
+    "titleVi": "Đã làm thì phải, vì đã quyết định làm",
+    "structure": "～からには／からは",
+    "explanation": "Mẫu ngữ pháp này mang ý nghĩa 'Một khi đã... thì đương nhiên phải / nhất định sẽ...', dùng để thể hiện quyết tâm, ý chí hoặc tinh thần trách nhiệm cao dựa trên một sự thật hay quyết định đã định sẵn. Vế trước nêu lên tiền đề hoặc sự việc đã trở thành hiện thực, còn vế sau bắt buộc đi cùng các biểu hiện mang tính ý chí, nghĩa vụ, nguyện vọng hoặc kêu gọi như 「～べきだ」, 「～なければならない」, 「～つもりだ」, 「～てください」. Sắc thái câu văn rất dứt khoát, nghiêm túc và thường được dùng trong các tình huống trang trọng, công việc hoặc khi thể hiện lập trường kiên định.",
+    "nuanceReason": "「～からは」 là cách nói mang tính văn viết cổ hơn và ít phổ biến trong giao tiếp hiện đại so với 「～からには」, cả hai đều có ý nghĩa và sắc thái tương đồng với mẫu 「～以上（は）」.",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "留学を決意したからには、何としてもJLPT N1に合格してみせる。",
+    "masterExampleVi": "Một khi đã quyết tâm đi du học, tôi nhất định sẽ thi đỗ JLPT N1 cho bằng được.",
+    "examples": [
+      {
+        "sentence": "留学を決意したからには、何としてもJLPT N1に合格してみせる。",
+        "translation": "Một khi đã quyết tâm đi du học, tôi nhất định sẽ thi đỗ JLPT N1 cho bằng được.",
+        "reading": ""
+      },
+      {
+        "sentence": "プロジェクトのリーダーを引き受けたからには、最後まで責任を持ってやり遂げるべきだ。",
+        "translation": "Một khi đã nhận làm trưởng dự án thì nên có trách nhiệm hoàn thành đến cùng.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0300",
+    "grammar_id": "gram_n3_0300",
+    "milestoneId": "ms_n3_s7_l1",
+    "milestone_id": "ms_n3_s7_l1",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 75,
+    "pattern": "～としたら／とすれば／とすると",
+    "titleVi": "Nếu giả sử, giả định rằng",
+    "structure": "～としたら／とすれば／とすると",
+    "explanation": "Mẫu câu này dùng để đưa ra một giả định, giả thiết (thường là tình huống không có thật hoặc khó xảy ra ở hiện tại) nhằm bàn luận hoặc suy xét về diễn biến tiếp theo. Trong đó, 「～としたら」thiên về giả thiết phi thực tế và mang tính cảm tính, 「～とすれば」nhấn mạnh vào tiền đề lập luận logic, còn 「～とすると」hướng đến kết quả suy diễn tất yếu kéo theo. Vế sau không dùng cho sự thật đã diễn ra trong quá khứ mà đi với phán đoán, ý kiến, nguyện vọng hoặc câu hỏi giả định.",
+    "nuanceReason": "「～とすると」thường dẫn tới một hệ quả tính toán hoặc kết luận logic tất yếu, do đó vế sau tuyệt đối không dùng các mẫu câu thể hiện ý chí, nguyện vọng (～たい), mệnh lệnh (～てください) hay rủ rê (～ましょう).",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "もし明日から一週間の休みが取れるとしたら、どこへ旅行に行きたいですか。",
+    "masterExampleVi": "Nếu giả sử được nghỉ một tuần kể từ ngày mai, bạn muốn đi du lịch ở đâu?",
+    "examples": [
+      {
+        "sentence": "もし明日から一週間の休みが取れるとしたら、どこへ旅行に行きたいですか。",
+        "translation": "Nếu giả sử được nghỉ một tuần kể từ ngày mai, bạn muốn đi du lịch ở đâu?",
+        "reading": ""
+      },
+      {
+        "sentence": "新商品の発売を来月に延期するとすれば、予算の再調整が必要になります。",
+        "translation": "Giả sử hoãn ngày ra mắt sản phẩm mới sang tháng sau thì chúng ta sẽ cần phải điều chỉnh lại ngân sách.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0301",
+    "grammar_id": "gram_n3_0301",
+    "milestoneId": "ms_n3_s7_l1",
+    "milestone_id": "ms_n3_s7_l1",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 75,
+    "pattern": "～としても",
+    "titleVi": "Dù cho là, ngay cả nếu (nhượng bộ giả định)",
+    "structure": "～としても",
+    "explanation": "Mẫu câu 「～としても」 dùng để biểu thị sự nhượng bộ mang tính giả định, mang nghĩa \"dù cho / ngay cả khi giả định là...\". Mẫu này kết hợp với thể thông thường (普通形), thường được dùng khi mức độ xảy ra của giả thuyết là rất thấp hoặc chỉ là một khả năng được đặt ra. Vế sau thể hiện lập trường, phán đoán hoặc ý chí của người nói rằng kết luận sẽ không bị lung lay bởi giả định ở vế trước.",
+    "nuanceReason": "So với 「～にしても」, mẫu「～としても」mang tính chất giả định thuần túy mạnh hơn và rất thường đi kèm với các phó từ như 「たとえ」「仮に」「いくら」.",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "仮にその話が事実だとしても、彼が取った行動を正当化することはできない。",
+    "masterExampleVi": "Giả sử chuyện đó có là sự thật đi chăng nữa, cũng không thể biện minh cho hành động của anh ta.",
+    "examples": [
+      {
+        "sentence": "仮にその話が事実だとしても、彼が取った行動を正当化することはできない。",
+        "translation": "Giả sử chuyện đó có là sự thật đi chăng nữa, cũng không thể biện minh cho hành động của anh ta.",
+        "reading": ""
+      },
+      {
+        "sentence": "たとえ試験に失敗したとしても、これまで努力してきた経験は無駄にはならない。",
+        "translation": "Dù cho có thi trượt đi nữa, thì những kinh nghiệm nỗ lực từ trước đến nay cũng không hề vô ích.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0302",
+    "grammar_id": "gram_n3_0302",
+    "milestoneId": "ms_n3_s7_l1",
+    "milestone_id": "ms_n3_s7_l1",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 75,
+    "pattern": "〜からには",
+    "titleVi": "nói quyết tâm \"đã... thì\", điều kiện tối thiểu \"chỉ cần...\" (SKM Bài 5)",
+    "structure": "〜からには",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 7 · Bài 75 (㉕): Dùng để nói quyết tâm \"đã... thì\", điều kiện tối thiểu \"chỉ cần...\" (SKM Bài 5).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜からには（N3）",
+    "masterExampleVi": "nói quyết tâm \"đã... thì\", điều kiện tối thiểu \"chỉ cần...\" (SKM Bài 5)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0303",
+    "grammar_id": "gram_n3_0303",
+    "milestoneId": "ms_n3_s7_l1",
+    "milestone_id": "ms_n3_s7_l1",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 75,
+    "pattern": "〜としたら",
+    "titleVi": "nói quyết tâm \"đã... thì\", điều kiện tối thiểu \"chỉ cần...\" (SKM Bài 5)",
+    "structure": "〜としたら",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 7 · Bài 75 (㉕): Dùng để nói quyết tâm \"đã... thì\", điều kiện tối thiểu \"chỉ cần...\" (SKM Bài 5).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜としたら（N3）",
+    "masterExampleVi": "nói quyết tâm \"đã... thì\", điều kiện tối thiểu \"chỉ cần...\" (SKM Bài 5)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

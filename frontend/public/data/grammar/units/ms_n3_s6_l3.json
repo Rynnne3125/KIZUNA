@@ -1,0 +1,142 @@
+[
+  {
+    "id": "gram_n3_0288",
+    "grammar_id": "gram_n3_0288",
+    "milestoneId": "ms_n3_s6_l3",
+    "milestone_id": "ms_n3_s6_l3",
+    "stageId": "stage_n3_6",
+    "stage_id": "stage_n3_6",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 73,
+    "pattern": "～おかげで／おかげか",
+    "titleVi": "Nhờ (nguyên nhân mang tính tích cực/biết ơn)",
+    "structure": "～おかげで／おかげか",
+    "explanation": "Mẫu câu này dùng để diễn tả nguyên nhân, lý do dẫn đến một kết quả tốt đẹp, mang hàm ý biết ơn hoặc cảm thấy may mắn (nghĩa là \"nhờ có...\"). Khi dùng dạng 「～おかげか」, câu mang sắc thái phỏng đoán không chắc chắn (\"có lẽ là nhờ...\"). Về kết nối, mẫu đi sau thể thông thường (普通形), lưu ý tính từ đuôi な giữ 「な」 và danh từ đi với 「の」.",
+    "nuanceReason": "Ngoài việc dùng để cảm ơn chân thành, trong khẩu ngữ mẫu này đôi khi được dùng với giọng điệu mỉa mai, châm biếm khi ai đó làm hỏng việc dẫn đến kết quả xấu.",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "毎朝ウォーキングを始めたおかげか、最近体の調子がとても良いです。",
+    "masterExampleVi": "Có lẽ nhờ bắt đầu đi bộ mỗi sáng mà dạo này sức khỏe của tôi rất tốt.",
+    "examples": [
+      {
+        "sentence": "毎朝ウォーキングを始めたおかげか、最近体の調子がとても良いです。",
+        "translation": "Có lẽ nhờ bắt đầu đi bộ mỗi sáng mà dạo này sức khỏe của tôi rất tốt.",
+        "reading": ""
+      },
+      {
+        "sentence": "新しいプロジェクトはチーム全員が協力してくれたおかげで、無事に成功しました。",
+        "translation": "Dự án mới đã thành công tốt đẹp nhờ có sự chung sức giúp đỡ của tất cả thành viên trong nhóm.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0289",
+    "grammar_id": "gram_n3_0289",
+    "milestoneId": "ms_n3_s6_l3",
+    "milestone_id": "ms_n3_s6_l3",
+    "stageId": "stage_n3_6",
+    "stage_id": "stage_n3_6",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 73,
+    "pattern": "～ことから",
+    "titleVi": "Từ thực tế là, xuất phát từ (căn cứ/lý do)",
+    "structure": "～ことから",
+    "explanation": "Mẫu ngữ pháp 「～ことから」được dùng để diễn tả lý do, căn cứ dẫn đến một phán đoán, kết quả hoặc giải thích nguồn gốc tên gọi của sự vật, sự việc (nghĩa là: từ thực tế là..., xuất phát từ...). Cấu trúc này kết hợp với thể thông thường (thể ngắn), trong đó danh từ và tính từ đuôi な thường kết hợp với である hoặc な trước ことから. Sắc thái câu mang tính khách quan và trang trọng (thường dùng trong văn viết hoặc tin tức), vế sau không dùng cho các câu thể hiện ý chí, mệnh lệnh hay rủ rê của người nói.",
+    "nuanceReason": "Khác với「から／ので」dùng tự do cho mọi lý do giao tiếp thường ngày,「ことから」mang tính văn viết trang trọng và đặc biệt chuyên dùng cho các mẫu giải thích nguồn gốc tên gọi (kết hợp với ～と呼ばれている／～と名付けられた).",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "富士山に形が似ていることから、その山は「小富士」と呼ばれている。",
+    "masterExampleVi": "Xuất phát từ việc có hình dáng giống núi Phú Sĩ, ngọn núi đó được gọi là \"Tiểu Phú Sĩ\".",
+    "examples": [
+      {
+        "sentence": "富士山に形が似ていることから、その山は「小富士」と呼ばれている。",
+        "translation": "Xuất phát từ việc có hình dáng giống núi Phú Sĩ, ngọn núi đó được gọi là \"Tiểu Phú Sĩ\".",
+        "reading": ""
+      },
+      {
+        "sentence": "現場に指紋が残っていたことから、警察はすぐに犯人を特定することができた。",
+        "translation": "Từ thực tế là dấu vân tay còn lưu lại ở hiện trường, cảnh sát đã có thể nhanh chóng xác định được thủ phạm.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0290",
+    "grammar_id": "gram_n3_0290",
+    "milestoneId": "ms_n3_s6_l3",
+    "milestone_id": "ms_n3_s6_l3",
+    "stageId": "stage_n3_6",
+    "stage_id": "stage_n3_6",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 73,
+    "pattern": "～ために（原因）",
+    "titleVi": "Vì, do (nguyên nhân dẫn đến kết quả)",
+    "structure": "～ために（原因）",
+    "explanation": "Mẫu câu 「～ために」 dùng để biểu thị nguyên nhân, lý do trực tiếp dẫn đến một sự việc, hiện tượng hoặc kết quả khách quan. Ngữ pháp này mang sắc thái trang trọng, có tính văn viết cao, thường được dùng trong các thông báo công cộng, bản tin thời sự hoặc báo cáo công việc. Điểm mấu chốt là vế sau diễn tả kết quả thực tế đã xảy ra hoặc ngoài tầm kiểm soát, tuyệt đối không đi kèm với các cách nói thể hiện ý chí, mệnh lệnh, rủ rê hay nguyện vọng cá nhân.",
+    "nuanceReason": "Cần phân biệt rõ với 「～ために」 chỉ mục đích (vế sau đi cùng hành động có chủ ý), còn 「～ために」 chỉ nguyên nhân thì vế sau luôn là tình trạng, kết quả xảy ra tự nhiên ngoài tầm kiểm soát.",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "大雨のために、近くの川の水位が急激に上がっている。",
+    "masterExampleVi": "Do mưa lớn, mực nước con sông gần đây đang dâng lên nhanh chóng.",
+    "examples": [
+      {
+        "sentence": "大雨のために、近くの川の水位が急激に上がっている。",
+        "translation": "Do mưa lớn, mực nước con sông gần đây đang dâng lên nhanh chóng.",
+        "reading": ""
+      },
+      {
+        "sentence": "システムに障害が発生したために、一時的にサービスがご利用いただけません。",
+        "translation": "Do hệ thống phát sinh sự cố, quý khách tạm thời không thể sử dụng dịch vụ.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0291",
+    "grammar_id": "gram_n3_0291",
+    "milestoneId": "ms_n3_s6_l3",
+    "milestone_id": "ms_n3_s6_l3",
+    "stageId": "stage_n3_6",
+    "stage_id": "stage_n3_6",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 73,
+    "pattern": "～せいで／せいか",
+    "titleVi": "Vì lỗi của, do (nguyên nhân mang tính tiêu cực/đổ lỗi)",
+    "structure": "～せいで／せいか",
+    "explanation": "Mẫu ngữ pháp「～せいで」dùng để chỉ nguyên nhân, lý do dẫn đến một kết quả tiêu cực, không mong muốn, thường mang sắc thái trách móc hoặc đổ lỗi (\"tại vì...\", \"do... mà ra nông nỗi này\"). Khi dùng biến thể「～せいか」, câu văn mang sắc thái phỏng đoán không chắc chắn (\"có lẽ là tại...\", \"không biết có phải do... hay không\"). Mẫu câu kết hợp với thể thông thường (普通形), trong đó tính từ đuôi な giữ nguyên な và danh từ đi kèm với の.",
+    "nuanceReason": "Cần chú ý cách nối danh từ phải có の (N＋のせいで) và có thể dùng cụm cố định「〜のせいにする」với nghĩa 'đổ lỗi/đổ thừa cho ai/cái gì'.",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "昨夜遅くまでゲームをしていたせいで、今朝の重要な会議に遅刻してしまった。",
+    "masterExampleVi": "Tại tối qua mải chơi game đến khuya nên sáng nay tôi đã bị trễ cuộc họp quan trọng.",
+    "examples": [
+      {
+        "sentence": "昨夜遅くまでゲームをしていたせいで、今朝の重要な会議に遅刻してしまった。",
+        "translation": "Tại tối qua mải chơi game đến khuya nên sáng nay tôi đã bị trễ cuộc họp quan trọng.",
+        "reading": ""
+      },
+      {
+        "sentence": "歳のせいか、最近細かい文字を読むのが億劫になってきた。",
+        "translation": "Có lẽ do tuổi tác nên dạo này tôi bắt đầu thấy ngại đọc những dòng chữ nhỏ.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

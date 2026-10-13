@@ -1,0 +1,242 @@
+[
+  {
+    "id": "gram_n5_0084",
+    "grammar_id": "gram_n5_0084",
+    "milestoneId": "ms_minna_b21",
+    "milestone_id": "ms_minna_b21",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 21,
+    "pattern": "〜と思います",
+    "titleVi": "tôi nghĩ rằng ~",
+    "structure": "〜と思います",
+    "explanation": "Dùng thể thông thường (普通形) + と思います để diễn tả ý kiến, phỏng đoán. Không dùng dạng lịch sự trước と: sai: 寒いですと思います → đúng: 寒いと思います.",
+    "nuanceReason": "と思っています (đang nghĩ = quan điểm kéo dài) vs と思います (nghĩ ngay lúc nói). Cả hai thường dùng được.",
+    "commonMistake": "[Sai]: 面白いですと思います。(dùng dạng lịch sự trước と) -> [Đúng]: 面白いと思います。. Trước と思います phải dùng thể thông thường (普通形). い-adj: おもしろい (không có です), な-adj: 便利だ, Danh từ: 学生だ. Đây là lỗi phổ biến nhất của người học N5.",
+    "kitsuPrompt": "Đưa ra nhận xét về một chủ đề (phim, thức ăn, thời tiết) và hỏi tôi ý kiến. Tôi sẽ trả lời bằng 〜と思います.",
+    "masterExampleJp": "あした雨が降ると思います。",
+    "masterExampleVi": "Tôi nghĩ ngày mai trời sẽ mưa.",
+    "examples": [
+      {
+        "sentence": "あした雨が降ると思います。",
+        "translation": "Tôi nghĩ ngày mai trời sẽ mưa."
+      },
+      {
+        "sentence": "田中さんはもう帰ったと思います。",
+        "translation": "Tôi nghĩ anh Tanaka đã về rồi."
+      },
+      {
+        "sentence": "この映画はおもしろいと思います。",
+        "translation": "Tôi nghĩ bộ phim này thú vị."
+      },
+      {
+        "sentence": "日本語は難しいと思いますか。",
+        "translation": "Bạn có nghĩ tiếng Nhật khó không?"
+      }
+    ],
+    "dialogue": {
+      "title": "Thảo luận về bộ phim",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "あの映画、おもしろいと思いますか。",
+          "translation": "Bạn nghĩ bộ phim đó thú vị không?"
+        },
+        {
+          "speaker": "B",
+          "text": "うーん、私はちょっと長いと思います。でも、映像はきれいだと思います。",
+          "translation": "Ừm, tôi nghĩ hơi dài. Nhưng hình ảnh thì tôi nghĩ đẹp."
+        },
+        {
+          "speaker": "A",
+          "text": "そうですね。主人公の演技はすばらしいと思いますよ。",
+          "translation": "Đúng nhỉ. Diễn xuất của nhân vật chính tôi nghĩ tuyệt vời đấy."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0085",
+    "grammar_id": "gram_n5_0085",
+    "milestoneId": "ms_minna_b21",
+    "milestone_id": "ms_minna_b21",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 21,
+    "pattern": "〜と言いました",
+    "titleVi": "nói rằng ~ / bảo rằng ~",
+    "structure": "〜と言いました",
+    "explanation": "Dẫn lời nói trực tiếp hoặc gián tiếp: [nội dung] + と言いました. Nội dung dùng thể thông thường. と là dấu hiệu trích dẫn.",
+    "nuanceReason": "Dẫn lời hiện tại: 〜と言っています. Dẫn lời quá khứ: 〜と言いました.",
+    "commonMistake": "[Sai]: 田中さんは「明日来ます」と言いました。(dùng thể lịch sự trong trích dẫn gián tiếp) -> [Đúng]: 田中さんは明日来ると言いました。. Khi dẫn lời gián tiếp, nội dung trong と cần dùng thể thông thường. Chỉ dùng dấu「」và thể lịch sự khi trích dẫn trực tiếp nguyên văn.",
+    "kitsuPrompt": "Hỏi tôi ai đó đã nói gì về một tình huống (ví dụ: bạn nói thời tiết thế nào, thầy nói bài thi thế nào). Tôi sẽ dùng 〜と言いました.",
+    "masterExampleJp": "田中さんはあした来ると言いました。",
+    "masterExampleVi": "Anh Tanaka nói (rằng) ngày mai anh sẽ đến.",
+    "examples": [
+      {
+        "sentence": "田中さんはあした来ると言いました。",
+        "translation": "Anh Tanaka nói (rằng) ngày mai anh sẽ đến."
+      },
+      {
+        "sentence": "先生は明日テストがあると言いました。",
+        "translation": "Thầy nói ngày mai có bài kiểm tra."
+      },
+      {
+        "sentence": "彼女は「疲れた」と言いました。",
+        "translation": "Cô ấy nói \"Mệt quá\"."
+      },
+      {
+        "sentence": "何と言いましたか。",
+        "translation": "Anh/chị ấy nói gì vậy?"
+      }
+    ],
+    "dialogue": {
+      "title": "Truyền đạt lại tin tức",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "田中さんから電話があったよ。",
+          "translation": "Vừa có điện thoại của Tanaka đó."
+        },
+        {
+          "speaker": "B",
+          "text": "え、何と言いましたか。",
+          "translation": "Ồ, anh ấy nói gì vậy?"
+        },
+        {
+          "speaker": "A",
+          "text": "明日のパーティーに行けないと言いました。仕事が忙しいって。",
+          "translation": "Anh ấy nói không đến bữa tiệc ngày mai được. Bảo là công việc bận lắm."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0086",
+    "grammar_id": "gram_n5_0086",
+    "milestoneId": "ms_minna_b21",
+    "milestone_id": "ms_minna_b21",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 21,
+    "pattern": "〜でしょう",
+    "titleVi": "có lẽ ~ (phỏng đoán với tự tin)",
+    "structure": "〜でしょう",
+    "explanation": "でしょう diễn tả phỏng đoán, suy luận có độ chắc nhất định. Giọng lên ở cuối → câu hỏi \"... phải không?\". Giọng xuống → khẳng định \"hẳn là...\".",
+    "nuanceReason": "でしょう (lịch sự) = だろう (thân mật). Trong dự báo thời tiết, でしょう rất phổ biến.",
+    "commonMistake": "[Sai]: 明日は雨でしょうです。(thêm です sau でしょう) -> [Đúng]: 明日は雨でしょう。. でしょう đã là dạng lịch sự, không thêm です. Tương tự: おいしいでしょう (không phải おいしいですでしょう).",
+    "kitsuPrompt": "Hỏi tôi phỏng đoán về thời tiết, tình huống, hoặc cảm nghĩ của ai đó. Tôi sẽ trả lời bằng でしょう.",
+    "masterExampleJp": "あした、雨が降るでしょう。",
+    "masterExampleVi": "Ngày mai có lẽ trời mưa.",
+    "examples": [
+      {
+        "sentence": "あした、雨が降るでしょう。",
+        "translation": "Ngày mai có lẽ trời mưa."
+      },
+      {
+        "sentence": "田中さんは忙しいでしょう。",
+        "translation": "Anh Tanaka chắc là bận."
+      },
+      {
+        "sentence": "もう知っているでしょう？",
+        "translation": "Bạn đã biết rồi phải không?"
+      },
+      {
+        "sentence": "この問題は難しいでしょう。",
+        "translation": "Bài này hẳn là khó."
+      }
+    ],
+    "dialogue": {
+      "title": "Đoán thời tiết cho chuyến đi",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "来週、京都に行きます。天気はどうでしょうか。",
+          "translation": "Tuần sau tôi đi Kyoto. Thời tiết sẽ thế nào nhỉ?"
+        },
+        {
+          "speaker": "B",
+          "text": "11月ですから、少し寒いでしょう。でも雨は降らないでしょう。",
+          "translation": "Vì là tháng 11 nên có lẽ hơi lạnh. Nhưng chắc không mưa đâu."
+        },
+        {
+          "speaker": "A",
+          "text": "そうですね。コートを持って行ったほうがいいでしょうね。",
+          "translation": "Đúng nhỉ. Có lẽ nên mang áo khoác theo nhỉ."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0087",
+    "grammar_id": "gram_n5_0087",
+    "milestoneId": "ms_minna_b21",
+    "milestone_id": "ms_minna_b21",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 21,
+    "pattern": "Nについて",
+    "titleVi": "về N / liên quan đến N",
+    "structure": "Nについて",
+    "explanation": "について đứng sau danh từ để chỉ chủ đề, nội dung đang nói đến. Dùng với 話す, 書く, 教える, 考える, 知っている, v.v.",
+    "nuanceReason": "について vs に関して(にかんして): cả hai đều là \"về\". に関して trang trọng hơn, dùng trong văn viết.",
+    "commonMistake": "[Sai]: 日本についての文化を話します。(nhầm cấu trúc) -> [Đúng]: 日本の文化について話します。. Cấu trúc đúng: [danh từ chủ đề] について + động từ. Không thêm の giữa について và động từ. についての có thể dùng nhưng tiếp theo phải là danh từ: 日本文化についての本 (cuốn sách về văn hóa Nhật).",
+    "kitsuPrompt": "Hỏi tôi muốn nói/học/biết về chủ đề gì. Tôi sẽ dùng Nについて để trả lời.",
+    "masterExampleJp": "日本の文化について話します。",
+    "masterExampleVi": "Tôi nói về văn hóa Nhật Bản.",
+    "examples": [
+      {
+        "sentence": "日本の文化について話します。",
+        "translation": "Tôi nói về văn hóa Nhật Bản."
+      },
+      {
+        "sentence": "日本語の勉強方法について教えてください。",
+        "translation": "Hãy cho tôi biết về phương pháp học tiếng Nhật."
+      },
+      {
+        "sentence": "環境問題について考えています。",
+        "translation": "Tôi đang suy nghĩ về vấn đề môi trường."
+      },
+      {
+        "sentence": "何についてレポートを書きましたか。",
+        "translation": "Bạn đã viết báo cáo về chủ đề gì?"
+      }
+    ],
+    "dialogue": {
+      "title": "Chuẩn bị bài thuyết trình",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "レポートは何について書きますか。",
+          "translation": "Bạn viết báo cáo về chủ đề gì?"
+        },
+        {
+          "speaker": "B",
+          "text": "日本の伝統的な祭りについて書こうと思っています。",
+          "translation": "Tôi đang nghĩ sẽ viết về lễ hội truyền thống Nhật Bản."
+        },
+        {
+          "speaker": "A",
+          "text": "おもしろそうですね。どんなお祭りについて調べましたか。",
+          "translation": "Nghe hay đấy nhỉ. Bạn đã tìm hiểu về lễ hội nào vậy?"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

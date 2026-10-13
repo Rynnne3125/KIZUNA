@@ -1,0 +1,319 @@
+[
+  {
+    "id": "gram_n3_0316",
+    "grammar_id": "gram_n3_0316",
+    "milestoneId": "ms_n3_s8_l1",
+    "milestone_id": "ms_n3_s8_l1",
+    "stageId": "stage_n3_8",
+    "stage_id": "stage_n3_8",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 79,
+    "pattern": "～次第で／次第では",
+    "titleVi": "Tùy theo, phụ thuộc vào",
+    "structure": "～次第で／次第では",
+    "explanation": "Mẫu câu này dùng để diễn đạt ý nghĩa kết quả hoặc sự việc phía sau sẽ thay đổi, được quyết định tùy thuộc vào nội dung, mức độ của danh từ đi trước. Cấu trúc kết hợp trực tiếp với danh từ (N + 次第で / 次第では). Trong đó, khi dùng dạng 「次第では」, câu văn thường mang sắc thái nhấn mạnh vào một khả năng hay một trường hợp cụ thể có thể xảy ra (thường đi kèm với ～こともある, ～かもしれない).",
+    "nuanceReason": "Khác với 「～次第で」 diễn tả kết quả thay đổi đa dạng tùy theo danh từ, 「～次第では」 thường hướng đến một khả năng, hệ quả cụ thể (thường đi kèm với đuôi câu ～こともある、～かもしれない).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "明日の花火大会は、天候次第で中止になる可能性があります。",
+    "masterExampleVi": "Lễ hội pháo hoa ngày mai có khả năng sẽ bị hủy tùy thuộc vào thời tiết.",
+    "examples": [
+      {
+        "sentence": "明日の花火大会は、天候次第で中止になる可能性があります。",
+        "translation": "Lễ hội pháo hoa ngày mai có khả năng sẽ bị hủy tùy thuộc vào thời tiết.",
+        "reading": ""
+      },
+      {
+        "sentence": "面接での受け答え次第では、未経験者でも採用されることがあります。",
+        "translation": "Tùy vào cách trả lời trong buổi phỏng vấn, ngay cả người chưa có kinh nghiệm cũng có thể được tuyển dụng.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0317",
+    "grammar_id": "gram_n3_0317",
+    "milestoneId": "ms_n3_s8_l1",
+    "milestone_id": "ms_n3_s8_l1",
+    "stageId": "stage_n3_8",
+    "stage_id": "stage_n3_8",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 79,
+    "pattern": "～らしい（推量・根拠）",
+    "titleVi": "Có vẻ, hình như (dựa trên bằng chứng khách quan)",
+    "structure": "～らしい（推量・根拠）",
+    "explanation": "Mẫu ngữ pháp này dùng để đưa ra phán đoán, suy đoán mang tính khách quan ('hình như / có vẻ') dựa trên các căn cứ thực tế, dấu hiệu bên ngoài hoặc thông tin gián tiếp. Người nói dựa vào những chứng cứ cụ thể thu thập được qua thính giác, thị giác hoặc tình trạng thực tế để suy luận chứ không chỉ dựa vào cảm tính nhất thời. Cấu trúc này đi với thể thông thường (普通形), riêng tính từ đuôi な và danh từ thì nối trực tiếp mà không đi kèm 「だ」.",
+    "nuanceReason": "Khác với 「～そうだ（様態）」 phán đoán cảm tính trực tiếp qua vẻ ngoài trước mắt, 「～らしい」 là suy đoán khách quan dựa trên chứng cứ, dấu hiệu cụ thể hoặc thông tin gián tiếp.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "隣の部屋からいい匂いがしてきた。今夜はカレーを作っているらしい。",
+    "masterExampleVi": "Từ phòng bên cạnh bay ra mùi thơm nức. Có vẻ như tối nay họ nấu món cà ri.",
+    "examples": [
+      {
+        "sentence": "隣の部屋からいい匂いがしてきた。今夜はカレーを作っているらしい。",
+        "translation": "Từ phòng bên cạnh bay ra mùi thơm nức. Có vẻ như tối nay họ nấu món cà ri.",
+        "reading": ""
+      },
+      {
+        "sentence": "部屋の電気も消えているし、車もないから、山田さんは留守らしい。",
+        "translation": "Đèn phòng thì tắt mà xe cũng không có, hình như anh Yamada đang vắng nhà.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0318",
+    "grammar_id": "gram_n3_0318",
+    "milestoneId": "ms_n3_s8_l1",
+    "milestone_id": "ms_n3_s8_l1",
+    "stageId": "stage_n3_8",
+    "stage_id": "stage_n3_8",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 79,
+    "pattern": "～そうだ（外観）",
+    "titleVi": "Trông có vẻ, nhìn có vẻ (dựa vào quan sát trực tiếp)",
+    "structure": "～そうだ（外観）",
+    "explanation": "Mẫu 「～そうだ」 dùng để diễn tả phán đoán, cảm nhận trực quan của người nói về trạng thái hoặc tính chất của sự vật, sự việc thông qua quan sát vẻ bề ngoài (trông có vẻ...). Ngoài ra, khi kết hợp với động từ thể ます, mẫu này còn thể hiện một hiện tượng hay hành động sắp sửa xảy ra ngay trước mắt (sắp sửa...). Ngữ pháp này mang sắc thái nhận định chủ quan tức thì dựa trên những gì mắt thấy, thường dùng nhiều trong giao tiếp sinh hoạt hàng ngày.",
+    "nuanceReason": "Không dùng 「～そうだ」 cho các từ chỉ tính chất thị giác quá hiển nhiên đập vào mắt (như màu sắc 赤い, 青い hoặc かわいい, きれい), và dạng phủ định của tính từ là 「～なさそうだ」.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "空が急に暗くなってきて、今にも大雨が降り出しそうだ。",
+    "masterExampleVi": "Trời bỗng nhiên tối sầm lại, trông như sắp sửa đổ mưa lớn đến nơi rồi.",
+    "examples": [
+      {
+        "sentence": "空が急に暗くなってきて、今にも大雨が降り出しそうだ。",
+        "translation": "Trời bỗng nhiên tối sầm lại, trông như sắp sửa đổ mưa lớn đến nơi rồi.",
+        "reading": ""
+      },
+      {
+        "sentence": "田中さんは新しいプロジェクトの話をしているとき、いつも本当に楽しそうだ。",
+        "translation": "Anh Tanaka khi nói về dự án mới lúc nào trông cũng có vẻ thực sự rất vui.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0319",
+    "grammar_id": "gram_n3_0319",
+    "milestoneId": "ms_n3_s8_l1",
+    "milestone_id": "ms_n3_s8_l1",
+    "stageId": "stage_n3_8",
+    "stage_id": "stage_n3_8",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 79,
+    "pattern": "～ほど（程度）",
+    "titleVi": "Đến mức, đến nỗi (mức độ cao)",
+    "structure": "～ほど（程度）",
+    "explanation": "Mẫu ngữ pháp này dùng để diễn tả mức độ rất cao của một trạng thái hoặc hành động bằng cách đưa ra ví dụ so sánh cụ thể, thậm chí mang tính cường điệu hóa (\"đến mức...\", \"đến nỗi...\"). Cấu trúc này đi trực tiếp sau thể thông thường (V/A-i/A-na/N) và thường xuất hiện khi người nói muốn nhấn mạnh cảm xúc mạnh mẽ hoặc tình trạng quá tải. Trong giao tiếp hàng ngày lẫn văn viết, nó giúp câu văn trở nên sinh động và giàu hình ảnh hơn.",
+    "nuanceReason": "So với 「くらい」, 「ほど」 mang sắc thái trang trọng hơn và thường nhấn mạnh mức độ cao, nghiêm trọng hoặc cường điệu hơn hẳn.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "昨日は仕事が忙しすぎて、息をつく暇もないほど働いた。",
+    "masterExampleVi": "Hôm qua công việc bận đến mức tôi làm việc mà không có cả thời gian để thở.",
+    "examples": [
+      {
+        "sentence": "昨日は仕事が忙しすぎて、息をつく暇もないほど働いた。",
+        "translation": "Hôm qua công việc bận đến mức tôi làm việc mà không có cả thời gian để thở.",
+        "reading": ""
+      },
+      {
+        "sentence": "山頂からの星空は息をのむほど美しく、登山の疲れが一瞬で吹き飛んだ。",
+        "translation": "Bầu trời sao nhìn từ đỉnh núi đẹp đến mức nín thở, khiến mọi mệt mỏi của chuyến leo núi tan biến trong chốc lát.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0320",
+    "grammar_id": "gram_n3_0320",
+    "milestoneId": "ms_n3_s8_l1",
+    "milestone_id": "ms_n3_s8_l1",
+    "stageId": "stage_n3_8",
+    "stage_id": "stage_n3_8",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 79,
+    "pattern": "～ように（様態）",
+    "titleVi": "Như thể là, dường như (so sánh/tương tự)",
+    "structure": "～ように（様態）",
+    "explanation": "Mẫu「～ように」dùng để so sánh, ví von một sự vật, hiện tượng hoặc hành động có đặc điểm tương tự như một điều khác (mang nghĩa \"như thể là\", \"giống như\"). Cấu trúc này thường đi kèm với phó từ「まるで」ở đầu câu nhằm tăng tính hình tượng và nhấn mạnh mức độ tương đồng. Khi dùng để bổ nghĩa cho động từ hoặc tính từ ta dùng dạng「～ように」, còn khi bổ nghĩa cho danh từ đứng sau thì chuyển thành「～ような + N」.",
+    "nuanceReason": "Mẫu này thường kết hợp với「まるで」để tạo hình ảnh ví von tượng trưng, cần tránh nhầm lẫn với「～らしい」(dùng khi đối tượng thực sự có đúng bản chất, đặc trưng vốn có của nó).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "彼女はまるでプロの歌手のように上手に歌を歌った。",
+    "masterExampleVi": "Cô ấy đã hát rất hay, cứ như thể là một ca sĩ chuyên nghiệp vậy.",
+    "examples": [
+      {
+        "sentence": "彼女はまるでプロの歌手のように上手に歌を歌った。",
+        "translation": "Cô ấy đã hát rất hay, cứ như thể là một ca sĩ chuyên nghiệp vậy.",
+        "reading": ""
+      },
+      {
+        "sentence": "冬の北海道は、まるで冷凍庫の中にいるように厳しい寒さだ。",
+        "translation": "Mùa đông ở Hokkaido lạnh buốt giá, giống như đang ở trong một chiếc tủ đông vậy.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0321",
+    "grammar_id": "gram_n3_0321",
+    "milestoneId": "ms_n3_s8_l1",
+    "milestone_id": "ms_n3_s8_l1",
+    "stageId": "stage_n3_8",
+    "stage_id": "stage_n3_8",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 79,
+    "pattern": "まるで～ようだ／みたいだ",
+    "titleVi": "Hoàn toàn như thể là, y chang như",
+    "structure": "まるで～ようだ／みたいだ",
+    "explanation": "Mẫu 「まるで～ようだ／みたいだ」 dùng để ví von, so sánh một sự vật, hiện tượng hoặc trạng thái với một điều gì đó rất giống dù thực tế không phải như vậy. Phó từ 「まるで」 mang nghĩa \"hoàn toàn / cứ như thể\", giúp nhấn mạnh mức độ tương đồng sống động của phép so sánh. 「～ようだ」 mang sắc thái trang trọng và dùng nhiều trong văn viết, trong khi 「～みたいだ」 mang tính khẩu ngữ, thân mật và phổ biến trong hội thoại giao tiếp hàng ngày.",
+    "nuanceReason": "Khi muốn bổ nghĩa cho danh từ đứng sau, cấu trúc chuyển thành 「まるで～ような＋N」 hoặc 「まるで～みたいな＋N」; còn bổ nghĩa cho động từ/tính từ thì dùng 「まるで～ように／みたいに」.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "まだ5月なのに今日の暑さは異常で、まるで真夏のようだ。",
+    "masterExampleVi": "Mới chỉ tháng 5 thôi mà hôm nay nóng bất thường, cứ như thể đang giữa mùa hè vậy.",
+    "examples": [
+      {
+        "sentence": "まだ5月なのに今日の暑さは異常で、まるで真夏のようだ。",
+        "translation": "Mới chỉ tháng 5 thôi mà hôm nay nóng bất thường, cứ như thể đang giữa mùa hè vậy.",
+        "reading": ""
+      },
+      {
+        "sentence": "あの兄弟は性格も声もそっくりで、まるで双子みたいだ。",
+        "translation": "Hai anh em nhà đó tính cách lẫn giọng nói đều giống hệt nhau, y chang như sinh đôi vậy.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0322",
+    "grammar_id": "gram_n3_0322",
+    "milestoneId": "ms_n3_s8_l1",
+    "milestone_id": "ms_n3_s8_l1",
+    "stageId": "stage_n3_8",
+    "stage_id": "stage_n3_8",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 79,
+    "pattern": "かのように／かのような",
+    "titleVi": "Như thể (điều thực ra không phải vậy)",
+    "structure": "かのように／かのような",
+    "explanation": "Mẫu câu này dùng để diễn tả một hành động hoặc trạng thái diễn ra \"cứ như thể là...\", nhằm ví von sinh động một hiện tượng. Điểm mấu chốt là trên thực tế bản chất sự việc hoàn toàn không phải như vậy. Dạng 「〜かのように」 đứng trước để bổ nghĩa cho động từ, còn 「〜かのような」 đi kèm để bổ nghĩa cho danh từ phía sau, thường mang sắc thái miêu tả bóng bẩy hoặc châm biếm, phê phán.",
+    "nuanceReason": "Cần phân biệt với 「〜ように」 thông thường: 「〜かのように」 nhấn mạnh sự việc thực tế hoàn toàn trái ngược hoặc không có thật, không dùng cho sự việc có thật hay so sánh tỉ dụ thực tế.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "まだ10月なのに、真冬がやってきたかのような厳しい寒さだ。",
+    "masterExampleVi": "Mới chỉ là tháng 10 thôi mà trời đã lạnh buốt cứ như thể mùa đông thực sự đã đến rồi.",
+    "examples": [
+      {
+        "sentence": "まだ10月なのに、真冬がやってきたかのような厳しい寒さだ。",
+        "translation": "Mới chỉ là tháng 10 thôi mà trời đã lạnh buốt cứ như thể mùa đông thực sự đã đến rồi.",
+        "reading": ""
+      },
+      {
+        "sentence": "彼女はすべてを一人でやり遂げたかのように、得意げに話している。",
+        "translation": "Cô ấy đang nói chuyện đầy vẻ đắc ý cứ như thể chính mình đã tự tay hoàn thành tất cả mọi việc.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0323",
+    "grammar_id": "gram_n3_0323",
+    "milestoneId": "ms_n3_s8_l1",
+    "milestone_id": "ms_n3_s8_l1",
+    "stageId": "stage_n3_8",
+    "stage_id": "stage_n3_8",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 79,
+    "pattern": "〜らしい",
+    "titleVi": "nói \"tùy thuộc vào...\", phỏng đoán và ví von sinh động (SKM Bài 9)",
+    "structure": "〜らしい",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 8 · Bài 79 (㉙): Dùng để nói \"tùy thuộc vào...\", phỏng đoán và ví von sinh động (SKM Bài 9).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜らしい（N3）",
+    "masterExampleVi": "nói \"tùy thuộc vào...\", phỏng đoán và ví von sinh động (SKM Bài 9)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0324",
+    "grammar_id": "gram_n3_0324",
+    "milestoneId": "ms_n3_s8_l1",
+    "milestone_id": "ms_n3_s8_l1",
+    "stageId": "stage_n3_8",
+    "stage_id": "stage_n3_8",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 79,
+    "pattern": "〜そうだ",
+    "titleVi": "nói \"tùy thuộc vào...\", phỏng đoán và ví von sinh động (SKM Bài 9)",
+    "structure": "〜そうだ",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 8 · Bài 79 (㉙): Dùng để nói \"tùy thuộc vào...\", phỏng đoán và ví von sinh động (SKM Bài 9).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜そうだ（N3）",
+    "masterExampleVi": "nói \"tùy thuộc vào...\", phỏng đoán và ví von sinh động (SKM Bài 9)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0325",
+    "grammar_id": "gram_n3_0325",
+    "milestoneId": "ms_n3_s8_l1",
+    "milestone_id": "ms_n3_s8_l1",
+    "stageId": "stage_n3_8",
+    "stage_id": "stage_n3_8",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 79,
+    "pattern": "〜まるで〜ようだ",
+    "titleVi": "nói \"tùy thuộc vào...\", phỏng đoán và ví von sinh động (SKM Bài 9)",
+    "structure": "〜まるで〜ようだ",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 8 · Bài 79 (㉙): Dùng để nói \"tùy thuộc vào...\", phỏng đoán và ví von sinh động (SKM Bài 9).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜まるで〜ようだ（N3）",
+    "masterExampleVi": "nói \"tùy thuộc vào...\", phỏng đoán và ví von sinh động (SKM Bài 9)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

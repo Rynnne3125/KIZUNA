@@ -1,0 +1,190 @@
+[
+  {
+    "id": "gram_n2_0502",
+    "grammar_id": "gram_n2_0502",
+    "milestoneId": "ms_n2_s6_l3",
+    "milestone_id": "ms_n2_s6_l3",
+    "stageId": "stage_n2_6",
+    "stage_id": "stage_n2_6",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 111,
+    "pattern": "〜にあって（は）",
+    "titleVi": "Ở trong (hoàn cảnh đặc biệt/khủng hoảng/bước ngoặt) — KHÔNG dùng cho việc thường",
+    "structure": "〜にあって（は）",
+    "explanation": "Mẫu 「〜にあって（は）」 đi sau danh từ để biểu thị ý nghĩa \"chính vì đang ở trong một hoàn cảnh, thời kỳ đặc biệt hoặc tình huống khủng hoảng/biến động lớn\". Cấu trúc này mang sắc thái trang trọng, văn viết cứng (thường dùng trong tin tức, phóng sự, diễn văn trang trọng). Vế sau thường đi kèm với những hành động, thái độ kiên định hoặc sự việc đặc biệt mang tính quyết định phát sinh từ hoàn cảnh ngặt nghèo đó.",
+    "nuanceReason": "Khác với 「〜において」 dùng được cho mọi bối cảnh/địa điểm chung, 「〜にあって」 luôn nhấn mạnh tính chất gay cấn, nghiêm trọng hoặc tính bước ngoặt của hoàn cảnh.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "激しい市場競争にあって、独自の技術開発を怠らない企業だけが生き残ることができる。",
+    "masterExampleVi": "Ở trong bối cảnh cạnh tranh thị trường khốc liệt, chỉ những doanh nghiệp không ngừng nỗ lực phát triển công nghệ độc quyền mới có thể sống sót.",
+    "examples": [
+      {
+        "sentence": "激しい市場競争にあって、独自の技術開発を怠らない企業だけが生き残ることができる。",
+        "translation": "Ở trong bối cảnh cạnh tranh thị trường khốc liệt, chỉ những doanh nghiệp không ngừng nỗ lực phát triển công nghệ độc quyền mới có thể sống sót.",
+        "reading": ""
+      },
+      {
+        "sentence": "大災害という非常時にあっては、デマに惑わされず冷静に行動することが何よりも求められる。",
+        "translation": "Ở trong tình trạng khẩn cấp như thảm họa lớn, điều được đòi hỏi hơn hết là phải bình tĩnh hành động mà không bị lung lạc bởi tin đồn thất thiệt.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0503",
+    "grammar_id": "gram_n2_0503",
+    "milestoneId": "ms_n2_s6_l3",
+    "milestone_id": "ms_n2_s6_l3",
+    "stageId": "stage_n2_6",
+    "stage_id": "stage_n2_6",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 111,
+    "pattern": "〜をもって（① 手段[しゅだん]・様態[ようたい]）",
+    "titleVi": "Bằng / với (phương tiện, cách thức trang trọng — như で nhưng cứng hơn)",
+    "structure": "〜をもって（① 手段[しゅだん]・様態[ようたい]）",
+    "explanation": "Mẫu ngữ pháp 「〜をもって」 đi sau danh từ để biểu thị phương tiện, phương pháp hoặc thái độ/cách thức thực hiện hành động, mang nghĩa là \"bằng / với / thông qua\". Đây là cách diễn đạt rất trang trọng, có tính văn viết và nghi lễ cao, tương đương với trợ từ 「で」 nhưng mang sắc thái nghiêm túc, quyết tâm hoặc trịnh trọng hơn nhiều. Cấu trúc này thường xuất hiện trong thông báo chính thức, diễn văn, văn bản kinh doanh, hoặc đi kèm các danh từ trừu tượng chỉ tinh thần, thái độ (nỗ lực, thành ý) và phương thức liên lạc chính thức (văn bản).",
+    "nuanceReason": "Cần phân biệt với 「〜をもって」 mang nghĩa biểu thị mốc thời gian kết thúc/bắt đầu (ví dụ: 本日をもって — kể từ hôm nay / kết thúc vào hôm nay).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "今回の採用試験の結果につきましては、後日書面をもってお知らせいたします。",
+    "masterExampleVi": "Về kết quả của kỳ thi tuyển dụng lần này, chúng tôi xin phép thông báo bằng văn bản vào ngày sau.",
+    "examples": [
+      {
+        "sentence": "今回の採用試験の結果につきましては、後日書面をもってお知らせいたします。",
+        "translation": "Về kết quả của kỳ thi tuyển dụng lần này, chúng tôi xin phép thông báo bằng văn bản vào ngày sau.",
+        "reading": ""
+      },
+      {
+        "sentence": "彼は持ち前の不屈の精神をもって、度重なる困難を乗り越えてきた。",
+        "translation": "Anh ấy đã vượt qua muôn vàn khó khăn liên tiếp bằng tinh thần bất khuất vốn có của mình.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0504",
+    "grammar_id": "gram_n2_0504",
+    "milestoneId": "ms_n2_s6_l3",
+    "milestone_id": "ms_n2_s6_l3",
+    "stageId": "stage_n2_6",
+    "stage_id": "stage_n2_6",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 111,
+    "pattern": "〜をもって（② 期限[きげん]・基準時[きじゅんじ]）",
+    "titleVi": "Kể từ / cho đến (mốc thời điểm chính thức bắt đầu hoặc kết thúc — văn công vụ)",
+    "structure": "〜をもって（② 期限[きげん]・基準時[きじゅんじ]）",
+    "explanation": "Mẫu ngữ pháp 「〜をもって」 đi sau danh từ chỉ thời gian để biểu thị mốc thời điểm chính thức chấm dứt hoặc khởi đầu một sự việc, trạng thái. Mẫu câu mang sắc thái rất trang trọng, tính nghi thức cao, thường xuất hiện trong các văn bản thông báo của công ty, cơ quan nhà nước hoặc các bài phát biểu khai mạc, bế mạc. Trong tiếng Việt, mẫu này thường được dịch là \"kể từ...\", \"tính đến hết...\", \"vào lúc...\".",
+    "nuanceReason": "Trong các bài phát biểu hoặc thông báo mang tính nghi lễ trang trọng, mẫu này thường được chuyển thành dạng kính ngữ lịch sự là 「〜をもちまして」.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "弊社のオンラインサービスは、3月31日をもって終了とさせていただきます。",
+    "masterExampleVi": "Dịch vụ trực tuyến của công ty chúng tôi xin phép được chính thức dừng hoạt động kể từ hết ngày 31 tháng 3.",
+    "examples": [
+      {
+        "sentence": "弊社のオンラインサービスは、3月31日をもって終了とさせていただきます。",
+        "translation": "Dịch vụ trực tuyến của công ty chúng tôi xin phép được chính thức dừng hoạt động kể từ hết ngày 31 tháng 3.",
+        "reading": ""
+      },
+      {
+        "sentence": "今年度の助成金申請の受付は、本日17時をもって締め切らせていただきます。",
+        "translation": "Việc tiếp nhận hồ sơ xin trợ cấp cho năm tài chính này sẽ chính thức khép lại vào lúc 17 giờ hôm nay.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0505",
+    "grammar_id": "gram_n2_0505",
+    "milestoneId": "ms_n2_s6_l3",
+    "milestone_id": "ms_n2_s6_l3",
+    "stageId": "stage_n2_6",
+    "stage_id": "stage_n2_6",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 111,
+    "pattern": "〜にあって ≠ 〜をもって（①②） ≠ 〜において（N2）",
+    "titleVi": "にあって = hoàn cảnh đặc biệt/khủng hoảng; をもって = phương tiện trang trọng HOẶC mốc dứt điểm (2 nghĩa khác hẳn nhau); において = trung tính, dùng cho bối cảnh/lĩnh vực chung, KHÔNG cần đặc biệt",
+    "structure": "〜にあって ≠ 〜をもって（①②） ≠ 〜において（N2）",
+    "explanation": "「〜にあって」dùng để nhấn mạnh sự việc diễn ra trong một hoàn cảnh, bối cảnh đặc biệt hoặc ngặt nghèo (như khủng hoảng, biến động thời đại). Trong khi đó,「〜をもって」thuộc văn phong trang trọng, mang hai nghĩa riêng biệt là phương tiện/cách thức (bằng...) hoặc mốc thời gian dứt điểm (kể từ...). Khác với hai mẫu trên,「〜において」chỉ mang tính trung tính, dùng để nêu địa điểm, thời gian hoặc lĩnh vực chung mà không chứa sắc thái hoàn cảnh đặc biệt.",
+    "nuanceReason": "Cần lưu ý「〜をもって」có hai nét nghĩa hoàn toàn khác nhau là 'bằng phương tiện/thái độ' và 'tính đến mốc thời gian (kết thúc)', cả hai đều chỉ dùng trong văn phong trang trọng, thông báo chính thức.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "少子高齢化が急速に進む現代にあって、柔軟な働き方の推進は不可欠である。",
+    "masterExampleVi": "Trong bối cảnh thời đại hiện nay khi tỷ lệ sinh giảm và già hóa dân số diễn ra nhanh chóng, việc thúc đẩy các hình thức làm việc linh hoạt là điều không thể thiếu.",
+    "examples": [
+      {
+        "sentence": "少子高齢化が急速に進む現代にあって、柔軟な働き方の推進は不可欠である。",
+        "translation": "Trong bối cảnh thời đại hiện nay khi tỷ lệ sinh giảm và già hóa dân số diễn ra nhanh chóng, việc thúc đẩy các hình thức làm việc linh hoạt là điều không thể thiếu.",
+        "reading": ""
+      },
+      {
+        "sentence": "当館は施設の老朽化に伴い、今月末日をもって閉館することとなりました。",
+        "translation": "Do cơ sở vật chất đã xuống cấp, bảo tàng của chúng tôi sẽ chính thức đóng cửa kể từ ngày cuối cùng của tháng này.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0506",
+    "grammar_id": "gram_n2_0506",
+    "milestoneId": "ms_n2_s6_l3",
+    "milestone_id": "ms_n2_s6_l3",
+    "stageId": "stage_n2_6",
+    "stage_id": "stage_n2_6",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 111,
+    "pattern": "〜得る／得ない",
+    "titleVi": "\"có thể xảy ra\", \"khó lòng\", \"e rằng sẽ\"",
+    "structure": "〜得る／得ない",
+    "explanation": "Cấu trúc thuộc [N2] Chặng 6 · Bài 111 (㉓): Dùng để \"có thể xảy ra\", \"khó lòng\", \"e rằng sẽ\".",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜得る／得ない（N2）",
+    "masterExampleVi": "\"có thể xảy ra\", \"khó lòng\", \"e rằng sẽ\"",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0507",
+    "grammar_id": "gram_n2_0507",
+    "milestoneId": "ms_n2_s6_l3",
+    "milestone_id": "ms_n2_s6_l3",
+    "stageId": "stage_n2_6",
+    "stage_id": "stage_n2_6",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 111,
+    "pattern": "〜かねる／かねない",
+    "titleVi": "\"có thể xảy ra\", \"khó lòng\", \"e rằng sẽ\"",
+    "structure": "〜かねる／かねない",
+    "explanation": "Cấu trúc thuộc [N2] Chặng 6 · Bài 111 (㉓): Dùng để \"có thể xảy ra\", \"khó lòng\", \"e rằng sẽ\".",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜かねる／かねない（N2）",
+    "masterExampleVi": "\"có thể xảy ra\", \"khó lòng\", \"e rằng sẽ\"",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

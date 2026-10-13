@@ -1,0 +1,190 @@
+[
+  {
+    "id": "gram_n2_0438",
+    "grammar_id": "gram_n2_0438",
+    "milestoneId": "ms_n2_s3_l3",
+    "milestone_id": "ms_n2_s3_l3",
+    "stageId": "stage_n2_3",
+    "stage_id": "stage_n2_3",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 99,
+    "pattern": "〜（が）ゆえ（に）",
+    "titleVi": "Vì (lý do trang trọng, mang tính lý luận/khách quan) — văn viết học thuật, xã luận, công văn",
+    "structure": "〜（が）ゆえ（に）",
+    "explanation": "「〜（が）ゆえ（に）」mang nghĩa \"chính vì / do bởi\", dùng để diễn tả nguyên nhân, lý do mang tính logic dẫn đến một kết quả tất yếu, khó tránh khỏi hoặc mang tính số phận. Đây là lối diễn đạt văn viết cổ điển, trang trọng, thường xuất hiện trong văn phong học thuật, xã luận báo chí, tác phẩm văn học hoặc công văn. Mẫu câu này không dùng cho các tình huống sinh hoạt thường nhật và không đi kèm câu mệnh lệnh, nhờ vả trực tiếp.",
+    "nuanceReason": "Khi bổ nghĩa trực tiếp cho một danh từ đứng sau, mẫu này biến đổi thành dạng「〜（が）ゆえの＋N」chứ không dùng「〜ゆえに＋N」.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "経験が浅いがゆえに、予期せぬトラブルに対して適切な判断を下すことができなかった。",
+    "masterExampleVi": "Chính vì còn ít kinh nghiệm nên tôi đã không thể đưa ra phán đoán thích hợp trước sự cố bất ngờ.",
+    "examples": [
+      {
+        "sentence": "経験が浅いがゆえに、予期せぬトラブルに対して適切な判断を下すことができなかった。",
+        "translation": "Chính vì còn ít kinh nghiệm nên tôi đã không thể đưa ra phán đoán thích hợp trước sự cố bất ngờ.",
+        "reading": ""
+      },
+      {
+        "sentence": "有名人であるがゆえの苦悩は、一般の人々にはなかなか理解されないものだ。",
+        "translation": "Những nỗi khổ chỉ vì là người nổi tiếng thì người bình thường khó lòng mà thấu hiểu được.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0439",
+    "grammar_id": "gram_n2_0439",
+    "milestoneId": "ms_n2_s3_l3",
+    "milestone_id": "ms_n2_s3_l3",
+    "stageId": "stage_n2_3",
+    "stage_id": "stage_n2_3",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 99,
+    "pattern": "〜とあって",
+    "titleVi": "Vì tình huống đặc biệt/hiếm nên (hệ quả khách quan) — hiện tượng xã hội, KHÔNG dùng cho ý chí của chính người nói",
+    "structure": "〜とあって",
+    "explanation": "Mẫu ngữ pháp 「〜とあって」 dùng để diễn tả ý nghĩa \"bởi vì rơi vào một hoàn cảnh hay tình huống đặc biệt/hiếm có, nên đương nhiên dẫn đến một kết quả hoặc hiện tượng tương ứng\". Vế sau luôn là một sự việc, trạng thái khách quan có thể quan sát được (như sự đông đúc, lượng tiêu thụ tăng vọt, sự quan tâm của công chúng). Mẫu câu này thường mang sắc thái khách quan, hay dùng trong tin tức, báo chí hoặc phóng sự xã hội, và tuyệt đối không đi cùng các đuôi câu biểu thị ý chí, nguyện vọng hay nhờ vả của người nói.",
+    "nuanceReason": "Khác với 「〜ゆえ（に）」 mang tính trang trọng/nguyên nhân trừu tượng, 「〜とあって」 nhấn mạnh vào \"bối cảnh/sự kiện đặc biệt trước mắt\" dẫn đến hiện tượng náo nhiệt, đông đúc hay phản ứng rõ rệt có thể nhìn thấy được ở vế sau.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "今年の夏は記録的な猛暑とあって、エアコンや清涼飲料水の売れ行きが急増している。",
+    "masterExampleVi": "Vì mùa hè năm nay nắng nóng kỷ lục nên lượng tiêu thụ máy điều hòa và nước giải khát đang tăng vọt.",
+    "examples": [
+      {
+        "sentence": "今年の夏は記録的な猛暑とあって、エアコンや清涼飲料水の売れ行きが急増している。",
+        "translation": "Vì mùa hè năm nay nắng nóng kỷ lục nên lượng tiêu thụ máy điều hòa và nước giải khát đang tăng vọt.",
+        "reading": ""
+      },
+      {
+        "sentence": "世界的に有名な指揮者が来日するとあって、コンサートのチケットは発売開始からわずか数分で完売した。",
+        "translation": "Vì vị nhạc trưởng nổi tiếng thế giới sang Nhật biểu diễn nên vé buổi hòa nhạc đã bán hết sạch chỉ sau vài phút mở bán.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0440",
+    "grammar_id": "gram_n2_0440",
+    "milestoneId": "ms_n2_s3_l3",
+    "milestone_id": "ms_n2_s3_l3",
+    "stageId": "stage_n2_3",
+    "stage_id": "stage_n2_3",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 99,
+    "pattern": "ゆえ（に） ≠ とあって の 使[つか]い分[わ]け",
+    "titleVi": "ゆえに = lý do lý luận trừu tượng, chủ ngữ bất kỳ (kể cả bản thân); とあって = vì HOÀN CẢNH ĐẶC BIỆT/HIẾM cụ thể nên xảy ra hiện tượng khách quan (xã hội/đám đông)",
+    "structure": "ゆえ（に） ≠ とあって の 使[つか]い分[わ]け",
+    "explanation": "「ゆえ（に）」mang sắc thái văn viết trang trọng, dùng để giải thích mối quan hệ nhân quả mang tính lý luận, nguyên nhân sâu xa hoặc bản chất trừu tượng và có thể dùng cho bất kỳ chủ ngữ nào (kể cả bản thân). Ngược lại,「とあって」nhấn mạnh nguyên nhân là một tình huống hoặc sự kiện đặc biệt, hiếm thấy, dẫn đến một kết quả/hiện tượng mang tính khách quan (thường là phản ứng của số đông, xã hội). Do đó,「とあって」không dùng cho nguyên nhân bản chất trừu tượng hay để thể hiện ý chí, nguyện vọng cá nhân của người nói.",
+    "nuanceReason": "Vế sau của「とあって」luôn là hiện tượng thực tế xảy ra một cách tự nhiên/khách quan, tuyệt đối không đi cùng câu thể hiện ý chí, nguyện vọng của người nói như「〜たい」「〜つもりだ」hay câu mệnh lệnh, nhờ vả.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "若さゆえに、周囲の助言に素直に耳を傾けられず、多くの失敗を重ねてしまった。",
+    "masterExampleVi": "Chính vì còn quá trẻ người non dạ nên tôi đã không thể thành thật lắng nghe lời khuyên của mọi người xung quanh và liên tiếp phạm phải nhiều sai lầm.",
+    "examples": [
+      {
+        "sentence": "若さゆえに、周囲の助言に素直に耳を傾けられず、多くの失敗を重ねてしまった。",
+        "translation": "Chính vì còn quá trẻ người non dạ nên tôi đã không thể thành thật lắng nghe lời khuyên của mọi người xung quanh và liên tiếp phạm phải nhiều sai lầm.",
+        "reading": ""
+      },
+      {
+        "sentence": "人気アイドルのラストコンサートとあって、会場の前には早朝から長蛇の列ができていた。",
+        "translation": "Vì là buổi hòa nhạc cuối cùng của thần tượng nổi tiếng nên ngay từ sáng sớm trước hội trường đã có một hàng dài người xếp hàng.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0441",
+    "grammar_id": "gram_n2_0441",
+    "milestoneId": "ms_n2_s3_l3",
+    "milestone_id": "ms_n2_s3_l3",
+    "stageId": "stage_n2_3",
+    "stage_id": "stage_n2_3",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 99,
+    "pattern": "ゆえ（に）（N1） ≠ だけに（N2・第76課）の 使[つか]い分[わ]け",
+    "titleVi": "だけに (N2) = chính vì X nên kết quả Y tương xứng/bất ngờ, mang sắc thái cảm xúc, dùng được cả văn nói; ゆえに (N1) = lý do lý luận thuần túy, KHÔNG mang sắc thái tương xứng/bất ngờ, chỉ dùng văn viết trang trọng cao cấp",
+    "structure": "ゆえ（に）（N1） ≠ だけに（N2・第76課）の 使[つか]い分[わ]け",
+    "explanation": "「だけに」 (N2) dùng để nhấn mạnh mối quan hệ nhân quả mà trong đó vế sau là kết quả, mức độ cảm xúc (vui, buồn, thất vọng...) tương xứng hoặc vượt trên mức kỳ vọng thông thường từ vế trước, dùng linh hoạt trong cả văn nói lẫn văn viết. Ngược lại, 「ゆえ（に）」 (N1) là mẫu câu thuộc phong cách văn viết trang trọng, cổ kính, dùng để trình bày lý do mang tính logic, lý luận học thuật hoặc nguyên nhân khách quan mà không chứa đựng hàm ý 'kết quả tương xứng với nỗ lực/kỳ vọng'. Vì vậy, không dùng 「ゆえに」 cho các biểu đạt cảm xúc đời thường, và không dùng 「だけに」 trong văn bản nghị luận hay quy phạm đòi hỏi sự khách quan tuyệt đối.",
+    "nuanceReason": "「ゆえに」 có thể đứng độc lập ở đầu câu như một liên từ kết nối (故に、〜 = Do đó / Vì vậy) trong văn nghị luận, trong khi 「だけに」 tuyệt đối không có cách dùng làm liên từ đầu câu.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "科学的根拠が不十分であるがゆえに、この仮説は学会で受け入れられなかった。",
+    "masterExampleVi": "Chính vì căn cứ khoa học chưa đầy đủ mà giả thuyết này đã không được hội đồng học thuật chấp nhận.",
+    "examples": [
+      {
+        "sentence": "科学的根拠が不十分であるがゆえに、この仮説は学会で受け入れられなかった。",
+        "translation": "Chính vì căn cứ khoa học chưa đầy đủ mà giả thuyết này đã không được hội đồng học thuật chấp nhận.",
+        "reading": ""
+      },
+      {
+        "sentence": "長年期待されていた大型プロジェクトだけに、中止が決まった時の関係者の落胆は大きい。",
+        "translation": "Chính vì là dự án quy mô lớn được kỳ vọng suốt nhiều năm nên sự thất vọng của những người liên quan khi có quyết định hủy bỏ là vô cùng lớn.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0442",
+    "grammar_id": "gram_n2_0442",
+    "milestoneId": "ms_n2_s3_l3",
+    "milestone_id": "ms_n2_s3_l3",
+    "stageId": "stage_n2_3",
+    "stage_id": "stage_n2_3",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 99,
+    "pattern": "〜ものなら",
+    "titleVi": "\"giá mà có thể…\", \"hễ mà lỡ… thì gay\"",
+    "structure": "〜ものなら",
+    "explanation": "Cấu trúc thuộc [N2] Chặng 3 · Bài 99 (⑪): Dùng để \"giá mà có thể…\", \"hễ mà lỡ… thì gay\".",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜ものなら（N2）",
+    "masterExampleVi": "\"giá mà có thể…\", \"hễ mà lỡ… thì gay\"",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0443",
+    "grammar_id": "gram_n2_0443",
+    "milestoneId": "ms_n2_s3_l3",
+    "milestone_id": "ms_n2_s3_l3",
+    "stageId": "stage_n2_3",
+    "stage_id": "stage_n2_3",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 99,
+    "pattern": "〜（よ）うものなら",
+    "titleVi": "\"giá mà có thể…\", \"hễ mà lỡ… thì gay\"",
+    "structure": "〜（よ）うものなら",
+    "explanation": "Cấu trúc thuộc [N2] Chặng 3 · Bài 99 (⑪): Dùng để \"giá mà có thể…\", \"hễ mà lỡ… thì gay\".",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜（よ）うものなら（N2）",
+    "masterExampleVi": "\"giá mà có thể…\", \"hễ mà lỡ… thì gay\"",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

@@ -1,0 +1,162 @@
+[
+  {
+    "id": "gram_n4_0115",
+    "grammar_id": "gram_n4_0115",
+    "milestoneId": "ms_minna_b31",
+    "milestone_id": "ms_minna_b31",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 31,
+    "pattern": "V意向形",
+    "titleVi": "ý chí / đề nghị cùng làm (dạng thể ý chí)",
+    "structure": "V意向形",
+    "explanation": "Thể ý chí (volitional form) biểu thị ý định hoặc lời mời cùng làm. Nhóm I: い→お+う (書く→書こう). Nhóm II: bỏ る+よう (食べる→食べよう). Nhóm III: する→しよう, くる→こよう.",
+    "nuanceReason": "〜ようと思っています = \"đang nghĩ sẽ ~\" (kế hoạch của bản thân, chưa quyết chắc)",
+    "commonMistake": "[Sai]: 明日は早く起きようです。 -> [Đúng]: 明日は早く起きようと思います。. V意向形(thể ý chí, vd 起きよう)là dạng kết thúc câu riêng, không được ghép trực tiếp です phía sau. Muốn nói lịch sự về ý định thì phải dùng cấu trúc V意向形+と思います, không phải thêm です ngay sau 意向形.",
+    "kitsuPrompt": "Hỏi tôi về một kế hoạch tôi muốn thực hiện. Tôi sẽ trả lời bằng V意向形+と思っています.",
+    "masterExampleJp": "明日早く起きよう。",
+    "masterExampleVi": "Ngày mai dậy sớm thôi.",
+    "examples": [
+      {
+        "sentence": "明日早く起きよう。",
+        "translation": "Ngày mai dậy sớm thôi."
+      },
+      {
+        "sentence": "一緒に勉強しよう！",
+        "translation": "Cùng nhau học nào!"
+      },
+      {
+        "sentence": "もう帰ろうか。",
+        "translation": "Về thôi nhỉ?"
+      }
+    ],
+    "dialogue": {
+      "jp": "A：週末、映画を見ようか。\nB：いいね、行こう！",
+      "vi": "A: Cuối tuần xem phim không?\nB: Hay đấy, đi thôi!"
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0116",
+    "grammar_id": "gram_n4_0116",
+    "milestoneId": "ms_minna_b31",
+    "milestone_id": "ms_minna_b31",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 31,
+    "pattern": "Vるつもりです",
+    "titleVi": "dự định / có ý định làm",
+    "structure": "Vるつもりです",
+    "explanation": "〜つもりです theo sau V thể từ điển biểu thị ý định cá nhân, đã quyết định nhưng chưa hẳn là lịch cụ thể. Phủ định: Vないつもりです (dự định không làm).",
+    "nuanceReason": "Khác với 予定: つもり là ý định cá nhân (có thể thay đổi), 予定 là lịch đã lên (thường có tính cố định hơn).",
+    "commonMistake": "[Sai]: 来年、日本へ行くつもりをしています。 -> [Đúng]: 来年、日本へ行くつもりです。. つもり là danh từ hình thức đi kèm です (Vるつもりです), không phải động từ để chia thành 〜をしています. Học viên hay nhầm với mẫu 練習をしています nên gắn thêm をしています vào sau つもり, đây là sai cấu trúc.",
+    "kitsuPrompt": "Hỏi tôi có kế hoạch gì trong tương lai gần. Tôi sẽ dùng 〜つもりです.",
+    "masterExampleJp": "夏休みに沖縄へ行くつもりです。",
+    "masterExampleVi": "Kỳ nghỉ hè tôi dự định đi Okinawa.",
+    "examples": [
+      {
+        "sentence": "夏休みに沖縄へ行くつもりです。",
+        "translation": "Kỳ nghỉ hè tôi dự định đi Okinawa."
+      },
+      {
+        "sentence": "今年は結婚しないつもりです。",
+        "translation": "Năm nay tôi không có ý định kết hôn."
+      },
+      {
+        "sentence": "大学を卒業したら、働くつもりです。",
+        "translation": "Sau khi tốt nghiệp đại học tôi dự định đi làm."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：将来何をするつもりですか。\nB：医者になるつもりです。",
+      "vi": "A: Tương lai bạn dự định làm gì?\nB: Tôi dự định trở thành bác sĩ."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0117",
+    "grammar_id": "gram_n4_0117",
+    "milestoneId": "ms_minna_b31",
+    "milestone_id": "ms_minna_b31",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 31,
+    "pattern": "Vる予定です",
+    "titleVi": "có lịch / dự kiến (theo lịch trình)",
+    "structure": "Vる予定です",
+    "explanation": "〜予定です theo sau V thể từ điển biểu thị lịch đã lên, thường có tính xác định cao hơn つもり. Dùng trong công việc, sự kiện đã đặt trước.",
+    "nuanceReason": "Cũng dùng được với danh từ: 出張の予定です。Phủ định: 予定はありません / 予定がありません.",
+    "commonMistake": "[Sai]: 来月、出張に行く予定をしています。 -> [Đúng]: 来月、出張に行く予定です。. Tương tự つもり, 予定 cũng là danh từ hình thức dùng với です (Vる予定です), không chia thành 〜をしています. Nhầm lẫn phổ biến là coi 予定 như một hành động đang diễn ra thay vì một trạng thái lịch trình đã định.",
+    "kitsuPrompt": "Hỏi tôi lịch công tác hay kế hoạch cuối tuần. Tôi sẽ dùng 〜予定です.",
+    "masterExampleJp": "来月、出張の予定があります。",
+    "masterExampleVi": "Tháng sau tôi có lịch công tác.",
+    "examples": [
+      {
+        "sentence": "来月、出張の予定があります。",
+        "translation": "Tháng sau tôi có lịch công tác."
+      },
+      {
+        "sentence": "会議は３時に始まる予定です。",
+        "translation": "Cuộc họp dự kiến bắt đầu lúc 3 giờ."
+      },
+      {
+        "sentence": "今年の夏、友だちの結婚式に出席する予定です。",
+        "translation": "Mùa hè năm nay tôi dự kiến dự đám cưới của bạn."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：来週の土曜日は何か予定がありますか。\nB：友だちと映画を見る予定です。",
+      "vi": "A: Thứ Bảy tuần sau bạn có kế hoạch gì không?\nB: Tôi có kế hoạch đi xem phim với bạn."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0118",
+    "grammar_id": "gram_n4_0118",
+    "milestoneId": "ms_minna_b31",
+    "milestone_id": "ms_minna_b31",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 31,
+    "pattern": "まだVていません",
+    "titleVi": "chưa ~ (hành động chưa hoàn thành)",
+    "structure": "まだVていません",
+    "explanation": "まだ + Vていません biểu thị hành động chưa xảy ra mặc dù dự kiến hoặc đáng lẽ đã xảy ra. Khác với 〜ていません đơn thuần (chỉ trạng thái hiện tại không làm).",
+    "nuanceReason": "もう〜ましたか（rồi chưa?）→ まだ〜ていません（chưa）là cặp hỏi-đáp phổ biến.",
+    "commonMistake": "[Sai]: 今朝からまだ何も食べませんでした。 -> [Đúng]: 今朝からまだ何も食べていません。. まだ diễn tả một việc tính đến hiện tại vẫn chưa xảy ra dù đáng lẽ đã xảy ra, nên phải dùng thể tiếp diễn phủ định 〜ていません để nối kết quá khứ với hiện tại. 〜ませんでした chỉ một sự việc đã hoàn toàn kết thúc trong quá khứ, không phù hợp khi đi cùng まだ.",
+    "kitsuPrompt": "Hỏi tôi về những việc tôi chưa làm xong. Tôi sẽ dùng まだ〜ていません.",
+    "masterExampleJp": "まだ宿題をやっていません。",
+    "masterExampleVi": "Tôi chưa làm bài tập về nhà.",
+    "examples": [
+      {
+        "sentence": "まだ宿題をやっていません。",
+        "translation": "Tôi chưa làm bài tập về nhà."
+      },
+      {
+        "sentence": "まだ昼ごはんを食べていません。",
+        "translation": "Tôi chưa ăn trưa."
+      },
+      {
+        "sentence": "映画はまだ見ていません。",
+        "translation": "Bộ phim đó tôi chưa xem."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：もうレポートを出しましたか。\nB：いいえ、まだ出していません。明日出す予定です。",
+      "vi": "A: Bạn đã nộp báo cáo chưa?\nB: Chưa ạ, tôi chưa nộp. Dự kiến nộp ngày mai."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

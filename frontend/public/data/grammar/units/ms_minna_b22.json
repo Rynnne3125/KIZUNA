@@ -1,0 +1,182 @@
+[
+  {
+    "id": "gram_n5_0088",
+    "grammar_id": "gram_n5_0088",
+    "milestoneId": "ms_minna_b22",
+    "milestone_id": "ms_minna_b22",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 22,
+    "pattern": "Vる／Vた／Vない + N",
+    "titleVi": "N mà / N đã / N chưa V (mệnh đề bổ nghĩa danh từ)",
+    "structure": "Vる／Vた／Vない + N",
+    "explanation": "Mệnh đề động từ đứng trước danh từ để bổ nghĩa, giống relative clause trong tiếng Anh. Thứ tự: [mệnh đề bổ nghĩa] + [danh từ]. Không cần pronoun (that/who/which).",
+    "nuanceReason": "Người thực hiện hành động trong mệnh đề bổ nghĩa dùng が (không phải は): 私が買った本 (không phải 私は買った本).",
+    "commonMistake": "[Sai]: 私は買った本 (dùng は thay vì が trong mệnh đề bổ nghĩa) -> [Đúng]: 私が買った本. Trong mệnh đề bổ nghĩa danh từ, chủ thể thực hiện hành động phải dùng が, không phải は. は chỉ được dùng ở mệnh đề chính. Đây là quy tắc quan trọng nhất của cấu trúc này.",
+    "kitsuPrompt": "Hỏi tôi mô tả đồ vật hoặc người nào đó. Tôi sẽ dùng mệnh đề bổ nghĩa để trả lời.",
+    "masterExampleJp": "これは私が昨日買った本です。",
+    "masterExampleVi": "Đây là cuốn sách mà tôi đã mua hôm qua.",
+    "examples": [
+      {
+        "sentence": "これは私が昨日買った本です。",
+        "translation": "Đây là cuốn sách mà tôi đã mua hôm qua."
+      },
+      {
+        "sentence": "あそこに座っている人は田中さんです。",
+        "translation": "Người đang ngồi kia là anh Tanaka."
+      },
+      {
+        "sentence": "日本語が話せる人を探しています。",
+        "translation": "Tôi đang tìm người có thể nói tiếng Nhật."
+      },
+      {
+        "sentence": "まだ食べていない料理がたくさんあります。",
+        "translation": "Vẫn còn nhiều món tôi chưa ăn."
+      }
+    ],
+    "dialogue": {
+      "title": "Mô tả đồ vật và người",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "あのテーブルの上にある赤いかばんは誰のですか。",
+          "translation": "Cái túi đỏ ở trên bàn kia là của ai vậy?"
+        },
+        {
+          "speaker": "B",
+          "text": "ああ、それは昨日田中さんが忘れていったかばんです。",
+          "translation": "À, đó là cái túi mà Tanaka để quên hôm qua."
+        },
+        {
+          "speaker": "A",
+          "text": "そうですか。田中さんに連絡したほうがいいですね。",
+          "translation": "Thế à. Nên liên lạc với Tanaka thì hơn nhỉ."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0089",
+    "grammar_id": "gram_n5_0089",
+    "milestoneId": "ms_minna_b22",
+    "milestone_id": "ms_minna_b22",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 22,
+    "pattern": "Vる + 時間／約束／機会など",
+    "titleVi": "thời gian / hẹn / cơ hội để làm ~",
+    "structure": "Vる + 時間／約束／機会など",
+    "explanation": "Mệnh đề bổ nghĩa trước danh từ trừu tượng như 時間 (thời gian), 約束 (lời hẹn), 機会 (cơ hội). Rất phổ biến trong giao tiếp hàng ngày.",
+    "nuanceReason": "〜する予定 (kế hoạch) / 〜する機会 (cơ hội) / 〜する時間 (thời gian) — những collocation phổ biến.",
+    "commonMistake": "[Sai]: 食べるの時間がありません。(thêm の không cần thiết trước danh từ) -> [Đúng]: 食べる時間がありません。. Mệnh đề bổ nghĩa + danh từ không cần の ở giữa. の chỉ dùng để danh từ hóa (食べるのは好きです) hoặc trong cấu trúc の where clause.",
+    "kitsuPrompt": "Hỏi tôi về thời gian, cơ hội hoặc kế hoạch. Tôi sẽ trả lời bằng các cụm như 〜する時間、〜する機会、〜する約束.",
+    "masterExampleJp": "昼ごはんを食べる時間がありません。",
+    "masterExampleVi": "Tôi không có thời gian ăn trưa.",
+    "examples": [
+      {
+        "sentence": "昼ごはんを食べる時間がありません。",
+        "translation": "Tôi không có thời gian ăn trưa."
+      },
+      {
+        "sentence": "明日、会う約束をしました。",
+        "translation": "Tôi đã hẹn gặp vào ngày mai."
+      },
+      {
+        "sentence": "日本に行く機会がありますか。",
+        "translation": "Bạn có cơ hội đi Nhật không?"
+      },
+      {
+        "sentence": "話したいことがあります。",
+        "translation": "Có chuyện tôi muốn nói với bạn."
+      }
+    ],
+    "dialogue": {
+      "title": "Lên kế hoạch gặp nhau",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "最近、忙しいですか。",
+          "translation": "Dạo này bạn có bận không?"
+        },
+        {
+          "speaker": "B",
+          "text": "はい、昼ごはんを食べる時間もないくらいです。",
+          "translation": "Có, bận đến mức không có thời gian ăn trưa nữa."
+        },
+        {
+          "speaker": "A",
+          "text": "大変ですね。今週末、ゆっくり話せる機会がありますか。",
+          "translation": "Vất vả nhỉ. Cuối tuần này bạn có cơ hội nói chuyện thoải mái không?"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0090",
+    "grammar_id": "gram_n5_0090",
+    "milestoneId": "ms_minna_b22",
+    "milestone_id": "ms_minna_b22",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 22,
+    "pattern": "Aい N / NAな N",
+    "titleVi": "N mà có tính chất ~ (tính từ bổ nghĩa danh từ)",
+    "structure": "Aい N / NAな N",
+    "explanation": "Tính từ đứng trước danh từ: い-adj giữ nguyên; な-adj thêm な. Đây là cách tạo cụm danh từ mô tả.",
+    "nuanceReason": "Tính từ bổ nghĩa + N tạo cụm danh từ dùng làm chủ ngữ, tân ngữ hoặc bổ ngữ trong câu dài hơn.",
+    "commonMistake": "[Sai]: 静かいレストラン (áp dụng い-adj cho な-adj) -> [Đúng]: 静かなレストラン. な-adj khi bổ nghĩa danh từ phải thêm な: 静かな, 有名な, 便利な. い-adj giữ nguyên: 大きい, 新しい, 安い. Phải phân biệt loại tính từ.",
+    "kitsuPrompt": "Hỏi tôi muốn có đồ vật hay đi nơi như thế nào. Tôi sẽ mô tả bằng tính từ bổ nghĩa danh từ.",
+    "masterExampleJp": "大きい荷物を持っています。",
+    "masterExampleVi": "Tôi đang mang hành lý to.",
+    "examples": [
+      {
+        "sentence": "大きい荷物を持っています。",
+        "translation": "Tôi đang mang hành lý to."
+      },
+      {
+        "sentence": "静かなレストランで食べたいです。",
+        "translation": "Tôi muốn ăn ở nhà hàng yên tĩnh."
+      },
+      {
+        "sentence": "新しいスマホが欲しいです。",
+        "translation": "Tôi muốn có điện thoại mới."
+      },
+      {
+        "sentence": "有名な俳優に会いたいです。",
+        "translation": "Tôi muốn gặp diễn viên nổi tiếng."
+      }
+    ],
+    "dialogue": {
+      "title": "Mô tả nơi muốn đến",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "今度の旅行、どんなホテルに泊まりたいですか。",
+          "translation": "Chuyến đi tới bạn muốn ở khách sạn như thế nào?"
+        },
+        {
+          "speaker": "B",
+          "text": "静かできれいな部屋がいいです。できれば海が見える場所がいいな。",
+          "translation": "Tôi muốn phòng yên tĩnh và sạch sẽ. Nếu được thì ở nơi nhìn thấy biển."
+        },
+        {
+          "speaker": "A",
+          "text": "いいですね。安くておいしいレストランも近くにあるといいですよね。",
+          "translation": "Nghe hay đấy. Nếu gần có nhà hàng ngon và rẻ nữa thì tốt nhỉ."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

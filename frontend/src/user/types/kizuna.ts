@@ -65,17 +65,62 @@ export interface VocabularyBook {
 
 export type VocabularyCatalog = Record<'N5' | 'N4' | 'N3' | 'N2' | 'N1', VocabularyBook[]>;
 
+export interface GrammarExample {
+  sentence: string;
+  translation: string;
+}
+
+export interface DialogueLine {
+  speaker: string;
+  text: string;
+  translation: string;
+}
+
+export interface GrammarDialogue {
+  title?: string;
+  lines: DialogueLine[];
+}
+
 export interface GrammarItem {
   id: string;
+  grammar_id?: string;
   milestoneId?: string;
+  stageId?: string;
+  jlptLevel?: string;
+  level?: string;
+  lessonNumber?: number;
   pattern: string;
   titleVi: string;
+  structure?: string;
   explanation: string;
   nuanceReason?: string;
+  commonMistake?: string;
+  kitsuPrompt?: string;
   masterExampleJp: string;
   masterExampleVi: string;
-  level?: string;
+  examples?: GrammarExample[];
+  dialogue?: GrammarDialogue;
+  sourceBook?: string;
+  sourceUrl?: string;
 }
+
+export interface GrammarUnit {
+  unitId: string;
+  unitTitle: string;
+  subTitle?: string;
+  lessonNumber?: number;
+  itemCount: number;
+}
+
+export interface GrammarBook {
+  bookId: string;
+  bookName: string;
+  description: string;
+  totalItems: number;
+  units: GrammarUnit[];
+}
+
+export type GrammarCatalog = Record<'N5' | 'N4' | 'N3' | 'N2' | 'N1', GrammarBook[]>;
 
 export interface KanjiItem {
   id: string;

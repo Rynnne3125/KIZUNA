@@ -1,0 +1,114 @@
+[
+  {
+    "id": "gram_n4_0113",
+    "grammar_id": "gram_n4_0113",
+    "milestoneId": "ms_minna_b30",
+    "milestone_id": "ms_minna_b30",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 30,
+    "pattern": "Vてあります",
+    "titleVi": "(ai đó) đã làm sẵn — kết quả còn đó",
+    "structure": "Vてあります",
+    "explanation": "Tha động từ + てあります diễn đạt trạng thái hiện tại là kết quả của hành động ai đó đã cố ý thực hiện trước đó. Nhấn mạnh: có người đã chuẩn bị, kết quả còn đó, thường là có lý do.",
+    "nuanceReason": "Phân biệt: 窓が開いている(自動詞) = cửa đang mở (không rõ chủ đích) vs 窓が開けてある(他動詞) = cửa đã được mở có chủ đích (để thông khí chẳng hạn).",
+    "commonMistake": "[Sai]: 窓が開いてあります。(tự động từ + てある) -> [Đúng]: 窓が開けてあります。(tha動詞 + てある). てあります chỉ dùng với tha động từ. Nếu muốn dùng tự động từ + kết quả, hãy dùng 〜ています: 窓が開いています.",
+    "kitsuPrompt": "Hỏi tôi xem nhà tôi đã chuẩn bị gì cho khách (đồ ăn, phòng, v.v.). Tôi sẽ dùng 〜てあります.",
+    "masterExampleJp": "黒板に予定が書いてあります。",
+    "masterExampleVi": "Lịch trình đã được viết trên bảng đen rồi.",
+    "examples": [
+      {
+        "sentence": "黒板に予定が書いてあります。",
+        "translation": "Lịch trình đã được viết trên bảng đen rồi."
+      },
+      {
+        "sentence": "ビールが冷蔵庫に冷やしてあります。",
+        "translation": "Bia đã được để lạnh trong tủ lạnh rồi."
+      },
+      {
+        "sentence": "部屋の予約がしてあります。",
+        "translation": "Phòng đã được đặt rồi."
+      }
+    ],
+    "dialogue": {
+      "title": "Chuẩn bị bữa tiệc",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "料理の準備はできていますか。",
+          "translation": "Chuẩn bị đồ ăn xong chưa?"
+        },
+        {
+          "speaker": "B",
+          "text": "はい、サラダは作ってあります。飲み物も冷やしてあります。",
+          "translation": "Vâng, salad đã làm xong rồi. Đồ uống cũng đã làm lạnh rồi."
+        },
+        {
+          "speaker": "A",
+          "text": "お皿は並べてありますか。",
+          "translation": "Đĩa đã bày ra chưa?"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0114",
+    "grammar_id": "gram_n4_0114",
+    "milestoneId": "ms_minna_b30",
+    "milestone_id": "ms_minna_b30",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 30,
+    "pattern": "Vておきます",
+    "titleVi": "làm trước / làm sẵn để dùng sau",
+    "structure": "Vておきます",
+    "explanation": "Vておきます diễn đạt hành động thực hiện trước để chuẩn bị cho điều gì sẽ xảy ra sau. Nhấn mạnh ý thức chuẩn bị, lên kế hoạch từ trước. Văn nói: 〜とく / 〜ておく.",
+    "nuanceReason": "Văn nói: 読んでおく → 読んどく. 調べておきます → 調べとく. Nghĩa vẫn giữ nguyên — chỉ là rút gọn.",
+    "commonMistake": "[Sai]: 会議のために資料をしておきました。(動詞なし) -> [Đúng]: 会議のために資料を準備しておきました。. Vておきます cần động từ cụ thể đứng trước おきます. \"資料をしておく\" thiếu động từ rõ ràng — phải nói \"準備する/印刷する/読む...\".",
+    "kitsuPrompt": "Hỏi tôi cần chuẩn bị gì cho một sự kiện sắp tới (kỳ thi, du lịch, phỏng vấn). Tôi sẽ dùng 〜ておきます.",
+    "masterExampleJp": "旅行の前にホテルを予約しておきます。",
+    "masterExampleVi": "Trước chuyến đi tôi sẽ đặt khách sạn trước.",
+    "examples": [
+      {
+        "sentence": "旅行の前にホテルを予約しておきます。",
+        "translation": "Trước chuyến đi tôi sẽ đặt khách sạn trước."
+      },
+      {
+        "sentence": "試験のために単語を覚えておいてください。",
+        "translation": "Hãy ghi nhớ từ vựng trước để chuẩn bị cho kỳ thi."
+      },
+      {
+        "sentence": "会議の前に資料を読んでおいた方がいいです。",
+        "translation": "Nên đọc tài liệu trước khi họp."
+      }
+    ],
+    "dialogue": {
+      "title": "Chuẩn bị cho kỳ thi",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "試験まで何をしておくべきですか。",
+          "translation": "Trước kỳ thi nên chuẩn bị gì?"
+        },
+        {
+          "speaker": "B",
+          "text": "文法を復習しておいて、単語も全部覚えておいてください。",
+          "translation": "Hãy ôn lại ngữ pháp và ghi nhớ hết từ vựng trước nhé."
+        },
+        {
+          "speaker": "A",
+          "text": "わかりました。辞書も持ってきておきます。",
+          "translation": "Vâng. Tôi cũng sẽ mang từ điển theo trước."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

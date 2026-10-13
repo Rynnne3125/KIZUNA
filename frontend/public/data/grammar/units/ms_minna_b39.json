@@ -1,0 +1,122 @@
+[
+  {
+    "id": "gram_n4_0141",
+    "grammar_id": "gram_n4_0141",
+    "milestoneId": "ms_minna_b39",
+    "milestone_id": "ms_minna_b39",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 39,
+    "pattern": "V／Aて、〜 (原因・感情)",
+    "titleVi": "vì ~ (nguyên nhân cảm xúc/kết quả tự nhiên)",
+    "structure": "V／Aて、〜 (原因・感情)",
+    "explanation": "V/A thể て + vế sau biểu thị nguyên nhân dẫn đến cảm xúc hoặc kết quả tự nhiên. Dùng với động từ trạng thái hoặc kết quả khách quan — không dùng với câu yêu cầu/mệnh lệnh.",
+    "nuanceReason": "Vế sau KHÔNG thể là mệnh lệnh, yêu cầu, hay ý chí: ❌ 急いで、早く来てください (dùng ので/から thay).",
+    "commonMistake": "[Sai]: 熱があって、休んでください。 -> [Đúng]: 熱があるので、休んでください。. Vế sau của 〜て (nguyên nhân) chỉ diễn tả cảm xúc hoặc kết quả tự nhiên, KHÔNG được là câu mệnh lệnh, yêu cầu hay ý chí như 〜てください/〜ましょう/〜たい. Khi vế sau là yêu cầu như 休んでください, phải dùng 〜ので hoặc 〜から thay cho 〜て.",
+    "kitsuPrompt": "Hỏi tôi về một kỷ niệm cảm động hay bất ngờ. Tôi sẽ kể bằng 〜て感動しました/びっくりしました.",
+    "masterExampleJp": "嬉しいニュースを聞いて、泣いてしまいました。",
+    "masterExampleVi": "Nghe tin vui tôi khóc mất.",
+    "examples": [
+      {
+        "sentence": "嬉しいニュースを聞いて、泣いてしまいました。",
+        "translation": "Nghe tin vui tôi khóc mất."
+      },
+      {
+        "sentence": "道に迷って、遅れました。",
+        "translation": "Vì lạc đường nên tôi đến muộn."
+      },
+      {
+        "sentence": "財布を忘れて、困りました。",
+        "translation": "Quên ví nên tôi bối rối."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：どうして泣いているんですか。\nB：映画を見て、感動して泣いてしまいました。",
+      "vi": "A: Sao bạn khóc vậy?\nB: Xem phim cảm động quá nên khóc mất."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0142",
+    "grammar_id": "gram_n4_0142",
+    "milestoneId": "ms_minna_b39",
+    "milestone_id": "ms_minna_b39",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 39,
+    "pattern": "〜ので",
+    "titleVi": "vì ~ nên ~ (lý do lịch sự/khách quan)",
+    "structure": "〜ので",
+    "explanation": "ので sau V/A/N thể bình thường (Na adj + な, N + な trước ので) biểu thị lý do theo cách khách quan, lịch sự. Dùng khi xin phép, giải thích, hoặc văn viết trang trọng.",
+    "nuanceReason": "ので lịch sự, khách quan hơn から. Trong văn nói thân mật dùng から. Trong email/xin phép chính thức dùng ので.",
+    "commonMistake": "[Sai]: 静かだので、ここで勉強しやすいです。 -> [Đúng]: 静かなので、ここで勉強しやすいです。. Trước ので, tính từ đuôi な (na-keiyoushi) phải chia thành 「な」+ ので (không phải だ + ので), và danh từ cũng phải thêm な trước ので (N + なので), ví dụ 学生なので chứ không phải 学生だので. Đây là lỗi rất phổ biến vì học viên nhầm quy tắc chia の trước こと/です sang ので.",
+    "kitsuPrompt": "Tôi muốn xin nghỉ làm. Hãy giúp tôi viết email ngắn dùng 〜ので.",
+    "masterExampleJp": "熱があるので、今日は休みます。",
+    "masterExampleVi": "Vì có sốt nên hôm nay tôi nghỉ.",
+    "examples": [
+      {
+        "sentence": "熱があるので、今日は休みます。",
+        "translation": "Vì có sốt nên hôm nay tôi nghỉ."
+      },
+      {
+        "sentence": "雨が降るので、傘を持ってきました。",
+        "translation": "Vì trời mưa nên tôi mang ô."
+      },
+      {
+        "sentence": "静かなので、ここで勉強しやすいです。",
+        "translation": "Vì yên tĩnh nên học ở đây dễ chịu."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：明日の会議、欠席できますか。\nB：出張があるので、欠席させていただきます。",
+      "vi": "A: Cuộc họp ngày mai bạn có thể vắng mặt không?\nB: Vì có chuyến công tác nên tôi xin phép vắng."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0143",
+    "grammar_id": "gram_n4_0143",
+    "milestoneId": "ms_minna_b39",
+    "milestone_id": "ms_minna_b39",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 39,
+    "pattern": "Nのために / Vるために",
+    "titleVi": "vì ~ (nguyên nhân tiêu cực) / để ~ (mục đích)",
+    "structure": "Nのために / Vるために",
+    "explanation": "ために có hai nghĩa: (1) nguyên nhân tiêu cực/trung lập trong văn viết (事故のために = vì tai nạn); (2) mục đích (試験のために = để thi). Ngữ cảnh quyết định.",
+    "nuanceReason": "ため là văn viết/trang trọng. Văn nói thân mật dùng から hoặc ので thay thế.",
+    "commonMistake": "[Sai]: 日本語が話せるために、毎日勉強しています。 -> [Đúng]: 日本語が話せるように、毎日勉強しています。. ために diễn đạt mục đích chỉ dùng được với động từ Ý CHÍ (hành động chủ động có thể kiểm soát, như 合格するために); còn với động từ khả năng/trạng thái không chủ động điều khiển được (話せる - thể khả năng) phải dùng ように. Ngoài ra cần phân biệt hai nghĩa của ために: (1) nguyên nhân trung lập/tiêu cực trong văn viết (事故のために), (2) mục đích (試験のために) — ngữ cảnh quyết định nghĩa nào đang được dùng.",
+    "kitsuPrompt": "Hỏi tôi về lý do tại sao tôi học tiếng Nhật. Tôi sẽ dùng 〜ために (mục đích).",
+    "masterExampleJp": "台風のために、電車が止まりました。",
+    "masterExampleVi": "Vì bão nên tàu điện dừng hoạt động.",
+    "examples": [
+      {
+        "sentence": "台風のために、電車が止まりました。",
+        "translation": "Vì bão nên tàu điện dừng hoạt động."
+      },
+      {
+        "sentence": "試験に合格するために、毎日勉強しています。",
+        "translation": "Để đậu kỳ thi tôi học mỗi ngày."
+      },
+      {
+        "sentence": "病気のために、仕事を休みました。",
+        "translation": "Vì bệnh nên tôi nghỉ làm."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：どうして電車が遅れているんですか。\nB：事故のため、しばらくお待ちください。（アナウンス）",
+      "vi": "A: Sao tàu điện bị trễ vậy?\nB: Vì tai nạn, xin quý khách chờ một lúc. (Thông báo)"
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "gram_n1_0582",
+    "grammar_id": "gram_n1_0582",
+    "milestoneId": "ms_n1_s3_l3",
+    "milestone_id": "ms_n1_s3_l3",
+    "stageId": "stage_n1_3",
+    "stage_id": "stage_n1_3",
+    "jlptLevel": "N1",
+    "jlpt_level": "N1",
+    "lessonNumber": 135,
+    "pattern": "〜（よ）うが／（よ）うと",
+    "titleVi": "\"dù có… hay không cũng…\" — phủ định cả hai chiều lựa chọn",
+    "structure": "〜（よ）うが／（よ）うと",
+    "explanation": "Cấu trúc N1 thuộc [N1] Chặng 3 · Bài 135 (⑪): \"dù có… hay không cũng…\" — phủ định cả hai chiều lựa chọn.",
+    "nuanceReason": "[INFO]  | [INFO] ",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜（よ）うが／（よ）うと（N1・実用例）",
+    "masterExampleVi": "\"dù có… hay không cũng…\" — phủ định cả hai chiều lựa chọn",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N1 / Michinori N1",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

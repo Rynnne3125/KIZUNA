@@ -1,0 +1,142 @@
+[
+  {
+    "id": "gram_n3_0178",
+    "grammar_id": "gram_n3_0178",
+    "milestoneId": "ms_n3_s1_l1",
+    "milestone_id": "ms_n3_s1_l1",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 51,
+    "pattern": "〜はずだ",
+    "titleVi": "Suy luận khách quan: \"lẽ ra phải ~\", \"chắc chắn là ~\" (dựa trên logic/sự kiện đã biết)",
+    "structure": "〜はずだ",
+    "explanation": "Mẫu ngữ pháp 「〜はずだ」 dùng để diễn đạt sự phán đoán, suy luận logic mang tính khách quan của người nói, có nghĩa là 'chắc chắn là ~' hoặc 'lẽ ra phải ~'. Người nói đưa ra khẳng định này dựa trên những căn cứ, lý do xác thực hoặc quy luật hiển nhiên đã biết trước đó. Mẫu này không dùng để diễn đạt phán đoán cảm tính vô căn cứ và cũng không dùng cho hành vi có ý chí của chính bản thân người nói.",
+    "nuanceReason": "Không dùng 「〜はずだ」 để nói về hành động dự định có chủ ý của chính mình (ví dụ: không nói 「私は明日行くはずだ」 mà phải dùng 「行く予定だ」 hoặc 「行くつもりだ」).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "電車はいつも時間通りに運行しているから、あと5分で駅に着くはずだ。",
+    "masterExampleVi": "Tàu điện luôn chạy đúng giờ nên chắc chắn khoảng 5 phút nữa sẽ đến ga.",
+    "examples": [
+      {
+        "sentence": "電車はいつも時間通りに運行しているから、あと5分で駅に着くはずだ。",
+        "translation": "Tàu điện luôn chạy đúng giờ nên chắc chắn khoảng 5 phút nữa sẽ đến ga.",
+        "reading": ""
+      },
+      {
+        "sentence": "田中さんは日本に10年間も住んでいたので、日本語がとても上手なはずだ。",
+        "translation": "Anh Tanaka đã sống ở Nhật tận 10 năm nên chắc chắn tiếng Nhật của anh ấy phải rất giỏi.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0179",
+    "grammar_id": "gram_n3_0179",
+    "milestoneId": "ms_n3_s1_l1",
+    "milestone_id": "ms_n3_s1_l1",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 51,
+    "pattern": "〜はずがない",
+    "titleVi": "Phủ định mạnh bằng logic: \"không thể nào ~ được\"",
+    "structure": "〜はずがない",
+    "explanation": "Mẫu ngữ pháp 「〜はずがない」 dùng để biểu thị sự phán đoán phủ định mạnh mẽ mang tính logic, mang nghĩa \"chắc chắn không thể nào...\" hoặc \"làm sao mà... có thể xảy ra được\". Người nói dựa trên lý do, bằng chứng xác đáng hoặc quy luật hiển nhiên để khẳng định một sự việc tuyệt đối không có khả năng diễn ra. Cấu trúc này thể hiện niềm tin và lập luận chắc chắn của người nói, đồng thời không dùng để nói về hành động có chủ ý của chính bản thân mình.",
+    "nuanceReason": "Trong giao tiếp thân mật thường ngày, 「〜はずがない」 có thể nói gọn thành 「〜はずない」 hoặc dùng tương đương với 「〜わけがない」.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "毎日あんなに一生懸命勉強したんだから、彼が試験に落ちるはずがない。",
+    "masterExampleVi": "Vì ngày nào anh ấy cũng học hành chăm chỉ đến thế nên không thể nào trượt kỳ thi được.",
+    "examples": [
+      {
+        "sentence": "毎日あんなに一生懸命勉強したんだから、彼が試験に落ちるはずがない。",
+        "translation": "Vì ngày nào anh ấy cũng học hành chăm chỉ đến thế nên không thể nào trượt kỳ thi được.",
+        "reading": ""
+      },
+      {
+        "sentence": "この店は高級ホテルの中にあるから、料理がまずいはずがない。",
+        "translation": "Nhà hàng này nằm trong khách sạn cao cấp nên đồ ăn không thể nào dở được.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0180",
+    "grammar_id": "gram_n3_0180",
+    "milestoneId": "ms_n3_s1_l1",
+    "milestone_id": "ms_n3_s1_l1",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 51,
+    "pattern": "はずだ ≠ べきだ",
+    "titleVi": "はずだ = suy luận khách quan (có căn cứ); べきだ = bổn phận chủ quan (\"đáng ra phải\")",
+    "structure": "はずだ ≠ べきだ",
+    "explanation": "「はずだ」dùng để biểu thị suy luận logic hoặc phán đoán có căn cứ khách quan của người nói, mang nghĩa \"chắc chắn là / lẽ ra phải thế\" theo tính toán hoặc quy luật. Trái lại, 「べきだ」thể hiện phán đoán mang tính chủ quan về bổn phận, đạo đức hoặc điều đương nhiên phải làm theo lẽ thường (\"nên / đáng ra phải\"). Điểm mấu chốt để phân biệt là 「はずだ」nhấn mạnh vào kết quả dự đoán theo logic, còn 「べきだ」nhấn mạnh vào trách nhiệm và hành vi cần thực hiện.",
+    "nuanceReason": "Động từ nhóm 3 「する」khi kết hợp với 「べきだ」có hai cách chia là 「するべきだ」hoặc「すべきだ」, trong đó dạng「すべきだ」mang sắc thái trang trọng hơn.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "田中さんは10年も日本に住んでいたので、日本の習慣に詳しいはずだ。",
+    "masterExampleVi": "Anh Tanaka đã sống ở Nhật tận 10 năm nên chắc chắn là sẽ am hiểu tập quán Nhật Bản.",
+    "examples": [
+      {
+        "sentence": "田中さんは10年も日本に住んでいたので、日本の習慣に詳しいはずだ。",
+        "translation": "Anh Tanaka đã sống ở Nhật tận 10 năm nên chắc chắn là sẽ am hiểu tập quán Nhật Bản.",
+        "reading": ""
+      },
+      {
+        "sentence": "借りたお金は約束した期日までにきちんと返すべきだ。",
+        "translation": "Tiền đã vay thì đáng ra phải trả đàng hoàng trước kỳ hạn đã hẹn.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0181",
+    "grammar_id": "gram_n3_0181",
+    "milestoneId": "ms_n3_s1_l1",
+    "milestone_id": "ms_n3_s1_l1",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 51,
+    "pattern": "はずがない ≠ ないはずだ",
+    "titleVi": "はずがない = \"không thể nào ~\" (mạnh, loại trừ hoàn toàn); ないはずだ = \"suy luận rằng không ~\" (nhẹ hơn)",
+    "structure": "はずがない ≠ ないはずだ",
+    "explanation": "「はずがない」và「ないはずだ」đều biểu thị suy luận phủ định dựa trên căn cứ logic, nhưng mức độ quả quyết và sắc thái biểu đạt có sự khác biệt rõ rệt.「はずがない」mang sắc thái phủ định tuyệt đối, dùng khi người nói muốn bác bỏ hoàn toàn khả năng xảy ra của sự việc với ý nghĩa \"không thể nào có chuyện đó\". Trong khi đó,「ないはずだ」chỉ đơn thuần là một phán đoán mang tính phủ định nhẹ nhàng hơn với ý nghĩa \"chắc là không / lẽ ra không...\", thể hiện suy đoán khách quan chứ không mang tính bài trừ gay gắt. Vì vậy, tùy thuộc vào mức độ chắc chắn và việc có muốn bác bỏ ý kiến/khả năng nào đó hay không mà người nói lựa chọn cấu trúc phù hợp.",
+    "nuanceReason": "「はずがない」mang sắc thái bác bỏ mạnh mẽ tương đương với「わけがない」, trong khi「ないはずだ」chỉ là dạng suy đoán phủ định nhẹ nhàng của cấu trúc「〜はずだ」.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "ちゃんと鍵を閉めたのだから、部屋に泥棒が入れるはずがない。",
+    "masterExampleVi": "Vì đã khóa cửa cẩn thận rồi nên trộm không thể nào vào phòng được.",
+    "examples": [
+      {
+        "sentence": "ちゃんと鍵を閉めたのだから、部屋に泥棒が入れるはずがない。",
+        "translation": "Vì đã khóa cửa cẩn thận rồi nên trộm không thể nào vào phòng được.",
+        "reading": ""
+      },
+      {
+        "sentence": "十分に対策を練ったので、今回の計画は失敗しないはずだ。",
+        "translation": "Vì đã lên phương án đối phó kỹ lưỡng nên kế hoạch lần này chắc là sẽ không thất bại đâu.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

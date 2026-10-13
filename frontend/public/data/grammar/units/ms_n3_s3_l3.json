@@ -1,0 +1,166 @@
+[
+  {
+    "id": "gram_n3_0221",
+    "grammar_id": "gram_n3_0221",
+    "milestoneId": "ms_n3_s3_l3",
+    "milestone_id": "ms_n3_s3_l3",
+    "stageId": "stage_n3_3",
+    "stage_id": "stage_n3_3",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 61,
+    "pattern": "〜と（必然[ひつぜん]・自然[しぜん]）",
+    "titleVi": "〜と: điều kiện tất yếu / tự nhiên — hệ quả tự động xảy ra, KHÔNG dùng mệnh lệnh/ý chí sau",
+    "structure": "〜と（必然[ひつぜん]・自然[しぜん]）",
+    "explanation": "Mẫu ngữ pháp 「〜と」 dùng để diễn tả một điều kiện mà khi sự việc ở vế trước xảy ra thì vế sau sẽ tất yếu, tự nhiên hoặc tự động xảy ra theo quy luật. Cấu trúc này thường xuất hiện khi mô tả hiện tượng tự nhiên, thói quen bất di bất dịch, chỉ dẫn đường sá hoặc thao tác vận hành máy móc. Cần đặc biệt lưu ý rằng vế sau của 「〜と」 mang tính khách quan, tuyệt đối không đi kèm với ý chí, nguyện vọng, rủ rê hay mệnh lệnh của người nói.",
+    "nuanceReason": "Khác với 「〜たら」 dùng linh hoạt cho cả ý chí và lời mời, 「〜と」 chỉ giới hạn ở kết quả phát sinh tự nhiên mang tính tất yếu và khách quan.",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "この赤いボタンを押すと、機械が動きます。",
+    "masterExampleVi": "Hễ nhấn chiếc nút màu đỏ này thì máy móc sẽ tự động hoạt động.",
+    "examples": [
+      {
+        "sentence": "この赤いボタンを押すと、機械が動きます。",
+        "translation": "Hễ nhấn chiếc nút màu đỏ này thì máy móc sẽ tự động hoạt động.",
+        "reading": ""
+      },
+      {
+        "sentence": "お酒をたくさん飲むと、すぐに顔が赤くなります。",
+        "translation": "Hễ uống nhiều rượu là mặt tôi lại đỏ bừng ngay lập tức.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0222",
+    "grammar_id": "gram_n3_0222",
+    "milestoneId": "ms_n3_s3_l3",
+    "milestone_id": "ms_n3_s3_l3",
+    "stageId": "stage_n3_3",
+    "stage_id": "stage_n3_3",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 61,
+    "pattern": "〜ば（仮定[かてい]条件[じょうけん]）",
+    "titleVi": "〜ば: điều kiện giả định chung — câu sau KHÔNG phải quá khứ cụ thể; không dùng tả trạng thái quá khứ",
+    "structure": "〜ば（仮定[かてい]条件[じょうけん]）",
+    "explanation": "Mẫu ngữ pháp「〜ば」dùng để biểu thị điều kiện giả định, mang nghĩa là \"nếu... thì...\". Mẫu này thường dùng khi nêu lên điều kiện cần thiết để một sự việc xảy ra, hoặc đưa ra các quy luật chung, giả định cho tương lai. Điểm lưu ý quan trọng là vế sau của「〜ば」không được dùng ở thì quá khứ để diễn tả một hành động, sự việc hay trạng thái cụ thể đã diễn ra trong thực tế.",
+    "nuanceReason": "Khác với「〜たら」,「〜ば」chỉ tập trung vào điều kiện giả định thuần túy, tuyệt đối không dùng cho sự việc đã phát sinh hay chuỗi hành động kế tiếp trong quá khứ.",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "安[やす]ければ、この 新[あたら]しい パソコンを 買[か]いたいです。",
+    "masterExampleVi": "Nếu giá rẻ thì tôi muốn mua chiếc máy tính mới này.",
+    "examples": [
+      {
+        "sentence": "安[やす]ければ、この 新[あたら]しい パソコンを 買[か]いたいです。",
+        "translation": "Nếu giá rẻ thì tôi muốn mua chiếc máy tính mới này.",
+        "reading": ""
+      },
+      {
+        "sentence": "明日[あした] 天気[てんき]が よければ、一緒[いっしょ]に 山登[やまのぼ]りに 行[い]きませんか。",
+        "translation": "Nếu ngày mai thời tiết đẹp, bạn có muốn đi leo núi cùng tôi không?",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0223",
+    "grammar_id": "gram_n3_0223",
+    "milestoneId": "ms_n3_s3_l3",
+    "milestone_id": "ms_n3_s3_l3",
+    "stageId": "stage_n3_3",
+    "stage_id": "stage_n3_3",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 61,
+    "pattern": "〜たら（汎用[はんよう]条件[じょうけん]）",
+    "titleVi": "〜たら: điều kiện linh hoạt nhất — dùng được với mệnh lệnh, ý chí, quá khứ, mọi loại vị ngữ",
+    "structure": "〜たら（汎用[はんよう]条件[じょうけん]）",
+    "explanation": "Mẫu ngữ pháp 「〜たら」 biểu thị điều kiện giả định (\"nếu...\") hoặc điều kiện tất yếu/trình tự thời gian (\"sau khi... thì...\"). Đây là dạng câu điều kiện linh hoạt và đa năng nhất trong tiếng Nhật vì vế sau có thể thoải mái kết hợp với câu mệnh lệnh, nhờ vả, rủ rê hay ý chí của người nói. Mẫu này có tính khẩu ngữ cao và được sử dụng rất phổ biến trong giao tiếp hàng ngày.",
+    "nuanceReason": "So với「〜と」hay「〜ば」, vế sau của「〜たら」hoàn toàn không bị giới hạn bởi ý chí, nhờ vả hay mệnh lệnh, đồng thời cũng mang sắc thái giao tiếp tự nhiên và linh hoạt nhất.",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "分からないことがあったら、遠慮なく質問してください。",
+    "masterExampleVi": "Nếu có điều gì không hiểu, bạn hãy thoải mái đặt câu hỏi nhé.",
+    "examples": [
+      {
+        "sentence": "分からないことがあったら、遠慮なく質問してください。",
+        "translation": "Nếu có điều gì không hiểu, bạn hãy thoải mái đặt câu hỏi nhé.",
+        "reading": ""
+      },
+      {
+        "sentence": "明日雨が降ったら、ハイキングはやめて映画を見に行きましょう。",
+        "translation": "Ngày mai nếu trời mưa thì chúng ta hãy hủy đi bộ dã ngoại và cùng đi xem phim nhé.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0224",
+    "grammar_id": "gram_n3_0224",
+    "milestoneId": "ms_n3_s3_l3",
+    "milestone_id": "ms_n3_s3_l3",
+    "stageId": "stage_n3_3",
+    "stage_id": "stage_n3_3",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 61,
+    "pattern": "〜なら（前提[ぜんてい]条件[じょうけん]）",
+    "titleVi": "〜なら: giả định dựa trên thông tin vừa nghe / tình huống đang đề cập — câu sau thường mang ý khuyên/đề xuất",
+    "structure": "〜なら（前提[ぜんてい]条件[じょうけん]）",
+    "explanation": "「〜なら」được dùng để đưa ra lời khuyên, đề xuất, yêu cầu hoặc phán đoán dựa trên thông tin mà đối phương vừa nhắc tới hoặc một tình huống đang diễn ra trước mắt. Cấu trúc này mang sắc thái \"nếu đã định làm việc đó / nếu đúng là trường hợp như thế thì...\". Vế sau của câu thường đi với các mẫu biểu thị ý chí, lời khuyên (〜ほうがいい, 〜てください, 〜はいかがですか), và hành động ở vế sau hoàn toàn có thể xảy ra trước hành động ở vế trước.",
+    "nuanceReason": "Khác với「〜たら」hay「〜と」,「〜なら」cho phép hành động ở vế sau diễn ra TRƯỚC hành động ở vế trước (thường dùng để khuyên chuẩn bị trước).",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "新しいパソコンを買うなら、秋葉原の専門店に行ってみてください。",
+    "masterExampleVi": "Nếu bạn định mua máy tính mới thì hãy thử ghé các cửa hàng chuyên dụng ở Akihabara nhé.",
+    "examples": [
+      {
+        "sentence": "新しいパソコンを買うなら、秋葉原の専門店に行ってみてください。",
+        "translation": "Nếu bạn định mua máy tính mới thì hãy thử ghé các cửa hàng chuyên dụng ở Akihabara nhé.",
+        "reading": ""
+      },
+      {
+        "sentence": "頭が痛いなら、無理をしないで今日は早く休んだほうがいいですよ。",
+        "translation": "Nếu cậu đang bị đau đầu thì đừng cố quá, hôm nay nên nghỉ ngơi sớm đi.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0225",
+    "grammar_id": "gram_n3_0225",
+    "milestoneId": "ms_n3_s3_l3",
+    "milestone_id": "ms_n3_s3_l3",
+    "stageId": "stage_n3_3",
+    "stage_id": "stage_n3_3",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 61,
+    "pattern": "〜ば／〜たら／〜なら／〜と（ôn sâu）",
+    "titleVi": "chọn đúng 1 trong 4 cách \"nếu\" theo ngữ cảnh",
+    "structure": "〜ば／〜たら／〜なら／〜と（ôn sâu）",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 3 · Bài 61 (⑪): Dùng để chọn đúng 1 trong 4 cách \"nếu\" theo ngữ cảnh.",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜ば／〜たら／〜なら／〜と（ôn sâu）（N3）",
+    "masterExampleVi": "chọn đúng 1 trong 4 cách \"nếu\" theo ngữ cảnh",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

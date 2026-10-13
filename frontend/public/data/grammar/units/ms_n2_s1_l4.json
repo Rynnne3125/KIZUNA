@@ -1,0 +1,190 @@
+[
+  {
+    "id": "gram_n2_0398",
+    "grammar_id": "gram_n2_0398",
+    "milestoneId": "ms_n2_s1_l4",
+    "milestone_id": "ms_n2_s1_l4",
+    "stageId": "stage_n2_1",
+    "stage_id": "stage_n2_1",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 92,
+    "pattern": "〜限[かぎ]りだ",
+    "titleVi": "…vô cùng (cảm xúc mạnh — tiếp tính từ)",
+    "structure": "〜限[かぎ]りだ",
+    "explanation": "Mẫu 「〜限りだ」 mang ý nghĩa \"vô cùng...\", \"hết sức...\", dùng để nhấn mạnh cảm xúc hoặc tâm trạng của người nói đã đạt đến mức độ cao nhất. Cấu trúc này kết hợp trực tiếp với tính từ đuôi い (A-い) hoặc tính từ đuôi な (A-な + な) biểu thị cảm xúc, tâm lý chủ quan như 嬉しい, 寂しい, 残念な, 誇らしい... Mẫu câu mang sắc thái trang trọng, thường xuất hiện trong văn viết, thư từ, phỏng vấn hoặc khi phát biểu cảm nghĩ cá nhân trước người khác.",
+    "nuanceReason": "Khác với 「〜てたまらない」 (cảm xúc bộc phát tự nhiên không kiềm chế được, dùng trong hội thoại thân mật), 「〜限りだ」 trang trọng hơn và chỉ dùng cho tính từ chỉ cảm xúc tâm lý của chính người nói.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "長年努力してきた研究が世界的に認められ、研究者として誇らしい限りだ。",
+    "masterExampleVi": "Công trình nghiên cứu mà tôi nỗ lực bao năm qua đã được thế giới công nhận, là một nhà nghiên cứu tôi cảm thấy tự hào vô cùng.",
+    "examples": [
+      {
+        "sentence": "長年努力してきた研究が世界的に認められ、研究者として誇らしい限りだ。",
+        "translation": "Công trình nghiên cứu mà tôi nỗ lực bao năm qua đã được thế giới công nhận, là một nhà nghiên cứu tôi cảm thấy tự hào vô cùng.",
+        "reading": ""
+      },
+      {
+        "sentence": "楽しみにしていた海外旅行が台風のせいで直前に中止になってしまい、残念な限りだ。",
+        "translation": "Chuyến du lịch nước ngoài mà tôi hóng đợi bấy lâu lại bị hủy ngay trước giờ đi vì bão, thật đáng tiếc vô cùng.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0399",
+    "grammar_id": "gram_n2_0399",
+    "milestoneId": "ms_n2_s1_l4",
+    "milestone_id": "ms_n2_s1_l4",
+    "stageId": "stage_n2_1",
+    "stage_id": "stage_n2_1",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 92,
+    "pattern": "〜ことか（どんなに／何度[なんど]〜ことか）",
+    "titleVi": "Biết bao… (cảm thán — bắt buộc có từ nghi vấn)",
+    "structure": "〜ことか（どんなに／何度[なんど]〜ことか）",
+    "explanation": "Mẫu ngữ pháp này dùng để bộc lộ cảm xúc, tâm trạng mãnh liệt mang tính cảm thán sâu sắc như \"biết bao, biết chừng nào, bao nhiêu lần...\". Điểm đặc trưng bắt buộc là luôn phải đi kèm với các từ nghi vấn chỉ mức độ hoặc tần suất như 「どんなに」「どれほど」「何度」「何回」 ở vế trước. Thường được sử dụng trong văn viết hồi tưởng, độc thoại nội tâm hoặc khi người nói muốn giãi bày nỗi niềm xúc động, hối tiếc, cực nhọc hay vui sướng tột cùng.",
+    "nuanceReason": "Khác với 「〜ものだ」 dùng để cảm thán chung về bản chất sự vật hoặc hoài niệm quá khứ, 「〜ことか」 luôn đi cùng từ nghi vấn để nhấn mạnh mức độ tột cùng trong cảm xúc của người nói.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "故郷を離れて一人で暮らしていると、母の手料理がどれほど恋しいことか。",
+    "masterExampleVi": "Sống một mình xa quê hương mới thấy nhớ những món ăn mẹ nấu biết bao.",
+    "examples": [
+      {
+        "sentence": "故郷を離れて一人で暮らしていると、母の手料理がどれほど恋しいことか。",
+        "translation": "Sống một mình xa quê hương mới thấy nhớ những món ăn mẹ nấu biết bao.",
+        "reading": ""
+      },
+      {
+        "sentence": "難関の国家試験に合格できたと知った時は、どんなに嬉しかったことか。",
+        "translation": "Khi biết tin mình đã đỗ kỳ thi quốc gia đầy cam go, tôi đã vui sướng biết dường nào.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0400",
+    "grammar_id": "gram_n2_0400",
+    "milestoneId": "ms_n2_s1_l4",
+    "milestone_id": "ms_n2_s1_l4",
+    "stageId": "stage_n2_1",
+    "stage_id": "stage_n2_1",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 92,
+    "pattern": "〜の極[きわ]み",
+    "titleVi": "Tột cùng của… (văn viết cực trang trọng — tiếp danh từ)",
+    "structure": "〜の極[きわ]み",
+    "explanation": "Mẫu 「〜の極み」 đi trực tiếp sau danh từ để biểu thị trạng thái đạt đến đỉnh điểm, tột cùng của một cảm xúc, sự việc hoặc tính chất nào đó (\"vô cùng...\", \"tột cùng của...\"). Đây là cách diễn đạt văn viết cổ mang tính trang trọng, tôn nghiêm cao, thường xuất hiện trong các bài phát biểu, nghi thức trang trọng hoặc văn thư lịch thiệp. Mẫu câu này có thể đi kèm với cả danh từ mang nghĩa tích cực (vinh dự, hạnh phúc) lẫn tiêu cực (đau xót, ngu ngốc).",
+    "nuanceReason": "So với mẫu 「〜の至り」 hầu như chỉ chuyên dùng cho cảm xúc nội tâm của người nói (như 光栄, 若気の至り), mẫu 「〜の極み」 có phạm vi rộng hơn khi dùng được cho cả cảm xúc lẫn đánh giá sự vật, trạng thái khách quan (như 痛恨, 愚劣, 贅沢).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "世界的な権威ある賞をいただき、研究者として栄誉の極みに存じます。",
+    "masterExampleVi": "Được nhận giải thưởng danh giá tầm cỡ thế giới, với tư cách là một nhà nghiên cứu, tôi cảm thấy vinh dự tột cùng.",
+    "examples": [
+      {
+        "sentence": "世界的な権威ある賞をいただき、研究者として栄誉の極みに存じます。",
+        "translation": "Được nhận giải thưởng danh giá tầm cỡ thế giới, với tư cách là một nhà nghiên cứu, tôi cảm thấy vinh dự tột cùng.",
+        "reading": ""
+      },
+      {
+        "sentence": "準備不足が原因で長年のプロジェクトが水泡に帰したのは、痛恨の極みである。",
+        "translation": "Việc dự án bao năm qua đổ sông đổ biển chỉ vì thiếu chuẩn bị là nỗi đau xót tột cùng.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0401",
+    "grammar_id": "gram_n2_0401",
+    "milestoneId": "ms_n2_s1_l4",
+    "milestone_id": "ms_n2_s1_l4",
+    "stageId": "stage_n2_1",
+    "stage_id": "stage_n2_1",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 92,
+    "pattern": "限[かぎ]りだ ／ ことか ／ の極[きわ]み の 使[つか]い分[わ]け",
+    "titleVi": "Phân biệt ba mẫu: 限りだ (tính từ) ／ ことか (từ nghi vấn) ／ の極み (danh từ)",
+    "structure": "限[かぎ]りだ ／ ことか ／ の極[きわ]み の 使[つか]い分[わ]け",
+    "explanation": "Cả ba mẫu đều dùng để bộc lộ cảm xúc mãnh liệt nhưng khác nhau về từ loại kết hợp và sắc thái biểu đạt. 「〜限りだ」 đi trực tiếp sau tính từ để bộc lộ cảm xúc chủ quan tức thì của người nói (vô cùng/hết sức). 「〜ことか」 bắt buộc đi với từ nghi vấn (どんなに、どれほど...) để cảm thán về mức độ sâu sắc qua một quá trình (biết bao/dường nào). 「〜の極み」 kết hợp với danh từ trừu tượng để diễn tả trạng thái đạt đến mức tột đỉnh trong văn phong trang trọng (tột cùng của...).",
+    "nuanceReason": "「〜限りだ」 dùng cho tính từ chỉ cảm xúc chủ quan tức thời, 「〜ことか」 nhấn mạnh mức độ/thời gian đã trải qua cùng từ nghi vấn, còn 「〜の極み」 là văn viết trang trọng chỉ đi với danh từ cố định (痛恨、贅沢、光栄...).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "合格の知らせを聞いた時はどんなに嬉しかったことか。今こうして夢の舞台に立てて光栄の極みであり、嬉しい限りだ。",
+    "masterExampleVi": "Khi nghe tin đỗ tôi đã vui sướng biết bao. Giờ đây được đứng trên sân khấu mơ ước thế này, tôi thấy vinh dự tột cùng và vô cùng hạnh phúc.",
+    "examples": [
+      {
+        "sentence": "合格の知らせを聞いた時はどんなに嬉しかったことか。今こうして夢の舞台に立てて光栄の極みであり、嬉しい限りだ。",
+        "translation": "Khi nghe tin đỗ tôi đã vui sướng biết bao. Giờ đây được đứng trên sân khấu mơ ước thế này, tôi thấy vinh dự tột cùng và vô cùng hạnh phúc.",
+        "reading": ""
+      },
+      {
+        "sentence": "異国の地で一人暮らしを始めた頃はどれほど心細かったことか。今では良き友人に恵まれ、感謝の極みであると同時に心強い限りだ。",
+        "translation": "Hồi mới bắt đầu sống một mình nơi đất khách quê người, tôi đã cảm thấy bất an biết bao. Giờ đây được bạn bè tốt giúp đỡ, tôi thấy biết ơn tột cùng và vô cùng vững tâm.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0402",
+    "grammar_id": "gram_n2_0402",
+    "milestoneId": "ms_n2_s1_l4",
+    "milestone_id": "ms_n2_s1_l4",
+    "stageId": "stage_n2_1",
+    "stage_id": "stage_n2_1",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 92,
+    "pattern": "〜上で",
+    "titleVi": "\"sau khi… rồi mới…\", \"không… thì chưa thể\"",
+    "structure": "〜上で",
+    "explanation": "Cấu trúc thuộc [N2] Chặng 1 · Bài 92 (④): Dùng để \"sau khi… rồi mới…\", \"không… thì chưa thể\".",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜上で（N2）",
+    "masterExampleVi": "\"sau khi… rồi mới…\", \"không… thì chưa thể\"",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0403",
+    "grammar_id": "gram_n2_0403",
+    "milestoneId": "ms_n2_s1_l4",
+    "milestone_id": "ms_n2_s1_l4",
+    "stageId": "stage_n2_1",
+    "stage_id": "stage_n2_1",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 92,
+    "pattern": "〜てからでないと",
+    "titleVi": "\"sau khi… rồi mới…\", \"không… thì chưa thể\"",
+    "structure": "〜てからでないと",
+    "explanation": "Cấu trúc thuộc [N2] Chặng 1 · Bài 92 (④): Dùng để \"sau khi… rồi mới…\", \"không… thì chưa thể\".",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜てからでないと（N2）",
+    "masterExampleVi": "\"sau khi… rồi mới…\", \"không… thì chưa thể\"",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

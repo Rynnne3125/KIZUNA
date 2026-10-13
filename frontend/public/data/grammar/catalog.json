@@ -1,0 +1,1060 @@
+{
+  "N5": [
+    {
+      "bookId": "n5-grammar",
+      "bookName": "Minna no Nihongo I (N5)",
+      "description": "Trọng tâm ngữ pháp JLPT N5",
+      "totalItems": 100,
+      "units": [
+        {
+          "unitId": "ms_minna_b01",
+          "unitTitle": "Bài 1: Giới thiệu bản thân",
+          "subTitle": "(〜は 〜です／じゃありません・〜か)",
+          "lessonNumber": 1,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_minna_b02",
+          "unitTitle": "Bài 2: Đại từ chỉ thị",
+          "subTitle": "(これ／それ／あれ・この＋N・〜の)",
+          "lessonNumber": 2,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b03",
+          "unitTitle": "Bài 3: Vị trí & địa điểm",
+          "subTitle": "(ここ／そこ／あそこ・どこ・〜階)",
+          "lessonNumber": 3,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b04",
+          "unitTitle": "Bài 4: Giờ giấc & thời gian",
+          "subTitle": "(今〜時・〜から〜まで・曜日)",
+          "lessonNumber": 4,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_minna_b05",
+          "unitTitle": "Bài 5: Di chuyển & phương tiện",
+          "subTitle": "(〜へ 行きます・で（phương tiện）・いつ)",
+          "lessonNumber": 5,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b06",
+          "unitTitle": "Bài 6: Tân ngữ & tha động từ",
+          "subTitle": "(〜を＋động từ・で（nơi hành động）・ませんか／ましょう)",
+          "lessonNumber": 6,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_minna_b07",
+          "unitTitle": "Bài 7: Cho & nhận đồ vật",
+          "subTitle": "(で（công cụ）・あげます／もらいます・もう／まだ)",
+          "lessonNumber": 7,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b08",
+          "unitTitle": "Bài 8: Tính từ い & な",
+          "subTitle": "(Tính từ い／な・とても／あまり)",
+          "lessonNumber": 8,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_minna_b09",
+          "unitTitle": "Bài 9: Sở thích & năng lực",
+          "subTitle": "(〜が 好き／上手／わかります・〜から（lý do）)",
+          "lessonNumber": 9,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_minna_b10",
+          "unitTitle": "Bài 10: Sự tồn tại",
+          "subTitle": "(あります／います・〜に（vị trí）・うえ／した／なか…)",
+          "lessonNumber": 10,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b11",
+          "unitTitle": "Bài 11: Số đếm & trợ số từ",
+          "subTitle": "(Lượng từ（〜人・〜枚・〜台…）・期間)",
+          "lessonNumber": 11,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b12",
+          "unitTitle": "Bài 12: So sánh",
+          "subTitle": "(Quá khứ của です／tính từ・〜より・いちばん)",
+          "lessonNumber": 12,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b13",
+          "unitTitle": "Bài 13: Mong muốn",
+          "subTitle": "(〜が ほしい・〜たい・〜に 行きます（mục đích）)",
+          "lessonNumber": 13,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b14",
+          "unitTitle": "Bài 14: Thể て & đang làm",
+          "subTitle": "(Thể て・〜てください・〜ています（đang）)",
+          "lessonNumber": 14,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b15",
+          "unitTitle": "Bài 15: Cho phép & cấm đoán",
+          "subTitle": "(〜てもいいです・〜てはいけません・〜ています（trạng thái）)",
+          "lessonNumber": 15,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b16",
+          "unitTitle": "Bài 16: Nối câu & thứ tự",
+          "subTitle": "(〜て、〜て（nối câu）・〜てから・A は B が（đặc tính）)",
+          "lessonNumber": 16,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b17",
+          "unitTitle": "Bài 17: Nghĩa vụ & phủ định",
+          "subTitle": "(Thể ない・〜ないでください・〜なければなりません)",
+          "lessonNumber": 17,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b18",
+          "unitTitle": "Bài 18: Khả năng & sở thích",
+          "subTitle": "(Thể từ điển・〜ことが できます・趣味は〜こと・〜前に)",
+          "lessonNumber": 18,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b19",
+          "unitTitle": "Bài 19: Kinh nghiệm & thay đổi",
+          "subTitle": "(Thể た・〜たことが あります・〜たり〜たりします)",
+          "lessonNumber": 19,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b20",
+          "unitTitle": "Bài 20: Thể thông thường",
+          "subTitle": "(普通形 — thể thường（だ・じゃない・た・ない）)",
+          "lessonNumber": 20,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b21",
+          "unitTitle": "Bài 21: Suy nghĩ & trích dẫn",
+          "subTitle": "(〜と 思います・〜と 言いました・〜でしょう？)",
+          "lessonNumber": 21,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b22",
+          "unitTitle": "Bài 22: Bổ nghĩa danh từ",
+          "subTitle": "(Mệnh đề bổ nghĩa danh từ（これは ミラーさんが 作ったケーキ）)",
+          "lessonNumber": 22,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b23",
+          "unitTitle": "Bài 23: Thời điểm & điều kiện",
+          "subTitle": "(〜とき・〜と（hễ…thì）)",
+          "lessonNumber": 23,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b24",
+          "unitTitle": "Bài 24: Cho & nhận hành động",
+          "subTitle": "(くれます・〜てあげます／てもらいます／てくれます)",
+          "lessonNumber": 24,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b25",
+          "unitTitle": "Bài 25: Giả định & nhượng bộ",
+          "subTitle": "(〜たら（nếu/sau khi）・〜ても（dù）)",
+          "lessonNumber": 25,
+          "itemCount": 4
+        }
+      ]
+    }
+  ],
+  "N4": [
+    {
+      "bookId": "n4-grammar",
+      "bookName": "Minna no Nihongo II (N4)",
+      "description": "Trọng tâm ngữ pháp JLPT N4",
+      "totalItems": 77,
+      "units": [
+        {
+          "unitId": "ms_minna_b26",
+          "unitTitle": "Bài 26: Giải thích & lý do",
+          "subTitle": "(〜んです・〜ていただけませんか・〜たらいいですか)",
+          "lessonNumber": 26,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b27",
+          "unitTitle": "Bài 27: Dạng khả năng",
+          "subTitle": "(可能動詞・〜しか〜ない・〜が 見えます／聞こえます)",
+          "lessonNumber": 27,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b28",
+          "unitTitle": "Bài 28: Hai việc đồng thời",
+          "subTitle": "(〜ながら・〜ています（thói quen）・〜し、〜し)",
+          "lessonNumber": 28,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b29",
+          "unitTitle": "Bài 29: Tự động từ & kết quả",
+          "subTitle": "(自動詞＋ています（trạng thái）・〜てしまいます)",
+          "lessonNumber": 29,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b30",
+          "unitTitle": "Bài 30: Làm sẵn & chuẩn bị",
+          "subTitle": "(他動詞＋てあります・〜ておきます)",
+          "lessonNumber": 30,
+          "itemCount": 2
+        },
+        {
+          "unitId": "ms_minna_b31",
+          "unitTitle": "Bài 31: Dự định & kế hoạch",
+          "subTitle": "(意向形（〜よう）・〜と 思っています・〜つもりです)",
+          "lessonNumber": 31,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b32",
+          "unitTitle": "Bài 32: Lời khuyên & dự đoán",
+          "subTitle": "(〜ほうがいいです・〜でしょう・〜かもしれません)",
+          "lessonNumber": 32,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b33",
+          "unitTitle": "Bài 33: Mệnh lệnh & cấm chỉ",
+          "subTitle": "(命令形・禁止形・〜は〜という意味・〜と 読みます)",
+          "lessonNumber": 33,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b34",
+          "unitTitle": "Bài 34: Theo như & để nguyên",
+          "subTitle": "(〜とおりに・〜たあとで・〜て／〜ないで（cách thức）)",
+          "lessonNumber": 34,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b35",
+          "unitTitle": "Bài 35: Điều kiện ば & なら",
+          "subTitle": "(条件形 〜ば・〜なら・〜ば〜ほど)",
+          "lessonNumber": 35,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b36",
+          "unitTitle": "Bài 36: Mục tiêu & thay đổi",
+          "subTitle": "(〜ように（mục đích）・〜ようになります・〜なくなります)",
+          "lessonNumber": 36,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b37",
+          "unitTitle": "Bài 37: Thể bị động",
+          "subTitle": "(受身（thể bị động）・〜に〜（ら）れます)",
+          "lessonNumber": 37,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b38",
+          "unitTitle": "Bài 38: Danh từ hóa",
+          "subTitle": "(〜のは／のが・〜のを 忘れました・普通形＋の)",
+          "lessonNumber": 38,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b39",
+          "unitTitle": "Bài 39: Nguyên nhân & lý do",
+          "subTitle": "(〜て（nguyên nhân cảm xúc）・〜ので)",
+          "lessonNumber": 39,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b40",
+          "unitTitle": "Bài 40: Câu hỏi gián tiếp",
+          "subTitle": "(〜か（どうか）・疑問詞＋か・〜てみます)",
+          "lessonNumber": 40,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b41",
+          "unitTitle": "Bài 41: Ân huệ & nhờ vả",
+          "subTitle": "(〜ていただきます／くださいます／やります)",
+          "lessonNumber": 41,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b42",
+          "unitTitle": "Bài 42: Mục đích & tốn phí",
+          "subTitle": "(〜ために（mục đích）・〜のに（dùng để／cần）)",
+          "lessonNumber": 42,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b43",
+          "unitTitle": "Bài 43: Vẻ ngoài & trạng thái",
+          "subTitle": "(〜そうです（様態 vẻ như）・〜てきます／ていきます)",
+          "lessonNumber": 43,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b44",
+          "unitTitle": "Bài 44: Quá mức & cách làm",
+          "subTitle": "(〜すぎます・〜やすい／にくい・〜く／に します)",
+          "lessonNumber": 44,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b45",
+          "unitTitle": "Bài 45: Trường hợp & đối lập",
+          "subTitle": "(〜場合は・〜のに（trái với mong đợi）)",
+          "lessonNumber": 45,
+          "itemCount": 2
+        },
+        {
+          "unitId": "ms_minna_b46",
+          "unitTitle": "Bài 46: Thời điểm hành động",
+          "subTitle": "(〜ところです・〜たばかりです・〜ているところ)",
+          "lessonNumber": 46,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_minna_b47",
+          "unitTitle": "Bài 47: Truyền đạt & nghe nói",
+          "subTitle": "(〜そうです（伝聞 nghe nói）・〜ようです)",
+          "lessonNumber": 47,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b48",
+          "unitTitle": "Bài 48: Thể sai khiến",
+          "subTitle": "(使役（〜させます）・〜させてください)",
+          "lessonNumber": 48,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b49",
+          "unitTitle": "Bài 49: Kính ngữ tôn trọng",
+          "subTitle": "(尊敬語（お〜になります・〜（ら）れます・お／ご〜）)",
+          "lessonNumber": 49,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_minna_b50",
+          "unitTitle": "Bài 50: Kính ngữ khiêm nhường",
+          "subTitle": "(謙譲語（お〜します・伺います・申します）・丁寧語)",
+          "lessonNumber": 50,
+          "itemCount": 3
+        }
+      ]
+    }
+  ],
+  "N3": [
+    {
+      "bookId": "n3-grammar",
+      "bookName": "Shinkanzen & Soumatome N3",
+      "description": "Trọng tâm ngữ pháp JLPT N3",
+      "totalItems": 210,
+      "units": [
+        {
+          "unitId": "ms_n3_s1_l1",
+          "unitTitle": "[N3] Chặng 1 · Bài 51 (①): 〜はずだ・〜はずがない",
+          "subTitle": "(①): 〜はずだ・〜はずがない",
+          "lessonNumber": 51,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_n3_s1_l2",
+          "unitTitle": "[N3] Chặng 1 · Bài 52 (②): 〜にちがいない・〜かもしれない",
+          "subTitle": "(②): 〜にちがいない・〜かもしれない",
+          "lessonNumber": 52,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_n3_s1_l3",
+          "unitTitle": "[N3] Chặng 1 · Bài 53 (③): 〜べきだ・〜ものだ",
+          "subTitle": "(③): 〜べきだ・〜ものだ",
+          "lessonNumber": 53,
+          "itemCount": 6
+        },
+        {
+          "unitId": "ms_n3_s1_l4",
+          "unitTitle": "[N3] Chặng 1 · Bài 54 (④): 〜というより・〜にしては・〜わりに",
+          "subTitle": "(④): 〜というより・〜にしては・〜わりに",
+          "lessonNumber": 54,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n3_s2_l1",
+          "unitTitle": "[N3] Chặng 2 · Bài 55 (⑤): 〜うちに・〜ないうちに",
+          "subTitle": "(⑤): 〜うちに・〜ないうちに",
+          "lessonNumber": 55,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_n3_s2_l2",
+          "unitTitle": "[N3] Chặng 2 · Bài 56 (⑥): 〜間に・〜間（continuous）",
+          "subTitle": "(⑥): 〜間に・〜間（continuous）",
+          "lessonNumber": 56,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n3_s2_l3",
+          "unitTitle": "[N3] Chặng 2 · Bài 57 (⑦): 〜たとたん（に）・〜か〜ないかのうちに",
+          "subTitle": "(⑦): 〜たとたん（に）・〜か〜ないかのうちに",
+          "lessonNumber": 57,
+          "itemCount": 2
+        },
+        {
+          "unitId": "ms_n3_s2_l4",
+          "unitTitle": "[N3] Chặng 2 · Bài 58 (⑧): 〜たびに・〜まま",
+          "subTitle": "(⑧): 〜たびに・〜まま",
+          "lessonNumber": 58,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n3_s3_l1",
+          "unitTitle": "[N3] Chặng 3 · Bài 59 (⑨): 〜おかげで・〜せいで・〜ために",
+          "subTitle": "(⑨): 〜おかげで・〜せいで・〜ために",
+          "lessonNumber": 59,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_n3_s3_l2",
+          "unitTitle": "[N3] Chặng 3 · Bài 60 (⑩): 〜ように（mục đích）・〜ために（mục đích）",
+          "subTitle": "(⑩): 〜ように（mục đích）・〜ために（mục đích）",
+          "lessonNumber": 60,
+          "itemCount": 6
+        },
+        {
+          "unitId": "ms_n3_s3_l3",
+          "unitTitle": "[N3] Chặng 3 · Bài 61 (⑪): 〜ば／〜たら／〜なら／〜と（ôn sâu）",
+          "subTitle": "(⑪): 〜ば／〜たら／〜なら／〜と（ôn sâu）",
+          "lessonNumber": 61,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n3_s3_l4",
+          "unitTitle": "[N3] Chặng 3 · Bài 62 (⑫): 〜ても・〜のに・〜くせに",
+          "subTitle": "(⑫): 〜ても・〜のに・〜くせに",
+          "lessonNumber": 62,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_n3_s4_l1",
+          "unitTitle": "[N3] Chặng 4 · Bài 63 (⑬): 〜そうだ（様態）・〜そうだ（伝聞）",
+          "subTitle": "(⑬): 〜そうだ（様態）・〜そうだ（伝聞）",
+          "lessonNumber": 63,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_n3_s4_l2",
+          "unitTitle": "[N3] Chặng 4 · Bài 64 (⑭): 〜ようだ・〜みたいだ",
+          "subTitle": "(⑭): 〜ようだ・〜みたいだ",
+          "lessonNumber": 64,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n3_s4_l3",
+          "unitTitle": "[N3] Chặng 4 · Bài 65 (⑮): 〜らしい（伝聞・典型）",
+          "subTitle": "(⑮): 〜らしい（伝聞・典型）",
+          "lessonNumber": 65,
+          "itemCount": 6
+        },
+        {
+          "unitId": "ms_n3_s4_l4",
+          "unitTitle": "[N3] Chặng 4 · Bài 66 (⑯): 〜ほど・〜くらい／ぐらい・〜ば〜ほど",
+          "subTitle": "(⑯): 〜ほど・〜くらい／ぐらい・〜ば〜ほど",
+          "lessonNumber": 66,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n3_s5_l1",
+          "unitTitle": "[N3] Chặng 5 · Bài 67 (⑰): 〜について・〜に関して",
+          "subTitle": "(⑰): 〜について・〜に関して",
+          "lessonNumber": 67,
+          "itemCount": 6
+        },
+        {
+          "unitId": "ms_n3_s5_l2",
+          "unitTitle": "[N3] Chặng 5 · Bài 68 (⑱): 〜によって（nguyên nhân・phương tiện・tùy theo）",
+          "subTitle": "(⑱): 〜によって（nguyên nhân・phương tiện・tùy theo）",
+          "lessonNumber": 68,
+          "itemCount": 7
+        },
+        {
+          "unitId": "ms_n3_s5_l3",
+          "unitTitle": "[N3] Chặng 5 · Bài 69 (⑲): 〜として・〜にとって",
+          "subTitle": "(⑲): 〜として・〜にとって",
+          "lessonNumber": 69,
+          "itemCount": 6
+        },
+        {
+          "unitId": "ms_n3_s5_l4",
+          "unitTitle": "[N3] Chặng 5 · Bài 70 (⑳): 〜に対して・〜に比べて",
+          "subTitle": "(⑳): 〜に対して・〜に比べて",
+          "lessonNumber": 70,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_n3_s6_l1",
+          "unitTitle": "[N3] Chặng 6 · Bài 71 (㉑): 〜として・〜において・〜をはじめ・〜について・〜に対して",
+          "subTitle": "(㉑): 〜として・〜において・〜をはじめ・〜について・〜に対して",
+          "lessonNumber": 71,
+          "itemCount": 6
+        },
+        {
+          "unitId": "ms_n3_s6_l2",
+          "unitTitle": "[N3] Chặng 6 · Bài 72 (㉒): 〜をきっかけに・〜に加えて・〜ところで・〜にわたって・〜をめぐって・〜に反して",
+          "subTitle": "(㉒): 〜をきっかけに・〜に加えて・〜ところで・〜にわたって・〜をめぐって・〜に反して",
+          "lessonNumber": 72,
+          "itemCount": 11
+        },
+        {
+          "unitId": "ms_n3_s6_l3",
+          "unitTitle": "[N3] Chặng 6 · Bài 73 (㉓): 〜おかげで／おかげか・〜ことから・〜ために・〜せいで／せいか",
+          "subTitle": "(㉓): 〜おかげで／おかげか・〜ことから・〜ために・〜せいで／せいか",
+          "lessonNumber": 73,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_n3_s6_l4",
+          "unitTitle": "[N3] Chặng 6 · Bài 74 (㉔): 〜ことで・〜だからといって・〜あまり・〜ばかりに",
+          "subTitle": "(㉔): 〜ことで・〜だからといって・〜あまり・〜ばかりに",
+          "lessonNumber": 74,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n3_s7_l1",
+          "unitTitle": "[N3] Chặng 7 · Bài 75 (㉕): 〜以上は／以上・〜さえ〜ば・〜からには・〜としたら・〜としても",
+          "subTitle": "(㉕): 〜以上は／以上・〜さえ〜ば・〜からには・〜としたら・〜としても",
+          "lessonNumber": 75,
+          "itemCount": 7
+        },
+        {
+          "unitId": "ms_n3_s7_l2",
+          "unitTitle": "[N3] Chặng 7 · Bài 76 (㉖): 〜にしては・〜くせに・〜にもかかわらず・〜ながら（も）",
+          "subTitle": "(㉖): 〜にしては・〜くせに・〜にもかかわらず・〜ながら（も）",
+          "lessonNumber": 76,
+          "itemCount": 2
+        },
+        {
+          "unitId": "ms_n3_s7_l3",
+          "unitTitle": "[N3] Chặng 7 · Bài 77 (㉗): 〜以来・〜たびに・〜たとたん（に）・〜うちに・〜間に",
+          "subTitle": "(㉗): 〜以来・〜たびに・〜たとたん（に）・〜うちに・〜間に",
+          "lessonNumber": 77,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_n3_s7_l4",
+          "unitTitle": "[N3] Chặng 7 · Bài 78 (㉘): 〜たばかり・〜するところだ・〜際に・〜にあたって",
+          "subTitle": "(㉘): 〜たばかり・〜するところだ・〜際に・〜にあたって",
+          "lessonNumber": 78,
+          "itemCount": 7
+        },
+        {
+          "unitId": "ms_n3_s8_l1",
+          "unitTitle": "[N3] Chặng 8 · Bài 79 (㉙): 〜次第で／次第では・〜らしい・〜そうだ・〜ほど・〜まるで〜ようだ",
+          "subTitle": "(㉙): 〜次第で／次第では・〜らしい・〜そうだ・〜ほど・〜まるで〜ようだ",
+          "lessonNumber": 79,
+          "itemCount": 10
+        },
+        {
+          "unitId": "ms_n3_s8_l2",
+          "unitTitle": "[N3] Chặng 8 · Bài 80 (㉚): 〜ていく・〜つつある・〜てくる・〜ようになる・〜ようにする",
+          "subTitle": "(㉚): 〜ていく・〜つつある・〜てくる・〜ようになる・〜ようにする",
+          "lessonNumber": 80,
+          "itemCount": 7
+        },
+        {
+          "unitId": "ms_n3_s8_l3",
+          "unitTitle": "[N3] Chặng 8 · Bài 81 (㉛): 〜てばかりいる・〜一方だ・〜がちだ・〜っぽい",
+          "subTitle": "(㉛): 〜てばかりいる・〜一方だ・〜がちだ・〜っぽい",
+          "lessonNumber": 81,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_n3_s9_l1",
+          "unitTitle": "[N3] Chặng 9 · Bài 82 (㉜): 〜てもらう／あげる／くれる・〜（ら）れる・〜させる・〜ということだ",
+          "subTitle": "(㉜): 〜てもらう／あげる／くれる・〜（ら）れる・〜させる・〜ということだ",
+          "lessonNumber": 82,
+          "itemCount": 10
+        },
+        {
+          "unitId": "ms_n3_s9_l2",
+          "unitTitle": "[N3] Chặng 9 · Bài 83 (㉝): 〜べきだ・〜にほかならない・〜に違いない・〜はずだ・〜わけだ",
+          "subTitle": "(㉝): 〜べきだ・〜にほかならない・〜に違いない・〜はずだ・〜わけだ",
+          "lessonNumber": 83,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n3_s9_l3",
+          "unitTitle": "[N3] Chặng 9 · Bài 84 (㉞): 〜ものの・〜ざるを得ない・〜ことにする・〜ものだ",
+          "subTitle": "(㉞): 〜ものの・〜ざるを得ない・〜ことにする・〜ものだ",
+          "lessonNumber": 84,
+          "itemCount": 6
+        },
+        {
+          "unitId": "ms_n3_s9_l4",
+          "unitTitle": "[N3] Chặng 9 · Bài 85 (㉟): 〜こそ・〜だって・〜さえも・〜だけでなく・〜ばかりか",
+          "subTitle": "(㉟): 〜こそ・〜だって・〜さえも・〜だけでなく・〜ばかりか",
+          "lessonNumber": 85,
+          "itemCount": 8
+        },
+        {
+          "unitId": "ms_n3_s9_l5",
+          "unitTitle": "[N3] Chặng 9 · Bài 86 (㊱): 〜にかかわらず・〜どころか・〜にすぎない・〜はともかく",
+          "subTitle": "(㊱): 〜にかかわらず・〜どころか・〜にすぎない・〜はともかく",
+          "lessonNumber": 86,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n3_s9_l6",
+          "unitTitle": "[N3] Chặng 9 · Bài 87 (㊲): 〜かな／かしら・〜よね／ね／よ・〜でしょ・〜じゃないか・〜んだ",
+          "subTitle": "(㊲): 〜かな／かしら・〜よね／ね／よ・〜でしょ・〜じゃないか・〜んだ",
+          "lessonNumber": 87,
+          "itemCount": 9
+        },
+        {
+          "unitId": "ms_n3_s9_l7",
+          "unitTitle": "[N3] Chặng 9 · Bài 88 (㊳): 〜とか・〜てしまう／ちゃう・〜なあ・〜っけ・〜てくれない",
+          "subTitle": "(㊳): 〜とか・〜てしまう／ちゃう・〜なあ・〜っけ・〜てくれない",
+          "lessonNumber": 88,
+          "itemCount": 8
+        }
+      ]
+    }
+  ],
+  "N2": [
+    {
+      "bookId": "n2-grammar",
+      "bookName": "Shinkanzen & Soumatome N2",
+      "description": "Trọng tâm ngữ pháp JLPT N2",
+      "totalItems": 185,
+      "units": [
+        {
+          "unitId": "ms_n2_s1_l1",
+          "unitTitle": "[N2] Chặng 1 · Bài 89 (①): 〜次第・〜か〜ないかのうちに",
+          "subTitle": "(①): 〜次第・〜か〜ないかのうちに",
+          "lessonNumber": 89,
+          "itemCount": 2
+        },
+        {
+          "unitId": "ms_n2_s1_l2",
+          "unitTitle": "[N2] Chặng 1 · Bài 90 (②): 〜際（に）・〜にあたって",
+          "subTitle": "(②): 〜際（に）・〜にあたって",
+          "lessonNumber": 90,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_n2_s1_l3",
+          "unitTitle": "[N2] Chặng 1 · Bài 91 (③): 〜最中に・〜うちに（ôn sâu）",
+          "subTitle": "(③): 〜最中に・〜うちに（ôn sâu）",
+          "lessonNumber": 91,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n2_s1_l4",
+          "unitTitle": "[N2] Chặng 1 · Bài 92 (④): 〜上で・〜てからでないと",
+          "subTitle": "(④): 〜上で・〜てからでないと",
+          "lessonNumber": 92,
+          "itemCount": 6
+        },
+        {
+          "unitId": "ms_n2_s2_l1",
+          "unitTitle": "[N2] Chặng 2 · Bài 93 (⑤): 〜ばかりに・〜あまり（に）",
+          "subTitle": "(⑤): 〜ばかりに・〜あまり（に）",
+          "lessonNumber": 93,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n2_s2_l2",
+          "unitTitle": "[N2] Chặng 2 · Bài 94 (⑥): 〜ことだから・〜だけに",
+          "subTitle": "(⑥): 〜ことだから・〜だけに",
+          "lessonNumber": 94,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n2_s2_l3",
+          "unitTitle": "[N2] Chặng 2 · Bài 95 (⑦): 〜以上（は）・〜上は・〜からには",
+          "subTitle": "(⑦): 〜以上（は）・〜上は・〜からには",
+          "lessonNumber": 95,
+          "itemCount": 6
+        },
+        {
+          "unitId": "ms_n2_s2_l4",
+          "unitTitle": "[N2] Chặng 2 · Bài 96 (⑧): 〜ものだから・〜もので・〜だけあって",
+          "subTitle": "(⑧): 〜ものだから・〜もので・〜だけあって",
+          "lessonNumber": 96,
+          "itemCount": 7
+        },
+        {
+          "unitId": "ms_n2_s3_l1",
+          "unitTitle": "[N2] Chặng 3 · Bài 97 (⑨): 〜ものの・〜とはいえ",
+          "subTitle": "(⑨): 〜ものの・〜とはいえ",
+          "lessonNumber": 97,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n2_s3_l2",
+          "unitTitle": "[N2] Chặng 3 · Bài 98 (⑩): 〜にしても・〜としても・〜にせよ",
+          "subTitle": "(⑩): 〜にしても・〜としても・〜にせよ",
+          "lessonNumber": 98,
+          "itemCount": 6
+        },
+        {
+          "unitId": "ms_n2_s3_l3",
+          "unitTitle": "[N2] Chặng 3 · Bài 99 (⑪): 〜ものなら・〜（よ）うものなら",
+          "subTitle": "(⑪): 〜ものなら・〜（よ）うものなら",
+          "lessonNumber": 99,
+          "itemCount": 6
+        },
+        {
+          "unitId": "ms_n2_s3_l4",
+          "unitTitle": "[N2] Chặng 3 · Bài 100 (⑫): 〜たところで・〜からといって",
+          "subTitle": "(⑫): 〜たところで・〜からといって",
+          "lessonNumber": 100,
+          "itemCount": 6
+        },
+        {
+          "unitId": "ms_n2_s4_l1",
+          "unitTitle": "[N2] Chặng 4 · Bài 101 (⑬): 〜において・〜にわたって",
+          "subTitle": "(⑬): 〜において・〜にわたって",
+          "lessonNumber": 101,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_n2_s4_l2",
+          "unitTitle": "[N2] Chặng 4 · Bài 102 (⑭): 〜に基づいて・〜に応じて・〜に沿って",
+          "subTitle": "(⑭): 〜に基づいて・〜に応じて・〜に沿って",
+          "lessonNumber": 102,
+          "itemCount": 7
+        },
+        {
+          "unitId": "ms_n2_s4_l3",
+          "unitTitle": "[N2] Chặng 4 · Bài 103 (⑮): 〜をめぐって・〜にかけては",
+          "subTitle": "(⑮): 〜をめぐって・〜にかけては",
+          "lessonNumber": 103,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n2_s4_l4",
+          "unitTitle": "[N2] Chặng 4 · Bài 104 (⑯): 〜からすると・〜から見ると・〜にしたら",
+          "subTitle": "(⑯): 〜からすると・〜から見ると・〜にしたら",
+          "lessonNumber": 104,
+          "itemCount": 7
+        },
+        {
+          "unitId": "ms_n2_s5_l1",
+          "unitTitle": "[N2] Chặng 5 · Bài 105 (⑰): 〜ざるを得ない・〜ないわけにはいかない",
+          "subTitle": "(⑰): 〜ざるを得ない・〜ないわけにはいかない",
+          "lessonNumber": 105,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n2_s5_l2",
+          "unitTitle": "[N2] Chặng 5 · Bài 106 (⑱): 〜てしかたがない・〜てたまらない・〜てならない",
+          "subTitle": "(⑱): 〜てしかたがない・〜てたまらない・〜てならない",
+          "lessonNumber": 106,
+          "itemCount": 6
+        },
+        {
+          "unitId": "ms_n2_s5_l3",
+          "unitTitle": "[N2] Chặng 5 · Bài 107 (⑲): 〜にすぎない・〜にほかならない・〜というものだ",
+          "subTitle": "(⑲): 〜にすぎない・〜にほかならない・〜というものだ",
+          "lessonNumber": 107,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_n2_s5_l4",
+          "unitTitle": "[N2] Chặng 5 · Bài 108 (⑳): 〜どころか・〜どころではない",
+          "subTitle": "(⑳): 〜どころか・〜どころではない",
+          "lessonNumber": 108,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_n2_s6_l1",
+          "unitTitle": "[N2] Chặng 6 · Bài 109 (㉑): 〜始末だ・〜ばかりだ（xu hướng xấu）",
+          "subTitle": "(㉑): 〜始末だ・〜ばかりだ（xu hướng xấu）",
+          "lessonNumber": 109,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n2_s6_l2",
+          "unitTitle": "[N2] Chặng 6 · Bài 110 (㉒): 〜限りだ・〜ことか・〜の極み",
+          "subTitle": "(㉒): 〜限りだ・〜ことか・〜の極み",
+          "lessonNumber": 110,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n2_s6_l3",
+          "unitTitle": "[N2] Chặng 6 · Bài 111 (㉓): 〜得る／得ない・〜かねる／かねない",
+          "subTitle": "(㉓): 〜得る／得ない・〜かねる／かねない",
+          "lessonNumber": 111,
+          "itemCount": 6
+        },
+        {
+          "unitId": "ms_n2_s6_l4",
+          "unitTitle": "[N2] Chặng 6 · Bài 112 (㉔): 敬語の完成（尊敬・謙譲・丁重）",
+          "subTitle": "(㉔): 敬語の完成（尊敬・謙譲・丁重）",
+          "lessonNumber": 112,
+          "itemCount": 7
+        },
+        {
+          "unitId": "ms_n2_s7_l1",
+          "unitTitle": "[N2] Chặng 7 · Bài 113 (㉕): 〜ものの・〜とはいえ・〜に限り／に限って・〜をもって・〜や否や・〜ゆえに・〜ばこそ",
+          "subTitle": "(㉕): 〜ものの・〜とはいえ・〜に限り／に限って・〜をもって・〜や否や・〜ゆえに・〜ばこそ",
+          "lessonNumber": 113,
+          "itemCount": 7
+        },
+        {
+          "unitId": "ms_n2_s7_l2",
+          "unitTitle": "[N2] Chặng 7 · Bài 114 (㉖): 〜一方だ・〜一方で・〜に応じて・〜さえ〜ば・〜てこそ・〜てはじめて",
+          "subTitle": "(㉖): 〜一方だ・〜一方で・〜に応じて・〜さえ〜ば・〜てこそ・〜てはじめて",
+          "lessonNumber": 114,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_n2_s7_l3",
+          "unitTitle": "[N2] Chặng 7 · Bài 115 (㉗): 〜を余儀なくされる・〜ならいざしらず・〜とあって・〜をめぐって・〜ざるを得ない",
+          "subTitle": "(㉗): 〜を余儀なくされる・〜ならいざしらず・〜とあって・〜をめぐって・〜ざるを得ない",
+          "lessonNumber": 115,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_n2_s8_l1",
+          "unitTitle": "[N2] Chặng 8 · Bài 116 (㉘): 〜につれて・〜ばかりに・〜かねる・〜かねない・〜どころか・〜はもとより・〜にほかならない",
+          "subTitle": "(㉘): 〜につれて・〜ばかりに・〜かねる・〜かねない・〜どころか・〜はもとより・〜にほかならない",
+          "lessonNumber": 116,
+          "itemCount": 4
+        },
+        {
+          "unitId": "ms_n2_s8_l2",
+          "unitTitle": "[N2] Chặng 8 · Bài 117 (㉙): 〜というものだ・〜ものがある・〜とは限らない・〜上で・〜からといって・〜ようがない",
+          "subTitle": "(㉙): 〜というものだ・〜ものがある・〜とは限らない・〜上で・〜からといって・〜ようがない",
+          "lessonNumber": 117,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n2_s8_l3",
+          "unitTitle": "[N2] Chặng 8 · Bài 118 (㉚): 〜はおろか・〜向き・〜をおいて・〜きりだ・〜てでも・〜てたまらない・〜ほど〜ない",
+          "subTitle": "(㉚): 〜はおろか・〜向き・〜をおいて・〜きりだ・〜てでも・〜てたまらない・〜ほど〜ない",
+          "lessonNumber": 118,
+          "itemCount": 6
+        },
+        {
+          "unitId": "ms_n2_s8_l4",
+          "unitTitle": "[N2] Chặng 8 · Bài 119 (㉛): 〜といっても・〜にせよ・〜ないでもない・〜ないまでも・〜以上は・〜ことなしに",
+          "subTitle": "(㉛): 〜といっても・〜にせよ・〜ないでもない・〜ないまでも・〜以上は・〜ことなしに",
+          "lessonNumber": 119,
+          "itemCount": 7
+        },
+        {
+          "unitId": "ms_n2_s9_l1",
+          "unitTitle": "[N2] Chặng 9 · Bài 120 (㉜): 〜に反して・〜にかかわらず・〜にもかかわらず・〜ながらも・〜を機に・〜にあたって",
+          "subTitle": "(㉜): 〜に反して・〜にかかわらず・〜にもかかわらず・〜ながらも・〜を機に・〜にあたって",
+          "lessonNumber": 120,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_n2_s9_l2",
+          "unitTitle": "[N2] Chặng 9 · Bài 121 (㉝): 〜にわたって・〜ものを・〜ことか・〜だけあって・〜だけに・〜ばかりか・〜に際して",
+          "subTitle": "(㉝): 〜にわたって・〜ものを・〜ことか・〜だけあって・〜だけに・〜ばかりか・〜に際して",
+          "lessonNumber": 121,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_n2_s9_l3",
+          "unitTitle": "[N2] Chặng 9 · Bài 122 (㉞): 〜をよそに・〜をはじめ・〜からには・〜ことなく・〜を通じて・〜を通して・〜ともなく",
+          "subTitle": "(㉞): 〜をよそに・〜をはじめ・〜からには・〜ことなく・〜を通じて・〜を通して・〜ともなく",
+          "lessonNumber": 122,
+          "itemCount": 6
+        },
+        {
+          "unitId": "ms_n2_s9_l4",
+          "unitTitle": "[N2] Chặng 9 · Bài 123 (㉟): 〜ではあるまいし・〜にしたら・〜にすれば・〜てならない・〜ずにはいられない・〜わけにはいかない",
+          "subTitle": "(㉟): 〜ではあるまいし・〜にしたら・〜にすれば・〜てならない・〜ずにはいられない・〜わけにはいかない",
+          "lessonNumber": 123,
+          "itemCount": 5
+        },
+        {
+          "unitId": "ms_n2_s9_l5",
+          "unitTitle": "[N2] Chặng 9 · Bài 124 (㊱): 〜に限って・〜をもちまして・〜ゆえに／ゆえ・〜向け・最高峰敬語",
+          "subTitle": "(㊱): 〜に限って・〜をもちまして・〜ゆえに／ゆえ・〜向け・最高峰敬語",
+          "lessonNumber": 124,
+          "itemCount": 5
+        }
+      ]
+    }
+  ],
+  "N1": [
+    {
+      "bookId": "n1-grammar",
+      "bookName": "Shinkanzen Master N1",
+      "description": "Trọng tâm ngữ pháp JLPT N1",
+      "totalItems": 33,
+      "units": [
+        {
+          "unitId": "ms_n1_s1_l1",
+          "unitTitle": "[N1] Chặng 1 · Bài 125 (①): 〜や否や・〜が早いか・〜なり",
+          "subTitle": "(①): 〜や否や・〜が早いか・〜なり",
+          "lessonNumber": 125,
+          "itemCount": 2
+        },
+        {
+          "unitId": "ms_n1_s1_l2",
+          "unitTitle": "[N1] Chặng 1 · Bài 126 (②): 〜そばから・〜たら最後／たが最後",
+          "subTitle": "(②): 〜そばから・〜たら最後／たが最後",
+          "lessonNumber": 126,
+          "itemCount": 1
+        },
+        {
+          "unitId": "ms_n1_s1_l3",
+          "unitTitle": "[N1] Chặng 1 · Bài 127 (③): 〜を皮切りに・〜を限りに・〜をもって",
+          "subTitle": "(③): 〜を皮切りに・〜を限りに・〜をもって",
+          "lessonNumber": 127,
+          "itemCount": 1
+        },
+        {
+          "unitId": "ms_n1_s2_l2",
+          "unitTitle": "[N1] Chặng 2 · Bài 130 (⑥): 〜ばこそ・〜あってこそ",
+          "subTitle": "(⑥): 〜ばこそ・〜あってこそ",
+          "lessonNumber": 130,
+          "itemCount": 1
+        },
+        {
+          "unitId": "ms_n1_s2_l4",
+          "unitTitle": "[N1] Chặng 2 · Bài 132 (⑧): 〜ずじまい・〜に至る／に至った",
+          "subTitle": "(⑧): 〜ずじまい・〜に至る／に至った",
+          "lessonNumber": 132,
+          "itemCount": 1
+        },
+        {
+          "unitId": "ms_n1_s3_l1",
+          "unitTitle": "[N1] Chặng 3 · Bài 133 (⑨): 〜といえども・〜であれ／〜であろうと",
+          "subTitle": "(⑨): 〜といえども・〜であれ／〜であろうと",
+          "lessonNumber": 133,
+          "itemCount": 2
+        },
+        {
+          "unitId": "ms_n1_s3_l2",
+          "unitTitle": "[N1] Chặng 3 · Bài 134 (⑩): 〜ものを・〜ところを",
+          "subTitle": "(⑩): 〜ものを・〜ところを",
+          "lessonNumber": 134,
+          "itemCount": 1
+        },
+        {
+          "unitId": "ms_n1_s3_l3",
+          "unitTitle": "[N1] Chặng 3 · Bài 135 (⑪): 〜（よ）うが／（よ）うと・〜（よ）うが〜まいが",
+          "subTitle": "(⑪): 〜（よ）うが／（よ）うと・〜（よ）うが〜まいが",
+          "lessonNumber": 135,
+          "itemCount": 1
+        },
+        {
+          "unitId": "ms_n1_s3_l4",
+          "unitTitle": "[N1] Chặng 3 · Bài 136 (⑫): 〜ならいざしらず・〜はさておき",
+          "subTitle": "(⑫): 〜ならいざしらず・〜はさておき",
+          "lessonNumber": 136,
+          "itemCount": 1
+        },
+        {
+          "unitId": "ms_n1_s4_l1",
+          "unitTitle": "[N1] Chặng 4 · Bài 137 (⑬): 〜をおいて（〜ない）・〜ならでは",
+          "subTitle": "(⑬): 〜をおいて（〜ない）・〜ならでは",
+          "lessonNumber": 137,
+          "itemCount": 2
+        },
+        {
+          "unitId": "ms_n1_s4_l3",
+          "unitTitle": "[N1] Chặng 4 · Bài 139 (⑮): 〜だに・〜すら・〜たりとも〜ない",
+          "subTitle": "(⑮): 〜だに・〜すら・〜たりとも〜ない",
+          "lessonNumber": 139,
+          "itemCount": 1
+        },
+        {
+          "unitId": "ms_n1_s4_l4",
+          "unitTitle": "[N1] Chặng 4 · Bài 140 (⑯): 〜にとどまらず・〜に限ったことではない",
+          "subTitle": "(⑯): 〜にとどまらず・〜に限ったことではない",
+          "lessonNumber": 140,
+          "itemCount": 1
+        },
+        {
+          "unitId": "ms_n1_s5_l1",
+          "unitTitle": "[N1] Chặng 5 · Bài 141 (⑰): 〜にあって・〜をもって",
+          "subTitle": "(⑰): 〜にあって・〜をもって",
+          "lessonNumber": 141,
+          "itemCount": 1
+        },
+        {
+          "unitId": "ms_n1_s5_l2",
+          "unitTitle": "[N1] Chặng 5 · Bài 142 (⑱): 〜に即して・〜にのっとって・〜を踏まえて",
+          "subTitle": "(⑱): 〜に即して・〜にのっとって・〜を踏まえて",
+          "lessonNumber": 142,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_n1_s5_l3",
+          "unitTitle": "[N1] Chặng 5 · Bài 143 (⑲): 〜いかんで／いかんによって・〜いかんによらず",
+          "subTitle": "(⑲): 〜いかんで／いかんによって・〜いかんによらず",
+          "lessonNumber": 143,
+          "itemCount": 2
+        },
+        {
+          "unitId": "ms_n1_s5_l4",
+          "unitTitle": "[N1] Chặng 5 · Bài 144 (⑳): 〜をよそに・〜をものともせず（に）・〜を顧みず",
+          "subTitle": "(⑳): 〜をよそに・〜をものともせず（に）・〜を顧みず",
+          "lessonNumber": 144,
+          "itemCount": 2
+        },
+        {
+          "unitId": "ms_n1_s6_l1",
+          "unitTitle": "[N1] Chặng 6 · Bài 145 (㉑): 〜ずにはおかない・〜ずにはすまない",
+          "subTitle": "(㉑): 〜ずにはおかない・〜ずにはすまない",
+          "lessonNumber": 145,
+          "itemCount": 2
+        },
+        {
+          "unitId": "ms_n1_s6_l2",
+          "unitTitle": "[N1] Chặng 6 · Bài 146 (㉒): 〜を禁じ得ない・〜に堪えない・〜に足る",
+          "subTitle": "(㉒): 〜を禁じ得ない・〜に堪えない・〜に足る",
+          "lessonNumber": 146,
+          "itemCount": 3
+        },
+        {
+          "unitId": "ms_n1_s6_l3",
+          "unitTitle": "[N1] Chặng 6 · Bài 147 (㉓): 〜極まりない・〜の至り・〜の極み",
+          "subTitle": "(㉓): 〜極まりない・〜の至り・〜の極み",
+          "lessonNumber": 147,
+          "itemCount": 2
+        },
+        {
+          "unitId": "ms_n1_s6_l4",
+          "unitTitle": "[N1] Chặng 6 · Bài 148 (㉔): 〜んばかりに・〜とばかりに・〜べからず／べからざる",
+          "subTitle": "(㉔): 〜んばかりに・〜とばかりに・〜べからず／べからざる",
+          "lessonNumber": 148,
+          "itemCount": 3
+        }
+      ]
+    }
+  ]
+}

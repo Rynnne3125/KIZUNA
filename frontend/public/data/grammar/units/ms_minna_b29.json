@@ -1,0 +1,170 @@
+[
+  {
+    "id": "gram_n4_0110",
+    "grammar_id": "gram_n4_0110",
+    "milestoneId": "ms_minna_b29",
+    "milestone_id": "ms_minna_b29",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 29,
+    "pattern": "自動詞 vs 他動詞",
+    "titleVi": "tự động từ vs tha động từ",
+    "structure": "自動詞 vs 他動詞",
+    "explanation": "Tự động từ (自動詞) không cần tân ngữ: ドアが開く. Tha động từ (他動詞) cần tân ngữ với を: ドアを開ける. Nhiều cặp tự/tha tồn tại song song và rất quan trọng.",
+    "nuanceReason": "Cặp hay gặp: 開く/開ける, 閉まる/閉める, つく/つける, 消える/消す, 起きる/起こす, 落ちる/落とす.",
+    "commonMistake": "[Sai]: ドアが開けています。 -> [Đúng]: ドアが開いています。(tự động từ + ています = trạng thái). Tự động từ + ています diễn đạt trạng thái kết quả: 開く(自) → 開いている(đang ở trạng thái mở). Tha động từ + ています: 開ける(他) → 開けている(đang thực hiện hành động mở).",
+    "kitsuPrompt": "Đưa ra tình huống trong nhà (đèn, cửa, máy móc) và hỏi tôi ai làm gì. Tôi sẽ phân biệt tự/tha động từ.",
+    "masterExampleJp": "ドアが開きます。vs ドアを開けます。",
+    "masterExampleVi": "Cửa mở. vs Tôi mở cửa.",
+    "examples": [
+      {
+        "sentence": "ドアが開きます。vs ドアを開けます。",
+        "translation": "Cửa mở. vs Tôi mở cửa."
+      },
+      {
+        "sentence": "電気がつきます。vs 電気をつけます。",
+        "translation": "Đèn bật. vs Tôi bật đèn."
+      },
+      {
+        "sentence": "窓が閉まります。vs 窓を閉めます。",
+        "translation": "Cửa sổ đóng. vs Tôi đóng cửa sổ."
+      }
+    ],
+    "dialogue": {
+      "title": "Ai làm vỡ bình hoa?",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "花瓶が割れています。どうしたんですか。",
+          "translation": "Bình hoa bị vỡ rồi. Sao vậy?"
+        },
+        {
+          "speaker": "B",
+          "text": "ネコが落としてしまったんです。",
+          "translation": "Con mèo làm rơi đấy ạ."
+        },
+        {
+          "speaker": "A",
+          "text": "ネコが花瓶を割ったんですね。困りましたね。",
+          "translation": "Mèo làm vỡ bình hoa rồi. Phiền quá nhỉ."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0111",
+    "grammar_id": "gram_n4_0111",
+    "milestoneId": "ms_minna_b29",
+    "milestone_id": "ms_minna_b29",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 29,
+    "pattern": "Vています (結果状態)",
+    "titleVi": "đang trong trạng thái kết quả",
+    "structure": "Vています (結果状態)",
+    "explanation": "Tự động từ + ています diễn đạt trạng thái hiện tại là kết quả của hành động trước đó. Hành động đã hoàn tất nhưng trạng thái còn đó. Trả lời câu hỏi \"bây giờ đang thế nào?\"",
+    "nuanceReason": "知っています, 住んでいます, 持っています, 結婚しています → đây là những động từ đặc biệt chỉ dùng ています để diễn đạt trạng thái (không dùng ます đơn).",
+    "commonMistake": "[Sai]: 結婚します。(khi muốn nói \"đã kết hôn\") -> [Đúng]: 結婚しています。. 結婚します = sẽ kết hôn (tương lai). 結婚しています = đã kết hôn (trạng thái hiện tại). Tương tự: 住みます → 住んでいます, 知ります → 知っています.",
+    "kitsuPrompt": "Hỏi tôi về trạng thái hiện tại của các đồ vật xung quanh (cửa, đèn, v.v.). Tôi sẽ dùng 〜ています.",
+    "masterExampleJp": "電気がついています。",
+    "masterExampleVi": "Đèn đang sáng (đã được bật).",
+    "examples": [
+      {
+        "sentence": "電気がついています。",
+        "translation": "Đèn đang sáng (đã được bật)."
+      },
+      {
+        "sentence": "財布の中にお金が入っています。",
+        "translation": "Trong ví có tiền (đã được bỏ vào)."
+      },
+      {
+        "sentence": "もう知っています。",
+        "translation": "Tôi đã biết rồi (hiện tại đang ở trạng thái biết)."
+      }
+    ],
+    "dialogue": {
+      "title": "Kiểm tra trước khi ra ngoài",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "電気が消えていますか。",
+          "translation": "Đèn đã tắt chưa?"
+        },
+        {
+          "speaker": "B",
+          "text": "はい、全部消えています。窓も閉まっています。",
+          "translation": "Vâng, tất cả đã tắt rồi. Cửa sổ cũng đã đóng."
+        },
+        {
+          "speaker": "A",
+          "text": "じゃあ、出かけましょう。",
+          "translation": "Vậy thì đi thôi."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0112",
+    "grammar_id": "gram_n4_0112",
+    "milestoneId": "ms_minna_b29",
+    "milestone_id": "ms_minna_b29",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 29,
+    "pattern": "Vてしまいました",
+    "titleVi": "đã lỡ làm / đã trót làm (đáng tiếc hoặc nhẹ nhõm)",
+    "structure": "Vてしまいました",
+    "explanation": "Vてしまいます diễn đạt: (1) hành động hoàn tất không thể đảo ngược, thường kèm cảm giác tiếc nuối; (2) hoàn thành hoàn toàn (nghĩa nhẹ hơn). Văn nói: 〜ちゃった (ngắn gọn).",
+    "nuanceReason": "Văn nói thân mật: 食べてしまった → 食べちゃった, してしまった → しちゃった. Nghĩa tiêu cực hay tích cực phụ thuộc ngữ cảnh.",
+    "commonMistake": "[Sai]: 財布を忘れました。(đúng nhưng thiếu sắc thái) -> [Đúng]: 財布を忘れてしまいました。(đáng tiếc, không thể hoàn tác). 〜ました đơn thuần chỉ thông báo. 〜てしまいました thêm sắc thái \"ôi thôi, không thể làm lại được\" — chọn cái nào tùy theo ý định biểu đạt.",
+    "kitsuPrompt": "Tạo tình huống tôi lỡ tay làm điều gì đó (phá vỡ đồ, quên hẹn, gửi nhầm). Tôi sẽ dùng 〜てしまいました.",
+    "masterExampleJp": "財布を忘れてしまいました。",
+    "masterExampleVi": "Tôi đã lỡ quên ví mất rồi.",
+    "examples": [
+      {
+        "sentence": "財布を忘れてしまいました。",
+        "translation": "Tôi đã lỡ quên ví mất rồi."
+      },
+      {
+        "sentence": "ケーキを全部食べてしまいました。",
+        "translation": "Đã ăn hết cái bánh rồi."
+      },
+      {
+        "sentence": "宿題を全部終わらせてしまいました。",
+        "translation": "Đã làm xong hết bài tập rồi (nhẹ nhõm)."
+      }
+    ],
+    "dialogue": {
+      "title": "Lỡ gửi email sai",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "大変！間違ったメールを送ってしまいました。",
+          "translation": "Ớ trời! Tôi đã lỡ gửi email nhầm rồi."
+        },
+        {
+          "speaker": "B",
+          "text": "えー！誰に送ったんですか。",
+          "translation": "Ôi! Gửi cho ai vậy?"
+        },
+        {
+          "speaker": "A",
+          "text": "お客様に内部のメールを送ってしまいました...",
+          "translation": "Tôi đã gửi email nội bộ cho khách hàng mất rồi..."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]
