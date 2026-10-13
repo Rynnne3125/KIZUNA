@@ -22,32 +22,32 @@
     "mnemonicStory": "Chữ NHẤT (Một - 一) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Một'.",
     "exampleCompounds": [
       {
-        "word": "一人",
-        "reading": "ひとり",
-        "meaning": "một người, một mình",
-        "type": "DT",
-        "level": "N5"
-      },
-      {
-        "word": "一日",
-        "reading": "ついたち",
-        "meaning": "ngày mồng một / 1 ngày",
-        "type": "DT",
-        "level": "N5"
-      },
-      {
-        "word": "一番",
-        "reading": "いちばん",
-        "meaning": "nhất, số một",
-        "type": "DT",
-        "level": "N5"
+        "word": "一人で",
+        "reading": "ひとりで",
+        "meaning": "một mình",
+        "level": "N5",
+        "type": "TrT"
       },
       {
         "word": "一緒に",
         "reading": "いっしょに",
         "meaning": "cùng nhau",
-        "type": "TrT",
-        "level": "N5"
+        "level": "N5",
+        "type": "TrT"
+      },
+      {
+        "word": "一番",
+        "reading": "いちばん",
+        "meaning": "nhất, số một",
+        "level": "N5",
+        "type": "DT"
+      },
+      {
+        "word": "一つ",
+        "reading": "ひとつ",
+        "meaning": "1 cái",
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -78,29 +78,29 @@
         "word": "二人",
         "reading": "ふたり",
         "meaning": "hai người",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "二日",
         "reading": "ふつか",
         "meaning": "ngày mồng hai / 2 ngày",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "二月",
         "reading": "にがつ",
         "meaning": "tháng hai",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "二十歳",
         "reading": "はたち",
         "meaning": "20 tuổi",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -131,29 +131,29 @@
         "word": "三つ",
         "reading": "みっつ",
         "meaning": "3 cái",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "三日",
         "reading": "みっか",
         "meaning": "ngày mồng ba / 3 ngày",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "三月",
         "reading": "さんがつ",
         "meaning": "tháng ba",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "三人",
         "reading": "さんにん",
         "meaning": "ba người",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -184,29 +184,29 @@
         "word": "四つ",
         "reading": "よっつ",
         "meaning": "4 cái",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "四日",
         "reading": "よっか",
         "meaning": "ngày mồng bốn / 4 ngày",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "四月",
         "reading": "しがつ",
         "meaning": "tháng tư",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "四季",
         "reading": "しき",
         "meaning": "bốn mùa",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -237,29 +237,29 @@
         "word": "五つ",
         "reading": "いつつ",
         "meaning": "5 cái",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "五日",
         "reading": "いつか",
         "meaning": "ngày mồng năm / 5 ngày",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "五月",
         "reading": "ごがつ",
         "meaning": "tháng năm",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "五人",
         "reading": "ごにん",
         "meaning": "năm người",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -290,29 +290,29 @@
         "word": "六つ",
         "reading": "むっつ",
         "meaning": "6 cái",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "六日",
         "reading": "むいか",
         "meaning": "ngày mồng sáu / 6 ngày",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "六月",
         "reading": "ろくがつ",
         "meaning": "tháng sáu",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "六人",
         "reading": "ろくにん",
         "meaning": "sáu người",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -343,29 +343,29 @@
         "word": "七つ",
         "reading": "ななつ",
         "meaning": "7 cái",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "七日",
         "reading": "なのか",
         "meaning": "ngày mồng bảy / 7 ngày",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "七月",
         "reading": "しちがつ",
         "meaning": "tháng bảy",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
-        "word": "七人",
-        "reading": "しちにん",
-        "meaning": "bảy người",
-        "type": "DT",
-        "level": "N5"
+        "word": "七夕",
+        "reading": "たなばた",
+        "meaning": "lễ Thất Tịch (mùng 7 tháng 7)",
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -396,29 +396,29 @@
         "word": "八つ",
         "reading": "やっつ",
         "meaning": "8 cái",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "八日",
         "reading": "ようか",
         "meaning": "ngày mồng tám / 8 ngày",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "八月",
         "reading": "はちがつ",
         "meaning": "tháng tám",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "八百屋",
         "reading": "やおや",
         "meaning": "tiệm rau quả",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -449,29 +449,29 @@
         "word": "九つ",
         "reading": "ここのつ",
         "meaning": "9 cái",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "九日",
         "reading": "ここのか",
         "meaning": "ngày mồng chín / 9 ngày",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "九月",
         "reading": "くがつ",
         "meaning": "tháng chín",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "九人",
         "reading": "きゅうにん",
         "meaning": "chín người",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -502,29 +502,29 @@
         "word": "十",
         "reading": "じゅう",
         "meaning": "mười",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "十日",
         "reading": "とおか",
         "meaning": "ngày mồng mười / 10 ngày",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "十月",
         "reading": "じゅうがつ",
         "meaning": "tháng mười",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "十分",
         "reading": "じゅっぷん",
         "meaning": "10 phút",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -555,29 +555,29 @@
         "word": "百",
         "reading": "ひゃく",
         "meaning": "một trăm",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "百円",
         "reading": "ひゃくえん",
         "meaning": "100 yên",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "三百",
         "reading": "さんびゃく",
         "meaning": "ba trăm",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "百貨店",
         "reading": "ひゃっかてん",
         "meaning": "trung tâm thương mại, bách hóa",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -608,29 +608,29 @@
         "word": "千",
         "reading": "せん",
         "meaning": "một nghìn",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "千円",
         "reading": "せんえん",
-        "meaning": "1.000 yên",
-        "type": "DT",
-        "level": "N5"
+        "meaning": "000 yên",
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "三千",
         "reading": "さんぜん",
         "meaning": "ba nghìn",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "千葉",
         "reading": "ちば",
         "meaning": "tỉnh Chiba",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -661,29 +661,29 @@
         "word": "一万",
         "reading": "いちまん",
         "meaning": "mười nghìn (1 vạn)",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "万年筆",
         "reading": "まんねんひつ",
         "meaning": "bút máy",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "万一",
         "reading": "まんいち",
         "meaning": "vạn nhất, ngộ nhỡ",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "千万",
         "reading": "せんまん",
         "meaning": "hàng chục triệu, rất nhiều",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -714,29 +714,29 @@
         "word": "円",
         "reading": "えん",
         "meaning": "tiền yên Nhật, hình tròn",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "百円",
         "reading": "ひゃくえん",
         "meaning": "100 yên",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "円高",
         "reading": "えんだか",
         "meaning": "đồng yên tăng giá",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       },
       {
         "word": "円安",
         "reading": "えんやす",
         "meaning": "đồng yên giảm giá",
-        "type": "DT",
-        "level": "N5"
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -764,32 +764,32 @@
     "mnemonicStory": "Chữ NHẬT (Ngày, Mặt trời - 日) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Ngày, Mặt trời'.",
     "exampleCompounds": [
       {
-        "word": "日本",
-        "reading": "にほん",
-        "meaning": "Nhật Bản",
+        "word": "日",
+        "reading": "ひ",
+        "meaning": "mặt trời",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "日本語",
-        "reading": "にほんご",
-        "meaning": "tiếng Nhật",
+        "word": "日々",
+        "reading": "ひび",
+        "meaning": "ngày ngày",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "昨日",
-        "reading": "きのう",
-        "meaning": "Hôm qua",
+        "word": "日ソ",
+        "reading": "にっソ",
+        "meaning": "Nhật-Xô",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "今日",
-        "reading": "きょう",
-        "meaning": "Hôm nay",
+        "word": "一日",
+        "reading": "いちにち",
+        "meaning": "một ngày",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -817,9 +817,9 @@
     "mnemonicStory": "Chữ NGUYỆT (Tháng, Trăng - 月) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Tháng, Trăng'.",
     "exampleCompounds": [
       {
-        "word": "月曜日",
-        "reading": "げつようび",
-        "meaning": "thứ Hai",
+        "word": "今月",
+        "reading": "こんげつ",
+        "meaning": "tháng này",
         "level": "N5",
         "type": "DT"
       },
@@ -831,16 +831,16 @@
         "type": "DT"
       },
       {
-        "word": "今月",
-        "reading": "こんげつ",
-        "meaning": "Tháng này",
+        "word": "来月",
+        "reading": "らいげつ",
+        "meaning": "tháng sau",
         "level": "N5",
         "type": "DT"
       },
       {
-        "word": "来月",
-        "reading": "らいげつ",
-        "meaning": "tháng sau",
+        "word": "月曜日",
+        "reading": "げつようび",
+        "meaning": "thứ hai",
         "level": "N5",
         "type": "DT"
       }
@@ -870,25 +870,32 @@
     "mnemonicStory": "Chữ HỎA (Lửa - 火) được ghép từ bộ Bát (八 - số tám, phân chia tỏa ra) và bộ Nhân (人 - con người). Sự kết hợp hài hòa giữa hình tượng số tám, phân chia tỏa ra và con người khắc họa nên ý nghĩa sâu sắc của 'Lửa'.",
     "exampleCompounds": [
       {
-        "word": "火曜日",
-        "reading": "かようび",
-        "meaning": "thứ Ba",
+        "word": "火",
+        "reading": "ひ",
+        "meaning": "lửa",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "火よう日",
-        "reading": "かようび",
-        "meaning": "thứ Ba",
+        "word": "下火",
+        "reading": "したび",
+        "meaning": "xuống dốc",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "花火",
-        "reading": "はなび",
-        "meaning": "pháo hoa",
+        "word": "中火",
+        "reading": "ちゅうび",
+        "meaning": "ngọn lửa vừa",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "火事",
+        "reading": "かじ",
+        "meaning": "cháy nhà",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -916,30 +923,30 @@
     "mnemonicStory": "Chữ THỦY (Nước - 水) được ghép từ bộ phận (㇇) và bộ Quyết (亅 - cái móc câu ngược) và bộ phận (乀). Sự kết hợp hài hòa giữa hình tượng ㇇ và cái móc câu ngược khắc họa nên ý nghĩa sâu sắc của 'Nước'.",
     "exampleCompounds": [
       {
-        "word": "水曜日",
-        "reading": "すいようび",
-        "meaning": "thứ Tư",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "水",
         "reading": "みず",
-        "meaning": "Nước",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "洪水",
-        "reading": "こうずい",
-        "meaning": "Lũ lụt",
+        "meaning": "nước",
         "level": "N5",
         "type": "vocab"
       },
       {
-        "word": "水素エネルギー",
-        "reading": "すいそエネルギー",
-        "meaning": "Năng lượng hydrogen",
+        "word": "一水",
+        "reading": "いちみず",
+        "meaning": "giọt (nước",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "水上",
+        "reading": "すいじょう",
+        "meaning": "dưới nước; trên mặt nước",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "下水",
+        "reading": "げすい",
+        "meaning": "cống",
         "level": "N5",
         "type": "vocab"
       }
@@ -969,25 +976,32 @@
     "mnemonicStory": "Chữ MỘC (Cây - 木) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Cây'.",
     "exampleCompounds": [
       {
-        "word": "木曜日",
-        "reading": "もくようび",
-        "meaning": "thứ Năm",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "木",
         "reading": "き",
-        "meaning": "Cây",
+        "meaning": "cây cối",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "木よう日",
-        "reading": "もくようび",
-        "meaning": "thứ Năm",
+        "word": "木々",
+        "reading": "きぎ",
+        "meaning": "nhiều cây; mỗi cây; tất cả các loại cây",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "並木",
+        "reading": "なみき",
+        "meaning": "hàng cây",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "丸木",
+        "reading": "まるき",
+        "meaning": "khúc gỗ mới đốn",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -1015,32 +1029,32 @@
     "mnemonicStory": "Chữ KIM (Vàng, Tiền - 金) được ghép từ bộ Nhân (人 - con người) và bộ Vương (王 - vua thống trị thiên địa) và bộ phận (丷). Sự kết hợp hài hòa giữa hình tượng con người và vua thống trị thiên địa khắc họa nên ý nghĩa sâu sắc của 'Vàng, Tiền'.",
     "exampleCompounds": [
       {
-        "word": "金曜日",
-        "reading": "きんようび",
-        "meaning": "thứ Sáu",
+        "word": "金",
+        "reading": "かね",
+        "meaning": "tiền; đồng tiền",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
         "word": "お金",
         "reading": "おかね",
-        "meaning": "tiền",
+        "meaning": "tiền; của cải",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "細かいお金",
-        "reading": "こまかいおかね",
-        "meaning": "tiền lẻ",
+        "word": "代金",
+        "reading": "だいきん",
+        "meaning": "giá; tiền hàng; hóa đơn; sự thanh toán",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "貯金します",
-        "reading": "ちょきんします",
-        "meaning": "tiết kiệm tiền",
+        "word": "借金",
+        "reading": "しゃっきん",
+        "meaning": "khoản nợ",
         "level": "N5",
-        "type": "ĐT3"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -1068,30 +1082,30 @@
     "mnemonicStory": "Chữ THỔ (Đất - 土) được ghép từ bộ Thập (十 - số mười, trọn vẹn hoàn hảo) và bộ Nhất (一 - số một, khởi nguyên vạn vật). Sự kết hợp hài hòa giữa hình tượng số mười, trọn vẹn hoàn hảo và số một, khởi nguyên vạn vật khắc họa nên ý nghĩa sâu sắc của 'Đất'.",
     "exampleCompounds": [
       {
-        "word": "土曜日",
-        "reading": "どようび",
-        "meaning": "thứ Bảy",
+        "word": "土",
+        "reading": "つち",
+        "meaning": "đất",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "お土産",
-        "reading": "おみやげ",
-        "meaning": "quà",
+        "word": "土中",
+        "reading": "どちゅう",
+        "meaning": "dưới đất",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "[お]土産",
-        "reading": "[お]みやげ",
-        "meaning": "quà",
+        "word": "土人",
+        "reading": "どじん",
+        "meaning": "thổ dân; người địa phương",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "土壌汚染",
-        "reading": "どじょうおせん",
-        "meaning": "Ô nhiễm đất",
+        "word": "土俵",
+        "reading": "どひょう",
+        "meaning": "đấu trường; vũ đài",
         "level": "N5",
         "type": "vocab"
       }
@@ -1121,32 +1135,32 @@
     "mnemonicStory": "Chữ NIÊN (Năm - 年) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Năm'.",
     "exampleCompounds": [
       {
-        "word": "去年",
-        "reading": "きょねん",
-        "meaning": "năm ngoái",
+        "word": "年",
+        "reading": "とし",
+        "meaning": "năm; năm tháng; tuổi",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "今年",
-        "reading": "ことし",
-        "meaning": "năm nay",
+        "word": "年々",
+        "reading": "ねんねん",
+        "meaning": "hàng năm; mỗi năm; từng năm",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "来年",
-        "reading": "らいねん",
-        "meaning": "năm sau",
+        "word": "一年",
+        "reading": "いちねん",
+        "meaning": "một năm",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "～年",
-        "reading": "～ねん",
-        "meaning": "năm ~",
+        "word": "丁年",
+        "reading": "ていねん",
+        "meaning": "tuổi thành niên",
         "level": "N5",
-        "type": "KH"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -1174,32 +1188,32 @@
     "mnemonicStory": "Chữ THỜI (Thời gian - 時) được ghép từ bộ Nhật (日 - mặt trời, ban ngày, thời gian) và bộ TỰ (寺 - Chùa). Bóng mặt trời dịch chuyển qua mái chùa cổ kính báo hiệu từng khắc thời gian trôi qua.",
     "exampleCompounds": [
       {
-        "word": "時計",
-        "reading": "とけい",
-        "meaning": "đồng hồ",
+        "word": "時",
+        "reading": "とき",
+        "meaning": "có khi; có lúc",
         "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "～時",
-        "reading": "～じ",
-        "meaning": "~ giờ",
-        "level": "N5",
-        "type": "KH"
-      },
-      {
-        "word": "何時",
-        "reading": "なんじ",
-        "meaning": "Mấy giờ",
-        "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
         "word": "時々",
         "reading": "ときどき",
-        "meaning": "thỉnh thoảng",
+        "meaning": "có lúc; thỉnh thoảng",
         "level": "N5",
-        "type": "TrT"
+        "type": "vocab"
+      },
+      {
+        "word": "一時",
+        "reading": "ひととき",
+        "meaning": "giây lát; một lần; tạm thời",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "時下",
+        "reading": "じか",
+        "meaning": "ngày nay",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -1227,32 +1241,32 @@
     "mnemonicStory": "Chữ PHÂN (Phút, Chia - 分) được ghép từ bộ Bát (八 - số tám, phân chia tỏa ra) và bộ Đao (刀 - con dao sắc, vũ khí). Sự kết hợp hài hòa giữa hình tượng số tám, phân chia tỏa ra và con dao sắc, vũ khí khắc họa nên ý nghĩa sâu sắc của 'Phút, Chia'.",
     "exampleCompounds": [
       {
-        "word": "～分",
-        "reading": "～ふん",
-        "meaning": "~ phút",
-        "level": "N5",
-        "type": "KH"
-      },
-      {
-        "word": "何分",
-        "reading": "なんぷん",
-        "meaning": "Mấy phút",
+        "word": "分かる",
+        "reading": "わかる",
+        "meaning": "hiểu, nắm rõ",
         "level": "N5",
         "type": "DT"
       },
       {
-        "word": "分かりました",
-        "reading": "わかりました",
-        "meaning": "tôi hiểu rồi",
+        "word": "半分",
+        "reading": "はんぶん",
+        "meaning": "một nửa",
         "level": "N5",
-        "type": "KH"
+        "type": "DT"
       },
       {
-        "word": "分かります",
-        "reading": "わかります",
-        "meaning": "hiểu",
+        "word": "十分",
+        "reading": "じゅっぷん",
+        "meaning": "10 phút / đầy đủ",
         "level": "N5",
-        "type": "ĐT1"
+        "type": "DT"
+      },
+      {
+        "word": "自分",
+        "reading": "じぶん",
+        "meaning": "bản thân",
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -1282,30 +1296,30 @@
       {
         "word": "半",
         "reading": "はん",
-        "meaning": "rưỡi, nửa",
+        "meaning": "bán",
         "level": "N5",
-        "type": "KH"
+        "type": "vocab"
+      },
+      {
+        "word": "半々",
+        "reading": "はんはん",
+        "meaning": "thành hai phần bằng nhau",
+        "level": "N5",
+        "type": "vocab"
       },
       {
         "word": "半ば",
         "reading": "なかば",
-        "meaning": "một nửa, ở giữa",
+        "meaning": "giữa",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "半ば過ぎ",
-        "reading": "なかばすぎ",
-        "meaning": "ngoài giữa",
+        "word": "一半",
+        "reading": "いっぱん",
+        "meaning": "nửa",
         "level": "N5",
-        "type": "ĐT"
-      },
-      {
-        "word": "月半ば",
-        "reading": "つきなかば",
-        "meaning": "giữa tháng",
-        "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -1337,28 +1351,28 @@
         "reading": "いま",
         "meaning": "bây giờ",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "今日",
-        "reading": "きょう",
-        "meaning": "Hôm nay",
+        "word": "今に",
+        "reading": "いまに",
+        "meaning": "chẳng mấy chốc",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "今朝",
-        "reading": "けさ",
-        "meaning": "sáng nay",
+        "word": "今や",
+        "reading": "いまや",
+        "meaning": "bây giờ",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "今晩",
-        "reading": "こんばん",
-        "meaning": "tối nay",
+        "word": "今一",
+        "reading": "いまいち",
+        "meaning": "khác",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -1386,32 +1400,32 @@
     "mnemonicStory": "Chữ TIỀN (Trước - 前) được ghép từ bộ phận (䒑) và bộ phận (刖). Sự kết hợp hài hòa giữa hình tượng 䒑 và 刖 khắc họa nên ý nghĩa sâu sắc của 'Trước'.",
     "exampleCompounds": [
       {
-        "word": "午前",
-        "reading": "ごぜん",
-        "meaning": "sáng, AM",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "前",
-        "reading": "まえ",
-        "meaning": "trước",
+        "reading": "ぜん",
+        "meaning": "tiền; trước; kém",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "名前",
-        "reading": "なまえ",
-        "meaning": "tên",
+        "word": "前々",
+        "reading": "まえ々",
+        "meaning": "sẵn sàng trước",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "前提",
-        "reading": "ぜんてい",
-        "meaning": "tiền đề; giả định",
+        "word": "お前",
+        "reading": "おまえ",
+        "meaning": "mày",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "前に",
+        "reading": "まえに",
+        "meaning": "khi trước",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -1439,32 +1453,32 @@
     "mnemonicStory": "Chữ HẬU (Sau - 後) được ghép từ bộ Xích (彳 - bước chân trái dò đường) và bộ Yêu (幺 - nhỏ nhắn, sợi chỉ mảnh) và bộ Truy (夂 - bước chân theo sau). Sự kết hợp hài hòa giữa hình tượng bước chân trái dò đường và nhỏ nhắn, sợi chỉ mảnh khắc họa nên ý nghĩa sâu sắc của 'Sau'.",
     "exampleCompounds": [
       {
-        "word": "午後",
-        "reading": "ごご",
-        "meaning": "chiều, PM",
+        "word": "後",
+        "reading": "あと",
+        "meaning": "người kế vị; người nối nghiệp",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "後ろ",
-        "reading": "うしろ",
-        "meaning": "sau",
+        "word": "後々",
+        "reading": "のちのち",
+        "meaning": "Tương lai xa",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
         "word": "後で",
         "reading": "あとで",
-        "meaning": "sau, sau đó",
+        "meaning": "chốc nữa",
         "level": "N5",
-        "type": "TrT"
+        "type": "vocab"
       },
       {
-        "word": "後輩",
-        "reading": "こうはい",
-        "meaning": "đàn em",
+        "word": "後に",
+        "reading": "あとに",
+        "meaning": "đàng sau",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -1492,32 +1506,32 @@
     "mnemonicStory": "Chữ NGỌ (Trưa - 午) được ghép từ bộ phận (𠂉) và bộ Thập (十 - số mười, trọn vẹn hoàn hảo). Sự kết hợp hài hòa giữa hình tượng 𠂉 và số mười, trọn vẹn hoàn hảo khắc họa nên ý nghĩa sâu sắc của 'Trưa'.",
     "exampleCompounds": [
       {
-        "word": "午前",
-        "reading": "ごぜん",
-        "meaning": "sáng, AM",
+        "word": "午",
+        "reading": "うま",
+        "meaning": "Ngọ (chi)",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "午後",
-        "reading": "ごご",
-        "meaning": "chiều, PM",
+        "word": "丙午",
+        "reading": "ひのえうま",
+        "meaning": "năm Bính Ngọ",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "初午",
-        "reading": "はつうま",
-        "meaning": "“Ngày ngựa” đầu tiên trong tháng âm lịch",
+        "word": "亭午",
+        "reading": "ていご",
+        "meaning": "Buổi trưa",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "午年",
-        "reading": "うまどし",
-        "meaning": "năm con ngựa",
+        "word": "午刻",
+        "reading": "うまこく",
+        "meaning": "trưa",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -1545,32 +1559,32 @@
     "mnemonicStory": "Chữ GIAN (Khoảng - 間) được ghép từ bộ Môn (門 - hai cánh cổng lớn uy nghi) và bộ Nhật (日 - mặt trời, ban ngày, thời gian). Sự kết hợp hài hòa giữa hình tượng hai cánh cổng lớn uy nghi và mặt trời, ban ngày, thời gian khắc họa nên ý nghĩa sâu sắc của 'Khoảng'.",
     "exampleCompounds": [
       {
-        "word": "時間",
-        "reading": "じかん",
-        "meaning": "Thời gian / Giờ",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "間",
         "reading": "あいだ",
-        "meaning": "Giữa (hai thứ)",
+        "meaning": "giữa",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "～週間",
-        "reading": "～しゅうかん",
-        "meaning": "~ tuần",
+        "word": "間々",
+        "reading": "まま",
+        "meaning": "thỉnh thoảng",
         "level": "N5",
-        "type": "KH"
+        "type": "vocab"
       },
       {
-        "word": "間違えます",
-        "reading": "まちがえます",
-        "meaning": "nhầm, mắc lỗi",
+        "word": "間に",
+        "reading": "まに",
+        "meaning": "lúc",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
+      },
+      {
+        "word": "不間",
+        "reading": "ふま",
+        "meaning": "sự vụng về",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -1598,25 +1612,32 @@
     "mnemonicStory": "Chữ MỖI (Mỗi - 毎) được ghép từ bộ phận (𠂉) và bộ Vô (毋 - chớ đừng, không nên). Sự kết hợp hài hòa giữa hình tượng 𠂉 và chớ đừng, không nên khắc họa nên ý nghĩa sâu sắc của 'Mỗi'.",
     "exampleCompounds": [
       {
-        "word": "毎朝",
-        "reading": "まいあさ",
-        "meaning": "mỗi sáng",
+        "word": "毎",
+        "reading": "ごと",
+        "meaning": "mỗi; hàng",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "毎晩",
-        "reading": "まいばん",
-        "meaning": "mỗi tối",
+        "word": "毎々",
+        "reading": "ことごとく",
+        "meaning": "thường xuyên",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "毎日",
-        "reading": "まいにち",
-        "meaning": "mỗi ngày",
+        "word": "毎に",
+        "reading": "ごとに",
+        "meaning": "mỗi; mọi; cứ",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "毎回",
+        "reading": "まいかい",
+        "meaning": "lần nào cũng",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -1644,32 +1665,32 @@
     "mnemonicStory": "Chữ CHU (Tuần - 週) được ghép từ bộ Quai sước (辶 - bước chân di chuyển trên đường) và bộ CHU (周 - Xung quanh, chu vi). Sự kết hợp hài hòa giữa hình tượng bước chân di chuyển trên đường và Xung quanh, chu vi khắc họa nên ý nghĩa sâu sắc của 'Tuần'.",
     "exampleCompounds": [
       {
-        "word": "先週",
-        "reading": "せんしゅう",
-        "meaning": "tuần trước",
+        "word": "週",
+        "reading": "しゅう",
+        "meaning": "tuần",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "一週",
+        "reading": "いっしゅう",
+        "meaning": "tuần lễ",
+        "level": "N5",
+        "type": "vocab"
       },
       {
         "word": "今週",
         "reading": "こんしゅう",
-        "meaning": "Tuần này",
+        "meaning": "tuần lễ này",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "来週",
-        "reading": "らいしゅう",
-        "meaning": "tuần sau",
+        "word": "週令",
+        "reading": "しゅうれい",
+        "meaning": "một tuần nay; đã được một tuần; tuần trước",
         "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "～週間",
-        "reading": "～しゅうかん",
-        "meaning": "~ tuần",
-        "level": "N5",
-        "type": "KH"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -1697,32 +1718,32 @@
     "mnemonicStory": "Chữ TIÊN (Trước, Tiên - 先) được ghép từ bộ phận (𠂒) và bộ Nhân đi (儿 - đôi chân bước đi). Sự kết hợp hài hòa giữa hình tượng 𠂒 và đôi chân bước đi khắc họa nên ý nghĩa sâu sắc của 'Trước, Tiên'.",
     "exampleCompounds": [
       {
-        "word": "先生",
-        "reading": "せんせい",
-        "meaning": "Giáo viên",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "先週",
-        "reading": "せんしゅう",
-        "meaning": "tuần trước",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "先月",
-        "reading": "せんげつ",
-        "meaning": "tháng trước",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "先",
         "reading": "さき",
-        "meaning": "trước",
+        "meaning": "đầu mút; điểm đầu; tương lai",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "お先",
+        "reading": "おさき",
+        "meaning": "tương lai; trước.; phía trước",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "先ず",
+        "reading": "まず",
+        "meaning": "trước hết; trước tiên",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "先に",
+        "reading": "さきに",
+        "meaning": "phía trước; trước mặt",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -1750,32 +1771,32 @@
     "mnemonicStory": "Chữ LAI (Đến - 来) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Đến'.",
     "exampleCompounds": [
       {
-        "word": "～から来ました",
-        "reading": "～からきました",
-        "meaning": "tôi đến từ ~",
+        "word": "来",
+        "reading": "らい",
+        "meaning": "sự tới",
         "level": "N5",
-        "type": "KH"
+        "type": "vocab"
       },
       {
-        "word": "来週",
-        "reading": "らいしゅう",
-        "meaning": "tuần sau",
+        "word": "来す",
+        "reading": "きたす",
+        "meaning": "gây nên; gây ra; làm xảy ra",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "来月",
-        "reading": "らいげつ",
-        "meaning": "tháng sau",
+        "word": "来る",
+        "reading": "きたる",
+        "meaning": "đến",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "来年",
-        "reading": "らいねん",
-        "meaning": "năm sau",
+        "word": "来世",
+        "reading": "らいせ",
+        "meaning": "kiếp sau",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -1803,32 +1824,32 @@
     "mnemonicStory": "Chữ SINH (Sống, Sinh - 生) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Sống, Sinh'.",
     "exampleCompounds": [
       {
-        "word": "先生",
-        "reading": "せんせい",
-        "meaning": "Giáo viên",
+        "word": "生",
+        "reading": "き",
+        "meaning": "sự nguyên chất; nguyên; nguyên xi; thuần khiết; sống; chưa chế biến",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "学生",
-        "reading": "がくせい",
-        "meaning": "Sinh viên / Học sinh",
+        "word": "生~",
+        "reading": "なま~",
+        "meaning": "...tươi",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "誕生日",
-        "reading": "たんじょうび",
-        "meaning": "sinh nhật",
+        "word": "生う",
+        "reading": "おう",
+        "meaning": "mọc (răng); phát triển; lớn lên",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "生活",
-        "reading": "せいかつ",
-        "meaning": "cuộc sống",
+        "word": "生き",
+        "reading": "いき",
+        "meaning": "sự tươi",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -1856,30 +1877,30 @@
     "mnemonicStory": "Chữ NHÂN (Người - 人) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Người'.",
     "exampleCompounds": [
       {
-        "word": "あの人",
-        "reading": "あのひと",
-        "meaning": "người kia, người đó",
+        "word": "日本人",
+        "reading": "にほんじん",
+        "meaning": "người Nhật",
         "level": "N5",
         "type": "DT"
       },
       {
-        "word": "人",
-        "reading": "ひと",
-        "meaning": "Người",
+        "word": "大人",
+        "reading": "おとな",
+        "meaning": "người lớn",
         "level": "N5",
         "type": "DT"
       },
       {
-        "word": "一人で",
-        "reading": "ひとりで",
-        "meaning": "một mình",
+        "word": "一人",
+        "reading": "ひとり",
+        "meaning": "một người",
         "level": "N5",
-        "type": "TrT"
+        "type": "DT"
       },
       {
-        "word": "ご主人",
-        "reading": "ごしゅじん",
-        "meaning": "chồng (người khác)",
+        "word": "三人",
+        "reading": "さんにん",
+        "meaning": "ba người",
         "level": "N5",
         "type": "DT"
       }
@@ -1909,30 +1930,30 @@
     "mnemonicStory": "Chữ TỬ (Con - 子) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Con'.",
     "exampleCompounds": [
       {
-        "word": "椅子",
-        "reading": "いす",
-        "meaning": "ghế",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "子ども",
         "reading": "こども",
-        "meaning": "lừa đảo",
+        "meaning": "trẻ con",
         "level": "N5",
         "type": "DT"
       },
       {
         "word": "男の子",
-        "reading": "おとこのこ",
-        "meaning": "con trai",
+        "reading": "おとのこ",
+        "meaning": "bé trai",
         "level": "N5",
         "type": "DT"
       },
       {
         "word": "女の子",
         "reading": "おんなのこ",
-        "meaning": "con gái",
+        "meaning": "bé gái",
+        "level": "N5",
+        "type": "DT"
+      },
+      {
+        "word": "息子",
+        "reading": "むすこ",
+        "meaning": "con trai",
         "level": "N5",
         "type": "DT"
       }
@@ -1962,25 +1983,32 @@
     "mnemonicStory": "Chữ NỮ (Nữ - 女) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Nữ'.",
     "exampleCompounds": [
       {
-        "word": "彼女",
-        "reading": "かのじょ",
-        "meaning": "cô ấy, người yêu (nữ)",
+        "word": "女",
+        "reading": "おんな",
+        "meaning": "phụ nữ; con gái; cô gái; đàn bà; nữ",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "女の人",
-        "reading": "おんなのひと",
-        "meaning": "phụ nữ",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "女の子",
-        "reading": "おんなのこ",
+        "word": "一女",
+        "reading": "いちじょ",
         "meaning": "con gái",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "女中",
+        "reading": "じょちゅう",
+        "meaning": "cô gái; thiếu nữ; thị nữ; tỳ nữ; người hầu gái; người giúp việc",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "女主",
+        "reading": "おんなぬし",
+        "meaning": "bà chủ",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2009,31 +2037,31 @@
     "exampleCompounds": [
       {
         "word": "男の人",
-        "reading": "おとこのひと",
-        "meaning": "đàn ông",
+        "reading": "おとconひと",
+        "meaning": "người đàn ông",
         "level": "N5",
         "type": "DT"
       },
       {
         "word": "男の子",
-        "reading": "おとこのこ",
-        "meaning": "con trai",
+        "reading": "おとのこ",
+        "meaning": "bé trai",
         "level": "N5",
         "type": "DT"
       },
       {
-        "word": "小男",
-        "reading": "こおとこ",
-        "meaning": "người đàn ông nhỏ bé",
+        "word": "長男",
+        "reading": "ちょうなん",
+        "meaning": "con trai trưởng",
         "level": "N5",
-        "type": "ĐT"
+        "type": "DT"
       },
       {
-        "word": "男名",
-        "reading": "おとこな",
-        "meaning": "tên nam",
+        "word": "男子",
+        "reading": "だんし",
+        "meaning": "nam giới",
         "level": "N5",
-        "type": "ĐT"
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2061,32 +2089,32 @@
     "mnemonicStory": "Chữ PHỤ (Cha - 父) được ghép từ bộ Bát (八 - số tám, phân chia tỏa ra) và bộ phận (乂). Sự kết hợp hài hòa giữa hình tượng số tám, phân chia tỏa ra và 乂 khắc họa nên ý nghĩa sâu sắc của 'Cha'.",
     "exampleCompounds": [
       {
-        "word": "父",
-        "reading": "ちち",
-        "meaning": "Bố (của mình)",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "お父さん",
         "reading": "おとうさん",
-        "meaning": "Bố (người khác/lịch sự)",
+        "meaning": "bố",
         "level": "N5",
         "type": "DT"
       },
       {
-        "word": "父の日",
-        "reading": "ちちのひ",
-        "meaning": "bố, người cha",
+        "word": "父親",
+        "reading": "ちちおや",
+        "meaning": "người cha",
         "level": "N5",
-        "type": "ĐT"
+        "type": "DT"
       },
       {
-        "word": "父方",
-        "reading": "ちちかた",
-        "meaning": "bên gia đình bên bố",
+        "word": "祖父",
+        "reading": "そふ",
+        "meaning": "ông (nội/ngoại)",
         "level": "N5",
-        "type": "ĐT"
+        "type": "DT"
+      },
+      {
+        "word": "父母",
+        "reading": "ふぼ",
+        "meaning": "bố mẹ, phụ mẫu",
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2114,32 +2142,32 @@
     "mnemonicStory": "Chữ MẪU (Mẹ - 母) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Mẹ'.",
     "exampleCompounds": [
       {
-        "word": "母",
-        "reading": "はは",
-        "meaning": "Mẹ (của mình)",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "お母さん",
         "reading": "おかあさん",
-        "meaning": "Mẹ (người khác/lịch sự)",
+        "meaning": "mẹ",
         "level": "N5",
         "type": "DT"
       },
       {
-        "word": "母御",
-        "reading": "ははご",
-        "meaning": "(lời nói lịch sự dành cho người khác) mẹ",
+        "word": "母親",
+        "reading": "ははおや",
+        "meaning": "người mẹ",
         "level": "N5",
-        "type": "ĐT"
+        "type": "DT"
       },
       {
-        "word": "亡き母",
-        "reading": "なきはは",
-        "meaning": "mẹ chết",
+        "word": "祖母",
+        "reading": "そぼ",
+        "meaning": "bà (nội/ngoại)",
         "level": "N5",
-        "type": "ĐT"
+        "type": "DT"
+      },
+      {
+        "word": "母国",
+        "reading": "ぼこく",
+        "meaning": "quê hương, mẫu quốc",
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2167,32 +2195,32 @@
     "mnemonicStory": "Chữ HỮU (Bạn - 友) được ghép từ bộ phận (𠂇) và bộ Hựu (又 - lại nữa, bàn tay phải làm việc). Sự kết hợp hài hòa giữa hình tượng 𠂇 và lại nữa, bàn tay phải làm việc khắc họa nên ý nghĩa sâu sắc của 'Bạn'.",
     "exampleCompounds": [
       {
-        "word": "友達",
-        "reading": "ともだち",
-        "meaning": "bạn bè",
+        "word": "友",
+        "reading": "とも",
+        "meaning": "sự đi chơi cùng bạn bè",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "友だち",
-        "reading": "ともだち",
-        "meaning": "bạn bè",
+        "word": "交友",
+        "reading": "こうゆう",
+        "meaning": "người bạn",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "友��",
-        "reading": "ともこ",
-        "meaning": "bạn bè",
+        "word": "友交",
+        "reading": "",
+        "meaning": "tình bạn",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "ジム友",
-        "reading": "ジムとも",
-        "meaning": "người bạn tập gym",
+        "word": "友人",
+        "reading": "ゆうじん",
+        "meaning": "bạn",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2220,32 +2248,32 @@
     "mnemonicStory": "Chữ HỌC (Học - 学) được ghép từ bộ phận (𭕄) và bộ Mịch (冖 - khăn trùm, che phủ) và bộ Tử (子 - đứa con nhỏ). Sự kết hợp hài hòa giữa hình tượng 𭕄 và khăn trùm, che phủ khắc họa nên ý nghĩa sâu sắc của 'Học'.",
     "exampleCompounds": [
       {
-        "word": "学生",
-        "reading": "がくせい",
-        "meaning": "Sinh viên / Học sinh",
+        "word": "学",
+        "reading": "がく",
+        "meaning": "sự học",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "大学",
-        "reading": "だいがく",
-        "meaning": "trường đại học",
+        "word": "学び",
+        "reading": "まなび",
+        "meaning": "sự học",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "学校",
-        "reading": "がっこう",
-        "meaning": "Trường học",
+        "word": "学ぶ",
+        "reading": "まなぶ",
+        "meaning": "học",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "見学します",
-        "reading": "けんがくします",
-        "meaning": "tham quan với mục đích học tập; tham quan",
+        "word": "不学",
+        "reading": "ふがく",
+        "meaning": "dốt nát",
         "level": "N5",
-        "type": "ĐT3"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2273,32 +2301,32 @@
     "mnemonicStory": "Chữ HIỆU (Trường - 校) được ghép từ bộ Mộc (木 - cái cây, gỗ rừng) và bộ GIAO (交 - Giao lưu, Giao thông). Ngôi nhà bằng gỗ là nơi gặp gỡ, giao lưu tri thức giữa thầy và trò để học tập.",
     "exampleCompounds": [
       {
-        "word": "学校",
-        "reading": "がっこう",
-        "meaning": "Trường học",
+        "word": "校",
+        "reading": "こう",
+        "meaning": "hiệu; trường học; dấu hiệu",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "高校",
-        "reading": "こうこう",
-        "meaning": "trường cấp 3",
+        "word": "一校",
+        "reading": "いちこう",
+        "meaning": "dây",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "日本語学校",
-        "reading": "にほんごがっこう",
-        "meaning": "trường Nhật ngữ",
+        "word": "校主",
+        "reading": "こうしゅ",
+        "meaning": "hiệu trưởng",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "小学校",
-        "reading": "しょうがっこう",
-        "meaning": "trường tiểu học",
+        "word": "校了",
+        "reading": "こうりょう",
+        "meaning": "sự đã hiệu chỉnh xong; hiệu chỉnh xong; đã hiệu chỉnh",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2326,32 +2354,32 @@
     "mnemonicStory": "Chữ ĐẠI (Lớn - 大) được ghép từ bộ Nhất (一 - số một, khởi nguyên vạn vật) và bộ Nhân (人 - con người). Sự kết hợp hài hòa giữa hình tượng số một, khởi nguyên vạn vật và con người khắc họa nên ý nghĩa sâu sắc của 'Lớn'.",
     "exampleCompounds": [
       {
-        "word": "大学",
-        "reading": "だいがく",
-        "meaning": "trường đại học",
+        "word": "大き",
+        "reading": "おおき",
+        "meaning": "to",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "大変ですね",
-        "reading": "たいへんですね",
-        "meaning": "vất vả nhỉ",
+        "word": "大乱",
+        "reading": "たいらん",
+        "meaning": "đại loạn",
         "level": "N5",
-        "type": "KH"
+        "type": "vocab"
       },
       {
-        "word": "大きい",
-        "reading": "おおきい",
-        "meaning": "To, lớn",
+        "word": "大事",
+        "reading": "だいじ",
+        "meaning": "quan trọng; đại sự",
         "level": "N5",
-        "type": "TT-i"
+        "type": "vocab"
       },
       {
-        "word": "お大事に",
-        "reading": "おだいじに",
-        "meaning": "giữ gìn sức khỏe",
+        "word": "大人",
+        "reading": "おとな",
+        "meaning": "người lớn; người trưởng thành",
         "level": "N5",
-        "type": "KH"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2379,32 +2407,32 @@
     "mnemonicStory": "Chữ TIỂU (Nhỏ - 小) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Nhỏ'.",
     "exampleCompounds": [
       {
-        "word": "小さい",
-        "reading": "ちいさい",
-        "meaning": "Nhỏ",
+        "word": "小さ",
+        "reading": "ちいさ",
+        "meaning": "nhỏ",
         "level": "N5",
-        "type": "TT-i"
+        "type": "vocab"
       },
       {
-        "word": "小学校",
-        "reading": "しょうがっこう",
-        "meaning": "trường tiểu học",
+        "word": "中小",
+        "reading": "ちゅうしょう",
+        "meaning": "vừa và nhỏ",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "やや小さい",
-        "reading": "ややちいさい",
-        "meaning": "hơi nhỏ",
+        "word": "小事",
+        "reading": "しょうじ",
+        "meaning": "vật nhỏ mọn; chuyện vặt",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "より小さい",
-        "reading": "よりちいさい",
-        "meaning": "ít hơn",
+        "word": "小人",
+        "reading": "こびと",
+        "meaning": "đứa trẻ; nhi đồng; người lùn; chú lùn",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2432,32 +2460,32 @@
     "mnemonicStory": "Chữ TRUNG (Giữa - 中) được ghép từ bộ Khẩu (口 - cái miệng, lời nói, ăn uống) và bộ Cổn (丨 - nét thẳng đứng, thông suốt). Sự kết hợp hài hòa giữa hình tượng cái miệng, lời nói, ăn uống và nét thẳng đứng, thông suốt khắc họa nên ý nghĩa sâu sắc của 'Giữa'.",
     "exampleCompounds": [
       {
-        "word": "中国",
-        "reading": "ちゅうごく",
-        "meaning": "Trung Quốc",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "中",
         "reading": "なか",
-        "meaning": "Trong, giữa",
+        "meaning": "bên trong",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "世界中",
-        "reading": "せかいじゅう",
-        "meaning": "khắp thế giới, toàn thế giới",
+        "word": "中々",
+        "reading": "なか々",
+        "meaning": "thực",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "途中",
-        "reading": "とちゅう",
-        "meaning": "giữa chừng, nửa đường",
+        "word": "中世",
+        "reading": "ちゅうせい",
+        "meaning": "thời Trung cổ",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "中中",
+        "reading": "なかなか",
+        "meaning": "...mãi mà..",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2485,32 +2513,32 @@
     "mnemonicStory": "Chữ THƯỢNG (Trên - 上) được ghép từ bộ phận (⺊) và bộ Nhất (一 - số một, khởi nguyên vạn vật). Sự kết hợp hài hòa giữa hình tượng ⺊ và số một, khởi nguyên vạn vật khắc họa nên ý nghĩa sâu sắc của 'Trên'.",
     "exampleCompounds": [
       {
-        "word": "上手[な]",
-        "reading": "じょうず[な]",
-        "meaning": "giỏi",
-        "level": "N5",
-        "type": "TT-na"
-      },
-      {
         "word": "上",
         "reading": "うえ",
-        "meaning": "Trên",
+        "meaning": "trên; mặt trên; trên đỉnh",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "上着",
-        "reading": "うわぎ",
-        "meaning": "áo khoác",
+        "word": "上々",
+        "reading": "うえ々",
+        "meaning": "lớn",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "以上です",
-        "reading": "いじょうです",
-        "meaning": "hết rồi",
+        "word": "上す",
+        "reading": "のぼす",
+        "meaning": "cho lên",
         "level": "N5",
-        "type": "KH"
+        "type": "vocab"
+      },
+      {
+        "word": "上り",
+        "reading": "のぼり",
+        "meaning": "sự leo lên; sự tăng lên",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2538,32 +2566,32 @@
     "mnemonicStory": "Chữ HẠ (Dưới - 下) được ghép từ bộ Nhất (一 - số một, khởi nguyên vạn vật) và bộ Bốc (卜 - bói toán, điềm triệu). Sự kết hợp hài hòa giữa hình tượng số một, khởi nguyên vạn vật và bói toán, điềm triệu khắc họa nên ý nghĩa sâu sắc của 'Dưới'.",
     "exampleCompounds": [
       {
-        "word": "地下",
-        "reading": "ちか",
-        "meaning": "ngầm, dưới mặt đất",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "地下鉄",
-        "reading": "ちかてつ",
-        "meaning": "tàu điện ngầm",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "下手[な]",
-        "reading": "へた[な]",
-        "meaning": "kém",
-        "level": "N5",
-        "type": "TT-na"
-      },
-      {
         "word": "下",
         "reading": "した",
-        "meaning": "Dưới",
+        "meaning": "dưới; phía dưới; bên dưới; phần dưới; phần sau; tập sau",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "下し",
+        "reading": "おろし",
+        "meaning": "sự rút khỏi",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "下す",
+        "reading": "くだす",
+        "meaning": "hạ lệnh; đưa ra phán đoán của mình; làm; thực hiện; chấp (bút)",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "下に",
+        "reading": "したに",
+        "meaning": "ở dưới",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2593,30 +2621,30 @@
       {
         "word": "右",
         "reading": "みぎ",
-        "meaning": "Bên phải",
+        "meaning": "bên phải; phía bên phải",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "右手",
-        "reading": "みぎて",
-        "meaning": "tay phải",
+        "word": "右側",
+        "reading": "みぎがわ",
+        "meaning": "bên hữu",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "右目",
-        "reading": "みぎめ",
-        "meaning": "mắt phải",
+        "word": "右傾",
+        "reading": "うけい",
+        "meaning": "hữu khuynh",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "上右",
-        "reading": "うえみぎ",
-        "meaning": "phía trên bên phải (góc)",
+        "word": "右岸",
+        "reading": "うがん",
+        "meaning": "hữu ngạn",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2646,30 +2674,30 @@
       {
         "word": "左",
         "reading": "ひだり",
-        "meaning": "Bên trái",
+        "meaning": "bên trái",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "左手",
-        "reading": "ひだりて",
-        "meaning": "tay trái",
+        "word": "左上",
+        "reading": "ひだりうえ",
+        "meaning": "bên trái phía trên cùng",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "左目",
-        "reading": "ひだりめ",
-        "meaning": "mắt trái",
+        "word": "左側",
+        "reading": "さそく",
+        "meaning": "bên trái",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "上左",
-        "reading": "うえひだり",
-        "meaning": "phía trên bên trái (góc)",
+        "word": "左傾",
+        "reading": "さけい",
+        "meaning": "khuynh tả",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2698,31 +2726,31 @@
     "exampleCompounds": [
       {
         "word": "外",
-        "reading": "ほか",
-        "meaning": "ngoài",
+        "reading": "そと",
+        "meaning": "bên ngoài; phía ngoài; ngoài",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "外国",
-        "reading": "がいこく",
-        "meaning": "nước ngoài",
+        "word": "外す",
+        "reading": "はずす",
+        "meaning": "sai lệch; không đúng",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "郊外",
-        "reading": "こうがい",
-        "meaning": "ngoại ô",
+        "word": "外に",
+        "reading": "ほかに",
+        "meaning": "ngoài ra; hơn nữa",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "意外な",
-        "reading": "いがいな",
-        "meaning": "không ngờ, không lường trước được",
+        "word": "外れ",
+        "reading": "はずれ",
+        "meaning": "sự sai lệch; sự chệch ra",
         "level": "N5",
-        "type": "TT-na"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2752,23 +2780,30 @@
       {
         "word": "北",
         "reading": "きた",
-        "meaning": "Bắc",
+        "meaning": "phía Bắc; miền Bắc",
         "level": "N5",
-        "type": "kanji"
+        "type": "vocab"
       },
       {
-        "word": "北口",
-        "reading": "きたぐち",
-        "meaning": "cổng phía bắc",
+        "word": "北京",
+        "reading": "ぺきん",
+        "meaning": "Bắc Kinh",
         "level": "N5",
-        "type": "noun"
+        "type": "vocab"
       },
       {
-        "word": "北海道",
-        "reading": "ほっかいどう",
-        "meaning": "Hokkaido (đảo phía bắc Nhật Bản)",
+        "word": "北側",
+        "reading": "きたがわ",
+        "meaning": "phía bắc; bờ bắc; bên bắc",
         "level": "N5",
-        "type": "proper"
+        "type": "vocab"
+      },
+      {
+        "word": "南北",
+        "reading": "なんぼく",
+        "meaning": "Bắc Nam",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2798,23 +2833,30 @@
       {
         "word": "南",
         "reading": "みなみ",
-        "meaning": "phía nam",
+        "meaning": "phía Nam; phương Nam",
         "level": "N5",
-        "type": "kanji"
+        "type": "vocab"
       },
       {
-        "word": "南口",
-        "reading": "みなみぐち",
-        "meaning": "cổng phía nam",
+        "word": "南下",
+        "reading": "なんか",
+        "meaning": "Đi xuống phía Nam",
         "level": "N5",
-        "type": "noun"
+        "type": "vocab"
       },
       {
-        "word": "南米",
-        "reading": "なんべい",
-        "meaning": "Nam Mỹ",
+        "word": "南京",
+        "reading": "なんきん",
+        "meaning": "Thành phố Nam Kinh",
         "level": "N5",
-        "type": "proper"
+        "type": "vocab"
+      },
+      {
+        "word": "南仏",
+        "reading": "なんふつ",
+        "meaning": "Miền Nam nước Pháp",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2844,23 +2886,30 @@
       {
         "word": "東",
         "reading": "ひがし",
-        "meaning": "Đông",
+        "meaning": "đông",
         "level": "N5",
-        "type": "kanji"
+        "type": "vocab"
       },
       {
-        "word": "東口",
-        "reading": "ひがしぐち",
-        "meaning": "cổng phía đông",
+        "word": "中東",
+        "reading": "ちゅうとう",
+        "meaning": "Trung đông",
         "level": "N5",
-        "type": "noun"
+        "type": "vocab"
       },
       {
-        "word": "東京",
-        "reading": "とうきょう",
-        "meaning": "tokyo nhật bản); lạc dương",
+        "word": "東亜",
+        "reading": "とうあ",
+        "meaning": "đông á",
         "level": "N5",
-        "type": "proper"
+        "type": "vocab"
+      },
+      {
+        "word": "東亞",
+        "reading": "とうあ",
+        "meaning": "Đông Á",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2888,32 +2937,32 @@
     "mnemonicStory": "Chữ TÂY (Tây - 西) được ghép từ bộ Nhất (一 - số một, khởi nguyên vạn vật) và bộ phận (𠁤). Sự kết hợp hài hòa giữa hình tượng số một, khởi nguyên vạn vật và 𠁤 khắc họa nên ý nghĩa sâu sắc của 'Tây'.",
     "exampleCompounds": [
       {
-        "word": "関西",
-        "reading": "かんさい",
-        "meaning": "vùng Kansai",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "西",
         "reading": "にし",
-        "meaning": "Tây",
+        "meaning": "hướng tây; phía tây",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "真西",
-        "reading": "まにし",
-        "meaning": "do hướng Tây",
+        "word": "西側",
+        "reading": "にしがわ",
+        "meaning": "Phía tây; bên bờ tây",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "西日",
-        "reading": "にしび",
-        "meaning": "mặt trời hướng tây",
+        "word": "北西",
+        "reading": "ほくせい",
+        "meaning": "tây bắc",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
+      },
+      {
+        "word": "西北",
+        "reading": "せいほく",
+        "meaning": "tây bắc",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2943,30 +2992,30 @@
       {
         "word": "口",
         "reading": "くち",
-        "meaning": "Miệng",
+        "meaning": "cửa; miệng; chỗ cho vào; chỗ ra vào (đồ vật)",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "人口",
-        "reading": "じんこう",
-        "meaning": "dân số",
+        "word": "口に",
+        "reading": "くちに",
+        "meaning": "sự ăn",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "仕口",
-        "reading": "しくち",
-        "meaning": "phương pháp",
+        "word": "一口",
+        "reading": "ひとくち",
+        "meaning": "một miếng",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "口子",
-        "reading": "くちこ",
-        "meaning": "buồng trứng hải sâm khô",
+        "word": "口上",
+        "reading": "こうじょう",
+        "meaning": "khả năng nói",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -2996,30 +3045,30 @@
       {
         "word": "目",
         "reading": "め",
-        "meaning": "Mắt",
+        "meaning": "con mắt",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "～目",
-        "reading": "～め",
-        "meaning": "thứ ~",
+        "word": "一目",
+        "reading": "いちもく",
+        "meaning": "cái nhìn; cái liếc",
         "level": "N5",
-        "type": "KH"
+        "type": "vocab"
       },
       {
-        "word": "目標",
-        "reading": "もくひょう",
-        "meaning": "Mục tiêu",
+        "word": "丁目",
+        "reading": "ちょうめ",
+        "meaning": "khu phố",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "目的",
-        "reading": "もくてき",
-        "meaning": "mục đích",
+        "word": "目上",
+        "reading": "めうえ",
+        "meaning": "cấp trên; bề trên",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -3049,30 +3098,30 @@
       {
         "word": "耳",
         "reading": "みみ",
-        "meaning": "cái tai; tai",
+        "meaning": "tai",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "寝耳",
-        "reading": "ねみみ",
-        "meaning": "có gì đó nghe thấy khi đang ngủ",
+        "word": "中耳",
+        "reading": "ちゅうじ",
+        "meaning": "tai giữa",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "小耳",
-        "reading": "こみみ",
-        "meaning": "nghe lén",
+        "word": "耳介",
+        "reading": "みみかい",
+        "meaning": "tai ngoài",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "目耳",
-        "reading": "めみみ",
-        "meaning": "(của chính mình) mắt và tai",
+        "word": "俚耳",
+        "reading": "りじ",
+        "meaning": "giám đốc",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -3100,32 +3149,32 @@
     "mnemonicStory": "Chữ THỦ (Tay - 手) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Tay'.",
     "exampleCompounds": [
       {
-        "word": "手帳",
-        "reading": "てちょう",
-        "meaning": "sổ tay (lịch)",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "お手洗い",
-        "reading": "おてあらい",
-        "meaning": "nhà vệ sinh (lịch sự)",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "手紙",
-        "reading": "てがみ",
-        "meaning": "thư",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "手",
         "reading": "て",
         "meaning": "tay",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "一手",
+        "reading": "いちて",
+        "meaning": "phương pháp",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "上手",
+        "reading": "じょうず",
+        "meaning": "lời tâng bốc; lời nịnh nọt",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "手下",
+        "reading": "てした",
+        "meaning": "phụ",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -3155,30 +3204,30 @@
       {
         "word": "足",
         "reading": "あし",
-        "meaning": "Chân / Bàn chân",
+        "meaning": "cẳng",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "お足",
-        "reading": "おあし",
-        "meaning": "tiền bạc",
+        "word": "足す",
+        "reading": "たす",
+        "meaning": "cộng",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "出足",
-        "reading": "であし",
-        "meaning": "bắt đầu",
+        "word": "足る",
+        "reading": "たる",
+        "meaning": "đủ",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "小足",
-        "reading": "こあし",
-        "meaning": "các bước băm nhỏ",
+        "word": "一足",
+        "reading": "ひとあし",
+        "meaning": "một bước",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -3208,28 +3257,28 @@
       {
         "word": "体",
         "reading": "からだ",
-        "meaning": "Cơ thể",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "体温",
-        "reading": "たいおん",
-        "meaning": "Nhiệt độ cơ thể",
+        "meaning": "cơ thể; sức khoẻ",
         "level": "N5",
         "type": "vocab"
       },
       {
-        "word": "抗体",
-        "reading": "こうたい",
-        "meaning": "kháng thể",
+        "word": "一体",
+        "reading": "いったい",
+        "meaning": "đồng nhất; làm một; cùng nhau; tập thể",
         "level": "N5",
         "type": "vocab"
       },
       {
-        "word": "染色体",
-        "reading": "せんしょくたい",
-        "meaning": "Nhiễm sắc thể",
+        "word": "主体",
+        "reading": "しゅたい",
+        "meaning": "chủ thể",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "事体",
+        "reading": "ことたい",
+        "meaning": "vị trí",
         "level": "N5",
         "type": "vocab"
       }
@@ -3259,32 +3308,32 @@
     "mnemonicStory": "Chữ NHẬP (Vào - 入) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Vào'.",
     "exampleCompounds": [
       {
-        "word": "入ります",
-        "reading": "はいります",
-        "meaning": "vào",
+        "word": "入る",
+        "reading": "はいる",
+        "meaning": "đi vào, bước vào",
         "level": "N5",
-        "type": "ĐT1"
+        "type": "DT"
       },
       {
-        "word": "入れます",
-        "reading": "いれます",
-        "meaning": "cho vào",
+        "word": "入れる",
+        "reading": "いれる",
+        "meaning": "cho vào, bỏ vào",
         "level": "N5",
-        "type": "ĐT2"
+        "type": "DT"
       },
       {
-        "word": "記入します",
-        "reading": "きにゅうします",
-        "meaning": "điền vào (biểu mẫu)",
+        "word": "入口",
+        "reading": "いりぐち",
+        "meaning": "lối vào, cửa vào",
         "level": "N5",
-        "type": "ĐT"
+        "type": "DT"
       },
       {
-        "word": "入院します",
-        "reading": "にゅういんします",
-        "meaning": "nhập viện",
+        "word": "入学",
+        "reading": "にゅうがく",
+        "meaning": "nhập học, vào trường",
         "level": "N5",
-        "type": "ĐT"
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -3312,32 +3361,32 @@
     "mnemonicStory": "Chữ XUẤT (Ra - 出) được ghép từ bộ Triệt (屮 - mầm non mới nhú) và bộ Khảm (凵 - hố sâu, chỗ trũng). Sự kết hợp hài hòa giữa hình tượng mầm non mới nhú và hố sâu, chỗ trũng khắc họa nên ý nghĩa sâu sắc của 'Ra'.",
     "exampleCompounds": [
       {
-        "word": "出ます",
-        "reading": "でます",
-        "meaning": "ra",
+        "word": "出る",
+        "reading": "でる",
+        "meaning": "đi ra, xuất hiện",
         "level": "N5",
-        "type": "ĐT2"
+        "type": "DT"
       },
       {
-        "word": "出します",
-        "reading": "だします",
-        "meaning": "lấy ra, gửi",
+        "word": "出す",
+        "reading": "だす",
+        "meaning": "lấy ra, gửi đi, nộp",
         "level": "N5",
-        "type": "ĐT1"
+        "type": "DT"
       },
       {
-        "word": "出かけます",
-        "reading": "でかけます",
-        "meaning": "ra ngoài",
+        "word": "出口",
+        "reading": "でぐち",
+        "meaning": "lối ra, cửa ra",
         "level": "N5",
-        "type": "ĐT2"
+        "type": "DT"
       },
       {
-        "word": "出張します",
-        "reading": "しゅっちょうします",
-        "meaning": "đi công tác",
+        "word": "出発",
+        "reading": "しゅっぱつ",
+        "meaning": "xuất phát, khởi hành",
         "level": "N5",
-        "type": "ĐT3"
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -3365,32 +3414,32 @@
     "mnemonicStory": "Chữ LẬP (Đứng - 立) được ghép từ bộ Đầu (亠 - phần nóc chóp trên cùng) và bộ phận (丷) và bộ Nhất (一 - số một, khởi nguyên vạn vật). Sự kết hợp hài hòa giữa hình tượng phần nóc chóp trên cùng và 丷 khắc họa nên ý nghĩa sâu sắc của 'Đứng'.",
     "exampleCompounds": [
       {
-        "word": "立ちます",
-        "reading": "たちます",
+        "word": "立ち",
+        "reading": "たち",
+        "meaning": "sự dừng lại",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "立つ",
+        "reading": "たつ",
         "meaning": "đứng",
         "level": "N5",
-        "type": "ĐT1"
+        "type": "vocab"
       },
       {
-        "word": "役に立ちます",
-        "reading": "やくにたちます",
-        "meaning": "có ích",
+        "word": "両立",
+        "reading": "りょうりつ",
+        "meaning": "sự cùng tồn tại; sự đứng cùng nhau",
         "level": "N5",
-        "type": "ĐT1"
+        "type": "vocab"
       },
       {
-        "word": "立場",
-        "reading": "たちば",
-        "meaning": "lập trường",
+        "word": "中立",
+        "reading": "ちゅうりつ",
+        "meaning": "trung lập",
         "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "独立します",
-        "reading": "どくりつします",
-        "meaning": "độc lập, tự lập",
-        "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -3418,30 +3467,30 @@
     "mnemonicStory": "Chữ HƯU (Nghỉ - 休) được ghép từ bộ Nhân đứng (亻 - người) và bộ Mộc (木 - cái cây, gỗ rừng). Người tựa lưng vào bóng cây râm mát là lúc đang dừng lại để nghỉ ngơi.",
     "exampleCompounds": [
       {
+        "word": "休む",
+        "reading": "やすむ",
+        "meaning": "nghỉ ngơi, vắng mặt",
+        "level": "N5",
+        "type": "DT"
+      },
+      {
         "word": "休み",
         "reading": "やすみ",
-        "meaning": "ngày nghỉ",
+        "meaning": "ngày nghỉ, giờ nghỉ",
         "level": "N5",
         "type": "DT"
-      },
-      {
-        "word": "昼休み",
-        "reading": "ひるやすみ",
-        "meaning": "nghỉ trưa",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "休みます",
-        "reading": "やすみます",
-        "meaning": "nghỉ",
-        "level": "N5",
-        "type": "ĐT1"
       },
       {
         "word": "夏休み",
         "reading": "なつやすみ",
         "meaning": "nghỉ hè",
+        "level": "N5",
+        "type": "DT"
+      },
+      {
+        "word": "休日",
+        "reading": "きゅうじつ",
+        "meaning": "ngày nghỉ lễ",
         "level": "N5",
         "type": "DT"
       }
@@ -3471,32 +3520,32 @@
     "mnemonicStory": "Chữ KIẾN (Nhìn - 見) được ghép từ bộ Mục (目 - đôi mắt mở to quan sát) và bộ Nhân đi (儿 - đôi chân bước đi). Sự kết hợp hài hòa giữa hình tượng đôi mắt mở to quan sát và đôi chân bước đi khắc họa nên ý nghĩa sâu sắc của 'Nhìn'.",
     "exampleCompounds": [
       {
-        "word": "見せてください",
-        "reading": "みせてください",
-        "meaning": "sự giải quyết; sự phân xử",
-        "level": "N5",
-        "type": "KH"
-      },
-      {
-        "word": "見ます",
-        "reading": "みます",
-        "meaning": "xem, nhìn",
-        "level": "N5",
-        "type": "ĐT2"
-      },
-      {
-        "word": "お花見",
-        "reading": "おはなみ",
-        "meaning": "ngắm hoa",
+        "word": "見る",
+        "reading": "みる",
+        "meaning": "nhìn, xem, ngắm",
         "level": "N5",
         "type": "DT"
       },
       {
-        "word": "見せます",
-        "reading": "みせます",
-        "meaning": "để quan sát cẩn thận; để đảm bảo",
+        "word": "見せる",
+        "reading": "みせる",
+        "meaning": "cho xem, cho thấy",
         "level": "N5",
-        "type": "ĐT2"
+        "type": "DT"
+      },
+      {
+        "word": "花見",
+        "reading": "はなみ",
+        "meaning": "ngắm hoa anh đào",
+        "level": "N5",
+        "type": "DT"
+      },
+      {
+        "word": "意見",
+        "reading": "いけん",
+        "meaning": "ý kiến, quan điểm",
+        "level": "N5",
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -3524,32 +3573,32 @@
     "mnemonicStory": "Chữ VĂN (Nghe - 聞) được ghép từ bộ Môn (門 - hai cánh cổng lớn uy nghi) và bộ Nhĩ (耳 - vành tai lắng nghe). Ghé vành tai áp sát vào sau cánh cổng để lắng nghe âm thanh vọng lại từ xa.",
     "exampleCompounds": [
       {
-        "word": "新聞",
-        "reading": "しんぶん",
-        "meaning": "báo, tin tức",
+        "word": "聞く",
+        "reading": "きく",
+        "meaning": "nghe; hỏi",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "聞きます",
-        "reading": "ききます",
-        "meaning": "nghe chăm chú",
+        "word": "他聞",
+        "reading": "たぶん",
+        "meaning": "có lẽ",
         "level": "N5",
-        "type": "ĐT1"
+        "type": "vocab"
       },
       {
-        "word": "聞こえます",
-        "reading": "きこえます",
-        "meaning": "nghe thấy được",
+        "word": "令聞",
+        "reading": "れいぶん",
+        "meaning": "tiếng tăm",
         "level": "N5",
-        "type": "ĐT2"
+        "type": "vocab"
       },
       {
-        "word": "〜そうです (伝聞)",
-        "reading": "〜そうです",
-        "meaning": "nghe nói ~ (truyền đạt lại thông tin)",
+        "word": "伝聞",
+        "reading": "でんぶん",
+        "meaning": "tin đồn",
         "level": "N5",
-        "type": "MT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -3577,25 +3626,32 @@
     "mnemonicStory": "Chữ ĐỘC (Đọc - 読) được ghép từ bộ Ngôn (言 - lời nói thốt ra từ miệng) và bộ MẠI (売 - Bán). Sự kết hợp hài hòa giữa hình tượng lời nói thốt ra từ miệng và Bán khắc họa nên ý nghĩa sâu sắc của 'Đọc'.",
     "exampleCompounds": [
       {
-        "word": "読みます",
-        "reading": "よみます",
-        "meaning": "đọc",
+        "word": "読み",
+        "reading": "よみ",
+        "meaning": "sự đọc",
         "level": "N5",
-        "type": "ĐT1"
-      },
-      {
-        "word": "読解力",
-        "reading": "どっかいりょく",
-        "meaning": "khả năng đọc hiểu",
-        "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
         "word": "読む",
         "reading": "よむ",
-        "meaning": "Đọc",
+        "meaning": "đọc",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "一読",
+        "reading": "いちどく",
+        "meaning": "sự đọc kỹ",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "判読",
+        "reading": "はんどく",
+        "meaning": "sự giải",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -3623,32 +3679,32 @@
     "mnemonicStory": "Chữ THƯ (Viết - 書) được ghép từ bộ phận (𦘒) và bộ Nhất (一 - số một, khởi nguyên vạn vật) và bộ Nhật (日 - mặt trời, ban ngày, thời gian). Sự kết hợp hài hòa giữa hình tượng 𦘒 và số một, khởi nguyên vạn vật khắc họa nên ý nghĩa sâu sắc của 'Viết'.",
     "exampleCompounds": [
       {
-        "word": "辞書",
-        "reading": "じしょ",
-        "meaning": "từ điển",
+        "word": "書",
+        "reading": "しょ",
+        "meaning": "bản",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "図書館",
-        "reading": "としょかん",
-        "meaning": "thư viện",
+        "word": "書く",
+        "reading": "かく",
+        "meaning": "vẽ",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "書きます",
-        "reading": "かきます",
-        "meaning": "viết, vẽ",
+        "word": "ト書",
+        "reading": "とがき",
+        "meaning": "bản hướng dẫn cách diễn (cách đi đứng",
         "level": "N5",
-        "type": "ĐT1"
+        "type": "vocab"
       },
       {
-        "word": "書留",
-        "reading": "かきとめ",
-        "meaning": "thư bảo đảm",
+        "word": "一書",
+        "reading": "いちしょ",
+        "meaning": "chữ cái",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -3676,32 +3732,32 @@
     "mnemonicStory": "Chữ THOẠI (Nói chuyện - 話) được ghép từ bộ Ngôn (言 - lời nói thốt ra từ miệng) và bộ Thiệt (舌 - chiếc lưỡi nếm vị). Sự kết hợp hài hòa giữa hình tượng lời nói thốt ra từ miệng và chiếc lưỡi nếm vị khắc họa nên ý nghĩa sâu sắc của 'Nói chuyện'.",
     "exampleCompounds": [
       {
-        "word": "電話",
-        "reading": "でんわ",
-        "meaning": "điện thoại",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "話します",
-        "reading": "はなします",
-        "meaning": "nói",
-        "level": "N5",
-        "type": "ĐT1"
-      },
-      {
-        "word": "電話します",
-        "reading": "でんわします",
-        "meaning": "gọi điện thoại",
-        "level": "N5",
-        "type": "ĐT3"
-      },
-      {
         "word": "話",
         "reading": "はなし",
-        "meaning": "câu chuyện",
+        "meaning": "câu chuyện; sự nói chuyện; sự hội tho���i",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "話々",
+        "reading": "はなし々",
+        "meaning": "chuyện phiếm",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "話し",
+        "reading": "はなし",
+        "meaning": "lời nói",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "話す",
+        "reading": "はなす",
+        "meaning": "bàn tán",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -3729,32 +3785,32 @@
     "mnemonicStory": "Chữ NGÔN (Nói - 言) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Nói'.",
     "exampleCompounds": [
       {
-        "word": "言います",
-        "reading": "いいます",
-        "meaning": "nói",
+        "word": "言う",
+        "reading": "いう",
+        "meaning": "nói, phát biểu",
         "level": "N5",
-        "type": "ĐT1"
+        "type": "DT"
       },
       {
-        "word": "失言",
-        "reading": "しつげん",
-        "meaning": "nói nhầm, nói hớ, lỡ miệng",
+        "word": "言葉",
+        "reading": "ことば",
+        "meaning": "từ vựng, ngôn ngữ",
+        "level": "N5",
+        "type": "DT"
+      },
+      {
+        "word": "一言",
+        "reading": "ひとこと",
+        "meaning": "một lời, đôi lời",
         "level": "N5",
         "type": "DT"
       },
       {
         "word": "伝言",
         "reading": "でんごん",
-        "meaning": "lời nhắn",
+        "meaning": "lời nhắn, tin nhắn",
         "level": "N5",
         "type": "DT"
-      },
-      {
-        "word": "〜ように言いました",
-        "reading": "〜ようにいいました",
-        "meaning": "nói với ~ hãy ~ (truyền đạt mệnh lệnh/yêu cầu)",
-        "level": "N5",
-        "type": "MT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -3782,30 +3838,30 @@
     "mnemonicStory": "Chữ NGỮ (Ngôn ngữ - 語) được ghép từ bộ Ngôn (言 - lời nói thốt ra từ miệng) và bộ phận (吾). Những lời nói chân thành tự đáy lòng mình (ngô) phát ra kết tinh thành ngôn ngữ giao tiếp.",
     "exampleCompounds": [
       {
-        "word": "英語",
-        "reading": "えいご",
-        "meaning": "tiếng Anh",
+        "word": "語",
+        "reading": "ご",
+        "meaning": "ngôn ngữ; từ",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "～語",
-        "reading": "～ご",
-        "meaning": "tiếng ~",
+        "word": "語り",
+        "reading": "かたり",
+        "meaning": "sự nói",
         "level": "N5",
-        "type": "KH"
+        "type": "vocab"
       },
       {
-        "word": "日本語",
-        "reading": "にほんご",
-        "meaning": "tiếng Nhật",
+        "word": "語る",
+        "reading": "かたる",
+        "meaning": "kể chuyện; kể lại; thuật lại",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "敬語",
-        "reading": "けいご",
-        "meaning": "kính ngữ, ngôn ngữ lịch sự",
+        "word": "日本語学校",
+        "reading": "にほんごがっこう",
+        "meaning": "trường Nhật ngữ",
         "level": "N5",
         "type": "DT"
       }
@@ -3835,32 +3891,32 @@
     "mnemonicStory": "Chữ THỰC (Ăn - 食) được ghép từ bộ Nhân (人 - con người) và bộ LƯƠNG (良 - Tốt, lành). Sự kết hợp hài hòa giữa hình tượng con người và Tốt, lành khắc họa nên ý nghĩa sâu sắc của 'Ăn'.",
     "exampleCompounds": [
       {
-        "word": "食堂",
-        "reading": "しょくどう",
-        "meaning": "nhà ăn",
+        "word": "食",
+        "reading": "しょく",
+        "meaning": "bột",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "食べます",
-        "reading": "たべます",
-        "meaning": "ăn",
+        "word": "食う",
+        "reading": "くう",
+        "meaning": "ăn; hốc; tọng; đớp; sực; nốc",
         "level": "N5",
-        "type": "ĐT2"
+        "type": "vocab"
       },
       {
-        "word": "食べ物",
-        "reading": "たべもの",
-        "meaning": "thức ăn",
+        "word": "三食",
+        "reading": "さんしょく",
+        "meaning": "sự xâm lấn",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "定食",
-        "reading": "ていしょく",
-        "meaning": "cơm phần",
+        "word": "主食",
+        "reading": "しゅしょく",
+        "meaning": "món chính",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -3888,32 +3944,32 @@
     "mnemonicStory": "Chữ ẨM (Uống - 飲) được ghép từ bộ Thực (飠 - đồ ăn, ẩm thực) và bộ Khiếm (欠 - há miệng ngáp, thiếu hụt). Há miệng đón nhận dòng nước mát lành đổ vào cổ họng chính là hành động uống nước.",
     "exampleCompounds": [
       {
-        "word": "飲みます",
-        "reading": "のみます",
-        "meaning": "uống",
+        "word": "飲む",
+        "reading": "のむ",
+        "meaning": "húp",
         "level": "N5",
-        "type": "ĐT1"
+        "type": "vocab"
       },
       {
-        "word": "飲み物",
-        "reading": "のみもの",
-        "meaning": "đồ uống",
+        "word": "会飲",
+        "reading": "かいいん",
+        "meaning": "Hội cùng ăn uống và nhậu nhẹt; ăn nhậu; nhậu; nhậu nhẹt",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "飲み過ぎます",
-        "reading": "のみすぎます",
-        "meaning": "uống quá nhiều",
+        "word": "飲助",
+        "reading": "のみすけ",
+        "meaning": "người thích rượu",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "飲まさせられます",
-        "reading": "のまさせられます",
-        "meaning": "bị bắt uống",
+        "word": "吸飲",
+        "reading": "",
+        "meaning": "sự hút",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -3941,30 +3997,30 @@
     "mnemonicStory": "Chữ HÀNH (Đi - 行) được ghép từ bộ Xích (彳 - bước chân trái dò đường) và bộ phận (亍). Sự kết hợp hài hòa giữa hình tượng bước chân trái dò đường và 亍 khắc họa nên ý nghĩa sâu sắc của 'Đi'.",
     "exampleCompounds": [
       {
+        "word": "行",
+        "reading": "ぎょう",
+        "meaning": "dòng",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "一行",
+        "reading": "いちぎょう",
+        "meaning": "một hàng; một dòng",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "行く",
+        "reading": "いく",
+        "meaning": "Đi",
+        "level": "N5",
+        "type": "DT"
+      },
+      {
         "word": "銀行員",
         "reading": "ぎんこういん",
         "meaning": "nhân viên ngân hàng",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "銀行",
-        "reading": "ぎんこう",
-        "meaning": "ngân hàng",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "急行",
-        "reading": "きゅうこう",
-        "meaning": "Tàu tốc hành (express)",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "飛行機",
-        "reading": "ひこうき",
-        "meaning": "máy bay",
         "level": "N5",
         "type": "DT"
       }
@@ -3994,30 +4050,30 @@
     "mnemonicStory": "Chữ MÃI (Mua - 買) được ghép từ bộ Võng (罒 - tấm lưới chụp xuống) và bộ Bối (貝 - vỏ sò biển, tiền tài của cải). Sự kết hợp hài hòa giữa hình tượng tấm lưới chụp xuống và vỏ sò biển, tiền tài của cải khắc họa nên ý nghĩa sâu sắc của 'Mua'.",
     "exampleCompounds": [
       {
-        "word": "買います",
-        "reading": "かいます",
-        "meaning": "mua",
-        "level": "N5",
-        "type": "ĐT1"
-      },
-      {
-        "word": "買い物します",
-        "reading": "かいものします",
-        "meaning": "mua sắm",
-        "level": "N5",
-        "type": "ĐT3"
-      },
-      {
-        "word": "企業買収",
-        "reading": "きぎょうばいしゅう",
-        "meaning": "Thâu tóm / mua lại doanh nghiệp",
-        "level": "N5",
-        "type": "vocab"
-      },
-      {
         "word": "買う",
         "reading": "かう",
         "meaning": "mua",
+        "level": "N5",
+        "type": "DT"
+      },
+      {
+        "word": "買い物",
+        "reading": "かいもの",
+        "meaning": "mua sắm",
+        "level": "N5",
+        "type": "DT"
+      },
+      {
+        "word": "売買",
+        "reading": "ばいばい",
+        "meaning": "mua bán, giao thương",
+        "level": "N5",
+        "type": "DT"
+      },
+      {
+        "word": "購買",
+        "reading": "こうばい",
+        "meaning": "sự mua vào, sức mua",
         "level": "N5",
         "type": "DT"
       }
@@ -4047,32 +4103,32 @@
     "mnemonicStory": "Chữ HỘI (Gặp - 会) được ghép từ bộ Nhân (人 - con người) và bộ phận (云). Sự kết hợp hài hòa giữa hình tượng con người và 云 khắc họa nên ý nghĩa sâu sắc của 'Gặp'.",
     "exampleCompounds": [
       {
-        "word": "会社員",
-        "reading": "かいしゃいん",
-        "meaning": "nhân viên công ty",
+        "word": "会",
+        "reading": "え",
+        "meaning": "sự hiểu",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "会社",
-        "reading": "かいしゃ",
-        "meaning": "công ty",
+        "word": "会う",
+        "reading": "あう",
+        "meaning": "đón",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "会議室",
-        "reading": "かいぎしつ",
-        "meaning": "phòng họp",
+        "word": "休会",
+        "reading": "きゅうかい",
+        "meaning": "sự hoãn lại",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "会議",
-        "reading": "かいぎ",
-        "meaning": "cuộc họp",
+        "word": "停会",
+        "reading": "ていかい",
+        "meaning": "sự hoãn lại",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -4100,32 +4156,32 @@
     "mnemonicStory": "Chữ HÀ (Gì - 何) được ghép từ bộ Nhân đứng (亻 - người) và bộ KHẢ (可 - Có thể, khả năng). Sự kết hợp hài hòa giữa hình tượng người và Có thể, khả năng khắc họa nên ý nghĩa sâu sắc của 'Gì'.",
     "exampleCompounds": [
       {
-        "word": "何歳",
-        "reading": "なんさい",
-        "meaning": "mấy tuổi",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "何",
-        "reading": "なん",
+        "reading": "なに",
         "meaning": "cái gì",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "何階",
-        "reading": "なんかい／なんがい",
-        "meaning": "Tầng mấy",
+        "word": "��か",
+        "reading": "なにか",
+        "meaning": "cái gì đó",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "何時",
-        "reading": "なんじ",
-        "meaning": "Mấy giờ",
+        "word": "何て",
+        "reading": "なんて",
+        "meaning": "cái gì cơ; làm thế nào mà",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "何で",
+        "reading": "なんで",
+        "meaning": "Vì sao; bằng gì",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -4153,32 +4209,32 @@
     "mnemonicStory": "Chữ TÂN (Mới - 新) được ghép từ bộ phận (亲) và bộ Cân (斤 - cái rìu đẵn gỗ). Sự kết hợp hài hòa giữa hình tượng 亲 và cái rìu đẵn gỗ khắc họa nên ý nghĩa sâu sắc của 'Mới'.",
     "exampleCompounds": [
       {
-        "word": "新聞",
-        "reading": "しんぶん",
-        "meaning": "báo, tin tức",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "新幹線",
-        "reading": "しんかんせん",
-        "meaning": "Tàu cao tốc shinkansen",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "新しい",
-        "reading": "あたらしい",
-        "meaning": "Mới",
-        "level": "N5",
-        "type": "TT-i"
-      },
-      {
         "word": "新",
         "reading": "しん",
-        "meaning": "Tân / mới",
+        "meaning": "tân; mới",
         "level": "N5",
-        "type": "kanji"
+        "type": "vocab"
+      },
+      {
+        "word": "新た",
+        "reading": "あらた",
+        "meaning": "sự tươi; sự mới",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "一新",
+        "reading": "いっしん",
+        "meaning": "sự cải cách; sự thay đổi hoàn toàn",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "新人",
+        "reading": "しんじん",
+        "meaning": "gương mặt mới; người mới",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -4206,32 +4262,32 @@
     "mnemonicStory": "Chữ CỔ (Cũ - 古) được ghép từ bộ Thập (十 - số mười, trọn vẹn hoàn hảo) và bộ Khẩu (口 - cái miệng, lời nói, ăn uống). Sự kết hợp hài hòa giữa hình tượng số mười, trọn vẹn hoàn hảo và cái miệng, lời nói, ăn uống khắc họa nên ý nghĩa sâu sắc của 'Cũ'.",
     "exampleCompounds": [
       {
-        "word": "古い",
-        "reading": "ふるい",
-        "meaning": "Cũ",
-        "level": "N5",
-        "type": "TT-i"
-      },
-      {
-        "word": "古い物",
-        "reading": "ふるいもの",
-        "meaning": "đồ cổ",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "古典",
-        "reading": "こてん",
-        "meaning": "Cổ điển / văn học cổ",
+        "word": "古",
+        "reading": "ふる",
+        "meaning": "tình trạng cổ xưa",
         "level": "N5",
         "type": "vocab"
       },
       {
-        "word": "古",
-        "reading": "こ",
-        "meaning": "Cổ / xưa",
+        "word": "古い",
+        "reading": "ふるい",
+        "meaning": "cũ; cổ; già",
         "level": "N5",
-        "type": "kanji"
+        "type": "vocab"
+      },
+      {
+        "word": "古く",
+        "reading": "ふるく",
+        "meaning": "trước đây",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "古す",
+        "reading": "ふるす",
+        "meaning": "cũ đi",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -4259,32 +4315,32 @@
     "mnemonicStory": "Chữ TRƯỜNG (Dài - 長) được ghép từ bộ phận (④) và bộ Nhất (一 - số một, khởi nguyên vạn vật) và bộ phận (𠄌). Sự kết hợp hài hòa giữa hình tượng ④ và số một, khởi nguyên vạn vật khắc họa nên ý nghĩa sâu sắc của 'Dài'.",
     "exampleCompounds": [
       {
+        "word": "長",
+        "reading": "なが",
+        "meaning": "thủ lĩnh",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "長々",
+        "reading": "ながなが",
+        "meaning": "dài (không gian",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
         "word": "長い",
         "reading": "ながい",
-        "meaning": "Dài",
+        "meaning": "bao lâu",
         "level": "N5",
-        "type": "TT-i"
+        "type": "vocab"
       },
       {
-        "word": "成長",
-        "reading": "せいちょう",
-        "meaning": "sinh trưởng, phát triển, trưởng thành",
+        "word": "長さ",
+        "reading": "ながさ",
+        "meaning": "bề dài",
         "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "部長",
-        "reading": "ぶちょう",
-        "meaning": "trưởng phòng",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "社長",
-        "reading": "しゃちょう",
-        "meaning": "giám đốc",
-        "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -4312,32 +4368,32 @@
     "mnemonicStory": "Chữ CAO (Cao - 高) được ghép từ bộ Đầu (亠 - phần nóc chóp trên cùng) và bộ Khẩu (口 - cái miệng, lời nói, ăn uống) và bộ phận (冋). Sự kết hợp hài hòa giữa hình tượng phần nóc chóp trên cùng và cái miệng, lời nói, ăn uống khắc họa nên ý nghĩa sâu sắc của 'Cao'.",
     "exampleCompounds": [
       {
+        "word": "高",
+        "reading": "こう",
+        "meaning": "lượng",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
         "word": "高い",
         "reading": "たかい",
-        "meaning": "Đắt / Cao",
+        "meaning": "cao; đắt",
         "level": "N5",
-        "type": "TT-i"
+        "type": "vocab"
       },
       {
-        "word": "高校",
-        "reading": "こうこう",
-        "meaning": "trường cấp 3",
+        "word": "高さ",
+        "reading": "たかさ",
+        "meaning": "bề cao",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "背が高い",
-        "reading": "せがたかい",
-        "meaning": "cao (chiều cao người)",
+        "word": "高み",
+        "reading": "たかみ",
+        "meaning": "chiều cao",
         "level": "N5",
-        "type": "TT-i"
-      },
-      {
-        "word": "最高",
-        "reading": "さいこう",
-        "meaning": "cao nhất, tuyệt vời, rất",
-        "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -4367,28 +4423,28 @@
       {
         "word": "安い",
         "reading": "やすい",
-        "meaning": "Rẻ / Thấp",
+        "meaning": "điềm tĩnh; yên tâm",
         "level": "N5",
-        "type": "TT-i"
+        "type": "vocab"
       },
       {
-        "word": "安心します",
-        "reading": "あんしんします",
-        "meaning": "yên tâm",
+        "word": "安く",
+        "reading": "やすく",
+        "meaning": "rẻ",
         "level": "N5",
-        "type": "ĐT"
-      },
-      {
-        "word": "安ければ",
-        "reading": "やすければ",
-        "meaning": "nếu rẻ thì",
-        "level": "N5",
-        "type": "MT"
+        "type": "vocab"
       },
       {
         "word": "不安",
         "reading": "ふあん",
-        "meaning": "Lo lắng / bất an",
+        "meaning": "không yên tâm; bất an",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "安住",
+        "reading": "あんじゅう",
+        "meaning": "sự an cư; cuộc sống yên ổn",
         "level": "N5",
         "type": "vocab"
       }
@@ -4418,30 +4474,30 @@
     "mnemonicStory": "Chữ ĐA (Nhiều - 多) được ghép từ bộ Tịch (夕 - buổi chiều tối, hoàng hôn) và bộ Tịch (夕 - buổi chiều tối, hoàng hôn). Sự kết hợp hài hòa giữa hình tượng buổi chiều tối, hoàng hôn và buổi chiều tối, hoàng hôn khắc họa nên ý nghĩa sâu sắc của 'Nhiều'.",
     "exampleCompounds": [
       {
-        "word": "多い",
-        "reading": "おおい",
-        "meaning": "nhiều",
-        "level": "N5",
-        "type": "TT-i"
-      },
-      {
-        "word": "多分",
-        "reading": "たぶん",
-        "meaning": "có lẽ, chắc là",
-        "level": "N5",
-        "type": "PV"
-      },
-      {
-        "word": "多文化共生",
-        "reading": "たぶんかきょうせい",
-        "meaning": "Cùng chung sống đa văn hóa",
+        "word": "多",
+        "reading": "た",
+        "meaning": "đa; nhiều",
         "level": "N5",
         "type": "vocab"
       },
       {
-        "word": "生物多様性",
-        "reading": "せいぶつたようせい",
-        "meaning": "Đa dạng sinh học",
+        "word": "多い",
+        "reading": "おおい",
+        "meaning": "bộn",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "多く",
+        "reading": "おおく",
+        "meaning": "đa",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "多作",
+        "reading": "たさく",
+        "meaning": "sự sinh sản nhiều",
         "level": "N5",
         "type": "vocab"
       }
@@ -4471,32 +4527,32 @@
     "mnemonicStory": "Chữ THIỂU (Ít - 少) được ghép từ bộ Tiểu (小 - nhỏ bé) và bộ Phiệt (丿 - nét phẩy nghiêng lướt). Sự kết hợp hài hòa giữa hình tượng nhỏ bé và nét phẩy nghiêng lướt khắc họa nên ý nghĩa sâu sắc của 'Ít'.",
     "exampleCompounds": [
       {
+        "word": "少々",
+        "reading": "しょうしょう",
+        "meaning": "một chút; một lát",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
         "word": "少し",
         "reading": "すこし",
-        "meaning": "Một ít",
+        "meaning": "chút đỉnh",
         "level": "N5",
-        "type": "TrT"
+        "type": "vocab"
       },
       {
-        "word": "少ない",
-        "reading": "すくない",
-        "meaning": "ít",
+        "word": "些少",
+        "reading": "さしょう",
+        "meaning": "vặt",
         "level": "N5",
-        "type": "TT-i"
+        "type": "vocab"
       },
       {
-        "word": "もう少し",
-        "reading": "もうすこし",
-        "meaning": "thêm chút nữa",
+        "word": "少佐",
+        "reading": "しょうさ",
+        "meaning": "thiếu tá",
         "level": "N5",
-        "type": "TrT"
-      },
-      {
-        "word": "少しずつ",
-        "reading": "すこしずつ",
-        "meaning": "từng chút một, dần dần",
-        "level": "N5",
-        "type": "PV"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -4524,23 +4580,30 @@
     "mnemonicStory": "Chữ BẠCH (Trắng - 白) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Trắng'.",
     "exampleCompounds": [
       {
+        "word": "白",
+        "reading": "しろ",
+        "meaning": "bên trắng",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
         "word": "白い",
         "reading": "しろい",
-        "meaning": "trắng",
+        "meaning": "màu trắng",
         "level": "N5",
-        "type": "TT-i"
+        "type": "vocab"
       },
       {
-        "word": "面白い",
-        "reading": "おもしろい",
-        "meaning": "thú vị",
+        "word": "乳白",
+        "reading": "にゅうはく",
+        "meaning": "Màu trắng sữa",
         "level": "N5",
-        "type": "TT-i"
+        "type": "vocab"
       },
       {
-        "word": "告白",
-        "reading": "こくはく",
-        "meaning": "Tỏ tình / thú nhận",
+        "word": "白亜",
+        "reading": "はくあ",
+        "meaning": "đá phấn",
         "level": "N5",
         "type": "vocab"
       }
@@ -4570,32 +4633,32 @@
     "mnemonicStory": "Chữ DANH (Tên - 名) được ghép từ bộ Tịch (夕 - buổi chiều tối, hoàng hôn) và bộ Khẩu (口 - cái miệng, lời nói, ăn uống). Sự kết hợp hài hòa giữa hình tượng buổi chiều tối, hoàng hôn và cái miệng, lời nói, ăn uống khắc họa nên ý nghĩa sâu sắc của 'Tên'.",
     "exampleCompounds": [
       {
-        "word": "名刺",
-        "reading": "めいし",
-        "meaning": "danh thiếp",
+        "word": "名",
+        "reading": "な",
+        "meaning": "danh nghĩa",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "有名[な]",
-        "reading": "ゆうめい[な]",
-        "meaning": "nổi tiếng",
+        "word": "下名",
+        "reading": "かめい",
+        "meaning": "được nói đến ở dưới",
         "level": "N5",
-        "type": "TT-na"
+        "type": "vocab"
       },
       {
-        "word": "名前",
-        "reading": "なまえ",
-        "meaning": "tên",
+        "word": "名主",
+        "reading": "なぬし",
+        "meaning": "Người đứng đầu trong làng; trưởng làng",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "有名な",
-        "reading": "ゆうめいな",
-        "meaning": "nổi tiếng",
+        "word": "名人",
+        "reading": "めいじん",
+        "meaning": "danh nhân",
         "level": "N5",
-        "type": "TT-na"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -4623,32 +4686,32 @@
     "mnemonicStory": "Chữ QUỐC (Nước - 国) được ghép từ bộ Vi (囗 - vòng vây khép kín, biên giới đất nước) và bộ Ngọc (玉 - viên ngọc quý có chấm). Bờ cõi biên cương bao bọc lấy viên ngọc quý giang sơn chính là hình tượng đất nước vững bền.",
     "exampleCompounds": [
       {
-        "word": "韓国",
-        "reading": "かんこく",
-        "meaning": "Hàn Quốc",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "中国",
-        "reading": "ちゅうごく",
-        "meaning": "Trung Quốc",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "国",
         "reading": "くに",
-        "meaning": "đất nước",
+        "meaning": "đất nước; quốc gia; quê nhà",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "外国",
-        "reading": "がいこく",
-        "meaning": "nước ngoài",
+        "word": "国々",
+        "reading": "くにぐに",
+        "meaning": "các nước",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "一国",
+        "reading": "いちこく",
+        "meaning": "bướng bỉnh",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "万国",
+        "reading": "ばんこく",
+        "meaning": "các nước; quốc tế",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -4678,30 +4741,30 @@
       {
         "word": "山",
         "reading": "やま",
-        "meaning": "Núi",
+        "meaning": "ngọn núi",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "外山",
-        "reading": "とやま",
-        "meaning": "ngọn núi gần đó",
+        "word": "山々",
+        "reading": "やまやま",
+        "meaning": "những ngọn núi; núi non",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "小山",
-        "reading": "こやま",
-        "meaning": "đồi",
+        "word": "一山",
+        "reading": "ひとやま",
+        "meaning": "núi",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "山場",
-        "reading": "やまば",
-        "meaning": "cao trào",
+        "word": "下山",
+        "reading": "げざん",
+        "meaning": "sự xuống núi; sự trở về nhà sau thời gian tu hành; sự hạ sơn; xuống núi",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -4731,30 +4794,30 @@
       {
         "word": "川",
         "reading": "かわ",
-        "meaning": "Sông",
+        "meaning": "con sông",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "川洲",
-        "reading": "かわす",
-        "meaning": "bãi cát trên sông",
+        "word": "川上",
+        "reading": "かわかみ",
+        "meaning": "thượng nguồn; đầu nguồn; thượng lưu",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "川瀬",
-        "reading": "かわせ",
-        "meaning": "ghềnh",
+        "word": "川下",
+        "reading": "かわしも",
+        "meaning": "hạ nguồn; cuối nguồn; hạ lưu",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "川路",
-        "reading": "かわじ",
-        "meaning": "dòng sông",
+        "word": "川原",
+        "reading": "かわはら",
+        "meaning": "đáy sông khô cạn",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -4789,25 +4852,25 @@
         "type": "DT"
       },
       {
+        "word": "天国",
+        "reading": "てんごく",
+        "meaning": "thiên đường",
+        "level": "N5",
+        "type": "DT"
+      },
+      {
+        "word": "天才",
+        "reading": "てんさい",
+        "meaning": "thiên tài",
+        "level": "N5",
+        "type": "DT"
+      },
+      {
         "word": "天ぷら",
         "reading": "てんぷら",
-        "meaning": "món tempura",
+        "meaning": "món tẩm bột chiên tempura",
         "level": "N5",
         "type": "DT"
-      },
-      {
-        "word": "天気予報",
-        "reading": "てんきよほう",
-        "meaning": "Dự báo thời tiết",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "天気がよければ",
-        "reading": "てんきがよければ",
-        "meaning": "nếu thời tiết đẹp thì",
-        "level": "N5",
-        "type": "MT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -4835,32 +4898,32 @@
     "mnemonicStory": "Chữ KHÍ (Khí, Tinh thần - 気) được ghép từ bộ Khí (气 - hơi thở, mây khói trời) và bộ phận (㐅). Sự kết hợp hài hòa giữa hình tượng hơi thở, mây khói trời và 㐅 khắc họa nên ý nghĩa sâu sắc của 'Khí, Tinh thần'.",
     "exampleCompounds": [
       {
-        "word": "電気",
-        "reading": "でんき",
-        "meaning": "Điện / Đèn",
+        "word": "元気",
+        "reading": "げんき",
+        "meaning": "khỏe mạnh",
         "level": "N5",
         "type": "DT"
       },
       {
-        "word": "ほんの気持ちです",
-        "reading": "ほんのきもちです",
-        "meaning": "chỉ là chút lòng thành",
+        "word": "天気",
+        "reading": "てんき",
+        "meaning": "thời tiết",
         "level": "N5",
-        "type": "KH"
+        "type": "DT"
       },
       {
-        "word": "元気[な]",
-        "reading": "げんき[な]",
-        "meaning": "khỏe mạnh",
+        "word": "気分",
+        "reading": "きぶん",
+        "meaning": "tâm trạng, cảm giác",
         "level": "N5",
-        "type": "TT-na"
+        "type": "DT"
       },
       {
-        "word": "お元気ですか",
-        "reading": "おげんきですか",
-        "meaning": "anh/chị có khỏe không?",
+        "word": "気持ち",
+        "reading": "きもち",
+        "meaning": "tấm lòng, cảm giác",
         "level": "N5",
-        "type": "KH"
+        "type": "DT"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -4890,23 +4953,30 @@
       {
         "word": "雨",
         "reading": "あめ",
-        "meaning": "Mưa",
+        "meaning": "cơn mưa",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "梅雨",
-        "reading": "つゆ",
-        "meaning": "Mùa mưa",
+        "word": "一雨",
+        "reading": "ひとあめ",
+        "meaning": "ngư���i chỉ",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "雨が降っても",
-        "reading": "あめがふっても",
-        "meaning": "dù trời mưa đi nữa",
+        "word": "俄雨",
+        "reading": "にわかあめ",
+        "meaning": "mưa rào",
         "level": "N5",
-        "type": "MT"
+        "type": "vocab"
+      },
+      {
+        "word": "雨傘",
+        "reading": "あまがさ",
+        "meaning": "ô che mưa",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -4934,30 +5004,30 @@
     "mnemonicStory": "Chữ HOA (Hoa - 花) được ghép từ bộ Thảo đầu (艹 - cỏ cây thảo mộc) và bộ HÓA (化 - Biến hóa). Sự kết hợp hài hòa giữa hình tượng cỏ cây thảo mộc và Biến hóa khắc họa nên ý nghĩa sâu sắc của 'Hoa'.",
     "exampleCompounds": [
       {
-        "word": "お花見",
-        "reading": "おはなみ",
-        "meaning": "ngắm hoa",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "花",
         "reading": "はな",
-        "meaning": "bông hoa; đóa hoa",
+        "meaning": "bông hoa",
         "level": "N5",
         "type": "DT"
       },
       {
-        "word": "生け花",
-        "reading": "いけばな",
-        "meaning": "nghệ thuật cắm hoa",
+        "word": "花火",
+        "reading": "はなび",
+        "meaning": "pháo hoa",
         "level": "N5",
         "type": "DT"
       },
       {
-        "word": "[お]花見",
-        "reading": "[お]はなみ",
-        "meaning": "ngắm hoa",
+        "word": "花屋",
+        "reading": "はなや",
+        "meaning": "tiệm hoa",
+        "level": "N5",
+        "type": "DT"
+      },
+      {
+        "word": "花見",
+        "reading": "はなみ",
+        "meaning": "ngắm hoa anh đào",
         "level": "N5",
         "type": "DT"
       }
@@ -4987,32 +5057,32 @@
     "mnemonicStory": "Chữ ĐIỆN (Điện - 電) được ghép từ bộ Vũ (雨 - mưa rơi từ vòm mây) và bộ Nhật (日 - mặt trời, ban ngày, thời gian) và bộ phận (乚). Sự kết hợp hài hòa giữa hình tượng mưa rơi từ vòm mây và mặt trời, ban ngày, thời gian khắc họa nên ý nghĩa sâu sắc của 'Điện'.",
     "exampleCompounds": [
       {
-        "word": "電気",
-        "reading": "でんき",
-        "meaning": "Điện / Đèn",
+        "word": "電位",
+        "reading": "でんい",
+        "meaning": "điện thế",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "電話",
-        "reading": "でんわ",
-        "meaning": "điện thoại",
+        "word": "電信",
+        "reading": "でんしん",
+        "meaning": "điện tín",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "電車",
-        "reading": "でんしゃ",
-        "meaning": "Tàu điện",
+        "word": "電停",
+        "reading": "でんてい",
+        "meaning": "sự dừng của xe điện",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "電池",
-        "reading": "でんち",
-        "meaning": "cục pin; pin",
+        "word": "停電",
+        "reading": "ていでん",
+        "meaning": "cúp điện",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -5040,32 +5110,32 @@
     "mnemonicStory": "Chữ XA (Xe - 車) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Xe'.",
     "exampleCompounds": [
       {
-        "word": "自動車",
-        "reading": "じどうしゃ",
-        "meaning": "xe hơi, ô tô",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "電車",
-        "reading": "でんしゃ",
-        "meaning": "Tàu điện",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "自転車",
-        "reading": "じてんしゃ",
-        "meaning": "xe đạp",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "車",
         "reading": "くるま",
-        "meaning": "Xe hơi",
+        "meaning": "bánh xe",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "下車",
+        "reading": "げしゃ",
+        "meaning": "sự xuống tàu xe; xuống xe; xuống tàu",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "車両",
+        "reading": "しゃりょう",
+        "meaning": "xe cộ; phương tiện giao thông",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "車中",
+        "reading": "しゃちゅう",
+        "meaning": "đoàn",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -5095,28 +5165,28 @@
       {
         "word": "道",
         "reading": "みち",
-        "meaning": "Đường, con đường",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "近道",
-        "reading": "ちかみち",
-        "meaning": "đường tắt",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "茶道",
-        "reading": "さどう",
-        "meaning": "Trà đạo",
+        "meaning": "con đường; con phố",
         "level": "N5",
         "type": "vocab"
       },
       {
-        "word": "書道",
-        "reading": "しょどう",
-        "meaning": "Thư pháp",
+        "word": "中道",
+        "reading": "ちゅうどう",
+        "meaning": "giữa hành trình; giữa chừng; lập trường đứng giữa; không đi theo hướng cực đoan; không đi theo cả chủ nghĩa khoái lạc và chủ nghĩa khổ hạnh (Phật); Lập trường tôn giáo đúng đắn đã vượt ra khỏi sự đối lập giữa sắc và không",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "二道",
+        "reading": "ふたみち",
+        "meaning": "nơi hai đường gặp và cắt nhau",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "人道",
+        "reading": "じんどう",
+        "meaning": "nhân đạo",
         "level": "N5",
         "type": "vocab"
       }
@@ -5150,28 +5220,28 @@
         "reading": "えき",
         "meaning": "nhà ga",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "駅夫",
-        "reading": "えきふ",
-        "meaning": "nhân viên đường sắt (porter)",
+        "word": "駅前",
+        "reading": "えきまえ",
+        "meaning": "trước ga",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "駅子",
-        "reading": "えきし",
-        "meaning": "nhân viên tại trạm thay ngựa trong thời kỳ ritsuryo",
+        "word": "駅員",
+        "reading": "えきいん",
+        "meaning": "nhân viên nhà ga; người soát vé ở ga tàu",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "駅路",
-        "reading": "えきろ",
-        "meaning": "đường bưu điện",
+        "word": "宿駅",
+        "reading": "しゅくえき",
+        "meaning": "đài tiếp âm",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -5200,31 +5270,31 @@
     "exampleCompounds": [
       {
         "word": "店",
-        "reading": "みせ",
-        "meaning": "cửa hàng",
+        "reading": "てん",
+        "meaning": "cửa hàng; cửa hiệu",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "喫茶店",
-        "reading": "きっさてん",
-        "meaning": "quán cà phê",
+        "word": "店主",
+        "reading": "てんしゅ",
+        "meaning": "chủ hiệu",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "店先",
+        "reading": "みせさき",
+        "meaning": "mặt tiền của cửa hàng; mặt tiền cửa tiệm",
+        "level": "N5",
+        "type": "vocab"
       },
       {
         "word": "出店",
-        "reading": "���みせ",
-        "meaning": "quầy bán đồ ăn",
+        "reading": "でみせ",
+        "meaning": "cửa hàng chi nhánh",
         "level": "N5",
-        "type": "ĐT"
-      },
-      {
-        "word": "夜店",
-        "reading": "よみせ",
-        "meaning": "quầy hàng đêm",
-        "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -5252,32 +5322,32 @@
     "mnemonicStory": "Chữ XÃ (Công ty - 社) được ghép từ bộ Thị đứng (礻 - thần thánh, nghi lễ tế tự) và bộ Thổ (土 - đất đai, thổ nhưỡng). Sự kết hợp hài hòa giữa hình tượng thần thánh, nghi lễ tế tự và đất đai, thổ nhưỡng khắc họa nên ý nghĩa sâu sắc của 'Công ty'.",
     "exampleCompounds": [
       {
-        "word": "社員",
-        "reading": "しゃいん",
-        "meaning": "nhân viên công ty ~",
+        "word": "社",
+        "reading": "やしろ",
+        "meaning": "đền thờ",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "会社員",
-        "reading": "かいしゃいん",
-        "meaning": "nhân viên công ty",
+        "word": "社中",
+        "reading": "しゃちゅう",
+        "meaning": "đoàn",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "会社",
-        "reading": "かいしゃ",
-        "meaning": "công ty",
+        "word": "社交",
+        "reading": "しゃこう",
+        "meaning": "xã giao; giao tiếp",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
         "word": "社会",
         "reading": "しゃかい",
         "meaning": "xã hội",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -5305,32 +5375,32 @@
     "mnemonicStory": "Chữ BẢN (Sách, Gốc - 本) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Sách, Gốc'.",
     "exampleCompounds": [
       {
-        "word": "日本",
-        "reading": "にほん",
-        "meaning": "Nhật Bản",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "本",
         "reading": "ほん",
-        "meaning": "Sách",
+        "meaning": "cái; chiếc; điếu; bông",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "日本語",
-        "reading": "にほんご",
-        "meaning": "tiếng Nhật",
+        "word": "本々",
+        "reading": "もともと",
+        "meaning": "vốn dĩ; nguyên là; vốn là",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "本屋",
-        "reading": "ほんや",
-        "meaning": "hiệu sách",
+        "word": "本の",
+        "reading": "ほんの",
+        "meaning": "chỉ; chỉ là",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "一本",
+        "reading": "いちほん",
+        "meaning": "cú đánh đòn",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -5358,32 +5428,32 @@
     "mnemonicStory": "Chữ MINH (Sáng - 明) được ghép từ bộ Nhật (日 - mặt trời, ban ngày, thời gian) và bộ Nguyệt (月 - mặt trăng, tháng, thể xác da thịt). Sự kết hợp hài hòa giữa hình tượng mặt trời, ban ngày, thời gian và mặt trăng, tháng, thể xác da thịt khắc họa nên ý nghĩa sâu sắc của 'Sáng'.",
     "exampleCompounds": [
       {
-        "word": "明日",
-        "reading": "あした",
-        "meaning": "Ngày mai",
+        "word": "明々",
+        "reading": "あきら々",
+        "meaning": "say mèm",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "明るい",
-        "reading": "あかるい",
-        "meaning": "Vui vẻ, cởi mở",
+        "word": "明い",
+        "reading": "あかい",
+        "meaning": "sáng",
         "level": "N5",
-        "type": "TT-i"
+        "type": "vocab"
       },
       {
-        "word": "説明します",
-        "reading": "せつめいします",
-        "meaning": "giải thích",
+        "word": "明き",
+        "reading": "あかき",
+        "meaning": "buồng",
         "level": "N5",
-        "type": "ĐT3"
+        "type": "vocab"
       },
       {
-        "word": "発明",
-        "reading": "はつめい",
-        "meaning": "phát minh",
+        "word": "明く",
+        "reading": "あく",
+        "meaning": "mở ra; hé mở; ló rạng; trống; lộ ra ngoài",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -5412,31 +5482,31 @@
     "exampleCompounds": [
       {
         "word": "魚",
-        "reading": "さかな",
-        "meaning": "Cá",
+        "reading": "うお",
+        "meaning": "cá",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "魚座",
-        "reading": "うおざ",
-        "meaning": "song Ngư (chòm sao)",
+        "word": "乾魚",
+        "reading": "かんぎょ",
+        "meaning": "cá khô",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "底魚",
-        "reading": "そこうお",
-        "meaning": "cá sống ở đáy",
+        "word": "人魚",
+        "reading": "にんぎょ",
+        "meaning": "Người cá",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "浮き魚",
-        "reading": "うきうお",
-        "meaning": "cá sống gần bề mặt",
+        "word": "魚介",
+        "reading": "ぎょかい",
+        "meaning": "đồ ăn biển; đồ biển; hải sản",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -5466,30 +5536,30 @@
       {
         "word": "肉",
         "reading": "にく",
-        "meaning": "Thịt",
+        "meaning": "thịt",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "牛肉",
-        "reading": "ぎゅうにく",
-        "meaning": "thịt bò",
+        "word": "並肉",
+        "reading": "なみにく",
+        "meaning": "Thịt có chất lượng trung bình",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "ぶた肉",
-        "reading": "ぶたにく",
-        "meaning": "thịt lợn",
+        "word": "中肉",
+        "reading": "ちゅうにく",
+        "meaning": "thịt có chất lượng trung bình",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "とり肉",
-        "reading": "とりにく",
-        "meaning": "thịt gà",
+        "word": "乾肉",
+        "reading": "いぬいにく",
+        "meaning": "ruốc",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -5517,32 +5587,32 @@
     "mnemonicStory": "Chữ LÂM (Rừng nhỏ - 林) được ghép từ bộ Mộc (木 - cái cây, gỗ rừng) và bộ Mộc (木 - cái cây, gỗ rừng). Sự kết hợp hài hòa giữa hình tượng cái cây, gỗ rừng và cái cây, gỗ rừng khắc họa nên ý nghĩa sâu sắc của 'Rừng nhỏ'.",
     "exampleCompounds": [
       {
-        "word": "森林破壊",
-        "reading": "しんりんはかい",
-        "meaning": "Phá rừng",
+        "word": "林",
+        "reading": "はやし",
+        "meaning": "rừng",
         "level": "N5",
         "type": "vocab"
       },
       {
-        "word": "林",
-        "reading": "りん",
-        "meaning": "Rừng thưa / Khu rừng",
+        "word": "林学",
+        "reading": "りんがく",
+        "meaning": "lâm học",
         "level": "N5",
-        "type": "kanji"
+        "type": "vocab"
       },
       {
-        "word": "林務",
-        "reading": "りんむ",
-        "meaning": "lâm nghiệp",
+        "word": "密林",
+        "reading": "みつりん",
+        "meaning": "bụi rậm",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "林家",
-        "reading": "りんか",
-        "meaning": "gia đình làm nghề lâm nghiệp",
+        "word": "山林",
+        "reading": "さんりん",
+        "meaning": "sơn lâm; rừng; rừng rậm",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -5570,32 +5640,32 @@
     "mnemonicStory": "Chữ SÂM (Rừng - 森) được ghép từ bộ Mộc (木 - cái cây, gỗ rừng) và bộ LÂM (林 - Rừng nhỏ). Sự kết hợp hài hòa giữa hình tượng cái cây, gỗ rừng và Rừng nhỏ khắc họa nên ý nghĩa sâu sắc của 'Rừng'.",
     "exampleCompounds": [
       {
-        "word": "森林破壊",
-        "reading": "しんりんはかい",
-        "meaning": "Phá rừng",
+        "word": "森",
+        "reading": "もり",
+        "meaning": "rừng",
         "level": "N5",
         "type": "vocab"
       },
       {
-        "word": "森",
-        "reading": "しん",
-        "meaning": "Rừng rậm",
+        "word": "森厳",
+        "reading": "しんげん",
+        "meaning": "theo nghi thức",
         "level": "N5",
-        "type": "kanji"
+        "type": "vocab"
       },
       {
-        "word": "大森",
-        "reading": "おおもり",
-        "meaning": "rừng lớn",
+        "word": "森林",
+        "reading": "しんりん",
+        "meaning": "rừng rú",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "森の奥",
-        "reading": "もりのおく",
-        "meaning": "sâu trong rừng",
+        "word": "山と森",
+        "reading": "やまともり",
+        "meaning": "rừng núi",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -5623,25 +5693,32 @@
     "mnemonicStory": "Chữ MỄ (Gạo - 米) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Gạo'.",
     "exampleCompounds": [
       {
-        "word": "お米",
-        "reading": "おこめ",
+        "word": "米",
+        "reading": "こめ",
         "meaning": "gạo",
         "level": "N5",
-        "type": "noun"
+        "type": "vocab"
       },
       {
-        "word": "米国",
-        "reading": "べいこく",
+        "word": "上米",
+        "reading": "うえまい",
+        "meaning": "lệnh",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "中米",
+        "reading": "ちゅうべい",
+        "meaning": "Trung Mỹ",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "米人",
+        "reading": "べいじん",
         "meaning": "nước Mỹ",
         "level": "N5",
-        "type": "proper"
-      },
-      {
-        "word": "玄米",
-        "reading": "げんまい",
-        "meaning": "gạo lứt",
-        "level": "N5",
-        "type": "noun"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -5669,32 +5746,32 @@
     "mnemonicStory": "Chữ NGƯU (Bò - 牛) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Bò'.",
     "exampleCompounds": [
       {
+        "word": "牛",
+        "reading": "うし",
+        "meaning": "bò",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "乳牛",
+        "reading": "にゅうぎゅう",
+        "meaning": "bò sữa",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
         "word": "牛乳",
         "reading": "ぎゅうにゅう",
-        "meaning": "sữa bò",
+        "meaning": "sữa",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "牛肉",
-        "reading": "ぎゅうにく",
-        "meaning": "thịt bò",
+        "word": "仔牛",
+        "reading": "こうし",
+        "meaning": "con bê; thịt bê; bê",
         "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "牡牛",
-        "reading": "おうし",
-        "meaning": "bò",
-        "level": "N5",
-        "type": "ĐT"
-      },
-      {
-        "word": "雌牛",
-        "reading": "めうし",
-        "meaning": "bò",
-        "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -5722,32 +5799,32 @@
     "mnemonicStory": "Chữ THẠCH (Đá - 石) được ghép từ bộ phận (丆) và bộ Khẩu (口 - cái miệng, lời nói, ăn uống). Sự kết hợp hài hòa giữa hình tượng 丆 và cái miệng, lời nói, ăn uống khắc họa nên ý nghĩa sâu sắc của 'Đá'.",
     "exampleCompounds": [
       {
-        "word": "懐石料理",
-        "reading": "かいせきりょうり",
-        "meaning": "Ẩm thực kaiseki (Nhật cao cấp)",
+        "word": "石",
+        "reading": "いし",
+        "meaning": "đá",
         "level": "N5",
         "type": "vocab"
       },
       {
-        "word": "小石",
-        "reading": "こいし",
-        "meaning": "sỏi",
+        "word": "丸石",
+        "reading": "まるいし",
+        "meaning": "tảng đá mòn",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "根石",
-        "reading": "ねいし",
-        "meaning": "đá nền",
+        "word": "石仏",
+        "reading": "せきぶつ",
+        "meaning": "tượng phật bằng đá",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "矢石",
-        "reading": "やいし",
-        "meaning": "viên đá nhọn; viên đá dùng làm đầu mũi tên",
+        "word": "石像",
+        "reading": "せきぞう",
+        "meaning": "tượng đá",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -5777,23 +5854,30 @@
       {
         "word": "岩",
         "reading": "いわ",
-        "meaning": "tảng đá, đá tảng",
+        "meaning": "đá; dốc đá; bờ đá",
         "level": "N5",
-        "type": "kanji"
+        "type": "vocab"
       },
       {
-        "word": "岩手",
-        "reading": "いわて",
-        "meaning": "Iwate (tỉnh)",
+        "word": "岩塩",
+        "reading": "がんえん",
+        "meaning": "muối mỏ; muối khoáng",
         "level": "N5",
-        "type": "proper"
+        "type": "vocab"
       },
       {
-        "word": "溶岩",
-        "reading": "ようがん",
-        "meaning": "dung nham",
+        "word": "岩壁",
+        "reading": "いわかべ",
+        "meaning": "bến tàu",
         "level": "N5",
-        "type": "noun"
+        "type": "vocab"
+      },
+      {
+        "word": "岩室",
+        "reading": "いわむろ",
+        "meaning": "chú ý",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -5821,23 +5905,9 @@
     "mnemonicStory": "Chữ VẬT (Vật, đồ vật - 物) được ghép từ bộ Ngưu (牛 - con trâu, con bò cần mẫn) và bộ phận (勿). Sự kết hợp hài hòa giữa hình tượng con trâu, con bò cần mẫn và 勿 khắc họa nên ý nghĩa sâu sắc của 'Vật, đồ vật'.",
     "exampleCompounds": [
       {
-        "word": "果物",
-        "reading": "くだもの",
-        "meaning": "trái cây",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "荷物",
-        "reading": "にもつ",
-        "meaning": "hành lý",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "食べ物",
         "reading": "たべもの",
-        "meaning": "thức ăn",
+        "meaning": "thức ăn, đồ ăn",
         "level": "N5",
         "type": "DT"
       },
@@ -5845,6 +5915,20 @@
         "word": "飲み物",
         "reading": "のみもの",
         "meaning": "đồ uống",
+        "level": "N5",
+        "type": "DT"
+      },
+      {
+        "word": "買い物",
+        "reading": "かいもの",
+        "meaning": "mua sắm",
+        "level": "N5",
+        "type": "DT"
+      },
+      {
+        "word": "荷物",
+        "reading": "にもつ",
+        "meaning": "hành lý",
         "level": "N5",
         "type": "DT"
       }
@@ -5874,32 +5958,32 @@
     "mnemonicStory": "Chữ NGUYÊN (Gốc rễ, nguồn gốc - 元) được ghép từ bộ Nhất (一 - số một, khởi nguyên vạn vật) và bộ phận (兀). Sự kết hợp hài hòa giữa hình tượng số một, khởi nguyên vạn vật và 兀 khắc họa nên ý nghĩa sâu sắc của 'Gốc rễ, nguồn gốc'.",
     "exampleCompounds": [
       {
-        "word": "元気[な]",
-        "reading": "げんき[な]",
-        "meaning": "khỏe mạnh",
+        "word": "元",
+        "reading": "もと",
+        "meaning": "cội",
         "level": "N5",
-        "type": "TT-na"
+        "type": "vocab"
       },
       {
-        "word": "お元気ですか",
-        "reading": "おげんきですか",
-        "meaning": "anh/chị có khỏe không?",
+        "word": "元々",
+        "reading": "もともと",
+        "meaning": "vốn dĩ; nguyên là; vốn là",
         "level": "N5",
-        "type": "KH"
+        "type": "vocab"
       },
       {
-        "word": "元気がない",
-        "reading": "げんきがない",
-        "meaning": "không khỏe, ủ rũ",
+        "word": "元は",
+        "reading": "もとは",
+        "meaning": "với tính chất gốc; về nguồn gốc",
         "level": "N5",
-        "type": "KH"
+        "type": "vocab"
       },
       {
-        "word": "どうぞお元気で",
-        "reading": "どうぞおげんきで",
-        "meaning": "chúc khỏe",
+        "word": "一元",
+        "reading": "いちげん",
+        "meaning": "đơn nhất",
         "level": "N5",
-        "type": "KH"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -5927,23 +6011,30 @@
     "mnemonicStory": "Chữ ĐỘNG (Làm việc - 働) được ghép từ bộ Nhân đứng (亻 - người) và bộ ĐỘNG (動 - Chuyển động). Sự kết hợp hài hòa giữa hình tượng người và Chuyển động khắc họa nên ý nghĩa sâu sắc của 'Làm việc'.",
     "exampleCompounds": [
       {
-        "word": "働きます",
-        "reading": "はたらきます",
-        "meaning": "làm việc",
+        "word": "働き",
+        "reading": "はたらき",
+        "meaning": "công việc; việc làm; sự đảm nhiệm chức năng; sự hoạt động",
         "level": "N5",
-        "type": "ĐT1"
+        "type": "vocab"
       },
       {
-        "word": "働かせます",
-        "reading": "はたらかせます",
-        "meaning": "bắt làm việc (cho làm việc)",
+        "word": "働く",
+        "reading": "はたらく",
+        "meaning": "làm",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "労働問題",
-        "reading": "ろうどうもんだい",
-        "meaning": "Vấn đề lao động",
+        "word": "働け",
+        "reading": "はたらけ",
+        "meaning": "làm đi",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "労働",
+        "reading": "ろうどう",
+        "meaning": "lao công",
         "level": "N5",
         "type": "vocab"
       }
@@ -5973,32 +6064,32 @@
     "mnemonicStory": "Chữ THỪA (Lên xe, cưỡi - 乗) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Lên xe, cưỡi'.",
     "exampleCompounds": [
       {
-        "word": "乗り場",
-        "reading": "のりば",
-        "meaning": "trạm, bến",
+        "word": "乗り",
+        "reading": "のり",
+        "meaning": "môn cưỡi ngựa",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "乗ります",
-        "reading": "のります",
-        "meaning": "lên (xe)",
+        "word": "乗る",
+        "reading": "のる",
+        "meaning": "cưỡi",
         "level": "N5",
-        "type": "ĐT1"
+        "type": "vocab"
       },
       {
-        "word": "乗り換えます",
-        "reading": "のりかえます",
-        "meaning": "đổi xe",
+        "word": "万乗",
+        "reading": "まんじょう",
+        "meaning": "quyền tối cao",
         "level": "N5",
-        "type": "ĐT2"
+        "type": "vocab"
       },
       {
-        "word": "乗り物",
-        "reading": "のりもの",
-        "meaning": "phương tiện đi lại",
+        "word": "三乗",
+        "reading": "さんじょう",
+        "meaning": "sự thăm hỏi",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -6026,32 +6117,32 @@
     "mnemonicStory": "Chữ HÀN (Lạnh - 寒) được ghép từ bộ phận (𡨄) và bộ phận (⺀). Sự kết hợp hài hòa giữa hình tượng 𡨄 và ⺀ khắc họa nên ý nghĩa sâu sắc của 'Lạnh'.",
     "exampleCompounds": [
       {
+        "word": "寒",
+        "reading": "さむ",
+        "meaning": "giữa mùa đông",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "寒々",
+        "reading": "さむざむ",
+        "meaning": "bị tàn phá",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
         "word": "寒い",
         "reading": "さむい",
-        "meaning": "lạnh",
+        "meaning": "cóng",
         "level": "N5",
-        "type": "TT-i"
+        "type": "vocab"
       },
       {
-        "word": "寒い日",
-        "reading": "さむいひ",
-        "meaning": "ngày lạnh",
+        "word": "寒さ",
+        "reading": "さむさ",
+        "meaning": "giá lạnh; cái lạnh; cái rét",
         "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "お寒い",
-        "reading": "おさむい",
-        "meaning": "nghèo",
-        "level": "N5",
-        "type": "ĐT"
-      },
-      {
-        "word": "うそ寒い",
-        "reading": "うそさむい",
-        "meaning": "hơi lạnh",
-        "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -6079,32 +6170,32 @@
     "mnemonicStory": "Chữ TRÀ (Trà - 茶) được ghép từ bộ Thảo đầu (艹 - cỏ cây thảo mộc) và bộ Nhân (人 - con người) và bộ phận (朩). Sự kết hợp hài hòa giữa hình tượng cỏ cây thảo mộc và con người khắc họa nên ý nghĩa sâu sắc của 'Trà'.",
     "exampleCompounds": [
       {
+        "word": "茶",
+        "reading": "ちゃ",
+        "meaning": "chè",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "茶々",
+        "reading": "ちゃちゃ",
+        "meaning": "sự đập gãy",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
         "word": "お茶",
         "reading": "おちゃ",
-        "meaning": "trà",
+        "meaning": "chè",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "紅茶",
-        "reading": "こうちゃ",
-        "meaning": "hồng trà",
+        "word": "茶代",
+        "reading": "ちゃだい",
+        "meaning": "đầu",
         "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "喫茶店",
-        "reading": "きっさてん",
-        "meaning": "quán cà phê",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
-        "word": "[お]茶",
-        "reading": "[お]ちゃ",
-        "meaning": "trà",
-        "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -6132,32 +6223,32 @@
     "mnemonicStory": "Chữ KINH (Kinh đô - 京) được ghép từ bộ Đầu (亠 - phần nóc chóp trên cùng) và bộ Khẩu (口 - cái miệng, lời nói, ăn uống) và bộ Tiểu (小 - nhỏ bé). Sự kết hợp hài hòa giữa hình tượng phần nóc chóp trên cùng và cái miệng, lời nói, ăn uống khắc họa nên ý nghĩa sâu sắc của 'Kinh đô'.",
     "exampleCompounds": [
       {
-        "word": "京語",
-        "reading": "キョウ",
-        "meaning": "Kinh đô (Kinh)",
+        "word": "京",
+        "reading": "けい",
+        "meaning": "mười triệu tỷ",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "京胡",
-        "reading": "きょうこ",
-        "meaning": "jinghu (nhạc cụ Trung Quốc 2 dây chơi với cung)",
+        "word": "上京",
+        "reading": "じょうきょう",
+        "meaning": "việc đi tới Tokyo",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "京都",
-        "reading": "きょうと",
-        "meaning": "thành phố kyoto",
+        "word": "入京",
+        "reading": "にゅうきょう",
+        "meaning": "Sự lên thủ đô; sự vào thủ đô",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "帰京",
-        "reading": "ききょう",
-        "meaning": "trở về Tokyo",
+        "word": "北京",
+        "reading": "ぺきん",
+        "meaning": "Bắc Kinh",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -6185,32 +6276,32 @@
     "mnemonicStory": "Chữ TRƯỚC (Mặc, đến nơi - 着) được ghép từ bộ Dương (羊 - con dê hiền lành, điềm lành) và bộ Mục (目 - đôi mắt mở to quan sát). Sự kết hợp hài hòa giữa hình tượng con dê hiền lành, điềm lành và đôi mắt mở to quan sát khắc họa nên ý nghĩa sâu sắc của 'Mặc, đến nơi'.",
     "exampleCompounds": [
       {
-        "word": "上着",
-        "reading": "うわぎ",
-        "meaning": "áo khoác",
+        "word": "着",
+        "reading": "ちゃく",
+        "meaning": "bộ; đến (đâu đó); về đích",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "下着",
-        "reading": "したぎ",
-        "meaning": "đồ lót",
+        "word": "着々",
+        "reading": "ちゃくちゃく",
+        "meaning": "một cách vững chắc",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "着ます",
-        "reading": "きます",
-        "meaning": "mặc (áo)",
+        "word": "着く",
+        "reading": "つく",
+        "meaning": "cặp",
         "level": "N5",
-        "type": "ĐT2"
+        "type": "vocab"
       },
       {
-        "word": "着きます",
-        "reading": "つきます",
-        "meaning": "đến (nơi)",
+        "word": "着る",
+        "reading": "きる",
+        "meaning": "bận",
         "level": "N5",
-        "type": "ĐT1"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -6238,25 +6329,32 @@
     "mnemonicStory": "Chữ CẬN (Gần - 近) được ghép từ bộ Quai sước (辶 - bước chân di chuyển trên đường) và bộ Cân (斤 - cái rìu đẵn gỗ). Sự kết hợp hài hòa giữa hình tượng bước chân di chuyển trên đường và cái rìu đẵn gỗ khắc họa nên ý nghĩa sâu sắc của 'Gần'.",
     "exampleCompounds": [
       {
-        "word": "近く",
-        "reading": "ちかく",
-        "meaning": "gần",
+        "word": "近々",
+        "reading": "ちかぢか",
+        "meaning": "trạng thái ở gần",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
         "word": "近い",
         "reading": "ちかい",
-        "meaning": "gần",
+        "meaning": "cận",
         "level": "N5",
-        "type": "TT-i"
+        "type": "vocab"
       },
       {
-        "word": "最近",
-        "reading": "さいきん",
-        "meaning": "gần đây",
+        "word": "近く",
+        "reading": "ちかく",
+        "meaning": "cận",
         "level": "N5",
-        "type": "TrT"
+        "type": "vocab"
+      },
+      {
+        "word": "近世",
+        "reading": "きんせい",
+        "meaning": "cận đại",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -6286,30 +6384,30 @@
       {
         "word": "酒",
         "reading": "さけ",
-        "meaning": "rượu, sake",
+        "meaning": "rượu cuốc lủi; rượu; rượu sake của nhật",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "酒かす",
-        "reading": "さけかす",
-        "meaning": "rượu sake",
+        "word": "お酒",
+        "reading": "おさけ",
+        "meaning": "rượu; rượu sakê",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "酒の気",
-        "reading": "さけのけ",
-        "meaning": "trông say xỉn",
+        "word": "酒仙",
+        "reading": "しゅせん",
+        "meaning": "sự uống rượu say",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "酒好き",
-        "reading": "さけずき",
-        "meaning": "người uống rượu",
+        "word": "酒保",
+        "reading": "しゅほ",
+        "meaning": "căng tin",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -6337,32 +6435,32 @@
     "mnemonicStory": "Chữ CHỈ (Giấy - 紙) được ghép từ bộ phận (糹) và bộ Thị (氏 - dòng họ, tôn xưng). Sự kết hợp hài hòa giữa hình tượng 糹 và dòng họ, tôn xưng khắc họa nên ý nghĩa sâu sắc của 'Giấy'.",
     "exampleCompounds": [
       {
-        "word": "手紙",
-        "reading": "てがみ",
-        "meaning": "thư",
-        "level": "N5",
-        "type": "DT"
-      },
-      {
         "word": "紙",
         "reading": "かみ",
         "meaning": "giấy",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "紙屋",
-        "reading": "かみや",
-        "meaning": "cửa hàng giấy",
+        "word": "ろ紙",
+        "reading": "ろし",
+        "meaning": "giấy lọc",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "唐紙",
-        "reading": "からかみ",
-        "meaning": "giấy in dày (để dán cửa trượt)",
+        "word": "上紙",
+        "reading": "うわがみ",
+        "meaning": "tờ bọc",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
+      },
+      {
+        "word": "別紙",
+        "reading": "べっし",
+        "meaning": "sự rào lại",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -6392,30 +6490,30 @@
       {
         "word": "犬",
         "reading": "いぬ",
-        "meaning": "chó",
+        "meaning": "cẩu",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "子犬",
+        "word": "一犬",
+        "reading": "いちいぬ",
+        "meaning": "cái nhìn",
+        "level": "N5",
+        "type": "vocab"
+      },
+      {
+        "word": "仔犬",
         "reading": "こいぬ",
-        "meaning": "cún con",
+        "meaning": "con chó con; chó con; cún con",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "犬派",
-        "reading": "いぬは",
-        "meaning": "người chó",
+        "word": "犬儒",
+        "reading": "けんじゅ",
+        "meaning": "nhà khuyến nho",
         "level": "N5",
-        "type": "ĐT"
-      },
-      {
-        "word": "小犬座",
-        "reading": "こいぬざ",
-        "meaning": "canis Minor (chòm sao)",
-        "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -6443,32 +6541,32 @@
     "mnemonicStory": "Chữ ĐIỀN (Ruộng - 田) là chữ tượng hình đơn vị, mô phỏng trực quan hình ảnh tượng trưng khởi nguyên để biểu thị trọn vẹn ý niệm 'Ruộng'.",
     "exampleCompounds": [
       {
-        "word": "田舎",
-        "reading": "いなか",
-        "meaning": "vùng quê",
+        "word": "田",
+        "reading": "た",
+        "meaning": "Điền",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "凹田",
-        "reading": "くぼた",
-        "meaning": "cánh đồng lúa ở nơi thấp",
+        "word": "田ぼ",
+        "reading": "たぼ",
+        "meaning": "trại",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "刈り田",
-        "reading": "かりた",
-        "meaning": "cánh đồng lúa đã thu hoạch",
+        "word": "丹田",
+        "reading": "たんでん",
+        "meaning": "bụng",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "春田",
-        "reading": "はるた",
-        "meaning": "ruộng lúa trống (giữa vụ thu hoạch và mùa xuân)",
+        "word": "公田",
+        "reading": "くでん",
+        "meaning": "sự truyền miệng (truyện cổ tích",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -6498,23 +6596,30 @@
       {
         "word": "弟",
         "reading": "おとうと",
-        "meaning": "em trai (mình)",
+        "meaning": "bào đệ",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
         "word": "兄弟",
         "reading": "きょうだい",
-        "meaning": "anh chị em",
+        "meaning": "anh em; huynh đệ",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "弟さん",
-        "reading": "おとうとさん",
-        "meaning": "em trai (người khác)",
+        "word": "弟分",
+        "reading": "おとうとぶん",
+        "meaning": "người mà mình coi như em trai",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "弟妹",
+        "reading": "ていまい",
+        "meaning": "em trai và em gái",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -6544,23 +6649,30 @@
       {
         "word": "兄",
         "reading": "あに",
-        "meaning": "anh trai (mình)",
+        "meaning": "anh trai",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "兄弟",
-        "reading": "きょうだい",
-        "meaning": "anh chị em",
+        "word": "仁兄",
+        "reading": "じんけい",
+        "meaning": "vẻ thanh lịch",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "お兄さん",
-        "reading": "おにいさん",
-        "meaning": "anh trai (người khác)",
+        "word": "大兄",
+        "reading": "たいけい",
+        "meaning": "đại ca",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
+      },
+      {
+        "word": "兄嫁",
+        "reading": "あによめ",
+        "meaning": "chị dâu",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -6590,30 +6702,30 @@
       {
         "word": "妹",
         "reading": "いもうと",
-        "meaning": "em gái (mình)",
+        "meaning": "em gái",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "妹さん",
-        "reading": "いもうとさん",
-        "meaning": "em gái (người khác)",
+        "word": "姉妹",
+        "reading": "しまい",
+        "meaning": "chị em",
         "level": "N5",
-        "type": "DT"
+        "type": "vocab"
       },
       {
-        "word": "妹分",
-        "reading": "いもうとぶん",
-        "meaning": "người được bảo trợ",
+        "word": "実妹",
+        "reading": "じつまい",
+        "meaning": "em ruột",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "妹婿",
-        "reading": "いもうとむこ",
-        "meaning": "chồng của em gái một người",
+        "word": "弟妹",
+        "reading": "ていまい",
+        "meaning": "em trai và em gái",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
@@ -6643,30 +6755,30 @@
       {
         "word": "短い",
         "reading": "みじかい",
-        "meaning": "ngắn",
-        "level": "N5",
-        "type": "TT-i"
-      },
-      {
-        "word": "短歌",
-        "reading": "たんか",
-        "meaning": "Thơ tanka (thể thơ Nhật)",
+        "meaning": "cụt",
         "level": "N5",
         "type": "vocab"
       },
       {
-        "word": "手短い",
-        "reading": "てみじかい",
-        "meaning": "ngắn",
+        "word": "短信",
+        "reading": "たんしん",
+        "meaning": "ngày sinh; lễ sinh nhật",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
       },
       {
-        "word": "気が短い",
-        "reading": "きがみじかい",
-        "meaning": "nóng nảy",
+        "word": "短冊",
+        "reading": "たんざく",
+        "meaning": "mảnh giấy nhỏ",
         "level": "N5",
-        "type": "ĐT"
+        "type": "vocab"
+      },
+      {
+        "word": "短刀",
+        "reading": "たんとう",
+        "meaning": "dao găm",
+        "level": "N5",
+        "type": "vocab"
       }
     ],
     "sourceUrl": "https://openjlpt.com/kanji"
