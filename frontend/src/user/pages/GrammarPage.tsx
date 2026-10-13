@@ -1989,7 +1989,7 @@ export const GrammarPage: React.FC = () => {
 
                                   <div style={{ flex: 1, minWidth: 0 }}>
                                     <div style={{
-                                      fontSize: 15,
+                                      fontSize: 16,
                                       fontWeight: 800,
                                       color: optTextColor,
                                       fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif",
@@ -1998,15 +1998,6 @@ export const GrammarPage: React.FC = () => {
                                       textOverflow: 'ellipsis'
                                     }}>
                                       {opt.pattern}
-                                    </div>
-                                    <div style={{
-                                      fontSize: 11,
-                                      color: quizAnswerChecked && !opt.isCorrect && !isSelected ? '#94a3b8' : '#64748b',
-                                      whiteSpace: 'nowrap',
-                                      overflow: 'hidden',
-                                      textOverflow: 'ellipsis'
-                                    }}>
-                                      {opt.titleVi}
                                     </div>
                                   </div>
 
