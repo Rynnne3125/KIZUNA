@@ -266,8 +266,6 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
   const [strokes, setStrokes] = useState<StrokeData[]>([]);
   const [numbers, setNumbers] = useState<StrokeNumberData[]>([]);
   const [currentStrokeIndex, setCurrentStrokeIndex] = useState<number>(0);
-  const [isPaused, setIsPaused] = useState<boolean>(false);
-  const [speed, setSpeed] = useState<number>(1); // 0.75x, 1x, 1.25x
   const [loopCount, setLoopCount] = useState<number>(0);
   const [showGhost, setShowGhost] = useState<boolean>(true);
 
@@ -285,7 +283,6 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
     if (!hex) return;
     setCurrentStrokeIndex(0);
     setLoopCount(0);
-    setIsPaused(false);
     setLoadingSvg(true);
 
     const url = `https://cdn.jsdelivr.net/gh/KanjiVG/kanjivg@master/kanji/${hex}.svg`;
@@ -330,13 +327,13 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
   }, [hex]);
 
   // Thời gian vẽ nét mượt mà
-  const drawDuration = Math.round(550 / speed); // ms để vẽ 1 nét từ đầu đến cuối
-  const pauseBetween = Math.round(110 / speed); // ms nghỉ giữa 2 nét
-  const pauseEnd = Math.round(1500 / speed);    // ms ngắm chữ hoàn thiện trước khi lặp lại
+  const drawDuration = 550; // ms để vẽ 1 nét từ đầu đến cuối
+  const pauseBetween = 100; // ms nghỉ giữa 2 nét
+  const pauseEnd = 1600;    // ms ngắm chữ hoàn thiện trước khi lặp lại
 
   // Bộ lặp tự động liên tục (Continuous Loop): Tự động vẽ từng nét từ điểm đầu đến điểm kết
   useEffect(() => {
-    if (tab !== 'diagram' || isPaused || strokes.length === 0) return;
+    if (tab !== 'diagram' || strokes.length === 0) return;
 
     let timer: NodeJS.Timeout;
 
@@ -354,39 +351,9 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
     }
 
     return () => clearTimeout(timer);
-  }, [tab, isPaused, strokes.length, currentStrokeIndex, speed, loopCount, drawDuration, pauseBetween, pauseEnd]);
+  }, [tab, strokes.length, currentStrokeIndex, loopCount, drawDuration, pauseBetween, pauseEnd]);
 
   const totalStrokes = strokes.length > 0 ? strokes.length : strokeCount;
-
-  // Điều khiển tạm dừng / tiếp tục
-  const handleTogglePause = () => {
-    setIsPaused(prev => !prev);
-  };
-
-  // Vẽ lại từ đầu ngay lập tức
-  const handleRestart = () => {
-    setCurrentStrokeIndex(0);
-    setLoopCount(c => c + 1);
-    setIsPaused(false);
-  };
-
-  // Xem nét trước
-  const handlePrevStep = () => {
-    setIsPaused(true);
-    setCurrentStrokeIndex(prev => (prev <= 0 ? strokes.length - 1 : prev - 1));
-  };
-
-  // Xem nét sau
-  const handleNextStep = () => {
-    setIsPaused(true);
-    setCurrentStrokeIndex(prev => (prev >= strokes.length - 1 ? 0 : prev + 1));
-  };
-
-  // Chọn trực tiếp nét cụ thể
-  const handleSelectSpecificStroke = (idx: number) => {
-    setIsPaused(true);
-    setCurrentStrokeIndex(idx);
-  };
 
   // Canvas vẽ nét cọ tay
   const clearCanvas = () => {
@@ -642,175 +609,7 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
         )}
       </div>
 
-      {/* Điều khiển nét vẽ thứ tự: Tự động chạy liên tục, Tạm dừng, Vẽ lại, Chỉnh tốc độ */}
-      {tab === 'diagram' && strokes.length > 0 && (
-        <div style={{ width: '100%', maxWidth: 360, marginTop: 12, display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'center' }}>
-          {/* Hàng nút bấm chính: Tạm dừng / Tiếp tục, Vẽ lại ngay, Tốc độ */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', justifyContent: 'center' }}>
-            <button
-              onClick={handleTogglePause}
-              style={{
-                padding: '4px 12px',
-                borderRadius: 6,
-                border: 'none',
-                background: isPaused ? '#2563eb' : '#c53d32',
-                color: '#ffffff',
-                fontSize: 12,
-                fontWeight: 800,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 5
-              }}
-              title={isPaused ? 'Tiếp tục tự động vẽ' : 'Tạm dừng nét vẽ'}
-            >
-              {isPaused ? '▶ Tiếp tục chạy' : '⏸ Tạm dừng'}
-            </button>
 
-            <button
-              onClick={handleRestart}
-              style={{
-                padding: '4px 10px',
-                borderRadius: 6,
-                border: '1px solid #d6d3d1',
-                background: '#ffffff',
-                color: '#44403c',
-                fontSize: 12,
-                fontWeight: 700,
-                cursor: 'pointer'
-              }}
-              title="Vẽ lại từ nét 1"
-            >
-              🔄 Vẽ lại
-            </button>
-
-            <button
-              onClick={handlePrevStep}
-              style={{
-                padding: '4px 8px',
-                borderRadius: 6,
-                border: '1px solid #d6d3d1',
-                background: '#ffffff',
-                color: '#44403c',
-                fontSize: 12,
-                fontWeight: 700,
-                cursor: 'pointer'
-              }}
-              title="Nét trước"
-            >
-              ◀
-            </button>
-
-            <button
-              onClick={handleNextStep}
-              style={{
-                padding: '4px 8px',
-                borderRadius: 6,
-                border: '1px solid #d6d3d1',
-                background: '#ffffff',
-                color: '#44403c',
-                fontSize: 12,
-                fontWeight: 700,
-                cursor: 'pointer'
-              }}
-              title="Nét sau"
-            >
-              ▶
-            </button>
-
-            {/* Chọn tốc độ */}
-            <div style={{ display: 'flex', background: '#f4f2ee', borderRadius: 6, padding: 2, border: '1px solid #e5e0d8', gap: 2 }}>
-              {[
-                { label: '0.75x', val: 0.75 },
-                { label: '1x', val: 1 },
-                { label: '1.25x', val: 1.25 }
-              ].map(s => (
-                <button
-                  key={s.label}
-                  onClick={() => setSpeed(s.val)}
-                  style={{
-                    padding: '2px 6px',
-                    borderRadius: 4,
-                    border: 'none',
-                    fontSize: 10,
-                    fontWeight: speed === s.val ? 800 : 500,
-                    background: speed === s.val ? '#1c2536' : 'transparent',
-                    color: speed === s.val ? '#ffffff' : '#78716c',
-                    cursor: 'pointer'
-                  }}
-                >
-                  {s.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Dải nút số nét: Click vào nét nào sẽ dừng lại nét đó để người học nghiên cứu */}
-          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', justifyContent: 'center' }}>
-            <button
-              onClick={() => {
-                setIsPaused(true);
-                setCurrentStrokeIndex(strokes.length);
-              }}
-              style={{
-                padding: '2px 8px',
-                borderRadius: 6,
-                border: currentStrokeIndex === strokes.length ? '2px solid #1c2536' : '1px solid #e2e8f0',
-                background: currentStrokeIndex === strokes.length ? '#1c2536' : '#ffffff',
-                color: currentStrokeIndex === strokes.length ? '#ffffff' : '#64748b',
-                fontSize: 11,
-                fontWeight: 700,
-                cursor: 'pointer'
-              }}
-              title="Xem trọn vẹn toàn bộ các nét"
-            >
-              Đầy đủ
-            </button>
-
-            {strokes.map((st, i) => {
-              const num = i + 1;
-              const isSelected = currentStrokeIndex === i;
-              return (
-                <button
-                  key={st.id}
-                  onClick={() => handleSelectSpecificStroke(i)}
-                  style={{
-                    width: 24,
-                    height: 24,
-                    borderRadius: 12,
-                    border: isSelected ? '2px solid #ef4444' : '1px solid #e2e8f0',
-                    background: isSelected ? '#ef4444' : '#ffffff',
-                    color: isSelected ? '#ffffff' : '#64748b',
-                    fontSize: 11,
-                    fontWeight: 900,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: 0,
-                    transition: 'all 0.15s ease'
-                  }}
-                  title={`Nét thứ ${num} (dừng để xem)`}
-                >
-                  {num}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Dòng trạng thái nét đang vẽ */}
-          <div style={{ fontSize: 11, color: currentStrokeIndex < strokes.length ? '#ef4444' : '#2d6d4b', fontWeight: 600 }}>
-            {currentStrokeIndex < strokes.length ? (
-              <span>
-                {isPaused ? '⏸ Đang dừng tại: ' : '✍️ Đang vẽ: '}
-                <strong>Nét thứ {currentStrokeIndex + 1}</strong> (vẽ từ điểm đầu đến điểm kết)
-              </span>
-            ) : (
-              <span>✨ Đã hoàn thành toàn bộ {totalStrokes} nét · Tự động lặp lại</span>
-            )}
-          </div>
-        </div>
-      )}
 
       {/* Điều khiển bảng vẽ tay */}
       {tab === 'canvas' && (
@@ -1878,20 +1677,30 @@ export const KanjiPage: React.FC = () => {
                         {/* Mẹo nhớ chiết tự logic chuẩn câu chuyện */}
                         {selectedKanji.mnemonicStory && (
                           <div style={{
-                            background: '#ffffff',
+                            background: '#fffdfa',
                             border: '1.5px solid #fed7aa',
-                            borderLeft: '4px solid #ea580c',
-                            borderRadius: 8,
-                            padding: '12px 14px',
-                            fontSize: 14,
-                            color: '#1e293b',
-                            lineHeight: 1.6,
-                            boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
+                            borderLeft: '5px solid #ea580c',
+                            borderRadius: 10,
+                            padding: '14px 16px',
+                            boxShadow: '0 2px 8px rgba(234, 88, 12, 0.05)'
                           }}>
-                            <div style={{ fontSize: 12, fontWeight: 800, color: '#ea580c', marginBottom: 4, display: 'flex', alignItems: 'center', gap: 6 }}>
-                              <span>💡 Mẹo nhớ chiết tự bộ thủ:</span>
+                            <div style={{
+                              fontSize: 12,
+                              fontWeight: 800,
+                              color: '#ea580c',
+                              marginBottom: 6,
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: 6
+                            }}>
+                              <span>💡 Mẹo chiết tự bộ thủ & Câu chuyện liên tưởng:</span>
                             </div>
-                            <div>
+                            <div style={{
+                              fontSize: 14.5,
+                              color: '#1c2536',
+                              lineHeight: 1.7,
+                              fontWeight: 500
+                            }}>
                               {selectedKanji.mnemonicStory}
                             </div>
                           </div>
@@ -1961,15 +1770,36 @@ export const KanjiPage: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* 5. Từ ghép thực tế (Example Compounds) */}
+                    {/* 5. Từ ghép thực tế cùng cấp độ JLPT */}
                     {selectedKanji.exampleCompounds && selectedKanji.exampleCompounds.length > 0 && (
                       <div>
-                        <div style={{ fontSize: 12, fontWeight: 800, color: '#78716c', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.5px' }}>
-                          📚 Từ Ghép Tiêu Biểu:
+                        <div style={{
+                          fontSize: 12,
+                          fontWeight: 800,
+                          color: '#78716c',
+                          textTransform: 'uppercase',
+                          marginBottom: 8,
+                          letterSpacing: '0.5px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 6
+                        }}>
+                          <span>📚 Từ Ghép Tiêu Biểu ({selectedKanji.jlptLevel || selectedLevel}):</span>
+                          <span style={{
+                            background: '#fdf2f0',
+                            color: '#c53d32',
+                            fontSize: 10,
+                            padding: '1px 6px',
+                            borderRadius: 4,
+                            fontWeight: 700
+                          }}>
+                            {selectedKanji.exampleCompounds.length} từ cùng cấp độ
+                          </span>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                           {selectedKanji.exampleCompounds.map((comp, ci) => {
                             const wordText = comp.word || comp.compound || '';
+                            const compLvl = comp.level || selectedKanji.jlptLevel || selectedLevel;
                             return (
                               <div
                                 key={ci}
@@ -1985,6 +1815,16 @@ export const KanjiPage: React.FC = () => {
                                 }}
                               >
                                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
+                                  <span style={{
+                                    fontSize: 11,
+                                    fontWeight: 800,
+                                    background: '#f1f5f9',
+                                    color: '#475569',
+                                    padding: '2px 6px',
+                                    borderRadius: 4
+                                  }}>
+                                    {compLvl}
+                                  </span>
                                   <span style={{ fontSize: 15, fontWeight: 900, color: '#1c2536' }}>
                                     {wordText}
                                   </span>
