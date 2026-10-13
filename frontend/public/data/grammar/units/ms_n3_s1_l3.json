@@ -1,0 +1,190 @@
+[
+  {
+    "id": "gram_n3_0185",
+    "grammar_id": "gram_n3_0185",
+    "milestoneId": "ms_n3_s1_l3",
+    "milestone_id": "ms_n3_s1_l3",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 53,
+    "pattern": "〜べきだ ／ 〜べきではない",
+    "titleVi": "Bổn phận / lẽ ra phải làm — phán xét đạo lý CHỦ QUAN",
+    "structure": "〜べきだ ／ 〜べきではない",
+    "explanation": "Mẫu 「〜べきだ ／ 〜べきではない」 dùng để thể hiện quan điểm, phán đoán chủ quan của người nói rằng theo đạo lý, lương tâm hoặc lẽ thường thì một hành động là đúng đắn, nên làm hoặc không được phép làm. Ngữ pháp đi kèm với động từ thể từ điển (V-る), riêng động từ 「する」 có thể chia thành 「すべき」 hoặc 「するべき」. Mẫu này mang sắc thái phán xét đạo đức và tính áp đặt khá mạnh, do đó không dùng cho các quy định/luật pháp khách quan và tuyệt đối tránh dùng để khuyên bảo trực tiếp người bề trên.",
+    "nuanceReason": "Khác với 「〜なければならない」 mang tính nghĩa vụ bắt buộc theo quy định hoặc luật pháp khách quan, 「〜べきだ」 hoàn toàn là nhận định đạo đức mang tính chủ quan của người nói.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "親は子どもの話を最後までしっかり聞くべきだ。",
+    "masterExampleVi": "Cha mẹ nên lắng nghe con cái nói một cách cẩn thận đến cùng.",
+    "examples": [
+      {
+        "sentence": "親は子どもの話を最後までしっかり聞くべきだ。",
+        "translation": "Cha mẹ nên lắng nghe con cái nói một cách cẩn thận đến cùng.",
+        "reading": ""
+      },
+      {
+        "sentence": "他人の悪口をSNSに書き込むべきではない。",
+        "translation": "Không nên viết những lời nói xấu người khác lên mạng xã hội.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0186",
+    "grammar_id": "gram_n3_0186",
+    "milestoneId": "ms_n3_s1_l3",
+    "milestone_id": "ms_n3_s1_l3",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 53,
+    "pattern": "〜ものだ（一般真理[いっぱんしんり]・感慨[かんがい]）",
+    "titleVi": "Chân lý chung / lẽ thường KHÁCH QUAN; hoặc hồi tưởng cảm thán",
+    "structure": "〜ものだ（一般真理[いっぱんしんり]・感慨[かんがい]）",
+    "explanation": "Mẫu ngữ pháp 「〜ものだ」 dùng để khẳng định một chân lý, quy luật tự nhiên hoặc bản chất vốn có của sự vật, sự việc mà xã hội hay mọi người đều coi là lẽ đương nhiên. Ngoài ra, khi kết hợp với thể quá khứ 「〜たものだ」, mẫu này thể hiện tâm trạng hoài niệm, hồi tưởng sâu sắc về một thói quen hoặc sự việc thường xuyên xảy ra trong quá khứ. Mẫu câu này mang sắc thái chiêm nghiệm, cảm thán khách quan hoặc cảm xúc chung, không dùng cho sự việc mang tính nhất thời, cá biệt.",
+    "nuanceReason": "Cần phân biệt 「〜ものだ」 (nói về lẽ đương nhiên/chân lý chung hoặc hồi tưởng thói quen cũ) với 「〜ことだ」 (đưa ra lời khuyên trực tiếp nên/không nên làm gì trong một tình huống cụ thể).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "人間は誰でもプレッシャーを感じると失敗するものだ。",
+    "masterExampleVi": "Con người ta ai cũng vậy, khi cảm thấy áp lực thì thường sẽ dễ mắc sai lầm.",
+    "examples": [
+      {
+        "sentence": "人間は誰でもプレッシャーを感じると失敗するものだ。",
+        "translation": "Con người ta ai cũng vậy, khi cảm thấy áp lực thì thường sẽ dễ mắc sai lầm.",
+        "reading": ""
+      },
+      {
+        "sentence": "子供のころは、夏休みになると毎日近くの森へ虫捕りに行ったものだ。",
+        "translation": "Hồi còn nhỏ, hễ cứ đến kỳ nghỉ hè là ngày nào tôi cũng vào khu rừng gần nhà để bắt côn trùng.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0187",
+    "grammar_id": "gram_n3_0187",
+    "milestoneId": "ms_n3_s1_l3",
+    "milestone_id": "ms_n3_s1_l3",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 53,
+    "pattern": "〜ものではない（〜ものじゃない）",
+    "titleVi": "Cấm / không nên — theo lẽ thường (nhẹ hơn べきではない)",
+    "structure": "〜ものではない（〜ものじゃない）",
+    "explanation": "Mẫu「〜ものではない（〜ものじゃない）」được dùng để đưa ra lời khuyên, cảnh cáo mang tính đạo lý hoặc lẽ thường tình trong xã hội rằng 'không nên/không được' làm một việc gì đó. Cấu trúc này kết hợp với động từ thể từ điển (V辞書形 + ものではない) và thường do người lớn tuổi, người có kinh nghiệm nhắc nhở thế hệ sau. Trong giao tiếp thường nhật, dạng nói thân mật「〜ものじゃない」được sử dụng rất phổ biến. Mẫu câu không dùng để ra lệnh cấm đoán trực tiếp cho một hành vi cụ thể mang tính cấp bách.",
+    "nuanceReason": "So với「〜べきではない」(mang tính trách nhiệm/nghĩa vụ mạnh mẽ),「〜ものではない」mang sắc thái khuyên răn nhẹ nhàng hơn dựa trên quan niệm đạo đức hoặc phép lịch sự chung.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "目上の人に対して、そんな失礼な口の利き方をするものではない。",
+    "masterExampleVi": "Không nên ăn nói thất lễ như thế đối với người bề trên.",
+    "examples": [
+      {
+        "sentence": "目上の人に対して、そんな失礼な口の利き方をするものではない。",
+        "translation": "Không nên ăn nói thất lễ như thế đối với người bề trên.",
+        "reading": ""
+      },
+      {
+        "sentence": "借りたお金は期日までにきちんと返すべきで、そのまま放置しておくものではない。",
+        "translation": "Tiền đã vay thì phải trả đúng hạn, không nên cứ để mặc kệ như vậy.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0188",
+    "grammar_id": "gram_n3_0188",
+    "milestoneId": "ms_n3_s1_l3",
+    "milestone_id": "ms_n3_s1_l3",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 53,
+    "pattern": "する → すべき（書[か]き言葉[ことば]の注意[ちゅうい]）",
+    "titleVi": "Dạng chuẩn: する→すべき (văn viết/thi JLPT); するべき cũng được nhưng ít chuẩn hơn",
+    "structure": "する → すべき（書[か]き言葉[ことば]の注意[ちゅうい]）",
+    "explanation": "Khi kết hợp động từ nhóm 3 (động từ đuôi する) với ngữ pháp べきだ, dạng chuẩn mực trong văn viết (書き言葉) và bài thi JLPT là chuyển thành 「〜すべきだ」 thay vì 「〜するべきだ」. Mẫu câu này diễn tả việc một người nên làm hoặc có nghĩa vụ đạo đức phải làm một hành động nào đó theo lẽ thường và quy chuẩn xã hội. Dù trong văn nói hàng ngày người Nhật vẫn có thể dùng 「〜するべき」, nhưng trong văn bản học thuật, báo chí và thi cử thì 「〜すべき」 luôn là hình thức chuẩn chỉnh nhất.",
+    "nuanceReason": "Mẫu 「〜すべき」 thể hiện đạo lý hoặc bổn phận chung mang tính khách quan, tuyệt đối không dùng để trực tiếp áp đặt hay sai bảo cấp trên.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "環境を守るために、私たちはプラスチックゴミを削減すべきだ。",
+    "masterExampleVi": "Để bảo vệ môi trường, chúng ta nên cắt giảm rác thải nhựa.",
+    "examples": [
+      {
+        "sentence": "環境を守るために、私たちはプラスチックゴミを削減すべきだ。",
+        "translation": "Để bảo vệ môi trường, chúng ta nên cắt giảm rác thải nhựa.",
+        "reading": ""
+      },
+      {
+        "sentence": "重要な決定を下す前に、専門家の意見をよく検討すべきです。",
+        "translation": "Trước khi đưa ra quyết định quan trọng, chúng ta nên xem xét kỹ ý kiến của các chuyên gia.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0189",
+    "grammar_id": "gram_n3_0189",
+    "milestoneId": "ms_n3_s1_l3",
+    "milestone_id": "ms_n3_s1_l3",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 53,
+    "pattern": "〜べきだ",
+    "titleVi": "nói lẽ phải, chân lý chung, lời khuyên đạo lý",
+    "structure": "〜べきだ",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 1 · Bài 53 (③): Dùng để nói lẽ phải, chân lý chung, lời khuyên đạo lý.",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜べきだ（N3）",
+    "masterExampleVi": "nói lẽ phải, chân lý chung, lời khuyên đạo lý",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0190",
+    "grammar_id": "gram_n3_0190",
+    "milestoneId": "ms_n3_s1_l3",
+    "milestone_id": "ms_n3_s1_l3",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 53,
+    "pattern": "〜ものだ",
+    "titleVi": "nói lẽ phải, chân lý chung, lời khuyên đạo lý",
+    "structure": "〜ものだ",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 1 · Bài 53 (③): Dùng để nói lẽ phải, chân lý chung, lời khuyên đạo lý.",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜ものだ（N3）",
+    "masterExampleVi": "nói lẽ phải, chân lý chung, lời khuyên đạo lý",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

@@ -1,0 +1,155 @@
+[
+  {
+    "id": "gram_n2_0393",
+    "grammar_id": "gram_n2_0393",
+    "milestoneId": "ms_n2_s1_l3",
+    "milestone_id": "ms_n2_s1_l3",
+    "stageId": "stage_n2_1",
+    "stage_id": "stage_n2_1",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 91,
+    "pattern": "〜始末[しまつ]だ",
+    "titleVi": "Rốt cuộc lại thành… (kết cục tiêu cực sau chuỗi sự việc)",
+    "structure": "〜始末[しまつ]だ",
+    "explanation": "Mẫu ngữ pháp 「〜始末だ」 dùng để diễn tả một kết cục tồi tệ, tiêu cực hoặc đáng tiếc xảy ra sau một chuỗi hành động, sự việc diễn biến xấu kéo dài. Cấu trúc thường kết hợp với động từ thể từ điển (Vる), thể quá khứ (Vた) hoặc danh từ đi kèm 「この／その」 (この始末だ). Câu mang sắc thái ngán ngẩm, thất vọng sâu sắc hoặc phê phán của người nói khi nhìn lại toàn bộ quá trình.",
+    "nuanceReason": "So với 「〜あげく」 (nhấn mạnh vào quá trình giằng co, mệt mỏi dẫn đến kết quả xấu), 「〜始末だ」 tập trung mạnh vào chính kết cục tồi tệ, bế tắc cùng thái độ ngao ngán, phê phán của người nói.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "彼は遅刻を繰り返したあげく、反省もせず上司に逆らって会社をクビになる始末だ。",
+    "masterExampleVi": "Anh ta liên tục đi làm muộn, đã không kiểm điểm lại còn cãi lời cấp trên, rốt cuộc dẫn đến kết cục bị công ty sa thải.",
+    "examples": [
+      {
+        "sentence": "彼は遅刻を繰り返したあげく、反省もせず上司に逆らって会社をクビになる始末だ。",
+        "translation": "Anh ta liên tục đi làm muộn, đã không kiểm điểm lại còn cãi lời cấp trên, rốt cuộc dẫn đến kết cục bị công ty sa thải.",
+        "reading": ""
+      },
+      {
+        "sentence": "弟は散々遊んで借金を作り、最後は高齢の両親に肩代わりしてもらう始末だ。",
+        "translation": "Em trai tôi chơi bời lêu lổng làm nợ nần chồng chất, rốt cuộc lại thành ra để bố mẹ già phải trả nợ thay.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0394",
+    "grammar_id": "gram_n2_0394",
+    "milestoneId": "ms_n2_s1_l3",
+    "milestone_id": "ms_n2_s1_l3",
+    "stageId": "stage_n2_1",
+    "stage_id": "stage_n2_1",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 91,
+    "pattern": "〜ばかりだ（xu hướng）",
+    "titleVi": "Ngày càng… (xu hướng một chiều đang diễn ra, thường xấu đi)",
+    "structure": "〜ばかりだ（xu hướng）",
+    "explanation": "Mẫu ngữ pháp 「〜ばかりだ」 đi sau động từ thể từ điển (Vる) chỉ sự biến đổi, diễn tả một xu hướng đang liên tục tiến triển theo một chiều hướng nhất định. Mẫu câu này hầu như chỉ dùng cho sắc thái tiêu cực, thể hiện tình trạng ngày càng xấu đi hoặc chuyển biến bất lợi mà không thể dừng lại được. Trong tiếng Việt, ngữ pháp này thường được dịch là \"ngày càng...\" hoặc \"cứ... mãi (xấu đi)\".",
+    "nuanceReason": "Khác với 「〜一方だ」 có thể dùng cho cả xu hướng tích cực lẫn tiêu cực, 「〜ばかりだ」 chỉ dùng cho chiều hướng xấu đi; ngoài ra cần tránh nhầm với 「Vた ＋ ばかりだ」 (vừa mới làm xong) và 「Vる ＋ ばかりだ」 biểu thị trạng thái đã chuẩn bị xong, chỉ còn chờ làm.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "一度崩れてしまった人間関係は、修復しようと焦れば焦るほど悪化するばかりだ。",
+    "masterExampleVi": "Mối quan hệ con người một khi đã rạn nứt thì càng nóng vội hàn gắn lại càng ngày càng xấu đi.",
+    "examples": [
+      {
+        "sentence": "一度崩れてしまった人間関係は、修復しようと焦れば焦るほど悪化するばかりだ。",
+        "translation": "Mối quan hệ con người một khi đã rạn nứt thì càng nóng vội hàn gắn lại càng ngày càng xấu đi.",
+        "reading": ""
+      },
+      {
+        "sentence": "物価は上がる一方なのに給料は上がらず、生活は苦しくなるばかりだ。",
+        "translation": "Giá cả thì cứ tăng mà lương không tăng, cuộc sống ngày càng trở nên khó khăn hơn.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0395",
+    "grammar_id": "gram_n2_0395",
+    "milestoneId": "ms_n2_s1_l3",
+    "milestone_id": "ms_n2_s1_l3",
+    "stageId": "stage_n2_1",
+    "stage_id": "stage_n2_1",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 91,
+    "pattern": "始末[しまつ]だ ≠ ばかりだ の 使[つか]い分[わ]け",
+    "titleVi": "Phân biệt: 始末だ (tổng kết chuỗi sự việc đã qua → kết cục xấu) ≠ ばかりだ (xu hướng đang tiến triển)",
+    "structure": "始末[しまつ]だ ≠ ばかりだ の 使[つか]い分[わ]け",
+    "explanation": "「〜始末だ」được dùng để diễn tả một kết cục tồi tệ, đáng tiếc xảy ra sau một chuỗi hành động sai lầm hoặc sự việc tiêu cực kéo dài trước đó. Ngược lại,「〜ばかりだ」nhấn mạnh vào xu hướng biến đổi theo chiều hướng xấu đang tiếp diễn và ngày càng trầm trọng hơn mà không thấy dấu hiệu dừng lại. Tóm lại,「〜始末だ」chốt lại 'kết cục cuối cùng' (điểm đến), còn「〜ばかりだ」tập trung vào 'chiều hướng đang tiếp tục xấu đi' (tiến trình).",
+    "nuanceReason": "「〜ばかりだ」thường kết hợp với các động từ biến đổi (悪化する, 増える, 減る, 募る...), còn「〜始末だ」thường đi sau các phó từ/liên từ chỉ sự tích tụ như「〜あげく」「とうとう」「ついに」.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "彼は遅刻を繰り返したあげく、大事なプレゼンの日に無断欠勤する始末だ。",
+    "masterExampleVi": "Anh ấy sau chuỗi ngày liên tục đi muộn, rốt cuộc đến ngày thuyết trình quan trọng lại nghỉ không phép.",
+    "examples": [
+      {
+        "sentence": "彼は遅刻を繰り返したあげく、大事なプレゼンの日に無断欠勤する始末だ。",
+        "translation": "Anh ấy sau chuỗi ngày liên tục đi muộn, rốt cuộc đến ngày thuyết trình quan trọng lại nghỉ không phép.",
+        "reading": ""
+      },
+      {
+        "sentence": "不況の影響で会社の業績は下がり、将来への不安は募るばかりだ。",
+        "translation": "Do ảnh hưởng suy thoái, tình hình kinh doanh của công ty đi xuống và nỗi bất an về tương lai ngày càng chồng chất.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0396",
+    "grammar_id": "gram_n2_0396",
+    "milestoneId": "ms_n2_s1_l3",
+    "milestone_id": "ms_n2_s1_l3",
+    "stageId": "stage_n2_1",
+    "stage_id": "stage_n2_1",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 91,
+    "pattern": "〜最中に",
+    "titleVi": "\"đang giữa lúc… thì\" (bị gián đoạn)",
+    "structure": "〜最中に",
+    "explanation": "Cấu trúc thuộc [N2] Chặng 1 · Bài 91 (③): Dùng để \"đang giữa lúc… thì\" (bị gián đoạn).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜最中に（N2）",
+    "masterExampleVi": "\"đang giữa lúc… thì\" (bị gián đoạn)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0397",
+    "grammar_id": "gram_n2_0397",
+    "milestoneId": "ms_n2_s1_l3",
+    "milestone_id": "ms_n2_s1_l3",
+    "stageId": "stage_n2_1",
+    "stage_id": "stage_n2_1",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 91,
+    "pattern": "〜うちに（ôn sâu）",
+    "titleVi": "\"đang giữa lúc… thì\" (bị gián đoạn)",
+    "structure": "〜うちに（ôn sâu）",
+    "explanation": "Cấu trúc thuộc [N2] Chặng 1 · Bài 91 (③): Dùng để \"đang giữa lúc… thì\" (bị gián đoạn).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜うちに（ôn sâu）（N2）",
+    "masterExampleVi": "\"đang giữa lúc… thì\" (bị gián đoạn)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

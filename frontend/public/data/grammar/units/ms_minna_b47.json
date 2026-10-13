@@ -1,0 +1,122 @@
+[
+  {
+    "id": "gram_n4_0166",
+    "grammar_id": "gram_n4_0166",
+    "milestoneId": "ms_minna_b47",
+    "milestone_id": "ms_minna_b47",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 47,
+    "pattern": "〜そうです (伝聞)",
+    "titleVi": "nghe nói ~ (truyền đạt thông tin từ nguồn khác)",
+    "structure": "〜そうです (伝聞)",
+    "explanation": "そうです (伝聞/truyền đạt) theo sau V/A/N thể bình thường biểu thị thông tin nghe được từ người khác hoặc nguồn khác. Khác với 様態そうです: 伝聞 dùng thể bình thường đầy đủ (食べるそうだ, 食べたそうだ).",
+    "nuanceReason": "Phân biệt: 高そうです (trông có vẻ đắt — 様態) vs 高いそうです (nghe nói đắt — 伝聞).",
+    "commonMistake": "[Sai]: 友だちの話では、あの映画はとても面白そうです。 -> [Đúng]: 友だちの話では、あの映画はとても面白いそうです。. 面白そうです (様態 - thể trạng thái, bỏ い thêm そう) nghĩa là \"trông có vẻ hay\" dựa trên quan sát trực tiếp của người nói, còn 面白いそうです (伝聞 - truyền đạt, giữ nguyên thể thường + そうだ) nghĩa là \"nghe người khác nói là hay\". Khi trích lời người khác (友だちの話では) phải dùng 伝聞 nên phải giữ đủ 面白い + そうです, không được bỏ い.",
+    "kitsuPrompt": "Chia sẻ với tôi tin tức bạn nghe được. Tôi sẽ phản hồi bằng 〜そうですね hoặc 〜そうです.",
+    "masterExampleJp": "天気予報によると、明日は雨が降るそうです。",
+    "masterExampleVi": "Theo dự báo thời tiết, nghe nói ngày mai trời mưa.",
+    "examples": [
+      {
+        "sentence": "天気予報によると、明日は雨が降るそうです。",
+        "translation": "Theo dự báo thời tiết, nghe nói ngày mai trời mưa."
+      },
+      {
+        "sentence": "田中さんは病気で休んでいるそうです。",
+        "translation": "Nghe nói Tanaka-san đang nghỉ vì bệnh."
+      },
+      {
+        "sentence": "あの店は安くておいしいそうですよ。",
+        "translation": "Nghe nói quán đó vừa rẻ vừa ngon đó."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：あの映画、面白いですか。\nB：まだ見ていませんが、友だちがとても面白いそうです。",
+      "vi": "A: Bộ phim đó có hay không?\nB: Tôi chưa xem nhưng bạn tôi nói rất hay."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0167",
+    "grammar_id": "gram_n4_0167",
+    "milestoneId": "ms_minna_b47",
+    "milestone_id": "ms_minna_b47",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 47,
+    "pattern": "〜らしいです",
+    "titleVi": "có vẻ ~ / nghe nói ~ (suy luận từ bằng chứng gián tiếp)",
+    "structure": "〜らしいです",
+    "explanation": "らしい theo sau V/A/N thể bình thường biểu thị suy luận từ thông tin gián tiếp (nghe đồn, dấu hiệu quan sát, tình hình chung). Thường mang nghĩa \"theo như tôi biết/thấy thì có vẻ...\".",
+    "nuanceReason": "らしい cũng có nghĩa \"mang đặc tính của ~\" khi theo sau N: 男らしい (nam tính), 日本らしい (mang phong cách Nhật).",
+    "commonMistake": "[Sai]: 山田さんは明日、東京へ来るらしいです。彼女に会った人から聞きました。 -> [Đúng]: 山田さんは明日、東京へ来るらしいです。彼女に会った人から聞きました。. らしい dùng được với cả V thể hiện tại (るらしい - sắp/sẽ xảy ra theo tin đồn) lẫn thể quá khứ (たらしい - đã xảy ra theo tin đồn); nhiều học viên tưởng らしい chỉ dùng cho việc đã xảy ra nên tránh dùng るらしい cho việc tương lai, nhưng thực ra るらしい hoàn toàn tự nhiên khi nói về việc sắp xảy ra nghe đồn được, còn たらしい tự nhiên hơn khi nói về việc đã xảy ra.",
+    "kitsuPrompt": "Kể cho tôi nghe điều gì đó bạn nghe đồn. Tôi sẽ phản hồi bằng らしいですね.",
+    "masterExampleJp": "山田さんは転職したらしいです。",
+    "masterExampleVi": "Có vẻ Yamada-san đã đổi việc rồi.",
+    "examples": [
+      {
+        "sentence": "山田さんは転職したらしいです。",
+        "translation": "Có vẻ Yamada-san đã đổi việc rồi."
+      },
+      {
+        "sentence": "日本の夏はとても暑いらしいですよ。",
+        "translation": "Nghe nói mùa hè Nhật Bản nóng lắm đó."
+      },
+      {
+        "sentence": "彼は毎日残業しているらしい。顔色が悪い。",
+        "translation": "Có vẻ anh ấy làm thêm giờ mỗi ngày. Nhìn trông xấu sắc."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：マリアさん、最近見かけないね。\nB：どこかに引っ越したらしいよ。先週から姿が見えないから。",
+      "vi": "A: Dạo này không thấy Maria nhỉ.\nB: Nghe nói chuyển đi đâu rồi. Tuần trước từ đó không thấy bóng."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0168",
+    "grammar_id": "gram_n4_0168",
+    "milestoneId": "ms_minna_b47",
+    "milestone_id": "ms_minna_b47",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 47,
+    "pattern": "Nによると",
+    "titleVi": "theo N / dựa theo N (trích nguồn thông tin)",
+    "structure": "Nによると",
+    "explanation": "によると theo sau nguồn thông tin (N = người, sách, báo, dự báo...) biểu thị \"theo như ~ nói/viết\". Thường đi kèm với 〜そうだ hoặc 〜らしい ở cuối câu.",
+    "nuanceReason": "によると không dùng khi người nói là nguồn thông tin của chính mình. Chỉ khi trích dẫn nguồn khác.",
+    "commonMistake": "[Sai]: 私によると、この本はとても面白いです。 -> [Đúng]: 私の意見では、この本はとても面白いです。. によると chỉ dùng để trích dẫn NGUỒN THÔNG TIN BÊN NGOÀI (báo, dự báo, lời người khác), không dùng cho ý kiến/quan điểm của chính người nói. Khi muốn nêu ý kiến bản thân phải dùng 私の意見では hoặc 私は〜と思います, không được ghép 私によると.",
+    "kitsuPrompt": "Chia sẻ tin tức nào đó bằng 〜によると〜そうです. Tôi sẽ hỏi thêm chi tiết.",
+    "masterExampleJp": "ニュースによると、大きな地震があったそうです。",
+    "masterExampleVi": "Theo tin tức, nghe nói đã có động đất lớn.",
+    "examples": [
+      {
+        "sentence": "ニュースによると、大きな地震があったそうです。",
+        "translation": "Theo tin tức, nghe nói đã có động đất lớn."
+      },
+      {
+        "sentence": "天気予報によると、明日は晴れるらしいです。",
+        "translation": "Theo dự báo thời tiết, có vẻ ngày mai nắng."
+      },
+      {
+        "sentence": "田中さんの話によると、あの店は安いそうですよ。",
+        "translation": "Theo lời Tanaka-san, nghe nói quán đó rẻ lắm."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：なんか、うちの会社、合併するって聞いたけど。\nB：本当に？誰の話によると？\nA：山田部長の話によると、来年合併するそうだよ。",
+      "vi": "A: Nghe nói công ty mình sẽ sáp nhập.\nB: Thật à? Theo lời ai vậy?\nA: Theo lời trưởng phòng Yamada, nghe nói năm sau sẽ sáp nhập."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

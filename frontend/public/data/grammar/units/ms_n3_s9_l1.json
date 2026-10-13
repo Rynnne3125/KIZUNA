@@ -1,0 +1,319 @@
+[
+  {
+    "id": "gram_n3_0337",
+    "grammar_id": "gram_n3_0337",
+    "milestoneId": "ms_n3_s9_l1",
+    "milestone_id": "ms_n3_s9_l1",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 82,
+    "pattern": "～てもらう・てあげる・てくれる",
+    "titleVi": "Nhận/cho/được nhận hành động giúp đỡ (授受表現)",
+    "structure": "～てもらう・てあげる・てくれる",
+    "explanation": "Nhóm ngữ pháp này biểu thị các hành vi cho - nhận sự giúp đỡ kèm theo sắc thái tình cảm và lòng biết ơn. Trong đó,「～てあげる」dùng khi người nói làm việc gì giúp người khác,「～てくれる」dùng khi người khác làm việc gì giúp mình (hoặc người thuộc phe mình), còn「～てもらう」biểu thị người nói tiếp nhận hành động giúp đỡ từ người khác. Khi sử dụng, cần đặc biệt lưu ý đến hướng của hành động và quan hệ thứ bậc để tránh gây cảm giác ban ơn hay thất lễ.",
+    "nuanceReason": "Lưu ý trợ từ: trong câu「～てくれる」thì người thực hiện hành động làm chủ ngữ (đi với が), còn câu「～てもらう」thì người nhận sự giúp đỡ là chủ ngữ và người làm hành động đi với trợ từ に.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "日本語のメールの書き方が分からなかったので、同僚にチェックしてもらった。",
+    "masterExampleVi": "Vì không rõ cách viết email bằng tiếng Nhật nên tôi đã nhờ đồng nghiệp kiểm tra giúp.",
+    "examples": [
+      {
+        "sentence": "日本語のメールの書き方が分からなかったので、同僚にチェックしてもらった。",
+        "translation": "Vì không rõ cách viết email bằng tiếng Nhật nên tôi đã nhờ đồng nghiệp kiểm tra giúp.",
+        "reading": ""
+      },
+      {
+        "sentence": "道に迷っていたら、親切な地元の方が駅まで案内してくれました。",
+        "translation": "Khi tôi đang bị lạc đường thì một người dân địa phương tốt bụng đã dẫn đường giúp tôi đến tận ga.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0338",
+    "grammar_id": "gram_n3_0338",
+    "milestoneId": "ms_n3_s9_l1",
+    "milestone_id": "ms_n3_s9_l1",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 82,
+    "pattern": "～（ら）れる・～（さ）せる",
+    "titleVi": "Thể thụ động (受け身) & sai khiến (使役) — bị/được làm; cho/bắt làm",
+    "structure": "～（ら）れる・～（さ）せる",
+    "explanation": "Mẫu ngữ pháp này bao gồm thể thụ động「～（ら）れる」(bị hoặc được tác động) và thể sai khiến「～（さ）せる」(cho phép hoặc bắt buộc ai đó làm việc gì). Thể thụ động được dùng để diễn đạt sự việc từ góc nhìn của người tiếp nhận hành động, bao gồm thụ động trực tiếp, thụ động gián tiếp (chỉ sự phiền toái) và thụ động khách quan. Thể sai khiến thể hiện quyền hạn hoặc sự cho phép của người có vị thế cao hơn đối với người dưới, hoặc dùng trong cấu trúc xin phép lịch sự「～させてください」. Khi sử dụng, cần lưu ý không dùng trực tiếp thể sai khiến đối với người bề trên để tránh gây cảm giác áp đặt, thiếu tôn trọng.",
+    "nuanceReason": "Cần phân biệt rõ thể thụ động「～（ら）れる」(bị/được làm), thể sai khiến「～（さ）せる」(cho/bắt làm) và thể sai khiến thụ động「～（さ）せられる」(bị ai đó bắt buộc phải làm điều bản thân không muốn).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "大事な書類を同僚に誤って捨てられるというトラブルが発生した。",
+    "masterExampleVi": "Đã xảy ra sự cố tài liệu quan trọng bị đồng nghiệp vô tình vứt mất.",
+    "examples": [
+      {
+        "sentence": "大事な書類を同僚に誤って捨てられるというトラブルが発生した。",
+        "translation": "Đã xảy ra sự cố tài liệu quan trọng bị đồng nghiệp vô tình vứt mất.",
+        "reading": ""
+      },
+      {
+        "sentence": "部長は若手社員の成長を促すため、大きなプロジェクトのリーダーを担当させることにした。",
+        "translation": "Trưởng phòng quyết định giao cho nhân viên trẻ đảm nhận vị trí trưởng dự án lớn nhằm thúc đẩy sự phát triển của họ.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0339",
+    "grammar_id": "gram_n3_0339",
+    "milestoneId": "ms_n3_s9_l1",
+    "milestone_id": "ms_n3_s9_l1",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 82,
+    "pattern": "～ように言う／頼む／伝える",
+    "titleVi": "Bảo, nhờ, truyền đạt cho ai đó làm gì (gián tiếp)",
+    "structure": "～ように言う／頼む／伝える",
+    "explanation": "Mẫu câu này dùng để trích dẫn gián tiếp một mệnh lệnh, yêu cầu hoặc lời dặn dò từ người này sang người khác với ý nghĩa 'bảo, nhờ, nhắn ai làm hoặc không làm việc gì'. Động từ đứng trước 「ように」 luôn chia ở thể từ điển (Vる) hoặc thể phủ định ngắn (Vない), kết hợp phía sau với các động từ truyền đạt như 言う, 頼む, 伝える. Cách nói này mang sắc thái lịch sự, mềm mỏng và tự nhiên hơn so với việc trích dẫn trực tiếp câu mệnh lệnh.",
+    "nuanceReason": "Khi chính bản thân là người nhận lời yêu cầu/dặn dò từ người khác, mẫu câu này thường được chuyển sang dạng bị động là 「～ように言われる／頼まれる」 (được/bị bảo làm gì).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "母は弟に、夜遅くまでゲームをしないで早く寝るように言いました。",
+    "masterExampleVi": "Mẹ đã bảo em trai không được chơi game đến khuya mà hãy đi ngủ sớm.",
+    "examples": [
+      {
+        "sentence": "母は弟に、夜遅くまでゲームをしないで早く寝るように言いました。",
+        "translation": "Mẹ đã bảo em trai không được chơi game đến khuya mà hãy đi ngủ sớm.",
+        "reading": ""
+      },
+      {
+        "sentence": "山田さんに、明日の会議の資料を今日中にメールで送るように伝えてください。",
+        "translation": "Xin hãy nhắn anh Yamada gửi tài liệu cuộc họp ngày mai qua email trong ngày hôm nay giúp tôi.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0340",
+    "grammar_id": "gram_n3_0340",
+    "milestoneId": "ms_n3_s9_l1",
+    "milestone_id": "ms_n3_s9_l1",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 82,
+    "pattern": "～ということだ",
+    "titleVi": "Có nghĩa là, điều đó có nghĩa là (kết luận/tóm tắt)",
+    "structure": "～ということだ",
+    "explanation": "Mẫu câu 「～ということだ」 dùng để giải thích bản chất, tóm tắt hoặc rút ra kết luận mang tính logic từ một tình huống, sự việc cụ thể (mang nghĩa 'tức là / điều đó có nghĩa là'). Vế trước thường đi kèm với cụm 「～ということは」 hoặc phó từ 「つまり」 để dẫn dắt vấn đề. Cấu trúc này thể hiện sự suy luận khách quan, thường được sử dụng trong văn viết, công việc hoặc giải thích hàng ngày.",
+    "nuanceReason": "Cần phân biệt với một cách dùng phổ biến khác của 「～ということだ」 là truyền đạt lại thông tin nghe ngóng được (tương đương với 「～そうだ / nghe nói là」).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "意見がないということは、現状の提案に賛成しているということだ。",
+    "masterExampleVi": "Không có ý kiến gì điều đó có nghĩa là bạn đang tán thành với đề xuất hiện tại.",
+    "examples": [
+      {
+        "sentence": "意見がないということは、現状の提案に賛成しているということだ。",
+        "translation": "Không có ý kiến gì điều đó có nghĩa là bạn đang tán thành với đề xuất hiện tại.",
+        "reading": ""
+      },
+      {
+        "sentence": "物価が上がって給料が変わらないのは、実質的に収入が減ったということだ。",
+        "translation": "Vật giá tăng trong khi lương không đổi điều đó đồng nghĩa với việc thu nhập thực tế đã bị giảm.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0341",
+    "grammar_id": "gram_n3_0341",
+    "milestoneId": "ms_n3_s9_l1",
+    "milestone_id": "ms_n3_s9_l1",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 82,
+    "pattern": "～という",
+    "titleVi": "Được gọi là, cái mà (đưa ra tên/nội dung)",
+    "structure": "～という",
+    "explanation": "Mẫu ngữ pháp 「～という」 được dùng để gọi tên, định nghĩa hoặc giải thích nội dung của một sự vật, sự việc, con người cụ thể mà người nói nghĩ rằng người nghe chưa biết. Ngoài việc gọi tên danh từ (Tên + という + N), mẫu này còn đi với thể thông thường (普通形 + という + N) để giải thích nội dung cho danh từ trừu tượng phía sau như tin đồn, kế hoạch, thông báo. Trong giao tiếp thân mật hằng ngày, 「～という」 thường được người bản xứ chuyển thành 「～っていう」.",
+    "nuanceReason": "Trong hội thoại tự nhiên hằng ngày, 「～という」 thường được nói tắt thành 「～っていう」, và cần tránh nhầm lẫn cách dùng định nghĩa/gọi tên này với hành động phát ngôn thực tế của động từ 「言う」(nói).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "駅の近くに「さくら」という美味しいラーメン屋が新しくできましたよ。",
+    "masterExampleVi": "Ở gần nhà ga mới mở một quán mì ramen rất ngon tên là \"Sakura\" đấy.",
+    "examples": [
+      {
+        "sentence": "駅の近くに「さくら」という美味しいラーメン屋が新しくできましたよ。",
+        "translation": "Ở gần nhà ga mới mở một quán mì ramen rất ngon tên là \"Sakura\" đấy.",
+        "reading": ""
+      },
+      {
+        "sentence": "山田先生が来月退職されるという噂を聞きましたが、本当ですか。",
+        "translation": "Tôi nghe phong phanh tin đồn thầy Yamada tháng sau sẽ nghỉ hưu, điều đó có thật không?",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0342",
+    "grammar_id": "gram_n3_0342",
+    "milestoneId": "ms_n3_s9_l1",
+    "milestone_id": "ms_n3_s9_l1",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 82,
+    "pattern": "～によると／によれば",
+    "titleVi": "Theo, dựa theo (nguồn thông tin)",
+    "structure": "～によると／によれば",
+    "explanation": "Mẫu ngữ pháp này dùng để dẫn xuất xứ hoặc nguồn của thông tin, mang ý nghĩa là \"theo như...\" hoặc \"căn cứ vào...\". Danh từ đứng trước thường là các nguồn tin đáng tin cậy như báo đài, kết quả khảo sát, chuyên gia hoặc lời kể của ai đó. Cuối câu hầu như luôn đi kèm các dạng biểu thị truyền đạt hoặc phỏng đoán như 「～そうだ」「～らしい」「～ということだ」 chứ không dùng kết thúc khẳng định dứt khoát.",
+    "nuanceReason": "Hai dạng 「～によると」 và 「～によれば」 hoàn toàn có thể thay thế cho nhau, tuy nhiên 「～によれば」 thường mang sắc thái trang trọng, mang tính văn viết hơn.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "今朝のニュースによれば、来月から電気料金が再び値上がりするそうだ。",
+    "masterExampleVi": "Theo tin tức sáng nay, từ tháng sau giá tiền điện dường như sẽ lại tăng lên.",
+    "examples": [
+      {
+        "sentence": "今朝のニュースによれば、来月から電気料金が再び値上がりするそうだ。",
+        "translation": "Theo tin tức sáng nay, từ tháng sau giá tiền điện dường như sẽ lại tăng lên.",
+        "reading": ""
+      },
+      {
+        "sentence": "専門家の調査によると、睡眠不足は集中力の低下に大きく影響するということです。",
+        "translation": "Theo khảo sát của các chuyên gia, việc thiếu ngủ ảnh hưởng rất lớn đến sự suy giảm khả năng tập trung.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0343",
+    "grammar_id": "gram_n3_0343",
+    "milestoneId": "ms_n3_s9_l1",
+    "milestone_id": "ms_n3_s9_l1",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 82,
+    "pattern": "～とのことだ／とのこと",
+    "titleVi": "Được biết là, nghe tin là (truyền đạt gián tiếp)",
+    "structure": "～とのことだ／とのこと",
+    "explanation": "Mẫu 「～とのことだ／とのこと」 dùng để truyền đạt lại thông tin mà người nói hoặc người viết tiếp nhận được từ nguồn khác (qua thư từ, điện thoại, email, thông báo...). Cấu trúc này mang sắc thái trang trọng, lịch sự và có tính truyền đạt khách quan hơn so với 「～そうだ」. Trong môi trường công sở hoặc văn bản trang trọng, mẫu này rất phổ biến khi báo cáo tin tức từ đối tác, khách hàng hoặc cấp trên.",
+    "nuanceReason": "「～とのことだ」 có ý nghĩa truyền đạt tương tự 「～そうだ」 nhưng trang trọng, lịch sự và mang tính văn viết hơn, đặc biệt thường gặp trong email công việc hoặc bản tin báo chí.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "先日の面接の結果につきましては、来週の月曜日にメールにてご連絡いただけるとのことです。",
+    "masterExampleVi": "Về kết quả buổi phỏng vấn hôm trước, được biết phía công ty sẽ liên hệ lại qua email vào thứ Hai tuần tới.",
+    "examples": [
+      {
+        "sentence": "先日の面接の結果につきましては、来週の月曜日にメールにてご連絡いただけるとのことです。",
+        "translation": "Về kết quả buổi phỏng vấn hôm trước, được biết phía công ty sẽ liên hệ lại qua email vào thứ Hai tuần tới.",
+        "reading": ""
+      },
+      {
+        "sentence": "大雪の影響により、一部の鉄道路線で運転が見合わされているとのことだ。",
+        "translation": "Được biết do ảnh hưởng của tuyết rơi dày đặc nên một số tuyến đường sắt đang tạm dừng hoạt động.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0344",
+    "grammar_id": "gram_n3_0344",
+    "milestoneId": "ms_n3_s9_l1",
+    "milestone_id": "ms_n3_s9_l1",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 82,
+    "pattern": "〜てもらう／あげる／くれる",
+    "titleVi": "thuần thục cho nhận, bị động, sai khiến và truyền ngôn (SKM Bài 12)",
+    "structure": "〜てもらう／あげる／くれる",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 9 · Bài 82 (㉜): Dùng để thuần thục cho nhận, bị động, sai khiến và truyền ngôn (SKM Bài 12).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜てもらう／あげる／くれる（N3）",
+    "masterExampleVi": "thuần thục cho nhận, bị động, sai khiến và truyền ngôn (SKM Bài 12)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0345",
+    "grammar_id": "gram_n3_0345",
+    "milestoneId": "ms_n3_s9_l1",
+    "milestone_id": "ms_n3_s9_l1",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 82,
+    "pattern": "〜（ら）れる",
+    "titleVi": "thuần thục cho nhận, bị động, sai khiến và truyền ngôn (SKM Bài 12)",
+    "structure": "〜（ら）れる",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 9 · Bài 82 (㉜): Dùng để thuần thục cho nhận, bị động, sai khiến và truyền ngôn (SKM Bài 12).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜（ら）れる（N3）",
+    "masterExampleVi": "thuần thục cho nhận, bị động, sai khiến và truyền ngôn (SKM Bài 12)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0346",
+    "grammar_id": "gram_n3_0346",
+    "milestoneId": "ms_n3_s9_l1",
+    "milestone_id": "ms_n3_s9_l1",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 82,
+    "pattern": "〜させる",
+    "titleVi": "thuần thục cho nhận, bị động, sai khiến và truyền ngôn (SKM Bài 12)",
+    "structure": "〜させる",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 9 · Bài 82 (㉜): Dùng để thuần thục cho nhận, bị động, sai khiến và truyền ngôn (SKM Bài 12).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜させる（N3）",
+    "masterExampleVi": "thuần thục cho nhận, bị động, sai khiến và truyền ngôn (SKM Bài 12)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

@@ -1,0 +1,190 @@
+[
+  {
+    "id": "gram_n3_0238",
+    "grammar_id": "gram_n3_0238",
+    "milestoneId": "ms_n3_s4_l3",
+    "milestone_id": "ms_n3_s4_l3",
+    "stageId": "stage_n3_4",
+    "stage_id": "stage_n3_4",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 65,
+    "pattern": "〜らしい（伝聞[でんぶん]）",
+    "titleVi": "Nghe nói ~ / Dường như ~ (thông tin gián tiếp, nguồn bên ngoài)",
+    "structure": "〜らしい（伝聞[でんぶん]）",
+    "explanation": "Mẫu câu 「〜らしい」 dùng để truyền đạt lại thông tin nghe được gián tiếp từ người khác, tin đồn, hoặc qua các phương tiện truyền thông. Sắc thái của mẫu này thể hiện phán đoán dựa trên nguồn tin bên ngoài nhưng người nói không chịu trách nhiệm hay khẳng định 100% tính xác thực của thông tin. Cấu trúc này thường được dùng nhiều trong giao tiếp hàng ngày khi chia sẻ những chuyện nghe ngóng được một cách khách quan, dè dặt.",
+    "nuanceReason": "Khác với 「〜そうだ」 (truyền đạt lại nguyên văn thông tin từ nguồn xác định), 「〜らしい」 mang sắc thái thông tin gián tiếp, mơ hồ và độ tin cậy thấp hơn.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "来月、駅の前に新しいカフェができるらしいよ。",
+    "masterExampleVi": "Nghe nói tháng sau ở trước nhà ga sẽ mở một quán cà phê mới đấy.",
+    "examples": [
+      {
+        "sentence": "来月、駅の前に新しいカフェができるらしいよ。",
+        "translation": "Nghe nói tháng sau ở trước nhà ga sẽ mở một quán cà phê mới đấy.",
+        "reading": ""
+      },
+      {
+        "sentence": "田中さんは来週から大阪へ転勤するらしいです。",
+        "translation": "Nghe nói anh Tanaka sẽ chuyển công tác đến Osaka từ tuần sau.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0239",
+    "grammar_id": "gram_n3_0239",
+    "milestoneId": "ms_n3_s4_l3",
+    "milestone_id": "ms_n3_s4_l3",
+    "stageId": "stage_n3_4",
+    "stage_id": "stage_n3_4",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 65,
+    "pattern": "〜らしい（典型[てんけい]）",
+    "titleVi": "Đúng chất ~ / Ra dáng ~ (tiêu biểu, đặc trưng của loại đó)",
+    "structure": "〜らしい（典型[てんけい]）",
+    "explanation": "Mẫu 「〜らしい」 đi trực tiếp sau danh từ để diễn tả một người hay sự vật mang trọn vẹn đặc trưng, phẩm chất tiêu biểu vốn có của đối tượng đó (\"đúng chất ~\", \"ra dáng ~\"). Cấu trúc này được chia và sử dụng tương tự như một tính từ đuôi い (らしさ, らしく, らしくない). Điểm cốt lõi là chủ thể thực sự thuộc về danh từ đó và đang thể hiện đúng bản chất tốt đẹp, tự nhiên mà mọi người kỳ vọng.",
+    "nuanceReason": "Cần phân biệt với 「〜っぽい」 (thường mang nghĩa chê bai hoặc tính chất giống bề ngoài) và 「〜みたい」 (dùng để so sánh ví von với đối tượng vốn dĩ không phải là nó).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "学生なんだから、もっと学生らしく真面目に勉強しなさい。",
+    "masterExampleVi": "Đã là học sinh thì hãy học hành chăm chỉ cho ra dáng học sinh đi chứ.",
+    "examples": [
+      {
+        "sentence": "学生なんだから、もっと学生らしく真面目に勉強しなさい。",
+        "translation": "Đã là học sinh thì hãy học hành chăm chỉ cho ra dáng học sinh đi chứ.",
+        "reading": ""
+      },
+      {
+        "sentence": "彼はどんなにピンチの時でも冷静で、実にリーダーらしい人だ。",
+        "translation": "Anh ấy dù trong hoàn cảnh nguy cấp đến đâu vẫn luôn bình tĩnh, quả thực là người đúng chất thủ lĩnh.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0240",
+    "grammar_id": "gram_n3_0240",
+    "milestoneId": "ms_n3_s4_l3",
+    "milestone_id": "ms_n3_s4_l3",
+    "stageId": "stage_n3_4",
+    "stage_id": "stage_n3_4",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 65,
+    "pattern": "らしい（伝聞[でんぶん]）vs そうだ（伝聞[でんぶん]）",
+    "titleVi": "らしい = thông tin lan truyền/mờ nguồn; そうだ = dẫn lời trực tiếp (TV/báo nói rõ)",
+    "structure": "らしい（伝聞[でんぶん]）vs そうだ（伝聞[でんぶん]）",
+    "explanation": "Cả 「らしい」 và 「そうだ」 đều dùng để truyền đạt lại thông tin nghe được từ người khác (truyền ngôn), nhưng khác nhau về mức độ rõ ràng của nguồn tin. 「らしい」 dùng khi tiếp nhận thông tin từ tin đồn, truyền miệng mơ hồ mà người nói không biết rõ hoặc không chắc chắn về nguồn gốc. Ngược lại, 「そうだ」 dùng khi trích dẫn lại thông tin từ nguồn xác thực, đáng tin cậy như báo đài, thời sự hoặc lời nói trực tiếp từ một người cụ thể (thường đi kèm 「～によると」, 「～では」). Do đó, khi muốn truyền đạt thông tin có căn cứ rõ ràng thì dùng 「そうだ」, còn khi chỉ là lời đồn đãi phong phanh thì dùng 「らしい」.",
+    "nuanceReason": "Cần chú ý cách nối:「そうだ」(truyền ngôn) đi với thể thông thường bao gồm cả「だ」(N/Tính từ -na + だそうだ), trong khi「らしい」kết hợp trực tiếp với N và Tính từ -na mà không có「だ」.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "誰から聞いたかは覚えていないが、駅前に新しいラーメン屋ができるらしい。",
+    "masterExampleVi": "Tôi không nhớ là nghe từ ai, nhưng nghe đồn hình như sắp có một quán ramen mới mở trước nhà ga.",
+    "examples": [
+      {
+        "sentence": "誰から聞いたかは覚えていないが、駅前に新しいラーメン屋ができるらしい。",
+        "translation": "Tôi không nhớ là nghe từ ai, nhưng nghe đồn hình như sắp có một quán ramen mới mở trước nhà ga.",
+        "reading": ""
+      },
+      {
+        "sentence": "噂ではコンサートが中止になるらしいが、公式発表によると予定通り行われるそうだ。",
+        "translation": "Nghe đồn là buổi hòa nhạc dường như sẽ bị hủy, nhưng theo thông báo chính thức thì nghe nói vẫn sẽ diễn ra theo đúng kế hoạch.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0241",
+    "grammar_id": "gram_n3_0241",
+    "milestoneId": "ms_n3_s4_l3",
+    "milestone_id": "ms_n3_s4_l3",
+    "stageId": "stage_n3_4",
+    "stage_id": "stage_n3_4",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 65,
+    "pattern": "らしい（伝聞[でんぶん]）vs ようだ（推量[すいりょう]）",
+    "titleVi": "らしい = thông tin từ người khác; ようだ = bằng chứng mình tự quan sát thấy",
+    "structure": "らしい（伝聞[でんぶん]）vs ようだ（推量[すいりょう]）",
+    "explanation": "「らしい」 được dùng để truyền đạt lại thông tin nghe từ người khác, báo đài hoặc dư luận mà bản thân người nói không trực tiếp chứng kiến. Ngược lại, 「ようだ」 thể hiện sự suy đoán mang tính chủ quan của người nói dựa trên những bằng chứng, dấu hiệu cụ thể do chính mắt mình thấy hoặc cảm nhận qua các giác quan. Để chọn đúng, hãy nhớ: tiếp nhận tin tức từ nguồn bên ngoài dùng 「らしい」, còn tự quan sát hiện trường thấy dấu vết để phán đoán thì dùng 「ようだ」.",
+    "nuanceReason": "Khi phán đoán không có nguồn tin bên ngoài mà chỉ dựa trên cảm giác, trực giác hoặc dấu hiệu trước mắt, hãy dùng 「ようだ」 thay vì 「らしい」.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "山田さんは来月アメリカの支社へ転勤するらしいですよ。",
+    "masterExampleVi": "Nghe nói anh Yamada tháng sau sẽ chuyển công tác sang chi nhánh ở Mỹ đấy.",
+    "examples": [
+      {
+        "sentence": "山田さんは来月アメリカの支社へ転勤するらしいですよ。",
+        "translation": "Nghe nói anh Yamada tháng sau sẽ chuyển công tác sang chi nhánh ở Mỹ đấy.",
+        "reading": ""
+      },
+      {
+        "sentence": "道が濡れて水たまりができているから、さっきまで強い雨が降っていたようだ。",
+        "translation": "Đường ướt và có vũng nước đọng nên dường như lúc nãy trời vừa mưa rất to.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0242",
+    "grammar_id": "gram_n3_0242",
+    "milestoneId": "ms_n3_s4_l3",
+    "milestone_id": "ms_n3_s4_l3",
+    "stageId": "stage_n3_4",
+    "stage_id": "stage_n3_4",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 65,
+    "pattern": "〜らしい（伝聞",
+    "titleVi": "\"nghe nói\", \"đúng chất / ra dáng\"",
+    "structure": "〜らしい（伝聞",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 4 · Bài 65 (⑮): Dùng để \"nghe nói\", \"đúng chất / ra dáng\".",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜らしい（伝聞（N3）",
+    "masterExampleVi": "\"nghe nói\", \"đúng chất / ra dáng\"",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0243",
+    "grammar_id": "gram_n3_0243",
+    "milestoneId": "ms_n3_s4_l3",
+    "milestone_id": "ms_n3_s4_l3",
+    "stageId": "stage_n3_4",
+    "stage_id": "stage_n3_4",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 65,
+    "pattern": "典型）",
+    "titleVi": "\"nghe nói\", \"đúng chất / ra dáng\"",
+    "structure": "典型）",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 4 · Bài 65 (⑮): Dùng để \"nghe nói\", \"đúng chất / ra dáng\".",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "典型）（N3）",
+    "masterExampleVi": "\"nghe nói\", \"đúng chất / ra dáng\"",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

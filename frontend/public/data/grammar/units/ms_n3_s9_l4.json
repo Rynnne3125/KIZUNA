@@ -1,0 +1,249 @@
+[
+  {
+    "id": "gram_n3_0358",
+    "grammar_id": "gram_n3_0358",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 85,
+    "pattern": "～こそ",
+    "titleVi": "Chính là, chỉ có (nhấn mạnh điều quan trọng nhất)",
+    "structure": "～こそ",
+    "explanation": "Mẫu 「～こそ」 dùng để nhấn mạnh chính đối tượng, nguyên nhân hay thời điểm đó chứ tuyệt đối không phải cái nào khác. Mẫu này thường đi trực tiếp sau danh từ (N + こそ) hoặc sau liên từ chỉ lý do (～からこそ) nhằm khẳng định mạnh mẽ cảm xúc, lý do cốt lõi hoặc ý chí quyết tâm của người nói. Sắc thái câu mang tính dứt khoát, trang trọng, thường xuất hiện nhiều trong văn viết, phát biểu hoặc các câu chào hỏi xã giao hàng ngày.",
+    "nuanceReason": "Khác với 「だけ」(chỉ giới hạn phạm vi đơn thuần), 「こそ」 mang sắc thái cảm xúc mạnh mẽ hơn, dùng để nhấn mạnh sự tâm đắc, quyết tâm hoặc tính đặc biệt của đối tượng.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "今年こそ絶対にJLPT N1に合格してみせる。",
+    "masterExampleVi": "Chính năm nay tôi nhất định sẽ thi đỗ JLPT N1 cho mà xem.",
+    "examples": [
+      {
+        "sentence": "今年こそ絶対にJLPT N1に合格してみせる。",
+        "translation": "Chính năm nay tôi nhất định sẽ thi đỗ JLPT N1 cho mà xem.",
+        "reading": ""
+      },
+      {
+        "sentence": "健康こそが人生において何よりも大切でかけがえのない財産だ。",
+        "translation": "Chính sức khỏe mới là tài sản quý giá và quan trọng hơn bất cứ thứ gì trong cuộc đời.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0359",
+    "grammar_id": "gram_n3_0359",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 85,
+    "pattern": "～だって",
+    "titleVi": "Kể cả, dù là ~ cũng (nhấn mạnh trường hợp cực đoan)",
+    "structure": "～だって",
+    "explanation": "Mẫu ngữ pháp 「～だって」 đi sau danh từ hoặc từ để hỏi nhằm đưa ra một trường hợp điển hình hoặc cực đoan, mang ý nghĩa \"kể cả, ngay cả, dù là... cũng...\". Mẫu này tương đương với 「～でも / ～さえ」 nhưng mang sắc thái văn nói thân mật và đời thường hơn. Khi kết hợp với từ để hỏi (誰, どこ, いつ...), câu mang ý nghĩa khẳng định toàn diện như \"bất cứ ai / bất cứ đâu / bất cứ khi nào\".",
+    "nuanceReason": "「～だって」 là cách nói mang đậm tính khẩu ngữ suồng sã, nên tránh dùng trong bài viết trang trọng, thư từ kinh doanh hoặc khi giao tiếp với người trên bằng kính ngữ.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "プロの選手だって、大きなプレッシャーでミスをすることがある。",
+    "masterExampleVi": "Kể cả vận động viên chuyên nghiệp cũng có lúc mắc sai lầm vì chịu áp lực lớn.",
+    "examples": [
+      {
+        "sentence": "プロの選手だって、大きなプレッシャーでミスをすることがある。",
+        "translation": "Kể cả vận động viên chuyên nghiệp cũng có lúc mắc sai lầm vì chịu áp lực lớn.",
+        "reading": ""
+      },
+      {
+        "sentence": "人間なんだから、誰だって失敗することはあるよ。",
+        "translation": "Đã là con người thì bất kỳ ai cũng có lúc mắc phải sai lầm thôi.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0360",
+    "grammar_id": "gram_n3_0360",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 85,
+    "pattern": "～さえ（も）",
+    "titleVi": "Thậm chí cả ~ (ngạc nhiên về điều cực đoan)",
+    "structure": "～さえ（も）",
+    "explanation": "Mẫu ngữ pháp này dùng để đưa ra một ví dụ mang tính cực đoan hoặc bất ngờ nhất, nhằm ngụ ý rằng đến điều khó tin như vậy còn xảy ra thì những điều bình thường khác là hiển nhiên. Thường mang sắc thái ngạc nhiên, cảm thán, thất vọng hoặc nhấn mạnh mức độ nghiêm trọng của sự việc. Vế sau của câu rất thường đi kèm với dạng phủ định để làm nổi bật sự thiếu sót hoặc bất khả thi.",
+    "nuanceReason": "Khi gắn vào danh từ,「さえ」sẽ thay thế hoàn toàn cho trợ từ「が」「を」, nhưng lại đứng sau các trợ từ chỉ vị trí, phương tiện như「に」「で」「から」(ví dụ: 先生にさえ、子供でさえ).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "昨日は仕事が忙しすぎて、昼ご飯を食べる時間さえなかった。",
+    "masterExampleVi": "Hôm qua công việc quá bận rộn nên thậm chí đến thời gian ăn trưa tôi cũng không có.",
+    "examples": [
+      {
+        "sentence": "昨日は仕事が忙しすぎて、昼ご飯を食べる時間さえなかった。",
+        "translation": "Hôm qua công việc quá bận rộn nên thậm chí đến thời gian ăn trưa tôi cũng không có.",
+        "reading": ""
+      },
+      {
+        "sentence": "この専門用語は、ベテランのエンジニアでさえも即座には答えられない難問だ。",
+        "translation": "Thuật ngữ chuyên môn này là câu hỏi khó đến mức thậm chí cả kỹ sư lâu năm cũng không thể trả lời ngay được.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0361",
+    "grammar_id": "gram_n3_0361",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 85,
+    "pattern": "～だけでなく／のみならず",
+    "titleVi": "Không chỉ ~ mà còn (mở rộng phạm vi)",
+    "structure": "～だけでなく／のみならず",
+    "explanation": "Mẫu câu này dùng để diễn đạt ý nghĩa \"không chỉ A mà còn cả B\", trong đó B là yếu tố được bổ sung thêm vào cùng phạm vi hoặc ở mức độ cao hơn. Trong khi 「～だけでなく」 được dùng rất phổ biến trong cả văn nói lẫn văn viết hằng ngày, thì 「～のみならず」 mang sắc thái trang trọng và dùng nhiều trong văn phong viết hoặc các bài phát biểu lịch sự. Vế sau thường đi kèm với các trợ từ mang tính mở rộng như 「も」、「まで」、「さえ」 để nhấn mạnh thông tin được thêm vào.",
+    "nuanceReason": "So với 「～だけでなく」 dùng linh hoạt trong đời sống hằng ngày, 「～のみならず」 là văn phong cứng, trang trọng hơn và thường xuất hiện trong báo chí, tin tức hoặc báo cáo kinh doanh.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "この新製品は国内市場のみならず、海外市場でも非常に高く評価されている。",
+    "masterExampleVi": "Sản phẩm mới này không chỉ ở thị trường trong nước mà còn được đánh giá rất cao tại thị trường nước ngoài.",
+    "examples": [
+      {
+        "sentence": "この新製品は国内市場のみならず、海外市場でも非常に高く評価されている。",
+        "translation": "Sản phẩm mới này không chỉ ở thị trường trong nước mà còn được đánh giá rất cao tại thị trường nước ngoài.",
+        "reading": ""
+      },
+      {
+        "sentence": "健康のためには、栄養バランスの良い食事を取るだけでなく、十分な睡眠を確保することも大切だ。",
+        "translation": "Để giữ gìn sức khỏe, không chỉ việc ăn uống cân bằng dinh dưỡng mà việc đảm bảo ngủ đủ giấc cũng rất quan trọng.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0362",
+    "grammar_id": "gram_n3_0362",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 85,
+    "pattern": "～ばかりか／ばかりでなく",
+    "titleVi": "Không chỉ ~ mà thậm chí còn (nhấn mạnh phạm vi vượt kỳ vọng)",
+    "structure": "～ばかりか／ばかりでなく",
+    "explanation": "Mẫu ngữ pháp này mang ý nghĩa \"không chỉ dừng lại ở A mà thậm chí còn B\", dùng khi muốn nhấn mạnh sự việc ở vế sau phát triển vượt ngoài mức độ hoặc kỳ vọng thông thường. Vế sau thường đi kèm với các trợ từ nhấn mạnh như 「も」「まで」「さえ」 để làm nổi bật phạm vi hoặc mức độ gia tăng. Cấu trúc này thường mang sắc thái ngạc nhiên, cảm thán hoặc bức xúc của người nói, và vế sau không dùng với dạng câu mệnh lệnh, nhờ vả hay thể hiện ý chí.",
+    "nuanceReason": "So với 「～だけでなく」 mang tính chất liệt kê trung tính, 「～ばかりか」 thể hiện rõ cảm xúc bất ngờ, bất mãn hoặc thán phục khi sự việc ở vế sau vượt quá tưởng tượng.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "このレストランは料理がまずいばかりか、店員の接客態度まで最悪だった。",
+    "masterExampleVi": "Nhà hàng này không chỉ đồ ăn dở tệ mà đến cả thái độ phục vụ của nhân viên cũng tồi tệ hết mức.",
+    "examples": [
+      {
+        "sentence": "このレストランは料理がまずいばかりか、店員の接客態度まで最悪だった。",
+        "translation": "Nhà hàng này không chỉ đồ ăn dở tệ mà đến cả thái độ phục vụ của nhân viên cũng tồi tệ hết mức.",
+        "reading": ""
+      },
+      {
+        "sentence": "彼女は英語ばかりでなく、フランス語や中国語も流暢に話すことができる。",
+        "translation": "Cô ấy không chỉ tiếng Anh mà còn có thể nói trôi chảy cả tiếng Pháp và tiếng Trung.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0363",
+    "grammar_id": "gram_n3_0363",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 85,
+    "pattern": "〜さえも",
+    "titleVi": "nhấn mạnh \"chính là...\", \"ngay cả...\", \"không những... mà còn\" (SKM Bài 15)",
+    "structure": "〜さえも",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 9 · Bài 85 (㉟): Dùng để nhấn mạnh \"chính là...\", \"ngay cả...\", \"không những... mà còn\" (SKM Bài 15).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜さえも（N3）",
+    "masterExampleVi": "nhấn mạnh \"chính là...\", \"ngay cả...\", \"không những... mà còn\" (SKM Bài 15)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0364",
+    "grammar_id": "gram_n3_0364",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 85,
+    "pattern": "〜だけでなく",
+    "titleVi": "nhấn mạnh \"chính là...\", \"ngay cả...\", \"không những... mà còn\" (SKM Bài 15)",
+    "structure": "〜だけでなく",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 9 · Bài 85 (㉟): Dùng để nhấn mạnh \"chính là...\", \"ngay cả...\", \"không những... mà còn\" (SKM Bài 15).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜だけでなく（N3）",
+    "masterExampleVi": "nhấn mạnh \"chính là...\", \"ngay cả...\", \"không những... mà còn\" (SKM Bài 15)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0365",
+    "grammar_id": "gram_n3_0365",
+    "milestoneId": "ms_n3_s9_l4",
+    "milestone_id": "ms_n3_s9_l4",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 85,
+    "pattern": "〜ばかりか",
+    "titleVi": "nhấn mạnh \"chính là...\", \"ngay cả...\", \"không những... mà còn\" (SKM Bài 15)",
+    "structure": "〜ばかりか",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 9 · Bài 85 (㉟): Dùng để nhấn mạnh \"chính là...\", \"ngay cả...\", \"không những... mà còn\" (SKM Bài 15).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜ばかりか（N3）",
+    "masterExampleVi": "nhấn mạnh \"chính là...\", \"ngay cả...\", \"không những... mà còn\" (SKM Bài 15)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "id": "gram_n4_0129",
+    "grammar_id": "gram_n4_0129",
+    "milestoneId": "ms_minna_b35",
+    "milestone_id": "ms_minna_b35",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 35,
+    "pattern": "V／Aば",
+    "titleVi": "nếu ~ (điều kiện giả định)",
+    "structure": "V／Aば",
+    "explanation": "Thể ば (provisional conditional) biểu thị điều kiện giả định. V nhóm I: âm cuối い→えば (書く→書けば). V nhóm II: bỏ る+れば. A い: bỏ い+ければ. Không dùng với hành động ý chí/yêu cầu ở vế sau.",
+    "nuanceReason": "ば thường dùng cho điều kiện tự nhiên/khách quan. たら thường dùng cho điều kiện cụ thể hơn, kết quả sau khi xảy ra.",
+    "commonMistake": "[Sai]: 安ければ、買ってください。 -> [Đúng]: 安かったら、買ってください。. Thể ば không được dùng khi vế sau là câu yêu cầu, mệnh lệnh hay ý chí của người nói (như てください, ましょう, たい). Trong trường hợp đó phải chuyển sang dùng たら (安かったら) vì たら có thể kết hợp tự nhiên với các vế sau mang tính yêu cầu/ý chí, còn ば chỉ hợp với điều kiện khách quan, tự nhiên, không kèm mệnh lệnh.",
+    "kitsuPrompt": "Đặt câu hỏi điều kiện \"nếu... thì sao?\" về cuộc sống hàng ngày. Tôi sẽ dùng ば.",
+    "masterExampleJp": "安ければ、買います。",
+    "masterExampleVi": "Nếu rẻ thì tôi mua.",
+    "examples": [
+      {
+        "sentence": "安ければ、買います。",
+        "translation": "Nếu rẻ thì tôi mua."
+      },
+      {
+        "sentence": "早く来れば、間に合います。",
+        "translation": "Nếu đến sớm thì kịp."
+      },
+      {
+        "sentence": "天気が良ければ、ピクニックに行きましょう。",
+        "translation": "Nếu thời tiết đẹp hãy đi dã ngoại."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：この薬を飲めば、すぐ良くなりますか。\nB：はい、ちゃんと飲めば、3日で治りますよ。",
+      "vi": "A: Nếu uống thuốc này thì hết ngay không?\nB: Vâng, nếu uống đúng giờ thì 3 ngày là khỏi."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0130",
+    "grammar_id": "gram_n4_0130",
+    "milestoneId": "ms_minna_b35",
+    "milestone_id": "ms_minna_b35",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 35,
+    "pattern": "Nなら／V普通形なら",
+    "titleVi": "nếu là ~ thì (phản hồi chủ đề, gợi ý)",
+    "structure": "Nなら／V普通形なら",
+    "explanation": "なら dùng khi phản hồi với thông tin vừa nhận được từ người khác hoặc giả định về chủ đề vừa đề cập. Thường mang hàm ý tư vấn, gợi ý.",
+    "nuanceReason": "なら nhấn mạnh rằng \"giả sử điều bạn nói là đúng, thì...\". Thường theo sau thông tin người khác vừa chia sẻ.",
+    "commonMistake": "[Sai]: A：明日、大阪へ行くんです。B：大阪へ行くのなら、たこ焼きを食べてね。 -> [Đúng]: A：明日、大阪へ行くんです。B：大阪へ行くなら、たこ焼きを食べてね。. Sau động từ ở thể thường (行く), thêm の trước なら (行くのなら) tuy không sai ngữ pháp nhưng nghe hơi sách vở, trang trọng thái quá cho văn nói thông thường. Trong hội thoại tự nhiên hàng ngày, người Nhật thường bỏ の và nói thẳng 行くなら. の chỉ hay xuất hiện khi muốn nhấn mạnh giải thích lý do (thường đi với んです/のです).",
+    "kitsuPrompt": "Hỏi tôi về dự định học tiếng Nhật. Sau đó tư vấn phương pháp bằng 〜なら.",
+    "masterExampleJp": "日本語を学ぶなら、この教科書がいいですよ。",
+    "masterExampleVi": "Nếu học tiếng Nhật thì cuốn giáo trình này tốt đó.",
+    "examples": [
+      {
+        "sentence": "日本語を学ぶなら、この教科書がいいですよ。",
+        "translation": "Nếu học tiếng Nhật thì cuốn giáo trình này tốt đó."
+      },
+      {
+        "sentence": "寿司が食べたいなら、あそこのお店がおいしいよ。",
+        "translation": "Nếu muốn ăn sushi thì tiệm đó ngon đấy."
+      },
+      {
+        "sentence": "A：明日、大阪へ行くんです。B：大阪へ行くなら、たこ焼きを食べてね。",
+        "translation": "A: Ngày mai tôi đi Osaka. B: Nếu đi Osaka thì nhớ ăn takoyaki nhé."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：パソコンを買いたいんですが。\nB：パソコンを買うなら、あのお店が安いですよ。",
+      "vi": "A: Tôi muốn mua máy tính.\nB: Nếu mua máy tính thì cửa hàng kia rẻ đó."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0131",
+    "grammar_id": "gram_n4_0131",
+    "milestoneId": "ms_minna_b35",
+    "milestone_id": "ms_minna_b35",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 35,
+    "pattern": "疑問詞＋V／Aたらいい",
+    "titleVi": "nên ~ cái gì/ở đâu/thế nào? (xin lời khuyên)",
+    "structure": "疑問詞＋V／Aたらいい",
+    "explanation": "疑問詞 (何, どこ, どう, いつ...) + V たらいい = cấu trúc xin lời khuyên về hành động nên làm. Thường kết thúc bằng ですか hoặc でしょうか.",
+    "nuanceReason": "Trả lời bằng 〜たほうがいいですよ hoặc 〜するといいですよ.",
+    "commonMistake": "[Sai]: 道が込んでいます。どう行けばいいでしょうか。 -> [Đúng]: 道が込んでいます。どう行ったらいいでしょうか。. Cả 〜ばいい và 〜たらいい đều dùng để xin lời khuyên và về mặt ngữ pháp không sai, nhưng trong văn nói tự nhiên của người Nhật, mẫu 疑問詞+Vたらいいですか phổ biến và tự nhiên hơn hẳn 疑問詞+Vばいいですか khi hỏi ý kiến trực tiếp. Học viên hay chọn ば vì quen mẫu điều kiện, nhưng nên ưu tiên たら trong ngữ cảnh xin lời khuyên.",
+    "kitsuPrompt": "Tôi sẽ hỏi bạn lời khuyên bằng 何をしたらいいですか. Bạn hãy trả lời bằng 〜たほうがいいですよ.",
+    "masterExampleJp": "日本語を勉強するには、何をしたらいいですか。",
+    "masterExampleVi": "Để học tiếng Nhật thì nên làm gì?",
+    "examples": [
+      {
+        "sentence": "日本語を勉強するには、何をしたらいいですか。",
+        "translation": "Để học tiếng Nhật thì nên làm gì?"
+      },
+      {
+        "sentence": "この荷物、どこに置いたらいいですか。",
+        "translation": "Đồ vật này tôi nên để ở đâu?"
+      },
+      {
+        "sentence": "道が込んでいます。どう行ったらいいでしょうか。",
+        "translation": "Đường tắc nghẽn. Nên đi thế nào nhỉ?"
+      }
+    ],
+    "dialogue": {
+      "jp": "A：日本語がうまくなるには、どうしたらいいですか。\nB：毎日少しずつ練習したらいいですよ。",
+      "vi": "A: Để giỏi tiếng Nhật thì nên làm thế nào?\nB: Nên luyện tập mỗi ngày một chút là được."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

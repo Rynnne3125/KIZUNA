@@ -1,0 +1,170 @@
+[
+  {
+    "id": "gram_n4_0104",
+    "grammar_id": "gram_n4_0104",
+    "milestoneId": "ms_minna_b27",
+    "milestone_id": "ms_minna_b27",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 27,
+    "pattern": "V可能形",
+    "titleVi": "có thể V",
+    "structure": "V可能形",
+    "explanation": "Dạng khả năng diễn đạt khả năng hoặc sự cho phép. Nhóm 1: える→ える (書く→書ける). Nhóm 2: る→られる (食べる→食べられる). Nhóm 3: する→できる, くる→こられる. Trợ từ を thường đổi thành が.",
+    "nuanceReason": "Nhóm 2 口語: 食べれる (thay食べられる) — được chấp nhận trong văn nói thân mật nhưng tránh trong văn viết.",
+    "commonMistake": "[Sai]: 日本語を話せます。 -> [Đúng]: 日本語が話せます。. Với dạng khả năng, trợ từ を thường đổi thành が. Đây là quy tắc quan trọng mà người học hay quên: 日本語を話す → 日本語が話せる.",
+    "kitsuPrompt": "Hỏi tôi những điều tôi có thể và không thể làm (nấu ăn, chơi nhạc cụ, thể thao...). Tôi sẽ trả lời bằng dạng 可能形.",
+    "masterExampleJp": "日本語が話せますが、漢字はあまり読めません。",
+    "masterExampleVi": "Có thể nói tiếng Nhật nhưng không đọc được kanji lắm.",
+    "examples": [
+      {
+        "sentence": "日本語が話せますが、漢字はあまり読めません。",
+        "translation": "Có thể nói tiếng Nhật nhưng không đọc được kanji lắm."
+      },
+      {
+        "sentence": "子どものころ、ピアノが弾けました。",
+        "translation": "Hồi nhỏ tôi chơi được đàn piano."
+      },
+      {
+        "sentence": "このホテルではペットが飼えません。",
+        "translation": "Khách sạn này không được nuôi thú cưng."
+      }
+    ],
+    "dialogue": {
+      "title": "Phỏng vấn xin việc",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "パソコンは使えますか。",
+          "translation": "Bạn có dùng được máy tính không?"
+        },
+        {
+          "speaker": "B",
+          "text": "はい、エクセルとワードなら問題なく使えます。",
+          "translation": "Vâng, Excel và Word thì dùng được không vấn đề gì."
+        },
+        {
+          "speaker": "A",
+          "text": "英語での会議に参加できますか。",
+          "translation": "Bạn có thể tham gia cuộc họp bằng tiếng Anh không?"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0105",
+    "grammar_id": "gram_n4_0105",
+    "milestoneId": "ms_minna_b27",
+    "milestone_id": "ms_minna_b27",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 27,
+    "pattern": "NがVえます／聞こえます",
+    "titleVi": "thấy / nghe được (tự nhiên, không cố ý)",
+    "structure": "NがVえます／聞こえます",
+    "explanation": "見えます và 聞こえます diễn đạt khả năng tự nhiên — mắt/tai tiếp nhận thông tin mà không cần cố gắng. Khác với 見られます/聞けます (có thể cố ý nhìn/nghe).",
+    "nuanceReason": "見える ≠ 見られる: 窓から富士山が見える (tự nhiên thấy) vs 映画が見られる (có thể/được xem). Tương tự: 聞こえる ≠ 聞ける.",
+    "commonMistake": "[Sai]: 富士山が見られます。(khi nói \"từ đây trông thấy Phú Sĩ\") -> [Đúng]: 富士山が見えます。. 見えます = tự nhiên nhìn thấy (không chủ đích). 見られます = có thể xem (có chủ đích, ví dụ: xem phim, xem biểu diễn).",
+    "kitsuPrompt": "Hỏi tôi về những điều có thể thấy/nghe từ nơi tôi đang ở (nhà, lớp học). Tôi sẽ dùng 見えます/聞こえます.",
+    "masterExampleJp": "部屋から海が見えます。",
+    "masterExampleVi": "Từ phòng có thể nhìn thấy biển.",
+    "examples": [
+      {
+        "sentence": "部屋から海が見えます。",
+        "translation": "Từ phòng có thể nhìn thấy biển."
+      },
+      {
+        "sentence": "隣の部屋から音楽が聞こえます。",
+        "translation": "Nghe thấy tiếng nhạc từ phòng bên."
+      },
+      {
+        "sentence": "霧で山が見えません。",
+        "translation": "Sương mù nên không thấy núi."
+      }
+    ],
+    "dialogue": {
+      "title": "Tìm chỗ ở",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "この部屋から何が見えますか。",
+          "translation": "Từ phòng này có thể thấy gì?"
+        },
+        {
+          "speaker": "B",
+          "text": "晴れた日は富士山が見えますよ。夜は夜景がきれいです。",
+          "translation": "Ngày nắng thấy được núi Phú Sĩ đấy. Ban đêm cảnh đêm đẹp lắm."
+        },
+        {
+          "speaker": "A",
+          "text": "道路の音は聞こえますか。",
+          "translation": "Có nghe thấy tiếng ồn từ đường không?"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0106",
+    "grammar_id": "gram_n4_0106",
+    "milestoneId": "ms_minna_b27",
+    "milestone_id": "ms_minna_b27",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 27,
+    "pattern": "Nしか〜ない",
+    "titleVi": "chỉ có N (hàm ý ít, thiếu)",
+    "structure": "Nしか〜ない",
+    "explanation": "しか + phủ định diễn tả \"chỉ có N mà thôi\" — mang hàm ý tiêu cực hoặc nuối tiếc. Khác với だけ (trung tính): 100円しかない (chỉ có 100 yên — thấy ít) vs 100円だけある (chỉ có 100 yên — trung tính).",
+    "nuanceReason": "しか luôn đi với động từ phủ định (ない/ません). しか thay thế trợ từ が/を nhưng giữ に/で/と.",
+    "commonMistake": "[Sai]: 日本語しかわかります。 -> [Đúng]: 日本語しかわかりません。. しか PHẢI đi với phủ định (ない/ません). Không bao giờ dùng しか với khẳng định. Nếu thấy しか mà không có phủ định → sai.",
+    "kitsuPrompt": "Tạo tình huống tôi bị hạn chế (ít tiền, ít thời gian, chỉ biết một thứ). Tôi sẽ dùng 〜しかありません để diễn đạt.",
+    "masterExampleJp": "お金が100円しかありません。",
+    "masterExampleVi": "Chỉ còn có 100 yên thôi.",
+    "examples": [
+      {
+        "sentence": "お金が100円しかありません。",
+        "translation": "Chỉ còn có 100 yên thôi."
+      },
+      {
+        "sentence": "ひらがなしか読めません。",
+        "translation": "Chỉ đọc được hiragana thôi."
+      },
+      {
+        "sentence": "残り時間は5分しかない。",
+        "translation": "Thời gian còn lại chỉ có 5 phút thôi."
+      }
+    ],
+    "dialogue": {
+      "title": "Thiếu tiền",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "夕食はどこで食べましょうか。",
+          "translation": "Ăn tối ở đâu nhỉ?"
+        },
+        {
+          "speaker": "B",
+          "text": "今日はお金が500円しかないんです。コンビニしか行けません。",
+          "translation": "Hôm nay tôi chỉ còn 500 yên thôi. Chỉ đi được cửa hàng tiện lợi thôi."
+        },
+        {
+          "speaker": "A",
+          "text": "そうですか。じゃあ、今日は私がおごります。",
+          "translation": "Vậy à. Vậy hôm nay để tôi đãi nhé."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

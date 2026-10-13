@@ -1,0 +1,107 @@
+[
+  {
+    "id": "gram_n2_0390",
+    "grammar_id": "gram_n2_0390",
+    "milestoneId": "ms_n2_s1_l2",
+    "milestone_id": "ms_n2_s1_l2",
+    "stageId": "stage_n2_1",
+    "stage_id": "stage_n2_1",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 90,
+    "pattern": "〜どころか、〜（反転[はんてん]）",
+    "titleVi": "Nói gì đến X — ngược lại Y (đảo ngược kỳ vọng)",
+    "structure": "〜どころか、〜（反転[はんてん]）",
+    "explanation": "Mẫu 「〜どころか」 dùng để diễn tả ý 'chẳng những không đạt được trạng thái X như kỳ vọng, mà thực tế ngược lại hoàn toàn là Y'. Vế trước (X) là điều vốn được dự đoán, hy vọng hoặc là mức chuẩn tối thiểu; vế sau (Y) đưa ra sự thật trái ngược 180 độ hoặc rơi vào chiều hướng xấu hơn. Mẫu câu này thường mang sắc thái bất ngờ, thất vọng hoặc nhấn mạnh sự thật hoàn toàn trái với tưởng tượng ban đầu.",
+    "nuanceReason": "Khác với 「〜ばかりか / 〜だけでなく」(mang tính lũy tiến, bổ sung thông tin cùng chiều), 「〜どころか」 nhấn mạnh sự phản chuyển, đưa ra thực tế hoàn toàn trái ngược với kỳ vọng hoặc mức chuẩn ở vế trước.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "薬を飲んで少しは良くなるどころか、かえって熱が上がってしまった。",
+    "masterExampleVi": "Chẳng những không đỡ chút nào sau khi uống thuốc mà ngược lại tôi còn bị sốt cao hơn.",
+    "examples": [
+      {
+        "sentence": "薬を飲んで少しは良くなるどころか、かえって熱が上がってしまった。",
+        "translation": "Chẳng những không đỡ chút nào sau khi uống thuốc mà ngược lại tôi còn bị sốt cao hơn.",
+        "reading": ""
+      },
+      {
+        "sentence": "節約するどころか、セールで衝動買いをして余計な出費が増えてしまった。",
+        "translation": "Nói gì đến chuyện tiết kiệm, tôi còn mua sắm bốc đồng vào đợt giảm giá khiến chi phí phát sinh thêm nhiều hơn.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0391",
+    "grammar_id": "gram_n2_0391",
+    "milestoneId": "ms_n2_s1_l2",
+    "milestone_id": "ms_n2_s1_l2",
+    "stageId": "stage_n2_1",
+    "stage_id": "stage_n2_1",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 90,
+    "pattern": "〜どころか、むしろ〜（程度[ていど]の逆転[ぎゃくてん]）",
+    "titleVi": "Không những không X, còn Y hơn thế nữa (leo thang ngược chiều)",
+    "structure": "〜どころか、むしろ〜（程度[ていど]の逆転[ぎゃくてん]）",
+    "explanation": "Mẫu câu này dùng để diễn tả rằng thực tế không những không đạt được kết quả hay kỳ vọng X ban đầu, mà ngược lại còn rơi vào trạng thái Y hoàn toàn trái ngược hoặc bất ngờ hơn. Cụm 「〜どころか」 mang tính phủ định mạnh mẽ vế trước, kết hợp với phó từ 「むしろ」 ở vế sau để nhấn mạnh tính chất đảo chiều và leo thang ngược hướng của sự việc. Mẫu này thường được dùng khi người nói muốn đính chính hoặc bày tỏ sự ngạc nhiên, thất vọng trước thực tế trái ngược hoàn toàn với dự đoán.",
+    "nuanceReason": "Cần phân biệt với 「〜ばかりか / 〜だけでなく」 (bổ sung thông tin cùng chiều tiến triển) và 「〜どころではない」 (không có thời gian/tâm trí để làm việc gì).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "薬を飲んで症状が良くなるどころか、むしろ悪化してしまった。",
+    "masterExampleVi": "Uống thuốc vào triệu chứng không những chẳng đỡ hơn, mà ngược lại còn trở nên trầm trọng hơn.",
+    "examples": [
+      {
+        "sentence": "薬を飲んで症状が良くなるどころか、むしろ悪化してしまった。",
+        "translation": "Uống thuốc vào triệu chứng không những chẳng đỡ hơn, mà ngược lại còn trở nên trầm trọng hơn.",
+        "reading": ""
+      },
+      {
+        "sentence": "新しいシステムを導入したが、業務が効率化するどころか、むしろやることが増えてしまった。",
+        "translation": "Đã áp dụng hệ thống mới nhưng công việc không những chẳng hiệu quả hơn, mà trái lại còn phát sinh thêm nhiều việc.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0392",
+    "grammar_id": "gram_n2_0392",
+    "milestoneId": "ms_n2_s1_l2",
+    "milestone_id": "ms_n2_s1_l2",
+    "stageId": "stage_n2_1",
+    "stage_id": "stage_n2_1",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 90,
+    "pattern": "どころか ≠ どころではない の 使[つか]い分[わ]け",
+    "titleVi": "Phân biệt: どころか = đảo chiều kỳ vọng (cần vế Y); どころではない = hoàn cảnh chặn hành động (câu đủ nghĩa)",
+    "structure": "どころか ≠ どころではない の 使[つか]い分[わ]け",
+    "explanation": "「〜どころか」dùng để diễn tả sự việc thực tế hoàn toàn trái ngược hoặc vượt xa dự đoán (không những không A mà ngược lại còn B), bắt buộc phải có vế sau để nêu kết quả đảo chiều. Trong khi đó,「〜どころではない」diễn tả việc hoàn cảnh khó khăn, bận rộn hoặc tâm lý bất an khiến ta không có tâm trí/thời gian làm việc gì đó. Điểm khác biệt lớn nhất là「〜どころではない」có thể đứng độc lập ở cuối câu để kết thúc câu, còn「〜どころか」luôn phải có vế tiếp nối phía sau.",
+    "nuanceReason": "Mẹo ghi nhớ: Muốn chốt hạ câu 'không phải lúc để...' thì dùng「〜どころではない」ở cuối câu; còn muốn nói 'chẳng những không A mà ngược lại còn B' thì dùng「〜どころか」và phải có vế B.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "ダイエットを始めたのに、痩せるどころかかえって２キロ太ってしまった。",
+    "masterExampleVi": "Dù đã bắt đầu ăn kiêng nhưng chẳng những không gầy đi mà trái lại còn tăng thêm 2 kg.",
+    "examples": [
+      {
+        "sentence": "ダイエットを始めたのに、痩せるどころかかえって２キロ太ってしまった。",
+        "translation": "Dù đã bắt đầu ăn kiêng nhưng chẳng những không gầy đi mà trái lại còn tăng thêm 2 kg.",
+        "reading": ""
+      },
+      {
+        "sentence": "明日は大事な試験があるので、今は遊びに行くどころではない。",
+        "translation": "Ngày mai có kỳ thi quan trọng nên bây giờ không phải là lúc để đi chơi.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

@@ -1,0 +1,238 @@
+[
+  {
+    "id": "gram_n5_0077",
+    "grammar_id": "gram_n5_0077",
+    "milestoneId": "ms_minna_b19",
+    "milestone_id": "ms_minna_b19",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 19,
+    "pattern": "Vたことがあります",
+    "titleVi": "đã từng làm V (kinh nghiệm)",
+    "structure": "Vたことがあります",
+    "explanation": "た-form + ことがあります = diễn tả kinh nghiệm đã từng có trong cuộc đời. Phủ định: Vたことがありません / Vたことはありません.",
+    "nuanceReason": "Hỏi kinh nghiệm: 〜たことがありますか (Bạn đã từng ~ chưa?). Trả lời: はい、あります / いいえ、ありません.",
+    "commonMistake": "[Sai]: 日本へ行くことがあります。(muốn nói đã từng đi) -> [Đúng]: 日本へ行ったことがあります。. Phải dùng た-form (quá khứ) trước ことがあります để diễn tả kinh nghiệm. Vることがあります có nghĩa khác: \"đôi khi có lúc làm V\".",
+    "kitsuPrompt": "Hỏi tôi về những trải nghiệm du lịch hay ẩm thực tôi đã từng có. Tôi sẽ trả lời bằng Vたことがあります.",
+    "masterExampleJp": "日本へ行ったことがあります。",
+    "masterExampleVi": "Tôi đã từng đến Nhật.",
+    "examples": [
+      {
+        "sentence": "日本へ行ったことがあります。",
+        "translation": "Tôi đã từng đến Nhật."
+      },
+      {
+        "sentence": "富士山に登ったことがありますか。",
+        "translation": "Bạn đã từng leo núi Fuji chưa?"
+      },
+      {
+        "sentence": "生ものを食べたことがありません。",
+        "translation": "Tôi chưa từng ăn đồ sống."
+      },
+      {
+        "sentence": "外国に住んだことがあります。",
+        "translation": "Tôi đã từng sống ở nước ngoài."
+      }
+    ],
+    "dialogue": {
+      "title": "Nói chuyện về trải nghiệm du lịch",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "外国へ行ったことがありますか。",
+          "translation": "Bạn đã từng đi nước ngoài chưa?"
+        },
+        {
+          "speaker": "B",
+          "text": "はい、タイへ行ったことがあります。食べ物がおいしかったです。",
+          "translation": "Rồi, tôi đã từng đến Thái Lan. Đồ ăn rất ngon."
+        },
+        {
+          "speaker": "A",
+          "text": "いいですね！日本へ行ったことは？",
+          "translation": "Tốt quá! Còn Nhật Bản thì sao?"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0078",
+    "grammar_id": "gram_n5_0078",
+    "milestoneId": "ms_minna_b19",
+    "milestone_id": "ms_minna_b19",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 19,
+    "pattern": "V1たりV2たりします",
+    "titleVi": "làm khi thì V1 khi thì V2 (liệt kê hoạt động)",
+    "structure": "V1たりV2たりします",
+    "explanation": "た-form + り liệt kê các hoạt động không đầy đủ (còn nhiều việc khác). Cuối câu dùng します/しました. Ngụ ý \"vừa cái này vừa cái kia (và những thứ khác)\".",
+    "nuanceReason": "Luôn phải có ít nhất 2 động từ + り, và kết thúc bằng します/しました. Không dùng chỉ 1 動詞たり.",
+    "commonMistake": "[Sai]: 映画を見たり、音楽を聞きます。(quên たり ở động từ thứ hai và quên します ở cuối) -> [Đúng]: 映画を見たり、音楽を聞いたりします。. Cả hai động từ đều phải chia dạng たり, và câu phải kết thúc bằng します/しました. Thiếu một trong hai sẽ làm câu sai ngữ pháp.",
+    "kitsuPrompt": "Hỏi tôi thường làm gì vào cuối tuần hoặc kỳ nghỉ. Tôi sẽ dùng V1たりV2たりします để kể nhiều hoạt động.",
+    "masterExampleJp": "休みの日は本を読んだり、音楽を聞いたりします。",
+    "masterExampleVi": "Ngày nghỉ tôi đọc sách, nghe nhạc (và các thứ khác).",
+    "examples": [
+      {
+        "sentence": "休みの日は本を読んだり、音楽を聞いたりします。",
+        "translation": "Ngày nghỉ tôi đọc sách, nghe nhạc (và các thứ khác)."
+      },
+      {
+        "sentence": "子どもたちは公園で走ったり、遊んだりしています。",
+        "translation": "Các em đang chạy và chơi ở công viên."
+      },
+      {
+        "sentence": "旅行で写真を撮ったり、ショッピングをしたりしました。",
+        "translation": "Trong chuyến du lịch tôi đã chụp ảnh, mua sắm (và nhiều thứ khác)."
+      }
+    ],
+    "dialogue": {
+      "title": "Hỏi cuối tuần làm gì",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "週末は何をしましたか。",
+          "translation": "Cuối tuần bạn làm gì vậy?"
+        },
+        {
+          "speaker": "B",
+          "text": "友だちと映画を見たり、カラオケをしたりしました。楽しかったです。",
+          "translation": "Tôi xem phim, hát karaoke với bạn bè. Vui lắm."
+        },
+        {
+          "speaker": "A",
+          "text": "いいなあ。私はずっと家で勉強したり、寝たりしていました。",
+          "translation": "Thích quá. Tôi thì ở nhà học bài với ngủ suốt."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0079",
+    "grammar_id": "gram_n5_0079",
+    "milestoneId": "ms_minna_b19",
+    "milestone_id": "ms_minna_b19",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 19,
+    "pattern": "Aくなります／NAになります",
+    "titleVi": "trở nên ~ (thay đổi trạng thái)",
+    "structure": "Aくなります／NAになります",
+    "explanation": "なる (trở thành/trở nên) chỉ sự thay đổi. い-adj → くなる; な-adj → になる. Dùng để nói về sự biến đổi dần dần hoặc đột ngột.",
+    "nuanceReason": "い-adj + くなる: 寒い→寒くなる, 大きい→大きくなる. な-adj/N + になる: 元気→元気になる, 医者→医者になる.",
+    "commonMistake": "[Sai]: 元気くなりました。(áp dụng くなる cho な-adj) -> [Đúng]: 元気になりました。. くなる chỉ dùng cho い-adj (寒い→寒くなる). な-adj và danh từ dùng になる (元気→元気になる, 医者→医者になる). Phải phân biệt loại tính từ.",
+    "kitsuPrompt": "Hỏi tôi về những thay đổi gần đây trong cuộc sống — thời tiết, sức khỏe, kỹ năng. Tôi sẽ dùng くなります hoặc になります.",
+    "masterExampleJp": "日本語が上手になりました。",
+    "masterExampleVi": "Tiếng Nhật của tôi đã giỏi lên.",
+    "examples": [
+      {
+        "sentence": "日本語が上手になりました。",
+        "translation": "Tiếng Nhật của tôi đã giỏi lên."
+      },
+      {
+        "sentence": "秋になって、寒くなりました。",
+        "translation": "Vào mùa thu, trời trở nên lạnh."
+      },
+      {
+        "sentence": "田中さんは有名になりました。",
+        "translation": "Anh Tanaka đã trở nên nổi tiếng."
+      },
+      {
+        "sentence": "子どもが大きくなりましたね。",
+        "translation": "Con bạn lớn rồi nhỉ."
+      }
+    ],
+    "dialogue": {
+      "title": "Nhận xét về sự tiến bộ",
+      "lines": [
+        {
+          "speaker": "先生",
+          "text": "最近、日本語がとても上手になりましたね。",
+          "translation": "Dạo này tiếng Nhật của bạn giỏi lên nhiều nhỉ."
+        },
+        {
+          "speaker": "B",
+          "text": "ありがとうございます。毎日練習したら、少し上手になりました。",
+          "translation": "Cảm ơn thầy. Nhờ luyện tập mỗi ngày mà giỏi lên một chút."
+        },
+        {
+          "speaker": "先生",
+          "text": "これからも頑張れば、もっと上手になりますよ。",
+          "translation": "Nếu tiếp tục cố gắng, bạn sẽ còn giỏi hơn nữa đấy."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0080",
+    "grammar_id": "gram_n5_0080",
+    "milestoneId": "ms_minna_b19",
+    "milestone_id": "ms_minna_b19",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 19,
+    "pattern": "Nになります",
+    "titleVi": "trở thành N (danh từ)",
+    "structure": "Nになります",
+    "explanation": "Danh từ + になります = trở thành một vai trò, nghề nghiệp, trạng thái mới. Thể hiện mục tiêu hoặc sự thay đổi.",
+    "nuanceReason": "になる (trở thành — có chủ ý hoặc biến đổi) khác にする (làm cho trở thành — chủ động quyết định): 先生になる vs 先生にする.",
+    "commonMistake": "[Sai]: 先生になりたいです。→ 先生にしたいです。(nhầm にする cho bản thân) -> [Đúng]: 先生になりたいです。. になる = tự thân trở thành (mục tiêu cá nhân). にする = chủ động biến cái gì/ai thành cái gì. Không thể dùng にする cho ước mơ của bản thân.",
+    "kitsuPrompt": "Hỏi tôi muốn trở thành gì trong tương lai và tại sao. Tôi sẽ trả lời bằng Nになりたいです.",
+    "masterExampleJp": "将来、医者になりたいです。",
+    "masterExampleVi": "Tôi muốn trở thành bác sĩ trong tương lai.",
+    "examples": [
+      {
+        "sentence": "将来、医者になりたいです。",
+        "translation": "Tôi muốn trở thành bác sĩ trong tương lai."
+      },
+      {
+        "sentence": "田中さんは部長になりました。",
+        "translation": "Anh Tanaka đã trở thành trưởng phòng."
+      },
+      {
+        "sentence": "来月から、新しい仕事になります。",
+        "translation": "Từ tháng sau, tôi sẽ chuyển sang công việc mới."
+      },
+      {
+        "sentence": "春になりました。",
+        "translation": "Mùa xuân đã đến."
+      }
+    ],
+    "dialogue": {
+      "title": "Nói về ước mơ tương lai",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "将来、何になりたいですか。",
+          "translation": "Bạn muốn trở thành gì trong tương lai?"
+        },
+        {
+          "speaker": "B",
+          "text": "日本語の先生になりたいです。子どもに日本語を教えたいです。",
+          "translation": "Tôi muốn trở thành giáo viên tiếng Nhật. Muốn dạy tiếng Nhật cho trẻ em."
+        },
+        {
+          "speaker": "A",
+          "text": "すてきですね。きっとなれますよ。",
+          "translation": "Tuyệt quá nhỉ. Chắc chắn bạn sẽ làm được thôi."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

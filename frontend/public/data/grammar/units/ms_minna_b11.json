@@ -1,0 +1,238 @@
+[
+  {
+    "id": "gram_n5_0045",
+    "grammar_id": "gram_n5_0045",
+    "milestoneId": "ms_minna_b11",
+    "milestone_id": "ms_minna_b11",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 11,
+    "pattern": "〜個／〜枚／〜本／〜回／〜杯",
+    "titleVi": "counter cho vật tròn / tờ mỏng / vật dài / lần / cốc",
+    "structure": "〜個／〜枚／〜本／〜回／〜杯",
+    "explanation": "Tiếng Nhật dùng trợ số từ (助数詞) khác nhau tùy loại vật đếm: 個(こ) vật nhỏ tròn, 枚(まい) vật mỏng phẳng, 本(ほん) vật dài hình trụ, 回(かい) lần, 杯(はい) cốc/bát.",
+    "nuanceReason": "Trợ số từ quan trọng N5: 〜枚(まい)tờ, 〜本(ほん)chai/cây, 〜冊(さつ)cuốn sách, 〜台(だい)máy móc, 〜匹(ひき)thú nhỏ.",
+    "commonMistake": "[Sai]: ビールを1本飲みました。(khi uống lon/chai nhỏ) -> [Đúng]: ビールを1缶(かん)飲みました。/ 1杯飲みました。. 本 dùng cho vật dài hình trụ như chai lớn, ống. Lon bia = 缶(かん). Ly/cốc = 杯(はい). Cần chọn counter phù hợp với hình dạng/loại vật.",
+    "kitsuPrompt": "Quiz tôi về trợ số từ: hỏi tôi \"dùng counter gì\" cho 5 đồ vật khác nhau.",
+    "masterExampleJp": "りんごを3個ください。",
+    "masterExampleVi": "Cho tôi 3 quả táo.",
+    "examples": [
+      {
+        "sentence": "りんごを3個ください。",
+        "translation": "Cho tôi 3 quả táo."
+      },
+      {
+        "sentence": "紙を2枚使いました。",
+        "translation": "Tôi đã dùng 2 tờ giấy."
+      },
+      {
+        "sentence": "ビールを1杯飲みました。",
+        "translation": "Tôi đã uống 1 ly bia."
+      },
+      {
+        "sentence": "先週、3回映画を見ました。",
+        "translation": "Tuần trước tôi đã xem phim 3 lần."
+      }
+    ],
+    "dialogue": {
+      "title": "Mua sắm ở siêu thị",
+      "lines": [
+        {
+          "speaker": "Khách",
+          "text": "すみません、このケーキを2個と牛乳を1本ください。",
+          "translation": "Xin lỗi, cho tôi 2 cái bánh và 1 chai sữa."
+        },
+        {
+          "speaker": "NV",
+          "text": "はい、他にはよろしいですか。",
+          "translation": "Vâng ạ. Còn cần thêm gì không?"
+        },
+        {
+          "speaker": "Khách",
+          "text": "えーと、コーヒーを3杯分のカップもお願いします。",
+          "translation": "À ừm, tôi cần thêm cốc cho 3 ly cà phê."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0046",
+    "grammar_id": "gram_n5_0046",
+    "milestoneId": "ms_minna_b11",
+    "milestone_id": "ms_minna_b11",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 11,
+    "pattern": "〜人／〜歳",
+    "titleVi": "counter người / tuổi",
+    "structure": "〜人／〜歳",
+    "explanation": "人(にん) đếm người (1人=ひとり, 2人=ふたり, 3人以上=〜にん). 歳(さい) đếm tuổi. Cả hai có cách đọc đặc biệt cần nhớ.",
+    "nuanceReason": "1人=ひとり, 2人=ふたり (đặc biệt!), 3人=さんにん, 4人=よにん, 何人=なんにん.",
+    "commonMistake": "[Sai]: 私の家族は4にんいます。 -> [Đúng]: 私の家族は4人(よにん)います。. 4人 đọc là よにん (không phải しにん — đó là cách đọc của \"死人\" = người chết). Luôn đọc 4人=よにん.",
+    "kitsuPrompt": "Hỏi tôi về gia đình, lớp học và nơi làm (có bao nhiêu người), tôi trả lời với 〜人.",
+    "masterExampleJp": "家族は5人います。",
+    "masterExampleVi": "Gia đình có 5 người.",
+    "examples": [
+      {
+        "sentence": "家族は5人います。",
+        "translation": "Gia đình có 5 người."
+      },
+      {
+        "sentence": "私は25歳です。",
+        "translation": "Tôi 25 tuổi."
+      },
+      {
+        "sentence": "何人で来ましたか。— 3人です。",
+        "translation": "Bạn đến mấy người? — 3 người."
+      },
+      {
+        "sentence": "クラスに外国人が10人います。",
+        "translation": "Trong lớp có 10 người nước ngoài."
+      }
+    ],
+    "dialogue": {
+      "title": "Đặt bàn ăn",
+      "lines": [
+        {
+          "speaker": "NV",
+          "text": "何名様ですか。",
+          "translation": "Quý khách có mấy người ạ?"
+        },
+        {
+          "speaker": "Khách",
+          "text": "4人です。子どもが2人います。",
+          "translation": "4 người. Trong đó có 2 trẻ em."
+        },
+        {
+          "speaker": "NV",
+          "text": "かしこまりました。お席にご案内します。",
+          "translation": "Vâng ạ. Tôi xin dẫn quý khách vào bàn."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0047",
+    "grammar_id": "gram_n5_0047",
+    "milestoneId": "ms_minna_b11",
+    "milestone_id": "ms_minna_b11",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 11,
+    "pattern": "Nに〜回Vます",
+    "titleVi": "làm ~ lần trong / mỗi N",
+    "structure": "Nに〜回Vます",
+    "explanation": "Diễn tả tần suất: に chỉ đơn vị thời gian (tuần/tháng/ngày), 〜回 chỉ số lần. Cấu trúc: [đơn vị thời gian]に[số]回 [động từ].",
+    "nuanceReason": "に ở đây không phải chỉ địa điểm mà chỉ khoảng thời gian: 一週間に (trong một tuần).",
+    "commonMistake": "[Sai]: 1週間に3回ジムを行きます。 -> [Đúng]: 1週間に3回ジムに行きます。. 行きます (đi) dùng に cho địa điểm đích, không phải を. を đi với tha động từ, còn 行く là tự động từ.",
+    "kitsuPrompt": "Hỏi tôi tần suất 5 thói quen hàng ngày/tuần, tôi trả lời với Nに〜回Vます.",
+    "masterExampleJp": "1週間に3回ジムに行きます。",
+    "masterExampleVi": "Tôi đến phòng gym 3 lần một tuần.",
+    "examples": [
+      {
+        "sentence": "1週間に3回ジムに行きます。",
+        "translation": "Tôi đến phòng gym 3 lần một tuần."
+      },
+      {
+        "sentence": "1ヶ月に1回、歯医者に行きます。",
+        "translation": "Tôi đi nha sĩ 1 lần một tháng."
+      },
+      {
+        "sentence": "1日に2回薬を飲んでください。",
+        "translation": "Hãy uống thuốc 2 lần mỗi ngày."
+      },
+      {
+        "sentence": "1年に何回旅行しますか。",
+        "translation": "Bạn đi du lịch mấy lần một năm?"
+      }
+    ],
+    "dialogue": {
+      "title": "Hỏi về thói quen tập thể thao",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "どのくらいジムに行きますか。",
+          "translation": "Bạn đi gym bao nhiêu?"
+        },
+        {
+          "speaker": "B",
+          "text": "1週間に3回行きます。毎週月水金です。",
+          "translation": "3 lần một tuần. Các tuần vào thứ Hai, Tư, Sáu."
+        },
+        {
+          "speaker": "A",
+          "text": "すごい！私は1ヶ月に1回ぐらいです。",
+          "translation": "Ghê thật! Tôi chỉ khoảng 1 lần một tháng thôi."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0048",
+    "grammar_id": "gram_n5_0048",
+    "milestoneId": "ms_minna_b11",
+    "milestone_id": "ms_minna_b11",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 11,
+    "pattern": "NとNとどちらが〜ですか",
+    "titleVi": "A và B, cái nào ~ hơn?",
+    "structure": "NとNとどちらが〜ですか",
+    "explanation": "Câu hỏi so sánh hai lựa chọn. Cấu trúc: [A]と[B]とどちらが〜ですか → Trả lời: [A/B]のほうが〜です.",
+    "nuanceReason": "どちら là dạng lịch sự; どっち là dạng thân mật. Trả lời dùng 〜のほうが (hơn).",
+    "commonMistake": "[Sai]: A: AとBとどちらが好きですか。B: はい、Aが好きです。 -> [Đúng]: A: AとBとどちらが好きですか。B: Aのほうが好きです。. Câu hỏi どちら không trả lời はい/いいえ. Phải dùng 〜のほうが để chỉ rõ lựa chọn so sánh.",
+    "kitsuPrompt": "Hỏi tôi 5 cặp so sánh (A và B, cái nào tốt hơn?) bằng どちらが、tôi trả lời với のほうが.",
+    "masterExampleJp": "夏と冬とどちらが好きですか。— 夏のほうが好きです。",
+    "masterExampleVi": "Bạn thích mùa hè hay mùa đông? — Tôi thích mùa hè hơn.",
+    "examples": [
+      {
+        "sentence": "夏と冬とどちらが好きですか。— 夏のほうが好きです。",
+        "translation": "Bạn thích mùa hè hay mùa đông? — Tôi thích mùa hè hơn."
+      },
+      {
+        "sentence": "電車とバスとどちらが早いですか。",
+        "translation": "Tàu điện và xe buýt, cái nào nhanh hơn?"
+      },
+      {
+        "sentence": "日本語と英語とどちらが難しいですか。",
+        "translation": "Tiếng Nhật và tiếng Anh, cái nào khó hơn?"
+      }
+    ],
+    "dialogue": {
+      "title": "Chọn nhà hàng ăn tối",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "中華料理と和食とどちらがいいですか。",
+          "translation": "Đồ Trung Hoa và đồ Nhật, bạn thích cái nào hơn?"
+        },
+        {
+          "speaker": "B",
+          "text": "今日は和食のほうがいいです。すし屋はどうですか。",
+          "translation": "Hôm nay tôi thích đồ Nhật hơn. Quán sushi thế nào?"
+        },
+        {
+          "speaker": "A",
+          "text": "いいですね！近くにおいしいすし屋があります。",
+          "translation": "Tốt đấy! Gần đây có quán sushi ngon."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

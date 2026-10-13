@@ -1,0 +1,283 @@
+[
+  {
+    "id": "gram_n5_0014",
+    "grammar_id": "gram_n5_0014",
+    "milestoneId": "ms_minna_b04",
+    "milestone_id": "ms_minna_b04",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 4,
+    "pattern": "〜時／〜分",
+    "titleVi": "giờ / phút",
+    "structure": "〜時／〜分",
+    "explanation": "Cách nói giờ trong tiếng Nhật: số + 時(じ) cho giờ, số + 分(ふん/ぷん) cho phút. Một số cách đọc phút đặc biệt cần chú ý.",
+    "nuanceReason": "4分=よんぷん, 1分=いっぷん, 6分=ろっぷん, 8分=はっぷん, 10分=じゅっぷん — có biến âm.",
+    "commonMistake": "[Sai]: 今、4時（しじ）15分（ふん）です。 -> [Đúng]: 今、4時（よじ）15分（ぷん）です。. Giờ có cách đọc đặc biệt: 4時=よじ (không phải しじ), 7時=しちじ, 9時=くじ (không phải きゅうじ). Phút cũng biến âm: 15分=じゅうごふん nhưng 1分=いっぷん, 4分=よんぷん, 10分=じゅっぷん — phải thuộc từng cách đọc, không suy từ số đếm thường.",
+    "kitsuPrompt": "",
+    "masterExampleJp": "今、9時15分です。",
+    "masterExampleVi": "Bây giờ là 9 giờ 15 phút.",
+    "examples": [
+      {
+        "sentence": "今、9時15分です。",
+        "translation": "Bây giờ là 9 giờ 15 phút."
+      },
+      {
+        "sentence": "会議は3時半に始まります。",
+        "translation": "Cuộc họp bắt đầu lúc 3 giờ rưỡi."
+      },
+      {
+        "sentence": "授業は何時から何時までですか。",
+        "translation": "Lớp học từ mấy giờ đến mấy giờ?"
+      },
+      {
+        "sentence": "今何時ですか。",
+        "translation": "Bây giờ là mấy giờ?"
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0015",
+    "grammar_id": "gram_n5_0015",
+    "milestoneId": "ms_minna_b04",
+    "milestone_id": "ms_minna_b04",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 4,
+    "pattern": "Vます／Vません",
+    "titleVi": "làm / không làm (hiện tại/tương lai lịch sự)",
+    "structure": "Vます／Vません",
+    "explanation": "Dạng ます là dạng lịch sự của động từ, dùng trong hội thoại với người không thân. Vます = khẳng định, Vません = phủ định.",
+    "nuanceReason": "Dạng ます cũng dùng cho tương lai: 明日行きます (Tôi sẽ đi ngày mai).",
+    "commonMistake": "[Sai]: 昨日勉強します。 -> [Đúng]: 昨日勉強しました。. ます-form chỉ dùng cho hiện tại/tương lai. Với quá khứ phải đổi thành ました.",
+    "kitsuPrompt": "Bạn hãy hỏi tôi 5 câu về thói quen hàng ngày bằng dạng ます, tôi sẽ trả lời.",
+    "masterExampleJp": "毎日日本語を勉強します。",
+    "masterExampleVi": "Tôi học tiếng Nhật mỗi ngày.",
+    "examples": [
+      {
+        "sentence": "毎日日本語を勉強します。",
+        "translation": "Tôi học tiếng Nhật mỗi ngày."
+      },
+      {
+        "sentence": "週末は働きません。",
+        "translation": "Cuối tuần tôi không làm việc."
+      },
+      {
+        "sentence": "朝ごはんを食べますか。",
+        "translation": "Bạn có ăn sáng không?"
+      },
+      {
+        "sentence": "私はお酒を飲みません。",
+        "translation": "Tôi không uống rượu."
+      }
+    ],
+    "dialogue": {
+      "title": "Hỏi lịch học",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "毎日日本語を勉強しますか。",
+          "translation": "Bạn có học tiếng Nhật mỗi ngày không?"
+        },
+        {
+          "speaker": "B",
+          "text": "はい、毎日勉強します。週末も勉強します。",
+          "translation": "Có, tôi học mỗi ngày. Cuối tuần cũng học."
+        },
+        {
+          "speaker": "A",
+          "text": "すごいですね！",
+          "translation": "Cừ thật nhỉ!"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0016",
+    "grammar_id": "gram_n5_0016",
+    "milestoneId": "ms_minna_b04",
+    "milestone_id": "ms_minna_b04",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 4,
+    "pattern": "Vました／Vませんでした",
+    "titleVi": "đã làm / đã không làm (quá khứ)",
+    "structure": "Vました／Vませんでした",
+    "explanation": "Dạng quá khứ lịch sự: ました = đã làm, ませんでした = đã không làm. Thường đi kèm các từ chỉ quá khứ như 昨日, 先週, さっき.",
+    "nuanceReason": "もう + Vました = đã làm rồi. まだ + Vていません = chưa làm (học sau).",
+    "commonMistake": "[Sai]: 昨日勉強しませんです。 -> [Đúng]: 昨日勉強しませんでした。. Phủ định quá khứ là ませんでした (một từ), không phải ません + でした. Phải đổi nguyên cụm.",
+    "kitsuPrompt": "Hãy hỏi tôi 5 câu về việc tôi đã làm hôm qua/tuần trước, dùng Vました/ませんでした.",
+    "masterExampleJp": "昨日映画を見ました。",
+    "masterExampleVi": "Hôm qua tôi đã xem phim.",
+    "examples": [
+      {
+        "sentence": "昨日映画を見ました。",
+        "translation": "Hôm qua tôi đã xem phim."
+      },
+      {
+        "sentence": "先週は忙しくて、全然勉強しませんでした。",
+        "translation": "Tuần trước bận quá, tôi đã không học chút nào."
+      },
+      {
+        "sentence": "もう昼ごはんを食べましたか。",
+        "translation": "Bạn đã ăn trưa chưa?"
+      },
+      {
+        "sentence": "昨日はどこへ行きましたか。",
+        "translation": "Hôm qua bạn đã đi đâu?"
+      }
+    ],
+    "dialogue": {
+      "title": "Hỏi về cuối tuần",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "週末、何をしましたか。",
+          "translation": "Cuối tuần bạn đã làm gì?"
+        },
+        {
+          "speaker": "B",
+          "text": "友だちと映画を見ました。リンさんは？",
+          "translation": "Tôi đi xem phim với bạn. Còn Linh?"
+        },
+        {
+          "speaker": "A",
+          "text": "私は何もしませんでした。ずっと寝ていました。",
+          "translation": "Tôi chẳng làm gì. Ngủ suốt thôi."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0017",
+    "grammar_id": "gram_n5_0017",
+    "milestoneId": "ms_minna_b04",
+    "milestone_id": "ms_minna_b04",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 4,
+    "pattern": "NからNまで",
+    "titleVi": "từ N đến N",
+    "structure": "NからNまで",
+    "explanation": "から chỉ điểm xuất phát (thời gian hoặc không gian), まで chỉ điểm kết thúc. Có thể dùng một mình hoặc kết hợp.",
+    "nuanceReason": "から và まで có thể dùng riêng lẻ: 9時から (từ 9 giờ), 5時まで (đến 5 giờ).",
+    "commonMistake": "[Sai]: 9時から5時にまで -> [Đúng]: 9時から5時まで. まで không kết hợp với に. Cấu trúc cố định: から...まで, không thêm trợ từ ở giữa.",
+    "kitsuPrompt": "Hãy hỏi tôi giờ giấc 3 hoạt động hàng ngày, tôi trả lời bằng từ A時からB時まで.",
+    "masterExampleJp": "仕事は9時から6時までです。",
+    "masterExampleVi": "Công việc từ 9 giờ đến 6 giờ.",
+    "examples": [
+      {
+        "sentence": "仕事は9時から6時までです。",
+        "translation": "Công việc từ 9 giờ đến 6 giờ."
+      },
+      {
+        "sentence": "月曜日から金曜日まで働きます。",
+        "translation": "Tôi làm việc từ thứ Hai đến thứ Sáu."
+      },
+      {
+        "sentence": "東京から大阪まで新幹線で2時間かかります。",
+        "translation": "Từ Tokyo đến Osaka mất 2 tiếng bằng tàu cao tốc."
+      },
+      {
+        "sentence": "9時から勉強します。",
+        "translation": "Tôi học từ 9 giờ."
+      }
+    ],
+    "dialogue": {
+      "title": "Hỏi giờ mở cửa",
+      "lines": [
+        {
+          "speaker": "Khách",
+          "text": "すみません、お店は何時から何時までですか。",
+          "translation": "Xin lỗi, quán mở từ mấy giờ đến mấy giờ?"
+        },
+        {
+          "speaker": "NV",
+          "text": "11時から夜10時までです。",
+          "translation": "Từ 11 giờ trưa đến 10 giờ tối ạ."
+        },
+        {
+          "speaker": "Khách",
+          "text": "日曜日もやっていますか。",
+          "translation": "Chủ nhật cũng mở chứ ạ?"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0018",
+    "grammar_id": "gram_n5_0018",
+    "milestoneId": "ms_minna_b04",
+    "milestone_id": "ms_minna_b04",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 4,
+    "pattern": "Nと",
+    "titleVi": "cùng với ai / và N",
+    "structure": "Nと",
+    "explanation": "と có hai nghĩa: (1) cùng với ai đó thực hiện hành động, (2) liệt kê danh từ (A và B). Ở bài này học nghĩa \"cùng với người\".",
+    "nuanceReason": "一人で (một mình) là cách nói ngược lại với 〜と. Chú ý: と chỉ \"cùng với người/sinh vật\", không dùng cho phương tiện (dùng で).",
+    "commonMistake": "[Sai]: 電車と行きます。 -> [Đúng]: 電車で行きます。. と dùng cho \"cùng với người\"; phương tiện thì dùng で. Người Việt hay nhầm vì tiếng Việt \"đi với\" dùng cho cả hai.",
+    "kitsuPrompt": "Hãy hỏi tôi \"cuối tuần đi đâu với ai\" và tôi trả lời bằng Nと.",
+    "masterExampleJp": "友だちと映画を見ました。",
+    "masterExampleVi": "Tôi đã xem phim cùng với bạn.",
+    "examples": [
+      {
+        "sentence": "友だちと映画を見ました。",
+        "translation": "Tôi đã xem phim cùng với bạn."
+      },
+      {
+        "sentence": "家族と旅行します。",
+        "translation": "Tôi đi du lịch cùng gia đình."
+      },
+      {
+        "sentence": "誰と行きましたか。",
+        "translation": "Bạn đã đi cùng ai?"
+      },
+      {
+        "sentence": "一人で行きます。",
+        "translation": "Tôi tự đi một mình."
+      }
+    ],
+    "dialogue": {
+      "title": "Lên kế hoạch ăn tối",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "今夜、誰と晩ご飯を食べますか。",
+          "translation": "Tối nay bạn ăn tối với ai?"
+        },
+        {
+          "speaker": "B",
+          "text": "同僚と食べます。リンさんも一緒にどうですか。",
+          "translation": "Tôi ăn với đồng nghiệp. Linh đi cùng không?"
+        },
+        {
+          "speaker": "A",
+          "text": "いいですね、行きます！",
+          "translation": "Tốt quá, tôi đi nhé!"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

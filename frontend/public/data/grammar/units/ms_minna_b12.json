@@ -1,0 +1,238 @@
+[
+  {
+    "id": "gram_n5_0049",
+    "grammar_id": "gram_n5_0049",
+    "milestoneId": "ms_minna_b12",
+    "milestone_id": "ms_minna_b12",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 12,
+    "pattern": "NはNより〜です",
+    "titleVi": "N thì ~ hơn N",
+    "structure": "NはNより〜です",
+    "explanation": "より đứng sau đối tượng bị so sánh (chuẩn so sánh), tính từ đứng sau. Dịch: \"N1 thì ~ hơn N2\" hay \"N1 ~ hơn so với N2\".",
+    "nuanceReason": "より = \"hơn so với\". Câu hỏi: 〜より〜のほうがいいですか hay どちらのほうがいいですか.",
+    "commonMistake": "[Sai]: 東京は大阪よりも大きいです。(không sai, nhưng) -> [Đúng]: 東京は大阪より大きいです。. よりも (thêm も) nghe mạnh hơn/nhấn mạnh hơn よりだけ. Cả hai đều đúng nhưng より đơn giản hơn cho N5.",
+    "kitsuPrompt": "Hỏi tôi so sánh Tokyo vs Osaka, hè vs đông, tiếng Nhật vs tiếng Anh... bằng AはBより〜。",
+    "masterExampleJp": "東京は大阪より大きいです。",
+    "masterExampleVi": "Tokyo lớn hơn Osaka.",
+    "examples": [
+      {
+        "sentence": "東京は大阪より大きいです。",
+        "translation": "Tokyo lớn hơn Osaka."
+      },
+      {
+        "sentence": "電車はバスより速いです。",
+        "translation": "Tàu điện nhanh hơn xe buýt."
+      },
+      {
+        "sentence": "今日は昨日より涼しいです。",
+        "translation": "Hôm nay mát hơn hôm qua."
+      },
+      {
+        "sentence": "日本語は思ったより難しくないです。",
+        "translation": "Tiếng Nhật không khó như tôi nghĩ."
+      }
+    ],
+    "dialogue": {
+      "title": "So sánh hai thành phố",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "東京と大阪、どちらが好きですか。",
+          "translation": "Tokyo và Osaka, bạn thích thành phố nào hơn?"
+        },
+        {
+          "speaker": "B",
+          "text": "大阪のほうが好きです。東京より物価が安いし、食べ物がおいしいです。",
+          "translation": "Tôi thích Osaka hơn. Giá cả rẻ hơn Tokyo và đồ ăn ngon hơn."
+        },
+        {
+          "speaker": "A",
+          "text": "そうですか。私は東京のほうが便利だと思います。",
+          "translation": "Vậy à. Tôi nghĩ Tokyo tiện hơn."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0050",
+    "grammar_id": "gram_n5_0050",
+    "milestoneId": "ms_minna_b12",
+    "milestone_id": "ms_minna_b12",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 12,
+    "pattern": "NよりNのほうが〜です",
+    "titleVi": "N hơn N về mặt ~",
+    "structure": "NよりNのほうが〜です",
+    "explanation": "のほうが nhấn mạnh vào thứ được chọn/nổi bật hơn. Cấu trúc phổ biến khi trả lời câu hỏi so sánh どちらが.",
+    "nuanceReason": "AよりBのほうが〜 = B hơn A (B được chọn, A là chuẩn so sánh).",
+    "commonMistake": "[Sai]: りんごよりみかんは好きです。 -> [Đúng]: りんごよりみかんのほうが好きです。. Cấu trúc cố định: AよりBのほうが〜. Không thay のほうが bằng は — ý nghĩa sẽ thay đổi.",
+    "kitsuPrompt": "Cho tôi hai lựa chọn, tôi sẽ so sánh và trả lời bằng 〜よりNのほうが〜です.",
+    "masterExampleJp": "りんごよりみかんのほうが好きです。",
+    "masterExampleVi": "Tôi thích quýt hơn táo.",
+    "examples": [
+      {
+        "sentence": "りんごよりみかんのほうが好きです。",
+        "translation": "Tôi thích quýt hơn táo."
+      },
+      {
+        "sentence": "バスより電車のほうが便利です。",
+        "translation": "Tàu điện tiện hơn xe buýt."
+      },
+      {
+        "sentence": "東京より京都のほうが静かです。",
+        "translation": "Kyoto yên tĩnh hơn Tokyo."
+      },
+      {
+        "sentence": "どちらのほうが安いですか。",
+        "translation": "Cái nào rẻ hơn?"
+      }
+    ],
+    "dialogue": {
+      "title": "Tư vấn mua điện thoại",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "このスマホとあのスマホ、どちらがいいですか。",
+          "translation": "Điện thoại này và điện thoại kia, cái nào tốt hơn?"
+        },
+        {
+          "speaker": "B",
+          "text": "バッテリーはこちらのほうが長いですが、あちらのほうがカメラが良いです。",
+          "translation": "Pin cái này tốt hơn, nhưng camera cái kia tốt hơn."
+        },
+        {
+          "speaker": "A",
+          "text": "じゃあ、カメラのほうが大事ですから、あちらにします。",
+          "translation": "Vậy vì camera quan trọng hơn, tôi chọn cái kia."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0051",
+    "grammar_id": "gram_n5_0051",
+    "milestoneId": "ms_minna_b12",
+    "milestone_id": "ms_minna_b12",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 12,
+    "pattern": "Nの中で〜が一番〜です",
+    "titleVi": "~ nhất trong N",
+    "structure": "Nの中で〜が一番〜です",
+    "explanation": "So sánh bậc nhất: chỉ thứ đứng đầu trong một nhóm. Cấu trúc: [nhóm]の中で / [nhóm]で + [chủ thể]が一番〜.",
+    "nuanceReason": "Câu hỏi bậc nhất: 〜の中で何が一番〜ですか (cái gì ~ nhất?) / 誰が一番〜ですか (ai ~ nhất?).",
+    "commonMistake": "[Sai]: クラスで田中さんが一番です高いです。 -> [Đúng]: クラスで田中さんが一番背が高いです。. 一番 đứng trước tính từ, không ngắt câu. Cấu trúc: 一番 + [tính từ] (không thêm です ở giữa).",
+    "kitsuPrompt": "Hỏi tôi \"〜の中で何が一番〜ですか\" về 4 chủ đề, tôi trả lời với 一番〜なのは〜です.",
+    "masterExampleJp": "クラスの中で田中さんが一番背が高いです。",
+    "masterExampleVi": "Trong lớp, anh Tanaka cao nhất.",
+    "examples": [
+      {
+        "sentence": "クラスの中で田中さんが一番背が高いです。",
+        "translation": "Trong lớp, anh Tanaka cao nhất."
+      },
+      {
+        "sentence": "日本の食べ物の中で、寿司が一番好きです。",
+        "translation": "Trong các món Nhật, tôi thích sushi nhất."
+      },
+      {
+        "sentence": "一年で一番寒い月はいつですか。",
+        "translation": "Tháng lạnh nhất trong năm là tháng nào?"
+      },
+      {
+        "sentence": "この店で一番人気のメニューは何ですか。",
+        "translation": "Món phổ biến nhất ở quán này là gì?"
+      }
+    ],
+    "dialogue": {
+      "title": "Hỏi về sở thích nhất",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "日本の食べ物の中で何が一番好きですか。",
+          "translation": "Trong đồ ăn Nhật, bạn thích nhất cái gì?"
+        },
+        {
+          "speaker": "B",
+          "text": "一番好きなのはラーメンです！特に醤油ラーメン。",
+          "translation": "Thứ tôi thích nhất là ramen! Đặc biệt là ramen xì dầu."
+        },
+        {
+          "speaker": "A",
+          "text": "おすすめのお店はありますか。",
+          "translation": "Bạn có quán nào hay không?"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0052",
+    "grammar_id": "gram_n5_0052",
+    "milestoneId": "ms_minna_b12",
+    "milestone_id": "ms_minna_b12",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 12,
+    "pattern": "NはNと同じです",
+    "titleVi": "N giống N / N giống với N",
+    "structure": "NはNと同じです",
+    "explanation": "と同じ diễn tả sự giống nhau. Ngược lại là 違います (khác nhau) hoặc 〜と違います (khác với 〜).",
+    "nuanceReason": "同じ là tính từ na-adj nhưng đặc biệt: không thêm な khi đứng trước danh từ: 同じ値段 (không phải 同じな値段).",
+    "commonMistake": "[Sai]: 同じな趣味ですね。 -> [Đúng]: 同じ趣味ですね。. 同じ là tính từ đặc biệt — không dùng な khi đứng trước danh từ, dù nó thuộc nhóm な-adj.",
+    "kitsuPrompt": "So sánh tôi và bạn về sở thích, tôi sẽ dùng 同じです hoặc 違います để trả lời.",
+    "masterExampleJp": "私のかばんはあなたのと同じです。",
+    "masterExampleVi": "Túi của tôi giống túi của bạn.",
+    "examples": [
+      {
+        "sentence": "私のかばんはあなたのと同じです。",
+        "translation": "Túi của tôi giống túi của bạn."
+      },
+      {
+        "sentence": "今日の宿題は昨日と同じですか。",
+        "translation": "Bài tập hôm nay có giống hôm qua không?"
+      },
+      {
+        "sentence": "これとこれは同じですか、違いますか。",
+        "translation": "Cái này và cái này giống hay khác nhau?"
+      }
+    ],
+    "dialogue": {
+      "title": "Nhận ra cùng sở thích",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "私はK-POPが好きです。",
+          "translation": "Tôi thích K-POP."
+        },
+        {
+          "speaker": "B",
+          "text": "あ、私も！趣味が同じですね。",
+          "translation": "Ồ tôi cũng vậy! Sở thích giống nhau nhỉ."
+        },
+        {
+          "speaker": "A",
+          "text": "でも好きなグループは違いますか。",
+          "translation": "Nhưng nhóm yêu thích thì có khác không?"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

@@ -1,0 +1,307 @@
+[
+  {
+    "id": "gram_n5_0032",
+    "grammar_id": "gram_n5_0032",
+    "milestoneId": "ms_minna_b08",
+    "milestone_id": "ms_minna_b08",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 8,
+    "pattern": "NはAいです／Aくないです",
+    "titleVi": "N thì tính từ い (khẳng định / phủ định)",
+    "structure": "NはAいです／Aくないです",
+    "explanation": "Tính từ đuôi い chia: khẳng định = い + です; phủ định = い → くない + です. Tính từ い hoạt động như vị ngữ trực tiếp mà không cần な.",
+    "nuanceReason": "Quá khứ tính từ い: い → かった + です (おいしかった). いい → よかった (không phải いかった).",
+    "commonMistake": "[Sai]: 今日は寒いくないです。 -> [Đúng]: 今日は寒くないです。. Phủ định tính từ い: bỏ い, thêm くない. Không thêm くない vào sau い — phải thay い bằng くない.",
+    "kitsuPrompt": "Hỏi tôi đánh giá 5 thứ khác nhau (đồ ăn, phim, trường học...) và tôi trả lời với tính từ い.",
+    "masterExampleJp": "この本はおもしろいです。",
+    "masterExampleVi": "Cuốn sách này thú vị.",
+    "examples": [
+      {
+        "sentence": "この本はおもしろいです。",
+        "translation": "Cuốn sách này thú vị."
+      },
+      {
+        "sentence": "今日は寒くないです。",
+        "translation": "Hôm nay không lạnh."
+      },
+      {
+        "sentence": "このラーメンはおいしいですが、高いです。",
+        "translation": "Tô ramen này ngon nhưng đắt."
+      },
+      {
+        "sentence": "昨日の試験は難しかったです。",
+        "translation": "Bài thi hôm qua khó."
+      }
+    ],
+    "dialogue": {
+      "title": "Đánh giá nhà hàng mới",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "昨日の新しいレストラン、どうでしたか。",
+          "translation": "Nhà hàng mới hôm qua thế nào?"
+        },
+        {
+          "speaker": "B",
+          "text": "料理はおいしかったですが、ちょっと高かったです。",
+          "translation": "Đồ ăn ngon nhưng hơi đắt."
+        },
+        {
+          "speaker": "A",
+          "text": "お店はきれいでしたか。",
+          "translation": "Quán sạch không?"
+        },
+        {
+          "speaker": "B",
+          "text": "はい、とてもきれいで、静かでした。",
+          "translation": "Có, rất sạch và yên tĩnh."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0033",
+    "grammar_id": "gram_n5_0033",
+    "milestoneId": "ms_minna_b08",
+    "milestone_id": "ms_minna_b08",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 8,
+    "pattern": "NAなN",
+    "titleVi": "N na-adj (bổ nghĩa trước danh từ)",
+    "structure": "NAなN",
+    "explanation": "Tính từ な đứng trước danh từ phải có な ở giữa. Khi đứng làm vị ngữ (sau は) thì bỏ な: きれいな町 → この町はきれいです.",
+    "nuanceReason": "Tính từ な khi làm vị ngữ: この町はきれいです (không cần な). Khi bổ nghĩa danh từ: きれいな町.",
+    "commonMistake": "[Sai]: きれいい部屋 -> [Đúng]: きれいな部屋. きれい trông như tính từ い nhưng thực ra là tính từ な (い cuối không phải đuôi chia). Luôn dùng きれいな khi bổ nghĩa danh từ.",
+    "kitsuPrompt": "Hỏi tôi mô tả thành phố quê hương, tôi sẽ dùng 3 tính từ な trong câu trả lời.",
+    "masterExampleJp": "きれいな街ですね。",
+    "masterExampleVi": "Thành phố đẹp nhỉ.",
+    "examples": [
+      {
+        "sentence": "きれいな街ですね。",
+        "translation": "Thành phố đẹp nhỉ."
+      },
+      {
+        "sentence": "静かな部屋が好きです。",
+        "translation": "Tôi thích phòng yên tĩnh."
+      },
+      {
+        "sentence": "有名なレストランに行きました。",
+        "translation": "Tôi đã đến một nhà hàng nổi tiếng."
+      },
+      {
+        "sentence": "便利なアプリを使っています。",
+        "translation": "Tôi đang dùng một ứng dụng tiện lợi."
+      }
+    ],
+    "dialogue": {
+      "title": "Giới thiệu thành phố quê hương",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "ハノイはどんな町ですか。",
+          "translation": "Hà Nội là thành phố như thế nào?"
+        },
+        {
+          "speaker": "B",
+          "text": "とてもにぎやかな町です。歴史的な場所もたくさんあります。",
+          "translation": "Là một thành phố rất nhộn nhịp. Cũng có nhiều địa điểm lịch sử."
+        },
+        {
+          "speaker": "A",
+          "text": "いいですね。静かな場所もありますか。",
+          "translation": "Tốt quá. Có chỗ nào yên tĩnh không?"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0034",
+    "grammar_id": "gram_n5_0034",
+    "milestoneId": "ms_minna_b08",
+    "milestone_id": "ms_minna_b08",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 8,
+    "pattern": "NはNAです／NAじゃありません",
+    "titleVi": "N thì na-adj / N không na-adj",
+    "structure": "NはNAです／NAじゃありません",
+    "explanation": "Tính từ な làm vị ngữ: khẳng định = NA + です; phủ định = NA + じゃありません / ではありません. Không cần な khi là vị ngữ.",
+    "nuanceReason": "Quá khứ tính từ な: NAでした (khẳng định), NAじゃありませんでした (phủ định).",
+    "commonMistake": "[Sai]: この町はにぎやかなです。 -> [Đúng]: この町はにぎやかです。. Tính từ な khi đứng làm vị ngữ (sau は) thì BỎ な, chỉ cần +です. Chỉ dùng な khi đứng TRƯỚC danh từ: にぎやかな町.",
+    "kitsuPrompt": "Hỏi tôi đặc điểm tính cách của bạn tôi, tôi mô tả bằng tính từ な dạng vị ngữ.",
+    "masterExampleJp": "この町はにぎやかです。",
+    "masterExampleVi": "Thành phố này nhộn nhịp.",
+    "examples": [
+      {
+        "sentence": "この町はにぎやかです。",
+        "translation": "Thành phố này nhộn nhịp."
+      },
+      {
+        "sentence": "私の部屋はあまりきれいじゃありません。",
+        "translation": "Phòng tôi không được sạch lắm."
+      },
+      {
+        "sentence": "田中さんは親切な人です。",
+        "translation": "Anh Tanaka là người tốt bụng."
+      },
+      {
+        "sentence": "日本語の勉強は大変ですが、楽しいです。",
+        "translation": "Học tiếng Nhật vất vả nhưng vui."
+      }
+    ],
+    "dialogue": {
+      "title": "Nói về căn phòng mới",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "新しい部屋はどうですか。きれいですか。",
+          "translation": "Phòng mới thế nào? Sạch không?"
+        },
+        {
+          "speaker": "B",
+          "text": "きれいですが、あまり広くないです。でも静かです。",
+          "translation": "Sạch nhưng không rộng lắm. Nhưng yên tĩnh."
+        },
+        {
+          "speaker": "A",
+          "text": "駅から便利ですか。",
+          "translation": "Có thuận tiện từ ga không?"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0035",
+    "grammar_id": "gram_n5_0035",
+    "milestoneId": "ms_minna_b08",
+    "milestone_id": "ms_minna_b08",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 8,
+    "pattern": "どんなNですか",
+    "titleVi": "N như thế nào? / N loại gì?",
+    "structure": "どんなNですか",
+    "explanation": "どんな hỏi về đặc điểm hoặc tính chất của N. Trả lời mô tả bằng tính từ い hoặc な.",
+    "nuanceReason": "どんな (loại gì, như thế nào) khác với どう (= như thế nào về cách thức/cảm nhận): どうでしたか (Bạn cảm thấy thế nào?).",
+    "commonMistake": "[Sai]: A: 日本はどんな国ですか。B: はい、いい国です。 -> [Đúng]: A: 日本はどんな国ですか。B: きれいで、安全な国です。. どんな hỏi mô tả, không trả lời はい/いいえ. Phải mô tả bằng tính từ hoặc đặc điểm cụ thể.",
+    "kitsuPrompt": "Hỏi tôi \"どんな〜が好きですか\" về 4 chủ đề: âm nhạc, phim, sách, thức ăn.",
+    "masterExampleJp": "日本はどんな国ですか。",
+    "masterExampleVi": "Nhật Bản là đất nước như thế nào?",
+    "examples": [
+      {
+        "sentence": "日本はどんな国ですか。",
+        "translation": "Nhật Bản là đất nước như thế nào?"
+      },
+      {
+        "sentence": "どんな音楽が好きですか。",
+        "translation": "Bạn thích nhạc loại gì?"
+      },
+      {
+        "sentence": "彼はどんな人ですか。",
+        "translation": "Anh ấy là người như thế nào?"
+      },
+      {
+        "sentence": "新しい仕事はどんな仕事ですか。",
+        "translation": "Công việc mới là công việc như thế nào?"
+      }
+    ],
+    "dialogue": {
+      "title": "Hỏi về công việc mới",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "新しい会社はどんな会社ですか。",
+          "translation": "Công ty mới là công ty như thế nào?"
+        },
+        {
+          "speaker": "B",
+          "text": "IT系の会社です。とても忙しいですが、仕事がおもしろいです。",
+          "translation": "Là công ty IT. Rất bận nhưng công việc thú vị."
+        },
+        {
+          "speaker": "A",
+          "text": "上司はどんな人ですか。",
+          "translation": "Sếp là người thế nào?"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0036",
+    "grammar_id": "gram_n5_0036",
+    "milestoneId": "ms_minna_b08",
+    "milestone_id": "ms_minna_b08",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 8,
+    "pattern": "とても／あまり〜ない",
+    "titleVi": "rất ~ / không ~ lắm",
+    "structure": "とても／あまり〜ない",
+    "explanation": "Trạng từ bổ nghĩa mức độ: とても (rất) dùng với câu khẳng định; あまり (không... lắm) chỉ dùng với câu phủ định.",
+    "nuanceReason": "あまり luôn đi với phủ định: あまり〜ない / あまり〜ません. Sai: あまりおいしいです.",
+    "commonMistake": "[Sai]: あまりおいしいです。 -> [Đúng]: あまりおいしくないです。/ あまりおいしくありません。. あまり bắt buộc phải đi với phủ định. Nếu muốn nói \"rất ngon\" thì dùng とても.",
+    "kitsuPrompt": "Hỏi tôi đánh giá 5 thứ (đồ ăn, phim, thời tiết...) và tôi dùng とても hoặc あまり〜ない.",
+    "masterExampleJp": "このケーキはとてもおいしいです。",
+    "masterExampleVi": "Cái bánh này rất ngon.",
+    "examples": [
+      {
+        "sentence": "このケーキはとてもおいしいです。",
+        "translation": "Cái bánh này rất ngon."
+      },
+      {
+        "sentence": "日本語はあまり難しくないです。",
+        "translation": "Tiếng Nhật không khó lắm."
+      },
+      {
+        "sentence": "その映画はあまり面白くありませんでした。",
+        "translation": "Bộ phim đó không thú vị lắm."
+      },
+      {
+        "sentence": "今日はとても暑いですね。",
+        "translation": "Hôm nay nóng quá nhỉ."
+      }
+    ],
+    "dialogue": {
+      "title": "Bình luận thời tiết",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "今日はとても暑いですね。",
+          "translation": "Hôm nay nóng quá nhỉ."
+        },
+        {
+          "speaker": "B",
+          "text": "そうですね。でも昨日はあまり暑くなかったです。",
+          "translation": "Đúng vậy. Nhưng hôm qua không nóng lắm."
+        },
+        {
+          "speaker": "A",
+          "text": "明日はどうでしょうか。",
+          "translation": "Ngày mai thế nào nhỉ?"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

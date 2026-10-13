@@ -1,0 +1,142 @@
+[
+  {
+    "id": "gram_n2_0450",
+    "grammar_id": "gram_n2_0450",
+    "milestoneId": "ms_n2_s4_l1",
+    "milestone_id": "ms_n2_s4_l1",
+    "stageId": "stage_n2_4",
+    "stage_id": "stage_n2_4",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 101,
+    "pattern": "〜んがため（に）",
+    "titleVi": "Nhằm để... — mục đích quyết liệt, ý chí gắng sức đến cùng (văn viết cứng, mang sắc thái khẩn thiết/sinh tồn)",
+    "structure": "〜んがため（に）",
+    "explanation": "Mẫu ngữ pháp 「〜んがため（に）」 biểu thị mục đích lớn lao, mang ý nghĩa \"với mong muốn/nhằm để...\", thể hiện ý chí quyết tâm cao độ hoặc sự nỗ lực tột cùng của chủ thể. Đây là lối diễn đạt văn viết cổ kính, trang trọng, thường xuất hiện trong văn học, báo chí hoặc các bài diễn thuyết mang tính lịch sử, thời sự. Động từ kết nối bằng cách lấy dạng phủ định 「ない」 bỏ 「ない」 cộng với 「んがため（に）」, riêng động từ 「する」 biến đổi đặc biệt thành 「せんがため（に）」. Vế sau của câu thường miêu tả những hành động quyết liệt, chấp nhận gian khổ hoặc hy sinh để đạt được mục đích đó, không dùng cho sinh hoạt thường nhật.",
+    "nuanceReason": "Mẫu này mang sắc thái ý chí vô cùng quyết liệt và trang nghiêm nên tuyệt đối không dùng cho các hành động hay mục đích vụn vặt hằng ngày (như đi chợ, mua sắm); trường hợp thông thường hãy dùng 「〜ために」.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "彼は真実を明らかにせんがために、身の危険を顧みず調査を続けた。",
+    "masterExampleVi": "Nhằm làm sáng tỏ chân tướng sự thật, anh ấy đã bất chấp hiểm nguy đến tính mạng để tiếp tục cuộc điều tra.",
+    "examples": [
+      {
+        "sentence": "彼は真実を明らかにせんがために、身の危険を顧みず調査を続けた。",
+        "translation": "Nhằm làm sáng tỏ chân tướng sự thật, anh ấy đã bất chấp hiểm nguy đến tính mạng để tiếp tục cuộc điều tra.",
+        "reading": ""
+      },
+      {
+        "sentence": "難病に苦しむ人々を救わんがため、研究者たちは日夜新薬の開発に没頭している。",
+        "translation": "Nhằm cứu giúp những bệnh nhân mắc bệnh hiểm nghèo, các nhà nghiên cứu đang ngày đêm miệt mài phát triển loại thuốc mới.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0451",
+    "grammar_id": "gram_n2_0451",
+    "milestoneId": "ms_n2_s4_l1",
+    "milestone_id": "ms_n2_s4_l1",
+    "stageId": "stage_n2_4",
+    "stage_id": "stage_n2_4",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 101,
+    "pattern": "〜べく",
+    "titleVi": "Để (mà)... — nêu mục đích của một hành động cụ thể, văn viết trang trọng/tường thuật; vế sau KHÔNG được là mệnh lệnh・thỉnh cầu",
+    "structure": "〜べく",
+    "explanation": "Mẫu ngữ pháp 「〜べく」 mang ý nghĩa \"để, nhằm mục đích...\", dùng để diễn đạt việc thực hiện một hành động cụ thể nhằm đạt được mục tiêu xác định. Mẫu câu này thuộc phong cách văn viết trang trọng, mang tính tường thuật cao, thường xuất hiện trong báo chí, văn kiện kinh doanh, bài luận hoặc phát biểu trịnh trọng. Vế sau luôn là hành động có ý chí của người nói và tuyệt đối không đi cùng các hình thức mệnh lệnh, nhờ vả hay tác động đến người nghe.",
+    "nuanceReason": "Động từ 「する」 khi kết hợp với mẫu này có thể chuyển thành 「すべく」 hoặc 「するべく」, trong đó dạng 「すべく」 mang tính cổ và trang trọng hơn.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "弊社は海外市場を開拓すべく、現地法人の設立準備を進めている。",
+    "masterExampleVi": "Công ty chúng tôi đang xúc tiến việc chuẩn bị thành lập pháp nhân tại địa phương nhằm mở rộng thị trường ra nước ngoài.",
+    "examples": [
+      {
+        "sentence": "弊社は海外市場を開拓すべく、現地法人の設立準備を進めている。",
+        "translation": "Công ty chúng tôi đang xúc tiến việc chuẩn bị thành lập pháp nhân tại địa phương nhằm mở rộng thị trường ra nước ngoài.",
+        "reading": ""
+      },
+      {
+        "sentence": "彼は最新の医療技術を学ぶべく、アメリカへの留学を決意した。",
+        "translation": "Anh ấy đã quyết định đi du học Mỹ để học hỏi những kỹ thuật y tế tiên tiến nhất.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0452",
+    "grammar_id": "gram_n2_0452",
+    "milestoneId": "ms_n2_s4_l1",
+    "milestone_id": "ms_n2_s4_l1",
+    "stageId": "stage_n2_4",
+    "stage_id": "stage_n2_4",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 101,
+    "pattern": "〜んがため（に） ≠ 〜べく の 使[つか]い分[わ]け",
+    "titleVi": "んがため(に) nhấn ý chí quyết liệt/sinh tồn cực độ, thường mang sắc thái bi tráng; べく trung tính hơn, chỉ tường thuật mục đích của một hành động cụ thể (báo cáo/xã luận)",
+    "structure": "〜んがため（に） ≠ 〜べく の 使[つか]い分[わ]け",
+    "explanation": "Cả hai mẫu ngữ pháp đều mang nghĩa \"nhằm để / với mục đích\", thuộc văn phong viết trang trọng nhưng có sắc thái biểu cảm khác biệt. 「〜んがため（に）」nhấn mạnh ý chí quyết tâm cao độ, sẵn sàng hy sinh hoặc mang tính chất sinh tử, bi tráng của chủ thể khi theo đuổi một mục tiêu to lớn. Ngược lại, 「〜べく」mang sắc thái khách quan và trung tính hơn, thường dùng trong báo cáo công vụ, thông cáo hoặc xã luận để tường thuật mục đích của một hành động, kế hoạch cụ thể. Cả hai mẫu đều không dùng câu mang tính nhờ vả, mệnh lệnh hoặc sai khiến ở vế sau.",
+    "nuanceReason": "Cần lưu ý cách chia đặc biệt của động từ nhóm 3 「する」: đi với 「んがため」 sẽ là 「せんがため」, còn đi với 「べく」 sẽ chuyển thành 「すべく」 (hoặc 「するべく」).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "国家の独立と尊厳を守らんがために、兵士たちは最前線で命を懸けて戦った。",
+    "masterExampleVi": "Nhằm bảo vệ nền độc lập và lòng tự tôn của quốc gia, các binh sĩ đã liều mình chiến đấu nơi tiền tuyến.",
+    "examples": [
+      {
+        "sentence": "国家の独立と尊厳を守らんがために、兵士たちは最前線で命を懸けて戦った。",
+        "translation": "Nhằm bảo vệ nền độc lập và lòng tự tôn của quốc gia, các binh sĩ đã liều mình chiến đấu nơi tiền tuyến.",
+        "reading": ""
+      },
+      {
+        "sentence": "弊社は海外市場への本格的な進出を果たすべく、現地法人を設立することとした。",
+        "translation": "Nhằm thực hiện việc tiến ra thị trường quốc tế một cách bài bản, công ty chúng tôi đã quyết định thành lập pháp nhân tại địa phương.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0453",
+    "grammar_id": "gram_n2_0453",
+    "milestoneId": "ms_n2_s4_l1",
+    "milestone_id": "ms_n2_s4_l1",
+    "stageId": "stage_n2_4",
+    "stage_id": "stage_n2_4",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 101,
+    "pattern": "〜んがため（に）・〜べく ≠ 〜ために・〜ように（N3）",
+    "titleVi": "ため(に)/ように (N3) trung tính, dùng cả văn nói lẫn văn viết; んがため(に)/べく (N1) CHỈ dùng văn viết cứng (xã luận/công văn/diễn văn), nhấn quyết tâm/khẩn thiết mạnh hơn nhiều",
+    "structure": "〜んがため（に）・〜べく ≠ 〜ために・〜ように（N3）",
+    "explanation": "Trong khi「〜ために・〜ように」(N3) diễn tả mục đích thông thường, mang tính trung tính và dùng linh hoạt trong cả hội thoại thường ngày lẫn văn viết, thì「〜んがため（に）・〜べく」(N1) thuộc phong cách văn viết trang trọng, cổ kính và cứng cáp (thường gặp trong xã luận, công văn, diễn văn). Các mẫu N1 này nhấn mạnh quyết tâm mãnh liệt, sự nỗ lực phi thường hướng tới một mục đích trọng đại, sống còn hoặc khẩn thiết, mang sắc thái hào hùng hơn rất nhiều so với ngữ pháp N3.",
+    "nuanceReason": "「〜べく」thường hướng tới hành động thể hiện trách nhiệm hoặc định hướng lớn mang tính lý trí, trong khi「〜ように」chủ yếu dùng khi mục đích ở vế trước là trạng thái hoặc khả năng không trực tiếp điều khiển được.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "チームを勝利に導かんがため、主将は激痛に耐えて最後まで戦い抜いた。",
+    "masterExampleVi": "Quyết tâm đưa toàn đội đến thắng lợi, người đội trưởng đã nén chịu đau đớn dữ dội để chiến đấu đến cùng.",
+    "examples": [
+      {
+        "sentence": "チームを勝利に導かんがため、主将は激痛に耐えて最後まで戦い抜いた。",
+        "translation": "Quyết tâm đưa toàn đội đến thắng lợi, người đội trưởng đã nén chịu đau đớn dữ dội để chiến đấu đến cùng.",
+        "reading": ""
+      },
+      {
+        "sentence": "体力をつけるために、毎朝30分ジョギングをすることにしている。",
+        "translation": "Để rèn luyện thể lực, tôi duy trì thói quen chạy bộ 30 phút mỗi sáng.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

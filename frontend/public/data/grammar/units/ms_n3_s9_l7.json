@@ -1,0 +1,249 @@
+[
+  {
+    "id": "gram_n3_0380",
+    "grammar_id": "gram_n3_0380",
+    "milestoneId": "ms_n3_s9_l7",
+    "milestone_id": "ms_n3_s9_l7",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 88,
+    "pattern": "～とか（例示・伝聞・口語）",
+    "titleVi": "~ chẳng hạn, ~ hay gì đó (liệt kê ví dụ/truyền đạt không chính thức)",
+    "structure": "～とか（例示・伝聞・口語）",
+    "explanation": "Mẫu ngữ pháp 「～とか」 dùng trong văn nói để đưa ra một vài ví dụ tiêu biểu mang tính chất không liệt kê hết (như \"chẳng hạn như... hay là...\"), hoặc biểu thị thông tin nghe loáng thoáng, phỏng đoán chưa chắc chắn. Mẫu này thường đi trực tiếp sau danh từ hoặc dạng thông thường (普通形) của động từ, tính từ. Vì mang sắc thái thân mật, tự nhiên và có tính khẩu ngữ cao nên 「～とか」 chỉ dùng trong giao tiếp đời thường hàng ngày, tránh dùng trong văn bản hoặc hoàn cảnh trang trọng.",
+    "nuanceReason": "So với 「～や～など」 có thể dùng cho cả văn viết lẫn văn nói trang trọng, 「～とか」 chỉ dùng trong hội thoại đời thường và có thể đi kèm động từ ở cuối câu để đưa ra gợi ý nhẹ nhàng hoặc diễn đạt sự ngập ngừng.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "気分転換に散歩するとか、音楽を聴くとかしたらどう？",
+    "masterExampleVi": "Để đổi gió thì bạn thử đi dạo hay nghe nhạc gì đó xem sao?",
+    "examples": [
+      {
+        "sentence": "気分転換に散歩するとか、音楽を聴くとかしたらどう？",
+        "translation": "Để đổi gió thì bạn thử đi dạo hay nghe nhạc gì đó xem sao?",
+        "reading": ""
+      },
+      {
+        "sentence": "山田さんは来月仕事を辞めるとか言ってたけど、本当かな。",
+        "translation": "Nghe đâu Yamada bảo tháng sau sẽ nghỉ việc hay sao ấy, không biết có thật không nhỉ.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0381",
+    "grammar_id": "gram_n3_0381",
+    "milestoneId": "ms_n3_s9_l7",
+    "milestone_id": "ms_n3_s9_l7",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 88,
+    "pattern": "～てしまう／ちゃう（完了・後悔）",
+    "titleVi": "Đã ~ mất rồi, lỡ ~ rồi (hoàn tất/hối tiếc)",
+    "structure": "～てしまう／ちゃう（完了・後悔）",
+    "explanation": "Mẫu câu 「～てしまう」 được dùng để diễn tả một hành động đã hoàn tất trọn vẹn (làm xong hết) hoặc một sự việc xảy ra ngoài ý muốn gây ra cảm giác hối tiếc, tiếc nuối hay thất vọng. Trong văn nói thân mật hàng ngày, 「～てしまう」 thường được biến đổi ngắn gọn thành 「～ちゃう」 (và 「～でしまう」 thành 「～じゃう」). Mẫu này kết hợp với động từ thể て và xuất hiện vô cùng phổ biến trong giao tiếp đời sống lẫn các kỳ thi JLPT.",
+    "nuanceReason": "Cần phân biệt sắc thái tiếc nuối hoặc làm xong dứt điểm của 「～てしまう」 với hành động chủ động làm sẵn để chuẩn bị trước của 「～ておく」.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "大切にしていたお気に入りの傘を、電車の中に忘れてきてしまいました。",
+    "masterExampleVi": "Tôi lỡ để quên mất chiếc ô yêu thích mà mình vô cùng trân trọng ở trên tàu điện rồi.",
+    "examples": [
+      {
+        "sentence": "大切にしていたお気に入りの傘を、電車の中に忘れてきてしまいました。",
+        "translation": "Tôi lỡ để quên mất chiếc ô yêu thích mà mình vô cùng trân trọng ở trên tàu điện rồi.",
+        "reading": ""
+      },
+      {
+        "sentence": "ずっと楽しみにしていた大人気のアニメを、週末で全話一気に観ちゃった。",
+        "translation": "Bộ anime đình đám mà tôi mong chờ bấy lâu, tôi đã xem hết sạch cả bộ chỉ trong dịp cuối tuần rồi.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0382",
+    "grammar_id": "gram_n3_0382",
+    "milestoneId": "ms_n3_s9_l7",
+    "milestone_id": "ms_n3_s9_l7",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 88,
+    "pattern": "～なあ",
+    "titleVi": "~ nhỉ, ~ thật (cảm thán, nội tâm)",
+    "structure": "～なあ",
+    "explanation": "Mẫu「～なあ」được dùng để bộc lộ cảm xúc, sự cảm thán hoặc suy nghĩ nội tâm một cách tự nhiên như tiếng lòng tự nói với chính mình. Ngoài ra, mẫu này cũng rất hay đi cùng thể điều kiện (như ～たら、～ば) để thể hiện niềm mong ước tha thiết hay nuối tiếc. Do mang sắc thái độc thoại và thân mật, mẫu này chỉ dùng cho bản thân hoặc trò chuyện với bạn bè thân thiết, không dùng trong ngữ cảnh trang trọng.",
+    "nuanceReason": "Khác với「ね」dùng để hướng tới đối phương nhằm tìm kiếm sự đồng cảm,「なあ」chủ yếu là tiếng thở dài hay cảm thán thốt ra từ nội tâm của chính người nói.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "富士山の頂上から見る日の出は、本当に綺麗だなあ。",
+    "masterExampleVi": "Ngắm bình minh từ đỉnh núi Phú Sĩ thực sự đẹp tuyệt vời biết bao.",
+    "examples": [
+      {
+        "sentence": "富士山の頂上から見る日の出は、本当に綺麗だなあ。",
+        "translation": "Ngắm bình minh từ đỉnh núi Phú Sĩ thực sự đẹp tuyệt vời biết bao.",
+        "reading": ""
+      },
+      {
+        "sentence": "子どもの頃に戻れたらいいのになあ。",
+        "translation": "Ước gì mình có thể quay trở lại thời thơ ấu thì tốt biết mấy.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0383",
+    "grammar_id": "gram_n3_0383",
+    "milestoneId": "ms_n3_s9_l7",
+    "milestone_id": "ms_n3_s9_l7",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 88,
+    "pattern": "～っけ",
+    "titleVi": "Nhỉ, nhỉ (hỏi lại điều mình không chắc nhớ)",
+    "structure": "～っけ",
+    "explanation": "Mẫu 「～っけ」 được dùng nhiều trong hội thoại thân mật để xác nhận lại một thông tin mà người nói đã từng biết hoặc từng nghe qua nhưng tạm thời không nhớ rõ. Ngoài ra, mẫu này cũng thường dùng khi tự độc thoại với chính mình nhằm cố nhớ lại một việc gì đó. Cấu trúc này rất hay kết hợp với thể quá khứ (như ～たっけ / だったっけ) để thể hiện rằng sự việc đó vốn đã được định sẵn hoặc đã xảy ra trong quá khứ.",
+    "nuanceReason": "Khi cần hỏi người bề trên hoặc trong bối cảnh lịch sự, có thể chuyển sang dạng 「～でしたっけ / ～ましたっけ」 để xác nhận lại thông tin một cách nhẹ nhàng, lễ phép.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "来週のテストの範囲って、教科書の何ページまでだったっけ？",
+    "masterExampleVi": "Phạm vi bài kiểm tra tuần sau là đến trang bao nhiêu trong sách giáo khoa ấy nhỉ?",
+    "examples": [
+      {
+        "sentence": "来週のテストの範囲って、教科書の何ページまでだったっけ？",
+        "translation": "Phạm vi bài kiểm tra tuần sau là đến trang bao nhiêu trong sách giáo khoa ấy nhỉ?",
+        "reading": ""
+      },
+      {
+        "sentence": "あの新しいカフェ、駅の西口を出て右手にあるんだっけ？",
+        "translation": "Quán cà phê mới mở đó nằm ở bên tay phải sau khi ra khỏi cửa Tây ga đúng không nhỉ?",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0384",
+    "grammar_id": "gram_n3_0384",
+    "milestoneId": "ms_n3_s9_l7",
+    "milestone_id": "ms_n3_s9_l7",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 88,
+    "pattern": "～てくれない？／てもらえる？",
+    "titleVi": "Nhờ, xin ~ giùm (yêu cầu thân mật/lịch sự)",
+    "structure": "～てくれない？／てもらえる？",
+    "explanation": "Mẫu câu này dùng để nhờ vả hoặc yêu cầu đối phương thực hiện một hành động nào đó giúp mình với thái độ nhẹ nhàng. Dạng thân mật 「～てくれない？／てもらえる？」 thường dùng khi trò chuyện với bạn bè, người thân trong gia đình hoặc người có vai vế thấp hơn. Khi cần thể hiện sự lịch sự hơn trong giao tiếp hàng ngày hoặc công việc, người nói sẽ chuyển sang dạng 「～てくれませんか？／～てもらえますか？」.",
+    "nuanceReason": "「～てもらえる？」 thường mang sắc thái khiêm tốn và thăm dò khả năng của đối phương nhiều hơn so với 「～てくれない？」.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "エアコンのリモコン、そこの机の上にあるから取ってくれない？",
+    "masterExampleVi": "Điều khiển điều hòa ở trên bàn đằng kia, lấy giùm mình được không?",
+    "examples": [
+      {
+        "sentence": "エアコンのリモコン、そこの机の上にあるから取ってくれない？",
+        "translation": "Điều khiển điều hòa ở trên bàn đằng kia, lấy giùm mình được không?",
+        "reading": ""
+      },
+      {
+        "sentence": "この書類の日本語が合っているかどうか、ちょっと見てもらえる？",
+        "translation": "Cậu xem giúp tớ xem tiếng Nhật trong tài liệu này có đúng không được không?",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0385",
+    "grammar_id": "gram_n3_0385",
+    "milestoneId": "ms_n3_s9_l7",
+    "milestone_id": "ms_n3_s9_l7",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 88,
+    "pattern": "〜とか",
+    "titleVi": "sử dụng từ lóng và cách nói rút gọn trong khẩu ngữ hàng ngày (SKM Bài 18)",
+    "structure": "〜とか",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 9 · Bài 88 (㊳): Dùng để sử dụng từ lóng và cách nói rút gọn trong khẩu ngữ hàng ngày (SKM Bài 18).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜とか（N3）",
+    "masterExampleVi": "sử dụng từ lóng và cách nói rút gọn trong khẩu ngữ hàng ngày (SKM Bài 18)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0386",
+    "grammar_id": "gram_n3_0386",
+    "milestoneId": "ms_n3_s9_l7",
+    "milestone_id": "ms_n3_s9_l7",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 88,
+    "pattern": "〜てしまう／ちゃう",
+    "titleVi": "sử dụng từ lóng và cách nói rút gọn trong khẩu ngữ hàng ngày (SKM Bài 18)",
+    "structure": "〜てしまう／ちゃう",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 9 · Bài 88 (㊳): Dùng để sử dụng từ lóng và cách nói rút gọn trong khẩu ngữ hàng ngày (SKM Bài 18).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜てしまう／ちゃう（N3）",
+    "masterExampleVi": "sử dụng từ lóng và cách nói rút gọn trong khẩu ngữ hàng ngày (SKM Bài 18)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0387",
+    "grammar_id": "gram_n3_0387",
+    "milestoneId": "ms_n3_s9_l7",
+    "milestone_id": "ms_n3_s9_l7",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 88,
+    "pattern": "〜てくれない",
+    "titleVi": "sử dụng từ lóng và cách nói rút gọn trong khẩu ngữ hàng ngày (SKM Bài 18)",
+    "structure": "〜てくれない",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 9 · Bài 88 (㊳): Dùng để sử dụng từ lóng và cách nói rút gọn trong khẩu ngữ hàng ngày (SKM Bài 18).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜てくれない（N3）",
+    "masterExampleVi": "sử dụng từ lóng và cách nói rút gọn trong khẩu ngữ hàng ngày (SKM Bài 18)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

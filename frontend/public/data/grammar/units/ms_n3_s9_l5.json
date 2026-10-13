@@ -1,0 +1,166 @@
+[
+  {
+    "id": "gram_n3_0366",
+    "grammar_id": "gram_n3_0366",
+    "milestoneId": "ms_n3_s9_l5",
+    "milestone_id": "ms_n3_s9_l5",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 86,
+    "pattern": "～にかかわらず",
+    "titleVi": "Bất kể, không kể (điều kiện không ảnh hưởng kết quả)",
+    "structure": "～にかかわらず",
+    "explanation": "Mẫu câu「～にかかわらず」mang ý nghĩa \"bất kể... / không màng đến...\", diễn đạt ý nghĩa hành động hoặc kết quả ở vế sau hoàn toàn không bị chi phối hay ảnh hưởng bởi điều kiện ở vế trước. Vế trước thường đi kèm danh từ chỉ phạm vi/sự biến thiên (như thời tiết, tuổi tác, quốc tịch) hoặc các cặp từ đối lập, cặp khẳng định - phủ định (như có hay không, làm hay không làm). Mẫu này mang sắc thái trang trọng, khách quan, thường xuất hiện nhiều trong các văn bản thông báo, quy tắc, hợp đồng hoặc bài phát biểu.",
+    "nuanceReason": "Cần lưu ý:「～にかかわらず」yêu cầu vế trước phải là yếu tố có độ dao động/lựa chọn (như thời tiết, đi hay không), còn nếu chỉ là một sự thật đã định hình muốn diễn tả sự tương phản thì phải dùng「～にもかかわらず」.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "理由の如何にかかわらず、提出期限を過ぎた申請書は一切受理いたしません。",
+    "masterExampleVi": "Bất kể lý do là gì, chúng tôi tuyệt đối không tiếp nhận đơn xin đã quá hạn nộp.",
+    "examples": [
+      {
+        "sentence": "理由の如何にかかわらず、提出期限を過ぎた申請書は一切受理いたしません。",
+        "translation": "Bất kể lý do là gì, chúng tôi tuyệt đối không tiếp nhận đơn xin đã quá hạn nộp.",
+        "reading": ""
+      },
+      {
+        "sentence": "この市民講座は、年齢や国籍にかかわらず、どなたでも無料で受講していただけます。",
+        "translation": "Khóa học cộng đồng này bất kể độ tuổi hay quốc tịch, bất kỳ ai cũng có thể tham gia học miễn phí.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0367",
+    "grammar_id": "gram_n3_0367",
+    "milestoneId": "ms_n3_s9_l5",
+    "milestone_id": "ms_n3_s9_l5",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 86,
+    "pattern": "～どころか",
+    "titleVi": "Không những không ~, trái lại / Không phải ~ đâu mà còn",
+    "structure": "～どころか",
+    "explanation": "Mẫu câu 「～どころか」 dùng để nhấn mạnh một thực tế hoàn toàn trái ngược với điều được dự đoán, kỳ vọng, hoặc sự việc thực tế còn ở mức độ chênh lệch rất xa so với vế trước. Cấu trúc này thường được dịch là \"không những không... mà trái lại\" hoặc \"ngay cả A còn chưa được, nói gì đến B\". Mẫu này mang sắc thái phủ định mạnh mẽ, thường biểu thị sự ngạc nhiên, thất vọng hoặc phê phán trong cả giao tiếp thường ngày lẫn văn viết.",
+    "nuanceReason": "Khác với 「～ばかりか」(không chỉ A mà còn B, hai vế cùng chiều bổ sung cho nhau), 「～どころか」luôn mang tính phủ định thực tế ở vế trước để nêu lên một sự thật tương phản gay gắt hoặc tiêu cực hơn nhiều.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "風邪が治るどころか、熱が４０度まで上がって入院することになった。",
+    "masterExampleVi": "Bệnh cảm cúm không những không khỏi mà sốt còn tăng lên tận 40 độ khiến tôi phải nhập viện.",
+    "examples": [
+      {
+        "sentence": "風邪が治るどころか、熱が４０度まで上がって入院することになった。",
+        "translation": "Bệnh cảm cúm không những không khỏi mà sốt còn tăng lên tận 40 độ khiến tôi phải nhập viện.",
+        "reading": ""
+      },
+      {
+        "sentence": "忙しくて、旅行どころか週末にゆっくり休む時間さえない。",
+        "translation": "Bận rộn đến mức nói gì đến chuyện đi du lịch, ngay cả thời gian nghỉ ngơi thong thả vào cuối tuần cũng chẳng có.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0368",
+    "grammar_id": "gram_n3_0368",
+    "milestoneId": "ms_n3_s9_l5",
+    "milestone_id": "ms_n3_s9_l5",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 86,
+    "pattern": "～にすぎない",
+    "titleVi": "Chỉ là, không hơn gì (hạ thấp, không coi trọng quá)",
+    "structure": "～にすぎない",
+    "explanation": "Mẫu câu 「～にすぎない」 dùng để diễn tả ý nghĩa \"chỉ là... không hơn không kém\", nhằm đánh giá sự việc ở mức độ thấp hoặc không coi trọng quá mức. Cấu trúc này thường kết hợp với danh từ hoặc thể thông thường của động từ/tính từ, mang sắc thái khiêm tốn khi nói về bản thân hoặc xem nhẹ một sự việc nào đó. Trong câu, mẫu này rất hay đi kèm với các phó từ như 「ただ」「単に」 để tăng tính nhấn mạnh.",
+    "nuanceReason": "「～にすぎない」 thường đi cùng phó từ 「ただ」「単に」 để nhấn mạnh ý \"chỉ là\", và tránh nhầm với mẫu khẳng định mạnh mẽ 「～にほかならない」 (chính là/không gì khác ngoài).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "今回の成功は運が良かったにすぎないから、次はもっと気を引き締めて臨もう。",
+    "masterExampleVi": "Thành công lần này chẳng qua chỉ là do may mắn thôi, nên lần tới hãy tập trung hơn nữa nhé.",
+    "examples": [
+      {
+        "sentence": "今回の成功は運が良かったにすぎないから、次はもっと気を引き締めて臨もう。",
+        "translation": "Thành công lần này chẳng qua chỉ là do may mắn thôi, nên lần tới hãy tập trung hơn nữa nhé.",
+        "reading": ""
+      },
+      {
+        "sentence": "ネット上の噂は単なる推測にすぎないため、鵜呑みにするのは危険だ。",
+        "translation": "Tin đồn trên mạng chỉ đơn thuần là suy đoán thôi, vì vậy việc tin ngay là rất nguy hiểm.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0369",
+    "grammar_id": "gram_n3_0369",
+    "milestoneId": "ms_n3_s9_l5",
+    "milestone_id": "ms_n3_s9_l5",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 86,
+    "pattern": "～はともかく（として）",
+    "titleVi": "Tạm gác (vấn đề đó) sang một bên",
+    "structure": "～はともかく（として）",
+    "explanation": "Mẫu câu này có nghĩa là \"tạm gác A sang một bên / chưa bàn tới A\", dùng khi người nói muốn tạm thời không xem xét vấn đề A để ưu tiên nhấn mạnh vào sự việc B ở vế sau. Cấu trúc thường kết hợp trực tiếp với Danh từ, cụm danh từ hóa (V-るの) hoặc dạng nghi vấn 「〜かどうか」. Vế B phía sau thể hiện đánh giá, hành động hoặc sự thực quan trọng hơn mà người nói muốn tập trung vào. Mẫu này được dùng phổ biến cả trong giao tiếp hàng ngày lẫn văn viết để diễn đạt cách nhìn nhận thực tế và khách quan.",
+    "nuanceReason": "Phân biệt với 「〜は抜きにして」 (bỏ qua một nghi thức/thủ tục quen thuộc để đi thẳng vào việc chính) và 「〜にかかわらず」 (bất kể điều kiện A thế nào thì vế B vẫn hoàn toàn không bị ảnh hưởng).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "結果はともかくとして、最後まで諦めずに全力を尽くしたことに大きな意味がある。",
+    "masterExampleVi": "Tạm gác kết quả sang một bên, việc nỗ lực hết mình và không bỏ cuộc cho đến phút cuối cùng mới mang ý nghĩa to lớn.",
+    "examples": [
+      {
+        "sentence": "結果はともかくとして、最後まで諦めずに全力を尽くしたことに大きな意味がある。",
+        "translation": "Tạm gác kết quả sang một bên, việc nỗ lực hết mình và không bỏ cuộc cho đến phút cuối cùng mới mang ý nghĩa to lớn.",
+        "reading": ""
+      },
+      {
+        "sentence": "デザインはともかく、この空気清浄機は機能性と省エネ性能が非常に優れている。",
+        "translation": "Chưa bàn đến kiểu dáng thiết kế, chiếc máy lọc không khí này có tính năng và khả năng tiết kiệm điện vô cùng vượt trội.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0370",
+    "grammar_id": "gram_n3_0370",
+    "milestoneId": "ms_n3_s9_l5",
+    "milestone_id": "ms_n3_s9_l5",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 86,
+    "pattern": "〜はともかく",
+    "titleVi": "nói \"bất kể...\", \"nói gì đến...\", \"chẳng qua chỉ là...\" (SKM Bài 16)",
+    "structure": "〜はともかく",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 9 · Bài 86 (㊱): Dùng để nói \"bất kể...\", \"nói gì đến...\", \"chẳng qua chỉ là...\" (SKM Bài 16).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜はともかく（N3）",
+    "masterExampleVi": "nói \"bất kể...\", \"nói gì đến...\", \"chẳng qua chỉ là...\" (SKM Bài 16)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

@@ -1,0 +1,242 @@
+[
+  {
+    "id": "gram_n5_0028",
+    "grammar_id": "gram_n5_0028",
+    "milestoneId": "ms_minna_b07",
+    "milestone_id": "ms_minna_b07",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 7,
+    "pattern": "NでNをVます",
+    "titleVi": "bằng công cụ N, làm gì",
+    "structure": "NでNをVます",
+    "explanation": "で ở đây chỉ công cụ hoặc phương tiện thực hiện hành động. Công cụ = vật bạn \"dùng\" để làm gì đó.",
+    "nuanceReason": "で chỉ cả phương tiện di chuyển (電車で) lẫn công cụ (はしで) — cùng một trợ từ, hai ngữ cảnh.",
+    "commonMistake": "[Sai]: はしをごはんを食べます。 -> [Đúng]: はしでごはんを食べます。. Công cụ/phương tiện dùng で, không phải を. を chỉ đánh dấu tân ngữ trực tiếp (ở đây là ごはん).",
+    "kitsuPrompt": "Hỏi tôi dùng công cụ gì cho 5 hoạt động hàng ngày, tôi trả lời với Nで.",
+    "masterExampleJp": "はしでごはんを食べます。",
+    "masterExampleVi": "Tôi ăn cơm bằng đũa.",
+    "examples": [
+      {
+        "sentence": "はしでごはんを食べます。",
+        "translation": "Tôi ăn cơm bằng đũa."
+      },
+      {
+        "sentence": "ボールペンで名前を書いてください。",
+        "translation": "Hãy viết tên bằng bút bi."
+      },
+      {
+        "sentence": "スマホで写真を撮りました。",
+        "translation": "Tôi đã chụp ảnh bằng điện thoại."
+      },
+      {
+        "sentence": "日本語で話しましょう。",
+        "translation": "Hãy nói chuyện bằng tiếng Nhật."
+      }
+    ],
+    "dialogue": {
+      "title": "Thực hành ăn bằng đũa",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "はしが使えますか。",
+          "translation": "Bạn có dùng được đũa không?"
+        },
+        {
+          "speaker": "B",
+          "text": "はい、でもまだ上手じゃないです。フォークで食べてもいいですか。",
+          "translation": "Được, nhưng vẫn chưa giỏi. Tôi ăn bằng dĩa được không?"
+        },
+        {
+          "speaker": "A",
+          "text": "もちろんです！練習しましょう。",
+          "translation": "Dĩ nhiên! Hãy cùng luyện tập nhé."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0029",
+    "grammar_id": "gram_n5_0029",
+    "milestoneId": "ms_minna_b07",
+    "milestone_id": "ms_minna_b07",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 7,
+    "pattern": "NにNをあげます",
+    "titleVi": "cho N (đồ vật) cho ai",
+    "structure": "NにNをあげます",
+    "explanation": "あげます = \"cho\" — người nói (hoặc người khác, ngoại trừ người nghe) cho đồ vật đến người nhận. Hướng cho: mình → người khác.",
+    "nuanceReason": "Không dùng あげます khi người nhận là người nói — dùng もらいます. Cũng tránh dùng あげます cho người bề trên (dùng さしあげます).",
+    "commonMistake": "[Sai]: 田中さんは私に本をあげました。(khi muốn nói \"nhận từ Tanaka\") -> [Đúng]: 田中さんに本をもらいました。. あげます: tôi → người khác. もらいます: tôi ← người khác. Người Việt hay nhầm hướng. Chú ý: chủ ngữ \"tôi\" không cần nói ra trong もらいます.",
+    "kitsuPrompt": "Hỏi tôi đã tặng gì cho ai trong các dịp đặc biệt, tôi trả lời với NにNをあげます.",
+    "masterExampleJp": "田中さんに本をあげました。",
+    "masterExampleVi": "Tôi đã tặng sách cho anh Tanaka.",
+    "examples": [
+      {
+        "sentence": "田中さんに本をあげました。",
+        "translation": "Tôi đã tặng sách cho anh Tanaka."
+      },
+      {
+        "sentence": "彼女に花をあげます。",
+        "translation": "Tôi sẽ tặng hoa cho bạn gái."
+      },
+      {
+        "sentence": "子どもにお菓子をあげました。",
+        "translation": "Tôi đã cho kẹo cho đứa trẻ."
+      },
+      {
+        "sentence": "誕生日に何をあげましたか。",
+        "translation": "Bạn đã tặng gì vào ngày sinh nhật?"
+      }
+    ],
+    "dialogue": {
+      "title": "Hỏi về quà sinh nhật",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "田中さんの誕生日に何をあげましたか。",
+          "translation": "Bạn đã tặng gì cho anh Tanaka nhân dịp sinh nhật?"
+        },
+        {
+          "speaker": "B",
+          "text": "本をあげました。日本語の勉強の本です。",
+          "translation": "Tôi tặng sách. Sách học tiếng Nhật."
+        },
+        {
+          "speaker": "A",
+          "text": "いいプレゼントですね！",
+          "translation": "Quà hay đấy!"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0030",
+    "grammar_id": "gram_n5_0030",
+    "milestoneId": "ms_minna_b07",
+    "milestone_id": "ms_minna_b07",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 7,
+    "pattern": "NにNをもらいます",
+    "titleVi": "nhận N từ ai",
+    "structure": "NにNをもらいます",
+    "explanation": "もらいます = \"nhận\" — người nói nhận đồ vật từ ai đó. Hướng nhận: người khác → mình. に chỉ người cho, を chỉ vật được nhận.",
+    "nuanceReason": "から cũng có thể thay に với もらいます: 友だちからもらいました. から nhấn mạnh \"xuất phát từ\" hơn.",
+    "commonMistake": "[Sai]: 友だちからをもらいました。 -> [Đúng]: 友だちからもらいました。/ 友だちにもらいました。. から và に đều chỉ người cho với もらいます, nhưng không dùng をから cùng lúc. Nếu dùng から, chỉ cần: 友だちからもらいました.",
+    "kitsuPrompt": "Hỏi tôi đã nhận quà gì từ ai trong năm qua, tôi trả lời với NにNをもらいました.",
+    "masterExampleJp": "友だちにプレゼントをもらいました。",
+    "masterExampleVi": "Tôi đã nhận quà từ bạn.",
+    "examples": [
+      {
+        "sentence": "友だちにプレゼントをもらいました。",
+        "translation": "Tôi đã nhận quà từ bạn."
+      },
+      {
+        "sentence": "先生に本をもらいました。",
+        "translation": "Tôi đã nhận sách từ thầy giáo."
+      },
+      {
+        "sentence": "誰にもらいましたか。",
+        "translation": "Bạn nhận từ ai vậy?"
+      },
+      {
+        "sentence": "親に時計をもらいました。",
+        "translation": "Tôi đã nhận đồng hồ từ bố mẹ."
+      }
+    ],
+    "dialogue": {
+      "title": "Khoe quà nhận được",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "素敵な時計ですね！どうしたんですか。",
+          "translation": "Chiếc đồng hồ đẹp quá! Bạn có từ đâu vậy?"
+        },
+        {
+          "speaker": "B",
+          "text": "彼氏にもらいました。誕生日プレゼントです。",
+          "translation": "Bạn trai tặng tôi. Quà sinh nhật đấy."
+        },
+        {
+          "speaker": "A",
+          "text": "いいですね、うらやましい！",
+          "translation": "Tốt quá, ghen tị với bạn!"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0031",
+    "grammar_id": "gram_n5_0031",
+    "milestoneId": "ms_minna_b07",
+    "milestone_id": "ms_minna_b07",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 7,
+    "pattern": "Nで (ngôn ngữ／phương tiện)",
+    "titleVi": "bằng tiếng N / bằng N",
+    "structure": "Nで (ngôn ngữ／phương tiện)",
+    "explanation": "Mở rộng của で chỉ phương tiện: dùng để nói bằng ngôn ngữ nào. Cũng áp dụng cho phương thức liên lạc.",
+    "nuanceReason": "で chỉ phương tiện/công cụ/ngôn ngữ — một trợ từ đa năng, gặp lại nhiều ở các bài sau.",
+    "commonMistake": "[Sai]: 日本語に話してください。 -> [Đúng]: 日本語で話してください。. Ngôn ngữ dùng で (phương tiện giao tiếp). に ở đây không phù hợp — に chỉ điểm đến hoặc người nhận, không chỉ ngôn ngữ.",
+    "kitsuPrompt": "Hỏi tôi dùng ngôn ngữ nào cho 3 tình huống khác nhau (họp, chat, viết thư), tôi trả lời với Nで.",
+    "masterExampleJp": "日本語で話してください。",
+    "masterExampleVi": "Hãy nói bằng tiếng Nhật.",
+    "examples": [
+      {
+        "sentence": "日本語で話してください。",
+        "translation": "Hãy nói bằng tiếng Nhật."
+      },
+      {
+        "sentence": "メールで連絡します。",
+        "translation": "Tôi sẽ liên lạc qua email."
+      },
+      {
+        "sentence": "英語でも話せますか。",
+        "translation": "Bạn có thể nói bằng tiếng Anh không?"
+      },
+      {
+        "sentence": "日本語で書いた手紙",
+        "translation": "bức thư viết bằng tiếng Nhật"
+      }
+    ],
+    "dialogue": {
+      "title": "Họp quốc tế",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "会議は何語でしますか。",
+          "translation": "Cuộc họp dùng ngôn ngữ gì?"
+        },
+        {
+          "speaker": "B",
+          "text": "英語でします。でも資料は日本語で書きます。",
+          "translation": "Họp bằng tiếng Anh. Nhưng tài liệu viết bằng tiếng Nhật."
+        },
+        {
+          "speaker": "A",
+          "text": "わかりました。日本語でメールを送ります。",
+          "translation": "Tôi hiểu. Tôi sẽ gửi email bằng tiếng Nhật."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

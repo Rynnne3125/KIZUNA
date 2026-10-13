@@ -1,0 +1,166 @@
+[
+  {
+    "id": "gram_n3_0206",
+    "grammar_id": "gram_n3_0206",
+    "milestoneId": "ms_n3_s2_l4",
+    "milestone_id": "ms_n3_s2_l4",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 58,
+    "pattern": "〜たびに",
+    "titleVi": "Mỗi lần ~ là (luôn xảy ra cùng)",
+    "structure": "〜たびに",
+    "explanation": "Mẫu ngữ pháp này dùng để diễn tả ý nghĩa 'cứ mỗi lần... thì lại...', nhấn mạnh việc mỗi khi một sự kiện hoặc hành động nào đó diễn ra thì một kết quả hoặc cảm xúc nhất định cũng luôn luôn lặp lại. Cấu trúc đi kèm với động từ thể từ điển (V-ru) hoặc danh từ có trợ từ の (N の たびに). Mẫu câu này không dùng cho các hiện tượng tự nhiên mang tính tất yếu hoặc các thói quen sinh hoạt thường nhật hiển nhiên.",
+    "nuanceReason": "Khác với 「〜ごとに」 có thể đi cùng lượng từ chỉ chu kỳ (như 2時間ごとに - mỗi 2 tiếng), 「〜たびに」 chỉ đi với sự kiện hoặc hành động cụ thể để nhấn mạnh tính lặp lại của kết quả.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "この写真を見るたびに、楽しかった高校時代を思い出します。",
+    "masterExampleVi": "Mỗi lần ngắm bức ảnh này, tôi lại nhớ về thời cấp ba vui vẻ.",
+    "examples": [
+      {
+        "sentence": "この写真を見るたびに、楽しかった高校時代を思い出します。",
+        "translation": "Mỗi lần ngắm bức ảnh này, tôi lại nhớ về thời cấp ba vui vẻ.",
+        "reading": ""
+      },
+      {
+        "sentence": "彼は失敗のたびに落ち込むのではなく、次のチャンスに向けて前向きに行動している。",
+        "translation": "Cứ mỗi lần thất bại, anh ấy không hề chán nản mà luôn hành động tích cực hướng tới cơ hội tiếp theo.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0207",
+    "grammar_id": "gram_n3_0207",
+    "milestoneId": "ms_n3_s2_l4",
+    "milestone_id": "ms_n3_s2_l4",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 58,
+    "pattern": "〜まま（で）",
+    "titleVi": "Để nguyên / giữ nguyên trạng thái (không thay đổi)",
+    "structure": "〜まま（で）",
+    "explanation": "Mẫu ngữ pháp này dùng để diễn tả một hành động được thực hiện trong khi vẫn giữ nguyên trạng thái trước đó mà không có sự thay đổi. Cấu trúc thường thể hiện một trạng thái vốn dĩ cần được xử lý/thay đổi nhưng lại được duy trì liên tục hoặc bất thường. Cách kết hợp bao gồm động từ thể た/ない, tính từ đuôi い, tính từ đuôi な (giữ な), hoặc danh từ đi kèm trợ từ 「の」 trước まま.",
+    "nuanceReason": "Khác với 「〜っぱなし」 chỉ đi với động từ và thường mang sắc thái tiêu cực, phê phán do sự bỏ mặc/bất cẩn, 「〜まま」 có tính trung tính hơn và dùng được cho cả tính từ lẫn danh từ.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "昨夜はエアコンをつけたまま寝てしまい、風邪をひいてしまった。",
+    "masterExampleVi": "Tối qua tôi lỡ để nguyên điều hòa bật mà đi ngủ nên đã bị cảm.",
+    "examples": [
+      {
+        "sentence": "昨夜はエアコンをつけたまま寝てしまい、風邪をひいてしまった。",
+        "translation": "Tối qua tôi lỡ để nguyên điều hòa bật mà đi ngủ nên đã bị cảm.",
+        "reading": ""
+      },
+      {
+        "sentence": "このトマトは加熱せず、生のままで食べたほうがおいしいです。",
+        "translation": "Quả cà chua này không cần nấu, ăn sống nguyên như vậy sẽ ngon hơn.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0208",
+    "grammar_id": "gram_n3_0208",
+    "milestoneId": "ms_n3_s2_l4",
+    "milestone_id": "ms_n3_s2_l4",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 58,
+    "pattern": "〜たまま",
+    "titleVi": "Giữ nguyên trạng thái sau khi hành động đã xảy ra",
+    "structure": "〜たまま",
+    "explanation": "Mẫu ngữ pháp 「〜たまま」 diễn tả việc thực hiện một hành động khác trong khi vẫn giữ nguyên trạng thái do hành động trước đó tạo ra mà không có sự thay đổi. Mẫu này thường được sử dụng khi hành động tiếp theo diễn ra trong một trạng thái bất thường, trái với thói quen thông thường hoặc lẽ ra phải thay đổi trạng thái đó. Cấu trúc đi kèm với động từ thể quá khứ (Vた + まま) để nhấn mạnh kết quả của hành động đã hoàn thành vẫn đang tiếp tục được duy trì.",
+    "nuanceReason": "Khác với「〜っぱなし」thường mang sắc thái phê phán hay chê trách việc buông xuôi bỏ mặc,「〜たまま」chỉ đơn thuần miêu tả trạng thái được duy trì mà không nhất thiết mang hàm ý tiêu cực.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "昨晩はテレビをつけたまま寝てしまった。",
+    "masterExampleVi": "Tối qua tôi lỡ ngủ quên trong khi vẫn để nguyên tivi bật.",
+    "examples": [
+      {
+        "sentence": "昨晩はテレビをつけたまま寝てしまった。",
+        "translation": "Tối qua tôi lỡ ngủ quên trong khi vẫn để nguyên tivi bật.",
+        "reading": ""
+      },
+      {
+        "sentence": "靴を履いたまま部屋に入ってはいけません。",
+        "translation": "Không được để nguyên giày mà đi vào trong phòng.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0209",
+    "grammar_id": "gram_n3_0209",
+    "milestoneId": "ms_n3_s2_l4",
+    "milestone_id": "ms_n3_s2_l4",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 58,
+    "pattern": "たびに ≠ まま ≠ ながら",
+    "titleVi": "Phân biệt: たびに (lặp), まま (trạng thái bất biến), ながら (đồng thời)",
+    "structure": "たびに ≠ まま ≠ ながら",
+    "explanation": "「〜たびに」dùng để diễn tả sự việc lặp lại mang tính quy luật, hễ mỗi lần A xảy ra thì B lại diễn ra theo. Trong khi đó,「〜まま」nhấn mạnh việc giữ nguyên một trạng thái vốn có để tiếp tục thực hiện hành động khác (để nguyên A mà làm B). Còn「〜ながら」dùng khi một chủ thể thực hiện song song hai hành động có chủ ý cùng một lúc (vừa làm A vừa làm B).",
+    "nuanceReason": "「〜たびに」không dùng cho những sự việc diễn ra hiển nhiên hằng ngày (như 'mỗi sáng thức dậy'), còn「〜ながら」bắt buộc hai vế phải cùng một chủ ngữ với trọng tâm rơi vào hành động ở vế sau.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "この写真を見るたびに、楽しかった学生時代を思い出します。",
+    "masterExampleVi": "Mỗi lần nhìn bức ảnh này, tôi lại nhớ về thời học sinh vui vẻ.",
+    "examples": [
+      {
+        "sentence": "この写真を見るたびに、楽しかった学生時代を思い出します。",
+        "translation": "Mỗi lần nhìn bức ảnh này, tôi lại nhớ về thời học sinh vui vẻ.",
+        "reading": ""
+      },
+      {
+        "sentence": "窓を開けたまま出かけてしまい、部屋に雨が入ってしまいました。",
+        "translation": "Tôi lỡ để nguyên cửa sổ mở mà ra ngoài nên nước mưa đã hắt vào phòng.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0210",
+    "grammar_id": "gram_n3_0210",
+    "milestoneId": "ms_n3_s2_l4",
+    "milestone_id": "ms_n3_s2_l4",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 58,
+    "pattern": "〜まま",
+    "titleVi": "\"mỗi lần…là…\", \"để nguyên trạng thái\"",
+    "structure": "〜まま",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 2 · Bài 58 (⑧): Dùng để \"mỗi lần…là…\", \"để nguyên trạng thái\".",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜まま（N3）",
+    "masterExampleVi": "\"mỗi lần…là…\", \"để nguyên trạng thái\"",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

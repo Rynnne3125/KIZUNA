@@ -1,0 +1,107 @@
+[
+  {
+    "id": "gram_n3_0182",
+    "grammar_id": "gram_n3_0182",
+    "milestoneId": "ms_n3_s1_l2",
+    "milestone_id": "ms_n3_s1_l2",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 52,
+    "pattern": "〜にちがいない",
+    "titleVi": "Chắc chắn là ~ (suy luận mạnh ≈90%, có căn cứ khách quan)",
+    "structure": "〜にちがいない",
+    "explanation": "Mẫu câu này dùng để thể hiện sự suy luận, phán đoán có độ chắc chắn rất cao (khoảng 90%) của người nói dựa trên căn cứ hoặc bằng chứng thực tế. Người nói tin tưởng tuyệt đối rằng nhận định của mình là đúng sự thật ('chắc chắn là...', 'không thể sai được'). Cần lưu ý mẫu này chỉ dùng để phán đoán về người khác hoặc sự việc khách quan, tuyệt đối không dùng cho bản thân.",
+    "nuanceReason": "So với「〜はずだ」(chắc chắn dựa trên logic, lý lẽ khách quan),「〜にちがいない」mang tính trực giác và sự quả quyết chủ quan mạnh mẽ hơn từ người nói.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "明かりがついているから、田中さんはまだオフィスにいるにちがいない。",
+    "masterExampleVi": "Vì đèn vẫn sáng nên chắc chắn anh Tanaka vẫn còn ở trong văn phòng.",
+    "examples": [
+      {
+        "sentence": "明かりがついているから、田中さんはまだオフィスにいるにちがいない。",
+        "translation": "Vì đèn vẫn sáng nên chắc chắn anh Tanaka vẫn còn ở trong văn phòng.",
+        "reading": ""
+      },
+      {
+        "sentence": "これだけ長い行列ができているのだから、この店の料理はおいしいにちがいない。",
+        "translation": "Người xếp hàng dài đến mức này thì đồ ăn của quán này chắc chắn là rất ngon.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0183",
+    "grammar_id": "gram_n3_0183",
+    "milestoneId": "ms_n3_s1_l2",
+    "milestone_id": "ms_n3_s1_l2",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 52,
+    "pattern": "〜かもしれない",
+    "titleVi": "Có thể là ~ (khả năng ≈40%, không chắc chắn)",
+    "structure": "〜かもしれない",
+    "explanation": "Mẫu 「〜かもしれない」 dùng để diễn đạt suy đoán của người nói về một khả năng có thể xảy ra nhưng độ chắc chắn không cao (chỉ khoảng 30% - 50%). Mẫu này mang ý nghĩa \"có thể\", \"có lẽ\", \"không chừng là...\", dùng khi người nói không đủ chứng cứ xác thực để khẳng định chắc chắn. Trong hội thoại thân mật hàng ngày, người Nhật thường rút gọn thành 「〜かも」, còn trong hoàn cảnh trang trọng, lịch sự sẽ dùng 「〜かもしれません」.",
+    "nuanceReason": "Trong thang độ chắc chắn, 「〜かもしれない」 (khoảng 40%) thể hiện khả năng thấp hơn nhiều so với 「〜だろう／でしょう」 (khoảng 70-80%) và 「〜に違いない」 (khoảng 90%).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "毎日無理をして働き続けると、体を壊してしまうかもしれないよ。",
+    "masterExampleVi": "Nếu cứ tiếp tục làm việc quá sức mỗi ngày thì có thể bạn sẽ bị đổ bệnh đấy.",
+    "examples": [
+      {
+        "sentence": "毎日無理をして働き続けると、体を壊してしまうかもしれないよ。",
+        "translation": "Nếu cứ tiếp tục làm việc quá sức mỗi ngày thì có thể bạn sẽ bị đổ bệnh đấy.",
+        "reading": ""
+      },
+      {
+        "sentence": "この店はいつも人気だから、予約しないと入れないかもしれない。",
+        "translation": "Quán này lúc nào cũng đông khách nên nếu không đặt trước thì có thể sẽ không vào được.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0184",
+    "grammar_id": "gram_n3_0184",
+    "milestoneId": "ms_n3_s1_l2",
+    "milestone_id": "ms_n3_s1_l2",
+    "stageId": "stage_n3_1",
+    "stage_id": "stage_n3_1",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 52,
+    "pattern": "確信[かくしん]の 度合[どあ]い：にちがいない ＞ だろう ＞ かもしれない",
+    "titleVi": "Thang độ chắc chắn: にちがいない (≈90%) > だろう (≈60%) > かもしれない (≈40%)",
+    "structure": "確信[かくしん]の 度合[どあ]い：にちがいない ＞ だろう ＞ かもしれない",
+    "explanation": "Ba mẫu ngữ pháp này dùng để thể hiện các mức độ phỏng đoán và sự chắc chắn giảm dần của người nói dựa trên bằng chứng hoặc cảm nhận cá nhân. Trong đó, 「〜に違いない」thể hiện sự tin tưởng mạnh mẽ (khoảng 90%) khi có căn cứ vững chắc, mang nghĩa là \"chắc chắn là\". 「〜だろう / でしょう」thể hiện suy đoán thông thường có cơ sở vừa phải (khoảng 60%), mang nghĩa \"có lẽ / chắc là\". Còn 「〜かもしれない」thể hiện khả năng thấp hoặc suy đoán dè dặt (khoảng 40%), mang nghĩa \"có thể / biết đâu chừng\".",
+    "nuanceReason": "「〜に違いない」 là sự suy đoán mang tính chủ quan dựa trên bằng chứng của người nói, không dùng cho sự thật hiển nhiên 100% hay hiện tượng tự nhiên có tính quy luật tuyệt đối.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "あんなに 毎日[まいにち] 練習[れんしゅう]したのだから、彼[かれ]が 優勝[ゆうしょう]する にちがいない。",
+    "masterExampleVi": "Đã luyện tập chăm chỉ mỗi ngày như thế thì chắc chắn anh ấy sẽ giành chức vô địch.",
+    "examples": [
+      {
+        "sentence": "あんなに 毎日[まいにち] 練習[れんしゅう]したのだから、彼[かれ]が 優勝[ゆうしょう]する にちがいない。",
+        "translation": "Đã luyện tập chăm chỉ mỗi ngày như thế thì chắc chắn anh ấy sẽ giành chức vô địch.",
+        "reading": ""
+      },
+      {
+        "sentence": "午後[ごご]から 雨[あめ]が 降[ふ]るかもしれないので、傘[かさ]を 持[も]って 行[い]った ほうが いいですよ。",
+        "translation": "Buổi chiều có thể trời sẽ mưa nên bạn nên mang theo ô đi nhé.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

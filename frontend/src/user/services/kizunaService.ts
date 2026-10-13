@@ -1,6 +1,6 @@
 import { db } from '../../config/firebase';
 import { collection, getDocs, doc, getDoc, query, where, limit } from 'firebase/firestore';
-import { Stage, Milestone, VocabularyItem, VocabularyCatalog, GrammarItem, KanjiItem, Exam } from '../types/kizuna';
+import { Stage, Milestone, VocabularyItem, VocabularyCatalog, GrammarItem, GrammarCatalog, KanjiItem, Exam } from '../types/kizuna';
 import { VOCABULARY_CATALOG } from '../data/vocabularyCatalog';
 
 function getSessionCache<T>(key: string): T | null {
@@ -161,9 +161,61 @@ export const kizunaService = {
     ];
   },
 
+  /**
+   * Lấy danh mục ngữ pháp phân cấp theo cấp độ N5 -> N1 và các bài học
+   * 0 Firestore read (tải từ static JSON cache)
+   */
+  async getGrammarCatalog(): Promise<GrammarCatalog | null> {
+    const cacheKey = 'kizuna_grammar_catalog_cache';
+    const cached = getSessionCache<GrammarCatalog>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      const res = await fetch('/data/grammar/catalog.json');
+      if (res.ok) {
+        const data: GrammarCatalog = await res.json();
+        setSessionCache(cacheKey, data);
+        return data;
+      }
+    } catch (e) {
+      console.warn('Fetch grammar catalog error:', e);
+    }
+    return null;
+  },
+
+  /**
+   * Lấy danh sách mẫu câu ngữ pháp theo bài học (Unit) cụ thể
+   * Tải từ /data/grammar/units/[unitId].json (0 Firestore read)
+   */
+  async getGrammarByUnit(unitId: string): Promise<GrammarItem[]> {
+    const cacheKey = `kizuna_grammar_unit_${unitId}`;
+    const cached = getSessionCache<GrammarItem[]>(cacheKey);
+    if (cached && cached.length > 0) return cached;
+
+    try {
+      const res = await fetch(`/data/grammar/units/${unitId}.json`);
+      if (res.ok) {
+        const items: GrammarItem[] = await res.json();
+        setSessionCache(cacheKey, items);
+        return items;
+      }
+    } catch (e) {
+      console.warn(`Fetch grammar unit ${unitId} failed:`, e);
+    }
+
+    return [];
+  },
+
   async getGrammar(): Promise<GrammarItem[]> {
     const cached = getSessionCache<GrammarItem[]>('kizuna_grammar_cache');
     if (cached) return cached;
+
+    // Lấy thử từ Unit đầu tiên của N5
+    const firstUnit = await this.getGrammarByUnit('ms_minna_b01');
+    if (firstUnit.length > 0) {
+      setSessionCache('kizuna_grammar_cache', firstUnit);
+      return firstUnit;
+    }
 
     try {
       const q = query(collection(db, 'grammar_items'), limit(50));

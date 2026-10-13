@@ -1,0 +1,142 @@
+[
+  {
+    "id": "gram_n3_0333",
+    "grammar_id": "gram_n3_0333",
+    "milestoneId": "ms_n3_s8_l3",
+    "milestone_id": "ms_n3_s8_l3",
+    "stageId": "stage_n3_8",
+    "stage_id": "stage_n3_8",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 81,
+    "pattern": "～てばかりいる",
+    "titleVi": "Chỉ làm mỗi việc ~, cứ mãi ~",
+    "structure": "～てばかりいる",
+    "explanation": "Mẫu ngữ pháp「～てばかりいる」được dùng để diễn tả một hành động lặp đi lặp lại liên tục, mang nghĩa chỉ làm mỗi việc đó mà bỏ bê những việc khác cần làm. Cấu trúc này đi sau động từ thể Te (V-て + ばかりいる) và thường thể hiện sự phê bình, chê trách hoặc bất mãn của người nói trước một thói quen xấu. Vì mang sắc thái phàn nàn và tiêu cực nên mẫu này tuyệt đối không dùng cho các hành động mang tính khen ngợi hay đánh giá tích cực.",
+    "nuanceReason": "Cần phân biệt với 「Vる＋ばかりだ」 diễn tả xu hướng ngày càng diễn biến theo một chiều hướng xấu, còn 「Vて＋ばかりいる」 nhấn mạnh sự lặp lại của một hành động tiêu cực.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "彼は文句を言ってばかりいて、自分では何もしようとしない。",
+    "masterExampleVi": "Anh ta cứ cằn nhằn phàn nàn suốt mà bản thân chẳng chịu làm gì cả.",
+    "examples": [
+      {
+        "sentence": "彼は文句を言ってばかりいて、自分では何もしようとしない。",
+        "translation": "Anh ta cứ cằn nhằn phàn nàn suốt mà bản thân chẳng chịu làm gì cả.",
+        "reading": ""
+      },
+      {
+        "sentence": "休みの日だからといって、一日中ベッドで寝てばかりいると体に良くないよ。",
+        "translation": "Dù là ngày nghỉ nhưng cứ nằm ngủ suốt cả ngày trên giường thì không tốt cho sức khỏe đâu.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0334",
+    "grammar_id": "gram_n3_0334",
+    "milestoneId": "ms_n3_s8_l3",
+    "milestone_id": "ms_n3_s8_l3",
+    "stageId": "stage_n3_8",
+    "stage_id": "stage_n3_8",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 81,
+    "pattern": "～一方だ",
+    "titleVi": "Ngày càng ~, cứ ~ mãi (xu hướng tiếp tục tăng/giảm)",
+    "structure": "～一方だ",
+    "explanation": "Mẫu ngữ pháp này dùng để diễn tả một trạng thái hoặc xu hướng đang không ngừng tiếp diễn theo một chiều hướng nhất định (ngày càng tăng, giảm, xấu đi...). Mẫu chỉ kết hợp với các động từ biểu thị sự biến đổi như 増える, 減る, 悪化する, 進む... Trong đa số các trường hợp, mẫu mang sắc thái tiêu cực hoặc thể hiện sự lo ngại về tình hình đang diễn biến theo chiều hướng không mong muốn.",
+    "nuanceReason": "So với mẫu 「～ばかりだ」 (hầu như chỉ dùng cho chiều hướng xấu), 「～一方だ」 cũng chủ yếu dùng cho biến chuyển tiêu cực nhưng đôi khi vẫn có thể dùng cho chiều hướng tích cực nếu ngữ cảnh thể hiện rõ sự thay đổi tiến triển.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "最近は仕事が忙しくなるにつれて、ストレスがたまる一方だ。",
+    "masterExampleVi": "Dạo gần đây công việc càng bận rộn thì căng thẳng lại ngày càng tích tụ nhiều hơn.",
+    "examples": [
+      {
+        "sentence": "最近は仕事が忙しくなるにつれて、ストレスがたまる一方だ。",
+        "translation": "Dạo gần đây công việc càng bận rộn thì căng thẳng lại ngày càng tích tụ nhiều hơn.",
+        "reading": ""
+      },
+      {
+        "sentence": "少子化の影響で、この地域の子供の数は減る一方だ。",
+        "translation": "Do ảnh hưởng của tình trạng giảm tỷ lệ sinh, số lượng trẻ em ở khu vực này ngày càng giảm đi.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0335",
+    "grammar_id": "gram_n3_0335",
+    "milestoneId": "ms_n3_s8_l3",
+    "milestone_id": "ms_n3_s8_l3",
+    "stageId": "stage_n3_8",
+    "stage_id": "stage_n3_8",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 81,
+    "pattern": "～がちだ",
+    "titleVi": "Hay bị, thường hay (xu hướng tiêu cực)",
+    "structure": "～がちだ",
+    "explanation": "Mẫu ngữ pháp này dùng để diễn đạt việc một hành động, trạng thái hoặc xu hướng nào đó thường hay diễn ra. Cấu trúc này hầu như luôn mang sắc thái tiêu cực, dùng cho những sự việc không tốt, không mong muốn hoặc thói quen xấu. Thường đi sau động từ thể ます (bỏ ます) hoặc danh từ để tạo thành kết cấu diễn tả khuynh hướng hay mắc phải.",
+    "nuanceReason": "Cần phân biệt với 「～気味（ぎみ）」 vốn chỉ dấu hiệu, cảm giác nhẹ ở hiện tại (như hơi sốt, hơi mệt), trong khi 「～がち」 nhấn mạnh tần suất thường xuyên xảy ra của một khuynh hướng tiêu cực.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "パソコンを長時間使っていると、目が疲れがちだ。",
+    "masterExampleVi": "Nếu sử dụng máy tính trong thời gian dài thì mắt thường hay bị mỏi.",
+    "examples": [
+      {
+        "sentence": "パソコンを長時間使っていると、目が疲れがちだ。",
+        "translation": "Nếu sử dụng máy tính trong thời gian dài thì mắt thường hay bị mỏi.",
+        "reading": ""
+      },
+      {
+        "sentence": "忙しい時期は、食事を簡単に済ませて栄養が偏りがちだ。",
+        "translation": "Vào những thời điểm bận rộn, người ta thường hay ăn uống qua loa dẫn đến việc mất cân bằng dinh dưỡng.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0336",
+    "grammar_id": "gram_n3_0336",
+    "milestoneId": "ms_n3_s8_l3",
+    "milestone_id": "ms_n3_s8_l3",
+    "stageId": "stage_n3_8",
+    "stage_id": "stage_n3_8",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 81,
+    "pattern": "～っぽい",
+    "titleVi": "Có vẻ, hay, dễ (mang tính chất nào đó)",
+    "structure": "～っぽい",
+    "explanation": "Mẫu「～っぽい」dùng để diễn tả người hoặc sự vật có xu hướng, cảm giác hoặc mang đậm tính chất nào đó (như màu sắc, tính cách, trạng thái). Ngữ pháp này kết hợp với danh từ, tính từ đuôi い (bỏ い) hoặc động từ thể ます (bỏ ます). Đây là cách nói mang tính khẩu ngữ thân mật, thường mang sắc thái tiêu cực hoặc chê bai nhẹ nhàng. Khi đi cùng động từ, mẫu biểu thị xu hướng dễ hoặc hay làm một việc gì đó.",
+    "nuanceReason": "Phân biệt với「～らしい」(đúng bản chất thực tế, thường mang nghĩa tích cực),「～っぽい」chỉ mang cảm giác bên ngoài và thường dùng với sắc thái tiêu cực hoặc khi đối tượng không thực sự là bản chất đó (ví dụ: 女っぽい dùng cho nam giới có nét nữ tính).",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "最近の彼は疲れがたまっているのか、少し怒りっぽくなっている。",
+    "masterExampleVi": "Dạo gần đây chắc do mệt mỏi tích tụ nên anh ấy trở nên hơi dễ nổi nóng.",
+    "examples": [
+      {
+        "sentence": "最近の彼は疲れがたまっているのか、少し怒りっぽくなっている。",
+        "translation": "Dạo gần đây chắc do mệt mỏi tích tụ nên anh ấy trở nên hơi dễ nổi nóng.",
+        "reading": ""
+      },
+      {
+        "sentence": "このスープは水っぽくて、あまり味がしない。",
+        "translation": "Món súp này loãng toẹt như nước, chẳng có vị gì mấy.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

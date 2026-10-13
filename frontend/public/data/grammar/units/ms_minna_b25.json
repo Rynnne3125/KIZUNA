@@ -1,0 +1,234 @@
+[
+  {
+    "id": "gram_n5_0097",
+    "grammar_id": "gram_n5_0097",
+    "milestoneId": "ms_minna_b25",
+    "milestone_id": "ms_minna_b25",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 25,
+    "pattern": "V/Aたら",
+    "titleVi": "nếu / khi ~ (điều kiện hoặc thời điểm)",
+    "structure": "V/Aたら",
+    "explanation": "た-form + ら tạo điều kiện. Hai nghĩa: (1) điều kiện \"nếu\": giả định chưa xảy ra; (2) thời điểm \"khi\": hoàn thành V1 rồi làm V2. Đây là dạng điều kiện linh hoạt nhất.",
+    "nuanceReason": "たら có thể dùng với mọi loại V2 (ý chí, lời mời, yêu cầu) — linh hoạt hơn と và ば. Câu hỏi lịch sự: 〜たら、どうですか (Nếu ~ thì sao?).",
+    "commonMistake": "[Sai]: 家に帰ったら、テレビを見ていました。(V2 quá khứ trong câu điều kiện một lần) -> [Đúng]: 家に帰ったら、テレビを見ました。. たら diễn tả điều kiện: khi V1 hoàn thành thì V2 xảy ra. V2 nên ở hiện tại hoặc tương lai (未来), hoặc quá khứ đơn (ました). Tránh dùng ていました vì nó gợi trạng thái đang kéo dài.",
+    "kitsuPrompt": "Hỏi tôi sẽ làm gì trong một tình huống giả định vui (ví dụ: nếu trúng xổ số, nếu biết nói tiếng Nhật hoàn hảo). Tôi sẽ dùng たら để trả lời.",
+    "masterExampleJp": "雨が降ったら、行きません。",
+    "masterExampleVi": "Nếu trời mưa thì tôi không đi.",
+    "examples": [
+      {
+        "sentence": "雨が降ったら、行きません。",
+        "translation": "Nếu trời mưa thì tôi không đi."
+      },
+      {
+        "sentence": "家に帰ったら、電話してください。",
+        "translation": "Khi về nhà rồi hãy gọi điện cho tôi."
+      },
+      {
+        "sentence": "春になったら、花見をしましょう。",
+        "translation": "Khi mùa xuân đến, hãy đi ngắm hoa nhé."
+      },
+      {
+        "sentence": "安かったら、買います。",
+        "translation": "Nếu rẻ thì tôi sẽ mua."
+      }
+    ],
+    "dialogue": {
+      "title": "Lên kế hoạch nếu được nghỉ dài",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "長い休みが取れたら、どこへ行きたいですか。",
+          "translation": "Nếu được nghỉ dài, bạn muốn đi đâu?"
+        },
+        {
+          "speaker": "B",
+          "text": "北海道へ行ったことがないので、行ってみたいです。雪が積もったら、スキーもしたいです。",
+          "translation": "Vì chưa từng đến Hokkaido nên tôi muốn thử. Nếu tuyết đổ thì tôi cũng muốn trượt tuyết."
+        },
+        {
+          "speaker": "A",
+          "text": "いいですね。計画が決まったら、一緒に行きましょうよ。",
+          "translation": "Hay đấy. Khi kế hoạch xong rồi, cùng đi nhé."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0098",
+    "grammar_id": "gram_n5_0098",
+    "milestoneId": "ms_minna_b25",
+    "milestone_id": "ms_minna_b25",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 25,
+    "pattern": "もし〜たら",
+    "titleVi": "nếu giả sử ~ (điều kiện khó xảy ra)",
+    "structure": "もし〜たら",
+    "explanation": "もし nhấn mạnh tính giả định, thường dùng cho điều kiện khó có khả năng xảy ra. もし đứng đầu câu, たら ở cuối mệnh đề điều kiện.",
+    "nuanceReason": "もし tăng tính giả định; câu vẫn đúng khi không có もし, nhưng もし giúp báo hiệu điều kiện sắp tới.",
+    "commonMistake": "[Sai]: もし雨が降ると、行きません。(dùng と thay vì たら sau もし) -> [Đúng]: もし雨が降ったら、行きません。. もし phải đi với たら (hoặc ば), không dùng với と. と là điều kiện tự nhiên/quy luật, không phù hợp với giả định chủ quan của もし.",
+    "kitsuPrompt": "Hỏi tôi câu \"もし〜たら、どうしますか\" về tình huống vui hay viễn tưởng. Tôi sẽ trả lời sáng tạo.",
+    "masterExampleJp": "もし宝くじが当たったら、世界旅行をします。",
+    "masterExampleVi": "Nếu giả sử trúng xổ số, tôi sẽ đi du lịch vòng quanh thế giới.",
+    "examples": [
+      {
+        "sentence": "もし宝くじが当たったら、世界旅行をします。",
+        "translation": "Nếu giả sử trúng xổ số, tôi sẽ đi du lịch vòng quanh thế giới."
+      },
+      {
+        "sentence": "もし時間があったら、手伝います。",
+        "translation": "Nếu có thời gian thì tôi sẽ giúp."
+      },
+      {
+        "sentence": "もし日本語が上手になったら、通訳になりたいです。",
+        "translation": "Nếu tiếng Nhật giỏi lên, tôi muốn làm phiên dịch."
+      }
+    ],
+    "dialogue": {
+      "title": "Ước mơ viễn vông",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "もし何でも一つ欲しいものが手に入るとしたら、何が欲しいですか。",
+          "translation": "Nếu giả sử được có bất kỳ thứ gì bạn muốn, bạn muốn gì?"
+        },
+        {
+          "speaker": "B",
+          "text": "もし時間を自由に使えたら、毎日旅行したいです。お金より時間の方が大切ですから。",
+          "translation": "Nếu được tự do dùng thời gian, tôi muốn đi du lịch mỗi ngày. Vì thời gian quan trọng hơn tiền bạc."
+        },
+        {
+          "speaker": "A",
+          "text": "いい考えですね。もし私が一億円あったら、まず親に家を買ってあげたいです。",
+          "translation": "Ý hay đấy. Còn nếu tôi có 100 triệu yên thì trước tiên tôi muốn mua nhà cho bố mẹ."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0099",
+    "grammar_id": "gram_n5_0099",
+    "milestoneId": "ms_minna_b25",
+    "milestone_id": "ms_minna_b25",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 25,
+    "pattern": "V/Aても",
+    "titleVi": "dù ~ vẫn ~ (nhượng bộ)",
+    "structure": "V/Aても",
+    "explanation": "て-form + も diễn tả \"dù hoặc dù có ~ thì kết quả vẫn vậy\". Ngược với điều kiện thông thường — nhấn mạnh không có ngoại lệ.",
+    "nuanceReason": "Cấu trúc mở rộng: 何V-ても (dù làm bao nhiêu): 何度食べても飽きない (ăn mãi không chán).",
+    "commonMistake": "[Sai]: 雨が降っても行きません。(nhầm nghĩa — thực ra nói \"dù mưa cũng không đi\") -> [Đúng]: 雨が降っても、行きます。(dù mưa vẫn đi). ても + phủ định = dù X thì vẫn không Y. ても + khẳng định = dù X thì vẫn Y. Phải chú ý phần V2 là khẳng định hay phủ định để không nhầm nghĩa.",
+    "kitsuPrompt": "Hỏi tôi về điều tôi vẫn làm dù có trở ngại. Tôi sẽ dùng 〜ても để thể hiện quyết tâm.",
+    "masterExampleJp": "雨が降っても、行きます。",
+    "masterExampleVi": "Dù trời mưa, tôi vẫn đi.",
+    "examples": [
+      {
+        "sentence": "雨が降っても、行きます。",
+        "translation": "Dù trời mưa, tôi vẫn đi."
+      },
+      {
+        "sentence": "忙しくても、毎日運動します。",
+        "translation": "Dù bận, tôi vẫn tập thể dục mỗi ngày."
+      },
+      {
+        "sentence": "何度聞いても、わかりません。",
+        "translation": "Dù hỏi bao nhiêu lần cũng không hiểu."
+      },
+      {
+        "sentence": "高くても、買います。",
+        "translation": "Dù đắt, tôi vẫn mua."
+      }
+    ],
+    "dialogue": {
+      "title": "Bàn về quyết tâm học tiếng Nhật",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "日本語の勉強、つらくないですか。",
+          "translation": "Học tiếng Nhật không vất vả sao?"
+        },
+        {
+          "speaker": "B",
+          "text": "難しくても、楽しいので続けます。漢字は何度見ても忘れてしまいますが...",
+          "translation": "Dù khó nhưng vì vui nên tôi tiếp tục. Tuy nhiên chữ Hán dù nhìn bao nhiêu lần cũng quên..."
+        },
+        {
+          "speaker": "A",
+          "text": "私もです。でも、諦めなければ絶対に上手になりますよ。",
+          "translation": "Tôi cũng vậy. Nhưng nếu không bỏ cuộc chắc chắn sẽ giỏi lên thôi."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0100",
+    "grammar_id": "gram_n5_0100",
+    "milestoneId": "ms_minna_b25",
+    "milestone_id": "ms_minna_b25",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 25,
+    "pattern": "たとえ〜ても",
+    "titleVi": "dù cho ~ (nhấn mạnh mạnh hơn)",
+    "structure": "たとえ〜ても",
+    "explanation": "たとえ (= dù cho, dù rằng) kết hợp với ても để nhấn mạnh hơn về tính nhượng bộ. Thường dùng trong ngữ cảnh trang trọng, quyết tâm, hoặc văn học.",
+    "nuanceReason": "たとえ〜ても mạnh hơn và trang trọng hơn 〜ても bình thường. Thường thấy trong diễn văn, quyết tâm cá nhân.",
+    "commonMistake": "[Sai]: たとえ〜たら (dùng たら sau たとえ) -> [Đúng]: たとえ〜ても. たとえ phải đi với ても, không đi với たら. たとえ〜ても là cặp cố định biểu đạt \"dù cho ~ đi nữa\".",
+    "kitsuPrompt": "Hỏi tôi về điều tôi quyết tâm làm dù hoàn cảnh khó khăn. Tôi sẽ dùng たとえ〜ても để diễn đạt mạnh mẽ.",
+    "masterExampleJp": "たとえ難しくても、諦めません。",
+    "masterExampleVi": "Dù cho khó đến đâu, tôi sẽ không bỏ cuộc.",
+    "examples": [
+      {
+        "sentence": "たとえ難しくても、諦めません。",
+        "translation": "Dù cho khó đến đâu, tôi sẽ không bỏ cuộc."
+      },
+      {
+        "sentence": "たとえ失敗しても、また挑戦します。",
+        "translation": "Dù cho có thất bại, tôi sẽ thử lại."
+      },
+      {
+        "sentence": "たとえ雨が降っても、試合は続けます。",
+        "translation": "Dù cho trời mưa, trận đấu vẫn tiếp tục."
+      }
+    ],
+    "dialogue": {
+      "title": "Thể hiện quyết tâm trước kỳ thi",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "明日、日本語能力試験ですね。緊張していますか。",
+          "translation": "Ngày mai thi năng lực tiếng Nhật nhỉ. Bạn có hồi hộp không?"
+        },
+        {
+          "speaker": "B",
+          "text": "はい、でもたとえ合格できなくても、また来年挑戦します。",
+          "translation": "Có, nhưng dù cho không đậu thì năm sau tôi sẽ thử lại."
+        },
+        {
+          "speaker": "A",
+          "text": "その気持ちが大切ですよ。たとえ結果が悪くても、努力は無駄じゃないです。",
+          "translation": "Tinh thần đó mới quan trọng. Dù cho kết quả không tốt thì công sức không bao giờ uổng phí."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

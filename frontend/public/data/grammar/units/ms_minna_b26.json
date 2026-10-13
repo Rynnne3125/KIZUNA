@@ -1,0 +1,170 @@
+[
+  {
+    "id": "gram_n4_0101",
+    "grammar_id": "gram_n4_0101",
+    "milestoneId": "ms_minna_b26",
+    "milestone_id": "ms_minna_b26",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 26,
+    "pattern": "〜んです",
+    "titleVi": "giải thích lý do / bộc lộ cảm xúc",
+    "structure": "〜んです",
+    "explanation": "〜んです (= 〜のです) thêm sắc thái \"giải thích, tâm sự\" vào câu. Dùng khi muốn truyền đạt lý do hoặc cảm xúc đằng sau thông tin — khác với 〜です đơn thuần chỉ trần thuật.",
+    "nuanceReason": "V/いAdj → んです. なAdj/N → なんです. Thân mật: 〜んだ (nam), 〜の (nữ). Câu nghi vấn: 〜んですか.",
+    "commonMistake": "[Sai]: どうして休みましたですか。 -> [Đúng]: どうして休んだんですか。. Khi hỏi lý do, tiếng Nhật tự nhiên dùng 〜んですか. Câu hỏi 〜んですか mang sắc thái \"tôi muốn hiểu tình huống của bạn\", nghe quan tâm hơn nhiều.",
+    "kitsuPrompt": "Hỏi tôi vì sao trông có vẻ mệt/vui/buồn hôm nay. Tôi sẽ dùng 〜んです để giải thích tình huống.",
+    "masterExampleJp": "頭が痛いんです。だから、今日は早く帰ります。",
+    "masterExampleVi": "Tôi bị đau đầu. Vì thế hôm nay về sớm.",
+    "examples": [
+      {
+        "sentence": "頭が痛いんです。だから、今日は早く帰ります。",
+        "translation": "Tôi bị đau đầu. Vì thế hôm nay về sớm."
+      },
+      {
+        "sentence": "実は、日本語を勉強しているんです。",
+        "translation": "Thực ra, tôi đang học tiếng Nhật đấy."
+      },
+      {
+        "sentence": "このケーキ、おいしいんですよ！ぜひ食べてみてください。",
+        "translation": "Bánh này ngon lắm đấy! Nhất định phải thử đi."
+      }
+    ],
+    "dialogue": {
+      "title": "Giải thích tại sao đến muộn",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "遅いですね。どうしたんですか。",
+          "translation": "Muộn nhỉ. Có chuyện gì vậy?"
+        },
+        {
+          "speaker": "B",
+          "text": "すみません。電車が止まったんです。",
+          "translation": "Xin lỗi. Tàu điện bị dừng ạ."
+        },
+        {
+          "speaker": "A",
+          "text": "そうなんですか。大変でしたね。",
+          "translation": "Vậy à. Vất vả nhỉ."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0102",
+    "grammar_id": "gram_n4_0102",
+    "milestoneId": "ms_minna_b26",
+    "milestone_id": "ms_minna_b26",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 26,
+    "pattern": "V／Aんですか",
+    "titleVi": "hỏi lý do / tình huống (quan tâm)",
+    "structure": "V／Aんですか",
+    "explanation": "Câu hỏi với 〜んですか mang sắc thái \"Tôi chú ý thấy điều gì đó — có chuyện gì vậy?\". Thân thiện và quan tâm hơn câu hỏi trực tiếp, tạo cảm giác muốn hiểu tình huống của đối phương.",
+    "nuanceReason": "〜んですか thường đi kèm quan sát: \"Tôi thấy X → tại sao/có phải Y?\". Nghe tự nhiên hơn câu hỏi trực tiếp lạnh lùng.",
+    "commonMistake": "[Sai]: 田中さんは元気んですか。 -> [Đúng]: 田中さんは元気なんですか。. Danh từ và tính từ な phải thêm な trước んです: 元気なんです, 学生なんです (tính từ い và động từ nối trực tiếp: 忙しいんです, 行くんです). Ngoài ra chỉ dùng 〜んですか khi có điều quan sát được muốn hỏi — dùng cho câu hỏi thông tin thường (お名前は何ですか) sẽ nghe như tra khảo.",
+    "kitsuPrompt": "Mô tả một tình huống rõ ràng (ví dụ: tôi đang cầm nhiều túi, trông lo lắng...). Tôi sẽ dùng 〜んですか để hỏi.",
+    "masterExampleJp": "荷物が多いんですか。どこへ行くんですか。",
+    "masterExampleVi": "Hành lý nhiều nhỉ. Bạn đi đâu vậy?",
+    "examples": [
+      {
+        "sentence": "荷物が多いんですか。どこへ行くんですか。",
+        "translation": "Hành lý nhiều nhỉ. Bạn đi đâu vậy?"
+      },
+      {
+        "sentence": "泣いているんですか。どうしたんですか。",
+        "translation": "Bạn đang khóc à. Có chuyện gì vậy?"
+      },
+      {
+        "sentence": "日本語が上手なんですね。どこで勉強したんですか。",
+        "translation": "Tiếng Nhật giỏi nhỉ. Học ở đâu vậy?"
+      }
+    ],
+    "dialogue": {
+      "title": "Quan tâm đến đồng nghiệp",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "元気がないんですか。疲れているんですか。",
+          "translation": "Bạn có vẻ không khỏe. Mệt à?"
+        },
+        {
+          "speaker": "B",
+          "text": "ええ、昨日ほとんど眠れなかったんです。",
+          "translation": "Vâng, hôm qua gần như không ngủ được."
+        },
+        {
+          "speaker": "A",
+          "text": "今日は早く帰ったほうがいいんじゃないですか。",
+          "translation": "Hôm nay về sớm thôi nhỉ."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0103",
+    "grammar_id": "gram_n4_0103",
+    "milestoneId": "ms_minna_b26",
+    "milestone_id": "ms_minna_b26",
+    "stageId": "stage_n4_1",
+    "stage_id": "stage_n4_1",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 26,
+    "pattern": "Nなんです",
+    "titleVi": "là N đấy — giải thích bằng danh từ",
+    "structure": "Nなんです",
+    "explanation": "Khi phần giải thích là danh từ hoặc tính từ な, phải thêm な trước んです → なんです. Dùng khi giải thích đặc trưng, tình huống hoặc danh tính của bản thân.",
+    "nuanceReason": "Quy tắc: V → んです ／ いAdj → いんです ／ なAdj → なんです ／ N → なんです. Chỉ な-adj và N mới cần thêm な.",
+    "commonMistake": "[Sai]: 学生んです。 -> [Đúng]: 学生なんです。. Danh từ và tính từ な phải thêm な trước んです. Nhớ quy tắc: V-ん, いAdj-ん, なAdj-なん, N-なん.",
+    "kitsuPrompt": "Giả vờ bạn không biết tôi là ai. Hỏi về quốc tịch, nghề nghiệp. Tôi sẽ giải thích bằng 〜なんです.",
+    "masterExampleJp": "今日は私の誕生日なんです。",
+    "masterExampleVi": "Hôm nay là sinh nhật của tôi đấy.",
+    "examples": [
+      {
+        "sentence": "今日は私の誕生日なんです。",
+        "translation": "Hôm nay là sinh nhật của tôi đấy."
+      },
+      {
+        "sentence": "彼女は日本人なんですよ。",
+        "translation": "Cô ấy là người Nhật đấy nhé."
+      },
+      {
+        "sentence": "あの店、有名なんですか。",
+        "translation": "Quán đó nổi tiếng à?"
+      }
+    ],
+    "dialogue": {
+      "title": "Giới thiệu về bản thân",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "どこから来たんですか。",
+          "translation": "Bạn từ đâu đến vậy?"
+        },
+        {
+          "speaker": "B",
+          "text": "ベトナム人なんです。ハノイ出身です。",
+          "translation": "Tôi là người Việt Nam. Quê ở Hà Nội."
+        },
+        {
+          "speaker": "A",
+          "text": "そうなんですね。日本語が本当に上手なんですね。",
+          "translation": "Vậy à. Tiếng Nhật giỏi thật nhỉ."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

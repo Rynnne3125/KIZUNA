@@ -1,0 +1,107 @@
+[
+  {
+    "id": "gram_n3_0196",
+    "grammar_id": "gram_n3_0196",
+    "milestoneId": "ms_n3_s2_l1",
+    "milestone_id": "ms_n3_s2_l1",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 55,
+    "pattern": "〜うちに",
+    "titleVi": "Tranh thủ làm trong khi trạng thái vẫn còn (trước khi trạng thái đổi)",
+    "structure": "〜うちに",
+    "explanation": "Mẫu ngữ pháp này diễn tả ý nghĩa tranh thủ làm một hành động có chủ ý trong khi một trạng thái hoặc điều kiện thuận lợi vẫn đang duy trì. Hành động ở vế sau cần được thực hiện trước khi trạng thái ở vế trước thay đổi hoặc mất đi cơ hội tốt. Ngữ cảnh thường dùng trong đời sống hàng ngày để đưa ra lời khuyên, lời nhắc nhở hoặc bày tỏ dự định tận dụng thời điểm thích hợp.",
+    "nuanceReason": "Khác với「〜間に」chỉ đơn thuần nêu mốc thời gian diễn ra sự việc,「〜うちに」nhấn mạnh cảm giác tranh thủ và tính cấp bách trước khi trạng thái thuận lợi kết thúc.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "記憶が新しいうちに、今日習った単語を復習しておきます。",
+    "masterExampleVi": "Tranh thủ lúc trí nhớ còn mới, tôi sẽ ôn tập lại từ vựng đã học hôm nay.",
+    "examples": [
+      {
+        "sentence": "記憶が新しいうちに、今日習った単語を復習しておきます。",
+        "translation": "Tranh thủ lúc trí nhớ còn mới, tôi sẽ ôn tập lại từ vựng đã học hôm nay.",
+        "reading": ""
+      },
+      {
+        "sentence": "日本に留学しているうちに、一度富士山に登ってみたいです。",
+        "translation": "Tranh thủ trong thời gian đang du học ở Nhật, tôi muốn thử một lần leo núi Phú Sĩ.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0197",
+    "grammar_id": "gram_n3_0197",
+    "milestoneId": "ms_n3_s2_l1",
+    "milestone_id": "ms_n3_s2_l1",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 55,
+    "pattern": "〜ないうちに",
+    "titleVi": "Trước khi (điều gì đó) xảy ra — nhấn mạnh chưa xảy ra",
+    "structure": "〜ないうちに",
+    "explanation": "Mẫu câu「〜ないうちに」diễn tả ý nghĩa \"trước khi sự việc hoặc trạng thái nào đó xảy ra, hãy tranh thủ làm gì đó\". Cấu trúc này nhấn mạnh việc chủ động thực hiện hành động trước khi có sự biến đổi về hoàn cảnh hoặc trước khi tình huống bất lợi diễn ra. Vế sau thường đi cùng các hình thức thể hiện ý chí, lời khuyên, đề nghị hoặc mệnh lệnh như「〜てください」「〜ましょう」.",
+    "nuanceReason": "Khác với「〜前に」chỉ đơn thuần xác định mốc thời gian xảy ra trước một sự kiện,「〜ないうちに」nhấn mạnh vào quá trình biến đổi trạng thái (trời tối dần, thức ăn nguội đi...) và mang sắc thái tranh thủ thời gian.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "スープが冷めないうちに、どうぞ召し上がってください。",
+    "masterExampleVi": "Xin mời bạn dùng súp trước khi nó bị nguội (tranh thủ khi còn nóng).",
+    "examples": [
+      {
+        "sentence": "スープが冷めないうちに、どうぞ召し上がってください。",
+        "translation": "Xin mời bạn dùng súp trước khi nó bị nguội (tranh thủ khi còn nóng).",
+        "reading": ""
+      },
+      {
+        "sentence": "外が暗くならないうちに、公園でのジョギングを終えましょう。",
+        "translation": "Chúng ta hãy kết thúc buổi chạy bộ ở công viên trước khi trời tối nhé.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0198",
+    "grammar_id": "gram_n3_0198",
+    "milestoneId": "ms_n3_s2_l1",
+    "milestone_id": "ms_n3_s2_l1",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 55,
+    "pattern": "うちに ≠ 間[あいだ]に",
+    "titleVi": "Phân biệt: うちに (tranh thủ → kết quả tức thời) ≠ 間に (khoảng thời gian → hành động kéo dài song song)",
+    "structure": "うちに ≠ 間[あいだ]に",
+    "explanation": "「〜うちに」nhấn mạnh ý thức tranh thủ thời gian hoặc trạng thái thuận lợi trước khi điều kiện thay đổi để thực hiện một hành động có chủ đích. Ngược lại,「〜間に」chỉ đơn thuần xác định một khoảng thời gian khách quan mà trong đó một hành động hoặc sự việc khác diễn ra. Do đó, khi muốn diễn tả hành động kéo dài song song hoặc sự việc xảy ra tự nhiên trong một khoảng thời gian, ta dùng「間に」chứ không dùng「うちに」.",
+    "nuanceReason": "Vế sau của「〜うちに」thường chứa ý chí, lời rủ rê hoặc yêu cầu (〜たい、〜てください、〜よう), trong khi「〜間に」chủ yếu diễn tả hành động hoặc sự việc diễn ra một cách khách quan trong khung thời gian đó.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "スープが温かいうちに、早く召し上がってください。",
+    "masterExampleVi": "Hãy dùng súp ngay khi còn đang nóng nhé.",
+    "examples": [
+      {
+        "sentence": "スープが温かいうちに、早く召し上がってください。",
+        "translation": "Hãy dùng súp ngay khi còn đang nóng nhé.",
+        "reading": ""
+      },
+      {
+        "sentence": "電車を待っている間に、単語帳を見て勉強していた。",
+        "translation": "Trong khoảng thời gian chờ tàu điện, tôi đã xem sổ tay từ vựng để học bài.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

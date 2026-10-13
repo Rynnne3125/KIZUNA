@@ -1,0 +1,182 @@
+[
+  {
+    "id": "gram_n5_0091",
+    "grammar_id": "gram_n5_0091",
+    "milestoneId": "ms_minna_b23",
+    "milestone_id": "ms_minna_b23",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 23,
+    "pattern": "V/Aとき",
+    "titleVi": "khi ~ / lúc ~",
+    "structure": "V/Aとき",
+    "explanation": "とき chỉ thời điểm xảy ra hành động. Dạng động từ trước とき quan trọng: Vる-とき (trước khi V), Vた-とき (sau khi đã V). Sự khác biệt này rất quan trọng.",
+    "nuanceReason": "日本へ行くとき (trước khi đến Nhật, còn đang chuẩn bị) khác 日本へ行ったとき (đã đến Nhật rồi).",
+    "commonMistake": "[Sai]: 日本へ行くとき、富士山を見ました。(muốn nói đã đến Nhật rồi mới thấy Fuji) -> [Đúng]: 日本へ行ったとき、富士山を見ました。. Hành động \"thấy Fuji\" xảy ra sau khi đã đến Nhật → phải dùng Vたとき. Vるとき = hành động chính chưa hoàn thành (đang trên đường đi). Ví dụ đúng: 日本へ行くとき、荷物を準備しました (chuẩn bị trước khi đi).",
+    "kitsuPrompt": "Hỏi tôi về kỷ niệm thời thơ ấu hoặc thói quen khi còn học. Tôi sẽ dùng 〜とき để kể.",
+    "masterExampleJp": "日本へ行ったとき、富士山を見ました。",
+    "masterExampleVi": "Khi (đã) đến Nhật, tôi đã nhìn thấy núi Fuji.",
+    "examples": [
+      {
+        "sentence": "日本へ行ったとき、富士山を見ました。",
+        "translation": "Khi (đã) đến Nhật, tôi đã nhìn thấy núi Fuji."
+      },
+      {
+        "sentence": "子どものとき、よく泳ぎました。",
+        "translation": "Lúc còn nhỏ, tôi hay bơi lội."
+      },
+      {
+        "sentence": "困ったとき、電話してください。",
+        "translation": "Khi gặp khó khăn, hãy gọi điện cho tôi."
+      },
+      {
+        "sentence": "暇なとき、映画を見ます。",
+        "translation": "Khi rảnh, tôi xem phim."
+      }
+    ],
+    "dialogue": {
+      "title": "Nhớ lại kỷ niệm thời thơ ấu",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "子どものとき、よく何をしましたか。",
+          "translation": "Hồi nhỏ bạn thường làm gì?"
+        },
+        {
+          "speaker": "B",
+          "text": "川の近くで育ったので、夏になると毎日泳ぎました。",
+          "translation": "Vì lớn lên gần sông nên hè nào tôi cũng bơi mỗi ngày."
+        },
+        {
+          "speaker": "A",
+          "text": "いいですね。私は学校から帰ったとき、いつも公園で遊びました。",
+          "translation": "Tốt nhỉ. Còn tôi, mỗi lần tan học về là hay chơi ở công viên."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0092",
+    "grammar_id": "gram_n5_0092",
+    "milestoneId": "ms_minna_b23",
+    "milestone_id": "ms_minna_b23",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 23,
+    "pattern": "V1とV2 (điều kiện tự nhiên)",
+    "titleVi": "khi V1 thì (tự nhiên) V2",
+    "structure": "V1とV2 (điều kiện tự nhiên)",
+    "explanation": "と chỉ điều kiện tự nhiên, quy luật, hoặc chỉ dẫn: khi/nếu V1 thì tất yếu V2. Không dùng với mệnh đề biểu đạt ý chí, mong muốn, lời mời ở V2.",
+    "nuanceReason": "Không dùng と khi V2 là ý chí/lời mời: sai: 右に曲がると、見てください → dùng たら hoặc ば thay thế.",
+    "commonMistake": "[Sai]: 駅に着くと、電話してください。(V2 là yêu cầu/mệnh lệnh) -> [Đúng]: 駅に着いたら、電話してください。. と không dùng khi V2 là ý chí, yêu cầu, lời mời, lời khuyên. Phải dùng たら hoặc ば trong những trường hợp đó. と chỉ dùng cho kết quả tự nhiên/tất yếu.",
+    "kitsuPrompt": "Chỉ đường cho tôi từ ga đến một địa điểm nổi tiếng. Dùng 〜と để nói điều kiện tự nhiên.",
+    "masterExampleJp": "このボタンを押すと、ドアが開きます。",
+    "masterExampleVi": "Khi nhấn nút này, cửa sẽ mở ra.",
+    "examples": [
+      {
+        "sentence": "このボタンを押すと、ドアが開きます。",
+        "translation": "Khi nhấn nút này, cửa sẽ mở ra."
+      },
+      {
+        "sentence": "春になると、桜が咲きます。",
+        "translation": "Khi mùa xuân đến, hoa anh đào nở."
+      },
+      {
+        "sentence": "右に曲がると、コンビニがあります。",
+        "translation": "Rẽ phải là thấy cửa hàng tiện lợi."
+      },
+      {
+        "sentence": "お湯を入れると、3分で食べられます。",
+        "translation": "Khi cho nước sôi vào, 3 phút là ăn được."
+      }
+    ],
+    "dialogue": {
+      "title": "Chỉ đường đến nơi",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "すみません、郵便局はどこですか。",
+          "translation": "Xin lỗi, bưu điện ở đâu vậy ạ?"
+        },
+        {
+          "speaker": "B",
+          "text": "この道をまっすぐ行くと、信号があります。そこを左に曲がると、右手に見えますよ。",
+          "translation": "Đi thẳng theo con đường này thì có đèn giao thông. Rẽ trái ở đó rồi sẽ thấy ở bên phải."
+        },
+        {
+          "speaker": "A",
+          "text": "ありがとうございます。歩くと何分くらいですか。",
+          "translation": "Cảm ơn bạn. Nếu đi bộ thì mất khoảng bao nhiêu phút?"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0093",
+    "grammar_id": "gram_n5_0093",
+    "milestoneId": "ms_minna_b23",
+    "milestone_id": "ms_minna_b23",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 23,
+    "pattern": "Vないで",
+    "titleVi": "mà không làm V / không làm V rồi (làm gì khác)",
+    "structure": "Vないで",
+    "explanation": "ない-form + で = \"không làm V (và làm V2 thay)\". Khác với Vなくて (nối tính từ hoặc chỉ lý do).",
+    "nuanceReason": "Vないで (cách thức — không làm V) vs Vなくて (lý do — vì không làm V nên): 病気で来ないで vs 病気で来なくて困った.",
+    "commonMistake": "[Sai]: 朝ごはんを食べなくて学校へ行きました。(dùng なくて thay vì ないで cho cách thức) -> [Đúng]: 朝ごはんを食べないで学校へ行きました。. ないで chỉ cách thức (đi mà không ăn). なくて chỉ lý do/nguyên nhân (vì không ăn nên...). Nhầm hai cấu trúc này là lỗi rất phổ biến.",
+    "kitsuPrompt": "Hỏi tôi về điều tôi đã làm theo cách không thông thường hôm nay. Tôi sẽ dùng Vないで để mô tả.",
+    "masterExampleJp": "朝ごはんを食べないで学校へ行きました。",
+    "masterExampleVi": "Tôi đã đến trường mà không ăn sáng.",
+    "examples": [
+      {
+        "sentence": "朝ごはんを食べないで学校へ行きました。",
+        "translation": "Tôi đã đến trường mà không ăn sáng."
+      },
+      {
+        "sentence": "傘を持たないで出かけました。",
+        "translation": "Tôi ra ngoài mà không mang ô."
+      },
+      {
+        "sentence": "日本語で話してください。英語を使わないで。",
+        "translation": "Hãy nói tiếng Nhật. Đừng dùng tiếng Anh."
+      },
+      {
+        "sentence": "何も言わないで行ってしまいました。",
+        "translation": "Anh ấy đã đi mà không nói gì cả."
+      }
+    ],
+    "dialogue": {
+      "title": "Giải thích lý do đến muộn",
+      "lines": [
+        {
+          "speaker": "先生",
+          "text": "今日はどうして遅れましたか。",
+          "translation": "Hôm nay tại sao em trễ vậy?"
+        },
+        {
+          "speaker": "B",
+          "text": "朝、寝坊して、ごはんも食べないで急いで来ました。",
+          "translation": "Sáng em ngủ quên, rồi không ăn sáng, vội vàng đến luôn ạ."
+        },
+        {
+          "speaker": "先生",
+          "text": "次からは準備してから来てください。急がないでゆっくり来ていいですよ。",
+          "translation": "Lần sau chuẩn bị rồi hãy đến. Không cần vội, đến từ từ cũng được."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

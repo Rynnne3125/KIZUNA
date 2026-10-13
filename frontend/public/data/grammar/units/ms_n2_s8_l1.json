@@ -1,0 +1,142 @@
+[
+  {
+    "id": "gram_n2_0529",
+    "grammar_id": "gram_n2_0529",
+    "milestoneId": "ms_n2_s8_l1",
+    "milestone_id": "ms_n2_s8_l1",
+    "stageId": "stage_n2_8",
+    "stage_id": "stage_n2_8",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 116,
+    "pattern": "～につれて",
+    "titleVi": "Dần dần khi A thay đổi thì B cũng thay đổi",
+    "structure": "～につれて",
+    "explanation": "Mẫu 「～につれて」 diễn tả ý nghĩa \"cùng với sự thay đổi của A thì B cũng dần dần biến đổi theo\". Cả vế trước và vế sau đều phải chứa từ ngữ biểu thị sự chuyển biến, tiến triển theo thời gian (như tăng giảm, già đi, phát triển...). Vế sau diễn tả sự thay đổi diễn ra mang tính tự nhiên, không dùng với các cách diễn đạt thể hiện ý chí, nguyện vọng hay mệnh lệnh của người nói.",
+    "nuanceReason": "So với 「～にしたがって」, mẫu 「～につれて」 chỉ dùng cho sự biến đổi tỉ lệ thuận mang tính tự nhiên và không dùng được với các câu văn mang tính chỉ thị hay quy tắc bắt buộc.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "台風が近づくにつれて、風と雨がだんだん強くなってきた。",
+    "masterExampleVi": "Càng tiến lại gần tâm bão, mưa và gió càng lúc càng mạnh dần lên.",
+    "examples": [
+      {
+        "sentence": "台風が近づくにつれて、風と雨がだんだん強くなってきた。",
+        "translation": "Càng tiến lại gần tâm bão, mưa và gió càng lúc càng mạnh dần lên.",
+        "reading": ""
+      },
+      {
+        "sentence": "年齢を重ねるにつれて、健康管理の大切さを実感するようになった。",
+        "translation": "Càng có tuổi, tôi càng thấm thía được tầm quan trọng của việc giữ gìn sức khỏe.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0530",
+    "grammar_id": "gram_n2_0530",
+    "milestoneId": "ms_n2_s8_l1",
+    "milestone_id": "ms_n2_s8_l1",
+    "stageId": "stage_n2_8",
+    "stage_id": "stage_n2_8",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 116,
+    "pattern": "～かねる",
+    "titleVi": "Khó có thể ~ / Không tiện",
+    "structure": "～かねる",
+    "explanation": "Mẫu 「～かねる」 kết hợp với động từ thể ます (bỏ ます), mang ý nghĩa \"khó có thể...\" hoặc \"không tiện làm...\". Mẫu câu này được dùng khi người nói muốn từ chối một yêu cầu, đề nghị một cách lịch sự, trang trọng vì lý do lập trường, đạo đức hoặc trách nhiệm công việc dù về mặt năng lực có thể làm được. Đây là cách diễn đạt phổ biến trong giao tiếp thương mại và dịch vụ khách hàng nhằm tránh dùng từ từ chối trực tiếp như 「できません」.",
+    "nuanceReason": "Cần tránh nhầm lẫn với 「～かねない」 (có nguy cơ/khả năng cao sẽ xảy ra kết quả xấu), và lưu ý rằng tuy mang hình thức khẳng định nhưng 「～かねる」 lại biểu thị ý nghĩa phủ định.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "個人情報保護の観点から、他のお客様に関するお問い合わせにはお答えしかねます。",
+    "masterExampleVi": "Dưới góc độ bảo mật thông tin cá nhân, chúng tôi khó có thể trả lời các thắc mắc liên quan đến khách hàng khác.",
+    "examples": [
+      {
+        "sentence": "個人情報保護の観点から、他のお客様に関するお問い合わせにはお答えしかねます。",
+        "translation": "Dưới góc độ bảo mật thông tin cá nhân, chúng tôi khó có thể trả lời các thắc mắc liên quan đến khách hàng khác.",
+        "reading": ""
+      },
+      {
+        "sentence": "そのようなご提案は、弊社の現在の方針に合致しないため、受け入れかねます。",
+        "translation": "Đề xuất như vậy không phù hợp với định hướng hiện tại của công ty chúng tôi nên khó lòng chấp thuận được.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0531",
+    "grammar_id": "gram_n2_0531",
+    "milestoneId": "ms_n2_s8_l1",
+    "milestone_id": "ms_n2_s8_l1",
+    "stageId": "stage_n2_8",
+    "stage_id": "stage_n2_8",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 116,
+    "pattern": "～はもとより",
+    "titleVi": "Không chỉ ~ mà còn ~",
+    "structure": "～はもとより",
+    "explanation": "Mẫu ngữ pháp này dùng để diễn tả ý «A là điều hiển nhiên rồi, nhưng không chỉ A mà ngay cả B cũng...». Cấu trúc thường đi trực tiếp sau Danh từ (hoặc Danh từ + Trợ từ), vế sau thường đi kèm với trợ từ 「も」 để mở rộng thêm đối tượng khác. Đây là cách diễn đạt mang tính trang trọng, lịch sự và mang hơi hướng văn viết nhiều hơn so với 「～はもちろん」, thường được dùng trong các bài phát biểu, hội nghị hoặc báo cáo công việc.",
+    "nuanceReason": "So với 「～はもちろん」, mẫu 「～はもとより」 mang sắc thái trang trọng, văn phong viết cứng cáp hơn nhiều nên thường dùng trong văn bản, thuyết trình và tránh dùng trong giao tiếp thân mật hàng ngày.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "このレストランは、料理の味はもとより、接客サービスの素晴らしさでも高く評価されている。",
+    "masterExampleVi": "Nhà hàng này không chỉ có hương vị món ăn ngon (là đương nhiên) mà còn được đánh giá rất cao về sự tuyệt vời trong cung cách phục vụ.",
+    "examples": [
+      {
+        "sentence": "このレストランは、料理の味はもとより、接客サービスの素晴らしさでも高く評価されている。",
+        "translation": "Nhà hàng này không chỉ có hương vị món ăn ngon (là đương nhiên) mà còn được đánh giá rất cao về sự tuyệt vời trong cung cách phục vụ.",
+        "reading": ""
+      },
+      {
+        "sentence": "新製品の開発には、国内市場はもとより、海外市場の動向も視野に入れる必要がある。",
+        "translation": "Trong việc phát triển sản phẩm mới, không chỉ thị trường trong nước mà chúng ta còn cần phải để mắt tới cả xu hướng của thị trường nước ngoài.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0532",
+    "grammar_id": "gram_n2_0532",
+    "milestoneId": "ms_n2_s8_l1",
+    "milestone_id": "ms_n2_s8_l1",
+    "stageId": "stage_n2_8",
+    "stage_id": "stage_n2_8",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 116,
+    "pattern": "～に過ぎない",
+    "titleVi": "Chỉ là ~ mà thôi",
+    "structure": "～に過ぎない",
+    "explanation": "Mẫu ngữ pháp này mang ý nghĩa \"chỉ là... không hơn\", dùng để nhấn mạnh một sự việc, hành động hay trạng thái chỉ dừng lại ở mức độ thấp, đơn giản và không có gì to tát. Cấu trúc thường kết hợp với thể thông thường của động từ hoặc danh từ (V-thể thông thường / N + に過ぎない). Mẫu câu thường được sử dụng với thái độ đánh giá khách quan hoặc khiêm tốn khi tự nói về bản thân.",
+    "nuanceReason": "Cần phân biệt với 「～にほかならない」 vốn mang nghĩa khẳng định mạnh (\"chính là / không gì khác ngoài\"), trong khi 「～に過ぎない」 dùng để hạ thấp mức độ hoặc khiêm tốn (\"chỉ là... không hơn\").",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "私が言ったことは単なる個人的な推測に過ぎない。",
+    "masterExampleVi": "Những điều tôi vừa nói chỉ là suy đoán mang tính cá nhân mà thôi.",
+    "examples": [
+      {
+        "sentence": "私が言ったことは単なる個人的な推測に過ぎない。",
+        "translation": "Những điều tôi vừa nói chỉ là suy đoán mang tính cá nhân mà thôi.",
+        "reading": ""
+      },
+      {
+        "sentence": "今回の合格は最初の第一歩に過ぎない。",
+        "translation": "Việc đỗ kỳ thi lần này chỉ là bước đi đầu tiên mà thôi.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

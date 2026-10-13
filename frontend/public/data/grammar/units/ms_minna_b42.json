@@ -1,0 +1,122 @@
+[
+  {
+    "id": "gram_n4_0151",
+    "grammar_id": "gram_n4_0151",
+    "milestoneId": "ms_minna_b42",
+    "milestone_id": "ms_minna_b42",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 42,
+    "pattern": "Vる／Nのために",
+    "titleVi": "để ~ (mục đích có ý chí)",
+    "structure": "Vる／Nのために",
+    "explanation": "ために theo sau V thể từ điển hoặc N + の biểu thị mục đích của hành động. Phân biệt với ように: ために dùng với V ý chí (動詞意志形), ように dùng với V可能 và V ない.",
+    "nuanceReason": "❌ 起きられるように → ✓ (V可能+ように). ❌ 起きるために = có thể nhưng ために thường ít dùng với V khả năng.",
+    "commonMistake": "[Sai]: 朝早く起きられるために、目覚まし時計を二つセットしました。 -> [Đúng]: 朝早く起きられるように、目覚まし時計を二つセットしました。. ために dùng sau động từ ý chí (意志動詞: 食べる, 勉強する...) để diễn đạt mục đích mà bản thân chủ động làm được; còn ように dùng sau động từ khả năng (可能形: 起きられる, 食べられる...) hoặc động từ vô ý chí vì bản thân không thể chủ động kiểm soát việc \"có làm được hay không\". Do đó 起きられるために là sai, phải dùng 起きられるように.",
+    "kitsuPrompt": "Hỏi tôi về mục tiêu lớn nhất của tôi hiện nay. Tôi sẽ trả lời bằng 〜ために〜ています.",
+    "masterExampleJp": "日本語が上手になるために、毎日練習します。",
+    "masterExampleVi": "Để giỏi tiếng Nhật tôi luyện tập mỗi ngày.",
+    "examples": [
+      {
+        "sentence": "日本語が上手になるために、毎日練習します。",
+        "translation": "Để giỏi tiếng Nhật tôi luyện tập mỗi ngày."
+      },
+      {
+        "sentence": "健康のために、野菜をたくさん食べています。",
+        "translation": "Vì sức khỏe tôi ăn nhiều rau."
+      },
+      {
+        "sentence": "試験のために、友だちと勉強しました。",
+        "translation": "Để thi, tôi học cùng bạn bè."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：なぜ毎朝走るんですか。\nB：マラソンに出るために、体を鍛えているんです。",
+      "vi": "A: Sao mỗi sáng bạn chạy bộ vậy?\nB: Tôi đang rèn thể lực để thi marathon."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0152",
+    "grammar_id": "gram_n4_0152",
+    "milestoneId": "ms_minna_b42",
+    "milestone_id": "ms_minna_b42",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 42,
+    "pattern": "Vるのに〜",
+    "titleVi": "để làm ~ / dùng cho việc ~ (chức năng/phương tiện)",
+    "structure": "Vるのに〜",
+    "explanation": "Vるのに sau đó là tính từ/động từ chức năng biểu thị công dụng hoặc tình huống cần thiết. Thường đi với: 便利だ, 使う, 必要だ, 時間がかかる.",
+    "nuanceReason": "Vるのに + かかる = tốn thời gian/tiền để làm. Vるのに + 便利 = tiện để làm. Vるのに + 必要 = cần để làm.",
+    "commonMistake": "[Sai]: 日本語の勉強のに、この辞書を使います。 -> [Đúng]: 日本語の勉強のために、この辞書を使います。. Vるのに (dùng để làm gì / công dụng) chỉ theo sau ĐỘNG TỪ ở thể từ điển (V る), không thể gắn trực tiếp sau danh từ như 勉強. Khi muốn nói mục đích với danh từ, phải dùng Nのために (không phải Nのに): 日本語の勉強のために辞書を使います. Nếu muốn dùng dạng のに thì phải chuyển thành động từ: 日本語を勉強するのに、この辞書を使います。",
+    "kitsuPrompt": "Hỏi tôi công cụ hay ứng dụng nào tôi dùng để học tiếng Nhật. Tôi sẽ dùng のに.",
+    "masterExampleJp": "この道具は魚をさばくのに使います。",
+    "masterExampleVi": "Dụng cụ này dùng để làm cá.",
+    "examples": [
+      {
+        "sentence": "この道具は魚をさばくのに使います。",
+        "translation": "Dụng cụ này dùng để làm cá."
+      },
+      {
+        "sentence": "日本語の勉強に辞書は必要なのに、忘れてきた。",
+        "translation": "Từ điển cần thiết để học tiếng Nhật mà tôi lại quên mang."
+      },
+      {
+        "sentence": "駅まで歩いて行くのに15分かかります。",
+        "translation": "Đi bộ đến ga mất 15 phút."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：このアプリ、何に使うんですか。\nB：発音を練習するのに使っています。とても便利ですよ。",
+      "vi": "A: App này dùng để làm gì vậy?\nB: Tôi dùng để luyện phát âm. Tiện lắm."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0153",
+    "grammar_id": "gram_n4_0153",
+    "milestoneId": "ms_minna_b42",
+    "milestone_id": "ms_minna_b42",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 42,
+    "pattern": "Nに〜時間／お金がかかります",
+    "titleVi": "tốn ~ thời gian / tiền cho N",
+    "structure": "Nに〜時間／お金がかかります",
+    "explanation": "かかる (tốn) dùng với thời gian và tiền bạc. Cấu trúc: [hoạt động/nơi] に [lượng thời gian/tiền] がかかります.",
+    "nuanceReason": "かかる ≠ 要る (いる). 要る = cần có (物が要る). かかる = tốn (時間・お金がかかる). Cũng dùng: Vるのにかかります.",
+    "commonMistake": "[Sai]: この作業は時間がかかります。 -> [Đúng]: この作業に3時間かかります。. Cấu trúc かかる cần chỉ rõ LƯỢNG thời gian/tiền cụ thể đi kèm trợ từ に trước đối tượng tốn kém: [việc] に [số lượng thời gian/tiền] がかかります. Nói chung chung 時間がかかります (không có con số, dùng は thay vì に) làm mất đi thông tin định lượng cần thiết của mẫu câu — câu đúng và đầy đủ phải nêu rõ số lượng: この作業に3時間かかります (công việc này tốn 3 tiếng).",
+    "kitsuPrompt": "Hỏi tôi mất bao lâu/tốn bao nhiêu để làm điều gì đó. Tôi sẽ dùng かかります.",
+    "masterExampleJp": "東京から大阪まで新幹線で２時間かかります。",
+    "masterExampleVi": "Từ Tokyo đến Osaka bằng shinkansen mất 2 tiếng.",
+    "examples": [
+      {
+        "sentence": "東京から大阪まで新幹線で２時間かかります。",
+        "translation": "Từ Tokyo đến Osaka bằng shinkansen mất 2 tiếng."
+      },
+      {
+        "sentence": "この修理に10万円かかりました。",
+        "translation": "Sửa chữa này tốn 100,000 yên."
+      },
+      {
+        "sentence": "料理を作るのに30分かかります。",
+        "translation": "Nấu ăn mất 30 phút."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：免許を取るのに、どのくらいお金がかかりましたか。\nB：学校の費用が30万円くらいかかりました。",
+      "vi": "A: Lấy bằng lái tốn bao nhiêu tiền vậy?\nB: Chi phí trường học khoảng 300,000 yên."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

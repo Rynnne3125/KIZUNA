@@ -1,0 +1,122 @@
+[
+  {
+    "id": "gram_n4_0138",
+    "grammar_id": "gram_n4_0138",
+    "milestoneId": "ms_minna_b38",
+    "milestone_id": "ms_minna_b38",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 38,
+    "pattern": "Vるのは〜です",
+    "titleVi": "việc V là ~ (danh từ hóa mệnh đề)",
+    "structure": "Vるのは〜です",
+    "explanation": "の sau V thể từ điển biến mệnh đề thành danh từ. のは = \"việc ~\" làm chủ ngữ. Dùng khi muốn nói về trải nghiệm/hành động như một thực thể.",
+    "nuanceReason": "こと và の có thể thay thế nhau với のは/のが trong nhiều trường hợp, nhưng の gợi cảm giác trực quan/cụ thể hơn.",
+    "commonMistake": "[Sai]: 日本語を話しますのは難しいです。 -> [Đúng]: 日本語を話すのは難しいです。. の danh từ hóa mệnh đề chỉ ghép được với động từ ở THỂ TỪ ĐIỂN (辞書形), không ghép được với thể ます lịch sự. Vì vậy 話しますの là sai, phải nói 話すの. Quy tắc: Vる (từ điển) + のは/のが, không bao giờ Vます + の.",
+    "kitsuPrompt": "Hỏi tôi về điều gì đó tôi thấy khó hoặc thú vị. Tôi sẽ dùng 〜のは〜です.",
+    "masterExampleJp": "日本語を話すのは難しいです。",
+    "masterExampleVi": "Việc nói tiếng Nhật thì khó.",
+    "examples": [
+      {
+        "sentence": "日本語を話すのは難しいです。",
+        "translation": "Việc nói tiếng Nhật thì khó."
+      },
+      {
+        "sentence": "山に登るのは大変ですが、楽しいです。",
+        "translation": "Việc leo núi thì vất vả nhưng vui."
+      },
+      {
+        "sentence": "毎日早起きするのは辛いです。",
+        "translation": "Việc dậy sớm mỗi ngày thật khổ."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：日本語を勉強するのはどうですか。\nB：難しいですが、楽しいです！話せるようになるのが目標です。",
+      "vi": "A: Học tiếng Nhật thế nào?\nB: Khó nhưng vui! Mục tiêu là trở nên nói được."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0139",
+    "grammar_id": "gram_n4_0139",
+    "milestoneId": "ms_minna_b38",
+    "milestone_id": "ms_minna_b38",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 38,
+    "pattern": "Vるのが好きです／上手です",
+    "titleVi": "thích / giỏi việc ~",
+    "structure": "Vるのが好きです／上手です",
+    "explanation": "V thể từ điển + の + が好き/嫌い/上手/下手/得意/苦手 — biểu thị thái độ, sở thích hoặc kỹ năng đối với một hành động.",
+    "nuanceReason": "好き/嫌い/上手/下手/得意/苦手 đều theo mẫu này. Chú ý: 上手 thường nói về kỹ năng của người khác (lịch sự), 得意 nói về bản thân.",
+    "commonMistake": "[Sai]: 料理することが好きですが、この文はちょっと硬いです。 -> [Đúng]: 料理するのが好きです。. こと và の đều danh từ hóa được động từ và về ngữ pháp こと không sai, nhưng khi nói về một hành động cụ thể, sống động (đặc biệt trong văn nói/hội thoại) người Nhật tự nhiên dùng の hơn là こと. こと nghe trang trọng, trừu tượng hơn nên hợp với văn viết/khái niệm chung, còn の hợp với trải nghiệm/cảm giác cụ thể như sở thích cá nhân.",
+    "kitsuPrompt": "Hỏi tôi về sở thích và điểm mạnh/yếu của tôi. Tôi sẽ dùng のが好き/得意/苦手.",
+    "masterExampleJp": "歌を歌うのが好きです。",
+    "masterExampleVi": "Tôi thích hát.",
+    "examples": [
+      {
+        "sentence": "歌を歌うのが好きです。",
+        "translation": "Tôi thích hát."
+      },
+      {
+        "sentence": "料理を作るのが得意です。",
+        "translation": "Tôi giỏi nấu ăn."
+      },
+      {
+        "sentence": "人前で話すのが苦手です。",
+        "translation": "Tôi kém nói trước đám đông."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：何か趣味はありますか。\nB：写真を撮るのが好きです。休みのたびに出かけます。",
+      "vi": "A: Bạn có sở thích gì không?\nB: Tôi thích chụp ảnh. Mỗi kỳ nghỉ là tôi đi ngay."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0140",
+    "grammar_id": "gram_n4_0140",
+    "milestoneId": "ms_minna_b38",
+    "milestone_id": "ms_minna_b38",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 38,
+    "pattern": "Vるのを忘れました／知っています",
+    "titleVi": "quên / biết việc ~ (の làm tân ngữ)",
+    "structure": "Vるのを忘れました／知っています",
+    "explanation": "の danh từ hóa làm tân ngữ (を) cho các động từ tri giác/nhận thức: 忘れる, 知る, 見る, 聞く, 手伝う, やめる...",
+    "nuanceReason": "こと cũng dùng với 知る, 忘れる nhưng thường trừu tượng hơn. の gợi cảm giác đang thấy/trải nghiệm sự việc đó.",
+    "commonMistake": "[Sai]: 薬を飲みましたのを忘れました。 -> [Đúng]: 薬を飲むのを忘れました。. の (danh từ hóa) làm tân ngữ đứng trước を phải đi sau động từ ở THỂ TỪ ĐIỂN, không chia thì (không dùng thể ました). Thì quá khứ chỉ nằm ở động từ chính phía sau (忘れました), còn mệnh đề bị danh từ hóa luôn giữ nguyên thể từ điển: 飲むのを忘れました, không phải 飲みましたのを.",
+    "kitsuPrompt": "Hỏi tôi về những việc tôi hay quên làm. Tôi sẽ dùng 〜のを忘れました.",
+    "masterExampleJp": "薬を飲むのを忘れました。",
+    "masterExampleVi": "Tôi quên uống thuốc.",
+    "examples": [
+      {
+        "sentence": "薬を飲むのを忘れました。",
+        "translation": "Tôi quên uống thuốc."
+      },
+      {
+        "sentence": "彼女が来るのを知っていましたか。",
+        "translation": "Bạn có biết cô ấy sẽ đến không?"
+      },
+      {
+        "sentence": "子どもが転ぶのを見ました。",
+        "translation": "Tôi thấy đứa trẻ ngã."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：会議の時間、変わったの知ってた？\nB：えっ、知らなかった！メールを確認するのを忘れてた。",
+      "vi": "A: Giờ họp đổi rồi bạn biết không?\nB: Ơ, không biết! Tôi quên kiểm tra email."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

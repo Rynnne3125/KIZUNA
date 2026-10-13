@@ -1,0 +1,162 @@
+[
+  {
+    "id": "gram_n4_0162",
+    "grammar_id": "gram_n4_0162",
+    "milestoneId": "ms_minna_b46",
+    "milestone_id": "ms_minna_b46",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 46,
+    "pattern": "Vるところです",
+    "titleVi": "sắp ~ (ngay bây giờ, chuẩn bị thực hiện)",
+    "structure": "Vるところです",
+    "explanation": "V thể từ điển + ところ biểu thị thời điểm ngay trước khi hành động bắt đầu. Nhấn mạnh \"chuẩn bị làm, chưa làm\". Thường kết hợp với 今から, ちょうど.",
+    "nuanceReason": "Vるところ + でした = chuẩn bị làm nhưng đã bị gián đoạn. Rất thường gặp trong câu chuyện kể.",
+    "commonMistake": "[Sai]: 田中さんは今、ご飯を食べるところです。 -> [Đúng]: 田中さんは今、ご飯を食べているところです。. Vるところです (chưa xảy ra, sắp làm) khác hẳn Vているところです (đang diễn ra giữa chừng). Nếu hành động đang thực sự xảy ra ngay lúc nói (đang ăn) thì phải dùng thể ている + ところ, không dùng thể từ điển + ところ vì thể đó chỉ diễn tả \"sắp\" chứ chưa bắt đầu.",
+    "kitsuPrompt": "Gọi điện hỏi tôi đang làm gì. Tôi sẽ nói \"vừa chuẩn bị ~\" bằng るところです.",
+    "masterExampleJp": "ちょうど出かけるところです。",
+    "masterExampleVi": "Tôi đang chuẩn bị ra ngoài đây.",
+    "examples": [
+      {
+        "sentence": "ちょうど出かけるところです。",
+        "translation": "Tôi đang chuẩn bị ra ngoài đây."
+      },
+      {
+        "sentence": "今から昼ごはんを食べるところです。",
+        "translation": "Bây giờ tôi chuẩn bị ăn trưa."
+      },
+      {
+        "sentence": "電話をするところでした。",
+        "translation": "Tôi chuẩn bị gọi điện (nhưng...). "
+      }
+    ],
+    "dialogue": {
+      "jp": "A：どこかへ行くんですか。\nB：ええ、ちょうど駅へ行くところです。一緒に行きますか。",
+      "vi": "A: Bạn đi đâu à?\nB: Vâng, tôi đang chuẩn bị ra ga đây. Đi cùng không?"
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0163",
+    "grammar_id": "gram_n4_0163",
+    "milestoneId": "ms_minna_b46",
+    "milestone_id": "ms_minna_b46",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 46,
+    "pattern": "Vているところです",
+    "titleVi": "đang ~ (ngay lúc này, giữa chừng)",
+    "structure": "Vているところです",
+    "explanation": "V thể ている + ところ biểu thị hành động đang tiếp diễn ngay tại thời điểm nói, nhấn mạnh \"đang ở giữa chừng\". Thường dùng khi được hỏi đột ngột.",
+    "nuanceReason": "Vているところ mạnh hơn Vています về nghĩa \"đang ở giữa việc đó ngay lúc này\".",
+    "commonMistake": "[Sai]: 今、調べているところします。 -> [Đúng]: 今、調べているところです。. Sau ところ (khi kết câu) phải theo bằng です, không phải します — ところ là danh từ hình thức nên chia như danh từ (ところです / ところでした), không chia theo động từ する. Ngoài ra ところ còn có thể theo sau bằng に気づいた, に電話がかかってきた... nhưng không phải します.",
+    "kitsuPrompt": "Gọi điện hỏi tôi đang làm gì. Tôi sẽ nói \"đang ~\" bằng ているところです.",
+    "masterExampleJp": "今、調べているところです。",
+    "masterExampleVi": "Tôi đang tra cứu đây.",
+    "examples": [
+      {
+        "sentence": "今、調べているところです。",
+        "translation": "Tôi đang tra cứu đây."
+      },
+      {
+        "sentence": "書類を作っているところですが、少し待ってください。",
+        "translation": "Tôi đang làm tài liệu, xin chờ một chút."
+      },
+      {
+        "sentence": "今ちょうど話し合っているところです。",
+        "translation": "Chúng tôi đang thảo luận đây."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：山田さん、資料できましたか。\nB：今、最終確認をしているところです。あと10分ほどで終わります。",
+      "vi": "A: Yamada-san, tài liệu xong chưa?\nB: Tôi đang kiểm tra lần cuối đây. Khoảng 10 phút nữa xong."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0164",
+    "grammar_id": "gram_n4_0164",
+    "milestoneId": "ms_minna_b46",
+    "milestone_id": "ms_minna_b46",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 46,
+    "pattern": "Vたところです",
+    "titleVi": "vừa mới ~ xong (ngay trước đây, khách quan)",
+    "structure": "Vたところです",
+    "explanation": "V thể た + ところ biểu thị hành động vừa mới hoàn thành ngay trước đó. Mang tính khách quan về thời điểm. Thường kết hợp: たった今〜たところ.",
+    "nuanceReason": "たところ nhấn mạnh thời điểm vừa xong. たばかり nhấn mạnh cảm giác \"mới mẻ, chưa quen\". Thường có thể thay nhau nhưng sắc thái khác.",
+    "commonMistake": "[Sai]: 私も今来たところですから、少し待ってください。 -> [Đúng]: 私も今来たところなので、少し待ってください。. から sau たところです nghe không tự nhiên vì ところです đã mang sắc thái kết câu/miêu tả trạng thái khách quan; khi cần nối lý do nên dùng ので (hoặc tách thành câu riêng rồi giải thích ở câu sau), tránh ghép trực tiếp からsau ところです.",
+    "kitsuPrompt": "Hỏi tôi vừa làm xong gì. Tôi sẽ trả lời bằng たところです.",
+    "masterExampleJp": "たった今、着いたところです。",
+    "masterExampleVi": "Tôi vừa mới đến đây.",
+    "examples": [
+      {
+        "sentence": "たった今、着いたところです。",
+        "translation": "Tôi vừa mới đến đây."
+      },
+      {
+        "sentence": "宿題をやり終えたところです。",
+        "translation": "Tôi vừa mới làm xong bài tập."
+      },
+      {
+        "sentence": "ちょうど食べ終えたところでした。",
+        "translation": "Tôi vừa mới ăn xong đúng lúc."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：お待たせしました。\nB：いいえ、私も今来たところです。",
+      "vi": "A: Xin lỗi để bạn chờ.\nB: Không sao, tôi cũng vừa mới đến đây."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0165",
+    "grammar_id": "gram_n4_0165",
+    "milestoneId": "ms_minna_b46",
+    "milestone_id": "ms_minna_b46",
+    "stageId": "stage_n4_5",
+    "stage_id": "stage_n4_5",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 46,
+    "pattern": "Vたばかりです",
+    "titleVi": "mới ~ (cảm giác còn mới, chưa quen)",
+    "structure": "Vたばかりです",
+    "explanation": "V thể た + ばかり biểu thị hành động vừa xảy ra với cảm giác \"còn mới mẻ\". Khoảng thời gian có thể không quá ngắn (vài ngày/tuần) nhưng người nói cảm thấy vẫn còn \"mới\".",
+    "nuanceReason": "ばかり cũng có nghĩa khác: Vてばかり (chỉ làm mỗi việc đó): ゲームばかりしている (chỉ chơi game thôi).",
+    "commonMistake": "[Sai]: すみません、来るばかりです。 -> [Đúng]: すみません、来たばかりです。. たばかり luôn phải đi với động từ thể た (đã xảy ra) vì ý nghĩa là \"vừa mới ~ xong\"; không thể dùng thể từ điển (るばかり) vì như vậy sẽ mất nghĩa \"vừa mới\", câu trở nên vô nghĩa. Đúng: 来たばかりです (vừa mới đến).",
+    "kitsuPrompt": "Hỏi tôi về điều gì đó tôi mới bắt đầu học/làm. Tôi sẽ dùng たばかりです.",
+    "masterExampleJp": "日本に来たばかりで、まだ慣れていません。",
+    "masterExampleVi": "Tôi mới sang Nhật nên chưa quen.",
+    "examples": [
+      {
+        "sentence": "日本に来たばかりで、まだ慣れていません。",
+        "translation": "Tôi mới sang Nhật nên chưa quen."
+      },
+      {
+        "sentence": "結婚したばかりなので、新居を探しています。",
+        "translation": "Mới cưới xong nên đang tìm nhà mới."
+      },
+      {
+        "sentence": "食べたばかりなので、まだおなかがいっぱいです。",
+        "translation": "Vừa mới ăn xong nên vẫn còn no."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：日本語、上手ですね。\nB：ありがとうございます。でも、まだ勉強を始めたばかりです。",
+      "vi": "A: Tiếng Nhật bạn giỏi nhỉ.\nB: Cảm ơn. Nhưng tôi mới bắt đầu học thôi."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

@@ -1,0 +1,177 @@
+[
+  {
+    "id": "gram_n2_0533",
+    "grammar_id": "gram_n2_0533",
+    "milestoneId": "ms_n2_s8_l2",
+    "milestone_id": "ms_n2_s8_l2",
+    "stageId": "stage_n2_8",
+    "stage_id": "stage_n2_8",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 117,
+    "pattern": "～ものがある",
+    "titleVi": "Có điều gì đó ~ (cảm nhận chủ quan)",
+    "structure": "～ものがある",
+    "explanation": "Mẫu ngữ pháp này dùng để diễn tả cảm nhận, cảm xúc hoặc đánh giá chủ quan sâu sắc của người nói về một sự vật, sự việc (\"có cảm giác rất...\", \"có điều gì đó khiến ta thấy...\"). Cấu trúc thường kết hợp với các từ ngữ thể hiện tâm trạng, ấn tượng như「感じる」「考えさせられる」「懐かしい」「寂しい」hoặc đi kèm「どこか」「何となく」. Thường được sử dụng trong văn viết hoặc cách nói trang trọng để bộc lộ sự xúc động, trăn trở hoặc đồng cảm.",
+    "nuanceReason": "Cần phân biệt「～ものがある」(bộc lộ cảm xúc, ấn tượng sâu sắc từ phía người nói) với「～というものだ」(khẳng định một chân lý, bản chất đương nhiên \"đó thực sự chính là...\").",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "彼の演奏には、聴く人の心を強く揺さぶるものがある。",
+    "masterExampleVi": "Màn trình diễn của anh ấy có một điều gì đó lay động mạnh mẽ trái tim người nghe.",
+    "examples": [
+      {
+        "sentence": "彼の演奏には、聴く人の心を強く揺さぶるものがある。",
+        "translation": "Màn trình diễn của anh ấy có một điều gì đó lay động mạnh mẽ trái tim người nghe.",
+        "reading": ""
+      },
+      {
+        "sentence": "長年住み慣れた実家を離れるのは、やはりどこか寂しいものがある。",
+        "translation": "Rời xa ngôi nhà gắn bó bao năm quả thực có cảm giác gì đó rất buồn bã.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0534",
+    "grammar_id": "gram_n2_0534",
+    "milestoneId": "ms_n2_s8_l2",
+    "milestone_id": "ms_n2_s8_l2",
+    "stageId": "stage_n2_8",
+    "stage_id": "stage_n2_8",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 117,
+    "pattern": "～とは限らない",
+    "titleVi": "Không nhất thiết ~ / Không hẳn là",
+    "structure": "～とは限らない",
+    "explanation": "Mẫu ngữ pháp này dùng để phủ định một phần quan niệm hoặc nhận định chung, mang ý nghĩa \"không nhất thiết là...\" hoặc \"không hẳn là...\". Mẫu câu diễn tả rằng sự việc không mang tính tuyệt đối 100% mà luôn tồn tại những trường hợp ngoại lệ. Thường đi kèm với các phó từ như 「必ずしも」(không hẳn/chưa chắc) hoặc 「いつも」(luôn luôn) và được sử dụng linh hoạt trong cả văn nói lẫn văn viết.",
+    "nuanceReason": "Mẫu này rất thường xuyên đi kèm phó từ「必ずしも」để nhấn mạnh ý phủ định một phần và nêu ra khả năng xảy ra ngoại lệ.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "値段が高いものが、必ずしも質が良いとは限らない。",
+    "masterExampleVi": "Đồ đắt tiền chưa chắc đã có chất lượng tốt.",
+    "examples": [
+      {
+        "sentence": "値段が高いものが、必ずしも質が良いとは限らない。",
+        "translation": "Đồ đắt tiền chưa chắc đã có chất lượng tốt.",
+        "reading": ""
+      },
+      {
+        "sentence": "日本語能力試験N1に合格したからといって、日本語が上手に話せるとは限らない。",
+        "translation": "Dù đã thi đỗ JLPT N1 nhưng không hẳn là có thể giao tiếp tiếng Nhật trôi chảy.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0535",
+    "grammar_id": "gram_n2_0535",
+    "milestoneId": "ms_n2_s8_l2",
+    "milestone_id": "ms_n2_s8_l2",
+    "stageId": "stage_n2_8",
+    "stage_id": "stage_n2_8",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 117,
+    "pattern": "～ようがない",
+    "titleVi": "Không có cách nào để ~",
+    "structure": "～ようがない",
+    "explanation": "Mẫu ngữ pháp này đi sau động từ thể Masu (bỏ ます) nhằm diễn đạt ý 'dù rất muốn làm nhưng hoàn toàn không có cách nào hay phương tiện nào để thực hiện'. Cấu trúc này thể hiện sự bất lực, bế tắc của người nói trước một tình huống thực tế do thiếu thốn điều kiện, công cụ hoặc thông tin. Thường chỉ kết hợp với các động từ chỉ hành động có chủ ý (như liên lạc, sửa chữa, giải thích, cứu vãn).",
+    "nuanceReason": "Với danh từ động từ nhóm 3 thường dùng dạng「N + の + しようがない」(như 連絡のしようがない), và khi bổ nghĩa cho danh từ đi sau thì biến đổi thành「～ようのない + N」.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "連絡先も現住所も分からないのだから、こちらからは連絡のしようがない。",
+    "masterExampleVi": "Vì không biết cả thông tin liên lạc lẫn địa chỉ hiện tại nên phía chúng tôi hoàn toàn không có cách nào để liên lạc được.",
+    "examples": [
+      {
+        "sentence": "連絡先も現住所も分からないのだから、こちらからは連絡のしようがない。",
+        "translation": "Vì không biết cả thông tin liên lạc lẫn địa chỉ hiện tại nên phía chúng tôi hoàn toàn không có cách nào để liên lạc được.",
+        "reading": ""
+      },
+      {
+        "sentence": "データのバックアップを取っていなかったため、パソコンが完全に壊れてしまっては復旧のしようがない。",
+        "translation": "Vì không sao lưu dữ liệu nên một khi máy tính đã hỏng hoàn toàn thì chẳng còn cách nào để khôi phục lại.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0536",
+    "grammar_id": "gram_n2_0536",
+    "milestoneId": "ms_n2_s8_l2",
+    "milestone_id": "ms_n2_s8_l2",
+    "stageId": "stage_n2_8",
+    "stage_id": "stage_n2_8",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 117,
+    "pattern": "～まい",
+    "titleVi": "Chắc không ~ / Quyết không",
+    "structure": "～まい",
+    "explanation": "「～まい」 là mẫu ngữ pháp trang trọng dùng để diễn đạt hai ý nghĩa chính: phủ định ý chí (\"quyết không làm...\") và phủ định suy đoán (\"chắc là không...\"). Về cách kết hợp, động từ nhóm 1 nối với thể từ điển + まい, động từ nhóm 2 dùng thể từ điển hoặc bỏ ない + まい, còn động từ nhóm 3 có dạng đặc biệt như すまい/するまい và こまい/くるまい. Mẫu câu này mang sắc thái văn viết đanh thép, thể hiện quyết tâm dứt khoát hoặc sự phán đoán mang tính logic cao của người nói.",
+    "nuanceReason": "Khi diễn đạt ý chí không làm gì của người thứ ba, không kết thúc câu bằng「～まい」trực tiếp mà phải dùng dạng「～まいと思っている」hoặc「～まいとしている」.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "あんなひどい目に遭ったのだから、二度とあの店には行くまい。",
+    "masterExampleVi": "Đã gặp phải trải nghiệm tồi tệ như thế thì tôi quyết sẽ không bao giờ đến cửa hàng đó lần thứ hai.",
+    "examples": [
+      {
+        "sentence": "あんなひどい目に遭ったのだから、二度とあの店には行くまい。",
+        "translation": "Đã gặp phải trải nghiệm tồi tệ như thế thì tôi quyết sẽ không bao giờ đến cửa hàng đó lần thứ hai.",
+        "reading": ""
+      },
+      {
+        "sentence": "彼ほどのベテラン社員なら、このような単純なミスは犯すまい。",
+        "translation": "Một nhân viên kỳ cựu cỡ như anh ấy thì chắc hẳn sẽ không phạm phải lỗi ngớ ngẩn như thế này đâu.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n2_0537",
+    "grammar_id": "gram_n2_0537",
+    "milestoneId": "ms_n2_s8_l2",
+    "milestone_id": "ms_n2_s8_l2",
+    "stageId": "stage_n2_8",
+    "stage_id": "stage_n2_8",
+    "jlptLevel": "N2",
+    "jlpt_level": "N2",
+    "lessonNumber": 117,
+    "pattern": "～に相違ない",
+    "titleVi": "Chắc chắn là ~ (trang trọng)",
+    "structure": "～に相違ない",
+    "explanation": "Mẫu 「～に相違ない」 dùng để đưa ra phán đoán hoặc khẳng định mang tính chắc chắn cao của người nói dựa trên chứng cứ hoặc lập luận rõ ràng, mang nghĩa \"chắc chắn là / không sai được\". Đây là cách diễn đạt mang sắc thái trang trọng, văn phong cứng hơn nhiều so với 「～に違いない」, thường được dùng trong văn viết, báo cáo, bài phát biểu hoặc các bối cảnh trang trọng. Khi kết hợp, động từ và tính từ đuôi い ở thể thông thường, còn danh từ và tính từ đuôi な sẽ đi trực tiếp (bỏ だ) hoặc dùng dạng 「である」 trước 「に相違ない」.",
+    "nuanceReason": "「～に相違ない」 đồng nghĩa với 「～に違いない」 nhưng trang trọng và mang tính học thuật, văn viết hơn, nên không dùng trong giao tiếp xuồng xã hàng ngày.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "現場に残された指紋から判断すると、犯人は内部の事情に詳しい者に相違ない。",
+    "masterExampleVi": "Phán đoán từ dấu vân tay để lại hiện trường, thủ phạm chắc chắn là người nắm rất rõ tình hình nội bộ.",
+    "examples": [
+      {
+        "sentence": "現場に残された指紋から判断すると、犯人は内部の事情に詳しい者に相違ない。",
+        "translation": "Phán đoán từ dấu vân tay để lại hiện trường, thủ phạm chắc chắn là người nắm rất rõ tình hình nội bộ.",
+        "reading": ""
+      },
+      {
+        "sentence": "この画期的な新技術の開発は、今後の医療業界に大きな変革をもたらすに相違ない。",
+        "translation": "Việc phát triển công nghệ mới mang tính đột phá này chắc chắn sẽ đem lại sự thay đổi lớn cho ngành y tế trong tương lai.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N2",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

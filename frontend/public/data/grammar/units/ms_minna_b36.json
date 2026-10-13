@@ -1,0 +1,122 @@
+[
+  {
+    "id": "gram_n4_0132",
+    "grammar_id": "gram_n4_0132",
+    "milestoneId": "ms_minna_b36",
+    "milestone_id": "ms_minna_b36",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 36,
+    "pattern": "Vる／Vないように",
+    "titleVi": "để ~ / để không ~ (hướng đến mục tiêu)",
+    "structure": "Vる／Vないように",
+    "explanation": "〜ように biểu thị mục đích hoặc nỗ lực hướng đến trạng thái mong muốn. Thường theo sau V 可能形 (để có thể ~) hoặc V ない (để không ~). Khác với ために: ように dùng với V可能 và V ない, ために dùng với V ý chí.",
+    "nuanceReason": "ように + 言います/頼みます = gián tiếp truyền đạt yêu cầu: 静かにするように言ってください (nhờ nói hãy yên lặng).",
+    "commonMistake": "[Sai]: 太らないために、食べすぎないようにしています。 -> [Đúng]: 太らないように、食べすぎないようにしています。. Học viên hay lẫn ために và ように: ために đi theo sau động từ Ý CHÍ (thể từ điển mang tính chủ động rõ ràng như 勉強するために), còn ように bắt buộc dùng khi vế trước là động từ khả năng (V可能形) hoặc động từ phủ định (Vない) diễn tả mục tiêu/mong muốn không hoàn toàn kiểm soát được, ví dụ 太らないように, 食べられるように. Ở đây 太らない (phủ định) phải đi với ように, không được dùng ために.",
+    "kitsuPrompt": "Hỏi tôi về mục tiêu học tập. Tôi sẽ dùng 〜できるように〜ています.",
+    "masterExampleJp": "遅刻しないように、早く起きます。",
+    "masterExampleVi": "Để không đi muộn tôi dậy sớm.",
+    "examples": [
+      {
+        "sentence": "遅刻しないように、早く起きます。",
+        "translation": "Để không đi muộn tôi dậy sớm."
+      },
+      {
+        "sentence": "漢字が書けるように、毎日練習しています。",
+        "translation": "Để có thể viết kanji tôi luyện tập mỗi ngày."
+      },
+      {
+        "sentence": "健康のために、運動するようにしています。",
+        "translation": "Vì sức khỏe tôi đang cố gắng tập thể dục."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：どうして毎朝ジョギングするんですか。\nB：健康でいられるように、走るようにしているんです。",
+      "vi": "A: Sao mỗi sáng bạn đi chạy bộ vậy?\nB: Tôi đang cố chạy để giữ sức khỏe."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0133",
+    "grammar_id": "gram_n4_0133",
+    "milestoneId": "ms_minna_b36",
+    "milestone_id": "ms_minna_b36",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 36,
+    "pattern": "Vるようになります",
+    "titleVi": "trở nên có thể làm ~ (thay đổi tự nhiên)",
+    "structure": "Vるようになります",
+    "explanation": "ようになる biểu thị sự thay đổi tự nhiên theo thời gian — từ trạng thái A sang trạng thái B. Thường đi với V可能形 hoặc V普通形 biểu thị thay đổi khả năng/thói quen.",
+    "nuanceReason": "ようになった = kết quả thay đổi đã hoàn tất. Phủ định: Vないようになった (trở nên không còn làm).",
+    "commonMistake": "[Sai]: 毎日練習したら、上手になるようになりました。 -> [Đúng]: 毎日練習したら、上手になりました。. Lỗi phổ biến là thừa ようになる khi đã có になる rồi (danh từ/tính từ + になる đã tự mang nghĩa 'trở nên'), thêm ようになった nữa thành lặp nghĩa dư thừa, đúng ra chỉ cần 上手になりました. Ngoài ra một lỗi khác hay gặp là quên よう khi chia động từ khả năng: できるになりました (sai) phải là できるようになりました (đủ よう).",
+    "kitsuPrompt": "Hỏi tôi về điều gì đó tôi đã học được sau nhiều tháng cố gắng. Tôi sẽ kể bằng ようになりました.",
+    "masterExampleJp": "練習したら、泳げるようになりました。",
+    "masterExampleVi": "Sau khi luyện tập tôi đã bơi được rồi.",
+    "examples": [
+      {
+        "sentence": "練習したら、泳げるようになりました。",
+        "translation": "Sau khi luyện tập tôi đã bơi được rồi."
+      },
+      {
+        "sentence": "日本に住んでから、箸が使えるようになりました。",
+        "translation": "Từ khi sống ở Nhật tôi đã dùng được đũa."
+      },
+      {
+        "sentence": "毎日読んでいたら、速く読めるようになりました。",
+        "translation": "Đọc mỗi ngày thì tôi đọc nhanh hơn rồi."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：日本語、上手になりましたね。\nB：ありがとうございます。毎日聞いていたら、少し聞き取れるようになりました。",
+      "vi": "A: Tiếng Nhật bạn giỏi hơn nhỉ.\nB: Cảm ơn. Nghe mỗi ngày thì tôi đã nghe hiểu được một chút."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n4_0134",
+    "grammar_id": "gram_n4_0134",
+    "milestoneId": "ms_minna_b36",
+    "milestone_id": "ms_minna_b36",
+    "stageId": "stage_n4_3",
+    "stage_id": "stage_n4_3",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "lessonNumber": 36,
+    "pattern": "Vるようにします",
+    "titleVi": "cố gắng làm ~ (quyết tâm/nỗ lực)",
+    "structure": "Vるようにします",
+    "explanation": "ようにする biểu thị sự cố ý, nỗ lực để duy trì hoặc bắt đầu một hành vi. Khác với ようになる (thay đổi tự nhiên), ようにする là ý chí chủ động.",
+    "nuanceReason": "〜ようにしています = đang duy trì thói quen. 〜ようにします = quyết tâm làm từ nay trở đi.",
+    "commonMistake": "[Sai]: 太らないように、野菜をたくさん食べないようにしている。 -> [Đúng]: 太らないように、野菜をたくさん食べるようにしています。. Mẫu 〜ようにしている (thể thường, không có です) tuy không sai về ngữ pháp nhưng khi nói về thói quen đang duy trì ở hiện tại trong văn nói lịch sự tự nhiên, người Nhật thường dùng 〜ようにしています (có です/ます) hơn là dùng thể thường 〜ようにしている, đặc biệt khi giao tiếp với người ngoài hoặc trong câu trả lời phỏng vấn.",
+    "kitsuPrompt": "Hỏi tôi về các thói quen tốt tôi đang cố gắng duy trì. Tôi sẽ dùng 〜ようにしています.",
+    "masterExampleJp": "毎朝ニュースを見るようにしています。",
+    "masterExampleVi": "Tôi đang cố gắng xem tin tức mỗi sáng.",
+    "examples": [
+      {
+        "sentence": "毎朝ニュースを見るようにしています。",
+        "translation": "Tôi đang cố gắng xem tin tức mỗi sáng."
+      },
+      {
+        "sentence": "野菜をたくさん食べるようにしています。",
+        "translation": "Tôi đang cố ăn nhiều rau hơn."
+      },
+      {
+        "sentence": "夜は早く寝るようにします。",
+        "translation": "Tôi sẽ cố gắng ngủ sớm vào buổi tối."
+      }
+    ],
+    "dialogue": {
+      "jp": "A：健康のために何かしていますか。\nB：毎日30分歩くようにしています。",
+      "vi": "A: Bạn làm gì để giữ sức khỏe không?\nB: Tôi đang cố gắng đi bộ 30 phút mỗi ngày."
+    },
+    "sourceBook": "Minna no Nihongo (N4)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

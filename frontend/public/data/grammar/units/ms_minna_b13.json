@@ -1,0 +1,243 @@
+[
+  {
+    "id": "gram_n5_0053",
+    "grammar_id": "gram_n5_0053",
+    "milestoneId": "ms_minna_b13",
+    "milestone_id": "ms_minna_b13",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 13,
+    "pattern": "NはNが欲しいです",
+    "titleVi": "N muốn (có được) N",
+    "structure": "NはNが欲しいです",
+    "explanation": "欲しい là tính từ い, diễn tả mong muốn sở hữu vật gì. Đối tượng mong muốn dùng が. Chú ý: chỉ nói về mong muốn của mình, không dùng để nói mong muốn của người khác (dùng ほしがっています).",
+    "nuanceReason": "Nói về người khác: 彼は新しい車を欲しがっています (anh ấy đang muốn xe mới). Không nói 彼は〜が欲しいです.",
+    "commonMistake": "[Sai]: 彼は新しい車が欲しいです。 -> [Đúng]: 彼は新しい車を欲しがっています。. Mong muốn là cảm xúc nội tâm — người Nhật tránh phán đoán cảm xúc người khác. Khi nói về người khác dùng 〜ほしがっています (biểu hiện ra ngoài).",
+    "kitsuPrompt": "Hỏi tôi muốn có gì cho dịp sinh nhật/Giáng sinh, tôi trả lời với 〜が欲しいです.",
+    "masterExampleJp": "新しいスマートフォンが欲しいです。",
+    "masterExampleVi": "Tôi muốn có điện thoại thông minh mới.",
+    "examples": [
+      {
+        "sentence": "新しいスマートフォンが欲しいです。",
+        "translation": "Tôi muốn có điện thoại thông minh mới."
+      },
+      {
+        "sentence": "今、お金が欲しいです。",
+        "translation": "Bây giờ tôi muốn có tiền."
+      },
+      {
+        "sentence": "何か欲しいものはありますか。",
+        "translation": "Bạn có muốn thứ gì không?"
+      },
+      {
+        "sentence": "休みが欲しいです。",
+        "translation": "Tôi muốn được nghỉ ngơi."
+      }
+    ],
+    "dialogue": {
+      "title": "Hỏi muốn quà gì",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "誕生日に何が欲しいですか。",
+          "translation": "Sinh nhật bạn muốn quà gì?"
+        },
+        {
+          "speaker": "B",
+          "text": "本当は新しいカメラが欲しいです。でも高いですから…",
+          "translation": "Thật ra tôi muốn máy ảnh mới. Nhưng vì đắt quá..."
+        },
+        {
+          "speaker": "A",
+          "text": "じゃあ、一緒に買いに行きましょう！",
+          "translation": "Vậy hãy cùng đi mua nhé!"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0054",
+    "grammar_id": "gram_n5_0054",
+    "milestoneId": "ms_minna_b13",
+    "milestone_id": "ms_minna_b13",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 13,
+    "pattern": "Vたいです",
+    "titleVi": "muốn làm V",
+    "structure": "Vたいです",
+    "explanation": "Gắn たい vào động từ dạng ます-stem để nói \"muốn làm\". たい hoạt động như tính từ い: Vたくないです (không muốn), Vたかったです (đã muốn).",
+    "nuanceReason": "Tân ngữ của Vたい có thể dùng を hoặc が: ラーメンを食べたい / ラーメンが食べたい (が nhấn mạnh đối tượng hơn).",
+    "commonMistake": "[Sai]: 彼女は日本へ行きたいです。 -> [Đúng]: 彼女は日本へ行きたがっています。. Giống 欲しい, たい cũng chỉ dùng khi nói về mong muốn của bản thân. Với người khác dùng 〜たがっています.",
+    "kitsuPrompt": "Hỏi tôi muốn làm gì trong 5 tình huống khác nhau, tôi trả lời với Vたいです.",
+    "masterExampleJp": "日本へ行きたいです。",
+    "masterExampleVi": "Tôi muốn đi Nhật.",
+    "examples": [
+      {
+        "sentence": "日本へ行きたいです。",
+        "translation": "Tôi muốn đi Nhật."
+      },
+      {
+        "sentence": "今日は何もしたくないです。",
+        "translation": "Hôm nay tôi không muốn làm gì cả."
+      },
+      {
+        "sentence": "子どものころ、医者になりたかったです。",
+        "translation": "Hồi nhỏ tôi muốn trở thành bác sĩ."
+      },
+      {
+        "sentence": "何が食べたいですか。",
+        "translation": "Bạn muốn ăn gì?"
+      }
+    ],
+    "dialogue": {
+      "title": "Lên kế hoạch kỳ nghỉ",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "夏休みはどこへ行きたいですか。",
+          "translation": "Kỳ nghỉ hè bạn muốn đi đâu?"
+        },
+        {
+          "speaker": "B",
+          "text": "京都へ行きたいです。お寺や神社を見たいです。",
+          "translation": "Tôi muốn đi Kyoto. Tôi muốn xem đền chùa và đình miếu."
+        },
+        {
+          "speaker": "A",
+          "text": "何が食べたいですか。",
+          "translation": "Bạn muốn ăn gì?"
+        },
+        {
+          "speaker": "B",
+          "text": "京都の抹茶スイーツが食べたいです！",
+          "translation": "Tôi muốn ăn bánh trà xanh Kyoto!"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0055",
+    "grammar_id": "gram_n5_0055",
+    "milestoneId": "ms_minna_b13",
+    "milestone_id": "ms_minna_b13",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 13,
+    "pattern": "NへNにVます",
+    "titleVi": "đi đến N để làm N",
+    "structure": "NへNにVます",
+    "explanation": "Diễn tả mục đích di chuyển. Mục đích đứng trước に, động từ di chuyển đứng sau. Cấu trúc: [nơi đến]へ + [mục đích]に + [đi/đến/về].",
+    "nuanceReason": "Mục đích là động từ dạng ます-stem + に: 食べに (để ăn), 見に (để xem), 遊びに (để chơi).",
+    "commonMistake": "[Sai]: スーパーへ買い物のために行きます。 -> [Đúng]: スーパーへ買い物に行きます。. Mục đích di chuyển dùng Vます-stem + に, không phải ために (ために = vì, dùng cho mục đích nói chung, học ở bài sau).",
+    "kitsuPrompt": "Hỏi tôi đi đâu để làm gì (3 địa điểm), tôi trả lời với NへNにVます.",
+    "masterExampleJp": "デパートへ買い物に行きます。",
+    "masterExampleVi": "Tôi đi đến trung tâm thương mại để mua sắm.",
+    "examples": [
+      {
+        "sentence": "デパートへ買い物に行きます。",
+        "translation": "Tôi đi đến trung tâm thương mại để mua sắm."
+      },
+      {
+        "sentence": "図書館へ本を借りに行きました。",
+        "translation": "Tôi đã đến thư viện để mượn sách."
+      },
+      {
+        "sentence": "日本へ日本語を勉強しに来ました。",
+        "translation": "Tôi đến Nhật để học tiếng Nhật."
+      },
+      {
+        "sentence": "友だちの家へ遊びに行きます。",
+        "translation": "Tôi đến nhà bạn để chơi."
+      }
+    ],
+    "dialogue": {
+      "title": "Nói lý do đến Nhật",
+      "lines": [
+        {
+          "speaker": "Người Nhật",
+          "text": "日本へ何をしに来ましたか。",
+          "translation": "Bạn đến Nhật để làm gì?"
+        },
+        {
+          "speaker": "Du học sinh",
+          "text": "日本語を勉強しに来ました。日本文化も学びたいです。",
+          "translation": "Tôi đến để học tiếng Nhật. Tôi cũng muốn tìm hiểu văn hóa Nhật."
+        },
+        {
+          "speaker": "Người Nhật",
+          "text": "そうですか。日本を楽しんでください！",
+          "translation": "Vậy à. Chúc bạn thích thú với Nhật Bản!"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0056",
+    "grammar_id": "gram_n5_0056",
+    "milestoneId": "ms_minna_b13",
+    "milestone_id": "ms_minna_b13",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 13,
+    "pattern": "NがVたいです",
+    "titleVi": "muốn ~ N (tân ngữ dùng が)",
+    "structure": "NがVたいです",
+    "explanation": "Khi tân ngữ của Vたい được nhấn mạnh hoặc trong câu hỏi \"cái gì muốn làm\", tân ngữ có thể dùng が thay vì を.",
+    "nuanceReason": "を vs が với たい: を = bình thường, が = nhấn mạnh đối tượng. Cả hai đều đúng, が tự nhiên hơn trong câu hỏi.",
+    "commonMistake": "[Sai]: 何をが食べたいですか。 -> [Đúng]: 何が食べたいですか。. Không dùng をが cùng lúc. Khi tân ngữ là から hỏi (何), dùng が: 何が食べたいですか. Khi tân ngữ cụ thể, dùng を hoặc が: ラーメンを/が食べたい.",
+    "kitsuPrompt": "Hỏi tôi 何が〜たいですか về 4 hoạt động, tôi trả lời nhấn mạnh đối tượng.",
+    "masterExampleJp": "日本料理が食べたいです。",
+    "masterExampleVi": "Tôi muốn ăn món Nhật.",
+    "examples": [
+      {
+        "sentence": "日本料理が食べたいです。",
+        "translation": "Tôi muốn ăn món Nhật."
+      },
+      {
+        "sentence": "何が見たいですか。— 富士山が見たいです。",
+        "translation": "Bạn muốn nhìn gì? — Tôi muốn nhìn thấy núi Fuji."
+      },
+      {
+        "sentence": "冷たい水が飲みたいです。",
+        "translation": "Tôi muốn uống nước lạnh."
+      }
+    ],
+    "dialogue": {
+      "title": "Hỏi muốn ăn gì hôm nay",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "今日は何が食べたいですか。",
+          "translation": "Hôm nay bạn muốn ăn gì?"
+        },
+        {
+          "speaker": "B",
+          "text": "辛いものが食べたいです！タイ料理はどうですか。",
+          "translation": "Tôi muốn ăn gì đó cay! Đồ ăn Thái thế nào?"
+        },
+        {
+          "speaker": "A",
+          "text": "いいですね。近くにおいしいお店があります。",
+          "translation": "Hay đấy. Gần đây có quán ngon."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

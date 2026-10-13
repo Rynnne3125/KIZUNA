@@ -1,0 +1,234 @@
+[
+  {
+    "id": "gram_n5_0019",
+    "grammar_id": "gram_n5_0019",
+    "milestoneId": "ms_minna_b05",
+    "milestone_id": "ms_minna_b05",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 5,
+    "pattern": "NへVます",
+    "titleVi": "đi đến N (hướng di chuyển)",
+    "structure": "NへVます",
+    "explanation": "へ (đọc là \"e\") chỉ hướng hoặc điểm đến của chuyển động. Thường dùng với động từ di chuyển: 行く, 来る, 帰る. へ và に có thể thay nhau nhưng へ nhấn mạnh hướng đi hơn.",
+    "nuanceReason": "Điểm đến cụ thể và mục đích rõ ràng → dùng に; nhấn mạnh hướng di chuyển → dùng へ.",
+    "commonMistake": "[Sai]: 学校に行きます。(khi muốn nhấn hướng đi) -> [Đúng]: 学校へ行きます。. Cả hai đều đúng nhưng へ nhấn mạnh quá trình di chuyển về hướng đó, còn に nhấn mạnh đích đến cụ thể. Với hành động đơn thuần \"đi đến\", に phổ biến hơn trong hội thoại.",
+    "kitsuPrompt": "Hỏi tôi kế hoạch cuối tuần đi đâu và tôi sẽ trả lời với NへVます.",
+    "masterExampleJp": "来月、日本へ行きます。",
+    "masterExampleVi": "Tháng sau tôi sẽ đi Nhật.",
+    "examples": [
+      {
+        "sentence": "来月、日本へ行きます。",
+        "translation": "Tháng sau tôi sẽ đi Nhật."
+      },
+      {
+        "sentence": "週末は図書館へ行きました。",
+        "translation": "Cuối tuần tôi đã đến thư viện."
+      },
+      {
+        "sentence": "何時に家へ帰りますか。",
+        "translation": "Bạn về nhà lúc mấy giờ?"
+      },
+      {
+        "sentence": "明日、友だちの家へ遊びに行きます。",
+        "translation": "Ngày mai tôi sẽ đến nhà bạn chơi."
+      }
+    ],
+    "dialogue": {
+      "title": "Hỏi kế hoạch cuối tuần",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "週末、どこへ行きますか。",
+          "translation": "Cuối tuần bạn sẽ đi đâu?"
+        },
+        {
+          "speaker": "B",
+          "text": "京都へ行きます。初めてです。",
+          "translation": "Tôi sẽ đi Kyoto. Lần đầu đấy."
+        },
+        {
+          "speaker": "A",
+          "text": "いいですね！楽しんできてください。",
+          "translation": "Tốt quá! Chúc bạn vui nhé."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0020",
+    "grammar_id": "gram_n5_0020",
+    "milestoneId": "ms_minna_b05",
+    "milestone_id": "ms_minna_b05",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 5,
+    "pattern": "NでVます",
+    "titleVi": "bằng / bởi phương tiện N",
+    "structure": "NでVます",
+    "explanation": "で chỉ phương tiện di chuyển hoặc công cụ. Đây là một trong những nghĩa của で — ở bài này tập trung vào phương tiện giao thông.",
+    "nuanceReason": "歩いて (đi bộ) không dùng で vì \"đi bộ\" dùng て-form như một trạng ngữ cách thức.",
+    "commonMistake": "[Sai]: 電車と会社へ行きます。 -> [Đúng]: 電車で会社へ行きます。. と dùng cho \"đi cùng người\", で dùng cho \"bằng phương tiện\". Hai trợ từ hoàn toàn khác nhau dù cùng ý \"đi với/bằng\" trong tiếng Việt.",
+    "kitsuPrompt": "Hỏi tôi đi đến 3 địa điểm khác nhau bằng phương tiện gì, tôi trả lời với で.",
+    "masterExampleJp": "電車で会社へ行きます。",
+    "masterExampleVi": "Tôi đi làm bằng tàu điện.",
+    "examples": [
+      {
+        "sentence": "電車で会社へ行きます。",
+        "translation": "Tôi đi làm bằng tàu điện."
+      },
+      {
+        "sentence": "バスで学校へ来ましたか。",
+        "translation": "Bạn đến trường bằng xe buýt à?"
+      },
+      {
+        "sentence": "歩いて駅まで行きます。",
+        "translation": "Tôi đi bộ đến ga."
+      },
+      {
+        "sentence": "飛行機で東京から大阪へ行きました。",
+        "translation": "Tôi đã bay từ Tokyo đến Osaka."
+      }
+    ],
+    "dialogue": {
+      "title": "Hỏi đường đi làm",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "毎日、何で会社へ行きますか。",
+          "translation": "Mỗi ngày bạn đi làm bằng gì?"
+        },
+        {
+          "speaker": "B",
+          "text": "電車で行きます。でも雨の日はバスです。",
+          "translation": "Tôi đi bằng tàu điện. Nhưng hôm mưa thì đi xe buýt."
+        },
+        {
+          "speaker": "A",
+          "text": "駅まで歩きますか。",
+          "translation": "Bạn đi bộ đến ga à?"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0021",
+    "grammar_id": "gram_n5_0021",
+    "milestoneId": "ms_minna_b05",
+    "milestone_id": "ms_minna_b05",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 5,
+    "pattern": "NとVます",
+    "titleVi": "cùng với N làm gì",
+    "structure": "NとVます",
+    "explanation": "と chỉ người cùng thực hiện hành động. Khác với phương tiện (で): bạn đi cùng người (と), đi bằng phương tiện (で).",
+    "nuanceReason": "誰と (cùng ai?) là câu hỏi cặp đôi với Nと. 一人で = một mình (không có と).",
+    "commonMistake": "[Sai]: 私は友だちと電車と行きました。 -> [Đúng]: 私は友だちと電車で行きました。. Một câu có thể có cả と (người đi cùng) và で (phương tiện), nhưng phương tiện phải là で, không phải と thứ hai.",
+    "kitsuPrompt": "Hỏi tôi 3 hoạt động cuối tuần vừa rồi đi cùng ai, tôi trả lời với Nと.",
+    "masterExampleJp": "家族と旅行します。",
+    "masterExampleVi": "Tôi đi du lịch cùng gia đình.",
+    "examples": [
+      {
+        "sentence": "家族と旅行します。",
+        "translation": "Tôi đi du lịch cùng gia đình."
+      },
+      {
+        "sentence": "誰と日本へ行きましたか。",
+        "translation": "Bạn đã đi Nhật cùng với ai?"
+      },
+      {
+        "sentence": "一人でレストランへ行きました。",
+        "translation": "Tôi đã đi nhà hàng một mình."
+      }
+    ],
+    "dialogue": {
+      "title": "Rủ bạn đi du lịch",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "来月、沖縄へ旅行します。",
+          "translation": "Tháng sau tôi đi du lịch Okinawa."
+        },
+        {
+          "speaker": "B",
+          "text": "誰と行きますか。",
+          "translation": "Bạn đi cùng ai?"
+        },
+        {
+          "speaker": "A",
+          "text": "彼女と行きます。一緒にどうですか。",
+          "translation": "Tôi đi cùng bạn gái. Bạn có muốn đi cùng không?"
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n5_0022",
+    "grammar_id": "gram_n5_0022",
+    "milestoneId": "ms_minna_b05",
+    "milestone_id": "ms_minna_b05",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "lessonNumber": 5,
+    "pattern": "いつVますか",
+    "titleVi": "khi nào làm?",
+    "structure": "いつVますか",
+    "explanation": "いつ là từ hỏi về thời gian \"khi nào / lúc nào\". Dùng thay cho từ chỉ thời gian trong câu và không cần trợ từ に.",
+    "nuanceReason": "いつ không cần に sau nó, nhưng thời gian cụ thể thì cần: 月曜日に行きます (đi vào thứ Hai).",
+    "commonMistake": "[Sai]: いつに行きますか。 -> [Đúng]: いつ行きますか。. いつ không kết hợp với に. Nhưng khi nói thời gian cụ thể thì cần に: 月曜日に行きます (vào thứ Hai).",
+    "kitsuPrompt": "Hỏi tôi 5 sự kiện sắp tới của tôi bằng いつ、tôi sẽ trả lời thời gian cụ thể.",
+    "masterExampleJp": "いつ日本へ来ましたか。",
+    "masterExampleVi": "Bạn đến Nhật khi nào?",
+    "examples": [
+      {
+        "sentence": "いつ日本へ来ましたか。",
+        "translation": "Bạn đến Nhật khi nào?"
+      },
+      {
+        "sentence": "次の試験はいつですか。",
+        "translation": "Kỳ thi tiếp theo là khi nào?"
+      },
+      {
+        "sentence": "いつ帰りますか。— 来週帰ります。",
+        "translation": "Khi nào bạn về? — Tôi về tuần sau."
+      }
+    ],
+    "dialogue": {
+      "title": "Hỏi ngày về nước",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "いつベトナムへ帰りますか。",
+          "translation": "Khi nào bạn về Việt Nam?"
+        },
+        {
+          "speaker": "B",
+          "text": "来月の15日に帰ります。",
+          "translation": "Tôi về ngày 15 tháng sau."
+        },
+        {
+          "speaker": "A",
+          "text": "そうですか。寂しくなりますね。",
+          "translation": "Vậy à. Sẽ nhớ bạn đấy."
+        }
+      ]
+    },
+    "sourceBook": "Minna no Nihongo (N5)",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

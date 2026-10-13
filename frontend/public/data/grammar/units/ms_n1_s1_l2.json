@@ -1,0 +1,26 @@
+[
+  {
+    "id": "gram_n1_0575",
+    "grammar_id": "gram_n1_0575",
+    "milestoneId": "ms_n1_s1_l2",
+    "milestone_id": "ms_n1_s1_l2",
+    "stageId": "stage_n1_1",
+    "stage_id": "stage_n1_1",
+    "jlptLevel": "N1",
+    "jlpt_level": "N1",
+    "lessonNumber": 126,
+    "pattern": "〜たら最後／たが最後",
+    "titleVi": "\"vừa xong lại ngay\" (lặp vô ích), \"một khi đã… thì hết đường lui\"",
+    "structure": "〜たら最後／たが最後",
+    "explanation": "Cấu trúc N1 thuộc [N1] Chặng 1 · Bài 126 (②): \"vừa xong lại ngay\" (lặp vô ích), \"một khi đã… thì hết đường lui\".",
+    "nuanceReason": "[INFO]  | [INFO] ",
+    "commonMistake": "[INFO]  | [INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜たら最後／たが最後（N1・実用例）",
+    "masterExampleVi": "\"vừa xong lại ngay\" (lặp vô ích), \"một khi đã… thì hết đường lui\"",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N1 / Michinori N1",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]

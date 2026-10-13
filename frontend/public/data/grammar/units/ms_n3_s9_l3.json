@@ -1,0 +1,201 @@
+[
+  {
+    "id": "gram_n3_0352",
+    "grammar_id": "gram_n3_0352",
+    "milestoneId": "ms_n3_s9_l3",
+    "milestone_id": "ms_n3_s9_l3",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 84,
+    "pattern": "～ものの",
+    "titleVi": "Tuy nhiên, dù vậy nhưng (nhượng bộ thực tế)",
+    "structure": "～ものの",
+    "explanation": "Mẫu 「～ものの」 dùng để diễn đạt sự nhượng bộ dựa trên sự thật khách quan: dù công nhận vế trước là đúng sự thật, nhưng vế sau lại diễn ra trái với kỳ vọng thông thường. Cấu trúc này thường kết hợp với thể thông thường (tính từ đuôi な và danh từ thường đi với な/であるものの). Mẫu câu mang sắc thái trang trọng, dùng nhiều trong văn viết hoặc lời tự sự, và vế sau chỉ nêu hiện thực chứ không dùng câu mệnh lệnh hay rủ rê.",
+    "nuanceReason": "So với 「～のに」 hay 「～けれども」, 「～ものの」 mang sắc thái văn viết trang trọng hơn và vế sau tuyệt đối không dùng hình thức mệnh lệnh hay ý chí.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "手術は無事に成功したものの、完全に回復するまでにはまだ時間がかかりそうだ。",
+    "masterExampleVi": "Mặc dù ca phẫu thuật đã thành công tốt đẹp nhưng có vẻ vẫn cần thêm thời gian để hồi phục hoàn toàn.",
+    "examples": [
+      {
+        "sentence": "手術は無事に成功したものの、完全に回復するまでにはまだ時間がかかりそうだ。",
+        "translation": "Mặc dù ca phẫu thuật đã thành công tốt đẹp nhưng có vẻ vẫn cần thêm thời gian để hồi phục hoàn toàn.",
+        "reading": ""
+      },
+      {
+        "sentence": "新しい職場に転職したものの、業務内容が思っていたものと違って戸惑っている。",
+        "translation": "Dù đã chuyển sang chỗ làm mới nhưng nội dung công việc khác với những gì tôi nghĩ khiến tôi khá bỡ ngỡ.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0353",
+    "grammar_id": "gram_n3_0353",
+    "milestoneId": "ms_n3_s9_l3",
+    "milestone_id": "ms_n3_s9_l3",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 84,
+    "pattern": "～ざるを得ない",
+    "titleVi": "Không thể không làm, buộc phải làm (không có lựa chọn)",
+    "structure": "～ざるを得ない",
+    "explanation": "Mẫu câu diễn tả ý nghĩa 'không thể không làm / đành phải, buộc phải làm' một việc gì đó dù trong lòng thực sự không muốn, vì tình thế hay hoàn cảnh khách quan ép buộc và không còn lựa chọn nào khác. Mẫu này gắn sau động từ thể ない bỏ ない (riêng する đổi thành せざるを得ない), mang sắc thái trang trọng, văn phong viết hoặc các quyết định nghiêm túc, bất đắc dĩ.",
+    "nuanceReason": "Cần tránh nhầm với 「～ずにはいられない」 (không kìm nén được cảm xúc bộc phát từ bên trong), trong khi 「～ざるを得ない」 là buộc phải hành động theo lý trí do hoàn cảnh bên ngoài ép buộc.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "これほど赤字が続いている以上、不採算部門を縮小せざるを得ない。",
+    "masterExampleVi": "Tình trạng thua lỗ kéo dài đến mức này thì chúng tôi đành phải thu hẹp các bộ phận kinh doanh không có lãi.",
+    "examples": [
+      {
+        "sentence": "これほど赤字が続いている以上、不採算部門を縮小せざるを得ない。",
+        "translation": "Tình trạng thua lỗ kéo dài đến mức này thì chúng tôi đành phải thu hẹp các bộ phận kinh doanh không có lãi.",
+        "reading": ""
+      },
+      {
+        "sentence": "大型の台風が接近しており、安全面を考慮して明日の屋外イベントは中止せざるを得ない。",
+        "translation": "Cơn bão lớn đang tiến gần, xét về mặt an toàn thì chúng tôi buộc phải hủy sự kiện ngoài trời ngày mai.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0354",
+    "grammar_id": "gram_n3_0354",
+    "milestoneId": "ms_n3_s9_l3",
+    "milestone_id": "ms_n3_s9_l3",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 84,
+    "pattern": "～ことにする／ことになる",
+    "titleVi": "Quyết định (ý chí) / Trở thành việc (quyết định bên ngoài)",
+    "structure": "～ことにする／ことになる",
+    "explanation": "「～ことにする」biểu thị quyết định xuất phát từ ý chí chủ quan của chính người nói. Trong khi đó,「～ことになる」diễn tả một sự việc đã được định đoạt do hoàn cảnh khách quan, người khác hoặc tập thể quyết định mà người nói chỉ tiếp nhận kết quả. Cả hai mẫu đều đi sau động từ thể từ điển (Vる) hoặc thể phủ định (Vない). Khi dùng ở dạng「～ことにしている」sẽ chỉ thói quen tự giác của bản thân, còn「～ことになっている」dùng cho quy định, luật lệ hoặc lịch trình đã ấn định.",
+    "nuanceReason": "Phân biệt dạng tiếp diễn:「～ことにしている」biểu thị thói quen hoặc nguyên tắc do bản thân tự đặt ra, còn「～ことになっている」chỉ quy tắc, tập quán hoặc lịch trình của tổ chức/xã hội.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "自分自身の将来を真剣に考えた末、今の会社を辞めて新しい分野へ転職することにする。",
+    "masterExampleVi": "Sau khi suy nghĩ nghiêm túc về tương lai của bản thân, tôi quyết định sẽ nghỉ công ty hiện tại để chuyển sang lĩnh vực mới.",
+    "examples": [
+      {
+        "sentence": "自分自身の将来を真剣に考えた末、今の会社を辞めて新しい分野へ転職することにする。",
+        "translation": "Sau khi suy nghĩ nghiêm túc về tương lai của bản thân, tôi quyết định sẽ nghỉ công ty hiện tại để chuyển sang lĩnh vực mới.",
+        "reading": ""
+      },
+      {
+        "sentence": "会社の組織再編に伴い、来期の初めから大阪支社へ異動することになった。",
+        "translation": "Cùng với việc tái cơ cấu của công ty, tôi được quyết định sẽ chuyển công tác về chi nhánh Osaka từ đầu kỳ tới.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0355",
+    "grammar_id": "gram_n3_0355",
+    "milestoneId": "ms_n3_s9_l3",
+    "milestone_id": "ms_n3_s9_l3",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 84,
+    "pattern": "～ことにしている",
+    "titleVi": "Thói quen tự đặt ra, luôn luôn làm theo quyết định của mình",
+    "structure": "～ことにしている",
+    "explanation": "Mẫu câu này dùng để diễn tả một thói quen, quy tắc hoặc nguyên tắc sống do chính bản thân tự đặt ra và đang duy trì thực hiện đều đặn theo ý chí của mình. Sắc thái của câu nhấn mạnh sự chủ động và quyết tâm cá nhân, không phải do ai ép buộc hay quy định bên ngoài áp đặt. Cấu trúc đi kèm là động từ thể từ điển hoặc thể phủ định (Vる / Vない) kết hợp với ことにしている.",
+    "nuanceReason": "Phân biệt với 「～ことにした」 (vừa mới đưa ra quyết định một lần); 「～ことにしている」 biểu thị quyết định đó đã trở thành một thói quen hoặc nguyên tắc đang được duy trì đều đặn.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "健康を維持するために、どんなに忙しくても毎朝30分ジョギングすることにしている。",
+    "masterExampleVi": "Để duy trì sức khỏe, dù bận rộn đến mấy tôi cũng tự đặt ra quy tắc chạy bộ 30 phút mỗi sáng.",
+    "examples": [
+      {
+        "sentence": "健康を維持するために、どんなに忙しくても毎朝30分ジョギングすることにしている。",
+        "translation": "Để duy trì sức khỏe, dù bận rộn đến mấy tôi cũng tự đặt ra quy tắc chạy bộ 30 phút mỗi sáng.",
+        "reading": ""
+      },
+      {
+        "sentence": "日本語力を落とさないように、通勤電車の中では必ず日本のニュースを1本読むことにしている。",
+        "translation": "Để không bị mai một tiếng Nhật, tôi luôn duy trì thói quen đọc một bài báo tin tức Nhật Bản mỗi khi đi tàu đi làm.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0356",
+    "grammar_id": "gram_n3_0356",
+    "milestoneId": "ms_n3_s9_l3",
+    "milestone_id": "ms_n3_s9_l3",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 84,
+    "pattern": "～ものだ／ものではない",
+    "titleVi": "Là điều hiển nhiên / Không nên (lẽ thường tình, hồi tưởng)",
+    "structure": "～ものだ／ものではない",
+    "explanation": "Mẫu ngữ pháp này dùng để biểu thị một chân lý, quy luật tự nhiên hoặc đạo lý, lẽ thường tình trong cuộc sống mà ai cũng coi là hiển nhiên. Dạng 「～ものだ」thể hiện điều nên làm hoặc bản chất vốn có theo chuẩn mực xã hội, còn 「～ものではない」mang sắc thái khuyên răn, cảnh báo không nên làm điều gì đó. Cần lưu ý mẫu này chỉ dùng để nói về các nguyên lý phổ quát chung, không dùng khi đưa ra lời khuyên hay mệnh lệnh trực tiếp cho một cá nhân trong tình huống cụ thể.",
+    "nuanceReason": "Không dùng 「～ものだ／ものではない」để khuyên bảo hoặc ra lệnh cho cấp trên, đồng thời tránh nhầm với 「～べきだ」（thể hiện bổn phận, nghĩa vụ mang tính phán đoán chủ quan của người nói）.",
+    "commonMistake": "[INFO] ",
+    "kitsuPrompt": "",
+    "masterExampleJp": "困っている人がいたら、親切にして助け合うものだ。",
+    "masterExampleVi": "Khi thấy người gặp khó khăn thì nên đối xử tốt và giúp đỡ lẫn nhau, đó là lẽ thường tình.",
+    "examples": [
+      {
+        "sentence": "困っている人がいたら、親切にして助け合うものだ。",
+        "translation": "Khi thấy người gặp khó khăn thì nên đối xử tốt và giúp đỡ lẫn nhau, đó là lẽ thường tình.",
+        "reading": ""
+      },
+      {
+        "sentence": "人の悪口を本人のいないところで言うものではない。",
+        "translation": "Không nên nói xấu sau lưng người khác khi họ không có mặt.",
+        "reading": ""
+      }
+    ],
+    "dialogue": null,
+    "sourceBook": "Shin Kanzen Master N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  },
+  {
+    "id": "gram_n3_0357",
+    "grammar_id": "gram_n3_0357",
+    "milestoneId": "ms_n3_s9_l3",
+    "milestone_id": "ms_n3_s9_l3",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "lessonNumber": 84,
+    "pattern": "〜ことにする",
+    "titleVi": "diễn đạt quyết định \"quyết định làm...\", \"đành phải...\" (SKM Bài 14)",
+    "structure": "〜ことにする",
+    "explanation": "Cấu trúc thuộc [N3] Chặng 9 · Bài 84 (㉞): Dùng để diễn đạt quyết định \"quyết định làm...\", \"đành phải...\" (SKM Bài 14).",
+    "nuanceReason": "",
+    "commonMistake": "",
+    "kitsuPrompt": "",
+    "masterExampleJp": "〜ことにする（N3）",
+    "masterExampleVi": "diễn đạt quyết định \"quyết định làm...\", \"đành phải...\" (SKM Bài 14)",
+    "examples": [],
+    "dialogue": null,
+    "sourceBook": "Michinori N3",
+    "sourceUrl": "https://openjlpt.com/grammar"
+  }
+]
