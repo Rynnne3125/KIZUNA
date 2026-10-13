@@ -77,7 +77,7 @@
       {
         "word": "経済",
         "reading": "けいざい",
-        "meaning": "kinh tế",
+        "meaning": "Kinh tế",
         "level": "N3",
         "type": "DT"
       },
@@ -130,7 +130,7 @@
       {
         "word": "経済",
         "reading": "けいざい",
-        "meaning": "kinh tế",
+        "meaning": "Kinh tế",
         "level": "N3",
         "type": "DT"
       },
@@ -144,7 +144,7 @@
       {
         "word": "弁済",
         "reading": "べんさい",
-        "meaning": "Trả nợ / hoàn trả",
+        "meaning": "hoàn trả, thanh toán nợ (nghĩa vụ dân sự)",
         "level": "N3",
         "type": "vocab"
       },
@@ -190,7 +190,7 @@
       {
         "word": "実際",
         "reading": "じっさい",
-        "meaning": "thực tế, thực ra",
+        "meaning": "thực tế, thực sự",
         "level": "N3",
         "type": "PV"
       },
@@ -356,7 +356,7 @@
       {
         "word": "法律",
         "reading": "ほうりつ",
-        "meaning": "Pháp luật / luật pháp",
+        "meaning": "pháp luật",
         "level": "N3",
         "type": "vocab"
       },
@@ -409,14 +409,14 @@
       {
         "word": "定規",
         "reading": "じょうぎ",
-        "meaning": "ruler",
+        "meaning": "cái thước kẻ",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "新規作成（する） (しんきさくせい（する）)",
         "reading": "しんきさくせい（する）",
-        "meaning": "creation, renewal",
+        "meaning": "sự sáng tạo, đổi mới",
         "level": "N3",
         "type": "DT"
       }
@@ -455,21 +455,21 @@
       {
         "word": "罰則",
         "reading": "ばっそく",
-        "meaning": "Hình phạt / chế tài",
+        "meaning": "điều khoản xử phạt, chế tài",
         "level": "N3",
         "type": "vocab"
       },
       {
         "word": "則る",
         "reading": "のっとる",
-        "meaning": "To conform to",
+        "meaning": "để phù hợp với",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "付則",
         "reading": "ふそく",
-        "meaning": "Additional rules",
+        "meaning": "quy tắc bổ sung",
         "level": "N3",
         "type": "DT"
       }
@@ -501,14 +501,14 @@
       {
         "word": "天気予報",
         "reading": "てんきよほう",
-        "meaning": "dự báo thời tiết",
+        "meaning": "Dự báo thời tiết",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "情報",
         "reading": "じょうほう",
-        "meaning": "thông tin, tin tức",
+        "meaning": "tin tức, thông tin",
         "level": "N3",
         "type": "DT"
       },
@@ -554,14 +554,14 @@
       {
         "word": "情報",
         "reading": "じょうほう",
-        "meaning": "thông tin, tin tức",
+        "meaning": "tin tức, thông tin",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "苦情",
         "reading": "くじょう",
-        "meaning": "khiếu nại, than phiền",
+        "meaning": "phàn nàn",
         "level": "N3",
         "type": "DT"
       },
@@ -607,7 +607,7 @@
       {
         "word": "条件",
         "reading": "じょうけん",
-        "meaning": "điều kiện, điều kiện kèm theo",
+        "meaning": "Điều kiện",
         "level": "N3",
         "type": "DT"
       },
@@ -628,7 +628,7 @@
       {
         "word": "件名",
         "reading": "けんめい",
-        "meaning": "topic",
+        "meaning": "đề tài",
         "level": "N3",
         "type": "DT"
       }
@@ -727,14 +727,14 @@
       {
         "word": "不思議な",
         "reading": "ふしぎな",
-        "meaning": "kỳ lạ, kỳ diệu, bí ẩn",
+        "meaning": "kì lạ, kì quái, khó hiểu",
         "level": "N3",
         "type": "TT-na"
       },
       {
         "word": "不思議（な） (ふしぎ（な）)",
         "reading": "ふしぎ（な）",
-        "meaning": "strangeness (strange)",
+        "meaning": "sự kỳ lạ (kỳ lạ)",
         "level": "N3",
         "type": "DT"
       }
@@ -872,7 +872,7 @@
       {
         "word": "確認",
         "reading": "かくにん",
-        "meaning": "xác nhận, kiểm tra",
+        "meaning": "xác nhận, xác minh",
         "level": "N3",
         "type": "DT"
       },
@@ -985,7 +985,7 @@
       {
         "word": "調子",
         "reading": "ちょうし",
-        "meaning": "tình trạng, điều kiện, trạng thái",
+        "meaning": "tình trạng, phong độ, nhịp điệu",
         "level": "N3",
         "type": "DT"
       },
@@ -999,7 +999,7 @@
       {
         "word": "調味料",
         "reading": "ちょうみりょう",
-        "meaning": "Gia vị / nước chấm",
+        "meaning": "Gia vị",
         "level": "N3",
         "type": "vocab"
       }
@@ -1038,7 +1038,7 @@
       {
         "word": "検査（する） (けんさ（する）)",
         "reading": "けんさ（する）",
-        "meaning": "testing",
+        "meaning": "thử nghiệm",
         "level": "N3",
         "type": "DT"
       },
@@ -1091,21 +1091,21 @@
       {
         "word": "必ず",
         "reading": "かならず",
-        "meaning": "chắc chắn, đảm bảo, nhất định, luôn như vậy, không có ngoại lệ",
+        "meaning": "nhất định",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "必ずや",
         "reading": "かならずや",
-        "meaning": "Certainly",
+        "meaning": "chắc chắn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "必ずしも",
         "reading": "かならずしも",
-        "meaning": "Not always",
+        "meaning": "không hẳn, không cần thiết",
         "level": "N3",
         "type": "ĐT"
       }
@@ -1296,7 +1296,7 @@
       {
         "word": "目的",
         "reading": "もくてき",
-        "meaning": "mục đích, mục tiêu",
+        "meaning": "mục đích",
         "level": "N3",
         "type": "DT"
       },
@@ -1356,21 +1356,21 @@
       {
         "word": "交流（する） (こうりゅう（する）)",
         "reading": "こうりゅう（する）",
-        "meaning": "interaction",
+        "meaning": "sự tương tác",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "流し台",
         "reading": "ながしだい",
-        "meaning": "sink",
+        "meaning": "bồn rửa",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "流行（する） (りゅうこう（する）)",
         "reading": "りゅうこう（する）",
-        "meaning": "popularity, circulation, fashion trend",
+        "meaning": "phổ biến, lưu thông, xu hướng thời trang",
         "level": "N3",
         "type": "DT"
       }
@@ -1402,7 +1402,7 @@
       {
         "word": "感謝",
         "reading": "かんしゃ",
-        "meaning": "lòng biết ơn, sự cảm ơn",
+        "meaning": "biết ơn, cảm tạ",
         "level": "N3",
         "type": "DT"
       },
@@ -1423,7 +1423,7 @@
       {
         "word": "直感",
         "reading": "ちょっかん",
-        "meaning": "trực giác, trực cảm",
+        "meaning": "trực giác, linh cảm",
         "level": "N3",
         "type": "DT"
       }
@@ -1529,7 +1529,7 @@
       {
         "word": "異常（な） (いじょう（な）)",
         "reading": "いじょう（な）",
-        "meaning": "abnormality (abnormal)",
+        "meaning": "sự bất thường (bất thường)",
         "level": "N3",
         "type": "DT"
       }
@@ -1568,7 +1568,7 @@
       {
         "word": "玄関",
         "reading": "げんかん",
-        "meaning": "cửa ra vào, lối vào nhà",
+        "meaning": "cửa vào",
         "level": "N3",
         "type": "DT"
       },
@@ -1614,21 +1614,21 @@
       {
         "word": "申し訳ありません",
         "reading": "もうしわけありません",
-        "meaning": "tôi xin lỗi (rất thành khẩn)",
+        "meaning": "Xin lỗi.",
         "level": "N3",
         "type": "MT"
       },
       {
         "word": "申請",
         "reading": "しんせい",
-        "meaning": "đơn xin, đăng ký, thủ tục",
+        "meaning": "nộp đơn xin / đăng ký / xin cấp",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "申します",
         "reading": "もうします",
-        "meaning": "tên là, gọi là (謙譲語 của 言います)",
+        "meaning": "nói (khiêm nhường ngữ của いいます)",
         "level": "N3",
         "type": "ĐT"
       },
@@ -1688,7 +1688,7 @@
       {
         "word": "改行（する） (かいぎょう（する）)",
         "reading": "かいぎょう（する）",
-        "meaning": "line break",
+        "meaning": "ngắt dòng",
         "level": "N3",
         "type": "DT"
       }
@@ -1734,14 +1734,14 @@
       {
         "word": "組む",
         "reading": "くむ",
-        "meaning": "To cross (legs or arms)",
+        "meaning": "hiệp lực, tham gia, đoàn kết, bắt chéo",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "仕組む",
         "reading": "しくむ",
-        "meaning": "To devise",
+        "meaning": "để nghĩ ra",
         "level": "N3",
         "type": "ĐT"
       }
@@ -1773,7 +1773,7 @@
       {
         "word": "担当",
         "reading": "たんとう",
-        "meaning": "phụ trách, người phụ trách",
+        "meaning": "chịu trách nhiệm, đảm đương",
         "level": "N3",
         "type": "DT"
       },
@@ -1787,7 +1787,7 @@
       {
         "word": "担当（する） (たんとう（する）)",
         "reading": "たんとう（する）",
-        "meaning": "responsibility",
+        "meaning": "trách nhiệm",
         "level": "N3",
         "type": "DT"
       }
@@ -1819,7 +1819,7 @@
       {
         "word": "負けます",
         "reading": "まけます",
-        "meaning": "thua",
+        "meaning": "thụy",
         "level": "N3",
         "type": "ĐT2"
       },
@@ -1833,7 +1833,7 @@
       {
         "word": "負け",
         "reading": "まけ",
-        "meaning": "thua",
+        "meaning": "thụy",
         "level": "N3",
         "type": "DT"
       }
@@ -1865,7 +1865,7 @@
       {
         "word": "責任",
         "reading": "せきにん",
-        "meaning": "trách nhiệm",
+        "meaning": "Trách nhiệm",
         "level": "N3",
         "type": "DT"
       },
@@ -1879,14 +1879,14 @@
       {
         "word": "責める",
         "reading": "せめる",
-        "meaning": "To condemn",
+        "meaning": "đổ lỗi",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "と言って責める",
         "reading": "といってせめる",
-        "meaning": "To accuse",
+        "meaning": "để buộc tội",
         "level": "N3",
         "type": "ĐT"
       }
@@ -1925,7 +1925,7 @@
       {
         "word": "請求書",
         "reading": "せいきゅうしょ",
-        "meaning": "payment request form",
+        "meaning": "mẫu yêu cầu thanh toán",
         "level": "N3",
         "type": "DT"
       },
@@ -1964,7 +1964,7 @@
       {
         "word": "希望",
         "reading": "きぼう",
-        "meaning": "hy vọng, nguyện vọng",
+        "meaning": "hy vọng, kỳ vọng, khao khát",
         "level": "N3",
         "type": "DT"
       },
@@ -1985,7 +1985,7 @@
       {
         "word": "希望（する） (きぼう（する）)",
         "reading": "きぼう（する）",
-        "meaning": "hope, aspiration, desire",
+        "meaning": "hy vọng, khát vọng, khao khát",
         "level": "N3",
         "type": "DT"
       }
@@ -2017,28 +2017,28 @@
       {
         "word": "希望",
         "reading": "きぼう",
-        "meaning": "hy vọng, nguyện vọng",
+        "meaning": "hy vọng, kỳ vọng, khao khát",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "希望（する） (きぼう（する）)",
         "reading": "きぼう（する）",
-        "meaning": "hope, aspiration, desire",
+        "meaning": "hy vọng, khát vọng, khao khát",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "極希",
         "reading": "ごくまれ",
-        "meaning": "Extremely rare",
+        "meaning": "cực kỳ hiếm",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "古希",
         "reading": "こき",
-        "meaning": "70th birthday",
+        "meaning": "tuổi bảy mươi",
         "level": "N3",
         "type": "DT"
       }
@@ -2123,7 +2123,7 @@
       {
         "word": "予想",
         "reading": "よそう",
-        "meaning": "dự đoán, tiên đoán",
+        "meaning": "dự đoán",
         "level": "N3",
         "type": "DT"
       },
@@ -2137,14 +2137,14 @@
       {
         "word": "可哀想な",
         "reading": "かわいそうな",
-        "meaning": "đáng thương, tội nghiệp",
+        "meaning": "tội nghiệp",
         "level": "N3",
         "type": "TT-na"
       },
       {
         "word": "想像（する） (そうぞう（する）)",
         "reading": "そうぞう（する）",
-        "meaning": "imagination",
+        "meaning": "trí tưởng tượng",
         "level": "N3",
         "type": "DT"
       }
@@ -2236,21 +2236,21 @@
       {
         "word": "忘れる",
         "reading": "わすれる",
-        "meaning": "To forget",
+        "meaning": "để quên",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "寝忘れる",
         "reading": "ねわすれる",
-        "meaning": "To oversleep",
+        "meaning": "ngủ quên",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "見忘れる",
         "reading": "みわすれる",
-        "meaning": "To forget",
+        "meaning": "để quên",
         "level": "N3",
         "type": "ĐT"
       }
@@ -2328,14 +2328,14 @@
       {
         "word": "信号",
         "reading": "しんごう",
-        "meaning": "đèn tín hiệu",
+        "meaning": "Đèn tín hiệu giao thông",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "信じます",
         "reading": "しんじます",
-        "meaning": "tin tưởng, tin vào",
+        "meaning": "tin, tin tưởng",
         "level": "N3",
         "type": "ĐT"
       },
@@ -2349,7 +2349,7 @@
       {
         "word": "自信",
         "reading": "じしん",
-        "meaning": "tự tin, sự tự tin",
+        "meaning": "Tự tin",
         "level": "N3",
         "type": "DT"
       }
@@ -2441,7 +2441,7 @@
       {
         "word": "証拠",
         "reading": "しょうこ",
-        "meaning": "bằng chứng, chứng cứ",
+        "meaning": "bằng chứng",
         "level": "N3",
         "type": "DT"
       },
@@ -2480,7 +2480,7 @@
       {
         "word": "指示",
         "reading": "しじ",
-        "meaning": "chỉ thị, hướng dẫn",
+        "meaning": "chỉ dẫn, chỉ thị",
         "level": "N3",
         "type": "DT"
       },
@@ -2501,7 +2501,7 @@
       {
         "word": "掲示板",
         "reading": "けいじばん",
-        "meaning": "notice board",
+        "meaning": "bảng thông báo",
         "level": "N3",
         "type": "DT"
       }
@@ -2533,14 +2533,14 @@
       {
         "word": "現象",
         "reading": "げんしょう",
-        "meaning": "hiện tượng",
+        "meaning": "Hiện tượng",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "表現",
         "reading": "ひょうげん",
-        "meaning": "Biểu đạt / diễn đạt",
+        "meaning": "cách nói, cách diễn đạt",
         "level": "N3",
         "type": "vocab"
       },
@@ -2600,14 +2600,14 @@
       {
         "word": "野原",
         "reading": "のはら",
-        "meaning": "Field",
+        "meaning": "cánh đồng",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "原っぱ",
         "reading": "はらっぱ",
-        "meaning": "Open field",
+        "meaning": "trường mở",
         "level": "N3",
         "type": "ĐT"
       }
@@ -2653,14 +2653,14 @@
       {
         "word": "因る",
         "reading": "よる",
-        "meaning": "To be due to",
+        "meaning": "là do",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "因む",
         "reading": "ちなむ",
-        "meaning": "To be associated (with)",
+        "meaning": "được liên kết (với)",
         "level": "N3",
         "type": "ĐT"
       }
@@ -2812,14 +2812,14 @@
       {
         "word": "月末",
         "reading": "げつまつ",
-        "meaning": "end of the month",
+        "meaning": "cuối tháng",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "年末年始",
         "reading": "ねんまつねんし",
-        "meaning": "the beginning and end of the year",
+        "meaning": "đầu và cuối năm",
         "level": "N3",
         "type": "DT"
       }
@@ -2872,7 +2872,7 @@
       {
         "word": "終点",
         "reading": "しゅうてん",
-        "meaning": "final station",
+        "meaning": "trạm cuối cùng",
         "level": "N3",
         "type": "DT"
       }
@@ -2918,14 +2918,14 @@
       {
         "word": "通り過ぎる",
         "reading": "とおりすぎる",
-        "meaning": "go too far",
+        "meaning": "đi quá xa",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "乗り過ごす",
         "reading": "のりすごす",
-        "meaning": "going past the destination",
+        "meaning": "đi quá đích",
         "level": "N3",
         "type": "DT"
       }
@@ -2964,7 +2964,7 @@
       {
         "word": "増加（する） (ぞうか（する）)",
         "reading": "ぞうか（する）",
-        "meaning": "increase; rise",
+        "meaning": "sự gia tăng; sự thêm vào",
         "level": "N3",
         "type": "DT"
       },
@@ -3024,7 +3024,7 @@
       {
         "word": "減少（する） (げんしょう（する）)",
         "reading": "げんしょう（する）",
-        "meaning": "reduction; decrease",
+        "meaning": "hao; sự giảm",
         "level": "N3",
         "type": "DT"
       },
@@ -3077,7 +3077,7 @@
       {
         "word": "進学",
         "reading": "しんがく",
-        "meaning": "lên học trường cao hơn, tiếp tục học",
+        "meaning": "học lên",
         "level": "N3",
         "type": "DT"
       },
@@ -3116,7 +3116,7 @@
       {
         "word": "退職",
         "reading": "たいしょく",
-        "meaning": "từ chức, nghỉ việc",
+        "meaning": "nghỉ việc",
         "level": "N3",
         "type": "DT"
       },
@@ -3183,14 +3183,14 @@
       {
         "word": "分け与える",
         "reading": "わけあたえる",
-        "meaning": "To distribute",
+        "meaning": "để phân phối",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "投げ与える",
         "reading": "なげあたえる",
-        "meaning": "To give by tossing or throwing",
+        "meaning": "cho bằng cách ném hoặc ném",
         "level": "N3",
         "type": "ĐT"
       }
@@ -3229,7 +3229,7 @@
       {
         "word": "取引先",
         "reading": "とりひきさき",
-        "meaning": "đối tác kinh doanh, khách hàng",
+        "meaning": "Đối tác / khách hàng",
         "level": "N3",
         "type": "DT"
       },
@@ -3275,28 +3275,28 @@
       {
         "word": "選びます",
         "reading": "えらびます",
-        "meaning": "chọn, lựa chọn",
+        "meaning": "chọn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "選挙",
         "reading": "せんきょ",
-        "meaning": "Bầu cử",
+        "meaning": "cuộc bầu cử",
         "level": "N3",
         "type": "vocab"
       },
       {
         "word": "選ぶ",
         "reading": "えらぶ",
-        "meaning": "To choose",
+        "meaning": "để chọn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "くじで選ぶ",
         "reading": "くじでえらぶ",
-        "meaning": "To choose by lot",
+        "meaning": "để chọn theo lô",
         "level": "N3",
         "type": "ĐT"
       }
@@ -3342,7 +3342,7 @@
       {
         "word": "連絡します",
         "reading": "れんらくします",
-        "meaning": "liên lạc, thông báo",
+        "meaning": "liên lạc",
         "level": "N3",
         "type": "ĐT"
       },
@@ -3381,7 +3381,7 @@
       {
         "word": "連絡します",
         "reading": "れんらくします",
-        "meaning": "liên lạc, thông báo",
+        "meaning": "liên lạc",
         "level": "N3",
         "type": "ĐT"
       },
@@ -3395,14 +3395,14 @@
       {
         "word": "絡む",
         "reading": "からむ",
-        "meaning": "To entangle",
+        "meaning": "là, thì (trợ động từ)",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "絡まる",
         "reading": "からまる",
-        "meaning": "To be entwined",
+        "meaning": "để được quấn vào nhau",
         "level": "N3",
         "type": "ĐT"
       }
@@ -3434,7 +3434,7 @@
       {
         "word": "落とします",
         "reading": "おとします",
-        "meaning": "đánh rơi, đánh mất",
+        "meaning": "đánh rơi",
         "level": "N3",
         "type": "ĐT"
       },
@@ -3448,7 +3448,7 @@
       {
         "word": "落とす",
         "reading": "おとす",
-        "meaning": "drop",
+        "meaning": "làm rơi",
         "level": "N3",
         "type": "DT"
       },
@@ -3494,21 +3494,21 @@
       {
         "word": "等しい",
         "reading": "ひとしい",
-        "meaning": "Equal",
+        "meaning": "bằng nhau, giống nhau",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "相等しい",
         "reading": "あいひとしい",
-        "meaning": "Equal to each other",
+        "meaning": "bình đẳng với nhau",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "私等には",
         "reading": "わたくしなどには",
-        "meaning": "For the likes of me",
+        "meaning": "đối với những người như tôi",
         "level": "N3",
         "type": "ĐT"
       }
@@ -3540,28 +3540,28 @@
       {
         "word": "参ります",
         "reading": "まいります",
-        "meaning": "đến, đi (謙譲語 của 行きます/来ます)",
+        "meaning": "đi, đến (khiêm nhường ngữ của いきます và きます)",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "参加",
         "reading": "さんか",
-        "meaning": "tham gia",
+        "meaning": "sự tham gia; sự tham dự",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "参る",
         "reading": "まいる",
-        "meaning": "To go",
+        "meaning": "đi",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "取って参る",
         "reading": "とってまいる",
-        "meaning": "To fetch (something)",
+        "meaning": "để lấy (cái gì đó)",
         "level": "N3",
         "type": "ĐT"
       }
@@ -3600,7 +3600,7 @@
       {
         "word": "協力（する） (きょうりょく（する）)",
         "reading": "きょうりょく（する）",
-        "meaning": "cooperation",
+        "meaning": "sự hợp tác",
         "level": "N3",
         "type": "DT"
       },
@@ -3660,7 +3660,7 @@
       {
         "word": "契約",
         "reading": "けいやく",
-        "meaning": "Hợp đồng",
+        "meaning": "hợp đồng",
         "level": "N3",
         "type": "vocab"
       }
@@ -3706,14 +3706,14 @@
       {
         "word": "束ね",
         "reading": "たばね",
-        "meaning": "Bundle",
+        "meaning": "bó",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "毛束",
         "reading": "けたば",
-        "meaning": "Bundle of hair",
+        "meaning": "bó tóc",
         "level": "N3",
         "type": "ĐT"
       }
@@ -3759,7 +3759,7 @@
       {
         "word": "調整（する） (ちょうせい（する）)",
         "reading": "ちょうせい（する）",
-        "meaning": "coordination; arrangement; organization",
+        "meaning": "điều chỉnh; sự điều chỉnh",
         "level": "N3",
         "type": "DT"
       },
@@ -3805,7 +3805,7 @@
       {
         "word": "治療",
         "reading": "ちりょう",
-        "meaning": "Điều trị",
+        "meaning": "trị liệu, chữa bệnh",
         "level": "N3",
         "type": "vocab"
       },
@@ -3819,7 +3819,7 @@
       {
         "word": "治療（する） (ちりょう（する）)",
         "reading": "ちりょう（する）",
-        "meaning": "treatment, healing",
+        "meaning": "điều trị, chữa bệnh",
         "level": "N3",
         "type": "DT"
       }
@@ -3858,7 +3858,7 @@
       {
         "word": "留守番電話",
         "reading": "るすばんでんわ",
-        "meaning": "answering machine when no one is home",
+        "meaning": "máy trả lời tự động khi không có ai ở nhà",
         "level": "N3",
         "type": "DT"
       },
@@ -3950,7 +3950,7 @@
       {
         "word": "失敗",
         "reading": "しっぱい",
-        "meaning": "thất bại, sai lầm",
+        "meaning": "thất bại",
         "level": "N3",
         "type": "DT"
       },
@@ -4010,7 +4010,7 @@
       {
         "word": "競争（する） (きょうそう（する）)",
         "reading": "きょうそう（する）",
-        "meaning": "competition",
+        "meaning": "cuộc thi",
         "level": "N3",
         "type": "DT"
       },
@@ -4049,7 +4049,7 @@
       {
         "word": "努力",
         "reading": "どりょく",
-        "meaning": "nỗ lực, cố gắng",
+        "meaning": "nỗ lực, sự cố gắng",
         "level": "N3",
         "type": "DT"
       },
@@ -4063,7 +4063,7 @@
       {
         "word": "努力（する） (どりょく（する）)",
         "reading": "どりょく（する）",
-        "meaning": "effort; trying hard",
+        "meaning": "chí tâm; nỗ lực",
         "level": "N3",
         "type": "DT"
       }
@@ -4102,7 +4102,7 @@
       {
         "word": "成長",
         "reading": "せいちょう",
-        "meaning": "sự trưởng thành, lớn lên, phát triển",
+        "meaning": "sinh trưởng, phát triển, trưởng thành",
         "level": "N3",
         "type": "DT"
       },
@@ -4148,7 +4148,7 @@
       {
         "word": "失礼な",
         "reading": "しつれいな",
-        "meaning": "thất lễ, vô lễ, khiếm nhã",
+        "meaning": "thất lễ, mất lịch sự",
         "level": "N3",
         "type": "TT-na"
       },
@@ -4162,14 +4162,14 @@
       {
         "word": "失敗",
         "reading": "しっぱい",
-        "meaning": "thất bại, sai lầm",
+        "meaning": "thất bại",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "失礼いたします",
         "reading": "しつれいいたします",
-        "meaning": "xin thất lễ, xin phép (trang trọng nhất)",
+        "meaning": "Xin phép thầy tôi cúp máy ạ. (kính ngữ của しつれいします)",
         "level": "N3",
         "type": "MT"
       }
@@ -4208,7 +4208,7 @@
       {
         "word": "得（な） (とく（な）)",
         "reading": "とく（な）",
-        "meaning": "bargain",
+        "meaning": "mặc cả",
         "level": "N3",
         "type": "DT"
       },
@@ -4268,14 +4268,14 @@
       {
         "word": "損",
         "reading": "そん",
-        "meaning": "Tổn / lỗ",
+        "meaning": "lỗ, tổn thất",
         "level": "N3",
         "type": "kanji"
       },
       {
         "word": "損（な） (そん（な）)",
         "reading": "そん（な）",
-        "meaning": "loss, disadvantage",
+        "meaning": "sự mất mát, bất lợi",
         "level": "N3",
         "type": "DT"
       }
@@ -4374,7 +4374,7 @@
       {
         "word": "税込",
         "reading": "ぜいこみ",
-        "meaning": "including tax",
+        "meaning": "bao gồm thuế",
         "level": "N3",
         "type": "DT"
       }
@@ -4473,7 +4473,7 @@
       {
         "word": "物価",
         "reading": "ぶっか",
-        "meaning": "giá cả, vật giá, mức giá chung",
+        "meaning": "Giá cả hàng hóa",
         "level": "N3",
         "type": "DT"
       }
@@ -4505,14 +4505,14 @@
       {
         "word": "資格",
         "reading": "しかく",
-        "meaning": "tư cách, bằng cấp, chứng chỉ",
+        "meaning": "tư cách, bằng cấp, xứng đáng",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "合格",
         "reading": "ごうかく",
-        "meaning": "đỗ thi, đạt tiêu chuẩn",
+        "meaning": "thi đỗ, trúng tuyển",
         "level": "N3",
         "type": "DT"
       },
@@ -4572,7 +4572,7 @@
       {
         "word": "高級（な） (こうきゅう（な）)",
         "reading": "こうきゅう（な）",
-        "meaning": "high quality",
+        "meaning": "chất lượng cao",
         "level": "N3",
         "type": "DT"
       }
@@ -4657,21 +4657,21 @@
       {
         "word": "喪章",
         "reading": "もしょう",
-        "meaning": "Sign of mourning",
+        "meaning": "dấu hiệu tang thương",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "市章",
         "reading": "ししょう",
-        "meaning": "City symbol",
+        "meaning": "biểu tượng thành phố",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "旗章",
         "reading": "きしょう",
-        "meaning": "Flag insignia",
+        "meaning": "phù hiệu cờ",
         "level": "N3",
         "type": "DT"
       }
@@ -4703,14 +4703,14 @@
       {
         "word": "季節",
         "reading": "きせつ",
-        "meaning": "mùa",
+        "meaning": "Mùa trong năm",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "節約（する） (せつやく（する）)",
         "reading": "せつやく（する）",
-        "meaning": "saving",
+        "meaning": "tiết kiệm",
         "level": "N3",
         "type": "DT"
       },
@@ -4770,7 +4770,7 @@
       {
         "word": "頭痛",
         "reading": "ずつう",
-        "meaning": "headache",
+        "meaning": "đau đầu",
         "level": "N3",
         "type": "DT"
       }
@@ -4809,21 +4809,21 @@
       {
         "word": "首都",
         "reading": "しゅと",
-        "meaning": "capital city",
+        "meaning": "thủ đô",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "寝首",
         "reading": "ねくび",
-        "meaning": "Head of a sleeping person",
+        "meaning": "đầu người đang ngủ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "小首",
         "reading": "こくび",
-        "meaning": "Head",
+        "meaning": "cái đầu",
         "level": "N3",
         "type": "ĐT"
       }
@@ -4862,21 +4862,21 @@
       {
         "word": "背戸",
         "reading": "せど",
-        "meaning": "Back door or entrance",
+        "meaning": "cửa sau hoặc lối vào",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "山背",
         "reading": "やませ",
-        "meaning": "Cold wind descending from the mountains",
+        "meaning": "gió lạnh từ trên núi thổi xuống",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "背丈",
         "reading": "せたけ",
-        "meaning": "Stature",
+        "meaning": "tầm vóc",
         "level": "N3",
         "type": "ĐT"
       }
@@ -4915,21 +4915,21 @@
       {
         "word": "骨折（する） (こっせつ（する）)",
         "reading": "こっせつ（する）",
-        "meaning": "broken bone",
+        "meaning": "xương gãy",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "骨身",
         "reading": "ほねみ",
-        "meaning": "Flesh and bones",
+        "meaning": "thịt và xương",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "骨なし",
         "reading": "ほねなし",
-        "meaning": "Rickets",
+        "meaning": "bệnh còi xương",
         "level": "N3",
         "type": "ĐT"
       }
@@ -5028,7 +5028,7 @@
       {
         "word": "ため息",
         "reading": "ためいき",
-        "meaning": "sigh",
+        "meaning": "thở dài",
         "level": "N3",
         "type": "DT"
       }
@@ -5074,14 +5074,14 @@
       {
         "word": "涙目",
         "reading": "なみだめ",
-        "meaning": "Teary eyes",
+        "meaning": "đôi mắt đẫm lệ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "涙ぐむ",
         "reading": "��みだぐむ",
-        "meaning": "To be moved to tears",
+        "meaning": "cảm động rơi nước mắt",
         "level": "N3",
         "type": "ĐT"
       }
@@ -5127,14 +5127,14 @@
       {
         "word": "泣く",
         "reading": "なく",
-        "meaning": "To cry",
+        "meaning": "khóc",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "泣く泣く",
         "reading": "なくなく",
-        "meaning": "Tearfully",
+        "meaning": "rơi nước mắt",
         "level": "N3",
         "type": "ĐT"
       }
@@ -5173,21 +5173,21 @@
       {
         "word": "怒り",
         "reading": "いかり",
-        "meaning": "tức giận, phẫn nộ",
+        "meaning": "Cơn giận",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "争い怒る",
         "reading": "あらそいいかる",
-        "meaning": "To be angry and quarrelsome",
+        "meaning": "hay tức giận và gây gổ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "かんかん怒る",
         "reading": "かんかんおこる",
-        "meaning": "To get very mad",
+        "meaning": "trở nên rất điên cuồng",
         "level": "N3",
         "type": "ĐT"
       }
@@ -5219,7 +5219,7 @@
       {
         "word": "悲しい",
         "reading": "かなしい",
-        "meaning": "buồn, đau buồn",
+        "meaning": "buồn",
         "level": "N3",
         "type": "TT"
       },
@@ -5279,14 +5279,14 @@
       {
         "word": "喜ぶ",
         "reading": "よろこぶ",
-        "meaning": "To be delighted",
+        "meaning": "để được vui mừng",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "大いに喜ぶ",
         "reading": "おおいによろこぶ",
-        "meaning": "To be highly pleased",
+        "meaning": "rất hài lòng",
         "level": "N3",
         "type": "ĐT"
       }
@@ -5318,7 +5318,7 @@
       {
         "word": "苦情",
         "reading": "くじょう",
-        "meaning": "khiếu nại, than phiền",
+        "meaning": "phàn nàn",
         "level": "N3",
         "type": "DT"
       },
@@ -5339,7 +5339,7 @@
       {
         "word": "苦労（する） (くろう（する）)",
         "reading": "くろう（する）",
-        "meaning": "discomfort, hardship",
+        "meaning": "sự khó chịu, khó khăn",
         "level": "N3",
         "type": "DT"
       }
@@ -5424,7 +5424,7 @@
       {
         "word": "熱",
         "reading": "ねつ",
-        "meaning": "sốt",
+        "meaning": "Sốt, nhiệt",
         "level": "N3",
         "type": "DT"
       },
@@ -5438,7 +5438,7 @@
       {
         "word": "熱する",
         "reading": "ねっする",
-        "meaning": "heat, warm up",
+        "meaning": "sưởi ấm, sưởi ấm",
         "level": "N3",
         "type": "DT"
       }
@@ -5491,7 +5491,7 @@
       {
         "word": "冷凍（する） (れいとう（する）)",
         "reading": "れいとう（する）",
-        "meaning": "freezing",
+        "meaning": "đóng băng",
         "level": "N3",
         "type": "DT"
       }
@@ -5523,7 +5523,7 @@
       {
         "word": "気温",
         "reading": "きおん",
-        "meaning": "nhiệt độ không khí",
+        "meaning": "Nhiệt độ",
         "level": "N3",
         "type": "DT"
       },
@@ -5576,7 +5576,7 @@
       {
         "word": "湿度",
         "reading": "しつど",
-        "meaning": "độ ẩm",
+        "meaning": "Độ ẩm",
         "level": "N3",
         "type": "DT"
       },
@@ -5590,14 +5590,14 @@
       {
         "word": "湿る",
         "reading": "しめるしとる",
-        "meaning": "To be wet",
+        "meaning": "bị ẩm",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "湿す",
         "reading": "しめす",
-        "meaning": "To wet",
+        "meaning": "làm ướt",
         "level": "N3",
         "type": "ĐT"
       }
@@ -5636,14 +5636,14 @@
       {
         "word": "乾杯（する） (かんぱい（する）)",
         "reading": "かんぱい（する）",
-        "meaning": "drinking a toast, raising a glass, clinking glasses",
+        "meaning": "nâng cốc, nâng cốc, chạm cốc",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "乾燥（する） (かんそう（する）)",
         "reading": "かんそう（する）",
-        "meaning": "drying",
+        "meaning": "sấy khô",
         "level": "N3",
         "type": "DT"
       },
@@ -5689,7 +5689,7 @@
       {
         "word": "台風",
         "reading": "たいふう",
-        "meaning": "bão, cơn bão",
+        "meaning": "Bão",
         "level": "N3",
         "type": "DT"
       },
@@ -5735,28 +5735,28 @@
       {
         "word": "波",
         "reading": "は",
-        "meaning": "Sóng",
+        "meaning": "sóng",
         "level": "N3",
         "type": "kanji"
       },
       {
         "word": "女波",
         "reading": "めなみ",
-        "meaning": "The smaller waves",
+        "meaning": "những con sóng nhỏ hơn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "波路",
         "reading": "なみじ",
-        "meaning": "Sea route",
+        "meaning": "tuyến đường biển",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "波間",
         "reading": "なみま",
-        "meaning": "On the waves",
+        "meaning": "trên sóng",
         "level": "N3",
         "type": "ĐT"
       }
@@ -5795,21 +5795,21 @@
       {
         "word": "小雪",
         "reading": "こゆき",
-        "meaning": "Light snow",
+        "meaning": "tuyết nhẹ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "根雪",
         "reading": "ねゆき",
-        "meaning": "Lingering snow",
+        "meaning": "tuyết rơi",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "雪夜",
         "reading": "ゆきよ",
-        "meaning": "Snowy night",
+        "meaning": "đêm tuyết",
         "level": "N3",
         "type": "ĐT"
       }
@@ -5848,21 +5848,21 @@
       {
         "word": "八雲",
         "reading": "やくも",
-        "meaning": "Thick clouds",
+        "meaning": "mây dày",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "雲居",
         "reading": "くもい",
-        "meaning": "Sky",
+        "meaning": "bầu trời",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "雲間",
         "reading": "くもま",
-        "meaning": "Rift between clouds",
+        "meaning": "vết nứt giữa những đám mây",
         "level": "N3",
         "type": "ĐT"
       }
@@ -5901,7 +5901,7 @@
       {
         "word": "空港",
         "reading": "くうこう",
-        "meaning": "sân bay",
+        "meaning": "Sân bay",
         "level": "N3",
         "type": "DT"
       },
@@ -5915,7 +5915,7 @@
       {
         "word": "空き缶",
         "reading": "あきかん",
-        "meaning": "can",
+        "meaning": "có thể",
         "level": "N3",
         "type": "DT"
       }
@@ -5954,21 +5954,21 @@
       {
         "word": "五つ星ホテル",
         "reading": "いつつぼしホテル",
-        "meaning": "five-star hotel",
+        "meaning": "khách sạn năm sao",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "星々",
         "reading": "ほしぼし",
-        "meaning": "Stars",
+        "meaning": "ngôi sao",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "星さま",
         "reading": "ほしさま",
-        "meaning": "Star",
+        "meaning": "ngôi sao",
         "level": "N3",
         "type": "ĐT"
       }
@@ -6000,28 +6000,28 @@
       {
         "word": "電池",
         "reading": "でんち",
-        "meaning": "pin",
+        "meaning": "cục pin; pin",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "内池",
         "reading": "うちいけ",
-        "meaning": "Garden pond",
+        "meaning": "ao vườn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "古池",
         "reading": "ふるいけ",
-        "meaning": "Old pool",
+        "meaning": "hồ bơi cũ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "溜池",
         "reading": "ためいけ",
-        "meaning": "Reservoir",
+        "meaning": "hồ chứa nước",
         "level": "N3",
         "type": "ĐT"
       }
@@ -6060,21 +6060,21 @@
       {
         "word": "白鳥の湖",
         "reading": "はくちょうのみずうみ",
-        "meaning": "Swan Lake (ballet)",
+        "meaning": "hồ Thiên Nga (múa ba lê)",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "ダム湖",
         "reading": "ダムこ",
-        "meaning": "Reservoir",
+        "meaning": "hồ chứa nước",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "地下湖",
         "reading": "ちかこ",
-        "meaning": "Underground lake",
+        "meaning": "hồ ngầm",
         "level": "N3",
         "type": "DT"
       }
@@ -6113,21 +6113,21 @@
       {
         "word": "千島",
         "reading": "ちしま",
-        "meaning": "Kurile Islands",
+        "meaning": "quần đảo Kuril",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "島根",
         "reading": "しまね",
-        "meaning": "Island country",
+        "meaning": "đảo quốc",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "島田",
         "reading": "しまだ",
-        "meaning": "Pompadour-like hair style",
+        "meaning": "kiểu tóc giống Pompadour",
         "level": "N3",
         "type": "ĐT"
       }
@@ -6166,14 +6166,14 @@
       {
         "word": "部下",
         "reading": "ぶか",
-        "meaning": "cấp dưới, thuộc cấp",
+        "meaning": "Cấp dưới",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "部長",
         "reading": "ぶちょう",
-        "meaning": "trưởng phòng, trưởng bộ phận",
+        "meaning": "trưởng phòng",
         "level": "N3",
         "type": "DT"
       },
@@ -6226,7 +6226,7 @@
       {
         "word": "省略（する） (しょうりゃく（する）)",
         "reading": "しょうりゃく（する）",
-        "meaning": "summary, reduction",
+        "meaning": "tóm tắt, giảm bớt",
         "level": "N3",
         "type": "DT"
       },
@@ -6272,21 +6272,21 @@
       {
         "word": "市庁",
         "reading": "しちょう",
-        "meaning": "Municipal office",
+        "meaning": "văn phòng thành phố",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "府庁",
         "reading": "ふちょう",
-        "meaning": "Prefectural office",
+        "meaning": "văn phòng tỉnh",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "支庁",
         "reading": "しちょう",
-        "meaning": "(governmental) branch office",
+        "meaning": "(chính phủ) văn phòng chi nhánh",
         "level": "N3",
         "type": "DT"
       }
@@ -6332,14 +6332,14 @@
       {
         "word": "府下",
         "reading": "ふか",
-        "meaning": "Suburban districts (of a metropolis)",
+        "meaning": "các quận ngoại thành (của đô thị)",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "府庫",
         "reading": "ふこ",
-        "meaning": "Treasury",
+        "meaning": "kho bạc",
         "level": "N3",
         "type": "DT"
       }
@@ -6378,21 +6378,21 @@
       {
         "word": "他県",
         "reading": "たけん",
-        "meaning": "Another prefecture",
+        "meaning": "một tỉnh khác",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "府県",
         "reading": "ふけん",
-        "meaning": "Prefecture",
+        "meaning": "tỉnh",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "県下",
         "reading": "けんか",
-        "meaning": "In the prefecture",
+        "meaning": "ở tỉnh",
         "level": "N3",
         "type": "DT"
       }
@@ -6431,21 +6431,21 @@
       {
         "word": "区別（する） (くべつ（する）)",
         "reading": "くべつ（する）",
-        "meaning": "distinction, separation",
+        "meaning": "sự phân biệt, sự tách biệt",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "区々",
         "reading": "くく",
-        "meaning": "Petty",
+        "meaning": "nhỏ mọn",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "区議",
         "reading": "くぎ",
-        "meaning": "Ward assemblyman",
+        "meaning": "dân biểu phường",
         "level": "N3",
         "type": "DT"
       }
@@ -6477,28 +6477,28 @@
       {
         "word": "町",
         "reading": "まち",
-        "meaning": "thành phố, phố",
+        "meaning": "Thị trấn / Phố",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "小町",
         "reading": "こまち",
-        "meaning": "A belle",
+        "meaning": "một người đẹp",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "町湯",
         "reading": "まちゆ",
-        "meaning": "Public bath located in a city or town",
+        "meaning": "nhà tắm công cộng nằm ở thành phố hoặc thị trấn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "雄町",
         "reading": "おまち",
-        "meaning": "Omachi rice",
+        "meaning": "cơm omachi",
         "level": "N3",
         "type": "ĐT"
       }
@@ -6537,21 +6537,21 @@
       {
         "word": "小村",
         "reading": "こむら",
-        "meaning": "Small village",
+        "meaning": "ngôi làng nhỏ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "村々",
         "reading": "むらむら",
-        "meaning": "Villages",
+        "meaning": "làng",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "村人",
         "reading": "むらびと",
-        "meaning": "Villager",
+        "meaning": "dân làng",
         "level": "N3",
         "type": "ĐT"
       }
@@ -6583,7 +6583,7 @@
       {
         "word": "困ります",
         "reading": "こまります",
-        "meaning": "khó khăn, bối rối, phiền",
+        "meaning": "rắc rối, khó xử, có vấn đề",
         "level": "N3",
         "type": "ĐT"
       },
@@ -6650,14 +6650,14 @@
       {
         "word": "驚く",
         "reading": "おどろく",
-        "meaning": "To be surprised",
+        "meaning": "bị ngạc nhiên",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "驚くべき",
         "reading": "おどろくべき",
-        "meaning": "Astonishing",
+        "meaning": "đáng kinh ngạc",
         "level": "N3",
         "type": "ĐT"
       }
@@ -6696,7 +6696,7 @@
       {
         "word": "恐ろしい",
         "reading": "おそろしい",
-        "meaning": "scary, frightening",
+        "meaning": "đáng sợ, đáng sợ",
         "level": "N3",
         "type": "DT"
       },
@@ -6735,28 +6735,28 @@
       {
         "word": "恥ずかしい",
         "reading": "はずかしい",
-        "meaning": "xấu hổ, ngượng ngùng",
+        "meaning": "xấu hổ, thẹn, hổ thẹn",
         "level": "N3",
         "type": "TT"
       },
       {
         "word": "恥じる",
         "reading": "はじる",
-        "meaning": "To feel ashamed",
+        "meaning": "cảm thấy xấu hổ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "大恥",
         "reading": "おおはじ",
-        "meaning": "Humiliation",
+        "meaning": "sự sỉ nhục",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "恥じらい",
         "reading": "はじらい",
-        "meaning": "Shyness",
+        "meaning": "sự nhút nhát",
         "level": "N3",
         "type": "ĐT"
       }
@@ -6788,7 +6788,7 @@
       {
         "word": "後悔",
         "reading": "こうかい",
-        "meaning": "sự hối hận, sự tiếc nuối",
+        "meaning": "hối hận",
         "level": "N3",
         "type": "DT"
       },
@@ -6802,7 +6802,7 @@
       {
         "word": "後悔（する） (こうかい（する）)",
         "reading": "こうかい（する）",
-        "meaning": "regret",
+        "meaning": "hối tiếc",
         "level": "N3",
         "type": "DT"
       },
@@ -6894,21 +6894,21 @@
       {
         "word": "静か",
         "reading": "しずか",
-        "meaning": "Quiet",
+        "meaning": "im lặng",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "静かに",
         "reading": "しずかに",
-        "meaning": "Calmly",
+        "meaning": "bình tĩnh",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "物静か",
         "reading": "ものしずか",
-        "meaning": "Quiet",
+        "meaning": "im lặng",
         "level": "N3",
         "type": "ĐT"
       }
@@ -6947,7 +6947,7 @@
       {
         "word": "感激（する） (かんげき（する）)",
         "reading": "かんげき（する）",
-        "meaning": "appreciation, being moved",
+        "meaning": "đánh giá cao, cảm động",
         "level": "N3",
         "type": "DT"
       },
@@ -6986,28 +6986,28 @@
       {
         "word": "厳しい",
         "reading": "きびしい",
-        "meaning": "nghiêm khắc, khắt khe, khắc nghiệt",
+        "meaning": "nghiêm, nghiêm khắc, nghiêm ngặt",
         "level": "N3",
         "type": "TT"
       },
       {
         "word": "手厳しい",
         "reading": "てきびしい",
-        "meaning": "Severe",
+        "meaning": "nghiêm trọng",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "厳しい暑さ",
         "reading": "きびしいあつさ",
-        "meaning": "Intense heat",
+        "meaning": "nhiệt độ cao",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "厳しい批評",
         "reading": "きびしいひひょう",
-        "meaning": "Severe criticism",
+        "meaning": "chỉ trích nặng nề",
         "level": "N3",
         "type": "ĐT"
       }
@@ -7039,28 +7039,28 @@
       {
         "word": "穏語",
         "reading": "オン",
-        "meaning": "Bình yên, Ôn hòa (Ổn)",
+        "meaning": "bình Yên, Ôn hòa (Ổn)",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "穏やか",
         "reading": "おだやか",
-        "meaning": "Calm",
+        "meaning": "điềm tĩnh",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "穏やかに話す",
         "reading": "おだやかにはなす",
-        "meaning": "To talk quietly",
+        "meaning": "nói chuyện lặng lẽ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "不穏",
         "reading": "ふおん",
-        "meaning": "Unrest",
+        "meaning": "bất ổn",
         "level": "N3",
         "type": "DT"
       }
@@ -7106,14 +7106,14 @@
       {
         "word": "暴く",
         "reading": "あばく",
-        "meaning": "To disclose",
+        "meaning": "tiết lộ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "暴利",
         "reading": "ぼうり",
-        "meaning": "Excessive profits",
+        "meaning": "lợi nhuận quá mức",
         "level": "N3",
         "type": "DT"
       }
@@ -7152,21 +7152,21 @@
       {
         "word": "混乱（する） (こんらん（する）)",
         "reading": "こんらん（する）",
-        "meaning": "confusion, chaos",
+        "meaning": "sự bối rối, sự hỗn loạn",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "乱れる",
         "reading": "みだれる",
-        "meaning": "To be disordered",
+        "meaning": "hỗn loạn, rối",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "乱す",
         "reading": "みだす",
-        "meaning": "To throw out of order",
+        "meaning": "lộn xộn, làm đảo lộn kế hoạch, làm hỏng",
         "level": "N3",
         "type": "ĐT"
       }
@@ -7258,14 +7258,14 @@
       {
         "word": "手間暇",
         "reading": "てまひま",
-        "meaning": "Time and effort",
+        "meaning": "thời gian và công sức",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "暇取る",
         "reading": "ひまどる",
-        "meaning": "To take time",
+        "meaning": "để dành thời gian",
         "level": "N3",
         "type": "ĐT"
       }
@@ -7318,7 +7318,7 @@
       {
         "word": "交換（する） (こうかん（する）)",
         "reading": "こうかん（する）",
-        "meaning": "exchange",
+        "meaning": "trao đổi",
         "level": "N3",
         "type": "DT"
       }
@@ -7371,7 +7371,7 @@
       {
         "word": "一回払い",
         "reading": "いっかいばらい",
-        "meaning": "one-time payment",
+        "meaning": "thanh toán một lần",
         "level": "N3",
         "type": "DT"
       }
@@ -7403,7 +7403,7 @@
       {
         "word": "余語",
         "reading": "ヨ",
-        "meaning": "Dư thừa, Còn lại (Dư)",
+        "meaning": "dư thừa, Còn lại (Dư)",
         "level": "N3",
         "type": "DT"
       },
@@ -7417,14 +7417,14 @@
       {
         "word": "手に余る",
         "reading": "てにあまる",
-        "meaning": "To be beyond one's capacities",
+        "meaning": "vượt quá khả năng của một người",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "有り余る",
         "reading": "ありあまる",
-        "meaning": "To be superfluous",
+        "meaning": "thừa thãi, dư dả quá mức cần thiết (thời gian, tiền bạc, sức lực)",
         "level": "N3",
         "type": "ĐT"
       }
@@ -7463,21 +7463,21 @@
       {
         "word": "渡る",
         "reading": "わたる",
-        "meaning": "To cross over",
+        "meaning": "để vượt qua",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "世を渡る",
         "reading": "よをわたる",
-        "meaning": "To make one's way in the world",
+        "meaning": "để tìm đường đi trên thế giới",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "冴え渡る",
         "reading": "さえわたる",
-        "meaning": "To get cold",
+        "meaning": "để bị cảm lạnh",
         "level": "N3",
         "type": "ĐT"
       }
@@ -7509,7 +7509,7 @@
       {
         "word": "推移",
         "reading": "すいい",
-        "meaning": "xu hướng, diễn biến",
+        "meaning": "biến chuyển, thay đổi dần theo thời gian",
         "level": "N3",
         "type": "DT"
       },
@@ -7530,7 +7530,7 @@
       {
         "word": "移転（する） (いてん（する）)",
         "reading": "いてん（する）",
-        "meaning": "movement, relocation",
+        "meaning": "sự di chuyển, sự di dời",
         "level": "N3",
         "type": "DT"
       }
@@ -7576,7 +7576,7 @@
       {
         "word": "面倒（な） (めんどう（な）)",
         "reading": "めんどう（な）",
-        "meaning": "care, looking after someone; annoyance, difficulty (trouble)",
+        "meaning": "quan tâm, trông nom ai đó; sự khó chịu, khó khăn (rắc rối)",
         "level": "N3",
         "type": "DT"
       },
@@ -7668,21 +7668,21 @@
       {
         "word": "折角",
         "reading": "せっかく",
-        "meaning": "cố công, vất vả mới được (漢字 cùng nghĩa)",
+        "meaning": "đã mất công",
         "level": "N3",
         "type": "PV"
       },
       {
         "word": "骨折（する） (こっせつ（する）)",
         "reading": "こっせつ（する）",
-        "meaning": "broken bone",
+        "meaning": "xương gãy",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "折りたたみ傘",
         "reading": "おりたたみがさ",
-        "meaning": "folding umbrella",
+        "meaning": "ô gấp",
         "level": "N3",
         "type": "DT"
       },
@@ -7721,21 +7721,21 @@
       {
         "word": "すき焼き",
         "reading": "すきやき",
-        "meaning": "sukiyaki",
+        "meaning": "món lẩu sukiyaki của nhật; lẩu thịt bò",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "やきもちを焼く",
         "reading": "やきもちをやく",
-        "meaning": "Ghen",
+        "meaning": "ghen tị",
         "level": "N3",
         "type": "vocab"
       },
       {
         "word": "日焼け（する） (ひやけ（する）)",
         "reading": "ひやけ（する）",
-        "meaning": "sunburn",
+        "meaning": "cháy nắng",
         "level": "N3",
         "type": "DT"
       },
@@ -7933,7 +7933,7 @@
       {
         "word": "競争（する） (きょうそう（する）)",
         "reading": "きょうそう（する）",
-        "meaning": "competition",
+        "meaning": "cuộc thi",
         "level": "N3",
         "type": "DT"
       },
@@ -8025,21 +8025,21 @@
       {
         "word": "拾う",
         "reading": "ひろう",
-        "meaning": "To pick up",
+        "meaning": "để nhặt",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "年を拾う",
         "reading": "としをひろう",
-        "meaning": "To grow old",
+        "meaning": "để già đi",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "骨を拾う",
         "reading": "ほねをひろう",
-        "meaning": "To collect the ashes of the deceased",
+        "meaning": "để thu thập tro cốt của người đã khuất",
         "level": "N3",
         "type": "ĐT"
       }
@@ -8078,21 +8078,21 @@
       {
         "word": "捨てる",
         "reading": "すてる",
-        "meaning": "To throw away",
+        "meaning": "để vứt đi",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "見捨てる",
         "reading": "みすてる",
-        "meaning": "To abandon",
+        "meaning": "từ bỏ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "乗り捨てる",
         "reading": "のりすてる",
-        "meaning": "To get off",
+        "meaning": "để xuống xe",
         "level": "N3",
         "type": "ĐT"
       }
@@ -8191,14 +8191,14 @@
       {
         "word": "打つ手",
         "reading": "うつて",
-        "meaning": "Way to do (something)",
+        "meaning": "cách để làm (việc gì đó)",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "のた打つ",
         "reading": "のたうつ",
-        "meaning": "To writhe",
+        "meaning": "quằn quại",
         "level": "N3",
         "type": "ĐT"
       }
@@ -8251,7 +8251,7 @@
       {
         "word": "以降",
         "reading": "いこう",
-        "meaning": "from then on",
+        "meaning": "từ đó trở đi",
         "level": "N3",
         "type": "DT"
       }
@@ -8304,7 +8304,7 @@
       {
         "word": "直感",
         "reading": "ちょっかん",
-        "meaning": "trực giác, trực cảm",
+        "meaning": "trực giác, linh cảm",
         "level": "N3",
         "type": "DT"
       }
@@ -8396,14 +8396,14 @@
       {
         "word": "通勤（する） (つうきん（する）)",
         "reading": "つうきん（する）",
-        "meaning": "commuting to and from work",
+        "meaning": "đi lại và đi làm",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "勤務（する） (きんむ（する）)",
         "reading": "きんむ（する）",
-        "meaning": "working",
+        "meaning": "đang làm việc",
         "level": "N3",
         "type": "DT"
       }
@@ -8449,14 +8449,14 @@
       {
         "word": "泣き叫ぶ",
         "reading": "なきさけぶ",
-        "meaning": "To cry and shout",
+        "meaning": "để khóc và hét lên",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "大声で叫ぶ",
         "reading": "おおごえでさけぶ",
-        "meaning": "To yell out loud",
+        "meaning": "để hét thật to",
         "level": "N3",
         "type": "ĐT"
       }
@@ -8495,7 +8495,7 @@
       {
         "word": "深夜",
         "reading": "しんや",
-        "meaning": "late at night",
+        "meaning": "đêm khuya",
         "level": "N3",
         "type": "DT"
       },
@@ -8555,14 +8555,14 @@
       {
         "word": "日が浅い",
         "reading": "ひがあさい",
-        "meaning": "It hasn't been long since",
+        "meaning": "đã lâu rồi chưa",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "日の浅い",
         "reading": "ひのあさい",
-        "meaning": "It hasn't been long since",
+        "meaning": "đã lâu rồi chưa",
         "level": "N3",
         "type": "ĐT"
       }
@@ -8601,21 +8601,21 @@
       {
         "word": "厚い",
         "reading": "あつい",
-        "meaning": "Thick",
+        "meaning": "dày",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "分厚い",
         "reading": "ぶあつい",
-        "meaning": "Bulky",
+        "meaning": "cồng kềnh",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "厚板",
         "reading": "あついた",
-        "meaning": "Plank",
+        "meaning": "tấm ván",
         "level": "N3",
         "type": "ĐT"
       }
@@ -8654,14 +8654,14 @@
       {
         "word": "薄暗い",
         "reading": "うすぐらい",
-        "meaning": "dim, getting dark",
+        "meaning": "mờ dần, tối dần",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "薄い",
         "reading": "うすい",
-        "meaning": "nhạt, mỏng",
+        "meaning": "nhạt, loãng",
         "level": "N3",
         "type": "DT"
       }
@@ -8700,21 +8700,21 @@
       {
         "word": "狭い",
         "reading": "せまい",
-        "meaning": "Narrow",
+        "meaning": "chật, hẹp",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "幅の狭い",
         "reading": "はばのせまい",
-        "meaning": "Narrow",
+        "meaning": "chật hẹp",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "所狭い",
         "reading": "ところせまい",
-        "meaning": "Crowded",
+        "meaning": "đông đúc",
         "level": "N3",
         "type": "ĐT"
       }
@@ -8813,7 +8813,7 @@
       {
         "word": "単純（な） (たんじゅん（な）)",
         "reading": "たんじゅん（な）",
-        "meaning": "simple, plain-spoken",
+        "meaning": "nói một cách đơn giản, dễ hiểu",
         "level": "N3",
         "type": "DT"
       }
@@ -8852,21 +8852,21 @@
       {
         "word": "単純（な） (たんじゅん（な）)",
         "reading": "たんじゅん（な）",
-        "meaning": "simple, plain-spoken",
+        "meaning": "nói một cách đơn giản, dễ hiểu",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "不純",
         "reading": "ふじゅん",
-        "meaning": "Impurity",
+        "meaning": "tạp chất",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "愚純",
         "reading": "ぐじゅん",
-        "meaning": "Stupid",
+        "meaning": "ngốc nghếch",
         "level": "N3",
         "type": "DT"
       }
@@ -8905,7 +8905,7 @@
       {
         "word": "混雑（する） (こんざつ（する）)",
         "reading": "こんざつ（する）",
-        "meaning": "crowdedness, being packed",
+        "meaning": "sự đông đúc, chật cứng",
         "level": "N3",
         "type": "DT"
       },
@@ -8958,14 +8958,14 @@
       {
         "word": "緊める",
         "reading": "しめる",
-        "meaning": "To be strict with",
+        "meaning": "phải nghiêm khắc với",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "喫緊",
         "reading": "きっきん",
-        "meaning": "Urgency",
+        "meaning": "khẩn cấp",
         "level": "N3",
         "type": "DT"
       }
@@ -9011,14 +9011,14 @@
       {
         "word": "二十歳",
         "reading": "はたとせ",
-        "meaning": "Twenty years",
+        "meaning": "hai mươi năm",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "千歳飴",
         "reading": "ちとせあめ",
-        "meaning": "Red and white candy stick sold at children's festivals",
+        "meaning": "que kẹo đỏ và trắng được bán tại lễ hội thiếu nhi",
         "level": "N3",
         "type": "ĐT"
       }
@@ -9050,7 +9050,7 @@
       {
         "word": "億",
         "reading": "おく",
-        "meaning": "trăm triệu",
+        "meaning": "Trăm triệu",
         "level": "N3",
         "type": "DT"
       },
@@ -9096,28 +9096,28 @@
       {
         "word": "昔語",
         "reading": "セキ",
-        "meaning": "Ngày xưa, Quá khứ (Tích)",
+        "meaning": "ngày xưa, Quá khứ (Tích)",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "その昔",
         "reading": "そのむかし",
-        "meaning": "A long time ago",
+        "meaning": "cách đây đã lâu",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "一昔",
         "reading": "ひとむかし",
-        "meaning": "Ages",
+        "meaning": "độ tuổi",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "大昔",
         "reading": "おおむかし",
-        "meaning": "Great antiquity",
+        "meaning": "thời cổ đại vĩ đại",
         "level": "N3",
         "type": "ĐT"
       }
@@ -9156,21 +9156,21 @@
       {
         "word": "倍",
         "reading": "ばい",
-        "meaning": "gấp đôi, lần",
+        "meaning": "Lần, gấp đôi",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "二倍",
         "reading": "にばい",
-        "meaning": "Double",
+        "meaning": "gấp đôi",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "五倍",
         "reading": "ごばい",
-        "meaning": "Five times",
+        "meaning": "năm lần",
         "level": "N3",
         "type": "DT"
       }
@@ -9255,28 +9255,28 @@
       {
         "word": "季節",
         "reading": "きせつ",
-        "meaning": "mùa",
+        "meaning": "Mùa trong năm",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "四季",
         "reading": "しき",
-        "meaning": "Four seasons",
+        "meaning": "Nhận thức, kiến thức",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "季夏",
         "reading": "きか",
-        "meaning": "End of summer",
+        "meaning": "cuối hè",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "季子",
         "reading": "きし",
-        "meaning": "Last child",
+        "meaning": "đứa con cuối cùng",
         "level": "N3",
         "type": "DT"
       }
@@ -9315,21 +9315,21 @@
       {
         "word": "岸辺",
         "reading": "きしべ",
-        "meaning": "Shore",
+        "meaning": "bờ biển",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "彼の岸",
         "reading": "かのきし",
-        "meaning": "Nirvana",
+        "meaning": "niết bàn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "右岸",
         "reading": "うがん",
-        "meaning": "Right bank (shore)",
+        "meaning": "bờ phải (bờ)",
         "level": "N3",
         "type": "DT"
       }
@@ -9375,14 +9375,14 @@
       {
         "word": "下坂",
         "reading": "しもさか",
-        "meaning": "Downhill",
+        "meaning": "xuống dốc",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "坂道",
         "reading": "さかみち",
-        "meaning": "Hill road",
+        "meaning": "đường đồi",
         "level": "N3",
         "type": "ĐT"
       }
@@ -9421,21 +9421,21 @@
       {
         "word": "小松",
         "reading": "こまつ",
-        "meaning": "Small pine",
+        "meaning": "thông nhỏ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "松屋",
         "reading": "まつや",
-        "meaning": "Matsuya (department store)",
+        "meaning": "matsuya (cửa hàng bách hóa)",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "松葉",
         "reading": "まつば",
-        "meaning": "Pine needle",
+        "meaning": "lá thông",
         "level": "N3",
         "type": "ĐT"
       }
@@ -9474,21 +9474,21 @@
       {
         "word": "桜湯",
         "reading": "さくらゆ",
-        "meaning": "Drink made of boiled water poured over preserved cherry leaves and blossoms",
+        "meaning": "đồ uống làm từ nước đun sôi đổ lên lá và hoa anh đào được bảo quản",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "桜まじ",
         "reading": "さくらまじ",
-        "meaning": "Southerly wind that blows when the cherry trees are in bloom",
+        "meaning": "gió Nam thổi khi hoa đào nở",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "桜人",
         "reading": "さくらびと",
-        "meaning": "Cherry blossom viewer",
+        "meaning": "người ngắm hoa anh đào",
         "level": "N3",
         "type": "ĐT"
       }
@@ -9534,14 +9534,14 @@
       {
         "word": "砂場",
         "reading": "すなば",
-        "meaning": "Sand pit",
+        "meaning": "hố cát",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "砂湯",
         "reading": "すなゆ",
-        "meaning": "Sand bath",
+        "meaning": "tắm cát",
         "level": "N3",
         "type": "ĐT"
       }
@@ -9573,28 +9573,28 @@
       {
         "word": "泥棒",
         "reading": "どろぼう",
-        "meaning": "kẻ trộm, tên cướp",
+        "meaning": "kẻ trộm",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "泥湯",
         "reading": "どろゆ",
-        "meaning": "Mud bath (at an onsen)",
+        "meaning": "tắm bùn (tại suối nước nóng)",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "泥田",
         "reading": "どろた",
-        "meaning": "Rice paddy with a thick layer of mud at the bottom",
+        "meaning": "cánh đồng lúa có lớp bùn dày ở dưới đáy",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "こそ泥",
         "reading": "こそどろ",
-        "meaning": "Sneak thief",
+        "meaning": "kẻ trộm lén lút",
         "level": "N3",
         "type": "ĐT"
       }
@@ -9633,21 +9633,21 @@
       {
         "word": "言葉づかい",
         "reading": "ことばづかい",
-        "meaning": "way of speaking, choice of words",
+        "meaning": "cách nói, lựa chọn từ ngữ",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "枯れ葉",
         "reading": "かれは",
-        "meaning": "Dead leaf",
+        "meaning": "lá chết",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "照葉",
         "reading": "てりは",
-        "meaning": "Beautiful shiny autumn leaves",
+        "meaning": "lá mùa thu đẹp óng ả",
         "level": "N3",
         "type": "ĐT"
       }
@@ -9679,28 +9679,28 @@
       {
         "word": "野菜",
         "reading": "やさい",
-        "meaning": "rau",
+        "meaning": "thô",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "野球",
         "reading": "やきゅう",
-        "meaning": "bóng chày",
+        "meaning": "Bóng chày",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "小野",
         "reading": "おの",
-        "meaning": "Plain",
+        "meaning": "đơn giản",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "野ろ",
         "reading": "のろ",
-        "meaning": "Field",
+        "meaning": "cánh đồng",
         "level": "N3",
         "type": "ĐT"
       }
@@ -9739,21 +9739,21 @@
       {
         "word": "劇務",
         "reading": "げきむ",
-        "meaning": "Exhausting work",
+        "meaning": "công việc mệt mỏi",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "劇化",
         "reading": "げきか",
-        "meaning": "Dramatization",
+        "meaning": "kịch hóa",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "劇画",
         "reading": "げきが",
-        "meaning": "Comic strip with dramatic story",
+        "meaning": "truyện tranh có cốt truyện kịch tính",
         "level": "N3",
         "type": "DT"
       }
@@ -9792,21 +9792,21 @@
       {
         "word": "漢詩",
         "reading": "かんしからうた",
-        "meaning": "Chinese poetry",
+        "meaning": "thơ Trung Quốc",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "古詩",
         "reading": "こし",
-        "meaning": "Ancient poems",
+        "meaning": "thơ cổ",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "史詩",
         "reading": "しし",
-        "meaning": "Historical poem",
+        "meaning": "bài thơ lịch sử",
         "level": "N3",
         "type": "DT"
       }
@@ -9838,7 +9838,7 @@
       {
         "word": "芸術",
         "reading": "げいじゅつ",
-        "meaning": "nghệ thuật",
+        "meaning": "Nghệ thuật",
         "level": "N3",
         "type": "DT"
       },
@@ -9852,14 +9852,14 @@
       {
         "word": "伎芸",
         "reading": "ぎげい",
-        "meaning": "Art of kabuki",
+        "meaning": "nghệ thuật; nghề thủ công",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "多芸",
         "reading": "たげい",
-        "meaning": "Versatility",
+        "meaning": "tính linh hoạt",
         "level": "N3",
         "type": "DT"
       }
@@ -9898,21 +9898,21 @@
       {
         "word": "お宮",
         "reading": "おみや",
-        "meaning": "Shinto shrine",
+        "meaning": "đền thờ Thần đạo",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "夜宮",
         "reading": "よみや",
-        "meaning": "Festival-eve vigil",
+        "meaning": "đêm canh thức lễ hội",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "宮家",
         "reading": "みやけ",
-        "meaning": "House of a prince of the blood",
+        "meaning": "ngôi nhà của một hoàng tử máu",
         "level": "N3",
         "type": "ĐT"
       }
@@ -9958,7 +9958,7 @@
       {
         "word": "祝日",
         "reading": "しゅくじつ",
-        "meaning": "public holiday",
+        "meaning": "ngày nghỉ lễ",
         "level": "N3",
         "type": "DT"
       }
@@ -9990,7 +9990,7 @@
       {
         "word": "失礼な",
         "reading": "しつれいな",
-        "meaning": "thất lễ, vô lễ, khiếm nhã",
+        "meaning": "thất lễ, mất lịch sự",
         "level": "N3",
         "type": "TT-na"
       },
@@ -10011,7 +10011,7 @@
       {
         "word": "失礼いたします",
         "reading": "しつれいいたします",
-        "meaning": "xin thất lễ, xin phép (trang trọng nhất)",
+        "meaning": "Xin phép thầy tôi cúp máy ạ. (kính ngữ của しつれいします)",
         "level": "N3",
         "type": "MT"
       }
@@ -10057,7 +10057,7 @@
       {
         "word": "ひな祭り",
         "reading": "ひなまつり",
-        "meaning": "hina doll festival",
+        "meaning": "lễ hội búp bê hina",
         "level": "N3",
         "type": "DT"
       }
@@ -10103,14 +10103,14 @@
       {
         "word": "嘉賞",
         "reading": "かしょう",
-        "meaning": "Approval",
+        "meaning": "sự chấp thuận",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "賞味",
         "reading": "しょうみ",
-        "meaning": "Relish",
+        "meaning": "thưởng thức",
         "level": "N3",
         "type": "DT"
       }
@@ -10149,21 +10149,21 @@
       {
         "word": "付票",
         "reading": "ふひょう",
-        "meaning": "Tag",
+        "meaning": "nhãn",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "死票",
         "reading": "しひょう",
-        "meaning": "Useless vote",
+        "meaning": "phiếu bầu vô dụng",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "起票",
         "reading": "きひょう",
-        "meaning": "Issue of a voucher",
+        "meaning": "phát hành chứng từ",
         "level": "N3",
         "type": "DT"
       }
@@ -10248,21 +10248,21 @@
       {
         "word": "読み漁る",
         "reading": "よみあさる",
-        "meaning": "To read a large number (of)",
+        "meaning": "để đọc một số lượng lớn (của)",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "買い漁る",
         "reading": "かいあさる",
-        "meaning": "To buy all (of something) one can get one's hands on",
+        "meaning": "mua tất cả (của một cái gì đó) người ta có thể có được",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "掃き溜めを漁る",
         "reading": "はきだめをあさる",
-        "meaning": "To rummage a dustbin",
+        "meaning": "để lục lọi thùng rác",
         "level": "N3",
         "type": "ĐT"
       }
@@ -10301,7 +10301,7 @@
       {
         "word": "商店街",
         "reading": "しょうてんがい",
-        "meaning": "shopping street",
+        "meaning": "phố mua sắm",
         "level": "N3",
         "type": "DT"
       },
@@ -10315,7 +10315,7 @@
       {
         "word": "商業",
         "reading": "しょうぎょう",
-        "meaning": "business, commerce",
+        "meaning": "kinh doanh, thương mại",
         "level": "N3",
         "type": "DT"
       }
@@ -10453,21 +10453,21 @@
       {
         "word": "胸幅",
         "reading": "むねはば",
-        "meaning": "Breadth of the chest",
+        "meaning": "chiều rộng của ngực",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "胸悪",
         "reading": "むねわる",
-        "meaning": "Unpleasant",
+        "meaning": "khó chịu",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "胸熱",
         "reading": "むねあつ",
-        "meaning": "Becoming fraught with emotion",
+        "meaning": "trở nên ngập tràn cảm xúc",
         "level": "N3",
         "type": "ĐT"
       }
@@ -10506,21 +10506,21 @@
       {
         "word": "腕毛",
         "reading": "うでげ",
-        "meaning": "Arm hair",
+        "meaning": "lông cánh tay",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "腕輪",
         "reading": "うでわ",
-        "meaning": "Bracelet",
+        "meaning": "vòng đeo tay",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "二の腕",
         "reading": "にのうで",
-        "meaning": "Upper arm",
+        "meaning": "cánh tay trên",
         "level": "N3",
         "type": "ĐT"
       }
@@ -10559,21 +10559,21 @@
       {
         "word": "腰かける",
         "reading": "こしかける",
-        "meaning": "sit, sit down",
+        "meaning": "ngồi, ngồi xuống",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "お腰",
         "reading": "おこし",
-        "meaning": "Buttocks",
+        "meaning": "mông",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "美腰",
         "reading": "びこし",
-        "meaning": "Slim waist",
+        "meaning": "vòng eo thon gọn",
         "level": "N3",
         "type": "ĐT"
       }
@@ -10612,21 +10612,21 @@
       {
         "word": "肩書き",
         "reading": "かたがき",
-        "meaning": "position, job title",
+        "meaning": "chức vụ, chức danh",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "（肩が）こる (（かたが）こる)",
         "reading": "（かたが）こる",
-        "meaning": "(shoulder) ache",
+        "meaning": "(vai) đau nhức",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "肩こり",
         "reading": "かたこり",
-        "meaning": "shoulder pain",
+        "meaning": "đau vai",
         "level": "N3",
         "type": "DT"
       }
@@ -10665,7 +10665,7 @@
       {
         "word": "皮ふ",
         "reading": "ひふ",
-        "meaning": "Da",
+        "meaning": "đà",
         "level": "N3",
         "type": "DT"
       },
@@ -10711,21 +10711,21 @@
       {
         "word": "胃部",
         "reading": "いぶ",
-        "meaning": "Gastric region",
+        "meaning": "vùng dạ dày",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "健胃",
         "reading": "けんい",
-        "meaning": "Strong stomach",
+        "meaning": "bụng khỏe",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "網胃",
         "reading": "あみい",
-        "meaning": "Reticulum",
+        "meaning": "mạng lưới",
         "level": "N3",
         "type": "DT"
       }
@@ -10764,21 +10764,21 @@
       {
         "word": "右脳",
         "reading": "うのう",
-        "meaning": "Right brain",
+        "meaning": "não phải",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "左脳",
         "reading": "さのう",
-        "meaning": "Left brain",
+        "meaning": "não trái",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "脳死",
         "reading": "のうし",
-        "meaning": "Brain death",
+        "meaning": "chết não",
         "level": "N3",
         "type": "DT"
       }
@@ -10810,28 +10810,28 @@
       {
         "word": "傷",
         "reading": "しょう",
-        "meaning": "Vết thương",
+        "meaning": "vết thương",
         "level": "N3",
         "type": "kanji"
       },
       {
         "word": "手傷",
         "reading": "てきず",
-        "meaning": "Wound suffered in a fight",
+        "meaning": "vết thương trong lúc đánh nhau",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "無傷",
         "reading": "むきず",
-        "meaning": "Unhurt",
+        "meaning": "không bị thương",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "傷つく",
         "reading": "きずつく",
-        "meaning": "To be wounded",
+        "meaning": "bị thương",
         "level": "N3",
         "type": "ĐT"
       }
@@ -10909,7 +10909,7 @@
       {
         "word": "老舗",
         "reading": "しにせ",
-        "meaning": "Cửa hàng lâu đời / hàng trăm năm",
+        "meaning": "cửa hiệu/doanh nghiệp lâu đời, có truyền thống và uy tín",
         "level": "N3",
         "type": "vocab"
       },
@@ -10923,14 +10923,14 @@
       {
         "word": "老人",
         "reading": "ろうじん",
-        "meaning": "elderly person",
+        "meaning": "người già",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "老人ホーム",
         "reading": "ろうじんホーム",
-        "meaning": "nursing home",
+        "meaning": "viện dưỡng lão",
         "level": "N3",
         "type": "DT"
       }
@@ -11029,14 +11029,14 @@
       {
         "word": "お宅",
         "reading": "おたく",
-        "meaning": "Your house",
+        "meaning": "nhà (kính ngữ của うち hoặc いえ)",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "宅地",
         "reading": "たくち",
-        "meaning": "Building lot",
+        "meaning": "lô đất xây dựng",
         "level": "N3",
         "type": "DT"
       }
@@ -11075,21 +11075,21 @@
       {
         "word": "堂宇",
         "reading": "どうう",
-        "meaning": "Edifice",
+        "meaning": "dinh thự",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "庫堂",
         "reading": "くどう",
-        "meaning": "Temple kitchen",
+        "meaning": "bếp chùa",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "御堂",
         "reading": "みどう",
-        "meaning": "Enshrinement hall (of a buddha)",
+        "meaning": "điện thờ (của một vị phật)",
         "level": "N3",
         "type": "DT"
       }
@@ -11128,21 +11128,21 @@
       {
         "word": "土壁",
         "reading": "つちかべ",
-        "meaning": "Mud wall",
+        "meaning": "tường bùn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "塗り壁",
         "reading": "ぬりかべ",
-        "meaning": "Plaster or mortar-covered wall",
+        "meaning": "tường trát hoặc trát vữa",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "壁パス",
         "reading": "かべパス",
-        "meaning": "Wall pass (soccer)",
+        "meaning": "đường chuyền xuyên tường (bóng đá)",
         "level": "N3",
         "type": "ĐT"
       }
@@ -11188,14 +11188,14 @@
       {
         "word": "出窓",
         "reading": "でまど",
-        "meaning": "Bay window",
+        "meaning": "cửa sổ lồi",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "小窓",
         "reading": "こまど",
-        "meaning": "Small window",
+        "meaning": "cửa sổ nhỏ",
         "level": "N3",
         "type": "ĐT"
       }
@@ -11241,14 +11241,14 @@
       {
         "word": "庭土",
         "reading": "にわど",
-        "meaning": "Garden soil",
+        "meaning": "đất vườn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "庭師",
         "reading": "にわし",
-        "meaning": "Gardener",
+        "meaning": "người làm vườn",
         "level": "N3",
         "type": "ĐT"
       }
@@ -11294,14 +11294,14 @@
       {
         "word": "この辺り",
         "reading": "このあたり",
-        "meaning": "This area",
+        "meaning": "khu vực này",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "その辺り",
         "reading": "そのあたり",
-        "meaning": "Thereabouts",
+        "meaning": "ở đó",
         "level": "N3",
         "type": "ĐT"
       }
@@ -11340,21 +11340,21 @@
       {
         "word": "他ならぬ",
         "reading": "ほかならぬ",
-        "meaning": "Nothing but",
+        "meaning": "không có gì ngoài",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "その他にも",
         "reading": "そのほかにも",
-        "meaning": "In addition",
+        "meaning": "ngoài ra",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "他でもない",
         "reading": "ほかでもない",
-        "meaning": "What I want to say is",
+        "meaning": "điều tôi muốn nói là",
         "level": "N3",
         "type": "ĐT"
       }
@@ -11446,7 +11446,7 @@
       {
         "word": "[お]互いに",
         "reading": "[お]たがいに",
-        "meaning": "each other, together",
+        "meaning": "nhau, cùng nhau",
         "level": "N3",
         "type": "DT"
       },
@@ -11545,21 +11545,21 @@
       {
         "word": "率いる",
         "reading": "ひきいる",
-        "meaning": "To lead",
+        "meaning": "để dẫn đầu",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "引率",
         "reading": "いんそつ",
-        "meaning": "Leading",
+        "meaning": "dẫn đầu",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "真率",
         "reading": "しんそつ",
-        "meaning": "Honesty",
+        "meaning": "trung thực",
         "level": "N3",
         "type": "DT"
       }
@@ -11598,21 +11598,21 @@
       {
         "word": "半額",
         "reading": "はんがく",
-        "meaning": "half price",
+        "meaning": "một nửa giá",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "額付き",
         "reading": "ひたいつき",
-        "meaning": "Shape of one's brow or forehead",
+        "meaning": "hình dạng của trán hoặc trán của một người",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "額際",
         "reading": "ひたいぎわ",
-        "meaning": "The hairline",
+        "meaning": "đường chân tóc",
         "level": "N3",
         "type": "ĐT"
       }
@@ -11644,14 +11644,14 @@
       {
         "word": "書類",
         "reading": "しょるい",
-        "meaning": "tài liệu, giấy tờ",
+        "meaning": "Tài liệu, giấy tờ",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "親類",
         "reading": "しんるい",
-        "meaning": "relatives",
+        "meaning": "họ hàng",
         "level": "N3",
         "type": "DT"
       },
@@ -11697,21 +11697,21 @@
       {
         "word": "複利",
         "reading": "ふくり",
-        "meaning": "Compound interest",
+        "meaning": "lãi kép",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "複座",
         "reading": "ふくざ",
-        "meaning": "Two-seater",
+        "meaning": "xe hai chỗ",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "複素",
         "reading": "ふくそ",
-        "meaning": "Complex",
+        "meaning": "tổ hợp",
         "level": "N3",
         "type": "DT"
       }
@@ -11750,21 +11750,21 @@
       {
         "word": "簡保",
         "reading": "かんぽ",
-        "meaning": "Postal life insurance",
+        "meaning": "bảo hiểm nhân thọ bưu điện",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "簡易",
         "reading": "かんい",
-        "meaning": "Simplicity",
+        "meaning": "đơn giản",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "簡素",
         "reading": "かんそ",
-        "meaning": "Simplicity",
+        "meaning": "đơn giản, giản tiện (cách trang trí, sinh hoạt không cầu kỳ)",
         "level": "N3",
         "type": "DT"
       }
@@ -11803,21 +11803,21 @@
       {
         "word": "述べる",
         "reading": "のべる",
-        "meaning": "To state",
+        "meaning": "bày tỏ, nêu lên",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "説き述べる",
         "reading": "ときのべる",
-        "meaning": "To explain",
+        "meaning": "để giải thích",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "申し述べる",
         "reading": "もうしのべる",
-        "meaning": "To say",
+        "meaning": "để nói",
         "level": "N3",
         "type": "ĐT"
       }
@@ -11849,14 +11849,14 @@
       {
         "word": "理由",
         "reading": "りゆう",
-        "meaning": "lý do, nguyên nhân",
+        "meaning": "lý do",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "自由な",
         "reading": "じゆうな",
-        "meaning": "tự do, thoải mái",
+        "meaning": "tự do",
         "level": "N3",
         "type": "TT-na"
       },
@@ -11870,7 +11870,7 @@
       {
         "word": "経由（する） (けいゆ（する）)",
         "reading": "けいゆ（する）",
-        "meaning": "passing through, transit",
+        "meaning": "đi qua, quá cảnh",
         "level": "N3",
         "type": "DT"
       }
@@ -11923,7 +11923,7 @@
       {
         "word": "提案",
         "reading": "ていあん",
-        "meaning": "Đề xuất / đề nghị",
+        "meaning": "đề án, đề xuất",
         "level": "N3",
         "type": "vocab"
       }
@@ -11969,14 +11969,14 @@
       {
         "word": "追加（する） (ついか（する）)",
         "reading": "ついか（する）",
-        "meaning": "addition, extra",
+        "meaning": "thêm vào, thêm vào",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "増加（する） (ぞうか（する）)",
         "reading": "ぞうか（する）",
-        "meaning": "increase; rise",
+        "meaning": "sự gia tăng; sự thêm vào",
         "level": "N3",
         "type": "DT"
       }
@@ -12015,14 +12015,14 @@
       {
         "word": "欠席（する） (けっせき（する）)",
         "reading": "けっせき（する）",
-        "meaning": "absence, taking time off",
+        "meaning": "vắng mặt, nghỉ phép",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "欠点",
         "reading": "けってん",
-        "meaning": "weakness, shortcoming",
+        "meaning": "điểm yếu, khuyết điểm",
         "level": "N3",
         "type": "DT"
       },
@@ -12068,21 +12068,21 @@
       {
         "word": "補講（する） (ほこう（する）)",
         "reading": "ほこう（する）",
-        "meaning": "make-up study, extra study",
+        "meaning": "học bù, học thêm",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "補う",
         "reading": "おぎなう",
-        "meaning": "To compensate for",
+        "meaning": "đền bù; bù; bổ sung",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "欠を補う",
         "reading": "けつをおぎなう",
-        "meaning": "To bridge a gap",
+        "meaning": "để thu hẹp khoảng cách",
         "level": "N3",
         "type": "ĐT"
       }
@@ -12181,7 +12181,7 @@
       {
         "word": "血液型",
         "reading": "けつえきがた",
-        "meaning": "blood type",
+        "meaning": "nhóm máu",
         "level": "N3",
         "type": "DT"
       }
@@ -12227,14 +12227,14 @@
       {
         "word": "固める",
         "reading": "かためる",
-        "meaning": "To harden",
+        "meaning": "làm cứng",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "差し固める",
         "reading": "さしかためる",
-        "meaning": "To close or shut tight",
+        "meaning": "để đóng hoặc đóng chặt",
         "level": "N3",
         "type": "ĐT"
       }
@@ -12273,21 +12273,21 @@
       {
         "word": "花粉症",
         "reading": "かふんしょう",
-        "meaning": "hay fever",
+        "meaning": "sốt mùa hè",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "きな粉",
         "reading": "きなこ",
-        "meaning": "Roasted soybean flour",
+        "meaning": "bột đậu nành rang",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "そば粉",
         "reading": "そばこ",
-        "meaning": "Buckwheat flour",
+        "meaning": "bột kiều mạch",
         "level": "N3",
         "type": "ĐT"
       }
@@ -12326,21 +12326,21 @@
       {
         "word": "在庫",
         "reading": "ざいこ",
-        "meaning": "Hàng tồn kho",
+        "meaning": "Hàng tồn kho / Còn hàng",
         "level": "N3",
         "type": "vocab"
       },
       {
         "word": "府庫",
         "reading": "ふこ",
-        "meaning": "Treasury",
+        "meaning": "kho bạc",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "武庫",
         "reading": "ぶこ",
-        "meaning": "Armory",
+        "meaning": "kho vũ khí",
         "level": "N3",
         "type": "DT"
       }
@@ -12379,21 +12379,21 @@
       {
         "word": "詞賦",
         "reading": "しふ",
-        "meaning": "Chinese poetry",
+        "meaning": "thơ Trung Quốc",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "賀詞",
         "reading": "がし",
-        "meaning": "Congratulations",
+        "meaning": "chúc mừng",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "作詞",
         "reading": "さくし",
-        "meaning": "(writing) song lyrics",
+        "meaning": "(viết) lời bài hát",
         "level": "N3",
         "type": "DT"
       }
@@ -12439,14 +12439,14 @@
       {
         "word": "下句",
         "reading": "げく",
-        "meaning": "The last part of a poem or Bible verse",
+        "meaning": "phần cuối của một bài thơ hoặc câu Kinh Thánh",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "佳句",
         "reading": "かく",
-        "meaning": "Beautiful passage of literature",
+        "meaning": "đoạn văn đẹp đẽ",
         "level": "N3",
         "type": "DT"
       }
@@ -12485,21 +12485,21 @@
       {
         "word": "訓む",
         "reading": "よむ",
-        "meaning": "To pronounce kanji (using the native Japanese reading)",
+        "meaning": "cách phát âm chữ kanji (dùng cách đọc tiếng Nhật bản xứ)",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "訓ずる",
         "reading": "くんずる",
-        "meaning": "To read kanji using its native Japanese pronunciation",
+        "meaning": "để đọc chữ kanji bằng cách phát âm tiếng Nhật bản địa",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "古訓",
         "reading": "こくん",
-        "meaning": "Ancient instruction",
+        "meaning": "lời dạy cổ xưa",
         "level": "N3",
         "type": "DT"
       }
@@ -12531,7 +12531,7 @@
       {
         "word": "甘い",
         "reading": "あまい",
-        "meaning": "ngọt",
+        "meaning": "Ngọt",
         "level": "N3",
         "type": "TT-i"
       },
@@ -12545,14 +12545,14 @@
       {
         "word": "甘いもの",
         "reading": "あまいもの",
-        "meaning": "Sweets",
+        "meaning": "kẹo",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "甘い声",
         "reading": "あまいこえ",
-        "meaning": "Sweet voice",
+        "meaning": "giọng nói ngọt ngào",
         "level": "N3",
         "type": "ĐT"
       }
@@ -12598,7 +12598,7 @@
       {
         "word": "汚れ",
         "reading": "よごれ",
-        "meaning": "dirty, stain",
+        "meaning": "bẩn, vết bẩn",
         "level": "N3",
         "type": "DT"
       },
@@ -12637,7 +12637,7 @@
       {
         "word": "影響",
         "reading": "えいきょう",
-        "meaning": "ảnh hưởng, tác động",
+        "meaning": "ảnh hưởng",
         "level": "N3",
         "type": "DT"
       },
@@ -12690,21 +12690,21 @@
       {
         "word": "和製",
         "reading": "わせい",
-        "meaning": "Japanese-made",
+        "meaning": "do người Nhật sản xuất",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "土製",
         "reading": "どせい",
-        "meaning": "Clay",
+        "meaning": "đất sét",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "手製",
         "reading": "てせい",
-        "meaning": "Handmade",
+        "meaning": "thủ công",
         "level": "N3",
         "type": "DT"
       }
@@ -12736,7 +12736,7 @@
       {
         "word": "易しい",
         "reading": "やさしい",
-        "meaning": "dễ",
+        "meaning": "Dễ",
         "level": "N3",
         "type": "TT-i"
       },
@@ -12835,7 +12835,7 @@
       {
         "word": "現象",
         "reading": "げんしょう",
-        "meaning": "hiện tượng",
+        "meaning": "Hiện tượng",
         "level": "N3",
         "type": "DT"
       },
@@ -12856,7 +12856,7 @@
       {
         "word": "対象",
         "reading": "たいしょう",
-        "meaning": "object, target",
+        "meaning": "đối tượng, mục tiêu",
         "level": "N3",
         "type": "DT"
       }
@@ -12895,21 +12895,21 @@
       {
         "word": "冥き途",
         "reading": "くらきみち",
-        "meaning": "Hades",
+        "meaning": "âm phủ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "使途",
         "reading": "しと",
-        "meaning": "Purpose for which money is spent",
+        "meaning": "mục đích sử dụng tiền",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "帰途",
         "reading": "きと",
-        "meaning": "On the way back",
+        "meaning": "trên đường về",
         "level": "N3",
         "type": "DT"
       }
@@ -12941,28 +12941,28 @@
       {
         "word": "未語",
         "reading": "ミ",
-        "meaning": "Chưa, chưa từng (Vị)",
+        "meaning": "chưa, chưa từng (Vị)",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "未来",
         "reading": "みらい",
-        "meaning": "the future",
+        "meaning": "tương lai",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "未だし",
         "reading": "いまだし",
-        "meaning": "Something to be desired",
+        "meaning": "một cái gì đó được mong muốn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "未だに",
         "reading": "いまだに",
-        "meaning": "Still",
+        "meaning": "vẫn chưa",
         "level": "N3",
         "type": "ĐT"
       }
@@ -12994,7 +12994,7 @@
       {
         "word": "演奏",
         "reading": "えんそう",
-        "meaning": "Biểu diễn (âm nhạc)",
+        "meaning": "biểu diễn",
         "level": "N3",
         "type": "vocab"
       },
@@ -13061,14 +13061,14 @@
       {
         "word": "彼ら",
         "reading": "かれら",
-        "meaning": "They (usually male)",
+        "meaning": "họ, bọn họ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "彼氏",
         "reading": "かれし",
-        "meaning": "Boyfriend",
+        "meaning": "bạn trai",
         "level": "N3",
         "type": "ĐT"
       }
@@ -13100,14 +13100,14 @@
       {
         "word": "眠い",
         "reading": "ねむい",
-        "meaning": "buồn ngủ",
+        "meaning": "Buồn ngủ",
         "level": "N3",
         "type": "TT-i"
       },
       {
         "word": "居眠り（する） (いねむり（する）)",
         "reading": "いねむり（する）",
-        "meaning": "nodding off",
+        "meaning": "gật đầu",
         "level": "N3",
         "type": "DT"
       },
@@ -13167,14 +13167,14 @@
       {
         "word": "然程",
         "reading": "さほど",
-        "meaning": "Not so",
+        "meaning": "không phải vậy",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "程に",
         "reading": "ほどに",
-        "meaning": "Because",
+        "meaning": "bởi vì",
         "level": "N3",
         "type": "ĐT"
       }
@@ -13206,7 +13206,7 @@
       {
         "word": "意識",
         "reading": "いしき",
-        "meaning": "Ý thức / nhận thức",
+        "meaning": "Ý thức",
         "level": "N3",
         "type": "vocab"
       },
@@ -13259,7 +13259,7 @@
       {
         "word": "美術館",
         "reading": "びじゅつかん",
-        "meaning": "bảo tàng mỹ thuật",
+        "meaning": "Bảo tàng nghệ thuật",
         "level": "N3",
         "type": "DT"
       },
@@ -13273,14 +13273,14 @@
       {
         "word": "芸術",
         "reading": "げいじゅつ",
-        "meaning": "nghệ thuật",
+        "meaning": "Nghệ thuật",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "技術",
         "reading": "ぎじゅつ",
-        "meaning": "kỹ thuật, công nghệ",
+        "meaning": "Kỹ thuật, công nghệ",
         "level": "N3",
         "type": "DT"
       }
@@ -13312,7 +13312,7 @@
       {
         "word": "お刺身",
         "reading": "おさしみ",
-        "meaning": "sashimi",
+        "meaning": "gỏi cá; sasimi",
         "level": "N3",
         "type": "DT"
       },
@@ -13485,14 +13485,14 @@
       {
         "word": "主婦",
         "reading": "しゅふ",
-        "meaning": "homemaker",
+        "meaning": "người nội trợ",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "婦人服",
         "reading": "ふじんふく",
-        "meaning": "women's clothes",
+        "meaning": "quần áo phụ nữ",
         "level": "N3",
         "type": "DT"
       }
@@ -13524,28 +13524,28 @@
       {
         "word": "在庫",
         "reading": "ざいこ",
-        "meaning": "Hàng tồn kho",
+        "meaning": "Hàng tồn kho / Còn hàng",
         "level": "N3",
         "type": "vocab"
       },
       {
         "word": "存在",
         "reading": "そんざい",
-        "meaning": "Tồn tại / sự hiện hữu",
+        "meaning": "tồn tại",
         "level": "N3",
         "type": "vocab"
       },
       {
         "word": "存在（する） (そんざい（する）)",
         "reading": "そんざい（する）",
-        "meaning": "existence, person, thing",
+        "meaning": "sự tồn tại, con người, đồ vật",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "滞在（する） (たいざい（する）)",
         "reading": "たいざい（する）",
-        "meaning": "stay, lodge",
+        "meaning": "ở lại, ở trọ",
         "level": "N3",
         "type": "DT"
       }
@@ -13591,7 +13591,7 @@
       {
         "word": "紳士服",
         "reading": "しんしふく",
-        "meaning": "men's clothes",
+        "meaning": "quần áo nam",
         "level": "N3",
         "type": "DT"
       }
@@ -13623,7 +13623,7 @@
       {
         "word": "仲語",
         "reading": "チュウ",
-        "meaning": "Quan hệ, ở giữa (Trọng)",
+        "meaning": "quan hệ, ở giữa (Trọng)",
         "level": "N3",
         "type": "DT"
       },
@@ -13644,7 +13644,7 @@
       {
         "word": "仲直り（する） (なかなおり（する）)",
         "reading": "なかなおり（する）",
-        "meaning": "making peace",
+        "meaning": "làm hòa",
         "level": "N3",
         "type": "DT"
       }
@@ -13676,7 +13676,7 @@
       {
         "word": "例えば",
         "reading": "たとえば",
-        "meaning": "ví dụ, chẳng hạn",
+        "meaning": "ví dụ",
         "level": "N3",
         "type": "PV"
       },
@@ -13722,7 +13722,7 @@
       {
         "word": "見積もり",
         "reading": "みつもり",
-        "meaning": "Báo giá / ước tính",
+        "meaning": "bảng báo giá, dự trù chi phí",
         "level": "N3",
         "type": "vocab"
       },
@@ -13775,7 +13775,7 @@
       {
         "word": "助けます",
         "reading": "たすけます",
-        "meaning": "giúp đỡ, cứu trợ",
+        "meaning": "giúp, giúp đỡ",
         "level": "N3",
         "type": "ĐT"
       },
@@ -13881,21 +13881,21 @@
       {
         "word": "出迎え",
         "reading": "でむかえ",
-        "meaning": "picking someone up",
+        "meaning": "đón ai đó",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "出迎える",
         "reading": "でむかえる",
-        "meaning": "to pick someone up",
+        "meaning": "để đón ai đó",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "歓迎会",
         "reading": "かんげいかい",
-        "meaning": "welcome party, social gathering",
+        "meaning": "tiệc chào mừng, họp mặt giao lưu",
         "level": "N3",
         "type": "DT"
       }
@@ -14040,14 +14040,14 @@
       {
         "word": "将又",
         "reading": "はたまた",
-        "meaning": "And",
+        "meaning": "và",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "将士",
         "reading": "しょうし",
-        "meaning": "Officers and men",
+        "meaning": "cán bộ và nam giới",
         "level": "N3",
         "type": "DT"
       }
@@ -14086,21 +14086,21 @@
       {
         "word": "看護師",
         "reading": "かんごし",
-        "meaning": "Y tá / điều dưỡng",
+        "meaning": "Y tá",
         "level": "N3",
         "type": "vocab"
       },
       {
         "word": "医師",
         "reading": "いし",
-        "meaning": "Doctor",
+        "meaning": "Bác sĩ",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "士師",
         "reading": "しし",
-        "meaning": "Judge (of ancient China)",
+        "meaning": "thẩm phán (của Trung Quốc cổ đại)",
         "level": "N3",
         "type": "DT"
       }
@@ -14185,7 +14185,7 @@
       {
         "word": "給料",
         "reading": "きゅうりょう",
-        "meaning": "lương, tiền lương",
+        "meaning": "Lương",
         "level": "N3",
         "type": "DT"
       },
@@ -14245,21 +14245,21 @@
       {
         "word": "久しい",
         "reading": "ひさしい",
-        "meaning": "Long",
+        "meaning": "dài",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "久しい昔",
         "reading": "ひさしいむかし",
-        "meaning": "A long time ago",
+        "meaning": "cách đây đã lâu",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "弥久",
         "reading": "びきゅう",
-        "meaning": "Extending over a long time",
+        "meaning": "kéo dài trong thời gian dài",
         "level": "N3",
         "type": "DT"
       }
@@ -14305,14 +14305,14 @@
       {
         "word": "満員",
         "reading": "まんいん",
-        "meaning": "full, no room left, crowded",
+        "meaning": "đầy, không còn chỗ, đông đúc",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "不満（な） (ふまん（な）)",
         "reading": "ふまん（な）",
-        "meaning": "dissatisfied, unhappy",
+        "meaning": "không hài lòng, không vui",
         "level": "N3",
         "type": "DT"
       }
@@ -14358,14 +14358,14 @@
       {
         "word": "踊る",
         "reading": "おどる",
-        "meaning": "To dance",
+        "meaning": "để nhảy",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "舞踊",
         "reading": "ぶよう",
-        "meaning": "Dancing",
+        "meaning": "khiêu vũ",
         "level": "N3",
         "type": "DT"
       }
@@ -14404,21 +14404,21 @@
       {
         "word": "具に",
         "reading": "つぶさに",
-        "meaning": "In detail",
+        "meaning": "chi tiết",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "不具",
         "reading": "ふぐ",
-        "meaning": "Deformity",
+        "meaning": "biến dạng",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "具す",
         "reading": "ぐす",
-        "meaning": "To accompany",
+        "meaning": "đi cùng",
         "level": "N3",
         "type": "DT"
       }
@@ -14450,7 +14450,7 @@
       {
         "word": "平和",
         "reading": "へいわ",
-        "meaning": "hoà bình",
+        "meaning": "hòa bình",
         "level": "N3",
         "type": "DT"
       },
@@ -14510,7 +14510,7 @@
       {
         "word": "券",
         "reading": "けん",
-        "meaning": "Phiếu / chứng khoán",
+        "meaning": "vé",
         "level": "N3",
         "type": "kanji"
       },
@@ -14570,7 +14570,7 @@
       {
         "word": "差別",
         "reading": "さべつ",
-        "meaning": "Phân biệt đối xử",
+        "meaning": "phân biệt, phân biệt đối xử (chủng tộc)",
         "level": "N3",
         "type": "vocab"
       }
@@ -14602,14 +14602,14 @@
       {
         "word": "景色",
         "reading": "けしき",
-        "meaning": "phong cảnh",
+        "meaning": "phong cảnh, cảnh sắc",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "景気",
         "reading": "けいき",
-        "meaning": "Tình hình kinh tế / cảnh khí",
+        "meaning": "Tình hình kinh tế",
         "level": "N3",
         "type": "vocab"
       },
@@ -14676,7 +14676,7 @@
       {
         "word": "二酸化炭素",
         "reading": "にさんかたんそ",
-        "meaning": "Carbon dioxide / CO2",
+        "meaning": "khí các bô ních; co2",
         "level": "N3",
         "type": "vocab"
       }
@@ -14722,14 +14722,14 @@
       {
         "word": "侍史",
         "reading": "じし",
-        "meaning": "Private secretary",
+        "meaning": "thư ký riêng",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "偽史",
         "reading": "ぎし",
-        "meaning": "Falsified history",
+        "meaning": "lịch sử giả mạo",
         "level": "N3",
         "type": "DT"
       }
@@ -14821,7 +14821,7 @@
       {
         "word": "血液型",
         "reading": "けつえきがた",
-        "meaning": "blood type",
+        "meaning": "nhóm máu",
         "level": "N3",
         "type": "DT"
       },
@@ -14881,14 +14881,14 @@
       {
         "word": "装う",
         "reading": "よそおう",
-        "meaning": "To dress",
+        "meaning": "để ăn mặc",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "装い",
         "reading": "よそおい",
-        "meaning": "Dress",
+        "meaning": "đầm",
         "level": "N3",
         "type": "ĐT"
       }
@@ -14927,7 +14927,7 @@
       {
         "word": "登録（する） (とうろく（する）)",
         "reading": "とうろく（する）",
-        "meaning": "registration",
+        "meaning": "sự đăng ký",
         "level": "N3",
         "type": "DT"
       },
@@ -14980,21 +14980,21 @@
       {
         "word": "植える",
         "reading": "うえる",
-        "meaning": "To plant",
+        "meaning": "đói, thiếu thốn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "植わる",
         "reading": "うわる",
-        "meaning": "To be planted",
+        "meaning": "được trồng",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "仮植",
         "reading": "かしょく",
-        "meaning": "Temporary planting",
+        "meaning": "trồng tạm thời",
         "level": "N3",
         "type": "DT"
       }
@@ -15086,14 +15086,14 @@
       {
         "word": "見比べる",
         "reading": "みくらべる",
-        "meaning": "To compare with the eye",
+        "meaning": "để so sánh với mắt",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "食べ比べる",
         "reading": "たべくらべる",
-        "meaning": "To taste and compare several dishes (or foods) of the same type",
+        "meaning": "nếm thử và so sánh một số món ăn (hoặc thức ăn) cùng loại",
         "level": "N3",
         "type": "ĐT"
       }
@@ -15132,21 +15132,21 @@
       {
         "word": "比較",
         "reading": "ひかく",
-        "meaning": "Comparison",
+        "meaning": "so sánh",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "較差",
         "reading": "かくさ",
-        "meaning": "Range",
+        "meaning": "phạm vi",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "比較器",
         "reading": "ひかくき",
-        "meaning": "Comparator",
+        "meaning": "bộ so sánh",
         "level": "N3",
         "type": "DT"
       }
@@ -15178,14 +15178,14 @@
       {
         "word": "幸語",
         "reading": "コウ",
-        "meaning": "Hạnh phúc, may mắn (Hạnh)",
+        "meaning": "hạnh Phúc, may mắn (Hạnh)",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "幸せ（な） (しあわせ（な）)",
         "reading": "しあわせ（な）",
-        "meaning": "happiness",
+        "meaning": "niềm hạnh phúc",
         "level": "N3",
         "type": "DT"
       },
@@ -15277,21 +15277,21 @@
       {
         "word": "喫む",
         "reading": "のむ",
-        "meaning": "To smoke (tobacco)",
+        "meaning": "hút thuốc (thuốc lá)",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "喫煙",
         "reading": "きつえん",
-        "meaning": "Smoking",
+        "meaning": "hút thuốc",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "喫飲",
         "reading": "きついん",
-        "meaning": "Eating and drinking",
+        "meaning": "ăn uống",
         "level": "N3",
         "type": "DT"
       }
@@ -15323,7 +15323,7 @@
       {
         "word": "野球",
         "reading": "やきゅう",
-        "meaning": "bóng chày",
+        "meaning": "Bóng chày",
         "level": "N3",
         "type": "DT"
       },
@@ -15376,21 +15376,21 @@
       {
         "word": "詳しい",
         "reading": "くわしい",
-        "meaning": "rành / am hiểu / thạo / biết rõ (về lĩnh vực, sự việc)",
+        "meaning": "cụ thể, chi tiết",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "詳しい話",
         "reading": "くわしいはなし",
-        "meaning": "Detailed account",
+        "meaning": "tài khoản chi tiết",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "詳らか",
         "reading": "つまびらか",
-        "meaning": "Detailed",
+        "meaning": "chi tiết",
         "level": "N3",
         "type": "ĐT"
       }
@@ -15429,21 +15429,21 @@
       {
         "word": "宿泊（する） (しゅくはく（する）)",
         "reading": "しゅくはく（する）",
-        "meaning": "lodging, staying overnight",
+        "meaning": "chỗ ở, nghỉ qua đêm",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "宿す",
         "reading": "やどす",
-        "meaning": "To keep (guest)",
+        "meaning": "để giữ (khách)",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "宿り",
         "reading": "やどり",
-        "meaning": "Lodging abode",
+        "meaning": "nơi ở",
         "level": "N3",
         "type": "ĐT"
       }
@@ -15482,7 +15482,7 @@
       {
         "word": "予定",
         "reading": "よてい",
-        "meaning": "kế hoạch, dự định",
+        "meaning": "dự định; lịch trình",
         "level": "N3",
         "type": "DT"
       },
@@ -15528,7 +15528,7 @@
       {
         "word": "迷惑",
         "reading": "めいわく",
-        "meaning": "sự phiền toái, rắc rối, làm phiền",
+        "meaning": "làm phiền, quấy rầy",
         "level": "N3",
         "type": "DT"
       },
@@ -15549,7 +15549,7 @@
       {
         "word": "迷惑（な/する） (めいわく（な/する）)",
         "reading": "めいわく（な/する）",
-        "meaning": "annoyance, trouble",
+        "meaning": "sự khó chịu, rắc rối",
         "level": "N3",
         "type": "DT"
       }
@@ -15595,7 +15595,7 @@
       {
         "word": "発展（する） (はってん（する）)",
         "reading": "はってん（する）",
-        "meaning": "development",
+        "meaning": "phát triển",
         "level": "N3",
         "type": "DT"
       }
@@ -15634,21 +15634,21 @@
       {
         "word": "位する",
         "reading": "くらいする",
-        "meaning": "To rank",
+        "meaning": "để xếp hạng",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "位付け",
         "reading": "くらいづけ",
-        "meaning": "Ranking",
+        "meaning": "xếp hạng",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "位取り",
         "reading": "くらいどり",
-        "meaning": "Grade",
+        "meaning": "cấp",
         "level": "N3",
         "type": "ĐT"
       }
@@ -15694,14 +15694,14 @@
       {
         "word": "粗菓",
         "reading": "そか",
-        "meaning": "Refreshments (implied to be low-grade)",
+        "meaning": "giải khát (ngụ ý là cấp thấp)",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "冷菓",
         "reading": "れいか",
-        "meaning": "Chilled sweets",
+        "meaning": "kẹo ướp lạnh",
         "level": "N3",
         "type": "DT"
       }
@@ -15733,28 +15733,28 @@
       {
         "word": "拝見します",
         "reading": "はいけんします",
-        "meaning": "xem (謙譲語 của 見ます)",
+        "meaning": "xem, nhìn (khiêm nhường ngữ của みます)",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "拝む",
         "reading": "おがむ",
-        "meaning": "To assume the posture of praying",
+        "meaning": "để đảm nhận tư thế cầu nguyện",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "伏し拝む",
         "reading": "ふしおがむ",
-        "meaning": "To kneel and worship",
+        "meaning": "quỳ xuống và thờ phượng",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "拝す",
         "reading": "はいす",
-        "meaning": "To bow",
+        "meaning": "cúi lạy",
         "level": "N3",
         "type": "DT"
       }
@@ -15800,14 +15800,14 @@
       {
         "word": "底値",
         "reading": "そこね",
-        "meaning": "Bottom price",
+        "meaning": "giá đáy",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "底意",
         "reading": "そこい",
-        "meaning": "One's underlying motives or true intentions",
+        "meaning": "động cơ cơ bản hoặc ý định thực sự của một người",
         "level": "N3",
         "type": "ĐT"
       }
@@ -15846,21 +15846,21 @@
       {
         "word": "脚光を浴びる",
         "reading": "きゃっこうをあびる",
-        "meaning": "To be performed (on the stage)",
+        "meaning": "sẽ được biểu diễn (trên sân khấu)",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "フットライトを浴びる",
         "reading": "フットライトをあびる",
-        "meaning": "To appear on the stage",
+        "meaning": "để xuất hiện trên sân khấu",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "浴びせる",
         "reading": "あびせる",
-        "meaning": "To pour on",
+        "meaning": "để đổ vào",
         "level": "N3",
         "type": "ĐT"
       }
@@ -15899,21 +15899,21 @@
       {
         "word": "日替わり",
         "reading": "ひがわり",
-        "meaning": "changes from day to day",
+        "meaning": "thay đổi từng ngày",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "両替（する） (りょうがえ（する）)",
         "reading": "りょうがえ（する）",
-        "meaning": "currency exchange",
+        "meaning": "trao đổi tiền tệ",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "取り替える",
         "reading": "とりかえる",
-        "meaning": "change, replace",
+        "meaning": "thay đổi, thay thế",
         "level": "N3",
         "type": "DT"
       }
@@ -15952,21 +15952,21 @@
       {
         "word": "週刊誌",
         "reading": "しゅうかんし",
-        "meaning": "weekly newspaper",
+        "meaning": "báo hàng tuần",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "地誌",
         "reading": "ちし",
-        "meaning": "Topography",
+        "meaning": "địa hình",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "墓誌",
         "reading": "ぼし",
-        "meaning": "Epitaph",
+        "meaning": "văn bia",
         "level": "N3",
         "type": "DT"
       }
@@ -16005,21 +16005,21 @@
       {
         "word": "下城",
         "reading": "げじょう",
-        "meaning": "Withdrawing from the castle",
+        "meaning": "rút lui khỏi lâu đài",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "化城",
         "reading": "げじょう",
-        "meaning": "Castle magically created by the Buddha",
+        "meaning": "lâu đài được Đức Phật tạo ra một cách kỳ diệu",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "古城",
         "reading": "こじょう",
-        "meaning": "Old castle",
+        "meaning": "lâu đài cổ",
         "level": "N3",
         "type": "DT"
       }
@@ -16072,7 +16072,7 @@
       {
         "word": "片道",
         "reading": "かたみち",
-        "meaning": "one way",
+        "meaning": "một chiều",
         "level": "N3",
         "type": "DT"
       }
@@ -16118,14 +16118,14 @@
       {
         "word": "他領",
         "reading": "たりょう",
-        "meaning": "Another fief",
+        "meaning": "một thái ấp khác",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "寺領",
         "reading": "じりょう",
-        "meaning": "Temple's territory",
+        "meaning": "lãnh thổ của ngôi đền",
         "level": "N3",
         "type": "DT"
       }
@@ -16164,7 +16164,7 @@
       {
         "word": "レジ袋",
         "reading": "レジぶくろ",
-        "meaning": "plastic bag",
+        "meaning": "túi nhựa",
         "level": "N3",
         "type": "DT"
       },
@@ -16203,7 +16203,7 @@
       {
         "word": "怖い",
         "reading": "こわい",
-        "meaning": "sợ, đáng sợ",
+        "meaning": "Đáng sợ",
         "level": "N3",
         "type": "TT"
       },
@@ -16217,14 +16217,14 @@
       {
         "word": "怖い顔",
         "reading": "こわいかお",
-        "meaning": "Grim face",
+        "meaning": "mặt nhăn nhó",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "怖がる",
         "reading": "こわがる",
-        "meaning": "To be afraid of",
+        "meaning": "sợ hãi",
         "level": "N3",
         "type": "ĐT"
       }
@@ -16256,14 +16256,14 @@
       {
         "word": "夢",
         "reading": "ゆめ",
-        "meaning": "giấc mơ, ước mơ",
+        "meaning": "giấc mơ",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "夢中（な） (むちゅう（な）)",
         "reading": "むちゅう（な）",
-        "meaning": "passion, enthusiasm",
+        "meaning": "niềm đam mê, sự nhiệt tình",
         "level": "N3",
         "type": "DT"
       },
@@ -16316,7 +16316,7 @@
       {
         "word": "腹痛",
         "reading": "ふくつう",
-        "meaning": "stomachache",
+        "meaning": "đau bụng",
         "level": "N3",
         "type": "DT"
       }
@@ -16355,21 +16355,21 @@
       {
         "word": "警察",
         "reading": "けいさつ",
-        "meaning": "cảnh sát, ngành cảnh sát",
+        "meaning": "cảnh sát",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "夜警",
         "reading": "やけい",
-        "meaning": "Night watchman",
+        "meaning": "người gác đêm",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "奇警",
         "reading": "きけい",
-        "meaning": "Witty",
+        "meaning": "hóm hỉnh",
         "level": "N3",
         "type": "DT"
       }
@@ -16454,7 +16454,7 @@
       {
         "word": "許可",
         "reading": "きょか",
-        "meaning": "sự cho phép, giấy phép",
+        "meaning": "phép, giấy phép",
         "level": "N3",
         "type": "DT"
       },
@@ -16468,14 +16468,14 @@
       {
         "word": "不可能な",
         "reading": "ふかのうな",
-        "meaning": "bất khả thi, không thể",
+        "meaning": "không thể",
         "level": "N3",
         "type": "TT-na"
       },
       {
         "word": "可哀想な",
         "reading": "かわいそうな",
-        "meaning": "đáng thương, tội nghiệp",
+        "meaning": "tội nghiệp",
         "level": "N3",
         "type": "TT-na"
       }
@@ -16521,7 +16521,7 @@
       {
         "word": "一人暮らし",
         "reading": "ひとりぐらし",
-        "meaning": "living alone",
+        "meaning": "sống một mình",
         "level": "N3",
         "type": "DT"
       },
@@ -16560,14 +16560,14 @@
       {
         "word": "被害",
         "reading": "ひがい",
-        "meaning": "thiệt hại, tổn thất",
+        "meaning": "thiệt hại",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "障害",
         "reading": "しょうがい",
-        "meaning": "chướng ngại, trở ngại",
+        "meaning": "cản trở, khó khăn",
         "level": "N3",
         "type": "DT"
       },
@@ -16581,7 +16581,7 @@
       {
         "word": "被害者",
         "reading": "ひがいしゃ",
-        "meaning": "injured person, victim",
+        "meaning": "người bị thương, nạn nhân",
         "level": "N3",
         "type": "DT"
       }
@@ -16620,14 +16620,14 @@
       {
         "word": "口座",
         "reading": "こうざ",
-        "meaning": "account",
+        "meaning": "tài khoản",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "座席",
         "reading": "ざせき",
-        "meaning": "seat",
+        "meaning": "ghế",
         "level": "N3",
         "type": "DT"
       }
@@ -16673,14 +16673,14 @@
       {
         "word": "匪団",
         "reading": "ひだん",
-        "meaning": "Bandit gang",
+        "meaning": "băng đảng cướp",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "団地",
         "reading": "だんち",
-        "meaning": "Multi-unit apartments",
+        "meaning": "căn hộ nhiều căn hộ",
         "level": "N3",
         "type": "DT"
       }
@@ -16712,21 +16712,21 @@
       {
         "word": "側語",
         "reading": "ソク",
-        "meaning": "Phía, bên cạnh (Trắc)",
+        "meaning": "phía, side edge (Trắc)",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "内側",
         "reading": "うちがわ",
-        "meaning": "inside",
+        "meaning": "bên trong",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "通路側",
         "reading": "つうろがわ",
-        "meaning": "aisle side",
+        "meaning": "bên lối đi",
         "level": "N3",
         "type": "DT"
       }
@@ -16765,7 +16765,7 @@
       {
         "word": "個人",
         "reading": "こじん",
-        "meaning": "individual",
+        "meaning": "cá nhân",
         "level": "N3",
         "type": "DT"
       },
@@ -16804,7 +16804,7 @@
       {
         "word": "周語",
         "reading": "シュウ",
-        "meaning": "Xung quanh, chu vi (Chu)",
+        "meaning": "vùng xung quanh; chu vi",
         "level": "N3",
         "type": "DT"
       },
@@ -16818,14 +16818,14 @@
       {
         "word": "周り",
         "reading": "まわり",
-        "meaning": "Circumference",
+        "meaning": "đường tròn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "周囲",
         "reading": "しゅうい",
-        "meaning": "Surroundings",
+        "meaning": "môi trường xung quanh",
         "level": "N3",
         "type": "DT"
       }
@@ -16857,28 +16857,28 @@
       {
         "word": "次第に",
         "reading": "しだいに",
-        "meaning": "dần dần, từ từ",
+        "meaning": "dần dần",
         "level": "N3",
         "type": "PV"
       },
       {
         "word": "次第",
         "reading": "しだい",
-        "meaning": "Dependent upon",
+        "meaning": "ngay khi (Vます形+次第); tuỳ thuộc vào, tuỳ theo (Nの/N次第で)",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "第二",
         "reading": "だいに",
-        "meaning": "Second",
+        "meaning": "thứ hai",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "第五",
         "reading": "だいご",
-        "meaning": "The fifth",
+        "meaning": "thứ năm",
         "level": "N3",
         "type": "DT"
       }
@@ -16910,7 +16910,7 @@
       {
         "word": "準備",
         "reading": "じゅんび",
-        "meaning": "chuẩn bị, sự chuẩn bị",
+        "meaning": "chuẩn bị [～します:chuẩn bị]",
         "level": "N3",
         "type": "DT"
       },
@@ -16924,14 +16924,14 @@
       {
         "word": "備える",
         "reading": "そなえる",
-        "meaning": "To furnish",
+        "meaning": "lắp đặt, chuẩn bị, sẵn có",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "兼ね備える",
         "reading": "かねそなえる",
-        "meaning": "To have both",
+        "meaning": "để có cả hai",
         "level": "N3",
         "type": "ĐT"
       }
@@ -16970,7 +16970,7 @@
       {
         "word": "専攻（する） (せんこう（する）)",
         "reading": "せんこう（する）",
-        "meaning": "specialty, major",
+        "meaning": "chuyên ngành, chuyên ngành",
         "level": "N3",
         "type": "DT"
       },
@@ -17016,14 +17016,14 @@
       {
         "word": "正面",
         "reading": "しょうめん",
-        "meaning": "front side",
+        "meaning": "mặt trước",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "面接（する） (めんせつ（する）)",
         "reading": "めんせつ（する）",
-        "meaning": "interview",
+        "meaning": "phỏng vấn",
         "level": "N3",
         "type": "DT"
       },
@@ -17076,14 +17076,14 @@
       {
         "word": "練る",
         "reading": "ねる",
-        "meaning": "To knead",
+        "meaning": "nhào trộn, trau chuốt",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "武を練る",
         "reading": "ぶをねる",
-        "meaning": "To train oneself in military arts",
+        "meaning": "để rèn luyện bản thân về nghệ thuật quân sự",
         "level": "N3",
         "type": "ĐT"
       }
@@ -17122,21 +17122,21 @@
       {
         "word": "教授",
         "reading": "きょうじゅ",
-        "meaning": "professor",
+        "meaning": "giáo sư",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "授ける",
         "reading": "さずける",
-        "meaning": "To grant",
+        "meaning": "cấp",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "学位を授ける",
         "reading": "がくいをさずける",
-        "meaning": "To award a degree",
+        "meaning": "để cấp bằng",
         "level": "N3",
         "type": "ĐT"
       }
@@ -17175,21 +17175,21 @@
       {
         "word": "～君",
         "reading": "～くん",
-        "meaning": "cậu ~",
+        "meaning": "hậu tố thêm sau tên em trai",
         "level": "N3",
         "type": "KH"
       },
       {
         "word": "君ら",
         "reading": "きみら",
-        "meaning": "You guys",
+        "meaning": "các bạn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "君が代",
         "reading": "きみがよ",
-        "meaning": "Imperial reign",
+        "meaning": "triều đại hoàng gia",
         "level": "N3",
         "type": "ĐT"
       }
@@ -17221,7 +17221,7 @@
       {
         "word": "相撲",
         "reading": "すもう",
-        "meaning": "sumo",
+        "meaning": "đô vật; võ sỹ",
         "level": "N3",
         "type": "DT"
       },
@@ -17235,7 +17235,7 @@
       {
         "word": "相談します",
         "reading": "そうだんします",
-        "meaning": "bàn bạc, tư vấn, xin ý kiến",
+        "meaning": "nói chuyện, thảo luận",
         "level": "N3",
         "type": "ĐT"
       },
@@ -17274,7 +17274,7 @@
       {
         "word": "相談します",
         "reading": "そうだんします",
-        "meaning": "bàn bạc, tư vấn, xin ý kiến",
+        "meaning": "nói chuyện, thảo luận",
         "level": "N3",
         "type": "ĐT"
       },
@@ -17334,21 +17334,21 @@
       {
         "word": "忠実な僕",
         "reading": "ちゅうじつなしもべ",
-        "meaning": "Faithful servant",
+        "meaning": "đầy tớ trung thành",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "下僕",
         "reading": "げぼく",
-        "meaning": "Manservant",
+        "meaning": "người hầu",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "僕ら",
         "reading": "ぼくら",
-        "meaning": "We",
+        "meaning": "chúng tôi",
         "level": "N3",
         "type": "DT"
       }
@@ -17387,7 +17387,7 @@
       {
         "word": "当然な",
         "reading": "とうぜんな",
-        "meaning": "đương nhiên, tất nhiên",
+        "meaning": "tất nhiên, đương nhiên",
         "level": "N3",
         "type": "TT-na"
       },
@@ -17440,21 +17440,21 @@
       {
         "word": "皆々",
         "reading": "みなみな",
-        "meaning": "All",
+        "meaning": "tất cả",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "皆様",
         "reading": "みなさま",
-        "meaning": "Everyone",
+        "meaning": "quý vị ( kính ngữ của みなさん)",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "皆の者",
         "reading": "みなのもの",
-        "meaning": "Everybody",
+        "meaning": "mọi người",
         "level": "N3",
         "type": "ĐT"
       }
@@ -17493,21 +17493,21 @@
       {
         "word": "紹介",
         "reading": "しょうかい",
-        "meaning": "Introduction",
+        "meaning": "giới thiệu",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "他己紹介",
         "reading": "たこしょうかい",
-        "meaning": "Introduction of someone else",
+        "meaning": "giới thiệu của người khác",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "紹介文",
         "reading": "しょうかいぶん",
-        "meaning": "Introductory essay",
+        "meaning": "tiểu luận giới thiệu",
         "level": "N3",
         "type": "DT"
       }
@@ -17546,21 +17546,21 @@
       {
         "word": "［ご］夫妻",
         "reading": "［ご］ふさい",
-        "meaning": "husband and wife",
+        "meaning": "vợ chồng",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "妻戸",
         "reading": "つまど",
-        "meaning": "(pair of) wooden doors in the interior of a home",
+        "meaning": "(cặp) cửa gỗ bên trong một ngôi nhà",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "元妻",
         "reading": "もとつま",
-        "meaning": "Ex-wife",
+        "meaning": "vợ cũ",
         "level": "N3",
         "type": "ĐT"
       }
@@ -17599,21 +17599,21 @@
       {
         "word": "気宇",
         "reading": "きう",
-        "meaning": "Breadth of mind",
+        "meaning": "chiều rộng của tâm trí",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "眉宇",
         "reading": "びう",
-        "meaning": "Brow",
+        "meaning": "lông mày",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "祠宇",
         "reading": "しう",
-        "meaning": "Shrine",
+        "meaning": "đền thờ",
         "level": "N3",
         "type": "DT"
       }
@@ -17645,7 +17645,7 @@
       {
         "word": "臨床試験",
         "reading": "りんしょうしけん",
-        "meaning": "Thử nghiệm lâm sàng",
+        "meaning": "thử nghiệm lâm sàng",
         "level": "N3",
         "type": "vocab"
       },
@@ -17659,14 +17659,14 @@
       {
         "word": "床屋",
         "reading": "とこや",
-        "meaning": "Barbershop",
+        "meaning": "tiệm hớt tóc",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "床ずれ",
         "reading": "とこずれ",
-        "meaning": "Bedsore",
+        "meaning": "lở loét",
         "level": "N3",
         "type": "ĐT"
       }
@@ -17751,21 +17751,21 @@
       {
         "word": "恋愛（する） (れんあい（する）)",
         "reading": "れんあい（する）",
-        "meaning": "romance, love",
+        "meaning": "lãng mạn, tình yêu",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "恋う",
         "reading": "こう",
-        "meaning": "To love",
+        "meaning": "để yêu",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "恋路",
         "reading": "こいじ",
-        "meaning": "Romance",
+        "meaning": "lãng mạn",
         "level": "N3",
         "type": "ĐT"
       }
@@ -17811,14 +17811,14 @@
       {
         "word": "穴子",
         "reading": "あなご",
-        "meaning": "Garden eel",
+        "meaning": "lươn vườn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "ほぞ穴",
         "reading": "ほぞあな",
-        "meaning": "Mortice",
+        "meaning": "thế chấp",
         "level": "N3",
         "type": "ĐT"
       }
@@ -17857,21 +17857,21 @@
       {
         "word": "河原",
         "reading": "かわら",
-        "meaning": "Dry river bed",
+        "meaning": "lòng sông cạn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "恋河",
         "reading": "こいかわ",
-        "meaning": "Oceans of love",
+        "meaning": "những đại dương tình yêu",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "河の神",
         "reading": "かわのかみ",
-        "meaning": "River god",
+        "meaning": "thần sông",
         "level": "N3",
         "type": "ĐT"
       }
@@ -17917,14 +17917,14 @@
       {
         "word": "生誕",
         "reading": "せいたん",
-        "meaning": "Birth",
+        "meaning": "sự sinh đẻ; sự ra đời",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "荒誕",
         "reading": "こうたん",
-        "meaning": "Exaggerated beyond recognition",
+        "meaning": "phóng đại đến mức không thể nhận ra",
         "level": "N3",
         "type": "DT"
       }
@@ -17963,21 +17963,21 @@
       {
         "word": "煮豆",
         "reading": "にまめ",
-        "meaning": "Cooked beans",
+        "meaning": "đậu nấu chín",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "血豆",
         "reading": "ちまめ",
-        "meaning": "Blood blister",
+        "meaning": "vỉ máu",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "みつ豆",
         "reading": "みつまめ",
-        "meaning": "Mixture of boiled beans",
+        "meaning": "hỗn hợp đậu luộc",
         "level": "N3",
         "type": "ĐT"
       }
@@ -18023,14 +18023,14 @@
       {
         "word": "手鏡",
         "reading": "てかがみ",
-        "meaning": "Hand-mirror",
+        "meaning": "gương cầm tay",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "柄鏡",
         "reading": "えかがみ",
-        "meaning": "Traditional mirror with a handle",
+        "meaning": "gương truyền thống có tay cầm",
         "level": "N3",
         "type": "ĐT"
       }
@@ -18069,7 +18069,7 @@
       {
         "word": "不可能な",
         "reading": "ふかのうな",
-        "meaning": "bất khả thi, không thể",
+        "meaning": "không thể",
         "level": "N3",
         "type": "TT-na"
       },
@@ -18122,21 +18122,21 @@
       {
         "word": "介す",
         "reading": "かいす",
-        "meaning": "To use as an intermediary",
+        "meaning": "để sử dụng như một trung gian",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "介意",
         "reading": "かいい",
-        "meaning": "Worrying about",
+        "meaning": "lo lắng về",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "介護",
         "reading": "かいご",
-        "meaning": "Nursing",
+        "meaning": "chăm sóc, trông nom",
         "level": "N3",
         "type": "DT"
       }
@@ -18182,14 +18182,14 @@
       {
         "word": "良い",
         "reading": "よい",
-        "meaning": "Good",
+        "meaning": "tốt",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "て良い",
         "reading": "てよい",
-        "meaning": "(after the ren'youkei form of a verb) indicates concession or compromise",
+        "meaning": "(sau dạng ren'youkei của động từ) biểu thị sự nhượng bộ hoặc thỏa hiệp",
         "level": "N3",
         "type": "ĐT"
       }
@@ -18235,14 +18235,14 @@
       {
         "word": "飼育",
         "reading": "しいく",
-        "meaning": "Breeding",
+        "meaning": "chăn nuôi",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "飼養",
         "reading": "しよう",
-        "meaning": "Breeding",
+        "meaning": "chăn nuôi",
         "level": "N3",
         "type": "DT"
       }
@@ -18295,7 +18295,7 @@
       {
         "word": "預金（する） (よきん（する）)",
         "reading": "よきん（する）",
-        "meaning": "depositing money (into a bank)",
+        "meaning": "gửi tiền (vào ngân hàng)",
         "level": "N3",
         "type": "DT"
       }
@@ -18334,21 +18334,21 @@
       {
         "word": "内緒",
         "reading": "ないしょ",
-        "meaning": "secret, private matter, something known only between us",
+        "meaning": "bí mật, vấn đề riêng tư, điều gì đó chỉ chúng ta mới biết",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "下緒",
         "reading": "さげお",
-        "meaning": "Cord for attaching a sword scabbard tightly to the obi",
+        "meaning": "dây để gắn chặt bao kiếm vào obi",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "筈緒",
         "reading": "はずお",
-        "meaning": "Hemp rope fastened from the bow of a Japanese ship to the tip of the mast",
+        "meaning": "dây gai buộc từ mũi tàu Nhật Bản đến đầu cột buồm",
         "level": "N3",
         "type": "ĐT"
       }
@@ -18380,7 +18380,7 @@
       {
         "word": "課長",
         "reading": "かちょう",
-        "meaning": "trưởng khoa, trưởng ban",
+        "meaning": "tổ trưởng",
         "level": "N3",
         "type": "DT"
       },
@@ -18401,7 +18401,7 @@
       {
         "word": "課題",
         "reading": "かだい",
-        "meaning": "đề tài, bài tập, nhiệm vụ",
+        "meaning": "vấn đề cần giải quyết",
         "level": "N3",
         "type": "DT"
       }
@@ -18440,7 +18440,7 @@
       {
         "word": "資格",
         "reading": "しかく",
-        "meaning": "tư cách, bằng cấp, chứng chỉ",
+        "meaning": "tư cách, bằng cấp, xứng đáng",
         "level": "N3",
         "type": "DT"
       },
@@ -18493,21 +18493,21 @@
       {
         "word": "誰か",
         "reading": "だれか",
-        "meaning": "Someone",
+        "meaning": "người nào đó",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "誰も",
         "reading": "だれも",
-        "meaning": "Everyone",
+        "meaning": "mọi người",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "誰しも",
         "reading": "だれしも",
-        "meaning": "Everyone",
+        "meaning": "mọi người",
         "level": "N3",
         "type": "ĐT"
       }
@@ -18606,14 +18606,14 @@
       {
         "word": "優先席",
         "reading": "ゆうせんせき",
-        "meaning": "priority seat",
+        "meaning": "ghế ưu tiên",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "助手席",
         "reading": "じょしゅせき",
-        "meaning": "passenger seat",
+        "meaning": "ghế hành khách",
         "level": "N3",
         "type": "DT"
       }
@@ -18652,21 +18652,21 @@
       {
         "word": "語呂",
         "reading": "ごろ",
-        "meaning": "Sound (of a sentence)",
+        "meaning": "âm thanh (của một câu)",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "風呂",
         "reading": "ふろ",
-        "meaning": "Bath",
+        "meaning": "bồn tắm",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "呂律",
         "reading": "ろれつ",
-        "meaning": "Articulation",
+        "meaning": "khớp nối",
         "level": "N3",
         "type": "DT"
       }
@@ -18719,7 +18719,7 @@
       {
         "word": "掃除機",
         "reading": "そうじき",
-        "meaning": "vacuum cleaner",
+        "meaning": "máy hút bụi",
         "level": "N3",
         "type": "DT"
       }
@@ -18751,7 +18751,7 @@
       {
         "word": "美術館",
         "reading": "びじゅつかん",
-        "meaning": "bảo tàng mỹ thuật",
+        "meaning": "Bảo tàng nghệ thuật",
         "level": "N3",
         "type": "DT"
       },
@@ -18772,7 +18772,7 @@
       {
         "word": "美人",
         "reading": "びじん",
-        "meaning": "beautiful person",
+        "meaning": "người đẹp",
         "level": "N3",
         "type": "DT"
       }
@@ -18811,21 +18811,21 @@
       {
         "word": "御血",
         "reading": "おんち",
-        "meaning": "Blood of Christ (Eucharist)",
+        "meaning": "máu Chúa Kitô (Thánh Thể)",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "御身",
         "reading": "おんみ",
-        "meaning": "(polite term for) the body",
+        "meaning": "(thuật ngữ lịch sự chỉ) cơ thể",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "御の字",
         "reading": "おんのじ",
-        "meaning": "Most satisfactory",
+        "meaning": "hài lòng nhất",
         "level": "N3",
         "type": "ĐT"
       }
@@ -18871,14 +18871,14 @@
       {
         "word": "偉材",
         "reading": "いざい",
-        "meaning": "Extraordinary talent",
+        "meaning": "tài năng phi thường",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "具材",
         "reading": "ぐざい",
-        "meaning": "Material",
+        "meaning": "vật liệu",
         "level": "N3",
         "type": "DT"
       }
@@ -18917,21 +18917,21 @@
       {
         "word": "丈夫な",
         "reading": "じょうぶな",
-        "meaning": "healthy, strong",
+        "meaning": "khỏe mạnh, mạnh mẽ",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "着丈",
         "reading": "きたけ",
-        "meaning": "Dress length",
+        "meaning": "chiều dài váy",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "背丈",
         "reading": "せたけ",
-        "meaning": "Stature",
+        "meaning": "tầm vóc",
         "level": "N3",
         "type": "ĐT"
       }
@@ -18963,7 +18963,7 @@
       {
         "word": "就職",
         "reading": "しゅうしょく",
-        "meaning": "tìm việc làm, đi làm",
+        "meaning": "tìm việc",
         "level": "N3",
         "type": "DT"
       },
@@ -18984,7 +18984,7 @@
       {
         "word": "退職",
         "reading": "たいしょく",
-        "meaning": "từ chức, nghỉ việc",
+        "meaning": "nghỉ việc",
         "level": "N3",
         "type": "DT"
       }
@@ -19023,21 +19023,21 @@
       {
         "word": "乾杯（する） (かんぱい（する）)",
         "reading": "かんぱい（する）",
-        "meaning": "drinking a toast, raising a glass, clinking glasses",
+        "meaning": "nâng cốc, nâng cốc, chạm cốc",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "杯事",
         "reading": "さかずきごと",
-        "meaning": "Pledge made over winecups",
+        "meaning": "lời cam kết trên chén rượu",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "水杯",
         "reading": "みずさかずき",
-        "meaning": "Farewell cups of water",
+        "meaning": "chia tay cốc nước",
         "level": "N3",
         "type": "ĐT"
       }
@@ -19083,7 +19083,7 @@
       {
         "word": "期待",
         "reading": "きたい",
-        "meaning": "kỳ vọng, mong đợi",
+        "meaning": "mong chờ, kì vọng",
         "level": "N3",
         "type": "DT"
       },
@@ -19129,21 +19129,21 @@
       {
         "word": "翌日",
         "reading": "よくじつ",
-        "meaning": "the next day",
+        "meaning": "ngày hôm sau",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "翌々",
         "reading": "よくよく",
-        "meaning": "The one after next",
+        "meaning": "cái tiếp theo cái tiếp theo",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "翌晩",
         "reading": "よくばん",
-        "meaning": "The following evening",
+        "meaning": "tối hôm sau",
         "level": "N3",
         "type": "DT"
       }
@@ -19189,7 +19189,7 @@
       {
         "word": "我慢（する） (がまん（する）)",
         "reading": "がまん（する）",
-        "meaning": "endurance",
+        "meaning": "sức chịu đựng",
         "level": "N3",
         "type": "DT"
       },
@@ -19235,21 +19235,21 @@
       {
         "word": "靴屋",
         "reading": "くつや",
-        "meaning": "Shoemaker",
+        "meaning": "thợ đóng giày",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "靴ひも",
         "reading": "くつひも",
-        "meaning": "Shoelace",
+        "meaning": "dây giày",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "靴べら",
         "reading": "くつべら",
-        "meaning": "Shoehorn",
+        "meaning": "sừng giày",
         "level": "N3",
         "type": "ĐT"
       }
@@ -19288,21 +19288,21 @@
       {
         "word": "丸く",
         "reading": "まるく",
-        "meaning": "In a circle",
+        "meaning": "trong một vòng tròn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "丸で",
         "reading": "まるで",
-        "meaning": "Quite",
+        "meaning": "khá",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "丸み",
         "reading": "まるみ",
-        "meaning": "Roundness",
+        "meaning": "độ tròn",
         "level": "N3",
         "type": "ĐT"
       }
@@ -19348,14 +19348,14 @@
       {
         "word": "毛裏",
         "reading": "けうら",
-        "meaning": "Fur-lined",
+        "meaning": "lót lông",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "羽裏",
         "reading": "はうら",
-        "meaning": "Underside of a bird's wing",
+        "meaning": "mặt dưới cánh chim",
         "level": "N3",
         "type": "ĐT"
       }
@@ -19394,21 +19394,21 @@
       {
         "word": "数匹",
         "reading": "すうひき",
-        "meaning": "Several animals",
+        "meaning": "một số động vật",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "馬匹",
         "reading": "ばひつ",
-        "meaning": "Horses",
+        "meaning": "ngựa",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "匹偶",
         "reading": "ひつぐう",
-        "meaning": "Pair",
+        "meaning": "đôi",
         "level": "N3",
         "type": "DT"
       }
@@ -19461,7 +19461,7 @@
       {
         "word": "恋愛（する） (れんあい（する）)",
         "reading": "れんあい（する）",
-        "meaning": "romance, love",
+        "meaning": "lãng mạn, tình yêu",
         "level": "N3",
         "type": "DT"
       }
@@ -19500,7 +19500,7 @@
       {
         "word": "突き当たり",
         "reading": "つきあたり",
-        "meaning": "the end of the road, the end of a t-shaped road",
+        "meaning": "cuối con đường, cuối con đường hình chữ T",
         "level": "N3",
         "type": "DT"
       },
@@ -19546,28 +19546,28 @@
       {
         "word": "央語",
         "reading": "オウ",
-        "meaning": "Ở giữa, trung tâm (Ương)",
+        "meaning": "ở giữa, trung tâm (ƯƯƠNG)",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "年央",
         "reading": "ねんおう",
-        "meaning": "Mid-year",
+        "meaning": "giữa năm",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "月央",
         "reading": "げつおう",
-        "meaning": "Middle of the month",
+        "meaning": "giữa tháng",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "道央",
         "reading": "どうおう",
-        "meaning": "Central Hokkaido",
+        "meaning": "miền trung Hokkaido",
         "level": "N3",
         "type": "DT"
       }
@@ -19613,7 +19613,7 @@
       {
         "word": "保険証",
         "reading": "ほけんしょう",
-        "meaning": "insurance card",
+        "meaning": "thẻ bảo hiểm",
         "level": "N3",
         "type": "DT"
       }
@@ -19666,7 +19666,7 @@
       {
         "word": "停車（する） (ていしゃ（する）)",
         "reading": "ていしゃ（する）",
-        "meaning": "stopping the vehicle",
+        "meaning": "dừng xe",
         "level": "N3",
         "type": "DT"
       }
@@ -19705,21 +19705,21 @@
       {
         "word": "小枝",
         "reading": "こえだ",
-        "meaning": "Twig",
+        "meaning": "cành cây",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "枝毛",
         "reading": "えだげ",
-        "meaning": "Split end of hair",
+        "meaning": "tách phần đuôi tóc",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "切り枝",
         "reading": "きりえだ",
-        "meaning": "Slips (to plant)",
+        "meaning": "trượt (để trồng)",
         "level": "N3",
         "type": "ĐT"
       }
@@ -19751,21 +19751,21 @@
       {
         "word": "髪",
         "reading": "かみ",
-        "meaning": "tóc",
+        "meaning": "Tóc",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "（髪を）とかす (（かみを）とかす)",
         "reading": "（かみを）とかす",
-        "meaning": "brush (one’s hair)",
+        "meaning": "tỉnh táo; trong sạch",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "白髪",
         "reading": "しらが",
-        "meaning": "gray hair",
+        "meaning": "tóc bạc",
         "level": "N3",
         "type": "DT"
       }
@@ -19804,14 +19804,14 @@
       {
         "word": "許可",
         "reading": "きょか",
-        "meaning": "sự cho phép, giấy phép",
+        "meaning": "phép, giấy phép",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "特許",
         "reading": "とっきょ",
-        "meaning": "Bằng sáng chế / patent",
+        "meaning": "Bằng sáng chế, patent",
         "level": "N3",
         "type": "vocab"
       },
@@ -19864,14 +19864,14 @@
       {
         "word": "和婚",
         "reading": "わこん",
-        "meaning": "Traditional Japanese wedding",
+        "meaning": "đám cưới truyền thống Nhật Bản",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "婚儀",
         "reading": "こんぎ",
-        "meaning": "Wedding ceremony",
+        "meaning": "lễ cưới",
         "level": "N3",
         "type": "DT"
       }
@@ -19956,21 +19956,21 @@
       {
         "word": "造り",
         "reading": "つくり",
-        "meaning": "Make-up",
+        "meaning": "trang điểm",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "造り手",
         "reading": "つくりて",
-        "meaning": "Maker",
+        "meaning": "người tạo",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "造り花",
         "reading": "つくりばな",
-        "meaning": "Artificial flower",
+        "meaning": "hoa nhân tạo",
         "level": "N3",
         "type": "ĐT"
       }
@@ -20009,21 +20009,21 @@
       {
         "word": "荷駄",
         "reading": "にだ",
-        "meaning": "Pack",
+        "meaning": "đóng gói",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "駄句",
         "reading": "だく",
-        "meaning": "Poor poem",
+        "meaning": "bài thơ nghèo",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "駄荷",
         "reading": "だに",
-        "meaning": "Horse's load",
+        "meaning": "tải trọng của ngựa",
         "level": "N3",
         "type": "DT"
       }
@@ -20062,21 +20062,21 @@
       {
         "word": "嘘字",
         "reading": "うそじ",
-        "meaning": "Incorrect character",
+        "meaning": "ký tự không chính xác",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "嘘寝",
         "reading": "うそね",
-        "meaning": "Feigned sleep",
+        "meaning": "giả ngủ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "嘘っこ",
         "reading": "うそっこ",
-        "meaning": "(doing something) for fun",
+        "meaning": "(làm gì đó) cho vui",
         "level": "N3",
         "type": "ĐT"
       }
@@ -20108,28 +20108,28 @@
       {
         "word": "財布",
         "reading": "さいふ",
-        "meaning": "ví tiền, bóp",
+        "meaning": "cái ví",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "布子",
         "reading": "ぬのこ",
-        "meaning": "Clothes padded with cotton",
+        "meaning": "quần áo được lót bằng bông",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "布目",
         "reading": "ぬのめ",
-        "meaning": "Texture",
+        "meaning": "kết cấu",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "亜麻布",
         "reading": "あまぬの",
-        "meaning": "Linen",
+        "meaning": "vải lanh",
         "level": "N3",
         "type": "ĐT"
       }
@@ -20168,21 +20168,21 @@
       {
         "word": "奴等",
         "reading": "やつら",
-        "meaning": "They",
+        "meaning": "họ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "奴原",
         "reading": "やつばら",
-        "meaning": "They",
+        "meaning": "họ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "うちの奴",
         "reading": "うちのやつ",
-        "meaning": "My wife",
+        "meaning": "vợ tôi",
         "level": "N3",
         "type": "ĐT"
       }
@@ -20221,21 +20221,21 @@
       {
         "word": "逃げる",
         "reading": "にげる",
-        "meaning": "To escape",
+        "meaning": "chạy trốn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "逃げるが勝ち",
         "reading": "にげるがかち",
-        "meaning": "He that fights and runs away may live to fight another day",
+        "meaning": "kẻ chiến đấu và bỏ chạy có thể sống để chiến đấu vào một ngày khác",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "逃がす",
         "reading": "にがす",
-        "meaning": "To miss",
+        "meaning": "thả ra",
         "level": "N3",
         "type": "ĐT"
       }
@@ -20267,28 +20267,28 @@
       {
         "word": "陸語",
         "reading": "リク",
-        "meaning": "Đất liền, lục địa (Lục)",
+        "meaning": "đất liền, lục địa (Lục)",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "陸湯",
         "reading": "おかゆ",
-        "meaning": "Hot water used for cleaning up",
+        "meaning": "nước nóng dùng để làm sạch",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "陸釣",
         "reading": "おかづり",
-        "meaning": "Fishing from land",
+        "meaning": "câu cá từ đất liền",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "陸蒸気",
         "reading": "おかじょうき",
-        "meaning": "Steam train (early Meiji period)",
+        "meaning": "tàu hơi nước (đầu thời Minh Trị)",
         "level": "N3",
         "type": "ĐT"
       }
@@ -20327,14 +20327,14 @@
       {
         "word": "通路側",
         "reading": "つうろがわ",
-        "meaning": "aisle side",
+        "meaning": "bên lối đi",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "線路",
         "reading": "せんろ",
-        "meaning": "railway track",
+        "meaning": "đường ray",
         "level": "N3",
         "type": "DT"
       },
@@ -20380,7 +20380,7 @@
       {
         "word": "精神",
         "reading": "せいしん",
-        "meaning": "Tinh thần / tâm thần",
+        "meaning": "tinh thần",
         "level": "N3",
         "type": "vocab"
       },
@@ -20440,7 +20440,7 @@
       {
         "word": "絶対に",
         "reading": "ぜったいに",
-        "meaning": "chắc chắn, không bao giờ, tuyệt đối không",
+        "meaning": "nhất định, tuyệt đối",
         "level": "N3",
         "type": "DT"
       }
@@ -20486,14 +20486,14 @@
       {
         "word": "急を救う",
         "reading": "きゅうをすくう",
-        "meaning": "To help (a person) out of danger",
+        "meaning": "giúp (một người) thoát khỏi nguy hiểm",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "救護",
         "reading": "きゅうご",
-        "meaning": "Relief",
+        "meaning": "sự cứu tế",
         "level": "N3",
         "type": "DT"
       }
@@ -20578,21 +20578,21 @@
       {
         "word": "奥意",
         "reading": "おくい",
-        "meaning": "True intention",
+        "meaning": "ý định thực sự",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "奥手",
         "reading": "おくて",
-        "meaning": "Late-growing rice",
+        "meaning": "lúa mọc muộn",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "奥歯",
         "reading": "おくば",
-        "meaning": "Molars",
+        "meaning": "răng hàm",
         "level": "N3",
         "type": "ĐT"
       }
@@ -20684,21 +20684,21 @@
       {
         "word": "負債総額",
         "reading": "ふさいそうがく",
-        "meaning": "Aggregate amount of indebtedness",
+        "meaning": "tổng số nợ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "総出",
         "reading": "そうで",
-        "meaning": "All together",
+        "meaning": "tất cả cùng nhau",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "総務",
         "reading": "そうむ",
-        "meaning": "General affairs",
+        "meaning": "công việc chung",
         "level": "N3",
         "type": "DT"
       }
@@ -20744,14 +20744,14 @@
       {
         "word": "保護貿易",
         "reading": "ほごぼうえき",
-        "meaning": "Protective trade",
+        "meaning": "thương mại bảo hộ",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "密貿易",
         "reading": "みつぼうえき",
-        "meaning": "Smuggling",
+        "meaning": "buôn lậu",
         "level": "N3",
         "type": "DT"
       }
@@ -20790,7 +20790,7 @@
       {
         "word": "［お］札",
         "reading": "［お］さつ",
-        "meaning": "paper money",
+        "meaning": "tiền giấy",
         "level": "N3",
         "type": "DT"
       },
@@ -20804,7 +20804,7 @@
       {
         "word": "名札",
         "reading": "なふだ",
-        "meaning": "name tag, name plate",
+        "meaning": "bảng tên, bảng tên",
         "level": "N3",
         "type": "DT"
       }
@@ -20836,7 +20836,7 @@
       {
         "word": "一生懸命",
         "reading": "いっしょうけんめい",
-        "meaning": "hết sức cố gắng, toàn tâm toàn ý",
+        "meaning": "(cố gắng) hết sức, chăm chỉ, miệt mài",
         "level": "N3",
         "type": "PV"
       },
@@ -20896,21 +20896,21 @@
       {
         "word": "児童",
         "reading": "じどう",
-        "meaning": "Children",
+        "meaning": "những đứa trẻ",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "慈童",
         "reading": "じどう",
-        "meaning": "Noh mask resembling a dignified youth",
+        "meaning": "mặt nạ Noh giống như một thanh niên trang nghiêm",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "童子",
         "reading": "どうじ",
-        "meaning": "Boy",
+        "meaning": "con trai",
         "level": "N3",
         "type": "DT"
       }
@@ -20949,21 +20949,21 @@
       {
         "word": "先祖",
         "reading": "せんぞ",
-        "meaning": "ancestors",
+        "meaning": "tổ tiên",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "始祖",
         "reading": "しそ",
-        "meaning": "Founder",
+        "meaning": "người sáng lập",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "媽祖",
         "reading": "まそ",
-        "meaning": "Mazu",
+        "meaning": "mã Tổ",
         "level": "N3",
         "type": "DT"
       }
@@ -21048,21 +21048,21 @@
       {
         "word": "お里",
         "reading": "おさと",
-        "meaning": "One's parents' home",
+        "meaning": "nhà của cha mẹ một người",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "里子",
         "reading": "さとご",
-        "meaning": "Foster child",
+        "meaning": "trẻ được gửi nuôi tạm ở gia đình khác (nuôi dưỡng hộ)",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "里偏",
         "reading": "さとへん",
-        "meaning": "Kanji \"village\" radical",
+        "meaning": "kanji “làng” cấp tiến",
         "level": "N3",
         "type": "ĐT"
       }
@@ -21108,14 +21108,14 @@
       {
         "word": "文系",
         "reading": "ぶんけい",
-        "meaning": "social sciences",
+        "meaning": "khoa học xã hội",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "理系",
         "reading": "りけい",
-        "meaning": "natural sciences",
+        "meaning": "khoa học tự nhiên",
         "level": "N3",
         "type": "DT"
       }
@@ -21154,21 +21154,21 @@
       {
         "word": "一人娘",
         "reading": "ひとりむすめ",
-        "meaning": "only daughter",
+        "meaning": "con gái duy nhất",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "小娘",
         "reading": "こむすめ",
-        "meaning": "Young girl",
+        "meaning": "cô gái trẻ",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "生娘",
         "reading": "きむすめ",
-        "meaning": "Virgin",
+        "meaning": "trinh nữ",
         "level": "N3",
         "type": "ĐT"
       }
@@ -21207,21 +21207,21 @@
       {
         "word": "乳毛",
         "reading": "ちちげ",
-        "meaning": "Nipple hair",
+        "meaning": "lông núm vú",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "はみ乳",
         "reading": "はみちち",
-        "meaning": "Exposed breasts",
+        "meaning": "bộ ngực lộ ra ngoài",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "乳繰る",
         "reading": "ちちくる",
-        "meaning": "To have a secret affair",
+        "meaning": "có một mối tình bí mật",
         "level": "N3",
         "type": "ĐT"
       }
@@ -21260,21 +21260,21 @@
       {
         "word": "涼しい顔",
         "reading": "すずしいかお",
-        "meaning": "Nonchalant (unruffled) air",
+        "meaning": "không khí thờ ơ (không xáo trộn)",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "涼む",
         "reading": "すずむ",
-        "meaning": "To cool oneself",
+        "meaning": "để làm mát bản thân",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "涼やか",
         "reading": "すずやか",
-        "meaning": "Refreshing",
+        "meaning": "làm mới",
         "level": "N3",
         "type": "ĐT"
       }
@@ -21320,14 +21320,14 @@
       {
         "word": "目を盗む",
         "reading": "めをぬすむ",
-        "meaning": "To do something behind someone's back",
+        "meaning": "làm điều gì đó sau lưng ai đó",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "骨を盗む",
         "reading": "ほねをぬすむ",
-        "meaning": "To spare oneself",
+        "meaning": "để tha cho mình",
         "level": "N3",
         "type": "ĐT"
       }
@@ -21366,14 +21366,14 @@
       {
         "word": "[お]化粧（する） ([お]けしょう（する）)",
         "reading": "[お]けしょう（する）",
-        "meaning": "makeup",
+        "meaning": "trang điểm",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "化粧",
         "reading": "けしょう",
-        "meaning": "trang điểm",
+        "meaning": "sự trang điểm (～をします：trang điểm)",
         "level": "N3",
         "type": "DT"
       }
@@ -21405,28 +21405,28 @@
       {
         "word": "匂語",
         "reading": "にお.う",
-        "meaning": "Mùi hương, tỏa hương (Mùi)",
+        "meaning": "mùi hương, tỏa hương (Mùi)",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "匂う",
         "reading": "におう",
-        "meaning": "To be fragrant",
+        "meaning": "có mùi, nực mùi",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "咲き匂う",
         "reading": "さきにおう",
-        "meaning": "To be in beautiful full bloom",
+        "meaning": "để nở hoa thật đẹp",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "匂い",
         "reading": "におい",
-        "meaning": "Odour",
+        "meaning": "mùi",
         "level": "N3",
         "type": "ĐT"
       }
@@ -21458,28 +21458,28 @@
       {
         "word": "福語",
         "reading": "フク",
-        "meaning": "Phúc lành, may mắn (Phúc)",
+        "meaning": "phúc lành, may mắn (Phúc)",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "利福",
         "reading": "りふく",
-        "meaning": "Well-being",
+        "meaning": "hạnh phúc",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "祉福",
         "reading": "しふく",
-        "meaning": "Prosperity",
+        "meaning": "sự phồn vinh",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "禍福",
         "reading": "かふく",
-        "meaning": "Fortune and misfortune",
+        "meaning": "vận may và bất hạnh",
         "level": "N3",
         "type": "DT"
       }
@@ -21532,7 +21532,7 @@
       {
         "word": "尊敬（する） (そんけい（する）)",
         "reading": "そんけい（する）",
-        "meaning": "respect",
+        "meaning": "sự tôn trọng",
         "level": "N3",
         "type": "DT"
       }
@@ -21571,21 +21571,21 @@
       {
         "word": "探す",
         "reading": "さがす",
-        "meaning": "look for",
+        "meaning": "tìm kiếm",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "探る",
         "reading": "さぐる",
-        "meaning": "To feel around for",
+        "meaning": "để cảm nhận xung quanh",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "道を探る",
         "reading": "みちをさぐる",
-        "meaning": "To seek a path",
+        "meaning": "để tìm kiếm một con đường",
         "level": "N3",
         "type": "ĐT"
       }
@@ -21684,14 +21684,14 @@
       {
         "word": "居酒屋",
         "reading": "いざかや",
-        "meaning": "drinking place",
+        "meaning": "nơi uống rượu",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "居眠り（する） (いねむり（する）)",
         "reading": "いねむり（する）",
-        "meaning": "nodding off",
+        "meaning": "gật đầu",
         "level": "N3",
         "type": "DT"
       }
@@ -21730,21 +21730,21 @@
       {
         "word": "招く",
         "reading": "まねく",
-        "meaning": "To invite",
+        "meaning": "dẫn đến, chuốc lấy (hậu quả không mong muốn)",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "手招く",
         "reading": "てまねく",
-        "meaning": "To beckon",
+        "meaning": "để vẫy gọi",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "差し招く",
         "reading": "さしまねく",
-        "meaning": "To beckon (to)",
+        "meaning": "kêu gọi (đến)",
         "level": "N3",
         "type": "ĐT"
       }
@@ -21783,21 +21783,21 @@
       {
         "word": "手管",
         "reading": "てくだ",
-        "meaning": "Wiles",
+        "meaning": "lừa",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "管を巻く",
         "reading": "くだをまく",
-        "meaning": "To grumble over one's wine cups",
+        "meaning": "càu nhàu về chén rượu của mình",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "管狐",
         "reading": "くだぎつね",
-        "meaning": "Mythological pipe fox",
+        "meaning": "cáo ống thần thoại",
         "level": "N3",
         "type": "ĐT"
       }
@@ -21836,14 +21836,14 @@
       {
         "word": "まな板",
         "reading": "まないた",
-        "meaning": "cutting board",
+        "meaning": "thớt",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "掲示板",
         "reading": "けいじばん",
-        "meaning": "notice board",
+        "meaning": "bảng thông báo",
         "level": "N3",
         "type": "DT"
       }
@@ -21935,7 +21935,7 @@
       {
         "word": "生放送",
         "reading": "なまほうそう",
-        "meaning": "live television, live broadcast",
+        "meaning": "truyền hình trực tiếp, truyền hình trực tiếp",
         "level": "N3",
         "type": "DT"
       }
@@ -21974,21 +21974,21 @@
       {
         "word": "汗",
         "reading": "あせ",
-        "meaning": "sweat",
+        "meaning": "mồ hôi",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "一汗",
         "reading": "ひとあせ",
-        "meaning": "Doing a job",
+        "meaning": "làm một công việc",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "大汗",
         "reading": "おおあせ",
-        "meaning": "Heavy sweating",
+        "meaning": "đổ mồ hôi nhiều",
         "level": "N3",
         "type": "ĐT"
       }
@@ -22041,7 +22041,7 @@
       {
         "word": "検査（する） (けんさ（する）)",
         "reading": "けんさ（する）",
-        "meaning": "testing",
+        "meaning": "thử nghiệm",
         "level": "N3",
         "type": "DT"
       }
@@ -22073,28 +22073,28 @@
       {
         "word": "雰囲気",
         "reading": "ふんいき",
-        "meaning": "không khí, bầu không khí, khí quyển",
+        "meaning": "Bầu không khí",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "霧雰",
         "reading": "むふん",
-        "meaning": "Misty air",
+        "meaning": "không khí mù sương",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "霜雰",
         "reading": "そうふん",
-        "meaning": "Frosty air",
+        "meaning": "không khí băng giá",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "雰囲気を壊す",
         "reading": "ふんいきをこわす",
-        "meaning": "To spoil the mood",
+        "meaning": "để làm hỏng tâm trạng",
         "level": "N3",
         "type": "DT"
       }
@@ -22133,21 +22133,21 @@
       {
         "word": "仁王",
         "reading": "におう",
-        "meaning": "The two guardian Deva kings",
+        "meaning": "hai vị thiên vương hộ mệnh",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "倭王",
         "reading": "わおう",
-        "meaning": "King of Yamato",
+        "meaning": "vua xứ Oa (Nhật Bản thời cổ)",
         "level": "N3",
         "type": "DT"
       },
       {
         "word": "王事",
         "reading": "おうじ",
-        "meaning": "Imperial or royal cause",
+        "meaning": "nguyên nhân hoàng gia hoặc hoàng gia",
         "level": "N3",
         "type": "DT"
       }
@@ -22186,21 +22186,21 @@
       {
         "word": "幾つ",
         "reading": "いくつ",
-        "meaning": "How many?",
+        "meaning": "bao nhiêu; bao nhiêu tuổi",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "幾つか",
         "reading": "いくつか",
-        "meaning": "(a) few",
+        "meaning": "(a) ít",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "幾つも",
         "reading": "いくつも",
-        "meaning": "Many",
+        "meaning": "nhiều",
         "level": "N3",
         "type": "ĐT"
       }
@@ -22246,14 +22246,14 @@
       {
         "word": "射殺す",
         "reading": "いころす",
-        "meaning": "To shoot a person to death",
+        "meaning": "để bắn chết một người",
         "level": "N3",
         "type": "ĐT"
       },
       {
         "word": "けり殺す",
         "reading": "けりころす",
-        "meaning": "To kick to death",
+        "meaning": "đá đến chết",
         "level": "N3",
         "type": "ĐT"
       }
