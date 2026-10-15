@@ -20,9 +20,12 @@ import {
   CheckCircle2,
   X,
   ChevronLeft,
-  ListFilter
+  ListFilter,
+  FileText
 } from 'lucide-react';
 import { kizunaService } from '../services/kizunaService';
+import { authService } from '../services/authService';
+import { progressService } from '../services/progressService';
 import { VideoLesson, ChoukaiAudioItem, QuestionSet } from '../types/kizuna';
 
 const LEVEL_FILTERS = [
@@ -69,7 +72,8 @@ export const LibraryPage: React.FC = () => {
 
   // Làm bài thi Choukai chi tiết
   const [activeExamDetail, setActiveExamDetail] = useState<ChoukaiAudioItem | null>(null);
-  const [loadingExamDetail, setLoadingExamDetail] = useState<boolean>(false);
+  const [loadingExamId, setLoadingExamId] = useState<string | null>(null);
+  const [examErrorMsg, setExamErrorMsg] = useState<string | null>(null);
   const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [scoreResult, setScoreResult] = useState<{ total: number; correct: number; percentage: number; isPassed: boolean } | null>(null);
@@ -127,13 +131,14 @@ export const LibraryPage: React.FC = () => {
       .slice(0, 4);
   }, [allVideos, activeVideo]);
 
-  // Lọc danh sách Đề thi Choukai
+  // Lọc danh sách Đề thi Choukai (Chỉ chọn đề có trọn vẹn bộ câu hỏi nghe)
   const filteredChoukai = useMemo(() => {
     return choukaiCatalog.filter(item => {
+      const hasQuestions = item.listeningSetsCount !== 0;
       const matchLevel = choukaiLevel === 'ALL' || item.level?.toUpperCase() === choukaiLevel.toUpperCase();
       const q = choukaiSearch.toLowerCase().trim();
       const matchSearch = !q || item.label.toLowerCase().includes(q) || (item.year && item.year.toString().includes(q));
-      return matchLevel && matchSearch;
+      return hasQuestions && matchLevel && matchSearch;
     });
   }, [choukaiCatalog, choukaiLevel, choukaiSearch]);
 
@@ -149,22 +154,28 @@ export const LibraryPage: React.FC = () => {
 
   // Bắt đầu làm bài thi Choukai (Tải đề chi tiết 5 Mondai kèm kịch bản)
   const handleStartChoukaiExam = async (examId: string) => {
-    setLoadingExamDetail(true);
+    setLoadingExamId(examId);
+    setExamErrorMsg(null);
     try {
       const full = await kizunaService.getChoukaiExamDetail(examId);
-      if (full) {
+      if (full && full.questionSets && full.questionSets.length > 0) {
         setActiveExamDetail(full);
         setUserAnswers({});
         setIsSubmitted(false);
         setScoreResult(null);
         window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        setExamErrorMsg('Đề thi này hiện chưa hoàn thiện câu hỏi trắc nghiệm hoặc không thể nạp. Vui lòng chọn đề khác!');
       }
+    } catch (err) {
+      console.error('Lỗi nạp bài thi Choukai:', err);
+      setExamErrorMsg('Đã có lỗi xảy ra khi nạp đề thi. Vui lòng thử lại!');
     } finally {
-      setLoadingExamDetail(false);
+      setLoadingExamId(null);
     }
   };
 
-  // Nộp bài thi Choukai và tính điểm
+  // Nộp bài thi Choukai, tính điểm & lưu tiến trình người dùng
   const handleConfirmSubmitChoukai = () => {
     if (!activeExamDetail || !activeExamDetail.questionSets) return;
     setShowSubmitModal(false);
@@ -186,6 +197,27 @@ export const LibraryPage: React.FC = () => {
 
     setScoreResult({ total, correct, percentage, isPassed });
     setIsSubmitted(true);
+
+    // Lưu kết quả thi vào Firestore & LocalStorage để theo dõi tiến trình
+    const currentUser = authService.getCurrentUser();
+    if (currentUser?.id) {
+      progressService.saveExamResult({
+        userId: currentUser.id,
+        examId: activeExamDetail.id,
+        examLabel: `${activeExamDetail.label} (Choukai)`,
+        level: activeExamDetail.level,
+        score: correct,
+        total,
+        percentage,
+        isPassed,
+        timeSpentSeconds: 0,
+        answeredCount: Object.keys(userAnswers).length,
+        totalQuestions: total,
+        completedAt: new Date().toISOString(),
+        userAnswers
+      }).catch(err => console.warn('Lỗi ghi nhận tiến trình thi Choukai:', err));
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -873,18 +905,43 @@ export const LibraryPage: React.FC = () => {
                             )}
                           </div>
 
-                          {q.prompt && (
-                            <div style={{ fontSize: 13, color: '#475569', marginBottom: 12, lineHeight: 1.5 }}>
-                              {q.prompt}
-                            </div>
+                          {/* Nội dung câu hỏi (chứa ảnh nếu có, ví dụ hình vẽ Mondai 4) */}
+                          {q.question && q.question !== '番' && (
+                            <div
+                              style={{
+                                fontSize: 14,
+                                color: '#1e293b',
+                                marginBottom: 12,
+                                lineHeight: 1.6,
+                                fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
+                              }}
+                              dangerouslySetInnerHTML={{ __html: q.question.replace(/^番\s*/, '') }}
+                            />
                           )}
 
-                          {/* 4 PHƯƠNG ÁN LỰA CHỌN */}
+                          {/* Đoạn văn/nội dung phụ nếu có */}
+                          {q.content && (
+                            <div
+                              style={{
+                                fontSize: 13,
+                                color: '#475569',
+                                marginBottom: 12,
+                                lineHeight: 1.6,
+                                background: '#f8fafc',
+                                padding: '10px 14px',
+                                borderRadius: 6
+                              }}
+                              dangerouslySetInnerHTML={{ __html: q.content }}
+                            />
+                          )}
+
+                          {/* CÁC PHƯƠNG ÁN LỰA CHỌN (1, 2, 3, 4) */}
                           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 10, marginBottom: 12 }}>
-                            {q.options.map((opt, optIdx) => {
-                              const optNum = (optIdx + 1).toString();
-                              const isSelected = userChoice === optNum;
-                              const isTargetCorrect = isSubmitted && q.correctAnswer === optNum;
+                            {q.options && q.options.map((opt, optIdx) => {
+                              const optId = typeof opt === 'object' && opt !== null ? String(opt.id) : (optIdx + 1).toString();
+                              const optText = typeof opt === 'object' && opt !== null ? opt.value : String(opt);
+                              const isSelected = userChoice === optId;
+                              const isTargetCorrect = isSubmitted && q.correctAnswer === optId;
 
                               let optBorder = '1px solid #ebe7df';
                               let optBg = '#ffffff';
@@ -910,12 +967,12 @@ export const LibraryPage: React.FC = () => {
 
                               return (
                                 <button
-                                  key={optIdx}
+                                  key={optId || optIdx}
                                   type="button"
                                   disabled={isSubmitted}
                                   onClick={() => {
                                     if (isSubmitted) return;
-                                    setUserAnswers(prev => ({ ...prev, [q.id]: optNum }));
+                                    setUserAnswers(prev => ({ ...prev, [q.id]: optId }));
                                   }}
                                   style={{
                                     textAlign: 'left',
@@ -924,60 +981,70 @@ export const LibraryPage: React.FC = () => {
                                     border: optBorder,
                                     background: optBg,
                                     color: optColor,
-                                    fontSize: 12,
+                                    fontSize: 13,
                                     fontWeight: isSelected || isTargetCorrect ? 700 : 500,
                                     cursor: isSubmitted ? 'default' : 'pointer',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    gap: 8,
+                                    gap: 10,
                                     transition: 'all 0.15s ease'
                                   }}
                                 >
                                   <span style={{
-                                    width: 22,
-                                    height: 22,
+                                    width: 24,
+                                    height: 24,
                                     borderRadius: '50%',
                                     background: isSelected ? '#c53d32' : isTargetCorrect ? '#16a34a' : '#f1f5f9',
                                     color: isSelected || isTargetCorrect ? '#ffffff' : '#64748b',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    fontSize: 11,
+                                    fontSize: 12,
                                     fontWeight: 800,
                                     flexShrink: 0
                                   }}>
-                                    {optNum}
+                                    {optId}
                                   </span>
-                                  <span style={{ flex: 1 }}>{opt}</span>
+                                  <span style={{ flex: 1, lineHeight: 1.5 }}>
+                                    {optText ? (
+                                      <span dangerouslySetInnerHTML={{ __html: optText }} />
+                                    ) : (
+                                      <span style={{ color: '#94a3b8', fontStyle: 'italic', fontSize: 12 }}>
+                                        Phương án ({optId})
+                                      </span>
+                                    )}
+                                  </span>
                                 </button>
                               );
                             })}
                           </div>
 
                           {/* KỊCH BẢN NGHE (AUDIO SCRIPT) - MỞ KHÓA KHI NỘP BÀI */}
-                          {isSubmitted && q.audioScript && (
+                          {isSubmitted && (q.script || (q as any).audioScript) && (
                             <div style={{
                               background: '#f8fafc',
                               border: '1px dashed #cbd5e1',
                               borderRadius: 8,
-                              padding: '12px 14px',
+                              padding: '14px 16px',
                               marginTop: 10
                             }}>
-                              <div style={{ fontSize: 11, fontWeight: 800, color: '#0d9488', marginBottom: 4 }}>
-                                KỊCH BẢN HỘI THOẠI (AUDIO SCRIPT):
+                              <div style={{ fontSize: 11, fontWeight: 800, color: '#0d9488', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 6 }}>
+                                <FileText size={13} />
+                                <span>KỊCH BẢN HỘI THOẠI (AUDIO SCRIPT):</span>
                               </div>
-                              <div style={{
-                                fontSize: 13,
-                                color: '#1e293b',
-                                lineHeight: 1.6,
-                                whiteSpace: 'pre-wrap',
-                                fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
-                              }}>
-                                {q.audioScript}
-                              </div>
+                              <div
+                                style={{
+                                  fontSize: 13,
+                                  color: '#1e293b',
+                                  lineHeight: 1.7,
+                                  whiteSpace: 'pre-wrap',
+                                  fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
+                                }}
+                                dangerouslySetInnerHTML={{ __html: q.script || (q as any).audioScript || '' }}
+                              />
                               {q.explanation && (
-                                <div style={{ fontSize: 12, color: '#64748b', marginTop: 6, paddingTop: 6, borderTop: '1px solid #e2e8f0' }}>
-                                  <strong>Giải thích:</strong> {q.explanation}
+                                <div style={{ fontSize: 12, color: '#64748b', marginTop: 8, paddingTop: 8, borderTop: '1px solid #e2e8f0' }}>
+                                  <strong>Giải thích:</strong> <span dangerouslySetInnerHTML={{ __html: q.explanation }} />
                                 </div>
                               )}
                             </div>
@@ -1051,6 +1118,35 @@ export const LibraryPage: React.FC = () => {
                 </div>
               </div>
 
+              {/* Thông báo nếu có lỗi nạp đề thi */}
+              {examErrorMsg && (
+                <div style={{
+                  background: '#fef2f2',
+                  border: '1px solid #fecaca',
+                  borderRadius: 8,
+                  padding: '12px 16px',
+                  marginBottom: 16,
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  color: '#991b1b',
+                  fontSize: 13,
+                  fontWeight: 600
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <AlertCircle size={16} color="#dc2626" />
+                    <span>{examErrorMsg}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setExamErrorMsg(null)}
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#991b1b', padding: 4 }}
+                  >
+                    <X size={14} />
+                  </button>
+                </div>
+              )}
+
               {/* Danh sách 65 đề thi dạng Grid */}
               {loadingChoukai ? (
                 <div style={{ textAlign: 'center', padding: 60, color: '#78716c' }}>
@@ -1103,26 +1199,39 @@ export const LibraryPage: React.FC = () => {
                       </div>
 
                       <button
+                        type="button"
+                        disabled={loadingExamId === item.id}
                         onClick={() => handleStartChoukaiExam(item.id)}
                         style={{
                           width: '100%',
-                          padding: '8px 16px',
-                          background: '#c53d32',
+                          padding: '10px 16px',
+                          background: loadingExamId === item.id ? '#94a3b8' : '#c53d32',
                           color: '#ffffff',
                           border: 'none',
-                          borderRadius: 6,
-                          fontSize: 12,
+                          borderRadius: 8,
+                          fontSize: 13,
                           fontWeight: 800,
-                          cursor: 'pointer',
+                          cursor: loadingExamId === item.id ? 'not-allowed' : 'pointer',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          gap: 6
+                          gap: 8,
+                          boxShadow: '0 2px 6px rgba(197, 61, 50, 0.25)',
+                          transition: 'all 0.15s ease'
                         }}
                       >
-                        <Headphones size={13} />
-                        <span>Vào phòng thi làm bài</span>
-                        <ArrowRight size={13} />
+                        {loadingExamId === item.id ? (
+                          <>
+                            <span className="inline-block w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                            <span>Đang vào phòng thi...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Headphones size={14} />
+                            <span>Vào thi thử Choukai</span>
+                            <ArrowRight size={14} />
+                          </>
+                        )}
                       </button>
                     </div>
                   ))}

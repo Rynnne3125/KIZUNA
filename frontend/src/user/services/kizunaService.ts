@@ -373,13 +373,38 @@ export const kizunaService = {
 
   async getExamById(id: string): Promise<Exam | null> {
     try {
-      const snap = await getDoc(doc(db, 'jlpt_exams', id));
-      if (snap.exists()) {
-        return { id: snap.id, ...snap.data() } as Exam;
+      if (db) {
+        const snap = await getDoc(doc(db, 'jlpt_exams', id));
+        if (snap.exists()) {
+          return { id: snap.id, ...snap.data() } as Exam;
+        }
       }
     } catch (e) {
-      console.warn(`Error fetching full exam ${id}:`, e);
+      console.warn(`Error fetching full exam ${id} from Firestore:`, e);
     }
+
+    // Fallback nếu Firestore không có hoặc lỗi: Tìm trong choukai_audio.json
+    try {
+      const choukai = await this.getChoukaiExamDetail(id);
+      if (choukai) {
+        return {
+          id: choukai.id,
+          label: choukai.label,
+          level: choukai.level,
+          type: `jlpt-${choukai.level.toLowerCase()}`,
+          year: choukai.year,
+          month: choukai.month,
+          durationMinutes: choukai.durationMinutes || 40,
+          totalQuestions: choukai.totalQuestions || choukai.actualQuestionCount || 30,
+          actualQuestionCount: choukai.actualQuestionCount || choukai.totalQuestions || 30,
+          audioUrl: choukai.audioUrl,
+          questionSets: choukai.questionSets
+        };
+      }
+    } catch (e) {
+      console.warn('Fallback getExamById failed:', e);
+    }
+
     return null;
   },
 
@@ -487,7 +512,7 @@ export const kizunaService = {
 
   /**
    * Lấy danh sách bài nghe Choukai cào từ Corodomo (65 đề thi có audio chính thức)
-   * Tải từ Firestore jlpt_exam_catalog hoặc fallback /data/audio/choukai_catalog.json
+   * Tải từ /data/audio/choukai_catalog.json (ưu tiên tốc độ 0ms) hoặc Firestore jlpt_exam_catalog
    */
   async getChoukaiAudioList(level = 'ALL'): Promise<ChoukaiAudioItem[]> {
     const cacheKey = `kizuna_choukai_audio_cache_${level}`;
@@ -496,43 +521,43 @@ export const kizunaService = {
 
     let items: ChoukaiAudioItem[] = [];
 
-    // 1. Thử lấy từ Firestore jlpt_exam_catalog
+    // 1. Ưu tiên tải nhanh từ file JSON tĩnh cục bộ (0ms, 0 Firestore Read, hoạt động ngay cả khi offline)
     try {
-      if (db) {
-        const snap = await getDocs(collection(db, 'jlpt_exam_catalog'));
-        if (!snap.empty) {
-          snap.forEach(d => {
-            const data = d.data();
-            if (data.audioUrl) {
-              items.push({
-                id: d.id,
-                label: data.label || '',
-                level: data.level || 'N3',
-                year: data.year,
-                month: data.month,
-                audioUrl: data.audioUrl,
-                durationMinutes: data.durationMinutes || 40,
-                totalQuestions: data.totalQuestions,
-                actualQuestionCount: data.actualQuestionCount,
-                listeningSetsCount: data.questionSetCount || 5
-              });
-            }
-          });
-        }
+      const res = await fetch('/data/audio/choukai_catalog.json');
+      if (res.ok) {
+        items = await res.json();
       }
     } catch (e) {
-      console.warn('Firestore choukai catalog fetch failed:', e);
+      console.warn('Local choukai_catalog.json fetch failed:', e);
     }
 
-    // 2. Fallback nếu Firestore chưa nạp hoặc offline
+    // 2. Fallback sang Firestore nếu chưa tải được file cục bộ
     if (items.length === 0) {
       try {
-        const res = await fetch('/data/audio/choukai_catalog.json');
-        if (res.ok) {
-          items = await res.json();
+        if (db) {
+          const snap = await getDocs(collection(db, 'jlpt_exam_catalog'));
+          if (!snap.empty) {
+            snap.forEach(d => {
+              const data = d.data();
+              if (data.audioUrl) {
+                items.push({
+                  id: d.id,
+                  label: data.label || '',
+                  level: data.level || 'N3',
+                  year: data.year,
+                  month: data.month,
+                  audioUrl: data.audioUrl,
+                  durationMinutes: data.durationMinutes || 40,
+                  totalQuestions: data.totalQuestions,
+                  actualQuestionCount: data.actualQuestionCount,
+                  listeningSetsCount: data.questionSetCount || 5
+                });
+              }
+            });
+          }
         }
       } catch (e) {
-        console.warn('Local choukai_catalog.json fetch failed:', e);
+        console.warn('Firestore choukai catalog fetch failed:', e);
       }
     }
 
@@ -560,7 +585,7 @@ export const kizunaService = {
     const cached = getSessionCache<ChoukaiAudioItem>(cacheKey);
     if (cached) return cached;
 
-    // 1. Thử lấy từ /data/audio/choukai_audio.json
+    // 1. Thử lấy từ /data/audio/choukai_audio.json (Có đầy đủ 5 Mondai & scripts)
     try {
       const res = await fetch('/data/audio/choukai_audio.json');
       if (res.ok) {
@@ -577,23 +602,26 @@ export const kizunaService = {
 
     // 2. Fallback nếu không có file cục bộ: Lấy từ Firestore jlpt_exams
     try {
-      const full = await this.getExamById(id);
-      if (full) {
-        const item: ChoukaiAudioItem = {
-          id: full.id,
-          label: full.label,
-          level: full.level,
-          year: full.year,
-          month: full.month,
-          audioUrl: full.audioUrl || '',
-          durationMinutes: full.durationMinutes || 40,
-          totalQuestions: full.totalQuestions,
-          actualQuestionCount: full.actualQuestionCount,
-          listeningSetsCount: (full.questionSets || []).filter(s => s.part === 2).length,
-          questionSets: (full.questionSets || []).filter(s => s.part === 2)
-        };
-        setSessionCache(cacheKey, item);
-        return item;
+      if (db) {
+        const snap = await getDoc(doc(db, 'jlpt_exams', id));
+        if (snap.exists()) {
+          const full = { id: snap.id, ...snap.data() } as Exam;
+          const item: ChoukaiAudioItem = {
+            id: full.id,
+            label: full.label,
+            level: full.level,
+            year: full.year,
+            month: full.month,
+            audioUrl: full.audioUrl || '',
+            durationMinutes: full.durationMinutes || 40,
+            totalQuestions: full.totalQuestions,
+            actualQuestionCount: full.actualQuestionCount,
+            listeningSetsCount: (full.questionSets || []).filter(s => s.part === 2).length,
+            questionSets: (full.questionSets || []).filter(s => s.part === 2)
+          };
+          setSessionCache(cacheKey, item);
+          return item;
+        }
       }
     } catch (e) {
       console.warn('Fetch Firestore choukai error:', e);
