@@ -1,6 +1,6 @@
 import { db } from '../../config/firebase';
 import { collection, getDocs, doc, getDoc, query, where, limit } from 'firebase/firestore';
-import { Stage, Milestone, VocabularyItem, VocabularyCatalog, GrammarItem, GrammarCatalog, KanjiItem, KanjiCatalog, Exam } from '../types/kizuna';
+import { Stage, Milestone, VocabularyItem, VocabularyCatalog, GrammarItem, GrammarCatalog, KanjiItem, KanjiCatalog, Exam, VideoLesson, ChoukaiAudioItem } from '../types/kizuna';
 import { VOCABULARY_CATALOG } from '../data/vocabularyCatalog';
 
 function getSessionCache<T>(key: string): T | null {
@@ -430,5 +430,125 @@ export const kizunaService = {
       // ignore
     }
     return DEFAULT_STATS;
+  },
+
+  /**
+   * Lấy danh sách video shadowing / podcast tiếng Nhật
+   * Ưu tiên tải từ Firestore (video_lessons), có fallback JSON tĩnh và cache sessionStorage
+   */
+  async getVideoLessons(level = 'ALL', category = 'ALL'): Promise<VideoLesson[]> {
+    const cacheKey = `kizuna_videos_cache_${level}_${category}`;
+    const cached = getSessionCache<VideoLesson[]>(cacheKey);
+    if (cached && cached.length > 0) return cached;
+
+    let allVideos: VideoLesson[] = [];
+
+    // 1. Thử lấy từ Firestore collection 'video_lessons'
+    try {
+      if (db) {
+        const q = query(collection(db, 'video_lessons'), limit(250));
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          snap.forEach(d => {
+            allVideos.push({ id: d.id, ...d.data() } as VideoLesson);
+          });
+        }
+      }
+    } catch (e) {
+      console.warn('Firestore video_lessons fetch failed, falling back to local dataset:', e);
+    }
+
+    // 2. Fallback nếu Firestore rỗng hoặc lỗi mạng / quota
+    if (allVideos.length === 0) {
+      try {
+        const res = await fetch('/data/videos/video_lessons.json');
+        if (res.ok) {
+          allVideos = await res.json();
+        }
+      } catch (e) {
+        console.warn('Local video_lessons.json fetch failed:', e);
+      }
+    }
+
+    // 3. Lọc theo cấp độ & danh mục
+    let filtered = allVideos;
+    if (level !== 'ALL') {
+      filtered = filtered.filter(v => v.jlptLevel?.toUpperCase() === level.toUpperCase());
+    }
+    if (category !== 'ALL') {
+      filtered = filtered.filter(v => v.category?.toLowerCase() === category.toLowerCase());
+    }
+
+    if (filtered.length > 0) {
+      setSessionCache(cacheKey, filtered, 15 * 60 * 1000);
+    }
+    return filtered;
+  },
+
+  /**
+   * Lấy danh sách bài nghe Choukai cào từ Corodomo (65 đề thi có audio chính thức)
+   * Tải từ Firestore jlpt_exam_catalog hoặc fallback /data/audio/choukai_catalog.json
+   */
+  async getChoukaiAudioList(level = 'ALL'): Promise<ChoukaiAudioItem[]> {
+    const cacheKey = `kizuna_choukai_audio_cache_${level}`;
+    const cached = getSessionCache<ChoukaiAudioItem[]>(cacheKey);
+    if (cached && cached.length > 0) return cached;
+
+    let items: ChoukaiAudioItem[] = [];
+
+    // 1. Thử lấy từ Firestore jlpt_exam_catalog
+    try {
+      if (db) {
+        const snap = await getDocs(collection(db, 'jlpt_exam_catalog'));
+        if (!snap.empty) {
+          snap.forEach(d => {
+            const data = d.data();
+            if (data.audioUrl) {
+              items.push({
+                id: d.id,
+                label: data.label || '',
+                level: data.level || 'N3',
+                year: data.year,
+                month: data.month,
+                audioUrl: data.audioUrl,
+                durationMinutes: data.durationMinutes || 40,
+                totalQuestions: data.totalQuestions,
+                actualQuestionCount: data.actualQuestionCount,
+                listeningSetsCount: data.questionSetCount || 5
+              });
+            }
+          });
+        }
+      }
+    } catch (e) {
+      console.warn('Firestore choukai catalog fetch failed:', e);
+    }
+
+    // 2. Fallback nếu Firestore chưa nạp hoặc offline
+    if (items.length === 0) {
+      try {
+        const res = await fetch('/data/audio/choukai_catalog.json');
+        if (res.ok) {
+          items = await res.json();
+        }
+      } catch (e) {
+        console.warn('Local choukai_catalog.json fetch failed:', e);
+      }
+    }
+
+    // 3. Sắp xếp đề mới nhất lên trước
+    items.sort((a, b) => {
+      if (a.year && b.year && a.year !== b.year) return b.year - a.year;
+      return (b.month || 0) - (a.month || 0);
+    });
+
+    if (level !== 'ALL') {
+      items = items.filter(x => x.level.toUpperCase() === level.toUpperCase());
+    }
+
+    if (items.length > 0) {
+      setSessionCache(cacheKey, items, 30 * 60 * 1000);
+    }
+    return items;
   }
 };
