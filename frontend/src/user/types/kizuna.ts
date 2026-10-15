@@ -122,20 +122,57 @@ export interface GrammarBook {
 
 export type GrammarCatalog = Record<'N5' | 'N4' | 'N3' | 'N2' | 'N1', GrammarBook[]>;
 
+export interface KanjiCompound {
+  word?: string;
+  compound?: string;
+  reading: string;
+  meaning: string;
+  type?: string;
+  level?: string;
+  lesson?: number;
+}
+
 export interface KanjiItem {
   id: string;
+  kanji_id?: string;
   milestoneId?: string;
+  stageId?: string;
+  lessonNumber?: number;
+  kanjiNumber?: number;
   kanji: string;
+  character?: string;
+  jlptLevel?: string;
+  level?: string;
   strokeCount: number;
   radicals?: string;
   onyomi?: string;
   kunyomi?: string;
   sinoVietnamese: string;
   vietnameseMeaning: string;
+  meaning_vi?: string;
   mnemonicStory?: string;
-  exampleCompounds?: Array<{ compound: string; reading: string; meaning: string }>;
-  level?: string;
+  exampleCompounds?: KanjiCompound[];
+  sourceUrl?: string;
 }
+
+export interface KanjiUnit {
+  unitId: string;
+  unitTitle: string;
+  subTitle?: string;
+  lessonNumber?: number;
+  itemCount: number;
+  kanjiPreview?: Array<{ kanji: string; sino: string }>;
+}
+
+export interface KanjiBook {
+  bookId: string;
+  bookName: string;
+  description: string;
+  totalItems: number;
+  units: KanjiUnit[];
+}
+
+export type KanjiCatalog = Record<'N5' | 'N4' | 'N3' | 'N2' | 'N1', KanjiBook[]>;
 
 export interface ExamOption {
   id: string;
@@ -182,5 +219,36 @@ export interface Exam {
   explanationCount?: number;
   scriptCount?: number;
   createdAt?: string;
+  questionSets?: QuestionSet[];
+}
+
+export interface VideoLesson {
+  id: string;
+  video_id?: string;
+  originalId?: number;
+  title: string;
+  titleEn?: string;
+  jlptLevel: string;
+  category: string;
+  channelName: string;
+  youtubeVideoId: string;
+  youtubeUrl: string;
+  thumbnailUrl: string;
+  durationSeconds: number;
+  segmentCount?: number;
+  createdAt?: string;
+}
+
+export interface ChoukaiAudioItem {
+  id: string;
+  label: string;
+  level: string;
+  year?: number;
+  month?: number;
+  audioUrl: string;
+  durationMinutes: number;
+  totalQuestions?: number;
+  actualQuestionCount?: number;
+  listeningSetsCount?: number;
   questionSets?: QuestionSet[];
 }

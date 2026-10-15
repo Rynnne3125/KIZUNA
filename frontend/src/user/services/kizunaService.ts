@@ -1,6 +1,6 @@
 import { db } from '../../config/firebase';
 import { collection, getDocs, doc, getDoc, query, where, limit } from 'firebase/firestore';
-import { Stage, Milestone, VocabularyItem, VocabularyCatalog, GrammarItem, GrammarCatalog, KanjiItem, Exam } from '../types/kizuna';
+import { Stage, Milestone, VocabularyItem, VocabularyCatalog, GrammarItem, GrammarCatalog, KanjiItem, KanjiCatalog, Exam, VideoLesson, ChoukaiAudioItem } from '../types/kizuna';
 import { VOCABULARY_CATALOG } from '../data/vocabularyCatalog';
 
 function getSessionCache<T>(key: string): T | null {
@@ -239,9 +239,85 @@ export const kizunaService = {
     return fallback;
   },
 
+  /**
+   * Lấy danh mục chữ Hán phân cấp theo cấp độ N5 -> N1 và các bài học
+   * 0 Firestore read (tải từ static JSON cache)
+   */
+  async getKanjiCatalog(): Promise<KanjiCatalog | null> {
+    const cacheKey = 'kizuna_kanji_catalog_cache';
+    const cached = getSessionCache<KanjiCatalog>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      const res = await fetch('/data/kanji/catalog.json');
+      if (res.ok) {
+        const data: KanjiCatalog = await res.json();
+        setSessionCache(cacheKey, data);
+        return data;
+      }
+    } catch (e) {
+      console.warn('Fetch kanji catalog error:', e);
+    }
+    return null;
+  },
+
+  /**
+   * Lấy danh sách chữ Hán theo bài học (Unit) cụ thể
+   * Tải từ /data/kanji/units/[unitId].json (0 Firestore read)
+   */
+  async getKanjiByUnit(unitId: string): Promise<KanjiItem[]> {
+    const cacheKey = `kizuna_kanji_unit_${unitId}`;
+    const cached = getSessionCache<KanjiItem[]>(cacheKey);
+    if (cached && cached.length > 0) return cached;
+
+    try {
+      const res = await fetch(`/data/kanji/units/${unitId}.json`);
+      if (res.ok) {
+        const items: KanjiItem[] = await res.json();
+        setSessionCache(cacheKey, items);
+        return items;
+      }
+    } catch (e) {
+      console.warn(`Fetch kanji unit ${unitId} failed:`, e);
+    }
+
+    return [];
+  },
+
+  /**
+   * Lấy danh sách toàn bộ chữ Hán trực tiếp theo cấp độ JLPT (N5 -> N1)
+   * Tải từ /data/kanji/levels/[level].json (0 Firestore read)
+   */
+  async getKanjiByLevel(level: 'N5' | 'N4' | 'N3' | 'N2' | 'N1'): Promise<KanjiItem[]> {
+    const lvlKey = level.toLowerCase();
+    const cacheKey = `kizuna_kanji_level_${lvlKey}`;
+    const cached = getSessionCache<KanjiItem[]>(cacheKey);
+    if (cached && cached.length > 0) return cached;
+
+    try {
+      const res = await fetch(`/data/kanji/levels/${lvlKey}.json`);
+      if (res.ok) {
+        const items: KanjiItem[] = await res.json();
+        setSessionCache(cacheKey, items);
+        return items;
+      }
+    } catch (e) {
+      console.warn(`Fetch kanji level ${level} failed:`, e);
+    }
+
+    return [];
+  },
+
   async getKanji(): Promise<KanjiItem[]> {
     const cached = getSessionCache<KanjiItem[]>('kizuna_kanji_cache');
     if (cached) return cached;
+
+    // Lấy thử từ Unit đầu tiên của N5
+    const firstUnit = await this.getKanjiByUnit('ms_minna_b01');
+    if (firstUnit.length > 0) {
+      setSessionCache('kizuna_kanji_cache', firstUnit);
+      return firstUnit;
+    }
 
     try {
       const q = query(collection(db, 'kanji_dictionary'), limit(50));
@@ -297,13 +373,38 @@ export const kizunaService = {
 
   async getExamById(id: string): Promise<Exam | null> {
     try {
-      const snap = await getDoc(doc(db, 'jlpt_exams', id));
-      if (snap.exists()) {
-        return { id: snap.id, ...snap.data() } as Exam;
+      if (db) {
+        const snap = await getDoc(doc(db, 'jlpt_exams', id));
+        if (snap.exists()) {
+          return { id: snap.id, ...snap.data() } as Exam;
+        }
       }
     } catch (e) {
-      console.warn(`Error fetching full exam ${id}:`, e);
+      console.warn(`Error fetching full exam ${id} from Firestore:`, e);
     }
+
+    // Fallback nếu Firestore không có hoặc lỗi: Tìm trong choukai_audio.json
+    try {
+      const choukai = await this.getChoukaiExamDetail(id);
+      if (choukai) {
+        return {
+          id: choukai.id,
+          label: choukai.label,
+          level: choukai.level,
+          type: `jlpt-${choukai.level.toLowerCase()}`,
+          year: choukai.year,
+          month: choukai.month,
+          durationMinutes: choukai.durationMinutes || 40,
+          totalQuestions: choukai.totalQuestions || choukai.actualQuestionCount || 30,
+          actualQuestionCount: choukai.actualQuestionCount || choukai.totalQuestions || 30,
+          audioUrl: choukai.audioUrl,
+          questionSets: choukai.questionSets
+        };
+      }
+    } catch (e) {
+      console.warn('Fallback getExamById failed:', e);
+    }
+
     return null;
   },
 
@@ -354,5 +455,178 @@ export const kizunaService = {
       // ignore
     }
     return DEFAULT_STATS;
+  },
+
+  /**
+   * Lấy danh sách video shadowing / podcast tiếng Nhật
+   * Ưu tiên tải từ Firestore (video_lessons), có fallback JSON tĩnh và cache sessionStorage
+   */
+  async getVideoLessons(level = 'ALL', category = 'ALL'): Promise<VideoLesson[]> {
+    const cacheKey = `kizuna_videos_cache_${level}_${category}`;
+    const cached = getSessionCache<VideoLesson[]>(cacheKey);
+    if (cached && cached.length > 0) return cached;
+
+    let allVideos: VideoLesson[] = [];
+
+    // 1. Thử lấy từ Firestore collection 'video_lessons'
+    try {
+      if (db) {
+        const q = query(collection(db, 'video_lessons'), limit(250));
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          snap.forEach(d => {
+            allVideos.push({ id: d.id, ...d.data() } as VideoLesson);
+          });
+        }
+      }
+    } catch (e) {
+      console.warn('Firestore video_lessons fetch failed, falling back to local dataset:', e);
+    }
+
+    // 2. Fallback nếu Firestore rỗng hoặc lỗi mạng / quota
+    if (allVideos.length === 0) {
+      try {
+        const res = await fetch('/data/videos/video_lessons.json');
+        if (res.ok) {
+          allVideos = await res.json();
+        }
+      } catch (e) {
+        console.warn('Local video_lessons.json fetch failed:', e);
+      }
+    }
+
+    // 3. Lọc theo cấp độ & danh mục
+    let filtered = allVideos;
+    if (level !== 'ALL') {
+      filtered = filtered.filter(v => v.jlptLevel?.toUpperCase() === level.toUpperCase());
+    }
+    if (category !== 'ALL') {
+      filtered = filtered.filter(v => v.category?.toLowerCase() === category.toLowerCase());
+    }
+
+    if (filtered.length > 0) {
+      setSessionCache(cacheKey, filtered, 15 * 60 * 1000);
+    }
+    return filtered;
+  },
+
+  /**
+   * Lấy danh sách bài nghe Choukai cào từ Corodomo (65 đề thi có audio chính thức)
+   * Tải từ /data/audio/choukai_catalog.json (ưu tiên tốc độ 0ms) hoặc Firestore jlpt_exam_catalog
+   */
+  async getChoukaiAudioList(level = 'ALL'): Promise<ChoukaiAudioItem[]> {
+    const cacheKey = `kizuna_choukai_audio_cache_${level}`;
+    const cached = getSessionCache<ChoukaiAudioItem[]>(cacheKey);
+    if (cached && cached.length > 0) return cached;
+
+    let items: ChoukaiAudioItem[] = [];
+
+    // 1. Ưu tiên tải nhanh từ file JSON tĩnh cục bộ (0ms, 0 Firestore Read, hoạt động ngay cả khi offline)
+    try {
+      const res = await fetch('/data/audio/choukai_catalog.json');
+      if (res.ok) {
+        items = await res.json();
+      }
+    } catch (e) {
+      console.warn('Local choukai_catalog.json fetch failed:', e);
+    }
+
+    // 2. Fallback sang Firestore nếu chưa tải được file cục bộ
+    if (items.length === 0) {
+      try {
+        if (db) {
+          const snap = await getDocs(collection(db, 'jlpt_exam_catalog'));
+          if (!snap.empty) {
+            snap.forEach(d => {
+              const data = d.data();
+              if (data.audioUrl) {
+                items.push({
+                  id: d.id,
+                  label: data.label || '',
+                  level: data.level || 'N3',
+                  year: data.year,
+                  month: data.month,
+                  audioUrl: data.audioUrl,
+                  durationMinutes: data.durationMinutes || 40,
+                  totalQuestions: data.totalQuestions,
+                  actualQuestionCount: data.actualQuestionCount,
+                  listeningSetsCount: data.questionSetCount || 5
+                });
+              }
+            });
+          }
+        }
+      } catch (e) {
+        console.warn('Firestore choukai catalog fetch failed:', e);
+      }
+    }
+
+    // 3. Sắp xếp đề mới nhất lên trước
+    items.sort((a, b) => {
+      if (a.year && b.year && a.year !== b.year) return b.year - a.year;
+      return (b.month || 0) - (a.month || 0);
+    });
+
+    if (level !== 'ALL') {
+      items = items.filter(x => x.level.toUpperCase() === level.toUpperCase());
+    }
+
+    if (items.length > 0) {
+      setSessionCache(cacheKey, items, 30 * 60 * 1000);
+    }
+    return items;
+  },
+
+  /**
+   * Lấy chi tiết bài thi Choukai kèm 5 Mondai câu hỏi & kịch bản nghe
+   */
+  async getChoukaiExamDetail(id: string): Promise<ChoukaiAudioItem | null> {
+    const cacheKey = `kizuna_choukai_detail_${id}`;
+    const cached = getSessionCache<ChoukaiAudioItem>(cacheKey);
+    if (cached) return cached;
+
+    // 1. Thử lấy từ /data/audio/choukai_audio.json (Có đầy đủ 5 Mondai & scripts)
+    try {
+      const res = await fetch('/data/audio/choukai_audio.json');
+      if (res.ok) {
+        const list: ChoukaiAudioItem[] = await res.json();
+        const found = list.find(x => x.id === id);
+        if (found) {
+          setSessionCache(cacheKey, found);
+          return found;
+        }
+      }
+    } catch (e) {
+      console.warn('Fetch local choukai_audio.json error:', e);
+    }
+
+    // 2. Fallback nếu không có file cục bộ: Lấy từ Firestore jlpt_exams
+    try {
+      if (db) {
+        const snap = await getDoc(doc(db, 'jlpt_exams', id));
+        if (snap.exists()) {
+          const full = { id: snap.id, ...snap.data() } as Exam;
+          const item: ChoukaiAudioItem = {
+            id: full.id,
+            label: full.label,
+            level: full.level,
+            year: full.year,
+            month: full.month,
+            audioUrl: full.audioUrl || '',
+            durationMinutes: full.durationMinutes || 40,
+            totalQuestions: full.totalQuestions,
+            actualQuestionCount: full.actualQuestionCount,
+            listeningSetsCount: (full.questionSets || []).filter(s => s.part === 2).length,
+            questionSets: (full.questionSets || []).filter(s => s.part === 2)
+          };
+          setSessionCache(cacheKey, item);
+          return item;
+        }
+      }
+    } catch (e) {
+      console.warn('Fetch Firestore choukai error:', e);
+    }
+
+    return null;
   }
 };

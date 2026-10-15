@@ -62,8 +62,12 @@ yarn-error.log*
 scratch/
 .openjlpt_cache/
 frontend/.openjlpt_cache/
-frontend/public/data/units/
-public/data/units/
+
+
+### Local Data & Mock Datasets (Do NOT commit to GitHub) ###
+public/data/
+**/public/data/
+frontend/public/data/
 
 
 ### Environment Variables ###
