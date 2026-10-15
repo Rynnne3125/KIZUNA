@@ -550,5 +550,55 @@ export const kizunaService = {
       setSessionCache(cacheKey, items, 30 * 60 * 1000);
     }
     return items;
+  },
+
+  /**
+   * Lấy chi tiết bài thi Choukai kèm 5 Mondai câu hỏi & kịch bản nghe
+   */
+  async getChoukaiExamDetail(id: string): Promise<ChoukaiAudioItem | null> {
+    const cacheKey = `kizuna_choukai_detail_${id}`;
+    const cached = getSessionCache<ChoukaiAudioItem>(cacheKey);
+    if (cached) return cached;
+
+    // 1. Thử lấy từ /data/audio/choukai_audio.json
+    try {
+      const res = await fetch('/data/audio/choukai_audio.json');
+      if (res.ok) {
+        const list: ChoukaiAudioItem[] = await res.json();
+        const found = list.find(x => x.id === id);
+        if (found) {
+          setSessionCache(cacheKey, found);
+          return found;
+        }
+      }
+    } catch (e) {
+      console.warn('Fetch local choukai_audio.json error:', e);
+    }
+
+    // 2. Fallback nếu không có file cục bộ: Lấy từ Firestore jlpt_exams
+    try {
+      const full = await this.getExamById(id);
+      if (full) {
+        const item: ChoukaiAudioItem = {
+          id: full.id,
+          label: full.label,
+          level: full.level,
+          year: full.year,
+          month: full.month,
+          audioUrl: full.audioUrl || '',
+          durationMinutes: full.durationMinutes || 40,
+          totalQuestions: full.totalQuestions,
+          actualQuestionCount: full.actualQuestionCount,
+          listeningSetsCount: (full.questionSets || []).filter(s => s.part === 2).length,
+          questionSets: (full.questionSets || []).filter(s => s.part === 2)
+        };
+        setSessionCache(cacheKey, item);
+        return item;
+      }
+    } catch (e) {
+      console.warn('Fetch Firestore choukai error:', e);
+    }
+
+    return null;
   }
 };
