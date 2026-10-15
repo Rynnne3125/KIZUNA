@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import { Volume2, Search, RotateCcw } from 'lucide-react';
 import { kizunaService } from '../services/kizunaService';
 import { VocabularyItem, VocabularyBook, VocabularyUnit, VocabularyCatalog } from '../types/kizuna';
 import { VOCABULARY_CATALOG } from '../data/vocabularyCatalog';
@@ -780,7 +781,7 @@ export const VocabPage: React.FC = () => {
                     handleSelectBook(book);
                   }}
                 >
-                  開く (Mở sách) ➔
+                  開く (Mở sách) →
                 </button>
               </div>
             );
@@ -1033,8 +1034,16 @@ export const VocabPage: React.FC = () => {
           </div>
 
           {loadingUnit ? (
-            <div style={{ padding: 60, textAlign: 'center', color: '#78716c', fontSize: 14 }}>
-              ⏳ Đang nạp từ vựng...
+            <div style={{ padding: 60, textAlign: 'center', color: '#78716c', fontSize: 14, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+              <div style={{
+                width: 28,
+                height: 28,
+                border: '3px solid #e7e5e4',
+                borderTop: '3px solid #c53d32',
+                borderRadius: '50%',
+                animation: 'kanjiSpin 0.8s linear infinite'
+              }} />
+              <span>Đang nạp từ vựng...</span>
             </div>
           ) : (
             <>
@@ -1045,15 +1054,16 @@ export const VocabPage: React.FC = () => {
                     <div style={{ fontSize: 13, fontWeight: 700, color: '#57534e' }}>
                       {filteredList.length} từ vựng trong bài:
                     </div>
-                    <div style={{ minWidth: 220 }}>
+                    <div style={{ position: 'relative', minWidth: 220 }}>
+                      <Search size={14} color="#78716c" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
                       <input
                         type="text"
-                        placeholder="🔍 Tìm từ trong bài..."
+                        placeholder="Tìm từ trong bài..."
                         value={searchTerm}
                         onChange={e => setSearchTerm(e.target.value)}
                         style={{
                           width: '100%',
-                          padding: '6px 12px',
+                          padding: '6px 12px 6px 30px',
                           borderRadius: 7,
                           border: '1px solid #d6d3d1',
                           fontSize: 13,
@@ -1090,17 +1100,22 @@ export const VocabPage: React.FC = () => {
                                   </span>
                                   <button
                                     onClick={() => speakJapanese(item.term)}
-                                    title="Phát âm"
+                                    title="Phát âm từ"
                                     style={{
-                                      background: 'transparent',
-                                      border: 'none',
+                                      background: '#faf8f5',
+                                      border: '1px solid #e7e5e4',
+                                      borderRadius: '50%',
+                                      width: 26,
+                                      height: 26,
+                                      display: 'inline-flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'center',
                                       cursor: 'pointer',
-                                      fontSize: 14,
-                                      padding: 0,
-                                      opacity: 0.8
+                                      color: '#57534e',
+                                      padding: 0
                                     }}
                                   >
-                                    🔊
+                                    <Volume2 size={13} />
                                   </button>
                                 </div>
                                 <div style={{ fontSize: 13, color: '#2d6d4b', fontWeight: 600, marginTop: 2 }}>
@@ -1135,9 +1150,17 @@ export const VocabPage: React.FC = () => {
                                       <button
                                         onClick={() => speakJapanese(item.exampleSentenceJp || '')}
                                         title="Phát âm câu"
-                                        style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 12, opacity: 0.8 }}
+                                        style={{
+                                          background: 'transparent',
+                                          border: 'none',
+                                          cursor: 'pointer',
+                                          padding: 2,
+                                          color: '#78716c',
+                                          display: 'inline-flex',
+                                          alignItems: 'center'
+                                        }}
                                       >
-                                        🔊
+                                        <Volume2 size={13} />
                                       </button>
                                     </div>
                                     <div style={{ fontSize: 12, color: '#57534e' }}>
@@ -1530,10 +1553,14 @@ export const VocabPage: React.FC = () => {
                               borderRadius: 8,
                               fontWeight: 700,
                               fontSize: 14,
-                              cursor: 'pointer'
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              gap: 8
                             }}
                           >
-                            🔄 Làm lại các thẻ chưa thuộc ({learningIds.size} từ)
+                            <RotateCcw size={16} /> Làm lại các thẻ chưa thuộc ({learningIds.size} từ)
                           </button>
                         )}
 
@@ -1547,10 +1574,14 @@ export const VocabPage: React.FC = () => {
                             borderRadius: 8,
                             fontWeight: 700,
                             fontSize: 14,
-                            cursor: 'pointer'
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: 8
                           }}
                         >
-                          🔁 Làm lại tất cả ({unitVocabList.length} từ)
+                          <RotateCcw size={16} /> Làm lại tất cả ({unitVocabList.length} từ)
                         </button>
                       </div>
                     </div>
@@ -1931,10 +1962,14 @@ export const VocabPage: React.FC = () => {
                               borderRadius: 8,
                               fontWeight: 700,
                               fontSize: 14,
-                              cursor: 'pointer'
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              gap: 8
                             }}
                           >
-                            🔄 Làm lại các thẻ sai & bỏ qua ({quizWrongItems.length + quizSkippedItems.length} câu)
+                            <RotateCcw size={16} /> Làm lại các thẻ sai & bỏ qua ({quizWrongItems.length + quizSkippedItems.length} câu)
                           </button>
                         )}
 
@@ -1948,10 +1983,14 @@ export const VocabPage: React.FC = () => {
                             borderRadius: 8,
                             fontWeight: 700,
                             fontSize: 14,
-                            cursor: 'pointer'
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: 8
                           }}
                         >
-                          🔁 Làm lại tất cả ({unitVocabList.length} câu)
+                          <RotateCcw size={16} /> Làm lại tất cả ({unitVocabList.length} câu)
                         </button>
                       </div>
                     </div>

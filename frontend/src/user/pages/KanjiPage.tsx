@@ -1,4 +1,22 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
+import { 
+  Volume2, 
+  Search, 
+  PenTool, 
+  Layers, 
+  Lightbulb, 
+  BookOpen, 
+  Sparkles, 
+  RotateCcw, 
+  ChevronLeft, 
+  ChevronRight, 
+  ChevronsLeft, 
+  ChevronsRight, 
+  Check, 
+  X, 
+  FastForward, 
+  ArrowRight 
+} from 'lucide-react';
 import { kizunaService } from '../services/kizunaService';
 import { KanjiItem } from '../types/kizuna';
 
@@ -1152,6 +1170,15 @@ export const KanjiPage: React.FC = () => {
             stroke-dashoffset: 0;
           }
         }
+
+        @keyframes kanjiSpin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
       `}</style>
 
       {/* 1. HEADER CHỮ HÁN PHONG CÁCH NHẬT BẢN HIỆN ĐẠI (和の美学) */}
@@ -1191,7 +1218,7 @@ export const KanjiPage: React.FC = () => {
               </h1>
             </div>
             <p style={{ color: '#78716c', fontSize: 13, margin: 0 }}>
-              Học <strong>2,216 chữ Hán</strong> chuẩn JLPT theo cấp độ (N5 ➔ N1), phân trang 40 chữ/trang, thứ tự nét đỏ & mẹo nhớ chiết tự bộ thủ.
+              Học <strong>2,216 chữ Hán</strong> chuẩn JLPT theo cấp độ (N5 → N1), phân trang 40 chữ/trang, thứ tự nét đỏ & mẹo nhớ chiết tự bộ thủ.
             </p>
           </div>
 
@@ -1351,8 +1378,18 @@ export const KanjiPage: React.FC = () => {
       </div>
 
       {loadingLevel ? (
-        <div style={{ padding: 80, textAlign: 'center', color: '#78716c', fontSize: 15 }}>
-          ⏳ Đang nạp danh mục chữ Hán cấp độ {selectedLevel}...
+        <div style={{ padding: '80px 20px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+          <div style={{
+            width: 32,
+            height: 32,
+            border: '3px solid #e5e0d8',
+            borderTopColor: '#c53d32',
+            borderRadius: '50%',
+            animation: 'kanjiSpin 0.8s linear infinite'
+          }} />
+          <div style={{ color: '#78716c', fontSize: 14, fontWeight: 600 }}>
+            Đang nạp danh mục chữ Hán cấp độ {selectedLevel}...
+          </div>
         </div>
       ) : (
         <>
@@ -1372,10 +1409,20 @@ export const KanjiPage: React.FC = () => {
                 flexWrap: 'wrap',
                 gap: 12
               }}>
-                <div style={{ minWidth: 260, flex: 1 }}>
+                <div style={{ minWidth: 260, flex: 1, position: 'relative', maxWidth: 380 }}>
+                  <Search style={{
+                    position: 'absolute',
+                    left: 12,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    width: 15,
+                    height: 15,
+                    color: '#94a3b8',
+                    pointerEvents: 'none'
+                  }} />
                   <input
                     type="text"
-                    placeholder="🔍 Tìm chữ Hán, Hán Việt, nghĩa (ví dụ: 休, HƯU, Nghỉ ngơi)..."
+                    placeholder="Tìm chữ Hán, Hán Việt, nghĩa (ví dụ: 休, HƯU, Nghỉ ngơi)..."
                     value={searchTerm}
                     onChange={e => {
                       setSearchTerm(e.target.value);
@@ -1383,15 +1430,41 @@ export const KanjiPage: React.FC = () => {
                     }}
                     style={{
                       width: '100%',
-                      maxWidth: 360,
-                      padding: '7px 12px',
-                      borderRadius: 7,
+                      padding: '8px 32px 8px 36px',
+                      borderRadius: 8,
                       border: '1px solid #d6d3d1',
                       fontSize: 13,
                       outline: 'none',
-                      background: '#faf8f5'
+                      background: '#faf8f5',
+                      boxSizing: 'border-box',
+                      transition: 'border-color 0.15s ease'
                     }}
                   />
+                  {searchTerm && (
+                    <button
+                      onClick={() => {
+                        setSearchTerm('');
+                        setCurrentPage(1);
+                      }}
+                      style={{
+                        position: 'absolute',
+                        right: 10,
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        padding: 2,
+                        color: '#94a3b8',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                      title="Xóa tìm kiếm"
+                    >
+                      <X style={{ width: 14, height: 14 }} />
+                    </button>
+                  )}
                 </div>
 
                 {/* Phân trang: Hiển thị 40 từ / trang */}
@@ -1404,35 +1477,42 @@ export const KanjiPage: React.FC = () => {
                     disabled={activePage <= 1}
                     onClick={() => handlePageChange(1)}
                     style={{
-                      padding: '4px 8px',
+                      padding: '5px 8px',
                       borderRadius: 6,
                       border: '1px solid #d6d3d1',
                       background: activePage <= 1 ? '#f5f5f4' : '#ffffff',
                       color: activePage <= 1 ? '#a8a29e' : '#1c2536',
                       cursor: activePage <= 1 ? 'not-allowed' : 'pointer',
                       fontSize: 12,
-                      fontWeight: 700
+                      fontWeight: 700,
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
                     }}
                     title="Trang đầu"
                   >
-                    ⏮
+                    <ChevronsLeft style={{ width: 14, height: 14 }} />
                   </button>
 
                   <button
                     disabled={activePage <= 1}
                     onClick={() => handlePageChange(activePage - 1)}
                     style={{
-                      padding: '4px 10px',
+                      padding: '5px 10px',
                       borderRadius: 6,
                       border: '1px solid #d6d3d1',
                       background: activePage <= 1 ? '#f5f5f4' : '#ffffff',
                       color: activePage <= 1 ? '#a8a29e' : '#1c2536',
                       cursor: activePage <= 1 ? 'not-allowed' : 'pointer',
                       fontSize: 12,
-                      fontWeight: 700
+                      fontWeight: 700,
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 4
                     }}
                   >
-                    ◀ Trước
+                    <ChevronLeft style={{ width: 14, height: 14 }} />
+                    <span>Trước</span>
                   </button>
 
                   {/* Nút bấm số trang */}
@@ -1467,35 +1547,42 @@ export const KanjiPage: React.FC = () => {
                     disabled={activePage >= totalPages}
                     onClick={() => handlePageChange(activePage + 1)}
                     style={{
-                      padding: '4px 10px',
+                      padding: '5px 10px',
                       borderRadius: 6,
                       border: '1px solid #d6d3d1',
                       background: activePage >= totalPages ? '#f5f5f4' : '#ffffff',
                       color: activePage >= totalPages ? '#a8a29e' : '#1c2536',
                       cursor: activePage >= totalPages ? 'not-allowed' : 'pointer',
                       fontSize: 12,
-                      fontWeight: 700
+                      fontWeight: 700,
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 4
                     }}
                   >
-                    Sau ▶
+                    <span>Sau</span>
+                    <ChevronRight style={{ width: 14, height: 14 }} />
                   </button>
 
                   <button
                     disabled={activePage >= totalPages}
                     onClick={() => handlePageChange(totalPages)}
                     style={{
-                      padding: '4px 8px',
+                      padding: '5px 8px',
                       borderRadius: 6,
                       border: '1px solid #d6d3d1',
                       background: activePage >= totalPages ? '#f5f5f4' : '#ffffff',
                       color: activePage >= totalPages ? '#a8a29e' : '#1c2536',
                       cursor: activePage >= totalPages ? 'not-allowed' : 'pointer',
                       fontSize: 12,
-                      fontWeight: 700
+                      fontWeight: 700,
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
                     }}
                     title="Trang cuối"
                   >
-                    ⏭
+                    <ChevronsRight style={{ width: 14, height: 14 }} />
                   </button>
                 </div>
               </div>
@@ -1607,6 +1694,9 @@ export const KanjiPage: React.FC = () => {
                               onClick={() => speakJapanese(selectedKanji.kanji)}
                               title="Phát âm chữ Hán"
                               style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: 6,
                                 background: '#faf8f5',
                                 border: '1px solid #d6d3d1',
                                 borderRadius: 16,
@@ -1617,7 +1707,8 @@ export const KanjiPage: React.FC = () => {
                                 color: '#44403c'
                               }}
                             >
-                              🔊 Phát âm
+                              <Volume2 style={{ width: 14, height: 14 }} />
+                              <span>Phát âm</span>
                             </button>
                           </div>
                           <div style={{ fontSize: 16, color: '#2d6d4b', fontWeight: 700, marginTop: 4 }}>
@@ -1632,16 +1723,38 @@ export const KanjiPage: React.FC = () => {
 
                     {/* 2. Cách viết chữ Hán & Thứ tự từng nét vẽ (KanjiStrokeBox phóng to 260px, không kẻ nét giữa, đường đỏ nổi bật) */}
                     <div>
-                      <div style={{ fontSize: 12, fontWeight: 800, color: '#78716c', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.5px' }}>
-                        ✍️ Cách Viết & Thứ Tự Từng Nét Vẽ:
+                      <div style={{
+                        fontSize: 12,
+                        fontWeight: 800,
+                        color: '#64748b',
+                        textTransform: 'uppercase',
+                        marginBottom: 10,
+                        letterSpacing: '0.6px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 6
+                      }}>
+                        <PenTool style={{ width: 14, height: 14, color: '#c53d32' }} />
+                        <span>Cách Viết & Thứ Tự Từng Nét Vẽ</span>
                       </div>
                       <KanjiStrokeBox kanji={selectedKanji.kanji} strokeCount={selectedKanji.strokeCount} />
                     </div>
 
                     {/* 3. Bộ thủ chuẩn & Mẹo ghi nhớ chiết tự (Theo đúng phong cách: Chữ ghép từ các bộ thủ) */}
                     <div>
-                      <div style={{ fontSize: 12, fontWeight: 800, color: '#78716c', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.5px' }}>
-                        🧩 Bộ Thủ & Mẹo Nhớ Chiết Tự:
+                      <div style={{
+                        fontSize: 12,
+                        fontWeight: 800,
+                        color: '#64748b',
+                        textTransform: 'uppercase',
+                        marginBottom: 10,
+                        letterSpacing: '0.6px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 6
+                      }}>
+                        <Layers style={{ width: 14, height: 14, color: '#c53d32' }} />
+                        <span>Bộ Thủ & Mẹo Nhớ Chiết Tự</span>
                       </div>
                       <div style={{
                         background: '#faf8f5',
@@ -1693,7 +1806,8 @@ export const KanjiPage: React.FC = () => {
                               alignItems: 'center',
                               gap: 6
                             }}>
-                              <span>💡 Mẹo chiết tự bộ thủ & Câu chuyện liên tưởng:</span>
+                              <Lightbulb style={{ width: 14, height: 14, color: '#ea580c' }} />
+                              <span>Mẹo Chiết Tự Bộ Thủ & Câu Chuyện Liên Tưởng</span>
                             </div>
                             <div style={{
                               fontSize: 14.5,
@@ -1710,8 +1824,19 @@ export const KanjiPage: React.FC = () => {
 
                     {/* 4. Âm On (Katakana) & Âm Kun (Hiragana) */}
                     <div>
-                      <div style={{ fontSize: 12, fontWeight: 800, color: '#78716c', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.5px' }}>
-                        🗣️ Cách Đọc Âm On & Âm Kun:
+                      <div style={{
+                        fontSize: 12,
+                        fontWeight: 800,
+                        color: '#64748b',
+                        textTransform: 'uppercase',
+                        marginBottom: 10,
+                        letterSpacing: '0.6px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 6
+                      }}>
+                        <BookOpen style={{ width: 14, height: 14, color: '#c53d32' }} />
+                        <span>Cách Đọc Âm On & Âm Kun</span>
                       </div>
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                         {/* Âm On */}
@@ -1734,9 +1859,20 @@ export const KanjiPage: React.FC = () => {
                             <button
                               onClick={() => speakJapanese(selectedKanji.onyomi!.replace(/[\,\s]/g, '、'))}
                               title="Nghe âm On"
-                              style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 14 }}
+                              style={{
+                                background: '#ffffff',
+                                border: '1px solid #cbd5e1',
+                                borderRadius: '50%',
+                                width: 28,
+                                height: 28,
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                color: '#1e40af'
+                              }}
                             >
-                              🔊
+                              <Volume2 style={{ width: 14, height: 14 }} />
                             </button>
                           )}
                         </div>
@@ -1761,9 +1897,20 @@ export const KanjiPage: React.FC = () => {
                             <button
                               onClick={() => speakJapanese(selectedKanji.kunyomi!.replace(/[\,\s\.]/g, '、'))}
                               title="Nghe âm Kun"
-                              style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 14 }}
+                              style={{
+                                background: '#ffffff',
+                                border: '1px solid #bbf7d0',
+                                borderRadius: '50%',
+                                width: 28,
+                                height: 28,
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                color: '#15803d'
+                              }}
                             >
-                              🔊
+                              <Volume2 style={{ width: 14, height: 14 }} />
                             </button>
                           )}
                         </div>
@@ -1776,21 +1923,25 @@ export const KanjiPage: React.FC = () => {
                         <div style={{
                           fontSize: 12,
                           fontWeight: 800,
-                          color: '#78716c',
+                          color: '#64748b',
                           textTransform: 'uppercase',
-                          marginBottom: 8,
-                          letterSpacing: '0.5px',
+                          marginBottom: 10,
+                          letterSpacing: '0.6px',
                           display: 'flex',
                           alignItems: 'center',
+                          justifyContent: 'space-between',
                           gap: 6
                         }}>
-                          <span>📚 Từ Ghép Tiêu Biểu ({selectedKanji.jlptLevel || selectedLevel}):</span>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                            <Sparkles style={{ width: 14, height: 14, color: '#c53d32' }} />
+                            <span>Từ Ghép Tiêu Biểu ({selectedKanji.jlptLevel || selectedLevel})</span>
+                          </div>
                           <span style={{
                             background: '#fdf2f0',
                             color: '#c53d32',
-                            fontSize: 10,
-                            padding: '1px 6px',
-                            borderRadius: 4,
+                            fontSize: 11,
+                            padding: '2px 8px',
+                            borderRadius: 6,
                             fontWeight: 700
                           }}>
                             {selectedKanji.exampleCompounds.length} từ cùng cấp độ
@@ -1838,9 +1989,21 @@ export const KanjiPage: React.FC = () => {
                                 <button
                                   onClick={() => speakJapanese(wordText || comp.reading)}
                                   title="Phát âm từ ghép"
-                                  style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 13 }}
+                                  style={{
+                                    background: '#ffffff',
+                                    border: '1px solid #e2e8f0',
+                                    borderRadius: '50%',
+                                    width: 26,
+                                    height: 26,
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    cursor: 'pointer',
+                                    color: '#64748b',
+                                    flexShrink: 0
+                                  }}
                                 >
-                                  🔊
+                                  <Volume2 style={{ width: 13, height: 13 }} />
                                 </button>
                               </div>
                             );
@@ -2031,21 +2194,23 @@ export const KanjiPage: React.FC = () => {
                                 background: 'rgba(255, 255, 255, 0.9)',
                                 border: '1px solid #d6d3d1',
                                 borderRadius: 20,
-                                padding: '4px 12px',
+                                padding: '5px 14px',
                                 fontSize: 13,
                                 color: '#1c2536',
                                 cursor: 'pointer',
                                 display: 'inline-flex',
                                 alignItems: 'center',
                                 gap: 6,
-                                marginBottom: 16
+                                marginBottom: 16,
+                                fontWeight: 600
                               }}
                             >
-                              🔊 Nghe phát âm
+                              <Volume2 style={{ width: 14, height: 14 }} />
+                              <span>Nghe phát âm</span>
                             </button>
 
                             <div style={{ fontSize: 12, color: '#a8a29e', marginTop: 12 }}>
-                              Nhấp chuột hoặc nhấn phím Space để lật xem nghĩa & mẹo nhớ ↻
+                              Nhấp chuột hoặc nhấn phím Space để lật xem nghĩa & mẹo nhớ
                             </div>
                           </div>
                         </div>
@@ -2101,8 +2266,11 @@ export const KanjiPage: React.FC = () => {
                                 marginBottom: 12,
                                 textAlign: 'left'
                               }}>
-                                <strong style={{ color: '#ea580c' }}>💡 Mẹo nhớ: </strong>
-                                {flipStudyList[flipActiveIndex].mnemonicStory}
+                                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: '#ea580c', fontWeight: 800 }}>
+                                  <Lightbulb style={{ width: 14, height: 14 }} />
+                                  <span>Mẹo nhớ: </span>
+                                </span>
+                                {' '}{flipStudyList[flipActiveIndex].mnemonicStory}
                               </div>
                             )}
 
@@ -2238,10 +2406,15 @@ export const KanjiPage: React.FC = () => {
                           borderRadius: 8,
                           fontWeight: 700,
                           fontSize: 14,
-                          cursor: 'pointer'
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: 6
                         }}
                       >
-                        🔄 Làm lại các thẻ chưa thuộc ({learningIds.size} chữ)
+                        <RotateCcw style={{ width: 15, height: 15 }} />
+                        <span>Làm lại các thẻ chưa thuộc ({learningIds.size} chữ)</span>
                       </button>
                     )}
 
@@ -2255,10 +2428,15 @@ export const KanjiPage: React.FC = () => {
                         borderRadius: 8,
                         fontWeight: 700,
                         fontSize: 14,
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 6
                       }}
                     >
-                      🔁 Làm lại tất cả ({activeStudyPool.length} chữ)
+                      <RotateCcw style={{ width: 15, height: 15 }} />
+                      <span>Làm lại tất cả ({activeStudyPool.length} chữ)</span>
                     </button>
                   </div>
                 </div>
@@ -2535,9 +2713,27 @@ export const KanjiPage: React.FC = () => {
                             <span style={{
                               fontWeight: 800,
                               fontSize: 14,
-                              color: quizIsCorrect ? '#15803d' : '#b91c1c'
+                              color: quizIsCorrect ? '#15803d' : (quizIsSkipped ? '#d97706' : '#b91c1c'),
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: 6
                             }}>
-                              {quizIsCorrect ? '✓ Chính xác!' : (quizIsSkipped ? '⏩ Đã bỏ qua' : '✗ Chưa chính xác')}
+                              {quizIsCorrect ? (
+                                <>
+                                  <Check style={{ width: 16, height: 16 }} />
+                                  <span>Chính xác!</span>
+                                </>
+                              ) : quizIsSkipped ? (
+                                <>
+                                  <FastForward style={{ width: 16, height: 16 }} />
+                                  <span>Đã bỏ qua</span>
+                                </>
+                              ) : (
+                                <>
+                                  <X style={{ width: 16, height: 16 }} />
+                                  <span>Chưa chính xác</span>
+                                </>
+                              )}
                             </span>
                             <button
                               onClick={() => speakJapanese(currentQuizQuestion.item.kanji)}
@@ -2545,19 +2741,28 @@ export const KanjiPage: React.FC = () => {
                                 background: '#ffffff',
                                 border: '1px solid #d6d3d1',
                                 borderRadius: 12,
-                                padding: '2px 8px',
+                                padding: '3px 10px',
                                 fontSize: 11,
-                                cursor: 'pointer'
+                                cursor: 'pointer',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: 4,
+                                color: '#44403c',
+                                fontWeight: 600
                               }}
                             >
-                              🔊 Nghe chữ Hán
+                              <Volume2 style={{ width: 13, height: 13 }} />
+                              <span>Nghe chữ Hán</span>
                             </button>
                           </div>
 
                           {currentQuizQuestion.item.mnemonicStory && (
-                            <div style={{ fontSize: 13, color: '#334155', lineHeight: 1.5 }}>
-                              <strong>💡 Mẹo nhớ: </strong>
-                              {currentQuizQuestion.item.mnemonicStory}
+                            <div style={{ fontSize: 13, color: '#334155', lineHeight: 1.5, marginTop: 4 }}>
+                              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: '#ea580c', fontWeight: 800 }}>
+                                <Lightbulb style={{ width: 14, height: 14 }} />
+                                <span>Mẹo nhớ: </span>
+                              </span>
+                              {' '}{currentQuizQuestion.item.mnemonicStory}
                             </div>
                           )}
 
@@ -2565,17 +2770,21 @@ export const KanjiPage: React.FC = () => {
                             <button
                               onClick={handleNextQuizQuestion}
                               style={{
-                                padding: '6px 16px',
+                                padding: '7px 16px',
                                 background: '#1c2536',
                                 color: '#ffffff',
                                 border: 'none',
                                 borderRadius: 6,
                                 fontWeight: 700,
                                 fontSize: 13,
-                                cursor: 'pointer'
+                                cursor: 'pointer',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: 6
                               }}
                             >
-                              Tiếp theo ➔
+                              <span>Tiếp theo</span>
+                              <ArrowRight style={{ width: 14, height: 14 }} />
                             </button>
                           </div>
                         </div>
@@ -2664,10 +2873,15 @@ export const KanjiPage: React.FC = () => {
                           borderRadius: 8,
                           fontWeight: 700,
                           fontSize: 14,
-                          cursor: 'pointer'
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: 6
                         }}
                       >
-                        🔄 Ôn lại các câu chưa đúng ({quizWrongQuestions.length + quizSkippedQuestions.length} câu)
+                        <RotateCcw style={{ width: 15, height: 15 }} />
+                        <span>Ôn lại các câu chưa đúng ({quizWrongQuestions.length + quizSkippedQuestions.length} câu)</span>
                       </button>
                     )}
 
@@ -2681,10 +2895,15 @@ export const KanjiPage: React.FC = () => {
                         borderRadius: 8,
                         fontWeight: 700,
                         fontSize: 14,
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 6
                       }}
                     >
-                      🔁 Luyện tập lại từ đầu ({quizQuestions.length} câu)
+                      <RotateCcw style={{ width: 15, height: 15 }} />
+                      <span>Luyện tập lại từ đầu ({quizQuestions.length} câu)</span>
                     </button>
                   </div>
                 </div>

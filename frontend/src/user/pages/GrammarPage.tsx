@@ -1,4 +1,19 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import { 
+  Volume2, 
+  Search, 
+  BookOpen, 
+  AlertTriangle, 
+  MessageSquare, 
+  RotateCcw, 
+  Check, 
+  X, 
+  ArrowRight,
+  PenTool,
+  Sparkles,
+  ChevronDown,
+  ChevronUp
+} from 'lucide-react';
 import { kizunaService } from '../services/kizunaService';
 import { GrammarItem, GrammarBook, GrammarUnit, GrammarCatalog } from '../types/kizuna';
 
@@ -835,7 +850,7 @@ export const GrammarPage: React.FC = () => {
                     handleSelectBook(book);
                   }}
                 >
-                  開く (Mở sách) ➔
+                  開く (Mở sách) →
                 </button>
               </div>
             );
@@ -1073,8 +1088,16 @@ export const GrammarPage: React.FC = () => {
           </div>
 
           {loadingUnit ? (
-            <div style={{ padding: 60, textAlign: 'center', color: '#78716c', fontSize: 14 }}>
-              ⏳ Đang nạp ngữ pháp bài học...
+            <div style={{ padding: 60, textAlign: 'center', color: '#78716c', fontSize: 14, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+              <div style={{
+                width: 28,
+                height: 28,
+                border: '3px solid #e7e5e4',
+                borderTop: '3px solid #c53d32',
+                borderRadius: '50%',
+                animation: 'kanjiSpin 0.8s linear infinite'
+              }} />
+              <span>Đang nạp ngữ pháp bài học...</span>
             </div>
           ) : (
             <>
@@ -1085,15 +1108,16 @@ export const GrammarPage: React.FC = () => {
                     <div style={{ fontSize: 13, fontWeight: 700, color: '#57534e' }}>
                       {filteredList.length} mẫu câu trong bài:
                     </div>
-                    <div style={{ minWidth: 260 }}>
+                    <div style={{ position: 'relative', minWidth: 260 }}>
+                      <Search size={15} color="#78716c" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
                       <input
                         type="text"
-                        placeholder="🔍 Tìm mẫu câu hoặc ý nghĩa..."
+                        placeholder="Tìm mẫu câu hoặc ý nghĩa..."
                         value={searchTerm}
                         onChange={e => setSearchTerm(e.target.value)}
                         style={{
                           width: '100%',
-                          padding: '7px 12px',
+                          padding: '7px 12px 7px 32px',
                           borderRadius: 7,
                           border: '1px solid #d6d3d1',
                           fontSize: 13,
@@ -1159,7 +1183,7 @@ export const GrammarPage: React.FC = () => {
                               </div>
                             </div>
 
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                               <button
                                 onClick={e => {
                                   e.stopPropagation();
@@ -1167,18 +1191,27 @@ export const GrammarPage: React.FC = () => {
                                 }}
                                 title="Phát âm mẫu câu"
                                 style={{
-                                  background: 'transparent',
-                                  border: 'none',
+                                  background: '#faf8f5',
+                                  border: '1px solid #e7e5e4',
+                                  borderRadius: '50%',
+                                  width: 28,
+                                  height: 28,
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
                                   cursor: 'pointer',
-                                  fontSize: 14,
-                                  padding: 4,
-                                  opacity: 0.8
+                                  color: '#57534e',
+                                  padding: 0
                                 }}
                               >
-                                🔊
+                                <Volume2 size={14} />
                               </button>
-                              <span style={{ fontSize: 13, color: '#78716c', fontWeight: 600 }}>
-                                {isExpanded ? '▲ Thu gọn' : '▼ Chi tiết'}
+                              <span style={{ fontSize: 13, color: '#78716c', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                                {isExpanded ? (
+                                  <>Thu gọn <ChevronUp size={14} /></>
+                                ) : (
+                                  <>Chi tiết <ChevronDown size={14} /></>
+                                )}
                               </span>
                             </div>
                           </div>
@@ -1189,8 +1222,8 @@ export const GrammarPage: React.FC = () => {
                               {/* 1. Cấu trúc / Công thức ghép (Structure) */}
                               {item.structure && (
                                 <div>
-                                  <div style={{ fontSize: 12, fontWeight: 800, color: '#78716c', textTransform: 'uppercase', marginBottom: 6, letterSpacing: '0.5px' }}>
-                                    📐 Cấu Trúc / Công Thức Ghép:
+                                  <div style={{ fontSize: 12, fontWeight: 800, color: '#78716c', textTransform: 'uppercase', marginBottom: 6, letterSpacing: '0.5px', display: 'flex', alignItems: 'center', gap: 6 }}>
+                                    <PenTool size={13} color="#78716c" /> Cấu Trúc / Công Thức Ghép:
                                   </div>
                                   <div style={{
                                     background: '#f8fafc',
@@ -1209,8 +1242,8 @@ export const GrammarPage: React.FC = () => {
 
                               {/* 2. Giải thích ý nghĩa & cách dùng (Explanation) */}
                               <div>
-                                <div style={{ fontSize: 12, fontWeight: 800, color: '#78716c', textTransform: 'uppercase', marginBottom: 6, letterSpacing: '0.5px' }}>
-                                  📖 Giải Thích & Hoàn Cảnh Sử Dụng:
+                                <div style={{ fontSize: 12, fontWeight: 800, color: '#78716c', textTransform: 'uppercase', marginBottom: 6, letterSpacing: '0.5px', display: 'flex', alignItems: 'center', gap: 6 }}>
+                                  <BookOpen size={13} color="#78716c" /> Giải Thích & Hoàn Cảnh Sử Dụng:
                                 </div>
                                 <div style={{ fontSize: 14, color: '#334155', lineHeight: 1.6, background: '#faf8f5', padding: '12px 16px', borderRadius: 8, border: '1px solid #ebe7df' }}>
                                   {item.explanation}
@@ -1220,8 +1253,8 @@ export const GrammarPage: React.FC = () => {
                               {/* 3. Bẫy lỗi sai người Việt hay mắc (Common Mistake) */}
                               {item.commonMistake && (
                                 <div>
-                                  <div style={{ fontSize: 12, fontWeight: 800, color: '#991b1b', textTransform: 'uppercase', marginBottom: 6, letterSpacing: '0.5px' }}>
-                                    ⚠️ Bẫy Lỗi Sai Cần Tránh:
+                                  <div style={{ fontSize: 12, fontWeight: 800, color: '#991b1b', textTransform: 'uppercase', marginBottom: 6, letterSpacing: '0.5px', display: 'flex', alignItems: 'center', gap: 6 }}>
+                                    <AlertTriangle size={13} color="#ef4444" /> Bẫy Lỗi Sai Cần Tránh:
                                   </div>
                                   <div style={{
                                     background: '#fef2f2',
@@ -1241,8 +1274,8 @@ export const GrammarPage: React.FC = () => {
                               {/* 4. Danh sách câu ví dụ chuẩn (Examples + Pronunciation) */}
                               {item.examples && item.examples.length > 0 && (
                                 <div>
-                                  <div style={{ fontSize: 12, fontWeight: 800, color: '#78716c', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.5px' }}>
-                                    ⭐ Câu Ví Dụ Điển Hình:
+                                  <div style={{ fontSize: 12, fontWeight: 800, color: '#78716c', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.5px', display: 'flex', alignItems: 'center', gap: 6 }}>
+                                    <Sparkles size={13} color="#d97706" /> Câu Ví Dụ Điển Hình:
                                   </div>
                                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                                     {item.examples.map((ex, i) => (
@@ -1274,12 +1307,15 @@ export const GrammarPage: React.FC = () => {
                                             background: '#faf8f5',
                                             border: '1px solid #d6d3d1',
                                             borderRadius: 6,
-                                            padding: '4px 8px',
+                                            padding: '5px 8px',
                                             cursor: 'pointer',
-                                            fontSize: 13
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            color: '#57534e'
                                           }}
                                         >
-                                          🔊
+                                          <Volume2 size={13} />
                                         </button>
                                       </div>
                                     ))}
@@ -1290,8 +1326,8 @@ export const GrammarPage: React.FC = () => {
                               {/* 5. Đoạn hội thoại mẫu thực chiến (Dialogue) */}
                               {item.dialogue && item.dialogue.lines && item.dialogue.lines.length > 0 && (
                                 <div>
-                                  <div style={{ fontSize: 12, fontWeight: 800, color: '#78716c', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.5px' }}>
-                                    💬 Đoạn Hội Thoại Thực Chiến: {item.dialogue.title ? `(${item.dialogue.title})` : ''}
+                                  <div style={{ fontSize: 12, fontWeight: 800, color: '#78716c', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.5px', display: 'flex', alignItems: 'center', gap: 6 }}>
+                                    <MessageSquare size={13} color="#78716c" /> Đoạn Hội Thoại Thực Chiến: {item.dialogue.title ? `(${item.dialogue.title})` : ''}
                                   </div>
                                   <div style={{
                                     background: '#f8fafc',
@@ -1329,9 +1365,17 @@ export const GrammarPage: React.FC = () => {
                                           <button
                                             onClick={() => speakJapanese(line.text)}
                                             title="Phát âm"
-                                            style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 12, opacity: 0.7 }}
+                                            style={{
+                                              background: 'transparent',
+                                              border: 'none',
+                                              cursor: 'pointer',
+                                              padding: 4,
+                                              color: '#64748b',
+                                              display: 'inline-flex',
+                                              alignItems: 'center'
+                                            }}
                                           >
-                                            🔊
+                                            <Volume2 size={13} />
                                           </button>
                                         </div>
                                       );
@@ -1582,9 +1626,13 @@ export const GrammarPage: React.FC = () => {
                                   padding: '8px 10px',
                                   fontSize: 12,
                                   color: '#7f1d1d',
-                                  marginBottom: 12
+                                  marginBottom: 12,
+                                  display: 'flex',
+                                  alignItems: 'flex-start',
+                                  gap: 6
                                 }}>
-                                  ⚠️ {flipStudyList[flipActiveIndex].commonMistake}
+                                  <AlertTriangle size={14} color="#ef4444" style={{ flexShrink: 0, marginTop: 1 }} />
+                                  <span>{flipStudyList[flipActiveIndex].commonMistake}</span>
                                 </div>
                               )}
 
@@ -1728,10 +1776,14 @@ export const GrammarPage: React.FC = () => {
                               borderRadius: 8,
                               fontWeight: 700,
                               fontSize: 14,
-                              cursor: 'pointer'
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              gap: 8
                             }}
                           >
-                            🔄 Làm lại các thẻ chưa thuộc ({learningIds.size} mẫu)
+                            <RotateCcw size={16} /> Làm lại các thẻ chưa thuộc ({learningIds.size} mẫu)
                           </button>
                         )}
 
@@ -1745,10 +1797,14 @@ export const GrammarPage: React.FC = () => {
                             borderRadius: 8,
                             fontWeight: 700,
                             fontSize: 14,
-                            cursor: 'pointer'
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: 8
                           }}
                         >
-                          🔁 Làm lại tất cả ({unitGrammarList.length} mẫu)
+                          <RotateCcw size={16} /> Làm lại tất cả ({unitGrammarList.length} mẫu)
                         </button>
                       </div>
                     </div>
@@ -1849,16 +1905,19 @@ export const GrammarPage: React.FC = () => {
                             right: 16,
                             background: '#faf8f5',
                             border: '1px solid #d6d3d1',
-                            padding: '5px 12px',
+                            padding: '6px 12px',
                             borderRadius: 20,
                             cursor: 'pointer',
                             fontSize: 12,
                             fontWeight: 600,
                             color: '#44403c',
-                            zIndex: 2
+                            zIndex: 2,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 6
                           }}
                         >
-                          🔊 Nghe câu
+                          <Volume2 size={14} /> Nghe câu
                         </button>
 
                         {/* Nội dung câu ví dụ điển hình */}
@@ -2002,10 +2061,10 @@ export const GrammarPage: React.FC = () => {
                                   </div>
 
                                   {quizAnswerChecked && opt.isCorrect && (
-                                    <span style={{ color: '#16a34a', fontWeight: 900, fontSize: 16 }}>✓</span>
+                                    <Check size={18} color="#16a34a" strokeWidth={3} />
                                   )}
                                   {quizAnswerChecked && isSelected && !opt.isCorrect && (
-                                    <span style={{ color: '#dc2626', fontWeight: 900, fontSize: 16 }}>✗</span>
+                                    <X size={18} color="#dc2626" strokeWidth={3} />
                                   )}
                                 </button>
                               );
@@ -2185,10 +2244,14 @@ export const GrammarPage: React.FC = () => {
                               borderRadius: 8,
                               fontWeight: 700,
                               fontSize: 14,
-                              cursor: 'pointer'
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              gap: 8
                             }}
                           >
-                            🔄 Làm lại các câu sai & bỏ qua ({quizWrongQuestions.length + quizSkippedQuestions.length} câu)
+                            <RotateCcw size={16} /> Làm lại các câu sai & bỏ qua ({quizWrongQuestions.length + quizSkippedQuestions.length} câu)
                           </button>
                         )}
 
@@ -2202,10 +2265,14 @@ export const GrammarPage: React.FC = () => {
                             borderRadius: 8,
                             fontWeight: 700,
                             fontSize: 14,
-                            cursor: 'pointer'
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: 8
                           }}
                         >
-                          🔁 Làm lại tất cả ({unitGrammarList.length} câu)
+                          <RotateCcw size={16} /> Làm lại tất cả ({unitGrammarList.length} câu)
                         </button>
                       </div>
                     </div>
