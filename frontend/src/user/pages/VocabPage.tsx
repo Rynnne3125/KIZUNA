@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { Volume2, Search, RotateCcw } from 'lucide-react';
+import { Volume2, Search, RotateCcw, Check, ChevronLeft } from 'lucide-react';
 import { kizunaService } from '../services/kizunaService';
+import { authService } from '../services/authService';
+import { progressService } from '../services/progressService';
 import { VocabularyItem, VocabularyBook, VocabularyUnit, VocabularyCatalog } from '../types/kizuna';
 import { VOCABULARY_CATALOG } from '../data/vocabularyCatalog';
 
@@ -76,6 +78,10 @@ export const VocabPage: React.FC = () => {
   const [unitVocabList, setUnitVocabList] = useState<VocabularyItem[]>([]);
   const [loadingUnit, setLoadingUnit] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const currentUser = authService.getCurrentUser();
+  const [completedUnits, setCompletedUnits] = useState<string[]>(() => {
+    return currentUser?.id ? progressService.getCompletedVocabUnits(currentUser.id) : [];
+  });
 
   // Study Mode State
   const [currentMode, setCurrentMode] = useState<StudyMode>('list');
@@ -235,6 +241,11 @@ export const VocabPage: React.FC = () => {
       setIsFlipped(false);
     } else {
       setFlipFinished(true);
+      const finalMastered = mastered ? new Set(masteredIds).add(currentItem.id) : masteredIds;
+      if (finalMastered.size === unitVocabList.length && currentUser?.id && selectedBook && selectedUnit) {
+        progressService.saveVocabUnitProgress(currentUser.id, selectedBook.bookId, selectedUnit.unitId, unitVocabList.length);
+        setCompletedUnits(prev => prev.includes(selectedUnit.unitId) ? prev : [...prev, selectedUnit.unitId]);
+      }
     }
   };
 
@@ -324,6 +335,10 @@ export const VocabPage: React.FC = () => {
       setQuizIsSkipped(false);
     } else {
       setQuizFinished(true);
+      if (quizWrongItems.length === 0 && quizSkippedItems.length === 0 && currentUser?.id && selectedBook && selectedUnit) {
+        progressService.saveVocabUnitProgress(currentUser.id, selectedBook.bookId, selectedUnit.unitId, unitVocabList.length);
+        setCompletedUnits(prev => prev.includes(selectedUnit.unitId) ? prev : [...prev, selectedUnit.unitId]);
+      }
     }
   };
 
@@ -812,10 +827,13 @@ export const VocabPage: React.FC = () => {
                 fontSize: 13,
                 fontWeight: 600,
                 color: '#57534e',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 4
               }}
             >
-              ⬅️ Chọn bộ sách khác
+              <ChevronLeft size={14} /> Chọn bộ sách khác
             </button>
           </div>
 
@@ -825,6 +843,7 @@ export const VocabPage: React.FC = () => {
             gap: 14
           }}>
             {selectedBook.units.map(unit => {
+              const isUnitDone = completedUnits.includes(unit.unitId);
               return (
                 <div
                   key={unit.unitId}
@@ -832,7 +851,8 @@ export const VocabPage: React.FC = () => {
                   style={{
                     background: '#ffffff',
                     borderRadius: 10,
-                    border: '1px solid #ebe7df',
+                    border: isUnitDone ? '1px solid #c6e2ce' : '1px solid #ebe7df',
+                    borderLeft: isUnitDone ? '4px solid #16a34a' : '1px solid #ebe7df',
                     padding: '16px 18px',
                     cursor: 'pointer',
                     boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
@@ -844,7 +864,7 @@ export const VocabPage: React.FC = () => {
                     e.currentTarget.style.boxShadow = '0 4px 10px rgba(0,0,0,0.05)';
                   }}
                   onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = '#ebe7df';
+                    e.currentTarget.style.borderColor = isUnitDone ? '#c6e2ce' : '#ebe7df';
                     e.currentTarget.style.transform = 'translateY(0)';
                     e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.02)';
                   }}
@@ -853,11 +873,29 @@ export const VocabPage: React.FC = () => {
                     <span style={{ fontSize: 12, fontWeight: 700, color: '#2d6d4b' }}>
                       {unit.wordCount} 語
                     </span>
-                    {unit.chapterTitle && (
-                      <span style={{ fontSize: 11, color: '#78716c', background: '#faf8f5', padding: '2px 8px', borderRadius: 4, border: '1px solid #f0ece3' }}>
-                        {unit.chapterTitle}
-                      </span>
-                    )}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      {isUnitDone && (
+                        <span style={{
+                          background: '#f0fdf4',
+                          color: '#15803d',
+                          border: '1px solid #bbf7d0',
+                          borderRadius: 4,
+                          padding: '1px 6px',
+                          fontSize: 10,
+                          fontWeight: 800,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: 2
+                        }}>
+                          <Check size={10} strokeWidth={3} /> Đã thuộc 100%
+                        </span>
+                      )}
+                      {unit.chapterTitle && (
+                        <span style={{ fontSize: 11, color: '#78716c', background: '#faf8f5', padding: '2px 8px', borderRadius: 4, border: '1px solid #f0ece3' }}>
+                          {unit.chapterTitle}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   <h4 style={{ fontSize: 14, fontWeight: 700, color: '#1c2536', margin: '4px 0 0 0', lineHeight: 1.4 }}>
