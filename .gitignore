@@ -62,8 +62,9 @@ yarn-error.log*
 scratch/
 .openjlpt_cache/
 frontend/.openjlpt_cache/
-frontend/public/data/units/
-public/data/units/
+frontend/public/data/
+public/data/
+**/public/data/
 
 
 ### Environment Variables ###
