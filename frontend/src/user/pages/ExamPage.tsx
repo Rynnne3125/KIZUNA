@@ -71,6 +71,11 @@ export const ExamPage: React.FC = () => {
   const [scoreResult, setScoreResult] = useState<ScoreDetail | null>(null);
   const [loadingExamDetail, setLoadingExamDetail] = useState(false);
   
+  // Modals xác nhận nộp bài & thoát phòng thi (thay thế window.confirm / alert)
+  const [showSubmitModal, setShowSubmitModal] = useState(false);
+  const [showExitModal, setShowExitModal] = useState(false);
+  const [loadErrorMsg, setLoadErrorMsg] = useState<string | null>(null);
+  
   // Đồng hồ đếm ngược thời gian thực theo chuẩn kỳ thi JLPT
   const [secondsRemaining, setSecondsRemaining] = useState<number>(0);
   const [totalDurationSeconds, setTotalDurationSeconds] = useState<number>(0);
@@ -177,8 +182,10 @@ export const ExamPage: React.FC = () => {
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        alert('Không thể tải chi tiết đề thi. Vui lòng thử lại!');
+        setLoadErrorMsg('Không thể tải chi tiết đề thi. Vui lòng kiểm tra lại kết nối và thử lại!');
       }
+    } catch {
+      setLoadErrorMsg('Đã có lỗi xảy ra khi nạp chi tiết đề thi. Vui lòng thử lại!');
     } finally {
       setLoadingExamDetail(false);
     }
@@ -194,17 +201,19 @@ export const ExamPage: React.FC = () => {
     executeSubmission(true);
   };
 
-  // Học viên chủ động bấm nộp bài
+  // Học viên chủ động bấm nộp bài -> Mở modal xác nhận thay vì window.confirm
   const handleSubmitExam = () => {
     if (!activeExam || !activeExam.questionSets) return;
-    const unansweredCount = countUnansweredQuestions();
-    if (unansweredCount > 0) {
-      const confirmed = window.confirm(
-        `Bạn còn ${unansweredCount} câu hỏi chưa trả lời. Bạn có chắc chắn muốn nộp bài chấm điểm ngay không?`
-      );
-      if (!confirmed) return;
-    }
+    setShowSubmitModal(true);
+  };
+
+  const handleConfirmSubmit = () => {
+    setShowSubmitModal(false);
     executeSubmission(false);
+  };
+
+  const handleCancelSubmit = () => {
+    setShowSubmitModal(false);
   };
 
   const countUnansweredQuestions = () => {
@@ -305,12 +314,17 @@ export const ExamPage: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Thoát khỏi phòng thi
+  // Thoát khỏi phòng thi -> Mở modal xác nhận thay vì window.confirm
   const handleExitExam = () => {
     if (!isSubmitted && Object.keys(userAnswers).length > 0) {
-      const confirmExit = window.confirm('Bạn có chắc chắn muốn rời khỏi phòng thi? Bài làm hiện tại chưa được nộp.');
-      if (!confirmExit) return;
+      setShowExitModal(true);
+      return;
     }
+    performExit();
+  };
+
+  const performExit = () => {
+    setShowExitModal(false);
     setActiveExam(null);
     setUserAnswers({});
     setIsSubmitted(false);
@@ -341,6 +355,10 @@ export const ExamPage: React.FC = () => {
           @keyframes kanjiSpin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
+          }
+          @keyframes kizunaModalIn {
+            from { opacity: 0; transform: scale(0.96) translateY(6px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
           }
         `}</style>
 
@@ -745,12 +763,41 @@ export const ExamPage: React.FC = () => {
                   const isWrong = isSubmitted && hasAnswered && userChoice !== q.correctAnswer;
                   const isUnanswered = isSubmitted && !hasAnswered;
 
+                  // Thiết lập khung viền: ĐỎ cho câu sai hoặc câu chưa làm, XANH LÁ cho câu đúng
+                  let cardBg = '#ffffff';
+                  let cardBorder = '1px solid #ebe7df';
+                  let cardBorderLeft = '1px solid #ebe7df';
+                  let cardShadow = '0 1px 3px rgba(0,0,0,0.02)';
+
+                  if (isSubmitted) {
+                    if (isCorrect) {
+                      cardBg = '#fbfdfb';
+                      cardBorder = '1.5px solid #86efac';
+                      cardBorderLeft = '5px solid #16a34a';
+                      cardShadow = '0 3px 10px rgba(22, 163, 74, 0.06)';
+                    } else {
+                      // isWrong hoặc isUnanswered: Khung đỏ nổi bật rõ ràng theo yêu cầu
+                      cardBg = '#fffafa';
+                      cardBorder = '1.5px solid #fca5a5';
+                      cardBorderLeft = '5px solid #dc2626';
+                      cardShadow = '0 3px 10px rgba(220, 38, 38, 0.06)';
+                    }
+                  }
+
                   return (
                     <div
                       key={q.id || qIdx}
                       style={{
-                        borderBottom: qIdx === qs.questions.length - 1 ? 'none' : '1px dashed #e2e8f0',
-                        paddingBottom: qIdx === qs.questions.length - 1 ? 0 : 20
+                        background: cardBg,
+                        border: cardBorder,
+                        borderLeft: cardBorderLeft,
+                        borderRadius: 12,
+                        padding: '20px 22px',
+                        boxShadow: cardShadow,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 14,
+                        transition: 'all 0.15s ease'
                       }}
                     >
                       {/* Tiêu đề câu hỏi kèm huy hiệu trạng thái đúng/sai sau khi nộp */}
@@ -758,8 +805,8 @@ export const ExamPage: React.FC = () => {
                         display: 'flex',
                         alignItems: 'flex-start',
                         justifyContent: 'space-between',
-                        gap: 10,
-                        marginBottom: 12
+                        gap: 12,
+                        flexWrap: 'wrap'
                       }}>
                         <div style={{
                           fontSize: 15,
@@ -773,9 +820,16 @@ export const ExamPage: React.FC = () => {
                             display: 'inline-flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            background: '#fdf2f0',
-                            color: '#c53d32',
-                            padding: '1px 8px',
+                            background: isSubmitted
+                              ? (isCorrect ? '#dcfce7' : '#fee2e2')
+                              : '#fdf2f0',
+                            color: isSubmitted
+                              ? (isCorrect ? '#15803d' : '#b91c1c')
+                              : '#c53d32',
+                            border: isSubmitted
+                              ? (isCorrect ? '1px solid #86efac' : '1px solid #fca5a5')
+                              : '1px solid #f3d5d2',
+                            padding: '2px 8px',
                             borderRadius: 4,
                             fontSize: 12,
                             fontWeight: 900,
@@ -796,13 +850,13 @@ export const ExamPage: React.FC = () => {
                                 gap: 4,
                                 background: '#f0fdf4',
                                 color: '#15803d',
-                                border: '1px solid #bbf7d0',
-                                padding: '3px 8px',
+                                border: '1px solid #86efac',
+                                padding: '4px 10px',
                                 borderRadius: 6,
                                 fontSize: 11,
                                 fontWeight: 800
                               }}>
-                                <Check size={13} strokeWidth={3} /> Đúng
+                                <Check size={13} strokeWidth={3} /> ĐÚNG
                               </span>
                             )}
                             {isWrong && (
@@ -810,15 +864,15 @@ export const ExamPage: React.FC = () => {
                                 display: 'inline-flex',
                                 alignItems: 'center',
                                 gap: 4,
-                                background: '#fef2f2',
+                                background: '#fee2e2',
                                 color: '#b91c1c',
-                                border: '1px solid #fecaca',
-                                padding: '3px 8px',
+                                border: '1px solid #fca5a5',
+                                padding: '4px 10px',
                                 borderRadius: 6,
                                 fontSize: 11,
                                 fontWeight: 800
                               }}>
-                                <X size={13} strokeWidth={3} /> Sai
+                                <X size={13} strokeWidth={3} /> CÂU SAI
                               </span>
                             )}
                             {isUnanswered && (
@@ -826,15 +880,15 @@ export const ExamPage: React.FC = () => {
                                 display: 'inline-flex',
                                 alignItems: 'center',
                                 gap: 4,
-                                background: '#fffbeb',
-                                color: '#b45309',
-                                border: '1px solid #fde68a',
-                                padding: '3px 8px',
+                                background: '#fee2e2',
+                                color: '#b91c1c',
+                                border: '1px solid #fca5a5',
+                                padding: '4px 10px',
                                 borderRadius: 6,
                                 fontSize: 11,
                                 fontWeight: 800
                               }}>
-                                <AlertCircle size={13} /> Chưa làm
+                                <AlertCircle size={13} /> CHƯA LÀM
                               </span>
                             )}
                           </div>
@@ -860,20 +914,22 @@ export const ExamPage: React.FC = () => {
                           if (isSubmitted) {
                             if (isOfficialCorrect) {
                               optBg = '#f0fdf4';
-                              optBorder = '1.5px solid #22c55e';
+                              optBorder = '1.5px solid #16a34a';
                               optColor = '#15803d';
-                              badgeBg = '#22c55e';
+                              badgeBg = '#16a34a';
                               badgeColor = '#ffffff';
                             } else if (isChosen && !isOfficialCorrect) {
                               optBg = '#fef2f2';
-                              optBorder = '1.5px solid #ef4444';
+                              optBorder = '2px solid #dc2626';
                               optColor = '#991b1b';
-                              badgeBg = '#ef4444';
+                              badgeBg = '#dc2626';
                               badgeColor = '#ffffff';
                             } else {
-                              optBg = '#fafafa';
-                              optBorder = '1.5px solid #f1f5f9';
+                              optBg = '#ffffff';
+                              optBorder = '1px solid #e2e8f0';
                               optColor = '#94a3b8';
+                              badgeBg = '#f8fafc';
+                              badgeColor = '#94a3b8';
                             }
                           } else if (isChosen) {
                             optBg = '#fdf2f0';
@@ -892,7 +948,7 @@ export const ExamPage: React.FC = () => {
                                 background: optBg,
                                 border: optBorder,
                                 color: optColor,
-                                padding: '10px 14px',
+                                padding: '11px 14px',
                                 borderRadius: 8,
                                 textAlign: 'left',
                                 fontSize: 14,
@@ -941,12 +997,18 @@ export const ExamPage: React.FC = () => {
                                 <span style={{
                                   display: 'inline-flex',
                                   alignItems: 'center',
-                                  gap: 4,
+                                  gap: 3,
                                   fontSize: 11,
                                   fontWeight: 800,
-                                  color: '#16a34a'
+                                  color: '#15803d',
+                                  background: '#dcfce7',
+                                  border: '1px solid #86efac',
+                                  padding: '2px 6px',
+                                  borderRadius: 4,
+                                  flexShrink: 0
                                 }}>
-                                  <Check size={15} strokeWidth={3} />
+                                  <Check size={12} strokeWidth={3} />
+                                  <span>Đáp án đúng</span>
                                 </span>
                               )}
 
@@ -954,12 +1016,18 @@ export const ExamPage: React.FC = () => {
                                 <span style={{
                                   display: 'inline-flex',
                                   alignItems: 'center',
-                                  gap: 4,
+                                  gap: 3,
                                   fontSize: 11,
                                   fontWeight: 800,
-                                  color: '#dc2626'
+                                  color: '#b91c1c',
+                                  background: '#fee2e2',
+                                  border: '1px solid #fca5a5',
+                                  padding: '2px 6px',
+                                  borderRadius: 4,
+                                  flexShrink: 0
                                 }}>
-                                  <X size={15} strokeWidth={3} />
+                                  <X size={12} strokeWidth={3} />
+                                  <span>Bạn đã chọn</span>
                                 </span>
                               )}
                             </button>
@@ -967,13 +1035,13 @@ export const ExamPage: React.FC = () => {
                         })}
                       </div>
 
-                      {/* BẢNG ĐỐI CHIẾU KẾT QUẢ & LỜI GIẢI CHI TIẾT (HIỂN THỊ TỰ ĐỘNG TẤT CẢ SAU KHI NỘP) */}
+                      {/* BẢNG ĐỐI CHIẾU KẾT QUẢ & LỜI GIẢI CHI TIẾT (HIỂN THỊ TỰ ĐỘNG SAU KHI NỘP) */}
                       {isSubmitted && (
                         <div style={{
-                          marginTop: 14,
-                          background: '#faf8f5',
-                          border: isCorrect ? '1px solid #c6e2ce' : '1px solid #f3d5d2',
-                          borderLeft: isCorrect ? '4px solid #16a34a' : '4px solid #c53d32',
+                          marginTop: 4,
+                          background: isCorrect ? '#f0fdf4' : '#fef2f2',
+                          border: isCorrect ? '1px solid #bbf7d0' : '1px solid #fecaca',
+                          borderLeft: isCorrect ? '4px solid #16a34a' : '4px solid #dc2626',
                           borderRadius: 8,
                           padding: '14px 16px',
                           fontSize: 13,
@@ -998,19 +1066,25 @@ export const ExamPage: React.FC = () => {
                             )}
 
                             {isWrong && (
-                              <div style={{ color: '#b91c1c', display: 'flex', alignItems: 'center', gap: 6 }}>
-                                <AlertCircle size={16} color="#dc2626" />
+                              <div style={{ color: '#b91c1c', display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                                <X size={16} color="#dc2626" strokeWidth={3} />
                                 <span>
-                                  Bạn đã chọn phương án ({userChoice}) — Đáp án chính xác là: <strong style={{ color: '#15803d', textDecoration: 'underline' }}>({q.correctAnswer})</strong>
+                                  Bạn đã chọn sai: <strong style={{ textDecoration: 'line-through' }}>Phương án ({userChoice})</strong> — Đáp án chính xác là:{' '}
+                                  <strong style={{ color: '#15803d', background: '#dcfce7', padding: '1px 6px', borderRadius: 4, border: '1px solid #86efac' }}>
+                                    Phương án ({q.correctAnswer})
+                                  </strong>
                                 </span>
                               </div>
                             )}
 
                             {isUnanswered && (
-                              <div style={{ color: '#b45309', display: 'flex', alignItems: 'center', gap: 6 }}>
-                                <AlertCircle size={16} color="#d97706" />
+                              <div style={{ color: '#b91c1c', display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                                <AlertCircle size={16} color="#dc2626" />
                                 <span>
-                                  Bạn chưa chọn đáp án cho câu này. Đáp án chính xác là: <strong style={{ color: '#15803d', textDecoration: 'underline' }}>({q.correctAnswer})</strong>
+                                  Bạn chưa chọn đáp án cho câu này — Đáp án chính xác là:{' '}
+                                  <strong style={{ color: '#15803d', background: '#dcfce7', padding: '1px 6px', borderRadius: 4, border: '1px solid #86efac' }}>
+                                    Phương án ({q.correctAnswer})
+                                  </strong>
                                 </span>
                               </div>
                             )}
@@ -1025,7 +1099,7 @@ export const ExamPage: React.FC = () => {
                               color: '#334155',
                               lineHeight: 1.6,
                               background: '#ffffff',
-                              border: '1px solid #ebe7df',
+                              border: isCorrect ? '1px solid #dcfce7' : '1px solid #fee2e2',
                               borderRadius: 6,
                               padding: '10px 12px'
                             }}>
@@ -1045,7 +1119,7 @@ export const ExamPage: React.FC = () => {
                               gap: 8,
                               color: '#475569',
                               lineHeight: 1.6,
-                              background: '#f8fafc',
+                              background: '#ffffff',
                               border: '1px solid #e2e8f0',
                               borderRadius: 6,
                               padding: '10px 12px'
@@ -1066,6 +1140,411 @@ export const ExamPage: React.FC = () => {
             </div>
           );
         })}
+        {/* 5. THANH ĐIỀU HƯỚNG / NỘP BÀI CUỐI TRANG */}
+        {!isSubmitted ? (
+          <div style={{
+            marginTop: 20,
+            padding: '20px 24px',
+            background: '#ffffff',
+            borderRadius: 12,
+            border: '1px solid #ebe7df',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: 16,
+            boxShadow: '0 2px 6px rgba(0,0,0,0.02)'
+          }}>
+            <div>
+              <div style={{ fontSize: 16, fontWeight: 800, color: '#1c2536' }}>
+                Đã hoàn thành các câu hỏi của đề thi?
+              </div>
+              <div style={{ fontSize: 13, color: '#78716c', marginTop: 4 }}>
+                Đã trả lời: <strong style={{ color: '#c53d32' }}>{answeredCount}</strong> / {totalQuestionsCount} câu ({progressPercent}%)
+                {countUnansweredQuestions() > 0 && (
+                  <span style={{ color: '#dc2626', marginLeft: 8, fontWeight: 700 }}>
+                    (Còn {countUnansweredQuestions()} câu chưa làm)
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleSubmitExam}
+              style={{
+                padding: '12px 26px',
+                background: '#c53d32',
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: 8,
+                fontWeight: 800,
+                fontSize: 14,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+                boxShadow: '0 4px 12px rgba(197, 61, 50, 0.25)',
+                transition: 'background 0.15s ease'
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = '#9c2a2a'}
+              onMouseLeave={e => e.currentTarget.style.background = '#c53d32'}
+            >
+              <CheckCircle2 size={18} /> Nộp bài chấm điểm
+            </button>
+          </div>
+        ) : (
+          <div style={{
+            marginTop: 20,
+            padding: '20px 24px',
+            background: '#ffffff',
+            borderRadius: 12,
+            border: '1px solid #ebe7df',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: 16,
+            boxShadow: '0 2px 6px rgba(0,0,0,0.02)'
+          }}>
+            <div>
+              <div style={{ fontSize: 16, fontWeight: 800, color: '#1c2536' }}>
+                Bạn đã xem lại xong kết quả bài thi!
+              </div>
+              <div style={{ fontSize: 13, color: '#78716c', marginTop: 4 }}>
+                Đạt <strong style={{ color: scoreResult?.isPassed ? '#15803d' : '#b91c1c' }}>{scoreResult?.correct} / {scoreResult?.total}</strong> câu đúng ({scoreResult?.percentage}%)
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                onClick={handleResetExam}
+                style={{
+                  padding: '10px 18px',
+                  background: '#1c2536',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: 8,
+                  fontWeight: 700,
+                  fontSize: 13,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 6
+                }}
+              >
+                <RotateCcw size={15} /> Làm lại đề này
+              </button>
+              <button
+                type="button"
+                onClick={handleExitExam}
+                style={{
+                  padding: '10px 18px',
+                  background: '#faf8f5',
+                  color: '#57534e',
+                  border: '1px solid #d6d3d1',
+                  borderRadius: 8,
+                  fontWeight: 700,
+                  fontSize: 13,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 6
+                }}
+              >
+                <ChevronLeft size={15} /> Trở về danh mục
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* MODAL XÁC NHẬN NỘP BÀI (THAY THẾ WINDOW.CONFIRM / LOCALHOST SAYS) */}
+        {showSubmitModal && (
+          <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(15, 23, 42, 0.65)',
+            backdropFilter: 'blur(5px)',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 20
+          }}>
+            <div style={{
+              background: '#ffffff',
+              borderRadius: 16,
+              maxWidth: 480,
+              width: '100%',
+              padding: '28px',
+              boxShadow: '0 20px 45px rgba(0, 0, 0, 0.25)',
+              border: '1px solid #ebe7df',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 20,
+              animation: 'kizunaModalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
+            }}>
+              {/* Icon & Title */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                <div style={{
+                  width: 50,
+                  height: 50,
+                  borderRadius: 14,
+                  background: countUnansweredQuestions() > 0 ? '#fef2f2' : '#f0fdf4',
+                  border: countUnansweredQuestions() > 0 ? '1px solid #fecaca' : '1px solid #bbf7d0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}>
+                  {countUnansweredQuestions() > 0 ? (
+                    <AlertCircle size={26} color="#dc2626" />
+                  ) : (
+                    <FileCheck size={26} color="#16a34a" />
+                  )}
+                </div>
+                <div>
+                  <h3 style={{
+                    fontSize: 18,
+                    fontWeight: 800,
+                    color: '#1c2536',
+                    margin: 0,
+                    fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
+                  }}>
+                    Xác nhận nộp bài thi
+                  </h3>
+                  <div style={{ fontSize: 13, color: '#78716c', marginTop: 2 }}>
+                    {activeExam.label} ({activeExam.level})
+                  </div>
+                </div>
+              </div>
+
+              {/* Bảng tóm tắt tiến độ */}
+              <div style={{
+                background: '#faf8f5',
+                border: '1px solid #ebe7df',
+                borderRadius: 10,
+                padding: '14px 16px',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, 1fr)',
+                gap: 12
+              }}>
+                <div>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: '#78716c' }}>TIẾN ĐỘ TRẢ LỜI</div>
+                  <div style={{ fontSize: 18, fontWeight: 900, color: '#16a34a', marginTop: 2 }}>
+                    {answeredCount} <span style={{ fontSize: 12, color: '#78716c' }}>/ {totalQuestionsCount} câu</span>
+                  </div>
+                </div>
+
+                <div>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: '#78716c' }}>THỜI GIAN CÒN LẠI</div>
+                  <div style={{ fontSize: 18, fontWeight: 900, color: secondsRemaining < 300 ? '#dc2626' : '#1c2536', marginTop: 2 }}>
+                    {formatTime(secondsRemaining)}
+                  </div>
+                </div>
+              </div>
+
+              {/* Cảnh báo nếu còn câu chưa làm */}
+              {countUnansweredQuestions() > 0 ? (
+                <div style={{
+                  background: '#fef2f2',
+                  border: '1px solid #fecaca',
+                  borderRadius: 8,
+                  padding: '12px 14px',
+                  fontSize: 13,
+                  color: '#991b1b',
+                  lineHeight: 1.5,
+                  display: 'flex',
+                  gap: 10
+                }}>
+                  <AlertCircle size={18} color="#dc2626" style={{ flexShrink: 0, marginTop: 1 }} />
+                  <div>
+                    Bạn còn <strong style={{ color: '#dc2626' }}>{countUnansweredQuestions()} câu hỏi chưa trả lời</strong>!
+                    Các câu chưa hoàn thành sẽ được tính là 0 điểm. Bạn có chắc chắn muốn nộp bài chấm điểm ngay không?
+                  </div>
+                </div>
+              ) : (
+                <div style={{
+                  background: '#f0fdf4',
+                  border: '1px solid #bbf7d0',
+                  borderRadius: 8,
+                  padding: '12px 14px',
+                  fontSize: 13,
+                  color: '#15803d',
+                  lineHeight: 1.5,
+                  display: 'flex',
+                  gap: 10
+                }}>
+                  <CheckCircle2 size={18} color="#16a34a" style={{ flexShrink: 0, marginTop: 1 }} />
+                  <div>
+                    Bạn đã hoàn thành đủ <strong>{totalQuestionsCount}</strong> câu hỏi. Hãy xác nhận để hệ thống chấm điểm và lưu tiến trình!
+                  </div>
+                </div>
+              )}
+
+              {/* Action Buttons */}
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 4 }}>
+                <button
+                  type="button"
+                  onClick={handleCancelSubmit}
+                  style={{
+                    padding: '10px 18px',
+                    background: '#ffffff',
+                    color: '#57534e',
+                    border: '1px solid #d6d3d1',
+                    borderRadius: 8,
+                    fontWeight: 700,
+                    fontSize: 13,
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease'
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#f5f5f4'}
+                  onMouseLeave={e => e.currentTarget.style.background = '#ffffff'}
+                >
+                  Kiểm tra lại bài
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleConfirmSubmit}
+                  style={{
+                    padding: '10px 22px',
+                    background: '#c53d32',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: 8,
+                    fontWeight: 800,
+                    fontSize: 13,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    boxShadow: '0 2px 8px rgba(197, 61, 50, 0.3)',
+                    transition: 'all 0.15s ease'
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#9c2a2a'}
+                  onMouseLeave={e => e.currentTarget.style.background = '#c53d32'}
+                >
+                  <CheckCircle2 size={16} /> Xác nhận nộp bài
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* MODAL XÁC NHẬN RỜI PHÒNG THI (THAY THẾ WINDOW.CONFIRM / LOCALHOST SAYS) */}
+        {showExitModal && (
+          <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(15, 23, 42, 0.65)',
+            backdropFilter: 'blur(5px)',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 20
+          }}>
+            <div style={{
+              background: '#ffffff',
+              borderRadius: 16,
+              maxWidth: 440,
+              width: '100%',
+              padding: '28px',
+              boxShadow: '0 20px 45px rgba(0, 0, 0, 0.25)',
+              border: '1px solid #ebe7df',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 18,
+              animation: 'kizunaModalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                <div style={{
+                  width: 50,
+                  height: 50,
+                  borderRadius: 14,
+                  background: '#fffbeb',
+                  border: '1px solid #fde68a',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}>
+                  <AlertCircle size={26} color="#d97706" />
+                </div>
+                <div>
+                  <h3 style={{
+                    fontSize: 18,
+                    fontWeight: 800,
+                    color: '#1c2536',
+                    margin: 0,
+                    fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
+                  }}>
+                    Rời khỏi phòng thi?
+                  </h3>
+                  <div style={{ fontSize: 13, color: '#78716c', marginTop: 2 }}>
+                    Bài làm hiện tại chưa được nộp
+                  </div>
+                </div>
+              </div>
+
+              <div style={{
+                background: '#fffbeb',
+                border: '1px solid #fde68a',
+                borderRadius: 8,
+                padding: '12px 14px',
+                fontSize: 13,
+                color: '#92400e',
+                lineHeight: 1.5
+              }}>
+                Bạn đã trả lời được <strong>{answeredCount}</strong> câu hỏi. Nếu rời phòng thi bây giờ, kết quả của lần thi này sẽ không được tính và lưu vào hệ thống.
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 4 }}>
+                <button
+                  type="button"
+                  onClick={() => setShowExitModal(false)}
+                  style={{
+                    padding: '10px 18px',
+                    background: '#ffffff',
+                    color: '#57534e',
+                    border: '1px solid #d6d3d1',
+                    borderRadius: 8,
+                    fontWeight: 700,
+                    fontSize: 13,
+                    cursor: 'pointer'
+                  }}
+                >
+                  Ở lại làm tiếp
+                </button>
+
+                <button
+                  type="button"
+                  onClick={performExit}
+                  style={{
+                    padding: '10px 20px',
+                    background: '#dc2626',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: 8,
+                    fontWeight: 800,
+                    fontSize: 13,
+                    cursor: 'pointer'
+                  }}
+                >
+                  Xác nhận rời đi
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -1079,6 +1558,10 @@ export const ExamPage: React.FC = () => {
         @keyframes kanjiSpin {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
+        }
+        @keyframes kizunaModalIn {
+          from { opacity: 0; transform: scale(0.96) translateY(6px); }
+          to { opacity: 1; transform: scale(1) translateY(0); }
         }
       `}</style>
 
@@ -1483,6 +1966,78 @@ export const ExamPage: React.FC = () => {
               </div>
             );
           })}
+        </div>
+      )}
+
+      {/* MODAL THÔNG BÁO LỖI NẠP ĐỀ (THAY THẾ WINDOW.ALERT / LOCALHOST SAYS) */}
+      {loadErrorMsg && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(15, 23, 42, 0.65)',
+          backdropFilter: 'blur(5px)',
+          zIndex: 9999,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20
+        }}>
+          <div style={{
+            background: '#ffffff',
+            borderRadius: 16,
+            maxWidth: 420,
+            width: '100%',
+            padding: '26px',
+            boxShadow: '0 20px 45px rgba(0, 0, 0, 0.25)',
+            border: '1px solid #ebe7df',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 16,
+            animation: 'kizunaModalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{
+                width: 44,
+                height: 44,
+                borderRadius: 12,
+                background: '#fef2f2',
+                border: '1px solid #fecaca',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0
+              }}>
+                <AlertCircle size={24} color="#dc2626" />
+              </div>
+              <h3 style={{ fontSize: 17, fontWeight: 800, color: '#1c2536', margin: 0 }}>
+                Thông báo
+              </h3>
+            </div>
+            <p style={{ fontSize: 13, color: '#57534e', lineHeight: 1.5, margin: 0 }}>
+              {loadErrorMsg}
+            </p>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 4 }}>
+              <button
+                type="button"
+                onClick={() => setLoadErrorMsg(null)}
+                style={{
+                  padding: '9px 20px',
+                  background: '#1c2536',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: 8,
+                  fontWeight: 700,
+                  fontSize: 13,
+                  cursor: 'pointer'
+                }}
+              >
+                Đã hiểu
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
