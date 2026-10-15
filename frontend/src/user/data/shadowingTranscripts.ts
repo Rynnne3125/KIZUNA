@@ -244,6 +244,166 @@ export const SHADOWING_TRANSCRIPTS: Record<string, TranscriptLine[]> = {
       furigana: 'いいえ、いきませんよ。つぎの にばんせんの かいそくに のってください。',
       vi: 'Không, tàu này không tới đâu. Bạn hãy lên chuyến tàu nhanh ở đường ray số 2 kế tiếp nhé.'
     }
+  ],
+
+  // Video 1283: Buông bỏ cố gắng quá sức để sống đúng mình trong năm 2026
+  '_o31VetEKdk': [
+    {
+      id: 'o1',
+      start: 0,
+      end: 7,
+      speaker: 'Diễn giả',
+      jp: 'いつも周りの期待に応えようと、無理をしすぎていませんか。',
+      furigana: 'いつも まわりの きたいに こたえようと、むりを しすぎていませんか。',
+      vi: 'Bạn có đang cố gồng mình quá mức để đáp ứng kỳ vọng của mọi người xung quanh không?'
+    },
+    {
+      id: 'o2',
+      start: 7,
+      end: 15,
+      speaker: 'Diễn giả',
+      jp: '他人の評価を気にしすぎると、自分自身の本当の望みが見えなくなってしまいます。',
+      furigana: 'たにんの ひょうかを きにしすぎると、じぶんじしんの ほんとうの のぞみが みえなくなってしまいます。',
+      vi: 'Nếu quá bận tâm đến ánh nhìn và đánh giá của người khác, bạn sẽ dần đánh mất những mong muốn thực sự của bản thân.'
+    },
+    {
+      id: 'o3',
+      start: 15,
+      end: 24,
+      speaker: 'Diễn giả',
+      jp: '「断る勇気」を持つことは、自分を大切にするための第一歩です。',
+      furigana: '「ことわる ゆうき」を もつことは、じぶんを たいせつにするための だいいっぽです。',
+      vi: 'Dám có "dũng khí từ chối" chính là bước đi đầu tiên để bạn biết yêu thương và trân trọng chính mình.'
+    },
+    {
+      id: 'o4',
+      start: 24,
+      end: 33,
+      speaker: 'Diễn giả',
+      jp: '今日から少し肩の力を抜いて、深呼吸してみましょう。',
+      furigana: 'きょうから すこし かたの ちからを ぬいて、しんこきゅうしてみましょう。',
+      vi: 'Từ hôm nay, hãy thử thả lỏng đôi vai và hít thở thật sâu bạn nhé.'
+    }
+  ],
+
+  // Video 1282: Quy tắc hẹn hò của người Nhật và cách một mối quan hệ bắt đầu
+  '_n3-vNWpG2o': [
+    {
+      id: 'd1',
+      start: 0,
+      end: 8,
+      speaker: 'Host',
+      jp: '日本では、お付き合いを始める前に「告白」という文化があります。',
+      furigana: 'にほんでは、おつきあいを はじめる まえに「こくはく」という ぶんかが あります。',
+      vi: 'Ở Nhật Bản, có một nét văn hóa đặc trưng trước khi chính thức hẹn hò được gọi là "Kokuhaku" (Tỏ tình).'
+    },
+    {
+      id: 'd2',
+      start: 8,
+      end: 17,
+      speaker: 'Host',
+      jp: '「好きです、付き合ってください」と言葉にして気持ちを伝えることが一般的です。',
+      furigana: '「すきです、つきあってください」と ことばにして きもちを つたえることが いっぱんてきです。',
+      vi: 'Mọi người thường nói rõ cảm xúc của mình thành lời: "Mình thích bạn, xin hãy hẹn hò với mình nhé".'
+    },
+    {
+      id: 'd3',
+      start: 17,
+      end: 26,
+      speaker: 'Host',
+      jp: '初デートでは、清潔感のある服装と時間を守ることがとても大切にされます。',
+      furigana: 'はつデートでは、せいけつかんの ある ふくそうと じかんを まもることが とても たいせつにされます。',
+      vi: 'Trong buổi hẹn hò đầu tiên, trang phục gọn gàng lịch sự và việc đúng giờ là điều vô cùng được coi trọng.'
+    },
+    {
+      id: 'd4',
+      start: 26,
+      end: 36,
+      speaker: 'Host',
+      jp: '相手のペースを尊重しながら、少しずつ信頼関係を築いていきましょう。',
+      furigana: 'あいての ペースを そんちょうしながら、すこしずつ しんらいかんけいを きずいていきましょう。',
+      vi: 'Hãy tôn trọng nhịp độ của đối phương và cùng nhau xây dựng mối quan hệ tin cậy từng chút một.'
+    }
+  ],
+
+  // Video 1281: Mô phỏng phỏng vấn xin việc: Cách trả lời tự tin
+  '_jMbSCUCmQE': [
+    {
+      id: 'iv1',
+      start: 0,
+      end: 8,
+      speaker: 'Người phỏng vấn',
+      jp: '本日はお時間をいただき、ありがとうございます。まず自己紹介をお願いできますか。',
+      furigana: 'ほんじつは おじかんを いただき、ありがとうございます。まず じこしょうかいを おねがいできますか。',
+      vi: 'Rất cảm ơn bạn đã dành thời gian hôm nay. Trước tiên bạn có thể tự giới thiệu ngắn gọn về bản thân được không?'
+    },
+    {
+      id: 'iv2',
+      start: 8,
+      end: 18,
+      speaker: 'Ứng viên',
+      jp: 'はい、グエン・ヴァン・Aと申します。大学では情報工学を専攻し、日本語の勉強を３年間続けてまいりました。',
+      furigana: 'はい、グエン・ヴァン・Aともうします。だいがくでは じょうほうこうがくを せんこうし、にほんごの べんきょうを さんねんかん つづけてまいりました。',
+      vi: 'Dạ vâng, tôi tên là Nguyễn Văn A. Ở trường đại học tôi theo học chuyên ngành công nghệ thông tin và đã kiên trì học tiếng Nhật suốt 3 năm qua.'
+    },
+    {
+      id: 'iv3',
+      start: 18,
+      end: 28,
+      speaker: 'Người phỏng vấn',
+      jp: '弊社のどのような事業に最も関心をお持ちでしょうか。',
+      furigana: 'へいしゃの どのような じぎょうに もっとも かんしんを おもちでしょうか。',
+      vi: 'Bạn quan tâm nhiều nhất đến mảng kinh doanh nào của công ty chúng tôi?'
+    },
+    {
+      id: 'iv4',
+      start: 28,
+      end: 38,
+      speaker: 'Ứng viên',
+      jp: '御社が推進されているクラウドソリューションの開発に、自身のスキルを活かして貢献したいと考えております。',
+      furigana: 'おんしゃが すいしんされている クラウドソリューションの かいはつに、じしんの スキルを いかして こうけんしたいと かんがえております。',
+      vi: 'Tôi rất mong muốn được vận dụng năng lực của mình để đóng góp vào việc phát triển các giải pháp điện toán đám mây mà quý công ty đang xúc tiến.'
+    }
+  ],
+
+  // Video 1280: Luyện nghe tiếng Nhật 15 phút mỗi ngày qua hội thoại thực tế
+  '_enUSao6gg4': [
+    {
+      id: 'en1',
+      start: 0,
+      end: 7,
+      speaker: 'Host',
+      jp: 'リスニング力を伸ばす一番の秘訣は、毎日の「習慣化」にあります。',
+      furigana: 'リスニングりょくを のばす いちばんの ひけつは、まいにちの「しゅうかんか」に あります。',
+      vi: 'Bí quyết số một để nâng cao khả năng nghe hiểu chính là "biến nó thành thói quen" mỗi ngày.'
+    },
+    {
+      id: 'en2',
+      start: 7,
+      end: 15,
+      speaker: 'Host',
+      jp: '通勤時間や家事の合間に、短い会話音声を流し聴きすることから始めましょう。',
+      furigana: 'つうきん じかんや かじの あいまに、みじかい かいわ おんせいを ながしぎきすることから はじめましょう。',
+      vi: 'Trong thời gian đi làm hoặc giữa lúc làm việc nhà, hãy bắt đầu bằng việc nghe các đoạn hội thoại ngắn.'
+    },
+    {
+      id: 'en3',
+      start: 15,
+      end: 24,
+      speaker: 'Host',
+      jp: '聞き取れなかった単語はすぐにメモして、その日のうちに復習するのがコツです。',
+      furigana: 'ききとれなかった たんごは すぐに メモして、その ひの うちに ふくしゅうするのが コツです。',
+      vi: 'Mẹo nhỏ là hãy ghi chú lại ngay những từ chưa nghe rõ và ôn lại chúng ngay trong ngày.'
+    },
+    {
+      id: 'en4',
+      start: 24,
+      end: 34,
+      speaker: 'Host',
+      jp: '１ヶ月後には、以前よりも自然と日本語が耳に入ってくるのを実感できるはずです。',
+      furigana: 'いっかげつごには、いぜんよりも しぜんと にほんごが みみに はいってくるのを じっかんできるはずです。',
+      vi: 'Chắc chắn sau một tháng, bạn sẽ cảm nhận được tiếng Nhật đi vào tai mình một cách tự nhiên hơn rất nhiều.'
+    }
   ]
 };
 
