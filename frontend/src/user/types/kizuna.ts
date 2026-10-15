@@ -221,3 +221,34 @@ export interface Exam {
   createdAt?: string;
   questionSets?: QuestionSet[];
 }
+
+export interface VideoLesson {
+  id: string;
+  video_id?: string;
+  originalId?: number;
+  title: string;
+  titleEn?: string;
+  jlptLevel: string;
+  category: string;
+  channelName: string;
+  youtubeVideoId: string;
+  youtubeUrl: string;
+  thumbnailUrl: string;
+  durationSeconds: number;
+  segmentCount?: number;
+  createdAt?: string;
+}
+
+export interface ChoukaiAudioItem {
+  id: string;
+  label: string;
+  level: string;
+  year?: number;
+  month?: number;
+  audioUrl: string;
+  durationMinutes: number;
+  totalQuestions?: number;
+  actualQuestionCount?: number;
+  listeningSetsCount?: number;
+  questionSets?: QuestionSet[];
+}

@@ -990,7 +990,13 @@ export const ExamPage: React.FC = () => {
                               </span>
 
                               <span style={{ flex: 1, fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif" }}>
-                                {opt.value}
+                                {opt.value ? (
+                                  opt.value
+                                ) : (
+                                  <span style={{ color: '#94a3b8', fontStyle: 'italic', fontSize: 13 }}>
+                                    Phương án ({opt.id})
+                                  </span>
+                                )}
                               </span>
 
                               {isSubmitted && isOfficialCorrect && (
