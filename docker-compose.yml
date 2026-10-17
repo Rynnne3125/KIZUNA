@@ -1,0 +1,28 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: kizuna-backend
+    restart: always
+    environment:
+      - SERVER_PORT=3000
+    networks:
+      - kizuna-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: kizuna-frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - kizuna-net
+
+networks:
+  kizuna-net:
+    driver: bridge
