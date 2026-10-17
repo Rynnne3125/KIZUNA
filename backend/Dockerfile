@@ -5,6 +5,7 @@ WORKDIR /app
 COPY gradlew .
 COPY gradle ./gradle
 COPY build.gradle settings.gradle gradle.properties ./
+RUN sed -i '/org.gradle.java.installations.paths/d' gradle.properties || true
 RUN sed -i 's/\r$//' gradlew && chmod +x gradlew && ./gradlew dependencies --no-daemon || true
 
 COPY src ./src
