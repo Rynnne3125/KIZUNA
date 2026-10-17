@@ -79,3 +79,7 @@ frontend/.env.local
 frontend/.env.*.local
 
 
+
+### Security & SSH Keys ###
+*.pem
+*.key
