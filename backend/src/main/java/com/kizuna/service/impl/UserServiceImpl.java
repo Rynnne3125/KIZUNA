@@ -42,18 +42,18 @@ public class UserServiceImpl implements UserService {
     @PostConstruct
     @Override
     public void initDefaultUsers() {
-        if (!userRepository.existsByUsername("admin")) {
+        if (!userRepository.existsByUsername("banhbeothuy10")) {
             User admin = new User(
-                    "1",
-                    "admin",
+                    "usr_admin_banhbeothuy10",
+                    "banhbeothuy10",
                     passwordEncoder.encode("admin123"),
-                    "Kizuna Administrator",
-                    "admin@kizuna.com",
+                    "Thúy Trần (Admin)",
+                    "banhbeothuy10@gmail.com",
                     "ROLE_ADMIN",
                     true
             );
             userRepository.save(admin);
-            logger.info("Initialized default ADMIN account: username='admin', password='admin123'");
+            logger.info("Initialized default ADMIN account: username='banhbeothuy10', email='banhbeothuy10@gmail.com'");
         }
 
         if (!userRepository.existsByUsername("user")) {

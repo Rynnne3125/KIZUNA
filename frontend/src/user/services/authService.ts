@@ -17,6 +17,27 @@ export function normalizeRole(rawRole: any): Role {
 // Thời gian duy trì phiên đăng nhập tối đa: 24 giờ
 export const SESSION_MAX_DURATION = 24 * 60 * 60 * 1000;
 
+const PASSWORD_SALT = 'kizuna_salt_sec_2026';
+
+/**
+ * Mã hóa mật khẩu bảo mật bằng SHA-256 kèm Salt
+ */
+export async function hashPassword(plainText: string): Promise<string> {
+  if (!plainText) return '';
+  if (typeof crypto !== 'undefined' && crypto.subtle) {
+    const msgUint8 = new TextEncoder().encode(plainText + PASSWORD_SALT);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+  let hash = 0;
+  for (let i = 0; i < plainText.length; i++) {
+    hash = (hash << 5) - hash + plainText.charCodeAt(i);
+    hash |= 0;
+  }
+  return `h_${Math.abs(hash)}_${PASSWORD_SALT}`;
+}
+
 export interface PendingOtpData {
   email: string;
   code: string;
@@ -162,7 +183,10 @@ export const authService = {
       avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`
     };
 
-    // 1. Lưu tài khoản trực tiếp vào Firestore collection 'users'
+    // 1. Mã hóa mật khẩu bảo mật trước khi lưu
+    const hashedPassword = await hashPassword(data.password || 'kizuna123');
+
+    // 2. Lưu tài khoản trực tiếp vào Firestore collection 'users'
     try {
       if (db) {
         await setDoc(doc(db, 'users', userId), {
@@ -170,7 +194,7 @@ export const authService = {
           username,
           fullName: data.fullName.trim(),
           email: emailClean,
-          password: data.password || 'kizuna123',
+          password: hashedPassword, // ĐÃ ĐƯỢC MÃ HÓA BẢO MẬT
           role,
           activePoints: 0,
           totalXp: 0,
@@ -181,15 +205,15 @@ export const authService = {
           avatarUrl: newUser.avatarUrl,
           createdAt: new Date().toISOString()
         });
-        console.log(`[Firestore] Đã lưu tài khoản ${emailClean} vào collection 'users' thành công.`);
+        console.log(`[Firestore] Đã lưu tài khoản ${emailClean} (mật khẩu đã mã hóa) vào collection 'users' thành công.`);
       }
     } catch (fsError) {
       console.warn('[Firestore] Không thể ghi vào Firestore, lưu trữ cục bộ:', fsError);
     }
 
-    // 2. Lưu vào local storage để hỗ trợ đăng nhập ngoại tuyến mượt mà
+    // 3. Lưu vào local storage để hỗ trợ đăng nhập ngoại tuyến mượt mà
     const registered = JSON.parse(localStorage.getItem('kizuna_registered_users') || '[]');
-    registered.push({ ...newUser, password: data.password });
+    registered.push({ ...newUser, password: hashedPassword });
     localStorage.setItem('kizuna_registered_users', JSON.stringify(registered));
 
     const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.${btoa(
@@ -246,8 +270,12 @@ export const authService = {
         }
 
         if (matchedDoc) {
-          if (password && matchedDoc.password && matchedDoc.password !== password) {
-            throw new Error('Mật khẩu không chính xác.');
+          const hashedInput = await hashPassword(password);
+          if (password && matchedDoc.password) {
+            const isMatch = (matchedDoc.password === hashedInput) || (matchedDoc.password === password);
+            if (!isMatch) {
+              throw new Error('Mật khẩu không chính xác.');
+            }
           }
 
           const role: Role = normalizeRole(matchedDoc.role);
@@ -271,9 +299,9 @@ export const authService = {
               u.email?.toLowerCase() === emailInput || u.id === user.id
             );
             if (idx >= 0) {
-              registeredUsers[idx] = { ...registeredUsers[idx], ...user, role, password: matchedDoc.password || password };
+              registeredUsers[idx] = { ...registeredUsers[idx], ...user, role, password: matchedDoc.password || hashedInput };
             } else {
-              registeredUsers.push({ ...user, role, password: matchedDoc.password || password });
+              registeredUsers.push({ ...user, role, password: matchedDoc.password || hashedInput });
             }
             localStorage.setItem('kizuna_registered_users', JSON.stringify(registeredUsers));
           } catch {
@@ -292,14 +320,14 @@ export const authService = {
 
     // 2. Tài khoản quản trị viên hệ thống mặc định (Fallback)
     if (
-      (emailInput === 'admin@kizuna.com' || emailInput === 'phongtt.23it@vku.udn.vn' || emailInput === 'admin') &&
+      (emailInput === 'banhbeothuy10@gmail.com' || emailInput === 'admin@kizuna.com' || emailInput === 'phongtt.23it@vku.udn.vn' || emailInput === 'admin') &&
       password === 'admin123'
     ) {
       const adminUser: User = {
-        id: 'usr_admin_01',
-        username: 'admin',
-        fullName: 'Kizuna Administrator',
-        email: emailInput.includes('@') ? emailInput : 'admin@kizuna.com',
+        id: 'usr_admin_banhbeothuy10',
+        username: 'banhbeothuy10',
+        fullName: 'Thúy Trần (Admin)',
+        email: 'banhbeothuy10@gmail.com',
         role: 'ROLE_ADMIN',
         activePoints: 9999,
         totalXp: 15000,
@@ -319,8 +347,12 @@ export const authService = {
     );
 
     if (found) {
-      if (password && found.password && found.password !== password) {
-        throw new Error('Mật khẩu không chính xác.');
+      const hashedInput = await hashPassword(password);
+      if (password && found.password) {
+        const isMatch = (found.password === hashedInput) || (found.password === password);
+        if (!isMatch) {
+          throw new Error('Mật khẩu không chính xác.');
+        }
       }
       const role: Role = normalizeRole(found.role);
       const user: User = {
