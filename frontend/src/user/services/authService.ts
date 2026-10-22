@@ -2,6 +2,7 @@ import { User, Role, LoginCredentials, RegisterData } from '../types/auth';
 import { db } from '../../config/firebase';
 import { doc, setDoc, collection, getDocs, getDoc, query, where, limit } from 'firebase/firestore';
 import { emailService, OFFICIAL_SENDER_EMAIL } from './emailService';
+import { validateEmail, validatePassword } from '../utils/authValidation';
 
 const TOKEN_KEY = 'kizuna_token';
 const USER_KEY = 'kizuna_user';
@@ -104,6 +105,10 @@ export const authService = {
    * Không trả mã OTP về cho client UI hiển thị để đảm bảo tính bảo mật thực thụ
    */
   async sendRegistrationOtp(email: string, fullName: string): Promise<{ success: boolean; sender: string; message: string }> {
+    const emailCheck = validateEmail(email);
+    if (!emailCheck.isValid) {
+      throw new Error(emailCheck.error || 'Địa chỉ email không hợp lệ.');
+    }
     const sender = OFFICIAL_SENDER_EMAIL;
     // Sinh mã ngẫu nhiên 6 chữ số
     const code = Math.floor(100000 + Math.random() * 900000).toString();
@@ -165,6 +170,14 @@ export const authService = {
    * Đăng ký tài khoản và lưu trực tiếp vào Firestore collection 'users'
    */
   async register(data: RegisterData): Promise<{ user: User; token: string }> {
+    const emailCheck = validateEmail(data.email);
+    if (!emailCheck.isValid) {
+      throw new Error(emailCheck.error || 'Địa chỉ email không hợp lệ.');
+    }
+    const pwdCheck = validatePassword(data.password || '');
+    if (!pwdCheck.isValid) {
+      throw new Error(pwdCheck.error || 'Mật khẩu chưa đáp ứng tiêu chuẩn bảo mật.');
+    }
     const role: Role = data.role || 'ROLE_USER';
     const emailClean = data.email.trim().toLowerCase();
     const username = data.username?.trim() || emailClean.split('@')[0];

@@ -5,10 +5,12 @@ import { Input } from '@/admin/components/ui/input';
 import { Label } from '@/admin/components/ui/label';
 import { 
   Mail, Lock, User, LogIn, UserPlus, Star, 
-  CheckCircle2, ArrowRight, RefreshCw, KeyRound, Sparkles, AlertCircle, MailCheck
+  CheckCircle2, ArrowRight, RefreshCw, KeyRound, Sparkles, AlertCircle, MailCheck,
+  Eye, EyeOff, Check
 } from 'lucide-react';
 import { authService } from '../services/authService';
 import { User as KizunaUser } from '../types/auth';
+import { validateEmail, validatePassword } from '../utils/authValidation';
 
 export interface LoginPageProps {
   onLoginSuccess: (user: KizunaUser) => void;
@@ -69,11 +71,14 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
 
   // Form states - Register
   const [regFullName, setRegFullName] = useState('');
   const [regEmail, setRegEmail] = useState('');
   const [regPassword, setRegPassword] = useState('');
+  const [showRegPassword, setShowRegPassword] = useState(false);
+  const regPasswordCheck = validatePassword(regPassword);
   const [regStep, setRegStep] = useState<'FORM' | 'OTP'>('FORM');
   const [otpCode, setOtpCode] = useState('');
   const [resendCooldown, setResendCooldown] = useState(0);
@@ -92,6 +97,12 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
     e.preventDefault();
     if (!loginEmail.trim() || !loginPassword.trim()) {
       setError('Vui lòng nhập đầy đủ địa chỉ Email và Mật khẩu.');
+      return;
+    }
+
+    const emailCheck = validateEmail(loginEmail);
+    if (!emailCheck.isValid) {
+      setError(emailCheck.error || 'Địa chỉ email không đúng định dạng.');
       return;
     }
 
@@ -128,16 +139,18 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(regEmail.trim())) {
-      setError('Định dạng email không hợp lệ. Vui lòng nhập đúng email (ví dụ: name@example.com).');
+    const emailCheck = validateEmail(regEmail);
+    if (!emailCheck.isValid) {
+      setError(emailCheck.error || 'Định dạng email không hợp lệ. Vui lòng nhập đúng email (ví dụ: name@gmail.com).');
       return;
     }
 
-    if (regPassword.length < 6) {
-      setError('Mật khẩu phải chứa tối thiểu 6 ký tự để đảm bảo an toàn.');
+    const pwdCheck = validatePassword(regPassword);
+    if (!pwdCheck.isValid) {
+      setError(pwdCheck.error || 'Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt (!@#$%...).');
       return;
     }
+
 
     setLoading(true);
 
@@ -184,6 +197,18 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
     const verifyRes = authService.verifyOtp(regEmail, cleanOtp);
     if (!verifyRes.valid) {
       setError(verifyRes.error || 'Mã OTP không chính xác hoặc đã hết hạn.');
+      return;
+    }
+
+    const emailCheck = validateEmail(regEmail);
+    if (!emailCheck.isValid) {
+      setError(emailCheck.error || 'Địa chỉ email không hợp lệ.');
+      return;
+    }
+
+    const pwdCheck = validatePassword(regPassword);
+    if (!pwdCheck.isValid) {
+      setError(pwdCheck.error || 'Mật khẩu chưa đủ điều kiện bảo mật.');
       return;
     }
 
@@ -256,6 +281,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                   setError(null); 
                   setSuccessMsg(null); 
                   setRegStep('FORM');
+                  setShowLoginPassword(false);
+                  setShowRegPassword(false);
                 }}
                 className={`flex-1 py-2.5 rounded-2xl text-sm font-bold transition-all cursor-pointer ${
                   isLoginMode 
@@ -271,6 +298,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                   setIsLoginMode(false); 
                   setError(null); 
                   setSuccessMsg(null); 
+                  setShowLoginPassword(false);
+                  setShowRegPassword(false);
                 }}
                 className={`flex-1 py-2.5 rounded-2xl text-sm font-bold transition-all cursor-pointer ${
                   !isLoginMode 
@@ -353,7 +382,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                         <Lock className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400 group-focus-within:text-emerald-600 transition-colors" />
                         <Input 
                           id="login-password" 
-                          type="password" 
+                          type={showLoginPassword ? 'text' : 'password'} 
                           name="login_password"
                           autoComplete="current-password"
                           value={loginPassword} 
@@ -362,8 +391,23 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                           onBlur={() => setIsPasswordFocused(false)} 
                           required 
                           placeholder="••••••••" 
-                          className="pl-10 h-11 bg-white border-slate-200 hover:border-emerald-300 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl transition-all" 
+                          className="pl-10 pr-11 h-11 bg-white border-slate-200 hover:border-emerald-300 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl transition-all" 
                         />
+                        <button
+                          type="button"
+                          onMouseDown={e => e.preventDefault()}
+                          onClick={() => setShowLoginPassword(prev => !prev)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-emerald-600 focus:outline-none transition-colors cursor-pointer p-1 rounded-lg"
+                          title={showLoginPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
+                          aria-label={showLoginPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
+                          tabIndex={-1}
+                        >
+                          {showLoginPassword ? (
+                            <EyeOff className="w-4 h-4" />
+                          ) : (
+                            <Eye className="w-4 h-4" />
+                          )}
+                        </button>
                       </div>
                     </div>
 
@@ -436,11 +480,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                           value={regEmail}
                           onChange={e => setRegEmail(e.target.value)}
                           required 
-                          placeholder="name@example.com" 
+                          placeholder="tenban@gmail.com" 
                           className="pl-10 h-10 bg-white border-slate-200 hover:border-emerald-300 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl" 
                         />
                       </div>
-                      <p className="text-[11px] text-slate-500">Dùng để nhận mã xác thực kích hoạt tài khoản.</p>
+                      <p className="text-[11px] text-slate-500">Chỉ gửi mã OTP khi email đúng định dạng (có @, tên miền hợp lệ như @gmail.com).</p>
                     </div>
 
                     <div className="space-y-1 group">
@@ -451,7 +495,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                         <Lock className="absolute left-3.5 top-3 h-4 w-4 text-slate-400 group-focus-within:text-emerald-600" />
                         <Input 
                           id="reg-pass" 
-                          type="password" 
+                          type={showRegPassword ? 'text' : 'password'} 
                           name="reg_password"
                           autoComplete="new-password"
                           value={regPassword} 
@@ -459,9 +503,58 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                           onFocus={() => setIsPasswordFocused(true)} 
                           onBlur={() => setIsPasswordFocused(false)} 
                           required 
-                          placeholder="Tối thiểu 6 ký tự" 
-                          className="pl-10 h-10 bg-white border-slate-200 hover:border-emerald-300 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl" 
+                          placeholder="Tối thiểu 8 ký tự (Hoa, thường, số, ký tự đặc biệt)" 
+                          className="pl-10 pr-11 h-10 bg-white border-slate-200 hover:border-emerald-300 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl" 
                         />
+                        <button
+                          type="button"
+                          onMouseDown={e => e.preventDefault()}
+                          onClick={() => setShowRegPassword(prev => !prev)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-emerald-600 focus:outline-none transition-colors cursor-pointer p-1 rounded-lg"
+                          title={showRegPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
+                          aria-label={showRegPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
+                          tabIndex={-1}
+                        >
+                          {showRegPassword ? (
+                            <EyeOff className="w-4 h-4" />
+                          ) : (
+                            <Eye className="w-4 h-4" />
+                          )}
+                        </button>
+                      </div>
+
+                      {/* Checklist điều kiện mật khẩu khi đăng ký */}
+                      <div className="pt-1.5 space-y-1 bg-slate-50/80 p-2.5 rounded-xl border border-slate-200/60 text-xs">
+                        <div className="text-[11px] font-semibold text-slate-600 flex items-center justify-between">
+                          <span>Yêu cầu mật khẩu:</span>
+                          {regPassword.length > 0 && (
+                            <span className={regPasswordCheck.isValid ? "text-emerald-600 font-bold flex items-center gap-1" : "text-amber-600 font-medium"}>
+                              {regPasswordCheck.isValid ? "✓ Đã đạt tiêu chuẩn" : "Chưa đủ điều kiện"}
+                            </span>
+                          )}
+                        </div>
+                        <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-[11px]">
+                          <div className={`flex items-center gap-1.5 ${regPasswordCheck.criteria.minLength ? 'text-emerald-700 font-semibold' : 'text-slate-500'}`}>
+                            {regPasswordCheck.criteria.minLength ? <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 stroke-[3]" /> : <div className="w-1.5 h-1.5 rounded-full bg-slate-300 ml-1 mr-1 shrink-0" />}
+                            <span>Tối thiểu 8 ký tự</span>
+                          </div>
+                          <div className={`flex items-center gap-1.5 ${regPasswordCheck.criteria.hasUpper ? 'text-emerald-700 font-semibold' : 'text-slate-500'}`}>
+                            {regPasswordCheck.criteria.hasUpper ? <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 stroke-[3]" /> : <div className="w-1.5 h-1.5 rounded-full bg-slate-300 ml-1 mr-1 shrink-0" />}
+                            <span>Chữ in hoa (A-Z)</span>
+                          </div>
+                          <div className={`flex items-center gap-1.5 ${regPasswordCheck.criteria.hasLower ? 'text-emerald-700 font-semibold' : 'text-slate-500'}`}>
+                            {regPasswordCheck.criteria.hasLower ? <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 stroke-[3]" /> : <div className="w-1.5 h-1.5 rounded-full bg-slate-300 ml-1 mr-1 shrink-0" />}
+                            <span>Chữ thường (a-z)</span>
+                          </div>
+                          <div className={`flex items-center gap-1.5 ${regPasswordCheck.criteria.hasNumber ? 'text-emerald-700 font-semibold' : 'text-slate-500'}`}>
+                            {regPasswordCheck.criteria.hasNumber ? <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 stroke-[3]" /> : <div className="w-1.5 h-1.5 rounded-full bg-slate-300 ml-1 mr-1 shrink-0" />}
+                            <span>Chữ số (0-9)</span>
+                          </div>
+                          <div className={`flex items-center gap-1.5 col-span-2 ${regPasswordCheck.criteria.hasSpecial ? 'text-emerald-700 font-semibold' : 'text-slate-500'}`}>
+                            {regPasswordCheck.criteria.hasSpecial ? <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 stroke-[3]" /> : <div className="w-1.5 h-1.5 rounded-full bg-slate-300 ml-1 mr-1 shrink-0" />}
+                            <span>Ký tự đặc biệt (!@#$%^&*...)</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
 

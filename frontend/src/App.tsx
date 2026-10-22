@@ -13,6 +13,8 @@ import { LibraryPage } from './user/pages/LibraryPage';
 import { ExamPage } from './user/pages/ExamPage';
 import { ProfilePage } from './user/pages/ProfilePage';
 import { AdminDashboardPage } from './admin/pages/AdminDashboardPage';
+import { Smartphone } from 'lucide-react';
+import { ApkDownloadModal } from './user/components/ApkDownloadModal';
 
 export default function App() {
   // Lấy người dùng từ session được lưu trong localStorage (tối đa 24h)
@@ -23,6 +25,9 @@ export default function App() {
     const current = authService.getCurrentUser();
     return current?.role === 'ROLE_ADMIN' ? 'admin' : 'home';
   });
+
+  // Trạng thái mở modal tải APK
+  const [isApkModalOpen, setIsApkModalOpen] = useState(false);
 
   // Đồng bộ quyền mới nhất từ Firestore khi mở ứng dụng (đảm bảo quyền mới sửa trên console ăn ngay)
   useEffect(() => {
@@ -119,11 +124,39 @@ export default function App() {
         onTabChange={handleTabChange}
         user={user}
         onLogout={handleLogout}
+        onOpenApkModal={() => setIsApkModalOpen(true)}
       />
 
       {/* KHU VỰC NỘI DUNG CHÍNH */}
       <div className="flex-1 flex flex-col min-w-0 pb-18 lg:pb-0">
         
+        {/* TOPBAR TRÊN MÁY TÍNH (DESKTOP TOPBAR) */}
+        <header className="hidden lg:flex items-center justify-between px-8 py-3 bg-white/80 backdrop-blur-md border-b border-emerald-100/70 sticky top-0 z-20 shadow-2xs">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 text-xs font-semibold text-slate-600">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>KIZUNA 絆 — Học tiếng Nhật thông minh chuẩn bản xứ</span>
+            </div>
+            <span className="text-slate-300">•</span>
+            <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-100">
+              Bậc: {user.level || 'Tân binh'}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            {/* Nút tải APK ở Topbar Desktop */}
+            <button
+              onClick={() => setIsApkModalOpen(true)}
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white text-xs font-extrabold shadow-sm shadow-emerald-600/20 active:scale-95 transition-all cursor-pointer"
+              title="Tải ứng dụng KIZUNA cho điện thoại Android"
+            >
+              <Smartphone className="w-4 h-4 text-emerald-200" />
+              <span>Tải Bản App APK</span>
+              <span className="bg-white/20 text-[10px] px-1.5 py-0.2 rounded-md font-extrabold">v1.0.4</span>
+            </button>
+          </div>
+        </header>
+
         <main className="flex-1 p-3.5 sm:p-6 lg:p-8 max-w-6xl w-full mx-auto">
           {activeTab === 'home' && (
             <HomePage
@@ -160,6 +193,12 @@ export default function App() {
         </footer>
 
       </div>
+
+      {/* MODAL TẢI BẢN APP APK CHO ĐIỆN THOẠI */}
+      <ApkDownloadModal
+        isOpen={isApkModalOpen}
+        onClose={() => setIsApkModalOpen(false)}
+      />
 
     </div>
   );
