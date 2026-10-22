@@ -27,9 +27,9 @@ export const emailService = {
    * Gửi mã OTP xác thực thực tế đến địa chỉ email của học viên
    */
   async sendOtpEmail({ toEmail, toName, otpCode }: SendOtpParams): Promise<SendOtpResult> {
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_ybngdt7';
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_jaiwasw';
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'Xkli86D5s3DEZjE-X';
 
     // 1. Gửi qua EmailJS Cloud nếu đã thiết lập các biến trong frontend/.env
     if (serviceId && templateId && publicKey) {
