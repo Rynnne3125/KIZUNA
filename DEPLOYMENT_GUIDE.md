@@ -10,7 +10,8 @@ Tài liệu này lưu lại toàn bộ quy trình thiết lập, vận hành và
 * **Public IP cố định (Elastic IP):** `15.135.17.96`
 * **User đăng nhập:** `ubuntu`
 * **File khóa bí mật (SSH Key):** `backend/src/main/resources/kizuna-key.pem`
-* **Link website:** `http://15.135.17.96`
+* **Tên miền chính thức (HTTPS Bảo mật):** `https://kizuna-thanhphongit.duckdns.org`
+* **Tự động chuyển hướng:** Mọi truy cập HTTP `http://kizuna-thanhphongit.duckdns.org` tự động chuyển sang `https://...`
 * **GitHub Repository:** `https://github.com/Rynnne3125/KIZUNA.git` (Nhánh: `develop`)
 
 ---
