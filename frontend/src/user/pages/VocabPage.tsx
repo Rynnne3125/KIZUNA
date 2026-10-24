@@ -18,11 +18,12 @@ import { VocabularyItem, VocabularyBook, VocabularyUnit, VocabularyCatalog } fro
 import { VOCABULARY_CATALOG } from '../data/vocabularyCatalog';
 
 type JlptLevelKey = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
-// 3 Chế độ học chuẩn hóa đồng bộ với Kanji và Ngữ Pháp:
+// 4 Chế độ học tập hoàn chỉnh:
 // 0: Danh sách từ vựng (List)
 // 1: Ôn tập (Flip - Flashcard lật 3D SRS & Vuốt chạm mobile)
-// 2: Luyện ghi nhớ (Quiz - Trắc nghiệm 4 đáp án)
-type StudyMode = 'list' | 'flip' | 'quiz';
+// 2: Luyện ghi nhớ (Quiz - Trắc nghiệm 4 đáp án chọn nghĩa từ)
+// 3: Gõ ghi nhớ (Typing - Nhìn chữ Hán/Từ vựng gõ cách đọc Hiragana)
+type StudyMode = 'list' | 'flip' | 'quiz' | 'typing';
 
 // Phân cấp danh xưng tiếng Nhật truyền thống cho từng bậc N
 const LEVEL_LABELS: Record<JlptLevelKey, { kanji: string; vi: string; desc: string }> = {
@@ -143,6 +144,18 @@ export const VocabPage: React.FC = () => {
   const [quizCorrectCount, setQuizCorrectCount] = useState(0);
   const [quizFinished, setQuizFinished] = useState(false);
 
+  // --- State Chế độ 3: Gõ Ghi Nhớ (Nhập Hiragana) ---
+  const [typingStudyList, setTypingStudyList] = useState<VocabularyItem[]>([]);
+  const [typingActiveIndex, setTypingActiveIndex] = useState(0);
+  const [typingInput, setTypingInput] = useState('');
+  const [typingAnswerChecked, setTypingAnswerChecked] = useState(false);
+  const [typingIsCorrect, setTypingIsCorrect] = useState(false);
+  const [typingIsSkipped, setTypingIsSkipped] = useState(false);
+  const [typingWrongItems, setTypingWrongItems] = useState<VocabularyItem[]>([]);
+  const [typingSkippedItems, setTypingSkippedItems] = useState<VocabularyItem[]>([]);
+  const [typingCorrectCount, setTypingCorrectCount] = useState(0);
+  const [typingFinished, setTypingFinished] = useState(false);
+
   const shuffleArray = <T,>(array: T[]): T[] => {
     const arr = [...array];
     for (let i = arr.length - 1; i > 0; i--) {
@@ -228,6 +241,18 @@ export const VocabPage: React.FC = () => {
         setQuizSkippedQuestions([]);
         setQuizCorrectCount(0);
         setQuizFinished(false);
+
+        // Reset Dạng 3: Gõ ghi nhớ
+        setTypingStudyList(studyWords);
+        setTypingActiveIndex(0);
+        setTypingInput('');
+        setTypingAnswerChecked(false);
+        setTypingIsCorrect(false);
+        setTypingIsSkipped(false);
+        setTypingWrongItems([]);
+        setTypingSkippedItems([]);
+        setTypingCorrectCount(0);
+        setTypingFinished(false);
       } catch (err) {
         console.error('Lỗi tải từ vựng:', err);
       } finally {
@@ -350,7 +375,6 @@ export const VocabPage: React.FC = () => {
     const diffX = currentX - touchStartX;
     const diffY = currentY - touchStartY;
 
-    // Chỉ thực hiện kéo thẻ khi thao tác người dùng theo phương ngang
     if (Math.abs(diffX) > Math.abs(diffY)) {
       const damp = Math.abs(diffX) > 130 ? 130 + (Math.abs(diffX) - 130) * 0.25 : Math.abs(diffX);
       setDragX(diffX < 0 ? -damp : damp);
@@ -368,20 +392,16 @@ export const VocabPage: React.FC = () => {
     setTouchStartX(null);
     setTouchStartY(null);
 
-    // Chạm nhanh không kéo đáng kể (< 14px và < 300ms) -> Lật thẻ 3D
     if (absDistance < 14 && duration < 300) {
       handleFlipCard();
       return;
     }
 
-    // Ngưỡng vuốt thẻ qua trái / phải
     const isSwipe = absDistance > 55 || (absDistance > 30 && duration < 250);
     if (isSwipe) {
       if (distance > 0) {
-        // Vuốt sang phải -> Đã thuộc
         handleMarkFlipResult(true);
       } else {
-        // Vuốt sang trái -> Chưa thuộc
         handleMarkFlipResult(false);
       }
     }
@@ -478,6 +498,105 @@ export const VocabPage: React.FC = () => {
     setQuizFinished(false);
   };
 
+  // --- LOGIC CHO DẠNG 3: GÕ GHI NHỚ (NHẬP HIRAGANA) ---
+  const initTypingMode = () => {
+    const list = isShuffle ? shuffleArray(unitVocabList) : unitVocabList;
+    setTypingStudyList(list);
+    setTypingActiveIndex(0);
+    setTypingInput('');
+    setTypingAnswerChecked(false);
+    setTypingIsCorrect(false);
+    setTypingIsSkipped(false);
+    setTypingWrongItems([]);
+    setTypingSkippedItems([]);
+    setTypingCorrectCount(0);
+    setTypingFinished(false);
+  };
+
+  const handleCheckTypingAnswer = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (typingAnswerChecked || typingStudyList.length === 0) return;
+
+    const currentItem = typingStudyList[typingActiveIndex];
+    if (!currentItem) return;
+
+    const cleanInput = typingInput.trim().toLowerCase();
+    if (!cleanInput) return;
+
+    const validReadings = [
+      currentItem.reading.toLowerCase(),
+      (currentItem.hiragana || '').toLowerCase(),
+      currentItem.term.toLowerCase()
+    ].filter(Boolean);
+
+    const isCorrect = validReadings.includes(cleanInput);
+
+    setTypingIsCorrect(isCorrect);
+    setTypingIsSkipped(false);
+    setTypingAnswerChecked(true);
+
+    if (isCorrect) {
+      setTypingCorrectCount(prev => prev + 1);
+    } else {
+      setTypingWrongItems(prev => [...prev, currentItem]);
+    }
+  };
+
+  const handleSkipTypingCard = () => {
+    if (typingAnswerChecked || typingStudyList.length === 0) return;
+    const currentItem = typingStudyList[typingActiveIndex];
+    if (!currentItem) return;
+
+    setTypingIsSkipped(true);
+    setTypingIsCorrect(false);
+    setTypingAnswerChecked(true);
+    setTypingSkippedItems(prev => [...prev, currentItem]);
+  };
+
+  const handleNextTypingQuestion = () => {
+    setSlideDirection('next');
+    if (typingActiveIndex + 1 < typingStudyList.length) {
+      setTypingActiveIndex(typingActiveIndex + 1);
+      setTypingInput('');
+      setTypingAnswerChecked(false);
+      setTypingIsCorrect(false);
+      setTypingIsSkipped(false);
+    } else {
+      setTypingFinished(true);
+      if (typingWrongItems.length === 0 && typingSkippedItems.length === 0 && currentUser?.id && selectedBook && selectedUnit) {
+        progressService.saveVocabUnitProgress(currentUser.id, selectedBook.bookId, selectedUnit.unitId, unitVocabList.length);
+        setCompletedUnits(prev => prev.includes(selectedUnit.unitId) ? prev : [...prev, selectedUnit.unitId]);
+      }
+    }
+  };
+
+  const restartAllTyping = () => {
+    initTypingMode();
+  };
+
+  const restartWrongOrSkippedTyping = () => {
+    const combinedMap = new Map<string, VocabularyItem>();
+    [...typingWrongItems, ...typingSkippedItems].forEach(item => combinedMap.set(item.id, item));
+    let retryList = Array.from(combinedMap.values());
+    if (retryList.length === 0) {
+      restartAllTyping();
+      return;
+    }
+    if (isShuffle) {
+      retryList = shuffleArray(retryList);
+    }
+    setTypingStudyList(retryList);
+    setTypingActiveIndex(0);
+    setTypingInput('');
+    setTypingAnswerChecked(false);
+    setTypingIsCorrect(false);
+    setTypingIsSkipped(false);
+    setTypingWrongItems([]);
+    setTypingSkippedItems([]);
+    setTypingCorrectCount(0);
+    setTypingFinished(false);
+  };
+
   // Chuyển đổi giữa ngẫu nhiên và theo thứ tự
   const handleToggleShuffle = () => {
     const nextShuffle = !isShuffle;
@@ -502,19 +621,37 @@ export const VocabPage: React.FC = () => {
       setQuizSkippedQuestions([]);
       setQuizCorrectCount(0);
       setQuizFinished(false);
+    } else if (currentMode === 'typing') {
+      const nextList = nextShuffle ? shuffleArray(unitVocabList) : [...unitVocabList];
+      setTypingStudyList(nextList);
+      setTypingActiveIndex(0);
+      setTypingInput('');
+      setTypingAnswerChecked(false);
+      setTypingIsCorrect(false);
+      setTypingIsSkipped(false);
+      setTypingWrongItems([]);
+      setTypingSkippedItems([]);
+      setTypingCorrectCount(0);
+      setTypingFinished(false);
     }
   };
 
-  // Tự động chuyển câu hỏi tiếp theo sau 3 giây hiển thị kết quả đúng ở Trắc nghiệm
+  // Tự động chuyển câu hỏi tiếp theo sau 3 giây hiển thị kết quả đúng ở Trắc nghiệm & Gõ ghi nhớ
   useEffect(() => {
-    if (!quizAnswerChecked || quizFinished || !quizIsCorrect) return;
-
-    const timer = setTimeout(() => {
-      handleNextQuizQuestion();
-    }, 2800);
-
-    return () => clearTimeout(timer);
-  }, [quizAnswerChecked, quizActiveIndex, quizFinished, quizIsCorrect]);
+    if (currentMode === 'quiz') {
+      if (!quizAnswerChecked || quizFinished || !quizIsCorrect) return;
+      const timer = setTimeout(() => {
+        handleNextQuizQuestion();
+      }, 2800);
+      return () => clearTimeout(timer);
+    } else if (currentMode === 'typing') {
+      if (!typingAnswerChecked || typingFinished || !typingIsCorrect) return;
+      const timer = setTimeout(() => {
+        handleNextTypingQuestion();
+      }, 3200);
+      return () => clearTimeout(timer);
+    }
+  }, [quizAnswerChecked, quizActiveIndex, quizFinished, quizIsCorrect, typingAnswerChecked, typingActiveIndex, typingFinished, typingIsCorrect, currentMode]);
 
   // Lắng nghe bàn phím
   useEffect(() => {
@@ -568,12 +705,41 @@ export const VocabPage: React.FC = () => {
           e.preventDefault();
           handleNextQuizQuestion();
         }
+      } else if (currentMode === 'typing' && !typingFinished) {
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          if (!typingAnswerChecked) {
+            handleSkipTypingCard();
+          } else {
+            handleNextTypingQuestion();
+          }
+          return;
+        }
+
+        if (typingAnswerChecked && e.key === 'Enter') {
+          e.preventDefault();
+          handleNextTypingQuestion();
+        }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentMode, isFlipped, flipActiveIndex, flipStudyList, flipFinished, quizAnswerChecked, quizActiveIndex, quizQuestions, quizFinished]);
+  }, [
+    currentMode, 
+    isFlipped, 
+    flipActiveIndex, 
+    flipStudyList, 
+    flipFinished, 
+    quizAnswerChecked, 
+    quizActiveIndex, 
+    quizQuestions, 
+    quizFinished,
+    typingAnswerChecked,
+    typingActiveIndex,
+    typingStudyList,
+    typingFinished
+  ]);
 
   // Lọc từ vựng
   const filteredList = useMemo(() => {
@@ -655,6 +821,11 @@ export const VocabPage: React.FC = () => {
         @keyframes kanjiSpin {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
+        }
+
+        @keyframes autoCountdown3s {
+          from { width: 100%; }
+          to { width: 0%; }
         }
 
         /* Responsive Media Queries */
@@ -1032,7 +1203,7 @@ export const VocabPage: React.FC = () => {
         </div>
       )}
 
-      {/* 4. KHÔNG GIAN HỌC UNIT (DANH SÁCH + 2 CHẾ ĐỘ THẺ CHUẨN KANJI & NGỮ PHÁP) */}
+      {/* 4. KHÔNG GIAN HỌC UNIT (DANH SÁCH + 3 CHẾ ĐỘ BÀI TẬP) */}
       {selectedBook && selectedUnit && (
         <div>
           {/* Header của bài học */}
@@ -1075,7 +1246,7 @@ export const VocabPage: React.FC = () => {
               </button>
             </div>
 
-            {/* Tabs chuyển chế độ: Danh sách + 2 dạng bài tập (1: Ôn tập, 2: Luyện ghi nhớ) */}
+            {/* Tabs chuyển chế độ: Danh sách + 3 dạng bài tập (1: Ôn tập, 2: Luyện ghi nhớ, 3: Gõ ghi nhớ) */}
             <div style={{
               display: 'flex',
               gap: 8,
@@ -1164,6 +1335,38 @@ export const VocabPage: React.FC = () => {
                   fontWeight: 900
                 }}>2</span>
                 <span>Luyện ghi nhớ</span>
+              </button>
+
+              {/* DẠNG 3: GÕ GHI NHỚ (Nhập Hiragana cách đọc từ vựng) */}
+              <button
+                onClick={() => {
+                  setCurrentMode('typing');
+                  initTypingMode();
+                }}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: 8,
+                  fontSize: 13,
+                  fontWeight: 700,
+                  border: 'none',
+                  cursor: 'pointer',
+                  background: currentMode === 'typing' ? '#2d6d4b' : '#faf8f5',
+                  color: currentMode === 'typing' ? '#ffffff' : '#78716c',
+                  borderBottom: currentMode === 'typing' ? '2px solid #2d6d4b' : '1px solid #e7e3da',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 7,
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                <span style={{
+                  background: currentMode === 'typing' ? 'rgba(255,255,255,0.25)' : '#ede7de',
+                  padding: '2px 7px',
+                  borderRadius: 5,
+                  fontSize: 12,
+                  fontWeight: 900
+                }}>3</span>
+                <span>Gõ ghi nhớ</span>
               </button>
             </div>
           </div>
@@ -2287,6 +2490,408 @@ export const VocabPage: React.FC = () => {
 
                         <button
                           onClick={restartAllQuiz}
+                          style={{
+                            padding: '11px 0',
+                            background: '#1c2536',
+                            color: '#ffffff',
+                            border: 'none',
+                            borderRadius: 8,
+                            fontWeight: 700,
+                            fontSize: 14,
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: 8
+                          }}
+                        >
+                          <RotateCcw size={16} /> Làm lại tất cả ({unitVocabList.length} câu)
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* CHẾ ĐỘ 3: DẠNG 3 - GÕ GHI NHỚ (Nhìn chữ Hán/Từ vựng gõ cách đọc Hiragana) */}
+              {currentMode === 'typing' && (
+                <div>
+                  {!typingFinished && typingStudyList[typingActiveIndex] ? (
+                    <div style={{ maxWidth: 640, margin: '0 auto' }}>
+                      {/* Tiến trình và chế độ sắp xếp */}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, fontSize: 13, color: '#78716c', flexWrap: 'wrap', gap: 8 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                          <span style={{ fontWeight: 600 }}>Thẻ {typingActiveIndex + 1} / {typingStudyList.length}</span>
+                          <button
+                            onClick={handleToggleShuffle}
+                            style={{
+                              padding: '3px 10px',
+                              fontSize: 12,
+                              fontWeight: 600,
+                              borderRadius: 16,
+                              border: '1px solid #d6d3d1',
+                              background: isShuffle ? '#f3f4f6' : '#ffffff',
+                              color: isShuffle ? '#1c2536' : '#78716c',
+                              cursor: 'pointer',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: 4,
+                              transition: 'all 0.15s ease'
+                            }}
+                            title="Chuyển đổi giữa theo thứ tự và ngẫu nhiên"
+                          >
+                            {isShuffle ? 'Ngẫu nhiên' : 'Theo thứ tự'}
+                          </button>
+                        </div>
+                        <div>
+                          Đúng: <strong style={{ color: '#2d6d4b' }}>{typingCorrectCount}</strong> | Sai & Bỏ qua: <strong style={{ color: '#c53d32' }}>{typingWrongItems.length + typingSkippedItems.length}</strong>
+                        </div>
+                      </div>
+                      <div style={{ width: '100%', height: 4, background: '#e7e3da', borderRadius: 2, marginBottom: 16, overflow: 'hidden' }}>
+                        <div style={{
+                          width: `${((typingActiveIndex + 1) / Math.max(1, typingStudyList.length)) * 100}%`,
+                          height: '100%',
+                          background: '#2d6d4b',
+                          transition: 'width 0.2s ease'
+                        }} />
+                      </div>
+
+                      {/* Khung thẻ câu hỏi gõ Hiragana */}
+                      <div
+                        key={typingActiveIndex}
+                        style={{
+                          background: 'linear-gradient(150deg, #ffffff 0%, #fdfbf7 100%)',
+                          borderRadius: 20,
+                          border: '1.5px solid #e7dfd5',
+                          minHeight: 380,
+                          padding: '36px 28px',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          textAlign: 'center',
+                          position: 'relative',
+                          boxShadow: '0 12px 30px -4px rgba(44, 30, 20, 0.06), 0 4px 10px -2px rgba(44, 30, 20, 0.03)',
+                          overflow: 'hidden',
+                          animation: `${slideDirection === 'next' ? 'cardSlideInNext' : 'cardSlideInPrev'} 0.32s cubic-bezier(0.22, 1, 0.36, 1) both`
+                        }}
+                      >
+                        <SakuraFallingBackground />
+
+                        {/* Hanko Seal chế độ */}
+                        <span style={{
+                          position: 'absolute',
+                          top: 16,
+                          left: 16,
+                          fontSize: 11,
+                          fontWeight: 900,
+                          color: '#2d6d4b',
+                          background: 'rgba(241, 248, 243, 0.9)',
+                          border: '1px solid #c6e2ce',
+                          padding: '2px 8px',
+                          borderRadius: 4,
+                          fontFamily: 'serif',
+                          zIndex: 2
+                        }}>
+                          3 · 仮名 (GÕ GHI NHỚ)
+                        </span>
+
+                        {/* Nút phát âm khi đã kiểm tra hoặc khi làm */}
+                        <button
+                          onClick={() => speakJapanese(typingStudyList[typingActiveIndex].term)}
+                          title="Phát âm từ"
+                          style={{
+                            position: 'absolute',
+                            top: 16,
+                            right: 16,
+                            background: '#faf8f5',
+                            border: '1px solid #d6d3d1',
+                            padding: '6px 12px',
+                            borderRadius: 20,
+                            cursor: 'pointer',
+                            fontSize: 12,
+                            fontWeight: 600,
+                            color: '#44403c',
+                            zIndex: 2,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 5
+                          }}
+                        >
+                          <Volume2 size={14} />
+                          <span>Nghe từ</span>
+                        </button>
+
+                        {/* Từ vựng câu hỏi */}
+                        <div style={{ position: 'relative', zIndex: 2, width: '100%', maxWidth: 500 }}>
+                          <div style={{ fontSize: 11, fontWeight: 800, color: '#78716c', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 6 }}>
+                            単語 · TỪ VỰNG TIẾNG NHẬT
+                          </div>
+
+                          <div style={{
+                            fontSize: 44,
+                            fontWeight: 900,
+                            color: '#1c2536',
+                            lineHeight: 1.2,
+                            fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif",
+                            marginBottom: 6
+                          }}>
+                            {typingStudyList[typingActiveIndex].term}
+                          </div>
+
+                          {typingStudyList[typingActiveIndex].sinoVietnamese && (
+                            <div style={{ fontSize: 13, fontWeight: 700, color: '#78716c', marginBottom: 8 }}>
+                              〔 {typingStudyList[typingActiveIndex].sinoVietnamese} 〕
+                            </div>
+                          )}
+
+                          <div style={{ fontSize: 15, fontWeight: 700, color: '#9c2a2a', marginBottom: 20 }}>
+                            {typingStudyList[typingActiveIndex].vietnameseMeaning}
+                          </div>
+
+                          {/* Khi CHƯA kiểm tra: Form nhập Hiragana */}
+                          {!typingAnswerChecked ? (
+                            <form onSubmit={handleCheckTypingAnswer} style={{ width: '100%', maxWidth: 420, margin: '0 auto' }}>
+                              <div style={{ marginBottom: 14 }}>
+                                <input
+                                  key={typingActiveIndex}
+                                  type="text"
+                                  autoFocus
+                                  placeholder="Nhập Hiragana cách đọc..."
+                                  value={typingInput}
+                                  onChange={e => setTypingInput(e.target.value)}
+                                  style={{
+                                    width: '100%',
+                                    padding: '12px 16px',
+                                    fontSize: 17,
+                                    fontWeight: 700,
+                                    borderRadius: 10,
+                                    border: '2px solid #d6d3d1',
+                                    outline: 'none',
+                                    textAlign: 'center',
+                                    background: '#faf8f5',
+                                    color: '#1c2536',
+                                    transition: 'border 0.2s ease'
+                                  }}
+                                  onFocus={e => e.target.style.borderColor = '#2d6d4b'}
+                                  onBlur={e => e.target.style.borderColor = '#d6d3d1'}
+                                />
+                              </div>
+
+                              <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
+                                <button
+                                  type="button"
+                                  onClick={handleSkipTypingCard}
+                                  style={{
+                                    padding: '9px 20px',
+                                    background: '#faf8f5',
+                                    color: '#78716c',
+                                    border: '1px solid #d6d3d1',
+                                    borderRadius: 8,
+                                    fontWeight: 700,
+                                    fontSize: 13,
+                                    cursor: 'pointer'
+                                  }}
+                                >
+                                  Bỏ qua (Tab)
+                                </button>
+
+                                <button
+                                  type="submit"
+                                  disabled={!typingInput.trim()}
+                                  style={{
+                                    padding: '9px 26px',
+                                    background: '#2d6d4b',
+                                    color: '#ffffff',
+                                    fontWeight: 700,
+                                    fontSize: 13,
+                                    borderRadius: 8,
+                                    border: 'none',
+                                    cursor: typingInput.trim() ? 'pointer' : 'not-allowed',
+                                    opacity: typingInput.trim() ? 1 : 0.6
+                                  }}
+                                >
+                                  Kiểm tra (Enter)
+                                </button>
+                              </div>
+                            </form>
+                          ) : (
+                            /* Khi ĐÃ kiểm tra: Hiển thị kết quả chi tiết */
+                            <div style={{
+                              width: '100%',
+                              padding: '16px 20px',
+                              borderRadius: 12,
+                              background: typingIsCorrect ? '#f1f8f3' : typingIsSkipped ? '#fffbeb' : '#fdf2f0',
+                              border: `1.5px solid ${typingIsCorrect ? '#c6e2ce' : typingIsSkipped ? '#fde68a' : '#f3d5d2'}`,
+                              textAlign: 'center',
+                              position: 'relative',
+                              zIndex: 2,
+                              boxShadow: '0 4px 14px rgba(0,0,0,0.03)',
+                              animation: 'resultSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) both'
+                            }}>
+                              <div style={{
+                                display: 'inline-block',
+                                padding: '3px 12px',
+                                borderRadius: 12,
+                                fontWeight: 800,
+                                fontSize: 12,
+                                background: typingIsCorrect ? 'rgba(45, 109, 75, 0.12)' : typingIsSkipped ? 'rgba(217, 119, 6, 0.12)' : 'rgba(197, 61, 50, 0.12)',
+                                color: typingIsCorrect ? '#2d6d4b' : typingIsSkipped ? '#b45309' : '#c53d32',
+                                marginBottom: 8
+                              }}>
+                                {typingIsCorrect ? '✓ Chính xác!' : typingIsSkipped ? 'Đã bỏ qua' : '✕ Chưa chính xác!'}
+                              </div>
+
+                              {!typingIsCorrect && !typingIsSkipped && typingInput.trim() && (
+                                <div style={{ fontSize: 13, color: '#78716c', marginBottom: 6 }}>
+                                  Bạn đã nhập: <span style={{ textDecoration: 'line-through', color: '#c53d32', fontWeight: 600 }}>{typingInput}</span>
+                                </div>
+                              )}
+
+                              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 6 }}>
+                                <span style={{ fontSize: 24, fontWeight: 900, color: '#1c2536' }}>
+                                  {typingStudyList[typingActiveIndex].term}
+                                </span>
+                                <span style={{ fontSize: 20, color: '#2d6d4b', fontWeight: 800 }}>
+                                  = {typingStudyList[typingActiveIndex].reading}
+                                </span>
+                              </div>
+
+                              {typingStudyList[typingActiveIndex].exampleSentenceJp && (
+                                <div style={{
+                                  marginTop: 10,
+                                  paddingTop: 10,
+                                  borderTop: '1px dashed #d6d3d1',
+                                  fontSize: 13,
+                                  textAlign: 'left'
+                                }}>
+                                  <div style={{ fontWeight: 600, color: '#1c2536', marginBottom: 2 }}>
+                                    {typingStudyList[typingActiveIndex].exampleSentenceJp}
+                                  </div>
+                                  <div style={{ color: '#78716c', fontSize: 12 }}>
+                                    {typingStudyList[typingActiveIndex].exampleSentenceVi}
+                                  </div>
+                                </div>
+                              )}
+
+                              <div style={{ marginTop: 14 }}>
+                                <button
+                                  type="button"
+                                  onClick={handleNextTypingQuestion}
+                                  style={{
+                                    padding: '9px 28px',
+                                    background: '#1c2536',
+                                    color: '#ffffff',
+                                    fontWeight: 700,
+                                    fontSize: 14,
+                                    borderRadius: 8,
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: 6
+                                  }}
+                                >
+                                  <span>Tiếp theo</span>
+                                  <ArrowRight size={14} />
+                                </button>
+
+                                <div style={{
+                                  width: 140,
+                                  height: 3,
+                                  background: 'rgba(0,0,0,0.08)',
+                                  borderRadius: 2,
+                                  overflow: 'hidden',
+                                  margin: '8px auto 0 auto'
+                                }}>
+                                  <div style={{
+                                    height: '100%',
+                                    background: typingIsCorrect ? '#2d6d4b' : typingIsSkipped ? '#d97706' : '#c53d32',
+                                    animation: 'autoCountdown3s 3.2s linear forwards'
+                                  }} />
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    /* Màn hình Tổng kết Dạng 3 */
+                    <div style={{
+                      maxWidth: 480,
+                      margin: '0 auto',
+                      background: '#ffffff',
+                      borderRadius: 14,
+                      border: '1px solid #ebe7df',
+                      padding: 32,
+                      textAlign: 'center',
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.04)'
+                    }}>
+                      <div style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: 44,
+                        height: 44,
+                        borderRadius: 22,
+                        background: '#f1f8f3',
+                        color: '#2d6d4b',
+                        fontSize: 22,
+                        marginBottom: 10
+                      }}>
+                        完
+                      </div>
+                      <h3 style={{ fontSize: 20, fontWeight: 800, color: '#1c2536', marginBottom: 6 }}>
+                        Hoàn thành bài gõ ghi nhớ Hiragana
+                      </h3>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, margin: '20px 0' }}>
+                        <div style={{ background: '#f1f8f3', border: '1px solid #c6e2ce', borderRadius: 8, padding: 14 }}>
+                          <div style={{ fontSize: 11, fontWeight: 700, color: '#2d6d4b' }}>正解 · ĐÚNG</div>
+                          <div style={{ fontSize: 26, fontWeight: 900, color: '#2d6d4b', marginTop: 4 }}>
+                            {typingCorrectCount}
+                          </div>
+                        </div>
+
+                        <div style={{ background: '#fdf2f0', border: '1px solid #f3d5d2', borderRadius: 8, padding: 14 }}>
+                          <div style={{ fontSize: 11, fontWeight: 700, color: '#c53d32' }}>SAI & BỎ QUA</div>
+                          <div style={{ fontSize: 26, fontWeight: 900, color: '#c53d32', marginTop: 4 }}>
+                            {typingWrongItems.length + typingSkippedItems.length}
+                          </div>
+                          {(typingWrongItems.length > 0 || typingSkippedItems.length > 0) && (
+                            <div style={{ fontSize: 11, color: '#78716c', marginTop: 2 }}>
+                              Sai: {typingWrongItems.length} · Bỏ qua: {typingSkippedItems.length}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                        {(typingWrongItems.length > 0 || typingSkippedItems.length > 0) && (
+                          <button
+                            onClick={restartWrongOrSkippedTyping}
+                            style={{
+                              padding: '11px 0',
+                              background: '#c53d32',
+                              color: '#ffffff',
+                              border: 'none',
+                              borderRadius: 8,
+                              fontWeight: 700,
+                              fontSize: 14,
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              gap: 8
+                            }}
+                          >
+                            <RotateCcw size={16} /> Làm lại các thẻ sai & bỏ qua ({typingWrongItems.length + typingSkippedItems.length} câu)
+                          </button>
+                        )}
+
+                        <button
+                          onClick={restartAllTyping}
                           style={{
                             padding: '11px 0',
                             background: '#1c2536',
