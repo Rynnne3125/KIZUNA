@@ -1,5 +1,16 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { Volume2, Search, RotateCcw, Check, ChevronLeft } from 'lucide-react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
+import { 
+  Volume2, 
+  Search, 
+  RotateCcw, 
+  Check, 
+  X, 
+  ChevronLeft, 
+  ChevronRight, 
+  BookOpen, 
+  Sparkles,
+  ArrowRight
+} from 'lucide-react';
 import { kizunaService } from '../services/kizunaService';
 import { authService } from '../services/authService';
 import { progressService } from '../services/progressService';
@@ -7,8 +18,11 @@ import { VocabularyItem, VocabularyBook, VocabularyUnit, VocabularyCatalog } fro
 import { VOCABULARY_CATALOG } from '../data/vocabularyCatalog';
 
 type JlptLevelKey = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
-// 3 Dạng bài tập: 1 là Thẻ lật (Ôn tập), 2 là Tiếng Việt viết Tiếng Nhật (Luyện dịch), 3 là Kanji viết Tiếng Nhật (Gõ ghi nhớ)
-type StudyMode = 'list' | 'flip' | 'vi_to_ja' | 'ja_to_hira';
+// 3 Chế độ học chuẩn hóa đồng bộ với Kanji và Ngữ Pháp:
+// 0: Danh sách từ vựng (List)
+// 1: Ôn tập (Flip - Flashcard lật 3D SRS & Vuốt chạm mobile)
+// 2: Luyện ghi nhớ (Quiz - Trắc nghiệm 4 đáp án)
+type StudyMode = 'list' | 'flip' | 'quiz';
 
 // Phân cấp danh xưng tiếng Nhật truyền thống cho từng bậc N
 const LEVEL_LABELS: Record<JlptLevelKey, { kanji: string; vi: string; desc: string }> = {
@@ -18,6 +32,16 @@ const LEVEL_LABELS: Record<JlptLevelKey, { kanji: string; vi: string; desc: stri
   N2: { kanji: '中上級', vi: 'Trung thượng cấp', desc: 'Thương mại & đàm phán doanh nghiệp' },
   N1: { kanji: '上級', vi: 'Thượng cấp', desc: 'Văn kiện chuyên sâu & học thuật cao cấp' }
 };
+
+interface VocabQuizOption {
+  text: string;
+  isCorrect: boolean;
+}
+
+interface VocabQuizQuestion {
+  item: VocabularyItem;
+  options: VocabQuizOption[];
+}
 
 // Component Animation Hoa anh đào rơi động chuẩn phong cách Nhật Bản
 const SakuraFallingBackground: React.FC = () => {
@@ -89,7 +113,10 @@ export const VocabPage: React.FC = () => {
   // Hướng lướt khi chuyển thẻ: 'next' (lướt sang trái) hoặc 'prev' (lướt sang phải)
   const [slideDirection, setSlideDirection] = useState<'next' | 'prev'>('next');
 
-  // --- State Dạng 1: Flashcard Lật 3D SRS ---
+  // Thứ tự học: sắp xếp ngẫu nhiên hoặc theo thứ tự mặc định
+  const [isShuffle, setIsShuffle] = useState(false);
+
+  // --- State Chế độ 1: Flashcard Lật 3D SRS ---
   const [flipActiveIndex, setFlipActiveIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [masteredIds, setMasteredIds] = useState<Set<string>>(new Set());
@@ -97,20 +124,24 @@ export const VocabPage: React.FC = () => {
   const [flipStudyList, setFlipStudyList] = useState<VocabularyItem[]>([]);
   const [flipFinished, setFlipFinished] = useState(false);
 
-  // --- State Dạng 2 & Dạng 3: Thẻ Ôn tập Nhập liệu & Bỏ qua ---
+  // --- Touch Gesture State cho lướt thẻ trên Mobile ---
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchStartY, setTouchStartY] = useState<number | null>(null);
+  const [touchStartTime, setTouchStartTime] = useState<number>(0);
+  const [dragX, setDragX] = useState<number>(0);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+
+  // --- State Chế độ 2: Luyện Ghi Nhớ (Trắc nghiệm 4 đáp án) ---
+  const [quizQuestions, setQuizQuestions] = useState<VocabQuizQuestion[]>([]);
   const [quizActiveIndex, setQuizActiveIndex] = useState(0);
-  const [quizInput, setQuizInput] = useState('');
+  const [quizSelectedOptionIndex, setQuizSelectedOptionIndex] = useState<number | null>(null);
   const [quizAnswerChecked, setQuizAnswerChecked] = useState(false);
   const [quizIsCorrect, setQuizIsCorrect] = useState(false);
   const [quizIsSkipped, setQuizIsSkipped] = useState(false);
-  const [quizWrongItems, setQuizWrongItems] = useState<VocabularyItem[]>([]);
-  const [quizSkippedItems, setQuizSkippedItems] = useState<VocabularyItem[]>([]);
+  const [quizWrongQuestions, setQuizWrongQuestions] = useState<VocabQuizQuestion[]>([]);
+  const [quizSkippedQuestions, setQuizSkippedQuestions] = useState<VocabQuizQuestion[]>([]);
   const [quizCorrectCount, setQuizCorrectCount] = useState(0);
   const [quizFinished, setQuizFinished] = useState(false);
-  const [quizStudyList, setQuizStudyList] = useState<VocabularyItem[]>([]);
-
-  // Thứ tự học: sắp xếp ngẫu nhiên hoặc theo thứ tự mặc định
-  const [isShuffle, setIsShuffle] = useState(false);
 
   const shuffleArray = <T,>(array: T[]): T[] => {
     const arr = [...array];
@@ -119,6 +150,40 @@ export const VocabPage: React.FC = () => {
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     return arr;
+  };
+
+  // Tạo bộ câu hỏi trắc nghiệm 4 đáp án chọn nghĩa tiếng Việt
+  const buildQuizQuestions = (items: VocabularyItem[]): VocabQuizQuestion[] => {
+    return items.map(item => {
+      const otherItems = items.filter(it => it.id !== item.id);
+      const shuffledOthers = shuffleArray(otherItems);
+      const maxDistractors = Math.min(3, shuffledOthers.length);
+      const distractors = shuffledOthers.slice(0, maxDistractors);
+
+      const options: VocabQuizOption[] = shuffleArray([
+        { text: item.vietnameseMeaning, isCorrect: true },
+        ...distractors.map(d => ({ text: d.vietnameseMeaning, isCorrect: false }))
+      ]);
+
+      return {
+        item,
+        options
+      };
+    });
+  };
+
+  // Phát âm tiếng Nhật với Web Speech API
+  const speakJapanese = (text: string) => {
+    if (!('speechSynthesis' in window)) return;
+    try {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'ja-JP';
+      utterance.rate = 0.9;
+      window.speechSynthesis.speak(utterance);
+    } catch (err) {
+      console.error('Speech error:', err);
+    }
   };
 
   // Tải catalog lúc mount
@@ -143,7 +208,7 @@ export const VocabPage: React.FC = () => {
         
         const studyWords = isShuffle ? shuffleArray(words) : words;
 
-        // Reset Dạng 1
+        // Reset Dạng 1: Flashcard
         setFlipStudyList(studyWords);
         setFlipActiveIndex(0);
         setIsFlipped(false);
@@ -151,17 +216,20 @@ export const VocabPage: React.FC = () => {
         setLearningIds(new Set());
         setFlipFinished(false);
 
-        // Reset Dạng 2 & 3
-        setQuizStudyList(studyWords);
+        // Reset Dạng 2: Trắc nghiệm
+        const questions = buildQuizQuestions(studyWords);
+        setQuizQuestions(questions);
         setQuizActiveIndex(0);
-        setQuizInput('');
+        setQuizSelectedOptionIndex(null);
         setQuizAnswerChecked(false);
         setQuizIsCorrect(false);
         setQuizIsSkipped(false);
-        setQuizWrongItems([]);
-        setQuizSkippedItems([]);
+        setQuizWrongQuestions([]);
+        setQuizSkippedQuestions([]);
         setQuizCorrectCount(0);
         setQuizFinished(false);
+      } catch (err) {
+        console.error('Lỗi tải từ vựng:', err);
       } finally {
         setLoadingUnit(false);
       }
@@ -170,51 +238,42 @@ export const VocabPage: React.FC = () => {
     loadUnitWords();
   }, [selectedBook, selectedUnit]);
 
-  // Phát âm tiếng Nhật (Web Speech API)
-  const speakJapanese = (text: string) => {
-    if (!('speechSynthesis' in window) || !text) return;
-    try {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'ja-JP';
-      utterance.rate = 0.9;
-      window.speechSynthesis.speak(utterance);
-    } catch (e) {
-      console.warn('Speech error:', e);
-    }
-  };
-
+  // Điều hướng bộ sách & bài học
   const handleSelectLevel = (lvl: JlptLevelKey) => {
     setSelectedLevel(lvl);
     setSelectedBook(null);
     setSelectedUnit(null);
+    setSearchTerm('');
     setCurrentMode('list');
   };
 
   const handleSelectBook = (book: VocabularyBook) => {
     setSelectedBook(book);
     setSelectedUnit(null);
+    setSearchTerm('');
     setCurrentMode('list');
   };
 
   const handleSelectUnit = (unit: VocabularyUnit) => {
     setSelectedUnit(unit);
-    setCurrentMode('list');
     setSearchTerm('');
+    setCurrentMode('list');
   };
 
   const handleBackToBooks = () => {
     setSelectedBook(null);
     setSelectedUnit(null);
+    setSearchTerm('');
     setCurrentMode('list');
   };
 
   const handleBackToUnits = () => {
     setSelectedUnit(null);
+    setSearchTerm('');
     setCurrentMode('list');
   };
 
-  // --- LOGIC CHO DẠNG 1: LẬT THẺ 3D ---
+  // --- LOGIC CHO DẠNG 1: FLASHCARD SRS & TOUCH SWIPE ---
   const handleFlipCard = () => {
     setIsFlipped(!isFlipped);
   };
@@ -274,68 +333,118 @@ export const VocabPage: React.FC = () => {
     setFlipFinished(false);
   };
 
-  // --- LOGIC CHO DẠNG 2 & 3: ÔN TẬP & BỎ QUA ---
-  const handleCheckQuizAnswer = (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-    if (quizAnswerChecked || quizStudyList.length === 0) return;
+  // --- XỬ LÝ TOUCH SWIPE CHO ĐIỆN THOẠI TRÊN FLASHCARD ---
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length !== 1) return;
+    setTouchStartX(e.touches[0].clientX);
+    setTouchStartY(e.touches[0].clientY);
+    setTouchStartTime(Date.now());
+    setIsDragging(true);
+    setDragX(0);
+  };
 
-    const currentItem = quizStudyList[quizActiveIndex];
-    if (!currentItem) return;
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX === null || touchStartY === null || !isDragging) return;
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const diffX = currentX - touchStartX;
+    const diffY = currentY - touchStartY;
 
-    const cleanInput = quizInput.trim().toLowerCase();
-    if (!cleanInput) return;
-
-    let isCorrect = false;
-
-    if (currentMode === 'vi_to_ja') {
-      const validAnswers = [
-        currentItem.term.toLowerCase(),
-        currentItem.reading.toLowerCase(),
-        (currentItem.hiragana || '').toLowerCase(),
-        (currentItem.kanji || '').toLowerCase()
-      ].filter(Boolean);
-      isCorrect = validAnswers.includes(cleanInput);
-    } else {
-      const validReadings = [
-        currentItem.reading.toLowerCase(),
-        (currentItem.hiragana || '').toLowerCase()
-      ].filter(Boolean);
-      isCorrect = validReadings.includes(cleanInput);
+    // Chỉ thực hiện kéo thẻ khi thao tác người dùng theo phương ngang
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      const damp = Math.abs(diffX) > 130 ? 130 + (Math.abs(diffX) - 130) * 0.25 : Math.abs(diffX);
+      setDragX(diffX < 0 ? -damp : damp);
     }
+  };
+
+  const handleTouchEnd = () => {
+    if (!isDragging) return;
+    const duration = Date.now() - touchStartTime;
+    const distance = dragX;
+    const absDistance = Math.abs(distance);
+
+    setIsDragging(false);
+    setDragX(0);
+    setTouchStartX(null);
+    setTouchStartY(null);
+
+    // Chạm nhanh không kéo đáng kể (< 14px và < 300ms) -> Lật thẻ 3D
+    if (absDistance < 14 && duration < 300) {
+      handleFlipCard();
+      return;
+    }
+
+    // Ngưỡng vuốt thẻ qua trái / phải
+    const isSwipe = absDistance > 55 || (absDistance > 30 && duration < 250);
+    if (isSwipe) {
+      if (distance > 0) {
+        // Vuốt sang phải -> Đã thuộc
+        handleMarkFlipResult(true);
+      } else {
+        // Vuốt sang trái -> Chưa thuộc
+        handleMarkFlipResult(false);
+      }
+    }
+  };
+
+  // --- LOGIC CHO DẠNG 2: BÀI TẬP TRẮC NGHIỆM LUYỆN GHI NHỚ ---
+  const initQuizMode = () => {
+    const list = isShuffle ? shuffleArray(unitVocabList) : unitVocabList;
+    const questions = buildQuizQuestions(list);
+    setQuizQuestions(questions);
+    setQuizActiveIndex(0);
+    setQuizSelectedOptionIndex(null);
+    setQuizAnswerChecked(false);
+    setQuizIsCorrect(false);
+    setQuizIsSkipped(false);
+    setQuizWrongQuestions([]);
+    setQuizSkippedQuestions([]);
+    setQuizCorrectCount(0);
+    setQuizFinished(false);
+  };
+
+  const currentQuizQuestion = quizQuestions[quizActiveIndex];
+
+  const handleSelectQuizOption = (optionIndex: number) => {
+    if (quizAnswerChecked || !currentQuizQuestion) return;
+
+    setQuizSelectedOptionIndex(optionIndex);
+    setQuizAnswerChecked(true);
+
+    const selectedOption = currentQuizQuestion.options[optionIndex];
+    const isCorrect = selectedOption.isCorrect;
 
     setQuizIsCorrect(isCorrect);
     setQuizIsSkipped(false);
-    setQuizAnswerChecked(true);
 
     if (isCorrect) {
       setQuizCorrectCount(prev => prev + 1);
     } else {
-      setQuizWrongItems(prev => [...prev, currentItem]);
+      setQuizWrongQuestions(prev => [...prev, currentQuizQuestion]);
     }
   };
 
-  const handleSkipQuizCard = () => {
-    if (quizAnswerChecked || quizStudyList.length === 0) return;
-    const currentItem = quizStudyList[quizActiveIndex];
-    if (!currentItem) return;
+  const handleSkipQuizQuestion = () => {
+    if (quizAnswerChecked || !currentQuizQuestion) return;
 
     setQuizIsSkipped(true);
     setQuizIsCorrect(false);
     setQuizAnswerChecked(true);
-    setQuizSkippedItems(prev => [...prev, currentItem]);
+    setQuizSelectedOptionIndex(null);
+    setQuizSkippedQuestions(prev => [...prev, currentQuizQuestion]);
   };
 
   const handleNextQuizQuestion = () => {
     setSlideDirection('next');
-    if (quizActiveIndex + 1 < quizStudyList.length) {
+    if (quizActiveIndex + 1 < quizQuestions.length) {
       setQuizActiveIndex(quizActiveIndex + 1);
-      setQuizInput('');
+      setQuizSelectedOptionIndex(null);
       setQuizAnswerChecked(false);
       setQuizIsCorrect(false);
       setQuizIsSkipped(false);
     } else {
       setQuizFinished(true);
-      if (quizWrongItems.length === 0 && quizSkippedItems.length === 0 && currentUser?.id && selectedBook && selectedUnit) {
+      if (quizWrongQuestions.length === 0 && quizSkippedQuestions.length === 0 && currentUser?.id && selectedBook && selectedUnit) {
         progressService.saveVocabUnitProgress(currentUser.id, selectedBook.bookId, selectedUnit.unitId, unitVocabList.length);
         setCompletedUnits(prev => prev.includes(selectedUnit.unitId) ? prev : [...prev, selectedUnit.unitId]);
       }
@@ -343,43 +452,33 @@ export const VocabPage: React.FC = () => {
   };
 
   const restartAllQuiz = () => {
-    const list = isShuffle ? shuffleArray(unitVocabList) : unitVocabList;
-    setQuizStudyList(list);
-    setQuizActiveIndex(0);
-    setQuizInput('');
-    setQuizAnswerChecked(false);
-    setQuizIsCorrect(false);
-    setQuizIsSkipped(false);
-    setQuizWrongItems([]);
-    setQuizSkippedItems([]);
-    setQuizCorrectCount(0);
-    setQuizFinished(false);
+    initQuizMode();
   };
 
   const restartWrongOrSkippedQuiz = () => {
-    const combinedMap = new Map<string, VocabularyItem>();
-    [...quizWrongItems, ...quizSkippedItems].forEach(item => combinedMap.set(item.id, item));
-    let retryList = Array.from(combinedMap.values());
-    if (retryList.length === 0) {
+    const combinedMap = new Map<string, VocabQuizQuestion>();
+    [...quizWrongQuestions, ...quizSkippedQuestions].forEach(q => combinedMap.set(q.item.id, q));
+    let retryQuestions = Array.from(combinedMap.values());
+    if (retryQuestions.length === 0) {
       restartAllQuiz();
       return;
     }
     if (isShuffle) {
-      retryList = shuffleArray(retryList);
+      retryQuestions = shuffleArray(retryQuestions);
     }
-    setQuizStudyList(retryList);
+    setQuizQuestions(retryQuestions);
     setQuizActiveIndex(0);
-    setQuizInput('');
+    setQuizSelectedOptionIndex(null);
     setQuizAnswerChecked(false);
     setQuizIsCorrect(false);
     setQuizIsSkipped(false);
-    setQuizWrongItems([]);
-    setQuizSkippedItems([]);
+    setQuizWrongQuestions([]);
+    setQuizSkippedQuestions([]);
     setQuizCorrectCount(0);
     setQuizFinished(false);
   };
 
-  // Chức năng chuyển đổi sắp xếp ngẫu nhiên hoặc theo thứ tự
+  // Chuyển đổi giữa ngẫu nhiên và theo thứ tự
   const handleToggleShuffle = () => {
     const nextShuffle = !isShuffle;
     setIsShuffle(nextShuffle);
@@ -390,40 +489,40 @@ export const VocabPage: React.FC = () => {
       setFlipActiveIndex(0);
       setIsFlipped(false);
       setFlipFinished(false);
-    } else if (currentMode === 'vi_to_ja' || currentMode === 'ja_to_hira') {
+    } else if (currentMode === 'quiz') {
       const nextList = nextShuffle ? shuffleArray(unitVocabList) : [...unitVocabList];
-      setQuizStudyList(nextList);
+      const questions = buildQuizQuestions(nextList);
+      setQuizQuestions(questions);
       setQuizActiveIndex(0);
-      setQuizInput('');
+      setQuizSelectedOptionIndex(null);
       setQuizAnswerChecked(false);
       setQuizIsCorrect(false);
       setQuizIsSkipped(false);
-      setQuizWrongItems([]);
-      setQuizSkippedItems([]);
+      setQuizWrongQuestions([]);
+      setQuizSkippedQuestions([]);
       setQuizCorrectCount(0);
       setQuizFinished(false);
     }
   };
 
-  // Tự động chuyển thẻ tiếp theo sau 5 giây hiển thị kết quả ở Dạng 2 & 3
+  // Tự động chuyển câu hỏi tiếp theo sau 3 giây hiển thị kết quả đúng ở Trắc nghiệm
   useEffect(() => {
-    if (!quizAnswerChecked || quizFinished) return;
+    if (!quizAnswerChecked || quizFinished || !quizIsCorrect) return;
 
     const timer = setTimeout(() => {
       handleNextQuizQuestion();
-    }, 5000);
+    }, 2800);
 
     return () => clearTimeout(timer);
-  }, [quizAnswerChecked, quizActiveIndex, quizFinished, quizStudyList.length]);
+  }, [quizAnswerChecked, quizActiveIndex, quizFinished, quizIsCorrect]);
 
-  // Lắng nghe tương tác phím mũi tên và Enter cho thẻ bài học
+  // Lắng nghe bàn phím
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement;
       const isInput = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable;
 
       if (currentMode === 'flip' && !flipFinished && flipStudyList.length > 0) {
-        // Nhấn Tab để bỏ qua thẻ ôn tập (đánh dấu chưa thuộc và chuyển tiếp)
         if (e.key === 'Tab') {
           e.preventDefault();
           handleMarkFlipResult(false);
@@ -454,19 +553,17 @@ export const VocabPage: React.FC = () => {
           e.preventDefault();
           handleFlipCard();
         }
-      } else if ((currentMode === 'vi_to_ja' || currentMode === 'ja_to_hira') && !quizFinished) {
-        // Nhấn Tab để bỏ qua thẻ khi đang làm bài tập
+      } else if (currentMode === 'quiz' && !quizFinished) {
         if (e.key === 'Tab') {
           e.preventDefault();
           if (!quizAnswerChecked) {
-            handleSkipQuizCard();
+            handleSkipQuizQuestion();
           } else {
             handleNextQuizQuestion();
           }
           return;
         }
 
-        // Nhấn Enter để chuyển sang thẻ tiếp theo khi đã hiển thị kết quả
         if (quizAnswerChecked && e.key === 'Enter') {
           e.preventDefault();
           handleNextQuizQuestion();
@@ -476,9 +573,9 @@ export const VocabPage: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentMode, isFlipped, flipActiveIndex, flipStudyList, flipFinished, quizAnswerChecked, quizActiveIndex, quizStudyList, quizFinished]);
+  }, [currentMode, isFlipped, flipActiveIndex, flipStudyList, flipFinished, quizAnswerChecked, quizActiveIndex, quizQuestions, quizFinished]);
 
-  // Filter từ vựng
+  // Lọc từ vựng
   const filteredList = useMemo(() => {
     if (!searchTerm.trim()) return unitVocabList;
     const q = searchTerm.toLowerCase();
@@ -522,15 +619,6 @@ export const VocabPage: React.FC = () => {
           }
         }
 
-        @keyframes autoCountdown5s {
-          from {
-            width: 100%;
-          }
-          to {
-            width: 0%;
-          }
-        }
-
         @keyframes cardSlideInNext {
           0% {
             opacity: 0;
@@ -563,9 +651,40 @@ export const VocabPage: React.FC = () => {
             transform: translateY(0);
           }
         }
+
+        @keyframes kanjiSpin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Media Queries */
+        @media (max-width: 768px) {
+          .vocab-desktop-table {
+            display: none !important;
+          }
+          .vocab-mobile-cards {
+            display: flex !important;
+            flex-direction: column;
+            gap: 12px;
+          }
+          .vocab-quiz-options-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        @media (min-width: 769px) {
+          .vocab-desktop-table {
+            display: block !important;
+          }
+          .vocab-mobile-cards {
+            display: none !important;
+          }
+          .vocab-quiz-options-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
       `}</style>
       
-      {/* 1. HEADER MANG PHONG CÁCH NHẬT BẢN HIỆN ĐẠI (和の美学) */}
+      {/* 1. HEADER MANG PHONG CÁCH NHẬT BẢN HIỆN ĐẠI (和の美学) ĐỒNG BỘ KANJI & NGỮ PHÁP */}
       <div style={{ marginBottom: 24 }}>
         <div style={{
           display: 'flex',
@@ -584,16 +703,16 @@ export const VocabPage: React.FC = () => {
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: 26,
-                height: 26,
-                border: '1.5px solid #c53d32',
-                borderRadius: 4,
-                color: '#c53d32',
-                fontSize: 13,
+                width: 32,
+                height: 32,
+                borderRadius: 8,
+                background: '#c53d32',
+                color: '#ffffff',
+                fontSize: 16,
                 fontWeight: 900,
                 fontFamily: 'serif',
                 lineHeight: 1,
-                background: '#fffcfb'
+                boxShadow: '0 3px 8px rgba(197, 61, 50, 0.25)'
               }}>
                 絆
               </span>
@@ -602,11 +721,11 @@ export const VocabPage: React.FC = () => {
               </h1>
             </div>
             <p style={{ color: '#78716c', fontSize: 13, margin: 0 }}>
-              Giáo trình chuẩn ngữ cảnh: <strong>耳から覚える</strong> (Mimi Kara) & <strong>新完全単語</strong> (Tango)
+              Giáo trình chuẩn ngữ cảnh: <strong>耳から覚える</strong> (Mimi Kara) & <strong>新完全マスター</strong> (Tango)
             </p>
           </div>
 
-          {/* Thanh chuyển cấp độ N phong cách Thẻ thẻ bài Nhật Bản (札 - Fuda) */}
+          {/* Thanh chuyển cấp độ N phong cách Thẻ bài Nhật Bản (札 - Fuda) */}
           <div style={{
             display: 'flex',
             background: '#f4f2ee',
@@ -692,7 +811,7 @@ export const VocabPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. CHỌN 1 TRONG 2 BỘ SÁCH CỦA CẤP ĐỘ HIỆN TẠI (Book Cover Wabi-sabi Style) */}
+      {/* 2. CHỌN BỘ SÁCH CỦA CẤP ĐỘ HIỆN TẠI (Book Cover Wabi-sabi Style) */}
       {!selectedBook && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
           {currentLevelBooks.map(book => {
@@ -740,7 +859,7 @@ export const VocabPage: React.FC = () => {
                       color: spineColor,
                       border: `1px solid ${isTango ? '#c6e2ce' : '#f3d5d2'}`
                     }}>
-                      {isTango ? '『新完全 · 単語』' : '『耳から覚える』'}
+                      {isTango ? '『新完全マスター · 単語』' : '『耳から覚える』'}
                     </span>
                     <span style={{ fontSize: 13, fontWeight: 900, color: '#c53d32' }}>
                       {selectedLevel} · {LEVEL_LABELS[selectedLevel].kanji}
@@ -787,7 +906,11 @@ export const VocabPage: React.FC = () => {
                     fontWeight: 700,
                     fontSize: 14,
                     cursor: 'pointer',
-                    transition: 'background 0.15s'
+                    transition: 'background 0.15s',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 6
                   }}
                   onMouseEnter={e => e.currentTarget.style.background = '#c53d32'}
                   onMouseLeave={e => e.currentTarget.style.background = '#1c2536'}
@@ -796,7 +919,8 @@ export const VocabPage: React.FC = () => {
                     handleSelectBook(book);
                   }}
                 >
-                  開く (Mở sách) →
+                  <span>開く (Mở sách)</span>
+                  <ChevronRight size={16} />
                 </button>
               </div>
             );
@@ -908,7 +1032,7 @@ export const VocabPage: React.FC = () => {
         </div>
       )}
 
-      {/* 4. KHÔNG GIAN HỌC UNIT (DANH SÁCH + 3 CHẾ ĐỘ THẺ) */}
+      {/* 4. KHÔNG GIAN HỌC UNIT (DANH SÁCH + 2 CHẾ ĐỘ THẺ CHUẨN KANJI & NGỮ PHÁP) */}
       {selectedBook && selectedUnit && (
         <div>
           {/* Header của bài học */}
@@ -940,14 +1064,18 @@ export const VocabPage: React.FC = () => {
                   fontSize: 13,
                   fontWeight: 600,
                   color: '#44403c',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 5
                 }}
               >
-                ⬅️ Danh sách bài
+                <ChevronLeft size={15} />
+                <span>Danh sách bài</span>
               </button>
             </div>
 
-            {/* Tabs chuyển chế độ: Danh sách + 3 dạng bài tập (1, 2, 3) */}
+            {/* Tabs chuyển chế độ: Danh sách + 2 dạng bài tập (1: Ôn tập, 2: Luyện ghi nhớ) */}
             <div style={{
               display: 'flex',
               gap: 8,
@@ -955,6 +1083,7 @@ export const VocabPage: React.FC = () => {
               paddingTop: 12,
               flexWrap: 'wrap'
             }}>
+              {/* CHẾ ĐỘ 0: DANH SÁCH TỪ */}
               <button
                 onClick={() => setCurrentMode('list')}
                 style={{
@@ -970,10 +1099,10 @@ export const VocabPage: React.FC = () => {
                   transition: 'all 0.15s ease'
                 }}
               >
-                Danh sách từ
+                Danh sách từ vựng
               </button>
 
-              {/* DẠNG 1: ÔN TẬP (Thẻ lật) */}
+              {/* DẠNG 1: ÔN TẬP (Flashcard Lật 3D SRS) */}
               <button
                 onClick={() => {
                   setCurrentMode('flip');
@@ -1005,11 +1134,11 @@ export const VocabPage: React.FC = () => {
                 <span>Ôn tập</span>
               </button>
 
-              {/* DẠNG 2: LUYỆN DỊCH (Từ tiếng Việt viết tiếng Nhật) */}
+              {/* DẠNG 2: LUYỆN GHI NHỚ (Trắc nghiệm 4 đáp án chọn nghĩa từ) */}
               <button
                 onClick={() => {
-                  setCurrentMode('vi_to_ja');
-                  restartAllQuiz();
+                  setCurrentMode('quiz');
+                  initQuizMode();
                 }}
                 style={{
                   padding: '8px 16px',
@@ -1018,9 +1147,9 @@ export const VocabPage: React.FC = () => {
                   fontWeight: 700,
                   border: 'none',
                   cursor: 'pointer',
-                  background: currentMode === 'vi_to_ja' ? '#2563eb' : '#faf8f5',
-                  color: currentMode === 'vi_to_ja' ? '#ffffff' : '#78716c',
-                  borderBottom: currentMode === 'vi_to_ja' ? '2px solid #2563eb' : '1px solid #e7e3da',
+                  background: currentMode === 'quiz' ? '#2563eb' : '#faf8f5',
+                  color: currentMode === 'quiz' ? '#ffffff' : '#78716c',
+                  borderBottom: currentMode === 'quiz' ? '2px solid #2563eb' : '1px solid #e7e3da',
                   display: 'flex',
                   alignItems: 'center',
                   gap: 7,
@@ -1028,45 +1157,13 @@ export const VocabPage: React.FC = () => {
                 }}
               >
                 <span style={{
-                  background: currentMode === 'vi_to_ja' ? 'rgba(255,255,255,0.25)' : '#ede7de',
+                  background: currentMode === 'quiz' ? 'rgba(255,255,255,0.25)' : '#ede7de',
                   padding: '2px 7px',
                   borderRadius: 5,
                   fontSize: 12,
                   fontWeight: 900
                 }}>2</span>
-                <span>Luyện dịch</span>
-              </button>
-
-              {/* DẠNG 3: GÕ GHI NHỚ (Từ Kanji viết tiếng Nhật / Hiragana) */}
-              <button
-                onClick={() => {
-                  setCurrentMode('ja_to_hira');
-                  restartAllQuiz();
-                }}
-                style={{
-                  padding: '8px 16px',
-                  borderRadius: 8,
-                  fontSize: 13,
-                  fontWeight: 700,
-                  border: 'none',
-                  cursor: 'pointer',
-                  background: currentMode === 'ja_to_hira' ? '#2d6d4b' : '#faf8f5',
-                  color: currentMode === 'ja_to_hira' ? '#ffffff' : '#78716c',
-                  borderBottom: currentMode === 'ja_to_hira' ? '2px solid #2d6d4b' : '1px solid #e7e3da',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 7,
-                  transition: 'all 0.15s ease'
-                }}
-              >
-                <span style={{
-                  background: currentMode === 'ja_to_hira' ? 'rgba(255,255,255,0.25)' : '#ede7de',
-                  padding: '2px 7px',
-                  borderRadius: 5,
-                  fontSize: 12,
-                  fontWeight: 900
-                }}>3</span>
-                <span>Gõ ghi nhớ</span>
+                <span>Luyện ghi nhớ</span>
               </button>
             </div>
           </div>
@@ -1085,14 +1182,14 @@ export const VocabPage: React.FC = () => {
             </div>
           ) : (
             <>
-              {/* CHẾ ĐỘ 0: DANH SÁCH BẢNG TỪ VỰNG */}
+              {/* CHẾ ĐỘ 0: DANH SÁCH BẢNG TỪ VỰNG (TỐI ƯU CẢ DESKTOP & MOBILE CARDS) */}
               {currentMode === 'list' && (
                 <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, flexWrap: 'wrap', gap: 10 }}>
                     <div style={{ fontSize: 13, fontWeight: 700, color: '#57534e' }}>
                       {filteredList.length} từ vựng trong bài:
                     </div>
-                    <div style={{ position: 'relative', minWidth: 220 }}>
+                    <div style={{ position: 'relative', minWidth: 240 }}>
                       <Search size={14} color="#78716c" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
                       <input
                         type="text"
@@ -1101,8 +1198,8 @@ export const VocabPage: React.FC = () => {
                         onChange={e => setSearchTerm(e.target.value)}
                         style={{
                           width: '100%',
-                          padding: '6px 12px 6px 30px',
-                          borderRadius: 7,
+                          padding: '7px 12px 7px 30px',
+                          borderRadius: 8,
                           border: '1px solid #d6d3d1',
                           fontSize: 13,
                           outline: 'none',
@@ -1112,7 +1209,8 @@ export const VocabPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <div style={{
+                  {/* BẢNG DESKTOP */}
+                  <div className="vocab-desktop-table" style={{
                     background: '#ffffff',
                     borderRadius: 12,
                     border: '1px solid #ebe7df',
@@ -1123,9 +1221,9 @@ export const VocabPage: React.FC = () => {
                       <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 14 }}>
                         <thead>
                           <tr style={{ background: '#faf8f5', borderBottom: '2px solid #e7e3da' }}>
-                            <th style={{ padding: '12px 16px', fontWeight: 700, color: '#57534e', width: '24%' }}>単語 · Từ vựng</th>
+                            <th style={{ padding: '12px 16px', fontWeight: 700, color: '#57534e', width: '26%' }}>単語 · Từ vựng</th>
                             <th style={{ padding: '12px 16px', fontWeight: 700, color: '#57534e', width: '28%' }}>意味 · Nghĩa tiếng Việt</th>
-                            <th style={{ padding: '12px 16px', fontWeight: 700, color: '#57534e', width: '48%' }}>例文 · Câu ví dụ</th>
+                            <th style={{ padding: '12px 16px', fontWeight: 700, color: '#57534e', width: '46%' }}>例文 · Câu ví dụ</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -1215,21 +1313,103 @@ export const VocabPage: React.FC = () => {
                       </table>
                     </div>
                   </div>
+
+                  {/* THẺ MOBILE THÂN THIỆN MÀN HÌNH NHỎ (MOBILE CARDS) */}
+                  <div className="vocab-mobile-cards">
+                    {filteredList.map((item) => (
+                      <div
+                        key={item.id}
+                        style={{
+                          background: '#ffffff',
+                          borderRadius: 12,
+                          border: '1px solid #ebe7df',
+                          padding: '14px 16px',
+                          boxShadow: '0 1px 4px rgba(0,0,0,0.02)'
+                        }}
+                      >
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
+                          <div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                              <span style={{ fontSize: 20, fontWeight: 900, color: '#1c2536' }}>
+                                {item.term}
+                              </span>
+                              <button
+                                onClick={() => speakJapanese(item.term)}
+                                style={{
+                                  background: '#faf8f5',
+                                  border: '1px solid #e7e5e4',
+                                  borderRadius: '50%',
+                                  width: 28,
+                                  height: 28,
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  cursor: 'pointer',
+                                  color: '#57534e'
+                                }}
+                              >
+                                <Volume2 size={14} />
+                              </button>
+                            </div>
+                            <div style={{ fontSize: 13, color: '#2d6d4b', fontWeight: 700, marginTop: 1 }}>
+                              {item.reading}
+                            </div>
+                            {item.sinoVietnamese && (
+                              <div style={{ fontSize: 11, fontWeight: 700, color: '#78716c' }}>
+                                〔 {item.sinoVietnamese} 〕
+                              </div>
+                            )}
+                          </div>
+
+                          <div style={{
+                            fontSize: 14,
+                            fontWeight: 800,
+                            color: '#9c2a2a',
+                            textAlign: 'right',
+                            maxWidth: '48%'
+                          }}>
+                            {item.vietnameseMeaning}
+                          </div>
+                        </div>
+
+                        {item.exampleSentenceJp && (
+                          <div style={{
+                            background: '#faf8f5',
+                            padding: '8px 10px',
+                            borderRadius: 8,
+                            border: '1px solid #ebe7df',
+                            borderLeft: '3px solid #c53d32',
+                            marginTop: 10
+                          }}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6 }}>
+                              <div style={{ fontWeight: 600, color: '#1c2536', fontSize: 12 }}>
+                                {item.exampleSentenceJp}
+                              </div>
+                              <button
+                                onClick={() => speakJapanese(item.exampleSentenceJp || '')}
+                                style={{
+                                  background: 'transparent',
+                                  border: 'none',
+                                  padding: 0,
+                                  color: '#78716c',
+                                  cursor: 'pointer'
+                                }}
+                              >
+                                <Volume2 size={13} />
+                              </button>
+                            </div>
+                            <div style={{ fontSize: 11, color: '#57534e', marginTop: 2 }}>
+                              {item.exampleSentenceVi}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
 
-              {/* CHẾ ĐỘ THẺ BÀI HỌC CHUẨN PHONG CÁCH NHẬT BẢN (1, 2, 3) */}
-              {currentMode === 'japanese_cards' && (
-                <div style={{ marginTop: 8 }}>
-                  <JapaneseLessonFlashcards
-                    lessonTitle={selectedUnit?.unitTitle || 'Bài 1: Giao tiếp & Sinh hoạt hàng ngày'}
-                    bookTitle={selectedBook?.bookName || 'Giáo trình Tiếng Nhật'}
-                    unitWords={unitVocabList}
-                  />
-                </div>
-              )}
-
-              {/* CHẾ ĐỘ 1: DẠNG 1 - ÔN TẬP (Thẻ lật Flashcard) */}
+              {/* CHẾ ĐỘ 1: DẠNG 1 - ÔN TẬP (Flashcard Lật 3D SRS & Vuốt Chạm Điện Thoại) */}
               {currentMode === 'flip' && (
                 <div>
                   {!flipFinished ? (
@@ -1265,36 +1445,92 @@ export const VocabPage: React.FC = () => {
                       </div>
                       <div style={{ width: '100%', height: 4, background: '#e7e3da', borderRadius: 2, marginBottom: 16, overflow: 'hidden' }}>
                         <div style={{
-                          width: `${((flipActiveIndex + 1) / flipStudyList.length) * 100}%`,
+                          width: `${((flipActiveIndex + 1) / Math.max(1, flipStudyList.length)) * 100}%`,
                           height: '100%',
                           background: '#c53d32',
                           transition: 'width 0.2s ease'
                         }} />
                       </div>
 
-                      {/* Hiệu ứng lướt thẻ mượt mà & lật 3D */}
+                      {/* KHUNG THẺ VUỐT CHẠM CẢM ỨNG & LẬT 3D */}
                       {flipStudyList[flipActiveIndex] && (
                         <div
                           key={flipActiveIndex}
                           style={{
                             perspective: 1000,
                             width: '100%',
-                            minHeight: 350,
+                            minHeight: 380,
+                            position: 'relative',
                             animation: `${slideDirection === 'next' ? 'cardSlideInNext' : 'cardSlideInPrev'} 0.32s cubic-bezier(0.22, 1, 0.36, 1) both`
                           }}
                         >
                           <div
-                            onClick={handleFlipCard}
+                            onTouchStart={handleTouchStart}
+                            onTouchMove={handleTouchMove}
+                            onTouchEnd={handleTouchEnd}
+                            onClick={() => {
+                              if (Math.abs(dragX) < 8) {
+                                handleFlipCard();
+                              }
+                            }}
                             style={{
                               position: 'relative',
                               width: '100%',
-                              minHeight: 350,
+                              minHeight: 380,
                               cursor: 'pointer',
                               transformStyle: 'preserve-3d',
-                              transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-                              transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
+                              transition: isDragging ? 'none' : 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)',
+                              transform: `${isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'} translateX(${dragX}px) rotate(${dragX * 0.045}deg)`,
+                              touchAction: 'pan-y',
+                              userSelect: 'none'
                             }}
                           >
+                            {/* Visual Feedback Badge khi vuốt sang phải: ĐÃ THUỘC */}
+                            {dragX > 20 && (
+                              <div style={{
+                                position: 'absolute',
+                                top: 24,
+                                left: 24,
+                                background: '#15803d',
+                                color: '#ffffff',
+                                padding: '6px 14px',
+                                borderRadius: 8,
+                                fontWeight: 900,
+                                fontSize: 13,
+                                letterSpacing: '1px',
+                                boxShadow: '0 4px 12px rgba(21, 128, 61, 0.35)',
+                                opacity: Math.min(1, (dragX - 20) / 45),
+                                transform: 'rotate(-10deg)',
+                                zIndex: 20,
+                                pointerEvents: 'none'
+                              }}>
+                                ✓ ĐÃ THUỘC
+                              </div>
+                            )}
+
+                            {/* Visual Feedback Badge khi vuốt sang trái: CHƯA THUỘC */}
+                            {dragX < -20 && (
+                              <div style={{
+                                position: 'absolute',
+                                top: 24,
+                                right: 24,
+                                background: '#c53d32',
+                                color: '#ffffff',
+                                padding: '6px 14px',
+                                borderRadius: 8,
+                                fontWeight: 900,
+                                fontSize: 13,
+                                letterSpacing: '1px',
+                                boxShadow: '0 4px 12px rgba(197, 61, 50, 0.35)',
+                                opacity: Math.min(1, (-dragX - 20) / 45),
+                                transform: 'rotate(10deg)',
+                                zIndex: 20,
+                                pointerEvents: 'none'
+                              }}>
+                                ✕ CHƯA THUỘC
+                              </div>
+                            )}
+
                             {/* MẶT TRƯỚC: 単語 (Chữ Hán & Hiragana) */}
                             <div
                               style={{
@@ -1303,7 +1539,7 @@ export const VocabPage: React.FC = () => {
                                 background: 'linear-gradient(150deg, #ffffff 0%, #fdfbf7 100%)',
                                 borderRadius: 20,
                                 border: '1.5px solid #e7dfd5',
-                                padding: '40px 32px',
+                                padding: '40px 28px',
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
@@ -1315,7 +1551,6 @@ export const VocabPage: React.FC = () => {
                                 overflow: 'hidden'
                               }}
                             >
-                              {/* Animation hoa anh đào rơi động trên nền thẻ */}
                               <SakuraFallingBackground />
 
                               {/* Hanko Seal Mặt trước */}
@@ -1333,7 +1568,7 @@ export const VocabPage: React.FC = () => {
                                 fontFamily: 'serif',
                                 zIndex: 2
                               }}>
-                                1 · 単語
+                                1 · 単語 (TỪ VỰNG)
                               </span>
 
                               <button
@@ -1341,7 +1576,7 @@ export const VocabPage: React.FC = () => {
                                   e.stopPropagation();
                                   speakJapanese(flipStudyList[flipActiveIndex].term);
                                 }}
-                                title="Phát âm"
+                                title="Phát âm từ"
                                 style={{
                                   position: 'absolute',
                                   top: 16,
@@ -1354,28 +1589,32 @@ export const VocabPage: React.FC = () => {
                                   fontSize: 12,
                                   fontWeight: 600,
                                   color: '#44403c',
-                                  zIndex: 2
+                                  zIndex: 2,
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: 5
                                 }}
                               >
-                                Phát âm
+                                <Volume2 size={13} />
+                                <span>Phát âm</span>
                               </button>
 
                               <div style={{ position: 'relative', zIndex: 2 }}>
-                                <div style={{ fontSize: 48, fontWeight: 900, color: '#1c2536', marginBottom: 8, letterSpacing: '1px', fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif" }}>
+                                <div style={{ fontSize: 46, fontWeight: 900, color: '#1c2536', marginBottom: 8, letterSpacing: '1px', fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif" }}>
                                   {flipStudyList[flipActiveIndex].term}
                                 </div>
                                 <div style={{ fontSize: 20, fontWeight: 700, color: '#2d6d4b', marginBottom: 6 }}>
                                   {flipStudyList[flipActiveIndex].reading}
                                 </div>
                                 {flipStudyList[flipActiveIndex].sinoVietnamese && (
-                                  <div style={{ fontSize: 12, fontWeight: 700, color: '#78716c', letterSpacing: '1px' }}>
+                                  <div style={{ fontSize: 13, fontWeight: 700, color: '#78716c', letterSpacing: '1px' }}>
                                     〔 {flipStudyList[flipActiveIndex].sinoVietnamese} 〕
                                   </div>
                                 )}
                               </div>
                             </div>
 
-                            {/* MẶT SAU: 意味 (Nghĩa tiếng Việt & Ví dụ) */}
+                            {/* MẶT SAU: 意味 (Nghĩa tiếng Việt & Câu ví dụ) */}
                             <div
                               style={{
                                 position: 'absolute',
@@ -1383,7 +1622,7 @@ export const VocabPage: React.FC = () => {
                                 background: 'linear-gradient(150deg, #ffffff 0%, #fdfbf7 100%)',
                                 borderRadius: 20,
                                 border: '1.5px solid #e7dfd5',
-                                padding: '40px 32px',
+                                padding: '40px 28px',
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
@@ -1396,7 +1635,6 @@ export const VocabPage: React.FC = () => {
                                 overflow: 'hidden'
                               }}
                             >
-                              {/* Animation hoa anh đào rơi động trên nền thẻ */}
                               <SakuraFallingBackground />
 
                               {/* Hanko Seal Mặt sau */}
@@ -1414,7 +1652,7 @@ export const VocabPage: React.FC = () => {
                                 fontFamily: 'serif',
                                 zIndex: 2
                               }}>
-                                1 · 意味
+                                1 · 意味 (Ý NGHĨA)
                               </span>
 
                               <button
@@ -1435,10 +1673,14 @@ export const VocabPage: React.FC = () => {
                                   fontSize: 12,
                                   fontWeight: 600,
                                   color: '#44403c',
-                                  zIndex: 2
+                                  zIndex: 2,
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: 5
                                 }}
                               >
-                                Phát âm
+                                <Volume2 size={13} />
+                                <span>Phát âm</span>
                               </button>
 
                               <div style={{ position: 'relative', zIndex: 2, width: '100%' }}>
@@ -1458,10 +1700,21 @@ export const VocabPage: React.FC = () => {
                                     margin: '0 auto',
                                     width: '100%'
                                   }}>
-                                    <div style={{ fontWeight: 700, color: '#1c2536', fontSize: 14, marginBottom: 3 }}>
-                                      {flipStudyList[flipActiveIndex].exampleSentenceJp}
+                                    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 6, marginBottom: 3 }}>
+                                      <div style={{ fontWeight: 700, color: '#1c2536', fontSize: 13 }}>
+                                        {flipStudyList[flipActiveIndex].exampleSentenceJp}
+                                      </div>
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          speakJapanese(flipStudyList[flipActiveIndex].exampleSentenceJp || '');
+                                        }}
+                                        style={{ background: 'transparent', border: 'none', padding: 0, color: '#78716c', cursor: 'pointer' }}
+                                      >
+                                        <Volume2 size={13} />
+                                      </button>
                                     </div>
-                                    <div style={{ color: '#57534e', fontSize: 13 }}>
+                                    <div style={{ color: '#57534e', fontSize: 12 }}>
                                       {flipStudyList[flipActiveIndex].exampleSentenceVi}
                                     </div>
                                   </div>
@@ -1472,7 +1725,7 @@ export const VocabPage: React.FC = () => {
                         </div>
                       )}
 
-                      {/* Các nút điều hướng kiểu Nhật (Không dùng ký hiệu mũi tên rườm rà) */}
+                      {/* Các nút điều hướng kiểu Nhật */}
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 18, gap: 12 }}>
                         <button
                           onClick={() => handleMarkFlipResult(false)}
@@ -1528,9 +1781,27 @@ export const VocabPage: React.FC = () => {
                         </button>
                       </div>
 
-                      {/* Hướng dẫn phím bấm tinh tế */}
-                      <div style={{ textAlign: 'center', marginTop: 10, fontSize: 12, color: '#a8a29e' }}>
-                        Dùng phím mũi tên trái và phải để lật và chuyển thẻ
+                      {/* Chỉ dẫn vuốt chạm tinh tế cho điện thoại */}
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 8,
+                        marginTop: 12,
+                        fontSize: 12,
+                        color: '#78716c',
+                        background: '#faf8f5',
+                        padding: '6px 14px',
+                        borderRadius: 20,
+                        border: '1px solid #ebe7df',
+                        maxWidth: 380,
+                        margin: '12px auto 0 auto'
+                      }}>
+                        <span>← Vuốt trái: Chưa thuộc</span>
+                        <span style={{ color: '#d6d3d1' }}>·</span>
+                        <span>Chạm: Lật thẻ</span>
+                        <span style={{ color: '#d6d3d1' }}>·</span>
+                        <span>Vuốt phải: Đã thuộc →</span>
                       </div>
                     </div>
                   ) : (
@@ -1560,7 +1831,7 @@ export const VocabPage: React.FC = () => {
                         完
                       </div>
                       <h3 style={{ fontSize: 20, fontWeight: 800, color: '#1c2536', marginBottom: 6 }}>
-                        Hoàn thành bài học
+                        Hoàn thành bài học từ vựng
                       </h3>
 
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, margin: '20px 0' }}>
@@ -1627,15 +1898,15 @@ export const VocabPage: React.FC = () => {
                 </div>
               )}
 
-              {/* CHẾ ĐỘ 2 & 3: BỐ CỤC THẺ GIỐNG DẠNG 1 + CÓ NÚT BỎ QUA */}
-              {(currentMode === 'vi_to_ja' || currentMode === 'ja_to_hira') && (
+              {/* CHẾ ĐỘ 2: DẠNG 2 - LUYỆN GHI NHỚ (Trắc nghiệm 4 đáp án chọn nghĩa từ) */}
+              {currentMode === 'quiz' && (
                 <div>
-                  {!quizFinished ? (
+                  {!quizFinished && currentQuizQuestion ? (
                     <div style={{ maxWidth: 640, margin: '0 auto' }}>
                       {/* Tiến trình và chế độ sắp xếp */}
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, fontSize: 13, color: '#78716c', flexWrap: 'wrap', gap: 8 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                          <span style={{ fontWeight: 600 }}>Thẻ {quizActiveIndex + 1} / {quizStudyList.length}</span>
+                          <span style={{ fontWeight: 600 }}>Câu {quizActiveIndex + 1} / {quizQuestions.length}</span>
                           <button
                             onClick={handleToggleShuffle}
                             style={{
@@ -1658,287 +1929,295 @@ export const VocabPage: React.FC = () => {
                           </button>
                         </div>
                         <div>
-                          Đúng: <strong style={{ color: '#2d6d4b' }}>{quizCorrectCount}</strong> | Sai & Bỏ qua: <strong style={{ color: '#c53d32' }}>{quizWrongItems.length + quizSkippedItems.length}</strong>
+                          Đúng: <strong style={{ color: '#2d6d4b' }}>{quizCorrectCount}</strong> | Sai & Bỏ qua: <strong style={{ color: '#c53d32' }}>{quizWrongQuestions.length + quizSkippedQuestions.length}</strong>
                         </div>
                       </div>
                       <div style={{ width: '100%', height: 4, background: '#e7e3da', borderRadius: 2, marginBottom: 16, overflow: 'hidden' }}>
                         <div style={{
-                          width: `${((quizActiveIndex + 1) / quizStudyList.length) * 100}%`,
+                          width: `${((quizActiveIndex + 1) / Math.max(1, quizQuestions.length)) * 100}%`,
                           height: '100%',
-                          background: currentMode === 'vi_to_ja' ? '#2563eb' : '#2d6d4b',
+                          background: '#2563eb',
                           transition: 'width 0.2s ease'
                         }} />
                       </div>
 
-                      {/* Khung thẻ câu hỏi có kích thước và vẻ ngoài đồng nhất với Dạng 1, hiệu ứng lướt mượt mà */}
-                      {quizStudyList[quizActiveIndex] && (
-                        <div
-                          key={quizActiveIndex}
-                          style={{
-                            background: 'linear-gradient(150deg, #ffffff 0%, #fdfbf7 100%)',
-                            borderRadius: 20,
-                            border: '1.5px solid #e7dfd5',
-                            minHeight: 350,
-                            padding: '40px 32px',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            textAlign: 'center',
-                            position: 'relative',
-                            boxShadow: '0 12px 30px -4px rgba(44, 30, 20, 0.06), 0 4px 10px -2px rgba(44, 30, 20, 0.03)',
-                            overflow: 'hidden',
-                            animation: 'cardSlideInNext 0.32s cubic-bezier(0.22, 1, 0.36, 1) both'
-                          }}
-                        >
-                          {/* Animation hoa anh đào rơi động trên nền thẻ */}
-                          <SakuraFallingBackground />
+                      {/* Khung thẻ câu hỏi trắc nghiệm */}
+                      <div
+                        key={quizActiveIndex}
+                        style={{
+                          background: 'linear-gradient(150deg, #ffffff 0%, #fdfbf7 100%)',
+                          borderRadius: 20,
+                          border: '1.5px solid #e7dfd5',
+                          minHeight: 380,
+                          padding: '36px 28px',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          textAlign: 'center',
+                          position: 'relative',
+                          boxShadow: '0 12px 30px -4px rgba(44, 30, 20, 0.06), 0 4px 10px -2px rgba(44, 30, 20, 0.03)',
+                          overflow: 'hidden',
+                          animation: `${slideDirection === 'next' ? 'cardSlideInNext' : 'cardSlideInPrev'} 0.32s cubic-bezier(0.22, 1, 0.36, 1) both`
+                        }}
+                      >
+                        <SakuraFallingBackground />
 
-                          {/* Hanko Seal chế độ */}
-                          <span style={{
+                        {/* Hanko Seal chế độ */}
+                        <span style={{
+                          position: 'absolute',
+                          top: 16,
+                          left: 16,
+                          fontSize: 11,
+                          fontWeight: 900,
+                          color: '#2563eb',
+                          background: 'rgba(239, 246, 255, 0.9)',
+                          border: '1px solid #bfdbfe',
+                          padding: '2px 8px',
+                          borderRadius: 4,
+                          fontFamily: 'serif',
+                          zIndex: 2
+                        }}>
+                          2 · 記憶 (LUYỆN GHI NHỚ)
+                        </span>
+
+                        {/* Nút phát âm */}
+                        <button
+                          onClick={() => speakJapanese(currentQuizQuestion.item.term)}
+                          title="Phát âm từ"
+                          style={{
                             position: 'absolute',
                             top: 16,
-                            left: 16,
-                            fontSize: 11,
-                            fontWeight: 900,
-                            color: currentMode === 'vi_to_ja' ? '#2563eb' : '#2d6d4b',
-                            background: currentMode === 'vi_to_ja' ? 'rgba(248, 250, 255, 0.85)' : 'rgba(241, 248, 243, 0.85)',
-                            border: `1px solid ${currentMode === 'vi_to_ja' ? '#bfdbfe' : '#c6e2ce'}`,
-                            padding: '2px 8px',
-                            borderRadius: 4,
-                            fontFamily: 'serif',
-                            zIndex: 2
-                          }}>
-                            {currentMode === 'vi_to_ja' ? '2 · 和訳' : '3 · 仮名'}
-                          </span>
+                            right: 16,
+                            background: '#faf8f5',
+                            border: '1px solid #d6d3d1',
+                            padding: '6px 12px',
+                            borderRadius: 20,
+                            cursor: 'pointer',
+                            fontSize: 12,
+                            fontWeight: 600,
+                            color: '#44403c',
+                            zIndex: 2,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 5
+                          }}
+                        >
+                          <Volume2 size={14} />
+                          <span>Nghe từ</span>
+                        </button>
 
-                          {/* Nút phát âm */}
-                          {(currentMode === 'ja_to_hira' || quizAnswerChecked) && (
-                            <button
-                              onClick={() => speakJapanese(quizStudyList[quizActiveIndex].term)}
-                              title="Phát âm"
-                              style={{
-                                position: 'absolute',
-                                top: 16,
-                                right: 16,
-                                background: '#faf8f5',
-                                border: '1px solid #d6d3d1',
-                                padding: '5px 12px',
-                                borderRadius: 20,
-                                cursor: 'pointer',
-                                fontSize: 12,
-                                fontWeight: 600,
-                                color: '#44403c',
-                                zIndex: 2
-                              }}
-                            >
-                              Phát âm
-                            </button>
+                        {/* Nội dung câu hỏi từ vựng */}
+                        <div style={{ position: 'relative', zIndex: 2, width: '100%', maxWidth: 560 }}>
+                          <div style={{ fontSize: 11, fontWeight: 800, color: '#78716c', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 6 }}>
+                            単語 · TỪ VỰNG TIẾNG NHẬT
+                          </div>
+
+                          <div style={{
+                            fontSize: 42,
+                            fontWeight: 900,
+                            color: '#1c2536',
+                            lineHeight: 1.2,
+                            fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif",
+                            marginBottom: 4
+                          }}>
+                            {currentQuizQuestion.item.term}
+                          </div>
+
+                          <div style={{
+                            fontSize: 18,
+                            fontWeight: 700,
+                            color: '#2d6d4b',
+                            marginBottom: 6
+                          }}>
+                            {currentQuizQuestion.item.reading}
+                          </div>
+
+                          {currentQuizQuestion.item.sinoVietnamese && (
+                            <div style={{
+                              fontSize: 13,
+                              fontWeight: 700,
+                              color: '#78716c',
+                              marginBottom: 16
+                            }}>
+                              〔 {currentQuizQuestion.item.sinoVietnamese} 〕
+                            </div>
                           )}
 
-                          {/* Từ vựng câu hỏi */}
-                          <div style={{ position: 'relative', zIndex: 2, width: '100%' }}>
-                            {currentMode === 'vi_to_ja' ? (
-                              <div style={{ fontSize: 26, fontWeight: 800, color: '#9c2a2a', marginBottom: 24, maxWidth: 500, margin: '0 auto 24px auto' }}>
-                                {quizStudyList[quizActiveIndex].vietnameseMeaning}
-                              </div>
-                            ) : (
-                              <div style={{ marginBottom: 20 }}>
-                                <div style={{ fontSize: 48, fontWeight: 900, color: '#1c2536', marginBottom: 6, letterSpacing: '1px', fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif" }}>
-                                  {quizStudyList[quizActiveIndex].term}
-                                </div>
-                                {quizStudyList[quizActiveIndex].sinoVietnamese && (
-                                  <div style={{ fontSize: 12, fontWeight: 700, color: '#78716c', letterSpacing: '1px' }}>
-                                    〔 {quizStudyList[quizActiveIndex].sinoVietnamese} 〕
-                                  </div>
-                                )}
-                              </div>
-                            )}
-
-                            {/* Khi CHƯA kiểm tra: Hiển thị form nhập */}
-                            {!quizAnswerChecked ? (
-                              <form onSubmit={handleCheckQuizAnswer} style={{ width: '100%', maxWidth: 440, margin: '0 auto' }}>
-                                <div style={{ marginBottom: 14 }}>
-                                  <input
-                                    key={quizActiveIndex}
-                                    type="text"
-                                    autoFocus
-                                    placeholder={currentMode === 'vi_to_ja' ? 'Nhập tiếng Nhật...' : 'Nhập Hiragana...'}
-                                    value={quizInput}
-                                    onChange={e => setQuizInput(e.target.value)}
-                                    onKeyDown={e => {
-                                      if (e.key === 'Tab') {
-                                        e.preventDefault();
-                                        handleSkipQuizCard();
-                                      }
-                                    }}
-                                    style={{
-                                      width: '100%',
-                                      padding: '12px 16px',
-                                      fontSize: 16,
-                                      borderRadius: 10,
-                                      border: '2px solid #d6d3d1',
-                                      outline: 'none',
-                                      textAlign: 'center',
-                                      background: '#faf8f5',
-                                      transition: 'border 0.2s ease'
-                                    }}
-                                  />
-                                </div>
-
-                                <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
-                                  <button
-                                    type="button"
-                                    onClick={handleSkipQuizCard}
-                                    style={{
-                                      padding: '10px 20px',
-                                      background: '#faf8f5',
-                                      color: '#78716c',
-                                      border: '1px solid #d6d3d1',
-                                      borderRadius: 8,
-                                      fontWeight: 700,
-                                      fontSize: 13,
-                                      cursor: 'pointer'
-                                    }}
-                                  >
-                                    Bỏ qua
-                                  </button>
-
-                                  <button
-                                    type="submit"
-                                    disabled={!quizInput.trim()}
-                                    style={{
-                                      padding: '10px 26px',
-                                      background: currentMode === 'vi_to_ja' ? '#2563eb' : '#2d6d4b',
-                                      color: '#ffffff',
-                                      fontWeight: 700,
-                                      fontSize: 13,
-                                      borderRadius: 8,
-                                      border: 'none',
-                                      cursor: quizInput.trim() ? 'pointer' : 'not-allowed',
-                                      opacity: quizInput.trim() ? 1 : 0.6
-                                    }}
-                                  >
-                                    Kiểm tra
-                                  </button>
-                                </div>
-                              </form>
-                            ) : (
-                              /* Khi ĐÃ kiểm tra: Hiển thị kết quả ngay dưới từ vựng, không còn khung nhập */
-                              <div style={{
-                                width: '100%',
-                                maxWidth: 480,
-                                margin: '0 auto',
-                                padding: '16px 20px',
-                                borderRadius: 12,
-                                background: quizIsCorrect ? '#f1f8f3' : quizIsSkipped ? '#fffbeb' : '#fdf2f0',
-                                border: `1.5px solid ${quizIsCorrect ? '#c6e2ce' : quizIsSkipped ? '#fde68a' : '#f3d5d2'}`,
-                                textAlign: 'center',
-                                position: 'relative',
-                                zIndex: 2,
-                                boxShadow: '0 4px 14px rgba(0,0,0,0.03)',
-                                animation: 'resultSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) both'
-                              }}>
-                                {/* Badge trạng thái */}
-                                <div style={{
-                                  display: 'inline-block',
-                                  padding: '3px 12px',
-                                  borderRadius: 12,
-                                  fontWeight: 800,
-                                  fontSize: 12,
-                                  background: quizIsCorrect ? 'rgba(45, 109, 75, 0.12)' : quizIsSkipped ? 'rgba(217, 119, 6, 0.12)' : 'rgba(197, 61, 50, 0.12)',
-                                  color: quizIsCorrect ? '#2d6d4b' : quizIsSkipped ? '#b45309' : '#c53d32',
-                                  marginBottom: 8
-                                }}>
-                                  {quizIsCorrect ? 'Chính xác' : quizIsSkipped ? 'Đã bỏ qua' : 'Chưa chính xác'}
-                                </div>
-
-                                {!quizIsCorrect && !quizIsSkipped && quizInput.trim() && (
-                                  <div style={{ fontSize: 13, color: '#78716c', marginBottom: 8 }}>
-                                    Bạn đã nhập: <span style={{ textDecoration: 'line-through', color: '#c53d32', fontWeight: 600 }}>{quizInput}</span>
-                                  </div>
-                                )}
-
-                                {/* Chi tiết từ vựng và cách đọc chuẩn */}
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 6 }}>
-                                  <span style={{ fontSize: 24, fontWeight: 900, color: '#1c2536', fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif" }}>
-                                    {quizStudyList[quizActiveIndex].term}
-                                  </span>
-                                  <span style={{ fontSize: 18, color: '#2d6d4b', fontWeight: 700 }}>
-                                    ({quizStudyList[quizActiveIndex].reading})
-                                  </span>
-                                  {quizStudyList[quizActiveIndex].sinoVietnamese && (
-                                    <span style={{ fontSize: 12, fontWeight: 700, color: '#78716c' }}>
-                                      〔 {quizStudyList[quizActiveIndex].sinoVietnamese} 〕
-                                    </span>
-                                  )}
-                                </div>
-
-                                {currentMode === 'ja_to_hira' && (
-                                  <div style={{ fontSize: 15, fontWeight: 700, color: '#9c2a2a', marginBottom: 8 }}>
-                                    {quizStudyList[quizActiveIndex].vietnameseMeaning}
-                                  </div>
-                                )}
-
-                                {quizStudyList[quizActiveIndex].exampleSentenceJp && (
-                                  <div style={{
-                                    marginTop: 10,
-                                    paddingTop: 10,
-                                    borderTop: '1px dashed #d6d3d1',
-                                    fontSize: 13,
-                                    textAlign: 'left'
-                                  }}>
-                                    <div style={{ fontWeight: 600, color: '#1c2536', marginBottom: 2 }}>
-                                      {quizStudyList[quizActiveIndex].exampleSentenceJp}
-                                    </div>
-                                    <div style={{ color: '#78716c', fontSize: 12 }}>
-                                      {quizStudyList[quizActiveIndex].exampleSentenceVi}
-                                    </div>
-                                  </div>
-                                )}
-
-                                {/* Nút Tiếp theo và thanh đếm ngược 5 giây */}
-                                <div style={{ marginTop: 14 }}>
-                                  <button
-                                    type="button"
-                                    onClick={handleNextQuizQuestion}
-                                    style={{
-                                      padding: '9px 28px',
-                                      background: '#1c2536',
-                                      color: '#ffffff',
-                                      fontWeight: 700,
-                                      fontSize: 14,
-                                      borderRadius: 8,
-                                      border: 'none',
-                                      cursor: 'pointer'
-                                    }}
-                                  >
-                                    Tiếp theo
-                                  </button>
-
-                                  <div style={{
-                                    width: 140,
-                                    height: 3,
-                                    background: 'rgba(0,0,0,0.08)',
-                                    borderRadius: 2,
-                                    overflow: 'hidden',
-                                    margin: '8px auto 0 auto'
-                                  }}>
-                                    <div style={{
-                                      height: '100%',
-                                      background: quizIsCorrect ? '#2d6d4b' : quizIsSkipped ? '#d97706' : '#c53d32',
-                                      animation: 'autoCountdown5s 5s linear forwards'
-                                    }} />
-                                  </div>
-                                </div>
-                              </div>
-                            )}
+                          <div style={{
+                            fontSize: 12,
+                            fontWeight: 700,
+                            color: '#9c2a2a',
+                            background: '#fef2f2',
+                            padding: '4px 12px',
+                            borderRadius: 16,
+                            display: 'inline-block',
+                            marginBottom: 18,
+                            border: '1px solid #fee2e2'
+                          }}>
+                            Chọn nghĩa tiếng Việt chính xác:
                           </div>
+
+                          {/* 4 Lựa chọn trắc nghiệm */}
+                          <div className="vocab-quiz-options-grid" style={{
+                            display: 'grid',
+                            gap: 10,
+                            width: '100%',
+                            marginBottom: 16
+                          }}>
+                            {currentQuizQuestion.options.map((opt, optIdx) => {
+                              const optionLetter = String.fromCharCode(65 + optIdx);
+                              const isSelected = quizSelectedOptionIndex === optIdx;
+
+                              let optBg = '#ffffff';
+                              let optBorder = '1.5px solid #e2e8f0';
+                              let optTextColor = '#1c2536';
+                              let badgeBg = '#f1f5f9';
+                              let badgeColor = '#475569';
+
+                              if (quizAnswerChecked) {
+                                if (opt.isCorrect) {
+                                  optBg = '#f0fdf4';
+                                  optBorder = '1.5px solid #22c55e';
+                                  optTextColor = '#15803d';
+                                  badgeBg = '#22c55e';
+                                  badgeColor = '#ffffff';
+                                } else if (isSelected && !opt.isCorrect) {
+                                  optBg = '#fef2f2';
+                                  optBorder = '1.5px solid #ef4444';
+                                  optTextColor = '#b91c1c';
+                                  badgeBg = '#ef4444';
+                                  badgeColor = '#ffffff';
+                                } else {
+                                  optBg = '#fafafa';
+                                  optBorder = '1.5px solid #f1f5f9';
+                                  optTextColor = '#94a3b8';
+                                }
+                              }
+
+                              return (
+                                <button
+                                  key={optIdx}
+                                  type="button"
+                                  disabled={quizAnswerChecked}
+                                  onClick={() => handleSelectQuizOption(optIdx)}
+                                  style={{
+                                    background: optBg,
+                                    border: optBorder,
+                                    borderRadius: 10,
+                                    padding: '12px 14px',
+                                    textAlign: 'left',
+                                    cursor: quizAnswerChecked ? 'default' : 'pointer',
+                                    transition: 'all 0.15s ease',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 10,
+                                    boxShadow: isSelected && !quizAnswerChecked ? '0 0 0 2px #2563eb' : '0 1px 3px rgba(0,0,0,0.02)'
+                                  }}
+                                >
+                                  <span style={{
+                                    width: 24,
+                                    height: 24,
+                                    borderRadius: 6,
+                                    background: badgeBg,
+                                    color: badgeColor,
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontSize: 12,
+                                    fontWeight: 800,
+                                    flexShrink: 0
+                                  }}>
+                                    {optionLetter}
+                                  </span>
+                                  <span style={{
+                                    fontSize: 14,
+                                    fontWeight: 700,
+                                    color: optTextColor,
+                                    flex: 1,
+                                    lineHeight: 1.3
+                                  }}>
+                                    {opt.text}
+                                  </span>
+                                  {quizAnswerChecked && opt.isCorrect && (
+                                    <Check size={16} color="#16a34a" strokeWidth={3} />
+                                  )}
+                                  {quizAnswerChecked && isSelected && !opt.isCorrect && (
+                                    <X size={16} color="#dc2626" strokeWidth={3} />
+                                  )}
+                                </button>
+                              );
+                            })}
+                          </div>
+
+                          {/* Hành động khi làm bài */}
+                          {!quizAnswerChecked ? (
+                            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                              <button
+                                type="button"
+                                onClick={handleSkipQuizQuestion}
+                                style={{
+                                  padding: '8px 20px',
+                                  background: '#faf8f5',
+                                  color: '#78716c',
+                                  border: '1px solid #d6d3d1',
+                                  borderRadius: 8,
+                                  fontWeight: 600,
+                                  fontSize: 13,
+                                  cursor: 'pointer'
+                                }}
+                              >
+                                Bỏ qua câu này
+                              </button>
+                            </div>
+                          ) : (
+                            <div style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              background: quizIsCorrect ? '#f0fdf4' : quizIsSkipped ? '#fffbeb' : '#fef2f2',
+                              border: `1px solid ${quizIsCorrect ? '#bbf7d0' : quizIsSkipped ? '#fef08a' : '#fecaca'}`,
+                              borderRadius: 10,
+                              padding: '10px 16px',
+                              marginTop: 10,
+                              flexWrap: 'wrap',
+                              gap: 10
+                            }}>
+                              <div style={{
+                                fontSize: 13,
+                                fontWeight: 800,
+                                color: quizIsCorrect ? '#15803d' : quizIsSkipped ? '#854d0e' : '#b91c1c'
+                              }}>
+                                {quizIsCorrect ? '✓ Chính xác!' : quizIsSkipped ? 'Đã bỏ qua câu này' : '✕ Chưa chính xác!'}
+                              </div>
+
+                              <button
+                                type="button"
+                                onClick={handleNextQuizQuestion}
+                                style={{
+                                  padding: '8px 18px',
+                                  background: '#1c2536',
+                                  color: '#ffffff',
+                                  border: 'none',
+                                  borderRadius: 8,
+                                  fontWeight: 700,
+                                  fontSize: 13,
+                                  cursor: 'pointer',
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: 6
+                                }}
+                              >
+                                <span>Tiếp theo</span>
+                                <ArrowRight size={14} />
+                              </button>
+                            </div>
+                          )}
                         </div>
-                      )}
+                      </div>
                     </div>
                   ) : (
-                    /* Màn hình Tổng kết Dạng 2 & 3 */
+                    /* Màn hình Tổng kết Dạng 2 */
                     <div style={{
                       maxWidth: 480,
                       margin: '0 auto',
@@ -1964,7 +2243,7 @@ export const VocabPage: React.FC = () => {
                         完
                       </div>
                       <h3 style={{ fontSize: 20, fontWeight: 800, color: '#1c2536', marginBottom: 6 }}>
-                        Hoàn thành bài luyện tập
+                        Hoàn thành bài luyện ghi nhớ
                       </h3>
 
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, margin: '20px 0' }}>
@@ -1978,18 +2257,13 @@ export const VocabPage: React.FC = () => {
                         <div style={{ background: '#fdf2f0', border: '1px solid #f3d5d2', borderRadius: 8, padding: 14 }}>
                           <div style={{ fontSize: 11, fontWeight: 700, color: '#c53d32' }}>SAI & BỎ QUA</div>
                           <div style={{ fontSize: 26, fontWeight: 900, color: '#c53d32', marginTop: 4 }}>
-                            {quizWrongItems.length + quizSkippedItems.length}
+                            {quizWrongQuestions.length + quizSkippedQuestions.length}
                           </div>
-                          {(quizWrongItems.length > 0 || quizSkippedItems.length > 0) && (
-                            <div style={{ fontSize: 11, color: '#78716c', marginTop: 2 }}>
-                              Sai: {quizWrongItems.length} · Bỏ qua: {quizSkippedItems.length}
-                            </div>
-                          )}
                         </div>
                       </div>
 
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                        {(quizWrongItems.length > 0 || quizSkippedItems.length > 0) && (
+                        {(quizWrongQuestions.length > 0 || quizSkippedQuestions.length > 0) && (
                           <button
                             onClick={restartWrongOrSkippedQuiz}
                             style={{
@@ -2007,7 +2281,7 @@ export const VocabPage: React.FC = () => {
                               gap: 8
                             }}
                           >
-                            <RotateCcw size={16} /> Làm lại các thẻ sai & bỏ qua ({quizWrongItems.length + quizSkippedItems.length} câu)
+                            <RotateCcw size={16} /> Làm lại các câu sai & bỏ qua ({quizWrongQuestions.length + quizSkippedQuestions.length} câu)
                           </button>
                         )}
 
