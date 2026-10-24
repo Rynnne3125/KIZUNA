@@ -1,0 +1,25 @@
+{
+  "name": "KIZUNA - Học Tiếng Nhật Thông Minh",
+  "short_name": "KIZUNA",
+  "description": "Nền tảng học tiếng Nhật thông minh chuẩn bản xứ, đồng bộ đa nền tảng.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#16a34a",
+  "orientation": "any",
+  "categories": ["education", "books"],
+  "icons": [
+    {
+      "src": "https://i.ibb.co/LDzs5grG/favicon-icon.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://i.ibb.co/LDzs5grG/favicon-icon.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ]
+}

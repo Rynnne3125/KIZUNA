@@ -228,15 +228,15 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
               )}
             </div>
 
-            {/* Drawer APK Download Banner */}
+            {/* Drawer Multiplatform Download Banner */}
             <div className="p-3 mx-3 my-2 bg-gradient-to-br from-emerald-600 to-green-700 rounded-2xl text-white shadow-md shadow-emerald-700/20">
               <div className="flex items-center gap-2 mb-1">
-                <Smartphone className="w-4 h-4 text-emerald-200" />
-                <span className="font-extrabold text-xs">KIZUNA Mobile App</span>
-                <span className="ml-auto bg-white/20 text-[10px] px-1.5 py-0.2 rounded font-bold">APK</span>
+                <Download className="w-4 h-4 text-emerald-200" />
+                <span className="font-extrabold text-xs">Cài Đặt KIZUNA App</span>
+                <span className="ml-auto bg-white/20 text-[10px] px-1.5 py-0.2 rounded font-bold">Android • iOS • PC</span>
               </div>
               <p className="text-[11px] text-emerald-100/90 leading-tight mb-2">
-                Học tiếng Nhật mọi lúc trên điện thoại Android.
+                Học tiếng Nhật mọi lúc trên Android, iPhone & Máy tính.
               </p>
               <button
                 type="button"
@@ -244,7 +244,7 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
                 className="w-full py-1.5 px-3 bg-white text-emerald-800 text-xs font-extrabold rounded-xl shadow-xs hover:bg-emerald-50 active:scale-98 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5 text-emerald-700" />
-                <span>Tải APK v1.0.4</span>
+                <span>Cài Đặt Ứng Dụng</span>
               </button>
             </div>
 
@@ -399,11 +399,11 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
         <div className="p-3 mx-3 mb-2 bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200/80 rounded-2xl">
           <div className="flex items-center gap-2 mb-1.5">
             <div className="w-7 h-7 rounded-lg bg-emerald-600 flex items-center justify-center text-white shrink-0">
-              <Smartphone className="w-4 h-4" />
+              <Download className="w-4 h-4" />
             </div>
             <div className="min-w-0 flex-1">
-              <div className="font-extrabold text-slate-800 text-xs leading-none truncate">Bản App Mobile</div>
-              <div className="text-[10px] text-emerald-700 font-semibold mt-0.5">Android APK v1.0.4</div>
+              <div className="font-extrabold text-slate-800 text-xs leading-none truncate">Cài Đặt App KIZUNA</div>
+              <div className="text-[10px] text-emerald-700 font-semibold mt-0.5">Android • iOS • PC</div>
             </div>
           </div>
           <button
@@ -412,7 +412,7 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
             className="w-full py-1.5 px-3 bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white text-xs font-extrabold rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer"
           >
             <Download className="w-3.5 h-3.5" />
-            <span>Tải file APK</span>
+            <span>Tải & Cài Đặt App</span>
           </button>
         </div>
 

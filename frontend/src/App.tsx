@@ -13,7 +13,7 @@ import { LibraryPage } from './user/pages/LibraryPage';
 import { ExamPage } from './user/pages/ExamPage';
 import { ProfilePage } from './user/pages/ProfilePage';
 import { AdminDashboardPage } from './admin/pages/AdminDashboardPage';
-import { Smartphone } from 'lucide-react';
+import { Smartphone, Download } from 'lucide-react';
 import { ApkDownloadModal } from './user/components/ApkDownloadModal';
 
 export default function App() {
@@ -144,15 +144,15 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-3">
-            {/* Nút tải APK ở Topbar Desktop */}
+            {/* Nút tải App đa nền tảng ở Topbar Desktop */}
             <button
               onClick={() => setIsApkModalOpen(true)}
               className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white text-xs font-extrabold shadow-sm shadow-emerald-600/20 active:scale-95 transition-all cursor-pointer"
-              title="Tải ứng dụng KIZUNA cho điện thoại Android"
+              title="Cài đặt ứng dụng KIZUNA cho Android, iOS và Máy tính (PC)"
             >
-              <Smartphone className="w-4 h-4 text-emerald-200" />
-              <span>Tải Bản App APK</span>
-              <span className="bg-white/20 text-[10px] px-1.5 py-0.2 rounded-md font-extrabold">v1.0.4</span>
+              <Download className="w-4 h-4 text-emerald-200" />
+              <span>Cài Đặt Ứng Dụng</span>
+              <span className="bg-white/20 text-[10px] px-1.5 py-0.2 rounded-md font-extrabold">Android • iOS • PC</span>
             </button>
           </div>
         </header>
