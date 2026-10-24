@@ -2,3 +2,4 @@ node_modules
 dist
 .openjlpt_cache
 .git
+android

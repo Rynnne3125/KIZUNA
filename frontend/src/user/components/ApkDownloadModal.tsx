@@ -77,7 +77,7 @@ export const ApkDownloadModal: React.FC<ApkDownloadModalProps> = ({ isOpen, onCl
             <div className="grid grid-cols-3 gap-2.5 text-center">
               <div className="bg-slate-50 border border-slate-100 rounded-2xl p-2.5">
                 <div className="text-[11px] text-slate-500 font-medium">Dung lượng</div>
-                <div className="text-sm font-extrabold text-slate-800 mt-0.5">~12.8 MB</div>
+                <div className="text-sm font-extrabold text-slate-800 mt-0.5">~6.3 MB</div>
               </div>
               <div className="bg-slate-50 border border-slate-100 rounded-2xl p-2.5">
                 <div className="text-[11px] text-slate-500 font-medium">Hệ điều hành</div>
