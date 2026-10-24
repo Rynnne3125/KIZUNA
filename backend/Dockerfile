@@ -1,5 +1,5 @@
 # Stage 1: Build JAR
-FROM eclipse-temurin:21-jdk-alpine AS builder
+FROM eclipse-temurin:21-jdk-jammy AS builder
 WORKDIR /app
 
 COPY gradlew .
@@ -11,8 +11,8 @@ RUN sed -i 's/\r$//' gradlew && chmod +x gradlew && ./gradlew dependencies --no-
 COPY src ./src
 RUN ./gradlew bootJar -x test --no-daemon
 
-# Stage 2: Lightweight Runtime
-FROM eclipse-temurin:21-jre-alpine
+# Stage 2: Lightweight Runtime (glibc for Netty/gRPC OpenSSL stability)
+FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
 
 # Copy JAR from build stage
