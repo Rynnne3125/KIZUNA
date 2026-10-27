@@ -15,7 +15,11 @@ import {
   Check, 
   X, 
   FastForward, 
-  ArrowRight 
+  ArrowRight,
+  Maximize2,
+  Minimize2,
+  Shuffle,
+  ArrowUpDown
 } from 'lucide-react';
 import { kizunaService } from '../services/kizunaService';
 import { KanjiItem } from '../types/kizuna';
@@ -709,6 +713,9 @@ export const KanjiPage: React.FC = () => {
 
   // Sắp xếp ngẫu nhiên hoặc theo thứ tự
   const [isShuffle, setIsShuffle] = useState(false);
+  // Chế độ toàn màn hình cho thẻ học
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const studyContainerRef = useRef<HTMLDivElement>(null);
 
   const shuffleArray = <T,>(array: T[]): T[] => {
     const arr = [...array];
@@ -983,9 +990,9 @@ export const KanjiPage: React.FC = () => {
     setQuizFinished(false);
   };
 
-  // Đổi sắp xếp ngẫu nhiên hoặc tuần tự
-  const handleToggleShuffle = () => {
-    const nextShuffle = !isShuffle;
+  // Đổi sắp xếp ngẫu nhiên hoặc tuần tự (hoặc ép chọn chế độ cụ thể)
+  const handleSetShuffle = (targetShuffle?: boolean) => {
+    const nextShuffle = targetShuffle !== undefined ? targetShuffle : !isShuffle;
     setIsShuffle(nextShuffle);
 
     if (currentMode === 'flip') {
@@ -1010,6 +1017,83 @@ export const KanjiPage: React.FC = () => {
     }
   };
 
+  const handleToggleShuffle = () => handleSetShuffle();
+
+  // Xáo trộn lại thẻ chữ Hán khi đang ở chế độ ngẫu nhiên
+  const handleReshuffleCurrent = () => {
+    if (currentMode === 'flip') {
+      setFlipStudyList(shuffleArray(activeStudyPool));
+      setFlipActiveIndex(0);
+      setIsFlipped(false);
+      setFlipFinished(false);
+    } else if (currentMode === 'quiz') {
+      setQuizQuestions(buildQuizQuestions(shuffleArray(activeStudyPool), levelKanjiList));
+      setQuizActiveIndex(0);
+      setQuizSelectedOptionIndex(null);
+      setQuizAnswerChecked(false);
+      setQuizIsCorrect(false);
+      setQuizIsSkipped(false);
+      setQuizWrongQuestions([]);
+      setQuizSkippedQuestions([]);
+      setQuizCorrectCount(0);
+      setQuizFinished(false);
+    }
+  };
+
+  const handlePrevCard = () => {
+    if (flipActiveIndex > 0) {
+      setSlideDirection('prev');
+      setFlipActiveIndex(prev => prev - 1);
+      setIsFlipped(false);
+    }
+  };
+
+  const handleNextCard = () => {
+    if (flipActiveIndex + 1 < flipStudyList.length) {
+      setSlideDirection('next');
+      setFlipActiveIndex(prev => prev + 1);
+      setIsFlipped(false);
+    }
+  };
+
+  // Bật/tắt chế độ toàn màn hình
+  const toggleFullscreen = () => {
+    if (!isFullscreen) {
+      const elem = studyContainerRef.current || document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen().catch(() => {});
+      } else if ((elem as any).webkitRequestFullscreen) {
+        (elem as any).webkitRequestFullscreen();
+      }
+      setIsFullscreen(true);
+    } else {
+      if (document.fullscreenElement || (document as any).webkitFullscreenElement) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        } else if ((document as any).webkitExitFullscreen) {
+          (document as any).webkitExitFullscreen();
+        }
+      }
+      setIsFullscreen(false);
+    }
+  };
+
+  // Đồng bộ trạng thái toàn màn hình khi người dùng bấm phím ESC trình duyệt
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      const isNativeFs = Boolean(document.fullscreenElement || (document as any).webkitFullscreenElement);
+      if (!isNativeFs && isFullscreen) {
+        setIsFullscreen(false);
+      }
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+    };
+  }, [isFullscreen]);
+
   // Tự động chuyển thẻ sau 5 giây hiển thị kết quả ở Dạng 2
   useEffect(() => {
     if (!quizAnswerChecked || quizFinished) return;
@@ -1027,6 +1111,24 @@ export const KanjiPage: React.FC = () => {
       const target = e.target as HTMLElement;
       const isInput = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable;
       if (isInput) return;
+
+      if (e.key === 'Escape' && isFullscreen) {
+        e.preventDefault();
+        toggleFullscreen();
+        return;
+      }
+
+      if ((e.key === 'f' || e.key === 'F') && !isInput && currentMode === 'flip') {
+        e.preventDefault();
+        toggleFullscreen();
+        return;
+      }
+
+      if ((e.key === 's' || e.key === 'S') && !isInput && currentMode === 'flip') {
+        e.preventDefault();
+        handleToggleShuffle();
+        return;
+      }
 
       if (currentMode === 'flip' && !flipFinished && flipStudyList.length > 0) {
         if (e.key === 'Tab') {
@@ -1097,7 +1199,7 @@ export const KanjiPage: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentMode, isFlipped, flipActiveIndex, flipStudyList, flipFinished, quizAnswerChecked, quizActiveIndex, quizQuestions, quizFinished]);
+  }, [currentMode, isFlipped, flipActiveIndex, flipStudyList, flipFinished, quizAnswerChecked, quizActiveIndex, quizQuestions, quizFinished, isFullscreen]);
 
   const currentQuizQuestion = quizQuestions[quizActiveIndex];
 
@@ -2019,83 +2121,219 @@ export const KanjiPage: React.FC = () => {
 
           {/* CHẾ ĐỘ 1: DẠNG 1 - ÔN TẬP (Flashcard Lật 3D SRS) */}
           {currentMode === 'flip' && (
-            <div>
+            <div
+              ref={studyContainerRef}
+              style={isFullscreen ? {
+                position: 'fixed',
+                inset: 0,
+                zIndex: 99999,
+                width: '100vw',
+                height: '100vh',
+                background: 'linear-gradient(180deg, #fcfbf9 0%, #f4efe6 100%)',
+                overflowY: 'auto',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '16px 20px',
+                boxSizing: 'border-box'
+              } : undefined}
+            >
+              {/* Sakura background khi toàn màn hình */}
+              {isFullscreen && <SakuraFallingBackground />}
+
               {/* Lựa chọn phạm vi học: 40 từ của trang hiện tại vs Toàn bộ cấp độ */}
-              <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginBottom: 14 }}>
-                <button
-                  onClick={() => {
-                    setStudyScope('page');
-                    setTimeout(() => initFlipMode(), 50);
-                  }}
-                  style={{
-                    padding: '4px 12px',
-                    borderRadius: 6,
-                    fontSize: 12,
-                    fontWeight: 700,
-                    border: '1px solid #d6d3d1',
-                    background: studyScope === 'page' ? '#c53d32' : '#ffffff',
-                    color: studyScope === 'page' ? '#ffffff' : '#57534e',
-                    cursor: 'pointer'
-                  }}
-                >
-                  Trang hiện tại ({currentPageItems.length} chữ)
-                </button>
-                <button
-                  onClick={() => {
-                    setStudyScope('all');
-                    setTimeout(() => initFlipMode(), 50);
-                  }}
-                  style={{
-                    padding: '4px 12px',
-                    borderRadius: 6,
-                    fontSize: 12,
-                    fontWeight: 700,
-                    border: '1px solid #d6d3d1',
-                    background: studyScope === 'all' ? '#c53d32' : '#ffffff',
-                    color: studyScope === 'all' ? '#ffffff' : '#57534e',
-                    cursor: 'pointer'
-                  }}
-                >
-                  Toàn bộ {selectedLevel} ({filteredList.length} chữ)
-                </button>
-              </div>
+              {!isFullscreen && (
+                <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginBottom: 14 }}>
+                  <button
+                    onClick={() => {
+                      setStudyScope('page');
+                      setTimeout(() => initFlipMode(), 50);
+                    }}
+                    style={{
+                      padding: '4px 12px',
+                      borderRadius: 6,
+                      fontSize: 12,
+                      fontWeight: 700,
+                      border: '1px solid #d6d3d1',
+                      background: studyScope === 'page' ? '#c53d32' : '#ffffff',
+                      color: studyScope === 'page' ? '#ffffff' : '#57534e',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Trang hiện tại ({currentPageItems.length} chữ)
+                  </button>
+                  <button
+                    onClick={() => {
+                      setStudyScope('all');
+                      setTimeout(() => initFlipMode(), 50);
+                    }}
+                    style={{
+                      padding: '4px 12px',
+                      borderRadius: 6,
+                      fontSize: 12,
+                      fontWeight: 700,
+                      border: '1px solid #d6d3d1',
+                      background: studyScope === 'all' ? '#c53d32' : '#ffffff',
+                      color: studyScope === 'all' ? '#ffffff' : '#57534e',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Toàn bộ {selectedLevel} ({filteredList.length} chữ)
+                  </button>
+                </div>
+              )}
 
               {!flipFinished ? (
-                <div style={{ maxWidth: 640, margin: '0 auto' }}>
-                  {/* Tiến trình và chế độ sắp xếp */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, fontSize: 13, color: '#78716c', flexWrap: 'wrap', gap: 8 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      <span style={{ fontWeight: 600 }}>Thẻ {flipActiveIndex + 1} / {flipStudyList.length}</span>
-                      <button
-                        onClick={handleToggleShuffle}
-                        style={{
-                          padding: '3px 10px',
-                          fontSize: 12,
-                          fontWeight: 600,
-                          borderRadius: 16,
-                          border: '1px solid #d6d3d1',
-                          background: isShuffle ? '#f3f4f6' : '#ffffff',
-                          color: isShuffle ? '#1c2536' : '#78716c',
-                          cursor: 'pointer',
+                <div style={{
+                  width: '100%',
+                  maxWidth: isFullscreen ? 720 : 640,
+                  margin: '0 auto',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: isFullscreen ? 'space-between' : 'flex-start',
+                  minHeight: isFullscreen ? '100%' : 'auto',
+                  position: 'relative',
+                  zIndex: 2
+                }}>
+                  {/* Thanh Header: Tiến trình & Chế độ sắp xếp */}
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10, fontSize: 13, color: '#78716c', flexWrap: 'wrap', gap: 10 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                        {isFullscreen && (
+                          <button
+                            onClick={toggleFullscreen}
+                            style={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: 5,
+                              padding: '5px 12px',
+                              borderRadius: 16,
+                              border: '1px solid #d6d3d1',
+                              background: '#ffffff',
+                              color: '#1c2536',
+                              fontWeight: 700,
+                              fontSize: 12,
+                              cursor: 'pointer',
+                              boxShadow: '0 1px 3px rgba(0,0,0,0.06)'
+                            }}
+                            title="Thoát toàn màn hình (Phím F hoặc Esc)"
+                          >
+                            <Minimize2 size={13} />
+                            <span>Thu nhỏ</span>
+                            <span style={{ fontSize: 10, color: '#78716c', background: '#f3f4f6', padding: '1px 4px', borderRadius: 4 }}>Esc</span>
+                          </button>
+                        )}
+
+                        <span style={{ fontWeight: 700, color: '#1c2536' }}>
+                          Thẻ {flipActiveIndex + 1} / {flipStudyList.length}
+                        </span>
+
+                        {/* BỘ CHỌN SẮP XẾP THẺ: THỨ TỰ CÓ SẴN / NGẪU NHIÊN */}
+                        <div style={{
                           display: 'inline-flex',
                           alignItems: 'center',
-                          gap: 4
-                        }}
-                      >
-                        {isShuffle ? 'Ngẫu nhiên' : 'Theo thứ tự'}
-                      </button>
+                          background: '#f1ede6',
+                          borderRadius: 16,
+                          padding: '2px',
+                          border: '1px solid #e2ddd5'
+                        }}>
+                          <button
+                            onClick={() => handleSetShuffle(false)}
+                            style={{
+                              padding: '3px 10px',
+                              fontSize: 11,
+                              fontWeight: 700,
+                              borderRadius: 14,
+                              border: 'none',
+                              background: !isShuffle ? '#ffffff' : 'transparent',
+                              color: !isShuffle ? '#1c2536' : '#78716c',
+                              cursor: 'pointer',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: 4,
+                              boxShadow: !isShuffle ? '0 1px 2px rgba(0,0,0,0.08)' : 'none',
+                              transition: 'all 0.15s ease'
+                            }}
+                            title="Sắp xếp thẻ theo thứ tự bài học có sẵn"
+                          >
+                            <ArrowUpDown size={11} />
+                            <span>Thứ tự có sẵn</span>
+                          </button>
+
+                          <button
+                            onClick={() => {
+                              if (isShuffle) {
+                                handleReshuffleCurrent();
+                              } else {
+                                handleSetShuffle(true);
+                              }
+                            }}
+                            style={{
+                              padding: '3px 10px',
+                              fontSize: 11,
+                              fontWeight: 700,
+                              borderRadius: 14,
+                              border: 'none',
+                              background: isShuffle ? '#c53d32' : 'transparent',
+                              color: isShuffle ? '#ffffff' : '#78716c',
+                              cursor: 'pointer',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: 4,
+                              boxShadow: isShuffle ? '0 1px 2px rgba(197,61,50,0.25)' : 'none',
+                              transition: 'all 0.15s ease'
+                            }}
+                            title={isShuffle ? "Nhấn để xáo trộn lại thẻ" : "Sắp xếp thẻ ngẫu nhiên"}
+                          >
+                            <Shuffle size={11} />
+                            <span>Ngẫu nhiên</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <div style={{ fontSize: 12 }}>
+                          Đã thuộc: <strong style={{ color: '#2d6d4b' }}>{masteredIds.size}</strong> | Chưa thuộc: <strong style={{ color: '#c53d32' }}>{learningIds.size}</strong>
+                        </div>
+
+                        {!isFullscreen && (
+                          <button
+                            onClick={toggleFullscreen}
+                            style={{
+                              padding: '4px 10px',
+                              fontSize: 12,
+                              fontWeight: 600,
+                              borderRadius: 16,
+                              border: '1px solid #d6d3d1',
+                              background: '#ffffff',
+                              color: '#1c2536',
+                              cursor: 'pointer',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: 4,
+                              boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
+                              transition: 'all 0.15s ease'
+                            }}
+                            title="Bật chế độ học toàn màn hình (Phím F)"
+                          >
+                            <Maximize2 size={12} />
+                            <span>Toàn màn hình</span>
+                            <span style={{ fontSize: 10, color: '#78716c', background: '#f3f4f6', padding: '0 4px', borderRadius: 3 }}>F</span>
+                          </button>
+                        )}
+                      </div>
                     </div>
-                    <div>
-                      Đã thuộc: <strong style={{ color: '#2d6d4b' }}>{masteredIds.size}</strong> | Chưa thuộc: <strong style={{ color: '#c53d32' }}>{learningIds.size}</strong>
+
+                    {/* Thanh tiến trình */}
+                    <div style={{ width: '100%', height: 4, background: '#e7e3da', borderRadius: 2, marginBottom: 16, overflow: 'hidden' }}>
+                      <div style={{
+                        width: `${((flipActiveIndex + 1) / Math.max(1, flipStudyList.length)) * 100}%`,
+                        height: '100%',
+                        background: '#c53d32',
+                        transition: 'width 0.2s ease'
+                      }} />
                     </div>
-                  </div>
-                  <div style={{ width: '100%', height: 4, background: '#e7e3da', borderRadius: 2, marginBottom: 16, overflow: 'hidden' }}>
-                    <div style={{
-                      width: `${((flipActiveIndex + 1) / Math.max(1, flipStudyList.length)) * 100}%`,
-                      height: '100%',
-                      background: '#c53d32',
-                      transition: 'width 0.2s ease'
-                    }} />
                   </div>
 
                   {/* Hiệu ứng lướt thẻ mượt mà & Lật 3D */}
@@ -2305,60 +2543,143 @@ export const KanjiPage: React.FC = () => {
                     </div>
                   )}
 
-                  {/* Nút hành động đánh giá kết quả ôn tập */}
-                  <div style={{ display: 'flex', gap: 12, marginTop: 20 }}>
-                    <button
-                      onClick={() => handleMarkFlipResult(false)}
-                      style={{
-                        flex: 1,
-                        padding: '12px 0',
-                        background: '#ffffff',
-                        border: '1.5px solid #fecaca',
-                        color: '#c53d32',
-                        borderRadius: 10,
-                        fontWeight: 700,
-                        fontSize: 14,
-                        cursor: 'pointer',
-                        transition: 'all 0.15s ease'
-                      }}
-                    >
-                      Chưa thuộc (Học lại)
-                    </button>
+                  {/* Nút hành động đánh giá kết quả ôn tập & Điều hướng */}
+                  <div>
+                    <div style={{ display: 'flex', gap: 10, marginTop: 20 }}>
+                      <button
+                        onClick={handlePrevCard}
+                        disabled={flipActiveIndex === 0}
+                        style={{
+                          padding: '12px 14px',
+                          background: '#ffffff',
+                          color: flipActiveIndex === 0 ? '#d6d3d1' : '#57534e',
+                          border: '1px solid #e7dfd5',
+                          borderRadius: 10,
+                          cursor: flipActiveIndex === 0 ? 'not-allowed' : 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          transition: 'all 0.15s ease'
+                        }}
+                        title="Thẻ trước (←)"
+                      >
+                        <ChevronLeft size={18} />
+                      </button>
 
-                    <button
-                      onClick={() => handleMarkFlipResult(true)}
-                      style={{
-                        flex: 1,
-                        padding: '12px 0',
-                        background: '#2d6d4b',
-                        border: 'none',
-                        color: '#ffffff',
-                        borderRadius: 10,
-                        fontWeight: 700,
-                        fontSize: 14,
-                        cursor: 'pointer',
-                        transition: 'all 0.15s ease'
-                      }}
-                    >
-                      Đã thuộc
-                    </button>
-                  </div>
+                      <button
+                        onClick={() => handleMarkFlipResult(false)}
+                        style={{
+                          flex: 1,
+                          padding: '12px 14px',
+                          background: '#fdf2f0',
+                          color: '#c53d32',
+                          border: '1.5px solid #fecaca',
+                          borderRadius: 10,
+                          fontWeight: 700,
+                          fontSize: 14,
+                          cursor: 'pointer',
+                          transition: 'all 0.15s ease'
+                        }}
+                      >
+                        Chưa thuộc
+                      </button>
 
-                  <div style={{ textAlign: 'center', marginTop: 10, fontSize: 12, color: '#a8a29e' }}>
-                    Dùng phím mũi tên trái và phải để lật và chuyển thẻ · Phím Tab để bỏ qua
+                      <button
+                        onClick={handleFlipCard}
+                        style={{
+                          padding: '12px 22px',
+                          background: '#ffffff',
+                          color: '#44403c',
+                          border: '1px solid #d6d3d1',
+                          borderRadius: 10,
+                          fontWeight: 700,
+                          fontSize: 14,
+                          cursor: 'pointer',
+                          transition: 'all 0.15s ease'
+                        }}
+                      >
+                        Lật thẻ
+                      </button>
+
+                      <button
+                        onClick={() => handleMarkFlipResult(true)}
+                        style={{
+                          flex: 1,
+                          padding: '12px 14px',
+                          background: '#2d6d4b',
+                          border: 'none',
+                          color: '#ffffff',
+                          borderRadius: 10,
+                          fontWeight: 700,
+                          fontSize: 14,
+                          cursor: 'pointer',
+                          transition: 'all 0.15s ease'
+                        }}
+                      >
+                        Đã thuộc
+                      </button>
+
+                      <button
+                        onClick={handleNextCard}
+                        disabled={flipActiveIndex >= flipStudyList.length - 1}
+                        style={{
+                          padding: '12px 14px',
+                          background: '#ffffff',
+                          color: flipActiveIndex >= flipStudyList.length - 1 ? '#d6d3d1' : '#57534e',
+                          border: '1px solid #e7dfd5',
+                          borderRadius: 10,
+                          cursor: flipActiveIndex >= flipStudyList.length - 1 ? 'not-allowed' : 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          transition: 'all 0.15s ease'
+                        }}
+                        title="Thẻ tiếp theo (→)"
+                      >
+                        <ChevronRight size={18} />
+                      </button>
+                    </div>
+
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: 8,
+                      marginTop: 12,
+                      fontSize: 12,
+                      color: '#78716c',
+                      background: '#faf8f5',
+                      padding: '6px 14px',
+                      borderRadius: 20,
+                      border: '1px solid #ebe7df',
+                      maxWidth: 460,
+                      margin: '12px auto 0 auto',
+                      flexWrap: 'wrap'
+                    }}>
+                      <span>Space: Lật thẻ</span>
+                      <span style={{ color: '#d6d3d1' }}>·</span>
+                      <span>← / →: Trước / Sau</span>
+                      <span style={{ color: '#d6d3d1' }}>·</span>
+                      <span>S: Đổi thứ tự</span>
+                      <span style={{ color: '#d6d3d1' }}>·</span>
+                      <span>F: Toàn màn hình</span>
+                    </div>
                   </div>
                 </div>
               ) : (
                 /* Tổng kết hoàn thành Dạng 1 */
                 <div style={{
                   maxWidth: 480,
-                  margin: '0 auto',
+                  width: '100%',
+                  margin: 'auto',
                   background: '#ffffff',
                   borderRadius: 14,
                   border: '1px solid #ebe7df',
                   padding: 32,
                   textAlign: 'center',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.04)'
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.04)',
+                  position: 'relative',
+                  zIndex: 2
                 }}>
                   <div style={{
                     display: 'inline-flex',
@@ -2438,6 +2759,29 @@ export const KanjiPage: React.FC = () => {
                       <RotateCcw style={{ width: 15, height: 15 }} />
                       <span>Làm lại tất cả ({activeStudyPool.length} chữ)</span>
                     </button>
+
+                    {isFullscreen && (
+                      <button
+                        onClick={toggleFullscreen}
+                        style={{
+                          padding: '10px 0',
+                          background: '#ffffff',
+                          color: '#44403c',
+                          border: '1px solid #d6d3d1',
+                          borderRadius: 8,
+                          fontWeight: 600,
+                          fontSize: 13,
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: 6
+                        }}
+                      >
+                        <Minimize2 size={15} />
+                        Thoát toàn màn hình (Esc)
+                      </button>
+                    )}
                   </div>
                 </div>
               )}
@@ -2491,26 +2835,70 @@ export const KanjiPage: React.FC = () => {
                 <div style={{ maxWidth: 640, margin: '0 auto' }}>
                   {/* Tiến trình và chế độ sắp xếp */}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, fontSize: 13, color: '#78716c', flexWrap: 'wrap', gap: 8 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      <span style={{ fontWeight: 600 }}>Câu {quizActiveIndex + 1} / {quizQuestions.length}</span>
-                      <button
-                        onClick={handleToggleShuffle}
-                        style={{
-                          padding: '3px 10px',
-                          fontSize: 12,
-                          fontWeight: 600,
-                          borderRadius: 16,
-                          border: '1px solid #d6d3d1',
-                          background: isShuffle ? '#f3f4f6' : '#ffffff',
-                          color: isShuffle ? '#1c2536' : '#78716c',
-                          cursor: 'pointer',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: 4
-                        }}
-                      >
-                        {isShuffle ? 'Ngẫu nhiên' : 'Theo thứ tự'}
-                      </button>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                      <span style={{ fontWeight: 700, color: '#1c2536' }}>Câu {quizActiveIndex + 1} / {quizQuestions.length}</span>
+
+                      {/* BỘ CHỌN SẮP XẾP CÂU HỎI */}
+                      <div style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        background: '#f1ede6',
+                        borderRadius: 16,
+                        padding: '2px',
+                        border: '1px solid #e2ddd5'
+                      }}>
+                        <button
+                          onClick={() => handleSetShuffle(false)}
+                          style={{
+                            padding: '3px 10px',
+                            fontSize: 11,
+                            fontWeight: 700,
+                            borderRadius: 14,
+                            border: 'none',
+                            background: !isShuffle ? '#ffffff' : 'transparent',
+                            color: !isShuffle ? '#1c2536' : '#78716c',
+                            cursor: 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 4,
+                            boxShadow: !isShuffle ? '0 1px 2px rgba(0,0,0,0.08)' : 'none',
+                            transition: 'all 0.15s ease'
+                          }}
+                          title="Sắp xếp câu hỏi theo thứ tự bài học có sẵn"
+                        >
+                          <ArrowUpDown size={11} />
+                          <span>Thứ tự có sẵn</span>
+                        </button>
+
+                        <button
+                          onClick={() => {
+                            if (isShuffle) {
+                              handleReshuffleCurrent();
+                            } else {
+                              handleSetShuffle(true);
+                            }
+                          }}
+                          style={{
+                            padding: '3px 10px',
+                            fontSize: 11,
+                            fontWeight: 700,
+                            borderRadius: 14,
+                            border: 'none',
+                            background: isShuffle ? '#2563eb' : 'transparent',
+                            color: isShuffle ? '#ffffff' : '#78716c',
+                            cursor: 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 4,
+                            boxShadow: isShuffle ? '0 1px 2px rgba(37,99,235,0.25)' : 'none',
+                            transition: 'all 0.15s ease'
+                          }}
+                          title={isShuffle ? "Nhấn để xáo trộn lại câu hỏi" : "Sắp xếp câu hỏi ngẫu nhiên"}
+                        >
+                          <Shuffle size={11} />
+                          <span>Ngẫu nhiên</span>
+                        </button>
+                      </div>
                     </div>
                     <div>
                       Đúng: <strong style={{ color: '#2d6d4b' }}>{quizCorrectCount}</strong> | Sai & Bỏ qua: <strong style={{ color: '#c53d32' }}>{quizWrongQuestions.length + quizSkippedQuestions.length}</strong>
