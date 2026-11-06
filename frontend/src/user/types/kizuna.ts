@@ -4,6 +4,17 @@ export interface Stage {
   orderIndex: number;
   description: string;
   themeColor?: string;
+  jlptLevel?: 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
+  range?: string;
+  hanko?: string;
+  colorGradient?: string[];
+  checkpoint?: {
+    cpH?: string;
+    cpTitle?: string;
+    cpDesc?: string;
+  };
+  milestoneIds?: string[];
+  total_milestones?: number;
   milestones?: Milestone[];
 }
 
@@ -16,10 +27,40 @@ export interface Milestone {
   communicationContext: string;
   xpReward: number;
   activePointsReward: number;
-  status?: 'COMPLETED' | 'UNLOCKED' | 'LOCKED';
+  status?: 'COMPLETED' | 'UNLOCKED' | 'LOCKED' | 'IN_PROGRESS';
   vocabCount?: number;
   kanjiCount?: number;
   grammarCount?: number;
+  jlptLevel?: string;
+  canDoGoal?: string;
+  milestone_type?: 'LESSON' | 'CHECKPOINT';
+  readingPassage?: any;
+  nikkiDiary?: any;
+}
+
+export interface JapanRegion {
+  id: string;
+  level: 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
+  nameVi: string;
+  nameJp: string;
+  realGeo: string;
+  badgeTitle: string;
+  description: string;
+  themeColor: string;
+  accentColor: string;
+  stagesCount: number;
+  milestonesCount: number;
+  totalXp: number;
+  status: 'COMPLETED' | 'UNLOCKED' | 'LOCKED';
+  completedStagesCount: number;
+  iconSymbol: string;
+  landmarkName: string;
+  landmarkDesc: string;
+  // Position on the 3D map canvas (percentage 0..100)
+  mapPos: {
+    x: number; // percentage left
+    y: number; // percentage top
+  };
 }
 
 export interface VocabularyItem {
