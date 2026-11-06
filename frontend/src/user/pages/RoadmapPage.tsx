@@ -3,6 +3,8 @@ import { kizunaService } from '../services/kizunaService';
 import { Stage, Milestone, JapanRegion } from '../types/kizuna';
 import { JapanOverworldMap } from '../components/roadmap/JapanOverworldMap';
 import { RegionDetailModal } from '../components/roadmap/RegionDetailModal';
+import { StageMilestoneMap } from '../components/roadmap/StageMilestoneMap';
+import { MilestoneDrawer } from '../components/roadmap/MilestoneDrawer';
 import { Flame, Zap, Trophy, Compass, ArrowLeft, Sparkles, MapPin, Layers, ChevronRight, Award } from 'lucide-react';
 
 const JAPAN_REGIONS_CONFIG: JapanRegion[] = [
@@ -117,6 +119,9 @@ export const RoadmapPage: React.FC = () => {
   const [currentView, setCurrentView] = useState<'OVERWORLD' | 'REGION_ZOOM'>('OVERWORLD');
   const [selectedRegion, setSelectedRegion] = useState<JapanRegion | null>(JAPAN_REGIONS_CONFIG[0]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedStageId, setSelectedStageId] = useState<string | null>(null);
+  const [selectedMilestone, setSelectedMilestone] = useState<Milestone | null>(null);
+  const [isMilestoneDrawerOpen, setIsMilestoneDrawerOpen] = useState(false);
 
   // User gamification metrics (mock / fetched)
   const [userStats] = useState({
@@ -150,6 +155,8 @@ export const RoadmapPage: React.FC = () => {
   const handleEnterRegion = (region: JapanRegion) => {
     setSelectedRegion(region);
     setIsModalOpen(false);
+    const firstStage = stages.find(s => s.jlptLevel === region.level || (!s.jlptLevel && region.level === 'N5'));
+    setSelectedStageId(firstStage?.id || null);
     setCurrentView('REGION_ZOOM');
   };
 
@@ -448,93 +455,20 @@ export const RoadmapPage: React.FC = () => {
             </div>
           )}
 
-          {/* Stages List in this region (Transition screen preview) */}
-          <div style={{ marginBottom: 16 }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <Layers size={18} style={{ color: selectedRegion?.themeColor }} />
-                <h2 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', margin: 0 }}>
-                  Danh Sách {regionStages.length || selectedRegion?.stagesCount} Chặng Trong Vùng {selectedRegion?.level}
-                </h2>
-              </div>
-              <span style={{ fontSize: 12, color: '#64748b' }}>
-                Chuẩn bị sẵn sàng cho Giai đoạn tiếp theo (Vẽ Map Chặng & Mốc game)
-              </span>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 16 }}>
-              {regionStages.map((st, idx) => {
-                const stageMilestones = milestones.filter(m => m.stageId === st.id);
-                return (
-                  <div
-                    key={st.id}
-                    className="kizuna-card"
-                    style={{
-                      padding: 20,
-                      borderRadius: 16,
-                      border: idx === 0 ? `2px solid ${selectedRegion?.themeColor}` : '1px solid #e2e8f0',
-                      boxShadow: idx === 0 ? `0 8px 20px -4px ${selectedRegion?.themeColor}30` : 'var(--shadow-sm)',
-                      position: 'relative'
-                    }}
-                  >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
-                      <span
-                        style={{
-                          fontSize: 12,
-                          fontWeight: 800,
-                          color: '#ffffff',
-                          backgroundColor: selectedRegion?.themeColor || '#16a34a',
-                          padding: '2px 10px',
-                          borderRadius: 6
-                        }}
-                      >
-                        Chặng {st.orderIndex || (idx + 1)}
-                      </span>
-                      {st.hanko && (
-                        <span
-                          style={{
-                            fontSize: 13,
-                            fontWeight: 800,
-                            color: selectedRegion?.themeColor,
-                            border: `1.5px solid ${selectedRegion?.themeColor}`,
-                            borderRadius: 6,
-                            padding: '1px 8px'
-                          }}
-                        >
-                          {st.hanko}
-                        </span>
-                      )}
-                    </div>
-
-                    <h3 style={{ fontSize: 15, fontWeight: 800, color: '#0f172a', marginBottom: 6 }}>
-                      {st.title.replace(/^\[N\d\]\s*/, '')}
-                    </h3>
-
-                    <div style={{ fontSize: 12.5, color: '#64748b', marginBottom: 12, minHeight: 36 }}>
-                      {st.description || 'Chinh phục các mốc kiến thức thực chiến.'}
-                    </div>
-
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        paddingTop: 10,
-                        borderTop: '1px solid #f1f5f9',
-                        fontSize: 12,
-                        color: '#64748b'
-                      }}
-                    >
-                      <span>📍 {stageMilestones.length || 5} Mốc học tập</span>
-                      <span style={{ color: selectedRegion?.themeColor, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 2 }}>
-                        Khám phá <ChevronRight size={14} />
-                      </span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          {/* Interactive Stage & Milestone Game Map */}
+          {selectedRegion && (
+            <StageMilestoneMap
+              region={selectedRegion}
+              stages={regionStages}
+              allMilestones={milestones}
+              selectedStageId={selectedStageId || regionStages[0]?.id || null}
+              onSelectStage={(st) => setSelectedStageId(st.id)}
+              onSelectMilestone={(ms) => {
+                setSelectedMilestone(ms);
+                setIsMilestoneDrawerOpen(true);
+              }}
+            />
+          )}
         </div>
       )}
 
@@ -545,6 +479,16 @@ export const RoadmapPage: React.FC = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onEnterRegion={handleEnterRegion}
+      />
+
+      {/* 4. MILESTONE QUEST DRAWER */}
+      <MilestoneDrawer
+        milestone={selectedMilestone}
+        isOpen={isMilestoneDrawerOpen}
+        onClose={() => setIsMilestoneDrawerOpen(false)}
+        onStartQuest={(ms, questIdx) => {
+          alert(`Bắt đầu Bài ${questIdx} của [${ms.title}]. Đang kết nối phòng luyện tập Kizuna!`);
+        }}
       />
     </div>
   );

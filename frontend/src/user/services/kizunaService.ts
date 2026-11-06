@@ -95,6 +95,29 @@ export const kizunaService = {
     return fallback;
   },
 
+  async getMilestoneQuests(milestoneId: string): Promise<any[]> {
+    const cacheKey = `kizuna_quests_${milestoneId}`;
+    const cached = getSessionCache<any[]>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      if (db) {
+        const q = query(collection(db, 'milestone_quests'), where('milestoneId', '==', milestoneId));
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          const quests: any[] = [];
+          snap.forEach(d => quests.push({ id: d.id, ...d.data() }));
+          quests.sort((a, b) => a.stepIndex - b.stepIndex);
+          setSessionCache(cacheKey, quests);
+          return quests;
+        }
+      }
+    } catch (e) {
+      console.warn('Firestore quests error:', e);
+    }
+    return [];
+  },
+
   /**
    * Lấy danh mục 2 bộ sách (Mimi Kara Oboeru & Tango) và các Unit theo từng cấp độ N5 -> N1
    * Tối ưu hóa: 0 Firestore Read (dùng catalog tĩnh & cache)
