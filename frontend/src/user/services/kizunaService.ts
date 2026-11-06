@@ -54,6 +54,12 @@ export const kizunaService = {
     return fallback;
   },
 
+  async getStagesByLevel(level: 'N5' | 'N4' | 'N3' | 'N2' | 'N1'): Promise<Stage[]> {
+    const allStages = await this.getStages();
+    const filtered = allStages.filter(s => s.jlptLevel === level || (!s.jlptLevel && level === 'N5'));
+    return filtered.sort((a, b) => a.orderIndex - b.orderIndex);
+  },
+
   async getMilestones(stageId?: string): Promise<Milestone[]> {
     const cacheKey = `kizuna_milestones_cache_${stageId || 'all'}`;
     const cached = getSessionCache<Milestone[]>(cacheKey);
