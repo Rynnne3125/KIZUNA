@@ -11,6 +11,8 @@ export interface User {
   totalXp?: number;
   currentStreak?: number;
   level?: string;
+  placementVerified?: boolean;
+  placementScore?: number;
 }
 
 export interface AuthState {

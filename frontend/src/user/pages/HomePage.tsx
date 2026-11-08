@@ -16,9 +16,10 @@ interface HomePageProps {
   user: User | null;
   onNavigate: (tab: UserNavTab) => void;
   onOpenAuth?: () => void;
+  onOpenPlacement?: () => void;
 }
 
-export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth }) => {
+export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth, onOpenPlacement }) => {
   // Tiến độ học tập thực tế từ Firestore
   const [userProgress, setUserProgress] = useState<UserProgressData | null>(null);
   const [loadingProgress, setLoadingProgress] = useState(true);
@@ -163,6 +164,65 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
           </div>
         )}
       </div>
+
+      {/* =========================================================================
+          1.5. CARD THẨM ĐỊNH TRÌNH ĐỘ ĐẦU VÀO CÙNG AI SENSEI (ADAPTIVE PLACEMENT)
+          ========================================================================= */}
+      {user && (
+        <div className={`rounded-3xl p-5 sm:p-6 border transition-all ${
+          user.placementVerified
+            ? 'bg-gradient-to-r from-emerald-50/80 to-teal-50/80 border-emerald-200'
+            : 'bg-gradient-to-r from-amber-500/10 via-emerald-500/10 to-teal-500/10 border-emerald-300 shadow-md shadow-emerald-950/5'
+        }`}>
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex items-start gap-4">
+              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${
+                user.placementVerified
+                  ? 'bg-emerald-600 text-white shadow-sm'
+                  : 'bg-gradient-to-br from-amber-500 to-emerald-600 text-white shadow-md'
+              }`}>
+                <GraduationCap className="w-6 h-6" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2 flex-wrap mb-1">
+                  <span className={`text-[11px] px-2.5 py-0.5 rounded-full font-bold uppercase ${
+                    user.placementVerified 
+                      ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                      : 'bg-amber-100 text-amber-900 border border-amber-200 animate-pulse'
+                  }`}>
+                    {user.placementVerified ? '✓ Đã thẩm định trình độ' : 'Khuyến nghị cho bạn'}
+                  </span>
+                  <span className="text-xs font-extrabold text-slate-800">
+                    Trình độ hiện tại: <strong className="text-emerald-700">{user.level || 'Tân binh'}</strong>
+                  </span>
+                </div>
+                <h3 className="text-base sm:text-lg font-extrabold text-slate-900">
+                  {user.placementVerified
+                    ? 'Lộ trình học tập đã được cá nhân hóa theo năng lực thực tế'
+                    : 'Thẩm định trình độ qua trắc nghiệm để mở khóa đúng lộ trình học'}
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 mt-0.5 max-w-xl">
+                  {user.placementVerified
+                    ? 'Bạn có thể làm lại bài kiểm tra thích ứng bất cứ lúc nào để nâng hạng hoặc kiểm tra sự tiến bộ của mình.'
+                    : 'Chỉ mất 5 - 7 phút với 3 câu hỏi khảo sát bằng cấp và bài test thích ứng. Bạn sẽ không phải học lại kiến thức đã biết!'}
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={onOpenPlacement}
+              className={`shrink-0 flex items-center justify-center gap-2 px-5 py-3 rounded-2xl font-bold text-xs sm:text-sm transition-all shadow-md cursor-pointer ${
+                user.placementVerified
+                  ? 'bg-white hover:bg-emerald-50 text-emerald-800 border border-emerald-200'
+                  : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/20'
+              }`}
+            >
+              <Sparkles className="w-4 h-4 text-amber-300 fill-amber-300" />
+              <span>{user.placementVerified ? 'Kiểm tra lại trình độ' : 'Làm bài kiểm tra ngay 🎯'}</span>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* =========================================================================
           2. TIẾN ĐỘ HỌC TẬP THỰC TẾ CỦA USER (TỪ FIRESTORE - CHƯA HỌC THÌ HIỂN THỊ KHỞI ĐỘNG)

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { kizunaService } from '../services/kizunaService';
+import { authService } from '../services/authService';
+import { progressService } from '../services/progressService';
 import { Stage, Milestone, JapanRegion } from '../types/kizuna';
 import { JapanOverworldMap } from '../components/roadmap/JapanOverworldMap';
 import { RegionDetailModal } from '../components/roadmap/RegionDetailModal';
@@ -109,21 +111,27 @@ const JAPAN_REGIONS_CONFIG: JapanRegion[] = [
 ];
 
 export const RoadmapPage: React.FC = () => {
+  const currentUser = authService.getCurrentUser();
   const [stages, setStages] = useState<Stage[]>([]);
   const [milestones, setMilestones] = useState<Milestone[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Map state
+  // Map state - Tự động chọn Vùng tương ứng theo level đã thẩm định của học viên
   const [currentView, setCurrentView] = useState<'OVERWORLD' | 'REGION_ZOOM'>('OVERWORLD');
-  const [selectedRegion, setSelectedRegion] = useState<JapanRegion | null>(JAPAN_REGIONS_CONFIG[0]);
+  const [selectedRegion, setSelectedRegion] = useState<JapanRegion | null>(() => {
+    if (currentUser?.level === 'N4') return JAPAN_REGIONS_CONFIG[1];
+    if (currentUser?.level === 'N3') return JAPAN_REGIONS_CONFIG[2];
+    if (currentUser?.level === 'N2') return JAPAN_REGIONS_CONFIG[3];
+    return JAPAN_REGIONS_CONFIG[0];
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // User gamification metrics (mock / fetched)
-  const [userStats] = useState({
-    streakDays: 5,
-    activePoints: 340,
-    totalXp: 1250,
-    currentLevel: 'N5'
+  // User gamification metrics đồng bộ thực tế từ tài khoản học viên
+  const [userStats, setUserStats] = useState({
+    streakDays: currentUser?.currentStreak || 0,
+    activePoints: currentUser?.activePoints || 0,
+    totalXp: currentUser?.totalXp || 0,
+    currentLevel: currentUser?.level || 'N5'
   });
 
   useEffect(() => {

@@ -15,6 +15,7 @@ import { ProfilePage } from './user/pages/ProfilePage';
 import { AdminDashboardPage } from './admin/pages/AdminDashboardPage';
 import { Smartphone, Download } from 'lucide-react';
 import { ApkDownloadModal } from './user/components/ApkDownloadModal';
+import { AiPlacementModal } from './user/components/placement/AiPlacementModal';
 
 export default function App() {
   // Lấy người dùng từ session được lưu trong localStorage (tối đa 24h)
@@ -28,6 +29,9 @@ export default function App() {
 
   // Trạng thái mở modal tải APK
   const [isApkModalOpen, setIsApkModalOpen] = useState(false);
+
+  // Trạng thái mở modal làm bài test thẩm định trình độ thích ứng
+  const [isPlacementModalOpen, setIsPlacementModalOpen] = useState(false);
 
   // Đồng bộ quyền mới nhất từ Firestore khi mở ứng dụng (đảm bảo quyền mới sửa trên console ăn ngay)
   useEffect(() => {
@@ -162,6 +166,7 @@ export default function App() {
             <HomePage
               user={user}
               onNavigate={handleTabChange}
+              onOpenPlacement={() => setIsPlacementModalOpen(true)}
             />
           )}
           {activeTab === 'vocab' && <VocabPage />}
@@ -198,6 +203,24 @@ export default function App() {
       <ApkDownloadModal
         isOpen={isApkModalOpen}
         onClose={() => setIsApkModalOpen(false)}
+      />
+
+      {/* MODAL THẨM ĐỊNH TRÌNH ĐỘ ĐẦU VÀO CÙNG AI SENSEI */}
+      <AiPlacementModal
+        isOpen={isPlacementModalOpen}
+        onClose={() => setIsPlacementModalOpen(false)}
+        user={user}
+        onAssessmentComplete={(result) => {
+          if (user) {
+            setUser({
+              ...user,
+              level: result.assignedLevel,
+              placementVerified: true,
+              placementScore: result.percentage
+            });
+          }
+        }}
+        onNavigateToRoadmap={() => handleTabChange('roadmap')}
       />
 
     </div>
