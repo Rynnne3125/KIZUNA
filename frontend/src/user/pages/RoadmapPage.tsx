@@ -1,134 +1,125 @@
 import React, { useEffect, useState } from 'react';
 import { kizunaService } from '../services/kizunaService';
-import { Stage, Milestone, JapanRegion } from '../types/kizuna';
-import { JapanOverworldMap } from '../components/roadmap/JapanOverworldMap';
-import { RegionDetailModal } from '../components/roadmap/RegionDetailModal';
-import { StageMilestoneMap } from '../components/roadmap/StageMilestoneMap';
-import { MilestoneDrawer } from '../components/roadmap/MilestoneDrawer';
-import { Flame, Zap, Trophy, Compass, ArrowLeft, Sparkles, MapPin, Layers, ChevronRight, Award } from 'lucide-react';
+import { Stage, Milestone } from '../types/kizuna';
+import { RoadmapMilestoneDetail } from '../components/roadmap/RoadmapMilestoneDetail';
+import { 
+  Flame, 
+  Zap, 
+  Trophy, 
+  BookOpen, 
+  Layers, 
+  ChevronRight, 
+  ArrowLeft, 
+  Sparkles, 
+  CheckCircle2, 
+  Lock, 
+  Compass, 
+  Award,
+  ChevronDown
+} from 'lucide-react';
 
-const JAPAN_REGIONS_CONFIG: JapanRegion[] = [
-  {
-    id: 'region_n5',
-    level: 'N5',
-    nameVi: 'Cửa Ngõ Thần Đạo',
-    nameJp: '第一界・九州＆沖縄の門',
-    realGeo: 'Kyushu & Okinawa (Tây Nam)',
-    badgeTitle: 'Khởi Đầu Sơ Cấp',
-    description: 'Bắt đầu chuyến hành trình từ vùng biển phía Tây Nam ấm áp. Chinh phục bảng chữ cái, câu danh từ, động từ cơ bản và 25 bài hội thoại sơ cấp Minna no Nihongo.',
-    themeColor: '#10b981',
-    accentColor: '#6ee7b7',
-    stagesCount: 5,
-    milestonesCount: 30,
-    totalXp: 3000,
-    status: 'UNLOCKED',
-    completedStagesCount: 1,
-    iconSymbol: '⛩️',
-    landmarkName: 'Cổng Torii Nổi Oki-no-Torii',
-    landmarkDesc: 'Cánh cổng huyền thoại dẫn lối vào vùng đất Nhật ngữ sơ cấp.',
-    mapPos: { x: 18, y: 77 }
+type JlptLevelKey = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
+
+const LEVEL_CONFIG: Record<JlptLevelKey, { kanji: string; vi: string; desc: string; range: string; color: string }> = {
+  N5: {
+    kanji: '入門',
+    vi: 'Nhập môn',
+    desc: 'Bảng chữ cái, câu danh từ, động từ & 25 bài sơ cấp Minna',
+    range: 'Bài 1 – 25 Minna no Nihongo · 5 Chặng · 30 Mốc',
+    color: '#10b981'
   },
-  {
-    id: 'region_n4',
-    level: 'N4',
-    nameVi: 'Cố Đô Tri Thức',
-    nameJp: '第二界・関西＆中国の城',
-    realGeo: 'Kansai & Chugoku (Tây Honshu)',
-    badgeTitle: 'Giao Tiếp Thực Tiễn',
-    description: 'Tiến vào kinh thành cổ Kyoto và Osaka phồn hoa. Nắm vững thể Te, Nai, Ta, câu bị động, sai khiến và kính ngữ cơ bản trong 25 bài Minna no Nihongo tiếp theo.',
-    themeColor: '#06b6d4',
-    accentColor: '#67e8f9',
-    stagesCount: 5,
-    milestonesCount: 30,
-    totalXp: 3200,
-    status: 'UNLOCKED',
-    completedStagesCount: 0,
-    iconSymbol: '🏯',
-    landmarkName: 'Chùa Vàng Kinkaku-ji & Lâu Đài Himeji',
-    landmarkDesc: 'Nơi lưu giữ các mẫu câu giao tiếp đời sống và công sở cơ bản.',
-    mapPos: { x: 38, y: 57 }
+  N4: {
+    kanji: '初級',
+    vi: 'Sơ cấp',
+    desc: 'Thể Te, Nai, Ta, bị động, sai khiến & kính ngữ cơ bản',
+    range: 'Bài 26 – 50 Minna no Nihongo · 5 Chặng · 30 Mốc',
+    color: '#06b6d4'
   },
-  {
-    id: 'region_n3',
-    level: 'N3',
-    nameVi: 'Đỉnh Phú Sĩ & Đô Thị',
-    nameJp: '第三界・中部＆関東の頂',
-    realGeo: 'Chubu & Kanto (Trung Tâm)',
-    badgeTitle: 'Trung Cấp Đột Phá',
-    description: 'Vượt qua ngọn núi Phú Sĩ tuyết trắng và tiến vào thủ đô Tokyo sôi động. Làm chủ 47 mốc ngữ pháp trung cấp, phân biệt sắc thái biểu cảm tinh vi.',
-    themeColor: '#3b82f6',
-    accentColor: '#93c5fd',
-    stagesCount: 9,
-    milestonesCount: 47,
-    totalXp: 4800,
-    status: 'UNLOCKED',
-    completedStagesCount: 0,
-    iconSymbol: '🗻',
-    landmarkName: 'Ngọn Núi Phú Sĩ & Tháp Tokyo',
-    landmarkDesc: 'Cột mốc chuyển mình quan trọng từ sơ cấp lên ngưỡng cửa trung cấp.',
-    mapPos: { x: 58, y: 44 }
+  N3: {
+    kanji: '中級',
+    vi: 'Trung cấp',
+    desc: 'Mẫu câu xã hội, liên kết thời gian, phán đoán & đời sống',
+    range: '47 Mốc ngữ pháp giao tiếp chuyên sâu · 9 Chặng',
+    color: '#3b82f6'
   },
-  {
-    id: 'region_n2',
-    level: 'N2',
-    nameVi: 'Rừng Núi & Lãnh Chúa',
-    nameJp: '第四界・東北の森',
-    realGeo: 'Tohoku (Đông Bắc Honshu)',
-    badgeTitle: 'Cao Cấp Chuyên Nghiệp',
-    description: 'Băng qua những cánh rừng thông và lâu đài Samurai cổ kính vùng Đông Bắc. Thuần thục tiếng Nhật thương mại, văn phong công sở và năng lực đọc hiểu chuyên sâu.',
-    themeColor: '#8b5cf6',
-    accentColor: '#c4b5fd',
-    stagesCount: 9,
-    milestonesCount: 45,
-    totalXp: 5000,
-    status: 'UNLOCKED',
-    completedStagesCount: 0,
-    iconSymbol: '🍁',
-    landmarkName: 'Thành Cổ Aizu & Rừng Phong Mùa Thu',
-    landmarkDesc: 'Vùng đất của văn phong trang trọng, học thuật và báo chí.',
-    mapPos: { x: 74, y: 30 }
+  N2: {
+    kanji: '中上級',
+    vi: 'Trung thượng cấp',
+    desc: 'Văn phong văn phòng, thương mại, nghị luận & xã luận',
+    range: '45 Mốc nâng cao & đọc hiểu chuyên sâu · 9 Chặng',
+    color: '#8b5cf6'
   },
-  {
-    id: 'region_n1',
-    level: 'N1',
-    nameVi: 'Đỉnh Băng Tuyết Tối Thượng',
-    nameJp: '第五界・北海道の極',
-    realGeo: 'Hokkaido (Cực Bắc)',
-    badgeTitle: 'Bậc Thầy Tối Cao',
-    description: 'Chạm tới cực bắc lạnh giá nơi ánh cực quang phương bắc soi rọi. Chinh phục đỉnh cao tuyệt đối của Nhật ngữ với các biểu thức cổ phong và năng lực cảm thán thâm sâu.',
-    themeColor: '#f59e0b',
-    accentColor: '#fde68a',
-    stagesCount: 6,
-    milestonesCount: 30,
-    totalXp: 6000,
-    status: 'UNLOCKED',
-    completedStagesCount: 0,
-    iconSymbol: '❄️',
-    landmarkName: 'Đền Thần Cực Quang Băng Giá',
-    landmarkDesc: 'Ngôi đền vinh danh những bậc thầy tiếng Nhật toàn diện nhất.',
-    mapPos: { x: 86, y: 15 }
+  N1: {
+    kanji: '上級',
+    vi: 'Thượng cấp',
+    desc: 'Biểu thức cực hạn, văn kiện học thuật & cổ phong',
+    range: '30 Mốc tối thượng · 6 Chặng',
+    color: '#f59e0b'
   }
-];
+};
+
+// Component Animation Hoa anh đào rơi động chuẩn phong cách Nhật Bản
+const SakuraFallingBackground: React.FC = () => {
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        inset: 0,
+        pointerEvents: 'none',
+        overflow: 'hidden',
+        zIndex: 0
+      }}
+    >
+      {[
+        { left: '4%', delay: '0s', duration: '7.5s', size: 14, rotate: 20 },
+        { left: '24%', delay: '2s', duration: '8.2s', size: 17, rotate: -30 },
+        { left: '45%', delay: '4s', duration: '6.8s', size: 13, rotate: 40 },
+        { left: '68%', delay: '1s', duration: '9.0s', size: 16, rotate: 10 },
+        { left: '88%', delay: '3.5s', duration: '7.2s', size: 15, rotate: -20 }
+      ].map((p, i) => (
+        <span
+          key={i}
+          style={{
+            position: 'absolute',
+            left: p.left,
+            top: '-20px',
+            width: p.size,
+            height: p.size * 1.3,
+            animation: `sakuraFall ${p.duration} linear infinite`,
+            animationDelay: p.delay,
+            opacity: 0.65,
+            display: 'block'
+          }}
+        >
+          <svg viewBox="0 0 30 40" width="100%" height="100%" style={{ transform: `rotate(${p.rotate}deg)` }}>
+            <path
+              d="M 15 2 C 22 10, 30 22, 24 32 C 18 40, 8 38, 4 30 C 0 20, 8 10, 15 2 Z"
+              fill="#fda4af"
+              opacity="0.8"
+            />
+          </svg>
+        </span>
+      ))}
+    </div>
+  );
+};
 
 export const RoadmapPage: React.FC = () => {
   const [stages, setStages] = useState<Stage[]>([]);
   const [milestones, setMilestones] = useState<Milestone[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Map state
-  const [currentView, setCurrentView] = useState<'OVERWORLD' | 'REGION_ZOOM'>('OVERWORLD');
-  const [selectedRegion, setSelectedRegion] = useState<JapanRegion | null>(JAPAN_REGIONS_CONFIG[0]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedStageId, setSelectedStageId] = useState<string | null>(null);
+  // Navigation hierarchy: Level -> Stage -> Milestone/Lesson
+  const [selectedLevel, setSelectedLevel] = useState<JlptLevelKey>('N5');
+  const [selectedStage, setSelectedStage] = useState<Stage | null>(null);
   const [selectedMilestone, setSelectedMilestone] = useState<Milestone | null>(null);
-  const [isMilestoneDrawerOpen, setIsMilestoneDrawerOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<'STAGES' | 'MILESTONES' | 'LESSON'>('STAGES');
 
-  // User gamification metrics (mock / fetched)
+  // Gamification metrics
   const [userStats] = useState({
     streakDays: 5,
     activePoints: 340,
-    totalXp: 1250,
-    currentLevel: 'N5'
+    totalXp: 1250
   });
 
   useEffect(() => {
@@ -147,349 +138,685 @@ export const RoadmapPage: React.FC = () => {
     loadData();
   }, []);
 
-  const handleSelectRegion = (region: JapanRegion) => {
-    setSelectedRegion(region);
-    setIsModalOpen(true);
+  // Filter stages of selected level
+  const levelStages = stages
+    .filter(s => s.jlptLevel === selectedLevel || (!s.jlptLevel && selectedLevel === 'N5'))
+    .sort((a, b) => a.orderIndex - b.orderIndex);
+
+  // Filter milestones of selected stage
+  const stageMilestones = milestones
+    .filter(m => m.stageId === selectedStage?.id)
+    .sort((a, b) => a.orderIndex - b.orderIndex);
+
+  const handleSelectLevel = (lvl: JlptLevelKey) => {
+    setSelectedLevel(lvl);
+    setSelectedStage(null);
+    setSelectedMilestone(null);
+    setViewMode('STAGES');
   };
 
-  const handleEnterRegion = (region: JapanRegion) => {
-    setSelectedRegion(region);
-    setIsModalOpen(false);
-    const firstStage = stages.find(s => s.jlptLevel === region.level || (!s.jlptLevel && region.level === 'N5'));
-    setSelectedStageId(firstStage?.id || null);
-    setCurrentView('REGION_ZOOM');
+  const handleSelectStage = (st: Stage) => {
+    setSelectedStage(st);
+    setSelectedMilestone(null);
+    setViewMode('MILESTONES');
   };
 
-  const handleBackToOverworld = () => {
-    setCurrentView('OVERWORLD');
+  const handleSelectMilestone = (ms: Milestone) => {
+    setSelectedMilestone(ms);
+    setViewMode('LESSON');
   };
 
-  // Filter stages of selected region
-  const regionStages = stages.filter(
-    s => s.jlptLevel === selectedRegion?.level || (!s.jlptLevel && selectedRegion?.level === 'N5')
-  );
+  const handleBackToStages = () => {
+    setSelectedStage(null);
+    setSelectedMilestone(null);
+    setViewMode('STAGES');
+  };
+
+  const handleBackToMilestones = () => {
+    setSelectedMilestone(null);
+    setViewMode('MILESTONES');
+  };
 
   return (
-    <div style={{ maxWidth: 1200, margin: '0 auto', paddingBottom: 60 }}>
-      {/* 1. TOP GAMIFICATION HUD BAR */}
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: 16,
-          backgroundColor: '#0f172a',
-          color: '#ffffff',
-          borderRadius: 20,
-          padding: '14px 20px',
-          marginBottom: 20,
-          boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.4)',
-          border: '1px solid rgba(255, 255, 255, 0.08)'
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div
-            style={{
-              width: 44,
-              height: 44,
-              borderRadius: '50%',
-              backgroundColor: 'rgba(239, 68, 68, 0.2)',
-              border: '2px solid #ef4444',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 22
-            }}
-          >
-            🗾
-          </div>
+    <div
+      style={{
+        maxWidth: 1040,
+        margin: '0 auto',
+        paddingBottom: 64,
+        position: 'relative',
+        fontFamily: '"Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+      }}
+    >
+      <SakuraFallingBackground />
+
+      <style>{`
+        @keyframes sakuraFall {
+          0% {
+            top: -8%;
+            transform: translateX(0) rotate(0deg);
+            opacity: 0;
+          }
+          15% {
+            opacity: 0.8;
+          }
+          50% {
+            transform: translateX(20px) rotate(180deg);
+          }
+          85% {
+            opacity: 0.8;
+          }
+          100% {
+            top: 108%;
+            transform: translateX(-15px) rotate(360deg);
+            opacity: 0;
+          }
+        }
+      `}</style>
+
+      {/* 1. HEADER MANG PHONG CÁCH NHẬT BẢN HIỆN ĐẠI (和の美学) */}
+      <div style={{ position: 'relative', zIndex: 1, marginBottom: 24 }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: 16,
+            marginBottom: 16,
+            paddingBottom: 16,
+            borderBottom: '1px solid #ebe7df'
+          }}
+        >
           <div>
-            <div style={{ fontSize: 11, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
-              KIZUNA JOURNEY ROADMAP
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+              {/* Dấu triện Hanko đỏ (印鑑) KIZUNA */}
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 26,
+                  height: 26,
+                  border: '1.5px solid #c53d32',
+                  borderRadius: 4,
+                  color: '#c53d32',
+                  fontSize: 13,
+                  fontWeight: 900,
+                  fontFamily: 'serif',
+                  lineHeight: 1,
+                  background: '#fffcfb'
+                }}
+              >
+                絆
+              </span>
+              <h1 style={{ fontSize: 23, fontWeight: 900, color: '#1c2536', margin: 0, letterSpacing: '-0.3px' }}>
+                道筋 <span style={{ fontSize: 17, fontWeight: 700, color: '#475569' }}>· Lộ Trình Học Chuẩn NEJ & Minna</span>
+              </h1>
             </div>
-            <div style={{ fontSize: 17, fontWeight: 800, color: '#ffffff' }}>
-              Hành Trình Khám Phá Quần Đảo Nhật Bản
+            <p style={{ color: '#78716c', fontSize: 13, margin: 0 }}>
+              Hành trình chinh phục mục tiêu giao tiếp Can-do: <strong>Chặng ➔ Mốc ➔ 4 Bài học Quests</strong>
+            </p>
+          </div>
+
+          {/* Gamification Chips */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 5,
+                padding: '5px 12px',
+                borderRadius: 9999,
+                backgroundColor: '#fff1f2',
+                border: '1px solid #fecdd3',
+                color: '#e11d48',
+                fontSize: 12,
+                fontWeight: 800
+              }}
+            >
+              <Flame size={14} />
+              <span>{userStats.streakDays} ngày</span>
+            </div>
+
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 5,
+                padding: '5px 12px',
+                borderRadius: 9999,
+                backgroundColor: '#f0f9ff',
+                border: '1px solid #bae6fd',
+                color: '#0284c7',
+                fontSize: 12,
+                fontWeight: 800
+              }}
+            >
+              <Zap size={14} />
+              <span>{userStats.activePoints} pts</span>
+            </div>
+
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 5,
+                padding: '5px 12px',
+                borderRadius: 9999,
+                backgroundColor: '#fefce8',
+                border: '1px solid #fef08a',
+                color: '#ca8a04',
+                fontSize: 12,
+                fontWeight: 800
+              }}
+            >
+              <Trophy size={14} />
+              <span>{userStats.totalXp} XP</span>
             </div>
           </div>
         </div>
 
-        {/* Gamification Chips */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 6,
-              padding: '6px 14px',
-              borderRadius: 9999,
-              backgroundColor: 'rgba(239, 68, 68, 0.15)',
-              border: '1px solid rgba(239, 68, 68, 0.3)',
-              color: '#f87171',
-              fontWeight: 800,
-              fontSize: 13
-            }}
-          >
-            <Flame size={16} />
-            <span>{userStats.streakDays} Ngày Streak</span>
-          </div>
-
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 6,
-              padding: '6px 14px',
-              borderRadius: 9999,
-              backgroundColor: 'rgba(56, 189, 248, 0.15)',
-              border: '1px solid rgba(56, 189, 248, 0.3)',
-              color: '#38bdf8',
-              fontWeight: 800,
-              fontSize: 13
-            }}
-          >
-            <Zap size={16} />
-            <span>{userStats.activePoints} Điểm Năng Động</span>
-          </div>
-
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 6,
-              padding: '6px 14px',
-              borderRadius: 9999,
-              backgroundColor: 'rgba(234, 179, 8, 0.15)',
-              border: '1px solid rgba(234, 179, 8, 0.3)',
-              color: '#facc15',
-              fontWeight: 800,
-              fontSize: 13
-            }}
-          >
-            <Trophy size={16} />
-            <span>{userStats.totalXp} XP</span>
-          </div>
+        {/* Thanh chuyển cấp độ N phong cách Thẻ bài Nhật Bản (札 - Fuda) */}
+        <div
+          style={{
+            display: 'flex',
+            background: '#f4f2ee',
+            padding: 4,
+            borderRadius: 12,
+            border: '1px solid #e5e0d8',
+            gap: 4,
+            overflowX: 'auto',
+            scrollbarWidth: 'none'
+          }}
+        >
+          {(['N5', 'N4', 'N3', 'N2', 'N1'] as JlptLevelKey[]).map(lvl => {
+            const isActive = selectedLevel === lvl;
+            const meta = LEVEL_CONFIG[lvl];
+            return (
+              <button
+                key={lvl}
+                onClick={() => handleSelectLevel(lvl)}
+                style={{
+                  flex: 1,
+                  minWidth: 100,
+                  padding: '8px 12px',
+                  borderRadius: 8,
+                  border: 'none',
+                  cursor: 'pointer',
+                  backgroundColor: isActive ? '#ffffff' : 'transparent',
+                  color: isActive ? '#0f172a' : '#78716c',
+                  boxShadow: isActive ? '0 2px 6px rgba(0, 0, 0, 0.08)' : 'none',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: 2,
+                  transition: 'all 0.15s'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span style={{ fontSize: 14, fontWeight: 900 }}>{lvl}</span>
+                  <span
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 800,
+                      color: isActive ? meta.color : '#a8a29e',
+                      fontFamily: 'serif'
+                    }}
+                  >
+                    {meta.kanji}
+                  </span>
+                </div>
+                <div style={{ fontSize: 11, color: isActive ? '#334155' : '#a8a29e', whiteSpace: 'nowrap' }}>
+                  {meta.vi}
+                </div>
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* 2. MAIN VIEW CONTROLLER */}
-      {currentView === 'OVERWORLD' ? (
-        /* ================= OVERWORLD 3D JAPAN MAP VIEW ================= */
-        <div>
-          <JapanOverworldMap
-            regions={JAPAN_REGIONS_CONFIG}
-            selectedRegion={selectedRegion}
-            onSelectRegion={handleSelectRegion}
-            onEnterRegion={handleEnterRegion}
-            userCurrentLevel={userStats.currentLevel}
-          />
+      {/* 2. BREADCRUMBS NAVIGATION */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 6,
+          fontSize: 13,
+          color: '#64748b',
+          marginBottom: 20,
+          flexWrap: 'wrap'
+        }}
+      >
+        <button
+          onClick={handleBackToStages}
+          style={{
+            background: 'none',
+            border: 'none',
+            padding: 0,
+            color: viewMode === 'STAGES' ? '#0f172a' : '#2563eb',
+            fontWeight: viewMode === 'STAGES' ? 800 : 600,
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 4
+          }}
+        >
+          <span>Lộ Trình {selectedLevel}</span>
+        </button>
 
-          {/* Quick instructions / tips footer */}
+        {selectedStage && (
+          <>
+            <ChevronRight size={14} style={{ color: '#94a3b8' }} />
+            <button
+              onClick={handleBackToMilestones}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                color: viewMode === 'MILESTONES' ? '#0f172a' : '#2563eb',
+                fontWeight: viewMode === 'MILESTONES' ? 800 : 600,
+                cursor: 'pointer'
+              }}
+            >
+              Chặng {selectedStage.orderIndex} {selectedStage.hanko ? `【${selectedStage.hanko}】` : ''}
+            </button>
+          </>
+        )}
+
+        {selectedMilestone && (
+          <>
+            <ChevronRight size={14} style={{ color: '#94a3b8' }} />
+            <span style={{ color: '#0f172a', fontWeight: 800 }}>
+              {selectedMilestone.nejUnit || `Mốc ${selectedMilestone.orderIndex}`}
+            </span>
+          </>
+        )}
+      </div>
+
+      {/* 3. MAIN BODY ACCORDING TO VIEW MODE */}
+      {loading ? (
+        <div style={{ padding: '60px 20px', textAlign: 'center', color: '#64748b' }}>
+          Đang tải lộ trình học tập...
+        </div>
+      ) : viewMode === 'STAGES' ? (
+        /* ================= TẦNG 2: DANH SÁCH CHẶNG (STAGES) ================= */
+        <div>
+          {/* Level Summary Banner */}
           <div
             style={{
-              marginTop: 18,
-              padding: '14px 20px',
-              borderRadius: 16,
               backgroundColor: '#ffffff',
-              border: '1px solid #e2e8f0',
+              borderRadius: 16,
+              padding: '18px 22px',
+              border: '1.5px solid #e2e8f0',
+              marginBottom: 20,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               boxShadow: 'var(--shadow-sm)'
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <Compass size={20} style={{ color: '#16a34a' }} />
-              <span style={{ fontSize: 13.5, color: '#334155', fontWeight: 600 }}>
-                💡 <b>Mẹo khám phá:</b> Bản đồ được chia thành 5 vùng đất tương ứng từ <b>N5 (Cửa Ngõ Thần Đạo)</b> đến <b>N1 (Đỉnh Băng Tuyết)</b>. Nhấp vào bất kỳ vùng đất nào trên mô hình 3D để xem thông tin chi tiết và bắt đầu học!
-              </span>
+            <div>
+              <div style={{ fontSize: 11, fontWeight: 800, color: LEVEL_CONFIG[selectedLevel].color, textTransform: 'uppercase', marginBottom: 2 }}>
+                Mục tiêu cấp độ {selectedLevel} ({LEVEL_CONFIG[selectedLevel].kanji})
+              </div>
+              <h2 style={{ fontSize: 16, fontWeight: 800, color: '#0f172a', margin: '0 0 4px 0' }}>
+                {LEVEL_CONFIG[selectedLevel].desc}
+              </h2>
+              <div style={{ fontSize: 12.5, color: '#64748b' }}>
+                {LEVEL_CONFIG[selectedLevel].range}
+              </div>
             </div>
 
-            <button
-              onClick={() => handleSelectRegion(selectedRegion || JAPAN_REGIONS_CONFIG[0])}
+            <div
               style={{
-                padding: '8px 16px',
-                borderRadius: 10,
-                border: 'none',
-                backgroundColor: '#16a34a',
-                color: '#ffffff',
-                fontWeight: 700,
                 fontSize: 13,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6
+                fontWeight: 800,
+                color: '#0f172a',
+                padding: '6px 14px',
+                borderRadius: 8,
+                backgroundColor: '#f8fafc',
+                border: '1px solid #e2e8f0'
               }}
             >
-              <span>Xem Vùng Đang Chọn</span>
-              <ChevronRight size={14} />
+              Tổng số: {levelStages.length} Chặng
+            </div>
+          </div>
+
+          {/* Stages Grid Cards */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 16 }}>
+            {levelStages.map((st, idx) => {
+              const stageMils = milestones.filter(m => m.stageId === st.id);
+              const milestoneCount = stageMils.length || st.total_milestones || 5;
+
+              return (
+                <div
+                  key={st.id}
+                  onClick={() => handleSelectStage(st)}
+                  className="kizuna-card"
+                  style={{
+                    backgroundColor: '#ffffff',
+                    borderRadius: 16,
+                    border: '1.5px solid #e2e8f0',
+                    padding: '20px 22px',
+                    cursor: 'pointer',
+                    boxShadow: 'var(--shadow-sm)',
+                    transition: 'all 0.2s',
+                    position: 'relative',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between'
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.borderColor = LEVEL_CONFIG[selectedLevel].color;
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.borderColor = '#e2e8f0';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+                  }}
+                >
+                  <div>
+                    {/* Top Tag & Hanko Seal */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                      <span
+                        style={{
+                          fontSize: 11.5,
+                          fontWeight: 800,
+                          padding: '3px 10px',
+                          borderRadius: 6,
+                          backgroundColor: '#f1f5f9',
+                          color: '#0f172a'
+                        }}
+                      >
+                        Chặng {st.orderIndex || idx + 1} • {st.range || 'Bài học'}
+                      </span>
+
+                      {st.hanko && (
+                        <span
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: 28,
+                            height: 28,
+                            borderRadius: 6,
+                            border: `1.5px solid ${LEVEL_CONFIG[selectedLevel].color}`,
+                            color: LEVEL_CONFIG[selectedLevel].color,
+                            fontSize: 13,
+                            fontWeight: 900,
+                            fontFamily: 'serif',
+                            backgroundColor: '#ffffff'
+                          }}
+                        >
+                          {st.hanko}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Stage Title */}
+                    <h3 style={{ fontSize: 16, fontWeight: 800, color: '#0f172a', margin: '0 0 8px 0', lineHeight: 1.4 }}>
+                      {st.title.replace(/^\[N\d\]\s*/, '')}
+                    </h3>
+
+                    {/* Stage Description */}
+                    <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.6, margin: '0 0 16px 0', minHeight: 40 }}>
+                      {st.description || 'Chinh phục kiến thức và kỹ năng giao tiếp trong chặng.'}
+                    </p>
+                  </div>
+
+                  {/* Stage Footer */}
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      borderTop: '1px solid #f1f5f9',
+                      paddingTop: 12,
+                      fontSize: 12.5
+                    }}
+                  >
+                    <span style={{ color: '#475569', fontWeight: 600 }}>
+                      📍 {milestoneCount} Mốc học tập
+                    </span>
+
+                    <span style={{ color: LEVEL_CONFIG[selectedLevel].color, fontWeight: 800, display: 'flex', alignItems: 'center', gap: 4 }}>
+                      <span>Xem mốc học</span>
+                      <ChevronRight size={14} />
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ) : viewMode === 'MILESTONES' ? (
+        /* ================= TẦNG 3: DANH SÁCH MỐC (MILESTONES) CỦA CHẶNG ================= */
+        <div>
+          {/* Back Button and Stage Header */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>
+            <button
+              onClick={handleBackToStages}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                padding: '8px 14px',
+                borderRadius: 8,
+                backgroundColor: '#ffffff',
+                border: '1px solid #e2e8f0',
+                color: '#334155',
+                fontSize: 13,
+                fontWeight: 700,
+                cursor: 'pointer'
+              }}
+            >
+              <ArrowLeft size={15} />
+              <span>Quay lại danh sách Chặng</span>
             </button>
+
+            <span
+              style={{
+                padding: '4px 12px',
+                borderRadius: 6,
+                backgroundColor: LEVEL_CONFIG[selectedLevel].color,
+                color: '#ffffff',
+                fontSize: 12,
+                fontWeight: 800
+              }}
+            >
+              {selectedLevel} • Chặng {selectedStage?.orderIndex}
+            </span>
+          </div>
+
+          {/* Stage Detail Card Banner */}
+          {selectedStage && (
+            <div
+              style={{
+                backgroundColor: '#ffffff',
+                borderRadius: 16,
+                border: '1.5px solid #e2e8f0',
+                padding: '20px 24px',
+                marginBottom: 20,
+                boxShadow: 'var(--shadow-sm)'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                <span style={{ fontSize: 12, fontWeight: 800, color: LEVEL_CONFIG[selectedLevel].color }}>
+                  Chặng {selectedStage.orderIndex} • {selectedStage.range}
+                </span>
+                {selectedStage.hanko && (
+                  <span style={{ fontSize: 13, fontWeight: 900, color: LEVEL_CONFIG[selectedLevel].color }}>
+                    【{selectedStage.hanko}】
+                  </span>
+                )}
+              </div>
+
+              <h2 style={{ fontSize: 20, fontWeight: 900, color: '#0f172a', margin: '0 0 6px 0' }}>
+                {selectedStage.title.replace(/^\[N\d\]\s*/, '')}
+              </h2>
+
+              <p style={{ fontSize: 13.5, color: '#64748b', margin: 0, lineHeight: 1.6 }}>
+                {selectedStage.description}
+              </p>
+            </div>
+          )}
+
+          {/* Milestones List */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            {stageMilestones.map((ms, idx) => {
+              const isCompleted = ms.status === 'COMPLETED' || idx === 0;
+              const isUnlocked = ms.status === 'UNLOCKED' || idx === 1;
+              const isBoss = ms.milestone_type === 'BOSS_CHALLENGE' || idx === stageMilestones.length - 1;
+
+              return (
+                <div
+                  key={ms.id}
+                  onClick={() => handleSelectMilestone(ms)}
+                  style={{
+                    backgroundColor: '#ffffff',
+                    border: isBoss
+                      ? '2px solid #f59e0b'
+                      : isUnlocked
+                      ? '1.5px solid #16a34a'
+                      : '1.5px solid #e2e8f0',
+                    borderRadius: 14,
+                    padding: '16px 20px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    cursor: 'pointer',
+                    boxShadow: 'var(--shadow-sm)',
+                    transition: 'all 0.15s',
+                    flexWrap: 'wrap',
+                    gap: 12
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.transform = 'translateX(4px)';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.transform = 'translateX(0)';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: '1 1 450px' }}>
+                    {/* Milestone Order Circle */}
+                    <div
+                      style={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: '50%',
+                        backgroundColor: isBoss
+                          ? '#fef3c7'
+                          : isCompleted
+                          ? '#dcfce7'
+                          : isUnlocked
+                          ? '#ecfdf5'
+                          : '#f1f5f9',
+                        color: isBoss
+                          ? '#d97706'
+                          : isCompleted
+                          ? '#16a34a'
+                          : isUnlocked
+                          ? '#15803d'
+                          : '#64748b',
+                        fontWeight: 900,
+                        fontSize: isBoss ? 18 : 14,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        border: isBoss ? '1.5px solid #fde68a' : isCompleted ? '1.5px solid #86efac' : '1px solid #cbd5e1',
+                        flexShrink: 0
+                      }}
+                    >
+                      {isBoss ? '🏯' : isCompleted ? '✓' : ms.kanjiMark || idx + 1}
+                    </div>
+
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 2 }}>
+                        <span
+                          style={{
+                            fontSize: 11,
+                            fontWeight: 800,
+                            color: isBoss ? '#d97706' : '#64748b',
+                            textTransform: 'uppercase'
+                          }}
+                        >
+                          {isBoss ? '👑 MỐC CHỐT CHẶNG (BOSS)' : `${ms.nejUnit || `Bài ${ms.orderIndex || idx + 1}`}`}
+                        </span>
+
+                        {isCompleted && (
+                          <span style={{ fontSize: 11, fontWeight: 700, color: '#16a34a', backgroundColor: '#dcfce7', padding: '1px 6px', borderRadius: 4 }}>
+                            Đã hoàn thành
+                          </span>
+                        )}
+
+                        {isUnlocked && !isCompleted && (
+                          <span style={{ fontSize: 11, fontWeight: 700, color: '#0284c7', backgroundColor: '#e0f2fe', padding: '1px 6px', borderRadius: 4 }}>
+                            Đang học
+                          </span>
+                        )}
+                      </div>
+
+                      <h3 style={{ fontSize: 15, fontWeight: 800, color: '#0f172a', margin: '0 0 4px 0' }}>
+                        {ms.title}
+                      </h3>
+
+                      <div style={{ fontSize: 12.5, color: '#475569' }}>
+                        🎯 <b>Mục tiêu:</b> {ms.canDoGoal || ms.communicationContext || 'Thực hành mục tiêu hội thoại cốt lõi'}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right side rewards and button */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                    <div style={{ textAlign: 'right' }}>
+                      <div style={{ fontSize: 12, fontWeight: 800, color: '#d97706' }}>
+                        +{ms.xpReward || 100} XP
+                      </div>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: '#0284c7' }}>
+                        +{ms.activePointsReward || 80} pts
+                      </div>
+                    </div>
+
+                    <div
+                      style={{
+                        padding: '6px 12px',
+                        borderRadius: 8,
+                        backgroundColor: isUnlocked ? '#16a34a' : '#f1f5f9',
+                        color: isUnlocked ? '#ffffff' : '#64748b',
+                        fontSize: 12,
+                        fontWeight: 800,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 4
+                      }}
+                    >
+                      <span>Vào học</span>
+                      <ChevronRight size={14} />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       ) : (
-        /* ================= REGION ZOOMED-IN VIEW (PHASE 1 PREVIEW) ================= */
-        <div style={{ animation: 'fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1)' }}>
-          {/* Back button and breadcrumb navigation */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>
-            <button
-              onClick={handleBackToOverworld}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-                padding: '10px 18px',
-                borderRadius: 12,
-                backgroundColor: '#0f172a',
-                color: '#f8fafc',
-                border: 'none',
-                fontSize: 13.5,
-                fontWeight: 700,
-                cursor: 'pointer',
-                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-                transition: 'transform 0.2s'
-              }}
-              onMouseEnter={e => (e.currentTarget.style.transform = 'translateX(-3px)')}
-              onMouseLeave={e => (e.currentTarget.style.transform = 'translateX(0)')}
-            >
-              <ArrowLeft size={16} />
-              <span>← Quay Lại Bản Đồ Nhật Bản 3D</span>
-            </button>
-
-            {/* Level Selector in Zoomed View */}
-            <div style={{ display: 'flex', gap: 6 }}>
-              {JAPAN_REGIONS_CONFIG.map(r => {
-                const isSelected = selectedRegion?.id === r.id;
-                return (
-                  <button
-                    key={r.id}
-                    onClick={() => setSelectedRegion(r)}
-                    style={{
-                      padding: '6px 14px',
-                      borderRadius: 9999,
-                      border: isSelected ? `2px solid ${r.themeColor}` : '1px solid #cbd5e1',
-                      backgroundColor: isSelected ? r.themeColor : '#ffffff',
-                      color: isSelected ? '#ffffff' : '#475569',
-                      fontSize: 12,
-                      fontWeight: 800,
-                      cursor: 'pointer',
-                      transition: 'all 0.2s'
-                    }}
-                  >
-                    {r.iconSymbol} {r.level}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Region Banner Header */}
-          {selectedRegion && (
-            <div
-              style={{
-                position: 'relative',
-                borderRadius: 24,
-                overflow: 'hidden',
-                padding: '28px 32px',
-                color: '#ffffff',
-                background: `linear-gradient(135deg, #0f172a 0%, ${selectedRegion.themeColor}33 50%, #0f172a 100%)`,
-                border: `2px solid ${selectedRegion.themeColor}60`,
-                boxShadow: `0 15px 35px -5px ${selectedRegion.themeColor}30`,
-                marginBottom: 28
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-                <span
-                  style={{
-                    backgroundColor: selectedRegion.themeColor,
-                    color: '#ffffff',
-                    padding: '4px 12px',
-                    borderRadius: 9999,
-                    fontSize: 12,
-                    fontWeight: 800
-                  }}
-                >
-                  {selectedRegion.level} • {selectedRegion.badgeTitle}
-                </span>
-                <span style={{ fontSize: 13, color: '#94a3b8', display: 'flex', alignItems: 'center', gap: 4 }}>
-                  <MapPin size={14} style={{ color: selectedRegion.themeColor }} />
-                  {selectedRegion.realGeo}
-                </span>
-              </div>
-
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 10 }}>
-                <h1 style={{ fontSize: 26, fontWeight: 800, margin: 0 }}>
-                  {selectedRegion.nameVi}
-                </h1>
-                <span style={{ fontSize: 15, fontWeight: 700, color: selectedRegion.accentColor }}>
-                  {selectedRegion.nameJp}
-                </span>
-              </div>
-
-              <p style={{ maxWidth: 720, fontSize: 14, color: '#cbd5e1', lineHeight: 1.6, margin: 0 }}>
-                {selectedRegion.description}
-              </p>
-
-              {/* Progress Summary Card */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 20,
-                  marginTop: 20,
-                  paddingTop: 16,
-                  borderTop: '1px solid rgba(255, 255, 255, 0.1)'
-                }}
-              >
-                <div>
-                  <div style={{ fontSize: 11, color: '#94a3b8' }}>Tiến độ vùng:</div>
-                  <div style={{ fontSize: 16, fontWeight: 800, color: '#ffffff' }}>
-                    Chặng 1 / {selectedRegion.stagesCount} hoàn thành (20%)
-                  </div>
-                </div>
-                <div style={{ flex: 1, maxWidth: 300 }}>
-                  <div style={{ height: 8, borderRadius: 9999, backgroundColor: 'rgba(255, 255, 255, 0.1)', overflow: 'hidden' }}>
-                    <div style={{ width: '20%', height: '100%', backgroundColor: selectedRegion.themeColor, borderRadius: 9999 }} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Interactive Stage & Milestone Game Map */}
-          {selectedRegion && (
-            <StageMilestoneMap
-              region={selectedRegion}
-              stages={regionStages}
-              allMilestones={milestones}
-              selectedStageId={selectedStageId || regionStages[0]?.id || null}
-              onSelectStage={(st) => setSelectedStageId(st.id)}
-              onSelectMilestone={(ms) => {
-                setSelectedMilestone(ms);
-                setIsMilestoneDrawerOpen(true);
-              }}
-            />
-          )}
-        </div>
+        /* ================= TẦNG 4: BÀI HỌC CHI TIẾT & BÀI TẬP ================= */
+        selectedMilestone && (
+          <RoadmapMilestoneDetail
+            milestone={selectedMilestone}
+            stage={selectedStage}
+            level={selectedLevel}
+            onBack={handleBackToMilestones}
+            onStartQuest={(ms, questIdx) => {
+              alert(`Bắt đầu Bài ${questIdx}: ${ms.title}. Đang chuyển đến phòng luyện tập KIZUNA!`);
+            }}
+          />
+        )
       )}
-
-      {/* 3. REGION DETAIL MODAL (LEVEL INSPECTION PORTAL) */}
-      <RegionDetailModal
-        region={selectedRegion}
-        stages={regionStages}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onEnterRegion={handleEnterRegion}
-      />
-
-      {/* 4. MILESTONE QUEST DRAWER */}
-      <MilestoneDrawer
-        milestone={selectedMilestone}
-        isOpen={isMilestoneDrawerOpen}
-        onClose={() => setIsMilestoneDrawerOpen(false)}
-        onStartQuest={(ms, questIdx) => {
-          alert(`Bắt đầu Bài ${questIdx} của [${ms.title}]. Đang kết nối phòng luyện tập Kizuna!`);
-        }}
-      />
     </div>
   );
 };
