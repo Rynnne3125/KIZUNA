@@ -119,6 +119,58 @@ export const kizunaService = {
   },
 
   /**
+   * Lấy danh sách từ vựng của Mốc từ Firestore collection 'vocabulary_items'
+   */
+  async getVocabularyByMilestone(milestoneId: string): Promise<any[]> {
+    if (!milestoneId) return [];
+    const cacheKey = `kizuna_vocab_ms_${milestoneId}`;
+    const cached = getSessionCache<any[]>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      if (db) {
+        const q = query(collection(db, 'vocabulary_items'), where('milestoneId', '==', milestoneId));
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          const items: any[] = [];
+          snap.forEach(d => items.push({ id: d.id, ...d.data() }));
+          setSessionCache(cacheKey, items);
+          return items;
+        }
+      }
+    } catch (e) {
+      console.warn('Firestore vocab by milestone error:', e);
+    }
+    return [];
+  },
+
+  /**
+   * Lấy danh sách ngữ pháp của Mốc từ Firestore collection 'grammar_items'
+   */
+  async getGrammarByMilestone(milestoneId: string): Promise<any[]> {
+    if (!milestoneId) return [];
+    const cacheKey = `kizuna_grammar_ms_${milestoneId}`;
+    const cached = getSessionCache<any[]>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      if (db) {
+        const q = query(collection(db, 'grammar_items'), where('milestoneId', '==', milestoneId));
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          const items: any[] = [];
+          snap.forEach(d => items.push({ id: d.id, ...d.data() }));
+          setSessionCache(cacheKey, items);
+          return items;
+        }
+      }
+    } catch (e) {
+      console.warn('Firestore grammar by milestone error:', e);
+    }
+    return [];
+  },
+
+  /**
    * Lấy danh mục 2 bộ sách (Mimi Kara Oboeru & Tango) và các Unit theo từng cấp độ N5 -> N1
    * Tối ưu hóa: 0 Firestore Read (dùng catalog tĩnh & cache)
    */

@@ -18,6 +18,16 @@ export interface UserExamResult {
   userAnswers: Record<string, string>;
 }
 
+export interface UserRoadmapProgress {
+  userId: string;
+  completedMilestones: string[];
+  completedQuests: Record<string, number[]>;
+  readingCompleted: string[];
+  currentStageId?: string;
+  currentMilestoneId?: string;
+  lastStudiedAt?: string;
+}
+
 export const progressService = {
   /**
    * Lấy tiến trình học tập chuẩn thực tế của user từ Firestore
@@ -88,39 +98,72 @@ export const progressService = {
   },
 
   /**
-   * Ghi nhận khi học xong từ vựng, chữ hán, ngữ pháp hoặc thi thử
-   * Tự động cộng điểm năng động (activePoints) và XP vào Firestore và localStorage
+   * Ghi nhận khi học xong từ vựng, chữ hán, ngữ pháp, đề thi hoặc lộ trình
+   * Tự động cộng điểm năng động (activePoints), XP và tính chuỗi ngày học Streak vào Firestore và localStorage
    */
   async recordActivity(
     userId: string,
-    type: 'vocab' | 'kanji' | 'grammar' | 'exam',
+    type: 'vocab' | 'kanji' | 'grammar' | 'exam' | 'roadmap',
     amount = 1,
-    activePointsEarned = 10
+    activePointsEarned = 10,
+    xpEarned?: number
   ): Promise<void> {
     if (!userId) return;
     try {
       sessionStorage.removeItem(`kizuna_user_progress_${userId}`);
+      sessionStorage.removeItem(`kizuna_roadmap_progress_${userId}`);
 
-      // Cập nhật session user trong localStorage để thanh header nhảy điểm ngay
+      const finalXp = typeof xpEarned === 'number' ? xpEarned : activePointsEarned * 2;
+      const todayStr = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+
+      // Cập nhật session user trong localStorage để thanh header và profile nhảy điểm ngay
       const userRaw = localStorage.getItem('kizuna_user');
+      let currentStreak = 0;
       if (userRaw) {
         const u = JSON.parse(userRaw);
         u.activePoints = (u.activePoints || 0) + activePointsEarned;
-        u.totalXp = (u.totalXp || 0) + (activePointsEarned * 2);
+        u.totalXp = (u.totalXp || 0) + finalXp;
+
+        const lastActive = u.lastActiveDate;
+        let streak = typeof u.currentStreak === 'number' ? u.currentStreak : 0;
+        if (lastActive !== todayStr) {
+          if (lastActive) {
+            const lastDate = new Date(lastActive);
+            const curDate = new Date(todayStr);
+            const diffDays = Math.round((curDate.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
+            if (diffDays === 1) {
+              streak += 1;
+            } else {
+              streak = 1;
+            }
+          } else {
+            streak = 1;
+          }
+          u.currentStreak = streak;
+          u.lastActiveDate = todayStr;
+        }
+        currentStreak = u.currentStreak || 1;
+        u.lastStudiedAt = new Date().toISOString();
         localStorage.setItem('kizuna_user', JSON.stringify(u));
+
+        // Phát sự kiện để App.tsx và UserNavbar cập nhật ngay lập tức
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new Event('kizuna_user_updated'));
+        }
       }
 
       if (!db) return;
 
       // 1. Cập nhật tiến độ trong collection 'user_progress'
       const progressRef = doc(db, 'user_progress', userId);
-      const fieldMap = {
+      const fieldMap: Record<string, string> = {
         vocab: 'vocabLearned',
         kanji: 'kanjiLearned',
         grammar: 'grammarLearned',
-        exam: 'examsCompleted'
+        exam: 'examsCompleted',
+        roadmap: 'milestonesCompleted'
       };
-      const targetField = fieldMap[type];
+      const targetField = fieldMap[type] || 'activitiesCompleted';
 
       await setDoc(progressRef, {
         userId,
@@ -128,20 +171,188 @@ export const progressService = {
         lastStudiedAt: new Date().toISOString()
       }, { merge: true });
 
-      // 2. Cập nhật điểm năng động và XP vào collection 'users'
+      // 2. Cập nhật điểm năng động, XP và Streak vào collection 'users'
       const userRef = doc(db, 'users', userId);
-      await updateDoc(userRef, {
+      const updatePayload: any = {
         activePoints: increment(activePointsEarned),
-        totalXp: increment(activePointsEarned * 2)
-      }).catch(async () => {
-        await setDoc(userRef, {
-          activePoints: increment(activePointsEarned),
-          totalXp: increment(activePointsEarned * 2)
-        }, { merge: true });
+        totalXp: increment(finalXp),
+        lastStudiedAt: new Date().toISOString(),
+        lastActiveDate: todayStr
+      };
+      if (currentStreak > 0) {
+        updatePayload.currentStreak = currentStreak;
+      }
+
+      await updateDoc(userRef, updatePayload).catch(async () => {
+        await setDoc(userRef, updatePayload, { merge: true });
       });
     } catch (e) {
       console.warn('[Progress] Lỗi ghi nhận hoạt động học tập:', e);
     }
+  },
+
+  /**
+   * Lấy tiến trình lộ trình chi tiết của người học từ Firestore collection 'user_progress'
+   */
+  async getUserRoadmapProgress(userId: string): Promise<UserRoadmapProgress> {
+    const fallbackProgress: UserRoadmapProgress = {
+      userId,
+      completedMilestones: [],
+      completedQuests: {},
+      readingCompleted: [],
+      currentStageId: 'stage_n5_1',
+      currentMilestoneId: 'ms_minna_b01'
+    };
+    if (!userId) return fallbackProgress;
+
+    const CACHE_KEY = `kizuna_roadmap_progress_${userId}`;
+    try {
+      const cached = sessionStorage.getItem(CACHE_KEY);
+      if (cached) {
+        const { data, exp } = JSON.parse(cached);
+        if (Date.now() < exp) return data;
+      }
+    } catch {}
+
+    if (!db) return fallbackProgress;
+
+    try {
+      const snap = await getDoc(doc(db, 'user_progress', userId));
+      if (snap.exists()) {
+        const d = snap.data();
+        const res: UserRoadmapProgress = {
+          userId,
+          completedMilestones: Array.isArray(d?.completedMilestones) ? d.completedMilestones : [],
+          completedQuests: (typeof d?.completedQuests === 'object' && d?.completedQuests !== null) ? d.completedQuests : {},
+          readingCompleted: Array.isArray(d?.readingCompleted) ? d.readingCompleted : [],
+          currentStageId: d?.currentStageId || 'stage_n5_1',
+          currentMilestoneId: d?.currentMilestoneId || 'ms_minna_b01',
+          lastStudiedAt: d?.lastStudiedAt
+        };
+        try {
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: res, exp: Date.now() + 5 * 60 * 1000 }));
+        } catch {}
+        return res;
+      }
+    } catch (e) {
+      console.warn('[Progress] Lỗi lấy roadmap progress từ Firestore:', e);
+    }
+    return fallbackProgress;
+  },
+
+  /**
+   * Lưu tiến độ hoàn thành một Quest trong Mốc lên Firestore
+   * Tự động kiểm tra: nếu mốc đã xong đủ 4 Quests và Đọc hiểu thì đánh dấu hoàn thành Mốc!
+   */
+  async saveQuestProgress(
+    userId: string,
+    milestoneId: string,
+    questStepIndex: number,
+    xpReward = 30,
+    activePointsReward = 15
+  ): Promise<UserRoadmapProgress> {
+    const current = await this.getUserRoadmapProgress(userId);
+    const existingQuestsForMilestone = current.completedQuests[milestoneId] || [];
+
+    const updatedQuestsForMilestone = existingQuestsForMilestone.includes(questStepIndex)
+      ? existingQuestsForMilestone
+      : [...existingQuestsForMilestone, questStepIndex].sort((a, b) => a - b);
+
+    const updatedCompletedQuests = {
+      ...current.completedQuests,
+      [milestoneId]: updatedQuestsForMilestone
+    };
+
+    // Kiểm tra xem đã hoàn thành cả 4 quests và bài đọc hiểu chưa
+    const hasFinishedAllQuests = [1, 2, 3, 4].every(idx => updatedQuestsForMilestone.includes(idx));
+    const hasFinishedReading = current.readingCompleted.includes(milestoneId);
+
+    const updatedCompletedMilestones = [...current.completedMilestones];
+    if (hasFinishedAllQuests && hasFinishedReading && !updatedCompletedMilestones.includes(milestoneId)) {
+      updatedCompletedMilestones.push(milestoneId);
+    }
+
+    const updated: UserRoadmapProgress = {
+      ...current,
+      completedQuests: updatedCompletedQuests,
+      completedMilestones: updatedCompletedMilestones,
+      lastStudiedAt: new Date().toISOString()
+    };
+
+    if (db) {
+      try {
+        const ref = doc(db, 'user_progress', userId);
+        await setDoc(ref, {
+          userId,
+          completedQuests: updatedCompletedQuests,
+          completedMilestones: updatedCompletedMilestones,
+          lastStudiedAt: updated.lastStudiedAt
+        }, { merge: true });
+      } catch (e) {
+        console.warn('[Progress] Lỗi cập nhật quest progress lên Firestore:', e);
+      }
+    }
+
+    try {
+      sessionStorage.setItem(`kizuna_roadmap_progress_${userId}`, JSON.stringify({ data: updated, exp: Date.now() + 5 * 60 * 1000 }));
+    } catch {}
+
+    // Ghi nhận hoạt động, cộng điểm năng động, XP & Streak
+    await this.recordActivity(userId, 'roadmap', 1, activePointsReward, xpReward);
+
+    return updated;
+  },
+
+  /**
+   * Lưu tiến độ hoàn thành bài Đọc hiểu trong Mốc lên Firestore
+   */
+  async saveReadingProgress(
+    userId: string,
+    milestoneId: string,
+    xpReward = 25,
+    activePointsReward = 15
+  ): Promise<UserRoadmapProgress> {
+    const current = await this.getUserRoadmapProgress(userId);
+    const updatedReadingCompleted = current.readingCompleted.includes(milestoneId)
+      ? current.readingCompleted
+      : [...current.readingCompleted, milestoneId];
+
+    const questsForMilestone = current.completedQuests[milestoneId] || [];
+    const hasFinishedAllQuests = [1, 2, 3, 4].every(idx => questsForMilestone.includes(idx));
+
+    const updatedCompletedMilestones = [...current.completedMilestones];
+    if (hasFinishedAllQuests && !updatedCompletedMilestones.includes(milestoneId)) {
+      updatedCompletedMilestones.push(milestoneId);
+    }
+
+    const updated: UserRoadmapProgress = {
+      ...current,
+      readingCompleted: updatedReadingCompleted,
+      completedMilestones: updatedCompletedMilestones,
+      lastStudiedAt: new Date().toISOString()
+    };
+
+    if (db) {
+      try {
+        const ref = doc(db, 'user_progress', userId);
+        await setDoc(ref, {
+          userId,
+          readingCompleted: updatedReadingCompleted,
+          completedMilestones: updatedCompletedMilestones,
+          lastStudiedAt: updated.lastStudiedAt
+        }, { merge: true });
+      } catch (e) {
+        console.warn('[Progress] Lỗi cập nhật reading progress lên Firestore:', e);
+      }
+    }
+
+    try {
+      sessionStorage.setItem(`kizuna_roadmap_progress_${userId}`, JSON.stringify({ data: updated, exp: Date.now() + 5 * 60 * 1000 }));
+    } catch {}
+
+    await this.recordActivity(userId, 'roadmap', 1, activePointsReward, xpReward);
+
+    return updated;
   },
 
   /**

@@ -45,6 +45,18 @@ export default function App() {
     }
   }, []);
 
+  // Lắng nghe sự kiện kizuna_user_updated để đồng bộ tức thời Navbar & Profile khi hoàn thành bài học
+  useEffect(() => {
+    const handleUserUpdate = () => {
+      const fresh = authService.getCurrentUser();
+      if (fresh) {
+        setUser({ ...fresh });
+      }
+    };
+    window.addEventListener('kizuna_user_updated', handleUserUpdate);
+    return () => window.removeEventListener('kizuna_user_updated', handleUserUpdate);
+  }, []);
+
   // Tự động kiểm tra thời hạn phiên đăng nhập (tối đa 24h) kể cả khi tab ở ẩn nền (background)
   useEffect(() => {
     const checkSessionExpiry = () => {

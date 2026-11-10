@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { kizunaService } from '../services/kizunaService';
+import { authService } from '../services/authService';
+import { progressService, UserRoadmapProgress } from '../services/progressService';
 import { Stage, Milestone } from '../types/kizuna';
+import { User } from '../types/auth';
 import { RoadmapMilestoneDetail } from '../components/roadmap/RoadmapMilestoneDetail';
 import { 
   Flame, 
   Zap, 
   Trophy, 
-  BookOpen, 
-  Layers, 
   ChevronRight, 
   ArrowLeft, 
-  Sparkles, 
   CheckCircle2, 
   Lock, 
-  Compass, 
-  Award,
-  ChevronDown
+  AlertCircle
 } from 'lucide-react';
 
 type JlptLevelKey = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
@@ -105,6 +103,9 @@ const SakuraFallingBackground: React.FC = () => {
 };
 
 export const RoadmapPage: React.FC = () => {
+  const [currentUser, setCurrentUser] = useState<User | null>(() => authService.getCurrentUser());
+  const [userProgress, setUserProgress] = useState<UserRoadmapProgress | null>(null);
+
   const [stages, setStages] = useState<Stage[]>([]);
   const [milestones, setMilestones] = useState<Milestone[]>([]);
   const [loading, setLoading] = useState(true);
@@ -115,16 +116,20 @@ export const RoadmapPage: React.FC = () => {
   const [selectedMilestone, setSelectedMilestone] = useState<Milestone | null>(null);
   const [viewMode, setViewMode] = useState<'STAGES' | 'MILESTONES' | 'LESSON'>('STAGES');
 
-  // Gamification metrics
-  const [userStats] = useState({
-    streakDays: 5,
-    activePoints: 340,
-    totalXp: 1250
-  });
+  // Gentle locked notification toast
+  const [lockedNotice, setLockedNotice] = useState<string | null>(null);
 
+  // Load real user and Firestore data
   useEffect(() => {
     async function loadData() {
       try {
+        const u = authService.getCurrentUser();
+        if (u) {
+          setCurrentUser(u);
+          const prog = await progressService.getUserRoadmapProgress(u.id);
+          setUserProgress(prog);
+        }
+
         const [s, m] = await Promise.all([
           kizunaService.getStages(),
           kizunaService.getMilestones()
@@ -138,15 +143,42 @@ export const RoadmapPage: React.FC = () => {
     loadData();
   }, []);
 
+  // Listen to user updates (when completing quests or reading)
+  useEffect(() => {
+    const handleUserUpdate = () => {
+      const fresh = authService.getCurrentUser();
+      if (fresh) {
+        setCurrentUser({ ...fresh });
+        progressService.getUserRoadmapProgress(fresh.id).then(prog => {
+          setUserProgress(prog);
+        });
+      }
+    };
+    window.addEventListener('kizuna_user_updated', handleUserUpdate);
+    return () => window.removeEventListener('kizuna_user_updated', handleUserUpdate);
+  }, []);
+
   // Filter stages of selected level
-  const levelStages = stages
-    .filter(s => s.jlptLevel === selectedLevel || (!s.jlptLevel && selectedLevel === 'N5'))
-    .sort((a, b) => a.orderIndex - b.orderIndex);
+  const levelStages = useMemo(() => {
+    return stages
+      .filter(s => s.jlptLevel === selectedLevel || (!s.jlptLevel && selectedLevel === 'N5'))
+      .sort((a, b) => a.orderIndex - b.orderIndex);
+  }, [stages, selectedLevel]);
 
   // Filter milestones of selected stage
-  const stageMilestones = milestones
-    .filter(m => m.stageId === selectedStage?.id)
-    .sort((a, b) => a.orderIndex - b.orderIndex);
+  const stageMilestones = useMemo(() => {
+    return milestones
+      .filter(m => m.stageId === selectedStage?.id)
+      .sort((a, b) => a.orderIndex - b.orderIndex);
+  }, [milestones, selectedStage?.id]);
+
+  // Check if a stage is completed based on its milestones
+  const isStageCompleted = (st?: Stage) => {
+    if (!st) return false;
+    const mils = milestones.filter(m => m.stageId === st.id);
+    if (mils.length === 0) return false;
+    return mils.every(m => userProgress?.completedMilestones?.includes(m.id));
+  };
 
   const handleSelectLevel = (lvl: JlptLevelKey) => {
     setSelectedLevel(lvl);
@@ -161,7 +193,12 @@ export const RoadmapPage: React.FC = () => {
     setViewMode('MILESTONES');
   };
 
-  const handleSelectMilestone = (ms: Milestone) => {
+  const handleSelectMilestone = (ms: Milestone, isUnlocked: boolean) => {
+    if (!isUnlocked) {
+      setLockedNotice(`🔒 Mốc "${ms.title}" đang khóa. Bạn cần hoàn thành mốc học tập trước đó để mở khóa!`);
+      setTimeout(() => setLockedNotice(null), 3500);
+      return;
+    }
     setSelectedMilestone(ms);
     setViewMode('LESSON');
   };
@@ -213,6 +250,33 @@ export const RoadmapPage: React.FC = () => {
         }
       `}</style>
 
+      {/* Toast Notification for Locked Milestone */}
+      {lockedNotice && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 24,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 9999,
+            backgroundColor: '#0f172a',
+            color: '#ffffff',
+            padding: '12px 24px',
+            borderRadius: 12,
+            boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.3)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+            fontSize: 14,
+            fontWeight: 700,
+            animation: 'fadeIn 0.2s ease-out'
+          }}
+        >
+          <AlertCircle size={18} style={{ color: '#f59e0b' }} />
+          <span>{lockedNotice}</span>
+        </div>
+      )}
+
       {/* 1. HEADER MANG PHONG CÁCH NHẬT BẢN HIỆN ĐẠI (和の美学) */}
       <div style={{ position: 'relative', zIndex: 1, marginBottom: 24 }}>
         <div
@@ -243,22 +307,22 @@ export const RoadmapPage: React.FC = () => {
                   fontSize: 13,
                   fontWeight: 900,
                   fontFamily: 'serif',
-                  lineHeight: 1,
-                  background: '#fffcfb'
+                  backgroundColor: '#fffaf9'
                 }}
               >
                 絆
               </span>
-              <h1 style={{ fontSize: 23, fontWeight: 900, color: '#1c2536', margin: 0, letterSpacing: '-0.3px' }}>
-                道筋 <span style={{ fontSize: 17, fontWeight: 700, color: '#475569' }}>· Lộ Trình Học Chuẩn NEJ & Minna</span>
-              </h1>
+              <span style={{ fontSize: 12, fontWeight: 800, color: '#c53d32', letterSpacing: 1.5, textTransform: 'uppercase' }}>
+                HỌC PHẦN CHUẨN HOÁ · 日本語ロードマップ
+              </span>
             </div>
-            <p style={{ color: '#78716c', fontSize: 13, margin: 0 }}>
-              Hành trình chinh phục mục tiêu giao tiếp Can-do: <strong>Chặng ➔ Mốc ➔ 4 Bài học Quests</strong>
-            </p>
+
+            <h1 style={{ fontSize: 24, fontWeight: 900, color: '#1c1917', margin: 0 }}>
+              Lộ Trình Học Tiếng Nhật
+            </h1>
           </div>
 
-          {/* Gamification Chips */}
+          {/* Gamification Stats: 100% REAL FROM USER PROFILE & FIRESTORE */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <div
               style={{
@@ -273,9 +337,10 @@ export const RoadmapPage: React.FC = () => {
                 fontSize: 12,
                 fontWeight: 800
               }}
+              title="Chuỗi ngày học liên tục"
             >
               <Flame size={14} />
-              <span>{userStats.streakDays} ngày</span>
+              <span>{currentUser?.currentStreak || 0} ngày streak</span>
             </div>
 
             <div
@@ -291,9 +356,10 @@ export const RoadmapPage: React.FC = () => {
                 fontSize: 12,
                 fontWeight: 800
               }}
+              title="Điểm năng động rèn luyện"
             >
               <Zap size={14} />
-              <span>{userStats.activePoints} pts</span>
+              <span>{currentUser?.activePoints || 0} pts</span>
             </div>
 
             <div
@@ -309,9 +375,10 @@ export const RoadmapPage: React.FC = () => {
                 fontSize: 12,
                 fontWeight: 800
               }}
+              title="Kinh nghiệm tích lũy"
             >
               <Trophy size={14} />
-              <span>{userStats.totalXp} XP</span>
+              <span>{currentUser?.totalXp || 0} XP</span>
             </div>
           </div>
         </div>
@@ -339,132 +406,130 @@ export const RoadmapPage: React.FC = () => {
                 style={{
                   flex: 1,
                   minWidth: 100,
-                  padding: '8px 12px',
+                  padding: '10px 14px',
                   borderRadius: 8,
                   border: 'none',
-                  cursor: 'pointer',
                   backgroundColor: isActive ? '#ffffff' : 'transparent',
-                  color: isActive ? '#0f172a' : '#78716c',
-                  boxShadow: isActive ? '0 2px 6px rgba(0, 0, 0, 0.08)' : 'none',
+                  cursor: 'pointer',
+                  boxShadow: isActive ? '0 2px 6px rgba(0,0,0,0.06)' : 'none',
+                  transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                   display: 'flex',
-                  flexDirection: 'column',
                   alignItems: 'center',
-                  gap: 2,
-                  transition: 'all 0.15s'
+                  justifyContent: 'center',
+                  gap: 8
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <span style={{ fontSize: 14, fontWeight: 900 }}>{lvl}</span>
-                  <span
-                    style={{
-                      fontSize: 11,
-                      fontWeight: 800,
-                      color: isActive ? meta.color : '#a8a29e',
-                      fontFamily: 'serif'
-                    }}
-                  >
-                    {meta.kanji}
-                  </span>
-                </div>
-                <div style={{ fontSize: 11, color: isActive ? '#334155' : '#a8a29e', whiteSpace: 'nowrap' }}>
-                  {meta.vi}
-                </div>
+                <span
+                  style={{
+                    fontSize: 15,
+                    fontWeight: 900,
+                    color: isActive ? meta.color : '#57534e'
+                  }}
+                >
+                  {lvl}
+                </span>
+
+                <span
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: isActive ? '#1c1917' : '#78716c'
+                  }}
+                >
+                  {meta.kanji} ({meta.vi})
+                </span>
               </button>
             );
           })}
         </div>
       </div>
 
-      {/* 2. BREADCRUMBS NAVIGATION */}
+      {/* 2. BREADCRUMBS TRAIL (Dấu vết di chuyển qua các tầng) */}
       <div
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 6,
+          gap: 8,
           fontSize: 13,
-          color: '#64748b',
+          color: '#78716c',
           marginBottom: 20,
           flexWrap: 'wrap'
         }}
       >
-        <button
+        <span
           onClick={handleBackToStages}
           style={{
-            background: 'none',
-            border: 'none',
-            padding: 0,
-            color: viewMode === 'STAGES' ? '#0f172a' : '#2563eb',
+            cursor: viewMode !== 'STAGES' ? 'pointer' : 'default',
             fontWeight: viewMode === 'STAGES' ? 800 : 600,
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 4
+            color: viewMode === 'STAGES' ? '#1c1917' : '#78716c',
+            textDecoration: viewMode !== 'STAGES' ? 'underline' : 'none'
           }}
         >
-          <span>Lộ Trình {selectedLevel}</span>
-        </button>
+          {selectedLevel} · {LEVEL_CONFIG[selectedLevel].desc}
+        </span>
 
         {selectedStage && (
           <>
-            <ChevronRight size={14} style={{ color: '#94a3b8' }} />
-            <button
+            <ChevronRight size={14} style={{ color: '#a8a29e' }} />
+            <span
               onClick={handleBackToMilestones}
               style={{
-                background: 'none',
-                border: 'none',
-                padding: 0,
-                color: viewMode === 'MILESTONES' ? '#0f172a' : '#2563eb',
+                cursor: viewMode === 'LESSON' ? 'pointer' : 'default',
                 fontWeight: viewMode === 'MILESTONES' ? 800 : 600,
-                cursor: 'pointer'
+                color: viewMode === 'MILESTONES' ? '#1c1917' : '#78716c',
+                textDecoration: viewMode === 'LESSON' ? 'underline' : 'none'
               }}
             >
-              Chặng {selectedStage.orderIndex} {selectedStage.hanko ? `【${selectedStage.hanko}】` : ''}
-            </button>
+              Chặng {selectedStage.orderIndex || 1}: {selectedStage.title.replace(/^\[N\d\]\s*/, '')}
+            </span>
           </>
         )}
 
-        {selectedMilestone && (
+        {selectedMilestone && viewMode === 'LESSON' && (
           <>
-            <ChevronRight size={14} style={{ color: '#94a3b8' }} />
-            <span style={{ color: '#0f172a', fontWeight: 800 }}>
-              {selectedMilestone.nejUnit || `Mốc ${selectedMilestone.orderIndex}`}
+            <ChevronRight size={14} style={{ color: '#a8a29e' }} />
+            <span style={{ fontWeight: 800, color: '#16a34a' }}>
+              Mốc: {selectedMilestone.title}
             </span>
           </>
         )}
       </div>
 
-      {/* 3. MAIN BODY ACCORDING TO VIEW MODE */}
+      {/* 3. NỘI DUNG CHÍNH (THEO VIEW MODE) */}
       {loading ? (
-        <div style={{ padding: '60px 20px', textAlign: 'center', color: '#64748b' }}>
-          Đang tải lộ trình học tập...
+        <div style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: 48, textAlign: 'center', border: '1px solid #e2e8f0' }}>
+          <div style={{ fontSize: 32, marginBottom: 12 }}>🌸</div>
+          <p style={{ color: '#64748b', fontWeight: 600 }}>Đang tải lộ trình học tiếng Nhật từ Firestore...</p>
         </div>
       ) : viewMode === 'STAGES' ? (
         /* ================= TẦNG 2: DANH SÁCH CHẶNG (STAGES) ================= */
         <div>
-          {/* Level Summary Banner */}
+          {/* Header Banner cho Cấp độ N hiện tại */}
           <div
             style={{
               backgroundColor: '#ffffff',
               borderRadius: 16,
-              padding: '18px 22px',
               border: '1.5px solid #e2e8f0',
+              padding: '20px 24px',
               marginBottom: 20,
+              boxShadow: 'var(--shadow-sm)',
               display: 'flex',
-              alignItems: 'center',
               justifyContent: 'space-between',
-              boxShadow: 'var(--shadow-sm)'
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: 12
             }}
           >
             <div>
-              <div style={{ fontSize: 11, fontWeight: 800, color: LEVEL_CONFIG[selectedLevel].color, textTransform: 'uppercase', marginBottom: 2 }}>
-                Mục tiêu cấp độ {selectedLevel} ({LEVEL_CONFIG[selectedLevel].kanji})
+              <div style={{ fontSize: 12, fontWeight: 800, color: LEVEL_CONFIG[selectedLevel].color, textTransform: 'uppercase', marginBottom: 2 }}>
+                CẤP ĐỘ {selectedLevel} · {LEVEL_CONFIG[selectedLevel].kanji}
               </div>
-              <h2 style={{ fontSize: 16, fontWeight: 800, color: '#0f172a', margin: '0 0 4px 0' }}>
-                {LEVEL_CONFIG[selectedLevel].desc}
-              </h2>
-              <div style={{ fontSize: 12.5, color: '#64748b' }}>
+              <h2 style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0' }}>
                 {LEVEL_CONFIG[selectedLevel].range}
-              </div>
+              </h2>
+              <p style={{ fontSize: 13, color: '#64748b', margin: 0 }}>
+                {LEVEL_CONFIG[selectedLevel].desc}
+              </p>
             </div>
 
             <div
@@ -487,6 +552,9 @@ export const RoadmapPage: React.FC = () => {
             {levelStages.map((st, idx) => {
               const stageMils = milestones.filter(m => m.stageId === st.id);
               const milestoneCount = stageMils.length || st.total_milestones || 5;
+              const completedCount = stageMils.filter(m => userProgress?.completedMilestones?.includes(m.id)).length;
+              const percent = stageMils.length > 0 ? Math.round((completedCount / stageMils.length) * 100) : 0;
+              const isComp = completedCount === stageMils.length && stageMils.length > 0;
 
               return (
                 <div
@@ -496,7 +564,7 @@ export const RoadmapPage: React.FC = () => {
                   style={{
                     backgroundColor: '#ffffff',
                     borderRadius: 16,
-                    border: '1.5px solid #e2e8f0',
+                    border: isComp ? '1.5px solid #86efac' : '1.5px solid #e2e8f0',
                     padding: '20px 22px',
                     cursor: 'pointer',
                     boxShadow: 'var(--shadow-sm)',
@@ -512,7 +580,7 @@ export const RoadmapPage: React.FC = () => {
                     e.currentTarget.style.boxShadow = 'var(--shadow-md)';
                   }}
                   onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = '#e2e8f0';
+                    e.currentTarget.style.borderColor = isComp ? '#86efac' : '#e2e8f0';
                     e.currentTarget.style.transform = 'translateY(0)';
                     e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
                   }}
@@ -526,8 +594,8 @@ export const RoadmapPage: React.FC = () => {
                           fontWeight: 800,
                           padding: '3px 10px',
                           borderRadius: 6,
-                          backgroundColor: '#f1f5f9',
-                          color: '#0f172a'
+                          backgroundColor: isComp ? '#dcfce7' : '#f1f5f9',
+                          color: isComp ? '#15803d' : '#0f172a'
                         }}
                       >
                         Chặng {st.orderIndex || idx + 1} • {st.range || 'Bài học'}
@@ -564,6 +632,25 @@ export const RoadmapPage: React.FC = () => {
                     <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.6, margin: '0 0 16px 0', minHeight: 40 }}>
                       {st.description || 'Chinh phục kiến thức và kỹ năng giao tiếp trong chặng.'}
                     </p>
+                  </div>
+
+                  {/* Stage Progress Bar */}
+                  <div style={{ marginBottom: 12 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11.5, fontWeight: 700, color: '#64748b', marginBottom: 4 }}>
+                      <span>Tiến độ</span>
+                      <span>{completedCount}/{milestoneCount} mốc ({percent}%)</span>
+                    </div>
+                    <div style={{ width: '100%', height: 6, backgroundColor: '#f1f5f9', borderRadius: 9999, overflow: 'hidden' }}>
+                      <div
+                        style={{
+                          width: `${percent}%`,
+                          height: '100%',
+                          backgroundColor: isComp ? '#16a34a' : LEVEL_CONFIG[selectedLevel].color,
+                          borderRadius: 9999,
+                          transition: 'width 0.3s ease'
+                        }}
+                      />
+                    </div>
                   </div>
 
                   {/* Stage Footer */}
@@ -609,75 +696,60 @@ export const RoadmapPage: React.FC = () => {
                 color: '#334155',
                 fontSize: 13,
                 fontWeight: 700,
-                cursor: 'pointer'
-              }}
-            >
-              <ArrowLeft size={15} />
-              <span>Quay lại danh sách Chặng</span>
-            </button>
-
-            <span
-              style={{
-                padding: '4px 12px',
-                borderRadius: 6,
-                backgroundColor: LEVEL_CONFIG[selectedLevel].color,
-                color: '#ffffff',
-                fontSize: 12,
-                fontWeight: 800
-              }}
-            >
-              {selectedLevel} • Chặng {selectedStage?.orderIndex}
-            </span>
-          </div>
-
-          {/* Stage Detail Card Banner */}
-          {selectedStage && (
-            <div
-              style={{
-                backgroundColor: '#ffffff',
-                borderRadius: 16,
-                border: '1.5px solid #e2e8f0',
-                padding: '20px 24px',
-                marginBottom: 20,
+                cursor: 'pointer',
                 boxShadow: 'var(--shadow-sm)'
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                <span style={{ fontSize: 12, fontWeight: 800, color: LEVEL_CONFIG[selectedLevel].color }}>
-                  Chặng {selectedStage.orderIndex} • {selectedStage.range}
-                </span>
-                {selectedStage.hanko && (
-                  <span style={{ fontSize: 13, fontWeight: 900, color: LEVEL_CONFIG[selectedLevel].color }}>
-                    【{selectedStage.hanko}】
-                  </span>
-                )}
-              </div>
+              <ArrowLeft size={16} />
+              <span>Quay lại danh sách Chặng</span>
+            </button>
 
+            {selectedStage && (
+              <span style={{ fontSize: 12.5, fontWeight: 800, color: '#16a34a', backgroundColor: '#ecfdf5', padding: '4px 12px', borderRadius: 6, border: '1px solid #bbf7d0' }}>
+                {selectedStage.range || `Chặng ${selectedStage.orderIndex}`} · {stageMilestones.length} Mốc học
+              </span>
+            )}
+          </div>
+
+          {selectedStage && (
+            <div style={{ backgroundColor: '#ffffff', borderRadius: 16, border: '1.5px solid #e2e8f0', padding: '20px 24px', marginBottom: 20 }}>
+              <div style={{ fontSize: 12, fontWeight: 800, color: LEVEL_CONFIG[selectedLevel].color, textTransform: 'uppercase', marginBottom: 2 }}>
+                CHẶNG {selectedStage.orderIndex || 1}
+              </div>
               <h2 style={{ fontSize: 20, fontWeight: 900, color: '#0f172a', margin: '0 0 6px 0' }}>
                 {selectedStage.title.replace(/^\[N\d\]\s*/, '')}
               </h2>
-
               <p style={{ fontSize: 13.5, color: '#64748b', margin: 0, lineHeight: 1.6 }}>
                 {selectedStage.description}
               </p>
             </div>
           )}
 
-          {/* Milestones List */}
+          {/* Milestones List: 100% REAL DYNAMIC STATUS FROM FIRESTORE */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             {stageMilestones.map((ms, idx) => {
-              const isCompleted = ms.status === 'COMPLETED' || idx === 0;
-              const isUnlocked = ms.status === 'UNLOCKED' || idx === 1;
+              const isCompleted = userProgress?.completedMilestones?.includes(ms.id) || false;
+
+              // Unlock logic based on real progress
+              const isFirstOfStage1 = (selectedLevel === 'N5' && selectedStage?.orderIndex === 1 && idx === 0);
+              const prevCompleted = idx > 0 ? (userProgress?.completedMilestones?.includes(stageMilestones[idx - 1].id) || false) : false;
+              const prevStageComp = (selectedStage && selectedStage.orderIndex > 1)
+                ? isStageCompleted(levelStages.find(s => s.orderIndex === selectedStage.orderIndex - 1))
+                : false;
+              const isUnlocked = isCompleted || isFirstOfStage1 || (idx === 0 ? prevStageComp : prevCompleted);
+
               const isBoss = ms.milestone_type === 'BOSS_CHALLENGE' || idx === stageMilestones.length - 1;
 
               return (
                 <div
                   key={ms.id}
-                  onClick={() => handleSelectMilestone(ms)}
+                  onClick={() => handleSelectMilestone(ms, isUnlocked)}
                   style={{
-                    backgroundColor: '#ffffff',
+                    backgroundColor: isUnlocked ? '#ffffff' : '#f8fafc',
                     border: isBoss
                       ? '2px solid #f59e0b'
+                      : isCompleted
+                      ? '1.5px solid #86efac'
                       : isUnlocked
                       ? '1.5px solid #16a34a'
                       : '1.5px solid #e2e8f0',
@@ -686,19 +758,24 @@ export const RoadmapPage: React.FC = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    cursor: 'pointer',
+                    cursor: isUnlocked ? 'pointer' : 'not-allowed',
+                    opacity: isUnlocked ? 1 : 0.75,
                     boxShadow: 'var(--shadow-sm)',
                     transition: 'all 0.15s',
                     flexWrap: 'wrap',
                     gap: 12
                   }}
                   onMouseEnter={e => {
-                    e.currentTarget.style.transform = 'translateX(4px)';
-                    e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+                    if (isUnlocked) {
+                      e.currentTarget.style.transform = 'translateX(4px)';
+                      e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+                    }
                   }}
                   onMouseLeave={e => {
-                    e.currentTarget.style.transform = 'translateX(0)';
-                    e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+                    if (isUnlocked) {
+                      e.currentTarget.style.transform = 'translateX(0)';
+                      e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+                    }
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: '1 1 450px' }}>
@@ -721,7 +798,7 @@ export const RoadmapPage: React.FC = () => {
                           ? '#16a34a'
                           : isUnlocked
                           ? '#15803d'
-                          : '#64748b',
+                          : '#94a3b8',
                         fontWeight: 900,
                         fontSize: isBoss ? 18 : 14,
                         display: 'flex',
@@ -731,7 +808,7 @@ export const RoadmapPage: React.FC = () => {
                         flexShrink: 0
                       }}
                     >
-                      {isBoss ? '🏯' : isCompleted ? '✓' : ms.kanjiMark || idx + 1}
+                      {isBoss ? '🏯' : isCompleted ? '✓' : !isUnlocked ? <Lock size={15} /> : ms.kanjiMark || idx + 1}
                     </div>
 
                     <div>
@@ -758,9 +835,15 @@ export const RoadmapPage: React.FC = () => {
                             Đang học
                           </span>
                         )}
+
+                        {!isUnlocked && (
+                          <span style={{ fontSize: 11, fontWeight: 700, color: '#64748b', backgroundColor: '#f1f5f9', padding: '1px 6px', borderRadius: 4 }}>
+                            Đang khóa
+                          </span>
+                        )}
                       </div>
 
-                      <h3 style={{ fontSize: 15, fontWeight: 800, color: '#0f172a', margin: '0 0 4px 0' }}>
+                      <h3 style={{ fontSize: 15, fontWeight: 800, color: isUnlocked ? '#0f172a' : '#64748b', margin: '0 0 4px 0' }}>
                         {ms.title}
                       </h3>
 
@@ -794,8 +877,17 @@ export const RoadmapPage: React.FC = () => {
                         gap: 4
                       }}
                     >
-                      <span>Vào học</span>
-                      <ChevronRight size={14} />
+                      {isUnlocked ? (
+                        <>
+                          <span>Vào học</span>
+                          <ChevronRight size={14} />
+                        </>
+                      ) : (
+                        <>
+                          <Lock size={12} />
+                          <span>Khóa</span>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -810,9 +902,13 @@ export const RoadmapPage: React.FC = () => {
             milestone={selectedMilestone}
             stage={selectedStage}
             level={selectedLevel}
+            userId={currentUser?.id}
+            userProgress={userProgress}
             onBack={handleBackToMilestones}
-            onStartQuest={(ms, questIdx) => {
-              alert(`Bắt đầu Bài ${questIdx}: ${ms.title}. Đang chuyển đến phòng luyện tập KIZUNA!`);
+            onProgressUpdate={updated => {
+              setUserProgress(updated);
+              const fresh = authService.getCurrentUser();
+              if (fresh) setCurrentUser(fresh);
             }}
           />
         )
