@@ -310,3 +310,72 @@ body {
   transform: rotateY(180deg);
 }
 
+/* ==========================================================================
+   WA-MODERN JAPANESE DESIGN SYSTEM (和モダン)
+   ========================================================================== */
+
+.font-jp-serif {
+  font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
+}
+
+.font-jp-sans {
+  font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Seigaiha (青海波) - Blue Sea Waves pattern */
+.bg-seigaiha-dark {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'%3E%3Cpath d='M0 32 A32 32 0 0 1 64 32 M8 32 A24 24 0 0 1 56 32 M16 32 A16 16 0 0 1 48 32 M24 32 A8 8 0 0 1 40 32 M32 0 A32 32 0 0 1 96 0 M-32 0 A32 32 0 0 1 32 0' fill='none' stroke='rgba(255,255,255,0.07)' stroke-width='1.2'/%3E%3C/svg%3E");
+}
+
+.bg-seigaiha-light {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'%3E%3Cpath d='M0 32 A32 32 0 0 1 64 32 M8 32 A24 24 0 0 1 56 32 M16 32 A16 16 0 0 1 48 32 M24 32 A8 8 0 0 1 40 32 M32 0 A32 32 0 0 1 96 0 M-32 0 A32 32 0 0 1 32 0' fill='none' stroke='rgba(16,185,129,0.06)' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+/* Asanoha (麻の葉) - Hemp Leaf geometric pattern */
+.bg-asanoha-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='83.14' viewBox='0 0 48 83.14'%3E%3Cpath d='M24 0 L48 41.57 L24 83.14 L0 41.57 Z M24 0 L24 83.14 M0 41.57 L48 41.57' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+/* Hanko / Inkan traditional vermillion seal stamp (朱印 / 判子) */
+.hanko-seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #c2410c;
+  color: #c2410c;
+  font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
+  font-weight: 800;
+  border-radius: 6px;
+  background-color: rgba(234, 88, 12, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(194, 65, 12, 0.25);
+  line-height: 1;
+  user-select: none;
+}
+
+.hanko-seal-round {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #c2410c;
+  color: #c2410c;
+  font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
+  font-weight: 800;
+  border-radius: 9999px;
+  background-color: rgba(234, 88, 12, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(194, 65, 12, 0.25);
+  line-height: 1;
+  user-select: none;
+}
+
+/* Traditional Japanese Crest Badge (家紋風バッジ) */
+.mon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
+  font-weight: 800;
+  line-height: 1;
+  user-select: none;
+}
+
+
