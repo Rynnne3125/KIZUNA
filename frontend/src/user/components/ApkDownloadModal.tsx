@@ -5,6 +5,7 @@ import {
   X, ShieldCheck, Sparkles, ExternalLink, Share2, PlusSquare,
   Laptop, Check, Globe, ArrowRight
 } from 'lucide-react';
+import { isNativeApp } from '../utils/platform';
 
 interface ApkDownloadModalProps {
   isOpen: boolean;
@@ -19,6 +20,8 @@ export const ApkDownloadModal: React.FC<ApkDownloadModalProps> = ({
   onClose,
   defaultTab
 }) => {
+  // Không hiển thị modal khi đang ở trong app native/APK
+  if (!isOpen || isNativeApp()) return null;
   // Tự động nhận diện thiết bị đang truy cập
   const detectPlatform = (): PlatformTab => {
     if (defaultTab) return defaultTab;
@@ -86,7 +89,7 @@ export const ApkDownloadModal: React.FC<ApkDownloadModalProps> = ({
   if (!isOpen) return null;
 
   // Đường dẫn tải trực tiếp APK và URL truy cập web
-  const apkDownloadPath = '/download/kizuna-v1.0.4.apk';
+  const apkDownloadPath = '/download/kizuna-latest.apk';
   const currentHost = typeof window !== 'undefined' ? window.location.origin : 'https://kizuna-thanhphongit.duckdns.org';
   const fullDownloadUrl = `${currentHost}${apkDownloadPath}`;
   const webAppUrl = currentHost;

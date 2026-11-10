@@ -15,8 +15,10 @@ import { ProfilePage } from './user/pages/ProfilePage';
 import { AdminDashboardPage } from './admin/pages/AdminDashboardPage';
 import { Smartphone, Download } from 'lucide-react';
 import { ApkDownloadModal } from './user/components/ApkDownloadModal';
+import { isNativeApp } from './user/utils/platform';
 
 export default function App() {
+  const isApp = isNativeApp();
   // Lấy người dùng từ session được lưu trong localStorage (tối đa 24h)
   const [user, setUser] = useState<User | null>(() => authService.getCurrentUser());
   
@@ -156,16 +158,18 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-3">
-            {/* Nút tải App đa nền tảng ở Topbar Desktop */}
-            <button
-              onClick={() => setIsApkModalOpen(true)}
-              className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white text-xs font-extrabold shadow-sm shadow-emerald-600/20 active:scale-95 transition-all cursor-pointer"
-              title="Cài đặt ứng dụng KIZUNA cho Android, iOS và Máy tính (PC)"
-            >
-              <Download className="w-4 h-4 text-emerald-200" />
-              <span>Cài Đặt Ứng Dụng</span>
-              <span className="bg-white/20 text-[10px] px-1.5 py-0.2 rounded-md font-extrabold">Android • iOS • PC</span>
-            </button>
+            {/* Nút tải App đa nền tảng ở Topbar Desktop (chỉ hiển thị trên Website) */}
+            {!isApp && (
+              <button
+                onClick={() => setIsApkModalOpen(true)}
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white text-xs font-extrabold shadow-sm shadow-emerald-600/20 active:scale-95 transition-all cursor-pointer"
+                title="Cài đặt ứng dụng KIZUNA cho Android, iOS và Máy tính (PC)"
+              >
+                <Download className="w-4 h-4 text-emerald-200" />
+                <span>Cài Đặt Ứng Dụng</span>
+                <span className="bg-white/20 text-[10px] px-1.5 py-0.2 rounded-md font-extrabold">Android • iOS • PC</span>
+              </button>
+            )}
           </div>
         </header>
 
@@ -206,11 +210,13 @@ export default function App() {
 
       </div>
 
-      {/* MODAL TẢI BẢN APP APK CHO ĐIỆN THOẠI */}
-      <ApkDownloadModal
-        isOpen={isApkModalOpen}
-        onClose={() => setIsApkModalOpen(false)}
-      />
+      {/* MODAL TẢI BẢN APP APK CHO ĐIỆN THOẠI (chỉ hiển thị trên Website) */}
+      {!isApp && (
+        <ApkDownloadModal
+          isOpen={isApkModalOpen}
+          onClose={() => setIsApkModalOpen(false)}
+        />
+      )}
 
     </div>
   );
