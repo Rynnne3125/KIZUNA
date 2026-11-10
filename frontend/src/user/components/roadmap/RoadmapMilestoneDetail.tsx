@@ -82,45 +82,49 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
   const defaultQuests = [
     {
       stepIndex: 1,
-      title: 'Bài 1: Thẻ học Ghi nhớ Cốt lõi (SRS Flashcards)',
+      title: 'Bài 1: Thẻ Ghi Nhớ Cốt Lõi (SRS Flashcards)',
       questType: 'SRS_FLASHCARD',
-      description: 'Học và ghi nhớ từ vựng & chữ Hán trọng tâm trong bài theo phương pháp lặp lại ngắt quãng SM-2.',
+      description: 'Luyện tập và ghi nhớ từ vựng, chữ Hán trọng tâm theo chu trình lặp lại ngắt quãng SM-2.',
       xpReward: 30,
       activePointsReward: 15
     },
     {
       stepIndex: 2,
-      title: 'Bài 2: Cổng Từ Vựng Phản Xạ (Vocab Gatekeeper 100%)',
+      title: 'Bài 2: Cổng Phản Xạ Từ Vựng (Gatekeeper 100%)',
       questType: 'VOCAB_GATEKEEPER',
-      description: 'Vượt qua bài trắc nghiệm phản xạ 4 phương án đảo ngẫu nhiên, yêu cầu đạt 100% độ chính xác để qua cổng.',
+      description: 'Vượt qua bài trắc nghiệm phản xạ nghĩa tiếng Việt, yêu cầu đạt 100% độ chính xác để qua cổng.',
       xpReward: 35,
       activePointsReward: 20
     },
     {
       stepIndex: 3,
-      title: 'Bài 3: Ngữ Pháp Ghép Câu & Bẫy Trợ Từ',
+      title: 'Bài 3: Ngữ Pháp Ghép Câu Kéo Thả (Drag & Drop)',
       questType: 'GRAMMAR_DRILL',
-      description: 'Thực hành ghép các thẻ từ xáo trộn thành câu tiếng Nhật hoàn chỉnh, nhận diện các cạm bẫy trợ từ người Việt hay mắc phải.',
+      description: 'Kéo thả các thẻ từ ghép thành câu tiếng Nhật hoàn chỉnh, nhận diện cạm bẫy trợ từ người Việt hay mắc.',
       xpReward: 40,
       activePointsReward: 25
     },
     {
       stepIndex: 4,
-      title: 'Bài 4: Bài Tập Thực Chiến & Gặp Gỡ AI Sensei',
+      title: 'Bài 4: Đối Thoại Tình Huống AI Sensei (2-Way Dialogue)',
       questType: 'PRACTICE_FINAL',
-      description: 'Đọc hiểu tình huống thực tế, tự viết câu trả lời và nhận đánh giá, sửa lỗi ngữ pháp tức thời từ AI Sensei.',
+      description: 'Hội thoại 2 chiều thực chiến theo ngữ cảnh, tự xây dựng câu trả lời và nhận phản hồi trực tiếp từ Sensei.',
       xpReward: 50,
       activePointsReward: 30
     }
   ];
 
-  // Merge Firestore quests with default schema so 4 quests are always well-defined
+  // Merge Firestore quests while preserving standardized titles and types
   const displayQuests = defaultQuests.map((defQ, idx) => {
-    const matched = quests.find(q => q.stepIndex === idx + 1 || (idx === 2 && q.questType === 'GRAMMAR_DRILL') || (idx === 3 && q.questType === 'VOCAB_KANJI_MASTERY'));
+    const matched = quests.find(q => (idx === 2 && q.questType === 'GRAMMAR_DRILL') || (idx === 3 && q.questType === 'VOCAB_KANJI_MASTERY'));
     return {
-      ...defQ,
       ...(matched || {}),
-      stepIndex: idx + 1
+      stepIndex: idx + 1,
+      title: defQ.title,
+      questType: defQ.questType,
+      description: defQ.description,
+      xpReward: defQ.xpReward,
+      activePointsReward: defQ.activePointsReward
     };
   });
 
@@ -648,6 +652,12 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
                               );
                             })}
                           </div>
+
+                          {readingQuizChecked && q.explanation && (
+                            <div style={{ marginTop: 12, padding: '8px 14px', borderRadius: 8, backgroundColor: '#ecfdf5', border: '1px solid #a7f3d0', fontSize: 13, color: '#065f46' }}>
+                              💡 <b>Giải thích chi tiết:</b> {q.explanation}
+                            </div>
+                          )}
                         </div>
                       );
                     })}
