@@ -48,8 +48,16 @@ The conflict strategy is **Last-Write-Wins by attempt timestamp**. Attempt IDs b
 | Coverage of the instrumented placement test bundle | **98.82% line**, **84.45% branch**, **88.89% function** on the isolated PR snapshot. The bundle includes the static question bank. This is scoped coverage for the placement modules and is not whole-application coverage. |
 | Backend API unit tests | **3 passed** covering request validation, response parsing, and rejection when the key or request budget is unavailable. |
 | Frontend production build | Passed with Vite. The separate project-wide TypeScript check still reports pre-existing Admin type errors. |
+| Desktop browser integration | **2 passed** in Chrome headless on the PR snapshot at commit `644f848`. The browser used real IndexedDB. Firestore writes and Gemini responses were simulated locally. |
 | Frame rate | Pending Android profiling. The template's 58–60 FPS range is a target, not a measurement. |
 | Internal testing APK | Pending a signed build from the version containing these changes and a verified release URL. |
+
+### Desktop browser scenarios
+
+1. **Offline and reconnect.** With the catalog cached, the browser went offline and submitted a quiz with 4/4 correct at N5 and 0/4 at N4. The result appeared immediately, the IndexedDB queue contained a pending record, and the roadmap opened Stage 5 N5. Reconnecting flushed the queue to the simulated Firestore store. Returning to the roadmap after reloading showed the same result and access.
+2. **AI recommendation and access.** A simulated Gemini response chose Lesson 6 in N5. The request included anonymous tier and category counts and N5 candidates only. The AI action opened Lesson 6's stage, and the next-stage action still pointed to Stage 5 N5.
+
+The test machine had no configured Gemini server key and no attached Android device or configured emulator. These browser checks do not provide live inference latency, recommendation accuracy, Android RAM, FPS, or an APK release.
 
 ### Reproduce the automated checks
 
