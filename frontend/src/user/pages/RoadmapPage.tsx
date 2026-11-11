@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { kizunaService } from '../services/kizunaService';
 import { authService } from '../services/authService';
-import { progressService } from '../services/progressService';
+import {
+  formatPlacementStageTitle, getPassedPlacementLevels, getPlacementLearningLevel, getPlacementTarget,
+  placementService, PlacementAssessmentResult
+} from '../services/placementService';
+import { SCREENING_QUESTIONS } from '../data/placementQuestionBank';
+import { AiPlacementModal } from '../components/placement/AiPlacementModal';
 import { Stage, Milestone, JapanRegion } from '../types/kizuna';
 import { JapanOverworldMap } from '../components/roadmap/JapanOverworldMap';
 import { RegionDetailModal } from '../components/roadmap/RegionDetailModal';
@@ -115,15 +120,17 @@ export const RoadmapPage: React.FC = () => {
   const [stages, setStages] = useState<Stage[]>([]);
   const [milestones, setMilestones] = useState<Milestone[]>([]);
   const [loading, setLoading] = useState(true);
+  const [placement, setPlacement] = useState<PlacementAssessmentResult | null>(null);
+  const [completedMilestones, setCompletedMilestones] = useState<string[]>([]);
+  const [expandedStageId, setExpandedStageId] = useState<string | null>(null);
+  const [isPlacementOpen, setIsPlacementOpen] = useState(false);
+  const userId = currentUser?.id;
 
   // Map state - Tự động chọn Vùng tương ứng theo level đã thẩm định của học viên
   const [currentView, setCurrentView] = useState<'OVERWORLD' | 'REGION_ZOOM'>('OVERWORLD');
-  const [selectedRegion, setSelectedRegion] = useState<JapanRegion | null>(() => {
-    if (currentUser?.level === 'N4') return JAPAN_REGIONS_CONFIG[1];
-    if (currentUser?.level === 'N3') return JAPAN_REGIONS_CONFIG[2];
-    if (currentUser?.level === 'N2') return JAPAN_REGIONS_CONFIG[3];
-    return JAPAN_REGIONS_CONFIG[0];
-  });
+  const [selectedRegion, setSelectedRegion] = useState<JapanRegion | null>(() =>
+    JAPAN_REGIONS_CONFIG.find(region => region.level === currentUser?.level) ?? JAPAN_REGIONS_CONFIG[0]
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // User gamification metrics đồng bộ thực tế từ tài khoản học viên
@@ -137,26 +144,35 @@ export const RoadmapPage: React.FC = () => {
   useEffect(() => {
     async function loadData() {
       try {
-        const [s, m] = await Promise.all([
+        const [s, m, result, completed] = await Promise.all([
           kizunaService.getStages(),
-          kizunaService.getMilestones()
+          kizunaService.getMilestones(),
+          userId ? placementService.checkUserPlacementStatus(userId) : Promise.resolve(null),
+          userId ? placementService.getCompletedMilestones(userId) : Promise.resolve([])
         ]);
         setStages(s);
         setMilestones(m);
+        setPlacement(result);
+        setCompletedMilestones(completed);
+        if (result) {
+          const region = JAPAN_REGIONS_CONFIG.find(region => region.level === getPlacementLearningLevel(result));
+          if (region) setSelectedRegion(region);
+        }
       } finally {
         setLoading(false);
       }
     }
     loadData();
-  }, []);
+  }, [userId]);
 
   const handleSelectRegion = (region: JapanRegion) => {
     setSelectedRegion(region);
     setIsModalOpen(true);
   };
 
-  const handleEnterRegion = (region: JapanRegion) => {
+  const handleEnterRegion = (region: JapanRegion, stageId?: string) => {
     setSelectedRegion(region);
+    setExpandedStageId(stageId ?? null);
     setIsModalOpen(false);
     setCurrentView('REGION_ZOOM');
   };
@@ -165,10 +181,29 @@ export const RoadmapPage: React.FC = () => {
     setCurrentView('OVERWORLD');
   };
 
-  // Filter stages of selected region
-  const regionStages = stages.filter(
-    s => s.jlptLevel === selectedRegion?.level || (!s.jlptLevel && selectedRegion?.level === 'N5')
-  );
+  const regionStages = stages
+    .filter(stage => (stage.jlptLevel ?? 'N5') === selectedRegion?.level)
+    .sort((a, b) => a.orderIndex - b.orderIndex);
+  const passedLevels = placement ? getPassedPlacementLevels(placement) : [];
+  const target = placement
+    ? getPlacementTarget(stages, milestones, getPlacementLearningLevel(placement), placement.recommendedStageId)
+    : null;
+  const goalLabel = SCREENING_QUESTIONS.goal.options.find(option => option.value === placement?.screening?.goal)?.label;
+  const stageMilestones = (stageId: string) => milestones
+    .filter(milestone => milestone.stageId === stageId)
+    .sort((a, b) => a.orderIndex - b.orderIndex);
+  const completedIds = new Set(completedMilestones);
+  const stageCompleted = (stageId: string) => {
+    const items = stageMilestones(stageId);
+    return items.length > 0 && items.every(item => completedIds.has(item.id));
+  };
+  const regionCompletedCount = regionStages.filter(stage => stageCompleted(stage.id)).length;
+  const regionPercentage = regionStages.length ? Math.round(regionCompletedCount * 100 / regionStages.length) : 0;
+  const jumpToRecommendation = () => {
+    if (!target) return;
+    const region = JAPAN_REGIONS_CONFIG.find(region => region.level === (target.stage.jlptLevel ?? 'N5'));
+    if (region) handleEnterRegion(region, target.stage.id);
+  };
 
   return (
     <div style={{ maxWidth: 1200, margin: '0 auto', paddingBottom: 60 }}>
@@ -273,6 +308,32 @@ export const RoadmapPage: React.FC = () => {
         </div>
       </div>
 
+      {currentUser && (
+        <section className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-emerald-200 bg-white p-4">
+          <div>
+            <h2 className="font-bold text-slate-900">{placement?.levelTitle ?? 'Kiểm tra trình độ'}</h2>
+            {placement && (
+              <div className="mt-1 space-y-1 text-sm text-slate-600">
+                {placement.answeredCount > 0 && <p>Đúng {placement.correctCount}/{placement.answeredCount} câu</p>}
+                {goalLabel && <p>Mục tiêu học tập · {goalLabel}</p>}
+                {passedLevels.length > 0 && <p>Đã mở toàn bộ mốc {passedLevels.join(', ')}</p>}
+                {target && <p>{passedLevels.includes('N1') ? 'Chặng ôn tập' : 'Chặng học tiếp theo'} · {formatPlacementStageTitle(target.stage.jlptLevel ?? 'N5', target.stage.title)}</p>}
+              </div>
+            )}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <button type="button" onClick={() => setIsPlacementOpen(true)} className="rounded-lg border border-emerald-600 px-4 py-2 font-semibold text-emerald-700">
+              {placement ? 'Làm lại bài test' : 'Bắt đầu xếp lớp'}
+            </button>
+            {target && (
+              <button type="button" onClick={jumpToRecommendation} className="rounded-lg bg-emerald-700 px-4 py-2 font-semibold text-white">
+                {passedLevels.includes('N1') ? 'Ôn tập theo đề xuất' : 'Học chặng tiếp theo'}
+              </button>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* 2. MAIN VIEW CONTROLLER */}
       {currentView === 'OVERWORLD' ? (
         /* ================= OVERWORLD 3D JAPAN MAP VIEW ================= */
@@ -363,7 +424,7 @@ export const RoadmapPage: React.FC = () => {
                 return (
                   <button
                     key={r.id}
-                    onClick={() => setSelectedRegion(r)}
+                    onClick={() => handleEnterRegion(r)}
                     style={{
                       padding: '6px 14px',
                       borderRadius: 9999,
@@ -444,12 +505,12 @@ export const RoadmapPage: React.FC = () => {
                 <div>
                   <div style={{ fontSize: 11, color: '#94a3b8' }}>Tiến độ vùng:</div>
                   <div style={{ fontSize: 16, fontWeight: 800, color: '#ffffff' }}>
-                    Chặng 1 / {selectedRegion.stagesCount} hoàn thành (20%)
+                    {regionCompletedCount} / {regionStages.length} chặng hoàn thành ({regionPercentage}%)
                   </div>
                 </div>
                 <div style={{ flex: 1, maxWidth: 300 }}>
                   <div style={{ height: 8, borderRadius: 9999, backgroundColor: 'rgba(255, 255, 255, 0.1)', overflow: 'hidden' }}>
-                    <div style={{ width: '20%', height: '100%', backgroundColor: selectedRegion.themeColor, borderRadius: 9999 }} />
+                    <div style={{ width: `${regionPercentage}%`, height: '100%', backgroundColor: selectedRegion.themeColor, borderRadius: 9999 }} />
                   </div>
                 </div>
               </div>
@@ -465,14 +526,13 @@ export const RoadmapPage: React.FC = () => {
                   Danh Sách {regionStages.length || selectedRegion?.stagesCount} Chặng Trong Vùng {selectedRegion?.level}
                 </h2>
               </div>
-              <span style={{ fontSize: 12, color: '#64748b' }}>
-                Chuẩn bị sẵn sàng cho Giai đoạn tiếp theo (Vẽ Map Chặng & Mốc game)
-              </span>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 16 }}>
               {regionStages.map((st, idx) => {
-                const stageMilestones = milestones.filter(m => m.stageId === st.id);
+                const items = stageMilestones(st.id);
+                const isExpanded = expandedStageId === st.id;
+                const canReview = passedLevels.includes(st.jlptLevel ?? 'N5');
                 return (
                   <div
                     key={st.id}
@@ -480,8 +540,8 @@ export const RoadmapPage: React.FC = () => {
                     style={{
                       padding: 20,
                       borderRadius: 16,
-                      border: idx === 0 ? `2px solid ${selectedRegion?.themeColor}` : '1px solid #e2e8f0',
-                      boxShadow: idx === 0 ? `0 8px 20px -4px ${selectedRegion?.themeColor}30` : 'var(--shadow-sm)',
+                      border: target?.stage.id === st.id ? `2px solid ${selectedRegion?.themeColor}` : '1px solid #e2e8f0',
+                      boxShadow: target?.stage.id === st.id ? `0 8px 20px -4px ${selectedRegion?.themeColor}30` : 'var(--shadow-sm)',
                       position: 'relative'
                     }}
                   >
@@ -533,17 +593,74 @@ export const RoadmapPage: React.FC = () => {
                         color: '#64748b'
                       }}
                     >
-                      <span>📍 {stageMilestones.length || 5} Mốc học tập</span>
-                      <span style={{ color: selectedRegion?.themeColor, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 2 }}>
-                        Khám phá <ChevronRight size={14} />
-                      </span>
+                      <span>{items.length} mốc học tập{canReview ? ' · Đã mở để ôn lại' : ''}</span>
+                      <button
+                        type="button"
+                        aria-expanded={isExpanded}
+                        onClick={() => setExpandedStageId(isExpanded ? null : st.id)}
+                        className="inline-flex items-center gap-1 font-semibold text-emerald-700"
+                      >
+                        {isExpanded ? 'Ẩn mốc học' : 'Xem mốc học'} <ChevronRight size={14} />
+                      </button>
                     </div>
+                    {isExpanded && (
+                      <ul className="mt-3 space-y-2">
+                        {items.map((item, index) => {
+                          const completed = completedIds.has(item.id);
+                          const previous = regionStages[idx - 1];
+                          const prerequisiteMet = index > 0
+                            ? completedIds.has(items[index - 1].id)
+                            : previous ? stageCompleted(previous.id) : selectedRegion?.level === 'N5';
+                          const unlocked = completed || canReview || target?.milestone.id === item.id || prerequisiteMet;
+                          return (
+                            <li key={item.id} className="rounded-lg border border-slate-200 p-3 text-sm">
+                              {unlocked ? (
+                                <details>
+                                  <summary className="cursor-pointer font-semibold text-emerald-800">
+                                    {item.title} · {completed ? 'Đã học' : 'Vào học'}
+                                  </summary>
+                                  <p className="mt-2 text-slate-600">{item.canDoGoal ?? item.communicationContext}</p>
+                                  {item.readingPassage?.japanese && (
+                                    <p lang="ja" className="mt-2 whitespace-pre-line text-slate-800">{item.readingPassage.japanese}</p>
+                                  )}
+                                  {item.readingPassage?.vietnamese && (
+                                    <p className="mt-2 whitespace-pre-line text-slate-600">{item.readingPassage.vietnamese}</p>
+                                  )}
+                                </details>
+                              ) : (
+                                <span className="text-slate-500">{item.title} · Đang khóa</span>
+                              )}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
                   </div>
                 );
               })}
             </div>
           </div>
         </div>
+      )}
+
+      {isPlacementOpen && (
+        <AiPlacementModal
+          isOpen
+          onClose={() => setIsPlacementOpen(false)}
+          user={currentUser}
+          onAssessmentComplete={result => {
+            setPlacement(result);
+            setUserStats(previous => ({ ...previous, currentLevel: result.assignedLevel }));
+            if (!stages.some(stage => stage.id === result.recommendedStageId) ||
+                !milestones.some(milestone => milestone.id === result.recommendedMilestoneId)) {
+              void placementService.getPlacementCatalog().then(catalog => {
+                setStages(catalog.stages);
+                setMilestones(catalog.milestones);
+              }).catch(error => console.warn('Không thể tải lại lộ trình:', error));
+            }
+          }}
+          onNavigateToRoadmap={jumpToRecommendation}
+        />
       )}
 
       {/* 3. REGION DETAIL MODAL (LEVEL INSPECTION PORTAL) */}

@@ -215,7 +215,7 @@ export default function App() {
             setUser({
               ...user,
               level: result.assignedLevel,
-              placementVerified: true,
+              placementVerified: result.answeredCount > 0,
               placementScore: result.percentage
             });
           }
