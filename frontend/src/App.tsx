@@ -16,6 +16,7 @@ import { AdminDashboardPage } from './admin/pages/AdminDashboardPage';
 import { Smartphone, Download } from 'lucide-react';
 import { ApkDownloadModal } from './user/components/ApkDownloadModal';
 import { AiPlacementModal } from './user/components/placement/AiPlacementModal';
+import { placementService } from './user/services/placementService';
 
 export default function App() {
   // Lấy người dùng từ session được lưu trong localStorage (tối đa 24h)
@@ -32,6 +33,15 @@ export default function App() {
 
   // Trạng thái mở modal làm bài test thẩm định trình độ thích ứng
   const [isPlacementModalOpen, setIsPlacementModalOpen] = useState(false);
+
+  useEffect(() => {
+    const userId = user?.id;
+    if (!userId) return;
+    const sync = () => { void placementService.syncPendingPlacement(userId); };
+    sync();
+    window.addEventListener('online', sync);
+    return () => window.removeEventListener('online', sync);
+  }, [user?.id]);
 
   // Đồng bộ quyền mới nhất từ Firestore khi mở ứng dụng (đảm bảo quyền mới sửa trên console ăn ngay)
   useEffect(() => {

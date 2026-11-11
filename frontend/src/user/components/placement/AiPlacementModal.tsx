@@ -32,6 +32,7 @@ import {
   PlacementAssessmentResult 
 } from '../../services/placementService';
 import { User } from '../../types/auth';
+import { PLACEMENT_CONFIDENCE_LABELS } from '../../services/placementAssessmentApi';
 
 interface AiPlacementModalProps {
   isOpen: boolean;
@@ -72,6 +73,7 @@ export const AiPlacementModal: React.FC<AiPlacementModalProps> = ({
   const [testedQuestionsHistory, setTestedQuestionsHistory] = useState<DiagnosticQuestion[]>([]);
 
   const [assessmentResult, setAssessmentResult] = useState<PlacementAssessmentResult | null>(null);
+  const [syncPending, setSyncPending] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [roadmapError, setRoadmapError] = useState<string | null>(null);
 
@@ -163,13 +165,16 @@ export const AiPlacementModal: React.FC<AiPlacementModalProps> = ({
 
     try {
       const result = await placementService.evaluatePlacement(user.id, { ...screening, goal }, answers, questions, setId);
-      await placementService.savePlacementResult(result);
-      setAssessmentResult(result);
+      const saved = await placementService.savePlacementResult(result);
+      setAssessmentResult(saved.result);
+      setSyncPending(saved.status === 'pending');
       setCurrentStep('RESULT');
-      onAssessmentComplete(result);
+      onAssessmentComplete(saved.result);
     } catch (error) {
       console.error('Lỗi khi lưu kết quả xếp lớp:', error);
-      setRoadmapError('Chưa lưu được kết quả và điểm bắt đầu từ Firestore. Vui lòng thử lại.');
+      setRoadmapError(error instanceof Error && error.message.startsWith('Cần tải lộ trình')
+        ? error.message
+        : 'Chưa lưu được kết quả. Vui lòng thử lại.');
     } finally {
       setIsSaving(false);
     }
@@ -584,6 +589,14 @@ export const AiPlacementModal: React.FC<AiPlacementModalProps> = ({
                   <span>Đúng {assessmentResult.correctCount}/{assessmentResult.answeredCount} câu</span>
                 </div>
               )}
+              {assessmentResult.aiAssessment && (
+                <p className="mt-2 text-sm text-slate-600">
+                  Độ tin cậy theo Gemini · {PLACEMENT_CONFIDENCE_LABELS[assessmentResult.aiAssessment.confidence]}
+                </p>
+              )}
+              {syncPending && (
+                <p role="status" className="mt-2 text-sm text-amber-700">Đã lưu trên thiết bị, đang chờ đồng bộ.</p>
+              )}
             </div>
 
             <div className="bg-indigo-50 border border-indigo-200 rounded-2xl p-4 flex items-center justify-between gap-4 flex-wrap">
@@ -593,11 +606,14 @@ export const AiPlacementModal: React.FC<AiPlacementModalProps> = ({
                 </div>
                 <div>
                   <div className="text-xs text-indigo-700 font-bold uppercase">
-                    {passedLevels.includes('N1') ? 'Chặng đề xuất để ôn tập' : 'Chặng học tiếp theo'}
+                    {assessmentResult.aiAssessment ? 'Gợi ý từ Gemini' : 'Điểm bắt đầu theo bài test'}
                   </div>
                   <div className="text-sm font-extrabold text-indigo-950">
                     {formatPlacementStageTitle(getPlacementLearningLevel(assessmentResult), assessmentResult.recommendedStageTitle)}
                   </div>
+                  {assessmentResult.aiAssessment && (
+                    <div className="text-sm text-indigo-800">{assessmentResult.recommendedMilestoneTitle}</div>
+                  )}
                 </div>
               </div>
               {passedLevels.length > 0 && (

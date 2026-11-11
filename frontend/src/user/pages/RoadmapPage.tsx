@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { kizunaService } from '../services/kizunaService';
 import { authService } from '../services/authService';
 import {
-  formatPlacementStageTitle, getPassedPlacementLevels, getPlacementLearningLevel, getPlacementTarget,
+  formatPlacementStageTitle, getRoadmapAccess,
   placementService, PlacementAssessmentResult
 } from '../services/placementService';
 import { SCREENING_QUESTIONS } from '../data/placementQuestionBank';
+import { PLACEMENT_CONFIDENCE_LABELS } from '../services/placementAssessmentApi';
 import { AiPlacementModal } from '../components/placement/AiPlacementModal';
 import { Stage, Milestone, JapanRegion } from '../types/kizuna';
 import { JapanOverworldMap } from '../components/roadmap/JapanOverworldMap';
@@ -144,25 +145,36 @@ export const RoadmapPage: React.FC = () => {
   useEffect(() => {
     async function loadData() {
       try {
-        const [s, m, result, completed] = await Promise.all([
-          kizunaService.getStages(),
-          kizunaService.getMilestones(),
+        const [catalog, result, completed] = await Promise.all([
+          placementService.getPlacementCatalog().catch(async () => {
+            const [stages, milestones] = await Promise.all([kizunaService.getStages(), kizunaService.getMilestones()]);
+            return { stages, milestones };
+          }),
           userId ? placementService.checkUserPlacementStatus(userId) : Promise.resolve(null),
           userId ? placementService.getCompletedMilestones(userId) : Promise.resolve([])
         ]);
-        setStages(s);
-        setMilestones(m);
+        setStages(catalog.stages);
+        setMilestones(catalog.milestones);
         setPlacement(result);
         setCompletedMilestones(completed);
-        if (result) {
-          const region = JAPAN_REGIONS_CONFIG.find(region => region.level === getPlacementLearningLevel(result));
-          if (region) setSelectedRegion(region);
-        }
+        const access = getRoadmapAccess(catalog.stages, catalog.milestones, completed, result);
+        const region = JAPAN_REGIONS_CONFIG.find(region => region.level === (access.lastAccessibleStage?.jlptLevel ?? 'N5'));
+        if (region) setSelectedRegion(region);
       } finally {
         setLoading(false);
       }
     }
     loadData();
+  }, [userId]);
+
+  useEffect(() => {
+    if (!userId) return;
+    const refresh = () => {
+      void placementService.checkUserPlacementStatus(userId).then(setPlacement);
+      void placementService.getCompletedMilestones(userId).then(setCompletedMilestones);
+    };
+    window.addEventListener('kizuna_user_updated', refresh);
+    return () => window.removeEventListener('kizuna_user_updated', refresh);
   }, [userId]);
 
   const handleSelectRegion = (region: JapanRegion) => {
@@ -184,10 +196,9 @@ export const RoadmapPage: React.FC = () => {
   const regionStages = stages
     .filter(stage => (stage.jlptLevel ?? 'N5') === selectedRegion?.level)
     .sort((a, b) => a.orderIndex - b.orderIndex);
-  const passedLevels = placement ? getPassedPlacementLevels(placement) : [];
-  const target = placement
-    ? getPlacementTarget(stages, milestones, getPlacementLearningLevel(placement), placement.recommendedStageId)
-    : null;
+  const { passedLevels, placementTarget, unlockedMilestoneIds, lastAccessibleStage } = getRoadmapAccess(
+    stages, milestones, completedMilestones, placement
+  );
   const goalLabel = SCREENING_QUESTIONS.goal.options.find(option => option.value === placement?.screening?.goal)?.label;
   const stageMilestones = (stageId: string) => milestones
     .filter(milestone => milestone.stageId === stageId)
@@ -199,11 +210,16 @@ export const RoadmapPage: React.FC = () => {
   };
   const regionCompletedCount = regionStages.filter(stage => stageCompleted(stage.id)).length;
   const regionPercentage = regionStages.length ? Math.round(regionCompletedCount * 100 / regionStages.length) : 0;
-  const jumpToRecommendation = () => {
-    if (!target) return;
-    const region = JAPAN_REGIONS_CONFIG.find(region => region.level === (target.stage.jlptLevel ?? 'N5'));
-    if (region) handleEnterRegion(region, target.stage.id);
+  const openStage = (stage?: Stage | null) => {
+    if (!stage) return;
+    const region = JAPAN_REGIONS_CONFIG.find(region => region.level === (stage.jlptLevel ?? 'N5'));
+    if (region) handleEnterRegion(region, stage.id);
   };
+
+  useEffect(() => {
+    if (!placement?.aiAssessment || !placementTarget || expandedStageId !== placementTarget.stage.id) return;
+    document.getElementById(`roadmap-milestone-${placementTarget.milestone.id}`)?.scrollIntoView({ block: 'nearest' });
+  }, [expandedStageId, placement?.aiAssessment, placementTarget?.stage.id, placementTarget?.milestone.id]);
 
   return (
     <div style={{ maxWidth: 1200, margin: '0 auto', paddingBottom: 60 }}>
@@ -317,7 +333,12 @@ export const RoadmapPage: React.FC = () => {
                 {placement.answeredCount > 0 && <p>Đúng {placement.correctCount}/{placement.answeredCount} câu</p>}
                 {goalLabel && <p>Mục tiêu học tập · {goalLabel}</p>}
                 {passedLevels.length > 0 && <p>Đã mở toàn bộ mốc {passedLevels.join(', ')}</p>}
-                {target && <p>{passedLevels.includes('N1') ? 'Chặng ôn tập' : 'Chặng học tiếp theo'} · {formatPlacementStageTitle(target.stage.jlptLevel ?? 'N5', target.stage.title)}</p>}
+                {lastAccessibleStage && <p>Chặng học tiếp theo · {formatPlacementStageTitle(lastAccessibleStage.jlptLevel ?? 'N5', lastAccessibleStage.title)}</p>}
+                {placement.aiAssessment && placementTarget && (
+                  <button type="button" onClick={() => openStage(placementTarget.stage)} className="text-left text-indigo-700 underline">
+                    Bài AI đề xuất · {placementTarget.milestone.title} · Độ tin cậy {PLACEMENT_CONFIDENCE_LABELS[placement.aiAssessment.confidence]}
+                  </button>
+                )}
               </div>
             )}
           </div>
@@ -325,9 +346,9 @@ export const RoadmapPage: React.FC = () => {
             <button type="button" onClick={() => setIsPlacementOpen(true)} className="rounded-lg border border-emerald-600 px-4 py-2 font-semibold text-emerald-700">
               {placement ? 'Làm lại bài test' : 'Bắt đầu xếp lớp'}
             </button>
-            {target && (
-              <button type="button" onClick={jumpToRecommendation} className="rounded-lg bg-emerald-700 px-4 py-2 font-semibold text-white">
-                {passedLevels.includes('N1') ? 'Ôn tập theo đề xuất' : 'Học chặng tiếp theo'}
+            {placement && lastAccessibleStage && (
+              <button type="button" onClick={() => openStage(lastAccessibleStage)} className="rounded-lg bg-emerald-700 px-4 py-2 font-semibold text-white">
+                Vào học chặng này ngay
               </button>
             )}
           </div>
@@ -540,8 +561,8 @@ export const RoadmapPage: React.FC = () => {
                     style={{
                       padding: 20,
                       borderRadius: 16,
-                      border: target?.stage.id === st.id ? `2px solid ${selectedRegion?.themeColor}` : '1px solid #e2e8f0',
-                      boxShadow: target?.stage.id === st.id ? `0 8px 20px -4px ${selectedRegion?.themeColor}30` : 'var(--shadow-sm)',
+                      border: lastAccessibleStage?.id === st.id ? `2px solid ${selectedRegion?.themeColor}` : '1px solid #e2e8f0',
+                      boxShadow: lastAccessibleStage?.id === st.id ? `0 8px 20px -4px ${selectedRegion?.themeColor}30` : 'var(--shadow-sm)',
                       position: 'relative'
                     }}
                   >
@@ -605,19 +626,16 @@ export const RoadmapPage: React.FC = () => {
                     </div>
                     {isExpanded && (
                       <ul className="mt-3 space-y-2">
-                        {items.map((item, index) => {
+                        {items.map(item => {
                           const completed = completedIds.has(item.id);
-                          const previous = regionStages[idx - 1];
-                          const prerequisiteMet = index > 0
-                            ? completedIds.has(items[index - 1].id)
-                            : previous ? stageCompleted(previous.id) : selectedRegion?.level === 'N5';
-                          const unlocked = completed || canReview || target?.milestone.id === item.id || prerequisiteMet;
+                          const unlocked = unlockedMilestoneIds.has(item.id);
+                          const isAiRecommendation = placement?.aiAssessment && placementTarget?.milestone.id === item.id;
                           return (
-                            <li key={item.id} className="rounded-lg border border-slate-200 p-3 text-sm">
+                            <li key={item.id} id={`roadmap-milestone-${item.id}`} className="rounded-lg border border-slate-200 p-3 text-sm">
                               {unlocked ? (
                                 <details>
                                   <summary className="cursor-pointer font-semibold text-emerald-800">
-                                    {item.title} · {completed ? 'Đã học' : 'Vào học'}
+                                    {item.title} · {completed ? 'Đã học' : isAiRecommendation ? 'AI đề xuất' : 'Vào học'}
                                   </summary>
                                   <p className="mt-2 text-slate-600">{item.canDoGoal ?? item.communicationContext}</p>
                                   {item.readingPassage?.japanese && (
@@ -659,7 +677,7 @@ export const RoadmapPage: React.FC = () => {
               }).catch(error => console.warn('Không thể tải lại lộ trình:', error));
             }
           }}
-          onNavigateToRoadmap={jumpToRecommendation}
+          onNavigateToRoadmap={() => openStage(lastAccessibleStage)}
         />
       )}
 
