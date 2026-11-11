@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { kizunaService } from '../services/kizunaService';
 import { authService } from '../services/authService';
 import { progressService } from '../services/progressService';
+import { placementService } from '../services/placementService';
+import { roadmapGeneratorService } from '../services/roadmapGeneratorService';
+import { PersonalizedRoadmap } from '../types/roadmapTypes';
 import { Stage, Milestone, JapanRegion } from '../types/kizuna';
 import { JapanOverworldMap } from '../components/roadmap/JapanOverworldMap';
 import { RegionDetailModal } from '../components/roadmap/RegionDetailModal';
-import { Flame, Zap, Trophy, Compass, ArrowLeft, Sparkles, MapPin, Layers, ChevronRight, Award } from 'lucide-react';
+import { RoadmapTimelineView } from '../components/roadmap/RoadmapTimelineView';
+import { AiPlacementModal } from '../components/placement/AiPlacementModal';
+import { Flame, Zap, Trophy, Compass, ArrowLeft, Sparkles, MapPin, Layers, ChevronRight, Award, Calendar, Brain, RotateCcw } from 'lucide-react';
 
 const JAPAN_REGIONS_CONFIG: JapanRegion[] = [
   {
@@ -133,6 +138,44 @@ export const RoadmapPage: React.FC = () => {
     totalXp: currentUser?.totalXp || 0,
     currentLevel: currentUser?.level || 'N5'
   });
+
+  // Chế độ xem: 'TIMELINE' (Kế hoạch tuần cá nhân hóa bởi AI) hoặc 'MAP' (Bản đồ 3D)
+  const [activeRoadmapMode, setActiveRoadmapMode] = useState<'TIMELINE' | 'MAP'>('TIMELINE');
+  const [personalizedRoadmap, setPersonalizedRoadmap] = useState<PersonalizedRoadmap | null>(null);
+  const [loadingRoadmap, setLoadingRoadmap] = useState(false);
+  const [isPlacementModalOpen, setIsPlacementModalOpen] = useState(false);
+
+  // Tải lộ trình học cá nhân hóa duy nhất của học viên (Chỉ có sau khi hoàn thành bài test)
+  const refreshUserRoadmap = async () => {
+    if (!currentUser?.id) return;
+    setLoadingRoadmap(true);
+    try {
+      const rdm = await roadmapGeneratorService.getUserRoadmap(currentUser.id);
+      setPersonalizedRoadmap(rdm);
+    } catch (err) {
+      console.warn('Lỗi nạp roadmap:', err);
+    } finally {
+      setLoadingRoadmap(false);
+    }
+  };
+
+  useEffect(() => {
+    refreshUserRoadmap();
+  }, [currentUser?.id]);
+
+  // Đánh dấu hoàn thành / bỏ hoàn thành nhiệm vụ
+  const handleToggleTask = async (weekNumber: number, taskId: string) => {
+    if (!currentUser?.id) return;
+    const updated = await roadmapGeneratorService.toggleTaskCompletion(currentUser.id, weekNumber, taskId);
+    if (updated) {
+      setPersonalizedRoadmap({ ...updated });
+    }
+  };
+
+  // Mở modal làm bài kiểm tra để tạo hoặc tạo lại lộ trình
+  const handleOpenPlacementTest = () => {
+    setIsPlacementModalOpen(true);
+  };
 
   useEffect(() => {
     async function loadData() {
@@ -273,8 +316,85 @@ export const RoadmapPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. MAIN VIEW CONTROLLER */}
-      {currentView === 'OVERWORLD' ? (
+      {/* 1.5. TAB CHUYỂN ĐỔI CHẾ ĐỘ XEM: KẾ HOẠCH TUẦN AI vs BẢN ĐỒ 3D */}
+      <div className="flex items-center justify-between gap-3 mb-6 flex-wrap">
+        <div className="inline-flex p-1.5 bg-slate-200/80 rounded-2xl border border-slate-200/60 shadow-2xs">
+          <button
+            onClick={() => setActiveRoadmapMode('TIMELINE')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer ${
+              activeRoadmapMode === 'TIMELINE'
+                ? 'bg-white text-emerald-900 shadow-sm'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <Calendar className="w-4 h-4 text-emerald-600" />
+            <span>Kế Hoạch Tuần Cá Nhân Hóa (AI)</span>
+          </button>
+
+          <button
+            onClick={() => setActiveRoadmapMode('MAP')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer ${
+              activeRoadmapMode === 'MAP'
+                ? 'bg-white text-emerald-900 shadow-sm'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <Compass className="w-4 h-4 text-emerald-600" />
+            <span>Bản Đồ Quần Đảo 3D</span>
+          </button>
+        </div>
+
+        {activeRoadmapMode === 'TIMELINE' && personalizedRoadmap && (
+          <button
+            onClick={handleOpenPlacementTest}
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-bold transition-all cursor-pointer"
+          >
+            <RotateCcw className="w-3.5 h-3.5 text-emerald-600" />
+            <span>Làm lại bài test để tạo lại lộ trình</span>
+          </button>
+        )}
+      </div>
+
+      {/* 2. NỘI DUNG HIỂN THỊ THEO TAB ĐANG CHỌN */}
+      {activeRoadmapMode === 'TIMELINE' ? (
+        loadingRoadmap ? (
+          <div className="bg-white rounded-3xl p-12 text-center border border-emerald-100 shadow-sm space-y-3">
+            <div className="w-12 h-12 mx-auto rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center animate-pulse text-emerald-600">
+              <Brain className="w-6 h-6" />
+            </div>
+            <h3 className="text-base font-bold text-slate-800">Đang Tải Lộ Trình Học Cá Nhân Hóa...</h3>
+            <p className="text-xs text-slate-500 max-w-sm mx-auto">Vui lòng chờ trong giây lát để đồng bộ dữ liệu lộ trình của bạn.</p>
+          </div>
+        ) : personalizedRoadmap ? (
+          <RoadmapTimelineView
+            roadmap={personalizedRoadmap}
+            onToggleTask={handleToggleTask}
+            onRegenerate={handleOpenPlacementTest}
+            onSwitchToMap={() => setActiveRoadmapMode('MAP')}
+          />
+        ) : (
+          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-emerald-100 text-center shadow-md max-w-lg mx-auto space-y-4">
+            <div className="w-16 h-16 mx-auto rounded-3xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
+              <Brain className="w-8 h-8" />
+            </div>
+            <h3 className="text-xl font-extrabold text-slate-900">
+              Chưa Có Lộ Trình Học Cá Nhân Hóa
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Mỗi học viên chỉ được tạo <strong>1 lộ trình cá nhân hóa duy nhất qua Gemini API</strong> sau khi hoàn thành bài kiểm tra năng lực đầu vào. Bạn có thể làm bài kiểm tra (hoặc làm lại bài kiểm tra với bộ đề ngẫu nhiên mới) để AI Sensei tạo lộ trình cho bạn.
+            </p>
+            <button
+              onClick={handleOpenPlacementTest}
+              className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-2xl text-xs sm:text-sm transition-all shadow-md shadow-emerald-600/20 cursor-pointer"
+            >
+              Làm bài kiểm tra năng lực để tạo lộ trình ⚡
+            </button>
+          </div>
+        )
+      ) : (
+        /* ================= OVERWORLD / REGION ZOOM MAP VIEW ================= */
+        <div>
+          {currentView === 'OVERWORLD' ? (
         /* ================= OVERWORLD 3D JAPAN MAP VIEW ================= */
         <div>
           <JapanOverworldMap
@@ -545,6 +665,8 @@ export const RoadmapPage: React.FC = () => {
           </div>
         </div>
       )}
+        </div>
+      )}
 
       {/* 3. REGION DETAIL MODAL (LEVEL INSPECTION PORTAL) */}
       <RegionDetailModal
@@ -553,6 +675,22 @@ export const RoadmapPage: React.FC = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onEnterRegion={handleEnterRegion}
+      />
+
+      {/* 4. MODAL LÀM BÀI KIỂM TRA NĂNG LỰC ĐỂ TẠO / TẠO LẠI LỘ TRÌNH */}
+      <AiPlacementModal
+        isOpen={isPlacementModalOpen}
+        onClose={() => setIsPlacementModalOpen(false)}
+        user={currentUser}
+        onAssessmentComplete={(result) => {
+          setUserStats(prev => ({ ...prev, currentLevel: result.assignedLevel }));
+          refreshUserRoadmap();
+        }}
+        onNavigateToRoadmap={() => {
+          setIsPlacementModalOpen(false);
+          setActiveRoadmapMode('TIMELINE');
+          refreshUserRoadmap();
+        }}
       />
     </div>
   );

@@ -3,12 +3,14 @@ import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { 
   ScreeningAnswer, 
   DiagnosticQuestion, 
-  DIAGNOSTIC_QUESTIONS 
+  DIAGNOSTIC_QUESTION_SETS 
 } from '../data/placementQuestionBank';
+import { kizunaService } from './kizunaService';
 import { User } from '../types/auth';
 
 export interface PlacementAssessmentResult {
   userId: string;
+  questionSetId?: number;
   screening: ScreeningAnswer;
   assignedLevel: 'N5' | 'N4' | 'N3' | 'Tân binh';
   levelTitle: string;
@@ -29,12 +31,153 @@ export interface PlacementAssessmentResult {
   testedAt: string;
 }
 
+const OPTION_KEYS: ('A' | 'B' | 'C' | 'D')[] = ['A', 'B', 'C', 'D'];
+
+/**
+ * Xáo trộn vị trí 4 đáp án A, B, C, D của một câu hỏi để tránh học vẹt vị trí
+ */
+function shuffleQuestionOptions(q: DiagnosticQuestion): DiagnosticQuestion {
+  const originalCorrectText = q.options.find(o => o.key === q.correctAnswer)?.text;
+  const shuffledTexts = [...q.options].sort(() => Math.random() - 0.5);
+
+  let newCorrectKey: 'A' | 'B' | 'C' | 'D' = 'A';
+  const newOptions = shuffledTexts.map((opt, idx) => {
+    const key = OPTION_KEYS[idx] || 'A';
+    if (opt.text === originalCorrectText) {
+      newCorrectKey = key;
+    }
+    return {
+      key,
+      text: opt.text,
+      subtext: opt.subtext
+    };
+  });
+
+  return {
+    ...q,
+    options: newOptions,
+    correctAnswer: newCorrectKey
+  };
+}
+
 export const placementService = {
   /**
-   * Lấy danh sách câu hỏi theo tầng độ khó
+   * Chọn ngẫu nhiên 1 bộ đề trong 10 bộ đề (Không trùng với bộ đề vừa làm lần trước)
    */
-  getQuestionsForLevel(level: 'N5' | 'N4' | 'N3'): DiagnosticQuestion[] {
-    return DIAGNOSTIC_QUESTIONS.filter(q => q.level === level);
+  pickRandomSetId(): number {
+    const lastSetRaw = localStorage.getItem('kizuna_last_placement_set_id');
+    const lastSetId = lastSetRaw ? parseInt(lastSetRaw, 10) : -1;
+
+    const allSetIds = DIAGNOSTIC_QUESTION_SETS.map(s => s.setId);
+    const availableIds = allSetIds.filter(id => id !== lastSetId);
+    const pool = availableIds.length > 0 ? availableIds : allSetIds;
+
+    const chosenId = pool[Math.floor(Math.random() * pool.length)];
+    try {
+      localStorage.setItem('kizuna_last_placement_set_id', String(chosenId));
+    } catch {}
+    return chosenId;
+  },
+
+  /**
+   * Lấy câu hỏi theo tầng độ khó từ Bộ đề được chọn (1 trong 10 bộ) + đảo vị trí đáp án
+   */
+  getQuestionsForLevel(level: 'N5' | 'N4' | 'N3', setId?: number): DiagnosticQuestion[] {
+    const targetSetId = setId || this.pickRandomSetId();
+    const foundSet = DIAGNOSTIC_QUESTION_SETS.find(s => s.setId === targetSetId) || DIAGNOSTIC_QUESTION_SETS[0];
+    const levelQuestions = foundSet.questions.filter(q => q.level === level);
+    return levelQuestions.map(q => shuffleQuestionOptions(q));
+  },
+
+  /**
+   * Sinh câu hỏi động trực tiếp từ CSDL (vocabulary_items & kanji_dictionary) kết hợp với Bộ đề ngẫu nhiên
+   */
+  async getDynamicQuestionsForLevel(level: 'N5' | 'N4' | 'N3', setId?: number): Promise<DiagnosticQuestion[]> {
+    const baseQuestions = this.getQuestionsForLevel(level, setId);
+
+    try {
+      // Thử lấy dữ liệu từ vựng trong CSDL theo đúng cấp độ
+      const unitMap: Record<'N5' | 'N4' | 'N3', { book: string; units: string[] }> = {
+        N5: { book: 'n5-mimikara', units: ['n5-mimikara_b01', 'n5-mimikara_b04', 'n5-mimikara_b06', 'n5-mimikara_b08'] },
+        N4: { book: 'n4-mimikara', units: ['n4-mimikara_b01', 'n4-mimikara_b02', 'n4-mimikara_b03', 'n4-mimikara_b05'] },
+        N3: { book: 'n3-mimikara', units: ['n3-mimikara_u01', 'n3-mimikara_u02', 'n3-mimikara_u03', 'n3-mimikara_u04'] }
+      };
+
+      const cfg = unitMap[level];
+      const randomUnitId = cfg.units[Math.floor(Math.random() * cfg.units.length)];
+      const vocabItems = await kizunaService.getVocabularyByUnit(cfg.book, randomUnitId);
+
+      // Lọc các từ có chữ Hán (term khác reading) và có nghĩa tiếng Việt rõ ràng
+      const validVocab = vocabItems.filter(
+        v => v.term && v.reading && v.vietnameseMeaning && v.term !== v.reading
+      );
+
+      if (validVocab.length >= 8) {
+        const shuffledVocab = [...validVocab].sort(() => Math.random() - 0.5);
+        const targetKanjiWord = shuffledVocab[0];
+        const kanjiDistractors = shuffledVocab.slice(1, 4);
+
+        const targetVocabWord = shuffledVocab[4];
+        const vocabDistractors = shuffledVocab.slice(5, 8);
+
+        const points = level === 'N5' ? 10 : level === 'N4' ? 15 : 20;
+
+        // 1. Câu hỏi Kanji sinh động từ CSDL
+        const dbKanjiQ: DiagnosticQuestion = shuffleQuestionOptions({
+          id: `db_kanji_${level}_${targetKanjiWord.id}_${Date.now()}`,
+          setId,
+          level,
+          category: 'kanji',
+          question: `Từ trong ngoặc đọc là gì:\n「${targetKanjiWord.term}」`,
+          contextJp: `「${targetKanjiWord.term}」`,
+          options: [
+            { key: 'A', text: targetKanjiWord.reading },
+            { key: 'B', text: kanjiDistractors[0].reading },
+            { key: 'C', text: kanjiDistractors[1].reading },
+            { key: 'D', text: kanjiDistractors[2].reading }
+          ],
+          correctAnswer: 'A',
+          explanationVi: `Từ 「${targetKanjiWord.term}」 (${targetKanjiWord.vietnameseMeaning}) có cách đọc chuẩn là 「${targetKanjiWord.reading}」.`,
+          points
+        });
+
+        // 2. Câu hỏi Từ vựng / Chữ Hán sinh động từ CSDL (Không chứa nghĩa tiếng Việt trên câu hỏi và đáp án)
+        const hasExampleWithTerm =
+          targetVocabWord.exampleSentenceJp &&
+          targetVocabWord.exampleSentenceJp.includes(targetVocabWord.term);
+
+        const vocabPrompt = hasExampleWithTerm
+          ? `Chọn từ thích hợp điền vào chỗ trống:\n${targetVocabWord.exampleSentenceJp!.replace(targetVocabWord.term, '（　）')}`
+          : `Từ trong ngoặc viết bằng chữ Hán như thế nào:\n「${targetVocabWord.reading}」`;
+
+        const dbVocabQ: DiagnosticQuestion = shuffleQuestionOptions({
+          id: `db_vocab_${level}_${targetVocabWord.id}_${Date.now()}`,
+          setId,
+          level,
+          category: 'vocabulary',
+          question: vocabPrompt,
+          options: [
+            { key: 'A', text: targetVocabWord.term },
+            { key: 'B', text: vocabDistractors[0].term },
+            { key: 'C', text: vocabDistractors[1].term },
+            { key: 'D', text: vocabDistractors[2].term }
+          ],
+          correctAnswer: 'A',
+          explanationVi: `「${targetVocabWord.term}」 (${targetVocabWord.reading}) mang nghĩa là "${targetVocabWord.vietnameseMeaning}".`,
+          points
+        });
+
+        // Thay thế 2 câu kanji & vocabulary trong bộ đề bằng 2 câu sinh trực tiếp từ CSDL
+        const grammarAndAlphabet = baseQuestions.filter(q => q.category !== 'kanji' && q.category !== 'vocabulary');
+        if (grammarAndAlphabet.length >= 2) {
+          return [grammarAndAlphabet[0], grammarAndAlphabet[1], dbKanjiQ, dbVocabQ];
+        }
+      }
+    } catch (err) {
+      console.warn('[PlacementService] Không thể lấy câu hỏi động từ CSDL, dùng bộ đề ngẫu nhiên:', err);
+    }
+
+    return baseQuestions;
   },
 
   /**
@@ -44,7 +187,8 @@ export const placementService = {
     userId: string,
     screening: ScreeningAnswer,
     userAnswers: Record<string, string>,
-    testedQuestions: DiagnosticQuestion[]
+    testedQuestions: DiagnosticQuestion[],
+    questionSetId?: number
   ): Promise<PlacementAssessmentResult> {
     let score = 0;
     let maxScore = 0;
@@ -114,7 +258,6 @@ export const placementService = {
     let recommendedStageTitle = 'Bảng Chữ Cái & Câu Chào Hỏi Minna 1';
     let unlockedRegionIds = ['region_n5'];
 
-    // Nếu người dùng chọn chưa học chữ cái và không làm hoặc làm điểm thấp
     if (screening.studyBackground === 'never' && percentage < 50) {
       assignedLevel = 'Tân binh';
       levelTitle = 'Tân Binh Nhập Môn';
@@ -124,7 +267,6 @@ export const placementService = {
       recommendedStageTitle = 'Bảng Chữ Cái Hiragana & Katakana Căn Bản';
       unlockedRegionIds = ['region_n5'];
     } else if (percentage >= 80 && testedQuestions.some(q => q.level === 'N3')) {
-      // Đạt chuẩn N3
       assignedLevel = 'N3';
       levelTitle = 'Trung Cấp Đột Phá (N3)';
       recommendedRegionId = 'region_n3';
@@ -133,7 +275,6 @@ export const placementService = {
       recommendedStageTitle = 'Ngữ Pháp N3 Chuyên Sâu & Kính Ngữ Công Sở';
       unlockedRegionIds = ['region_n5', 'region_n4', 'region_n3'];
     } else if (percentage >= 65 && testedQuestions.some(q => q.level === 'N4')) {
-      // Đạt chuẩn N4
       assignedLevel = 'N4';
       levelTitle = 'Sơ Cấp Vững Vàng (N4)';
       recommendedRegionId = 'region_n4';
@@ -142,7 +283,6 @@ export const placementService = {
       recommendedStageTitle = 'Các Thể Động Từ N4 & Câu Phức Giao Tiếp';
       unlockedRegionIds = ['region_n5', 'region_n4'];
     } else {
-      // Sơ cấp N5
       assignedLevel = 'N5';
       levelTitle = 'Sơ Cấp Tiêu Chuẩn (N5)';
       recommendedRegionId = 'region_n5';
@@ -152,7 +292,6 @@ export const placementService = {
       unlockedRegionIds = ['region_n5'];
     }
 
-    // Nhận xét từ AI Sensei
     let aiSenseiFeedback = '';
     const goalText = screening.goal === 'it_career' 
       ? 'Kỹ sư IT làm việc tại Nhật Bản' 
@@ -170,6 +309,7 @@ export const placementService = {
 
     return {
       userId,
+      questionSetId,
       screening,
       assignedLevel,
       levelTitle,
@@ -197,7 +337,6 @@ export const placementService = {
   async savePlacementResult(result: PlacementAssessmentResult): Promise<void> {
     if (!result.userId) return;
 
-    // 1. Cập nhật Firestore collection 'users'
     if (db) {
       try {
         const userRef = doc(db, 'users', result.userId);
@@ -207,6 +346,7 @@ export const placementService = {
           placementMethod: 'ADAPTIVE_TEST',
           placementScore: result.percentage,
           placementDetails: {
+            questionSetId: result.questionSetId || 1,
             assignedLevel: result.assignedLevel,
             score: result.score,
             maxScore: result.maxScore,
@@ -218,12 +358,10 @@ export const placementService = {
           },
           updatedAt: new Date().toISOString()
         });
-        console.log(`[PlacementService] Đã cập nhật kết quả thẩm định level ${result.assignedLevel} vào Firestore users/${result.userId}`);
       } catch (err) {
         console.warn('[PlacementService] Lỗi updateDoc users:', err);
       }
 
-      // 2. Cập nhật Firestore collection 'user_progress' để mở khóa bản đồ
       try {
         const progressRef = doc(db, 'user_progress', result.userId);
         await setDoc(progressRef, {
@@ -235,13 +373,11 @@ export const placementService = {
           lastPlacementAt: result.testedAt,
           lastStudiedAt: new Date().toISOString()
         }, { merge: true });
-        console.log(`[PlacementService] Đã mở khóa bản đồ các vùng [${result.unlockedRegionIds.join(', ')}] trong user_progress`);
       } catch (err) {
         console.warn('[PlacementService] Lỗi setDoc user_progress:', err);
       }
     }
 
-    // 3. Đồng bộ lại User session trong localStorage
     try {
       const rawUser = localStorage.getItem('kizuna_user');
       if (rawUser) {
@@ -251,7 +387,6 @@ export const placementService = {
           localStorage.setItem('kizuna_user', JSON.stringify(currentUser));
         }
       }
-      // Lưu kết quả placement chi tiết
       localStorage.setItem(`kizuna_placement_${result.userId}`, JSON.stringify(result));
     } catch (e) {
       console.warn('[PlacementService] Lỗi đồng bộ localStorage:', e);
@@ -264,7 +399,6 @@ export const placementService = {
   async checkUserPlacementStatus(userId: string): Promise<PlacementAssessmentResult | null> {
     if (!userId) return null;
 
-    // Kiểm tra cache local
     const local = localStorage.getItem(`kizuna_placement_${userId}`);
     if (local) {
       try {
@@ -272,7 +406,6 @@ export const placementService = {
       } catch {}
     }
 
-    // Kiểm tra Firestore
     if (db) {
       try {
         const snap = await getDoc(doc(db, 'users', userId));
