@@ -3,7 +3,7 @@ import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
 export const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || 'dummy_api_key_for_ui_testing',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || 'AIzaSyA49_93r5iK5nbY6TykssefQjrR6cp1SgY',
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || 'ebook-fdc02.firebaseapp.com',
   databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL || 'https://ebook-fdc02-default-rtdb.firebaseio.com',
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || 'ebook-fdc02',
