@@ -1,7 +1,33 @@
-import { db } from '../../config/firebase';
+import { db, firebaseConfig } from '../../config/firebase';
 import { collection, getDocs, doc, getDoc, query, where, limit } from 'firebase/firestore';
 import { Stage, Milestone, VocabularyItem, VocabularyCatalog, GrammarItem, GrammarCatalog, KanjiItem, KanjiCatalog, Exam, VideoLesson, ChoukaiAudioItem } from '../types/kizuna';
 import { VOCABULARY_CATALOG } from '../data/vocabularyCatalog';
+
+let isKizunaFirestoreOffline =
+  !db ||
+  !firebaseConfig.apiKey ||
+  firebaseConfig.apiKey === 'dummy_api_key_for_ui_testing' ||
+  firebaseConfig.apiKey === 'your_firebase_api_key_here';
+
+async function safeGetDocs(q: any, timeoutMs = 2200): Promise<any> {
+  if (isKizunaFirestoreOffline) {
+    throw new Error('FIRESTORE_OFFLINE');
+  }
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    return await Promise.race([
+      getDocs(q),
+      new Promise((_, reject) => {
+        timer = setTimeout(() => {
+          isKizunaFirestoreOffline = true;
+          reject(new Error('FIRESTORE_TIMEOUT'));
+        }, timeoutMs);
+      })
+    ]);
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
 
 function getSessionCache<T>(key: string): T | null {
   try {
@@ -32,7 +58,7 @@ export const kizunaService = {
     if (cached) return cached;
 
     try {
-      const snap = await getDocs(collection(db, 'stages'));
+      const snap = await safeGetDocs(collection(db, 'stages'));
       if (!snap.empty) {
         const stages: Stage[] = [];
         snap.forEach(d => stages.push({ id: d.id, ...d.data() } as Stage));
@@ -67,7 +93,7 @@ export const kizunaService = {
 
     try {
       let q = collection(db, 'milestones');
-      const snap = await getDocs(q);
+      const snap = await safeGetDocs(q);
       if (!snap.empty) {
         const milestones: Milestone[] = [];
         snap.forEach(d => {
@@ -120,7 +146,7 @@ export const kizunaService = {
           where('unitId', '==', unitId),
           limit(60)
         );
-        const snap = await getDocs(q);
+        const snap = await safeGetDocs(q);
         if (!snap.empty) {
           const items: VocabularyItem[] = [];
           snap.forEach(d => items.push({ id: d.id, ...d.data() } as VocabularyItem));
@@ -225,7 +251,7 @@ export const kizunaService = {
 
     try {
       const q = query(collection(db, 'grammar_items'), limit(50));
-      const snap = await getDocs(q);
+      const snap = await safeGetDocs(q);
       if (!snap.empty) {
         const items: GrammarItem[] = [];
         snap.forEach(d => items.push({ id: d.id, ...d.data() } as GrammarItem));
@@ -327,7 +353,7 @@ export const kizunaService = {
 
     try {
       const q = query(collection(db, 'kanji_dictionary'), limit(50));
-      const snap = await getDocs(q);
+      const snap = await safeGetDocs(q);
       if (!snap.empty) {
         const items: KanjiItem[] = [];
         snap.forEach(d => items.push({ id: d.id, ...d.data() } as KanjiItem));
@@ -349,7 +375,7 @@ export const kizunaService = {
 
   async getExamCatalog(levelFilter = 'ALL'): Promise<Exam[]> {
     try {
-      const snap = await getDocs(collection(db, 'jlpt_exam_catalog'));
+      const snap = await safeGetDocs(collection(db, 'jlpt_exam_catalog'));
       if (!snap.empty) {
         const exams: Exam[] = [];
         snap.forEach(d => {
@@ -478,7 +504,7 @@ export const kizunaService = {
     try {
       if (db) {
         const q = query(collection(db, 'video_lessons'), limit(250));
-        const snap = await getDocs(q);
+        const snap = await safeGetDocs(q);
         if (!snap.empty) {
           snap.forEach(d => {
             allVideos.push({ id: d.id, ...d.data() } as VideoLesson);
@@ -541,7 +567,7 @@ export const kizunaService = {
     if (items.length === 0) {
       try {
         if (db) {
-          const snap = await getDocs(collection(db, 'jlpt_exam_catalog'));
+          const snap = await safeGetDocs(collection(db, 'jlpt_exam_catalog'));
           if (!snap.empty) {
             snap.forEach(d => {
               const data = d.data();
