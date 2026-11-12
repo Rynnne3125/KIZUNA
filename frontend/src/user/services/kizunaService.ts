@@ -10,7 +10,7 @@ let isKizunaFirestoreOffline =
   firebaseConfig.apiKey === 'your_firebase_api_key_here';
 
 async function safeGetDocs(q: any, timeoutMs = 2200): Promise<any> {
-  if (isKizunaFirestoreOffline) {
+  if (isKizunaFirestoreOffline || (typeof navigator !== 'undefined' && !navigator.onLine)) {
     throw new Error('FIRESTORE_OFFLINE');
   }
   let timer: ReturnType<typeof setTimeout> | undefined;
@@ -31,10 +31,12 @@ async function safeGetDocs(q: any, timeoutMs = 2200): Promise<any> {
 
 function getSessionCache<T>(key: string): T | null {
   try {
-    const raw = sessionStorage.getItem(key);
+    const raw = sessionStorage.getItem(key) || localStorage.getItem(`offline_${key}`);
     if (!raw) return null;
     const { data, exp } = JSON.parse(raw);
-    if (Date.now() > exp) {
+    const isOffline = typeof navigator !== 'undefined' && !navigator.onLine;
+    // Khi không có Wi-Fi (Offline), cho phép dùng dữ liệu đã lưu trong localStorage bất kể TTL
+    if (!isOffline && Date.now() > exp) {
       sessionStorage.removeItem(key);
       return null;
     }
@@ -46,11 +48,44 @@ function getSessionCache<T>(key: string): T | null {
 
 function setSessionCache<T>(key: string, data: T, ttlMs = 30 * 60 * 1000) {
   try {
-    sessionStorage.setItem(key, JSON.stringify({ data, exp: Date.now() + ttlMs }));
+    const payload = JSON.stringify({ data, exp: Date.now() + ttlMs });
+    sessionStorage.setItem(key, payload);
+    // Lưu bản sao Offline vào localStorage (TTL 7 ngày) để dùng khi mất Wi-Fi
+    localStorage.setItem(
+      `offline_${key}`,
+      JSON.stringify({ data, exp: Date.now() + 7 * 24 * 60 * 60 * 1000 })
+    );
   } catch {
-    // ignore
+    // ignore quota errors
   }
 }
+
+const OFFLINE_VOCAB_DECK: VocabularyItem[] = [
+  { id: 'v1', term: '私', reading: 'わたし', sinoVietnamese: 'TƯ', vietnameseMeaning: 'Tôi, bản thân tôi', wordType: 'Đại từ', level: 'N5', exampleSentenceJp: '私は学生です。', exampleSentenceVi: 'Tôi là học sinh.' },
+  { id: 'v2', term: '先生', reading: 'せんせい', sinoVietnamese: 'TIÊN SINH', vietnameseMeaning: 'Thầy, cô giáo', wordType: 'Danh từ', level: 'N5', exampleSentenceJp: '田中先生は日本語を教えます。', exampleSentenceVi: 'Thầy Tanaka dạy tiếng Nhật.' },
+  { id: 'v3', term: '本', reading: 'ほん', sinoVietnamese: 'BẢN', vietnameseMeaning: 'Quyển sách', wordType: 'Danh từ', level: 'N5', exampleSentenceJp: 'これは日本語の本です。', exampleSentenceVi: 'Đây là sách tiếng Nhật.' },
+  { id: 'v4', term: '友達', reading: 'ともだち', sinoVietnamese: 'HỮU ĐẠT', vietnameseMeaning: 'Bạn bè', wordType: 'Danh từ', level: 'N5', exampleSentenceJp: '友達と勉強します。', exampleSentenceVi: 'Tôi học bài cùng bạn bè.' },
+  { id: 'v5', term: '日本', reading: 'にほん', sinoVietnamese: 'NHẬT BẢN', vietnameseMeaning: 'Nước Nhật', wordType: 'Danh từ', level: 'N5', exampleSentenceJp: '来年、日本へ行きます。', exampleSentenceVi: 'Năm sau tôi sẽ đi Nhật.' },
+  { id: 'v6', term: '会社員', reading: 'かいしゃいん', sinoVietnamese: 'HỘI XÃ VIÊN', vietnameseMeaning: 'Nhân viên công ty', wordType: 'Danh từ', level: 'N5', exampleSentenceJp: '兄は会社員です。', exampleSentenceVi: 'Anh trai tôi là nhân viên công ty.' },
+  { id: 'v7', term: '大学', reading: 'だいがく', sinoVietnamese: 'ĐẠI HỌC', vietnameseMeaning: 'Trường đại học', wordType: 'Danh từ', level: 'N5', exampleSentenceJp: 'さくら大学で勉強しています。', exampleSentenceVi: 'Tôi đang học tại Đại học Sakura.' },
+  { id: 'v8', term: '約束', reading: 'やくそく', sinoVietnamese: 'ƯỚC THÚC', vietnameseMeaning: 'Cuộc hẹn, lời hứa', wordType: 'Danh từ', level: 'N4', exampleSentenceJp: '友達と約束があります。', exampleSentenceVi: 'Tôi có hẹn với bạn.' }
+];
+
+const OFFLINE_GRAMMAR_DECK: GrammarItem[] = [
+  { id: 'g1', pattern: 'A は B です', titleVi: 'A là B (Khẳng định)', level: 'N5', explanation: 'Dùng để khẳng định danh từ A có đặc điểm hoặc thân phận là B.', nuanceReason: 'Trang trọng, lịch sự cơ bản trong hội thoại.', masterExampleJp: '私はベトナム人です。', masterExampleVi: 'Tôi là người Việt Nam.' },
+  { id: 'g2', pattern: 'A は B ではありません', titleVi: 'A không phải là B (Phủ định)', level: 'N5', explanation: 'Thể phủ định lịch sự của です.', nuanceReason: 'Trong văn nói thân mật có thể dùng じゃありません.', masterExampleJp: '田中さんは医者ではありません。', masterExampleVi: 'Anh Tanaka không phải là bác sĩ.' },
+  { id: 'g3', pattern: 'S + を + V-ます', titleVi: 'Tác động lên tân ngữ (Trợ từ を)', level: 'N5', explanation: 'Biểu thị tân ngữ chịu tác động trực tiếp của hành động.', nuanceReason: 'Đọc là "o", dùng phân biệt với chữ お thông thường.', masterExampleJp: 'ご飯を食べます。', masterExampleVi: 'Tôi ăn cơm.' },
+  { id: 'g4', pattern: 'V-てもいいです', titleVi: 'Được phép làm V', level: 'N5', explanation: 'Diễn tả sự cho phép hoặc xin phép thực hiện hành động.', nuanceReason: 'Dùng lịch sự khi xin phép cấp trên hoặc người lạ.', masterExampleJp: 'ここで写真を撮ってもいいですか。', masterExampleVi: 'Tôi chụp ảnh ở đây có được không?' }
+];
+
+const OFFLINE_KANJI_DECK: KanjiItem[] = [
+  { id: 'k1', kanji: '日', strokeCount: 4, sinoVietnamese: 'NHẬT', vietnameseMeaning: 'Mặt trời, ngày', onyomi: 'ニチ, ジツ', kunyomi: 'ひ, -び, -か', level: 'N5', mnemonicStory: 'Hình ảnh mặt trời tròn có một vệt sáng ở giữa.' },
+  { id: 'k2', kanji: '本', strokeCount: 5, sinoVietnamese: 'BẢN', vietnameseMeaning: 'Gốc, rễ, sách', onyomi: 'ホン', kunyomi: 'もと', level: 'N5', mnemonicStory: 'Cái cây (木) có thêm nét gạch ngang ở gốc để chỉ phần rễ/gốc rễ.' },
+  { id: 'k3', kanji: '人', strokeCount: 2, sinoVietnamese: 'NHÂN', vietnameseMeaning: 'Người', onyomi: 'ジン, ニン', kunyomi: 'ひと', level: 'N5', mnemonicStory: 'Hình ảnh hai chân người đang bước đi tựa vào nhau.' },
+  { id: 'k4', kanji: '学', strokeCount: 8, sinoVietnamese: 'HỌC', vietnameseMeaning: 'Học tập, trường học', onyomi: 'ガク', kunyomi: 'まな.ぶ', level: 'N5', mnemonicStory: 'Đứa trẻ (子) ngồi dưới mái nhà học tập.' },
+  { id: 'k5', kanji: '生', strokeCount: 5, sinoVietnamese: 'SINH', vietnameseMeaning: 'Sinh sống, học sinh', onyomi: 'セイ, ショウ', kunyomi: 'い.きる, う.まれる', level: 'N5', mnemonicStory: 'Mầm cây đâm chồi từ mặt đất (土).' },
+  { id: 'k6', kanji: '語', strokeCount: 14, sinoVietnamese: 'NGỮ', vietnameseMeaning: 'Ngôn ngữ, từ ngữ', onyomi: 'ゴ', kunyomi: 'かた.る', level: 'N5', mnemonicStory: 'Lời nói (言) của năm (五) cái miệng (口) tạo thành ngôn ngữ.' }
+];
 
 export const kizunaService = {
   async getStages(): Promise<Stage[]> {
@@ -170,7 +205,7 @@ export const kizunaService = {
       console.warn(`Fallback fetch unit ${unitId} failed:`, e);
     }
 
-    return [];
+    return OFFLINE_VOCAB_DECK;
   },
 
   async getVocabulary(): Promise<VocabularyItem[]> {
@@ -184,18 +219,12 @@ export const kizunaService = {
       return firstUnit;
     }
 
-    return [
-      { id: 'v1', term: '私', reading: 'わたし', sinoVietnamese: 'TƯ', vietnameseMeaning: 'Tôi, bản thân tôi', exampleSentenceJp: '私は学生です。', exampleSentenceVi: 'Tôi là học sinh.' },
-      { id: 'v2', term: '先生', reading: 'せんせい', sinoVietnamese: 'TIÊN SINH', vietnameseMeaning: 'Thầy, cô giáo', exampleSentenceJp: '田中先生は日本語を教えます。', exampleSentenceVi: 'Thầy Tanaka dạy tiếng Nhật.' },
-      { id: 'v3', term: '本', reading: 'ほん', sinoVietnamese: 'BẢN', vietnameseMeaning: 'Quyển sách', exampleSentenceJp: 'これは日本語の本です。', exampleSentenceVi: 'Đây là sách tiếng Nhật.' },
-      { id: 'v4', term: '友達', reading: 'ともだち', sinoVietnamese: 'HỮU ĐẠT', vietnameseMeaning: 'Bạn bè', exampleSentenceJp: '友達と勉強します。', exampleSentenceVi: 'Tôi học bài cùng bạn bè.' },
-      { id: 'v5', term: '日本', reading: 'にほん', sinoVietnamese: 'NHẬT BẢN', vietnameseMeaning: 'Nước Nhật', exampleSentenceJp: '来年、日本へ行きます。', exampleSentenceVi: 'Năm sau tôi sẽ đi Nhật.' }
-    ];
+    return OFFLINE_VOCAB_DECK;
   },
 
   /**
    * Lấy danh mục ngữ pháp phân cấp theo cấp độ N5 -> N1 và các bài học
-   * 0 Firestore read (tải từ static JSON cache)
+   * 0 Firestore read (tải từ static JSON cache + offline fallback)
    */
   async getGrammarCatalog(): Promise<GrammarCatalog | null> {
     const cacheKey = 'kizuna_grammar_catalog_cache';
@@ -212,7 +241,15 @@ export const kizunaService = {
     } catch (e) {
       console.warn('Fetch grammar catalog error:', e);
     }
-    return null;
+
+    const defaultUnits = [{ unitId: 'ms_minna_b01', unitTitle: 'Bài 1: Ngữ pháp Nền tảng (Offline)', lessonNumber: 1, itemCount: OFFLINE_GRAMMAR_DECK.length }];
+    return {
+      N5: [{ bookId: 'minna-n5', bookName: 'Minna no Nihongo N5 (Chế độ Offline)', description: 'Gói ngữ pháp dự phòng khi mất kết nối mạng', totalItems: OFFLINE_GRAMMAR_DECK.length, units: defaultUnits }],
+      N4: [{ bookId: 'minna-n4', bookName: 'Minna no Nihongo N4 (Chế độ Offline)', description: 'Gói ngữ pháp dự phòng khi mất kết nối mạng', totalItems: OFFLINE_GRAMMAR_DECK.length, units: defaultUnits }],
+      N3: [{ bookId: 'shinkanzen-n3', bookName: 'Shinkanzen Master N3 (Chế độ Offline)', description: 'Gói ngữ pháp dự phòng khi mất kết nối mạng', totalItems: OFFLINE_GRAMMAR_DECK.length, units: defaultUnits }],
+      N2: [{ bookId: 'shinkanzen-n2', bookName: 'Shinkanzen Master N2 (Chế độ Offline)', description: 'Gói ngữ pháp dự phòng khi mất kết nối mạng', totalItems: OFFLINE_GRAMMAR_DECK.length, units: defaultUnits }],
+      N1: [{ bookId: 'shinkanzen-n1', bookName: 'Shinkanzen Master N1 (Chế độ Offline)', description: 'Gói ngữ pháp dự phòng khi mất kết nối mạng', totalItems: OFFLINE_GRAMMAR_DECK.length, units: defaultUnits }],
+    };
   },
 
   /**
@@ -235,7 +272,7 @@ export const kizunaService = {
       console.warn(`Fetch grammar unit ${unitId} failed:`, e);
     }
 
-    return [];
+    return OFFLINE_GRAMMAR_DECK;
   },
 
   async getGrammar(): Promise<GrammarItem[]> {
@@ -262,13 +299,8 @@ export const kizunaService = {
       console.warn('Firestore grammar error:', e);
     }
 
-    const fallback: GrammarItem[] = [
-      { id: 'g1', pattern: 'A は B です', titleVi: 'A là B (Khẳng định)', explanation: 'Dùng để khẳng định danh từ A có đặc điểm hoặc thân phận là B.', nuanceReason: 'Trang trọng, lịch sự cơ bản trong hội thoại.', masterExampleJp: '私はベトナム人です。', masterExampleVi: 'Tôi là người Việt Nam.' },
-      { id: 'g2', pattern: 'A は B ではありません', titleVi: 'A không phải là B (Phủ định)', explanation: 'Thể phủ định lịch sự của です.', nuanceReason: 'Trong văn nói thân mật có thể dùng じゃありません.', masterExampleJp: '田中さんは医者ではありません。', masterExampleVi: 'Anh Tanaka không phải là bác sĩ.' },
-      { id: 'g3', pattern: 'S + を + V-ます', titleVi: 'Tác động lên tân ngữ (Trợ từ を)', explanation: 'Biểu thị tân ngữ chịu tác động trực tiếp của hành động.', nuanceReason: 'Đọc là "o", dùng phân biệt với chữ お thông thường.', masterExampleJp: 'ご飯を食べます。', masterExampleVi: 'Tôi ăn cơm.' }
-    ];
-    setSessionCache('kizuna_grammar_cache', fallback);
-    return fallback;
+    setSessionCache('kizuna_grammar_cache', OFFLINE_GRAMMAR_DECK);
+    return OFFLINE_GRAMMAR_DECK;
   },
 
   /**
@@ -290,7 +322,15 @@ export const kizunaService = {
     } catch (e) {
       console.warn('Fetch kanji catalog error:', e);
     }
-    return null;
+
+    const defaultKanjiUnits = [{ unitId: 'ms_minna_b01', unitTitle: 'Bài 1: Chữ Hán Nền tảng (Offline)', lessonNumber: 1, itemCount: OFFLINE_KANJI_DECK.length }];
+    return {
+      N5: [{ bookId: 'kanji-n5', bookName: 'Kanji Look & Learn N5 (Offline)', description: 'Bộ chữ Hán dự phòng khi mất kết nối mạng', totalItems: OFFLINE_KANJI_DECK.length, units: defaultKanjiUnits }],
+      N4: [{ bookId: 'kanji-n4', bookName: 'Kanji Look & Learn N4 (Offline)', description: 'Bộ chữ Hán dự phòng khi mất kết nối mạng', totalItems: OFFLINE_KANJI_DECK.length, units: defaultKanjiUnits }],
+      N3: [{ bookId: 'kanji-n3', bookName: 'Kanji Master N3 (Offline)', description: 'Bộ chữ Hán dự phòng khi mất kết nối mạng', totalItems: OFFLINE_KANJI_DECK.length, units: defaultKanjiUnits }],
+      N2: [{ bookId: 'kanji-n2', bookName: 'Kanji Master N2 (Offline)', description: 'Bộ chữ Hán dự phòng khi mất kết nối mạng', totalItems: OFFLINE_KANJI_DECK.length, units: defaultKanjiUnits }],
+      N1: [{ bookId: 'kanji-n1', bookName: 'Kanji Master N1 (Offline)', description: 'Bộ chữ Hán dự phòng khi mất kết nối mạng', totalItems: OFFLINE_KANJI_DECK.length, units: defaultKanjiUnits }],
+    };
   },
 
   /**
@@ -313,7 +353,7 @@ export const kizunaService = {
       console.warn(`Fetch kanji unit ${unitId} failed:`, e);
     }
 
-    return [];
+    return OFFLINE_KANJI_DECK;
   },
 
   /**
@@ -337,7 +377,7 @@ export const kizunaService = {
       console.warn(`Fetch kanji level ${level} failed:`, e);
     }
 
-    return [];
+    return OFFLINE_KANJI_DECK;
   },
 
   async getKanji(): Promise<KanjiItem[]> {
