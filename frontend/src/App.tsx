@@ -13,12 +13,15 @@ import { LibraryPage } from './user/pages/LibraryPage';
 import { ExamPage } from './user/pages/ExamPage';
 import { ProfilePage } from './user/pages/ProfilePage';
 import { AdminDashboardPage } from './admin/pages/AdminDashboardPage';
-import { Smartphone, Download } from 'lucide-react';
+import { Smartphone, Download, Wifi } from 'lucide-react';
 import { ApkDownloadModal } from './user/components/ApkDownloadModal';
 import { isNativeApp } from './user/utils/platform';
+import { useNetworkStatus } from './user/hooks/useNetworkStatus';
+import { WifiRequiredPage } from './user/pages/WifiRequiredPage';
 
 export default function App() {
   const isApp = isNativeApp();
+  const network = useNetworkStatus();
   // Lấy người dùng từ session được lưu trong localStorage (tối đa 24h)
   const [user, setUser] = useState<User | null>(() => authService.getCurrentUser());
   
@@ -108,6 +111,20 @@ export default function App() {
     setActiveTab('home');
   };
 
+  // 0. NẾU MẤT KẾT NỐI MẠNG HOẶC CHƯA KẾT NỐI WI-FI -> HIỂN THỊ TRANG YÊU CẦU WI-FI
+  if (network.isBlockedByWifiRequirement) {
+    return (
+      <WifiRequiredPage
+        status={network.status}
+        isChecking={network.isChecking}
+        onRecheck={network.recheck}
+        onBypassCellular={network.bypassCellular}
+        simulatedType={network.simulatedType}
+        onSetSimulatedType={network.setSimulatedType}
+      />
+    );
+  }
+
   // 1. Nếu chưa đăng nhập hoặc phiên đã hết hạn, bắt buộc hiển thị LoginPage trước!
   if (!user) {
     return (
@@ -155,6 +172,14 @@ export default function App() {
             <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-100">
               Bậc: {user.level || 'Tân binh'}
             </span>
+            <span className="text-slate-300">•</span>
+            <div 
+              className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-800 bg-emerald-50/90 px-2.5 py-0.5 rounded-full border border-emerald-200 cursor-default"
+              title="Đã kết nối Wi-Fi sẵn sàng sử dụng"
+            >
+              <Wifi className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Wi-Fi Online</span>
+            </div>
           </div>
 
           <div className="flex items-center gap-3">

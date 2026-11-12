@@ -3,7 +3,7 @@ import { User } from '../types/auth';
 import { 
   Home, BookOpen, FileText, Languages, Map, Film, 
   Target, UserCheck, Shield, LogOut, Menu, X, Flame, Star, Sparkles,
-  Smartphone, Download
+  Smartphone, Download, Wifi
 } from 'lucide-react';
 import { ApkDownloadModal } from './ApkDownloadModal';
 import { isNativeApp } from '../utils/platform';
@@ -101,6 +101,13 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
 
           {user ? (
             <>
+              <div 
+                className="hidden sm:flex items-center gap-1 bg-emerald-50 text-emerald-800 border border-emerald-200/80 px-2 py-0.5 rounded-full text-xs font-bold"
+                title="Đang kết nối Wi-Fi"
+              >
+                <Wifi className="w-3 h-3 text-emerald-600" />
+                <span>Wi-Fi</span>
+              </div>
               <div className="flex items-center gap-1 bg-amber-50 text-amber-800 border border-amber-200/80 px-2 py-0.5 rounded-full text-xs font-bold">
                 <Flame className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
                 <span>{user.currentStreak || 0}d</span>

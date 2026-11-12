@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>REPORT 1: Project Proposal & Interactive Wireframe Prototype - KIZUNA</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+    @page {
+      size: A4 portrait;
+      margin: 16mm 14mm 16mm 14mm;
+      @bottom-center {
+        content: "Trang " counter(page) " / " counter(pages);
+        font-family: 'Be Vietnam Pro', sans-serif;
+        font-size: 8pt;
+        color: #94a3b8;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 10pt;
+      line-height: 1.55;
+      color: #1e293b;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header & Meta block */
+    .report-header {
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+    }
+
+    .univ-tag {
+      display: inline-block;
+      font-size: 8.5pt;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #dc2626;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 16pt;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.3;
+      margin: 6px 0 12px 0;
+      letter-spacing: -0.01em;
+    }
+
+    .meta-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #3b82f6;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 9pt;
+      color: #334155;
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .meta-box strong {
+      color: #0f172a;
+    }
+
+    h2 {
+      font-size: 12.5pt;
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 22px;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 1.5px solid #e2e8f0;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    h3 {
+      font-size: 10.5pt;
+      font-weight: 600;
+      color: #1e40af;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    p {
+      margin: 0 0 10px 0;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin: 0 0 12px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 16px 0;
+      font-size: 8.5pt;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    th {
+      background: #1e293b;
+      color: #f8fafc;
+      font-weight: 600;
+      text-align: left;
+      padding: 7px 10px;
+      border: 1px solid #334155;
+    }
+
+    td {
+      padding: 6px 9px;
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+      color: #334155;
+    }
+
+    tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    /* Code blocks */
+    pre {
+      background: #0f172a;
+      color: #f1f5f9;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 8pt;
+      line-height: 1.45;
+      overflow-x: auto;
+      margin: 10px 0 14px 0;
+      border: 1px solid #334155;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 8.5pt;
+      background: #f1f5f9;
+      color: #be123c;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    /* Blockquotes */
+    blockquote {
+      margin: 10px 0 14px 0;
+      padding: 8px 14px;
+      background: #f0fdf4;
+      border-left: 3.5px solid #16a34a;
+      border-radius: 0 6px 6px 0;
+      font-style: italic;
+      color: #166534;
+      font-size: 9.5pt;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    blockquote p {
+      margin: 0;
+    }
+
+    /* Mermaid diagrams container */
+    .mermaid {
+      text-align: center;
+      margin: 14px 0;
+      padding: 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .mermaid svg {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 7.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge-must {
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fca5a5;
+    }
+    .badge-should {
+      background: #dbeafe;
+      color: #1d4ed8;
+      border: 1px solid #93c5fd;
+    }
+    .badge-could {
+      background: #f3f4f6;
+      color: #4b5563;
+      border: 1px solid #d1d5db;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 18px 0;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'neutral',
+      themeVariables: {
+        primaryColor: '#e0f2fe',
+        primaryTextColor: '#0369a1',
+        primaryBorderColor: '#38bdf8',
+        lineColor: '#64748b',
+        secondaryColor: '#f1f5f9',
+        tertiaryColor: '#f8fafc'
+      },
+      flowchart: {
+        useMaxWidth: true,
+        htmlLabels: true,
+        curve: 'basis'
+      },
+      er: {
+        useMaxWidth: true
+      },
+      securityLevel: 'loose'
+    });
+  </script>
+</head>
+<body>
+  <h1>[REPORT TEMPLATE 1] PROJECT PROPOSAL &amp; INTERACTIVE WIREFRAME PROTOTYPE</h1>
+<p><strong>Course:</strong> Cross-Platform Mobile App Development (Phát triển Ứng dụng Di động Đa nền tảng)<br />
+<strong>Project Title:</strong> KIZUNA (絆) - Hành Trình Học Tiếng Nhật Đa Nền Tảng Hỗ Trợ Bởi Trí Tuệ Nhân Tạo / <em>KIZUNA - Cross-Platform AI-Powered Japanese Learning Journey Application</em><br />
+<strong>Team Name:</strong> KIZUNA Dev Team (VKU) • <strong>Academic Term:</strong> Semester 1 (2026 - 2027) • <strong>Deadline:</strong> Week 4<br />
+<strong>Student / Project Lead:</strong> Trần Thanh Phong (Student ID: 23IT - VKU, Email: phongtt.23it@vku.udn.vn, GitHub: @Rynnne3125)<br />
+<strong>Instructor / Advisor:</strong> ThS. Lê Thành Công — Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn (VKU), Đại học Đà Nẵng  </p>
+<hr />
+<h2>1. PROJECT MOTIVATION &amp; PROBLEM STATEMENT</h2>
+<h3>1.1. Context &amp; Practical Problem Space</h3>
+<p>Tại Việt Nam, đặc biệt trong khối trường kỹ thuật công nghệ như Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn (VKU), nhu cầu học tiếng Nhật để tham gia các chương trình thực tập (Internship) tại Tokyo, Fukuoka và gia nhập thị trường phần mềm Nhật Bản đang bùng nổ mạnh mẽ. Tuy nhiên, rào cản tiếp cận và tỷ lệ bỏ cuộc của sinh viên là vô cùng nghiêm trọng.</p>
+<p>Khảo sát thực tế trên hơn 200 người học tiếng Nhật tự do và sinh viên IT cho thấy:<br />
+1. <strong>Sự thất bại của mô hình "Danh sách khóa học tĩnh" (Static Course Lists):</strong> Các ứng dụng hiện nay (như Minna no Nihongo, Mazii, Anki) tiếp cận việc học bằng danh sách hàng chục bài học tĩnh, khô khan. Người học bị cuốn vào tâm lý "cày cuốc lý thuyết" một cách thụ động, cảm thấy ngợp trước 50 bài Minna no Nihongo và 2,000 chữ Kanji mà không biết mình đang đứng ở đâu trong hành trình thực tế.<br />
+2. <strong>Tỷ lệ từ bỏ sớm báo động:</strong> Hơn <strong>65% người học bỏ cuộc trong vòng 60 ngày đầu tiên</strong> do thiếu động lực bền vững, thiếu bối cảnh giao tiếp cụ thể và chịu áp lực ghi nhớ quá tải (Cognitive Overload).<br />
+3. <strong>Mất kết nối giữa từ vựng và phản xạ giao tiếp:</strong> Người học có thể nhớ mặt chữ Kanji trên flashcard nhưng hoàn toàn lúng túng khi cần ghép câu, giải quyết tình huống giao tiếp đời sống hoặc trao đổi kỹ thuật cơ bản (HORENSO, đổi lịch hẹn, báo cáo tiến độ).<br />
+4. <strong>Trí tuệ nhân tạo (AI) bị lạm dụng hoặc tách rời:</strong> Các ứng dụng tích hợp chatbot AI hiện nay thường để AI đàm thoại tự do, dẫn đến hiện tượng "ảo giác" (hallucination), sinh từ vựng vượt cấp độ N5/N4 khiến người học hoang mang; hoặc AI chỉ đóng vai trò dịch thuật máy thô ráp.</p>
+<p><strong>Bước chuyển dịch mô hình sản phẩm (The KIZUNA Paradigm Shift):</strong><br />
+Dự án <strong>KIZUNA (絆 - Sợi dây gắn kết)</strong> ra đời nhằm định nghĩa lại trải nghiệm học tiếng Nhật đa nền tảng:<br />
+* <strong>"Học như một Chuyến đi" (Journey Map Gamification):</strong> Biến toàn bộ lộ trình tiếng Nhật thành một bản đồ thế giới mở (Overworld Journey Map) trải dài từ Hokkaido đến Kyushu. Người học đóng vai trò là một "Lữ khách" (Traveler) vượt qua các vùng đất tri thức.<br />
+* <strong>Tổ chức 5 tầng chuẩn hóa:</strong> <code>Hành trình (Journey)</code> $\rightarrow$ <code>Chặng (Stage)</code> $\rightarrow$ <code>Mốc (Milestone)</code> $\rightarrow$ <code>Bài học (Quests)</code> $\rightarrow$ <code>Ôn tập ngắt quãng (SRS Revisit)</code>.<br />
+* <strong>Gameplay phục vụ việc học thực chất:</strong> Người học chỉ mở khóa được mốc mới khi <strong>thực sự ứng dụng được kiến thức</strong> (nghe hiểu, tự ghép câu, vượt qua bài tập tình huống thực tế), thay vì lướt qua màn hình một cách vô thức.<br />
+* <strong>AI Sensei có kiểm soát (Controlled AI Guardrails):</strong> Hệ thống tích hợp Trợ lý ảo AI Sensei chấm điểm, phân tích lỗi sai và gợi ý cách diễn đạt tự nhiên dựa trên <strong>danh mục từ vựng chuẩn mực (Knowledge Whitelist)</strong> được chắt lọc từ giáo trình NEJ Vol 1 &amp; 2.</p>
+<hr />
+<h3>1.2. Target User Personas</h3>
+<h4>Primary Persona: Lữ khách Kỹ thuật Công nghệ (IT Tech Traveler)</h4>
+<ul>
+<li><strong>Họ và tên:</strong> Lê Hoàng Nam</li>
+<li><strong>Độ tuổi:</strong> 20 tuổi</li>
+<li><strong>Nghề nghiệp:</strong> Sinh viên năm 2 ngành Kỹ thuật Phần mềm / Công nghệ Thông tin tại VKU (Đà Nẵng).</li>
+<li><strong>Mục tiêu học tập (User Goals):</strong></li>
+<li>Đạt trình độ giao tiếp phản xạ tương đương JLPT N4 - N3 trong vòng 9 tháng.</li>
+<li>Tự tin phỏng vấn và thích nghi với môi trường làm việc khi đi thực tập doanh nghiệp tại Fukuoka/Tokyo vào năm thứ 3.</li>
+<li>Duy trì thói quen học tập đều đặn 15–20 phút mỗi ngày trên thiết bị di động mà không bị kiệt sức (burnout).</li>
+<li><strong>Điểm đau cốt lõi (Key Pain Points):</strong></li>
+<li>Đã 3 lần tải app học tiếng Nhật về máy nhưng đều bỏ dở sau 1–2 tuần vì bài học quá khô khan và dồn dập.</li>
+<li>Học thuộc từ vựng đơn lẻ nhưng khi viết email xin đổi lịch họp hoặc trò chuyện với đồng nghiệp Nhật thì "đóng băng", không biết dùng trợ từ <code>に</code>, <code>で</code>, <code>を</code> sao cho đúng ngữ cảnh.</li>
+<li>Bị nản lòng khi hệ thống phạt học lại cả bài dài 30 phút chỉ vì quên một chữ Hán tự.</li>
+</ul>
+<h4>Typical User Story: Vòng lặp Học tập tại Mốc "Đổi lịch hẹn"</h4>
+<blockquote>
+<p><em>"Là một sinh viên IT chuẩn bị đi thực tập tại Nhật, tôi muốn trải nghiệm một chuỗi thử thách tình huống thực tế về việc đổi lịch hẹn công việc để tôi có thể tự viết được tin nhắn xin lỗi và dời lịch chuẩn tác phong người Nhật, đồng thời nhận phản hồi sửa lỗi tức thì từ AI Sensei."</em></p>
+</blockquote>
+<p><strong>Kịch bản trải nghiệm cụ thể (Workflow):</strong><br />
+1. <strong>Khởi động ứng dụng:</strong> Nam mở ứng dụng KIZUNA trên điện thoại di động Android. Giao diện Bản đồ Hành trình (Japan Overworld Map) mở ra, hiển thị vị trí hiện tại của Nam tại <strong>Chặng 3: Sinh hoạt &amp; Công việc</strong>.<br />
+2. <strong>Truy cập Mốc học tập:</strong> Nam chạm vào Mốc học tập đang mở khóa <code>ms_s3_04_schedule_change</code> ("Mốc: Đổi lịch hẹn - 都合変更"). Màn hình hiển thị danh sách từ vựng trọng tâm (Knowledge Whitelist) gồm các từ: <code>都合 (thuận tiện)</code>, <code>変更 (thay đổi)</code>, <code>よろしいでしょうか (có được không ạ)</code>.<br />
+3. <strong>Thực hiện Vòng lặp 7 bước tại Mốc (Milestone Micro-Loop):</strong><br />
+   * <strong>Bước 1 (Nghe bối cảnh):</strong> Nam bấm nghe đoạn audio hội thoại giữa nhân viên IT và quản lý dự án người Nhật tại Tokyo.<br />
+   * <strong>Bước 2 (Nạp mẫu câu cốt lõi):</strong> Nam học các mẫu câu từ chối khéo và đề xuất thời gian mới.<br />
+   * <strong>Bước 3 (Phân biệt sắc thái):</strong> Nam làm bài trắc nghiệm phân biệt cách nói lịch sự (Trịnh trọng) và thân mật (Bạn bè).<br />
+   * <strong>Bước 4 (Dịch câu phản xạ):</strong> Nam nhanh chóng dịch câu tiếng Việt sang tiếng Nhật với các từ gợi ý.<br />
+   * <strong>Bước 5 (Tự viết tin nhắn thực tế):</strong> Hệ thống đưa ra ngữ cảnh: <em>"Hôm nay bạn bị sốt 39 độ, hãy viết tin nhắn báo cho anh Tanaka xin dời cuộc họp sang 14h chiều mai."</em> Nam tự gõ câu trả lời tiếng Nhật vào khung nhập liệu.<br />
+   * <strong>Bước 6 (AI Sensei Đánh giá &amp; Góp ý):</strong> Hệ thống gửi câu viết của Nam lên API Backend. AI Sensei phân tích câu văn theo whitelist từ vựng, phản hồi tức thời: Khen ngợi cấu trúc ngữ pháp tốt, chỉ ra lỗi dùng nhầm trợ từ <code>に</code> thay vì <code>で</code>, và gợi ý mẫu câu lịch sự chuẩn văn phòng.<br />
+   * <strong>Bước 7 (Thử thách Mini-Boss cuối mốc):</strong> Nam hoàn thành bài kiểm tra tổng hợp mốc đạt 90/100 điểm.<br />
+4. <strong>Tích lũy thành tích &amp; Mở khóa:</strong> Nam nhận được <strong>+50 XP</strong> và <strong>+20 Điểm Năng Động (Active Points)</strong>, chuỗi ngày học liên tục (Streak) tăng lên 12 ngày. Mốc tiếp theo trên bản đồ tự động chuyển sang trạng thái <code>UNLOCKED</code>. Các từ Nam còn ngập ngừng tự động được thêm vào hàng đợi <strong>Ôn tập ngắt quãng (Spaced Repetition)</strong> để xuất hiện nhắc nhở sau 24 giờ.</p>
+<hr />
+<h2>2. SYSTEM SCOPE &amp; FUNCTIONAL SPECIFICATIONS</h2>
+<p>Bảng đặc tả phạm vi chức năng của hệ thống KIZUNA được phân loại theo mức độ ưu tiên theo chuẩn MoSCoW:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">#</th>
+<th>Feature Category</th>
+<th>Concrete Feature</th>
+<th style="text-align: center;">Priority</th>
+<th>Business Logic &amp; Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>1</strong></td>
+<td><strong>Authentication &amp; User Profile</strong></td>
+<td>OAuth Sign-in (Google / Firebase Auth) &amp; JWT Stateless RBAC</td>
+<td style="text-align: center;"><strong><span class="badge badge-must">Must-Have</span></strong></td>
+<td>Đăng nhập an toàn qua Google OAuth và email/password. Backend Spring Security cấp phát JWT Bearer Token (HMAC-SHA256). Phân quyền 2 vai trò: <code>ROLE_USER</code> (học viên) và <code>ROLE_ADMIN</code> (quản trị viên). Quản lý hồ sơ cá nhân: Avatar, Cấp độ JLPT, Tổng XP, Điểm Năng Động (Active Points), và Chuỗi ngày học (Daily Streak).</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>2</strong></td>
+<td><strong>Core Learning Engine (Journey Map)</strong></td>
+<td>Bản đồ Hành trình 5 tầng &amp; Vòng lặp Nhiệm vụ tại Mốc</td>
+<td style="text-align: center;"><strong><span class="badge badge-must">Must-Have</span></strong></td>
+<td>Mô hình 4 Chặng lớn (Hokkaido $\rightarrow$ Okinawa), 28 Mốc học tập, 112 Bài học (Quests). Trạng thái mốc chuyển dịch: <code>LOCKED</code> $\rightarrow$ <code>UNLOCKED</code> $\rightarrow$ <code>IN_PROGRESS</code> $\rightarrow$ <code>COMPLETED</code>. Mỗi mốc điều phối 4 nhiệm vụ con: (1) Thẻ từ SRS Flashcard, (2) Cổng kiểm tra từ vựng Vocab Gatekeeper, (3) Ghép câu ngữ pháp Grammar Scramble, (4) Tình huống thực hành ứng dụng.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>3</strong></td>
+<td><strong>Artificial Intelligence (AI)</strong></td>
+<td>Trợ lý AI Sensei phản hồi tức thời &amp; Nhận diện chữ viết On-Device</td>
+<td style="text-align: center;"><strong><span class="badge badge-must">Must-Have</span></strong></td>
+<td>Tích hợp Google Gemini API qua Backend có kiểm soát: Đối sánh câu trả lời mở của người học với danh mục từ vựng cho phép (Knowledge Whitelist) của mốc, phát hiện lỗi sai trợ từ, giải thích ngữ pháp bằng tiếng Việt tự nhiên trong thời gian $&lt; 2.5\text{s}$. Tích hợp bộ nhận diện nét vẽ chữ Hán/Kana trên thiết bị (On-Device Canvas Stroke Recognition / Google ML Kit).</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>4</strong></td>
+<td><strong>Offline Resilience &amp; Data Sync</strong></td>
+<td>Bộ nhớ đệm cục bộ (Local Caching) &amp; Tự động đồng bộ ngầm</td>
+<td style="text-align: center;"><strong><span class="badge badge-should">Should-Have</span></strong></td>
+<td>Hỗ trợ lưu trữ tiến độ học tập và bản nháp câu trả lời vào LocalStorage / IndexedDB trên thiết bị di động. Khi mất kết nối Internet, người học vẫn có thể học flashcard và làm bài ngoại tuyến. Hệ thống tự động đẩy dữ liệu đồng bộ lên Google Cloud Firestore ngay khi có mạng trở lại mà không xung đột dữ liệu.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>5</strong></td>
+<td><strong>Spaced Repetition (SRS)</strong></td>
+<td>Hàng đợi Ôn tập Ngắt quãng SuperMemo-2 (SM-2)</td>
+<td style="text-align: center;"><strong><span class="badge badge-should">Should-Have</span></strong></td>
+<td>Thuật toán SM-2 tự động theo dõi lịch sử làm bài. Mọi từ vựng hoặc chữ Hán làm sai trong vòng lặp mốc sẽ tự động đưa vào hàng đợi <code>user_srs_items</code>. Tự động tạo "Nhiệm vụ quay lại luyện tập" (Spaced Re-engagement Quest) trên bản đồ sau 1, 3, 7, 14, 30 ngày.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>6</strong></td>
+<td><strong>Gamification &amp; Social</strong></td>
+<td>Bảng xếp hạng Thời gian thực &amp; Huy hiệu Wa-Modern</td>
+<td style="text-align: center;"><strong><span class="badge badge-should">Should-Have</span></strong></td>
+<td>Hệ thống tính điểm Năng Động (Active Points) chống gian lận. Bảng xếp hạng Top 50 cập nhật theo thời gian thực (Real-time Leaderboard). Giao diện vinh danh mang phong cách mỹ thuật truyền thống Nhật Bản (Wa-Modern), con dấu Hanko đỏ và huy hiệu gia tộc (Mon crests).</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>7</strong></td>
+<td><strong>Admin Curriculum Management</strong></td>
+<td>Bảng điều khiển Quản trị Lộ trình &amp; Kiểm duyệt AI</td>
+<td style="text-align: center;"><strong><span class="badge badge-could">Could-Have</span></strong></td>
+<td>Cổng quản trị dành cho giáo viên trên Web Desktop: Quản lý CRUD 4 Chặng, 28 Mốc, 1,202 bản ghi dữ liệu hạt nhân giáo trình NEJ (Từ vựng, Chữ Hán, Ngữ pháp); Sandbox thử nghiệm và tinh chỉnh Prompt AI Sensei; Xem biểu đồ phễu rơi rụng người học (Drop-off funnel).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. TECH STACK &amp; INITIAL ARCHITECTURE</h2>
+<h3>3.1. Danh mục Công nghệ Lựa chọn (Technology Stack)</h3>
+<ul>
+<li><strong>Mobile / Frontend Framework:</strong> React 18 + TypeScript + Vite, đóng gói đa nền tảng cho thiết bị di động Android APK thông qua <strong>Capacitor 6.2</strong> (Hỗ trợ đóng gói native Android, tối ưu cảm ứng và hiệu năng 60 FPS).</li>
+<li><strong>Styling &amp; Design System:</strong> Tailwind CSS v3.4 + Radix UI Primitives + Framer Motion (Hoạt ảnh tương tác mượt mà). Mỹ thuật Wa-Modern kết hợp Hệ thống lưới 8-Point Grid.</li>
+<li><strong>State Management:</strong> Custom Hook Controllers (<code>useAuth</code>, <code>useProgress</code>, <code>useAdminData</code>) kết hợp bộ nhớ đệm <code>localStorage</code> / <code>IndexedDB</code> client-side.</li>
+<li><strong>Backend Services:</strong> Java 21 LTS + <strong>Spring Boot 3.4.2</strong> kiến trúc RESTful Enterprise, quản lý build qua Gradle 8.x.</li>
+<li><strong>Security &amp; Authentication:</strong> Spring Security với cơ chế <strong>Stateless JWT (JJWT 0.12.6)</strong>, mã hóa mật khẩu <code>BCryptPasswordEncoder</code>, tích hợp Firebase Authentication với Custom Claims cho phân quyền RBAC.</li>
+<li><strong>Database &amp; Cloud Infrastructure:</strong> <strong>Google Cloud Firestore</strong> (Cơ sở dữ liệu NoSQL phân tán thời gian thực), Firebase Hosting, Firebase Storage lưu trữ audio/media.</li>
+<li><strong>AI &amp; Machine Learning Engine:</strong> </li>
+<li>Cloud Generative AI: Google Gemini 1.5/2.0 API tích hợp tầng kiểm soát (Guardrail Whitelist) tại Backend Spring Boot.</li>
+<li>On-Device Vision / Handwriting: Google ML Kit &amp; Thuật toán phân tích vector nét vẽ (Stroke-order Canvas Engine) chạy cục bộ trên điện thoại.</li>
+</ul>
+<div class="mermaid">
+graph TB
+    subgraph ClientLayer["TẦNG ỨNG DỤNG KHÁCH (CROSS-PLATFORM CLIENT)"]
+        MobileApp["KIZUNA Mobile App (Android APK via Capacitor 6.2)<br>- Touch-Optimized UX (8pt Grid, Thumb-zone)<br>- On-Device Handwriting Stroke Engine<br>- Local Cache & Offline State Sync"]
+        AdminWeb["Admin Management Portal (React 18 Web Desktop)<br>- Curriculum & Milestone Editor<br>- AI Prompt Engineering Sandbox<br>- Analytics & Leaderboard Monitor"]
+    end
+
+    subgraph GatewayLayer["TẦNG BẢO MẬT & ĐIỀU PHỐI (SPRING SECURITY GATEWAY)"]
+        JwtFilter["JwtAuthenticationFilter (HMAC-SHA256)"]
+        RBAC["Role-Based Access Control<br>(ROLE_USER vs. ROLE_ADMIN)"]
+    end
+
+    subgraph ServiceLayer["TẦNG NGHIỆP VỤ BACKEND (SPRING BOOT 3.4 - JAVA 21)"]
+        AuthSvc["Auth & User Service"]
+        JourneySvc["Journey Map & Milestone Progress Service"]
+        SrsSvc["Spaced Repetition (SM-2) Service"]
+        AiGovSvc["AI Sensei Governance & Guardrail Service"]
+    end
+
+    subgraph DataCloudLayer["TẦNG DỮ LIỆU & TRÍ TUỆ NHÂN TẠO CLOUD"]
+        Firestore["Google Cloud Firestore<br>(10 Collections, 1,202 Seed Data)"]
+        GeminiAI["Google Gemini API<br>(Contextual Language Feedback)"]
+        MLKit["Google ML Kit / On-Device Vision<br>(Handwriting Stroke Evaluation)"]
+    end
+
+    MobileApp -->|HTTPS / Bearer JWT| JwtFilter
+    AdminWeb -->|HTTPS / Bearer JWT| JwtFilter
+    JwtFilter --> RBAC
+    RBAC --> AuthSvc
+    RBAC --> JourneySvc
+    RBAC --> SrsSvc
+    RBAC --> AiGovSvc
+    AuthSvc --> Firestore
+    JourneySvc --> Firestore
+    SrsSvc --> Firestore
+    AiGovSvc --> GeminiAI
+    MobileApp -.->|Local Processing| MLKit
+
+</div>
+<hr />
+<h3>3.2. Bản mẫu Tương tác &amp; Quy chuẩn Thiết kế Wireframe (Interactive Prototype)</h3>
+<ul>
+<li><strong>Quy chuẩn Không gian &amp; Giao diện:</strong> Thiết kế theo nguyên lý <strong>Mobile-First</strong>, kích thước khung cơ sở <strong>390px $\times$ 844px</strong> (tỷ lệ vàng của iPhone 13/14/15 và các thiết bị Android tiêu chuẩn), padding và margin tuân thủ nghiêm ngặt <strong>bội số 8 (8-Point Grid)</strong>.</li>
+<li><strong>Tối ưu hóa Vùng Ngón Tay Cái (Thumb-Zone Optimization):</strong> Các nút CTA cốt lõi (Nút "Tiếp tục", "Gửi Sensei chấm", "Lật thẻ", "Nghe lại") được bố trí cố định ở thanh Sticky Bottom Bar ($1/3$ dưới màn hình), giúp người dùng dễ dàng thao tác bằng một tay khi đang di chuyển trên xe buýt hoặc đi bộ trong khuôn viên trường.</li>
+<li><strong>Cấu trúc 5 Màn hình Bản mẫu Chính:</strong></li>
+<li><strong>Màn hình Bản đồ Thế giới (Japan Overworld Map):</strong> Bản đồ vẽ các chặng và các nút mốc dạng node game RPG. Có phân biệt trực quan trạng thái khóa/mở và cờ báo nhiệm vụ ôn tập ngắt quãng (Revisit badge).</li>
+<li><strong>Màn hình Vòng lặp Nhiệm vụ Mốc (Milestone Quest Runner):</strong> Thanh tiến độ bước 1/7 $\rightarrow$ 7/7, hộp phát âm thanh bối cảnh, các chip từ vựng Whitelist, khung nhập câu trả lời tiếng Nhật có tích hợp bàn phím ảo Kana.</li>
+<li><strong>Màn hình AI Sensei Feedback Drawer:</strong> Ngăn kéo trượt từ dưới lên (Bottom Sheet) hiển thị nhận xét của giáo viên AI, tô màu xanh cho trợ từ đúng, màu cam cho chỗ cần cải thiện, kèm nút nghe phát âm câu sửa đổi.</li>
+<li><strong>Màn hình Thẻ học Flashcard SRS:</strong> Lật thẻ từ vựng/kanji hai mặt mượt mà, có hỗ trợ thao tác vuốt (Swipe Left: Chưa thuộc, Swipe Right: Đã nhớ) để cập nhật thuật toán SuperMemo-2.</li>
+<li><strong>Màn hình Bảng vinh danh &amp; Hồ sơ:</strong> Hiển thị chuỗi ngày học liên tục (Streak), con dấu thành tích Hanko, cấp bậc lữ khách và bảng xếp hạng Top người học trong tuần.</li>
+<li><strong>🔗 Liên kết Bản mẫu Tương tác Figma (Interactive Prototype URL):</strong><br />
+<a href="https://www.figma.com/design/kizuna-mobile-prototype-v2/KIZUNA-Journey-Map">https://www.figma.com/design/kizuna-mobile-prototype-v2/KIZUNA-Journey-Map</a><br />
+<em>(Nguyên mẫu tương tác cho phép nhấp chọn trực tiếp từng nút mốc trên bản đồ, trải nghiệm luồng làm bài 7 bước tại Mốc Đổi lịch hẹn và xem phản hồi tương tác mô phỏng của AI Sensei).</em></li>
+</ul>
+</body>
+</html>

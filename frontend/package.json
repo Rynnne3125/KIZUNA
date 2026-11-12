@@ -12,6 +12,7 @@
     "@capacitor/android": "^6.2.2",
     "@capacitor/cli": "^6.2.2",
     "@capacitor/core": "^6.2.2",
+    "@capacitor/network": "^6.0.4",
     "@emailjs/browser": "^4.4.1",
     "@radix-ui/react-avatar": "^1.2.6",
     "@radix-ui/react-dialog": "^1.1.23",

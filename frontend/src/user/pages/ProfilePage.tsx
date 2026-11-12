@@ -1,6 +1,7 @@
 import React from 'react';
 import { User } from '../types/auth';
-import { Flame, Star, Award, BookOpen, LogOut, User as UserIcon } from 'lucide-react';
+import { Flame, Star, Award, BookOpen, LogOut, User as UserIcon, Wifi } from 'lucide-react';
+import { useNetworkStatus } from '../hooks/useNetworkStatus';
 
 interface ProfilePageProps {
   user: User | null;
@@ -11,6 +12,8 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
   user,
   onLogout
 }) => {
+  const network = useNetworkStatus();
+
   if (!user) {
     return (
       <div className="max-w-md mx-auto my-16 text-center bg-white p-8 rounded-3xl border border-emerald-100 shadow-md">
@@ -96,6 +99,49 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
               <span>{user.level || 'Tân binh'}</span>
             </div>
             <div className="text-xs text-teal-900/80 font-medium">Bậc Xếp Hạng</div>
+          </div>
+        </div>
+
+        {/* Network & Wi-Fi Settings */}
+        <div className="bg-emerald-50/60 border border-emerald-200/80 rounded-2xl p-4 sm:p-5 mb-8 text-xs sm:text-sm text-slate-700 space-y-4">
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <div className="flex items-center gap-2 font-bold text-slate-800 text-sm">
+              <Wifi className="w-4 h-4 text-emerald-600" />
+              <span>Cài đặt kết nối & Yêu cầu Wi-Fi</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs font-extrabold px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-800">
+              <span className={`w-2 h-2 rounded-full ${network.status.isWifi ? 'bg-emerald-500' : network.status.isCellular ? 'bg-amber-500' : 'bg-rose-500'}`}></span>
+              <span>
+                {network.status.isWifi ? 'Đang dùng Wi-Fi' : network.status.isCellular ? 'Dữ liệu di động (4G)' : 'Mất mạng'}
+              </span>
+            </div>
+          </div>
+
+          <p className="text-slate-600 text-xs leading-relaxed">
+            Kiểm soát việc sử dụng dữ liệu khi truy cập KIZUNA. Bật tính năng này để yêu cầu thiết bị phải kết nối Wi-Fi khi vào app, giúp tối ưu tốc độ học bài và tránh phát sinh cước di động 4G ngoài ý muốn.
+          </p>
+
+          <div className="pt-2 border-t border-emerald-100 flex items-center justify-between gap-4">
+            <div>
+              <div className="font-bold text-slate-800 text-xs sm:text-sm">
+                Bắt buộc kết nối Wi-Fi khi mở ứng dụng
+              </div>
+              <div className="text-[11px] text-slate-500">
+                {network.wifiOnlyRequired 
+                  ? 'Đang bật: Cần có Wi-Fi để vào ứng dụng' 
+                  : 'Đang tắt: Cho phép truy cập bằng cả 4G/5G'}
+              </div>
+            </div>
+
+            <label className="relative inline-flex items-center cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={network.wifiOnlyRequired}
+                onChange={(e) => network.setWifiOnlyRequired(e.target.checked)}
+                className="sr-only peer"
+              />
+              <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+            </label>
           </div>
         </div>
 

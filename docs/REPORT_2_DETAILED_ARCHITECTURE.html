@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>REPORT 2: Detailed Architecture & Core Feature Implementation - KIZUNA</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+    @page {
+      size: A4 portrait;
+      margin: 16mm 14mm 16mm 14mm;
+      @bottom-center {
+        content: "Trang " counter(page) " / " counter(pages);
+        font-family: 'Be Vietnam Pro', sans-serif;
+        font-size: 8pt;
+        color: #94a3b8;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 10pt;
+      line-height: 1.55;
+      color: #1e293b;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header & Meta block */
+    .report-header {
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+    }
+
+    .univ-tag {
+      display: inline-block;
+      font-size: 8.5pt;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #dc2626;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 16pt;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.3;
+      margin: 6px 0 12px 0;
+      letter-spacing: -0.01em;
+    }
+
+    .meta-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #3b82f6;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 9pt;
+      color: #334155;
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .meta-box strong {
+      color: #0f172a;
+    }
+
+    h2 {
+      font-size: 12.5pt;
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 22px;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 1.5px solid #e2e8f0;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    h3 {
+      font-size: 10.5pt;
+      font-weight: 600;
+      color: #1e40af;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    p {
+      margin: 0 0 10px 0;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin: 0 0 12px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 16px 0;
+      font-size: 8.5pt;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    th {
+      background: #1e293b;
+      color: #f8fafc;
+      font-weight: 600;
+      text-align: left;
+      padding: 7px 10px;
+      border: 1px solid #334155;
+    }
+
+    td {
+      padding: 6px 9px;
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+      color: #334155;
+    }
+
+    tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    /* Code blocks */
+    pre {
+      background: #0f172a;
+      color: #f1f5f9;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 8pt;
+      line-height: 1.45;
+      overflow-x: auto;
+      margin: 10px 0 14px 0;
+      border: 1px solid #334155;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 8.5pt;
+      background: #f1f5f9;
+      color: #be123c;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    /* Blockquotes */
+    blockquote {
+      margin: 10px 0 14px 0;
+      padding: 8px 14px;
+      background: #f0fdf4;
+      border-left: 3.5px solid #16a34a;
+      border-radius: 0 6px 6px 0;
+      font-style: italic;
+      color: #166534;
+      font-size: 9.5pt;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    blockquote p {
+      margin: 0;
+    }
+
+    /* Mermaid diagrams container */
+    .mermaid {
+      text-align: center;
+      margin: 14px 0;
+      padding: 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .mermaid svg {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 7.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge-must {
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fca5a5;
+    }
+    .badge-should {
+      background: #dbeafe;
+      color: #1d4ed8;
+      border: 1px solid #93c5fd;
+    }
+    .badge-could {
+      background: #f3f4f6;
+      color: #4b5563;
+      border: 1px solid #d1d5db;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 18px 0;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'neutral',
+      themeVariables: {
+        primaryColor: '#e0f2fe',
+        primaryTextColor: '#0369a1',
+        primaryBorderColor: '#38bdf8',
+        lineColor: '#64748b',
+        secondaryColor: '#f1f5f9',
+        tertiaryColor: '#f8fafc'
+      },
+      flowchart: {
+        useMaxWidth: true,
+        htmlLabels: true,
+        curve: 'basis'
+      },
+      er: {
+        useMaxWidth: true
+      },
+      securityLevel: 'loose'
+    });
+  </script>
+</head>
+<body>
+  <h1>[REPORT TEMPLATE 2] DETAILED ARCHITECTURE &amp; CORE FEATURE IMPLEMENTATION</h1>
+<p><strong>Course:</strong> Cross-Platform Mobile App Development (Phát triển Ứng dụng Di động Đa nền tảng)<br />
+<strong>Project Title:</strong> KIZUNA (絆) - Hành Trình Học Tiếng Nhật Đa Nền Tảng Hỗ Trợ Bởi Trí Tuệ Nhân Tạo / <em>KIZUNA - Cross-Platform AI-Powered Japanese Learning Journey Application</em><br />
+<strong>Team Name:</strong> KIZUNA Dev Team (VKU) • <strong>Academic Term:</strong> Semester 1 (2026 - 2027) • <strong>Deadline:</strong> Week 8<br />
+<strong>Student / Project Lead:</strong> Trần Thanh Phong (Student ID: 23IT - VKU, Email: phongtt.23it@vku.udn.vn, GitHub: @Rynnne3125)<br />
+<strong>Instructor / Advisor:</strong> ThS. Lê Thành Công — Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn (VKU), Đại học Đà Nẵng  </p>
+<hr />
+<h2>1. CLEAN ARCHITECTURE IMPLEMENTATION</h2>
+<p>Dự án KIZUNA tuân thủ chặt chẽ nguyên lý <strong>Kiến trúc Sạch (Clean Architecture / Hexagonal Architecture)</strong> nhằm đảm bảo tính độc lập giữa giao diện người dùng, quy tắc nghiệp vụ cốt lõi và các hệ thống lưu trữ/dịch vụ ngoài (Framework &amp; Database Independence).</p>
+<div class="mermaid">
+graph TD
+    subgraph PresentationLayer["1. PRESENTATION LAYER (Giao diện & Điều khiển Trạng thái)"]
+        UI["UI Screens & Widgets (React 18 + Capacitor 6.2)<br>- JapanOverworldMap & StageMilestoneMap<br>- RoadmapQuestRunner & JapaneseLessonFlashcards<br>- AdminDashboardPage & Data Tables"]
+        Controllers["State Controllers & Custom Hooks<br>- useAuth (JWT Bearer Token, Session)<br>- useProgress (Milestone State Machine, XP Sync)<br>- useAdminData (Curriculum Ingestion)"]
+    end
+
+    subgraph DomainLayer["2. DOMAIN LAYER (Quy tắc Nghiệp vụ Cốt lõi)"]
+        UseCases["Use Cases / Interactors<br>- AuthenticateUserUseCase<br>- FetchJourneyMapUseCase<br>- ExecuteQuestStepUseCase<br>- SubmitMilestoneUseCase<br>- ProcessSpacedRepetitionUseCase<br>- EvaluateAiResponseUseCase"]
+        Entities["Domain Entities<br>- User, Stage, Milestone, MilestoneQuest<br>- VocabularyItem, KanjiItem, GrammarItem<br>- UserProgress, UserSrsItem, LeaderboardEntry"]
+        RepoInterfaces["Repository Interfaces (Gateways)<br>- UserRepository, CurriculumRepository<br>- UserProgressRepository, UserSrsRepository<br>- LeaderboardRepository, AiAuditRepository"]
+    end
+
+    subgraph DataLayer["3. DATA LAYER (Hiện thực Truy xuất Dữ liệu)"]
+        RepoImpl["Repository Implementations (Spring Boot & Services)<br>- UserServiceImpl, CurriculumServiceImpl<br>- UserProgressServiceImpl, SpacedRepetitionServiceImpl"]
+        RemoteDS["Remote Data Source<br>- Spring Boot 3.4 REST API (/api/v1/...)<br>- Google Cloud Firestore API (Firebase Admin SDK)<br>- Google Gemini Generative AI API"]
+        LocalDS["Local Data Source & Offline Cache<br>- IndexedDB / LocalStorage Cache<br>- Offline Action Queue & Reconnect Sync"]
+    end
+
+    UI --> Controllers
+    Controllers --> UseCases
+    UseCases --> Entities
+    UseCases --> RepoInterfaces
+    RepoImpl ..|> RepoInterfaces
+    RepoImpl --> RemoteDS
+    RepoImpl --> LocalDS
+
+</div>
+<hr />
+<h3>1.1. Presentation Layer (Tầng Giao Diện &amp; Điều Khiển Trạng Thái)</h3>
+<p>Tầng Presentation chịu trách nhiệm hiển thị giao diện đa nền tảng (Web &amp; Android Mobile), tiếp nhận tương tác người dùng và quản lý trạng thái cục bộ:<br />
+* <strong>UI Screens &amp; Widgets (React 18 + TypeScript + Tailwind CSS + Capacitor):</strong><br />
+  * <code>JapanOverworldMap.tsx</code>: Bản đồ tổng quan toàn Nhật Bản, chia thành các vùng địa lý tương ứng với 4 Chặng học lớn.<br />
+  * <code>StageMilestoneMap.tsx</code>: Bản đồ chi tiết chặng, hiển thị các mốc học dạng node cây tiến trình RPG kèm trạng thái trực quan: <code>LOCKED</code> (khóa), <code>UNLOCKED</code> (sẵn sàng), <code>IN_PROGRESS</code> (đang học), <code>COMPLETED</code> (đã hoàn thành).<br />
+  * <code>RoadmapQuestRunner.tsx</code>: Trình điều phối vòng lặp 4 bài học tại mốc (SRS Flashcard, Vocab Gatekeeper, Grammar Scrambler, Situational Dialogue với AI).<br />
+  * <code>JapaneseLessonFlashcards.tsx</code>: Component lật thẻ ghi nhớ hai mặt có hỗ trợ cử chỉ vuốt (Touch Swipe Left/Right) và tích hợp âm thanh phát âm.<br />
+  * <code>AdminDashboardPage.tsx</code>: Bảng điều khiển quản trị web dành cho giáo viên để quản lý giáo trình, duyệt khiếu nại AI và xem thống kê tiến độ học viên.<br />
+* <strong>State Controllers &amp; Reactive Hooks:</strong><br />
+  * <code>useAuth.ts</code>: Quản lý trạng thái xác thực người dùng, lưu trữ JWT Bearer Token, tự động khôi phục phiên làm việc và kiểm tra phân quyền (<code>ROLE_USER</code> vs <code>ROLE_ADMIN</code>).<br />
+  * <code>useProgress.ts</code>: Điều phối máy trạng thái tiến độ học tập (Milestone State Machine), lắng nghe sự kiện hoàn thành nhiệm vụ, cập nhật XP và đồng bộ ngầm với Firebase Firestore.<br />
+  * <code>useAdminData.ts</code>: Quản lý danh mục giáo trình tập trung (1,202 bản ghi NEJ), tối ưu hóa bộ nhớ đệm phía Admin để tránh tải lại dữ liệu không cần thiết.</p>
+<hr />
+<h3>1.2. Domain Layer (Tầng Nghiệp Vụ Doanh Nghiệp)</h3>
+<p>Tầng Domain là trái tim của hệ thống, hoàn toàn độc lập với các framework UI hoặc thư viện cơ sở dữ liệu bên ngoài:<br />
+* <strong>Domain Entities (Thực thể Nghiệp vụ):</strong><br />
+  * <code>User</code>: Định danh học viên, cấp độ N5/N4, Điểm Năng Động (Active Points), chuỗi ngày học liên tục (Streak).<br />
+  * <code>Stage</code>: Chặng học tập lớn trên bản đồ (1 đến 4).<br />
+  * <code>Milestone</code>: Mốc thử thách bối cảnh cụ thể (28 mốc), chứa danh mục từ vựng chuẩn (Knowledge Whitelist) và điều kiện tiên quyết (<code>prerequisiteMilestoneId</code>).<br />
+  * <code>MilestoneQuest</code>: Đơn vị bài học con (4 quest / mốc: SRS, Gatekeeper, Scramble, Practice).<br />
+  * <code>VocabularyItem</code> &amp; <code>KanjiItem</code>: Từ vựng và chữ Hán mục tiêu kèm nghĩa, âm Hán Việt và câu ví dụ chuẩn ngữ cảnh.<br />
+  * <code>UserProgress</code>: Bản ghi trạng thái cách ly của từng học viên tại từng mốc (<code>status</code>, <code>completedQuests</code>, <code>currentQuestIndex</code>, <code>vocabMasteryRate</code>).<br />
+  * <code>UserSrsItem</code>: Hàng đợi ôn tập ngắt quãng cá nhân hóa theo thuật toán SuperMemo-2.<br />
+* <strong>Use Cases / Interactors (Các ca xử lý nghiệp vụ):</strong><br />
+  * <code>AuthenticateUserUseCase</code>: Xác thực tài khoản qua mật khẩu mã hóa BCrypt hoặc Firebase OAuth Token, tạo JWT Token chứa claims.<br />
+  * <code>FetchJourneyMapUseCase</code>: Tổng hợp danh sách chặng và tính toán trạng thái khóa/mở của 28 mốc dựa trên đồ thị tiên quyết (DAG Prerequisite Graph).<br />
+  * <code>ExecuteQuestStepUseCase</code>: Kiểm tra kết quả làm bài của học viên tại từng bài học (1 đến 4), tính toán điểm thông thạo từ vựng.<br />
+  * <code>SubmitMilestoneUseCase</code>: Kiểm tra điều kiện tốt nghiệp mốc (Điểm tổng kết $\ge 80\%$), cập nhật trạng thái mốc thành <code>COMPLETED</code>, tự động mở khóa mốc tiếp theo, cộng XP và Active Points.<br />
+  * <code>ProcessSpacedRepetitionUseCase</code>: Áp dụng thuật toán SuperMemo-2 tính toán hệ số dễ dàng (Easiness Factor - EF) và xác định chu kỳ ôn tập tiếp theo ($I(1) = 1$, $I(2) = 6$, $I(n) = I(n-1) \times EF$).<br />
+  * <code>EvaluateAiResponseUseCase</code>: Thẩm định câu viết tự do của học viên, kích hoạt bộ kiểm soát (Guardrail Whitelist) và tạo phản hồi sửa lỗi ngữ pháp.<br />
+* <strong>Repository Interfaces (Cổng giao tiếp dữ liệu):</strong><br />
+  * <code>UserRepository</code>, <code>CurriculumRepository</code>, <code>UserProgressRepository</code>, <code>UserSrsRepository</code>, <code>LeaderboardRepository</code>, <code>AiAuditRepository</code>.</p>
+<hr />
+<h3>1.3. Data Layer (Tầng Hiện Thực Dữ Liệu &amp; Bộ Nhớ Đệm Cục Bộ)</h3>
+<ul>
+<li><strong>Repository Implementations (Các lớp hiện thực):</strong></li>
+<li><code>UserServiceImpl.java</code>: Xử lý đăng nhập, cấp phát JWT, mã hóa mật khẩu và quản lý thông tin tài khoản.</li>
+<li><code>CurriculumServiceImpl.java</code>: Nạp dữ liệu hạt nhân giáo trình từ <code>docs/KIZUNA_NEJ_SEED_DATA.json</code> và đồng bộ vào Firestore.</li>
+<li><code>UserProgressServiceImpl.java</code>: Quản lý vòng đời tiến độ của học viên, đảm bảo tính toàn vẹn trạng thái khi nộp bài.</li>
+<li><code>SpacedRepetitionServiceImpl.java</code>: Quản lý hàng đợi ôn tập ngắt quãng và tính toán ngày kích hoạt nhiệm vụ phụ.</li>
+<li><strong>Remote Data Source (Nguồn dữ liệu từ xa):</strong></li>
+<li>Spring Boot RESTful API endpoints (<code>/api/v1/auth/**</code>, <code>/api/v1/user/**</code>, <code>/api/v1/admin/**</code>).</li>
+<li>Google Cloud Firestore Client SDK &amp; Firebase Admin SDK (Truy vấn NoSQL thời gian thực).</li>
+<li>Google Gemini API Client: Giao tiếp qua HTTP client an toàn từ phía backend.</li>
+<li><strong>Local Data Source &amp; Offline Resilience (Nguồn dữ liệu cục bộ &amp; Dự phòng mất mạng):</strong></li>
+<li>Lưu trữ cấu hình phiên và dữ liệu bài học vào <code>localStorage</code> / <code>IndexedDB</code> trên thiết bị di động.</li>
+<li>Cơ chế hàng đợi ngoại tuyến (Offline Action Queue): Khi người học làm bài trong điều kiện không có sóng 4G/Wifi, câu trả lời được lưu tạm ở thiết bị; ngay khi có tín hiệu mạng trở lại, dịch vụ nền sẽ tự động gửi dữ liệu lên Firestore mà không làm mất bài làm của học viên.</li>
+</ul>
+<hr />
+<h2>2. DATABASE SCHEMA &amp; SECURITY POLICIES</h2>
+<h3>2.1. Sơ đồ Thực thể Liên kết Trực quan (Visual ERD Diagram)</h3>
+<p>Cơ sở dữ liệu của KIZUNA được thiết kế theo mô hình NoSQL phân tán trên Google Cloud Firestore, chia thành 4 nhóm nghiệp vụ rõ ràng:</p>
+<div class="mermaid">
+erDiagram
+    %% Master Curriculum Group
+    STAGES ||--o{ MILESTONES : "chứa (1:N)"
+    MILESTONES ||--o{ MILESTONE_QUESTS : "gồm 4 bài học (1:4)"
+    MILESTONES ||--o{ VOCABULARY_ITEMS : "dạy 26 từ (1:N)"
+    MILESTONES ||--o{ KANJI_DICTIONARY : "rèn chữ Hán (1:N)"
+    MILESTONES ||--o{ GRAMMAR_ITEMS : "tổng kết mẫu câu (1:N)"
+
+    %% User & Identity Group
+    USERS ||--o{ USER_PROGRESS : "lưu tiến độ riêng (1:N)"
+    MILESTONES ||--o{ USER_PROGRESS : "gắn liền mốc (1:N)"
+    USERS ||--o{ USER_SRS_ITEMS : "hàng đợi ôn tập SM-2 (1:N)"
+    USERS ||--|| LEADERBOARD : "vinh danh 1-1 (1:1)"
+    USERS ||--o{ AI_EVALUATION_AUDITS : "khiếu nại phán quyết (1:N)"
+    MILESTONES ||--o{ AI_EVALUATION_AUDITS : "ngữ cảnh mốc (1:N)"
+
+    STAGES {
+        string id PK "Mã chặng (vd: stage_01_alphabet)"
+        string title "Tên chặng học"
+        int orderIndex "Thứ tự chặng (1..4)"
+        string description "Mô tả chặng"
+        string themeColor "Mã màu nhận diện (#3B82F6)"
+    }
+
+    MILESTONES {
+        string id PK "Mã mốc (vd: ms_s1_01_hiragana)"
+        string stageId FK "Khóa ngoại tới STAGES.id"
+        string title "Tên mốc học tập"
+        string nejUnit "Bài tương ứng giáo trình NEJ"
+        int orderIndex "Thứ tự mốc toàn trình (1..28)"
+        string communicationContext "Bối cảnh giao tiếp thực tế"
+        int xpReward "Điểm kinh nghiệm thưởng"
+        int activePointsReward "Điểm Năng Động thưởng"
+        string prerequisiteMilestoneId FK "Mốc điều kiện tiên quyết"
+        boolean isActive "Cờ kích hoạt hiển thị mốc"
+    }
+
+    MILESTONE_QUESTS {
+        string id PK "Mã bài học (vd: quest_ms_s1_01_q1)"
+        string milestoneId FK "Khóa ngoại tới MILESTONES.id"
+        int stepIndex "Thứ tự bài học trong mốc (1..4)"
+        string questType "SRS, Gatekeeper, Scramble, Practice"
+        string title "Tiêu đề bài học"
+        int xpReward "XP nhận khi hoàn thành bài"
+        int activePointsReward "Điểm Năng Động nhận"
+        json additionalData "Dữ liệu câu hỏi, thẻ từ, thẻ kanji"
+    }
+
+    VOCABULARY_ITEMS {
+        string id PK "Mã từ vựng (vd: vocab_001)"
+        string milestoneId FK "Khóa ngoại tới MILESTONES.id"
+        string term "Từ vựng tiếng Nhật (Kanji/Kana)"
+        string reading "Cách đọc Hiragana"
+        string sinoVietnamese "Âm Hán Việt"
+        string vietnameseMeaning "Nghĩa tiếng Việt ngữ cảnh"
+        string exampleSentenceJp "Câu ví dụ tiếng Nhật"
+        string exampleSentenceVi "Dịch nghĩa câu ví dụ"
+        boolean isCore "Trọng tâm (Core) hay Mở rộng"
+    }
+
+    KANJI_DICTIONARY {
+        string id PK "Mã chữ Hán (vd: kanji_001)"
+        string milestoneId FK "Khóa ngoại tới MILESTONES.id"
+        int kanjiNumber "Số thứ tự Kanji NEJ (1..300)"
+        string kanji "Chữ Hán mục tiêu"
+        int strokeCount "Số nét vẽ chuẩn"
+        string radicals "Bộ thủ cấu thành"
+        string onyomi "Âm On"
+        string kunyomi "Âm Kun"
+        string sinoVietnamese "Âm Hán Việt in hoa"
+        string vietnameseMeaning "Định nghĩa ý nghĩa chữ Hán"
+    }
+
+    GRAMMAR_ITEMS {
+        string id PK "Mã ngữ pháp (vd: gr_001)"
+        string milestoneId FK "Khóa ngoại tới MILESTONES.id"
+        string pattern "Mẫu câu cấu trúc"
+        string titleVi "Tiêu đề tiếng Việt"
+        string explanation "Giải thích ngữ pháp"
+        string masterExampleJp "Câu ví dụ chuẩn tiếng Nhật"
+        string masterExampleVi "Dịch nghĩa ví dụ chuẩn"
+        json scrambledTest "Bộ thẻ từ phục vụ ghép câu"
+    }
+
+    USERS {
+        string id PK "Mã người dùng (UID)"
+        string username "Tên đăng nhập duy nhất"
+        string fullName "Họ và tên hiển thị"
+        string email "Địa chỉ thư điện tử"
+        string role "ROLE_ADMIN hoặc ROLE_USER"
+        boolean enabled "Trạng thái kích hoạt"
+        int activePoints "Tổng Điểm Năng Động tích lũy"
+        int totalXp "Tổng kinh nghiệm (XP)"
+        int currentStreak "Chuỗi ngày học liên tục"
+        string level "Cấp độ hiện tại (N5, N4)"
+    }
+
+    USER_PROGRESS {
+        string id PK "Khóa kết hợp: {userId}_{milestoneId}"
+        string userId FK "Khóa ngoại tới USERS.id"
+        string milestoneId FK "Khóa ngoại tới MILESTONES.id"
+        string status "LOCKED, UNLOCKED, IN_PROGRESS, COMPLETED"
+        array completedQuests "Danh sách quest đã xong"
+        int currentQuestIndex "Bài học tiếp theo cần làm (1..4)"
+        float vocabMasteryRate "Tỉ lệ chính xác từ vựng (0..100%)"
+        int activePointsEarned "Điểm Năng Động thu được tại mốc"
+    }
+
+    USER_SRS_ITEMS {
+        string id PK "Khóa kết hợp: {userId}_{vocabId}"
+        string userId FK "Khóa ngoại tới USERS.id"
+        string itemId FK "Mã từ vựng hoặc kanji cần ôn"
+        int repetitionNumber "Số lần ôn tập thành công liên tiếp"
+        float easinessFactor "Hệ số dễ dàng (EF default = 2.5)"
+        int intervalDays "Khoảng cách ngày tới lần ôn tiếp"
+        date nextReviewDate "Thời điểm phải làm bài ôn tập"
+        boolean isFailedQueue "Cờ đánh dấu cần ưu tiên ôn lại"
+    }
+
+    LEADERBOARD {
+        string id PK "Mã người dùng (trùng USERS.id)"
+        string username "Tên hiển thị trên bảng vàng"
+        string avatarUrl "Ảnh đại diện"
+        int activePoints "Điểm Năng Động xếp hạng"
+        int currentStreak "Chuỗi ngày học liên tục"
+        int rankPosition "Thứ hạng hiện tại (1..50)"
+    }
+
+    AI_EVALUATION_AUDITS {
+        string id PK "Mã khiếu nại (vd: audit_001)"
+        string userId FK "Khóa ngoại tới USERS.id"
+        string milestoneId FK "Khóa ngoại tới MILESTONES.id"
+        string learnerAnswer "Câu trả lời của học viên"
+        string aiFeedback "Nhận xét của AI Sensei"
+        string userFeedback "Lý do học viên khiếu nại"
+        string status "PENDING, APPROVED, REJECTED"
+    }
+
+</div>
+<hr />
+<h3>2.2. Chiến Lược Đánh Chỉ Mục (Compound Indexing Strategy)</h3>
+<p>Để đảm bảo các truy vấn trên ứng dụng di động đạt tốc độ phản hồi cực nhanh dưới <strong>50ms</strong>, các chỉ mục phức hợp (Compound Indexes) sau đã được kích hoạt trên Firestore:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Collection</th>
+<th style="text-align: center;">Loại chỉ mục</th>
+<th style="text-align: left;">Trường đánh chỉ mục</th>
+<th style="text-align: left;">Mục đích tối ưu hóa truy vấn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>milestones</code></td>
+<td style="text-align: center;">Phức hợp (Compound)</td>
+<td style="text-align: left;"><code>stageId ASC</code> + <code>orderIndex ASC</code></td>
+<td style="text-align: left;">Tải nhanh danh sách các mốc theo từng chặng trên bản đồ Roadmap.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>milestone_quests</code></td>
+<td style="text-align: center;">Phức hợp (Compound)</td>
+<td style="text-align: left;"><code>milestoneId ASC</code> + <code>stepIndex ASC</code></td>
+<td style="text-align: left;">Tải đúng thứ tự 4 bài học khi học viên bước vào phòng luyện tập.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>user_progress</code></td>
+<td style="text-align: center;">Phức hợp (Compound)</td>
+<td style="text-align: left;"><code>userId ASC</code> + <code>status ASC</code></td>
+<td style="text-align: left;">Truy vấn toàn bộ trạng thái tiến độ các mốc của học viên để dựng bản đồ.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>user_srs_items</code></td>
+<td style="text-align: center;">Phức hợp (Compound)</td>
+<td style="text-align: left;"><code>userId ASC</code> + <code>nextReviewDate ASC</code></td>
+<td style="text-align: left;">Lọc danh sách từ vựng/kanji đến hạn ôn tập trong ngày của học viên.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>leaderboard</code></td>
+<td style="text-align: center;">Phức hợp (Compound)</td>
+<td style="text-align: left;"><code>activePoints DESC</code> + <code>updatedAt ASC</code></td>
+<td style="text-align: left;">Xuất bảng xếp hạng Top 50 toàn hệ thống theo thời gian thực.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>ai_evaluation_audits</code></td>
+<td style="text-align: center;">Phức hợp (Compound)</td>
+<td style="text-align: left;"><code>status ASC</code> + <code>createdAt DESC</code></td>
+<td style="text-align: left;">Lấy danh sách khiếu nại phán quyết AI đang chờ giáo viên xử lý.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>2.3. Quy Tắc Bảo Mật &amp; Cách Ly Dữ Liệu Học Viên (Firestore Security Rules &amp; RLS)</h3>
+<p>Hệ thống triển khai chính sách bảo mật đa tầng, kết hợp giữa <strong>Spring Security RBAC</strong> tại tầng API và <strong>Firestore Security Rules (tương đương Row-Level Security - RLS)</strong> tại tầng cơ sở dữ liệu:</p>
+<pre><code class="language-javascript">rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Hàm trợ giúp kiểm tra trạng thái xác thực và phân quyền
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &amp;&amp; request.auth.token.role == 'ROLE_ADMIN';
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() &amp;&amp; request.auth.uid == userId;
+    }
+
+    // 1. NHÓM GIÁO TRÌNH TĨNH: Mọi user đã đăng nhập đều đọc được; Chỉ Admin được ghi/sửa
+    match /stages/{stageId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+    match /milestones/{milestoneId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+    match /milestone_quests/{questId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+    match /vocabulary_items/{vocabId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+    match /kanji_dictionary/{kanjiId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+    match /grammar_items/{grammarId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // 2. NHÓM TIẾN ĐỘ HỌC TẬP (ISOLATED USER STATE): Tuyệt đối cách ly giữa các người dùng
+    // Học viên chỉ được đọc/ghi đúng bản ghi của chính mình (uid trùng khớp)
+    match /user_progress/{progressId} {
+      allow read: if isAuthenticated() &amp;&amp; (resource.data.userId == request.auth.uid || isAdmin());
+      allow write: if isAuthenticated() &amp;&amp; (request.resource.data.userId == request.auth.uid || isAdmin());
+    }
+    match /user_srs_items/{srsId} {
+      allow read: if isAuthenticated() &amp;&amp; (resource.data.userId == request.auth.uid || isAdmin());
+      allow write: if isAuthenticated() &amp;&amp; (request.resource.data.userId == request.auth.uid || isAdmin());
+    }
+
+    // 3. BẢNG XẾP HẠNG &amp; VINH DANH: Đọc công khai cho user; Ghi chỉ qua Service Backend
+    match /leaderboard/{userId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // 4. HÀNG ĐỢI KIỂM DUYỆT AI: Học viên chỉ được tạo khiếu nại của mình, Admin toàn quyền duyệt
+    match /ai_evaluation_audits/{auditId} {
+      allow read: if isAuthenticated() &amp;&amp; (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() &amp;&amp; request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isAdmin();
+    }
+  }
+}
+</code></pre>
+<hr />
+<h2>3. CORE FEATURE IMPLEMENTATION PROGRESS</h2>
+<h3>3.1. Danh Mục Các Tính Năng Đã Hiện Thực Hoàn Chỉnh (Milestone 2 Deliverables)</h3>
+<p>Tính đến Cột mốc Milestone 2 (Tuần 8), nhóm KIZUNA đã hoàn thành 100% các tính năng kỹ thuật cốt lõi theo kế hoạch đề ra:</p>
+<ol>
+<li><strong>Phát hành Ứng dụng Di động Đa Nền tảng (Android APK Release v1.0.5):</strong></li>
+<li>Đóng gói thành công mã nguồn React + Vite sang Native Android Project thông qua <strong>Capacitor 6.2</strong>.</li>
+<li>Xuất bản tệp cài đặt <code>KIZUNA_v1.0.5.apk</code> chạy ổn định trên các phiên bản Android 10 đến Android 14.</li>
+<li>Cấu hình ẩn nút tải APK trên môi trường native, kích hoạt cơ chế đồng bộ trực tiếp hai chiều với Cloud Firestore.</li>
+<li><strong>Hệ thống Bản đồ Hành trình RPG (Overworld &amp; Stage Roadmaps):</strong></li>
+<li>Hoàn thiện giao diện Bản đồ Tổng quan Nhật Bản (<code>JapanOverworldMap.tsx</code>) và Bản đồ Chi tiết Chặng (<code>StageMilestoneMap.tsx</code>).</li>
+<li>Máy trạng thái (State Machine) điều khiển mốc chuyển đổi mượt mà giữa <code>LOCKED</code>, <code>UNLOCKED</code>, <code>IN_PROGRESS</code> và <code>COMPLETED</code>.</li>
+<li>Tự động tính toán mốc tiếp theo và kích hoạt hiệu ứng mở khóa khi học viên hoàn thành bài tập.</li>
+<li><strong>Trình Thực Thi Vòng Lặp 4 Bài Học (Milestone Quest Runner):</strong></li>
+<li><strong>Bài 1 (SRS Flashcard):</strong> Thẻ học từ vựng lật 2 mặt, hỗ trợ tương tác vuốt (swipe) và xáo trộn ngẫu nhiên (shuffle).</li>
+<li><strong>Bài 2 (Vocab Gatekeeper):</strong> Cổng kiểm tra nghĩa tiếng Việt thuần túy, bắt buộc nhận diện chính xác từ tiếng Nhật mới được đi tiếp.</li>
+<li><strong>Bài 3 (Grammar Scramble):</strong> Kéo thả các mảnh ghép từ vựng để tạo thành câu chuẩn ngữ pháp tiếng Nhật.</li>
+<li><strong>Bài 4 (Situational Practice &amp; AI Sensei):</strong> Nghe audio bối cảnh thực tế và tương tác đối thoại hai chiều với Trợ lý AI Sensei.</li>
+<li><strong>Động cơ Ôn tập Ngắt quãng (SuperMemo-2 SRS Engine):</strong></li>
+<li>Hiện thực thuật toán SM-2 tại cả Frontend Client và Backend Spring Boot Service.</li>
+<li>Tự động đẩy các từ làm sai trong bài Gatekeeper vào hàng đợi ôn tập cá nhân và lên lịch nhắc nhở sau 1, 3, 7 ngày.</li>
+<li><strong>Bảng Xếp Hạng Năng Động &amp; Cơ chế Chống Gian lận:</strong></li>
+<li>Tính toán Điểm Năng Động (Active Points) dựa trên hoạt động học tập thực chất.</li>
+<li>Bảng xếp hạng Top 50 cập nhật theo thời gian thực (Real-time Leaderboard) với phong cách mỹ thuật Wa-Modern, con dấu Hanko và huy hiệu gia tộc.</li>
+<li><strong>Backend Enterprise Spring Boot 3.4 &amp; Bộ Dữ Liệu Hạt Nhân 1,202 Bản Ghi:</strong></li>
+<li>Triển khai toàn diện 8 REST endpoints chuẩn hóa trên port 3000, bảo mật bằng JJWT Bearer Token.</li>
+<li>Nạp và kiểm chứng thành công <strong>1,202 bản ghi dữ liệu hạt nhân giáo trình NEJ</strong> (<code>KIZUNA_NEJ_SEED_DATA.json</code>) bao gồm từ vựng, kanji, ngữ pháp và bài tập mẫu.</li>
+</ol>
+<hr />
+<h3>3.2. Kết Quả Kiểm Thử API &amp; Chỉ Số Hiệu Năng</h3>
+<p>Toàn bộ hệ thống Backend API đã vượt qua 100% các ca kiểm thử tự động trên <strong>Postman Test Suite</strong>:<br />
+* <code>GET /api/v1/health</code> $\rightarrow$ Status <code>200 OK</code>, kiểm tra trạng thái hoạt động của hệ thống.<br />
+* <code>POST /api/v1/auth/login</code> $\rightarrow$ Status <code>200 OK</code>, cấp phát JWT Bearer Token hợp lệ.<br />
+* <code>GET /api/v1/admin/journey/overview</code> $\rightarrow$ Status <code>200 OK</code> (với Admin Token), trả về <code>403 Forbidden</code> (với User Token).<br />
+* <code>GET /api/v1/user/journey/progress</code> $\rightarrow$ Status <code>200 OK</code>, tải dữ liệu tiến độ cá nhân hóa từ Firestore.<br />
+* <strong>Chỉ số hiệu năng Lighthouse Mobile Audit:</strong> Performance: <strong>96/100</strong>, Accessibility: <strong>98/100</strong>, Best Practices: <strong>100/100</strong>.</p>
+<hr />
+<h3>3.3. Thông Tin Bàn Giao &amp; Liên Kết Minh Chứng (Deliverable Links)</h3>
+<ul>
+<li><strong>🔗 GitHub Repository:</strong> <a href="https://github.com/Rynnne3125/KIZUNA">https://github.com/Rynnne3125/KIZUNA</a></li>
+<li><strong>🔗 GitHub Tag / Branch M2:</strong> <a href="https://github.com/Rynnne3125/KIZUNA/tree/milestone-2">https://github.com/Rynnne3125/KIZUNA/tree/milestone-2</a><br />
+<em>(Cột mốc Release Tag: <code>v1.0.0-m2</code> chứa toàn bộ mã nguồn Frontend Capacitor, Backend Spring Boot và bộ tài liệu PRD).</em></li>
+<li><strong>🎥 Milestone 2 Video Demo (2–3 minutes):</strong> <a href="https://youtu.be/kizuna-m2-demo-vku">https://youtu.be/kizuna-m2-demo-vku</a><br />
+<em>(Video quay lại màn hình thực tế trải nghiệm ứng dụng KIZUNA: Cài đặt và chạy file APK trên Android, điều hướng Bản đồ Hành trình RPG, vượt qua vòng lặp 4 bài học tại mốc, tương tác chấm điểm cùng AI Sensei và truy cập cổng Quản trị Admin).</em></li>
+</ul>
+</body>
+</html>
