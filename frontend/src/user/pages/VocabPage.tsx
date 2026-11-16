@@ -1098,7 +1098,7 @@ export const VocabPage: React.FC = () => {
 
       {/* 2. CHỌN BỘ SÁCH CỦA CẤP ĐỘ HIỆN TẠI (Book Cover Wabi-sabi Style) */}
       {!selectedBook && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
           {currentLevelBooks.map(book => {
             const isTango = book.bookId.includes('tango');
             const spineColor = isTango ? '#2d6d4b' : '#c53d32';

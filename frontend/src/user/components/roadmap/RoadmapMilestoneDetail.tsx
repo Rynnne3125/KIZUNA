@@ -15,7 +15,11 @@ import {
   Check, 
   AlertCircle,
   HelpCircle,
-  RotateCcw
+  RotateCcw,
+  Crown,
+  Target,
+  Lightbulb,
+  FileText
 } from 'lucide-react';
 
 interface RoadmapMilestoneDetailProps {
@@ -212,10 +216,20 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
               fontWeight: 800,
               backgroundColor: isBoss ? '#fef3c7' : '#ecfdf5',
               color: isBoss ? '#d97706' : '#15803d',
-              border: isBoss ? '1px solid #fde68a' : '1px solid #bbf7d0'
+              border: isBoss ? '1px solid #fde68a' : '1px solid #bbf7d0',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 5
             }}
           >
-            {isBoss ? '👑 Thử Thách Trùm (Checkpoint)' : `${level} • Chặng ${stage?.orderIndex || 1}`}
+            {isBoss ? (
+              <>
+                <Crown size={12} />
+                <span>Thử Thách Trùm (Checkpoint)</span>
+              </>
+            ) : (
+              `${level} • Chặng ${stage?.orderIndex || 1}`
+            )}
           </span>
           {milestone.kanjiMark && (
             <span
@@ -249,14 +263,15 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
-          <div style={{ flex: '1 1 500px' }}>
+          <div style={{ flex: '1 1 auto', minWidth: 260 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
               <span style={{ fontSize: 12, fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>
                 {milestone.nejUnit || `Bài ${milestone.orderIndex || 1}`}
               </span>
               {isMilestoneCompleted ? (
-                <span style={{ fontSize: 11, fontWeight: 700, color: '#16a34a', backgroundColor: '#dcfce7', padding: '2px 8px', borderRadius: 4 }}>
-                  ✓ Đã hoàn thành mốc
+                <span style={{ fontSize: 11, fontWeight: 700, color: '#16a34a', backgroundColor: '#dcfce7', padding: '2px 8px', borderRadius: 4, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                  <Check size={12} strokeWidth={3} />
+                  <span>Đã hoàn thành mốc</span>
                 </span>
               ) : (
                 <span style={{ fontSize: 11, fontWeight: 700, color: '#0284c7', backgroundColor: '#e0f2fe', padding: '2px 8px', borderRadius: 4 }}>
@@ -269,14 +284,16 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
               {milestone.title}
             </h1>
 
-            <div style={{ fontSize: 14, color: '#334155', lineHeight: 1.6, marginBottom: 12 }}>
-              🎯 <b>Mục tiêu giao tiếp:</b> {milestone.canDoGoal || milestone.communicationContext || 'Thực hành giao tiếp tiếng Nhật cốt lõi'}
+            <div style={{ fontSize: 14, color: '#334155', lineHeight: 1.6, marginBottom: 12, display: 'flex', alignItems: 'flex-start', gap: 6 }}>
+              <Target size={15} style={{ color: '#0d9488', flexShrink: 0, marginTop: 3 }} />
+              <span><b>Mục tiêu giao tiếp:</b> {milestone.canDoGoal || milestone.communicationContext || 'Thực hành giao tiếp tiếng Nhật cốt lõi'}</span>
             </div>
 
             {/* Grammar summary tags from Firestore */}
             {milestone.grammarSummary && (
-              <div style={{ fontSize: 13, color: '#475569', backgroundColor: '#f8fafc', padding: '8px 12px', borderRadius: 8, border: '1px solid #e2e8f0' }}>
-                💡 <b>Trọng tâm:</b> {milestone.grammarSummary}
+              <div style={{ fontSize: 13, color: '#475569', backgroundColor: '#f8fafc', padding: '8px 12px', borderRadius: 8, border: '1px solid #e2e8f0', display: 'flex', alignItems: 'flex-start', gap: 6 }}>
+                <Lightbulb size={14} style={{ color: '#ca8a04', flexShrink: 0, marginTop: 2 }} />
+                <span><b>Trọng tâm:</b> {milestone.grammarSummary}</span>
               </div>
             )}
           </div>
@@ -352,7 +369,9 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
           }}
         >
           <Sparkles size={16} />
-          <span>Đọc hiểu {isReadingDone ? '✓' : ''}</span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+            Đọc hiểu {isReadingDone && <Check size={13} strokeWidth={3} style={{ color: '#16a34a' }} />}
+          </span>
         </button>
       </div>
 
@@ -379,7 +398,7 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
                   transition: 'all 0.15s'
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: '1 1 450px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: '1 1 auto', minWidth: 240 }}>
                   {/* Step order indicator */}
                   <div
                     style={{
@@ -397,7 +416,7 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
                       flexShrink: 0
                     }}
                   >
-                    {questDone ? '✓' : idx + 1}
+                    {questDone ? <Check size={16} strokeWidth={3} /> : idx + 1}
                   </div>
 
                   <div>
@@ -583,12 +602,14 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
               {milestone.readingPassage.questions && milestone.readingPassage.questions.length > 0 && (
                 <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 20, marginTop: 20 }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-                    <div style={{ fontSize: 15, fontWeight: 900, color: '#0f172a' }}>
-                      📝 Câu hỏi trắc nghiệm kiểm tra độ hiểu:
+                    <div style={{ fontSize: 15, fontWeight: 900, color: '#0f172a', display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <FileText size={16} style={{ color: '#475569' }} />
+                      <span>Câu hỏi trắc nghiệm kiểm tra độ hiểu:</span>
                     </div>
                     {isReadingDone && (
-                      <span style={{ fontSize: 12, fontWeight: 800, color: '#16a34a', backgroundColor: '#dcfce7', padding: '3px 10px', borderRadius: 6 }}>
-                        ✓ Đã hoàn thành Đọc hiểu
+                      <span style={{ fontSize: 12, fontWeight: 800, color: '#16a34a', backgroundColor: '#dcfce7', padding: '3px 10px', borderRadius: 6, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                        <Check size={13} strokeWidth={3} />
+                        <span>Đã hoàn thành Đọc hiểu</span>
                       </span>
                     )}
                   </div>
@@ -654,8 +675,9 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
                           </div>
 
                           {readingQuizChecked && q.explanation && (
-                            <div style={{ marginTop: 12, padding: '8px 14px', borderRadius: 8, backgroundColor: '#ecfdf5', border: '1px solid #a7f3d0', fontSize: 13, color: '#065f46' }}>
-                              💡 <b>Giải thích chi tiết:</b> {q.explanation}
+                            <div style={{ marginTop: 12, padding: '8px 14px', borderRadius: 8, backgroundColor: '#ecfdf5', border: '1px solid #a7f3d0', fontSize: 13, color: '#065f46', display: 'flex', alignItems: 'flex-start', gap: 6 }}>
+                              <Lightbulb size={14} style={{ color: '#059669', flexShrink: 0, marginTop: 2 }} />
+                              <span><b>Giải thích chi tiết:</b> {q.explanation}</span>
                             </div>
                           )}
                         </div>
@@ -716,10 +738,20 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
                             fontSize: 14,
                             border: 'none',
                             cursor: 'pointer',
-                            boxShadow: '0 2px 8px rgba(16, 185, 129, 0.3)'
+                            boxShadow: '0 2px 8px rgba(16, 185, 129, 0.3)',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 6
                           }}
                         >
-                          {savingReading ? 'Đang lưu...' : '✓ Hoàn thành Đọc hiểu (+25 XP, +15 AP)'}
+                          {savingReading ? (
+                            'Đang lưu...'
+                          ) : (
+                            <>
+                              <Check size={15} strokeWidth={3} />
+                              <span>Hoàn thành Đọc hiểu (+25 XP, +15 AP)</span>
+                            </>
+                          )}
                         </button>
                       </div>
                     )}

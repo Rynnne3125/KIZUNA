@@ -27,6 +27,7 @@ import { kizunaService } from '../services/kizunaService';
 import { authService } from '../services/authService';
 import { progressService } from '../services/progressService';
 import { VideoLesson, ChoukaiAudioItem, QuestionSet } from '../types/kizuna';
+import { isNativeApp } from '../utils/platform';
 
 const LEVEL_FILTERS = [
   { id: 'ALL', label: 'Tất cả cấp độ' },
@@ -221,10 +222,64 @@ export const LibraryPage: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleSelectVideo = (video: VideoLesson) => {
+    setActiveVideo(video);
+    setTimeout(() => {
+      const playerEl = document.getElementById('kizuna-main-player');
+      if (playerEl) {
+        playerEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.scrollTo({ top: 120, behavior: 'smooth' });
+      }
+    }, 50);
+  };
+
   return (
-    <div style={{ maxWidth: 1200, margin: '0 auto', paddingBottom: 60 }}>
+    <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 12px 60px 12px', boxSizing: 'border-box' }}>
+      <style>{`
+        /* Responsive Media Queries cho Mobile / Android */
+        @media (max-width: 900px) {
+          .library-theater-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .library-playlist-list {
+            max-height: 440px !important;
+          }
+          .library-header-card {
+            padding: 16px 18px !important;
+          }
+          .library-header-actions {
+            width: 100% !important;
+            justify-content: stretch !important;
+          }
+          .library-header-actions button {
+            flex: 1 1 auto !important;
+            justify-content: center !important;
+          }
+          .library-filter-panel {
+            padding: 12px 14px !important;
+          }
+          .library-filter-row {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 10px !important;
+          }
+          .library-search-box {
+            width: 100% !important;
+            max-width: 100% !important;
+          }
+          .library-related-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .library-related-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
       {/* 1. HERO HEADER PHONG CÁCH NHẬT BẢN */}
-      <div style={{
+      <div className="library-header-card" style={{
         background: 'linear-gradient(135deg, #ffffff 0%, #faf8f5 100%)',
         border: '1px solid #e7dfd5',
         borderLeft: '4px solid #c53d32',
@@ -432,22 +487,55 @@ export const LibraryPage: React.FC = () => {
 
           {/* GIAO DIỆN THEATER: TRÌNH PHÁT TRÁI + PLAYLIST PHẢI */}
           {activeVideo ? (
-            <div style={{
+            <div className="library-theater-grid" style={{
               display: 'grid',
-              gridTemplateColumns: 'minmax(0, 1.4fr) minmax(360px, 1fr)',
+              gridTemplateColumns: 'minmax(0, 1.4fr) minmax(320px, 1fr)',
               gap: 20,
               alignItems: 'start'
             }}>
               {/* CỘT TRÁI: VIDEO PLAYER & THÔNG TIN BÀI HỌC */}
-              <div>
+              <div id="kizuna-main-player">
+                {/* Visual Anchor: VÙNG PHÁT VIDEO ĐANG CHẠY (Hiển thị rõ ràng trên Android & Web) */}
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '10px 16px',
+                  background: 'linear-gradient(135deg, #fdf2f0 0%, #fff7f6 100%)',
+                  borderRadius: '14px 14px 0 0',
+                  border: '1.5px solid #fecaca',
+                  borderBottom: 'none'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#c53d32', fontWeight: 900, fontSize: 13 }}>
+                    <Play size={15} style={{ fill: '#c53d32' }} />
+                    <span>TRÌNH PHÁT BÀI GIẢNG ĐANG CHỌN</span>
+                  </div>
+                  <a
+                    href={`https://www.youtube.com/watch?v=${activeVideo.youtubeVideoId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontSize: 12,
+                      fontWeight: 700,
+                      color: '#0284c7',
+                      textDecoration: 'none',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 4
+                    }}
+                  >
+                    <span>Mở app YouTube</span> ↗
+                  </a>
+                </div>
+
                 <div style={{
                   background: '#ffffff',
-                  borderRadius: 14,
-                  border: '1px solid #ebe7df',
+                  borderRadius: '0 0 14px 14px',
+                  border: '1.5px solid #fecaca',
                   overflow: 'hidden',
-                  boxShadow: '0 4px 16px rgba(0,0,0,0.03)'
+                  boxShadow: '0 4px 16px rgba(197, 61, 50, 0.08)'
                 }}>
-                  {/* Trình phát nhúng YouTube chuẩn (có sandbox chặn chuyển trang ra ngoài) */}
+                  {/* Trình phát nhúng YouTube chuẩn (Hỗ trợ tốt trên Android WebView) */}
                   <div style={{
                     position: 'relative',
                     width: '100%',
@@ -456,11 +544,11 @@ export const LibraryPage: React.FC = () => {
                   }}>
                     <iframe
                       id="kizuna-video-player"
-                      src={`https://www.youtube-nocookie.com/embed/${activeVideo.youtubeVideoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+                      src={`https://www.youtube.com/embed/${activeVideo.youtubeVideoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
                       title={activeVideo.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-picture"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
-                      sandbox="allow-scripts allow-same-origin allow-presentation"
+                      sandbox="allow-scripts allow-same-origin allow-presentation allow-forms allow-popups"
                       style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
                     />
                   </div>
@@ -508,14 +596,11 @@ export const LibraryPage: React.FC = () => {
                     <Layers size={14} color="#c53d32" />
                     <span>BÀI HỌC LIÊN QUAN TIẾP THEO TRONG KIZUNA:</span>
                   </div>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: 12 }}>
+                  <div className="library-related-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: 12 }}>
                     {relatedVideos.map(v => (
                       <div
                         key={v.id}
-                        onClick={() => {
-                          setActiveVideo(v);
-                          window.scrollTo({ top: 160, behavior: 'smooth' });
-                        }}
+                        onClick={() => handleSelectVideo(v)}
                         style={{
                           background: '#ffffff',
                           borderRadius: 8,
@@ -588,16 +673,13 @@ export const LibraryPage: React.FC = () => {
                 </div>
 
                 {/* Danh sách video cuộn mượt mà */}
-                <div style={{ maxHeight: 680, overflowY: 'auto' }}>
+                <div className="library-playlist-list" style={{ maxHeight: 680, overflowY: 'auto' }}>
                   {filteredVideos.map(v => {
                     const isCurrent = activeVideo.id === v.id;
                     return (
                       <div
                         key={v.id}
-                        onClick={() => {
-                          setActiveVideo(v);
-                          window.scrollTo({ top: 160, behavior: 'smooth' });
-                        }}
+                        onClick={() => handleSelectVideo(v)}
                         style={{
                           display: 'flex',
                           gap: 10,

@@ -13,7 +13,13 @@ import {
   ArrowLeft, 
   CheckCircle2, 
   Lock, 
-  AlertCircle
+  AlertCircle,
+  Check,
+  Crown,
+  Target,
+  MapPin,
+  Sparkles,
+  BookOpen
 } from 'lucide-react';
 
 type JlptLevelKey = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
@@ -195,7 +201,7 @@ export const RoadmapPage: React.FC = () => {
 
   const handleSelectMilestone = (ms: Milestone, isUnlocked: boolean) => {
     if (!isUnlocked) {
-      setLockedNotice(`🔒 Mốc "${ms.title}" đang khóa. Bạn cần hoàn thành mốc học tập trước đó để mở khóa!`);
+      setLockedNotice(`Mốc "${ms.title}" đang khóa. Bạn cần hoàn thành mốc học tập trước đó để mở khóa!`);
       setTimeout(() => setLockedNotice(null), 3500);
       return;
     }
@@ -219,8 +225,9 @@ export const RoadmapPage: React.FC = () => {
       style={{
         maxWidth: 1040,
         margin: '0 auto',
-        paddingBottom: 64,
+        padding: '0 12px 64px 12px',
         position: 'relative',
+        boxSizing: 'border-box',
         fontFamily: '"Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
       }}
     >
@@ -246,6 +253,43 @@ export const RoadmapPage: React.FC = () => {
             top: 108%;
             transform: translateX(-15px) rotate(360deg);
             opacity: 0;
+          }
+        }
+
+        /* Responsive Breakpoints cho Roadmap */
+        @media (max-width: 768px) {
+          .roadmap-header-row {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 12px !important;
+          }
+          .roadmap-stats-row {
+            width: 100% !important;
+            flex-wrap: wrap !important;
+          }
+          .roadmap-level-bar {
+            width: 100% !important;
+            overflow-x: auto !important;
+            scrollbar-width: none !important;
+          }
+          .roadmap-level-bar button {
+            min-width: 76px !important;
+            padding: 8px 10px !important;
+          }
+          .roadmap-stages-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .roadmap-milestone-item {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            padding: 14px 16px !important;
+          }
+          .roadmap-milestone-actions {
+            width: 100% !important;
+            justify-content: space-between !important;
+            border-top: 1px dashed #e2e8f0 !important;
+            padding-top: 10px !important;
+            margin-top: 6px !important;
           }
         }
       `}</style>
@@ -385,6 +429,7 @@ export const RoadmapPage: React.FC = () => {
 
         {/* Thanh chuyển cấp độ N phong cách Thẻ bài Nhật Bản (札 - Fuda) */}
         <div
+          className="roadmap-level-bar"
           style={{
             display: 'flex',
             background: '#f4f2ee',
@@ -405,25 +450,27 @@ export const RoadmapPage: React.FC = () => {
                 onClick={() => handleSelectLevel(lvl)}
                 style={{
                   flex: 1,
-                  minWidth: 100,
-                  padding: '10px 14px',
+                  minWidth: 80,
+                  padding: '8px 12px',
                   borderRadius: 8,
                   border: 'none',
-                  backgroundColor: isActive ? '#ffffff' : 'transparent',
+                  backgroundColor: isActive ? '#c53d32' : 'transparent',
+                  color: isActive ? '#ffffff' : '#57534e',
                   cursor: 'pointer',
-                  boxShadow: isActive ? '0 2px 6px rgba(0,0,0,0.06)' : 'none',
+                  boxShadow: isActive ? '0 2px 6px rgba(197, 61, 50, 0.25)' : 'none',
                   transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: 8
+                  gap: 6
                 }}
               >
                 <span
                   style={{
-                    fontSize: 15,
+                    fontSize: 14,
                     fontWeight: 900,
-                    color: isActive ? meta.color : '#57534e'
+                    letterSpacing: '0.5px',
+                    color: isActive ? '#ffffff' : '#1c1917'
                   }}
                 >
                   {lvl}
@@ -431,12 +478,12 @@ export const RoadmapPage: React.FC = () => {
 
                 <span
                   style={{
-                    fontSize: 12,
+                    fontSize: 11,
                     fontWeight: 700,
-                    color: isActive ? '#1c1917' : '#78716c'
+                    color: isActive ? 'rgba(255,255,255,0.92)' : '#78716c'
                   }}
                 >
-                  {meta.kanji} ({meta.vi})
+                  {meta.kanji}
                 </span>
               </button>
             );
@@ -498,7 +545,7 @@ export const RoadmapPage: React.FC = () => {
       {/* 3. NỘI DUNG CHÍNH (THEO VIEW MODE) */}
       {loading ? (
         <div style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: 48, textAlign: 'center', border: '1px solid #e2e8f0' }}>
-          <div style={{ fontSize: 32, marginBottom: 12 }}>🌸</div>
+          <Sparkles size={32} style={{ color: '#c53d32', margin: '0 auto 12px', display: 'block' }} />
           <p style={{ color: '#64748b', fontWeight: 600 }}>Đang tải lộ trình học tiếng Nhật từ Firestore...</p>
         </div>
       ) : viewMode === 'STAGES' ? (
@@ -548,7 +595,7 @@ export const RoadmapPage: React.FC = () => {
           </div>
 
           {/* Stages Grid Cards */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 16 }}>
+          <div className="roadmap-stages-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
             {levelStages.map((st, idx) => {
               const stageMils = milestones.filter(m => m.stageId === st.id);
               const milestoneCount = stageMils.length || st.total_milestones || 5;
@@ -664,8 +711,9 @@ export const RoadmapPage: React.FC = () => {
                       fontSize: 12.5
                     }}
                   >
-                    <span style={{ color: '#475569', fontWeight: 600 }}>
-                      📍 {milestoneCount} Mốc học tập
+                    <span style={{ color: '#475569', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+                      <MapPin size={13} style={{ color: '#0d9488' }} />
+                      <span>{milestoneCount} Mốc học tập</span>
                     </span>
 
                     <span style={{ color: LEVEL_CONFIG[selectedLevel].color, fontWeight: 800, display: 'flex', alignItems: 'center', gap: 4 }}>
@@ -744,6 +792,7 @@ export const RoadmapPage: React.FC = () => {
                 <div
                   key={ms.id}
                   onClick={() => handleSelectMilestone(ms, isUnlocked)}
+                  className="roadmap-milestone-item"
                   style={{
                     backgroundColor: isUnlocked ? '#ffffff' : '#f8fafc',
                     border: isBoss
@@ -778,7 +827,7 @@ export const RoadmapPage: React.FC = () => {
                     }
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: '1 1 450px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: '1 1 auto', minWidth: 240 }}>
                     {/* Milestone Order Circle */}
                     <div
                       style={{
@@ -800,7 +849,7 @@ export const RoadmapPage: React.FC = () => {
                           ? '#15803d'
                           : '#94a3b8',
                         fontWeight: 900,
-                        fontSize: isBoss ? 18 : 14,
+                        fontSize: isBoss ? 16 : 14,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -808,7 +857,15 @@ export const RoadmapPage: React.FC = () => {
                         flexShrink: 0
                       }}
                     >
-                      {isBoss ? '🏯' : isCompleted ? '✓' : !isUnlocked ? <Lock size={15} /> : ms.kanjiMark || idx + 1}
+                      {isBoss ? (
+                        <Crown size={18} />
+                      ) : isCompleted ? (
+                        <Check size={16} strokeWidth={3} />
+                      ) : !isUnlocked ? (
+                        <Lock size={15} />
+                      ) : (
+                        ms.kanjiMark || idx + 1
+                      )}
                     </div>
 
                     <div>
@@ -818,10 +875,20 @@ export const RoadmapPage: React.FC = () => {
                             fontSize: 11,
                             fontWeight: 800,
                             color: isBoss ? '#d97706' : '#64748b',
-                            textTransform: 'uppercase'
+                            textTransform: 'uppercase',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 4
                           }}
                         >
-                          {isBoss ? '👑 MỐC CHỐT CHẶNG (BOSS)' : `${ms.nejUnit || `Bài ${ms.orderIndex || idx + 1}`}`}
+                          {isBoss ? (
+                            <>
+                              <Crown size={12} />
+                              <span>MỐC CHỐT CHẶNG (BOSS)</span>
+                            </>
+                          ) : (
+                            `${ms.nejUnit || `Bài ${ms.orderIndex || idx + 1}`}`
+                          )}
                         </span>
 
                         {isCompleted && (
@@ -847,14 +914,15 @@ export const RoadmapPage: React.FC = () => {
                         {ms.title}
                       </h3>
 
-                      <div style={{ fontSize: 12.5, color: '#475569' }}>
-                        🎯 <b>Mục tiêu:</b> {ms.canDoGoal || ms.communicationContext || 'Thực hành mục tiêu hội thoại cốt lõi'}
+                      <div style={{ fontSize: 12.5, color: '#475569', display: 'flex', alignItems: 'center', gap: 5 }}>
+                        <Target size={13} style={{ color: '#0d9488', flexShrink: 0 }} />
+                        <span><b>Mục tiêu:</b> {ms.canDoGoal || ms.communicationContext || 'Thực hành mục tiêu hội thoại cốt lõi'}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Right side rewards and button */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                  <div className="roadmap-milestone-actions" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
                     <div style={{ textAlign: 'right' }}>
                       <div style={{ fontSize: 12, fontWeight: 800, color: '#d97706' }}>
                         +{ms.xpReward || 100} XP

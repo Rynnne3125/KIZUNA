@@ -5,6 +5,7 @@ import {
   ArrowLeft, 
   Volume2, 
   RotateCw, 
+  RotateCcw,
   CheckCircle2, 
   XCircle, 
   Sparkles, 
@@ -23,7 +24,14 @@ import {
   ArrowUpDown,
   ChevronLeft,
   ChevronRight,
-  MessageSquare
+  MessageSquare,
+  Shield,
+  Puzzle,
+  Crown,
+  Lock,
+  Target,
+  Lightbulb,
+  MessageCircle
 } from 'lucide-react';
 
 interface RoadmapQuestRunnerProps {
@@ -449,7 +457,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
     }
 
     // Success
-    setDialogueFeedback('🎉 Tuyệt vời! Bạn đã đáp lại đúng mẫu câu, ngữ pháp chính xác và phong thái rất tự nhiên!');
+    setDialogueFeedback('Tuyệt vời! Bạn đã đáp lại đúng mẫu câu, ngữ pháp chính xác và phong thái rất tự nhiên!');
     setDialoguePassed(true);
     setCompletedDialoguesCount(prev => prev + 1);
   };
@@ -481,7 +489,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   if (loading) {
     return (
       <div style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: 48, textAlign: 'center', border: '1px solid #e2e8f0' }}>
-        <div style={{ fontSize: 32, marginBottom: 12 }}>🌸</div>
+        <Sparkles size={32} style={{ color: '#c53d32', margin: '0 auto 12px', display: 'block' }} />
         <p style={{ color: '#64748b', fontWeight: 600 }}>Đang tải bài học từ Firestore...</p>
       </div>
     );
@@ -502,8 +510,29 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
         } : {})
       }}
     >
+      <style>{`
+        @media (max-width: 640px) {
+          .roadmap-runner-header {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 12px !important;
+          }
+          .roadmap-runner-actions {
+            width: 100% !important;
+            justify-content: space-between !important;
+          }
+          .roadmap-flashcard-box {
+            padding: 28px 16px !important;
+            min-height: 240px !important;
+          }
+          .roadmap-flashcard-term {
+            font-size: clamp(28px, 9vw, 42px) !important;
+          }
+        }
+      `}</style>
+
       {/* Top action header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 10 }}>
+      <div className="roadmap-runner-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 10 }}>
         <button
           onClick={onBack}
           style={{
@@ -525,7 +554,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
           <span>Trở về chi tiết mốc</span>
         </button>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div className="roadmap-runner-actions" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <span style={{ fontSize: 13, fontWeight: 800, color: '#0f172a' }}>
             Nhiệm vụ {questIndex}/4:
           </span>
@@ -537,13 +566,36 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
               fontWeight: 800,
               backgroundColor: '#ecfdf5',
               color: '#047857',
-              border: '1px solid #a7f3d0'
+              border: '1px solid #a7f3d0',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 5
             }}
           >
-            {questIndex === 1 && '🎴 Thẻ Ghi Nhớ (SRS Flashcards)'}
-            {questIndex === 2 && '🛡️ Cổng Phản Xạ 100% (Gatekeeper)'}
-            {questIndex === 3 && '🧩 Ngữ Pháp Ghép Câu Kéo Thả'}
-            {questIndex === 4 && '🌸 Đối Thoại Tình Huống AI Sensei'}
+            {questIndex === 1 && (
+              <>
+                <Layers size={14} />
+                <span>Thẻ Ghi Nhớ (SRS Flashcards)</span>
+              </>
+            )}
+            {questIndex === 2 && (
+              <>
+                <Shield size={14} />
+                <span>Cổng Phản Xạ 100% (Gatekeeper)</span>
+              </>
+            )}
+            {questIndex === 3 && (
+              <>
+                <Puzzle size={14} />
+                <span>Ngữ Pháp Ghép Câu Kéo Thả</span>
+              </>
+            )}
+            {questIndex === 4 && (
+              <>
+                <MessageCircle size={14} />
+                <span>Đối Thoại Tình Huống AI Sensei</span>
+              </>
+            )}
           </span>
 
           <button
@@ -581,7 +633,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
             boxShadow: '0 10px 25px -5px rgba(16, 185, 129, 0.15)'
           }}
         >
-          <div style={{ fontSize: 48, marginBottom: 16 }}>🏆</div>
+          <Trophy size={48} style={{ color: '#eab308', margin: '0 auto 16px', display: 'block' }} />
           <h2 style={{ fontSize: 22, fontWeight: 900, color: '#065f46', marginBottom: 8 }}>
             XUẤT SẮC! BẠN ĐÃ HOÀN THÀNH NHIỆM VỤ {questIndex}!
           </h2>
@@ -679,8 +731,9 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
 
               {currentVocab ? (
                 <div>
-                  {/* Swipeable 3D Flip Card */}
+                  {/* Swipeable 3D Flip Card - Đồng bộ phong cách Thẻ từ vựng VocabPage */}
                   <div
+                    className="roadmap-flashcard-box"
                     onTouchStart={handleTouchStart}
                     onTouchMove={handleTouchMove}
                     onTouchEnd={handleTouchEnd}
@@ -692,18 +745,18 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     style={{
                       minHeight: 280,
                       backgroundColor: isFlipped ? '#fcfbf9' : '#ffffff',
-                      border: isFlipped ? '2px solid #3b82f6' : '2px solid #e2e8f0',
+                      border: isFlipped ? '2px solid #c53d32' : '2px solid #e2e8f0',
                       borderRadius: 16,
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      padding: '32px 24px',
+                      padding: '36px 24px',
                       cursor: 'pointer',
                       position: 'relative',
                       boxShadow: 'var(--shadow-md)',
                       textAlign: 'center',
-                      marginBottom: 20,
+                      marginBottom: 16,
                       userSelect: 'none',
                       transform: `translateX(${dragX}px) rotate(${dragX * 0.04}deg)`,
                       transition: isDragging ? 'none' : 'transform 0.25s ease-out'
@@ -711,15 +764,61 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                   >
                     {/* Badge when dragging */}
                     {dragX > 25 && (
-                      <span style={{ position: 'absolute', top: 16, left: 16, backgroundColor: '#15803d', color: '#ffffff', padding: '4px 10px', borderRadius: 6, fontSize: 12, fontWeight: 800 }}>
-                        ✓ ĐÃ NHỚ
+                      <span style={{ position: 'absolute', top: 16, left: 16, backgroundColor: '#15803d', color: '#ffffff', padding: '4px 10px', borderRadius: 6, fontSize: 12, fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: 4, zIndex: 10 }}>
+                        <Check size={13} strokeWidth={3} /> ĐÃ THUỘC
                       </span>
                     )}
                     {dragX < -25 && (
-                      <span style={{ position: 'absolute', top: 16, right: 16, backgroundColor: '#b45309', color: '#ffffff', padding: '4px 10px', borderRadius: 6, fontSize: 12, fontWeight: 800 }}>
-                        ↺ CẦN ÔN LẠI
+                      <span style={{ position: 'absolute', top: 16, right: 16, backgroundColor: '#c53d32', color: '#ffffff', padding: '4px 10px', borderRadius: 6, fontSize: 12, fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: 4, zIndex: 10 }}>
+                        <RotateCcw size={13} /> CHƯA THUỘC
                       </span>
                     )}
+
+                    {/* Fuda Seal Tag & Sound Button */}
+                    <span
+                      style={{
+                        position: 'absolute',
+                        top: 14,
+                        left: 16,
+                        fontSize: 11,
+                        fontWeight: 900,
+                        color: isFlipped ? '#2563eb' : '#c53d32',
+                        background: isFlipped ? 'rgba(248, 250, 255, 0.9)' : 'rgba(253, 242, 240, 0.9)',
+                        border: isFlipped ? '1px solid #bfdbfe' : '1px solid #f3d5d2',
+                        padding: '2px 8px',
+                        borderRadius: 4,
+                        fontFamily: 'serif'
+                      }}
+                    >
+                      {isFlipped ? '意味 · Ý NGHĨA' : `語 · TỪ VỰNG (${cardIndex + 1}/${displayVocabList.length})`}
+                    </span>
+
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        speakJapanese(currentVocab.term || currentVocab.reading);
+                      }}
+                      title="Phát âm"
+                      style={{
+                        position: 'absolute',
+                        top: 12,
+                        right: 14,
+                        background: '#faf8f5',
+                        border: '1px solid #d6d3d1',
+                        padding: '5px 12px',
+                        borderRadius: 20,
+                        cursor: 'pointer',
+                        fontSize: 12,
+                        fontWeight: 600,
+                        color: '#44403c',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 5
+                      }}
+                    >
+                      <Volume2 size={13} />
+                      <span>Phát âm</span>
+                    </button>
 
                     <span style={{ position: 'absolute', bottom: 12, right: 16, fontSize: 11.5, color: '#94a3b8', fontWeight: 600 }}>
                       <RotateCw size={13} style={{ verticalAlign: 'middle', marginRight: 4 }} />
@@ -728,36 +827,69 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
 
                     {!isFlipped ? (
                       /* FRONT: JAPANESE */
-                      <div>
-                        <div style={{ fontSize: 15, color: '#64748b', marginBottom: 6, fontWeight: 700 }}>
+                      <div style={{ width: '100%', maxWidth: 500, margin: 'auto' }}>
+                        <div style={{ fontSize: 16, color: '#78716c', marginBottom: 6, fontWeight: 700, letterSpacing: '0.5px' }}>
                           {currentVocab.reading || currentVocab.hiragana}
                         </div>
-                        <div style={{ fontSize: 46, fontWeight: 900, color: '#0f172a', marginBottom: 12 }}>
+                        <div
+                          className="roadmap-flashcard-term"
+                          style={{
+                            fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif",
+                            fontSize: 46,
+                            fontWeight: 900,
+                            color: '#1c1917',
+                            marginBottom: 10,
+                            letterSpacing: '1px'
+                          }}
+                        >
                           {currentVocab.term || currentVocab.kanji || currentVocab.reading}
                         </div>
                         {currentVocab.part_of_speech && (
-                          <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 4, backgroundColor: '#f1f5f9', color: '#475569', fontWeight: 700 }}>
+                          <span style={{ fontSize: 11, padding: '2px 10px', borderRadius: 4, backgroundColor: '#f5f5f4', color: '#57534e', fontWeight: 700, border: '1px solid #e7e5e4' }}>
                             {currentVocab.part_of_speech}
                           </span>
                         )}
                       </div>
                     ) : (
                       /* BACK: PURE VIETNAMESE */
-                      <div>
-                        <div style={{ fontSize: 26, fontWeight: 900, color: '#15803d', marginBottom: 8 }}>
+                      <div style={{ width: '100%', maxWidth: 500, margin: 'auto' }}>
+                        <div style={{ fontSize: 26, fontWeight: 900, color: '#9c2a2a', marginBottom: 6 }}>
                           {currentVocab.meaning_vi || currentVocab.vietnameseMeaning}
                         </div>
                         {currentVocab.sinoVietnamese && (
-                          <div style={{ fontSize: 13, color: '#64748b', marginBottom: 12, fontWeight: 700 }}>
-                            Âm Hán Việt: [<b>{currentVocab.sinoVietnamese}</b>]
+                          <div style={{ fontSize: 13, color: '#78716c', marginBottom: 12, fontWeight: 700 }}>
+                            〔 {currentVocab.sinoVietnamese} 〕
                           </div>
                         )}
                         {currentVocab.exampleSentenceJp && (
-                          <div style={{ backgroundColor: '#ffffff', padding: '12px 18px', borderRadius: 10, border: '1px solid #e2e8f0', marginTop: 12, textAlign: 'left', maxWidth: 500 }}>
-                            <div style={{ fontSize: 14, color: '#0f172a', fontWeight: 700, marginBottom: 4 }}>
-                              {currentVocab.exampleSentenceJp}
+                          <div
+                            style={{
+                              background: 'rgba(250, 248, 245, 0.95)',
+                              padding: '12px 16px',
+                              borderRadius: 10,
+                              border: '1px solid #ebe7df',
+                              borderLeft: '3px solid #c53d32',
+                              textAlign: 'left',
+                              marginTop: 10,
+                              width: '100%',
+                              boxSizing: 'border-box'
+                            }}
+                          >
+                            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 6, marginBottom: 3 }}>
+                              <div style={{ fontSize: 13.5, color: '#1c2536', fontWeight: 700 }}>
+                                {currentVocab.exampleSentenceJp}
+                              </div>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  speakJapanese(currentVocab.exampleSentenceJp || '');
+                                }}
+                                style={{ background: 'transparent', border: 'none', padding: 0, color: '#78716c', cursor: 'pointer' }}
+                              >
+                                <Volume2 size={13} />
+                              </button>
                             </div>
-                            <div style={{ fontSize: 13, color: '#475569' }}>
+                            <div style={{ fontSize: 12, color: '#57534e' }}>
                               {currentVocab.exampleSentenceVi || 'Câu ví dụ tiếng Nhật chuẩn.'}
                             </div>
                           </div>
@@ -766,102 +898,124 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     )}
                   </div>
 
-                  {/* Actions & Navigation Controls */}
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-                    <div style={{ display: 'flex', gap: 8 }}>
-                      <button
-                        onClick={handlePrevCard}
-                        disabled={cardIndex === 0}
-                        style={{
-                          padding: '10px 14px',
-                          borderRadius: 8,
-                          backgroundColor: '#ffffff',
-                          border: '1px solid #cbd5e1',
-                          color: '#334155',
-                          fontWeight: 700,
-                          fontSize: 13,
-                          cursor: cardIndex > 0 ? 'pointer' : 'not-allowed',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 4
-                        }}
-                      >
-                        <ChevronLeft size={16} /> Trước
-                      </button>
+                  {/* Navigation Toolbar */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: 12, gap: 10 }}>
+                    <button
+                      onClick={handlePrevCard}
+                      disabled={cardIndex === 0}
+                      style={{
+                        padding: '10px 16px',
+                        borderRadius: 10,
+                        backgroundColor: '#ffffff',
+                        border: '1px solid #d6d3d1',
+                        color: cardIndex === 0 ? '#d6d3d1' : '#44403c',
+                        fontWeight: 700,
+                        fontSize: 13,
+                        cursor: cardIndex > 0 ? 'pointer' : 'not-allowed',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 4
+                      }}
+                      title="Thẻ trước (←)"
+                    >
+                      <ChevronLeft size={16} /> <span>Trước</span>
+                    </button>
 
-                      <button
-                        onClick={() => handleNextCard()}
-                        disabled={cardIndex === displayVocabList.length - 1}
-                        style={{
-                          padding: '10px 14px',
-                          borderRadius: 8,
-                          backgroundColor: '#ffffff',
-                          border: '1px solid #cbd5e1',
-                          color: '#334155',
-                          fontWeight: 700,
-                          fontSize: 13,
-                          cursor: cardIndex < displayVocabList.length - 1 ? 'pointer' : 'not-allowed',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 4
-                        }}
-                      >
-                        Sau <ChevronRight size={16} />
-                      </button>
+                    <div style={{ fontSize: 12, color: '#78716c', background: '#faf8f5', padding: '6px 14px', borderRadius: 20, border: '1px solid #ebe7df' }}>
+                      <span>Space: Lật</span> · <span>← / →: Trước / Sau</span>
                     </div>
 
-                    <div style={{ display: 'flex', gap: 10 }}>
-                      <button
-                        onClick={() => speakJapanese(currentVocab.term || currentVocab.reading)}
-                        style={{
-                          padding: '10px 16px',
-                          borderRadius: 8,
-                          backgroundColor: '#f1f5f9',
-                          border: '1px solid #cbd5e1',
-                          color: '#334155',
-                          fontWeight: 700,
-                          fontSize: 13,
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 6
-                        }}
-                      >
-                        <Volume2 size={16} /> Nghe
-                      </button>
+                    <button
+                      onClick={() => handleNextCard()}
+                      disabled={cardIndex === displayVocabList.length - 1}
+                      style={{
+                        padding: '10px 16px',
+                        borderRadius: 10,
+                        backgroundColor: '#ffffff',
+                        border: '1px solid #d6d3d1',
+                        color: cardIndex < displayVocabList.length - 1 ? '#44403c' : '#d6d3d1',
+                        fontWeight: 700,
+                        fontSize: 13,
+                        cursor: cardIndex < displayVocabList.length - 1 ? 'pointer' : 'not-allowed',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 4
+                      }}
+                      title="Thẻ tiếp theo (→)"
+                    >
+                      <span>Sau</span> <ChevronRight size={16} />
+                    </button>
+                  </div>
 
-                      <button
-                        onClick={() => handleNextCard(false)}
-                        style={{
-                          padding: '10px 20px',
-                          borderRadius: 8,
-                          backgroundColor: '#fffbeb',
-                          border: '1.5px solid #fde68a',
-                          color: '#b45309',
-                          fontWeight: 800,
-                          fontSize: 13,
-                          cursor: 'pointer'
-                        }}
-                      >
-                        ↺ Cần ôn lại
-                      </button>
+                  {/* Actions Buttons - Đồng bộ nút Chấm thẻ VocabPage */}
+                  <div style={{ display: 'flex', gap: 10, width: '100%' }}>
+                    <button
+                      onClick={() => handleNextCard(false)}
+                      style={{
+                        flex: 1,
+                        padding: '12px 14px',
+                        backgroundColor: '#fdf2f0',
+                        color: '#c53d32',
+                        border: '1px solid #f3d5d2',
+                        borderRadius: 10,
+                        fontWeight: 700,
+                        fontSize: 14,
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 6,
+                        transition: 'all 0.15s ease'
+                      }}
+                    >
+                      <RotateCcw size={15} />
+                      <span>Chưa thuộc</span>
+                    </button>
 
-                      <button
-                        onClick={() => handleNextCard(true)}
-                        style={{
-                          padding: '10px 24px',
-                          borderRadius: 8,
-                          backgroundColor: '#ecfdf5',
-                          border: '1.5px solid #86efac',
-                          color: '#15803d',
-                          fontWeight: 800,
-                          fontSize: 13,
-                          cursor: 'pointer'
-                        }}
-                      >
-                        ✓ Đã nhớ
-                      </button>
-                    </div>
+                    <button
+                      onClick={() => setIsFlipped(!isFlipped)}
+                      style={{
+                        padding: '12px 20px',
+                        backgroundColor: '#ffffff',
+                        color: '#44403c',
+                        border: '1px solid #d6d3d1',
+                        borderRadius: 10,
+                        fontWeight: 700,
+                        fontSize: 14,
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 6,
+                        transition: 'all 0.15s ease'
+                      }}
+                    >
+                      <RotateCw size={15} />
+                      <span>Lật thẻ</span>
+                    </button>
+
+                    <button
+                      onClick={() => handleNextCard(true)}
+                      style={{
+                        flex: 1,
+                        padding: '12px 14px',
+                        backgroundColor: '#f1f8f3',
+                        color: '#2d6d4b',
+                        border: '1px solid #c6e2ce',
+                        borderRadius: 10,
+                        fontWeight: 700,
+                        fontSize: 14,
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 6,
+                        transition: 'all 0.15s ease'
+                      }}
+                    >
+                      <Check size={16} strokeWidth={3} />
+                      <span>Đã thuộc</span>
+                    </button>
                   </div>
                 </div>
               ) : (
@@ -879,8 +1033,9 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
             <div style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
                 <div>
-                  <h3 style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0' }}>
-                    🛡️ Cổng Phản Xạ 100% (Vocab Gatekeeper)
+                  <h3 style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <Shield size={18} style={{ color: '#047857' }} />
+                    <span>Cổng Phản Xạ 100% (Vocab Gatekeeper)</span>
                   </h3>
                   <div style={{ fontSize: 13, color: '#dc2626', fontWeight: 700 }}>
                     Tiêu chuẩn Người gác cổng: Đạt 100% (10/10 câu đúng) để mở khóa mốc!
@@ -984,7 +1139,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                 <div style={{ textAlign: 'center', padding: '24px 16px' }}>
                   {quizScore === gatekeeperQuestions.length ? (
                     <div>
-                      <div style={{ fontSize: 56, marginBottom: 12 }}>👑</div>
+                      <Crown size={56} style={{ color: '#eab308', margin: '0 auto 12px', display: 'block' }} />
                       <h3 style={{ fontSize: 22, fontWeight: 900, color: '#16a34a', marginBottom: 8 }}>
                         XUẤT SẮC! BẠN ĐẠT ĐIỂM TUYỆT ĐỐI 100%!
                       </h3>
@@ -1011,7 +1166,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     </div>
                   ) : (
                     <div>
-                      <div style={{ fontSize: 56, marginBottom: 12 }}>🔒</div>
+                      <Lock size={56} style={{ color: '#94a3b8', margin: '0 auto 12px', display: 'block' }} />
                       <h3 style={{ fontSize: 22, fontWeight: 900, color: '#dc2626', marginBottom: 8 }}>
                         CHƯA ĐẠT 100% — CỔNG VẪN ĐANG KHÓA!
                       </h3>
@@ -1048,8 +1203,9 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
             <div style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
                 <div>
-                  <h3 style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0' }}>
-                    🧩 Kéo Thả Ghép Câu & Bẫy Trợ Từ
+                  <h3 style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <Puzzle size={18} style={{ color: '#8b5cf6' }} />
+                    <span>Kéo Thả Ghép Câu & Bẫy Trợ Từ</span>
                   </h3>
                   <div style={{ fontSize: 13, color: '#64748b' }}>
                     Kéo thẻ từ hoặc nhấn vào thẻ để xếp vào khay câu tiếng Nhật ({scrambleIndex + 1}/{scrambleSentences.length || 1})
@@ -1109,7 +1265,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                   >
                     {userTokens.length === 0 ? (
                       <span style={{ color: '#94a3b8', fontSize: 13.5 }}>
-                        👉 Kéo thẻ từ hoặc bấm vào các thẻ bên dưới để xếp vào đây...
+                        Kéo thẻ từ hoặc bấm vào các thẻ bên dưới để xếp vào đây...
                       </span>
                     ) : (
                       userTokens.map((tok, idx) => (
@@ -1139,7 +1295,10 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                   {scrambleChecked && (
                     <div style={{ marginBottom: 18, padding: '12px 16px', borderRadius: 8, backgroundColor: scramblePassed ? '#dcfce7' : '#fee2e2', color: scramblePassed ? '#166534' : '#991b1b', fontSize: 13.5, fontWeight: 700 }}>
                       {scramblePassed ? (
-                        <div>✓ Rất chính xác! Câu tiếng Nhật hoàn chỉnh: <b>{currentScramble.original}</b></div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                          <Check size={16} strokeWidth={3} style={{ color: '#16a34a' }} />
+                          <span>Rất chính xác! Câu tiếng Nhật hoàn chỉnh: <b>{currentScramble.original}</b></span>
+                        </div>
                       ) : (
                         <div>✕ Chưa chính xác! Câu mẫu chuẩn là: <b>{currentScramble.original}</b></div>
                       )}
@@ -1225,8 +1384,9 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
             <div style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
                 <div>
-                  <h3 style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0' }}>
-                    🌸 Đối Thoại Tình Huống 2 Bên & Gặp Gỡ AI Sensei
+                  <h3 style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <MessageCircle size={18} style={{ color: '#0284c7' }} />
+                    <span>Đối Thoại Tình Huống 2 Bên & Gặp Gỡ AI Sensei</span>
                   </h3>
                   <div style={{ fontSize: 13, color: '#64748b' }}>
                     Tình huống thực tế {dialogueIndex + 1} / {dialogues.length}
@@ -1258,8 +1418,9 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
               {currentDialogue && (
                 <div>
                   {/* Context Header */}
-                  <div style={{ fontSize: 14, fontWeight: 800, color: '#0284c7', marginBottom: 16 }}>
-                    🎯 {currentDialogue.title}
+                  <div style={{ fontSize: 14, fontWeight: 800, color: '#0284c7', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <Target size={15} style={{ color: '#0284c7' }} />
+                    <span>{currentDialogue.title}</span>
                   </div>
 
                   {/* SIDE A: SENSEI SPEECH BUBBLE */}
@@ -1274,11 +1435,13 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        fontSize: 20,
+                        fontSize: 13,
+                        fontWeight: 900,
+                        color: '#0284c7',
                         flexShrink: 0
                       }}
                     >
-                      🎎
+                      先生
                     </div>
 
                     <div style={{ flex: 1 }}>
@@ -1343,8 +1506,9 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
 
                   {/* SIDE B: LEARNER RESPONSE AREA */}
                   <div style={{ backgroundColor: '#f8fafc', padding: '20px 22px', borderRadius: 16, border: '1.5px solid #e2e8f0', marginBottom: 20 }}>
-                    <div style={{ fontSize: 13, fontWeight: 800, color: '#166534', marginBottom: 6 }}>
-                      👉 Nhiệm vụ của bạn:
+                    <div style={{ fontSize: 13, fontWeight: 800, color: '#166534', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 5 }}>
+                      <Target size={14} style={{ color: '#166534' }} />
+                      <span>Nhiệm vụ của bạn:</span>
                     </div>
                     <div style={{ fontSize: 14.5, fontWeight: 700, color: '#0f172a', lineHeight: 1.5, marginBottom: 12 }}>
                       {currentDialogue.learnerPrompt}
@@ -1373,9 +1537,10 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     <div style={{ marginBottom: 14 }}>
                       <button
                         onClick={() => setShowSample(!showSample)}
-                        style={{ background: 'none', border: 'none', color: '#64748b', fontSize: 12.5, fontWeight: 700, cursor: 'pointer', textDecoration: 'underline' }}
+                        style={{ background: 'none', border: 'none', color: '#64748b', fontSize: 12.5, fontWeight: 700, cursor: 'pointer', textDecoration: 'underline', display: 'inline-flex', alignItems: 'center', gap: 4 }}
                       >
-                        {showSample ? 'Ẩn câu mẫu ví dụ' : '💡 Xem câu mẫu ví dụ'}
+                        <Lightbulb size={13} style={{ color: '#ca8a04' }} />
+                        <span>{showSample ? 'Ẩn câu mẫu ví dụ' : 'Xem câu mẫu ví dụ'}</span>
                       </button>
 
                       {showSample && (
