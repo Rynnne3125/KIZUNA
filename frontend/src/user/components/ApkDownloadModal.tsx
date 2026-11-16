@@ -254,12 +254,12 @@ export const ApkDownloadModal: React.FC<ApkDownloadModalProps> = ({
                 <div>
                   <a
                     href={apkDownloadPath}
-                    download="kizuna-v1.0.4.apk"
+                    download="kizuna-v1.0.6.apk"
                     className="w-full flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 active:scale-[0.99] text-white font-extrabold text-sm sm:text-base shadow-lg shadow-emerald-600/25 transition-all text-center cursor-pointer"
                   >
                     <Download className="w-5 h-5" />
                     <span>Tải File Cài Đặt APK (.apk)</span>
-                    <span className="bg-white/20 text-xs px-2 py-0.5 rounded-md font-extrabold">v1.0.4</span>
+                    <span className="bg-white/20 text-xs px-2 py-0.5 rounded-md font-extrabold">v1.0.6</span>
                   </a>
                   <div className="text-center mt-2">
                     <span className="text-[11px] text-slate-500">
@@ -275,7 +275,7 @@ export const ApkDownloadModal: React.FC<ApkDownloadModalProps> = ({
                   </div>
                   <ol className="space-y-1.5 text-xs text-slate-600 list-decimal list-inside leading-relaxed">
                     <li>Bấm nút <strong>Tải File Cài Đặt APK</strong> hoặc quét mã QR ở trên.</li>
-                    <li>Mở file <code className="bg-slate-100 px-1 py-0.5 rounded text-slate-700 font-mono text-[11px]">kizuna-v1.0.4.apk</code> trong thông báo tải xong hoặc thư mục <em>Tải về (Downloads)</em>.</li>
+                    <li>Mở file <code className="bg-slate-100 px-1 py-0.5 rounded text-slate-700 font-mono text-[11px]">kizuna-v1.0.6.apk</code> trong thông báo tải xong hoặc thư mục <em>Tải về (Downloads)</em>.</li>
                     <li>Chọn <strong>Cài đặt</strong> (nếu máy hỏi, bật <em>"Cho phép cài đặt từ nguồn này"</em>) và bắt đầu học ngay.</li>
                   </ol>
                 </div>
@@ -381,15 +381,15 @@ export const ApkDownloadModal: React.FC<ApkDownloadModalProps> = ({
                 transition={{ duration: 0.2 }}
                 className="space-y-5"
               >
-                {/* Desktop PWA 1-Click Install Button */}
-                <div className="p-4 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200">
-                  <div className="flex items-center gap-3 mb-3">
+                {/* Desktop PC Options Banner */}
+                <div className="p-4 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 space-y-3">
+                  <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-sm">
                       <Monitor className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="font-extrabold text-slate-800 text-sm">Cài Đặt Trực Tiếp KIZUNA PC App</h4>
-                      <p className="text-[11px] text-slate-500">Chạy độc lập ngoài màn hình Desktop, thanh Taskbar riêng, mở siêu tốc.</p>
+                      <h4 className="font-extrabold text-slate-800 text-sm">Cài Đặt Ứng Dụng KIZUNA Cho Máy Tính (PC App)</h4>
+                      <p className="text-[11px] text-slate-500">Chạy độc lập ngoài màn hình Desktop, thanh Taskbar riêng, mở siêu tốc không lẫn tab.</p>
                     </div>
                   </div>
 
@@ -399,42 +399,58 @@ export const ApkDownloadModal: React.FC<ApkDownloadModalProps> = ({
                       <span>Đã cài đặt ứng dụng KIZUNA trên máy tính! Bạn có thể mở từ Desktop hoặc thanh Taskbar.</span>
                     </div>
                   ) : (
-                    <button
-                      type="button"
-                      onClick={handleInstallPwa}
-                      className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 active:scale-[0.99] text-white font-extrabold text-sm sm:text-base shadow-lg shadow-emerald-600/25 transition-all flex items-center justify-center gap-2.5 cursor-pointer"
-                    >
-                      <Download className="w-5 h-5" />
-                      <span>Cài Đặt Ngay Lên Máy Tính (PC App)</span>
-                    </button>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                      {/* Nút tải trực tiếp file zip cài đặt PC */}
+                      <a
+                        href="/download/kizuna-pc-app.zip"
+                        download="kizuna-pc-app.zip"
+                        className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-extrabold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                      >
+                        <Download className="w-4 h-4" />
+                        <span>Tải Gói Cài Đặt PC (.zip)</span>
+                      </a>
+
+                      {/* Nút cài PWA trực tiếp trên trình duyệt */}
+                      <button
+                        type="button"
+                        onClick={handleInstallPwa}
+                        className="w-full py-3 px-4 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-extrabold text-xs sm:text-sm shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
+                      >
+                        <Laptop className="w-4 h-4 text-emerald-600" />
+                        <span>Cài Trên Trình Duyệt (PWA)</span>
+                      </button>
+                    </div>
                   )}
+                  <div className="text-[11px] text-slate-500 text-center">
+                    Gói cài đặt PC tương thích Windows 10, Windows 11 và tự động tạo biểu tượng ngoài Desktop.
+                  </div>
                 </div>
 
                 {/* Manual Install Instructions for Chrome / Edge */}
                 <div id="pc-manual-guide" className="border border-slate-200/80 rounded-2xl p-4 bg-slate-50/60 space-y-3">
                   <div className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
                     <Globe className="w-4 h-4 text-emerald-700" />
-                    <span>Hướng dẫn cài đặt trên Google Chrome & Microsoft Edge:</span>
+                    <span>2 Cách sử dụng KIZUNA trên Máy Tính (PC):</span>
                   </div>
 
                   <div className="space-y-2 text-xs text-slate-700">
                     <div className="bg-white p-3 rounded-xl border border-slate-100 shadow-2xs">
                       <div className="font-bold text-slate-900 mb-1 flex items-center gap-1.5">
                         <span className="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[10px]">1</span>
-                        <span>Cách 1 (Nhanh nhất): Bấm icon cài đặt trên thanh địa chỉ URL</span>
+                        <span>Cách 1: Tải file Zip PC & Giải nén (Khuyên dùng)</span>
                       </div>
                       <p className="text-slate-600 leading-relaxed text-[11px]">
-                        Nhìn vào góc phải của thanh nhập địa chỉ web (URL) trên trình duyệt máy tính của bạn, bạn sẽ thấy biểu tượng <strong>"Cài đặt KIZUNA"</strong> (hình chiếc máy tính có mũi tên xuống <Download className="w-3 h-3 inline text-emerald-700" /> hoặc dấu cộng ⊕). Bấm vào đó và chọn <strong>"Cài đặt"</strong>.
+                        Bấm nút <strong>"Tải Gói Cài Đặt PC (.zip)"</strong> ở trên &rarr; giải nén file &rarr; nhấp đúp vào <strong>"Cai-Dat-Phim-Tat.bat"</strong> để tự động tạo icon KIZUNA trên màn hình Desktop máy tính. Bấm icon này để mở app cửa sổ riêng bất cứ lúc nào!
                       </p>
                     </div>
 
                     <div className="bg-white p-3 rounded-xl border border-slate-100 shadow-2xs">
                       <div className="font-bold text-slate-900 mb-1 flex items-center gap-1.5">
                         <span className="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[10px]">2</span>
-                        <span>Cách 2: Qua Menu trình duyệt</span>
+                        <span>Cách 2: Cài đặt trực tiếp từ thanh địa chỉ Chrome / Edge (PWA)</span>
                       </div>
                       <p className="text-slate-600 leading-relaxed text-[11px]">
-                        Bấm vào biểu tượng <strong>Menu 3 chấm (⋮ hoặc ...)</strong> ở góc trên bên phải trình duyệt Chrome/Edge &rarr; chọn <strong>"Lưu và chia sẻ"</strong> (hoặc "Ứng dụng") &rarr; bấm <strong>"Cài đặt KIZUNA..."</strong>.
+                        Nhìn vào góc phải thanh nhập URL trình duyệt máy tính, bạn sẽ thấy biểu tượng <strong>"Cài đặt KIZUNA"</strong> (hình máy tính có mũi tên xuống <Download className="w-3 h-3 inline text-emerald-700" />). Bấm vào đó và chọn <strong>"Cài đặt"</strong> để tạo app độc lập.
                       </p>
                     </div>
                   </div>
