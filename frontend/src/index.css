@@ -95,6 +95,21 @@
   --radius-full: 9999px;
 }
 
+.dark {
+  --bg-main: #020617;
+  --bg-card: #0f172a;
+  --border-color: #1e293b;
+  --border-hover: #047857;
+  
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.35);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.45), 0 2px 4px -2px rgb(0 0 0 / 0.35);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.55), 0 4px 6px -4px rgb(0 0 0 / 0.45);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -259,6 +274,16 @@ body {
   position: relative;
 }
 
+.dark .kanji-paper-bg,
+.dark.kanji-paper-bg {
+  background-color: #020617;
+  background-image: 
+    linear-gradient(to right, rgba(16, 185, 129, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 185, 129, 0.06) 1px, transparent 1px),
+    linear-gradient(to right, rgba(16, 185, 129, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 185, 129, 0.02) 1px, transparent 1px);
+}
+
 .kanji-paper-bg::before {
   content: "";
   position: fixed;
@@ -268,6 +293,13 @@ body {
     radial-gradient(circle at 12% 18%, rgba(16, 185, 129, 0.04) 0%, transparent 45%),
     radial-gradient(circle at 88% 82%, rgba(16, 185, 129, 0.04) 0%, transparent 45%);
   z-index: 0;
+}
+
+.dark .kanji-paper-bg::before,
+.dark.kanji-paper-bg::before {
+  background-image: 
+    radial-gradient(circle at 12% 18%, rgba(16, 185, 129, 0.07) 0%, transparent 45%),
+    radial-gradient(circle at 88% 82%, rgba(16, 185, 129, 0.07) 0%, transparent 45%);
 }
 
 /* Flashcard */
@@ -304,10 +336,20 @@ body {
 .flashcard-front {
   background: #ffffff;
 }
+.dark .flashcard-front {
+  background: #0f172a;
+  border-color: #334155;
+  color: #f8fafc;
+}
 .flashcard-back {
   background: #fdf2f8;
   border-color: #fbcfe8;
   transform: rotateY(180deg);
+}
+.dark .flashcard-back {
+  background: #1e1b2e;
+  border-color: #4c1d95;
+  color: #f8fafc;
 }
 
 /* ==========================================================================
@@ -329,6 +371,10 @@ body {
 
 .bg-seigaiha-light {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'%3E%3Cpath d='M0 32 A32 32 0 0 1 64 32 M8 32 A24 24 0 0 1 56 32 M16 32 A16 16 0 0 1 48 32 M24 32 A8 8 0 0 1 40 32 M32 0 A32 32 0 0 1 96 0 M-32 0 A32 32 0 0 1 32 0' fill='none' stroke='rgba(16,185,129,0.06)' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+.dark .bg-seigaiha-light {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'%3E%3Cpath d='M0 32 A32 32 0 0 1 64 32 M8 32 A24 24 0 0 1 56 32 M16 32 A16 16 0 0 1 48 32 M24 32 A8 8 0 0 1 40 32 M32 0 A32 32 0 0 1 96 0 M-32 0 A32 32 0 0 1 32 0' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'/%3E%3C/svg%3E");
 }
 
 /* Asanoha (麻の葉) - Hemp Leaf geometric pattern */

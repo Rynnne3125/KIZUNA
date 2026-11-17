@@ -107,14 +107,25 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
   const [killerLevelFilter, setKillerLevelFilter] = useState<string>('ALL');
   const [killerTab, setKillerTab] = useState<'ALL' | 'VOCABULARY' | 'KANJI'>('ALL');
 
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('kizuna_theme');
+      if (saved === 'dark') return true;
+      if (saved === 'light') return false;
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
+  });
 
   useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add('dark');
+      localStorage.setItem('kizuna_theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
+      localStorage.setItem('kizuna_theme', 'light');
     }
+    window.dispatchEvent(new CustomEvent('kizuna_theme_changed', { detail: { theme: isDark ? 'dark' : 'light' } }));
   }, [isDark]);
 
   if (!user || user.role !== 'ROLE_ADMIN') {

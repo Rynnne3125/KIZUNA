@@ -227,24 +227,24 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
       {/* =========================================================================
           2. TIẾN ĐỘ HỌC TẬP THỰC TẾ (HỆ THỐNG HUY HIỆU CHỮ HÁN MON & THẺ CHUẨN NHẬT)
           ========================================================================= */}
-      <div className="bg-white rounded-3xl p-5 sm:p-7 border border-emerald-100 shadow-md shadow-emerald-950/5 relative overflow-hidden bg-seigaiha-light">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-7 border border-emerald-100 dark:border-slate-800 shadow-md shadow-emerald-950/5 relative overflow-hidden bg-seigaiha-light transition-colors">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5 relative z-10">
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="hanko-seal px-2 py-0.2 text-[11px]">
                 進
               </span>
-              <span className="inline-block bg-emerald-50 text-emerald-800 border border-emerald-200/80 px-3 py-0.5 rounded-full text-xs font-bold font-jp-sans">
+              <span className="inline-block bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800 px-3 py-0.5 rounded-full text-xs font-bold font-jp-sans">
                 学習の進捗 • TIẾN ĐỘ HỌC TẬP THỰC TẾ
               </span>
             </div>
-            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 flex items-center gap-2">
+            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
               {hasStarted 
                 ? `Bạn đang học: ${userProgress?.currentMilestoneTitle || 'Mốc rèn luyện'}`
                 : 'Khởi đầu hành trình học tập'
               }
             </h2>
-            <div className="text-xs sm:text-sm text-slate-500 mt-1">
+            <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
               {hasStarted
                 ? `${userProgress?.currentStageTitle || 'Chặng 1: Bảng Chữ Cái & Giao Tiếp Cơ Bản'} • ${userProgress?.currentMilestoneContext || 'Rèn luyện phản xạ'}`
                 : 'Bắt đầu từ Chặng 1 để rèn luyện bảng chữ cái, phát âm chuẩn Tokyo và tích lũy những Điểm Năng Động đầu tiên.'
@@ -264,15 +264,15 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
         {/* Thanh tiến độ thực tế */}
         <div className="mb-6 relative z-10">
           <div className="flex justify-between items-center text-xs font-bold mb-1.5">
-            <span className="text-slate-800 flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <span className="text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               <span>{hasStarted ? (userProgress?.currentStageTitle || 'Tiến độ hiện tại') : 'Khởi động hành trình (Chặng 1)'}</span>
             </span>
-            <span className="text-emerald-700 font-extrabold font-mono">
+            <span className="text-emerald-700 dark:text-emerald-400 font-extrabold font-mono">
               {hasStarted ? `${userProgress?.stageCompletionPercentage || 0}% hoàn thành` : '0% (Sẵn sàng bắt đầu)'}
             </span>
           </div>
-          <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200/50">
+          <div className="w-full h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden border border-slate-200/50 dark:border-slate-700">
             <div 
               className="h-full bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full transition-all duration-500"
               style={{ width: `${hasStarted ? Math.min(100, userProgress?.stageCompletionPercentage || 0) : 0}%` }}
@@ -280,51 +280,50 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
           </div>
         </div>
 
-        {/* 4 Thẻ thống kê tích lũy thực tế: BỎ TOÀN BỘ EMOJI XẤU (📖, 🈸, 📝, 🎯)
-            Thay bằng Huy hiệu chữ Hán Mon (語, 漢, 文, 試) kết hợp Icon Lucide sang trọng */}
+        {/* 4 Thẻ thống kê tích lũy thực tế */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 relative z-10">
           
           {/* 1. Từ vựng (語 - Kotoba) */}
           <div
             onClick={() => onNavigate('vocab')}
-            className="bg-white hover:bg-emerald-50/40 border border-slate-200 hover:border-emerald-400 rounded-2xl p-4 cursor-pointer transition-all duration-200 group shadow-2xs hover:shadow-sm"
+            className="bg-white dark:bg-slate-800/90 hover:bg-emerald-50/40 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-emerald-400 dark:hover:border-emerald-500 rounded-2xl p-4 cursor-pointer transition-all duration-200 group shadow-2xs hover:shadow-sm"
           >
             <div className="flex justify-between items-center mb-2.5">
-              <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 font-jp-serif font-black text-base group-hover:scale-105 transition-transform">
+              <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center text-emerald-800 dark:text-emerald-300 font-jp-serif font-black text-base group-hover:scale-105 transition-transform">
                 語
               </div>
-              <span className="text-[10px] sm:text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-full font-jp-sans">
+              <span className="text-[10px] sm:text-xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 px-2 py-0.5 rounded-full font-jp-sans">
                 {userProgress?.vocabLearned || 0} từ
               </span>
             </div>
-            <div className="text-[11px] text-slate-500 font-medium flex items-center gap-1.5">
-              <BookOpen className="w-3.5 h-3.5 text-emerald-600" />
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1.5">
+              <BookOpen className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
               <span>Từ vựng đã thuộc</span>
             </div>
-            <div className="text-lg sm:text-xl font-black text-slate-900 mt-1">
+            <div className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mt-1">
               {userProgress?.vocabLearned || 0}{' '}
               <span className="text-[11px] font-medium text-slate-400">/ {catalogStats.vocabCount.toLocaleString()}</span>
             </div>
           </div>
 
-          {/* 2. Chữ Hán Kanji (漢 - Kanji) - Đã bỏ hoàn toàn emoji 🈸 xấu */}
+          {/* 2. Chữ Hán Kanji (漢 - Kanji) */}
           <div
             onClick={() => onNavigate('kanji')}
-            className="bg-white hover:bg-indigo-50/40 border border-slate-200 hover:border-indigo-400 rounded-2xl p-4 cursor-pointer transition-all duration-200 group shadow-2xs hover:shadow-sm"
+            className="bg-white dark:bg-slate-800/90 hover:bg-indigo-50/40 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-indigo-400 dark:hover:border-indigo-500 rounded-2xl p-4 cursor-pointer transition-all duration-200 group shadow-2xs hover:shadow-sm"
           >
             <div className="flex justify-between items-center mb-2.5">
-              <div className="w-9 h-9 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-800 font-jp-serif font-black text-base group-hover:scale-105 transition-transform">
+              <div className="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 flex items-center justify-center text-indigo-800 dark:text-indigo-300 font-jp-serif font-black text-base group-hover:scale-105 transition-transform">
                 漢
               </div>
-              <span className="text-[10px] sm:text-xs font-bold bg-indigo-50 text-indigo-800 border border-indigo-200 px-2 py-0.5 rounded-full font-jp-sans">
+              <span className="text-[10px] sm:text-xs font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-800 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 px-2 py-0.5 rounded-full font-jp-sans">
                 {userProgress?.kanjiLearned || 0} chữ
               </span>
             </div>
-            <div className="text-[11px] text-slate-500 font-medium flex items-center gap-1.5">
-              <Languages className="w-3.5 h-3.5 text-indigo-600" />
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1.5">
+              <Languages className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
               <span>Chữ Hán Kanji</span>
             </div>
-            <div className="text-lg sm:text-xl font-black text-slate-900 mt-1">
+            <div className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mt-1">
               {userProgress?.kanjiLearned || 0}{' '}
               <span className="text-[11px] font-medium text-slate-400">/ {catalogStats.kanjiCount.toLocaleString()}</span>
             </div>
@@ -333,21 +332,21 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
           {/* 3. Ngữ pháp (文 - Bunpou) */}
           <div
             onClick={() => onNavigate('grammar')}
-            className="bg-white hover:bg-teal-50/40 border border-slate-200 hover:border-teal-400 rounded-2xl p-4 cursor-pointer transition-all duration-200 group shadow-2xs hover:shadow-sm"
+            className="bg-white dark:bg-slate-800/90 hover:bg-teal-50/40 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-teal-400 dark:hover:border-teal-500 rounded-2xl p-4 cursor-pointer transition-all duration-200 group shadow-2xs hover:shadow-sm"
           >
             <div className="flex justify-between items-center mb-2.5">
-              <div className="w-9 h-9 rounded-xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-800 font-jp-serif font-black text-base group-hover:scale-105 transition-transform">
+              <div className="w-9 h-9 rounded-xl bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 flex items-center justify-center text-teal-800 dark:text-teal-300 font-jp-serif font-black text-base group-hover:scale-105 transition-transform">
                 文
               </div>
-              <span className="text-[10px] sm:text-xs font-bold bg-teal-50 text-teal-800 border border-teal-200 px-2 py-0.5 rounded-full font-jp-sans">
+              <span className="text-[10px] sm:text-xs font-bold bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800 px-2 py-0.5 rounded-full font-jp-sans">
                 {userProgress?.grammarLearned || 0} mẫu
               </span>
             </div>
-            <div className="text-[11px] text-slate-500 font-medium flex items-center gap-1.5">
-              <FileText className="w-3.5 h-3.5 text-teal-600" />
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1.5">
+              <FileText className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
               <span>Ngữ pháp thực dụng</span>
             </div>
-            <div className="text-lg sm:text-xl font-black text-slate-900 mt-1">
+            <div className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mt-1">
               {userProgress?.grammarLearned || 0}{' '}
               <span className="text-[11px] font-medium text-slate-400">/ {catalogStats.grammarCount.toLocaleString()}</span>
             </div>
@@ -356,21 +355,21 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
           {/* 4. Bộ đề bổ trợ (試 - Shiken) */}
           <div
             onClick={() => onNavigate('exam')}
-            className="bg-white hover:bg-amber-50/40 border border-slate-200 hover:border-amber-400 rounded-2xl p-4 cursor-pointer transition-all duration-200 group shadow-2xs hover:shadow-sm"
+            className="bg-white dark:bg-slate-800/90 hover:bg-amber-50/40 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-amber-400 dark:hover:border-amber-500 rounded-2xl p-4 cursor-pointer transition-all duration-200 group shadow-2xs hover:shadow-sm"
           >
             <div className="flex justify-between items-center mb-2.5">
-              <div className="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-900 font-jp-serif font-black text-base group-hover:scale-105 transition-transform">
+              <div className="w-9 h-9 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 flex items-center justify-center text-amber-900 dark:text-amber-300 font-jp-serif font-black text-base group-hover:scale-105 transition-transform">
                 試
               </div>
-              <span className="text-[10px] sm:text-xs font-bold bg-amber-50 text-amber-900 border border-amber-200 px-2 py-0.5 rounded-full font-jp-sans">
+              <span className="text-[10px] sm:text-xs font-bold bg-amber-50 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 border border-amber-200 dark:border-amber-800 px-2 py-0.5 rounded-full font-jp-sans">
                 {userProgress?.examsCompleted || 0} đề
               </span>
             </div>
-            <div className="text-[11px] text-slate-500 font-medium flex items-center gap-1.5">
-              <Target className="w-3.5 h-3.5 text-amber-600" />
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1.5">
+              <Target className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
               <span>Đề luyện thi (Bổ trợ)</span>
             </div>
-            <div className="text-lg sm:text-xl font-black text-slate-900 mt-1">
+            <div className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mt-1">
               {userProgress?.examsCompleted || 0}{' '}
               <span className="text-[11px] font-medium text-slate-400">/ {catalogStats.examsCount.toLocaleString()}</span>
             </div>
@@ -382,20 +381,20 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
       {/* =========================================================================
           3. KHÁM PHÁ KHO TÀNG TRI THỨC KIZUNA (6 THẺ HỌC PHONG CÁCH KARUTA NHẬT BẢN)
           ========================================================================= */}
-      <div className="bg-white rounded-3xl p-5 sm:p-7 border border-emerald-100 shadow-md shadow-emerald-950/5 space-y-5">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-7 border border-emerald-100 dark:border-slate-800 shadow-md shadow-emerald-950/5 space-y-5 transition-colors">
         <div>
           <div className="flex items-center gap-2 mb-1.5">
             <span className="hanko-seal px-2 py-0.2 text-[11px]">
               知
             </span>
-            <span className="bg-emerald-50 text-emerald-800 border border-emerald-200/80 px-3 py-0.5 rounded-full text-xs font-bold font-jp-sans">
+            <span className="bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800 px-3 py-0.5 rounded-full text-xs font-bold font-jp-sans">
               知識の森 • KHÁM PHÁ KHO TÀNG TRI THỨC KIZUNA
             </span>
           </div>
-          <h2 className="text-lg sm:text-xl font-extrabold text-slate-900">
+          <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
             Hệ Thống Rèn Luyện Toàn Diện Cho Người Học Tiếng Nhật
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
             Bấm vào từng khu vực để bắt đầu học và nâng cao phản xạ tiếng Nhật tự nhiên chuẩn người bản xứ.
           </p>
         </div>
@@ -405,27 +404,27 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
           {/* Card 1: Từ vựng (語彙 - Kotoba) */}
           <div 
             onClick={() => onNavigate('vocab')}
-            className="group p-5 rounded-2xl border border-slate-200 hover:border-emerald-400 hover:shadow-lg hover:shadow-emerald-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-emerald-50/20 flex flex-col justify-between"
+            className="group p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-emerald-400 dark:hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-emerald-50/20 dark:from-slate-800/90 dark:to-slate-800/40 flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between mb-3.5">
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center text-emerald-800 dark:text-emerald-300 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
                   語
                 </div>
-                <span className="text-[11px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full font-jp-sans">
+                <span className="text-[11px] font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 px-2.5 py-0.5 rounded-full font-jp-sans">
                   語彙 • {catalogStats.vocabCount.toLocaleString()}+ Từ
                 </span>
               </div>
-              <h3 className="font-extrabold text-slate-900 group-hover:text-emerald-700 transition-colors text-base mb-1.5 flex items-center justify-between">
+              <h3 className="font-extrabold text-slate-900 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors text-base mb-1.5 flex items-center justify-between">
                 <span>Từ Vựng Giao Tiếp Thực Chiến</span>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 group-hover:translate-x-1 transition-all" />
+                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 group-hover:translate-x-1 transition-all" />
               </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 Tích hợp âm Hán Việt, phiên âm Hiragana, phát âm chuẩn Tokyo cùng ngữ cảnh hội thoại sinh động trong đời sống và văn phòng tại Nhật.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] font-bold text-emerald-700 flex items-center gap-1.5 group-hover:text-emerald-800">
-              <BookOpen className="w-3.5 h-3.5 text-emerald-600" />
+            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 text-[11px] font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5 group-hover:text-emerald-800 dark:group-hover:text-emerald-300">
+              <BookOpen className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
               <span>Học qua Flashcard tương tác</span>
             </div>
           </div>
@@ -433,139 +432,139 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
           {/* Card 2: Ngữ pháp (文法 - Bunpou) */}
           <div 
             onClick={() => onNavigate('grammar')}
-            className="group p-5 rounded-2xl border border-slate-200 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-teal-50/20 flex flex-col justify-between"
+            className="group p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-teal-400 dark:hover:border-teal-500 hover:shadow-lg hover:shadow-teal-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-teal-50/20 dark:from-slate-800/90 dark:to-slate-800/40 flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between mb-3.5">
-                <div className="w-10 h-10 rounded-xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-800 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 flex items-center justify-center text-teal-800 dark:text-teal-300 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
                   文
                 </div>
-                <span className="text-[11px] font-bold bg-teal-50 text-teal-800 border border-teal-200 px-2.5 py-0.5 rounded-full font-jp-sans">
+                <span className="text-[11px] font-bold bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800 px-2.5 py-0.5 rounded-full font-jp-sans">
                   文法 • {catalogStats.grammarCount.toLocaleString()}+ Mẫu
                 </span>
               </div>
-              <h3 className="font-extrabold text-slate-900 group-hover:text-teal-700 transition-colors text-base mb-1.5 flex items-center justify-between">
+              <h3 className="font-extrabold text-slate-900 dark:text-white group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors text-base mb-1.5 flex items-center justify-between">
                 <span>Ngữ Pháp Ứng Dụng Chuẩn Mực</span>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-teal-600 group-hover:translate-x-1 transition-all" />
+                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-teal-600 dark:group-hover:text-teal-400 group-hover:translate-x-1 transition-all" />
               </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 Giải thích cặn kẽ sắc thái biểu đạt, kính ngữ Keigo, khiêm nhường ngữ và văn phong email, báo cáo công việc chuẩn người Nhật.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] font-bold text-teal-700 flex items-center gap-1.5 group-hover:text-teal-800">
-              <FileText className="w-3.5 h-3.5 text-teal-600" />
+            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 text-[11px] font-bold text-teal-700 dark:text-teal-400 flex items-center gap-1.5 group-hover:text-teal-800 dark:group-hover:text-teal-300">
+              <FileText className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
               <span>Nắm vững cấu trúc câu</span>
             </div>
           </div>
 
-          {/* Card 3: Kanji (漢字 - Chữ Hán) - BỎ EMOJI 🈸 */}
+          {/* Card 3: Kanji (漢字 - Chữ Hán) */}
           <div 
             onClick={() => onNavigate('kanji')}
-            className="group p-5 rounded-2xl border border-slate-200 hover:border-indigo-400 hover:shadow-lg hover:shadow-indigo-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-indigo-50/20 flex flex-col justify-between"
+            className="group p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-indigo-400 dark:hover:border-indigo-500 hover:shadow-lg hover:shadow-indigo-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-indigo-50/20 dark:from-slate-800/90 dark:to-slate-800/40 flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between mb-3.5">
-                <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-800 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 flex items-center justify-center text-indigo-800 dark:text-indigo-300 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
                   漢
                 </div>
-                <span className="text-[11px] font-bold bg-indigo-50 text-indigo-800 border border-indigo-200 px-2.5 py-0.5 rounded-full font-jp-sans">
+                <span className="text-[11px] font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-800 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 px-2.5 py-0.5 rounded-full font-jp-sans">
                   漢字 • {catalogStats.kanjiCount.toLocaleString()}+ Chữ
                 </span>
               </div>
-              <h3 className="font-extrabold text-slate-900 group-hover:text-indigo-700 transition-colors text-base mb-1.5 flex items-center justify-between">
+              <h3 className="font-extrabold text-slate-900 dark:text-white group-hover:text-indigo-700 dark:group-hover:text-indigo-400 transition-colors text-base mb-1.5 flex items-center justify-between">
                 <span>Chữ Hán Kanji Tư Duy Hình Ảnh</span>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all" />
+                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 group-hover:translate-x-1 transition-all" />
               </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 Phương pháp nhớ chữ qua câu chuyện bộ thủ tượng hình, dễ dàng nhận diện từ ghép trong văn bản, hợp đồng và bảng biểu.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] font-bold text-indigo-700 flex items-center gap-1.5 group-hover:text-indigo-800">
-              <Languages className="w-3.5 h-3.5 text-indigo-600" />
+            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 text-[11px] font-bold text-indigo-700 dark:text-indigo-400 flex items-center gap-1.5 group-hover:text-indigo-800 dark:group-hover:text-indigo-300">
+              <Languages className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
               <span>Khám phá bí quyết nhớ chữ Hán</span>
             </div>
           </div>
 
-          {/* Card 4: Lộ trình (道標 - Michishirube) - BỎ EMOJI 🗺️ */}
+          {/* Card 4: Lộ trình (道標 - Michishirube) */}
           <div 
             onClick={() => onNavigate('roadmap')}
-            className="group p-5 rounded-2xl border border-slate-200 hover:border-amber-400 hover:shadow-lg hover:shadow-amber-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-amber-50/20 flex flex-col justify-between"
+            className="group p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-amber-400 dark:hover:border-amber-500 hover:shadow-lg hover:shadow-amber-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-amber-50/20 dark:from-slate-800/90 dark:to-slate-800/40 flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between mb-3.5">
-                <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-900 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 flex items-center justify-center text-amber-900 dark:text-amber-300 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
                   道
                 </div>
-                <span className="text-[11px] font-bold bg-amber-50 text-amber-900 border border-amber-200 px-2.5 py-0.5 rounded-full font-jp-sans">
+                <span className="text-[11px] font-bold bg-amber-50 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 border border-amber-200 dark:border-amber-800 px-2.5 py-0.5 rounded-full font-jp-sans">
                   道標 • 4 Chặng 28 Mốc
                 </span>
               </div>
-              <h3 className="font-extrabold text-slate-900 group-hover:text-amber-700 transition-colors text-base mb-1.5 flex items-center justify-between">
+              <h3 className="font-extrabold text-slate-900 dark:text-white group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors text-base mb-1.5 flex items-center justify-between">
                 <span>Lộ Trình Từng Bước Từ Số 0</span>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
+                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-amber-600 dark:group-hover:text-amber-400 group-hover:translate-x-1 transition-all" />
               </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 Đi từ bảng chữ cái, phát âm, hội thoại mua sắm đến kỹ năng phỏng vấn xin việc và nguyên tắc báo cáo Ho-Ren-So.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] font-bold text-amber-700 flex items-center gap-1.5 group-hover:text-amber-800">
-              <Compass className="w-3.5 h-3.5 text-amber-600" />
+            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 text-[11px] font-bold text-amber-700 dark:text-amber-400 flex items-center gap-1.5 group-hover:text-amber-800 dark:group-hover:text-amber-300">
+              <Compass className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
               <span>Xem chi tiết các mốc học</span>
             </div>
           </div>
 
-          {/* Card 5: Thư viện văn hóa (礼法 - Reihou) - BỎ EMOJI 📚 */}
+          {/* Card 5: Thư viện văn hóa (礼法 - Reihou) */}
           <div 
             onClick={() => onNavigate('library')}
-            className="group p-5 rounded-2xl border border-slate-200 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-purple-50/20 flex flex-col justify-between"
+            className="group p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-purple-400 dark:hover:border-purple-500 hover:shadow-lg hover:shadow-purple-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-purple-50/20 dark:from-slate-800/90 dark:to-slate-800/40 flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between mb-3.5">
-                <div className="w-10 h-10 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-900 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800 flex items-center justify-center text-purple-900 dark:text-purple-300 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
                   礼
                 </div>
-                <span className="text-[11px] font-bold bg-purple-50 text-purple-900 border border-purple-200 px-2.5 py-0.5 rounded-full font-jp-sans">
+                <span className="text-[11px] font-bold bg-purple-50 dark:bg-purple-950/60 text-purple-900 dark:text-purple-300 border border-purple-200 dark:border-purple-800 px-2.5 py-0.5 rounded-full font-jp-sans">
                   礼法 • Tác phong Nhật
                 </span>
               </div>
-              <h3 className="font-extrabold text-slate-900 group-hover:text-purple-700 transition-colors text-base mb-1.5 flex items-center justify-between">
+              <h3 className="font-extrabold text-slate-900 dark:text-white group-hover:text-purple-700 dark:group-hover:text-purple-400 transition-colors text-base mb-1.5 flex items-center justify-between">
                 <span>Cẩm Nang Doanh Nghiệp Nhật Bản</span>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all" />
+                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 group-hover:translate-x-1 transition-all" />
               </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 Cẩm nang ứng xử văn hóa, nghi thức cúi chào Ojigi, tác phong làm việc giúp bạn tự tin hòa nhập môi trường công ty Nhật.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] font-bold text-purple-700 flex items-center gap-1.5 group-hover:text-purple-800">
-              <Library className="w-3.5 h-3.5 text-purple-600" />
+            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 text-[11px] font-bold text-purple-700 dark:text-purple-400 flex items-center gap-1.5 group-hover:text-purple-800 dark:group-hover:text-purple-300">
+              <Library className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
               <span>Đọc cẩm nang doanh nghiệp</span>
             </div>
           </div>
 
-          {/* Card 6: Luyện thi JLPT (試験 - Shiken) - BỎ EMOJI 🎯 */}
+          {/* Card 6: Luyện thi JLPT (試験 - Shiken) */}
           <div 
             onClick={() => onNavigate('exam')}
-            className="group p-5 rounded-2xl border border-slate-200 hover:border-rose-400 hover:shadow-lg hover:shadow-rose-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-rose-50/20 flex flex-col justify-between"
+            className="group p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-rose-400 dark:hover:border-rose-500 hover:shadow-lg hover:shadow-rose-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-rose-50/20 dark:from-slate-800/90 dark:to-slate-800/40 flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between mb-3.5">
-                <div className="w-10 h-10 rounded-xl bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-900 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800 flex items-center justify-center text-rose-900 dark:text-rose-300 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
                   試
                 </div>
-                <span className="text-[11px] font-bold bg-rose-50 text-rose-900 border border-rose-200 px-2.5 py-0.5 rounded-full font-jp-sans">
+                <span className="text-[11px] font-bold bg-rose-50 dark:bg-rose-950/60 text-rose-900 dark:text-rose-300 border border-rose-200 dark:border-rose-800 px-2.5 py-0.5 rounded-full font-jp-sans">
                   試験 • {catalogStats.examsCount}+ Đề thi
                 </span>
               </div>
-              <h3 className="font-extrabold text-slate-900 group-hover:text-rose-700 transition-colors text-base mb-1.5 flex items-center justify-between">
+              <h3 className="font-extrabold text-slate-900 dark:text-white group-hover:text-rose-700 dark:group-hover:text-rose-400 transition-colors text-base mb-1.5 flex items-center justify-between">
                 <span>Phòng Luyện Thi JLPT (Bổ Trợ)</span>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-rose-600 group-hover:translate-x-1 transition-all" />
+                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-rose-600 dark:group-hover:text-rose-400 group-hover:translate-x-1 transition-all" />
               </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 Ngân hàng đề thi thử các cấp độ N5 - N1 kèm chấm điểm tự động và lời giải chi tiết, phục vụ khi bạn cần thi lấy chứng chỉ.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] font-bold text-rose-700 flex items-center gap-1.5 group-hover:text-rose-800">
-              <Target className="w-3.5 h-3.5 text-rose-600" />
+            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 text-[11px] font-bold text-rose-700 dark:text-rose-400 flex items-center gap-1.5 group-hover:text-rose-800 dark:group-hover:text-rose-300">
+              <Target className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
               <span>Vào phòng thi thử tự do</span>
             </div>
           </div>
@@ -576,31 +575,31 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
       {/* =========================================================================
           4. BẢNG XẾP HẠNG HỌC VIÊN TÍCH CỰC (順位表 - PODIUM NHẬT BẢN 壱 弐 参)
           ========================================================================= */}
-      <div className="bg-white rounded-3xl p-5 sm:p-7 border border-emerald-100 shadow-md shadow-emerald-950/5 space-y-5">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-7 border border-emerald-100 dark:border-slate-800 shadow-md shadow-emerald-950/5 space-y-5 transition-colors">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
               <span className="hanko-seal px-2 py-0.2 text-[11px]">
                 誉
               </span>
-              <span className="bg-amber-50 text-amber-900 border border-amber-200/80 px-3 py-0.5 rounded-full text-xs font-bold font-jp-sans flex items-center gap-1.5">
-                <Trophy className="w-3.5 h-3.5 text-amber-600" />
+              <span className="bg-amber-50 dark:bg-amber-950/50 text-amber-900 dark:text-amber-300 border border-amber-200/80 dark:border-amber-800 px-3 py-0.5 rounded-full text-xs font-bold font-jp-sans flex items-center gap-1.5">
+                <Trophy className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                 <span>順位表 • BẢNG XẾP HẠNG HỌC VIÊN TÍCH CỰC</span>
               </span>
             </div>
-            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900">
+            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
               Vinh Danh Học Viên Theo Điểm Năng Động (Active Points)
             </h2>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Xếp hạng dựa trên nỗ lực học tập thực tế trên hệ thống. Chỉ người dùng học viên mới tham gia bảng xếp hạng.
             </p>
           </div>
 
           {user && (
-            <div className="bg-emerald-50/80 border border-emerald-200/80 px-4 py-2 rounded-2xl flex items-center gap-3 self-start sm:self-auto">
+            <div className="bg-emerald-50/80 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800 px-4 py-2 rounded-2xl flex items-center gap-3 self-start sm:self-auto">
               <div className="text-right">
-                <div className="text-[11px] text-slate-500 font-semibold">Thứ hạng của bạn</div>
-                <div className="text-sm font-black text-emerald-800 font-jp-sans">
+                <div className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold">Thứ hạng của bạn</div>
+                <div className="text-sm font-black text-emerald-800 dark:text-emerald-300 font-jp-sans">
                   {userPosition ? `#${userPosition} / ${leaderboard.length} học viên` : 'Chưa xếp hạng'}
                 </div>
               </div>
@@ -613,20 +612,20 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
 
         {/* Thanh trạng thái thăng hạng của user */}
         {user && (
-          <div className="bg-gradient-to-r from-emerald-50/90 via-teal-50/60 to-emerald-50/90 border border-emerald-200/80 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div className="bg-gradient-to-r from-emerald-50/90 via-teal-50/60 to-emerald-50/90 dark:from-emerald-950/40 dark:via-teal-950/30 dark:to-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
             <div className="flex items-center gap-3">
-              <span className="w-10 h-10 rounded-xl bg-white shadow-2xs border border-emerald-200 flex items-center justify-center text-emerald-900 font-jp-serif font-black text-lg">
+              <span className="w-10 h-10 rounded-xl bg-white dark:bg-slate-900 shadow-2xs border border-emerald-200 dark:border-emerald-800 flex items-center justify-center text-emerald-900 dark:text-emerald-300 font-jp-serif font-black text-lg">
                 {currentRankMeta.kanji}
               </span>
               <div>
-                <div className="font-extrabold text-slate-900 text-sm flex items-center gap-2">
+                <div className="font-extrabold text-slate-900 dark:text-white text-sm flex items-center gap-2">
                   <span>Bậc hiện tại: {currentRank.name}</span>
-                  <span className="text-emerald-800 font-bold bg-white px-2.5 py-0.5 rounded-full border border-emerald-200 text-xs flex items-center gap-1">
+                  <span className="text-emerald-800 dark:text-emerald-300 font-bold bg-white dark:bg-slate-900 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800 text-xs flex items-center gap-1">
                     <Zap className="w-3 h-3 text-amber-500 fill-amber-500" />
                     <span>{userActivePoints.toLocaleString()} pts</span>
                   </span>
                 </div>
-                <div className="text-slate-600 mt-0.5">
+                <div className="text-slate-600 dark:text-slate-400 mt-0.5">
                   {currentRank.description}
                 </div>
               </div>
@@ -634,22 +633,22 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
 
             <div className="text-right shrink-0">
               {nextRankInfo.nextTier ? (
-                <div className="bg-white/95 border border-amber-200 px-3.5 py-1.5 rounded-xl text-center shadow-2xs">
-                  <div className="text-[11px] text-amber-950 font-bold">
-                    Cần thêm <span className="text-amber-700 font-extrabold">{nextRankInfo.pointsNeeded.toLocaleString()}</span> pts
+                <div className="bg-white/95 dark:bg-slate-900/95 border border-amber-200 dark:border-amber-800/60 px-3.5 py-1.5 rounded-xl text-center shadow-2xs">
+                  <div className="text-[11px] text-amber-950 dark:text-amber-300 font-bold">
+                    Cần thêm <span className="text-amber-700 dark:text-amber-400 font-extrabold">{nextRankInfo.pointsNeeded.toLocaleString()}</span> pts
                   </div>
-                  <div className="text-[10px] text-slate-500 mt-0.5 flex items-center justify-center gap-1 font-jp-sans">
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 flex items-center justify-center gap-1 font-jp-sans">
                     <span>để thăng hạng:</span>
-                    <span className="font-bold text-slate-800">{nextRankInfo.nextTier.name}</span>
+                    <span className="font-bold text-slate-800 dark:text-slate-200">{nextRankInfo.nextTier.name}</span>
                     {nextRankMeta && (
-                      <span className="w-3.5 h-3.5 rounded-full bg-amber-100 text-amber-900 text-[9px] font-jp-serif font-bold inline-flex items-center justify-center">
+                      <span className="w-3.5 h-3.5 rounded-full bg-amber-100 dark:bg-amber-900/60 text-amber-900 dark:text-amber-300 text-[9px] font-jp-serif font-bold inline-flex items-center justify-center">
                         {nextRankMeta.kanji}
                       </span>
                     )}
                   </div>
                 </div>
               ) : (
-                <div className="bg-emerald-100/90 text-emerald-950 font-bold px-3.5 py-1.5 rounded-xl text-center border border-emerald-200">
+                <div className="bg-emerald-100/90 dark:bg-emerald-950/60 text-emerald-950 dark:text-emerald-200 font-bold px-3.5 py-1.5 rounded-xl text-center border border-emerald-200 dark:border-emerald-800">
                   <span className="font-jp-serif font-extrabold mr-1">極</span> Bậc tối cao
                 </div>
               )}
@@ -665,30 +664,30 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
           <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-4 pb-2 max-w-2xl mx-auto items-end">
             
             {/* Top 2 - Á Quân (弐 - Dai-ni) */}
-            <div className="bg-slate-50/90 border border-slate-200 rounded-2xl p-3 sm:p-4 text-center flex flex-col items-center">
-              <div className="w-8 h-8 rounded-full bg-slate-200/80 border border-slate-300 text-slate-700 font-jp-serif font-black text-sm flex items-center justify-center mb-1.5 shadow-2xs">
+            <div className="bg-slate-50/90 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-2xl p-3 sm:p-4 text-center flex flex-col items-center">
+              <div className="w-8 h-8 rounded-full bg-slate-200/80 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-jp-serif font-black text-sm flex items-center justify-center mb-1.5 shadow-2xs">
                 弐
               </div>
               <img
                 src={leaderboard[1].avatarUrl}
                 alt={leaderboard[1].fullName}
-                className="w-12 h-12 rounded-2xl object-cover bg-white border-2 border-slate-300 shadow-xs mb-1.5"
+                className="w-12 h-12 rounded-2xl object-cover bg-white dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-700 shadow-xs mb-1.5"
               />
-              <div className="font-bold text-xs sm:text-sm text-slate-900 truncate w-full">{leaderboard[1].fullName}</div>
-              <div className="text-[11px] text-slate-500 flex items-center gap-1 justify-center mt-0.5">
-                <span className="w-3.5 h-3.5 rounded-full bg-slate-200 text-slate-800 text-[9px] font-jp-serif font-bold inline-flex items-center justify-center">
+              <div className="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 truncate w-full">{leaderboard[1].fullName}</div>
+              <div className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1 justify-center mt-0.5">
+                <span className="w-3.5 h-3.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-300 text-[9px] font-jp-serif font-bold inline-flex items-center justify-center">
                   {getRankMeta(leaderboard[1].rankTier.id).kanji}
                 </span>
                 <span className="truncate">{leaderboard[1].rankTier.name}</span>
               </div>
-              <div className="mt-2 text-xs font-black text-slate-700 bg-white px-2.5 py-0.5 rounded-full border border-slate-200 flex items-center gap-1">
+              <div className="mt-2 text-xs font-black text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 px-2.5 py-0.5 rounded-full border border-slate-200 dark:border-slate-700 flex items-center gap-1">
                 <Zap className="w-3 h-3 text-amber-500 fill-amber-500" />
                 <span>{leaderboard[1].activePoints.toLocaleString()}</span>
               </div>
             </div>
 
             {/* Top 1 - Quán Quân (壱 - Dai-ichi) - Dát vàng Yamabuki Nhật Bản, BỎ BOUNCE */}
-            <div className="bg-gradient-to-b from-amber-50/90 to-yellow-50/40 border-2 border-amber-300 rounded-3xl p-4 sm:p-5 text-center flex flex-col items-center shadow-md shadow-amber-500/10 -translate-y-2">
+            <div className="bg-gradient-to-b from-amber-50/90 to-yellow-50/40 dark:from-amber-950/40 dark:to-yellow-950/20 border-2 border-amber-300 dark:border-amber-600/60 rounded-3xl p-4 sm:p-5 text-center flex flex-col items-center shadow-md shadow-amber-500/10 -translate-y-2">
               <div className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-300 to-yellow-400 text-amber-950 font-jp-serif font-black text-base flex items-center justify-center mb-1.5 shadow-xs border border-amber-400">
                 壱
               </div>
@@ -696,15 +695,15 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
                 <img
                   src={leaderboard[0].avatarUrl}
                   alt={leaderboard[0].fullName}
-                  className="w-16 h-16 rounded-2xl object-cover bg-white border-2 border-amber-400 shadow-sm"
+                  className="w-16 h-16 rounded-2xl object-cover bg-white dark:bg-slate-800 border-2 border-amber-400 shadow-sm"
                 />
                 <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-amber-400 text-amber-950 flex items-center justify-center shadow-xs">
                   <Crown className="w-3.5 h-3.5 fill-amber-950" />
                 </div>
               </div>
-              <div className="font-extrabold text-sm sm:text-base text-slate-900 truncate w-full">{leaderboard[0].fullName}</div>
-              <div className="text-xs text-amber-800 font-bold flex items-center gap-1 justify-center mt-0.5">
-                <span className="w-3.5 h-3.5 rounded-full bg-amber-200 text-amber-900 text-[9px] font-jp-serif font-bold inline-flex items-center justify-center">
+              <div className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white truncate w-full">{leaderboard[0].fullName}</div>
+              <div className="text-xs text-amber-800 dark:text-amber-400 font-bold flex items-center gap-1 justify-center mt-0.5">
+                <span className="w-3.5 h-3.5 rounded-full bg-amber-200 dark:bg-amber-900/60 text-amber-900 dark:text-amber-300 text-[9px] font-jp-serif font-bold inline-flex items-center justify-center">
                   {getRankMeta(leaderboard[0].rankTier.id).kanji}
                 </span>
                 <span className="truncate">{leaderboard[0].rankTier.name}</span>
@@ -716,23 +715,23 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
             </div>
 
             {/* Top 3 - Quý Quân (参 - Dai-san) */}
-            <div className="bg-amber-50/30 border border-amber-200/70 rounded-2xl p-3 sm:p-4 text-center flex flex-col items-center">
-              <div className="w-8 h-8 rounded-full bg-amber-100 border border-amber-300 text-amber-900 font-jp-serif font-black text-sm flex items-center justify-center mb-1.5 shadow-2xs">
+            <div className="bg-amber-50/30 dark:bg-slate-900/40 border border-amber-200/70 dark:border-amber-900/40 rounded-2xl p-3 sm:p-4 text-center flex flex-col items-center">
+              <div className="w-8 h-8 rounded-full bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-300 font-jp-serif font-black text-sm flex items-center justify-center mb-1.5 shadow-2xs">
                 参
               </div>
               <img
                 src={leaderboard[2].avatarUrl}
                 alt={leaderboard[2].fullName}
-                className="w-12 h-12 rounded-2xl object-cover bg-white border-2 border-amber-300/80 shadow-xs mb-1.5"
+                className="w-12 h-12 rounded-2xl object-cover bg-white dark:bg-slate-800 border-2 border-amber-300/80 dark:border-amber-800 shadow-xs mb-1.5"
               />
-              <div className="font-bold text-xs sm:text-sm text-slate-900 truncate w-full">{leaderboard[2].fullName}</div>
-              <div className="text-[11px] text-slate-500 flex items-center gap-1 justify-center mt-0.5">
-                <span className="w-3.5 h-3.5 rounded-full bg-amber-100 text-amber-800 text-[9px] font-jp-serif font-bold inline-flex items-center justify-center">
+              <div className="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 truncate w-full">{leaderboard[2].fullName}</div>
+              <div className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1 justify-center mt-0.5">
+                <span className="w-3.5 h-3.5 rounded-full bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300 text-[9px] font-jp-serif font-bold inline-flex items-center justify-center">
                   {getRankMeta(leaderboard[2].rankTier.id).kanji}
                 </span>
                 <span className="truncate">{leaderboard[2].rankTier.name}</span>
               </div>
-              <div className="mt-2 text-xs font-black text-amber-900 bg-white px-2.5 py-0.5 rounded-full border border-amber-200 flex items-center gap-1">
+              <div className="mt-2 text-xs font-black text-amber-900 dark:text-amber-400 bg-white dark:bg-slate-800 px-2.5 py-0.5 rounded-full border border-amber-200 dark:border-amber-800 flex items-center gap-1">
                 <Zap className="w-3 h-3 text-amber-500 fill-amber-500" />
                 <span>{leaderboard[2].activePoints.toLocaleString()}</span>
               </div>
@@ -742,13 +741,13 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
         )}
 
         {/* DANH SÁCH HỌC VIÊN XẾP HẠNG (THAY THẾ EMOJI BẰNG THẺ THỨ HẠNG NHẬT BẢN) */}
-        <div className="divide-y divide-slate-100 border border-slate-100 rounded-2xl overflow-hidden bg-white">
+        <div className="divide-y divide-slate-100 dark:divide-slate-800 border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden bg-white dark:bg-slate-900/90">
           {loadingLeaderboard ? (
-            <div className="p-8 text-center text-slate-400 text-sm">
+            <div className="p-8 text-center text-slate-400 dark:text-slate-500 text-sm">
               Đang tải bảng xếp hạng từ Firestore...
             </div>
           ) : leaderboard.length === 0 ? (
-            <div className="p-8 text-center text-slate-400 text-sm">
+            <div className="p-8 text-center text-slate-400 dark:text-slate-500 text-sm">
               Chưa có học viên nào tham gia bảng xếp hạng.
             </div>
           ) : (
@@ -761,8 +760,8 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
                   key={item.id}
                   className={`flex items-center justify-between p-3 sm:p-4 transition-colors ${
                     isCurrentUser 
-                      ? 'bg-emerald-50/70 border-l-4 border-l-emerald-600' 
-                      : 'hover:bg-slate-50/60'
+                      ? 'bg-emerald-50/70 dark:bg-emerald-950/40 border-l-4 border-l-emerald-600' 
+                      : 'hover:bg-slate-50/60 dark:hover:bg-slate-800/50'
                   }`}
                 >
                   <div className="flex items-center gap-3 sm:gap-4 min-w-0">
@@ -773,15 +772,15 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
                           壱
                         </span>
                       ) : item.position === 2 ? (
-                        <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-200 text-slate-800 text-xs font-bold shadow-2xs">
+                        <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-300 text-xs font-bold shadow-2xs">
                           弐
                         </span>
                       ) : item.position === 3 ? (
-                        <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-900 text-xs font-bold shadow-2xs">
+                        <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 text-xs font-bold shadow-2xs">
                           参
                         </span>
                       ) : (
-                        <span className="text-slate-400 font-mono text-xs">
+                        <span className="text-slate-400 dark:text-slate-500 font-mono text-xs">
                           {item.position}位
                         </span>
                       )}
@@ -790,10 +789,10 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
                     <img 
                       src={item.avatarUrl} 
                       alt={item.fullName} 
-                      className="w-10 h-10 rounded-xl object-cover bg-emerald-50 border border-emerald-200 shrink-0" 
+                      className="w-10 h-10 rounded-xl object-cover bg-emerald-50 dark:bg-slate-800 border border-emerald-200 dark:border-emerald-800 shrink-0" 
                     />
                     <div className="min-w-0">
-                      <div className="font-bold text-slate-900 text-sm truncate flex items-center gap-2">
+                      <div className="font-bold text-slate-900 dark:text-white text-sm truncate flex items-center gap-2">
                         <span>{item.fullName}</span>
                         {isCurrentUser && (
                           <span className="text-[10px] bg-emerald-700 text-white font-extrabold px-1.5 py-0.2 rounded-md">
@@ -801,13 +800,13 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
                           </span>
                         )}
                       </div>
-                      <div className="text-xs text-slate-500 truncate flex items-center gap-1.5">
-                        <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200/80 px-2 py-0.2 rounded-full">
+                      <div className="text-xs text-slate-500 dark:text-slate-400 truncate flex items-center gap-1.5">
+                        <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800 px-2 py-0.2 rounded-full">
                           <span className="font-jp-serif font-bold text-[10px]">{rankMeta.kanji}</span>
                           <span>{item.rankTier.name}</span>
                         </span>
                         <span>•</span>
-                        <span className="inline-flex items-center gap-1 text-slate-600">
+                        <span className="inline-flex items-center gap-1 text-slate-600 dark:text-slate-400">
                           <Flame className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
                           <span>{item.currentStreak} ngày</span>
                         </span>
@@ -816,12 +815,12 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
                   </div>
 
                   <div className="text-right shrink-0">
-                    <div className="font-black text-emerald-800 text-sm sm:text-base flex items-center justify-end gap-1 font-mono">
+                    <div className="font-black text-emerald-800 dark:text-emerald-400 text-sm sm:text-base flex items-center justify-end gap-1 font-mono">
                       <Zap className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
                       <span>{item.activePoints.toLocaleString()}</span>
                       <span className="text-xs font-normal text-slate-400">pts</span>
                     </div>
-                    <div className="text-[11px] text-slate-400 font-medium">
+                    <div className="text-[11px] text-slate-400 dark:text-slate-500 font-medium">
                       {item.totalXp.toLocaleString()} XP
                     </div>
                   </div>

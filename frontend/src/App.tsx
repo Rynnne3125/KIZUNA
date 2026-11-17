@@ -13,10 +13,11 @@ import { LibraryPage } from './user/pages/LibraryPage';
 import { ExamPage } from './user/pages/ExamPage';
 import { ProfilePage } from './user/pages/ProfilePage';
 import { AdminDashboardPage } from './admin/pages/AdminDashboardPage';
-import { Smartphone, Download, CheckCircle2 } from 'lucide-react';
+import { Smartphone, Download, CheckCircle2, Moon, Sun } from 'lucide-react';
 import { ApkDownloadModal } from './user/components/ApkDownloadModal';
 import { isNativeApp } from './user/utils/platform';
 import { useNetworkStatus } from './user/hooks/useNetworkStatus';
+import { useTheme } from './user/hooks/useTheme';
 import { NoInternet404Page } from './user/pages/NoInternet404Page';
 
 import { AiPlacementModal } from './user/components/placement/AiPlacementModal';
@@ -26,6 +27,7 @@ import { placementService } from './user/services/placementService';
 export default function App() {
   const isApp = isNativeApp();
   const network = useNetworkStatus();
+  const { theme, isDark, toggleTheme } = useTheme();
   // Lấy người dùng từ session được lưu trong localStorage (tối đa 24h)
   const [user, setUser] = useState<User | null>(() => authService.getCurrentUser());
   
@@ -200,7 +202,7 @@ export default function App() {
 
   // 3. GIAO DIỆN CHÍNH HỌC VIÊN: Left Sidebar Menu + Nền giấy Kanji + Thẻ nội dung
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row kanji-paper-bg text-slate-800">
+    <div className={`min-h-screen flex flex-col lg:flex-row transition-colors duration-300 font-sans ${isDark ? 'dark bg-slate-950 text-slate-100' : 'bg-[#f7f9f6] kanji-paper-bg text-slate-800'}`}>
       
       {/* MENUBAR BÊN TRÁI (Desktop) + Header & Drawer & Bottom Navigation (Mobile App) */}
       <UserNavbar
@@ -209,25 +211,38 @@ export default function App() {
         user={user}
         onLogout={handleLogout}
         onOpenApkModal={() => setIsApkModalOpen(true)}
+        isDark={isDark}
+        onToggleTheme={toggleTheme}
       />
 
       {/* KHU VỰC NỘI DUNG CHÍNH */}
       <div className="flex-1 flex flex-col min-w-0 pb-18 lg:pb-0">
         
         {/* TOPBAR TRÊN MÁY TÍNH (DESKTOP TOPBAR) */}
-        <header className="hidden lg:flex items-center justify-between px-8 py-3 bg-white/80 backdrop-blur-md border-b border-emerald-100/70 sticky top-0 z-20 shadow-2xs">
+        <header className="hidden lg:flex items-center justify-between px-8 py-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-emerald-100/70 dark:border-slate-800 sticky top-0 z-20 shadow-2xs transition-colors">
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 text-xs font-semibold text-slate-600">
+            <div className="flex items-center gap-2 text-xs font-semibold text-slate-600 dark:text-slate-300">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               <span>KIZUNA 絆 — Học tiếng Nhật thông minh chuẩn bản xứ</span>
             </div>
-            <span className="text-slate-300">•</span>
-            <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-100">
+            <span className="text-slate-300 dark:text-slate-600">•</span>
+            <span className="text-[11px] font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-100 dark:border-emerald-800">
               Bậc: {user.level || 'Tân binh'}
             </span>
           </div>
 
           <div className="flex items-center gap-3">
+            {/* Nút bật/tắt Giao diện Sáng/Tối ở Topbar Desktop */}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="w-9 h-9 bg-white dark:bg-slate-800 border border-emerald-100 dark:border-slate-700 rounded-xl flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-slate-700 shadow-xs transition-colors cursor-pointer"
+              title={isDark ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối'}
+              aria-label="Toggle Theme"
+            >
+              {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-600 dark:text-slate-300" />}
+            </button>
+
             {/* Nút tải App đa nền tảng ở Topbar Desktop (chỉ hiển thị trên Website) */}
             {!isApp && (
               <button
@@ -244,9 +259,9 @@ export default function App() {
         </header>
 
         {isOnline && syncNotice && (
-          <div className="bg-emerald-50 border-b border-emerald-200 px-4 py-2 flex items-center justify-between gap-3 text-emerald-800 text-xs font-semibold">
+          <div className="bg-emerald-50 dark:bg-emerald-950/50 border-b border-emerald-200 dark:border-emerald-900 px-4 py-2 flex items-center justify-between gap-3 text-emerald-800 dark:text-emerald-300 text-xs font-semibold">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
               <span>{syncNotice}</span>
             </div>
           </div>
@@ -270,19 +285,21 @@ export default function App() {
             <ProfilePage
               user={user}
               onLogout={handleLogout}
+              isDark={isDark}
+              onToggleTheme={toggleTheme}
             />
           )}
         </main>
 
         {/* FOOTER: GIAO DIỆN CHUẨN SẠCH KHÔNG CHỨA GHI CHÚ DEV */}
-        <footer className="bg-white/80 backdrop-blur-xs border-t border-emerald-100 p-4 sm:p-5 text-center text-slate-500 text-xs mt-auto">
+        <footer className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xs border-t border-emerald-100 dark:border-slate-800 p-4 sm:p-5 text-center text-slate-500 dark:text-slate-400 text-xs mt-auto transition-colors">
           <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
             <div className="flex items-center gap-2">
-              <span className="font-extrabold text-emerald-700 tracking-tight">KIZUNA 絆</span>
-              <span className="text-slate-400">•</span>
+              <span className="font-extrabold text-emerald-700 dark:text-emerald-400 tracking-tight">KIZUNA 絆</span>
+              <span className="text-slate-400 dark:text-slate-600">•</span>
               <span>Nền tảng học tiếng Nhật thông minh</span>
             </div>
-            <div className="text-slate-400 text-xs">
+            <div className="text-slate-400 dark:text-slate-500 text-xs">
               © 2026 KIZUNA. All rights reserved.
             </div>
           </div>
