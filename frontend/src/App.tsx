@@ -164,12 +164,17 @@ export default function App() {
   // Bất kể đã đăng nhập hay chưa (kể cả khi đã có phiên đăng nhập và vào HomePage),
   // lập tức hiển thị trang 404 Không có Internet.
   // Khi có Internet: Nếu có phiên đăng nhập -> vào HomePage; nếu chưa -> vào LoginPage.
-  if (network.isBlockedByNoInternet) {
+  const isOffline = network.isBlockedByNoInternet || !isOnline;
+  if (isOffline) {
     return (
       <NoInternet404Page
         status={network.status}
         isChecking={network.isChecking}
-        onRecheck={network.recheck}
+        onRecheck={async () => {
+          const fresh = await network.recheck();
+          setIsOnline(fresh.connected && !fresh.isOffline);
+          return fresh;
+        }}
       />
     );
   }

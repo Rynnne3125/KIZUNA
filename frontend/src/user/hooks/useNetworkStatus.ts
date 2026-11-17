@@ -34,9 +34,12 @@ export const useNetworkStatus = (): UseNetworkStatusReturn => {
   const [isCellularBypassed, setIsCellularBypassedState] = useState<boolean>(() => networkService.isCellularBypassed());
   const [simulatedType, setSimulatedTypeState] = useState<ConnectionType | null>(() => networkService.getSimulatedType());
 
-  const fetchStatus = useCallback(async () => {
+  const fetchStatus = useCallback(async (force = false) => {
     setIsChecking(true);
     try {
+      if (force) {
+        await networkService.probeInternet(true);
+      }
       const fresh = await networkService.getStatus();
       setStatus(fresh);
       return fresh;
@@ -61,12 +64,12 @@ export const useNetworkStatus = (): UseNetworkStatusReturn => {
       }));
     };
     const handleBrowserOnline = () => {
-      fetchStatus();
+      fetchStatus(true);
     };
     window.addEventListener('offline', handleBrowserOffline);
     window.addEventListener('online', handleBrowserOnline);
 
-    // 3. Đăng ký lắng nghe thay đổi mạng từ hệ thống (Capacitor Network)
+    // 3. Đăng ký lắng nghe thay đổi mạng từ hệ thống (Capacitor Network + Probe)
     const unsubscribe = networkService.addStatusListener((updatedStatus) => {
       setStatus(updatedStatus);
       setIsChecking(false);
@@ -77,7 +80,7 @@ export const useNetworkStatus = (): UseNetworkStatusReturn => {
       setWifiOnlyRequiredState(networkService.isWifiOnlyRequired());
       setIsCellularBypassedState(networkService.isCellularBypassed());
       setSimulatedTypeState(networkService.getSimulatedType());
-      fetchStatus();
+      fetchStatus(true);
     };
 
     window.addEventListener('kizuna_network_config_changed', handleConfigChange);
@@ -114,8 +117,12 @@ export const useNetworkStatus = (): UseNetworkStatusReturn => {
   const setSimulatedType = (type: ConnectionType | null) => {
     networkService.setSimulatedType(type);
     setSimulatedTypeState(type);
-    fetchStatus();
+    fetchStatus(true);
   };
+
+  const recheck = useCallback(async () => {
+    return await fetchStatus(true);
+  }, [fetchStatus]);
 
   return {
     status,
@@ -124,7 +131,7 @@ export const useNetworkStatus = (): UseNetworkStatusReturn => {
     isCellularBypassed,
     isBlockedByNoInternet,
     isBlockedByWifiRequirement,
-    recheck: fetchStatus,
+    recheck,
     setWifiOnlyRequired,
     bypassCellular,
     resetBypass,

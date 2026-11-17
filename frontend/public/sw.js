@@ -1,5 +1,5 @@
-// KIZUNA Progressive Web App (PWA) Service Worker - Offline Ready v3
-const CACHE_NAME = 'kizuna-pwa-v3';
+// KIZUNA Progressive Web App (PWA) Service Worker - Offline Ready v4
+const CACHE_NAME = 'kizuna-pwa-v4';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
@@ -32,11 +32,13 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
 
   const url = new URL(request.url);
-  // Bỏ qua các kết nối WebChannel / API của Firestore hoặc Chrome Extension
+  // Bỏ qua các kết nối WebChannel / API của Firestore, Chrome Extension, và Probe kiểm tra mạng thực tế
   if (
     url.protocol.startsWith('chrome-extension') ||
     url.hostname.includes('firestore.googleapis.com') ||
-    url.hostname.includes('identitytoolkit.googleapis.com')
+    url.hostname.includes('identitytoolkit.googleapis.com') ||
+    url.searchParams.has('_t') ||
+    url.searchParams.has('_probe')
   ) {
     return;
   }
@@ -85,7 +87,7 @@ self.addEventListener('fetch', (event) => {
         })
         .catch(() => {
           // Khi mất mạng và asset chưa có trong cache:
-          // Tuyệt đối không trả về JSON 503 làm hỏng cú pháp script/css (gây lỗi Unexpected end of JSON input)
+          // Không trả về JSON 503 làm vỡ cú pháp script/css
           if (request.destination === 'style') {
             return new Response('', { status: 200, headers: { 'Content-Type': 'text/css' } });
           }

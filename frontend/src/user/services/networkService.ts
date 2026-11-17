@@ -1,8 +1,6 @@
 import { Network, ConnectionStatus, ConnectionType } from '@capacitor/network';
 import { isNativeApp } from '../utils/platform';
 
-const STORAGE_KEY_WIFI_ONLY = 'kizuna_wifi_only_required';
-const STORAGE_KEY_CELLULAR_BYPASS = 'kizuna_cellular_bypassed_session';
 const STORAGE_KEY_SIMULATED_TYPE = 'kizuna_simulated_network_type';
 
 export interface ExtendedNetworkStatus {
@@ -15,9 +13,10 @@ export interface ExtendedNetworkStatus {
 
 class NetworkService {
   private simulatedType: ConnectionType | null = null;
+  private lastProbeTime = 0;
+  private lastProbeResult = true;
 
   constructor() {
-    // Khởi tạo trạng thái giả lập từ session nếu có
     if (typeof window !== 'undefined') {
       const savedSim = sessionStorage.getItem(STORAGE_KEY_SIMULATED_TYPE);
       if (savedSim && ['wifi', 'cellular', 'none', 'unknown'].includes(savedSim)) {
@@ -27,10 +26,50 @@ class NetworkService {
   }
 
   /**
-   * Lấy trạng thái mạng hiện tại từ Capacitor Network hoặc Web APIs
+   * Kiểm tra kết nối Internet thực tế bằng request probe siêu nhẹ (HEAD)
+   * Giúp phát hiện mất mạng ngay lập tức trên Website kể cả khi card mạng ảo (WSL/Docker/LAN)
+   * khiến navigator.onLine trên trình duyệt vẫn trả về true.
+   */
+  public async probeInternet(force = false): Promise<boolean> {
+    if (typeof window === 'undefined') return true;
+
+    // Nếu navigator.onLine là false thì chắc chắn mất mạng
+    if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+      this.lastProbeResult = false;
+      return false;
+    }
+
+    // Rate-limit probe tối đa 1 lần mỗi 1000ms nếu không yêu cầu force
+    const now = Date.now();
+    if (!force && now - this.lastProbeTime < 1000) {
+      return this.lastProbeResult;
+    }
+    this.lastProbeTime = now;
+
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2000);
+      const probeUrl = `${window.location.origin}/manifest.json?_t=${now}`;
+      const response = await fetch(probeUrl, {
+        method: 'HEAD',
+        cache: 'no-store',
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+      const isOk = response.ok || response.status === 304;
+      this.lastProbeResult = isOk;
+      return isOk;
+    } catch {
+      this.lastProbeResult = false;
+      return false;
+    }
+  }
+
+  /**
+   * Lấy trạng thái mạng hiện tại từ Capacitor Network hoặc Web APIs + Real Probe
    */
   public async getStatus(): Promise<ExtendedNetworkStatus> {
-    // 1. Nếu đang có chế độ giả lập (cho mục đích test/review giao diện)
+    // 1. Chế độ giả lập (cho review/test)
     if (this.simulatedType) {
       const isConnected = this.simulatedType !== 'none';
       return {
@@ -42,49 +81,49 @@ class NetworkService {
       };
     }
 
+    // 2. Môi trường Website (Browser Desktop/Laptop)
+    if (!isNativeApp() && typeof window !== 'undefined') {
+      // Kiểm tra navigator.onLine
+      if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+        return {
+          connected: false,
+          connectionType: 'none',
+          isWifi: false,
+          isCellular: false,
+          isOffline: true
+        };
+      }
+
+      // Kiểm tra probe thực tế
+      const isOnline = await this.probeInternet();
+      return {
+        connected: isOnline,
+        connectionType: isOnline ? 'wifi' : 'none',
+        isWifi: isOnline,
+        isCellular: false,
+        isOffline: !isOnline
+      };
+    }
+
+    // 3. Môi trường Ứng dụng Di động Native (Capacitor)
     try {
-      // 2. Thử lấy thông qua plugin Capacitor Network chính thống
       const status: ConnectionStatus = await Network.getStatus();
       let connType: ConnectionType = status.connectionType;
 
-      // 3. Nếu đang ở môi trường trình duyệt Web (loại mạng là 'unknown' hoặc trình duyệt hỗ trợ NetworkInformation)
-      if (typeof window !== 'undefined' && typeof navigator !== 'undefined') {
-        const nav = navigator as any;
-        const navConnection = nav.connection || nav.mozConnection || nav.webkitConnection;
-
-        if (navConnection && navConnection.type) {
-          // Trình duyệt hỗ trợ thuộc tính type (Android Chrome, Chromium)
-          if (navConnection.type === 'wifi') {
-            connType = 'wifi';
-          } else if (navConnection.type === 'cellular') {
-            connType = 'cellular';
-          } else if (navConnection.type === 'none') {
-            connType = 'none';
-          }
-        } else if (!isNativeApp() && status.connected) {
-          // Nếu chạy trên Web desktop/laptop có Internet nhưng browser không cung cấp type:
-          // Mặc định coi là đường truyền băng thông rộng / Wi-Fi khả dụng
-          if (connType === 'unknown') {
-            connType = 'wifi';
-          }
-        }
-
-        // Kiểm tra navigator.onLine dự phòng
-        if (navigator.onLine === false) {
-          return {
-            connected: false,
-            connectionType: 'none',
-            isWifi: false,
-            isCellular: false,
-            isOffline: true
-          };
-        }
+      if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+        return {
+          connected: false,
+          connectionType: 'none',
+          isWifi: false,
+          isCellular: false,
+          isOffline: true
+        };
       }
 
-      const connected = status.connected;
+      const connected = status.connected && connType !== 'none';
       const isWifi = connected && connType === 'wifi';
       const isCellular = connected && connType === 'cellular';
-      const isOffline = !connected || connType === 'none';
+      const isOffline = !connected;
 
       return {
         connected,
@@ -93,8 +132,7 @@ class NetworkService {
         isCellular,
         isOffline
       };
-    } catch (err) {
-      console.warn('[NetworkService] Lỗi khi kiểm tra mạng qua Capacitor, dùng Web fallback:', err);
+    } catch {
       const isOnline = typeof navigator !== 'undefined' ? navigator.onLine : true;
       return {
         connected: isOnline,
@@ -111,99 +149,67 @@ class NetworkService {
    */
   public addStatusListener(callback: (status: ExtendedNetworkStatus) => void): () => void {
     let removeCapacitorListener: (() => void) | null = null;
+    let pollInterval: any = null;
 
     const handleUpdate = async () => {
       const fresh = await this.getStatus();
       callback(fresh);
     };
 
-    // Lắng nghe qua Capacitor
+    // Lắng nghe qua Capacitor Network
     Network.addListener('networkStatusChange', () => {
       handleUpdate();
     }).then(handle => {
       removeCapacitorListener = () => handle.remove();
-    }).catch(err => {
-      console.warn('[NetworkService] Không thể gán Capacitor listener:', err);
-    });
+    }).catch(() => {});
 
-    // Lắng nghe qua Window events dự phòng
+    // Lắng nghe qua Window events & Visibility & Periodic Probe cho Website
     if (typeof window !== 'undefined') {
       window.addEventListener('online', handleUpdate);
       window.addEventListener('offline', handleUpdate);
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') handleUpdate();
+      });
 
-      const nav = navigator as any;
-      const navConnection = nav.connection || nav.mozConnection || nav.webkitConnection;
-      if (navConnection && navConnection.addEventListener) {
-        navConnection.addEventListener('change', handleUpdate);
+      // Đối với Website: Polling probe nhẹ mỗi 3.5s để bắt kịp việc ngắt mạng
+      if (!isNativeApp()) {
+        pollInterval = setInterval(handleUpdate, 3500);
       }
     }
 
     return () => {
-      if (removeCapacitorListener) {
-        removeCapacitorListener();
-      }
+      if (removeCapacitorListener) removeCapacitorListener();
+      if (pollInterval) clearInterval(pollInterval);
       if (typeof window !== 'undefined') {
         window.removeEventListener('online', handleUpdate);
         window.removeEventListener('offline', handleUpdate);
-        const nav = navigator as any;
-        const navConnection = nav.connection || nav.mozConnection || nav.webkitConnection;
-        if (navConnection && navConnection.removeEventListener) {
-          navConnection.removeEventListener('change', handleUpdate);
-        }
       }
     };
   }
 
-  /**
-   * Cấu hình: Ứng dụng chấp nhận cả Wi-Fi lẫn 4G/5G, chỉ chặn khi mất mạng hoàn toàn
-   */
   public isWifiOnlyRequired(): boolean {
     return false;
   }
 
-  public setWifiOnlyRequired(required: boolean): void {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem(STORAGE_KEY_WIFI_ONLY, String(required));
-      window.dispatchEvent(new CustomEvent('kizuna_network_config_changed'));
-    }
-  }
+  public setWifiOnlyRequired(_required: boolean): void {}
 
-  /**
-   * Người dùng đã xác nhận bỏ qua và tiếp tục dùng 4G cho phiên làm việc này chưa
-   */
   public isCellularBypassed(): boolean {
-    if (typeof sessionStorage === 'undefined') return false;
-    return sessionStorage.getItem(STORAGE_KEY_CELLULAR_BYPASS) === 'true';
+    return false;
   }
 
-  public setCellularBypassed(bypassed: boolean): void {
-    if (typeof sessionStorage !== 'undefined') {
-      if (bypassed) {
-        sessionStorage.setItem(STORAGE_KEY_CELLULAR_BYPASS, 'true');
-      } else {
-        sessionStorage.removeItem(STORAGE_KEY_CELLULAR_BYPASS);
-      }
-      window.dispatchEvent(new CustomEvent('kizuna_network_config_changed'));
-    }
-  }
-
-  /**
-   * Trình giả lập loại mạng (cho mục đích demo / test chức năng)
-   */
-  public getSimulatedType(): ConnectionType | null {
-    return this.simulatedType;
-  }
+  public setCellularBypassed(_bypassed: boolean): void {}
 
   public setSimulatedType(type: ConnectionType | null): void {
     this.simulatedType = type;
     if (typeof sessionStorage !== 'undefined') {
-      if (type) {
-        sessionStorage.setItem(STORAGE_KEY_SIMULATED_TYPE, type);
-      } else {
-        sessionStorage.removeItem(STORAGE_KEY_SIMULATED_TYPE);
-      }
+      if (type) sessionStorage.setItem(STORAGE_KEY_SIMULATED_TYPE, type);
+      else sessionStorage.removeItem(STORAGE_KEY_SIMULATED_TYPE);
     }
     window.dispatchEvent(new CustomEvent('kizuna_network_config_changed'));
+  }
+
+  public getSimulatedType(): ConnectionType | null {
+    return this.simulatedType;
   }
 }
 
