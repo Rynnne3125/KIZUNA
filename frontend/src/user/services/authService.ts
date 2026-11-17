@@ -18,6 +18,15 @@ export function normalizeRole(rawRole: any): Role {
 // Thời gian duy trì phiên đăng nhập tối đa: 24 giờ
 export const SESSION_MAX_DURATION = 24 * 60 * 60 * 1000;
 
+function safeJsonParse<T>(raw: string | null | undefined, fallback: T): T {
+  if (!raw || typeof raw !== 'string' || !raw.trim()) return fallback;
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return fallback;
+  }
+}
+
 const PASSWORD_SALT = 'kizuna_salt_sec_2026';
 
 /**
@@ -235,7 +244,7 @@ export const authService = {
     }
 
     // 3. Lưu vào local storage để hỗ trợ đăng nhập ngoại tuyến mượt mà
-    const registered = JSON.parse(localStorage.getItem('kizuna_registered_users') || '[]');
+    const registered = safeJsonParse<any[]>(localStorage.getItem('kizuna_registered_users'), []);
     registered.push({ ...newUser, password: hashedPassword });
     localStorage.setItem('kizuna_registered_users', JSON.stringify(registered));
 
@@ -317,7 +326,7 @@ export const authService = {
 
           // Đồng bộ và cập nhật lại cache cục bộ kizuna_registered_users để không bao giờ bị lệch dữ liệu cũ
           try {
-            const registeredUsers = JSON.parse(localStorage.getItem('kizuna_registered_users') || '[]');
+            const registeredUsers = safeJsonParse<any[]>(localStorage.getItem('kizuna_registered_users'), []);
             const idx = registeredUsers.findIndex((u: any) => 
               u.email?.toLowerCase() === emailInput || u.id === user.id
             );
@@ -364,7 +373,7 @@ export const authService = {
     }
 
     // 3. Fallback bộ nhớ ngoại tuyến (Local Storage) khi không kết nối được Firestore
-    const registeredUsers = JSON.parse(localStorage.getItem('kizuna_registered_users') || '[]');
+    const registeredUsers = safeJsonParse<any[]>(localStorage.getItem('kizuna_registered_users'), []);
     const found = registeredUsers.find((u: any) => 
       u.email?.toLowerCase() === emailInput || u.username?.toLowerCase() === emailInput
     );

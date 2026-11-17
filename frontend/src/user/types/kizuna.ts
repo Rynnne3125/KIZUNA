@@ -33,7 +33,13 @@ export interface Milestone {
   grammarCount?: number;
   jlptLevel?: string;
   canDoGoal?: string;
-  milestone_type?: 'LESSON' | 'CHECKPOINT';
+  milestone_type?: 'LESSON' | 'CHECKPOINT' | 'BOSS_CHALLENGE';
+  kanjiMark?: string;
+  grammarSummary?: string;
+  vocabIds?: string[];
+  grammarIds?: string[];
+  gatekeeperQuiz?: any;
+  roleplayDialogues?: any;
   readingPassage?: any;
   nikkiDiary?: any;
 }

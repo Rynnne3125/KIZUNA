@@ -1387,7 +1387,7 @@ export const GrammarPage: React.FC = () => {
                                 color: '#c53d32',
                                 display: 'inline-flex',
                                 alignItems: 'center',
-                                justifyCenter: 'center',
+                                justifyContent: 'center',
                                 fontSize: 12,
                                 fontWeight: 800
                               }}>

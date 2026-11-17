@@ -11,7 +11,7 @@ let isKizunaFirestoreOffline =
   firebaseConfig.apiKey === 'dummy_api_key_for_ui_testing' ||
   firebaseConfig.apiKey === 'your_firebase_api_key_here';
 
-async function safeGetDocs(q: any, timeoutMs = 2200): Promise<any> {
+async function safeGetDocs(q: any, timeoutMs = 8000): Promise<any> {
   if (isKizunaFirestoreOffline || (typeof navigator !== 'undefined' && !navigator.onLine)) {
     throw new Error('FIRESTORE_OFFLINE');
   }
@@ -21,7 +21,6 @@ async function safeGetDocs(q: any, timeoutMs = 2200): Promise<any> {
       getDocs(q),
       new Promise((_, reject) => {
         timer = setTimeout(() => {
-          isKizunaFirestoreOffline = true;
           reject(new Error('FIRESTORE_TIMEOUT'));
         }, timeoutMs);
       })
@@ -34,7 +33,7 @@ async function safeGetDocs(q: any, timeoutMs = 2200): Promise<any> {
 function getSessionCache<T>(key: string): T | null {
   try {
     const raw = sessionStorage.getItem(key) || localStorage.getItem(`offline_${key}`);
-    if (!raw) return null;
+    if (!raw || typeof raw !== 'string' || !raw.trim()) return null;
     const { data, exp } = JSON.parse(raw);
     const isOffline = typeof navigator !== 'undefined' && !navigator.onLine;
     // Khi không có Wi-Fi (Offline), cho phép dùng dữ liệu đã lưu trong localStorage bất kể TTL

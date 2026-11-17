@@ -8,7 +8,7 @@ import {
 import { ApkDownloadModal } from './ApkDownloadModal';
 import { isNativeApp } from '../utils/platform';
 
-export type UserNavTab = 'home' | 'vocab' | 'grammar' | 'kanji' | 'roadmap' | 'library' | 'exam' | 'profile' | 'admin';
+export type UserNavTab = 'home' | 'vocab' | 'grammar' | 'kanji' | 'roadmap' | 'library' | 'exam' | 'profile' | 'admin' | 'login';
 
 interface UserNavbarProps {
   activeTab: UserNavTab;

@@ -20,10 +20,19 @@ export interface UserExamResult {
 
 export interface OfflineSyncItem {
   id: string;
-  type: 'vocab' | 'kanji' | 'grammar' | 'exam';
+  type: 'vocab' | 'kanji' | 'grammar' | 'exam' | 'roadmap';
   amount: number;
   activePointsEarned: number;
   createdAt: string;
+}
+
+function safeJsonParse<T>(raw: string | null | undefined, fallback: T): T {
+  if (!raw || typeof raw !== 'string' || !raw.trim()) return fallback;
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return fallback;
+  }
 }
 
 function withProgressTimeout<T>(promise: Promise<T>, ms = 2500): Promise<T> {
@@ -58,8 +67,8 @@ export const progressService = {
     try {
       const raw = sessionStorage.getItem(CACHE_KEY);
       if (raw) {
-        const { data, exp } = JSON.parse(raw);
-        if (Date.now() < exp) return data;
+        const parsed = safeJsonParse<{ data: UserProgressData; exp: number } | null>(raw, null);
+        if (parsed && Date.now() < parsed.exp) return parsed.data;
       }
     } catch {}
 
@@ -67,7 +76,8 @@ export const progressService = {
     if (typeof navigator !== 'undefined' && !navigator.onLine) {
       try {
         const offlineRaw = localStorage.getItem(OFFLINE_KEY);
-        if (offlineRaw) return JSON.parse(offlineRaw);
+        const parsedOffline = safeJsonParse<UserProgressData | null>(offlineRaw, null);
+        if (parsedOffline) return parsedOffline;
       } catch {}
       return {
         userId,
@@ -110,7 +120,8 @@ export const progressService = {
 
     try {
       const offlineRaw = localStorage.getItem(OFFLINE_KEY);
-      if (offlineRaw) return JSON.parse(offlineRaw);
+      const parsedOffline = safeJsonParse<UserProgressData | null>(offlineRaw, null);
+      if (parsedOffline) return parsedOffline;
     } catch {}
     return null;
   },
@@ -124,7 +135,7 @@ export const progressService = {
     try {
       sessionStorage.removeItem(`kizuna_user_progress_${userId}`);
       const prevRaw = localStorage.getItem(OFFLINE_KEY);
-      const prev: Partial<UserProgressData> = prevRaw ? JSON.parse(prevRaw) : { userId };
+      const prev: Partial<UserProgressData> = safeJsonParse<Partial<UserProgressData>>(prevRaw, { userId });
       const merged = {
         ...prev,
         ...data,
@@ -163,68 +174,70 @@ export const progressService = {
     if (!userId) return;
     const OFFLINE_KEY = `kizuna_offline_progress_${userId}`;
     const QUEUE_KEY = `kizuna_offline_sync_queue_${userId}`;
-    const fieldMap = {
+    const fieldMap: Record<string, string> = {
       vocab: 'vocabLearned',
       kanji: 'kanjiLearned',
       grammar: 'grammarLearned',
-      exam: 'examsCompleted'
-    } as const;
-    const targetField = fieldMap[type];
+      exam: 'examsCompleted',
+      roadmap: 'milestonesCompleted'
+    };
+    const targetField = fieldMap[type] || 'activitiesCompleted';
+
+    const finalXp = typeof xpEarned === 'number' ? xpEarned : activePointsEarned * 2;
+    const todayStr = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    let currentStreak = 0;
 
     try {
       sessionStorage.removeItem(`kizuna_user_progress_${userId}`);
       sessionStorage.removeItem(`kizuna_roadmap_progress_${userId}`);
 
       // 1. Cập nhật session user trong localStorage để thanh header nhảy điểm ngay (kể cả khi Offline)
-      const finalXp = typeof xpEarned === 'number' ? xpEarned : activePointsEarned * 2;
-      const todayStr = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
-
-      // Cập nhật session user trong localStorage để thanh header và profile nhảy điểm ngay
       const userRaw = localStorage.getItem('kizuna_user');
-      let currentStreak = 0;
       if (userRaw) {
-        const u = JSON.parse(userRaw);
-        u.activePoints = (u.activePoints || 0) + activePointsEarned;
-        u.totalXp = (u.totalXp || 0) + finalXp;
+        const u = safeJsonParse<any>(userRaw, null);
+        if (u) {
+          u.activePoints = (u.activePoints || 0) + activePointsEarned;
+          u.totalXp = (u.totalXp || 0) + finalXp;
 
-        const lastActive = u.lastActiveDate;
-        let streak = typeof u.currentStreak === 'number' ? u.currentStreak : 0;
-        if (lastActive !== todayStr) {
-          if (lastActive) {
-            const lastDate = new Date(lastActive);
-            const curDate = new Date(todayStr);
-            const diffDays = Math.round((curDate.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
-            if (diffDays === 1) {
-              streak += 1;
+          const lastActive = u.lastActiveDate;
+          let streak = typeof u.currentStreak === 'number' ? u.currentStreak : 0;
+          if (lastActive !== todayStr) {
+            if (lastActive) {
+              const lastDate = new Date(lastActive);
+              const curDate = new Date(todayStr);
+              const diffDays = Math.round((curDate.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
+              if (diffDays === 1) {
+                streak += 1;
+              } else {
+                streak = 1;
+              }
             } else {
               streak = 1;
             }
-          } else {
-            streak = 1;
+            u.currentStreak = streak;
+            u.lastActiveDate = todayStr;
           }
-          u.currentStreak = streak;
-          u.lastActiveDate = todayStr;
-        }
-        currentStreak = u.currentStreak || 1;
-        u.lastStudiedAt = new Date().toISOString();
-        localStorage.setItem('kizuna_user', JSON.stringify(u));
+          currentStreak = u.currentStreak || 1;
+          u.lastStudiedAt = new Date().toISOString();
+          localStorage.setItem('kizuna_user', JSON.stringify(u));
 
-        // Phát sự kiện để App.tsx và UserNavbar cập nhật ngay lập tức
-        if (typeof window !== 'undefined') {
-          window.dispatchEvent(new Event('kizuna_user_updated'));
+          // Phát sự kiện để App.tsx và UserNavbar cập nhật ngay lập tức
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new Event('kizuna_user_updated'));
+          }
         }
       }
 
       // 2. Cập nhật tiến độ Offline trong localStorage
       const prevRaw = localStorage.getItem(OFFLINE_KEY);
-      const prev: Record<string, any> = prevRaw ? JSON.parse(prevRaw) : {
+      const prev: Record<string, any> = safeJsonParse<Record<string, any>>(prevRaw, {
         userId,
         stageCompletionPercentage: 0,
         vocabLearned: 0,
         kanjiLearned: 0,
         grammarLearned: 0,
         examsCompleted: 0,
-      };
+      });
       prev[targetField] = (Number(prev[targetField]) || 0) + amount;
       prev.lastStudiedAt = new Date().toISOString();
       localStorage.setItem(OFFLINE_KEY, JSON.stringify(prev));
@@ -233,7 +246,7 @@ export const progressService = {
     const enqueueForLaterSync = () => {
       try {
         const rawQ = localStorage.getItem(QUEUE_KEY);
-        const queue: OfflineSyncItem[] = rawQ ? JSON.parse(rawQ) : [];
+        const queue: OfflineSyncItem[] = safeJsonParse<OfflineSyncItem[]>(rawQ, []);
         queue.push({
           id: `sync_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
           type,
@@ -286,7 +299,7 @@ export const progressService = {
     let queue: OfflineSyncItem[] = [];
     try {
       const raw = localStorage.getItem(QUEUE_KEY);
-      if (raw) queue = JSON.parse(raw);
+      queue = safeJsonParse<OfflineSyncItem[]>(raw, []);
     } catch {}
 
     if (queue.length === 0) return 0;
@@ -344,8 +357,8 @@ export const progressService = {
     try {
       const cached = sessionStorage.getItem(CACHE_KEY);
       if (cached) {
-        const { data, exp } = JSON.parse(cached);
-        if (Date.now() < exp) return data;
+        const parsed = safeJsonParse<{ data: UserRoadmapProgress; exp: number } | null>(cached, null);
+        if (parsed && Date.now() < parsed.exp) return parsed.data;
       }
     } catch {}
 
@@ -500,7 +513,7 @@ export const progressService = {
     const LOCAL_KEY = `kizuna_exam_results_${result.userId}`;
     try {
       const existingRaw = localStorage.getItem(LOCAL_KEY);
-      const existing: Record<string, UserExamResult> = existingRaw ? JSON.parse(existingRaw) : {};
+      const existing: Record<string, UserExamResult> = safeJsonParse<Record<string, UserExamResult>>(existingRaw, {});
       existing[result.examId] = result;
       localStorage.setItem(LOCAL_KEY, JSON.stringify(existing));
     } catch {}
@@ -529,9 +542,7 @@ export const progressService = {
     let cachedResults: Record<string, UserExamResult> = {};
     try {
       const existingRaw = localStorage.getItem(LOCAL_KEY);
-      if (existingRaw) {
-        cachedResults = JSON.parse(existingRaw);
-      }
+      cachedResults = safeJsonParse<Record<string, UserExamResult>>(existingRaw, {});
     } catch {}
 
     if (!db) return cachedResults;
@@ -567,7 +578,7 @@ export const progressService = {
     const LOCAL_KEY = `kizuna_vocab_completed_units_${userId}`;
     try {
       const existingRaw = localStorage.getItem(LOCAL_KEY);
-      const completedUnits: string[] = existingRaw ? JSON.parse(existingRaw) : [];
+      const completedUnits: string[] = safeJsonParse<string[]>(existingRaw, []);
       if (!completedUnits.includes(unitId)) {
         completedUnits.push(unitId);
         localStorage.setItem(LOCAL_KEY, JSON.stringify(completedUnits));
@@ -582,7 +593,7 @@ export const progressService = {
     if (!userId) return [];
     try {
       const raw = localStorage.getItem(`kizuna_vocab_completed_units_${userId}`);
-      return raw ? JSON.parse(raw) : [];
+      return safeJsonParse<string[]>(raw, []);
     } catch {
       return [];
     }
@@ -596,7 +607,7 @@ export const progressService = {
     const LOCAL_KEY = `kizuna_grammar_completed_units_${userId}`;
     try {
       const existingRaw = localStorage.getItem(LOCAL_KEY);
-      const completedUnits: string[] = existingRaw ? JSON.parse(existingRaw) : [];
+      const completedUnits: string[] = safeJsonParse<string[]>(existingRaw, []);
       if (!completedUnits.includes(unitId)) {
         completedUnits.push(unitId);
         localStorage.setItem(LOCAL_KEY, JSON.stringify(completedUnits));
@@ -611,7 +622,7 @@ export const progressService = {
     if (!userId) return [];
     try {
       const raw = localStorage.getItem(`kizuna_grammar_completed_units_${userId}`);
-      return raw ? JSON.parse(raw) : [];
+      return safeJsonParse<string[]>(raw, []);
     } catch {
       return [];
     }

@@ -173,31 +173,33 @@ const DEFAULT_FALLBACK_AUDITS: AiEvaluationAudit[] = [
   }
 ];
 
-export const adminService = {
-  async fetchCollectionData<T>(collectionName: string, queryLimit: number = 100): Promise<T[]> {
-    if (isFirestoreOfflineOrDummy) return [];
-    try {
-      const q = query(collection(db, collectionName), limit(queryLimit));
-      const snap = await withFirestoreTimeout(getDocs(q), 2200);
-      const list: T[] = [];
-      if (!snap.empty) {
-        snap.forEach(d => list.push({ id: d.id, ...d.data() } as unknown as T));
-      }
-      return list;
-    } catch (e) {
-      console.warn(`[AdminService] Firestore collection '${collectionName}' unavailable/timeout, using fallback.`);
-      return [];
+async function fetchCollectionData<T>(collectionName: string, queryLimit: number = 100): Promise<T[]> {
+  if (isFirestoreOfflineOrDummy) return [];
+  try {
+    const q = query(collection(db, collectionName), limit(queryLimit));
+    const snap = await withFirestoreTimeout(getDocs(q), 2200);
+    const list: T[] = [];
+    if (!snap.empty) {
+      snap.forEach(d => list.push({ id: d.id, ...d.data() } as unknown as T));
     }
-  },
+    return list;
+  } catch (e) {
+    console.warn(`[AdminService] Firestore collection '${collectionName}' unavailable/timeout, using fallback.`);
+    return [];
+  }
+}
+
+export const adminService = {
+  fetchCollectionData,
 
   async getSystemStats(): Promise<AdminSystemStats> {
     try {
-      const allUsers = await this.fetchCollectionData<AdminUser>('users');
+      const allUsers = await fetchCollectionData<AdminUser>('users');
       const users = allUsers.filter(u => !u.isDeleted);
-      const audits = await this.fetchCollectionData<AiEvaluationAudit>('ai_evaluation_audits');
-      const stages = await this.fetchCollectionData<Stage>('stages');
-      const milestones = await this.fetchCollectionData<Milestone>('milestones');
-      const exams = await this.fetchCollectionData<JlptExam>('jlpt_exam_catalog');
+      const audits = await fetchCollectionData<AiEvaluationAudit>('ai_evaluation_audits');
+      const stages = await fetchCollectionData<Stage>('stages');
+      const milestones = await fetchCollectionData<Milestone>('milestones');
+      const exams = await fetchCollectionData<JlptExam>('jlpt_exam_catalog');
 
       const totalAdmins = users.filter(u => u.role === 'ROLE_ADMIN').length;
       const totalLearners = users.filter(u => u.role !== 'ROLE_ADMIN').length;
@@ -227,7 +229,7 @@ export const adminService = {
   },
 
   async getUsers(): Promise<AdminUser[]> {
-    const all = await this.fetchCollectionData<AdminUser>('users', 300);
+    const all = await fetchCollectionData<AdminUser>('users', 300);
     if (all.length > 0) {
       return all.filter(u => !u.isDeleted);
     }
@@ -383,12 +385,12 @@ export const adminService = {
   },
 
   async getAiAudits(): Promise<AiEvaluationAudit[]> {
-    const list = await this.fetchCollectionData<AiEvaluationAudit>('ai_evaluation_audits');
+    const list = await fetchCollectionData<AiEvaluationAudit>('ai_evaluation_audits');
     return list.length > 0 ? list : DEFAULT_FALLBACK_AUDITS;
   },
 
   async getStages(): Promise<Stage[]> {
-    const list = await this.fetchCollectionData<Stage>('stages', 100);
+    const list = await fetchCollectionData<Stage>('stages', 100);
     if (list.length > 0) {
       return list.sort((a, b) => ((a.orderIndex ?? a.order_index ?? 0) - (b.orderIndex ?? b.order_index ?? 0)));
     }
@@ -444,7 +446,7 @@ export const adminService = {
   },
 
   async getMilestones(): Promise<Milestone[]> {
-    const list = await this.fetchCollectionData<Milestone>('milestones', 200);
+    const list = await fetchCollectionData<Milestone>('milestones', 200);
     if (list.length > 0) {
       return list.sort((a, b) => ((a.orderIndex ?? a.order_index ?? 0) - (b.orderIndex ?? b.order_index ?? 0)));
     }
@@ -677,7 +679,7 @@ export const adminService = {
   },
 
   async getVocabulary(): Promise<VocabularyItem[]> {
-    const list = await this.fetchCollectionData<VocabularyItem>('vocabulary_items', 500);
+    const list = await fetchCollectionData<VocabularyItem>('vocabulary_items', 500);
     if (list.length > 0) return list;
     return await kizunaService.getVocabulary();
   },
@@ -746,7 +748,7 @@ export const adminService = {
   },
 
   async getGrammar(): Promise<GrammarItem[]> {
-    const list = await this.fetchCollectionData<GrammarItem>('grammar_items', 500);
+    const list = await fetchCollectionData<GrammarItem>('grammar_items', 500);
     if (list.length > 0) return list;
     return await kizunaService.getGrammar();
   },
@@ -809,7 +811,7 @@ export const adminService = {
   },
 
   async getKanji(): Promise<KanjiDictionary[]> {
-    const list = await this.fetchCollectionData<KanjiDictionary>('kanji_dictionary', 500);
+    const list = await fetchCollectionData<KanjiDictionary>('kanji_dictionary', 500);
     if (list.length > 0) return list;
     return await kizunaService.getKanji();
   },
@@ -876,7 +878,7 @@ export const adminService = {
   },
 
   async getExams(): Promise<JlptExam[]> {
-    const list = await this.fetchCollectionData<JlptExam>('jlpt_exam_catalog');
+    const list = await fetchCollectionData<JlptExam>('jlpt_exam_catalog');
     if (list.length > 0) return list;
     return await kizunaService.getExamCatalog();
   },
@@ -968,8 +970,8 @@ export const adminService = {
   }): Promise<LearningAnalyticsData> {
     const { users, stages, milestones, vocabulary, kanji } = params;
     const [progressDocs, srsDocs] = await Promise.all([
-      this.fetchCollectionData<any>('user_progress', 500),
-      this.fetchCollectionData<any>('user_srs_items', 500)
+      fetchCollectionData<any>('user_progress', 500),
+      fetchCollectionData<any>('user_srs_items', 500)
     ]);
 
     const learners = users.filter(u => u.role !== 'ROLE_ADMIN');
