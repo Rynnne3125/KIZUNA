@@ -37,9 +37,9 @@ const BentoBox: React.FC<BentoBoxProps> = React.memo(({
   colSpan = 'col-span-12'
 }) => (
   <div
-    className={`${colSpan} relative rounded-2xl sm:rounded-3xl p-[1px] bg-gradient-to-br from-emerald-100/60 via-white/80 to-emerald-50/40 dark:from-emerald-950/40 dark:via-slate-900/60 dark:to-slate-950 border border-emerald-100/70 dark:border-slate-800 shadow-xs hover:shadow-md transition-shadow`}
+    className={`${colSpan} min-w-0 w-full relative rounded-2xl sm:rounded-3xl p-[1px] bg-gradient-to-br from-emerald-100/60 via-white/80 to-emerald-50/40 dark:from-emerald-950/40 dark:via-slate-900/60 dark:to-slate-950 border border-emerald-100/70 dark:border-slate-800 shadow-xs hover:shadow-md transition-shadow`}
   >
-    <div className={`h-full w-full rounded-[21px] sm:rounded-[23px] bg-white/95 dark:bg-slate-900/90 backdrop-blur-md flex flex-col p-4 sm:p-6 ${className}`}>
+    <div className={`h-full w-full min-w-0 rounded-[21px] sm:rounded-[23px] bg-white/95 dark:bg-slate-900/90 backdrop-blur-md flex flex-col p-4 sm:p-6 overflow-hidden ${className}`}>
       {children}
     </div>
   </div>
@@ -1532,34 +1532,34 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
       .slice(0, 6);
 
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4 sm:gap-6 pb-12">
-        <BentoBox colSpan="col-span-1 sm:col-span-1 md:col-span-4">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 pb-12 w-full min-w-0">
+        <BentoBox colSpan="col-span-12 sm:col-span-4 md:col-span-4">
           <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Tổng XP toàn hệ thống</div>
-          <div className="text-3xl sm:text-4xl font-black text-slate-800 dark:text-white">{totalXpSystem.toLocaleString()} XP</div>
-          <div className="text-xs text-slate-500 mt-2">Tích lũy từ {users.length} tài khoản</div>
+          <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-800 dark:text-white truncate">{totalXpSystem.toLocaleString()} XP</div>
+          <div className="text-xs text-slate-500 mt-2 truncate">Tích lũy từ {users.length} tài khoản</div>
         </BentoBox>
 
-        <BentoBox colSpan="col-span-1 sm:col-span-1 md:col-span-4">
+        <BentoBox colSpan="col-span-12 sm:col-span-4 md:col-span-4">
           <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Tổng Điểm Năng Động</div>
-          <div className="text-3xl sm:text-4xl font-black text-amber-600 dark:text-amber-400">{totalActivePoints.toLocaleString()} AP</div>
-          <div className="text-xs text-slate-500 mt-2">Điểm thi đua bảng xếp hạng</div>
+          <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-amber-600 dark:text-amber-400 truncate">{totalActivePoints.toLocaleString()} AP</div>
+          <div className="text-xs text-slate-500 mt-2 truncate">Điểm thi đua bảng xếp hạng</div>
         </BentoBox>
 
-        <BentoBox colSpan="col-span-1 sm:col-span-2 md:col-span-4">
-          <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Đã thẩm định năng lực (Placement)</div>
-          <div className="text-3xl sm:text-4xl font-black text-emerald-600 dark:text-emerald-400">
+        <BentoBox colSpan="col-span-12 sm:col-span-4 md:col-span-4">
+          <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Đã thẩm định năng lực</div>
+          <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-emerald-600 dark:text-emerald-400 truncate">
             {placementCompletedCount} / {users.length}
           </div>
-          <div className="text-xs text-slate-500 mt-2">Học viên đã hoàn thành bài test đầu vào</div>
+          <div className="text-xs text-slate-500 mt-2 truncate">Học viên hoàn thành bài test đầu vào</div>
         </BentoBox>
 
-        <BentoBox colSpan="col-span-1 sm:col-span-2 md:col-span-6">
+        <BentoBox colSpan="col-span-12 md:col-span-6">
           <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white mb-2">Phân bố trình độ học viên (JLPT)</h3>
           <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">Thống kê theo cấp độ hiện tại trên Firestore</p>
           <BarList data={levelBarData} color="emerald" className="mt-2" />
         </BentoBox>
 
-        <BentoBox colSpan="col-span-1 sm:col-span-2 md:col-span-6">
+        <BentoBox colSpan="col-span-12 md:col-span-6">
           <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white mb-2">Thống kê tài nguyên học liệu</h3>
           <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">Số lượng bản ghi hiện có trong cơ sở dữ liệu</p>
           <BarList data={contentStats} color="amber" className="mt-2" />
@@ -1567,11 +1567,54 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
         <BentoBox colSpan="col-span-12">
           <div className="mb-4">
-            <h3 className="text-lg font-bold text-slate-800 dark:text-white">Bảng xếp hạng học viên tích cực nhất</h3>
+            <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white">Bảng xếp hạng học viên tích cực nhất</h3>
             <p className="text-xs text-slate-500 dark:text-slate-400">Top học viên dẫn đầu về XP và Điểm Năng Động</p>
           </div>
-          <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
-            <Table className="min-w-[700px]">
+
+          {/* Dạng Mobile Card List (cho màn hình nhỏ, hoàn toàn không cần cuộn ngang) */}
+          <div className="block sm:hidden divide-y divide-slate-100 dark:divide-slate-800">
+            {topLearners.map((u, idx) => (
+              <div key={u.id} className="py-3 flex items-center justify-between gap-2.5">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <span className={`w-6 h-6 rounded-full text-[11px] font-black flex items-center justify-center shrink-0 ${
+                    idx === 0 ? 'bg-amber-400 text-slate-900 font-extrabold shadow-sm' :
+                    idx === 1 ? 'bg-slate-200 text-slate-800 font-extrabold' :
+                    idx === 2 ? 'bg-amber-600 text-white font-extrabold' :
+                    'bg-slate-100 dark:bg-slate-800 text-slate-500'
+                  }`}>
+                    #{idx + 1}
+                  </span>
+                  <div className="min-w-0">
+                    <div className="font-bold text-xs text-slate-900 dark:text-white truncate">
+                      {u.fullName || u.username || 'Ẩn danh'}
+                    </div>
+                    <div className="text-[10px] text-slate-400 truncate flex items-center gap-1.5 mt-0.5">
+                      <span className="font-semibold text-emerald-600 dark:text-emerald-400">{u.level || 'Tân binh'}</span>
+                      <span>•</span>
+                      <span>🔥 {u.currentStreak || 0} ngày</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-right shrink-0">
+                  <div className="font-extrabold text-xs text-emerald-600 dark:text-emerald-400">
+                    {(u.activePoints || 0).toLocaleString()} AP
+                  </div>
+                  <div className="text-[10px] text-slate-400">
+                    {(u.totalXp || 0).toLocaleString()} XP
+                  </div>
+                </div>
+              </div>
+            ))}
+            {topLearners.length === 0 && (
+              <div className="py-6 text-center text-xs text-slate-500">
+                Chưa có dữ liệu học viên
+              </div>
+            )}
+          </div>
+
+          {/* Dạng Desktop Table (chỉ hiện từ sm trở lên, có overflow-x-auto an toàn) */}
+          <div className="hidden sm:block w-full max-w-full overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
+            <Table className="w-full">
               <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
                 <TableRow>
                   <TableHead className="pl-6">Hạng</TableHead>
@@ -1598,6 +1641,13 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                     <TableCell className="text-right pr-6 font-bold text-emerald-600">{(u.activePoints || 0).toLocaleString()} AP</TableCell>
                   </TableRow>
                 ))}
+                {topLearners.length === 0 && (
+                  <TableRow>
+                    <TableCell colSpan={6} className="text-center py-6 text-slate-500 text-xs">
+                      Chưa có dữ liệu học viên
+                    </TableCell>
+                  </TableRow>
+                )}
               </TableBody>
             </Table>
           </div>
@@ -1622,72 +1672,72 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
     const maxReached = Math.max(1, ...(analytics?.funnelSteps.map(s => s.reachedCount) || [1]));
 
     return (
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pb-12">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 pb-12 w-full min-w-0">
         {/* KPI SUMMARY CARDS */}
-        <BentoBox colSpan="md:col-span-4">
+        <BentoBox colSpan="col-span-12 sm:col-span-4 md:col-span-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Học viên trong Phễu</span>
             <Users className="w-4 h-4 text-blue-500" />
           </div>
-          <div className="text-4xl font-black text-slate-800 dark:text-white">
+          <div className="text-3xl sm:text-4xl font-black text-slate-800 dark:text-white truncate">
             {analytics?.totalLearnersAnalyzed ?? users.filter(u => u.role !== 'ROLE_ADMIN').length}
           </div>
-          <div className="text-xs text-slate-500 mt-2">
-            Tổng số học viên tham gia lộ trình Cột mốc
+          <div className="text-xs text-slate-500 mt-2 truncate">
+            Học viên tham gia lộ trình Cột mốc
           </div>
         </BentoBox>
 
-        <BentoBox colSpan="md:col-span-4">
+        <BentoBox colSpan="col-span-12 sm:col-span-4 md:col-span-4">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Tỷ lệ Giữ chân TB (Retention)</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Tỷ lệ Giữ chân TB</span>
             <TrendingUp className="w-4 h-4 text-emerald-500" />
           </div>
-          <div className="text-4xl font-black text-emerald-600 dark:text-emerald-400">
+          <div className="text-3xl sm:text-4xl font-black text-emerald-600 dark:text-emerald-400 truncate">
             {analytics?.avgFunnelRetention ?? 0}%
           </div>
-          <div className="text-xs text-slate-500 mt-2">
-            Trung bình học viên duy trì qua {milestones.length} cột mốc
+          <div className="text-xs text-slate-500 mt-2 truncate">
+            Duy trì qua {milestones.length} cột mốc
           </div>
         </BentoBox>
 
-        <BentoBox colSpan="md:col-span-4">
+        <BentoBox colSpan="col-span-12 sm:col-span-4 md:col-span-4">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-red-500">Điểm nghẽn Rơi rụng (Bottleneck)</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-red-500">Điểm nghẽn Rơi rụng</span>
             <AlertTriangle className="w-4 h-4 text-red-500" />
           </div>
-          <div className="text-lg font-extrabold text-slate-800 dark:text-white truncate" title={analytics?.bottleneckMilestoneTitle}>
+          <div className="text-base sm:text-lg font-extrabold text-slate-800 dark:text-white truncate" title={analytics?.bottleneckMilestoneTitle}>
             {analytics?.bottleneckMilestoneTitle || 'Đang phân tích'}
           </div>
-          <div className="text-xs text-red-600 dark:text-red-400 font-semibold mt-2 flex items-center gap-1">
-            <ArrowDownRight className="w-3.5 h-3.5" />
-            Rơi rụng cao nhất: -{analytics?.bottleneckDropOffRate ?? 0}% so với mốc trước
+          <div className="text-xs text-red-600 dark:text-red-400 font-semibold mt-2 flex items-center gap-1 truncate">
+            <ArrowDownRight className="w-3.5 h-3.5 shrink-0" />
+            Rơi rụng cao nhất: -{analytics?.bottleneckDropOffRate ?? 0}%
           </div>
         </BentoBox>
 
         {/* 1. BIỂU ĐỒ PHỄU RƠI RỤNG (DROP-OFF FUNNEL) QUA CÁC MỐC */}
         <BentoBox colSpan="col-span-12">
-          <div className="mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
-            <div>
-              <div className="flex items-center gap-2">
-                <h2 className="text-2xl font-bold text-slate-800 dark:text-white">
-                  Biểu đồ Phễu Rơi Rụng (Drop-off Funnel) qua các Cột mốc
+          <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h2 className="text-lg sm:text-2xl font-bold text-slate-800 dark:text-white">
+                  Biểu đồ Phễu Rơi Rụng (Drop-off Funnel)
                 </h2>
-                <Badge className="bg-red-50 text-red-600 border border-red-200 dark:bg-red-900/20 dark:text-red-400">
-                  Funnel Analytics
+                <Badge className="bg-red-50 text-red-600 border border-red-200 dark:bg-red-900/20 dark:text-red-400 text-[10px] sm:text-xs">
+                  Funnel
                 </Badge>
               </div>
-              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-                Theo dõi số lượng học viên tiếp cận, hoàn thành và tỷ lệ bỏ cuộc tại từng cột mốc để phát hiện bài học quá khó cần cân bằng lại Gameplay.
+              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+                Theo dõi số lượng học viên tiếp cận và hoàn thành tại từng cột mốc
               </p>
             </div>
 
-            <div className="flex items-center gap-2.5">
+            <div className="w-full sm:w-auto">
               <select
                 value={funnelStageFilter}
                 onChange={e => setFunnelStageFilter(e.target.value)}
-                className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200"
+                className="w-full sm:w-auto h-9 sm:h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200"
               >
-                <option value="ALL">Tất cả Chặng học ({stages.length} chặng)</option>
+                <option value="ALL">Tất cả Chặng học ({stages.length})</option>
                 {stages.map(s => (
                   <option key={s.id} value={s.id}>
                     {s.title || s.id}
@@ -1697,7 +1747,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
             </div>
           </div>
 
-          <div className="space-y-3.5">
+          <div className="space-y-3">
             {funnelSteps.map((step, index) => {
               const reachedWidthPct = Math.max(6, Math.round((step.reachedCount / maxReached) * 100));
               const completedWidthPct = Math.max(4, Math.round((step.completedCount / maxReached) * 100));
@@ -1706,40 +1756,40 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
               return (
                 <div
                   key={step.milestoneId}
-                  className={`p-4 rounded-2xl border transition-colors ${
+                  className={`p-3 sm:p-4 rounded-2xl border transition-colors w-full min-w-0 ${
                     step.isBottleneck
                       ? 'bg-red-50/40 dark:bg-red-950/20 border-red-200 dark:border-red-800/70'
                       : 'bg-slate-50/60 dark:bg-slate-800/40 border-slate-100 dark:border-slate-800'
                   }`}
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2.5">
-                    <div className="flex items-center gap-2.5 flex-wrap">
-                      <span className="w-7 h-7 rounded-lg bg-slate-900 dark:bg-slate-700 text-white text-xs font-extrabold flex items-center justify-center shrink-0">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-2.5 w-full min-w-0">
+                    <div className="flex items-start sm:items-center gap-2.5 min-w-0">
+                      <span className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-slate-900 dark:bg-slate-700 text-white text-[11px] sm:text-xs font-extrabold flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
                         #{index + 1}
                       </span>
-                      <div>
-                        <div className="font-bold text-slate-800 dark:text-white text-sm flex items-center gap-2 flex-wrap">
-                          <span>{step.milestoneTitle}</span>
-                          <span className="text-[11px] font-mono text-slate-400">({step.milestoneId})</span>
+                      <div className="min-w-0">
+                        <div className="font-bold text-slate-800 dark:text-white text-xs sm:text-sm flex items-center gap-1.5 flex-wrap">
+                          <span className="truncate max-w-[200px] sm:max-w-none">{step.milestoneTitle}</span>
+                          <span className="text-[10px] font-mono text-slate-400 shrink-0">({step.milestoneId})</span>
                           {step.isBottleneck && (
-                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300">
-                              <AlertTriangle className="w-3 h-3" /> Điểm nghẽn (Rơi rụng cao)
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300 shrink-0">
+                              <AlertTriangle className="w-3 h-3" /> Điểm nghẽn
                             </span>
                           )}
                         </div>
-                        <div className="text-xs text-slate-400">
+                        <div className="text-[11px] text-slate-400 mt-0.5">
                           Chặng: <span className="font-semibold text-slate-600 dark:text-slate-300">{step.stageTitle}</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3 self-end sm:self-center">
-                      <div className="text-right">
-                        <div className="text-xs font-bold text-slate-700 dark:text-slate-200">
+                    <div className="flex items-center justify-between sm:justify-end gap-2 sm:gap-3 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200/60 dark:border-slate-800">
+                      <div className="text-left sm:text-right min-w-0">
+                        <div className="text-[11px] sm:text-xs font-bold text-slate-700 dark:text-slate-200">
                           Tiếp cận: <span className="text-blue-600 dark:text-blue-400">{step.reachedCount}</span> • Hoàn thành:{' '}
                           <span className="text-emerald-600 dark:text-emerald-400">{step.completedCount}</span>
                         </div>
-                        <div className="text-[11px] text-slate-500 flex items-center justify-end gap-2">
+                        <div className="text-[10px] sm:text-[11px] text-slate-500 flex items-center sm:justify-end gap-1.5 mt-0.5">
                           <span>Giữ chân: <strong>{step.retentionRate}%</strong></span>
                           <span className={step.dropOffRate >= 15 ? 'text-red-600 font-bold' : 'text-amber-600 font-semibold'}>
                             • Rơi rụng: -{step.dropOffRate}%
@@ -1755,17 +1805,17 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                             setEditingMilestone(targetMilestone);
                             setIsMilestoneDrawerOpen(true);
                           }}
-                          className="h-8 px-2.5 text-xs rounded-xl border-slate-200 dark:border-slate-700 hover:text-red-600 cursor-pointer shrink-0"
-                          title="Mở cấu hình Cân bằng Gameplay của Cột mốc này"
+                          className="h-7 sm:h-8 px-2 sm:px-2.5 text-[11px] sm:text-xs rounded-xl border-slate-200 dark:border-slate-700 hover:text-red-600 cursor-pointer shrink-0"
+                          title="Cân bằng Gameplay"
                         >
-                          <Settings className="w-3.5 h-3.5 mr-1" /> Cân bằng
+                          <Settings className="w-3 h-3 sm:w-3.5 sm:h-3.5 mr-1" /> Cân bằng
                         </Button>
                       )}
                     </div>
                   </div>
 
                   {/* THANH PHỄU KÉP: TIẾP CẬN (NỀN XANH NHẠT) & HOÀN THÀNH (THANH ĐẬM) */}
-                  <div className="w-full h-5 bg-slate-200/70 dark:bg-slate-900 rounded-full overflow-hidden relative">
+                  <div className="w-full h-4 sm:h-5 bg-slate-200/70 dark:bg-slate-900 rounded-full overflow-hidden relative">
                     <div
                       style={{ width: `${reachedWidthPct}%` }}
                       className="h-full bg-blue-500/25 dark:bg-blue-400/25 rounded-full transition-all duration-500"
@@ -1773,7 +1823,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                     />
                     <div
                       style={{ width: `${completedWidthPct}%` }}
-                      className={`absolute top-0 left-0 h-full rounded-full transition-all duration-500 flex items-center justify-end pr-2 text-[10px] font-extrabold text-white ${
+                      className={`absolute top-0 left-0 h-full rounded-full transition-all duration-500 flex items-center justify-end pr-2 text-[9px] sm:text-[10px] font-extrabold text-white ${
                         step.isBottleneck
                           ? 'bg-gradient-to-r from-red-600 to-orange-500'
                           : 'bg-gradient-to-r from-emerald-600 to-teal-500'
@@ -1788,7 +1838,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
             })}
 
             {funnelSteps.length === 0 && (
-              <div className="text-center py-8 text-slate-500 text-sm">
+              <div className="text-center py-8 text-slate-500 text-xs sm:text-sm">
                 Không có cột mốc nào thuộc chặng đã chọn.
               </div>
             )}
@@ -1797,37 +1847,37 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
         {/* 2. BÁO CÁO TOP TỪ VỰNG & KANJI "TỬ THẦN" (HAY LÀM SAI NHẤT) */}
         <BentoBox colSpan="col-span-12">
-          <div className="mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
-            <div>
+          <div className="mb-4 sm:mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-3">
+            <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <Skull className="w-6 h-6 text-red-600" />
-                <h2 className="text-2xl font-bold text-slate-800 dark:text-white">
-                  Báo cáo Top Từ vựng & Kanji "Tử thần" (Hay làm sai nhất)
+                <Skull className="w-5 h-5 sm:w-6 sm:h-6 text-red-600 shrink-0" />
+                <h2 className="text-lg sm:text-2xl font-bold text-slate-800 dark:text-white">
+                  Báo cáo Top Từ vựng & Kanji "Tử thần"
                 </h2>
               </div>
-              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-                Thống kê các mục từ vựng và chữ Hán có tỷ lệ trả lời sai cao nhất và hệ số ghi nhớ SRS (`Ease Factor`) thấp nhất để Admin bổ sung mẹo nhớ hoặc ví dụ trực quan.
+              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+                Các mục có tỷ lệ làm sai cao nhất từ dữ liệu SRS thực tế
               </p>
             </div>
 
             {((analytics?.killerVocabulary?.length || 0) > 0 || (analytics?.killerKanji?.length || 0) > 0) && (
-              <div className="flex flex-wrap items-center gap-2.5">
-                <div className="inline-flex rounded-xl bg-slate-100 dark:bg-slate-800 p-1">
+              <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto">
+                <div className="inline-flex rounded-xl bg-slate-100 dark:bg-slate-800 p-1 w-full sm:w-auto justify-between sm:justify-start">
                   <button
                     type="button"
                     onClick={() => setKillerTab('ALL')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
+                    className={`flex-1 sm:flex-none px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer text-center ${
                       killerTab === 'ALL'
                         ? 'bg-white dark:bg-slate-900 text-red-600 shadow-sm'
                         : 'text-slate-600 dark:text-slate-400'
                     }`}
                   >
-                    Tất cả (Song song)
+                    Tất cả
                   </button>
                   <button
                     type="button"
                     onClick={() => setKillerTab('VOCABULARY')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
+                    className={`flex-1 sm:flex-none px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer text-center ${
                       killerTab === 'VOCABULARY'
                         ? 'bg-white dark:bg-slate-900 text-red-600 shadow-sm'
                         : 'text-slate-600 dark:text-slate-400'
@@ -1838,7 +1888,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                   <button
                     type="button"
                     onClick={() => setKillerTab('KANJI')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
+                    className={`flex-1 sm:flex-none px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer text-center ${
                       killerTab === 'KANJI'
                         ? 'bg-white dark:bg-slate-900 text-red-600 shadow-sm'
                         : 'text-slate-600 dark:text-slate-400'
@@ -1851,7 +1901,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                 <select
                   value={killerLevelFilter}
                   onChange={e => setKillerLevelFilter(e.target.value)}
-                  className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200"
+                  className="w-full sm:w-auto h-9 sm:h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200"
                 >
                   <option value="ALL">Mọi cấp độ (N5-N1)</option>
                   <option value="N5">JLPT N5</option>
@@ -1865,11 +1915,11 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
           </div>
 
           {(analytics?.killerVocabulary?.length || 0) === 0 && (analytics?.killerKanji?.length || 0) === 0 ? (
-            <div className="flex flex-col items-center justify-center py-10 px-4 text-center bg-slate-50/50 dark:bg-slate-800/30 rounded-2xl border border-dashed border-slate-200 dark:border-slate-700">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3">
-                <CheckCircle className="w-6 h-6" />
+            <div className="flex flex-col items-center justify-center py-8 sm:py-10 px-4 text-center bg-slate-50/50 dark:bg-slate-800/30 rounded-2xl border border-dashed border-slate-200 dark:border-slate-700">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3">
+                <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
-              <h3 className="text-base font-bold text-slate-800 dark:text-white mb-1">
+              <h3 className="text-sm sm:text-base font-bold text-slate-800 dark:text-white mb-1">
                 Chưa ghi nhận mục kiến thức "Tử thần" nào trong Firestore
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md">
@@ -1877,22 +1927,64 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-              {/* BẢNG TOP TỪ VỰNG TỬ THẦN */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full min-w-0">
+              {/* BẢNG / DANH SÁCH TOP TỪ VỰNG TỬ THẦN */}
               {(killerTab === 'ALL' || killerTab === 'VOCABULARY') && (
-                <div className={killerTab === 'ALL' ? 'lg:col-span-6' : 'lg:col-span-12'}>
+                <div className={`${killerTab === 'ALL' ? 'lg:col-span-6' : 'lg:col-span-12'} w-full min-w-0`}>
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-base font-extrabold text-slate-800 dark:text-white flex items-center gap-2">
-                      <BookOpen className="w-4 h-4 text-red-500" />
-                      Top Từ vựng "Tử thần" hay nhầm lẫn nhất
+                    <h3 className="text-sm sm:text-base font-extrabold text-slate-800 dark:text-white flex items-center gap-2">
+                      <BookOpen className="w-4 h-4 text-red-500 shrink-0" />
+                      Top Từ vựng hay nhầm lẫn nhất
                     </h3>
-                    <Badge variant="outline" className="border-red-200 text-red-600 bg-red-50 dark:bg-red-900/20">
+                    <Badge variant="outline" className="border-red-200 text-red-600 bg-red-50 dark:bg-red-900/20 text-[10px] sm:text-xs">
                       Top {filteredKillerVocab.length}
                     </Badge>
                   </div>
 
-                  <div className="overflow-x-auto rounded-2xl border border-slate-100 dark:border-slate-800">
-                    <Table className="min-w-[550px]">
+                  {/* Dạng Mobile App Card List (chỉ hiện trên màn hình nhỏ, hoàn toàn không bị tràn) */}
+                  <div className="block sm:hidden divide-y divide-slate-100 dark:divide-slate-800 bg-slate-50/50 dark:bg-slate-900/50 rounded-2xl p-3 border border-slate-100 dark:border-slate-800">
+                    {filteredKillerVocab.map((item, idx) => (
+                      <div
+                        key={item.id}
+                        onClick={() => item.rawItem && openContentModal('vocabulary', item.rawItem)}
+                        className="py-2.5 first:pt-1 last:pb-1 cursor-pointer"
+                      >
+                        <div className="flex items-center justify-between gap-2 mb-1">
+                          <div className="flex items-center gap-2 min-w-0">
+                            <span className={`w-5 h-5 rounded-full text-[10px] font-black flex items-center justify-center shrink-0 ${
+                              idx < 3 ? 'bg-red-600 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
+                            }`}>
+                              {idx + 1}
+                            </span>
+                            <span className="font-bold text-sm text-slate-900 dark:text-white truncate">{item.term}</span>
+                            <span className="text-xs text-slate-400 truncate">({item.reading})</span>
+                          </div>
+                          <Badge variant="outline" className="text-[10px] px-1.5 py-0 border-red-200 text-red-600 shrink-0">
+                            {item.level}
+                          </Badge>
+                        </div>
+                        <div className="text-xs text-slate-600 dark:text-slate-300 line-clamp-1 mb-1.5">
+                          {item.meaning}
+                        </div>
+                        <div className="flex items-center justify-between text-[10px] text-slate-400 gap-2 mb-1">
+                          <span className="font-extrabold text-red-600">{item.errorRate}% sai ({item.wrongCount}/{item.totalAttempts})</span>
+                          <span>Ease: {item.avgEaseFactor} • {item.affectedLearners} HV</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
+                          <div style={{ width: `${item.errorRate}%` }} className="h-full bg-gradient-to-r from-orange-500 to-red-600 rounded-full" />
+                        </div>
+                      </div>
+                    ))}
+                    {filteredKillerVocab.length === 0 && (
+                      <div className="py-6 text-center text-xs text-slate-500">
+                        Không có dữ liệu từ vựng ở cấp độ này.
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Dạng Desktop Table (chỉ hiện từ sm trở lên) */}
+                  <div className="hidden sm:block w-full max-w-full overflow-x-auto rounded-2xl border border-slate-100 dark:border-slate-800">
+                    <Table className="w-full min-w-[500px]">
                       <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
                         <TableRow>
                           <TableHead className="pl-4">Hạng & Từ vựng</TableHead>
@@ -1919,9 +2011,9 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                                 >
                                   {idx + 1}
                                 </span>
-                                <div>
-                                  <div className="font-bold text-base text-slate-800 dark:text-white">{item.term}</div>
-                                  <div className="text-xs text-slate-500">{item.reading}</div>
+                                <div className="min-w-0">
+                                  <div className="font-bold text-base text-slate-800 dark:text-white truncate">{item.term}</div>
+                                  <div className="text-xs text-slate-500 truncate">{item.reading}</div>
                                 </div>
                               </div>
                             </TableCell>
@@ -1975,21 +2067,67 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                 </div>
               )}
 
-              {/* BẢNG TOP KANJI TỬ THẦN */}
+              {/* BẢNG / DANH SÁCH TOP KANJI TỬ THẦN */}
               {(killerTab === 'ALL' || killerTab === 'KANJI') && (
-                <div className={killerTab === 'ALL' ? 'lg:col-span-6' : 'lg:col-span-12'}>
+                <div className={`${killerTab === 'ALL' ? 'lg:col-span-6' : 'lg:col-span-12'} w-full min-w-0`}>
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-base font-extrabold text-slate-800 dark:text-white flex items-center gap-2">
-                      <FileText className="w-4 h-4 text-purple-600" />
-                      Top Kanji "Tử thần" khó nhớ nhất
+                    <h3 className="text-sm sm:text-base font-extrabold text-slate-800 dark:text-white flex items-center gap-2">
+                      <FileText className="w-4 h-4 text-purple-600 shrink-0" />
+                      Top Kanji khó nhớ nhất
                     </h3>
-                    <Badge variant="outline" className="border-purple-200 text-purple-600 bg-purple-50 dark:bg-purple-900/20">
+                    <Badge variant="outline" className="border-purple-200 text-purple-600 bg-purple-50 dark:bg-purple-900/20 text-[10px] sm:text-xs">
                       Top {filteredKillerKanji.length}
                     </Badge>
                   </div>
 
-                  <div className="overflow-x-auto rounded-2xl border border-slate-100 dark:border-slate-800">
-                    <Table className="min-w-[550px]">
+                  {/* Dạng Mobile App Card List (chỉ hiện trên màn hình nhỏ) */}
+                  <div className="block sm:hidden divide-y divide-slate-100 dark:divide-slate-800 bg-slate-50/50 dark:bg-slate-900/50 rounded-2xl p-3 border border-slate-100 dark:border-slate-800">
+                    {filteredKillerKanji.map((item, idx) => (
+                      <div
+                        key={item.id}
+                        onClick={() => item.rawItem && openContentModal('kanji', item.rawItem)}
+                        className="py-2.5 first:pt-1 last:pb-1 cursor-pointer"
+                      >
+                        <div className="flex items-center justify-between gap-2 mb-1">
+                          <div className="flex items-center gap-2.5 min-w-0">
+                            <span className={`w-5 h-5 rounded-full text-[10px] font-black flex items-center justify-center shrink-0 ${
+                              idx < 3 ? 'bg-purple-600 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
+                            }`}>
+                              {idx + 1}
+                            </span>
+                            <div className="w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-lg font-serif font-bold text-slate-800 dark:text-white shrink-0">
+                              {item.term}
+                            </div>
+                            <div className="min-w-0">
+                              <span className="font-extrabold text-xs text-red-600 uppercase truncate">{item.reading}</span>
+                            </div>
+                          </div>
+                          <Badge variant="outline" className="text-[10px] px-1.5 py-0 border-purple-200 text-purple-600 shrink-0">
+                            {item.level}
+                          </Badge>
+                        </div>
+                        <div className="text-xs text-slate-600 dark:text-slate-300 line-clamp-1 mb-1.5 pl-7">
+                          {item.meaning}
+                        </div>
+                        <div className="flex items-center justify-between text-[10px] text-slate-400 gap-2 mb-1 pl-7">
+                          <span className="font-extrabold text-red-600">{item.errorRate}% sai ({item.wrongCount}/{item.totalAttempts})</span>
+                          <span>Ease: {item.avgEaseFactor} • {item.affectedLearners} HV</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
+                          <div style={{ width: `${item.errorRate}%` }} className="h-full bg-gradient-to-r from-purple-500 to-red-600 rounded-full" />
+                        </div>
+                      </div>
+                    ))}
+                    {filteredKillerKanji.length === 0 && (
+                      <div className="py-6 text-center text-xs text-slate-500">
+                        Không có dữ liệu Kanji ở cấp độ này.
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Dạng Desktop Table (chỉ hiện từ sm trở lên) */}
+                  <div className="hidden sm:block w-full max-w-full overflow-x-auto rounded-2xl border border-slate-100 dark:border-slate-800">
+                    <Table className="w-full min-w-[500px]">
                       <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
                         <TableRow>
                           <TableHead className="pl-4">Hạng & Hán tự</TableHead>
@@ -2016,7 +2154,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                                 >
                                   {idx + 1}
                                 </span>
-                                <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-2xl font-serif font-bold text-slate-800 dark:text-white">
+                                <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-2xl font-serif font-bold text-slate-800 dark:text-white shrink-0">
                                   {item.term}
                                 </div>
                               </div>
@@ -2335,13 +2473,13 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
         </header>
 
         {/* SCROLLABLE PAGE CONTENT */}
-        <main className="flex-1 overflow-y-auto px-4 md:px-8 pb-12">
+        <main className="flex-1 overflow-y-auto overflow-x-hidden px-3 sm:px-6 md:px-8 pb-12 w-full min-w-0">
           {loading ? (
             <div className="h-full flex items-center justify-center">
               <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: "linear" }} className="w-10 h-10 border-4 border-slate-200 dark:border-slate-800 border-t-red-500 rounded-full" />
             </div>
           ) : (
-            <div className="max-w-7xl mx-auto">
+            <div className="max-w-7xl mx-auto w-full min-w-0">
               <AnimatePresence mode="wait">
                 <motion.div key={activeMenu} initial={{ opacity: 0, filter: 'blur(10px)', scale: 0.98 }} animate={{ opacity: 1, filter: 'blur(0px)', scale: 1 }} exit={{ opacity: 0, filter: 'blur(10px)', scale: 0.98 }} transition={{ duration: 0.3, ease: 'easeOut' }}>
                   {activeMenu === 'overview' && renderOverview()}
