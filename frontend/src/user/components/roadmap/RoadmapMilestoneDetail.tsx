@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Milestone, Stage } from '../../types/kizuna';
 import { kizunaService } from '../../services/kizunaService';
+import { soundService } from '../../services/soundService';
 import { progressService, UserRoadmapProgress } from '../../services/progressService';
 import { RoadmapQuestRunner } from './RoadmapQuestRunner';
 import { 
@@ -64,18 +65,9 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
     }
   }, [milestone?.id]);
 
-  // Speech helper
+  // Speech helper (Hỗ trợ cả Web & Android APK)
   const speakJapanese = (text: string) => {
-    if (!('speechSynthesis' in window) || !text) return;
-    try {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'ja-JP';
-      utterance.rate = 0.9;
-      window.speechSynthesis.speak(utterance);
-    } catch (e) {
-      console.warn('Speech error:', e);
-    }
+    soundService.speakJapanese(text);
   };
 
   const isMilestoneCompleted = userProgress?.completedMilestones?.includes(milestone.id) || false;

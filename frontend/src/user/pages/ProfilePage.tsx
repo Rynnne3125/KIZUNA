@@ -205,23 +205,28 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
               <span>{checkingUpdate ? 'Đang kiểm tra...' : 'Kiểm tra cập nhật mới'}</span>
             </button>
 
-            <a
-              href="/download/kizuna-latest.apk"
-              download="kizuna-v1.0.7.apk"
-              className="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-bold text-xs flex items-center gap-1.5 transition-all shadow-xs"
-            >
-              <Smartphone className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Tải file APK Android (v1.0.7)</span>
-            </a>
+            {/* Chỉ hiển thị nút tải APK và tải bản PC trên Website; trên bản App / APK ẩn hoàn toàn */}
+            {!isApp && (
+              <>
+                <a
+                  href="/download/kizuna-latest.apk"
+                  download="kizuna-v1.0.7.apk"
+                  className="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-bold text-xs flex items-center gap-1.5 transition-all shadow-xs"
+                >
+                  <Smartphone className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Tải file APK Android (v1.0.7)</span>
+                </a>
 
-            <a
-              href="/download/KIZUNA-Setup.exe"
-              download="KIZUNA-Setup.exe"
-              className="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-bold text-xs flex items-center gap-1.5 transition-all shadow-xs"
-            >
-              <Monitor className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Tải bản PC (.exe)</span>
-            </a>
+                <a
+                  href="/download/KIZUNA-Setup.exe"
+                  download="KIZUNA-Setup.exe"
+                  className="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-bold text-xs flex items-center gap-1.5 transition-all shadow-xs"
+                >
+                  <Monitor className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Tải bản PC (.exe)</span>
+                </a>
+              </>
+            )}
           </div>
 
           {updateResult && (

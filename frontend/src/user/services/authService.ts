@@ -85,6 +85,16 @@ export const authService = {
     localStorage.setItem(SESSION_EXPIRES_KEY, expiresAt.toString());
   },
 
+  updateCurrentUser(updatedUser: Partial<User>) {
+    const current = this.getCurrentUser();
+    if (!current) return;
+    const merged = { ...current, ...updatedUser };
+    localStorage.setItem(USER_KEY, JSON.stringify(merged));
+    const expiresAt = Date.now() + SESSION_MAX_DURATION;
+    localStorage.setItem(SESSION_EXPIRES_KEY, expiresAt.toString());
+    window.dispatchEvent(new Event('kizuna_user_updated'));
+  },
+
   clearSession() {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(USER_KEY);

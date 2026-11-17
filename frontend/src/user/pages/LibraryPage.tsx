@@ -47,6 +47,8 @@ const CATEGORY_FILTERS = [
   { id: 'Tin tức', label: 'Tin tức' }
 ];
 
+const VIDEO_THUMB_FALLBACK = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='180' viewBox='0 0 320 180' fill='%231e293b'><rect width='320' height='180' fill='%231e293b'/><text x='50%' y='50%' fill='%2394a3b8' font-size='13' font-family='sans-serif' text-anchor='middle' dominant-baseline='middle'>KIZUNA Video</text></svg>";
+
 export const LibraryPage: React.FC = () => {
   // 2 Phân hệ học tập thực tế & chuẩn xác:
   // 1. 'video': Kho học liệu video tiếng Nhật tổng hợp (1.015 video chính thức từ CSDL)
@@ -612,10 +614,11 @@ export const LibraryPage: React.FC = () => {
                       >
                         <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%', borderRadius: 6, overflow: 'hidden', background: '#0a0f1d' }}>
                           <img
-                            src={v.thumbnailUrl || `https://i.ytimg.com/vi/${v.youtubeVideoId}/hqdefault.jpg`}
+                            src={v.thumbnailUrl || (v.youtubeVideoId ? `https://i.ytimg.com/vi/${v.youtubeVideoId}/hqdefault.jpg` : VIDEO_THUMB_FALLBACK)}
                             alt={v.title}
                             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
                             loading="lazy"
+                            onError={(e) => { (e.currentTarget as HTMLImageElement).src = VIDEO_THUMB_FALLBACK; }}
                           />
                           <div style={{
                             position: 'absolute',
@@ -693,10 +696,11 @@ export const LibraryPage: React.FC = () => {
                       >
                         <div style={{ position: 'relative', width: 100, height: 58, borderRadius: 6, overflow: 'hidden', flexShrink: 0, background: '#0a0f1d' }}>
                           <img
-                            src={v.thumbnailUrl || `https://i.ytimg.com/vi/${v.youtubeVideoId}/hqdefault.jpg`}
+                            src={v.thumbnailUrl || (v.youtubeVideoId ? `https://i.ytimg.com/vi/${v.youtubeVideoId}/hqdefault.jpg` : VIDEO_THUMB_FALLBACK)}
                             alt={v.title}
                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                             loading="lazy"
+                            onError={(e) => { (e.currentTarget as HTMLImageElement).src = VIDEO_THUMB_FALLBACK; }}
                           />
                           <div style={{
                             position: 'absolute',

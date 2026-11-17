@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Milestone } from '../../types/kizuna';
 import { kizunaService } from '../../services/kizunaService';
+import { soundService } from '../../services/soundService';
 import { 
   ArrowLeft, 
   Volume2, 
@@ -59,18 +60,9 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   const [isFullscreen, setIsFullscreen] = useState(false);
   const runnerContainerRef = useRef<HTMLDivElement>(null);
 
-  // Audio helper
+  // Audio helper (Hỗ trợ cả Web & Android APK)
   const speakJapanese = (text: string) => {
-    if (!('speechSynthesis' in window) || !text) return;
-    try {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'ja-JP';
-      utterance.rate = 0.9;
-      window.speechSynthesis.speak(utterance);
-    } catch (e) {
-      console.warn('TTS error:', e);
-    }
+    soundService.speakJapanese(text);
   };
 
   const toggleFullscreen = () => {

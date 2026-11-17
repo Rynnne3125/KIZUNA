@@ -13,12 +13,11 @@ import { LibraryPage } from './user/pages/LibraryPage';
 import { ExamPage } from './user/pages/ExamPage';
 import { ProfilePage } from './user/pages/ProfilePage';
 import { AdminDashboardPage } from './admin/pages/AdminDashboardPage';
-import { Smartphone, Download, WifiOff, CheckCircle2 } from 'lucide-react';
-import { Smartphone, Download, Wifi } from 'lucide-react';
+import { Smartphone, Download, WifiOff, CheckCircle2, Wifi } from 'lucide-react';
 import { ApkDownloadModal } from './user/components/ApkDownloadModal';
 import { isNativeApp } from './user/utils/platform';
 import { useNetworkStatus } from './user/hooks/useNetworkStatus';
-import { WifiRequiredPage } from './user/pages/WifiRequiredPage';
+import { NoInternet404Page } from './user/pages/NoInternet404Page';
 
 import { AiPlacementModal } from './user/components/placement/AiPlacementModal';
 import { progressService } from './user/services/progressService';
@@ -161,21 +160,19 @@ export default function App() {
     setActiveTab('home');
   };
 
-  // 0. NẾU MẤT KẾT NỐI MẠNG HOẶC CHƯA KẾT NỐI WI-FI -> HIỂN THỊ TRANG YÊU CẦU WI-FI
-  if (network.isBlockedByWifiRequirement) {
+  // 0. NẾU CHƯA ĐĂNG NHẬP VÀ MẤT KẾT NỐI INTERNET (KHÔNG CÓ CẢ WI-FI LẪN 4G/5G)
+  // Bắt buộc hiển thị trang 404 Không có Internet để thông báo yêu cầu mạng trước khi vào LoginPage
+  if (!user && network.isBlockedByNoInternet) {
     return (
-      <WifiRequiredPage
+      <NoInternet404Page
         status={network.status}
         isChecking={network.isChecking}
         onRecheck={network.recheck}
-        onBypassCellular={network.bypassCellular}
-        simulatedType={network.simulatedType}
-        onSetSimulatedType={network.setSimulatedType}
       />
     );
   }
 
-  // 1. Nếu chưa đăng nhập hoặc phiên đã hết hạn, bắt buộc hiển thị LoginPage trước!
+  // 1. Nếu chưa đăng nhập hoặc phiên đã hết hạn, hiển thị LoginPage (Yêu cầu có mạng Wi-Fi hoặc 4G/5G)
   if (!user) {
     return (
       <LoginPage

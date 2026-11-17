@@ -23,6 +23,7 @@ import {
 import { kizunaService } from '../services/kizunaService';
 import { authService } from '../services/authService';
 import { progressService } from '../services/progressService';
+import { soundService } from '../services/soundService';
 import { GrammarItem, GrammarBook, GrammarUnit, GrammarCatalog } from '../types/kizuna';
 
 type JlptLevelKey = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
@@ -240,18 +241,9 @@ export const GrammarPage: React.FC = () => {
     loadUnitGrammar();
   }, [selectedUnit]);
 
-  // Phát âm tiếng Nhật (Web Speech API)
+  // Phát âm tiếng Nhật (Hỗ trợ chuẩn cả Web & Android APK qua soundService)
   const speakJapanese = (text: string) => {
-    if (!('speechSynthesis' in window) || !text) return;
-    try {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'ja-JP';
-      utterance.rate = 0.9;
-      window.speechSynthesis.speak(utterance);
-    } catch (e) {
-      console.warn('Speech error:', e);
-    }
+    soundService.speakJapanese(text);
   };
 
   const handleSelectLevel = (lvl: JlptLevelKey) => {
@@ -734,6 +726,90 @@ export const GrammarPage: React.FC = () => {
             transform: translateY(0);
           }
         }
+
+        /* TỐI ƯU GIAO DIỆN & CỠ CHỮ TRÊN THIẾT BỊ DI ĐỘNG (APP ANDROID / MOBILE) */
+        @media (max-width: 640px) {
+          .grammar-header-title {
+            font-size: 18px !important;
+          }
+          .grammar-header-sub {
+            font-size: 13px !important;
+          }
+          .grammar-level-btn {
+            padding: 4px 8px !important;
+          }
+          .grammar-level-btn .lvl-text {
+            font-size: 11px !important;
+          }
+          .grammar-level-btn .lvl-kanji {
+            font-size: 8px !important;
+          }
+          .grammar-book-card {
+            padding: 16px !important;
+          }
+          .grammar-unit-grid {
+            grid-template-columns: 1fr !important;
+            gap: 10px !important;
+          }
+          .grammar-unit-card {
+            padding: 12px 14px !important;
+          }
+          .grammar-card-header {
+            padding: 12px 14px !important;
+          }
+          .grammar-card-body {
+            padding: 12px 14px !important;
+            gap: 12px !important;
+          }
+          .grammar-pattern-text {
+            font-size: 15px !important;
+          }
+          .grammar-title-vi {
+            font-size: 12.5px !important;
+          }
+          .grammar-structure-box {
+            font-size: 13px !important;
+            padding: 8px 10px !important;
+            overflow-x: auto !important;
+            word-break: break-word !important;
+          }
+          .grammar-explanation-box {
+            font-size: 12.5px !important;
+            padding: 10px 12px !important;
+            line-height: 1.5 !important;
+          }
+          .grammar-mistake-box {
+            font-size: 12px !important;
+            padding: 10px 12px !important;
+          }
+          .grammar-example-jp {
+            font-size: 13px !important;
+          }
+          .grammar-example-vi {
+            font-size: 11.5px !important;
+          }
+          .grammar-flashcard-container {
+            min-height: 290px !important;
+          }
+          .grammar-flashcard-front {
+            padding: 24px 16px !important;
+          }
+          .grammar-flashcard-front .pattern-big {
+            font-size: 23px !important;
+            margin-bottom: 8px !important;
+          }
+          .grammar-flashcard-back {
+            padding: 18px 14px !important;
+          }
+          .grammar-quiz-example {
+            font-size: 15px !important;
+            padding: 12px 10px !important;
+          }
+          .grammar-quiz-option {
+            padding: 10px 12px !important;
+            font-size: 12.5px !important;
+          }
+        }
       `}</style>
 
       {/* 1. HEADER MANG PHONG CÁCH NHẬT BẢN HIỆN ĐẠI (和の美学) */}
@@ -768,8 +844,8 @@ export const GrammarPage: React.FC = () => {
               }}>
                 絆
               </span>
-              <h1 style={{ fontSize: 23, fontWeight: 900, color: '#1c2536', margin: 0, letterSpacing: '-0.3px' }}>
-                文法帳 <span style={{ fontSize: 17, fontWeight: 700, color: '#475569' }}>· Ngữ Pháp Tiếng Nhật</span>
+              <h1 className="grammar-header-title" style={{ fontSize: 23, fontWeight: 900, color: '#1c2536', margin: 0, letterSpacing: '-0.3px' }}>
+                文法帳 <span className="grammar-header-sub" style={{ fontSize: 17, fontWeight: 700, color: '#475569' }}>· Ngữ Pháp Tiếng Nhật</span>
               </h1>
             </div>
             <p style={{ color: '#78716c', fontSize: 13, margin: 0 }}>
@@ -793,6 +869,7 @@ export const GrammarPage: React.FC = () => {
                 <button
                   key={lvl}
                   onClick={() => handleSelectLevel(lvl)}
+                  className="grammar-level-btn"
                   style={{
                     padding: '6px 14px',
                     borderRadius: 7,
@@ -807,8 +884,8 @@ export const GrammarPage: React.FC = () => {
                     lineHeight: 1.15
                   }}
                 >
-                  <span style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.5px' }}>{lvl}</span>
-                  <span style={{ fontSize: 10, opacity: isActive ? 0.95 : 0.7, fontWeight: 600 }}>{meta.kanji}</span>
+                  <span className="lvl-text" style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.5px' }}>{lvl}</span>
+                  <span className="lvl-kanji" style={{ fontSize: 10, opacity: isActive ? 0.95 : 0.7, fontWeight: 600 }}>{meta.kanji}</span>
                 </button>
               );
             })}
@@ -872,6 +949,7 @@ export const GrammarPage: React.FC = () => {
             return (
               <div
                 key={book.bookId}
+                className="grammar-book-card"
                 style={{
                   background: '#ffffff',
                   borderRadius: 12,
@@ -1008,7 +1086,7 @@ export const GrammarPage: React.FC = () => {
             </button>
           </div>
 
-          <div style={{
+          <div className="grammar-unit-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
             gap: 14
@@ -1019,6 +1097,7 @@ export const GrammarPage: React.FC = () => {
                 <div
                   key={unit.unitId}
                   onClick={() => handleSelectUnit(unit)}
+                  className="grammar-unit-card"
                   style={{
                     background: '#ffffff',
                     borderRadius: 10,
@@ -1287,6 +1366,7 @@ export const GrammarPage: React.FC = () => {
                           {/* Card Header clickable to expand */}
                           <div
                             onClick={() => setExpandedItemId(isExpanded ? null : item.id)}
+                            className="grammar-card-header"
                             style={{
                               padding: '16px 20px',
                               cursor: 'pointer',
@@ -1307,17 +1387,17 @@ export const GrammarPage: React.FC = () => {
                                 color: '#c53d32',
                                 display: 'inline-flex',
                                 alignItems: 'center',
-                                justifyContent: 'center',
+                                justifyCenter: 'center',
                                 fontSize: 12,
                                 fontWeight: 800
                               }}>
                                 {idx + 1}
                               </span>
                               <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
-                                <span style={{ fontSize: 17, fontWeight: 900, color: '#1c2536', fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif" }}>
+                                <span className="grammar-pattern-text" style={{ fontSize: 17, fontWeight: 900, color: '#1c2536', fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif" }}>
                                   {item.pattern}
                                 </span>
-                                <span style={{ fontSize: 14, fontWeight: 700, color: '#9c2a2a' }}>
+                                <span className="grammar-title-vi" style={{ fontSize: 14, fontWeight: 700, color: '#9c2a2a' }}>
                                   · {item.titleVi}
                                 </span>
                               </div>
@@ -1358,14 +1438,14 @@ export const GrammarPage: React.FC = () => {
 
                           {/* Chi tiết 6 thành phần ngữ pháp (Khi mở rộng) */}
                           {isExpanded && (
-                            <div style={{ padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 18 }}>
+                            <div className="grammar-card-body" style={{ padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 18 }}>
                               {/* 1. Cấu trúc / Công thức ghép (Structure) */}
                               {item.structure && (
                                 <div>
                                   <div style={{ fontSize: 12, fontWeight: 800, color: '#78716c', textTransform: 'uppercase', marginBottom: 6, letterSpacing: '0.5px', display: 'flex', alignItems: 'center', gap: 6 }}>
                                     <PenTool size={13} color="#78716c" /> Cấu Trúc / Công Thức Ghép:
                                   </div>
-                                  <div style={{
+                                  <div className="grammar-structure-box" style={{
                                     background: '#f8fafc',
                                     border: '1px solid #e2e8f0',
                                     borderRadius: 8,
@@ -1385,7 +1465,7 @@ export const GrammarPage: React.FC = () => {
                                 <div style={{ fontSize: 12, fontWeight: 800, color: '#78716c', textTransform: 'uppercase', marginBottom: 6, letterSpacing: '0.5px', display: 'flex', alignItems: 'center', gap: 6 }}>
                                   <BookOpen size={13} color="#78716c" /> Giải Thích & Hoàn Cảnh Sử Dụng:
                                 </div>
-                                <div style={{ fontSize: 14, color: '#334155', lineHeight: 1.6, background: '#faf8f5', padding: '12px 16px', borderRadius: 8, border: '1px solid #ebe7df' }}>
+                                <div className="grammar-explanation-box" style={{ fontSize: 14, color: '#334155', lineHeight: 1.6, background: '#faf8f5', padding: '12px 16px', borderRadius: 8, border: '1px solid #ebe7df' }}>
                                   {item.explanation}
                                 </div>
                               </div>
@@ -1396,7 +1476,7 @@ export const GrammarPage: React.FC = () => {
                                   <div style={{ fontSize: 12, fontWeight: 800, color: '#991b1b', textTransform: 'uppercase', marginBottom: 6, letterSpacing: '0.5px', display: 'flex', alignItems: 'center', gap: 6 }}>
                                     <AlertTriangle size={13} color="#ef4444" /> Bẫy Lỗi Sai Cần Tránh:
                                   </div>
-                                  <div style={{
+                                  <div className="grammar-mistake-box" style={{
                                     background: '#fef2f2',
                                     border: '1px solid #fecaca',
                                     borderLeft: '4px solid #ef4444',
@@ -1433,10 +1513,10 @@ export const GrammarPage: React.FC = () => {
                                         }}
                                       >
                                         <div style={{ flex: 1 }}>
-                                          <div style={{ fontSize: 14, fontWeight: 700, color: '#1c2536', marginBottom: 3 }}>
+                                          <div className="grammar-example-jp" style={{ fontSize: 14, fontWeight: 700, color: '#1c2536', marginBottom: 3 }}>
                                             {ex.sentence}
                                           </div>
-                                          <div style={{ fontSize: 13, color: '#57534e' }}>
+                                          <div className="grammar-example-vi" style={{ fontSize: 13, color: '#57534e' }}>
                                             {ex.translation}
                                           </div>
                                         </div>
@@ -1711,6 +1791,7 @@ export const GrammarPage: React.FC = () => {
                       {flipStudyList[flipActiveIndex] && (
                         <div
                           key={flipActiveIndex}
+                          className="grammar-flashcard-container"
                           style={{
                             perspective: 1000,
                             width: '100%',
@@ -1720,6 +1801,7 @@ export const GrammarPage: React.FC = () => {
                         >
                           <div
                             onClick={handleFlipCard}
+                            className="grammar-flashcard-container"
                             style={{
                               position: 'relative',
                               width: '100%',
@@ -1732,6 +1814,7 @@ export const GrammarPage: React.FC = () => {
                           >
                             {/* MẶT TRƯỚC: Mẫu ngữ pháp & Công thức */}
                             <div
+                              className="grammar-flashcard-front"
                               style={{
                                 position: 'absolute',
                                 inset: 0,
@@ -1794,7 +1877,7 @@ export const GrammarPage: React.FC = () => {
                               </button>
 
                               <div style={{ position: 'relative', zIndex: 2 }}>
-                                <div style={{
+                                <div className="pattern-big" style={{
                                   fontSize: 32,
                                   fontWeight: 900,
                                   color: '#1c2536',
@@ -1829,6 +1912,7 @@ export const GrammarPage: React.FC = () => {
 
                             {/* MẶT SAU: Ý nghĩa tiếng Việt, Giải thích & Ví dụ */}
                             <div
+                              className="grammar-flashcard-back"
                               style={{
                                 position: 'absolute',
                                 inset: 0,
@@ -2258,6 +2342,7 @@ export const GrammarPage: React.FC = () => {
                       {/* Khung thẻ câu hỏi trắc nghiệm nhìn ví dụ */}
                       <div
                         key={quizActiveIndex}
+                        className="grammar-quiz-card"
                         style={{
                           background: 'linear-gradient(150deg, #ffffff 0%, #fdfbf7 100%)',
                           borderRadius: 20,
@@ -2326,7 +2411,7 @@ export const GrammarPage: React.FC = () => {
                             例文 · CÂU VÍ DỤ ĐIỂN HÌNH
                           </div>
 
-                          <div style={{
+                          <div className="grammar-quiz-example" style={{
                             fontSize: 23,
                             fontWeight: 900,
                             color: '#1c2536',
@@ -2404,6 +2489,7 @@ export const GrammarPage: React.FC = () => {
                                   type="button"
                                   disabled={quizAnswerChecked}
                                   onClick={() => handleSelectQuizOption(optIdx)}
+                                  className="grammar-quiz-option"
                                   style={{
                                     background: optBg,
                                     border: optBorder,

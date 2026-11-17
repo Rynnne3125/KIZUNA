@@ -2,6 +2,8 @@ import { db, firebaseConfig } from '../../config/firebase';
 import { collection, getDocs, doc, getDoc, query, where, limit } from 'firebase/firestore';
 import { Stage, Milestone, VocabularyItem, VocabularyCatalog, GrammarItem, GrammarCatalog, KanjiItem, KanjiCatalog, Exam, VideoLesson, ChoukaiAudioItem } from '../types/kizuna';
 import { VOCABULARY_CATALOG } from '../data/vocabularyCatalog';
+import { GRAMMAR_CATALOG } from '../data/grammarCatalog';
+import { KANJI_CATALOG } from '../data/kanjiCatalog';
 
 let isKizunaFirestoreOffline =
   !db ||
@@ -287,23 +289,15 @@ export const kizunaService = {
 
   /**
    * Lấy danh mục ngữ pháp phân cấp theo cấp độ N5 -> N1 và các bài học
-   * 0 Firestore read (tải từ static JSON cache + offline fallback)
+   * 0 Firestore read (tải từ catalog tĩnh chuẩn hoá + offline fallback)
    */
   async getGrammarCatalog(): Promise<GrammarCatalog | null> {
     const cacheKey = 'kizuna_grammar_catalog_cache';
     const cached = getSessionCache<GrammarCatalog>(cacheKey);
     if (cached) return cached;
 
-    const defaultUnits = [{ unitId: 'ms_minna_b01', unitTitle: 'Bài 1: Ngữ pháp Nền tảng (Offline)', lessonNumber: 1, itemCount: OFFLINE_GRAMMAR_DECK.length }];
-    const catalog: GrammarCatalog = {
-      N5: [{ bookId: 'minna-n5', bookName: 'Minna no Nihongo N5 (Chế độ Offline)', description: 'Gói ngữ pháp dự phòng khi mất kết nối mạng', totalItems: OFFLINE_GRAMMAR_DECK.length, units: defaultUnits }],
-      N4: [{ bookId: 'minna-n4', bookName: 'Minna no Nihongo N4 (Chế độ Offline)', description: 'Gói ngữ pháp dự phòng khi mất kết nối mạng', totalItems: OFFLINE_GRAMMAR_DECK.length, units: defaultUnits }],
-      N3: [{ bookId: 'shinkanzen-n3', bookName: 'Shinkanzen Master N3 (Chế độ Offline)', description: 'Gói ngữ pháp dự phòng khi mất kết nối mạng', totalItems: OFFLINE_GRAMMAR_DECK.length, units: defaultUnits }],
-      N2: [{ bookId: 'shinkanzen-n2', bookName: 'Shinkanzen Master N2 (Chế độ Offline)', description: 'Gói ngữ pháp dự phòng khi mất kết nối mạng', totalItems: OFFLINE_GRAMMAR_DECK.length, units: defaultUnits }],
-      N1: [{ bookId: 'shinkanzen-n1', bookName: 'Shinkanzen Master N1 (Chế độ Offline)', description: 'Gói ngữ pháp dự phòng khi mất kết nối mạng', totalItems: OFFLINE_GRAMMAR_DECK.length, units: defaultUnits }],
-    };
-    setSessionCache(cacheKey, catalog);
-    return catalog;
+    setSessionCache(cacheKey, GRAMMAR_CATALOG);
+    return GRAMMAR_CATALOG;
   },
 
   /**
@@ -316,14 +310,43 @@ export const kizunaService = {
 
     try {
       if (db) {
-        const q = query(
+        let q = query(
           collection(db, 'grammar_items'),
           where('milestoneId', '==', unitId)
         );
-        const snap = await getDocs(q);
+        let snap = await safeGetDocs(q);
+        if (snap.empty) {
+          q = query(
+            collection(db, 'grammar_items'),
+            where('milestone_id', '==', unitId)
+          );
+          snap = await safeGetDocs(q);
+        }
         if (!snap.empty) {
           const items: GrammarItem[] = [];
-          snap.forEach(d => items.push({ id: d.id, ...d.data() } as GrammarItem));
+          snap.forEach((d: any) => {
+            const data = d.data();
+            items.push({
+              id: d.id,
+              grammar_id: data.grammar_id || d.id,
+              milestoneId: data.milestoneId || data.milestone_id || unitId,
+              stageId: data.stageId || data.stage_id,
+              jlptLevel: data.jlptLevel || data.jlpt_level || 'N5',
+              lessonNumber: data.lessonNumber,
+              pattern: data.pattern || '',
+              titleVi: data.titleVi || data.title_vi || '',
+              structure: data.structure || '',
+              explanation: data.explanation || '',
+              nuanceReason: data.nuanceReason || data.nuance_reason || '',
+              commonMistake: data.commonMistake || data.common_mistake || '',
+              kitsuPrompt: data.kitsuPrompt || data.kitsu_prompt || '',
+              masterExampleJp: data.masterExampleJp || (data.examples && data.examples[0]?.sentence) || '',
+              masterExampleVi: data.masterExampleVi || (data.examples && data.examples[0]?.translation) || '',
+              examples: data.examples || [],
+              dialogue: data.dialogue,
+              sourceBook: data.sourceBook
+            } as GrammarItem);
+          });
           setSessionCache(cacheKey, items);
           return items;
         }
@@ -333,6 +356,60 @@ export const kizunaService = {
     }
 
     return OFFLINE_GRAMMAR_DECK;
+  },
+
+  /**
+   * Lấy danh sách mẫu câu ngữ pháp theo cấp độ JLPT trực tiếp từ Firestore
+   */
+  async getGrammarByLevel(level: 'N5' | 'N4' | 'N3' | 'N2' | 'N1'): Promise<GrammarItem[]> {
+    const lvlKey = level.toLowerCase();
+    const cacheKey = `kizuna_grammar_level_${lvlKey}`;
+    const cached = getSessionCache<GrammarItem[]>(cacheKey);
+    if (cached && cached.length > 0) return cached;
+
+    try {
+      if (db) {
+        let q = query(collection(db, 'grammar_items'), where('jlptLevel', '==', level), limit(150));
+        let snap = await safeGetDocs(q);
+        if (snap.empty) {
+          q = query(collection(db, 'grammar_items'), where('jlpt_level', '==', level), limit(150));
+          snap = await safeGetDocs(q);
+        }
+        if (!snap.empty) {
+          const items: GrammarItem[] = [];
+          snap.forEach((d: any) => {
+            const data = d.data();
+            items.push({
+              id: d.id,
+              grammar_id: data.grammar_id || d.id,
+              milestoneId: data.milestoneId || data.milestone_id,
+              stageId: data.stageId || data.stage_id,
+              jlptLevel: data.jlptLevel || data.jlpt_level || level,
+              lessonNumber: data.lessonNumber,
+              pattern: data.pattern || '',
+              titleVi: data.titleVi || data.title_vi || '',
+              structure: data.structure || '',
+              explanation: data.explanation || '',
+              nuanceReason: data.nuanceReason || data.nuance_reason || '',
+              commonMistake: data.commonMistake || data.common_mistake || '',
+              kitsuPrompt: data.kitsuPrompt || data.kitsu_prompt || '',
+              masterExampleJp: data.masterExampleJp || (data.examples && data.examples[0]?.sentence) || '',
+              masterExampleVi: data.masterExampleVi || (data.examples && data.examples[0]?.translation) || '',
+              examples: data.examples || [],
+              dialogue: data.dialogue,
+              sourceBook: data.sourceBook
+            } as GrammarItem);
+          });
+          setSessionCache(cacheKey, items);
+          return items;
+        }
+      }
+    } catch (e) {
+      console.warn(`Firestore grammar by level ${level} error:`, e);
+    }
+
+    const filtered = OFFLINE_GRAMMAR_DECK.filter(g => g.level === level || (!g.level && level === 'N5'));
+    return filtered.length > 0 ? filtered : OFFLINE_GRAMMAR_DECK;
   },
 
   async getGrammar(): Promise<GrammarItem[]> {
@@ -365,23 +442,15 @@ export const kizunaService = {
 
   /**
    * Lấy danh mục chữ Hán phân cấp theo cấp độ N5 -> N1 và các bài học
-   * 0 Firestore read (tải từ static JSON cache)
+   * 0 Firestore read (tải từ catalog tĩnh chuẩn hoá)
    */
   async getKanjiCatalog(): Promise<KanjiCatalog | null> {
     const cacheKey = 'kizuna_kanji_catalog_cache';
     const cached = getSessionCache<KanjiCatalog>(cacheKey);
     if (cached) return cached;
 
-    const defaultKanjiUnits = [{ unitId: 'ms_minna_b01', unitTitle: 'Bài 1: Chữ Hán Nền tảng (Offline)', lessonNumber: 1, itemCount: OFFLINE_KANJI_DECK.length }];
-    const catalog: KanjiCatalog = {
-      N5: [{ bookId: 'kanji-n5', bookName: 'Kanji Look & Learn N5 (Offline)', description: 'Bộ chữ Hán dự phòng khi mất kết nối mạng', totalItems: OFFLINE_KANJI_DECK.length, units: defaultKanjiUnits }],
-      N4: [{ bookId: 'kanji-n4', bookName: 'Kanji Look & Learn N4 (Offline)', description: 'Bộ chữ Hán dự phòng khi mất kết nối mạng', totalItems: OFFLINE_KANJI_DECK.length, units: defaultKanjiUnits }],
-      N3: [{ bookId: 'kanji-n3', bookName: 'Kanji Master N3 (Offline)', description: 'Bộ chữ Hán dự phòng khi mất kết nối mạng', totalItems: OFFLINE_KANJI_DECK.length, units: defaultKanjiUnits }],
-      N2: [{ bookId: 'kanji-n2', bookName: 'Kanji Master N2 (Offline)', description: 'Bộ chữ Hán dự phòng khi mất kết nối mạng', totalItems: OFFLINE_KANJI_DECK.length, units: defaultKanjiUnits }],
-      N1: [{ bookId: 'kanji-n1', bookName: 'Kanji Master N1 (Offline)', description: 'Bộ chữ Hán dự phòng khi mất kết nối mạng', totalItems: OFFLINE_KANJI_DECK.length, units: defaultKanjiUnits }],
-    };
-    setSessionCache(cacheKey, catalog);
-    return catalog;
+    setSessionCache(cacheKey, KANJI_CATALOG);
+    return KANJI_CATALOG;
   },
 
   /**

@@ -7,6 +7,7 @@ export interface UseNetworkStatusReturn {
   isChecking: boolean;
   wifiOnlyRequired: boolean;
   isCellularBypassed: boolean;
+  isBlockedByNoInternet: boolean;
   isBlockedByWifiRequirement: boolean;
   recheck: () => Promise<ExtendedNetworkStatus>;
   setWifiOnlyRequired: (required: boolean) => void;
@@ -67,12 +68,11 @@ export const useNetworkStatus = (): UseNetworkStatusReturn => {
     };
   }, [fetchStatus]);
 
-  // Kiểm tra xem ứng dụng có đang bị chặn bởi yêu cầu Wi-Fi hay không:
-  // - Nếu mất mạng (Offline / none): Luôn bị chặn
-  // - Nếu đang dùng mạng di động (Cellular 4G/5G) và chế độ yêu cầu Wi-Fi đang bật và chưa được người dùng bấm tiếp tục: Bị chặn
-  const isBlockedByWifiRequirement =
-    status.isOffline ||
-    (status.isCellular && wifiOnlyRequired && !isCellularBypassed);
+  // Kiểm tra xem ứng dụng có đang bị chặn do không có kết nối Internet hay không:
+  // - Nếu mất mạng (Offline / none / !connected): Bị chặn vào LoginPage, hiển thị trang 404 No Internet
+  // - Nếu có kết nối Wi-Fi HOẶC Dữ liệu di động (Cellular 4G/5G): Cho phép truy cập bình thường!
+  const isBlockedByNoInternet = status.isOffline || !status.connected;
+  const isBlockedByWifiRequirement = isBlockedByNoInternet;
 
   const setWifiOnlyRequired = (required: boolean) => {
     networkService.setWifiOnlyRequired(required);
@@ -100,6 +100,7 @@ export const useNetworkStatus = (): UseNetworkStatusReturn => {
     isChecking,
     wifiOnlyRequired,
     isCellularBypassed,
+    isBlockedByNoInternet,
     isBlockedByWifiRequirement,
     recheck: fetchStatus,
     setWifiOnlyRequired,

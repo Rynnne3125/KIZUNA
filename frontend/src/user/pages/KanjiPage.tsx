@@ -22,6 +22,7 @@ import {
   ArrowUpDown
 } from 'lucide-react';
 import { kizunaService } from '../services/kizunaService';
+import { soundService } from '../services/soundService';
 import { KanjiItem } from '../types/kizuna';
 
 type JlptLevelKey = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
@@ -846,18 +847,9 @@ export const KanjiPage: React.FC = () => {
     setQuizFinished(false);
   };
 
-  // Phát âm tiếng Nhật (Web Speech API)
+  // Phát âm tiếng Nhật (Hỗ trợ chuẩn cả Web Desktop & Android APK qua soundService)
   const speakJapanese = (text: string) => {
-    if (!('speechSynthesis' in window) || !text) return;
-    try {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'ja-JP';
-      utterance.rate = 0.9;
-      window.speechSynthesis.speak(utterance);
-    } catch (e) {
-      console.warn('Speech error:', e);
-    }
+    soundService.speakJapanese(text);
   };
 
   const handleSelectLevel = (lvl: JlptLevelKey) => {

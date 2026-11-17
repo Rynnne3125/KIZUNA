@@ -17,6 +17,7 @@ import {
   ChevronRight,
   ChevronLeft
 } from 'lucide-react';
+import { soundService } from '../services/soundService';
 
 // ============================================================================
 // DATA STRUCTURES FOR 3 EXERCISE TYPES (1, 2, 3)
@@ -523,18 +524,9 @@ export const JapaneseLessonFlashcards: React.FC<JapaneseLessonFlashcardsProps> =
   const currentCloze = clozeList[currentIndex] || clozeList[0];
   const currentDialogue = dialogueList[currentIndex] || dialogueList[0];
 
-  // Phát âm tiếng Nhật tự nhiên qua Web Speech API
+  // Phát âm tiếng Nhật (Hỗ trợ chuẩn cả Web & Android APK qua soundService)
   const speakJapanese = useCallback((text: string, rate: number = 0.9) => {
-    if (!('speechSynthesis' in window) || !text) return;
-    try {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'ja-JP';
-      utterance.rate = rate;
-      window.speechSynthesis.speak(utterance);
-    } catch (e) {
-      console.warn('SpeechSynthesis error:', e);
-    }
+    soundService.speakJapanese(text, rate);
   }, []);
 
   // Chuyển sang thẻ tiếp theo

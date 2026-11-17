@@ -20,6 +20,7 @@ import { authService } from '../services/authService';
 import { progressService } from '../services/progressService';
 import { VocabularyItem, VocabularyBook, VocabularyUnit, VocabularyCatalog } from '../types/kizuna';
 import { VOCABULARY_CATALOG } from '../data/vocabularyCatalog';
+import { soundService } from '../services/soundService';
 
 type JlptLevelKey = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
 // 4 Chế độ học tập hoàn chỉnh:
@@ -192,18 +193,9 @@ export const VocabPage: React.FC = () => {
     });
   };
 
-  // Phát âm tiếng Nhật với Web Speech API
+  // Phát âm tiếng Nhật (Hỗ trợ cả Web Desktop & Android APK qua soundService)
   const speakJapanese = (text: string) => {
-    if (!('speechSynthesis' in window)) return;
-    try {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'ja-JP';
-      utterance.rate = 0.9;
-      window.speechSynthesis.speak(utterance);
-    } catch (err) {
-      console.error('Speech error:', err);
-    }
+    soundService.speakJapanese(text);
   };
 
   // Tải catalog lúc mount
