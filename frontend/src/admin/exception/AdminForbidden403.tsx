@@ -4,7 +4,7 @@ import { ShieldAlert, Home, LogOut } from 'lucide-react';
 export interface AdminForbidden403Props {
   userRole?: string;
   userName?: string;
-  onGoHome: () => void;
+  onGoHome?: () => void;
   onLogout?: () => void;
 }
 

@@ -24,9 +24,30 @@ import { StageEditorModal } from '../components/StageEditorModal';
 import { MilestoneManagerDrawer } from '../components/MilestoneManagerDrawer';
 import { ContentEditorModal, ContentKind } from '../components/ContentEditorModal';
 
+export interface BentoBoxProps {
+  children: React.ReactNode;
+  className?: string;
+  colSpan?: string;
+  delay?: number;
+}
+
+const BentoBox: React.FC<BentoBoxProps> = React.memo(({
+  children,
+  className = '',
+  colSpan = 'col-span-12'
+}) => (
+  <div
+    className={`${colSpan} relative rounded-2xl sm:rounded-3xl p-[1px] bg-gradient-to-br from-emerald-100/60 via-white/80 to-emerald-50/40 dark:from-emerald-950/40 dark:via-slate-900/60 dark:to-slate-950 border border-emerald-100/70 dark:border-slate-800 shadow-xs hover:shadow-md transition-shadow`}
+  >
+    <div className={`h-full w-full rounded-[21px] sm:rounded-[23px] bg-white/95 dark:bg-slate-900/90 backdrop-blur-md flex flex-col p-4 sm:p-6 ${className}`}>
+      {children}
+    </div>
+  </div>
+));
+
 export interface AdminDashboardPageProps {
   user: { fullName?: string; username?: string; role?: string } | null;
-  onGoHome: () => void;
+  onGoHome?: () => void;
   onSwitchToAdmin?: () => void;
   onLoginDifferent?: () => void;
   onLogout?: () => void;
@@ -44,6 +65,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
   } = useAdminData();
   
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState('overview');
   const [searchTerm, setSearchTerm] = useState('');
   const [roleFilter, setRoleFilter] = useState<'ALL' | 'ROLE_ADMIN' | 'ROLE_USER'>('ALL');
@@ -106,19 +128,19 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
     );
   }
 
-  const roleDistribution = [
-    { name: 'Quản trị viên', value: stats?.totalAdmins || 0, color: 'red-500' },
-    { name: 'Học viên', value: stats?.totalLearners || 0, color: 'orange-500' },
-  ];
+  const roleDistribution = React.useMemo(() => [
+    { name: 'Quản trị viên', value: stats?.totalAdmins || 0 },
+    { name: 'Học viên', value: stats?.totalLearners || 0 },
+  ], [stats?.totalAdmins, stats?.totalLearners]);
 
-  const contentStats = [
+  const contentStats = React.useMemo(() => [
     { name: 'Đề thi', value: exams.length },
     { name: 'Chặng học', value: stages.length },
     { name: 'Cột mốc', value: milestones.length },
     { name: 'Từ vựng', value: vocabulary.length },
     { name: 'Ngữ pháp', value: grammar.length },
     { name: 'Kanji', value: kanji.length },
-  ];
+  ], [exams.length, stages.length, milestones.length, vocabulary.length, grammar.length, kanji.length]);
 
   const filteredUsers = users.filter(u => {
     const matchesSearch =
@@ -220,127 +242,120 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
     });
   }, [users, audits]);
 
-  const BentoBox = ({ children, className = '', colSpan = 'col-span-12', delay = 0 }: { children: React.ReactNode, className?: string, colSpan?: string, delay?: number }) => (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay }}
-      className={`${colSpan} relative rounded-3xl overflow-hidden p-[1px] bg-gradient-to-br from-white/40 to-white/5 dark:from-white/10 dark:to-white/5`}
-      style={{ backdropFilter: 'blur(16px)' }}
-    >
-      <div className={`h-full w-full rounded-[23px] bg-white/70 dark:bg-slate-900/70 shadow-xl dark:shadow-2xl flex flex-col p-6 ${className}`}>
-        {children}
-      </div>
-    </motion.div>
-  );
-
   const renderOverview = () => (
-    <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pb-12">
-      <BentoBox colSpan="md:col-span-8" className="bg-gradient-to-br from-red-500/10 to-transparent dark:from-red-900/20 justify-center">
-        <h2 className="text-3xl font-extrabold text-slate-800 dark:text-slate-100 mb-2">
-          Chào mừng trở lại, {user.fullName}
+    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 pb-12">
+      <BentoBox colSpan="col-span-12 lg:col-span-8" className="bg-gradient-to-br from-emerald-500/10 via-emerald-50/20 to-transparent dark:from-emerald-950/30 justify-center">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-xs font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/50 px-2.5 py-0.5 rounded-full">
+            KIZUNA 絆
+          </span>
+          <span className="text-xs text-slate-400 dark:text-slate-500">• Bảng điều khiển quản trị</span>
+        </div>
+        <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-800 dark:text-slate-100 mb-2">
+          Chào mừng trở lại, {user.fullName || user.username || 'Admin'}
         </h2>
-        <p className="text-slate-500 dark:text-slate-400 max-w-lg leading-relaxed">
-          Hệ thống hiện đang phục vụ <span className="font-bold text-slate-700 dark:text-slate-200">{users.length}</span> thành viên trên <span className="font-bold text-slate-700 dark:text-slate-200">{stages.length}</span> chặng và <span className="font-bold text-slate-700 dark:text-slate-200">{milestones.length}</span> cột mốc. Có <span className="font-bold text-red-600 dark:text-red-400">{stats?.pendingAiAudits || 0}</span> bài kiểm tra AI đang chờ đánh giá.
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-lg leading-relaxed">
+          Hệ thống hiện đang phục vụ <span className="font-bold text-slate-700 dark:text-slate-200">{users.length}</span> thành viên trên <span className="font-bold text-slate-700 dark:text-slate-200">{stages.length}</span> chặng và <span className="font-bold text-slate-700 dark:text-slate-200">{milestones.length}</span> cột mốc. Có <span className="font-bold text-amber-600 dark:text-amber-400">{stats?.pendingAiAudits || 0}</span> bài kiểm tra AI đang chờ đánh giá.
         </p>
-        <div className="mt-6 flex flex-wrap gap-4">
-          <motion.button whileTap={{ scale: 0.95 }} onClick={() => setActiveMenu('audits')} className="bg-red-600 text-white px-6 py-2.5 rounded-full font-semibold shadow-lg shadow-red-500/30 hover:bg-red-700 transition-colors cursor-pointer">
+        <div className="mt-5 flex flex-wrap gap-3">
+          <button onClick={() => setActiveMenu('audits')} className="bg-emerald-600 text-white px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold shadow-sm shadow-emerald-600/30 hover:bg-emerald-700 transition-colors cursor-pointer">
             Xem bài kiểm tra
-          </motion.button>
-          <motion.button whileTap={{ scale: 0.95 }} onClick={() => setActiveMenu('reports')} className="bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-6 py-2.5 rounded-full font-semibold shadow-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors cursor-pointer">
+          </button>
+          <button onClick={() => setActiveMenu('reports')} className="bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold shadow-2xs border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors cursor-pointer">
             Xem báo cáo
-          </motion.button>
+          </button>
         </div>
       </BentoBox>
 
-      <BentoBox colSpan="md:col-span-4" delay={0.1}>
-        <div className="flex justify-between items-start mb-6">
-          <div className="p-3 bg-red-100 dark:bg-red-500/20 rounded-2xl text-red-600 dark:text-red-400">
-            <Users className="w-6 h-6" />
+      <BentoBox colSpan="col-span-12 sm:col-span-6 lg:col-span-4">
+        <div className="flex justify-between items-start mb-4">
+          <div className="p-3 bg-emerald-100 dark:bg-emerald-500/20 rounded-2xl text-emerald-700 dark:text-emerald-400">
+            <Users className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
-          <Badge variant="outline" className="text-emerald-600 bg-emerald-50 dark:bg-emerald-500/10 border-emerald-200 dark:border-emerald-800">
+          <Badge variant="outline" className="text-emerald-700 bg-emerald-50 dark:bg-emerald-500/10 border-emerald-200 dark:border-emerald-800">
             <TrendingUp className="w-3 h-3 mr-1" /> +12%
           </Badge>
         </div>
         <div className="mt-auto">
-          <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Tổng thành viên</p>
-          <h3 className="text-5xl font-black text-slate-800 dark:text-white">
+          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Tổng thành viên</p>
+          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white">
             {((stats?.totalLearners || 0) + (stats?.totalAdmins || 0)).toLocaleString()}
           </h3>
         </div>
       </BentoBox>
 
-      <BentoBox colSpan="md:col-span-8" className="h-[400px]" delay={0.2}>
-        <div className="flex justify-between items-center mb-6">
+      <BentoBox colSpan="col-span-12 lg:col-span-8" className="min-h-[360px]">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
           <div>
-            <h3 className="text-lg font-bold text-slate-800 dark:text-white">Hoạt động nền tảng</h3>
-            <p className="text-sm text-slate-500 dark:text-slate-400">Số người dùng hoạt động & đăng ký mới hàng ngày</p>
+            <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white">Hoạt động nền tảng</h3>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Số người dùng hoạt động & đăng ký mới hàng ngày</p>
           </div>
-          <Activity className="w-5 h-5 text-red-500" />
+          <div className="p-2 bg-emerald-50 dark:bg-emerald-500/10 rounded-xl text-emerald-600 dark:text-emerald-400">
+            <Activity className="w-4 h-4 sm:w-5 sm:h-5" />
+          </div>
         </div>
-        <div className="flex-1 w-full relative">
+        <div className="w-full h-[260px] sm:h-[300px] relative">
           <AreaChart
             data={chartData}
             index="date"
             categories={['Người dùng HĐ', 'Đăng ký mới']}
-            colors={['red', 'amber']}
+            colors={['emerald', 'amber']}
             valueFormatter={(num) => num.toString()}
             showLegend={true}
             showGridLines={false}
-            showAnimation={true}
-            animationDuration={1500}
+            showAnimation={false}
             curveType="monotone"
             className="h-full w-full"
           />
         </div>
       </BentoBox>
 
-      <div className="col-span-12 md:col-span-4 flex flex-col gap-6">
-        <BentoBox className="flex-1" delay={0.3}>
+      <div className="col-span-12 sm:col-span-6 lg:col-span-4 flex flex-col gap-4 sm:gap-6">
+        <BentoBox className="flex-1">
           <div className="flex justify-between items-start">
-            <div className="p-3 bg-orange-100 dark:bg-orange-500/20 rounded-2xl text-orange-600 dark:text-orange-400">
-              <Database className="w-6 h-6" />
+            <div className="p-3 bg-amber-100 dark:bg-amber-500/20 rounded-2xl text-amber-700 dark:text-amber-400">
+              <Database className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
           </div>
-          <div className="mt-auto pt-6">
-            <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Dữ liệu học tập</p>
-            <h3 className="text-4xl font-black text-slate-800 dark:text-white">
+          <div className="mt-auto pt-4">
+            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Dữ liệu học tập</p>
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-800 dark:text-white">
               {stages.length + milestones.length}
             </h3>
           </div>
         </BentoBox>
 
-        <BentoBox className="flex-1" delay={0.4}>
+        <BentoBox className="flex-1">
           <div className="flex justify-between items-start">
-            <div className="p-3 bg-rose-100 dark:bg-rose-500/20 rounded-2xl text-rose-600 dark:text-rose-400">
-              <Bot className="w-6 h-6" />
+            <div className="p-3 bg-teal-100 dark:bg-teal-500/20 rounded-2xl text-teal-700 dark:text-teal-400">
+              <Bot className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
             {stats?.pendingAiAudits && stats.pendingAiAudits > 0 ? (
               <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-rose-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
               </span>
             ) : null}
           </div>
-          <div className="mt-auto pt-6">
-            <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Chờ duyệt AI</p>
-            <h3 className="text-4xl font-black text-slate-800 dark:text-white">
+          <div className="mt-auto pt-4">
+            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Chờ duyệt AI</p>
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-800 dark:text-white">
               {stats?.pendingAiAudits || 0}
             </h3>
           </div>
         </BentoBox>
       </div>
 
-      <BentoBox colSpan="md:col-span-5" delay={0.5}>
-        <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-6">Thành phần người dùng</h3>
-        <div className="flex-1 flex items-center justify-center">
-          <DonutChart data={roleDistribution} category="value" index="name" colors={['red', 'orange']} className="w-48 h-48" showAnimation={true} animationDuration={1000} />
+      <BentoBox colSpan="col-span-12 lg:col-span-5">
+        <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white mb-4">Thành phần người dùng</h3>
+        <div className="flex-1 flex items-center justify-center min-h-[200px]">
+          <DonutChart data={roleDistribution} category="value" index="name" colors={['amber', 'emerald']} className="w-44 h-44 sm:w-48 sm:h-48" showAnimation={false} />
         </div>
       </BentoBox>
 
-      <BentoBox colSpan="md:col-span-7" delay={0.6}>
-        <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-6">Phân bố nội dung</h3>
-        <BarList data={contentStats} className="mt-4" color="red" />
+      <BentoBox colSpan="col-span-12 lg:col-span-7">
+        <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white mb-4">Phân bố nội dung</h3>
+        <BarList data={contentStats} className="mt-2" color="emerald" />
       </BentoBox>
     </div>
   );
@@ -387,7 +402,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
           <Button
             onClick={() => setIsCreateUserOpen(true)}
-            className="bg-red-600 hover:bg-red-700 text-white rounded-xl cursor-pointer"
+            className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer"
           >
             <UserPlus className="w-4 h-4 mr-1.5" />
             Thêm người dùng
@@ -605,7 +620,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
             setEditingStage(null);
             setIsStageModalOpen(true);
           }}
-          className="bg-red-600 hover:bg-red-700 text-white rounded-xl cursor-pointer"
+          className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer"
         >
           <Plus className="w-4 h-4 mr-1.5" /> Thêm Chặng mới
         </Button>
@@ -733,7 +748,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                 setEditingMilestone(null);
                 setIsMilestoneDrawerOpen(true);
               }}
-              className="bg-red-600 hover:bg-red-700 text-white rounded-xl cursor-pointer"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer"
             >
               <Plus className="w-4 h-4 mr-1.5" /> Thêm Cột mốc
             </Button>
@@ -976,7 +991,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
             <Button
               onClick={() => openContentModal('vocabulary', null)}
-              className="bg-red-600 hover:bg-red-700 text-white rounded-xl cursor-pointer"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer"
             >
               <Plus className="w-4 h-4 mr-1.5" /> Thêm từ mới
             </Button>
@@ -1109,7 +1124,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
             <Button
               onClick={() => openContentModal('grammar', null)}
-              className="bg-red-600 hover:bg-red-700 text-white rounded-xl cursor-pointer"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer"
             >
               <Plus className="w-4 h-4 mr-1.5" /> Thêm ngữ pháp
             </Button>
@@ -1232,12 +1247,10 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
             <Button
               onClick={() => openContentModal('exam', null)}
-              variant="outline"
-              className="border-red-200 text-red-600 hover:bg-red-50 dark:border-red-800 dark:text-red-400 rounded-xl cursor-pointer"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer"
             >
               <Plus className="w-4 h-4 mr-1.5" /> Thêm Đề thi
             </Button>
-            <Button className="bg-red-500 hover:bg-red-600 text-white rounded-xl">Upload Đề thi</Button>
           </div>
         </div>
         <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
@@ -1374,7 +1387,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
             <Button
               onClick={() => openContentModal('kanji', null)}
-              className="bg-red-600 hover:bg-red-700 text-white rounded-xl cursor-pointer"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer"
             >
               <Plus className="w-4 h-4 mr-1.5" /> Thêm Kanji
             </Button>
@@ -1386,7 +1399,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
             <div
               key={k.id}
               onClick={() => openContentModal('kanji', k)}
-              className="group relative bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 text-center shadow-sm hover:border-red-300 dark:hover:border-red-700 transition-colors cursor-pointer"
+              className="group relative bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 text-center shadow-xs hover:border-emerald-400 dark:hover:border-emerald-700 transition-colors cursor-pointer"
             >
               <button
                 type="button"
@@ -1394,18 +1407,18 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                   e.stopPropagation();
                   openContentModal('kanji', k);
                 }}
-                className="absolute top-2.5 right-2.5 p-1.5 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors cursor-pointer"
+                className="absolute top-2.5 right-2.5 p-1.5 rounded-lg text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                 title="Sửa / Xóa Kanji"
               >
                 <Settings className="w-3.5 h-3.5" />
               </button>
               {(k.level || k.jlptLevel) && (
-                <span className="absolute top-2.5 left-2.5 text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                <span className="absolute top-2.5 left-2.5 text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-slate-800 text-emerald-800 dark:text-emerald-300 border border-emerald-100 dark:border-slate-700">
                   {k.level || k.jlptLevel}
                 </span>
               )}
               <div className="text-4xl font-serif text-slate-800 dark:text-white mb-2 mt-2">{k.kanji || k.id}</div>
-              <div className="text-sm font-bold text-red-500 mb-1 uppercase">{k.sinoVietnamese || k.hanviet || 'N/A'}</div>
+              <div className="text-sm font-bold text-emerald-700 dark:text-emerald-400 mb-1 uppercase tracking-wider">{k.sinoVietnamese || k.hanviet || 'N/A'}</div>
               <div className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1">{k.vietnameseMeaning || k.meaning || 'N/A'}</div>
             </div>
           ))}
@@ -1451,35 +1464,35 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
       .slice(0, 6);
 
     return (
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pb-12">
-        <BentoBox colSpan="md:col-span-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4 sm:gap-6 pb-12">
+        <BentoBox colSpan="col-span-1 sm:col-span-1 md:col-span-4">
           <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Tổng XP toàn hệ thống</div>
-          <div className="text-4xl font-black text-slate-800 dark:text-white">{totalXpSystem.toLocaleString()} XP</div>
+          <div className="text-3xl sm:text-4xl font-black text-slate-800 dark:text-white">{totalXpSystem.toLocaleString()} XP</div>
           <div className="text-xs text-slate-500 mt-2">Tích lũy từ {users.length} tài khoản</div>
         </BentoBox>
 
-        <BentoBox colSpan="md:col-span-4">
+        <BentoBox colSpan="col-span-1 sm:col-span-1 md:col-span-4">
           <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Tổng Điểm Năng Động</div>
-          <div className="text-4xl font-black text-orange-600 dark:text-orange-400">{totalActivePoints.toLocaleString()} AP</div>
+          <div className="text-3xl sm:text-4xl font-black text-amber-600 dark:text-amber-400">{totalActivePoints.toLocaleString()} AP</div>
           <div className="text-xs text-slate-500 mt-2">Điểm thi đua bảng xếp hạng</div>
         </BentoBox>
 
-        <BentoBox colSpan="md:col-span-4">
+        <BentoBox colSpan="col-span-1 sm:col-span-2 md:col-span-4">
           <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Đã thẩm định năng lực (Placement)</div>
-          <div className="text-4xl font-black text-emerald-600 dark:text-emerald-400">
+          <div className="text-3xl sm:text-4xl font-black text-emerald-600 dark:text-emerald-400">
             {placementCompletedCount} / {users.length}
           </div>
           <div className="text-xs text-slate-500 mt-2">Học viên đã hoàn thành bài test đầu vào</div>
         </BentoBox>
 
-        <BentoBox colSpan="md:col-span-6">
-          <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-2">Phân bố trình độ học viên (JLPT)</h3>
+        <BentoBox colSpan="col-span-1 sm:col-span-2 md:col-span-6">
+          <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white mb-2">Phân bố trình độ học viên (JLPT)</h3>
           <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">Thống kê theo cấp độ hiện tại trên Firestore</p>
-          <BarList data={levelBarData} color="red" className="mt-2" />
+          <BarList data={levelBarData} color="emerald" className="mt-2" />
         </BentoBox>
 
-        <BentoBox colSpan="md:col-span-6">
-          <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-2">Thống kê tài nguyên học liệu</h3>
+        <BentoBox colSpan="col-span-1 sm:col-span-2 md:col-span-6">
+          <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white mb-2">Thống kê tài nguyên học liệu</h3>
           <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">Số lượng bản ghi hiện có trong cơ sở dữ liệu</p>
           <BarList data={contentStats} color="amber" className="mt-2" />
         </BentoBox>
@@ -1998,40 +2011,131 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
   ];
 
   return (
-    <div className={`flex h-screen w-full overflow-hidden font-sans transition-colors duration-300 ${isDark ? 'dark bg-slate-950' : 'bg-[#f8fafc]'}`}>
+    <div className={`flex h-screen w-full overflow-hidden font-sans transition-colors duration-300 ${isDark ? 'dark bg-slate-950' : 'bg-[#f8fafc] kanji-paper-bg'}`}>
       
-      {/* BACKGROUND EFFECTS */}
+      {/* BACKGROUND EFFECTS (Soft Matcha / Teal ambient glow) */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-red-400/10 dark:bg-red-900/20 blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-orange-400/10 dark:bg-orange-900/20 blur-[120px]" />
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-400/10 dark:bg-emerald-900/15 blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-teal-400/10 dark:bg-teal-900/15 blur-[120px]" />
       </div>
 
-      {/* SIDEBAR */}
+      {/* MOBILE DRAWER BACKDROP & OFF-CANVAS SIDEBAR */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-40 lg:hidden"
+            />
+            <motion.aside
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 220 }}
+              className="fixed inset-y-0 left-0 w-72 max-w-[85vw] bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-r border-emerald-100 dark:border-slate-800 z-50 flex flex-col shadow-2xl lg:hidden"
+            >
+              {/* Mobile Sidebar Header */}
+              <div className="h-16 flex items-center justify-between px-5 border-b border-emerald-100/70 dark:border-slate-800">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-600 to-green-700 flex items-center justify-center text-white font-extrabold text-lg shadow-sm shadow-emerald-600/30">
+                    絆
+                  </div>
+                  <div>
+                    <span className="font-extrabold text-base text-emerald-950 dark:text-white tracking-tight block leading-tight">
+                      KIZUNA OS
+                    </span>
+                    <span className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
+                      Admin Suite
+                    </span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-9 h-9 rounded-xl flex items-center justify-center text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                  aria-label="Đóng menu"
+                >
+                  <XCircle className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Mobile Menu List */}
+              <div className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
+                <div className="px-3 text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">
+                  Danh mục quản trị
+                </div>
+                {menuItems.map(item => {
+                  const isActive = activeMenu === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                        setActiveMenu(item.id);
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className={`w-full flex items-center h-11 px-3.5 rounded-xl font-semibold text-sm transition-all cursor-pointer ${
+                        isActive 
+                          ? 'bg-emerald-600 text-white shadow-sm shadow-emerald-600/25' 
+                          : 'text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-slate-800/80 hover:text-emerald-700 dark:hover:text-emerald-400'
+                      }`}
+                    >
+                      <item.icon className="w-4 h-4 mr-3 shrink-0" />
+                      <span className="truncate">{item.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Mobile Footer: Logout Only */}
+              {onLogout && (
+                <div className="p-4 border-t border-emerald-100/70 dark:border-slate-800">
+                  <button
+                    onClick={onLogout}
+                    className="w-full flex items-center h-10 px-3.5 rounded-xl text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 text-sm font-semibold transition-colors cursor-pointer"
+                  >
+                    <LogOut className="w-4 h-4 mr-3 shrink-0" />
+                    <span>Đăng xuất hệ thống</span>
+                  </button>
+                </div>
+              )}
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* DESKTOP SIDEBAR */}
       <motion.aside 
         initial={false}
-        animate={{ width: isSidebarOpen ? 280 : 88 }}
-        className="h-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border-r border-slate-200 dark:border-slate-800 flex flex-col relative z-20 shadow-[4px_0_24px_rgba(0,0,0,0.02)]"
+        animate={{ width: isSidebarOpen ? 270 : 80 }}
+        className="hidden lg:flex h-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-r border-emerald-100/80 dark:border-slate-800 flex-col relative z-20 shadow-[4px_0_24px_rgba(0,0,0,0.02)]"
       >
-        <div className="h-20 flex items-center px-6 border-b border-slate-200 dark:border-slate-800">
+        <div className="h-20 flex items-center px-5 border-b border-emerald-100/70 dark:border-slate-800">
           <div className="flex items-center gap-3 overflow-hidden">
-            <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-rose-600 rounded-xl flex items-center justify-center shrink-0 shadow-lg shadow-red-500/30">
-              <ShieldAlert className="w-5 h-5 text-white" />
+            <div className="w-10 h-10 bg-gradient-to-br from-emerald-600 to-green-700 rounded-xl flex items-center justify-center shrink-0 shadow-md shadow-emerald-600/25 text-white font-extrabold text-xl">
+              絆
             </div>
             <AnimatePresence>
               {isSidebarOpen && (
-                <motion.span initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }} className="font-extrabold text-xl text-slate-800 dark:text-white whitespace-nowrap tracking-tight">
-                  KIZUNA OS
-                </motion.span>
+                <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }} className="whitespace-nowrap overflow-hidden">
+                  <span className="font-extrabold text-lg text-emerald-950 dark:text-white tracking-tight block leading-tight">
+                    KIZUNA OS
+                  </span>
+                  <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider block">
+                    Admin Dashboard
+                  </span>
+                </motion.div>
               )}
             </AnimatePresence>
           </div>
         </div>
 
-        <div className="flex-1 py-8 px-4 space-y-3 overflow-y-auto">
+        <div className="flex-1 py-6 px-3 space-y-1.5 overflow-y-auto">
           <AnimatePresence>
             {isSidebarOpen && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="px-3 text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
-                Menu Chính
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="px-3 text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">
+                Menu Quản trị
               </motion.div>
             )}
           </AnimatePresence>
@@ -2042,93 +2146,104 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
               <button
                 key={item.id}
                 onClick={() => setActiveMenu(item.id)}
-                className={`w-full flex items-center h-12 px-4 rounded-xl transition-all duration-300 group relative overflow-hidden ${
-                  isActive ? 'text-white' : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
+                className={`w-full flex items-center h-11 px-3.5 rounded-xl transition-all duration-200 group relative overflow-hidden cursor-pointer ${
+                  isActive ? 'text-white' : 'text-slate-600 dark:text-slate-400 hover:bg-emerald-50 dark:hover:bg-slate-800 hover:text-emerald-800 dark:hover:text-emerald-300'
                 }`}
+                title={item.label}
               >
                 {isActive && (
-                  <motion.div layoutId="activeMenu" className="absolute inset-0 bg-gradient-to-r from-red-500 to-rose-500 rounded-xl" />
+                  <motion.div layoutId="activeMenu" className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-green-600 rounded-xl shadow-xs" />
                 )}
-                <item.icon className={`w-5 h-5 shrink-0 relative z-10 transition-transform duration-300 ${isActive ? '' : 'group-hover:scale-110'}`} />
+                <item.icon className={`w-4 h-4 shrink-0 relative z-10 transition-transform duration-200 ${isActive ? '' : 'group-hover:scale-110'}`} />
                 <AnimatePresence>
                   {isSidebarOpen && (
-                    <motion.span initial={{ opacity: 0, width: 0 }} animate={{ opacity: 1, width: 'auto' }} exit={{ opacity: 0, width: 0 }} className="ml-4 font-semibold text-sm whitespace-nowrap relative z-10">
+                    <motion.span initial={{ opacity: 0, width: 0 }} animate={{ opacity: 1, width: 'auto' }} exit={{ opacity: 0, width: 0 }} className="ml-3 font-semibold text-sm whitespace-nowrap relative z-10">
                       {item.label}
                     </motion.span>
                   )}
                 </AnimatePresence>
               </button>
-            )
+            );
           })}
         </div>
 
-        <div className="p-4 border-t border-slate-200 dark:border-slate-800 space-y-2">
-          <button 
-            onClick={onGoHome}
-            title="Chuyển sang giao diện Học viên (Trang chủ)"
-            className="w-full flex items-center h-11 px-4 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors group cursor-pointer"
-          >
-            <Home className="w-5 h-5 shrink-0 group-hover:scale-105 transition-transform" />
-            <AnimatePresence>
-              {isSidebarOpen && (
-                <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="ml-4 font-semibold text-sm whitespace-nowrap">
-                  Giao diện Học viên
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </button>
-
-          {onLogout && (
+        {/* Desktop Footer: Logout Only (Đã bỏ hoàn toàn nút Giao diện học viên) */}
+        {onLogout && (
+          <div className="p-3 border-t border-emerald-100/70 dark:border-slate-800">
             <button 
               onClick={onLogout}
               title="Đăng xuất khỏi hệ thống"
-              className="w-full flex items-center h-11 px-4 rounded-xl text-slate-500 dark:text-slate-400 hover:bg-red-50 dark:hover:bg-red-500/10 hover:text-red-600 dark:hover:text-red-400 transition-colors group cursor-pointer"
+              className="w-full flex items-center h-10 px-3 rounded-xl text-slate-500 dark:text-slate-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 hover:text-rose-600 dark:hover:text-rose-400 transition-colors group cursor-pointer"
             >
-              <LogOut className="w-5 h-5 shrink-0 group-hover:-translate-x-1 transition-transform" />
+              <LogOut className="w-4 h-4 shrink-0 group-hover:-translate-x-1 transition-transform" />
               <AnimatePresence>
                 {isSidebarOpen && (
-                  <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="ml-4 font-semibold text-sm whitespace-nowrap">
+                  <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="ml-3 font-semibold text-xs whitespace-nowrap">
                     Đăng xuất
                   </motion.span>
                 )}
               </AnimatePresence>
             </button>
-          )}
-        </div>
+          </div>
+        )}
       </motion.aside>
 
       {/* MAIN CONTENT AREA */}
-      <div className="flex-1 flex flex-col min-w-0 z-10 relative">
+      <div className="flex-1 flex flex-col min-w-0 z-10 relative overflow-hidden">
         
         {/* TOP HEADER */}
-        <header className="h-20 bg-transparent flex items-center justify-between px-8 shrink-0">
-          <div className="flex items-center gap-4">
-            <motion.button whileTap={{ scale: 0.9 }} onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="w-10 h-10 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 shadow-sm transition-colors">
+        <header className="h-16 sm:h-20 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border-b border-emerald-100/70 dark:border-slate-800/80 flex items-center justify-between px-3 sm:px-6 lg:px-8 shrink-0 sticky top-0 z-20">
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Mobile menu toggle */}
+            <motion.button 
+              whileTap={{ scale: 0.9 }} 
+              onClick={() => setIsMobileMenuOpen(true)} 
+              className="lg:hidden w-9 h-9 sm:w-10 sm:h-10 bg-white dark:bg-slate-800 border border-emerald-100 dark:border-slate-700 rounded-xl flex items-center justify-center text-slate-700 dark:text-slate-300 shadow-xs cursor-pointer"
+              aria-label="Mở menu"
+            >
               <Menu className="w-5 h-5" />
             </motion.button>
-            <AnimatePresence mode="wait">
-              <motion.h1 key={activeMenu} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="text-2xl font-black text-slate-800 dark:text-white capitalize hidden sm:block tracking-tight">
-                {menuItems.find(m => m.id === activeMenu)?.label}
-              </motion.h1>
-            </AnimatePresence>
+
+            {/* Desktop menu toggle */}
+            <motion.button 
+              whileTap={{ scale: 0.9 }} 
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)} 
+              className="hidden lg:flex w-10 h-10 bg-white/80 dark:bg-slate-800 border border-emerald-100 dark:border-slate-700 rounded-xl items-center justify-center text-slate-700 dark:text-slate-300 shadow-xs hover:bg-emerald-50 dark:hover:bg-slate-700 transition-colors cursor-pointer"
+              aria-label="Thu phóng thanh bên"
+            >
+              <Menu className="w-5 h-5" />
+            </motion.button>
+
+            <div className="flex items-center gap-2">
+              <h1 className="text-base sm:text-xl font-black text-slate-900 dark:text-white tracking-tight truncate max-w-[200px] sm:max-w-none">
+                {menuItems.find(m => m.id === activeMenu)?.label || 'Quản trị KIZUNA'}
+              </h1>
+              <span className="hidden sm:inline-block text-[11px] font-bold text-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 dark:text-emerald-300 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
+                ADMIN
+              </span>
+            </div>
           </div>
           
-          <div className="flex items-center gap-4">
-            <motion.button whileTap={{ scale: 0.9 }} onClick={() => setIsDark(!isDark)} className="w-10 h-10 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 shadow-sm transition-colors">
-              {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          <div className="flex items-center gap-2 sm:gap-3">
+            <motion.button 
+              whileTap={{ scale: 0.9 }} 
+              onClick={() => setIsDark(!isDark)} 
+              className="w-9 h-9 sm:w-10 sm:h-10 bg-white dark:bg-slate-800 border border-emerald-100 dark:border-slate-700 rounded-xl flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-slate-700 shadow-xs transition-colors cursor-pointer"
+              title={isDark ? 'Chế độ sáng' : 'Chế độ tối'}
+            >
+              {isDark ? <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" /> : <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-slate-600" />}
             </motion.button>
 
-            <motion.button whileTap={{ scale: 0.9 }} className="w-10 h-10 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 shadow-sm transition-colors relative">
-              <Bell className="w-5 h-5" />
-              <span className="absolute top-2 right-2.5 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white dark:border-slate-900 animate-pulse"></span>
-            </motion.button>
-
-            <div className="flex items-center gap-3 pl-4 ml-2 border-l border-slate-200 dark:border-slate-800">
-              <div className="text-right hidden md:block">
-                <div className="text-sm font-bold text-slate-800 dark:text-white">{user.fullName || user.username || 'Admin'}</div>
-                <div className="text-xs font-medium text-red-500">{user.role}</div>
+            <div className="flex items-center gap-2 sm:gap-3 pl-2 sm:pl-3 border-l border-emerald-100 dark:border-slate-800">
+              <div className="text-right hidden sm:block">
+                <div className="text-xs sm:text-sm font-bold text-slate-800 dark:text-white truncate max-w-[140px]">
+                  {user.fullName || user.username || 'Admin'}
+                </div>
+                <div className="text-[10px] sm:text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                  Quản trị viên
+                </div>
               </div>
-              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-red-500 to-orange-500 text-white flex items-center justify-center font-bold shadow-lg shadow-red-500/20 border-2 border-white dark:border-slate-800 cursor-pointer">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-emerald-600 to-green-700 text-white flex items-center justify-center font-bold text-sm sm:text-base shadow-sm shadow-emerald-600/30 border border-emerald-200 dark:border-emerald-800 shrink-0">
                 {(user.fullName || user.username || 'A').charAt(0).toUpperCase()}
               </div>
             </div>

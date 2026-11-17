@@ -181,7 +181,7 @@ export const UserInspectorDrawer: React.FC<UserInspectorDrawerProps> = ({
         {/* HEADER */}
         <div className="px-6 py-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/70 dark:bg-slate-800/40">
           <div className="flex items-center gap-3.5 min-w-0">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-500 to-rose-600 text-white flex items-center justify-center font-extrabold text-lg shrink-0 shadow-md">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-600 to-green-700 text-white flex items-center justify-center font-extrabold text-lg shrink-0 shadow-md shadow-emerald-600/20">
               {(user.fullName || user.username || 'U').charAt(0).toUpperCase()}
             </div>
             <div className="min-w-0">
@@ -189,7 +189,7 @@ export const UserInspectorDrawer: React.FC<UserInspectorDrawerProps> = ({
                 <h3 className="text-lg font-extrabold text-slate-900 dark:text-white truncate">
                   {user.fullName || user.username || 'Học viên'}
                 </h3>
-                <Badge variant="outline" className={role === 'ROLE_ADMIN' ? 'border-red-300 bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-300' : 'border-slate-200 text-slate-600'}>
+                <Badge variant="outline" className={role === 'ROLE_ADMIN' ? 'border-amber-300 bg-amber-50 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300' : 'border-slate-200 text-slate-600'}>
                   {role === 'ROLE_ADMIN' ? 'ROLE_ADMIN' : 'ROLE_USER'}
                 </Badge>
               </div>
@@ -222,7 +222,7 @@ export const UserInspectorDrawer: React.FC<UserInspectorDrawerProps> = ({
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-3.5 py-2.5 text-xs sm:text-sm font-bold border-b-2 transition-colors cursor-pointer ${
                   active
-                    ? 'border-red-600 text-red-600 dark:text-red-400 dark:border-red-400'
+                    ? 'border-emerald-600 text-emerald-700 dark:text-emerald-400 dark:border-emerald-400'
                     : 'border-transparent text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
                 }`}
               >
@@ -357,7 +357,7 @@ export const UserInspectorDrawer: React.FC<UserInspectorDrawerProps> = ({
                 </div>
 
                 <div className="pt-2 flex justify-end">
-                  <Button type="submit" disabled={saving} className="bg-red-600 hover:bg-red-700 text-white cursor-pointer">
+                  <Button type="submit" disabled={saving} className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs shadow-emerald-600/20 cursor-pointer">
                     <Save className="w-4 h-4 mr-2" />
                     {saving ? 'Đang lưu...' : 'Lưu thay đổi'}
                   </Button>

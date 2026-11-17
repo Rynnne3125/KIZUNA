@@ -67,7 +67,7 @@ export const CreateUserModal: React.FC<CreateUserModalProps> = ({
       <div className="w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
         <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/70 dark:bg-slate-800/40">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-red-600 text-white flex items-center justify-center">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-600 to-green-700 text-white flex items-center justify-center shadow-xs">
               <UserPlus className="w-4 h-4" />
             </div>
             <div>
@@ -115,7 +115,7 @@ export const CreateUserModal: React.FC<CreateUserModalProps> = ({
               <button
                 type="button"
                 onClick={generateRandomPassword}
-                className="text-[11px] font-bold text-red-600 hover:underline cursor-pointer"
+                className="text-[11px] font-bold text-emerald-700 hover:underline cursor-pointer"
               >
                 Tạo ngẫu nhiên
               </button>
@@ -163,7 +163,7 @@ export const CreateUserModal: React.FC<CreateUserModalProps> = ({
             <Button type="button" variant="outline" onClick={onClose} className="cursor-pointer">
               Hủy
             </Button>
-            <Button type="submit" disabled={saving} className="bg-red-600 hover:bg-red-700 text-white cursor-pointer">
+            <Button type="submit" disabled={saving} className="bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer shadow-xs shadow-emerald-600/20">
               {saving ? 'Đang tạo...' : 'Tạo tài khoản'}
             </Button>
           </div>

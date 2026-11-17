@@ -510,7 +510,7 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
                   <div />
                 )}
 
-                <Button type="submit" disabled={saving} className="bg-red-600 hover:bg-red-700 text-white cursor-pointer">
+                <Button type="submit" disabled={saving} className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs shadow-emerald-600/20 cursor-pointer">
                   <Save className="w-4 h-4 mr-1.5" />
                   {saving ? 'Đang lưu...' : isEditing ? 'Lưu thông tin Mốc' : 'Tạo Cột mốc'}
                 </Button>
@@ -587,7 +587,7 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
               </div>
 
               <div className="flex justify-end pt-2">
-                <Button type="submit" disabled={saving} className="bg-red-600 hover:bg-red-700 text-white cursor-pointer">
+                <Button type="submit" disabled={saving} className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs shadow-emerald-600/20 cursor-pointer">
                   <Save className="w-4 h-4 mr-1.5" />
                   {saving ? 'Đang lưu...' : 'Lưu Cân Bằng Gameplay'}
                 </Button>
@@ -646,7 +646,7 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
                     required
                     className="flex-1"
                   />
-                  <Button type="submit" disabled={saving} className="bg-red-600 hover:bg-red-700 text-white shrink-0 cursor-pointer">
+                  <Button type="submit" disabled={saving} className="bg-emerald-600 hover:bg-emerald-700 text-white shrink-0 shadow-xs shadow-emerald-600/20 cursor-pointer">
                     <Plus className="w-4 h-4 mr-1" /> Thêm vào Whitelist
                   </Button>
                 </div>
@@ -658,7 +658,7 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
                   type="button"
                   onClick={() => setWhitelistSubTab('vocab')}
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer ${
-                    whitelistSubTab === 'vocab' ? 'bg-red-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
+                    whitelistSubTab === 'vocab' ? 'bg-emerald-600 text-white shadow-2xs' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
                   }`}
                 >
                   Từ vựng ({whitelist?.vocabulary.length || 0})
@@ -667,7 +667,7 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
                   type="button"
                   onClick={() => setWhitelistSubTab('kanji')}
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer ${
-                    whitelistSubTab === 'kanji' ? 'bg-red-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
+                    whitelistSubTab === 'kanji' ? 'bg-emerald-600 text-white shadow-2xs' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
                   }`}
                 >
                   Kanji ({whitelist?.kanji.length || 0})
@@ -676,7 +676,7 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
                   type="button"
                   onClick={() => setWhitelistSubTab('grammar')}
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer ${
-                    whitelistSubTab === 'grammar' ? 'bg-red-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
+                    whitelistSubTab === 'grammar' ? 'bg-emerald-600 text-white shadow-2xs' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
                   }`}
                 >
                   Ngữ pháp ({whitelist?.grammar.length || 0})
@@ -766,7 +766,7 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
                   size="sm"
                   onClick={handleAddNewQuest}
                   disabled={saving}
-                  className="bg-red-600 hover:bg-red-700 text-white cursor-pointer"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs shadow-emerald-600/20 cursor-pointer"
                 >
                   <Plus className="w-4 h-4 mr-1" /> Thêm Quest
                 </Button>
@@ -782,7 +782,7 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
                       <div key={q.id} className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-3">
                         <div className="flex items-start justify-between gap-3">
                           <div className="flex items-center gap-2.5">
-                            <span className="w-7 h-7 rounded-lg bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 font-extrabold text-xs flex items-center justify-center">
+                            <span className="w-7 h-7 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300 font-extrabold text-xs flex items-center justify-center">
                               #{q.stepIndex}
                             </span>
                             <div>
@@ -908,7 +908,7 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
                                 size="sm"
                                 disabled={saving}
                                 onClick={() => handleSaveQuest(q)}
-                                className="bg-red-600 hover:bg-red-700 text-white cursor-pointer"
+                                className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs shadow-emerald-600/20 cursor-pointer"
                               >
                                 <Save className="w-3.5 h-3.5 mr-1" /> Lưu Quest này
                               </Button>

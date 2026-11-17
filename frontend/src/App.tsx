@@ -193,7 +193,6 @@ export default function App() {
     return (
       <AdminDashboardPage
         user={user}
-        onGoHome={() => handleTabChange('home')}
         onLogout={handleLogout}
       />
     );

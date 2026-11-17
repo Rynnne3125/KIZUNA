@@ -731,7 +731,7 @@ export const ContentEditorModal: React.FC<ContentEditorModalProps> = ({
               <Button type="button" variant="outline" onClick={onClose} className="cursor-pointer">
                 Đóng
               </Button>
-              <Button type="submit" disabled={saving} className="bg-red-600 hover:bg-red-700 text-white cursor-pointer">
+              <Button type="submit" disabled={saving} className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs shadow-emerald-600/20 cursor-pointer">
                 <Save className="w-4 h-4 mr-1.5" />
                 {saving ? 'Đang lưu...' : isEditing ? 'Lưu thay đổi' : 'Thêm mới'}
               </Button>

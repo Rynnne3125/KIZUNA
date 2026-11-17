@@ -2,58 +2,31 @@ import React from 'react';
 
 export interface AdminNavbarProps {
   user: { fullName?: string; username?: string; role?: string } | null;
-  onGoHome: () => void;
+  onGoHome?: () => void;
   onLogout: () => void;
 }
 
 export const AdminNavbar: React.FC<AdminNavbarProps> = ({
   user,
-  onGoHome,
   onLogout
 }) => {
   return (
-    <div style={{
-      background: '#1e1b4b',
-      color: '#ffffff',
-      padding: '12px 20px',
-      marginBottom: 24,
-      borderRadius: 'var(--radius-md)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      flexWrap: 'wrap',
-      gap: 12
-    }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-        <div style={{
-          background: '#dc2626',
-          color: '#fff',
-          fontWeight: 900,
-          padding: '4px 8px',
-          borderRadius: 6,
-          fontSize: 14
-        }}>
-          ADMIN
+    <div className="bg-emerald-950 text-white px-5 py-3 mb-6 rounded-2xl flex items-center justify-between flex-wrap gap-3 border border-emerald-900/50 shadow-md">
+      <div className="flex items-center gap-3">
+        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-600 to-green-700 flex items-center justify-center text-white font-extrabold text-base shadow-sm">
+          絆
         </div>
         <div>
-          <div style={{ fontWeight: 800, fontSize: 16 }}>Hệ Thống Quản Trị Trung Tâm KIZUNA</div>
-          <div style={{ fontSize: 12, color: '#a5b4fc' }}>Phân hệ dành riêng cho ban điều hành & giáo viên</div>
+          <div className="font-extrabold text-sm sm:text-base text-emerald-50">Hệ Thống Quản Trị KIZUNA OS</div>
+          <div className="text-xs text-emerald-300/80">Phân hệ dành riêng cho ban điều hành & quản trị viên</div>
         </div>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-        <button
-          onClick={onGoHome}
-          className="btn btn-sm"
-          style={{ background: '#3b82f6', color: '#ffffff', border: 'none' }}
-        >
-          Về giao diện Học viên
-        </button>
+      <div className="flex items-center gap-2.5">
         {user && (
           <button
             onClick={onLogout}
-            className="btn btn-sm btn-secondary"
-            style={{ color: '#ef4444', borderColor: '#f87171' }}
+            className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-rose-300 border border-rose-500/40 hover:bg-rose-950/40 transition-colors cursor-pointer"
           >
             Đăng xuất
           </button>
