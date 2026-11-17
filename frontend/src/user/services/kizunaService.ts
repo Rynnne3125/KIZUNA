@@ -294,26 +294,16 @@ export const kizunaService = {
     const cached = getSessionCache<GrammarCatalog>(cacheKey);
     if (cached) return cached;
 
-    try {
-      const res = await fetch('/data/grammar/catalog.json');
-      if (res.ok) {
-        const data: GrammarCatalog = await res.json();
-        setSessionCache(cacheKey, data);
-        return data;
-      }
-    } catch (e) {
-      console.warn('Fetch grammar catalog error:', e);
-    }
-
     const defaultUnits = [{ unitId: 'ms_minna_b01', unitTitle: 'Bài 1: Ngữ pháp Nền tảng (Offline)', lessonNumber: 1, itemCount: OFFLINE_GRAMMAR_DECK.length }];
-    return {
+    const catalog: GrammarCatalog = {
       N5: [{ bookId: 'minna-n5', bookName: 'Minna no Nihongo N5 (Chế độ Offline)', description: 'Gói ngữ pháp dự phòng khi mất kết nối mạng', totalItems: OFFLINE_GRAMMAR_DECK.length, units: defaultUnits }],
       N4: [{ bookId: 'minna-n4', bookName: 'Minna no Nihongo N4 (Chế độ Offline)', description: 'Gói ngữ pháp dự phòng khi mất kết nối mạng', totalItems: OFFLINE_GRAMMAR_DECK.length, units: defaultUnits }],
       N3: [{ bookId: 'shinkanzen-n3', bookName: 'Shinkanzen Master N3 (Chế độ Offline)', description: 'Gói ngữ pháp dự phòng khi mất kết nối mạng', totalItems: OFFLINE_GRAMMAR_DECK.length, units: defaultUnits }],
       N2: [{ bookId: 'shinkanzen-n2', bookName: 'Shinkanzen Master N2 (Chế độ Offline)', description: 'Gói ngữ pháp dự phòng khi mất kết nối mạng', totalItems: OFFLINE_GRAMMAR_DECK.length, units: defaultUnits }],
       N1: [{ bookId: 'shinkanzen-n1', bookName: 'Shinkanzen Master N1 (Chế độ Offline)', description: 'Gói ngữ pháp dự phòng khi mất kết nối mạng', totalItems: OFFLINE_GRAMMAR_DECK.length, units: defaultUnits }],
     };
-    return null;
+    setSessionCache(cacheKey, catalog);
+    return catalog;
   },
 
   /**
@@ -382,26 +372,16 @@ export const kizunaService = {
     const cached = getSessionCache<KanjiCatalog>(cacheKey);
     if (cached) return cached;
 
-    try {
-      const res = await fetch('/data/kanji/catalog.json');
-      if (res.ok) {
-        const data: KanjiCatalog = await res.json();
-        setSessionCache(cacheKey, data);
-        return data;
-      }
-    } catch (e) {
-      console.warn('Fetch kanji catalog error:', e);
-    }
-
     const defaultKanjiUnits = [{ unitId: 'ms_minna_b01', unitTitle: 'Bài 1: Chữ Hán Nền tảng (Offline)', lessonNumber: 1, itemCount: OFFLINE_KANJI_DECK.length }];
-    return {
+    const catalog: KanjiCatalog = {
       N5: [{ bookId: 'kanji-n5', bookName: 'Kanji Look & Learn N5 (Offline)', description: 'Bộ chữ Hán dự phòng khi mất kết nối mạng', totalItems: OFFLINE_KANJI_DECK.length, units: defaultKanjiUnits }],
       N4: [{ bookId: 'kanji-n4', bookName: 'Kanji Look & Learn N4 (Offline)', description: 'Bộ chữ Hán dự phòng khi mất kết nối mạng', totalItems: OFFLINE_KANJI_DECK.length, units: defaultKanjiUnits }],
       N3: [{ bookId: 'kanji-n3', bookName: 'Kanji Master N3 (Offline)', description: 'Bộ chữ Hán dự phòng khi mất kết nối mạng', totalItems: OFFLINE_KANJI_DECK.length, units: defaultKanjiUnits }],
       N2: [{ bookId: 'kanji-n2', bookName: 'Kanji Master N2 (Offline)', description: 'Bộ chữ Hán dự phòng khi mất kết nối mạng', totalItems: OFFLINE_KANJI_DECK.length, units: defaultKanjiUnits }],
       N1: [{ bookId: 'kanji-n1', bookName: 'Kanji Master N1 (Offline)', description: 'Bộ chữ Hán dự phòng khi mất kết nối mạng', totalItems: OFFLINE_KANJI_DECK.length, units: defaultKanjiUnits }],
     };
-    return null;
+    setSessionCache(cacheKey, catalog);
+    return catalog;
   },
 
   /**
@@ -751,42 +731,10 @@ export const kizunaService = {
 
     // 1. Lấy từ Firestore collection jlpt_exam_catalog
     try {
-      const res = await fetch('/data/audio/choukai_catalog.json');
-      if (res.ok) {
-        items = await res.json();
-      }
-    } catch (e) {
-      console.warn('Local choukai_catalog.json fetch failed:', e);
-    }
-
-    // 2. Fallback sang Firestore nếu chưa tải được file cục bộ
-    if (items.length === 0) {
-      try {
-        if (db) {
-          const snap = await safeGetDocs(collection(db, 'jlpt_exam_catalog'));
-          if (!snap.empty) {
-            snap.forEach(d => {
-              const data = d.data();
-              if (data.audioUrl) {
-                items.push({
-                  id: d.id,
-                  label: data.label || '',
-                  level: data.level || 'N3',
-                  year: data.year,
-                  month: data.month,
-                  audioUrl: data.audioUrl,
-                  durationMinutes: data.durationMinutes || 40,
-                  totalQuestions: data.totalQuestions,
-                  actualQuestionCount: data.actualQuestionCount,
-                  listeningSetsCount: data.questionSetCount || 5
-                });
-              }
-            });
-          }
       if (db) {
-        const snap = await getDocs(collection(db, 'jlpt_exam_catalog'));
+        const snap = await safeGetDocs(collection(db, 'jlpt_exam_catalog'));
         if (!snap.empty) {
-          snap.forEach(d => {
+          snap.forEach((d: any) => {
             const data = d.data();
             if (data.audioUrl) {
               items.push({

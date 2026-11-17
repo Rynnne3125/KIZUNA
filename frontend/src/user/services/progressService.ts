@@ -34,6 +34,7 @@ function withProgressTimeout<T>(promise: Promise<T>, ms = 2500): Promise<T> {
       err => { clearTimeout(timer); reject(err); }
     );
   });
+}
 export interface UserRoadmapProgress {
   userId: string;
   completedMilestones: string[];
@@ -243,18 +244,6 @@ export const progressService = {
         localStorage.setItem(QUEUE_KEY, JSON.stringify(queue));
       } catch {}
     };
-      if (!db) return;
-
-      // 1. Cập nhật tiến độ trong collection 'user_progress'
-      const progressRef = doc(db, 'user_progress', userId);
-      const fieldMap: Record<string, string> = {
-        vocab: 'vocabLearned',
-        kanji: 'kanjiLearned',
-        grammar: 'grammarLearned',
-        exam: 'examsCompleted',
-        roadmap: 'milestonesCompleted'
-      };
-      const targetField = fieldMap[type] || 'activitiesCompleted';
 
     if (!db || (typeof navigator !== 'undefined' && !navigator.onLine)) {
       enqueueForLaterSync();
@@ -270,14 +259,17 @@ export const progressService = {
       }, { merge: true }));
 
       const userRef = doc(db, 'users', userId);
-      await withProgressTimeout(updateDoc(userRef, {
+      const updatePayload: any = {
         activePoints: increment(activePointsEarned),
-        totalXp: increment(activePointsEarned * 2)
-      }).catch(async () => {
-        await setDoc(userRef, {
-          activePoints: increment(activePointsEarned),
-          totalXp: increment(activePointsEarned * 2)
-        }, { merge: true });
+        totalXp: increment(finalXp),
+        lastStudiedAt: new Date().toISOString(),
+        lastActiveDate: todayStr
+      };
+      if (currentStreak > 0) {
+        updatePayload.currentStreak = currentStreak;
+      }
+      await withProgressTimeout(updateDoc(userRef, updatePayload).catch(async () => {
+        await setDoc(userRef, updatePayload, { merge: true });
       }));
     } catch (e) {
       console.warn('[Progress] Không thể đồng bộ ngay lên Firestore, đã xếp vào hàng đợi Offline:', e);
@@ -299,9 +291,9 @@ export const progressService = {
 
     if (queue.length === 0) return 0;
 
-    const totals = { vocab: 0, kanji: 0, grammar: 0, exam: 0, points: 0 };
+    const totals: Record<string, number> = { vocab: 0, kanji: 0, grammar: 0, exam: 0, points: 0 };
     for (const item of queue) {
-      totals[item.type] += item.amount;
+      if (totals[item.type] !== undefined) totals[item.type] += item.amount;
       totals.points += item.activePointsEarned;
     }
 
@@ -328,21 +320,6 @@ export const progressService = {
 
       localStorage.removeItem(QUEUE_KEY);
       return queue.length;
-      // 2. Cập nhật điểm năng động, XP và Streak vào collection 'users'
-      const userRef = doc(db, 'users', userId);
-      const updatePayload: any = {
-        activePoints: increment(activePointsEarned),
-        totalXp: increment(finalXp),
-        lastStudiedAt: new Date().toISOString(),
-        lastActiveDate: todayStr
-      };
-      if (currentStreak > 0) {
-        updatePayload.currentStreak = currentStreak;
-      }
-
-      await updateDoc(userRef, updatePayload).catch(async () => {
-        await setDoc(userRef, updatePayload, { merge: true });
-      });
     } catch (e) {
       console.warn('[Progress] Đồng bộ hàng đợi Offline thất bại, sẽ thử lại sau:', e);
       return 0;
