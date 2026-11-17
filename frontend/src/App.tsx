@@ -13,6 +13,7 @@ import { LibraryPage } from './user/pages/LibraryPage';
 import { ExamPage } from './user/pages/ExamPage';
 import { ProfilePage } from './user/pages/ProfilePage';
 import { AdminDashboardPage } from './admin/pages/AdminDashboardPage';
+import { Smartphone, Download, WifiOff, CheckCircle2 } from 'lucide-react';
 import { Smartphone, Download, Wifi } from 'lucide-react';
 import { ApkDownloadModal } from './user/components/ApkDownloadModal';
 import { isNativeApp } from './user/utils/platform';
@@ -20,6 +21,7 @@ import { useNetworkStatus } from './user/hooks/useNetworkStatus';
 import { WifiRequiredPage } from './user/pages/WifiRequiredPage';
 
 import { AiPlacementModal } from './user/components/placement/AiPlacementModal';
+import { progressService } from './user/services/progressService';
 import { placementService } from './user/services/placementService';
 
 export default function App() {
@@ -40,6 +42,39 @@ export default function App() {
   // Trạng thái mở modal làm bài test thẩm định trình độ thích ứng
   const [isPlacementModalOpen, setIsPlacementModalOpen] = useState(false);
 
+  // Trạng thái kết nối mạng (Online / Offline) và thông báo đồng bộ
+  const [isOnline, setIsOnline] = useState<boolean>(() =>
+    typeof navigator !== 'undefined' ? navigator.onLine : true
+  );
+  const [syncNotice, setSyncNotice] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleOnline = async () => {
+      setIsOnline(true);
+      const current = authService.getCurrentUser();
+      if (current?.id) {
+        const syncedCount = await progressService.syncOfflineQueue(current.id);
+        if (syncedCount > 0) {
+          setSyncNotice(`Đã kết nối lại Wi-Fi và đồng bộ ${syncedCount} hoạt động học tập ngoại tuyến!`);
+        } else {
+          setSyncNotice('Đã kết nối lại Wi-Fi — Chế độ Trực tuyến hoạt động bình thường.');
+        }
+        setTimeout(() => setSyncNotice(null), 4500);
+      }
+    };
+
+    const handleOffline = () => {
+      setIsOnline(false);
+      setSyncNotice(null);
+    };
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
   useEffect(() => {
     const userId = user?.id;
     if (!userId) return;
@@ -212,6 +247,30 @@ export default function App() {
             )}
           </div>
         </header>
+
+        {/* THANH THÔNG BÁO CHẾ ĐỘ NGOẠI TUYẾN (OFFLINE) / ĐỒNG BỘ TỰ ĐỘNG */}
+        {!isOnline && (
+          <div className="bg-amber-50 border-b border-amber-200 px-4 py-2.5 flex items-center justify-between gap-3 text-amber-900 text-xs font-semibold shadow-2xs">
+            <div className="flex items-center gap-2">
+              <WifiOff className="w-4 h-4 text-amber-600 shrink-0" />
+              <span>
+                <strong>Chế độ Ngoại tuyến (Offline):</strong> Không có kết nối Wi-Fi. Bạn vẫn có thể học Từ vựng, Ngữ pháp, Kanji, Lộ trình và làm Đề thi JLPT bình thường — tiến độ được lưu trên máy và sẽ tự động đồng bộ khi có mạng.
+              </span>
+            </div>
+            <span className="hidden sm:inline-block px-2 py-0.5 rounded-full bg-amber-200/70 text-amber-900 text-[10px] font-extrabold uppercase tracking-wider shrink-0">
+              Offline Ready
+            </span>
+          </div>
+        )}
+
+        {isOnline && syncNotice && (
+          <div className="bg-emerald-50 border-b border-emerald-200 px-4 py-2 flex items-center justify-between gap-3 text-emerald-800 text-xs font-semibold">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>{syncNotice}</span>
+            </div>
+          </div>
+        )}
 
         <main className="flex-1 p-3.5 sm:p-6 lg:p-8 max-w-6xl w-full mx-auto">
           {activeTab === 'home' && (

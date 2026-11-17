@@ -83,6 +83,44 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
   const [otpCode, setOtpCode] = useState('');
   const [resendCooldown, setResendCooldown] = useState(0);
 
+  // Kiểm tra môi trường localhost để bật phím tắt bấm vào rái cá nhảy thẳng vào Admin
+  const isLocalhost = typeof window !== 'undefined' && (
+    window.location.hostname === 'localhost' ||
+    window.location.hostname === '127.0.0.1' ||
+    window.location.hostname === '::1'
+  );
+
+  const handleOtterAdminQuickLogin = async () => {
+    if (!isLocalhost || loading) return;
+    try {
+      setLoading(true);
+      setError(null);
+      const res = await authService.login({
+        email: 'admin@kizuna.com',
+        password: 'admin123'
+      });
+      setSuccessMsg('Chế độ Localhost: Đang chuyển thẳng vào trang Quản trị (Admin)...');
+      setTimeout(() => {
+        onLoginSuccess(res.user);
+      }, 250);
+    } catch {
+      const devAdmin: KizunaUser = {
+        id: 'usr_admin_local',
+        username: 'admin',
+        fullName: 'Localhost Admin',
+        email: 'admin@kizuna.com',
+        role: 'ROLE_ADMIN',
+        activePoints: 9999,
+        totalXp: 15000,
+        currentStreak: 14,
+        level: 'N1',
+        avatarUrl: 'https://api.dicebear.com/7.x/bottts/svg?seed=admin'
+      };
+      authService.setSession(`token_admin_local_${Date.now()}`, devAdmin);
+      onLoginSuccess(devAdmin);
+    }
+  };
+
   // Countdown timer for OTP resend (60s)
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -684,6 +722,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
 
             {/* Mascot reaction */}
             <motion.div
+              onClick={handleOtterAdminQuickLogin}
+              title={isLocalhost ? '🛠️ [Localhost] Bấm vào Rái cá để nhảy thẳng vào trang Admin' : undefined}
               animate={isPasswordFocused ? { 
                 rotateY: 180, scale: 0.95, filter: 'drop-shadow(0 0 20px rgba(16,185,129,0.3))'
               } : { 
@@ -691,12 +731,12 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
               }}
               transition={{ type: "spring", stiffness: 100, damping: 15 }}
               style={{ transformStyle: 'preserve-3d' }}
-              className="w-72 h-72 sm:w-80 sm:h-80 relative flex items-center justify-center z-30"
+              className={`w-72 h-72 sm:w-80 sm:h-80 relative flex items-center justify-center z-30 ${isLocalhost ? 'cursor-pointer hover:scale-105 active:scale-95 transition-transform' : ''}`}
             >
               <img 
                 src="https://i.ibb.co/VY2n4HCx/otter-sitting-on-orange-cushion-nobg-only-character.webp" 
                 alt="Kizuna Mascot" 
-                className="w-full h-full object-contain pointer-events-none" 
+                className="w-full h-full object-contain select-none" 
               />
               
               <AnimatePresence>

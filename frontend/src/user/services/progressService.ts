@@ -18,6 +18,22 @@ export interface UserExamResult {
   userAnswers: Record<string, string>;
 }
 
+export interface OfflineSyncItem {
+  id: string;
+  type: 'vocab' | 'kanji' | 'grammar' | 'exam';
+  amount: number;
+  activePointsEarned: number;
+  createdAt: string;
+}
+
+function withProgressTimeout<T>(promise: Promise<T>, ms = 2500): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error('Progress Firestore timeout')), ms);
+    promise.then(
+      val => { clearTimeout(timer); resolve(val); },
+      err => { clearTimeout(timer); reject(err); }
+    );
+  });
 export interface UserRoadmapProgress {
   userId: string;
   completedMilestones: string[];
@@ -30,12 +46,14 @@ export interface UserRoadmapProgress {
 
 export const progressService = {
   /**
-   * Lấy tiến trình học tập chuẩn thực tế của user từ Firestore
-   * TỐI ƯU HÓA: Dùng cache sessionStorage (TTL 10 phút) để tránh đọc Firestore mỗi lần chuyển tab
+   * Lấy tiến trình học tập chuẩn thực tế của user từ Firestore (có lưu dự phòng Offline vào localStorage)
+   * TỐI ƯU HÓA: Dùng cache sessionStorage (TTL 10 phút) + localStorage Offline fallback
    */
   async getUserProgress(userId: string): Promise<UserProgressData | null> {
     if (!userId) return null;
     const CACHE_KEY = `kizuna_user_progress_${userId}`;
+    const OFFLINE_KEY = `kizuna_offline_progress_${userId}`;
+
     try {
       const raw = sessionStorage.getItem(CACHE_KEY);
       if (raw) {
@@ -44,9 +62,25 @@ export const progressService = {
       }
     } catch {}
 
+    // Nếu đang mất mạng (Offline), trả về ngay từ localStorage không chờ mạng
+    if (typeof navigator !== 'undefined' && !navigator.onLine) {
+      try {
+        const offlineRaw = localStorage.getItem(OFFLINE_KEY);
+        if (offlineRaw) return JSON.parse(offlineRaw);
+      } catch {}
+      return {
+        userId,
+        stageCompletionPercentage: 0,
+        vocabLearned: 0,
+        kanjiLearned: 0,
+        grammarLearned: 0,
+        examsCompleted: 0,
+      };
+    }
+
     if (!db) return null;
     try {
-      const snap = await getDoc(doc(db, 'user_progress', userId));
+      const snap = await withProgressTimeout(getDoc(doc(db, 'user_progress', userId)));
       if (snap.exists()) {
         const data = snap.data() as UserProgressData;
         const result: UserProgressData = {
@@ -65,39 +99,56 @@ export const progressService = {
         };
         try {
           sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: result, exp: Date.now() + 10 * 60 * 1000 }));
+          localStorage.setItem(OFFLINE_KEY, JSON.stringify(result));
         } catch {}
         return result;
       }
-      return null;
     } catch (e) {
-      console.warn('[Progress] Lỗi lấy tiến độ từ Firestore:', e);
-      return null;
+      console.warn('[Progress] Lỗi lấy tiến độ từ Firestore, dùng bản lưu Offline:', e);
     }
+
+    try {
+      const offlineRaw = localStorage.getItem(OFFLINE_KEY);
+      if (offlineRaw) return JSON.parse(offlineRaw);
+    } catch {}
+    return null;
   },
 
   /**
-   * Lưu hoặc cập nhật tiến trình học tập của user lên Firestore
+   * Lưu hoặc cập nhật tiến trình học tập của user lên LocalStorage và Firestore
    */
   async saveUserProgress(userId: string, data: Partial<UserProgressData>): Promise<void> {
     if (!userId) return;
+    const OFFLINE_KEY = `kizuna_offline_progress_${userId}`;
     try {
       sessionStorage.removeItem(`kizuna_user_progress_${userId}`);
-    } catch {}
-
-    if (!db) return;
-    try {
-      const ref = doc(db, 'user_progress', userId);
-      await setDoc(ref, {
+      const prevRaw = localStorage.getItem(OFFLINE_KEY);
+      const prev: Partial<UserProgressData> = prevRaw ? JSON.parse(prevRaw) : { userId };
+      const merged = {
+        ...prev,
         ...data,
         userId,
         lastStudiedAt: new Date().toISOString()
-      }, { merge: true });
+      };
+      localStorage.setItem(OFFLINE_KEY, JSON.stringify(merged));
+    } catch {}
+
+    if (!db || (typeof navigator !== 'undefined' && !navigator.onLine)) return;
+    try {
+      const ref = doc(db, 'user_progress', userId);
+      await withProgressTimeout(setDoc(ref, {
+        ...data,
+        userId,
+        lastStudiedAt: new Date().toISOString()
+      }, { merge: true }));
     } catch (e) {
       console.warn('[Progress] Lỗi cập nhật tiến trình lên Firestore:', e);
     }
   },
 
   /**
+   * Ghi nhận khi học xong từ vựng, chữ hán, ngữ pháp hoặc thi thử
+   * Tự động cộng điểm năng động (activePoints) và XP vào localStorage (hỗ trợ Offline) và Firestore
    * Ghi nhận khi học xong từ vựng, chữ hán, ngữ pháp, đề thi hoặc lộ trình
    * Tự động cộng điểm năng động (activePoints), XP và tính chuỗi ngày học Streak vào Firestore và localStorage
    */
@@ -109,10 +160,21 @@ export const progressService = {
     xpEarned?: number
   ): Promise<void> {
     if (!userId) return;
+    const OFFLINE_KEY = `kizuna_offline_progress_${userId}`;
+    const QUEUE_KEY = `kizuna_offline_sync_queue_${userId}`;
+    const fieldMap = {
+      vocab: 'vocabLearned',
+      kanji: 'kanjiLearned',
+      grammar: 'grammarLearned',
+      exam: 'examsCompleted'
+    } as const;
+    const targetField = fieldMap[type];
+
     try {
       sessionStorage.removeItem(`kizuna_user_progress_${userId}`);
       sessionStorage.removeItem(`kizuna_roadmap_progress_${userId}`);
 
+      // 1. Cập nhật session user trong localStorage để thanh header nhảy điểm ngay (kể cả khi Offline)
       const finalXp = typeof xpEarned === 'number' ? xpEarned : activePointsEarned * 2;
       const todayStr = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
 
@@ -152,6 +214,35 @@ export const progressService = {
         }
       }
 
+      // 2. Cập nhật tiến độ Offline trong localStorage
+      const prevRaw = localStorage.getItem(OFFLINE_KEY);
+      const prev: Record<string, any> = prevRaw ? JSON.parse(prevRaw) : {
+        userId,
+        stageCompletionPercentage: 0,
+        vocabLearned: 0,
+        kanjiLearned: 0,
+        grammarLearned: 0,
+        examsCompleted: 0,
+      };
+      prev[targetField] = (Number(prev[targetField]) || 0) + amount;
+      prev.lastStudiedAt = new Date().toISOString();
+      localStorage.setItem(OFFLINE_KEY, JSON.stringify(prev));
+    } catch {}
+
+    const enqueueForLaterSync = () => {
+      try {
+        const rawQ = localStorage.getItem(QUEUE_KEY);
+        const queue: OfflineSyncItem[] = rawQ ? JSON.parse(rawQ) : [];
+        queue.push({
+          id: `sync_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+          type,
+          amount,
+          activePointsEarned,
+          createdAt: new Date().toISOString()
+        });
+        localStorage.setItem(QUEUE_KEY, JSON.stringify(queue));
+      } catch {}
+    };
       if (!db) return;
 
       // 1. Cập nhật tiến độ trong collection 'user_progress'
@@ -165,12 +256,78 @@ export const progressService = {
       };
       const targetField = fieldMap[type] || 'activitiesCompleted';
 
-      await setDoc(progressRef, {
+    if (!db || (typeof navigator !== 'undefined' && !navigator.onLine)) {
+      enqueueForLaterSync();
+      return;
+    }
+
+    try {
+      const progressRef = doc(db, 'user_progress', userId);
+      await withProgressTimeout(setDoc(progressRef, {
         userId,
         [targetField]: increment(amount),
         lastStudiedAt: new Date().toISOString()
-      }, { merge: true });
+      }, { merge: true }));
 
+      const userRef = doc(db, 'users', userId);
+      await withProgressTimeout(updateDoc(userRef, {
+        activePoints: increment(activePointsEarned),
+        totalXp: increment(activePointsEarned * 2)
+      }).catch(async () => {
+        await setDoc(userRef, {
+          activePoints: increment(activePointsEarned),
+          totalXp: increment(activePointsEarned * 2)
+        }, { merge: true });
+      }));
+    } catch (e) {
+      console.warn('[Progress] Không thể đồng bộ ngay lên Firestore, đã xếp vào hàng đợi Offline:', e);
+      enqueueForLaterSync();
+    }
+  },
+
+  /**
+   * Đồng bộ hàng đợi học tập Offline lên Firestore khi có kết nối Wi-Fi trở lại
+   */
+  async syncOfflineQueue(userId: string): Promise<number> {
+    if (!userId || !db || (typeof navigator !== 'undefined' && !navigator.onLine)) return 0;
+    const QUEUE_KEY = `kizuna_offline_sync_queue_${userId}`;
+    let queue: OfflineSyncItem[] = [];
+    try {
+      const raw = localStorage.getItem(QUEUE_KEY);
+      if (raw) queue = JSON.parse(raw);
+    } catch {}
+
+    if (queue.length === 0) return 0;
+
+    const totals = { vocab: 0, kanji: 0, grammar: 0, exam: 0, points: 0 };
+    for (const item of queue) {
+      totals[item.type] += item.amount;
+      totals.points += item.activePointsEarned;
+    }
+
+    try {
+      const progressRef = doc(db, 'user_progress', userId);
+      const progressUpdate: Record<string, any> = {
+        userId,
+        lastStudiedAt: new Date().toISOString()
+      };
+      if (totals.vocab > 0) progressUpdate.vocabLearned = increment(totals.vocab);
+      if (totals.kanji > 0) progressUpdate.kanjiLearned = increment(totals.kanji);
+      if (totals.grammar > 0) progressUpdate.grammarLearned = increment(totals.grammar);
+      if (totals.exam > 0) progressUpdate.examsCompleted = increment(totals.exam);
+
+      await withProgressTimeout(setDoc(progressRef, progressUpdate, { merge: true }));
+
+      if (totals.points > 0) {
+        const userRef = doc(db, 'users', userId);
+        await withProgressTimeout(setDoc(userRef, {
+          activePoints: increment(totals.points),
+          totalXp: increment(totals.points * 2)
+        }, { merge: true }));
+      }
+
+      localStorage.removeItem(QUEUE_KEY);
+      return queue.length;
       // 2. Cập nhật điểm năng động, XP và Streak vào collection 'users'
       const userRef = doc(db, 'users', userId);
       const updatePayload: any = {
@@ -187,7 +344,8 @@ export const progressService = {
         await setDoc(userRef, updatePayload, { merge: true });
       });
     } catch (e) {
-      console.warn('[Progress] Lỗi ghi nhận hoạt động học tập:', e);
+      console.warn('[Progress] Đồng bộ hàng đợi Offline thất bại, sẽ thử lại sau:', e);
+      return 0;
     }
   },
 
