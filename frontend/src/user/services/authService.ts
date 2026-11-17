@@ -1,8 +1,21 @@
 import { User, Role, LoginCredentials, RegisterData } from '../types/auth';
-import { db } from '../../config/firebase';
-import { doc, setDoc, collection, getDocs, getDoc, query, where, limit } from 'firebase/firestore';
+import { db, auth } from '../../config/firebase';
+import { doc, setDoc, updateDoc, collection, getDocs, getDoc, query, where, limit } from 'firebase/firestore';
+import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { emailService, OFFICIAL_SENDER_EMAIL } from './emailService';
 import { validateEmail, validatePassword } from '../utils/authValidation';
+
+export const ADMIN_EMAILS = [
+  'banhbeothuy10@gmail.com',
+  'phongtt.23it@vku.udn.vn',
+  'admin@kizuna.com'
+];
+
+export function isAdminEmail(email: string): boolean {
+  if (!email) return false;
+  const clean = email.trim().toLowerCase();
+  return ADMIN_EMAILS.includes(clean) || clean === 'admin';
+}
 
 const TOKEN_KEY = 'kizuna_token';
 const USER_KEY = 'kizuna_user';
@@ -484,7 +497,187 @@ export const authService = {
     return null;
   },
 
+  /**
+   * Đăng nhập hoặc đăng ký nhanh bằng tài khoản Google (Firebase Authentication Popup)
+   * Tự động liên kết và đồng bộ hồ sơ, điểm số, XP, cấp độ với Firestore 'users'
+   */
+  async loginWithGoogle(): Promise<{ user: User; token: string }> {
+    if (!auth) {
+      throw new Error('Hệ thống Firebase Authentication chưa được khởi tạo. Vui lòng kiểm tra lại cấu hình.');
+    }
+
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({
+      prompt: 'select_account'
+    });
+
+    let fbUser: any = null;
+    try {
+      const result = await signInWithPopup(auth, provider);
+      fbUser = result.user;
+    } catch (authErr: any) {
+      console.warn('[Firebase Auth Google] Error:', authErr);
+      const code = authErr?.code || '';
+      if (code === 'auth/popup-closed-by-user') {
+        throw new Error('Bạn đã đóng cửa sổ đăng nhập Google trước khi hoàn tất.');
+      }
+      if (code === 'auth/popup-blocked') {
+        throw new Error('Trình duyệt đã chặn cửa sổ Popup. Vui lòng cho phép popup để đăng nhập bằng Google.');
+      }
+      if (code === 'auth/cancelled-popup-request') {
+        throw new Error('Yêu cầu đăng nhập đã bị hủy.');
+      }
+      if (code === 'auth/unauthorized-domain') {
+        throw new Error('Tên miền hiện tại chưa được cấp quyền trên Firebase Auth console.');
+      }
+      if (code === 'auth/operation-not-allowed') {
+        throw new Error('Phương thức đăng nhập Google chưa được kích hoạt trên Firebase.');
+      }
+      throw new Error(authErr?.message || 'Đăng nhập Google thất bại. Vui lòng thử lại.');
+    }
+
+    if (!fbUser || !fbUser.email) {
+      throw new Error('Không thể lấy thông tin email từ tài khoản Google của bạn.');
+    }
+
+    const emailClean = fbUser.email.trim().toLowerCase();
+    const displayName = fbUser.displayName?.trim() || emailClean.split('@')[0];
+    const photoURL = fbUser.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${emailClean}`;
+    const isAdmin = isAdminEmail(emailClean);
+
+    let matchedDoc: any = null;
+    let matchedDocId: string = '';
+
+    // 1. Kiểm tra tài khoản trong Firestore 'users'
+    if (db) {
+      try {
+        const usersRef = collection(db, 'users');
+        // Thử tìm theo email
+        const qEmail = query(usersRef, where('email', '==', emailClean), limit(1));
+        const snapEmail = await getDocs(qEmail);
+        if (!snapEmail.empty) {
+          matchedDoc = snapEmail.docs[0].data();
+          matchedDocId = snapEmail.docs[0].id;
+        } else {
+          // Thử tìm theo UID
+          try {
+            const directDoc = await getDoc(doc(db, 'users', fbUser.uid));
+            if (directDoc.exists()) {
+              matchedDoc = directDoc.data();
+              matchedDocId = directDoc.id;
+            }
+          } catch {
+            // bỏ qua lỗi đọc id trực tiếp
+          }
+        }
+      } catch (dbErr) {
+        console.warn('[Firestore Google Auth] Lỗi tra cứu tài khoản trong Firestore:', dbErr);
+      }
+    }
+
+    let appUser: User;
+
+    if (matchedDoc) {
+      // Đã có tài khoản: Giữ nguyên toàn bộ tiến độ học tập (XP, Điểm, Streak, Cấp độ)
+      const role: Role = isAdmin ? 'ROLE_ADMIN' : normalizeRole(matchedDoc.role);
+      appUser = {
+        id: matchedDoc.id || matchedDocId || fbUser.uid,
+        username: matchedDoc.username || emailClean.split('@')[0],
+        fullName: matchedDoc.fullName || displayName,
+        email: matchedDoc.email || emailClean,
+        role,
+        activePoints: typeof matchedDoc.activePoints === 'number' ? matchedDoc.activePoints : 0,
+        totalXp: typeof matchedDoc.totalXp === 'number' ? matchedDoc.totalXp : 0,
+        currentStreak: typeof matchedDoc.currentStreak === 'number' ? matchedDoc.currentStreak : 1,
+        level: matchedDoc.level || 'Tân binh',
+        avatarUrl: matchedDoc.avatarUrl || photoURL
+      };
+
+      // Cập nhật lastActiveDate, avatarUrl nếu có thay đổi
+      if (db && matchedDocId) {
+        try {
+          await updateDoc(doc(db, 'users', matchedDocId), {
+            lastActiveDate: new Date().toISOString(),
+            lastStudiedAt: new Date().toISOString(),
+            authProvider: 'google',
+            ...(matchedDoc.avatarUrl ? {} : { avatarUrl: photoURL })
+          });
+        } catch (uErr) {
+          console.warn('[Firestore] Lỗi cập nhật lastActiveDate cho Google user:', uErr);
+        }
+      }
+    } else {
+      // Người dùng mới: Khởi tạo tài khoản
+      const role: Role = isAdmin ? 'ROLE_ADMIN' : 'ROLE_USER';
+      const userId = fbUser.uid || `usr_g_${Date.now().toString(36)}`;
+      const username = emailClean.split('@')[0];
+
+      appUser = {
+        id: userId,
+        username,
+        fullName: displayName,
+        email: emailClean,
+        role,
+        activePoints: 0,
+        totalXp: 0,
+        currentStreak: 1,
+        level: 'Tân binh',
+        avatarUrl: photoURL
+      };
+
+      if (db) {
+        try {
+          await setDoc(doc(db, 'users', userId), {
+            id: userId,
+            username,
+            fullName: displayName,
+            email: emailClean,
+            role,
+            activePoints: 0,
+            totalXp: 0,
+            currentStreak: 1,
+            level: 'Tân binh',
+            enabled: true,
+            isDeleted: false,
+            avatarUrl: photoURL,
+            authProvider: 'google',
+            createdAt: new Date().toISOString(),
+            lastActiveDate: new Date().toISOString(),
+            lastStudiedAt: new Date().toISOString()
+          });
+          console.log(`[Firestore] Đã tạo tài khoản Google mới (${emailClean}) thành công.`);
+        } catch (setErr) {
+          console.warn('[Firestore] Lỗi tạo tài khoản Google mới trong Firestore:', setErr);
+        }
+      }
+    }
+
+    // Đồng bộ vào Local Storage kizuna_registered_users
+    try {
+      const registeredUsers = safeJsonParse<any[]>(localStorage.getItem('kizuna_registered_users'), []);
+      const idx = registeredUsers.findIndex((u: any) =>
+        u.email?.toLowerCase() === emailClean || u.id === appUser.id
+      );
+      if (idx >= 0) {
+        registeredUsers[idx] = { ...registeredUsers[idx], ...appUser, authProvider: 'google' };
+      } else {
+        registeredUsers.push({ ...appUser, authProvider: 'google' });
+      }
+      localStorage.setItem('kizuna_registered_users', JSON.stringify(registeredUsers));
+    } catch {
+      // bỏ qua lỗi storage
+    }
+
+    const token = `token_google_${Date.now()}_${appUser.id}`;
+    this.setSession(token, appUser);
+    window.dispatchEvent(new Event('kizuna_user_updated'));
+    return { user: appUser, token };
+  },
+
   logout() {
     this.clearSession();
+    if (auth) {
+      signOut(auth).catch(() => {});
+    }
   }
 };

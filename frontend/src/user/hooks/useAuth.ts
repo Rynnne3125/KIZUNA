@@ -44,6 +44,21 @@ export function useAuth() {
     }
   }, []);
 
+  const loginWithGoogle = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await authService.loginWithGoogle();
+      setUser(res.user);
+      return res.user;
+    } catch (err: any) {
+      setError(err.message || 'Đăng nhập Google thất bại');
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   const logout = useCallback(() => {
     authService.logout();
     setUser(null);
@@ -58,6 +73,7 @@ export function useAuth() {
     error,
     login,
     register,
+    loginWithGoogle,
     logout
   };
 }
