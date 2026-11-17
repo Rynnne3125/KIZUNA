@@ -115,6 +115,11 @@ export const RoadmapPage: React.FC = () => {
   const [stages, setStages] = useState<Stage[]>([]);
   const [milestones, setMilestones] = useState<Milestone[]>([]);
   const [loading, setLoading] = useState(true);
+  const [placement, setPlacement] = useState<PlacementAssessmentResult | null>(null);
+  const [completedMilestones, setCompletedMilestones] = useState<string[]>([]);
+  const [expandedStageId, setExpandedStageId] = useState<string | null>(null);
+  const [isPlacementOpen, setIsPlacementOpen] = useState(false);
+  const userId = currentUser?.id;
 
   // Navigation hierarchy: Level -> Stage -> Milestone/Lesson
   const [selectedLevel, setSelectedLevel] = useState<JlptLevelKey>('N5');
@@ -140,14 +145,29 @@ export const RoadmapPage: React.FC = () => {
           kizunaService.getStages(),
           kizunaService.getMilestones()
         ]);
-        setStages(s);
-        setMilestones(m);
+        setStages(catalog.stages);
+        setMilestones(catalog.milestones);
+        setPlacement(result);
+        setCompletedMilestones(completed);
+        const access = getRoadmapAccess(catalog.stages, catalog.milestones, completed, result);
+        const region = JAPAN_REGIONS_CONFIG.find(region => region.level === (access.lastAccessibleStage?.jlptLevel ?? 'N5'));
+        if (region) setSelectedRegion(region);
       } finally {
         setLoading(false);
       }
     }
     loadData();
-  }, []);
+  }, [userId]);
+
+  useEffect(() => {
+    if (!userId) return;
+    const refresh = () => {
+      void placementService.checkUserPlacementStatus(userId).then(setPlacement);
+      void placementService.getCompletedMilestones(userId).then(setCompletedMilestones);
+    };
+    window.addEventListener('kizuna_user_updated', refresh);
+    return () => window.removeEventListener('kizuna_user_updated', refresh);
+  }, [userId]);
 
   // Listen to user updates (when completing quests or reading)
   useEffect(() => {
@@ -957,6 +977,35 @@ export const RoadmapPage: React.FC = () => {
                         </>
                       )}
                     </div>
+                    {isExpanded && (
+                      <ul className="mt-3 space-y-2">
+                        {items.map(item => {
+                          const completed = completedIds.has(item.id);
+                          const unlocked = unlockedMilestoneIds.has(item.id);
+                          const isAiRecommendation = placement?.aiAssessment && placementTarget?.milestone.id === item.id;
+                          return (
+                            <li key={item.id} id={`roadmap-milestone-${item.id}`} className="rounded-lg border border-slate-200 p-3 text-sm">
+                              {unlocked ? (
+                                <details>
+                                  <summary className="cursor-pointer font-semibold text-emerald-800">
+                                    {item.title} · {completed ? 'Đã học' : isAiRecommendation ? 'AI đề xuất' : 'Vào học'}
+                                  </summary>
+                                  <p className="mt-2 text-slate-600">{item.canDoGoal ?? item.communicationContext}</p>
+                                  {item.readingPassage?.japanese && (
+                                    <p lang="ja" className="mt-2 whitespace-pre-line text-slate-800">{item.readingPassage.japanese}</p>
+                                  )}
+                                  {item.readingPassage?.vietnamese && (
+                                    <p className="mt-2 whitespace-pre-line text-slate-600">{item.readingPassage.vietnamese}</p>
+                                  )}
+                                </details>
+                              ) : (
+                                <span className="text-slate-500">{item.title} · Đang khóa</span>
+                              )}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
                   </div>
                 </div>
               );

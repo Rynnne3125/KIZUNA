@@ -16,6 +16,7 @@ interface HomePageProps {
   user: User | null;
   onNavigate: (tab: UserNavTab) => void;
   onOpenAuth?: () => void;
+  onOpenPlacement?: () => void;
 }
 
 // Bảng ánh xạ danh xưng và ấn triện chữ Hán phong cách Nhật Bản cho từng bậc Rank

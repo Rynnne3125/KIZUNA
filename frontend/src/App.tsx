@@ -19,6 +19,9 @@ import { isNativeApp } from './user/utils/platform';
 import { useNetworkStatus } from './user/hooks/useNetworkStatus';
 import { WifiRequiredPage } from './user/pages/WifiRequiredPage';
 
+import { AiPlacementModal } from './user/components/placement/AiPlacementModal';
+import { placementService } from './user/services/placementService';
+
 export default function App() {
   const isApp = isNativeApp();
   const network = useNetworkStatus();
@@ -33,6 +36,18 @@ export default function App() {
 
   // Trạng thái mở modal tải APK
   const [isApkModalOpen, setIsApkModalOpen] = useState(false);
+
+  // Trạng thái mở modal làm bài test thẩm định trình độ thích ứng
+  const [isPlacementModalOpen, setIsPlacementModalOpen] = useState(false);
+
+  useEffect(() => {
+    const userId = user?.id;
+    if (!userId) return;
+    const sync = () => { void placementService.syncPendingPlacement(userId); };
+    sync();
+    window.addEventListener('online', sync);
+    return () => window.removeEventListener('online', sync);
+  }, [user?.id]);
 
   // Đồng bộ quyền mới nhất từ Firestore khi mở ứng dụng (đảm bảo quyền mới sửa trên console ăn ngay)
   useEffect(() => {
@@ -203,6 +218,7 @@ export default function App() {
             <HomePage
               user={user}
               onNavigate={handleTabChange}
+              onOpenPlacement={() => setIsPlacementModalOpen(true)}
             />
           )}
           {activeTab === 'vocab' && <VocabPage />}
@@ -242,6 +258,24 @@ export default function App() {
           onClose={() => setIsApkModalOpen(false)}
         />
       )}
+
+      {/* MODAL THẨM ĐỊNH TRÌNH ĐỘ ĐẦU VÀO CÙNG AI SENSEI */}
+      <AiPlacementModal
+        isOpen={isPlacementModalOpen}
+        onClose={() => setIsPlacementModalOpen(false)}
+        user={user}
+        onAssessmentComplete={(result) => {
+          if (user) {
+            setUser({
+              ...user,
+              level: result.assignedLevel,
+              placementVerified: result.answeredCount > 0,
+              placementScore: result.percentage
+            });
+          }
+        }}
+        onNavigateToRoadmap={() => handleTabChange('roadmap')}
+      />
 
     </div>
   );
