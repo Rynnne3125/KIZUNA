@@ -1,0 +1,469 @@
+[
+  {
+    "id": "kanji_n3_0415",
+    "kanji_id": "kanji_n3_0415",
+    "milestoneId": "ms_n3_s6_l3",
+    "milestone_id": "ms_n3_s6_l3",
+    "stageId": "stage_n3_6",
+    "stage_id": "stage_n3_6",
+    "lessonNumber": 73,
+    "kanjiNumber": 415,
+    "kanji": "当",
+    "character": "当",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "当",
+    "onyomi": "トウ",
+    "kunyomi": "あ.たる",
+    "sinoVietnamese": "ĐƯƠNG",
+    "vietnameseMeaning": "Đúng, Trúng, Hiện tại",
+    "meaning_vi": "Đúng, Trúng, Hiện tại",
+    "mnemonicStory": "Chữ Hán [当] (Đương) nghĩa là \"Đúng, Trúng, Hiện tại\" — Âm On: トウ, Âm Kun: あ.たる.",
+    "exampleCompounds": [
+      {
+        "word": "本当ですか",
+        "reading": "ほんとうですか",
+        "meaning": "thật à?",
+        "type": "KH",
+        "level": "N3",
+        "lesson": 73
+      },
+      {
+        "word": "本当に",
+        "reading": "ほんとうに",
+        "meaning": "thực sự",
+        "type": "TrT",
+        "level": "N3",
+        "lesson": 73
+      },
+      {
+        "word": "お弁当",
+        "reading": "おべんとう",
+        "meaning": "cơm hộp",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 73
+      },
+      {
+        "word": "もし宝くじで1億円当たったら",
+        "reading": "もしたからくじでいちおくえんあたったら",
+        "meaning": "nếu trúng xổ số 100 triệu yên",
+        "type": "KH",
+        "level": "N3",
+        "lesson": 73
+      },
+      {
+        "word": "担当",
+        "reading": "たんとう",
+        "meaning": "phụ trách, người phụ trách",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 73
+      },
+      {
+        "word": "配当金",
+        "reading": "はいとうきん",
+        "meaning": "Cổ tức / tiền chia cổ tức",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 73
+      },
+      {
+        "word": "抵当権",
+        "reading": "ていとうけん",
+        "meaning": "Quyền thế chấp / cầm cố",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 73
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0453",
+    "kanji_id": "kanji_n3_0453",
+    "milestoneId": "ms_n3_s6_l3",
+    "milestone_id": "ms_n3_s6_l3",
+    "stageId": "stage_n3_6",
+    "stage_id": "stage_n3_6",
+    "lessonNumber": 73,
+    "kanjiNumber": 453,
+    "kanji": "与",
+    "character": "与",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "与",
+    "onyomi": "ヨ",
+    "kunyomi": "あた.える",
+    "sinoVietnamese": "DỮ",
+    "vietnameseMeaning": "Cho, Ban tặng",
+    "meaning_vi": "Cho, Ban tặng",
+    "mnemonicStory": "Chữ Hán [与] (Dữ) nghĩa là \"Cho, Ban tặng\" — Âm On: ヨ, Âm Kun: あた.える.",
+    "exampleCompounds": [
+      {
+        "word": "賞与",
+        "reading": "しょうよ",
+        "meaning": "tiền thưởng, thưởng",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 73
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0491",
+    "kanji_id": "kanji_n3_0491",
+    "milestoneId": "ms_n3_s6_l3",
+    "milestone_id": "ms_n3_s6_l3",
+    "stageId": "stage_n3_6",
+    "stage_id": "stage_n3_6",
+    "lessonNumber": 73,
+    "kanjiNumber": 491,
+    "kanji": "泣",
+    "character": "泣",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "泣",
+    "onyomi": "キュウ",
+    "kunyomi": "な.く",
+    "sinoVietnamese": "KHẤP",
+    "vietnameseMeaning": "Khóc",
+    "meaning_vi": "Khóc",
+    "mnemonicStory": "Chữ Hán [泣] (Khấp) nghĩa là \"Khóc\" — Âm On: キュウ, Âm Kun: な.く.",
+    "exampleCompounds": [
+      {
+        "word": "泣きます",
+        "reading": "なきます",
+        "meaning": "khóc",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 73
+      },
+      {
+        "word": "泣かせます",
+        "reading": "なかせます",
+        "meaning": "làm cho khóc, bắt khóc",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 73
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0529",
+    "kanji_id": "kanji_n3_0529",
+    "milestoneId": "ms_n3_s6_l3",
+    "milestone_id": "ms_n3_s6_l3",
+    "stageId": "stage_n3_6",
+    "stage_id": "stage_n3_6",
+    "lessonNumber": 73,
+    "kanjiNumber": 529,
+    "kanji": "暴",
+    "character": "暴",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "暴",
+    "onyomi": "ボウ",
+    "kunyomi": "あば.れる",
+    "sinoVietnamese": "BẠO",
+    "vietnameseMeaning": "Bạo lực, Hung dữ",
+    "meaning_vi": "Bạo lực, Hung dữ",
+    "mnemonicStory": "Chữ Hán [暴] (Bạo) nghĩa là \"Bạo lực, Hung dữ\" — Âm On: ボウ, Âm Kun: あば.れる.",
+    "exampleCompounds": [
+      {
+        "word": "暴語",
+        "reading": "ボウ",
+        "meaning": "Bạo lực, Hung dữ (Bạo)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 73
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0567",
+    "kanji_id": "kanji_n3_0567",
+    "milestoneId": "ms_n3_s6_l3",
+    "milestone_id": "ms_n3_s6_l3",
+    "stageId": "stage_n3_6",
+    "stage_id": "stage_n3_6",
+    "lessonNumber": 73,
+    "kanjiNumber": 567,
+    "kanji": "億",
+    "character": "億",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "億",
+    "onyomi": "オク",
+    "kunyomi": "",
+    "sinoVietnamese": "ỨC",
+    "vietnameseMeaning": "Trăm triệu (10^8)",
+    "meaning_vi": "Trăm triệu (10^8)",
+    "mnemonicStory": "Chữ Hán [億] (Ức) nghĩa là \"Trăm triệu (10^8)\" — Âm On: オク, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "億",
+        "reading": "おく",
+        "meaning": "trăm triệu",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 73
+      },
+      {
+        "word": "～億",
+        "reading": "～おく",
+        "meaning": "~ trăm triệu",
+        "type": "KH",
+        "level": "N3",
+        "lesson": 73
+      },
+      {
+        "word": "もし宝くじで1億円当たったら",
+        "reading": "もしたからくじでいちおくえんあたったら",
+        "meaning": "nếu trúng xổ số 100 triệu yên",
+        "type": "KH",
+        "level": "N3",
+        "lesson": 73
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0605",
+    "kanji_id": "kanji_n3_0605",
+    "milestoneId": "ms_n3_s6_l3",
+    "milestone_id": "ms_n3_s6_l3",
+    "stageId": "stage_n3_6",
+    "stage_id": "stage_n3_6",
+    "lessonNumber": 73,
+    "kanjiNumber": 605,
+    "kanji": "宅",
+    "character": "宅",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "宅",
+    "onyomi": "タク",
+    "kunyomi": "",
+    "sinoVietnamese": "TRẠCH",
+    "vietnameseMeaning": "Nhà riêng, Nhà ở",
+    "meaning_vi": "Nhà riêng, Nhà ở",
+    "mnemonicStory": "Chữ Hán [宅] (Trạch) nghĩa là \"Nhà riêng, Nhà ở\" — Âm On: タク, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "宅語",
+        "reading": "タク",
+        "meaning": "Nhà riêng, Nhà ở (Trạch)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 73
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0643",
+    "kanji_id": "kanji_n3_0643",
+    "milestoneId": "ms_n3_s6_l3",
+    "milestone_id": "ms_n3_s6_l3",
+    "stageId": "stage_n3_6",
+    "stage_id": "stage_n3_6",
+    "lessonNumber": 73,
+    "kanjiNumber": 643,
+    "kanji": "演",
+    "character": "演",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "演",
+    "onyomi": "エン",
+    "kunyomi": "",
+    "sinoVietnamese": "DIỄN",
+    "vietnameseMeaning": "Biểu diễn, diễn thuyết",
+    "meaning_vi": "Biểu diễn, diễn thuyết",
+    "mnemonicStory": "Chữ Hán [演] (Diễn) nghĩa là \"Biểu diễn, diễn thuyết\" — Âm On: エン, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "演奏",
+        "reading": "えんそう",
+        "meaning": "Biểu diễn (âm nhạc)",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 73
+      },
+      {
+        "word": "公演",
+        "reading": "こうえん",
+        "meaning": "Buổi biểu diễn / chương trình",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 73
+      },
+      {
+        "word": "演繹法",
+        "reading": "えんえきほう",
+        "meaning": "Diễn dịch / phương pháp diễn dịch",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 73
+      },
+      {
+        "word": "演",
+        "reading": "えん",
+        "meaning": "Diễn",
+        "type": "kanji",
+        "level": "N3",
+        "lesson": 73
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0681",
+    "kanji_id": "kanji_n3_0681",
+    "milestoneId": "ms_n3_s6_l3",
+    "milestone_id": "ms_n3_s6_l3",
+    "stageId": "stage_n3_6",
+    "stage_id": "stage_n3_6",
+    "lessonNumber": 73,
+    "kanjiNumber": 681,
+    "kanji": "植",
+    "character": "植",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "植",
+    "onyomi": "ショク",
+    "kunyomi": "う.える",
+    "sinoVietnamese": "THỰC",
+    "vietnameseMeaning": "Trồng cây",
+    "meaning_vi": "Trồng cây",
+    "mnemonicStory": "Chữ Hán [植] (Thực) nghĩa là \"Trồng cây\" — Âm On: ショク, Âm Kun: う.える.",
+    "exampleCompounds": [
+      {
+        "word": "植語",
+        "reading": "ショク",
+        "meaning": "Trồng cây (Thực)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 73
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0719",
+    "kanji_id": "kanji_n3_0719",
+    "milestoneId": "ms_n3_s6_l3",
+    "milestone_id": "ms_n3_s6_l3",
+    "stageId": "stage_n3_6",
+    "stage_id": "stage_n3_6",
+    "lessonNumber": 73,
+    "kanjiNumber": 719,
+    "kanji": "備",
+    "character": "備",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "備",
+    "onyomi": "ビ",
+    "kunyomi": "そな.える",
+    "sinoVietnamese": "BỊ",
+    "vietnameseMeaning": "Chuẩn bị, trang bị",
+    "meaning_vi": "Chuẩn bị, trang bị",
+    "mnemonicStory": "Chữ Hán [備] (Bị) nghĩa là \"Chuẩn bị, trang bị\" — Âm On: ビ, Âm Kun: そな.える.",
+    "exampleCompounds": [
+      {
+        "word": "準備",
+        "reading": "じゅんび",
+        "meaning": "chuẩn bị, sự chuẩn bị",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 73
+      },
+      {
+        "word": "外貨準備",
+        "reading": "がいかじゅんび",
+        "meaning": "Dự trữ ngoại hối",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 73
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0757",
+    "kanji_id": "kanji_n3_0757",
+    "milestoneId": "ms_n3_s6_l3",
+    "milestone_id": "ms_n3_s6_l3",
+    "stageId": "stage_n3_6",
+    "stage_id": "stage_n3_6",
+    "lessonNumber": 73,
+    "kanjiNumber": 757,
+    "kanji": "丈",
+    "character": "丈",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "丈",
+    "onyomi": "ジョウ",
+    "kunyomi": "たけ",
+    "sinoVietnamese": "TRƯỢNG",
+    "vietnameseMeaning": "Bền chắc, trượng",
+    "meaning_vi": "Bền chắc, trượng",
+    "mnemonicStory": "Chữ Hán [丈] (Trượng) nghĩa là \"Bền chắc, trượng\" — Âm On: ジョウ, Âm Kun: たけ.",
+    "exampleCompounds": [
+      {
+        "word": "大丈夫[な]",
+        "reading": "だいじょうぶ[な]",
+        "meaning": "không sao, ổn",
+        "type": "TT-na",
+        "level": "N3",
+        "lesson": 73
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0795",
+    "kanji_id": "kanji_n3_0795",
+    "milestoneId": "ms_n3_s6_l3",
+    "milestone_id": "ms_n3_s6_l3",
+    "stageId": "stage_n3_6",
+    "stage_id": "stage_n3_6",
+    "lessonNumber": 73,
+    "kanjiNumber": 795,
+    "kanji": "童",
+    "character": "童",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "童",
+    "onyomi": "ドウ",
+    "kunyomi": "わらべ",
+    "sinoVietnamese": "ĐỒNG",
+    "vietnameseMeaning": "Trẻ con, thiếu nhi",
+    "meaning_vi": "Trẻ con, thiếu nhi",
+    "mnemonicStory": "Chữ Hán [童] (Đồng) nghĩa là \"Trẻ con, thiếu nhi\" — Âm On: ドウ, Âm Kun: わらべ.",
+    "exampleCompounds": [
+      {
+        "word": "童語",
+        "reading": "ドウ",
+        "meaning": "Trẻ con, thiếu nhi (Đồng)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 73
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

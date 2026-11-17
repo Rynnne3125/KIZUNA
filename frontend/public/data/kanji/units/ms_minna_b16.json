@@ -1,0 +1,247 @@
+[
+  {
+    "id": "kanji_n5_0016",
+    "kanji_id": "kanji_n5_0016",
+    "milestoneId": "ms_minna_b16",
+    "milestone_id": "ms_minna_b16",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 16,
+    "kanjiNumber": 16,
+    "kanji": "月",
+    "character": "月",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "月",
+    "onyomi": "ゲツ",
+    "kunyomi": "つき",
+    "sinoVietnamese": "NGUYỆT",
+    "vietnameseMeaning": "Tháng, Trăng",
+    "meaning_vi": "Tháng, Trăng",
+    "mnemonicStory": "Chữ Hán [月] (Nguyệt) nghĩa là \"Tháng, Trăng\" — Âm On: ゲツ, Âm Kun: つき.",
+    "exampleCompounds": [
+      {
+        "word": "月曜日",
+        "reading": "げつようび",
+        "meaning": "thứ Hai",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "先月",
+        "reading": "せんげつ",
+        "meaning": "tháng trước",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "今月",
+        "reading": "こんげつ",
+        "meaning": "tháng này",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "来月",
+        "reading": "らいげつ",
+        "meaning": "tháng sau",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "何月",
+        "reading": "なんがつ",
+        "meaning": "tháng mấy",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "～か月",
+        "reading": "～かげつ",
+        "meaning": "~ tháng",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 16
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0041",
+    "kanji_id": "kanji_n5_0041",
+    "milestoneId": "ms_minna_b16",
+    "milestone_id": "ms_minna_b16",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 16,
+    "kanjiNumber": 41,
+    "kanji": "母",
+    "character": "母",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "母",
+    "onyomi": "ボ",
+    "kunyomi": "はは",
+    "sinoVietnamese": "MẪU",
+    "vietnameseMeaning": "Mẹ",
+    "meaning_vi": "Mẹ",
+    "mnemonicStory": "Chữ Hán [母] (Mẫu) nghĩa là \"Mẹ\" — Âm On: ボ, Âm Kun: はは.",
+    "exampleCompounds": [
+      {
+        "word": "母",
+        "reading": "はは",
+        "meaning": "mẹ (mình)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "お母さん",
+        "reading": "おかあさん",
+        "meaning": "mẹ (người khác)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0066",
+    "kanji_id": "kanji_n5_0066",
+    "milestoneId": "ms_minna_b16",
+    "milestone_id": "ms_minna_b16",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 16,
+    "kanjiNumber": 66,
+    "kanji": "休",
+    "character": "休",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "休",
+    "onyomi": "キュウ",
+    "kunyomi": "やす.む",
+    "sinoVietnamese": "HƯU",
+    "vietnameseMeaning": "Nghỉ",
+    "meaning_vi": "Nghỉ",
+    "mnemonicStory": "Chữ Hán [休] (Hưu) nghĩa là \"Nghỉ\" — Âm On: キュウ, Âm Kun: やす.む.",
+    "exampleCompounds": [
+      {
+        "word": "休み",
+        "reading": "やすみ",
+        "meaning": "ngày nghỉ",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "昼休み",
+        "reading": "ひるやすみ",
+        "meaning": "nghỉ trưa",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "休みます",
+        "reading": "やすみます",
+        "meaning": "nghỉ",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "夏休み",
+        "reading": "なつやすみ",
+        "meaning": "nghỉ hè",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0091",
+    "kanji_id": "kanji_n5_0091",
+    "milestoneId": "ms_minna_b16",
+    "milestone_id": "ms_minna_b16",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 16,
+    "kanjiNumber": 91,
+    "kanji": "川",
+    "character": "川",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "川",
+    "onyomi": "セン",
+    "kunyomi": "かわ",
+    "sinoVietnamese": "XUYÊN",
+    "vietnameseMeaning": "Sông",
+    "meaning_vi": "Sông",
+    "mnemonicStory": "Chữ Hán [川] (Xuyên) nghĩa là \"Sông\" — Âm On: セン, Âm Kun: かわ.",
+    "exampleCompounds": [
+      {
+        "word": "川",
+        "reading": "かわ",
+        "meaning": "sông",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0116",
+    "kanji_id": "kanji_n5_0116",
+    "milestoneId": "ms_minna_b16",
+    "milestone_id": "ms_minna_b16",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 16,
+    "kanjiNumber": 116,
+    "kanji": "寒",
+    "character": "寒",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "寒",
+    "onyomi": "カン",
+    "kunyomi": "さむ.い",
+    "sinoVietnamese": "HÀN",
+    "vietnameseMeaning": "Lạnh",
+    "meaning_vi": "Lạnh",
+    "mnemonicStory": "Chữ Hán [寒] (Hàn) nghĩa là \"Lạnh\" — Âm On: カン, Âm Kun: さむ.い.",
+    "exampleCompounds": [
+      {
+        "word": "寒い",
+        "reading": "さむい",
+        "meaning": "lạnh",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 16
+      },
+      {
+        "word": "寒い日",
+        "reading": "さむいひ",
+        "meaning": "ngày lạnh",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 16
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

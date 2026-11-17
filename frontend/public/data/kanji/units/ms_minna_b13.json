@@ -1,0 +1,303 @@
+[
+  {
+    "id": "kanji_n5_0013",
+    "kanji_id": "kanji_n5_0013",
+    "milestoneId": "ms_minna_b13",
+    "milestone_id": "ms_minna_b13",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 13,
+    "kanjiNumber": 13,
+    "kanji": "万",
+    "character": "万",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "万",
+    "onyomi": "マン",
+    "kunyomi": "",
+    "sinoVietnamese": "VẠN",
+    "vietnameseMeaning": "Vạn",
+    "meaning_vi": "Vạn",
+    "mnemonicStory": "Chữ Hán [万] (Vạn) nghĩa là \"Vạn\" — Âm On: マン, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "万",
+        "reading": "まん",
+        "meaning": "vạn",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 13
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0038",
+    "kanji_id": "kanji_n5_0038",
+    "milestoneId": "ms_minna_b13",
+    "milestone_id": "ms_minna_b13",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 13,
+    "kanjiNumber": 38,
+    "kanji": "女",
+    "character": "女",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "女",
+    "onyomi": "ジョ",
+    "kunyomi": "おんな",
+    "sinoVietnamese": "NỮ",
+    "vietnameseMeaning": "Nữ",
+    "meaning_vi": "Nữ",
+    "mnemonicStory": "Chữ Hán [女] (Nữ) nghĩa là \"Nữ\" — Âm On: ジョ, Âm Kun: おんな.",
+    "exampleCompounds": [
+      {
+        "word": "彼女",
+        "reading": "かのじょ",
+        "meaning": "cô ấy, người yêu (nữ)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "女の人",
+        "reading": "おんなのひと",
+        "meaning": "phụ nữ",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "女の子",
+        "reading": "おんなのこ",
+        "meaning": "con gái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 13
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0063",
+    "kanji_id": "kanji_n5_0063",
+    "milestoneId": "ms_minna_b13",
+    "milestone_id": "ms_minna_b13",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 13,
+    "kanjiNumber": 63,
+    "kanji": "入",
+    "character": "入",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "入",
+    "onyomi": "ニュウ",
+    "kunyomi": "い.る",
+    "sinoVietnamese": "NHẬP",
+    "vietnameseMeaning": "Vào",
+    "meaning_vi": "Vào",
+    "mnemonicStory": "Chữ Hán [入] (Nhập) nghĩa là \"Vào\" — Âm On: ニュウ, Âm Kun: い.る.",
+    "exampleCompounds": [
+      {
+        "word": "入ります",
+        "reading": "はいります",
+        "meaning": "vào",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "入れます",
+        "reading": "いれます",
+        "meaning": "cho vào",
+        "type": "ĐT2",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "記入します",
+        "reading": "きにゅうします",
+        "meaning": "điền vào (biểu mẫu)",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "入院します",
+        "reading": "にゅういんします",
+        "meaning": "nhập viện",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "輸入",
+        "reading": "ゆにゅう",
+        "meaning": "Nhập khẩu",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "入院",
+        "reading": "にゅういん",
+        "meaning": "Nhập viện",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 13
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0088",
+    "kanji_id": "kanji_n5_0088",
+    "milestoneId": "ms_minna_b13",
+    "milestone_id": "ms_minna_b13",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 13,
+    "kanjiNumber": 88,
+    "kanji": "名",
+    "character": "名",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "名",
+    "onyomi": "メイ",
+    "kunyomi": "な",
+    "sinoVietnamese": "DANH",
+    "vietnameseMeaning": "Tên",
+    "meaning_vi": "Tên",
+    "mnemonicStory": "Chữ Hán [名] (Danh) nghĩa là \"Tên\" — Âm On: メイ, Âm Kun: な.",
+    "exampleCompounds": [
+      {
+        "word": "名刺",
+        "reading": "めいし",
+        "meaning": "danh thiếp",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "有名[な]",
+        "reading": "ゆうめい[な]",
+        "meaning": "nổi tiếng",
+        "type": "TT-na",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "名前",
+        "reading": "なまえ",
+        "meaning": "tên",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "有名な",
+        "reading": "ゆうめいな",
+        "meaning": "nổi tiếng",
+        "type": "TT-na",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "署名",
+        "reading": "しょめい",
+        "meaning": "chữ ký, ký tên",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "名所",
+        "reading": "めいしょ",
+        "meaning": "địa danh nổi tiếng, thắng cảnh",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "著名人",
+        "reading": "ちょめいじん",
+        "meaning": "Người nổi tiếng / nhân vật nổi danh",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 13
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0113",
+    "kanji_id": "kanji_n5_0113",
+    "milestoneId": "ms_minna_b13",
+    "milestone_id": "ms_minna_b13",
+    "stageId": "stage_n5_3",
+    "stage_id": "stage_n5_3",
+    "lessonNumber": 13,
+    "kanjiNumber": 113,
+    "kanji": "元",
+    "character": "元",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "元",
+    "onyomi": "ゲン",
+    "kunyomi": "もと",
+    "sinoVietnamese": "NGUYÊN",
+    "vietnameseMeaning": "Gốc rễ, nguồn gốc",
+    "meaning_vi": "Gốc rễ, nguồn gốc",
+    "mnemonicStory": "Chữ Hán [元] (Nguyên) nghĩa là \"Gốc rễ, nguồn gốc\" — Âm On: ゲン, Âm Kun: もと.",
+    "exampleCompounds": [
+      {
+        "word": "元気[な]",
+        "reading": "げんき[な]",
+        "meaning": "khỏe mạnh",
+        "type": "TT-na",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "お元気ですか",
+        "reading": "おげんきですか",
+        "meaning": "anh/chị có khỏe không?",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "元気がない",
+        "reading": "げんきがない",
+        "meaning": "không khỏe, ủ rũ",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "どうぞお元気で",
+        "reading": "どうぞおげんきで",
+        "meaning": "chúc khỏe",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 13
+      },
+      {
+        "word": "元気そうです",
+        "reading": "げんきそうです",
+        "meaning": "trông có vẻ khoẻ mạnh",
+        "type": "MT",
+        "level": "N5",
+        "lesson": 13
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

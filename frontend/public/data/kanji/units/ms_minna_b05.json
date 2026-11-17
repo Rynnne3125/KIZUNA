@@ -1,0 +1,263 @@
+[
+  {
+    "id": "kanji_n5_0005",
+    "kanji_id": "kanji_n5_0005",
+    "milestoneId": "ms_minna_b05",
+    "milestone_id": "ms_minna_b05",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 5,
+    "kanjiNumber": 5,
+    "kanji": "五",
+    "character": "五",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "五",
+    "onyomi": "ゴ",
+    "kunyomi": "いつ.つ",
+    "sinoVietnamese": "NGŨ",
+    "vietnameseMeaning": "Năm",
+    "meaning_vi": "Năm",
+    "mnemonicStory": "Chữ Hán [五] (Ngũ) nghĩa là \"Năm\" — Âm On: ゴ, Âm Kun: いつ.つ.",
+    "exampleCompounds": [
+      {
+        "word": "五つ",
+        "reading": "いつつ",
+        "meaning": "5 cái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 5
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0030",
+    "kanji_id": "kanji_n5_0030",
+    "milestoneId": "ms_minna_b05",
+    "milestone_id": "ms_minna_b05",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 5,
+    "kanjiNumber": 30,
+    "kanji": "間",
+    "character": "間",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "間",
+    "onyomi": "カン",
+    "kunyomi": "あいだ",
+    "sinoVietnamese": "GIAN",
+    "vietnameseMeaning": "Khoảng",
+    "meaning_vi": "Khoảng",
+    "mnemonicStory": "Chữ Hán [間] (Gian) nghĩa là \"Khoảng\" — Âm On: カン, Âm Kun: あいだ.",
+    "exampleCompounds": [
+      {
+        "word": "時間",
+        "reading": "じかん",
+        "meaning": "thời gian",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "間",
+        "reading": "あいだ",
+        "meaning": "giữa (2 vật)",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "～週間",
+        "reading": "～しゅうかん",
+        "meaning": "~ tuần",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "間違えます",
+        "reading": "まちがえます",
+        "meaning": "nhầm, mắc lỗi",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "間接",
+        "reading": "かんせつ",
+        "meaning": "gián tiếp",
+        "type": "PV",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "間に合います",
+        "reading": "まにあいます",
+        "meaning": "kịp thời gian, không trễ",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "間取り",
+        "reading": "まどり",
+        "meaning": "Sơ đồ mặt bằng / phân chia phòng",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "空間",
+        "reading": "くうかん",
+        "meaning": "Không gian",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 5
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0055",
+    "kanji_id": "kanji_n5_0055",
+    "milestoneId": "ms_minna_b05",
+    "milestone_id": "ms_minna_b05",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 5,
+    "kanjiNumber": 55,
+    "kanji": "東",
+    "character": "東",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "東",
+    "onyomi": "トウ",
+    "kunyomi": "ひがし",
+    "sinoVietnamese": "ĐÔNG",
+    "vietnameseMeaning": "Đông",
+    "meaning_vi": "Đông",
+    "mnemonicStory": "Chữ Hán [東] (Đông) nghĩa là \"Đông\" — Âm On: トウ, Âm Kun: ひがし.",
+    "exampleCompounds": [
+      {
+        "word": "東",
+        "reading": "ひがし",
+        "meaning": "phía đông",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "東口",
+        "reading": "ひがしぐち",
+        "meaning": "cổng phía đông",
+        "type": "noun",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "東京",
+        "reading": "とうきょう",
+        "meaning": "Tokyo",
+        "type": "proper",
+        "level": "N5",
+        "lesson": 5
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0080",
+    "kanji_id": "kanji_n5_0080",
+    "milestoneId": "ms_minna_b05",
+    "milestone_id": "ms_minna_b05",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 5,
+    "kanjiNumber": 80,
+    "kanji": "新",
+    "character": "新",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "新",
+    "onyomi": "シン",
+    "kunyomi": "あたら.しい",
+    "sinoVietnamese": "TÂN",
+    "vietnameseMeaning": "Mới",
+    "meaning_vi": "Mới",
+    "mnemonicStory": "Chữ Hán [新] (Tân) nghĩa là \"Mới\" — Âm On: シン, Âm Kun: あたら.しい.",
+    "exampleCompounds": [
+      {
+        "word": "新聞",
+        "reading": "しんぶん",
+        "meaning": "báo, tin tức",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "新幹線",
+        "reading": "しんかんせん",
+        "meaning": "tàu siêu tốc",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "新しい",
+        "reading": "あたらしい",
+        "meaning": "mới",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 5
+      },
+      {
+        "word": "新",
+        "reading": "しん",
+        "meaning": "Tân / mới",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 5
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0105",
+    "kanji_id": "kanji_n5_0105",
+    "milestoneId": "ms_minna_b05",
+    "milestone_id": "ms_minna_b05",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 5,
+    "kanjiNumber": 105,
+    "kanji": "肉",
+    "character": "肉",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "肉",
+    "onyomi": "ニク",
+    "kunyomi": "",
+    "sinoVietnamese": "NHỤC",
+    "vietnameseMeaning": "Thịt",
+    "meaning_vi": "Thịt",
+    "mnemonicStory": "Chữ Hán [肉] (Nhục) nghĩa là \"Thịt\" — Âm On: ニク, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "肉",
+        "reading": "にく",
+        "meaning": "thịt",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 5
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

@@ -1,0 +1,279 @@
+[
+  {
+    "id": "kanji_n5_0017",
+    "kanji_id": "kanji_n5_0017",
+    "milestoneId": "ms_minna_b17",
+    "milestone_id": "ms_minna_b17",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 17,
+    "kanjiNumber": 17,
+    "kanji": "火",
+    "character": "火",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "火",
+    "onyomi": "カ",
+    "kunyomi": "ひ",
+    "sinoVietnamese": "HỎA",
+    "vietnameseMeaning": "Lửa",
+    "meaning_vi": "Lửa",
+    "mnemonicStory": "Chữ Hán [火] (Hỏa) nghĩa là \"Lửa\" — Âm On: カ, Âm Kun: ひ.",
+    "exampleCompounds": [
+      {
+        "word": "火曜日",
+        "reading": "かようび",
+        "meaning": "thứ Ba",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0042",
+    "kanji_id": "kanji_n5_0042",
+    "milestoneId": "ms_minna_b17",
+    "milestone_id": "ms_minna_b17",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 17,
+    "kanjiNumber": 42,
+    "kanji": "友",
+    "character": "友",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "友",
+    "onyomi": "ユウ",
+    "kunyomi": "とも",
+    "sinoVietnamese": "HỮU",
+    "vietnameseMeaning": "Bạn",
+    "meaning_vi": "Bạn",
+    "mnemonicStory": "Chữ Hán [友] (Hữu) nghĩa là \"Bạn\" — Âm On: ユウ, Âm Kun: とも.",
+    "exampleCompounds": [
+      {
+        "word": "友達",
+        "reading": "ともだち",
+        "meaning": "bạn bè",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0067",
+    "kanji_id": "kanji_n5_0067",
+    "milestoneId": "ms_minna_b17",
+    "milestone_id": "ms_minna_b17",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 17,
+    "kanjiNumber": 67,
+    "kanji": "見",
+    "character": "見",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "見",
+    "onyomi": "ケン",
+    "kunyomi": "み.る",
+    "sinoVietnamese": "KIẾN",
+    "vietnameseMeaning": "Nhìn",
+    "meaning_vi": "Nhìn",
+    "mnemonicStory": "Chữ Hán [見] (Kiến) nghĩa là \"Nhìn\" — Âm On: ケン, Âm Kun: み.る.",
+    "exampleCompounds": [
+      {
+        "word": "見せてください",
+        "reading": "みせてください",
+        "meaning": "cho xem",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "見ます",
+        "reading": "みます",
+        "meaning": "xem, nhìn",
+        "type": "ĐT2",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "お花見",
+        "reading": "おはなみ",
+        "meaning": "ngắm hoa",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "見せます",
+        "reading": "みせます",
+        "meaning": "cho xem",
+        "type": "ĐT2",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "見学します",
+        "reading": "けんがくします",
+        "meaning": "tham quan",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "意見",
+        "reading": "いけん",
+        "meaning": "ý kiến",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "見積もり",
+        "reading": "みつもり",
+        "meaning": "Báo giá / ước tính",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "偏見",
+        "reading": "へんけん",
+        "meaning": "Thành kiến / định kiến",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 17
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0092",
+    "kanji_id": "kanji_n5_0092",
+    "milestoneId": "ms_minna_b17",
+    "milestone_id": "ms_minna_b17",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 17,
+    "kanjiNumber": 92,
+    "kanji": "天",
+    "character": "天",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "天",
+    "onyomi": "テン",
+    "kunyomi": "あめ",
+    "sinoVietnamese": "THIÊN",
+    "vietnameseMeaning": "Trời",
+    "meaning_vi": "Trời",
+    "mnemonicStory": "Chữ Hán [天] (Thiên) nghĩa là \"Trời\" — Âm On: テン, Âm Kun: あめ.",
+    "exampleCompounds": [
+      {
+        "word": "天気",
+        "reading": "てんき",
+        "meaning": "thời tiết",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "天ぷら",
+        "reading": "てんぷら",
+        "meaning": "tempura",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "天気予報",
+        "reading": "てんきよほう",
+        "meaning": "dự báo thời tiết",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "天気がよければ",
+        "reading": "てんきがよければ",
+        "meaning": "nếu thời tiết đẹp thì",
+        "type": "MT",
+        "level": "N5",
+        "lesson": 17
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0117",
+    "kanji_id": "kanji_n5_0117",
+    "milestoneId": "ms_minna_b17",
+    "milestone_id": "ms_minna_b17",
+    "stageId": "stage_n5_4",
+    "stage_id": "stage_n5_4",
+    "lessonNumber": 17,
+    "kanjiNumber": 117,
+    "kanji": "茶",
+    "character": "茶",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "茶",
+    "onyomi": "チャ",
+    "kunyomi": "",
+    "sinoVietnamese": "TRÀ",
+    "vietnameseMeaning": "Trà",
+    "meaning_vi": "Trà",
+    "mnemonicStory": "Chữ Hán [茶] (Trà) nghĩa là \"Trà\" — Âm On: チャ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "お茶",
+        "reading": "おちゃ",
+        "meaning": "trà",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "紅茶",
+        "reading": "こうちゃ",
+        "meaning": "hồng trà",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "喫茶店",
+        "reading": "きっさてん",
+        "meaning": "quán cà phê",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "[お]茶",
+        "reading": "[お]ちゃ",
+        "meaning": "trà",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 17
+      },
+      {
+        "word": "茶道",
+        "reading": "さどう",
+        "meaning": "Nghệ thuật trà đạo",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 17
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

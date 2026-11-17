@@ -1,0 +1,557 @@
+[
+  {
+    "id": "kanji_n4_0137",
+    "kanji_id": "kanji_n4_0137",
+    "milestoneId": "ms_minna_b34",
+    "milestone_id": "ms_minna_b34",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 34,
+    "kanjiNumber": 137,
+    "kanji": "仕",
+    "character": "仕",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "仕",
+    "onyomi": "シ",
+    "kunyomi": "つか.える",
+    "sinoVietnamese": "SĨ",
+    "vietnameseMeaning": "Phục vụ",
+    "meaning_vi": "Phục vụ",
+    "mnemonicStory": "Chữ Hán [仕] (Sĩ) nghĩa là \"Phục vụ\" — Âm On: シ, Âm Kun: つか.える.",
+    "exampleCompounds": [
+      {
+        "word": "仕事",
+        "reading": "しごと",
+        "meaning": "công việc",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "仕方がない",
+        "reading": "しかたがない",
+        "meaning": "không thể làm gì",
+        "type": "KH",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "仕方なく",
+        "reading": "しかたなく",
+        "meaning": "đành vậy, không còn cách nào",
+        "type": "PV",
+        "level": "N4",
+        "lesson": 34
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0162",
+    "kanji_id": "kanji_n4_0162",
+    "milestoneId": "ms_minna_b34",
+    "milestone_id": "ms_minna_b34",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 34,
+    "kanjiNumber": 162,
+    "kanji": "研",
+    "character": "研",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "研",
+    "onyomi": "ケン",
+    "kunyomi": "と.ぐ",
+    "sinoVietnamese": "NGHIÊN",
+    "vietnameseMeaning": "Nghiên cứu",
+    "meaning_vi": "Nghiên cứu",
+    "mnemonicStory": "Chữ Hán [研] (Nghiên) nghĩa là \"Nghiên cứu\" — Âm On: ケン, Âm Kun: と.ぐ.",
+    "exampleCompounds": [
+      {
+        "word": "研究者",
+        "reading": "けんきゅうしゃ",
+        "meaning": "nhà nghiên cứu",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "研究します",
+        "reading": "けんきゅうします",
+        "meaning": "nghiên cứu",
+        "type": "ĐT3",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "研",
+        "reading": "けん",
+        "meaning": "Nghiên cứu / mài giũa",
+        "type": "kanji",
+        "level": "N4",
+        "lesson": 34
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0187",
+    "kanji_id": "kanji_n4_0187",
+    "milestoneId": "ms_minna_b34",
+    "milestone_id": "ms_minna_b34",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 34,
+    "kanjiNumber": 187,
+    "kanji": "院",
+    "character": "院",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "院",
+    "onyomi": "イン",
+    "kunyomi": "",
+    "sinoVietnamese": "VIỆN",
+    "vietnameseMeaning": "Viện",
+    "meaning_vi": "Viện",
+    "mnemonicStory": "Chữ Hán [院] (Viện) nghĩa là \"Viện\" — Âm On: イン, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "病院",
+        "reading": "びょういん",
+        "meaning": "bệnh viện",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "入院します",
+        "reading": "にゅういんします",
+        "meaning": "nhập viện",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "退院します",
+        "reading": "たいいんします",
+        "meaning": "xuất viện",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "入院",
+        "reading": "にゅういん",
+        "meaning": "Nhập viện",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "退院",
+        "reading": "たいいん",
+        "meaning": "Xuất viện",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 34
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0212",
+    "kanji_id": "kanji_n4_0212",
+    "milestoneId": "ms_minna_b34",
+    "milestone_id": "ms_minna_b34",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 34,
+    "kanjiNumber": 212,
+    "kanji": "急",
+    "character": "急",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "急",
+    "onyomi": "キュウ",
+    "kunyomi": "いそ.ぐ",
+    "sinoVietnamese": "CẤP",
+    "vietnameseMeaning": "Vội, Cấp bách",
+    "meaning_vi": "Vội, Cấp bách",
+    "mnemonicStory": "Chữ Hán [急] (Cấp) nghĩa là \"Vội, Cấp bách\" — Âm On: キュウ, Âm Kun: いそ.ぐ.",
+    "exampleCompounds": [
+      {
+        "word": "急行",
+        "reading": "きゅうこう",
+        "meaning": "tàu nhanh",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "特急",
+        "reading": "とっきゅう",
+        "meaning": "tàu siêu nhanh",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "急ぎます",
+        "reading": "いそぎます",
+        "meaning": "vội, gấp",
+        "type": "ĐT1",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "急いで",
+        "reading": "いそいで",
+        "meaning": "nhanh, vội, gấp",
+        "type": "PV",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "急速に",
+        "reading": "きゅうそくに",
+        "meaning": "nhanh chóng, với tốc độ nhanh",
+        "type": "PV",
+        "level": "N4",
+        "lesson": 34
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0237",
+    "kanji_id": "kanji_n4_0237",
+    "milestoneId": "ms_minna_b34",
+    "milestone_id": "ms_minna_b34",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 34,
+    "kanjiNumber": 237,
+    "kanji": "若",
+    "character": "若",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "若",
+    "onyomi": "ジャク",
+    "kunyomi": "わか.い",
+    "sinoVietnamese": "NHƯỢC",
+    "vietnameseMeaning": "Trẻ, Trẻ tuổi",
+    "meaning_vi": "Trẻ, Trẻ tuổi",
+    "mnemonicStory": "Chữ Hán [若] (Nhược) nghĩa là \"Trẻ, Trẻ tuổi\" — Âm On: ジャク, Âm Kun: わか.い.",
+    "exampleCompounds": [
+      {
+        "word": "若い",
+        "reading": "わかい",
+        "meaning": "trẻ",
+        "type": "TT-i",
+        "level": "N4",
+        "lesson": 34
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0262",
+    "kanji_id": "kanji_n4_0262",
+    "milestoneId": "ms_minna_b34",
+    "milestone_id": "ms_minna_b34",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 34,
+    "kanjiNumber": 262,
+    "kanji": "内",
+    "character": "内",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "内",
+    "onyomi": "ナイ",
+    "kunyomi": "うち",
+    "sinoVietnamese": "NỘI",
+    "vietnameseMeaning": "Bên trong",
+    "meaning_vi": "Bên trong",
+    "mnemonicStory": "Chữ Hán [内] (Nội) nghĩa là \"Bên trong\" — Âm On: ナイ, Âm Kun: うち.",
+    "exampleCompounds": [
+      {
+        "word": "家内",
+        "reading": "かない",
+        "meaning": "vợ tôi",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "案内します",
+        "reading": "あんないします",
+        "meaning": "hướng dẫn",
+        "type": "ĐT3",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "ご案内します",
+        "reading": "ごあんないします",
+        "meaning": "hướng dẫn, dẫn đường (lịch sự)",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "期限内に",
+        "reading": "きげんないに",
+        "meaning": "trong thời hạn, trước hạn",
+        "type": "PV",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "内装",
+        "reading": "ないそう",
+        "meaning": "Nội thất / trang trí bên trong",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "内部留保",
+        "reading": "ないぶりゅうほ",
+        "meaning": "Lợi nhuận giữ lại",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "内視鏡",
+        "reading": "ないしきょう",
+        "meaning": "Nội soi",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 34
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0287",
+    "kanji_id": "kanji_n4_0287",
+    "milestoneId": "ms_minna_b34",
+    "milestone_id": "ms_minna_b34",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 34,
+    "kanjiNumber": 287,
+    "kanji": "両",
+    "character": "両",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "両",
+    "onyomi": "リョウ",
+    "kunyomi": "",
+    "sinoVietnamese": "LƯỠNG",
+    "vietnameseMeaning": "Cả hai",
+    "meaning_vi": "Cả hai",
+    "mnemonicStory": "Chữ Hán [両] (Lưỡng) nghĩa là \"Cả hai\" — Âm On: リョウ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "両親",
+        "reading": "りょうしん",
+        "meaning": "bố mẹ",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 34
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0312",
+    "kanji_id": "kanji_n4_0312",
+    "milestoneId": "ms_minna_b34",
+    "milestone_id": "ms_minna_b34",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 34,
+    "kanjiNumber": 312,
+    "kanji": "験",
+    "character": "験",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "験",
+    "onyomi": "ケン",
+    "kunyomi": "",
+    "sinoVietnamese": "NGHIỆM",
+    "vietnameseMeaning": "Kinh nghiệm, Kỳ thi",
+    "meaning_vi": "Kinh nghiệm, Kỳ thi",
+    "mnemonicStory": "Chữ Hán [験] (Nghiệm) nghĩa là \"Kinh nghiệm, Kỳ thi\" — Âm On: ケン, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "試験",
+        "reading": "しけん",
+        "meaning": "kì thi",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "経験",
+        "reading": "けいけん",
+        "meaning": "kinh nghiệm",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "経験から学びます",
+        "reading": "けいけんからまなびます",
+        "meaning": "học từ kinh nghiệm",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "検定試験",
+        "reading": "けんていしけん",
+        "meaning": "kỳ thi năng lực, thi chứng chỉ",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "臨床試験",
+        "reading": "りんしょうしけん",
+        "meaning": "Thử nghiệm lâm sàng",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 34
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0337",
+    "kanji_id": "kanji_n4_0337",
+    "milestoneId": "ms_minna_b34",
+    "milestone_id": "ms_minna_b34",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 34,
+    "kanjiNumber": 337,
+    "kanji": "遠",
+    "character": "遠",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "遠",
+    "onyomi": "エン",
+    "kunyomi": "とお.い",
+    "sinoVietnamese": "VIỄN",
+    "vietnameseMeaning": "Xa, xa xôi",
+    "meaning_vi": "Xa, xa xôi",
+    "mnemonicStory": "Chữ Hán [遠] (Viễn) nghĩa là \"Xa, xa xôi\" — Âm On: エン, Âm Kun: とお.い.",
+    "exampleCompounds": [
+      {
+        "word": "遠い",
+        "reading": "とおい",
+        "meaning": "xa",
+        "type": "TT-i",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "遠回り",
+        "reading": "とおまわり",
+        "meaning": "đường vòng, đường dài",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 34
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0362",
+    "kanji_id": "kanji_n4_0362",
+    "milestoneId": "ms_minna_b34",
+    "milestone_id": "ms_minna_b34",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 34,
+    "kanjiNumber": 362,
+    "kanji": "夫",
+    "character": "夫",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "夫",
+    "onyomi": "フ",
+    "kunyomi": "おっと",
+    "sinoVietnamese": "PHU",
+    "vietnameseMeaning": "Chồng, đàn ông",
+    "meaning_vi": "Chồng, đàn ông",
+    "mnemonicStory": "Chữ Hán [夫] (Phu) nghĩa là \"Chồng, đàn ông\" — Âm On: フ, Âm Kun: おっと.",
+    "exampleCompounds": [
+      {
+        "word": "夫",
+        "reading": "おっと",
+        "meaning": "chồng (mình)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 34
+      },
+      {
+        "word": "大丈夫[な]",
+        "reading": "だいじょうぶ[な]",
+        "meaning": "không sao, ổn",
+        "type": "TT-na",
+        "level": "N4",
+        "lesson": 34
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0387",
+    "kanji_id": "kanji_n4_0387",
+    "milestoneId": "ms_minna_b34",
+    "milestone_id": "ms_minna_b34",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 34,
+    "kanjiNumber": 387,
+    "kanji": "豚",
+    "character": "豚",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "豚",
+    "onyomi": "トン",
+    "kunyomi": "ぶた",
+    "sinoVietnamese": "ĐỒN",
+    "vietnameseMeaning": "Con lợn",
+    "meaning_vi": "Con lợn",
+    "mnemonicStory": "Chữ Hán [豚] (Đồn) nghĩa là \"Con lợn\" — Âm On: トン, Âm Kun: ぶた.",
+    "exampleCompounds": [
+      {
+        "word": "豚語",
+        "reading": "トン",
+        "meaning": "Con lợn (Đồn)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 34
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

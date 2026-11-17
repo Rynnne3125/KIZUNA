@@ -1830,11 +1830,26 @@ export const KanjiPage: React.FC = () => {
                         </div>
                       );
                     })}
+
+                    {currentPageItems.length === 0 && (
+                      <div style={{
+                        gridColumn: '1 / -1',
+                        padding: '48px 16px',
+                        textAlign: 'center',
+                        color: '#94a3b8',
+                        background: '#ffffff',
+                        borderRadius: 10,
+                        border: '1px dashed #e2e8f0',
+                        fontSize: 13
+                      }}>
+                        {searchTerm ? 'Không tìm thấy chữ Hán nào phù hợp với từ khóa.' : 'Đang chuẩn bị danh sách chữ Hán...'}
+                      </div>
+                    )}
                   </div>
                 </div>
 
                 {/* Cột phải: Bảng chi tiết toàn diện (Nét vẽ, Bộ thủ, Mẹo nhớ chiết tự, Âm On/Kun, Từ ghép) */}
-                {selectedKanji && (
+                {selectedKanji ? (
                   <div id="kanji-detail-section" className="kanji-detail-panel" style={{
                     background: '#ffffff',
                     borderRadius: 14,
@@ -2191,6 +2206,28 @@ export const KanjiPage: React.FC = () => {
                         </div>
                       </div>
                     )}
+                  </div>
+                ) : (
+                  <div style={{
+                    background: '#ffffff',
+                    borderRadius: 14,
+                    border: '1px solid #ebe7df',
+                    padding: '60px 24px',
+                    textAlign: 'center',
+                    boxShadow: '0 2px 10px rgba(0,0,0,0.03)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 12
+                  }}>
+                    <BookOpen style={{ width: 44, height: 44, color: '#cbd5e1' }} />
+                    <div style={{ fontSize: 16, fontWeight: 700, color: '#334155' }}>
+                      Chọn một chữ Hán
+                    </div>
+                    <div style={{ fontSize: 13, color: '#94a3b8', maxWidth: 320, lineHeight: 1.5 }}>
+                      Nhấn vào bất kỳ chữ Hán nào trong danh sách bên trái để xem chi tiết thứ tự nét vẽ và mẹo ghi nhớ.
+                    </div>
                   </div>
                 )}
               </div>

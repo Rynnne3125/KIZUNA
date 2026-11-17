@@ -1,0 +1,549 @@
+[
+  {
+    "id": "kanji_n4_0134",
+    "kanji_id": "kanji_n4_0134",
+    "milestoneId": "ms_minna_b31",
+    "milestone_id": "ms_minna_b31",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 31,
+    "kanjiNumber": 134,
+    "kanji": "界",
+    "character": "界",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "界",
+    "onyomi": "カイ",
+    "kunyomi": "",
+    "sinoVietnamese": "GIỚI",
+    "vietnameseMeaning": "Giới hạn",
+    "meaning_vi": "Giới hạn",
+    "mnemonicStory": "Chữ Hán [界] (Giới) nghĩa là \"Giới hạn\" — Âm On: カイ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "世界",
+        "reading": "せかい",
+        "meaning": "thế giới",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "世界中",
+        "reading": "せかいじゅう",
+        "meaning": "khắp thế giới, toàn thế giới",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "限界",
+        "reading": "げんかい",
+        "meaning": "giới hạn, ngưỡng cửa",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 31
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0159",
+    "kanji_id": "kanji_n4_0159",
+    "milestoneId": "ms_minna_b31",
+    "milestone_id": "ms_minna_b31",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 31,
+    "kanjiNumber": 159,
+    "kanji": "習",
+    "character": "習",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "習",
+    "onyomi": "シュウ",
+    "kunyomi": "なら.う",
+    "sinoVietnamese": "TẬP",
+    "vietnameseMeaning": "Tập",
+    "meaning_vi": "Tập",
+    "mnemonicStory": "Chữ Hán [習] (Tập) nghĩa là \"Tập\" — Âm On: シュウ, Âm Kun: なら.う.",
+    "exampleCompounds": [
+      {
+        "word": "習います",
+        "reading": "ならいます",
+        "meaning": "học",
+        "type": "ĐT1",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "練習します",
+        "reading": "れんしゅうします",
+        "meaning": "luyện tập",
+        "type": "ĐT3",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "習慣",
+        "reading": "しゅうかん",
+        "meaning": "tập quán",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "風習",
+        "reading": "ふうしゅう",
+        "meaning": "Phong tục tập quán",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "機械学習",
+        "reading": "きかいがくしゅう",
+        "meaning": "Học máy / machine learning",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 31
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0184",
+    "kanji_id": "kanji_n4_0184",
+    "milestoneId": "ms_minna_b31",
+    "milestone_id": "ms_minna_b31",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 31,
+    "kanjiNumber": 184,
+    "kanji": "図",
+    "character": "図",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "図",
+    "onyomi": "ズ",
+    "kunyomi": "はか.る",
+    "sinoVietnamese": "ĐỒ",
+    "vietnameseMeaning": "Bản đồ",
+    "meaning_vi": "Bản đồ",
+    "mnemonicStory": "Chữ Hán [図] (Đồ) nghĩa là \"Bản đồ\" — Âm On: ズ, Âm Kun: はか.る.",
+    "exampleCompounds": [
+      {
+        "word": "図書館",
+        "reading": "としょかん",
+        "meaning": "thư viện",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "地図",
+        "reading": "ちず",
+        "meaning": "bản đồ",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "地図を見れば",
+        "reading": "ちずをみれば",
+        "meaning": "nếu xem bản đồ thì",
+        "type": "MT",
+        "level": "N4",
+        "lesson": 31
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0209",
+    "kanji_id": "kanji_n4_0209",
+    "milestoneId": "ms_minna_b31",
+    "milestone_id": "ms_minna_b31",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 31,
+    "kanjiNumber": 209,
+    "kanji": "去",
+    "character": "去",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "去",
+    "onyomi": "キョ",
+    "kunyomi": "さ.る",
+    "sinoVietnamese": "KHỨ",
+    "vietnameseMeaning": "Đi, Quá khứ",
+    "meaning_vi": "Đi, Quá khứ",
+    "mnemonicStory": "Chữ Hán [去] (Khứ) nghĩa là \"Đi, Quá khứ\" — Âm On: キョ, Âm Kun: さ.る.",
+    "exampleCompounds": [
+      {
+        "word": "去年",
+        "reading": "きょねん",
+        "meaning": "năm ngoái",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 31
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0234",
+    "kanji_id": "kanji_n4_0234",
+    "milestoneId": "ms_minna_b31",
+    "milestone_id": "ms_minna_b31",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 31,
+    "kanjiNumber": 234,
+    "kanji": "式",
+    "character": "式",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "式",
+    "onyomi": "シキ",
+    "kunyomi": "",
+    "sinoVietnamese": "THỨC",
+    "vietnameseMeaning": "Lễ thức, Công thức",
+    "meaning_vi": "Lễ thức, Công thức",
+    "mnemonicStory": "Chữ Hán [式] (Thức) nghĩa là \"Lễ thức, Công thức\" — Âm On: シキ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "株式",
+        "reading": "かぶしき",
+        "meaning": "Cổ phiếu",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 31
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0259",
+    "kanji_id": "kanji_n4_0259",
+    "milestoneId": "ms_minna_b31",
+    "milestone_id": "ms_minna_b31",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 31,
+    "kanjiNumber": 259,
+    "kanji": "点",
+    "character": "点",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "点",
+    "onyomi": "テン",
+    "kunyomi": "",
+    "sinoVietnamese": "ĐIỂM",
+    "vietnameseMeaning": "Điểm, Chấm",
+    "meaning_vi": "Điểm, Chấm",
+    "mnemonicStory": "Chữ Hán [点] (Điểm) nghĩa là \"Điểm, Chấm\" — Âm On: テン, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "交差点",
+        "reading": "こうさてん",
+        "meaning": "ngã tư",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "損益分岐点",
+        "reading": "そんえきぶんきてん",
+        "meaning": "Điểm hòa vốn",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 31
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0284",
+    "kanji_id": "kanji_n4_0284",
+    "milestoneId": "ms_minna_b31",
+    "milestone_id": "ms_minna_b31",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 31,
+    "kanjiNumber": 284,
+    "kanji": "理",
+    "character": "理",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "理",
+    "onyomi": "リ",
+    "kunyomi": "",
+    "sinoVietnamese": "LÝ",
+    "vietnameseMeaning": "Lý do, Lý lẽ",
+    "meaning_vi": "Lý do, Lý lẽ",
+    "mnemonicStory": "Chữ Hán [理] (Lý) nghĩa là \"Lý do, Lý lẽ\" — Âm On: リ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "料理",
+        "reading": "りょうり",
+        "meaning": "món ăn",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "修理します",
+        "reading": "しゅうりします",
+        "meaning": "sửa chữa",
+        "type": "ĐT3",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "無理[な]",
+        "reading": "むり[な]",
+        "meaning": "vô lý, quá sức",
+        "type": "TT-na",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "理由",
+        "reading": "りゆう",
+        "meaning": "lý do, nguyên nhân",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "整理します",
+        "reading": "せいりします",
+        "meaning": "sắp xếp, chỉnh lý, dọn dẹp",
+        "type": "ĐT",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "無理に",
+        "reading": "むりに",
+        "meaning": "ép buộc, cưỡng ép, ép ép",
+        "type": "PV",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "心理",
+        "reading": "しんり",
+        "meaning": "Tâm lý",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "懐石料理",
+        "reading": "かいせきりょうり",
+        "meaning": "Ẩm thực kaiseki (Nhật cao cấp)",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "精進料理",
+        "reading": "しょうじんりょうり",
+        "meaning": "Ẩm thực chay Phật giáo",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "論理",
+        "reading": "ろんり",
+        "meaning": "Logic / lý luận",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 31
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0309",
+    "kanji_id": "kanji_n4_0309",
+    "milestoneId": "ms_minna_b31",
+    "milestone_id": "ms_minna_b31",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 31,
+    "kanjiNumber": 309,
+    "kanji": "暗",
+    "character": "暗",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "暗",
+    "onyomi": "アン",
+    "kunyomi": "くら.い",
+    "sinoVietnamese": "ÁM",
+    "vietnameseMeaning": "Tối, Tăm",
+    "meaning_vi": "Tối, Tăm",
+    "mnemonicStory": "Chữ Hán [暗] (Ám) nghĩa là \"Tối, Tăm\" — Âm On: アン, Âm Kun: くら.い.",
+    "exampleCompounds": [
+      {
+        "word": "暗い",
+        "reading": "くらい",
+        "meaning": "tối",
+        "type": "TT-i",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "暗証番号",
+        "reading": "あんしょうばんごう",
+        "meaning": "mật khẩu",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "暗号化",
+        "reading": "あんごうか",
+        "meaning": "Mã hóa",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 31
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0334",
+    "kanji_id": "kanji_n4_0334",
+    "milestoneId": "ms_minna_b31",
+    "milestone_id": "ms_minna_b31",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 31,
+    "kanjiNumber": 334,
+    "kanji": "死",
+    "character": "死",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "死",
+    "onyomi": "シ",
+    "kunyomi": "し.ぬ",
+    "sinoVietnamese": "TỬ",
+    "vietnameseMeaning": "Chết, qua đời",
+    "meaning_vi": "Chết, qua đời",
+    "mnemonicStory": "Chữ Hán [死] (Tử) nghĩa là \"Chết, qua đời\" — Âm On: シ, Âm Kun: し.ぬ.",
+    "exampleCompounds": [
+      {
+        "word": "死語",
+        "reading": "シ",
+        "meaning": "Chết, qua đời (Tử)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 31
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0359",
+    "kanji_id": "kanji_n4_0359",
+    "milestoneId": "ms_minna_b31",
+    "milestone_id": "ms_minna_b31",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 31,
+    "kanjiNumber": 359,
+    "kanji": "晩",
+    "character": "晩",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "晩",
+    "onyomi": "バン",
+    "kunyomi": "",
+    "sinoVietnamese": "VÃN",
+    "vietnameseMeaning": "Buổi tối, muộn",
+    "meaning_vi": "Buổi tối, muộn",
+    "mnemonicStory": "Chữ Hán [晩] (Vãn) nghĩa là \"Buổi tối, muộn\" — Âm On: バン, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "晩",
+        "reading": "ばん",
+        "meaning": "buổi tối",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "今晩",
+        "reading": "こんばん",
+        "meaning": "tối nay",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "毎晩",
+        "reading": "まいばん",
+        "meaning": "mỗi tối",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 31
+      },
+      {
+        "word": "晩ご飯",
+        "reading": "ばんごはん",
+        "meaning": "bữa tối",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 31
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0384",
+    "kanji_id": "kanji_n4_0384",
+    "milestoneId": "ms_minna_b31",
+    "milestone_id": "ms_minna_b31",
+    "stageId": "stage_n4_2",
+    "stage_id": "stage_n4_2",
+    "lessonNumber": 31,
+    "kanjiNumber": 384,
+    "kanji": "黄",
+    "character": "黄",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "黄",
+    "onyomi": "コウ",
+    "kunyomi": "き",
+    "sinoVietnamese": "HOÀNG",
+    "vietnameseMeaning": "Màu vàng",
+    "meaning_vi": "Màu vàng",
+    "mnemonicStory": "Chữ Hán [黄] (Hoàng) nghĩa là \"Màu vàng\" — Âm On: コウ, Âm Kun: き.",
+    "exampleCompounds": [
+      {
+        "word": "黄語",
+        "reading": "コウ",
+        "meaning": "Màu vàng (Hoàng)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 31
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

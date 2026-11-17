@@ -1,0 +1,477 @@
+[
+  {
+    "id": "kanji_n3_0425",
+    "kanji_id": "kanji_n3_0425",
+    "milestoneId": "ms_n3_s9_l2",
+    "milestone_id": "ms_n3_s9_l2",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 83,
+    "kanjiNumber": 425,
+    "kanji": "組",
+    "character": "組",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "組",
+    "onyomi": "ソ",
+    "kunyomi": "く.む",
+    "sinoVietnamese": "TỔ",
+    "vietnameseMeaning": "Tổ, Nhóm, Lắp ráp",
+    "meaning_vi": "Tổ, Nhóm, Lắp ráp",
+    "mnemonicStory": "Chữ Hán [組] (Tổ) nghĩa là \"Tổ, Nhóm, Lắp ráp\" — Âm On: ソ, Âm Kun: く.む.",
+    "exampleCompounds": [
+      {
+        "word": "組語",
+        "reading": "ソ",
+        "meaning": "Tổ, Nhóm, Lắp ráp (Tổ)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 83
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0463",
+    "kanji_id": "kanji_n3_0463",
+    "milestoneId": "ms_n3_s9_l2",
+    "milestone_id": "ms_n3_s9_l2",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 83,
+    "kanjiNumber": 463,
+    "kanji": "束",
+    "character": "束",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "束",
+    "onyomi": "ソク",
+    "kunyomi": "たば",
+    "sinoVietnamese": "THÚC",
+    "vietnameseMeaning": "Bó, Lời hứa",
+    "meaning_vi": "Bó, Lời hứa",
+    "mnemonicStory": "Chữ Hán [束] (Thúc) nghĩa là \"Bó, Lời hứa\" — Âm On: ソク, Âm Kun: たば.",
+    "exampleCompounds": [
+      {
+        "word": "約束",
+        "reading": "やくそく",
+        "meaning": "lời hứa, hẹn",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 83
+      },
+      {
+        "word": "法的拘束力",
+        "reading": "ほうてきこうそくりょく",
+        "meaning": "Hiệu lực pháp lý ràng buộc",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 83
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0501",
+    "kanji_id": "kanji_n3_0501",
+    "milestoneId": "ms_n3_s9_l2",
+    "milestone_id": "ms_n3_s9_l2",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 83,
+    "kanjiNumber": 501,
+    "kanji": "乾",
+    "character": "乾",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "乾",
+    "onyomi": "カン",
+    "kunyomi": "かわ.く",
+    "sinoVietnamese": "CÀN",
+    "vietnameseMeaning": "Khô ráo",
+    "meaning_vi": "Khô ráo",
+    "mnemonicStory": "Chữ Hán [乾] (Càn) nghĩa là \"Khô ráo\" — Âm On: カン, Âm Kun: かわ.く.",
+    "exampleCompounds": [
+      {
+        "word": "乾語",
+        "reading": "カン",
+        "meaning": "Khô ráo (Càn)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 83
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0539",
+    "kanji_id": "kanji_n3_0539",
+    "milestoneId": "ms_n3_s9_l2",
+    "milestone_id": "ms_n3_s9_l2",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 83,
+    "kanjiNumber": 539,
+    "kanji": "曲",
+    "character": "曲",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "曲",
+    "onyomi": "キョク",
+    "kunyomi": "ま.がる",
+    "sinoVietnamese": "KHÚC",
+    "vietnameseMeaning": "Cong, Bài nhạc",
+    "meaning_vi": "Cong, Bài nhạc",
+    "mnemonicStory": "Chữ Hán [曲] (Khúc) nghĩa là \"Cong, Bài nhạc\" — Âm On: キョク, Âm Kun: ま.がる.",
+    "exampleCompounds": [
+      {
+        "word": "曲がります",
+        "reading": "まがります",
+        "meaning": "rẽ, quẹo",
+        "type": "ĐT1",
+        "level": "N3",
+        "lesson": 83
+      },
+      {
+        "word": "作曲",
+        "reading": "さっきょく",
+        "meaning": "Sáng tác nhạc",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 83
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0577",
+    "kanji_id": "kanji_n3_0577",
+    "milestoneId": "ms_n3_s9_l2",
+    "milestone_id": "ms_n3_s9_l2",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 83,
+    "kanjiNumber": 577,
+    "kanji": "泥",
+    "character": "泥",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "泥",
+    "onyomi": "デイ",
+    "kunyomi": "どろ",
+    "sinoVietnamese": "NÊ",
+    "vietnameseMeaning": "Bùn, Đất sình",
+    "meaning_vi": "Bùn, Đất sình",
+    "mnemonicStory": "Chữ Hán [泥] (Nê) nghĩa là \"Bùn, Đất sình\" — Âm On: デイ, Âm Kun: どろ.",
+    "exampleCompounds": [
+      {
+        "word": "泥棒",
+        "reading": "どろぼう",
+        "meaning": "kẻ trộm, tên cướp",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 83
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0615",
+    "kanji_id": "kanji_n3_0615",
+    "milestoneId": "ms_n3_s9_l2",
+    "milestone_id": "ms_n3_s9_l2",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 83,
+    "kanjiNumber": 615,
+    "kanji": "率",
+    "character": "率",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "率",
+    "onyomi": "リツ",
+    "kunyomi": "",
+    "sinoVietnamese": "SUẤT",
+    "vietnameseMeaning": "Tỉ lệ, Suất",
+    "meaning_vi": "Tỉ lệ, Suất",
+    "mnemonicStory": "Chữ Hán [率] (Suất) nghĩa là \"Tỉ lệ, Suất\" — Âm On: リツ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "率語",
+        "reading": "リツ",
+        "meaning": "Tỉ lệ, Suất (Suất)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 83
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0653",
+    "kanji_id": "kanji_n3_0653",
+    "milestoneId": "ms_n3_s9_l2",
+    "milestone_id": "ms_n3_s9_l2",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 83,
+    "kanjiNumber": 653,
+    "kanji": "在",
+    "character": "在",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "在",
+    "onyomi": "ザイ",
+    "kunyomi": "あ.る",
+    "sinoVietnamese": "TẠI",
+    "vietnameseMeaning": "Ở, tồn tại",
+    "meaning_vi": "Ở, tồn tại",
+    "mnemonicStory": "Chữ Hán [在] (Tại) nghĩa là \"Ở, tồn tại\" — Âm On: ザイ, Âm Kun: あ.る.",
+    "exampleCompounds": [
+      {
+        "word": "在庫",
+        "reading": "ざいこ",
+        "meaning": "Hàng tồn kho",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 83
+      },
+      {
+        "word": "存在",
+        "reading": "そんざい",
+        "meaning": "Tồn tại / sự hiện hữu",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 83
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0691",
+    "kanji_id": "kanji_n3_0691",
+    "milestoneId": "ms_n3_s9_l2",
+    "milestone_id": "ms_n3_s9_l2",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 83,
+    "kanjiNumber": 691,
+    "kanji": "定",
+    "character": "定",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "定",
+    "onyomi": "テイ",
+    "kunyomi": "さだ.める",
+    "sinoVietnamese": "ĐỊNH",
+    "vietnameseMeaning": "Quy định, cố định",
+    "meaning_vi": "Quy định, cố định",
+    "mnemonicStory": "Chữ Hán [定] (Định) nghĩa là \"Quy định, cố định\" — Âm On: テイ, Âm Kun: さだ.める.",
+    "exampleCompounds": [
+      {
+        "word": "定食",
+        "reading": "ていしょく",
+        "meaning": "cơm phần",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 83
+      },
+      {
+        "word": "予定",
+        "reading": "よてい",
+        "meaning": "kế hoạch, dự định",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 83
+      },
+      {
+        "word": "〜予定です",
+        "reading": "〜よていです",
+        "meaning": "dự định ~, theo kế hoạch thì ~",
+        "type": "MT",
+        "level": "N3",
+        "lesson": 83
+      },
+      {
+        "word": "限定",
+        "reading": "げんてい",
+        "meaning": "giới hạn, chỉ",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 83
+      },
+      {
+        "word": "仮定",
+        "reading": "かてい",
+        "meaning": "giả định, giả thiết",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 83
+      },
+      {
+        "word": "検定試験",
+        "reading": "けんていしけん",
+        "meaning": "kỳ thi năng lực, thi chứng chỉ",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 83
+      },
+      {
+        "word": "自己肯定感",
+        "reading": "じここうていかん",
+        "meaning": "Lòng tự trọng / tự chấp nhận bản thân",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 83
+      },
+      {
+        "word": "固定費",
+        "reading": "こていひ",
+        "meaning": "Chi phí cố định",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 83
+      },
+      {
+        "word": "定義",
+        "reading": "ていぎ",
+        "meaning": "Định nghĩa",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 83
+      },
+      {
+        "word": "決定論",
+        "reading": "けっていろん",
+        "meaning": "Thuyết quyết định luận",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 83
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0729",
+    "kanji_id": "kanji_n3_0729",
+    "milestoneId": "ms_n3_s9_l2",
+    "milestone_id": "ms_n3_s9_l2",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 83,
+    "kanjiNumber": 729,
+    "kanji": "皆",
+    "character": "皆",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "皆",
+    "onyomi": "カイ",
+    "kunyomi": "みな",
+    "sinoVietnamese": "GIAI",
+    "vietnameseMeaning": "Mọi người, tất cả",
+    "meaning_vi": "Mọi người, tất cả",
+    "mnemonicStory": "Chữ Hán [皆] (Giai) nghĩa là \"Mọi người, tất cả\" — Âm On: カイ, Âm Kun: みな.",
+    "exampleCompounds": [
+      {
+        "word": "皆さん",
+        "reading": "みなさん",
+        "meaning": "các anh chị, các bạn, quý vị",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 83
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0767",
+    "kanji_id": "kanji_n3_0767",
+    "milestoneId": "ms_n3_s9_l2",
+    "milestone_id": "ms_n3_s9_l2",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 83,
+    "kanjiNumber": 767,
+    "kanji": "愛",
+    "character": "愛",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "愛",
+    "onyomi": "アイ",
+    "kunyomi": "いと.しい",
+    "sinoVietnamese": "ÁI",
+    "vietnameseMeaning": "Yêu thương, tình yêu",
+    "meaning_vi": "Yêu thương, tình yêu",
+    "mnemonicStory": "Chữ Hán [愛] (Ái) nghĩa là \"Yêu thương, tình yêu\" — Âm On: アイ, Âm Kun: いと.しい.",
+    "exampleCompounds": [
+      {
+        "word": "純愛",
+        "reading": "じゅんあい",
+        "meaning": "Tình yêu thuần khiết",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 83
+      },
+      {
+        "word": "相思相愛",
+        "reading": "そうしそうあい",
+        "meaning": "Yêu nhau (cả hai)",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 83
+      },
+      {
+        "word": "愛情",
+        "reading": "あいじょう",
+        "meaning": "Tình yêu thương / tình cảm",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 83
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0805",
+    "kanji_id": "kanji_n3_0805",
+    "milestoneId": "ms_n3_s9_l2",
+    "milestone_id": "ms_n3_s9_l2",
+    "stageId": "stage_n3_9",
+    "stage_id": "stage_n3_9",
+    "lessonNumber": 83,
+    "kanjiNumber": 805,
+    "kanji": "匂",
+    "character": "匂",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "匂",
+    "onyomi": "",
+    "kunyomi": "にお.う",
+    "sinoVietnamese": "MÙI",
+    "vietnameseMeaning": "Mùi hương, tỏa hương",
+    "meaning_vi": "Mùi hương, tỏa hương",
+    "mnemonicStory": "Chữ Hán [匂] (Mùi) nghĩa là \"Mùi hương, tỏa hương\" — Âm On: —, Âm Kun: にお.う.",
+    "exampleCompounds": [
+      {
+        "word": "匂語",
+        "reading": "にお.う",
+        "meaning": "Mùi hương, tỏa hương (Mùi)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 83
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

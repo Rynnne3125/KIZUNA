@@ -1,0 +1,420 @@
+[
+  {
+    "id": "kanji_n4_0146",
+    "kanji_id": "kanji_n4_0146",
+    "milestoneId": "ms_minna_b43",
+    "milestone_id": "ms_minna_b43",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 43,
+    "kanjiNumber": 146,
+    "kanji": "走",
+    "character": "走",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "走",
+    "onyomi": "ソウ",
+    "kunyomi": "はし.る",
+    "sinoVietnamese": "TẨU",
+    "vietnameseMeaning": "Chạy",
+    "meaning_vi": "Chạy",
+    "mnemonicStory": "Chữ Hán [走] (Tẩu) nghĩa là \"Chạy\" — Âm On: ソウ, Âm Kun: はし.る.",
+    "exampleCompounds": [
+      {
+        "word": "走語",
+        "reading": "ソウ",
+        "meaning": "Chạy (Tẩu)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 43
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0171",
+    "kanji_id": "kanji_n4_0171",
+    "milestoneId": "ms_minna_b43",
+    "milestone_id": "ms_minna_b43",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 43,
+    "kanjiNumber": 171,
+    "kanji": "黒",
+    "character": "黒",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "黒",
+    "onyomi": "コク",
+    "kunyomi": "くろ.い",
+    "sinoVietnamese": "HẮC",
+    "vietnameseMeaning": "Đen",
+    "meaning_vi": "Đen",
+    "mnemonicStory": "Chữ Hán [黒] (Hắc) nghĩa là \"Đen\" — Âm On: コク, Âm Kun: くろ.い.",
+    "exampleCompounds": [
+      {
+        "word": "黒い",
+        "reading": "くろい",
+        "meaning": "đen",
+        "type": "TT-i",
+        "level": "N4",
+        "lesson": 43
+      },
+      {
+        "word": "黒字",
+        "reading": "くろじ",
+        "meaning": "Thặng dư / có lãi",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 43
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0196",
+    "kanji_id": "kanji_n4_0196",
+    "milestoneId": "ms_minna_b43",
+    "milestone_id": "ms_minna_b43",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 43,
+    "kanjiNumber": 196,
+    "kanji": "屋",
+    "character": "屋",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "屋",
+    "onyomi": "オク",
+    "kunyomi": "や",
+    "sinoVietnamese": "ỐC",
+    "vietnameseMeaning": "Phòng, Tiệm",
+    "meaning_vi": "Phòng, Tiệm",
+    "mnemonicStory": "Chữ Hán [屋] (Ốc) nghĩa là \"Phòng, Tiệm\" — Âm On: オク, Âm Kun: や.",
+    "exampleCompounds": [
+      {
+        "word": "部屋",
+        "reading": "へや",
+        "meaning": "phòng",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 43
+      },
+      {
+        "word": "本屋",
+        "reading": "ほんや",
+        "meaning": "hiệu sách",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 43
+      },
+      {
+        "word": "～屋",
+        "reading": "～や",
+        "meaning": "tiệm ~",
+        "type": "KH",
+        "level": "N4",
+        "lesson": 43
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0221",
+    "kanji_id": "kanji_n4_0221",
+    "milestoneId": "ms_minna_b43",
+    "milestone_id": "ms_minna_b43",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 43,
+    "kanjiNumber": 221,
+    "kanji": "号",
+    "character": "号",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "号",
+    "onyomi": "ゴウ",
+    "kunyomi": "",
+    "sinoVietnamese": "HIỆU",
+    "vietnameseMeaning": "Số, Hiệu",
+    "meaning_vi": "Số, Hiệu",
+    "mnemonicStory": "Chữ Hán [号] (Hiệu) nghĩa là \"Số, Hiệu\" — Âm On: ゴウ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "番号",
+        "reading": "ばんごう",
+        "meaning": "số (số điện thoại)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 43
+      },
+      {
+        "word": "信号",
+        "reading": "しんごう",
+        "meaning": "đèn tín hiệu",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 43
+      },
+      {
+        "word": "暗証番号",
+        "reading": "あんしょうばんごう",
+        "meaning": "mật khẩu",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 43
+      },
+      {
+        "word": "暗号化",
+        "reading": "あんごうか",
+        "meaning": "Mã hóa",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 43
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0246",
+    "kanji_id": "kanji_n4_0246",
+    "milestoneId": "ms_minna_b43",
+    "milestone_id": "ms_minna_b43",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 43,
+    "kanjiNumber": 246,
+    "kanji": "声",
+    "character": "声",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "声",
+    "onyomi": "セイ",
+    "kunyomi": "こえ",
+    "sinoVietnamese": "THANH",
+    "vietnameseMeaning": "Giọng nói, Tiếng",
+    "meaning_vi": "Giọng nói, Tiếng",
+    "mnemonicStory": "Chữ Hán [声] (Thanh) nghĩa là \"Giọng nói, Tiếng\" — Âm On: セイ, Âm Kun: こえ.",
+    "exampleCompounds": [
+      {
+        "word": "声優",
+        "reading": "せいゆう",
+        "meaning": "Diễn viên lồng tiếng",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 43
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0271",
+    "kanji_id": "kanji_n4_0271",
+    "milestoneId": "ms_minna_b43",
+    "milestone_id": "ms_minna_b43",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 43,
+    "kanjiNumber": 271,
+    "kanji": "平",
+    "character": "平",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "平",
+    "onyomi": "ヘイ",
+    "kunyomi": "たい.ら",
+    "sinoVietnamese": "BÌNH",
+    "vietnameseMeaning": "Bằng phẳng, Bình yên",
+    "meaning_vi": "Bằng phẳng, Bình yên",
+    "mnemonicStory": "Chữ Hán [平] (Bình) nghĩa là \"Bằng phẳng, Bình yên\" — Âm On: ヘイ, Âm Kun: たい.ら.",
+    "exampleCompounds": [
+      {
+        "word": "平和",
+        "reading": "へいわ",
+        "meaning": "hoà bình",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 43
+      },
+      {
+        "word": "平均",
+        "reading": "へいきん",
+        "meaning": "bình quân, trung bình",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 43
+      },
+      {
+        "word": "ジェンダー平等",
+        "reading": "ジェンダーびょうどう",
+        "meaning": "Bình đẳng giới",
+        "type": "vocab",
+        "level": "N4",
+        "lesson": 43
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0296",
+    "kanji_id": "kanji_n4_0296",
+    "milestoneId": "ms_minna_b43",
+    "milestone_id": "ms_minna_b43",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 43,
+    "kanjiNumber": 296,
+    "kanji": "家",
+    "character": "家",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "家",
+    "onyomi": "カ",
+    "kunyomi": "いえ",
+    "sinoVietnamese": "GIA",
+    "vietnameseMeaning": "Nhà, Gia đình",
+    "meaning_vi": "Nhà, Gia đình",
+    "mnemonicStory": "Chữ Hán [家] (Gia) nghĩa là \"Nhà, Gia đình\" — Âm On: カ, Âm Kun: いえ.",
+    "exampleCompounds": [
+      {
+        "word": "家",
+        "reading": "うち",
+        "meaning": "nhà",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 43
+      },
+      {
+        "word": "家族",
+        "reading": "かぞく",
+        "meaning": "gia đình",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 43
+      },
+      {
+        "word": "ご家族",
+        "reading": "ごかぞく",
+        "meaning": "gia đình (lịch sự)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 43
+      },
+      {
+        "word": "家内",
+        "reading": "かない",
+        "meaning": "vợ tôi",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 43
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0321",
+    "kanji_id": "kanji_n4_0321",
+    "milestoneId": "ms_minna_b43",
+    "milestone_id": "ms_minna_b43",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 43,
+    "kanjiNumber": 321,
+    "kanji": "貝",
+    "character": "貝",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "貝",
+    "onyomi": "バイ",
+    "kunyomi": "かい",
+    "sinoVietnamese": "BỐI",
+    "vietnameseMeaning": "Con sò, vỏ sò",
+    "meaning_vi": "Con sò, vỏ sò",
+    "mnemonicStory": "Chữ Hán [貝] (Bối) nghĩa là \"Con sò, vỏ sò\" — Âm On: バイ, Âm Kun: かい.",
+    "exampleCompounds": [
+      {
+        "word": "貝語",
+        "reading": "バイ",
+        "meaning": "Con sò, vỏ sò (Bối)",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 43
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0346",
+    "kanji_id": "kanji_n4_0346",
+    "milestoneId": "ms_minna_b43",
+    "milestone_id": "ms_minna_b43",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 43,
+    "kanjiNumber": 346,
+    "kanji": "真",
+    "character": "真",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "真",
+    "onyomi": "シン",
+    "kunyomi": "ま",
+    "sinoVietnamese": "CHÂN",
+    "vietnameseMeaning": "Chân thật, đúng",
+    "meaning_vi": "Chân thật, đúng",
+    "mnemonicStory": "Chữ Hán [真] (Chân) nghĩa là \"Chân thật, đúng\" — Âm On: シン, Âm Kun: ま.",
+    "exampleCompounds": [
+      {
+        "word": "写真",
+        "reading": "しゃしん",
+        "meaning": "ảnh",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 43
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n4_0371",
+    "kanji_id": "kanji_n4_0371",
+    "milestoneId": "ms_minna_b43",
+    "milestone_id": "ms_minna_b43",
+    "stageId": "stage_n4_4",
+    "stage_id": "stage_n4_4",
+    "lessonNumber": 43,
+    "kanjiNumber": 371,
+    "kanji": "線",
+    "character": "線",
+    "jlptLevel": "N4",
+    "jlpt_level": "N4",
+    "strokeCount": 8,
+    "radicals": "線",
+    "onyomi": "セン",
+    "kunyomi": "",
+    "sinoVietnamese": "TUYẾN",
+    "vietnameseMeaning": "Đường kẻ, tuyến đường",
+    "meaning_vi": "Đường kẻ, tuyến đường",
+    "mnemonicStory": "Chữ Hán [線] (Tuyến) nghĩa là \"Đường kẻ, tuyến đường\" — Âm On: セン, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "新幹線",
+        "reading": "しんかんせん",
+        "meaning": "tàu siêu tốc",
+        "type": "DT",
+        "level": "N4",
+        "lesson": 43
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

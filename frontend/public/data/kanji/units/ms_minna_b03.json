@@ -1,0 +1,392 @@
+[
+  {
+    "id": "kanji_n5_0003",
+    "kanji_id": "kanji_n5_0003",
+    "milestoneId": "ms_minna_b03",
+    "milestone_id": "ms_minna_b03",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 3,
+    "kanjiNumber": 3,
+    "kanji": "三",
+    "character": "三",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "三",
+    "onyomi": "サン",
+    "kunyomi": "み.つ",
+    "sinoVietnamese": "TAM",
+    "vietnameseMeaning": "Ba",
+    "meaning_vi": "Ba",
+    "mnemonicStory": "Chữ Hán [三] (Tam) nghĩa là \"Ba\" — Âm On: サン, Âm Kun: み.つ.",
+    "exampleCompounds": [
+      {
+        "word": "三つ",
+        "reading": "みっつ",
+        "meaning": "3 cái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "三段論法",
+        "reading": "さんだんろんぽう",
+        "meaning": "Tam đoạn luận / syllogism",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 3
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0028",
+    "kanji_id": "kanji_n5_0028",
+    "milestoneId": "ms_minna_b03",
+    "milestone_id": "ms_minna_b03",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 3,
+    "kanjiNumber": 28,
+    "kanji": "後",
+    "character": "後",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "後",
+    "onyomi": "ゴ",
+    "kunyomi": "あと",
+    "sinoVietnamese": "HẬU",
+    "vietnameseMeaning": "Sau",
+    "meaning_vi": "Sau",
+    "mnemonicStory": "Chữ Hán [後] (Hậu) nghĩa là \"Sau\" — Âm On: ゴ, Âm Kun: あと.",
+    "exampleCompounds": [
+      {
+        "word": "午後",
+        "reading": "ごご",
+        "meaning": "chiều, PM",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "後ろ",
+        "reading": "うしろ",
+        "meaning": "sau",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "後で",
+        "reading": "あとで",
+        "meaning": "sau, sau đó",
+        "type": "TrT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "後輩",
+        "reading": "こうはい",
+        "meaning": "đàn em",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "後悔",
+        "reading": "こうかい",
+        "meaning": "sự hối hận, sự tiếc nuối",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0053",
+    "kanji_id": "kanji_n5_0053",
+    "milestoneId": "ms_minna_b03",
+    "milestone_id": "ms_minna_b03",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 3,
+    "kanjiNumber": 53,
+    "kanji": "北",
+    "character": "北",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "北",
+    "onyomi": "ホク",
+    "kunyomi": "きた",
+    "sinoVietnamese": "BẮC",
+    "vietnameseMeaning": "Bắc",
+    "meaning_vi": "Bắc",
+    "mnemonicStory": "Chữ Hán [北] (Bắc) nghĩa là \"Bắc\" — Âm On: ホク, Âm Kun: きた.",
+    "exampleCompounds": [
+      {
+        "word": "北",
+        "reading": "きた",
+        "meaning": "phía bắc",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "北口",
+        "reading": "きたぐち",
+        "meaning": "cổng phía bắc",
+        "type": "noun",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "北海道",
+        "reading": "ほっかいどう",
+        "meaning": "Hokkaido (đảo phía bắc Nhật Bản)",
+        "type": "proper",
+        "level": "N5",
+        "lesson": 3
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0078",
+    "kanji_id": "kanji_n5_0078",
+    "milestoneId": "ms_minna_b03",
+    "milestone_id": "ms_minna_b03",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 3,
+    "kanjiNumber": 78,
+    "kanji": "会",
+    "character": "会",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "会",
+    "onyomi": "カイ",
+    "kunyomi": "あ.う",
+    "sinoVietnamese": "HỘI",
+    "vietnameseMeaning": "Gặp",
+    "meaning_vi": "Gặp",
+    "mnemonicStory": "Chữ Hán [会] (Hội) nghĩa là \"Gặp\" — Âm On: カイ, Âm Kun: あ.う.",
+    "exampleCompounds": [
+      {
+        "word": "会社員",
+        "reading": "かいしゃいん",
+        "meaning": "nhân viên công ty",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "会社",
+        "reading": "かいしゃ",
+        "meaning": "công ty",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "会議室",
+        "reading": "かいぎしつ",
+        "meaning": "phòng họp",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "会議",
+        "reading": "かいぎ",
+        "meaning": "cuộc họp",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "会います",
+        "reading": "あいます",
+        "meaning": "gặp",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "社会",
+        "reading": "しゃかい",
+        "meaning": "xã hội",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "国会",
+        "reading": "こっかい",
+        "meaning": "Quốc hội",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "社会保障",
+        "reading": "しゃかいほしょう",
+        "meaning": "An sinh xã hội",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "株主総会",
+        "reading": "かぶぬしそうかい",
+        "meaning": "Đại hội cổ đông",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "会",
+        "reading": "かい",
+        "meaning": "Hội / gặp",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 3
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0103",
+    "kanji_id": "kanji_n5_0103",
+    "milestoneId": "ms_minna_b03",
+    "milestone_id": "ms_minna_b03",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 3,
+    "kanjiNumber": 103,
+    "kanji": "明",
+    "character": "明",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "明",
+    "onyomi": "メイ",
+    "kunyomi": "あか.るい",
+    "sinoVietnamese": "MINH",
+    "vietnameseMeaning": "Sáng",
+    "meaning_vi": "Sáng",
+    "mnemonicStory": "Chữ Hán [明] (Minh) nghĩa là \"Sáng\" — Âm On: メイ, Âm Kun: あか.るい.",
+    "exampleCompounds": [
+      {
+        "word": "明日",
+        "reading": "あした",
+        "meaning": "ngày mai",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "明るい",
+        "reading": "あかるい",
+        "meaning": "sáng",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "説明します",
+        "reading": "せつめいします",
+        "meaning": "giải thích",
+        "type": "ĐT3",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "発明",
+        "reading": "はつめい",
+        "meaning": "phát minh, sáng chế",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "発明されます",
+        "reading": "はつめいされます",
+        "meaning": "được phát minh",
+        "type": "ĐT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "説明",
+        "reading": "せつめい",
+        "meaning": "giải thích, thuyết minh",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "照明",
+        "reading": "しょうめい",
+        "meaning": "Chiếu sáng",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "明",
+        "reading": "めい",
+        "meaning": "Minh / sáng",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 3
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0128",
+    "kanji_id": "kanji_n5_0128",
+    "milestoneId": "ms_minna_b03",
+    "milestone_id": "ms_minna_b03",
+    "stageId": "stage_n5_1",
+    "stage_id": "stage_n5_1",
+    "lessonNumber": 3,
+    "kanjiNumber": 128,
+    "kanji": "短",
+    "character": "短",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "短",
+    "onyomi": "タン",
+    "kunyomi": "みじか.い",
+    "sinoVietnamese": "ĐOẢN",
+    "vietnameseMeaning": "Ngắn",
+    "meaning_vi": "Ngắn",
+    "mnemonicStory": "Chữ Hán [短] (Đoản) nghĩa là \"Ngắn\" — Âm On: タン, Âm Kun: みじか.い.",
+    "exampleCompounds": [
+      {
+        "word": "短い",
+        "reading": "みじかい",
+        "meaning": "ngắn",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 3
+      },
+      {
+        "word": "短歌",
+        "reading": "たんか",
+        "meaning": "Thơ tanka (thể thơ Nhật)",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 3
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

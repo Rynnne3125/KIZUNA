@@ -1,0 +1,215 @@
+[
+  {
+    "id": "kanji_n5_0006",
+    "kanji_id": "kanji_n5_0006",
+    "milestoneId": "ms_minna_b06",
+    "milestone_id": "ms_minna_b06",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 6,
+    "kanjiNumber": 6,
+    "kanji": "六",
+    "character": "六",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "六",
+    "onyomi": "ロク",
+    "kunyomi": "む.つ",
+    "sinoVietnamese": "LỤC",
+    "vietnameseMeaning": "Sáu",
+    "meaning_vi": "Sáu",
+    "mnemonicStory": "Chữ Hán [六] (Lục) nghĩa là \"Sáu\" — Âm On: ロク, Âm Kun: む.つ.",
+    "exampleCompounds": [
+      {
+        "word": "六つ",
+        "reading": "むっつ",
+        "meaning": "6 cái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 6
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0031",
+    "kanji_id": "kanji_n5_0031",
+    "milestoneId": "ms_minna_b06",
+    "milestone_id": "ms_minna_b06",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 6,
+    "kanjiNumber": 31,
+    "kanji": "毎",
+    "character": "毎",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "毎",
+    "onyomi": "マイ",
+    "kunyomi": "",
+    "sinoVietnamese": "MỖI",
+    "vietnameseMeaning": "Mỗi",
+    "meaning_vi": "Mỗi",
+    "mnemonicStory": "Chữ Hán [毎] (Mỗi) nghĩa là \"Mỗi\" — Âm On: マイ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "毎朝",
+        "reading": "まいあさ",
+        "meaning": "mỗi sáng",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 6
+      },
+      {
+        "word": "毎晩",
+        "reading": "まいばん",
+        "meaning": "mỗi tối",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 6
+      },
+      {
+        "word": "毎日",
+        "reading": "まいにち",
+        "meaning": "mỗi ngày",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 6
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0056",
+    "kanji_id": "kanji_n5_0056",
+    "milestoneId": "ms_minna_b06",
+    "milestone_id": "ms_minna_b06",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 6,
+    "kanjiNumber": 56,
+    "kanji": "西",
+    "character": "西",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "西",
+    "onyomi": "セイ",
+    "kunyomi": "にし",
+    "sinoVietnamese": "TÂY",
+    "vietnameseMeaning": "Tây",
+    "meaning_vi": "Tây",
+    "mnemonicStory": "Chữ Hán [西] (Tây) nghĩa là \"Tây\" — Âm On: セイ, Âm Kun: にし.",
+    "exampleCompounds": [
+      {
+        "word": "関西",
+        "reading": "かんさい",
+        "meaning": "vùng Kansai",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 6
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0081",
+    "kanji_id": "kanji_n5_0081",
+    "milestoneId": "ms_minna_b06",
+    "milestone_id": "ms_minna_b06",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 6,
+    "kanjiNumber": 81,
+    "kanji": "古",
+    "character": "古",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "古",
+    "onyomi": "コ",
+    "kunyomi": "ふる.い",
+    "sinoVietnamese": "CỔ",
+    "vietnameseMeaning": "Cũ",
+    "meaning_vi": "Cũ",
+    "mnemonicStory": "Chữ Hán [古] (Cổ) nghĩa là \"Cũ\" — Âm On: コ, Âm Kun: ふる.い.",
+    "exampleCompounds": [
+      {
+        "word": "古い",
+        "reading": "ふるい",
+        "meaning": "cũ",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 6
+      },
+      {
+        "word": "古い物",
+        "reading": "ふるいもの",
+        "meaning": "đồ cổ",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 6
+      },
+      {
+        "word": "古典",
+        "reading": "こてん",
+        "meaning": "Cổ điển / văn học cổ",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 6
+      },
+      {
+        "word": "古",
+        "reading": "こ",
+        "meaning": "Cổ / xưa",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 6
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0106",
+    "kanji_id": "kanji_n5_0106",
+    "milestoneId": "ms_minna_b06",
+    "milestone_id": "ms_minna_b06",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 6,
+    "kanjiNumber": 106,
+    "kanji": "林",
+    "character": "林",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "林",
+    "onyomi": "リン",
+    "kunyomi": "はやし",
+    "sinoVietnamese": "LÂM",
+    "vietnameseMeaning": "Rừng nhỏ",
+    "meaning_vi": "Rừng nhỏ",
+    "mnemonicStory": "Chữ Hán [林] (Lâm) nghĩa là \"Rừng nhỏ\" — Âm On: リン, Âm Kun: はやし.",
+    "exampleCompounds": [
+      {
+        "word": "森林破壊",
+        "reading": "しんりんはかい",
+        "meaning": "Phá rừng",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 6
+      },
+      {
+        "word": "林",
+        "reading": "りん",
+        "meaning": "Rừng",
+        "type": "kanji",
+        "level": "N5",
+        "lesson": 6
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

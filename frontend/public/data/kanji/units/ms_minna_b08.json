@@ -1,0 +1,295 @@
+[
+  {
+    "id": "kanji_n5_0008",
+    "kanji_id": "kanji_n5_0008",
+    "milestoneId": "ms_minna_b08",
+    "milestone_id": "ms_minna_b08",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 8,
+    "kanjiNumber": 8,
+    "kanji": "八",
+    "character": "八",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "八",
+    "onyomi": "ハチ",
+    "kunyomi": "や.つ",
+    "sinoVietnamese": "BÁT",
+    "vietnameseMeaning": "Tám",
+    "meaning_vi": "Tám",
+    "mnemonicStory": "Chữ Hán [八] (Bát) nghĩa là \"Tám\" — Âm On: ハチ, Âm Kun: や.つ.",
+    "exampleCompounds": [
+      {
+        "word": "八つ",
+        "reading": "やっつ",
+        "meaning": "8 cái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0033",
+    "kanji_id": "kanji_n5_0033",
+    "milestoneId": "ms_minna_b08",
+    "milestone_id": "ms_minna_b08",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 8,
+    "kanjiNumber": 33,
+    "kanji": "先",
+    "character": "先",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "先",
+    "onyomi": "セン",
+    "kunyomi": "さき",
+    "sinoVietnamese": "TIÊN",
+    "vietnameseMeaning": "Trước, Tiên",
+    "meaning_vi": "Trước, Tiên",
+    "mnemonicStory": "Chữ Hán [先] (Tiên) nghĩa là \"Trước, Tiên\" — Âm On: セン, Âm Kun: さき.",
+    "exampleCompounds": [
+      {
+        "word": "先生",
+        "reading": "せんせい",
+        "meaning": "thầy giáo, cô giáo, giáo viên",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "先週",
+        "reading": "せんしゅう",
+        "meaning": "tuần trước",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "先月",
+        "reading": "せんげつ",
+        "meaning": "tháng trước",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "先",
+        "reading": "さき",
+        "meaning": "trước",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "お先に",
+        "reading": "おさきに",
+        "meaning": "xin phép trước",
+        "type": "TrT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "先輩",
+        "reading": "せんぱい",
+        "meaning": "đàn anh",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "取引先",
+        "reading": "とりひきさき",
+        "meaning": "Đối tác / khách hàng",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 8
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0058",
+    "kanji_id": "kanji_n5_0058",
+    "milestoneId": "ms_minna_b08",
+    "milestone_id": "ms_minna_b08",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 8,
+    "kanjiNumber": 58,
+    "kanji": "目",
+    "character": "目",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "目",
+    "onyomi": "モク",
+    "kunyomi": "め",
+    "sinoVietnamese": "MỤC",
+    "vietnameseMeaning": "Mắt",
+    "meaning_vi": "Mắt",
+    "mnemonicStory": "Chữ Hán [目] (Mục) nghĩa là \"Mắt\" — Âm On: モク, Âm Kun: め.",
+    "exampleCompounds": [
+      {
+        "word": "目",
+        "reading": "め",
+        "meaning": "mắt",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "～目",
+        "reading": "～め",
+        "meaning": "thứ ~",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "目標",
+        "reading": "もくひょう",
+        "meaning": "mục tiêu",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "目的",
+        "reading": "もくてき",
+        "meaning": "mục đích, mục tiêu",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "〜のに (目的)",
+        "reading": "〜のに (もくてき)",
+        "meaning": "để ~ (diễn đạt mục đích, ý nghĩa)",
+        "type": "MT",
+        "level": "N5",
+        "lesson": 8
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0083",
+    "kanji_id": "kanji_n5_0083",
+    "milestoneId": "ms_minna_b08",
+    "milestone_id": "ms_minna_b08",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 8,
+    "kanjiNumber": 83,
+    "kanji": "高",
+    "character": "高",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "高",
+    "onyomi": "コウ",
+    "kunyomi": "たか.い",
+    "sinoVietnamese": "CAO",
+    "vietnameseMeaning": "Cao",
+    "meaning_vi": "Cao",
+    "mnemonicStory": "Chữ Hán [高] (Cao) nghĩa là \"Cao\" — Âm On: コウ, Âm Kun: たか.い.",
+    "exampleCompounds": [
+      {
+        "word": "高い",
+        "reading": "たかい",
+        "meaning": "cao, đắt",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "高校",
+        "reading": "こうこう",
+        "meaning": "trường cấp 3",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "背が高い",
+        "reading": "せがたかい",
+        "meaning": "cao (chiều cao người)",
+        "type": "TT-i",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "最高",
+        "reading": "さいこう",
+        "meaning": "cao nhất, tuyệt vời nhất",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "高齢化",
+        "reading": "こうれいか",
+        "meaning": "già hoá dân số",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 8
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0108",
+    "kanji_id": "kanji_n5_0108",
+    "milestoneId": "ms_minna_b08",
+    "milestone_id": "ms_minna_b08",
+    "stageId": "stage_n5_2",
+    "stage_id": "stage_n5_2",
+    "lessonNumber": 8,
+    "kanjiNumber": 108,
+    "kanji": "米",
+    "character": "米",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "米",
+    "onyomi": "ベイ",
+    "kunyomi": "こめ",
+    "sinoVietnamese": "MỄ",
+    "vietnameseMeaning": "Gạo",
+    "meaning_vi": "Gạo",
+    "mnemonicStory": "Chữ Hán [米] (Mễ) nghĩa là \"Gạo\" — Âm On: ベイ, Âm Kun: こめ.",
+    "exampleCompounds": [
+      {
+        "word": "お米",
+        "reading": "おこめ",
+        "meaning": "gạo",
+        "type": "noun",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "米国",
+        "reading": "べいこく",
+        "meaning": "nước Mỹ",
+        "type": "proper",
+        "level": "N5",
+        "lesson": 8
+      },
+      {
+        "word": "玄米",
+        "reading": "げんまい",
+        "meaning": "gạo lứt",
+        "type": "noun",
+        "level": "N5",
+        "lesson": 8
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

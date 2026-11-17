@@ -367,7 +367,7 @@ export const kizunaService = {
 
   /**
    * Lấy danh sách toàn bộ chữ Hán trực tiếp theo cấp độ JLPT (N5 -> N1)
-   * Tải từ /data/kanji/levels/[level].json (0 Firestore read)
+   * Tải từ /data/kanji/levels/[level].json (0 Firestore read) với đa tầng dự phòng
    */
   async getKanjiByLevel(level: 'N5' | 'N4' | 'N3' | 'N2' | 'N1'): Promise<KanjiItem[]> {
     const lvlKey = level.toLowerCase();
@@ -375,15 +375,63 @@ export const kizunaService = {
     const cached = getSessionCache<KanjiItem[]>(cacheKey);
     if (cached && cached.length > 0) return cached;
 
+    // 1. Tải từ file tĩnh public /data/kanji/levels/[level].json
     try {
       const res = await fetch(`/data/kanji/levels/${lvlKey}.json`);
       if (res.ok) {
-        const items: KanjiItem[] = await res.json();
-        setSessionCache(cacheKey, items);
-        return items;
+        const text = await res.text();
+        if (text && text.trim().startsWith('[')) {
+          const items: KanjiItem[] = JSON.parse(text);
+          if (Array.isArray(items) && items.length > 0) {
+            setSessionCache(cacheKey, items);
+            return items;
+          }
+        }
       }
     } catch (e) {
-      console.warn(`Fetch kanji level ${level} failed:`, e);
+      console.warn(`Fetch static kanji level ${level} failed:`, e);
+    }
+
+    // 2. Dự phòng tầng 2: Truy vấn Firestore collection kanji_dictionary
+    try {
+      const q = query(
+        collection(db, 'kanji_dictionary'),
+        where('jlptLevel', '==', level),
+        limit(120)
+      );
+      const snap = await getDocs(q);
+      if (!snap.empty) {
+        const items: KanjiItem[] = [];
+        snap.forEach(d => items.push({ id: d.id, ...d.data() } as KanjiItem));
+        if (items.length > 0) {
+          setSessionCache(cacheKey, items);
+          return items;
+        }
+      }
+    } catch (e) {
+      console.warn(`Firestore kanji fallback for ${level} failed:`, e);
+    }
+
+    // 3. Dự phòng tầng 3: Bộ chữ Hán N5 khởi tạo đảm bảo không bao giờ bị trắng trang
+    if (level === 'N5') {
+      const defaultN5: KanjiItem[] = [
+        { id: 'kanji_n5_0001', kanji: '一', strokeCount: 1, sinoVietnamese: 'NHẤT', vietnameseMeaning: 'Một', onyomi: 'イチ, イツ', kunyomi: 'ひと, ひと.つ', mnemonicStory: 'Một nét ngang đơn giản tượng trưng cho con số 1.', exampleCompounds: [{ word: '一人', reading: 'ひとり', meaning: 'một mình', level: 'N5' }, { word: '一番', reading: 'いちばん', meaning: 'nhất, số 1', level: 'N5' }] },
+        { id: 'kanji_n5_0002', kanji: '二', strokeCount: 2, sinoVietnamese: 'NHỊ', vietnameseMeaning: 'Hai', onyomi: 'ニ, ジ', kunyomi: 'ふた, ふた.つ', mnemonicStory: 'Hai nét ngang song song tượng trưng cho con số 2.', exampleCompounds: [{ word: '二人', reading: 'ふたり', meaning: 'hai người', level: 'N5' }, { word: '二月', reading: 'にがつ', meaning: 'tháng 2', level: 'N5' }] },
+        { id: 'kanji_n5_0003', kanji: '三', strokeCount: 3, sinoVietnamese: 'TAM', vietnameseMeaning: 'Ba', onyomi: 'サン', kunyomi: 'み, み.つ', mnemonicStory: 'Ba nét ngang tượng trưng cho con số 3.', exampleCompounds: [{ word: '三人', reading: 'さんにん', meaning: 'ba người', level: 'N5' }, { word: '三日', reading: 'みっか', meaning: 'ngày 3', level: 'N5' }] },
+        { id: 'kanji_n5_0004', kanji: '四', strokeCount: 5, sinoVietnamese: 'TỨ', vietnameseMeaning: 'Bốn', onyomi: 'シ', kunyomi: 'よ, よ.つ, よん', mnemonicStory: 'Hình ảnh khung rèm cửa có 4 cạnh.', exampleCompounds: [{ word: '四月', reading: 'しがつ', meaning: 'tháng 4', level: 'N5' }, { word: '四季', reading: 'しき', meaning: 'bốn mùa', level: 'N5' }] },
+        { id: 'kanji_n5_0005', kanji: '五', strokeCount: 4, sinoVietnamese: 'NGŨ', vietnameseMeaning: 'Năm', onyomi: 'ゴ', kunyomi: 'いつ, いつ.つ', mnemonicStory: 'Con số 5 tượng trưng cho ngũ hành.', exampleCompounds: [{ word: '五月', reading: 'ごがつ', meaning: 'tháng 5', level: 'N5' }, { word: '五日', reading: 'いつか', meaning: 'ngày 5', level: 'N5' }] },
+        { id: 'kanji_n5_0006', kanji: '六', strokeCount: 4, sinoVietnamese: 'LỤC', vietnameseMeaning: 'Sáu', onyomi: 'ロク', kunyomi: 'む, む.つ', mnemonicStory: 'Hình ảnh một ngôi nhà có 6 góc.', exampleCompounds: [{ word: '六月', reading: 'ろくがつ', meaning: 'tháng 6', level: 'N5' }] },
+        { id: 'kanji_n5_0007', kanji: '七', strokeCount: 2, sinoVietnamese: 'THẤT', vietnameseMeaning: 'Bảy', onyomi: 'シチ', kunyomi: 'なな, なな.つ', mnemonicStory: 'Một đường cắt ngang tượng trưng cho số 7.', exampleCompounds: [{ word: '七月', reading: 'しちがつ', meaning: 'tháng 7', level: 'N5' }] },
+        { id: 'kanji_n5_0008', kanji: '八', strokeCount: 2, sinoVietnamese: 'BÁT', vietnameseMeaning: 'Tám', onyomi: 'ハチ', kunyomi: 'や, や.つ', mnemonicStory: 'Hai nét mở rộng ra tượng trưng cho số 8 phát tài.', exampleCompounds: [{ word: '八月', reading: 'はちがつ', meaning: 'tháng 8', level: 'N5' }] },
+        { id: 'kanji_n5_0009', kanji: '九', strokeCount: 2, sinoVietnamese: 'CỬU', vietnameseMeaning: 'Chín', onyomi: 'キュウ, ク', kunyomi: 'ここの, ここの.つ', mnemonicStory: 'Con số 9 uốn lượn tượng trưng cho sự trường cửu.', exampleCompounds: [{ word: '九月', reading: 'くがつ', meaning: 'tháng 9', level: 'N5' }] },
+        { id: 'kanji_n5_0010', kanji: '十', strokeCount: 2, sinoVietnamese: 'THẬP', vietnameseMeaning: 'Mười', onyomi: 'ジュウ', kunyomi: 'とお, と', mnemonicStory: 'Hình dấu cộng hoàn hảo tượng trưng cho số 10 thập toàn thập mỹ.', exampleCompounds: [{ word: '十月', reading: 'じゅうがつ', meaning: 'tháng 10', level: 'N5' }] },
+        { id: 'kanji_n5_0011', kanji: '日', strokeCount: 4, sinoVietnamese: 'NHẬT', vietnameseMeaning: 'Mặt trời, ngày', onyomi: 'ニチ, ジツ', kunyomi: 'ひ, -び, -か', mnemonicStory: 'Hình ảnh mặt trời tròn có một vệt sáng ở giữa.', exampleCompounds: [{ word: '日本', reading: 'にほん', meaning: 'Nhật Bản', level: 'N5' }, { word: '毎日', reading: 'まいにち', meaning: 'mỗi ngày', level: 'N5' }] },
+        { id: 'kanji_n5_0012', kanji: '本', strokeCount: 5, sinoVietnamese: 'BẢN', vietnameseMeaning: 'Gốc, sách', onyomi: 'ホン', kunyomi: 'もと', mnemonicStory: 'Cái cây (木) có thêm nét gạch ngang ở gốc để chỉ phần rễ/gốc rễ.', exampleCompounds: [{ word: '本', reading: 'ほん', meaning: 'sách', level: 'N5' }] },
+        { id: 'kanji_n5_0013', kanji: '人', strokeCount: 2, sinoVietnamese: 'NHÂN', vietnameseMeaning: 'Người', onyomi: 'ジン, ニン', kunyomi: 'ひと', mnemonicStory: 'Hình ảnh hai chân người đang bước đi tựa vào nhau.', exampleCompounds: [{ word: '日本人', reading: 'にほんじん', meaning: 'người Nhật', level: 'N5' }] },
+        { id: 'kanji_n5_0014', kanji: '月', strokeCount: 4, sinoVietnamese: 'NGUYỆT', vietnameseMeaning: 'Mặt trăng, tháng', onyomi: 'ゲツ, ガツ', kunyomi: 'つき', mnemonicStory: 'Hình ảnh vầng trăng khuyết trên bầu trời đêm.', exampleCompounds: [{ word: '今月', reading: 'こんげつ', meaning: 'tháng này', level: 'N5' }] },
+        { id: 'kanji_n5_0015', kanji: '火', strokeCount: 4, sinoVietnamese: 'HỎA', vietnameseMeaning: 'Lửa', onyomi: 'カ', kunyomi: 'ひ', mnemonicStory: 'Hình ảnh ngọn lửa đang bùng cháy với những tia lửa bắn ra hai bên.', exampleCompounds: [{ word: '火曜日', reading: 'かようび', meaning: 'thứ Ba', level: 'N5' }] }
+      ];
+      return defaultN5;
     }
 
     return [];

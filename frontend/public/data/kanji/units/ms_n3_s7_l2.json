@@ -1,0 +1,453 @@
+[
+  {
+    "id": "kanji_n3_0418",
+    "kanji_id": "kanji_n3_0418",
+    "milestoneId": "ms_n3_s7_l2",
+    "milestone_id": "ms_n3_s7_l2",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "lessonNumber": 76,
+    "kanjiNumber": 418,
+    "kanji": "流",
+    "character": "流",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "流",
+    "onyomi": "リュウ",
+    "kunyomi": "なが.れる",
+    "sinoVietnamese": "LƯU",
+    "vietnameseMeaning": "Chảy, Lưu hành",
+    "meaning_vi": "Chảy, Lưu hành",
+    "mnemonicStory": "Chữ Hán [流] (Lưu) nghĩa là \"Chảy, Lưu hành\" — Âm On: リュウ, Âm Kun: なが.れる.",
+    "exampleCompounds": [
+      {
+        "word": "流動性",
+        "reading": "りゅうどうせい",
+        "meaning": "Tính thanh khoản",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 76
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0456",
+    "kanji_id": "kanji_n3_0456",
+    "milestoneId": "ms_n3_s7_l2",
+    "milestone_id": "ms_n3_s7_l2",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "lessonNumber": 76,
+    "kanjiNumber": 456,
+    "kanji": "連",
+    "character": "連",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "連",
+    "onyomi": "レン",
+    "kunyomi": "つら.なる",
+    "sinoVietnamese": "LIÊN",
+    "vietnameseMeaning": "Liên kết, Liên tiếp",
+    "meaning_vi": "Liên kết, Liên tiếp",
+    "mnemonicStory": "Chữ Hán [連] (Liên) nghĩa là \"Liên kết, Liên tiếp\" — Âm On: レン, Âm Kun: つら.なる.",
+    "exampleCompounds": [
+      {
+        "word": "連れて来ます",
+        "reading": "つれてきます",
+        "meaning": "dẫn (ai) đến",
+        "type": "ĐT3",
+        "level": "N3",
+        "lesson": 76
+      },
+      {
+        "word": "連れて行きます",
+        "reading": "つれていきます",
+        "meaning": "dẫn (ai) đi",
+        "type": "ĐT1",
+        "level": "N3",
+        "lesson": 76
+      },
+      {
+        "word": "連絡します",
+        "reading": "れんらくします",
+        "meaning": "liên lạc, thông báo",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 76
+      },
+      {
+        "word": "ご連絡します",
+        "reading": "ごれんらくします",
+        "meaning": "liên lạc (lịch sự)",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 76
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0494",
+    "kanji_id": "kanji_n3_0494",
+    "milestoneId": "ms_n3_s7_l2",
+    "milestone_id": "ms_n3_s7_l2",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "lessonNumber": 76,
+    "kanjiNumber": 494,
+    "kanji": "喜",
+    "character": "喜",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "喜",
+    "onyomi": "キ",
+    "kunyomi": "よろこ.ぶ",
+    "sinoVietnamese": "HỈ",
+    "vietnameseMeaning": "Vui mừng",
+    "meaning_vi": "Vui mừng",
+    "mnemonicStory": "Chữ Hán [喜] (Hỉ) nghĩa là \"Vui mừng\" — Âm On: キ, Âm Kun: よろこ.ぶ.",
+    "exampleCompounds": [
+      {
+        "word": "喜びます",
+        "reading": "よろこびます",
+        "meaning": "vui mừng, hân hoan",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 76
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0532",
+    "kanji_id": "kanji_n3_0532",
+    "milestoneId": "ms_n3_s7_l2",
+    "milestone_id": "ms_n3_s7_l2",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "lessonNumber": 76,
+    "kanjiNumber": 532,
+    "kanji": "暇",
+    "character": "暇",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "暇",
+    "onyomi": "カ",
+    "kunyomi": "ひま",
+    "sinoVietnamese": "HẠ",
+    "vietnameseMeaning": "Rảnh rỗi, Thời gian rảnh",
+    "meaning_vi": "Rảnh rỗi, Thời gian rảnh",
+    "mnemonicStory": "Chữ Hán [暇] (Hạ) nghĩa là \"Rảnh rỗi, Thời gian rảnh\" — Âm On: カ, Âm Kun: ひま.",
+    "exampleCompounds": [
+      {
+        "word": "暇[な]",
+        "reading": "ひま[な]",
+        "meaning": "rảnh rỗi",
+        "type": "TT-na",
+        "level": "N3",
+        "lesson": 76
+      },
+      {
+        "word": "休暇",
+        "reading": "きゅうか",
+        "meaning": "kỳ nghỉ, nghỉ phép",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 76
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0570",
+    "kanji_id": "kanji_n3_0570",
+    "milestoneId": "ms_n3_s7_l2",
+    "milestone_id": "ms_n3_s7_l2",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "lessonNumber": 76,
+    "kanjiNumber": 570,
+    "kanji": "初",
+    "character": "初",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "初",
+    "onyomi": "ショ",
+    "kunyomi": "はじ.めて",
+    "sinoVietnamese": "SƠ",
+    "vietnameseMeaning": "Đầu tiên, Ban đầu",
+    "meaning_vi": "Đầu tiên, Ban đầu",
+    "mnemonicStory": "Chữ Hán [初] (Sơ) nghĩa là \"Đầu tiên, Ban đầu\" — Âm On: ショ, Âm Kun: はじ.めて.",
+    "exampleCompounds": [
+      {
+        "word": "初めまして",
+        "reading": "はじめまして",
+        "meaning": "rất hân hạnh được làm quen",
+        "type": "TGT",
+        "level": "N3",
+        "lesson": 76
+      },
+      {
+        "word": "初めて",
+        "reading": "はじめて",
+        "meaning": "lần đầu tiên",
+        "type": "TrT",
+        "level": "N3",
+        "lesson": 76
+      },
+      {
+        "word": "初デート",
+        "reading": "はつデート",
+        "meaning": "Buổi hẹn đầu tiên",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 76
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0608",
+    "kanji_id": "kanji_n3_0608",
+    "milestoneId": "ms_n3_s7_l2",
+    "milestone_id": "ms_n3_s7_l2",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "lessonNumber": 76,
+    "kanjiNumber": 608,
+    "kanji": "窓",
+    "character": "窓",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "窓",
+    "onyomi": "ソウ",
+    "kunyomi": "まど",
+    "sinoVietnamese": "SONG",
+    "vietnameseMeaning": "Cửa sổ",
+    "meaning_vi": "Cửa sổ",
+    "mnemonicStory": "Chữ Hán [窓] (Song) nghĩa là \"Cửa sổ\" — Âm On: ソウ, Âm Kun: まど.",
+    "exampleCompounds": [
+      {
+        "word": "窓",
+        "reading": "まど",
+        "meaning": "cửa sổ",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 76
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0646",
+    "kanji_id": "kanji_n3_0646",
+    "milestoneId": "ms_n3_s7_l2",
+    "milestone_id": "ms_n3_s7_l2",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "lessonNumber": 76,
+    "kanjiNumber": 646,
+    "kanji": "程",
+    "character": "程",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "程",
+    "onyomi": "テイ",
+    "kunyomi": "ほど",
+    "sinoVietnamese": "TRÌNH",
+    "vietnameseMeaning": "Mức độ, khoảng",
+    "meaning_vi": "Mức độ, khoảng",
+    "mnemonicStory": "Chữ Hán [程] (Trình) nghĩa là \"Mức độ, khoảng\" — Âm On: テイ, Âm Kun: ほど.",
+    "exampleCompounds": [
+      {
+        "word": "程語",
+        "reading": "テイ",
+        "meaning": "Mức độ, khoảng (Trình)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 76
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0684",
+    "kanji_id": "kanji_n3_0684",
+    "milestoneId": "ms_n3_s7_l2",
+    "milestone_id": "ms_n3_s7_l2",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "lessonNumber": 76,
+    "kanjiNumber": 684,
+    "kanji": "較",
+    "character": "較",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "較",
+    "onyomi": "カク",
+    "kunyomi": "",
+    "sinoVietnamese": "GIẢO",
+    "vietnameseMeaning": "So sánh",
+    "meaning_vi": "So sánh",
+    "mnemonicStory": "Chữ Hán [較] (Giảo) nghĩa là \"So sánh\" — Âm On: カク, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "較語",
+        "reading": "カク",
+        "meaning": "So sánh (Giảo)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 76
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0722",
+    "kanji_id": "kanji_n3_0722",
+    "milestoneId": "ms_n3_s7_l2",
+    "milestone_id": "ms_n3_s7_l2",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "lessonNumber": 76,
+    "kanjiNumber": 722,
+    "kanji": "練",
+    "character": "練",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "練",
+    "onyomi": "レン",
+    "kunyomi": "ね.る",
+    "sinoVietnamese": "LUYỆN",
+    "vietnameseMeaning": "Luyện tập, rèn luyện",
+    "meaning_vi": "Luyện tập, rèn luyện",
+    "mnemonicStory": "Chữ Hán [練] (Luyện) nghĩa là \"Luyện tập, rèn luyện\" — Âm On: レン, Âm Kun: ね.る.",
+    "exampleCompounds": [
+      {
+        "word": "練習します",
+        "reading": "れんしゅうします",
+        "meaning": "luyện tập",
+        "type": "ĐT3",
+        "level": "N3",
+        "lesson": 76
+      },
+      {
+        "word": "練習すれば",
+        "reading": "れんしゅうすれば",
+        "meaning": "nếu luyện tập thì",
+        "type": "MT",
+        "level": "N3",
+        "lesson": 76
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0760",
+    "kanji_id": "kanji_n3_0760",
+    "milestoneId": "ms_n3_s7_l2",
+    "milestone_id": "ms_n3_s7_l2",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "lessonNumber": 76,
+    "kanjiNumber": 760,
+    "kanji": "期",
+    "character": "期",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "期",
+    "onyomi": "キ",
+    "kunyomi": "",
+    "sinoVietnamese": "KỲ",
+    "vietnameseMeaning": "Thời kỳ, kỳ hạn",
+    "meaning_vi": "Thời kỳ, kỳ hạn",
+    "mnemonicStory": "Chữ Hán [期] (Kỳ) nghĩa là \"Thời kỳ, kỳ hạn\" — Âm On: キ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "期限内に",
+        "reading": "きげんないに",
+        "meaning": "trong thời hạn, trước hạn",
+        "type": "PV",
+        "level": "N3",
+        "lesson": 76
+      },
+      {
+        "word": "延期します",
+        "reading": "えんきします",
+        "meaning": "hoãn lại, trì hoãn",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 76
+      },
+      {
+        "word": "期待",
+        "reading": "きたい",
+        "meaning": "kỳ vọng, mong đợi",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 76
+      },
+      {
+        "word": "納期",
+        "reading": "のうき",
+        "meaning": "Thời hạn giao hàng",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 76
+      },
+      {
+        "word": "期",
+        "reading": "き",
+        "meaning": "Kỳ / thời kỳ",
+        "type": "kanji",
+        "level": "N3",
+        "lesson": 76
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0798",
+    "kanji_id": "kanji_n3_0798",
+    "milestoneId": "ms_n3_s7_l2",
+    "milestone_id": "ms_n3_s7_l2",
+    "stageId": "stage_n3_7",
+    "stage_id": "stage_n3_7",
+    "lessonNumber": 76,
+    "kanjiNumber": 798,
+    "kanji": "里",
+    "character": "里",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "里",
+    "onyomi": "リ",
+    "kunyomi": "さと",
+    "sinoVietnamese": "LÝ",
+    "vietnameseMeaning": "Làng quê, dặm",
+    "meaning_vi": "Làng quê, dặm",
+    "mnemonicStory": "Chữ Hán [里] (Lý) nghĩa là \"Làng quê, dặm\" — Âm On: リ, Âm Kun: さと.",
+    "exampleCompounds": [
+      {
+        "word": "里語",
+        "reading": "リ",
+        "meaning": "Làng quê, dặm (Lý)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 76
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

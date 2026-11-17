@@ -1,0 +1,606 @@
+[
+  {
+    "id": "kanji_n3_0399",
+    "kanji_id": "kanji_n3_0399",
+    "milestoneId": "ms_n3_s2_l3",
+    "milestone_id": "ms_n3_s2_l3",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 57,
+    "kanjiNumber": 399,
+    "kanji": "法",
+    "character": "法",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "法",
+    "onyomi": "ホウ",
+    "kunyomi": "",
+    "sinoVietnamese": "PHÁP",
+    "vietnameseMeaning": "Pháp luật",
+    "meaning_vi": "Pháp luật",
+    "mnemonicStory": "Chữ Hán [法] (Pháp) nghĩa là \"Pháp luật\" — Âm On: ホウ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "いい方法",
+        "reading": "いいほうほう",
+        "meaning": "phương pháp tốt, cách hay",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "文法力",
+        "reading": "ぶんぽうりょく",
+        "meaning": "khả năng ngữ pháp",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "法律",
+        "reading": "ほうりつ",
+        "meaning": "Pháp luật / luật pháp",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "合法",
+        "reading": "ごうほう",
+        "meaning": "Hợp pháp",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "違法",
+        "reading": "いほう",
+        "meaning": "Bất hợp pháp / trái pháp luật",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "法人格",
+        "reading": "ほうじんかく",
+        "meaning": "Tư cách pháp nhân",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 57
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0437",
+    "kanji_id": "kanji_n3_0437",
+    "milestoneId": "ms_n3_s2_l3",
+    "milestone_id": "ms_n3_s2_l3",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 57,
+    "kanjiNumber": 437,
+    "kanji": "信",
+    "character": "信",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "信",
+    "onyomi": "シン",
+    "kunyomi": "しん.じる",
+    "sinoVietnamese": "TÍN",
+    "vietnameseMeaning": "Tin tưởng, Thư tín",
+    "meaning_vi": "Tin tưởng, Thư tín",
+    "mnemonicStory": "Chữ Hán [信] (Tín) nghĩa là \"Tin tưởng, Thư tín\" — Âm On: シン, Âm Kun: しん.じる.",
+    "exampleCompounds": [
+      {
+        "word": "信号",
+        "reading": "しんごう",
+        "meaning": "đèn tín hiệu",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "信じます",
+        "reading": "しんじます",
+        "meaning": "tin tưởng, tin vào",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "信頼します",
+        "reading": "しんらいします",
+        "meaning": "tin tưởng, tín nhiệm",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "自信",
+        "reading": "じしん",
+        "meaning": "tự tin, sự tự tin",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "配信",
+        "reading": "はいしん",
+        "meaning": "Phát trực tiếp / streaming",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 57
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0475",
+    "kanji_id": "kanji_n3_0475",
+    "milestoneId": "ms_n3_s2_l3",
+    "milestone_id": "ms_n3_s2_l3",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 57,
+    "kanjiNumber": 475,
+    "kanji": "益",
+    "character": "益",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "益",
+    "onyomi": "エキ",
+    "kunyomi": "",
+    "sinoVietnamese": "ÍCH",
+    "vietnameseMeaning": "Ích lợi, Lợi ích",
+    "meaning_vi": "Ích lợi, Lợi ích",
+    "mnemonicStory": "Chữ Hán [益] (Ích) nghĩa là \"Ích lợi, Lợi ích\" — Âm On: エキ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "利益",
+        "reading": "りえき",
+        "meaning": "Lợi nhuận",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "損益分岐点",
+        "reading": "そんえきぶんきてん",
+        "meaning": "Điểm hòa vốn",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "益",
+        "reading": "えき",
+        "meaning": "Lợi ích / lãi",
+        "type": "kanji",
+        "level": "N3",
+        "lesson": 57
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0513",
+    "kanji_id": "kanji_n3_0513",
+    "milestoneId": "ms_n3_s2_l3",
+    "milestone_id": "ms_n3_s2_l3",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 57,
+    "kanjiNumber": 513,
+    "kanji": "庁",
+    "character": "庁",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "庁",
+    "onyomi": "チョウ",
+    "kunyomi": "",
+    "sinoVietnamese": "SẢNH",
+    "vietnameseMeaning": "Sảnh, Cơ quan",
+    "meaning_vi": "Sảnh, Cơ quan",
+    "mnemonicStory": "Chữ Hán [庁] (Sảnh) nghĩa là \"Sảnh, Cơ quan\" — Âm On: チョウ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "庁語",
+        "reading": "チョウ",
+        "meaning": "Sảnh, Cơ quan (Sảnh)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 57
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0551",
+    "kanji_id": "kanji_n3_0551",
+    "milestoneId": "ms_n3_s2_l3",
+    "milestone_id": "ms_n3_s2_l3",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 57,
+    "kanjiNumber": 551,
+    "kanji": "降",
+    "character": "降",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "降",
+    "onyomi": "コウ",
+    "kunyomi": "お.りる",
+    "sinoVietnamese": "GIÁNG",
+    "vietnameseMeaning": "Xuống, Mưa rơi",
+    "meaning_vi": "Xuống, Mưa rơi",
+    "mnemonicStory": "Chữ Hán [降] (Giáng) nghĩa là \"Xuống, Mưa rơi\" — Âm On: コウ, Âm Kun: お.りる.",
+    "exampleCompounds": [
+      {
+        "word": "降ります",
+        "reading": "おります",
+        "meaning": "xuống (xe)",
+        "type": "ĐT2",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "雨が降っても",
+        "reading": "あめがふっても",
+        "meaning": "dù trời mưa đi nữa",
+        "type": "MT",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "血圧降下薬",
+        "reading": "けつあつこうかやく",
+        "meaning": "Thuốc hạ huyết áp",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 57
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0589",
+    "kanji_id": "kanji_n3_0589",
+    "milestoneId": "ms_n3_s2_l3",
+    "milestone_id": "ms_n3_s2_l3",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 57,
+    "kanjiNumber": 589,
+    "kanji": "器",
+    "character": "器",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "器",
+    "onyomi": "キ",
+    "kunyomi": "うつわ",
+    "sinoVietnamese": "KHÍ",
+    "vietnameseMeaning": "Vật đựng, Khí cụ, Tài năng",
+    "meaning_vi": "Vật đựng, Khí cụ, Tài năng",
+    "mnemonicStory": "Chữ Hán [器] (Khí) nghĩa là \"Vật đựng, Khí cụ, Tài năng\" — Âm On: キ, Âm Kun: うつわ.",
+    "exampleCompounds": [
+      {
+        "word": "核兵器",
+        "reading": "かくへいき",
+        "meaning": "Vũ khí hạt nhân",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 57
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0627",
+    "kanji_id": "kanji_n3_0627",
+    "milestoneId": "ms_n3_s2_l3",
+    "milestone_id": "ms_n3_s2_l3",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 57,
+    "kanjiNumber": 627,
+    "kanji": "液",
+    "character": "液",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "液",
+    "onyomi": "エキ",
+    "kunyomi": "",
+    "sinoVietnamese": "DỊCH",
+    "vietnameseMeaning": "Chất lỏng, Dịch",
+    "meaning_vi": "Chất lỏng, Dịch",
+    "mnemonicStory": "Chữ Hán [液] (Dịch) nghĩa là \"Chất lỏng, Dịch\" — Âm On: エキ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "液",
+        "reading": "えき",
+        "meaning": "Dịch / chất lỏng",
+        "type": "kanji",
+        "level": "N3",
+        "lesson": 57
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0665",
+    "kanji_id": "kanji_n3_0665",
+    "milestoneId": "ms_n3_s2_l3",
+    "milestone_id": "ms_n3_s2_l3",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 57,
+    "kanjiNumber": 665,
+    "kanji": "務",
+    "character": "務",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "務",
+    "onyomi": "ム",
+    "kunyomi": "つと.める",
+    "sinoVietnamese": "VỤ",
+    "vietnameseMeaning": "Nhiệm vụ, công việc",
+    "meaning_vi": "Nhiệm vụ, công việc",
+    "mnemonicStory": "Chữ Hán [務] (Vụ) nghĩa là \"Nhiệm vụ, công việc\" — Âm On: ム, Âm Kun: つと.める.",
+    "exampleCompounds": [
+      {
+        "word": "事務所",
+        "reading": "じむしょ",
+        "meaning": "văn phòng",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "勤務します",
+        "reading": "きんむします",
+        "meaning": "làm việc, công tác",
+        "type": "ĐT",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "債務不履行",
+        "reading": "さいむふりこう",
+        "meaning": "Không thực hiện nghĩa vụ hợp đồng",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "義務論",
+        "reading": "ぎむろん",
+        "meaning": "Nghĩa vụ luận / đạo đức nghĩa vụ",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "務",
+        "reading": "む",
+        "meaning": "Nghĩa vụ / nhiệm vụ",
+        "type": "kanji",
+        "level": "N3",
+        "lesson": 57
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0703",
+    "kanji_id": "kanji_n3_0703",
+    "milestoneId": "ms_n3_s2_l3",
+    "milestone_id": "ms_n3_s2_l3",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 57,
+    "kanjiNumber": 703,
+    "kanji": "領",
+    "character": "領",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "領",
+    "onyomi": "リョウ",
+    "kunyomi": "",
+    "sinoVietnamese": "LÃNH",
+    "vietnameseMeaning": "Lãnh thổ, cai quản",
+    "meaning_vi": "Lãnh thổ, cai quản",
+    "mnemonicStory": "Chữ Hán [領] (Lãnh) nghĩa là \"Lãnh thổ, cai quản\" — Âm On: リョウ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "大統領",
+        "reading": "だいとうりょう",
+        "meaning": "tổng thống",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 57
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0741",
+    "kanji_id": "kanji_n3_0741",
+    "milestoneId": "ms_n3_s2_l3",
+    "milestone_id": "ms_n3_s2_l3",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 57,
+    "kanjiNumber": 741,
+    "kanji": "能",
+    "character": "能",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "能",
+    "onyomi": "ノウ",
+    "kunyomi": "",
+    "sinoVietnamese": "NĂNG",
+    "vietnameseMeaning": "Năng lực, tài năng",
+    "meaning_vi": "Năng lực, tài năng",
+    "mnemonicStory": "Chữ Hán [能] (Năng) nghĩa là \"Năng lực, tài năng\" — Âm On: ノウ, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "可能な",
+        "reading": "かのうな",
+        "meaning": "khả thi, có thể",
+        "type": "TT-na",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "不可能な",
+        "reading": "ふかのうな",
+        "meaning": "bất khả thi, không thể",
+        "type": "TT-na",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "技能",
+        "reading": "ぎのう",
+        "meaning": "kỹ năng, tay nghề",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "日本語能力試験",
+        "reading": "にほんごのうりょくしけん",
+        "meaning": "kỳ thi năng lực tiếng Nhật JLPT",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "能楽",
+        "reading": "のうがく",
+        "meaning": "Kịch Noh",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "再生可能エネルギー",
+        "reading": "さいせいかのうエネルギー",
+        "meaning": "Năng lượng tái tạo",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "持続可能",
+        "reading": "じぞくかのう",
+        "meaning": "Bền vững",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "人工知能",
+        "reading": "じんこうちのう",
+        "meaning": "Trí tuệ nhân tạo / AI",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 57
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0779",
+    "kanji_id": "kanji_n3_0779",
+    "milestoneId": "ms_n3_s2_l3",
+    "milestone_id": "ms_n3_s2_l3",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 57,
+    "kanjiNumber": 779,
+    "kanji": "嘘",
+    "character": "嘘",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "嘘",
+    "onyomi": "キョ",
+    "kunyomi": "うそ",
+    "sinoVietnamese": "HƯ",
+    "vietnameseMeaning": "Nói dối, giả dối",
+    "meaning_vi": "Nói dối, giả dối",
+    "mnemonicStory": "Chữ Hán [嘘] (Hư) nghĩa là \"Nói dối, giả dối\" — Âm On: キョ, Âm Kun: うそ.",
+    "exampleCompounds": [
+      {
+        "word": "嘘語",
+        "reading": "キョ",
+        "meaning": "Nói dối, giả dối (Hư)",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 57
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n3_0817",
+    "kanji_id": "kanji_n3_0817",
+    "milestoneId": "ms_n3_s2_l3",
+    "milestone_id": "ms_n3_s2_l3",
+    "stageId": "stage_n3_2",
+    "stage_id": "stage_n3_2",
+    "lessonNumber": 57,
+    "kanjiNumber": 817,
+    "kanji": "検",
+    "character": "検",
+    "jlptLevel": "N3",
+    "jlpt_level": "N3",
+    "strokeCount": 8,
+    "radicals": "検",
+    "onyomi": "ケン",
+    "kunyomi": "",
+    "sinoVietnamese": "KIỂM",
+    "vietnameseMeaning": "Kiểm tra, xét duyệt",
+    "meaning_vi": "Kiểm tra, xét duyệt",
+    "mnemonicStory": "Chữ Hán [検] (Kiểm) nghĩa là \"Kiểm tra, xét duyệt\" — Âm On: ケン, Âm Kun: —.",
+    "exampleCompounds": [
+      {
+        "word": "検定試験",
+        "reading": "けんていしけん",
+        "meaning": "kỳ thi năng lực, thi chứng chỉ",
+        "type": "DT",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "検察",
+        "reading": "けんさつ",
+        "meaning": "Công tố / kiểm sát",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 57
+      },
+      {
+        "word": "検証",
+        "reading": "けんしょう",
+        "meaning": "Kiểm chứng / xác minh",
+        "type": "vocab",
+        "level": "N3",
+        "lesson": 57
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]

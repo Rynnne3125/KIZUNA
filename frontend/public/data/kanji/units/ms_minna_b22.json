@@ -1,0 +1,303 @@
+[
+  {
+    "id": "kanji_n5_0022",
+    "kanji_id": "kanji_n5_0022",
+    "milestoneId": "ms_minna_b22",
+    "milestone_id": "ms_minna_b22",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 22,
+    "kanjiNumber": 22,
+    "kanji": "年",
+    "character": "年",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "年",
+    "onyomi": "ネン",
+    "kunyomi": "とし",
+    "sinoVietnamese": "NIÊN",
+    "vietnameseMeaning": "Năm",
+    "meaning_vi": "Năm",
+    "mnemonicStory": "Chữ Hán [年] (Niên) nghĩa là \"Năm\" — Âm On: ネン, Âm Kun: とし.",
+    "exampleCompounds": [
+      {
+        "word": "去年",
+        "reading": "きょねん",
+        "meaning": "năm ngoái",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "今年",
+        "reading": "ことし",
+        "meaning": "năm nay",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "来年",
+        "reading": "らいねん",
+        "meaning": "năm sau",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "～年",
+        "reading": "～ねん",
+        "meaning": "năm ~",
+        "type": "KH",
+        "level": "N5",
+        "lesson": 22
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0047",
+    "kanji_id": "kanji_n5_0047",
+    "milestoneId": "ms_minna_b22",
+    "milestone_id": "ms_minna_b22",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 22,
+    "kanjiNumber": 47,
+    "kanji": "中",
+    "character": "中",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "中",
+    "onyomi": "チュウ",
+    "kunyomi": "なか",
+    "sinoVietnamese": "TRUNG",
+    "vietnameseMeaning": "Giữa",
+    "meaning_vi": "Giữa",
+    "mnemonicStory": "Chữ Hán [中] (Trung) nghĩa là \"Giữa\" — Âm On: チュウ, Âm Kun: なか.",
+    "exampleCompounds": [
+      {
+        "word": "中国",
+        "reading": "ちゅうごく",
+        "meaning": "Trung Quốc",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "中",
+        "reading": "なか",
+        "meaning": "trong, giữa",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "世界中",
+        "reading": "せかいじゅう",
+        "meaning": "khắp thế giới, toàn thế giới",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "途中",
+        "reading": "とちゅう",
+        "meaning": "giữa chừng, nửa đường",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "中級",
+        "reading": "ちゅうきゅう",
+        "meaning": "trung cấp, trình độ trung gian",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0072",
+    "kanji_id": "kanji_n5_0072",
+    "milestoneId": "ms_minna_b22",
+    "milestone_id": "ms_minna_b22",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 22,
+    "kanjiNumber": 72,
+    "kanji": "言",
+    "character": "言",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "言",
+    "onyomi": "ゲン",
+    "kunyomi": "い.う",
+    "sinoVietnamese": "NGÔN",
+    "vietnameseMeaning": "Nói",
+    "meaning_vi": "Nói",
+    "mnemonicStory": "Chữ Hán [言] (Ngôn) nghĩa là \"Nói\" — Âm On: ゲン, Âm Kun: い.う.",
+    "exampleCompounds": [
+      {
+        "word": "言います",
+        "reading": "いいます",
+        "meaning": "nói",
+        "type": "ĐT1",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "失言",
+        "reading": "しつげん",
+        "meaning": "nói nhầm, nói hớ, lỡ miệng",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "伝言",
+        "reading": "でんごん",
+        "meaning": "nhắn tin, truyền đạt lời nhắn",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "〜ように言いました",
+        "reading": "〜ようにいいました",
+        "meaning": "nói với ~ hãy ~ (truyền đạt mệnh lệnh/yêu cầu)",
+        "type": "MT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "〜と言っていました",
+        "reading": "〜といっていました",
+        "meaning": "đã nói rằng ~ (báo cáo lại lời nói)",
+        "type": "MT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "遺言書",
+        "reading": "いごんしょ",
+        "meaning": "Di chúc",
+        "type": "vocab",
+        "level": "N5",
+        "lesson": 22
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0097",
+    "kanji_id": "kanji_n5_0097",
+    "milestoneId": "ms_minna_b22",
+    "milestone_id": "ms_minna_b22",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 22,
+    "kanjiNumber": 97,
+    "kanji": "車",
+    "character": "車",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "車",
+    "onyomi": "シャ",
+    "kunyomi": "くるま",
+    "sinoVietnamese": "XA",
+    "vietnameseMeaning": "Xe",
+    "meaning_vi": "Xe",
+    "mnemonicStory": "Chữ Hán [車] (Xa) nghĩa là \"Xe\" — Âm On: シャ, Âm Kun: くるま.",
+    "exampleCompounds": [
+      {
+        "word": "自動車",
+        "reading": "じどうしゃ",
+        "meaning": "xe hơi, ô tô",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "電車",
+        "reading": "でんしゃ",
+        "meaning": "tàu điện",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "自転車",
+        "reading": "じてんしゃ",
+        "meaning": "xe đạp",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "車",
+        "reading": "くるま",
+        "meaning": "xe hơi",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "駐車場",
+        "reading": "ちゅうしゃじょう",
+        "meaning": "bãi đỗ xe",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  },
+  {
+    "id": "kanji_n5_0122",
+    "kanji_id": "kanji_n5_0122",
+    "milestoneId": "ms_minna_b22",
+    "milestone_id": "ms_minna_b22",
+    "stageId": "stage_n5_5",
+    "stage_id": "stage_n5_5",
+    "lessonNumber": 22,
+    "kanjiNumber": 122,
+    "kanji": "紙",
+    "character": "紙",
+    "jlptLevel": "N5",
+    "jlpt_level": "N5",
+    "strokeCount": 8,
+    "radicals": "紙",
+    "onyomi": "シ",
+    "kunyomi": "かみ",
+    "sinoVietnamese": "CHỈ",
+    "vietnameseMeaning": "Giấy",
+    "meaning_vi": "Giấy",
+    "mnemonicStory": "Chữ Hán [紙] (Chỉ) nghĩa là \"Giấy\" — Âm On: シ, Âm Kun: かみ.",
+    "exampleCompounds": [
+      {
+        "word": "手紙",
+        "reading": "てがみ",
+        "meaning": "thư",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      },
+      {
+        "word": "紙",
+        "reading": "かみ",
+        "meaning": "giấy",
+        "type": "DT",
+        "level": "N5",
+        "lesson": 22
+      }
+    ],
+    "sourceUrl": "https://openjlpt.com/kanji"
+  }
+]
