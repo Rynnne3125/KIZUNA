@@ -7,6 +7,9 @@ services:
     restart: always
     environment:
       - SERVER_PORT=3000
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - KIZUNA_GEMINI_MODEL=${KIZUNA_GEMINI_MODEL:-gemini-3.5-flash-lite}
+      - KIZUNA_AI_DAILY_LIMIT=${KIZUNA_AI_DAILY_LIMIT:-100}
     networks:
       - kizuna-net
 

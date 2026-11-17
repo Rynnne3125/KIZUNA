@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>KIZUNA (絆) — Oral Defense Slide Deck (12 Slides)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Noto+Sans+JP:wght@700;900&display=swap');
+
+    @page {
+      size: 297mm 167.0625mm;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Be Vietnam Pro', 'Noto Sans JP', sans-serif;
+      background: #0f172a;
+      color: #1e293b;
+    }
+
+    .slide {
+      width: 297mm;
+      height: 167.0625mm;
+      background: linear-gradient(135deg, #f8fafc 0%, #f0fdf4 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      break-after: always;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide-header {
+      background: linear-gradient(90deg, #064e3b 0%, #065f46 60%, #0f172a 100%);
+      color: #ffffff;
+      padding: 14px 28px 14px 28px;
+    }
+
+    .slide-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .slide-tag {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #a7f3d0;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .slide-num {
+      font-size: 9.5pt;
+      font-weight: 800;
+      color: #fecaca;
+      background: rgba(220, 38, 38, 0.35);
+      border: 1px solid #f87171;
+      padding: 2px 10px;
+      border-radius: 999px;
+    }
+
+    .slide-title {
+      font-size: 17pt;
+      font-weight: 800;
+      margin: 0 0 4px 0;
+      color: #ffffff;
+      line-height: 1.25;
+    }
+
+    .slide-subtitle {
+      font-size: 10.5pt;
+      color: #d1fae5;
+      font-style: italic;
+    }
+
+    .slide-stripe {
+      height: 4px;
+      background: linear-gradient(90deg, #dc2626 0%, #f59e0b 50%, #10b981 100%);
+    }
+
+    .slide-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding: 18px 28px 10px 28px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .card-head {
+      padding: 11px 18px;
+      font-size: 11.5pt;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .head-dark {
+      background: #0f172a;
+      border-bottom: 3px solid #3b82f6;
+    }
+
+    .head-emerald {
+      background: #059669;
+      border-bottom: 3px solid #dc2626;
+    }
+
+    .card-list {
+      margin: 0;
+      padding: 14px 20px 14px 34px;
+      font-size: 10.5pt;
+      line-height: 1.55;
+      color: #1e293b;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+
+    .card-list li {
+      margin-bottom: 6px;
+    }
+
+    .qr-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      padding: 0 28px 8px 28px;
+    }
+
+    .qr-badge {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #ffffff;
+      border: 2px solid #059669;
+      border-radius: 12px;
+      padding: 8px 18px;
+      font-size: 9.5pt;
+      color: #0f172a;
+      box-shadow: 0 4px 10px rgba(5, 150, 105, 0.12);
+    }
+
+    .qr-badge img {
+      width: 68px;
+      height: 68px;
+      border-radius: 6px;
+    }
+
+    .qr-badge span {
+      color: #059669;
+      font-family: monospace;
+      font-weight: 700;
+    }
+
+    .slide-footer {
+      margin: 0 28px 16px 28px;
+      background: #ecfdf5;
+      border: 1.5px solid #10b981;
+      border-radius: 10px;
+      padding: 9px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hanko {
+      width: 32px;
+      height: 32px;
+      border: 2.5px solid #dc2626;
+      color: #dc2626;
+      background: #fff5f5;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Noto Sans JP', serif;
+      font-weight: 900;
+      font-size: 13pt;
+      flex-shrink: 0;
+    }
+
+    .footer-text {
+      font-size: 10pt;
+      color: #065f46;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  
+        <section class="slide">
+          <div class="slide-header">
+            <div class="slide-header-top">
+              <span class="slide-tag">⛩️ KIZUNA (絆) • CAPSTONE DEFENSE • MILESTONE 4 (60%)</span>
+              <span class="slide-num">SLIDE 01 / 12</span>
+            </div>
+            <h1 class="slide-title">KIZUNA (絆) — HÀNH TRÌNH HỌC TIẾNG NHẬT ĐA NỀN TẢNG HỖ TRỢ BỞI AI</h1>
+            <div class="slide-subtitle">Cross-Platform AI-Powered Japanese Learning Journey Application</div>
+          </div>
+          <div class="slide-stripe"></div>
+
+          <div class="slide-body">
+            <div class="card card-left">
+              <div class="card-head head-dark">Thông tin Học phần & Đồ án</div>
+              <ul class="card-list"><li>Học phần: Phát triển Ứng dụng Di động Đa nền tảng (Cross-Platform Mobile App Dev)</li><li>Chuyên đề tích hợp: CS2028 — AI Product Development: End to End</li><li>Trường: ĐH Công nghệ Thông tin & Truyền thông Việt - Hàn (VKU) - ĐH Đà Nẵng</li><li>Học kỳ: Semester 1 (2026 – 2027) • Cột mốc: Tuần 13 (Final Defense)</li></ul>
+            </div>
+            <div class="card card-right">
+              <div class="card-head head-emerald">Nhóm Thực hiện & Hệ thống Thực tế</div>
+              <ul class="card-list"><li>Sinh viên thực hiện: Trần Thanh Phong (23IT • phongtt.23it@vku.udn.vn)</li><li>Giảng viên hướng dẫn: ThS. Lê Thành Công</li><li>Live Cloud App: https://kizuna-thanhphongit.duckdns.org</li><li>Android APK (v1.0.5): /download/kizuna-latest.apk • GitHub: @Rynnne3125/KIZUNA</li></ul>
+            </div>
+          </div>
+
+          
+
+          <div class="slide-footer">
+            <div class="hanko">絆</div>
+            <div class="footer-text"><strong>ĐIỂM NHẤN:</strong> Sứ mệnh: Biến 1,202 đơn vị kiến thức giáo trình NEJ thành chuyến phiêu lưu RPG xuyên Nhật Bản có AI Sensei đồng hành an toàn.</div>
+          </div>
+        </section>
+        
+        <section class="slide">
+          <div class="slide-header">
+            <div class="slide-header-top">
+              <span class="slide-tag">⛩️ KIZUNA (絆) • CHAPTER 1 • PROBLEM STATEMENT & MOTIVATION</span>
+              <span class="slide-num">SLIDE 02 / 12</span>
+            </div>
+            <h1 class="slide-title">BÀI TOÁN THỰC TIỄN: VÌ SAO 65% NGƯỜI HỌC BỎ CUỘC TRONG 60 NGÀY ĐẦU?</h1>
+            <div class="slide-subtitle">Phân tích rào cản của mô hình học tiếng Nhật truyền thống đối với sinh viên CNTT</div>
+          </div>
+          <div class="slide-stripe"></div>
+
+          <div class="slide-body">
+            <div class="card card-left">
+              <div class="card-head head-dark">1. Bốn Điểm Đau Cốt Lõi (Core Pain Points)</div>
+              <ul class="card-list"><li>Danh sách khóa học tĩnh (Static Course Lists): 50 bài lý thuyết khô khan gây quá tải nhận thức.</li><li>Đứt gãy Từ vựng & Phản xạ: Nhớ từ trên Flashcard nhưng tê liệt khi cần ghép câu giao tiếp thực tế.</li><li>Cơ chế phạt cứng nhắc: Bắt học lại cả bài dài chỉ vì quên 1 chữ Kanji, gây tâm lý sợ sai.</li><li>Chatbot AI tự do thiếu rào chắn: Sinh từ vựng vượt cấp (N2/N1) làm người mới học (N5/N4) hoang mang.</li></ul>
+            </div>
+            <div class="card card-right">
+              <div class="card-head head-emerald">2. Chân Dung Người Học Mục Tiêu (Target Persona)</div>
+              <ul class="card-list"><li>Lê Hoàng Nam (20 tuổi, Sinh viên năm 2 ngành Kỹ thuật Phần mềm tại VKU).</li><li>Mục tiêu: Đạt N4/N3 trong 6–9 tháng để đi thực tập doanh nghiệp (Internship) tại Fukuoka/Tokyo.</li><li>Thói quen: Học 15–20 phút/ngày trên điện thoại Android khi đi xe buýt & mở Laptop buổi tối.</li><li>Kỳ vọng: Học câu nào dùng được ngay câu đó, đồng bộ mượt mà giữa Điện thoại và Máy tính.</li></ul>
+            </div>
+          </div>
+
+          
+
+          <div class="slide-footer">
+            <div class="hanko">絆</div>
+            <div class="footer-text"><strong>ĐIỂM NHẤN:</strong> Thống kê khảo sát: Hơn 65% người tự học tiếng Nhật qua ứng dụng truyền thống bỏ cuộc ngay trong 2 tháng đầu tiên.</div>
+          </div>
+        </section>
+        
+        <section class="slide">
+          <div class="slide-header">
+            <div class="slide-header-top">
+              <span class="slide-tag">⛩️ KIZUNA (絆) • CHAPTER 1 • THE KIZUNA PARADIGM SHIFT</span>
+              <span class="slide-num">SLIDE 03 / 12</span>
+            </div>
+            <h1 class="slide-title">BƯỚC CHUYỂN DỊCH MÔ HÌNH: 'HỌC NHƯ MỘT CHUYẾN ĐI' (JOURNEY MAP)</h1>
+            <div class="slide-subtitle">Tái cấu trúc bộ giáo trình chuẩn NEJ Vol 1 & 2 thành kiến trúc Bản đồ Hành trình 5 cấp độ</div>
+          </div>
+          <div class="slide-stripe"></div>
+
+          <div class="slide-body">
+            <div class="card card-left">
+              <div class="card-head head-dark">Kiến trúc Tri thức 5 Tầng (5-Tier Hierarchy)</div>
+              <ul class="card-list"><li>Tầng 1 — Hành trình (Journey): Chuyến du hành khám phá Nhật Bản từ Bắc xuống Nam.</li><li>Tầng 2 — Chặng (4 Stages): Nhập môn Kana -> N5 Sơ cấp -> N5/N4 Đời sống -> N4 Tự nhiên.</li><li>Tầng 3 — Mốc (28 Milestones): 28 trạm kiểm soát tình huống thực tế (Tự giới thiệu, Hỏi đường, Đổi lịch hẹn...).</li><li>Tầng 4 & 5 — 112 Quests & SM-2 SRS: 4 bài tập bắt buộc/mốc + Nhiệm vụ quay lại ôn lỗi sai.</li></ul>
+            </div>
+            <div class="card card-right">
+              <div class="card-head head-emerald">Quy mô Dữ liệu Hạt nhân Chuẩn hóa (1,202 Bản ghi)</div>
+              <ul class="card-list"><li>728+ Từ vựng cốt lõi (Vocabulary): Đầy đủ Kanji, Hiragana, Âm Hán Việt & câu ví dụ ngữ cảnh.</li><li>300 Chữ Hán chuẩn NEJ (Kanji #1–#300): Bộ thủ, số nét, âm On/Kun và câu chuyện mẹo nhớ.</li><li>30 Cấu trúc Ngữ pháp trọng tâm: Giải thích sắc thái văn hóa (Nuance) & bài tập ghép câu.</li><li>Ngân hàng đề luyện thi JLPT: Đầy đủ 5 cấp độ thực chiến từ N5, N4, N3, N2 đến N1.</li></ul>
+            </div>
+          </div>
+
+          
+
+          <div class="slide-footer">
+            <div class="hanko">絆</div>
+            <div class="footer-text"><strong>ĐIỂM NHẤN:</strong> Giá trị cốt lõi: Người học chỉ mở khóa mốc mới khi thực sự dùng được kiến thức (đạt >= 80% qua 4 thử thách thực hành).</div>
+          </div>
+        </section>
+        
+        <section class="slide">
+          <div class="slide-header">
+            <div class="slide-header-top">
+              <span class="slide-tag">⛩️ KIZUNA (絆) • CHAPTER 2 • MOBILE UI/UX & WA-MODERN AESTHETICS</span>
+              <span class="slide-num">SLIDE 04 / 12</span>
+            </div>
+            <h1 class="slide-title">THIẾT KẾ GIAO DIỆN WA-MODERN (和モダン) & TRẢI NGHIỆM DI ĐỘNG</h1>
+            <div class="slide-subtitle">Kết hợp tinh hoa mỹ thuật truyền thống Nhật Bản với chuẩn thiết kế Mobile-First hiện đại</div>
+          </div>
+          <div class="slide-stripe"></div>
+
+          <div class="slide-body">
+            <div class="card card-left">
+              <div class="card-head head-dark">Ngôn ngữ Thiết kế Wa-Modern Đặc sắc</div>
+              <ul class="card-list"><li>Con dấu đỏ Hanko (判子): Đóng mọc xác nhận hoàn thành mốc ('完' - Hoàn tất, '絆' - Kizuna).</li><li>Biểu tượng Gia huy (Mon Crests): Hoa Anh Đào Sakura, Cổng thần đạo Torii, loại bỏ emoji rời rạc.</li><li>Bảng màu chuẩn WCAG AAA (Tương phản 15.8:1): Xanh Rừng Trúc (#059669), Đỏ Sơn Mài (#DC2626) & Giấy Washi (#FAF8F5).</li></ul>
+            </div>
+            <div class="card card-right">
+              <div class="card-head head-emerald">Tối ưu Hóa Không gian Di động & Đa nền tảng</div>
+              <ul class="card-list"><li>Hệ thống lưới 8-Point Grid & Thumb-Zone: Nút thao tác đặt ở 1/3 dưới màn hình, dễ bấm bằng 1 ngón cái.</li><li>Tự động nhận diện thiết bị (Android / iOS / PC): Hướng dẫn cài APK bằng QR hoặc thêm vào Màn hình chính Safari.</li><li>Nhận diện Native thông minh (isNativeApp): Tự động ẩn toàn bộ nút tải APK khi đang chạy trong ứng dụng Android.</li></ul>
+            </div>
+          </div>
+
+          
+
+          <div class="slide-footer">
+            <div class="hanko">絆</div>
+            <div class="footer-text"><strong>ĐIỂM NHẤN:</strong> Đánh giá tự động bằng AI (10 Heuristics Jakob Nielsen) & đạt điểm Accessibility 98/100 trên Google Lighthouse.</div>
+          </div>
+        </section>
+        
+        <section class="slide">
+          <div class="slide-header">
+            <div class="slide-header-top">
+              <span class="slide-tag">⛩️ KIZUNA (絆) • CHAPTER 2 • CORE GAMEPLAY LOOP</span>
+              <span class="slide-num">SLIDE 05 / 12</span>
+            </div>
+            <h1 class="slide-title">VÒNG LẶP 4 NHIỆM VỤ TƯƠNG TÁC TẠI MỖI MỐC (4-QUEST MICRO-LOOP)</h1>
+            <div class="slide-subtitle">Trình điều phối RoadmapQuestRunner buộc người học rèn luyện toàn diện Nghe - Từ - Pháp - Hội thoại</div>
+          </div>
+          <div class="slide-stripe"></div>
+
+          <div class="slide-body">
+            <div class="card card-left">
+              <div class="card-head head-dark">Bước 1 & Bước 2: Nạp Từ Vựng & Kiểm Tra Cổng Gác</div>
+              <ul class="card-list"><li>Quest 1 — SRS Flashcard Swipe & Shuffle: Lật thẻ 2 mặt, vuốt phải (Đã thuộc) / vuốt trái (Học lại), xáo trộn ngẫu nhiên và nghe phát âm bản xứ TTS.</li><li>Quest 2 — Pure Vietnamese Vocab Gatekeeper: Cổng kiểm tra nghĩa tiếng Việt thuần túy không có Romaji nhắc bài; sai từ nào lập tức đẩy vào hàng đợi SM-2 SRS.</li></ul>
+            </div>
+            <div class="card card-right">
+              <div class="card-head head-emerald">Bước 3 & Bước 4: Lắp Ghép Câu & Đối Thoại AI Sensei</div>
+              <ul class="card-list"><li>Quest 3 — Drag & Drop Grammar Scramble: Chạm/kéo các mảnh từ vựng bị xáo trộn để ghép thành câu tiếng Nhật chuẩn ngữ pháp kèm giải thích sắc thái.</li><li>Quest 4 — Situational Reading & 2-Way AI Sensei: Đọc hiểu hội thoại dài theo bối cảnh NEJ và đối thoại 2 chiều với Sensei. Đạt >= 80% tự động mở khóa mốc kế tiếp!</li></ul>
+            </div>
+          </div>
+
+          
+
+          <div class="slide-footer">
+            <div class="hanko">絆</div>
+            <div class="footer-text"><strong>ĐIỂM NHẤN:</strong> Chấm dứt tình trạng 'bấm Next qua bài': Học viên phải vượt qua trọn vẹn cả 4 Quest mới nhận được dấu Hanko COMPLETED.</div>
+          </div>
+        </section>
+        
+        <section class="slide">
+          <div class="slide-header">
+            <div class="slide-header-top">
+              <span class="slide-tag">⛩️ KIZUNA (絆) • CHAPTER 3 • SYSTEM DESIGN & CLEAN ARCHITECTURE</span>
+              <span class="slide-num">SLIDE 06 / 12</span>
+            </div>
+            <h1 class="slide-title">KIẾN TRÚC HỆ THỐNG ĐA NỀN TẢNG & CLEAN ARCHITECTURE 3 TẦNG</h1>
+            <div class="slide-subtitle">Mô hình Unified Enterprise Backend phục vụ đồng thời Mobile APK, iOS PWA và Desktop Admin Portal</div>
+          </div>
+          <div class="slide-stripe"></div>
+
+          <div class="slide-body">
+            <div class="card card-left">
+              <div class="card-head head-dark">Tầng Frontend Đa Nền tảng (React 18 + Capacitor 6.2)</div>
+              <ul class="card-list"><li>Presentation Layer: 10 Pages & 25+ Components (RoadmapPage, RoadmapQuestRunner, AdminDashboardPage...).</li><li>State Controllers: Custom Hooks quản lý phiên và máy trạng thái tiến độ (useAuth, useProgress, useAdminData).</li><li>Đóng gói Native: Biên dịch sang Android APK (v1.0.5) qua Capacitor 6.2 & hỗ trợ iOS Safari Standalone PWA.</li></ul>
+            </div>
+            <div class="card card-right">
+              <div class="card-head head-emerald">Tầng Backend Doanh nghiệp (Java 21 + Spring Boot 3.4.2)</div>
+              <ul class="card-list"><li>Presentation Layer: 10 REST Controllers cung cấp 26 Endpoints chuẩn hóa qua phong bì JSON ApiResponse<T>.</li><li>Domain Layer: 11 Entities & 6 Service Interfaces (UserProgress, SpacedRepetition, AiGovernance, Leaderboard...).</li><li>Data Layer: 7 Repositories kết hợp Google Cloud Firestore & bộ đệm đa luồng ConcurrentHashMap.</li></ul>
+            </div>
+          </div>
+
+          
+
+          <div class="slide-footer">
+            <div class="hanko">絆</div>
+            <div class="footer-text"><strong>ĐIỂM NHẤN:</strong> Bảo mật Stateless JWT (JJWT 0.12.6 HMAC-SHA256) + Mã hóa BCrypt + Phân quyền RBAC chặt chẽ (ROLE_USER vs ROLE_ADMIN).</div>
+          </div>
+        </section>
+        
+        <section class="slide">
+          <div class="slide-header">
+            <div class="slide-header-top">
+              <span class="slide-tag">⛩️ KIZUNA (絆) • CHAPTER 3 • DATABASE SCHEMA & SECURITY POLICIES</span>
+              <span class="slide-num">SLIDE 07 / 12</span>
+            </div>
+            <h1 class="slide-title">CƠ SỞ DỮ LIỆU HYBRID FIRESTORE, ERD 10 THỰC THỂ & BẢO MẬT RLS</h1>
+            <div class="slide-subtitle">Thiết kế dữ liệu cách ly tuyệt đối theo người dùng kết hợp cơ chế kháng lỗi ngoại tuyến (Offline-First)</div>
+          </div>
+          <div class="slide-stripe"></div>
+
+          <div class="slide-body">
+            <div class="card card-left">
+              <div class="card-head head-dark">Cấu trúc 10 Collections trên Google Cloud Firestore</div>
+              <ul class="card-list"><li>Nhóm Giáo trình Tĩnh (Master Curriculum): stages (4), milestones (28), milestone_quests (112), vocabulary_items (728+), kanji_dictionary (300), grammar_items (30).</li><li>Nhóm Tiến trình Cách ly & Kiểm toán: users, user_progress, user_srs_items, leaderboard, ai_evaluation_audits.</li><li>Chiến lược Compound Indexes giúp mọi truy vấn bản đồ và bảng xếp hạng đạt độ trễ < 50ms.</li></ul>
+            </div>
+            <div class="card card-right">
+              <div class="card-head head-emerald">Bảo mật Cách ly (RLS) & Đồng bộ Ngoại tuyến (Offline Sync)</div>
+              <ul class="card-list"><li>Firestore Security Rules (RLS): Học viên chỉ đọc/ghi được bản ghi user_progress có userId == request.auth.uid; chỉ ROLE_ADMIN được sửa giáo trình.</li><li>Chống lỗ hổng IDOR tại Backend: Trích xuất định danh trực tiếp từ chữ ký số JWT (@AuthenticationPrincipal).</li><li>Local-First Dual Sync: Đọc tức thì (0ms) từ localStorage và tự động hợp nhất (Smart Merge) hai chiều với Firestore.</li></ul>
+            </div>
+          </div>
+
+          
+
+          <div class="slide-footer">
+            <div class="hanko">絆</div>
+            <div class="footer-text"><strong>ĐIỂM NHẤN:</strong> Kháng lỗi mất mạng: Khi đi vào vùng mất sóng 4G, tiến độ làm bài được giữ an toàn ở máy và tự đồng bộ khi có mạng lại.</div>
+          </div>
+        </section>
+        
+        <section class="slide">
+          <div class="slide-header">
+            <div class="slide-header-top">
+              <span class="slide-tag">⛩️ KIZUNA (絆) • CHAPTER 4 • RESPONSIBLE AI & 3-LAYER GUARDRAILS</span>
+              <span class="slide-num">SLIDE 08 / 12</span>
+            </div>
+            <h1 class="slide-title">KIẾN TRÚC KIỂM SOÁT AI SENSEI 3 LỚP & HUMAN-IN-THE-LOOP</h1>
+            <div class="slide-subtitle">Giải quyết triệt để bài toán 'Ảo giác' (Hallucination) và 'Vượt cấp độ' (Scope Creep) trong giáo dục</div>
+          </div>
+          <div class="slide-stripe"></div>
+
+          <div class="slide-body">
+            <div class="card card-left">
+              <div class="card-head head-dark">Kiến trúc 3-Layer AI Governance & Prompt Engineering</div>
+              <ul class="card-list"><li>Lớp 1 (Deterministic Whitelist): Mỗi mốc định nghĩa cứng danh mục từ vựng & ngữ pháp chuẩn NEJ do con người làm chủ.</li><li>Lớp 2 (Controlled Prompt Engine): Nhúng Whitelist vào System Prompt; chấm bài theo 3 chiều: Ngữ pháp + Trợ từ + Sắc thái lịch sự (Teineigo).</li><li>Lớp 3 (Output Guardrail): Ép đầu ra theo JSON Schema chuẩn, cấm dùng từ N2/N1 trong bài học sơ cấp N5/N4.</li></ul>
+            </div>
+            <div class="card card-right">
+              <div class="card-head head-emerald">Quy trình Kiểm duyệt Con người (Human-in-the-Loop Audit)</div>
+              <ul class="card-list"><li>Quyền Khiếu nại của Học viên: Nếu thấy AI Sensei chấm khắt khe, học viên bấm gửi khiếu nại ngay tại màn hình làm bài.</li><li>Hàng đợi Kiểm toán (ai_evaluation_audits): Lưu nguyên vẹn câu trả lời của học viên và nhận xét của AI với trạng thái PENDING.</li><li>Cổng Phán quyết Giảng viên: Admin duyệt APPROVED để cộng bù Active Points tự động và tinh chỉnh Prompt trong Sandbox.</li></ul>
+            </div>
+          </div>
+
+          
+
+          <div class="slide-footer">
+            <div class="hanko">絆</div>
+            <div class="footer-text"><strong>ĐIỂM NHẤN:</strong> Triết lý cốt lõi: Con người là Kiến trúc sư Tri thức (Knowledge Architect) — AI là Động cơ Biến thể & Huấn luyện Sắc thái.</div>
+          </div>
+        </section>
+        
+        <section class="slide">
+          <div class="slide-header">
+            <div class="slide-header-top">
+              <span class="slide-tag">⛩️ KIZUNA (絆) • CHAPTER 4 • SUPERMEMO-2 SRS & GAMIFICATION</span>
+              <span class="slide-num">SLIDE 09 / 12</span>
+            </div>
+            <h1 class="slide-title">THUẬT TOÁN ÔN TẬP SUPERMEMO-2 (SM-2) & GAME HÓA CHỐNG GIAN LẬN</h1>
+            <div class="slide-subtitle">Tối ưu hóa trí nhớ dài hạn dựa trên khoa học thần kinh và bảng xếp hạng năng động công bằng</div>
+          </div>
+          <div class="slide-stripe"></div>
+
+          <div class="slide-body">
+            <div class="card card-left">
+              <div class="card-head head-dark">Thuật toán Lặp lại Ngắt quãng SuperMemo-2 (SM-2)</div>
+              <ul class="card-list"><li>Đánh giá chất lượng nhớ q thuộc [0..5] sau mỗi lần ôn tập thẻ từ vựng hoặc chữ Hán.</li><li>Nếu quên (q < 3): Đặt lại n = 0, chu kỳ I = 1 ngày và bật cờ ưu tiên isFailedQueue = true trên bản đồ.</li><li>Nếu nhớ (q >= 3): Chu kỳ tăng theo hàm mũ I(1)=1, I(2)=6, I(n)=round(I(n-1) * EF) với hệ số dễ dàng EF >= 1.3.</li></ul>
+            </div>
+            <div class="card card-right">
+              <div class="card-head head-emerald">Hệ sinh thái Luyện tập Toàn diện & Chống Gian lận</div>
+              <ul class="card-list"><li>Điểm Năng Động (Active Points): Thước đo nỗ lực thực chất dùng để xếp hạng Top 50 Leaderboard thời gian thực.</li><li>Công cụ Anti-Cheat cho Admin: Kiểm tra lịch sử điểm và điều chỉnh/trừ điểm các tài khoản có dấu hiệu bất thường.</li><li>Tích hợp Giải phẫu 300 Kanji NEJ (Âm Hán Việt, Bộ thủ, Mẹo nhớ) & Phòng luyện đề JLPT đủ 5 cấp N5 -> N1.</li></ul>
+            </div>
+          </div>
+
+          
+
+          <div class="slide-footer">
+            <div class="hanko">絆</div>
+            <div class="footer-text"><strong>ĐIỂM NHẤN:</strong> Mọi từ vựng làm sai tại Bước 2 (Gatekeeper) đều tự động biến thành 'Nhiệm vụ quay lại luyện tập' vào ngày hôm sau.</div>
+          </div>
+        </section>
+        
+        <section class="slide">
+          <div class="slide-header">
+            <div class="slide-header-top">
+              <span class="slide-tag">⛩️ KIZUNA (絆) • CHAPTER 5 • TESTING, PROFILING & CLOUD DEPLOYMENT</span>
+              <span class="slide-num">SLIDE 10 / 12</span>
+            </div>
+            <h1 class="slide-title">KIỂM THỬ TOÀN DIỆN, ĐO LƯỜNG HIỆU NĂNG & TRIỂN KHAI PRODUCTION</h1>
+            <div class="slide-subtitle">Đạt 100% Pass Rate trên bộ kiểm thử API/E2E và vận hành thực tế 24/7 trên hạ tầng đám mây AWS EC2</div>
+          </div>
+          <div class="slide-stripe"></div>
+
+          <div class="slide-body">
+            <div class="card card-left">
+              <div class="card-head head-dark">Kết quả Kiểm thử & Hồ sơ Hiệu năng (Performance Profiling)</div>
+              <ul class="card-list"><li>Kiểm thử API & Bảo mật: 100% PASS trên 26 REST Endpoints (Postman Suite), chặn tuyệt đối lỗi 401/403 RBAC.</li><li>Google Lighthouse Audit: Performance 96/100 • Accessibility 98/100 • Best Practices 100/100.</li><li>Hiệu năng Thiết bị Thực tế: Khởi động lạnh APK 1.15s • Hoạt ảnh mượt 60 FPS • RAM ~78MB • API Latency ~42ms.</li></ul>
+            </div>
+            <div class="card card-right">
+              <div class="card-head head-emerald">Kiến trúc Triển khai Đám mây (AWS EC2 + Docker + HTTPS)</div>
+              <ul class="card-list"><li>Máy chủ đám mây: AWS EC2 Ubuntu 24.04 LTS (Elastic IP: 15.135.17.96) chạy Docker & Docker Compose.</li><li>Bảo mật HTTPS: Nginx Reverse Proxy + Chứng chỉ SSL Let's Encrypt tại https://kizuna-thanhphongit.duckdns.org.</li><li>Tự động phân phối gói cài đặt Android APK chính thức (v1.0.5 - ~18.2MB) trực tiếp từ máy chủ Production.</li></ul>
+            </div>
+          </div>
+
+          
+
+          <div class="slide-footer">
+            <div class="hanko">絆</div>
+            <div class="footer-text"><strong>ĐIỂM NHẤN:</strong> Hệ thống đã sẵn sàng 100% trên môi trường Production để Hội đồng quét mã QR tải về và trải nghiệm trực tiếp.</div>
+          </div>
+        </section>
+        
+        <section class="slide">
+          <div class="slide-header">
+            <div class="slide-header-top">
+              <span class="slide-tag">⛩️ KIZUNA (絆) • LIVE DEMO & DIRECT QR INSTALLATION</span>
+              <span class="slide-num">SLIDE 11 / 12</span>
+            </div>
+            <h1 class="slide-title">TRẢI NGHIỆM TRỰC TIẾP HỆ THỐNG & QUÉT MÃ QR CÀI ĐẶT ỨNG DỤNG</h1>
+            <div class="slide-subtitle">Kính mời Hội đồng dùng Camera điện thoại hoặc Zalo quét mã QR bên dưới để trải nghiệm trực tiếp</div>
+          </div>
+          <div class="slide-stripe"></div>
+
+          <div class="slide-body">
+            <div class="card card-left">
+              <div class="card-head head-dark">1. Tải & Cài Đặt Trực Tiếp Android APK (v1.0.5)</div>
+              <ul class="card-list"><li>Link tải trực tiếp (QR Android): https://kizuna-thanhphongit.duckdns.org/download/kizuna-latest.apk</li><li>Phiên bản chỉ định: https://kizuna-thanhphongit.duckdns.org/download/kizuna-v1.0.5.apk</li><li>Tương thích: Android 8.0 – Android 14+ • Đóng gói Native Capacitor 6.2 ký số bảo mật.</li></ul>
+            </div>
+            <div class="card card-right">
+              <div class="card-head head-emerald">2. Truy Cập Live Web App / iOS Safari PWA & Tài Khoản Test</div>
+              <ul class="card-list"><li>Link Web / iOS Safari PWA: https://kizuna-thanhphongit.duckdns.org</li><li>Tài khoản Học viên (ROLE_USER): Username: user  |  Password: user123</li><li>Tài khoản Giảng viên (ROLE_ADMIN): Username: admin  |  Password: admin123</li></ul>
+            </div>
+          </div>
+
+          
+            <div class="qr-row">
+              <div class="qr-badge">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fkizuna-thanhphongit.duckdns.org%2Fdownload%2Fkizuna-latest.apk" alt="QR Android APK" />
+                <div>
+                  <strong>Quét tải Android APK (v1.0.5)</strong><br/>
+                  <span>/download/kizuna-latest.apk</span>
+                </div>
+              </div>
+              <div class="qr-badge">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fkizuna-thanhphongit.duckdns.org" alt="QR Live Web & iOS" />
+                <div>
+                  <strong>Quét mở Web App / iOS Safari PWA</strong><br/>
+                  <span>kizuna-thanhphongit.duckdns.org</span>
+                </div>
+              </div>
+            </div>
+            
+
+          <div class="slide-footer">
+            <div class="hanko">絆</div>
+            <div class="footer-text"><strong>ĐIỂM NHẤN:</strong> GitHub Repository: https://github.com/Rynnne3125/KIZUNA  •  Tất cả 5 hạng mục bàn giao M4 đã hoàn tất 100%.</div>
+          </div>
+        </section>
+        
+        <section class="slide">
+          <div class="slide-header">
+            <div class="slide-header-top">
+              <span class="slide-tag">⛩️ KIZUNA (絆) • CHAPTER 6 • CONCLUSION, FUTURE WORK & Q&A</span>
+              <span class="slide-num">SLIDE 12 / 12</span>
+            </div>
+            <h1 class="slide-title">KẾT LUẬN, HƯỚNG PHÁT TRIỂN TIẾP THEO (ROADMAP V2.0) & THẢO LUẬN</h1>
+            <div class="slide-subtitle">Tổng kết giá trị đóng góp của dự án KIZUNA và lộ trình nâng cấp thương mại hóa</div>
+          </div>
+          <div class="slide-stripe"></div>
+
+          <div class="slide-body">
+            <div class="card card-left">
+              <div class="card-head head-dark">Tổng kết Đóng góp Cốt lõi của Đồ án KIZUNA</div>
+              <ul class="card-list"><li>Hoàn thiện hệ sinh thái học tiếng Nhật đa nền tảng (Android APK, iOS PWA, Web, Admin Portal) theo Clean Architecture.</li><li>Chuyển hóa trọn vẹn 1,202 bản ghi giáo trình NEJ và đề thi JLPT N5–N1 thành Bản đồ Hành trình RPG 5 cấp độ.</li><li>Tiên phong áp dụng kiến trúc 3-Layer AI Guardrails kết hợp thuật toán SuperMemo-2 giúp học thật, nhớ lâu và an toàn.</li></ul>
+            </div>
+            <div class="card card-right">
+              <div class="card-head head-emerald">Lộ trình Phát triển Giai đoạn Tiếp theo (Future Work v2.0)</div>
+              <ul class="card-list"><li>AI Speech Pitch-Accent Scoring: Chấm điểm phát âm và ngữ điệu giọng nói tiếng Nhật theo thời gian thực.</li><li>Real-time Kanji PvP Arena: Đấu trường thách đấu từ vựng & chữ Hán trực tiếp giữa các sinh viên qua WebSocket.</li><li>Chặng chuyên ngành Kỹ sư Cầu nối (BrSE N3/N2) & Phát hành chính thức lên Google Play Store / Apple App Store.</li></ul>
+            </div>
+          </div>
+
+          
+
+          <div class="slide-footer">
+            <div class="hanko">絆</div>
+            <div class="footer-text"><strong>ĐIỂM NHẤN:</strong> XIN TRÂN TRỌNG CẢM ƠN HỘI ĐỒNG & THẦY HƯỚNG DẪN! — NHÓM XIN LẮNG NGHE Ý KIẾN ĐÓNG GÓP (Q&A)</div>
+          </div>
+        </section>
+        
+</body>
+</html>

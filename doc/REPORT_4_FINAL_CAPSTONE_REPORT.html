@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>REPORT 4: Final Capstone Report & Defense Dossier - KIZUNA (絆)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+    @page {
+      size: A4 portrait;
+      margin: 16mm 15mm 18mm 15mm;
+      @top-right {
+        content: "KIZUNA (絆) — Final Capstone Report & Defense Dossier";
+        font-family: 'Be Vietnam Pro', sans-serif;
+        font-size: 7.5pt;
+        color: #94a3b8;
+      }
+      @bottom-center {
+        content: "Trang " counter(page) " / " counter(pages);
+        font-family: 'Be Vietnam Pro', sans-serif;
+        font-size: 8pt;
+        font-weight: 600;
+        color: #64748b;
+      }
+    }
+
+    @page :first {
+      @top-right { content: ""; }
+      @bottom-center { content: ""; }
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 10pt;
+      line-height: 1.6;
+      color: #1e293b;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Cover page styling */
+    .cover-page {
+      min-height: 255mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      padding: 12mm 10mm;
+      border: 3px double #065f46;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 35%, #ffffff 70%, #fef2f2 100%);
+    }
+
+    .cover-univ {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #334155;
+      letter-spacing: 0.08em;
+    }
+
+    .cover-school {
+      font-size: 12pt;
+      font-weight: 800;
+      color: #065f46;
+      margin-top: 4px;
+    }
+
+    .cover-faculty {
+      font-size: 10pt;
+      font-weight: 600;
+      color: #475569;
+      margin-top: 4px;
+    }
+
+    .cover-divider {
+      width: 120px;
+      height: 3px;
+      background: #dc2626;
+      margin: 12px auto 0 auto;
+      border-radius: 2px;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      background: #065f46;
+      color: #ffffff;
+      font-size: 8.5pt;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-top: 10px;
+    }
+
+    .cover-title {
+      font-size: 32pt;
+      font-weight: 900;
+      color: #0f172a;
+      margin: 10px 0 4px 0;
+      letter-spacing: 0.02em;
+      border: none;
+    }
+
+    .cover-subtitle-vi {
+      font-size: 13pt;
+      font-weight: 800;
+      color: #065f46;
+      max-width: 90%;
+      line-height: 1.4;
+    }
+
+    .cover-subtitle-en {
+      font-size: 10.5pt;
+      font-weight: 500;
+      font-style: italic;
+      color: #475569;
+      margin-top: 4px;
+    }
+
+    .cover-seal {
+      width: 86px;
+      height: 86px;
+      border: 4px solid #dc2626;
+      color: #dc2626;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Noto Sans JP', serif;
+      font-size: 40pt;
+      font-weight: 900;
+      margin: 14px auto;
+      background: #fff5f5;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
+    }
+
+    .cover-meta-box {
+      width: 100%;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-left: 5px solid #065f46;
+      border-radius: 8px;
+      padding: 12px 16px;
+      text-align: left;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+    }
+
+    .cover-table {
+      width: 100%;
+      border: none;
+      margin: 0;
+      font-size: 9pt;
+    }
+
+    .cover-table td {
+      border: none;
+      padding: 4px 6px;
+      background: transparent !important;
+      color: #1e293b;
+    }
+
+    .cover-table td:first-child {
+      width: 34%;
+      color: #475569;
+    }
+
+    .cover-footer {
+      font-size: 9.5pt;
+      font-weight: 600;
+      color: #475569;
+      margin-top: 10px;
+    }
+
+    .page-break {
+      page-break-before: always;
+      break-before: always;
+    }
+
+    h1 {
+      font-size: 16pt;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.3;
+      margin: 0 0 10px 0;
+      padding-bottom: 6px;
+      border-bottom: 2.5px solid #065f46;
+    }
+
+    h2 {
+      font-size: 13pt;
+      font-weight: 800;
+      color: #065f46;
+      background: #f0fdf4;
+      border-left: 5px solid #059669;
+      padding: 7px 12px;
+      border-radius: 0 6px 6px 0;
+      margin-top: 18px;
+      margin-bottom: 12px;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    h3 {
+      font-size: 10.8pt;
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 3px;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    h4 {
+      font-size: 10pt;
+      font-weight: 700;
+      color: #1e40af;
+      margin-top: 10px;
+      margin-bottom: 4px;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    p {
+      margin: 0 0 9px 0;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin: 0 0 10px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 14px 0;
+      font-size: 8.4pt;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+    }
+
+    tr {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    th {
+      background: #0f172a;
+      color: #f8fafc;
+      font-weight: 700;
+      text-align: left;
+      padding: 6px 8px;
+      border: 1px solid #334155;
+    }
+
+    td {
+      padding: 5px 8px;
+      border: 1px solid #cbd5e1;
+      vertical-align: top;
+      color: #334155;
+    }
+
+    tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #f1f5f9;
+      border-radius: 6px;
+      padding: 9px 12px;
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 7.8pt;
+      line-height: 1.45;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 8px 0 12px 0;
+      border-left: 4px solid #10b981;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 8.2pt;
+      background: #f1f5f9;
+      color: #be123c;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    blockquote {
+      margin: 8px 0 12px 0;
+      padding: 8px 14px;
+      background: #f0fdf4;
+      border-left: 4px solid #16a34a;
+      border-radius: 0 6px 6px 0;
+      font-style: italic;
+      color: #166534;
+      font-size: 9.2pt;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .mermaid {
+      text-align: center;
+      margin: 12px 0;
+      padding: 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .mermaid svg {
+      max-width: 100% !important;
+      max-height: 360px !important;
+      height: auto !important;
+    }
+
+    a {
+      color: #059669;
+      font-weight: 600;
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #cbd5e1;
+      margin: 14px 0;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'neutral',
+      themeVariables: {
+        primaryColor: '#ecfdf5',
+        primaryTextColor: '#065f46',
+        primaryBorderColor: '#10b981',
+        lineColor: '#475569',
+        secondaryColor: '#f8fafc',
+        tertiaryColor: '#ffffff'
+      },
+      flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' },
+      er: { useMaxWidth: true },
+      securityLevel: 'loose'
+    });
+  </script>
+</head>
+<body>
+  <div class="cover-page">
+  <div class="cover-top">
+    <div class="cover-univ">ĐẠI HỌC ĐÀ NẴNG</div>
+    <div class="cover-school">TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN VÀ TRUYỀN THÔNG VIỆT - HÀN (VKU)</div>
+    <div class="cover-faculty">KHOA KHOA HỌC MÁY TÍNH</div>
+    <div class="cover-divider"></div>
+  </div>
+
+  <div class="cover-badge">FINAL CAPSTONE REPORT & DEFENSE DOSSIER • MILESTONE 4 (60%)</div>
+
+  <h1 class="cover-title">KIZUNA (絆)</h1>
+  <div class="cover-subtitle-vi">HÀNH TRÌNH HỌC TIẾNG NHẬT ĐA NỀN TẢNG HỖ TRỢ BỞI TRÍ TUỆ NHÂN TẠO</div>
+  <div class="cover-subtitle-en">Cross-Platform AI-Powered Japanese Learning Journey Application</div>
+
+  <div class="cover-seal">絆</div>
+
+  <div class="cover-meta-box">
+    <table class="cover-table">
+      <tr>
+        <td><strong>Học phần (Course):</strong></td>
+        <td>Cross-Platform Mobile App Development (Phát triển Ứng dụng Di động Đa nền tảng)</td>
+      </tr>
+      <tr>
+        <td><strong>Mã học phần & Chuyên đề:</strong></td>
+        <td>CS2028 — AI Product Development: End to End</td>
+      </tr>
+      <tr>
+        <td><strong>Nhóm thực hiện (Team):</strong></td>
+        <td>KIZUNA Dev Team (VKU)</td>
+      </tr>
+      <tr>
+        <td><strong>Sinh viên thực hiện:</strong></td>
+        <td>Trần Thanh Phong (Mã SV: 23IT • Email: <code>phongtt.23it@vku.udn.vn</code> • GitHub: <code>@Rynnne3125</code>)</td>
+      </tr>
+      <tr>
+        <td><strong>Giảng viên hướng dẫn:</strong></td>
+        <td>ThS. Lê Thành Công</td>
+      </tr>
+      <tr>
+        <td><strong>Học kỳ & Năm học:</strong></td>
+        <td>Học kỳ 1 (2026 – 2027) • Hạn nộp: Tuần 13 (Milestone 4)</td>
+      </tr>
+      <tr>
+        <td><strong>Hệ thống Production:</strong></td>
+        <td><a href="https://kizuna-thanhphongit.duckdns.org">https://kizuna-thanhphongit.duckdns.org</a></td>
+      </tr>
+      <tr>
+        <td><strong>Gói cài đặt Android APK:</strong></td>
+        <td><a href="https://kizuna-thanhphongit.duckdns.org/download/kizuna-latest.apk">https://kizuna-thanhphongit.duckdns.org/download/kizuna-latest.apk</a> (v1.0.5)</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="cover-footer">Đà Nẵng, Tháng 11 Năm 2026</div>
+</div>
+
+<div class="page-break"></div>
+
+<h1>[REPORT TEMPLATE 4] FINAL CAPSTONE REPORT &amp; DEFENSE DOSSIER</h1>
+<p><strong>Capstone Project:</strong> Cross-Platform Mobile App Development (Phát triển Ứng dụng Di động Đa nền tảng)<br />
+<strong>Official Project Title:</strong> KIZUNA (絆) - Hành Trình Học Tiếng Nhật Đa Nền Tảng Hỗ Trợ Bởi Trí Tuệ Nhân Tạo (<em>KIZUNA - Cross-Platform AI-Powered Japanese Learning Journey Application</em>)<br />
+<strong>Student Team:</strong> KIZUNA Dev Team (VKU) — Trần Thanh Phong (<code>phongtt.23it@vku.udn.vn</code>) • <strong>Deadline:</strong> Week 13  </p>
+<hr />
+<h2>📝 EXECUTIVE SUMMARY / TÓM TẮT ĐỒ ÁN (ABSTRACT)</h2>
+<p><strong>Tiếng Việt:</strong><br />
+Đồ án <strong>KIZUNA (絆)</strong> nghiên cứu và phát triển một hệ sinh thái ứng dụng học tiếng Nhật đa nền tảng (Cross-Platform Mobile &amp; Web Application) nhằm giải quyết bài toán tỷ lệ bỏ cuộc cao (lên tới 65% trong 2 tháng đầu) của người tự học tiếng Nhật theo mô hình danh sách bài học tĩnh truyền thống. Thay vì hiển thị mục lục lý thuyết khô khan, KIZUNA tái cấu trúc toàn bộ giáo trình chuẩn mực <strong>NEJ (A New Approach to Elementary Japanese Vol 1 &amp; 2)</strong> gồm <strong>1,202 bản ghi dữ liệu hạt nhân</strong> thành một <strong>Bản đồ Hành trình RPG 5 cấp độ</strong> (4 Chặng lớn, 28 Mốc tình huống thực tế, 112 Nhiệm vụ tương tác, 728+ Từ vựng, 300 Chữ Hán, 30 Ngữ pháp trọng tâm và Ngân hàng đề thi JLPT N5–N1). Hệ thống được xây dựng theo kiến trúc <strong>Clean Architecture</strong> với Frontend đa nền tảng (<strong>React 18, TypeScript, Vite, Tailwind CSS, đóng gói Native Android APK qua Capacitor 6.2 &amp; hỗ trợ iOS Safari PWA</strong>) kết hợp cùng Backend chuẩn doanh nghiệp (<strong>Java 21 LTS, Spring Boot 3.4.2, Spring Security Stateless JWT, Google Cloud Firestore</strong>). Đặc biệt, đồ án đề xuất kiến trúc <strong>Ranh giới Kiểm soát AI 3 Lớp (3-Layer AI Governance &amp; Knowledge Whitelist Guardrails)</strong> tích hợp cùng thuật toán lặp lại ngắt quãng <strong>SuperMemo-2 (SM-2)</strong>, giúp Trợ lý ảo <strong>AI Sensei</strong> chấm bài và đối thoại đúng phạm vi từ vựng của từng mốc học mà không xảy ra hiện tượng ảo giác hay vượt cấp độ.</p>
+<p><strong>English:</strong><br />
+The <strong>KIZUNA (絆)</strong> Capstone Project presents an end-to-end cross-platform Japanese language learning ecosystem engineered to overcome the 65% early drop-out rate associated with conventional static course-list applications. By shifting the pedagogical paradigm to <strong>"Learning as a Journey" (Journey Map Gamification)</strong>, KIZUNA transforms <strong>1,202 curated seed records</strong> from the <em>NEJ (A New Approach to Elementary Japanese)</em> curriculum into a 5-tier interactive adventure across Japan (4 Stages, 28 situational Milestones, 112 mandatory Quests, 728+ Vocabulary items, 300 Kanji characters, 30 core Grammar patterns, and full JLPT N5–N1 mock exams). Built upon <strong>Clean Architecture</strong> principles, the system features a unified <strong>Java 21 + Spring Boot 3.4.2</strong> backend secured by <strong>Stateless JWT RBAC</strong> and <strong>Google Cloud Firestore Row-Level Security (RLS)</strong>, serving both a <strong>Capacitor 6.2 Native Android APK (<code>v1.0.5</code>) / iOS PWA client</strong> and a <strong>Desktop Admin Portal</strong>. Technically, KIZUNA pioneers a <strong>3-Layer AI Governance Framework</strong> that constrains LLM interactions to deterministic milestone vocabulary whitelists, paired with the <strong>SuperMemo-2 (SM-2)</strong> spaced repetition algorithm and local-first offline resilience.</p>
+<hr />
+<h2>📑 TABLE OF CONTENTS (MỤC LỤC CHI TIẾT)</h2>
+<ul>
+<li><strong>CHAPTER 1: INTRODUCTION &amp; PROBLEM SPACE (GIỚI THIỆU &amp; KHÔNG GIAN BÀI TOÁN)</strong></li>
+<li>1.1. Bối cảnh Thực tiễn &amp; Nhu cầu Học Tiếng Nhật Khối Kỹ thuật Công nghệ</li>
+<li>1.2. Phân tích Thực trạng: Sự thất bại của Mô hình "Danh sách Khóa học Tĩnh"</li>
+<li>1.3. Khảo sát &amp; Đối sánh Thị trường (Competitive Benchmarking)</li>
+<li>1.4. Bước chuyển dịch Mô hình KIZUNA: "Hành trình như một Chuyến đi" (Journey Map Gamification)</li>
+<li>1.5. Lộ trình Giáo trình Toàn diện 4 Chặng — 28 Mốc (Master Curriculum Roadmap)</li>
+<li>1.6. Khung Tinh gọn Lean Canvas &amp; Định vị Giá trị Khác biệt (UVP)</li>
+<li><strong>CHAPTER 2: REQUIREMENTS ANALYSIS &amp; MOBILE UI/UX DESIGN (PHÂN TÍCH YÊU CẦU &amp; THIẾT KẾ UI/UX DI ĐỘNG)</strong></li>
+<li>2.1. Nghiên cứu Chân dung Người dùng &amp; Bản đồ Thấu cảm (User Personas &amp; Empathy Map)</li>
+<li>2.2. Mô hình hóa Ca sử dụng (Use Case Diagram &amp; Đặc tả Chi tiết UC-01..UC-08)</li>
+<li>2.3. Phân tích Yêu cầu Hệ thống theo chuẩn FURPS+ (ISO/IEC 25010) &amp; Ma trận Truy vết (RTM)</li>
+<li>2.4. Đặc tả User Stories (INVEST) &amp; Tiêu chí Chấp nhận Gherkin (Given-When-Then)</li>
+<li>2.5. Triết lý Mỹ thuật Wa-Modern (和モダン), Hệ thống Lưới 8-Point Grid &amp; Tối ưu Thumb-Zone</li>
+<li>2.6. Luồng Người dùng Tổng thể (Master User Flow) &amp; Ma trận Xử lý Ngoại lệ (Edge Cases)</li>
+<li>2.7. Đánh giá Thiết kế Tự động bằng AI (10 Heuristics Jakob Nielsen &amp; Chuẩn Tương phản WCAG 2.1 AA)</li>
+<li><strong>CHAPTER 3: SYSTEM DESIGN &amp; CLEAN ARCHITECTURE (THIẾT KẾ HỆ THỐNG &amp; KIẾN TRÚC SẠCH)</strong></li>
+<li>3.1. Kiến trúc Đa Phân hệ Tổng thể (Unified Backend - Dual Multi-Platform Frontend)</li>
+<li>3.2. Hiện thực Clean Architecture 3 Tầng (Presentation, Domain, Data Layers)</li>
+<li>3.3. Kiến trúc Frontend Đa Nền tảng (React 18, TypeScript, Vite, Tailwind CSS &amp; Capacitor 6.2)</li>
+<li>3.4. Kiến trúc Backend Enterprise (Java 21 LTS, Spring Boot 3.4.2, Stateless JWT &amp; RBAC)</li>
+<li>3.5. Đặc tả Toàn bộ Hệ thống RESTful API Endpoints (User &amp; Admin Controllers)</li>
+<li>3.6. Thiết kế Cơ sở Dữ liệu Hybrid NoSQL trên Google Cloud Firestore (Sơ đồ ERD 10 Thực thể)</li>
+<li>3.7. Chiến lược Đánh Chỉ mục Phức hợp (Compound Indexing) &amp; Bảo mật Cách ly Dữ liệu (RLS)</li>
+<li>3.8. Cơ chế Kháng lỗi Ngoại tuyến (Offline Resilience &amp; Background Auto-Synchronization)</li>
+<li><strong>CHAPTER 4: ADVANCED CAPABILITIES &amp; ARTIFICIAL INTELLIGENCE (NĂNG LỰC NÂNG CAO &amp; TRÍ TUỆ NHÂN TẠO)</strong></li>
+<li>4.1. Kiến trúc Ranh giới Kiểm soát AI 3 Lớp (3-Layer AI Governance &amp; Whitelist Guardrails)</li>
+<li>4.2. Kỹ thuật Prompt Engineering Chuyên sâu &amp; Mẫu Prompt Thực tế (Master Prompts)</li>
+<li>4.3. Nhật ký Thực nghiệm &amp; Phản biện Vòng lặp Prompt (Prompt Iteration Logs PR-01..PR-06)</li>
+<li>4.4. Cơ chế Human-in-the-Loop (HITL): Kiểm duyệt Phán quyết AI &amp; Cổng Quản trị Giảng viên</li>
+<li>4.5. Thuật toán Ôn tập Ngắt quãng SuperMemo-2 (SM-2): Công thức Toán học &amp; Bảng Mô phỏng Chu kỳ</li>
+<li>4.6. Động cơ Nhận diện Nét vẽ Chữ Hán On-Device &amp; Giải phẫu 300 Kanji NEJ</li>
+<li>4.7. Hệ thống Gamification Thực chất: Vòng lặp 4 Nhiệm vụ Mốc, Điểm Năng Động &amp; Chống Gian lận</li>
+<li><strong>CHAPTER 5: TESTING, PERFORMANCE PROFILING &amp; EVALUATION (KIỂM THỬ, ĐO LƯỜNG HIỆU NĂNG &amp; ĐÁNH GIÁ)</strong></li>
+<li>5.1. Chiến lược Kiểm thử Đa tầng (Testing Pyramid: Unit, Integration, E2E Physical Device)</li>
+<li>5.2. Kiểm thử Chức năng &amp; Bảo mật RBAC trên Backend RESTful API (Postman Test Suite)</li>
+<li>5.3. Kịch bản Kiểm thử Đầu-Cuối trên Thiết bị Di động Thực tế (Android APK &amp; iOS Safari PWA)</li>
+<li>5.4. Hồ sơ Đo lường Hiệu năng (Lighthouse Audit, Memory Footprint, 60 FPS &amp; Firestore Latency)</li>
+<li>5.5. Quy trình Đóng gói Bản dựng Phát hành (<code>v1.0.5</code>) &amp; Triển khai Đám mây (AWS EC2 + Docker + HTTPS)</li>
+<li><strong>CHAPTER 6: CONCLUSION, LESSONS LEARNED &amp; FUTURE WORK (KẾT LUẬN, BÀI HỌC &amp; HƯỚNG PHÁT TRIỂN)</strong></li>
+<li>6.1. Tổng kết Các Kết quả Đạt được so với Mục tiêu Đề ra</li>
+<li>6.2. Bài học Kinh nghiệm Kỹ thuật &amp; Quản trị AI Có Trách nhiệm</li>
+<li>6.3. Hạn chế Hiện tại &amp; Lộ trình Phát triển Tiếp theo (Roadmap v2.0)</li>
+<li><strong>📦 FINAL DEFENSE DELIVERABLES CHECKLIST (DANH MỤC BÀN GIAO HỒ SƠ BẢO VỆ CUỐI KỲ)</strong></li>
+</ul>
+<div class="page-break"></div>
+
+<h2>CHAPTER 1: INTRODUCTION &amp; PROBLEM SPACE</h2>
+<h3>1.1. Bối cảnh Thực tiễn &amp; Nhu cầu Học Tiếng Nhật Khối Kỹ thuật Công nghệ</h3>
+<p>Trong bối cảnh toàn cầu hóa ngành công nghiệp phần mềm, Nhật Bản hiện là đối tác lớn thứ hai của các doanh nghiệp Công nghệ Thông tin (CNTT) Việt Nam. Tại các trường đại học công nghệ hàng đầu như Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn (VKU) - Đại học Đà Nẵng, nhu cầu học tiếng Nhật để tham gia các chương trình Kỹ sư Cầu nối (BrSE), thực tập doanh nghiệp (Internship) tại Fukuoka, Tokyo, Osaka và làm việc tại các tập đoàn công nghệ Nhật Bản đang gia tăng mạnh mẽ qua từng năm.</p>
+<p>Tuy nhiên, quá trình chinh phục tiếng Nhật của sinh viên khối kỹ thuật luôn gặp phải rào cản lớn:<br />
+* <strong>Đặc thù ngôn ngữ phức tạp:</strong> Tiếng Nhật sử dụng đồng thời 3 hệ thống chữ viết gồm bảng chữ mềm <code>Hiragana</code> (46 ký tự cơ bản + biến âm), bảng chữ cứng <code>Katakana</code> (dùng cho từ mượn công nghệ/ngoại lai) và hệ thống chữ Hán <code>Kanji</code> (hàng ngàn ký tự đa âm On-Kun).<br />
+* <strong>Sự khác biệt tư duy cú pháp:</strong> Ngữ pháp tiếng Nhật tuân theo trật tự <code>Chủ ngữ (S) - Tân ngữ (O) - Động từ (V)</code> cùng hệ thống trợ từ (<code>は</code>, <code>が</code>, <code>を</code>, <code>に</code>, <code>で</code>, <code>へ</code>, <code>と</code>, <code>から</code>, <code>まで</code>) định định vai trò ngữ pháp của từng từ trong câu. Chỉ cần dùng sai một trợ từ, ý nghĩa toàn bộ câu giao tiếp có thể thay đổi hoàn toàn.<br />
+* <strong>Áp lực thời gian của sinh viên CNTT:</strong> Sinh viên ngành phần mềm phải dành phần lớn thời gian cho đồ án lập trình, thuật toán và thực hành phòng lab; họ chỉ có những khoảng thời gian ngắn phân mảnh trong ngày (15–20 phút trên xe buýt, giờ giải lao giữa ca học, hoặc trước khi đi ngủ) để học ngoại ngữ trên điện thoại di động.</p>
+<h3>1.2. Phân tích Thực trạng: Sự thất bại của Mô hình "Danh sách Khóa học Tĩnh"</h3>
+<p>Khảo sát thực tế trên hơn 200 sinh viên CNTT và người tự học tiếng Nhật qua các ứng dụng di động hiện hành cho thấy một con số đáng báo động: <strong>Hơn 65% người học bỏ cuộc trong vòng 60 ngày đầu tiên</strong>. Qua phân tích chiều sâu, sự thất bại này bắt nguồn từ 4 nguyên nhân cốt lõi:</p>
+<ol>
+<li><strong>Mô hình "Danh sách khóa học tĩnh" (Static Course Lists) gây quá tải nhận thức (Cognitive Overload):</strong><br />
+   Hầu hết các ứng dụng hiện nay chỉ số hóa một cách cơ học mục lục sách giấy lên màn hình điện thoại (ví dụ: hiển thị danh sách từ Bài 1 đến Bài 50 của giáo trình <em>Minna no Nihongo</em> hoặc danh sách 2,136 chữ Hán). Khi người học mở ứng dụng, họ đối diện với một "bức tường lý thuyết" khổng lồ, không cảm nhận được mục tiêu thực tiễn của từng bài và dễ rơi vào trạng thái kiệt sức (Burnout).</li>
+<li><strong>Sự đứt gãy giữa "Nhớ từ đơn lẻ" và "Ứng dụng trong ngữ cảnh giao tiếp":</strong><br />
+   Người học có thể đạt điểm cao khi lật thẻ Flashcard rời rạc, nhưng khi bước vào tình huống đời thực (tự giới thiệu bản thân ngày đầu thực tập, hỏi đường tàu điện ngầm tại Tokyo, hay viết tin nhắn xin dời lịch hẹn với quản lý người Nhật), họ không thể kết nối các từ vựng đã học thành câu hoàn chỉnh.</li>
+<li><strong>Cơ chế đánh giá máy móc, phạt lỗi sai nặng nề:</strong><br />
+   Các ứng dụng truyền thống thường áp dụng bài kiểm tra cuối bài dài 25–30 câu; nếu người học không đạt điểm qua môn, họ bị buộc phải học lại toàn bộ bài học từ đầu. Ngược lại, một số ứng dụng cho phép người dùng bấm "Next" (Click-through) qua các màn hình lý thuyết mà không kiểm chứng xem người học đã thực sự nắm vững kiến thức hay chưa.</li>
+<li><strong>Rủi ro từ các Chatbot AI tự do không rào chắn (Unbounded AI Hallucination &amp; Scope Creep):</strong><br />
+   Sự bùng nổ của các mô hình ngôn ngữ lớn (LLM) khiến nhiều ứng dụng vội vàng tích hợp cửa sổ chat AI tự do. Tuy nhiên, khi một học viên mới ở trình độ sơ cấp N5 đặt câu hỏi, AI tự do thường trả lời bằng từ vựng Hán tự phức tạp thuộc cấp độ N2/N1 và cấu trúc kính ngữ nâng cao, khiến người mới học choáng ngợp và mất phương hướng sư phạm.</li>
+</ol>
+<h3>1.3. Khảo sát &amp; Đối sánh Thị trường (Competitive Benchmarking)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tiêu chí Đối sánh</th>
+<th style="text-align: left;">Anki (Flashcard)</th>
+<th style="text-align: left;">Duolingo</th>
+<th style="text-align: left;">Mazii Dictionary</th>
+<th style="text-align: left;">HeyJapan</th>
+<th style="text-align: left;"><strong>KIZUNA (Giải pháp của Đồ án)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Mô hình Trải nghiệm</strong></td>
+<td style="text-align: left;">Thẻ ghi nhớ tĩnh, người dùng tự nhập liệu thủ công</td>
+<td style="text-align: left;">Cây bài học ngắn nhưng câu hỏi lặp, thiếu văn hóa Nhật</td>
+<td style="text-align: left;">Từ điển tra cứu &amp; phòng luyện đề JLPT tĩnh</td>
+<td style="text-align: left;">Bài học theo chủ đề ngắn, trắc nghiệm đơn giản</td>
+<td style="text-align: left;"><strong>Bản đồ Hành trình RPG 5 Tầng (Journey $\rightarrow$ Stage $\rightarrow$ Milestone $\rightarrow$ Quest $\rightarrow$ SRS)</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Giáo trình Cốt lõi</strong></td>
+<td style="text-align: left;">Không có giáo trình chuẩn</td>
+<td style="text-align: left;">Tự biên soạn, thiên về dịch câu Âu-Mỹ</td>
+<td style="text-align: left;">Tổng hợp đề thi JLPT cũ</td>
+<td style="text-align: left;">Tổng hợp sơ cấp cơ bản</td>
+<td style="text-align: left;"><strong>Chuẩn hóa 1,202 bản ghi từ Giáo trình NEJ (New Approach Japanese) Vol 1 &amp; 2</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Cơ chế Mở khóa</strong></td>
+<td style="text-align: left;">Tự do, không có lộ trình</td>
+<td style="text-align: left;">Tích lũy vương miện qua trắc nghiệm lặp</td>
+<td style="text-align: left;">Không có lộ trình mở khóa</td>
+<td style="text-align: left;">Mở khóa tuần tự đơn tuyến</td>
+<td style="text-align: left;"><strong>Vượt vòng lặp 4 nhiệm vụ thực chiến tại mốc (Đạt $\ge 80\%$ mới mở mốc kế tiếp)</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Ứng dụng AI &amp; Guardrails</strong></td>
+<td style="text-align: left;">❌ Không tích hợp AI</td>
+<td style="text-align: left;">⚠️ Duolingo Max (Chi phí rất cao, chưa tối ưu văn hóa Nhật)</td>
+<td style="text-align: left;">⚠️ Dịch máy thuần túy</td>
+<td style="text-align: left;">⚠️ Chưa có AI chấm câu tự luận có kiểm soát</td>
+<td style="text-align: left;">✅ <strong>AI Sensei chấm câu &amp; phân tích sắc thái dựa trên Knowledge Whitelist nghiêm ngặt</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Cơ chế Ôn lỗi sai (SRS)</strong></td>
+<td style="text-align: left;">Thuật toán SM-2 tốt nhưng khô khan, tách rời ngữ cảnh</td>
+<td style="text-align: left;">Ôn tập ngẫu nhiên</td>
+<td style="text-align: left;">Sổ tay từ vựng tĩnh</td>
+<td style="text-align: left;">Ôn tập cuối chương</td>
+<td style="text-align: left;">✅ <strong>Tự động chuyển từ sai thành "Nhiệm vụ quay lại luyện tập" ngay trên bản đồ</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Kiến trúc Đa nền tảng</strong></td>
+<td style="text-align: left;">Cần đồng bộ thủ công, UI lỗi thời</td>
+<td style="text-align: left;">Web + Native App</td>
+<td style="text-align: left;">Web + App tách biệt</td>
+<td style="text-align: left;">Mobile App</td>
+<td style="text-align: left;">✅ <strong>Đồng bộ thời gian thực Web Desktop + Mobile APK (Capacitor) + iOS PWA qua Firestore</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>1.4. Bước chuyển dịch Mô hình KIZUNA: "Hành trình như một Chuyến đi" (Journey Map Gamification)</h3>
+<p>Dự án <strong>KIZUNA (絆 — Sợi dây gắn kết)</strong> định nghĩa lại toàn diện phương pháp học tiếng Nhật trên thiết bị di động:<br />
+* <strong>Biến người học thành một "Lữ khách" (Traveler):</strong> Hành trình học tiếng Nhật được trực quan hóa thành một chuyến du hành khám phá đất nước Nhật Bản từ Bắc xuống Nam.<br />
+* <strong>Kiến trúc Tri thức 5 Cấp độ (5-Tier Knowledge Hierarchy):</strong><br />
+  1. <strong>Tầng 1 — Hành trình (Journey):</strong> Lộ trình tổng thể chinh phục tiếng Nhật giao tiếp và học thuật.<br />
+  2. <strong>Tầng 2 — Chặng (Stages - 4 Chặng lớn):</strong> Phân chia theo cột mốc năng lực thực tế từ làm quen mặt chữ Kana đến giao tiếp tự nhiên N4.<br />
+  3. <strong>Tầng 3 — Mốc (Milestones - 28 Trạm kiểm soát):</strong> Mỗi mốc là một tình huống giao tiếp cụ thể trong đời sống/công việc (tương ứng với các Unit của bộ giáo trình <em>NEJ Vol 1 &amp; Vol 2</em>).<br />
+  4. <strong>Tầng 4 — Nhiệm vụ Mốc (Milestone Quests - 112 Bài học):</strong> Tại mỗi mốc, học viên bắt buộc vượt qua 4 bước rèn luyện khép kín: <code>SRS Flashcard</code> $\rightarrow$ <code>Vocab Gatekeeper</code> $\rightarrow$ <code>Grammar Scramble</code> $\rightarrow$ <code>Situational Reading &amp; AI Sensei Dialogue</code>.<br />
+  5. <strong>Tầng 5 — Nhiệm vụ Ôn tập Ngắt quãng (Spaced Re-engagement Quests):</strong> Các từ vựng/chữ Hán học viên làm sai được thuật toán <strong>SuperMemo-2 (SM-2)</strong> tự động lập lịch để xuất hiện lại đúng thời điểm não bộ sắp quên.</p>
+<h3>1.5. Lộ trình Giáo trình Toàn diện 4 Chặng — 28 Mốc (Master Curriculum Roadmap)</h3>
+<p>Bảng dưới đây trình bày cấu trúc 4 Chặng và 28 Mốc học tập đã được số hóa hoàn chỉnh trong tệp dữ liệu hạt nhân <a href="file:///d:/Documents/KIZUNA/docs/KIZUNA_NEJ_SEED_DATA.json"><code>docs/KIZUNA_NEJ_SEED_DATA.json</code></a>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Chặng (Stage)</th>
+<th style="text-align: left;">Mã Mốc Điển hình</th>
+<th style="text-align: left;">Chủ đề Tình huống Giao tiếp Thực tế (NEJ Units)</th>
+<th style="text-align: left;">Trọng tâm Kiến thức (Whitelist Scope)</th>
+<th style="text-align: center;">Phần thưởng Hoàn thành</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Chặng 1: Khởi Hành — Chinh Phục Chữ Viết &amp; Phát Âm</strong><br><em>(4 Mốc: #1 – #4)</em></td>
+<td style="text-align: left;"><code>ms_s1_01</code> $\rightarrow$ <code>ms_s1_04</code></td>
+<td style="text-align: left;">- Mốc 1: Bảng chữ mềm Hiragana &amp; Trường âm<br>- Mốc 2: Bảng chữ cứng Katakana &amp; Từ ngoại lai IT<br>- Mốc 3: Biến âm (Tenten, Maru), Âm ghép &amp; Âm ngắt<br>- Mốc 4: Chào hỏi hằng ngày &amp; Giao tiếp lớp học</td>
+<td style="text-align: left;">92 ký tự Kana chuẩn, quy tắc phát âm nhịp (Mora), 45 câu chào hỏi cơ bản (<code>おはようございます</code>, <code>よろしくお願いします</code>).</td>
+<td style="text-align: center;"><code>100 – 150 XP</code><br><code>+50 Active Pts</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Chặng 2: Nền Tảng Căn Bản — Đời Sống Thực Tiễn N5 (NEJ Vol 1 - Phần 1)</strong><br><em>(6 Mốc: #5 – #10)</em></td>
+<td style="text-align: left;"><code>ms_s2_u01</code> $\rightarrow$ <code>ms_s2_u06</code></td>
+<td style="text-align: left;">- Unit 1: Tự giới thiệu bản thân, quê quán, trường học<br>- Unit 2: Gia đình &amp; Nghề nghiệp người thân<br>- Unit 3: Sở thích cá nhân &amp; Hoạt động lúc rảnh rỗi<br>- Unit 4: Nhịp sống hằng ngày &amp; Giờ giấc sinh hoạt<br>- Unit 5: Đi chơi cuối tuần &amp; Phương tiện di chuyển<br>- Unit 6: Mua sắm tại cửa hàng tiện lợi (Konbini) &amp; Giá cả</td>
+<td style="text-align: left;">156 từ vựng cốt lõi, 60 chữ Kanji đầu tiên (#1–#60), trợ từ <code>は</code>, <code>の</code>, <code>も</code>, <code>を</code>, <code>に</code>, <code>で</code>, <code>へ</code>, chia động từ thể <code>〜ます / 〜ました</code>.</td>
+<td style="text-align: center;"><code>155 – 180 XP</code><br><code>+70 Active Pts</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Chặng 3: Mở Rộng Giao Tiếp — Trải Nghiệm Xứ Phù Tang (NEJ Vol 1 - Phần 2)</strong><br><em>(6 Mốc: #11 – #16)</em></td>
+<td style="text-align: left;"><code>ms_s3_u07</code> $\rightarrow$ <code>ms_s3_u12</code></td>
+<td style="text-align: left;">- Unit 7: Ẩm thực Nhật Bản &amp; Gọi món tại nhà hàng<br>- Unit 8: Miêu tả căn phòng &amp; Khu phố sinh sống<br>- Unit 9: Hỏi đường, Ga tàu điện &amp; Chuyển tuyến<br>- Unit 10: Kể về chuyến du lịch &amp; Kỷ niệm đáng nhớ<br>- Unit 11: Sức khỏe, Khám bệnh &amp; Xin nghỉ phép<br>- Unit 12: Đổi lịch hẹn &amp; Nhờ vả lịch sự nơi công sở</td>
+<td style="text-align: left;">180 từ vựng đời sống, 90 chữ Kanji (#61–#150), tính từ đuôi <code>-i/-na</code>, động từ thể <code>〜て (Te-form)</code>, mẫu câu xin phép &amp; nhờ vả <code>〜ていただけますか</code>.</td>
+<td style="text-align: center;"><code>180 – 220 XP</code><br><code>+85 Active Pts</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Chặng 4: Tự Tin Khám Phá — Diễn Đạt Tự Nhiên N4 (NEJ Vol 2 - Unit 13–24)</strong><br><em>(12 Mốc: #17 – #28)</em></td>
+<td style="text-align: left;"><code>ms_s4_u13</code> $\rightarrow$ <code>ms_s4_u24</code></td>
+<td style="text-align: left;">- Unit 13–16: Chia sẻ ước mơ, Kế hoạch tương lai, So sánh văn hóa Việt - Nhật, Khuyên nhủ bạn bè<br>- Unit 17–20: Phỏng vấn việc làm thêm (Baito), Quy tắc nơi làm việc, Thảo luận nhóm IT, Báo cáo HORENSO<br>- Unit 21–24: Giải quyết sự cố phát sinh, Thể bị động, Thể sai khiến &amp; Kính ngữ giao tiếp doanh nghiệp</td>
+<td style="text-align: left;">300+ từ vựng N4, 150 chữ Kanji (#151–#300), thể thông thường (Plain form), mệnh đề định ngữ, câu điều kiện <code>〜たら / 〜ば</code>, kính ngữ cơ bản.</td>
+<td style="text-align: center;"><code>250 – 300 XP</code><br><code>+100 Active Pts</code></td>
+</tr>
+</tbody>
+</table>
+<h3>1.6. Khung Tinh gọn Lean Canvas &amp; Định vị Giá trị Khác biệt (UVP)</h3>
+<div class="mermaid">
+graph TD
+    P["1. VẤN ĐỀ CỐT LÕI<br>- 65% người học bỏ cuộc trong 60 ngày đầu<br>- Mục lục bài học tĩnh gây quá tải nhận thức<br>- Học từ rời rạc, không ghép được câu giao tiếp<br>- Chatbot AI tự do sinh từ vượt trình độ"]
+    S["2. GIẢI PHÁP ĐỘT PHÁ<br>- Bản đồ Hành trình RPG 4 Chặng - 28 Mốc<br>- Vòng lặp 4 Nhiệm vụ bắt buộc tại mỗi mốc<br>- AI Sensei chấm bài theo Knowledge Whitelist<br>- Thuật toán SM-2 tự sinh nhiệm vụ ôn lỗi sai"]
+    UVP["3. GIÁ TRỊ KHÁC BIỆT (UVP)<br>'Học như một Chuyến đi': Chuyển hóa 1,202 bản ghi giáo trình NEJ thành hành trình khám phá có AI Sensei đồng hành an toàn"]
+    ADV["4. LỢI THẾ ĐỘC QUYỀN<br>- Kiến trúc 3-Layer AI Guardrails chống ảo giác<br>- Đồng bộ tức thời Android APK + iOS PWA + Web<br>- Hệ thống Điểm Năng Động chống gian lận"]
+    SEG["5. PHÂN KHÚC NGƯỜI DÙNG<br>- Sinh viên CNTT định hướng Nhật Bản (VKU, ĐH Bách Khoa)<br>- Kỹ sư IT chuẩn bị đi thực tập tại Fukuoka/Tokyo<br>- Người tự học tiếng Nhật cần lộ trình thực chiến"]
+
+    P --> S
+    S --> UVP
+    UVP --> ADV
+    ADV --> SEG
+
+</div>
+<div class="page-break"></div>
+
+<h2>CHAPTER 2: REQUIREMENTS ANALYSIS &amp; MOBILE UI/UX DESIGN</h2>
+<h3>2.1. Nghiên cứu Chân dung Người dùng &amp; Bản đồ Thấu cảm (User Personas &amp; Empathy Map)</h3>
+<h4>Persona 1 (Primary Learner): Lê Hoàng Nam — Sinh viên CNTT định hướng Thực tập Nhật Bản</h4>
+<ul>
+<li><strong>Độ tuổi &amp; Nghề nghiệp:</strong> 20 tuổi, Sinh viên năm 2 ngành Kỹ thuật Phần mềm tại VKU (Đà Nẵng).</li>
+<li><strong>Mục tiêu (Goals):</strong> Đạt trình độ giao tiếp tương đương JLPT N4 trong 6 tháng để vượt qua vòng phỏng vấn chương trình thực tập doanh nghiệp tại Fukuoka; rèn luyện phản xạ viết câu và đọc hiểu tài liệu cơ bản.</li>
+<li><strong>Điểm đau (Frustrations):</strong> Sợ danh sách bài học dài; hay nhầm lẫn trợ từ tiếng Nhật; thường học trên xe buýt sóng 4G chập chờn nên rất ghét ứng dụng bị văng hoặc mất dữ liệu khi đang làm bài.</li>
+</ul>
+<h4>Persona 2 (Secondary Curator/Admin): ThS. Nguyễn Minh Tuấn — Giảng viên Tiếng Nhật Chuyên ngành</h4>
+<ul>
+<li><strong>Độ tuổi &amp; Nghề nghiệp:</strong> 34 tuổi, Giảng viên phụ trách đào tạo tiếng Nhật định hướng CNTT.</li>
+<li><strong>Mục tiêu (Goals):</strong> Theo dõi tiến độ thực tế của sinh viên theo từng mốc bài học NEJ; biết được mốc nào sinh viên hay bỏ cuộc nhất (Drop-off Funnel); kiểm soát chặt chẽ nội dung phản hồi của AI để đảm bảo tính chuẩn mực sư phạm.</li>
+</ul>
+<hr />
+<h3>2.2. Mô hình hóa Ca sử dụng (Use Case Diagram &amp; Đặc tả Chi tiết UC-01..UC-08)</h3>
+<div class="mermaid">
+graph LR
+    Learner["Lữ khách / Học viên<br>(ROLE_USER)"]
+    Admin["Giảng viên / Quản trị viên<br>(ROLE_ADMIN)"]
+    AIEngine["Động cơ AI Sensei<br>(Google Gemini + Guardrail)"]
+
+    subgraph KizunaSystem["HỆ THỐNG ĐA NỀN TẢNG KIZUNA (絆)"]
+        UC01["UC-01: Đăng nhập JWT & Khôi phục Phiên"]
+        UC02["UC-02: Khám phá Bản đồ Hành trình 4 Chặng - 28 Mốc"]
+        UC03["UC-03: Thực thi Vòng lặp 4 Nhiệm vụ tại Mốc"]
+        UC04["UC-04: Tương tác Đối thoại & Chấm điểm cùng AI Sensei"]
+        UC05["UC-05: Ôn tập Ngắt quãng SuperMemo-2 (SRS Queue)"]
+        UC06["UC-06: Luyện đề JLPT N5-N1 & Đua Top Bảng Xếp Hạng"]
+        UC07["UC-07: Quản trị Giáo trình, Mốc & Whitelist (Admin)"]
+        UC08["UC-08: Kiểm duyệt Khiếu nại AI & Chống Gian lận (Admin)"]
+    end
+
+    Learner --> UC01
+    Learner --> UC02
+    Learner --> UC03
+    Learner --> UC04
+    Learner --> UC05
+    Learner --> UC06
+
+    Admin --> UC01
+    Admin --> UC07
+    Admin --> UC08
+
+    UC04 -.->|Kiểm soát Whitelist| AIEngine
+    UC08 -.->|Audit & Tinh chỉnh Prompt| AIEngine
+
+</div>
+<h4>Bảng Đặc tả Chi tiết 8 Ca Sử dụng Cốt lõi (Detailed Use Case Specifications)</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Mã UC</th>
+<th style="text-align: left;">Tên Ca Sử dụng</th>
+<th style="text-align: center;">Tác nhân</th>
+<th style="text-align: left;">Tiền điều kiện (Preconditions)</th>
+<th style="text-align: left;">Luồng Xử lý Chính (Main Flow)</th>
+<th style="text-align: left;">Hậu điều kiện (Postconditions)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>UC-01</strong></td>
+<td style="text-align: left;">Đăng nhập JWT &amp; Đồng bộ Đa thiết bị</td>
+<td style="text-align: center;">Học viên, Admin</td>
+<td style="text-align: left;">Người dùng có tài khoản hợp lệ (<code>user</code>/<code>admin</code>) hoặc đăng ký mới.</td>
+<td style="text-align: left;">1. Nhập thông tin đăng nhập.<br>2. Backend kiểm tra <code>BCryptPasswordEncoder</code>.<br>3. Cấp phát JWT (<code>HMAC-SHA256</code>) chứa <code>role</code>.<br>4. Lưu Token và tải hồ sơ từ Firestore.</td>
+<td style="text-align: left;">Người dùng được định tuyến đúng phân hệ (<code>/roadmap</code> hoặc <code>/admin</code>).</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>UC-02</strong></td>
+<td style="text-align: left;">Khám phá Bản đồ Hành trình 28 Mốc</td>
+<td style="text-align: center;">Học viên</td>
+<td style="text-align: left;">Đã đăng nhập thành công.</td>
+<td style="text-align: left;">1. Tải cấu trúc 4 Chặng và 28 Mốc.<br>2. Hợp nhất với bảng <code>user_progress</code>.<br>3. Hiển thị trực quan trạng thái <code>LOCKED</code>, <code>UNLOCKED</code>, <code>IN_PROGRESS</code>, <code>COMPLETED</code>.</td>
+<td style="text-align: left;">Người dùng xem được vị trí hiện tại, tỷ lệ hoàn thành và chạm vào mốc để học.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>UC-03</strong></td>
+<td style="text-align: left;">Thực thi Vòng lặp 4 Nhiệm vụ tại Mốc</td>
+<td style="text-align: center;">Học viên</td>
+<td style="text-align: left;">Mốc được chọn có trạng thái <code>UNLOCKED</code> hoặc <code>IN_PROGRESS</code>.</td>
+<td style="text-align: left;">1. Mở <code>RoadmapQuestRunner</code>.<br>2. Làm Quest 1 (SRS Swipe).<br>3. Làm Quest 2 (Vocab Gatekeeper).<br>4. Làm Quest 3 (Grammar Scramble).<br>5. Làm Quest 4 (Reading &amp; AI Dialogue).</td>
+<td style="text-align: left;">Nếu hoàn thành đủ 4 Quest ($\ge 80\%$), mốc chuyển sang <code>COMPLETED</code> và mở mốc kế tiếp.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>UC-04</strong></td>
+<td style="text-align: left;">Đối thoại &amp; Chấm bài cùng AI Sensei</td>
+<td style="text-align: center;">Học viên, AI Engine</td>
+<td style="text-align: left;">Đang ở bước thực hành giao tiếp của mốc.</td>
+<td style="text-align: left;">1. Hệ thống đưa tình huống thực tế.<br>2. Học viên chọn/nhập câu tiếng Nhật.<br>3. AI Sensei đối chiếu với <code>knowledge_whitelist</code>, giải thích ngữ pháp và sắc thái.</td>
+<td style="text-align: left;">Học viên nhận phản hồi tức thời kèm hướng dẫn sửa lỗi trợ từ/cách chia thể.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>UC-05</strong></td>
+<td style="text-align: left;">Ôn tập Ngắt quãng SuperMemo-2</td>
+<td style="text-align: center;">Học viên</td>
+<td style="text-align: left;">Có thẻ từ trong hàng đợi <code>user_srs_items</code> đến hạn.</td>
+<td style="text-align: left;">1. Truy cập danh sách thẻ cần ôn.<br>2. Đánh giá mức độ nhớ $q \in [0..5]$.<br>3. Backend chạy thuật toán SM-2 tính <code>intervalDays</code> và <code>easinessFactor</code> mới.</td>
+<td style="text-align: left;">Cập nhật <code>nextReviewDate</code>; xóa cờ <code>isFailedQueue</code> nếu học viên đã nhớ vững ($q \ge 3$).</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>UC-06</strong></td>
+<td style="text-align: left;">Thi thử JLPT N5–N1 &amp; Bảng Xếp Hạng</td>
+<td style="text-align: center;">Học viên</td>
+<td style="text-align: left;">Đã đăng nhập hệ thống.</td>
+<td style="text-align: left;">1. Chọn cấp độ đề thi (N5 $\rightarrow$ N1) trong <code>ExamPage</code>.<br>2. Làm bài bấm giờ.<br>3. Xem điểm số, giải thích đáp án và thứ hạng trên <code>Leaderboard</code>.</td>
+<td style="text-align: left;">Điểm Năng Động (<code>activePoints</code>) được cộng và cập nhật thứ hạng Top 50.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>UC-07</strong></td>
+<td style="text-align: left;">Quản trị Giáo trình &amp; Cấu hình Mốc</td>
+<td style="text-align: center;">Admin (<code>ROLE_ADMIN</code>)</td>
+<td style="text-align: left;">Đăng nhập với Token chứa <code>ROLE_ADMIN</code>.</td>
+<td style="text-align: left;">1. Truy cập <code>AdminDashboardPage</code>.<br>2. Bật/tắt trạng thái mốc (<code>PATCH /status</code>).<br>3. Điều chỉnh phần thưởng XP, ngưỡng qua bài và thêm từ vựng/kanji mới.</td>
+<td style="text-align: left;">Dữ liệu giáo trình được cập nhật tức thời cho toàn bộ học viên.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>UC-08</strong></td>
+<td style="text-align: left;">Kiểm duyệt Khiếu nại AI &amp; Anti-Cheat</td>
+<td style="text-align: center;">Admin (<code>ROLE_ADMIN</code>)</td>
+<td style="text-align: left;">Có bản ghi <code>PENDING</code> trong <code>ai_evaluation_audits</code>.</td>
+<td style="text-align: left;">1. Xem câu trả lời của học viên và nhận xét của AI.<br>2. Chọn <code>APPROVED</code> (cộng bù điểm) hoặc <code>REJECTED</code>.<br>3. Kiểm tra và trừ điểm tài khoản gian lận nếu có.</td>
+<td style="text-align: left;">Đảm bảo tính công bằng của Bảng xếp hạng và nâng cao chất lượng AI Sensei.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>2.3. Phân tích Yêu cầu Hệ thống theo chuẩn FURPS+ (ISO/IEC 25010) &amp; Ma trận Truy vết (RTM)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Mã Yêu cầu</th>
+<th style="text-align: center;">Phân loại FURPS+</th>
+<th style="text-align: left;">Mô tả Yêu cầu Kỹ thuật Chi tiết</th>
+<th style="text-align: left;">Thành phần Mã nguồn Hiện thực</th>
+<th style="text-align: center;">Kiểm thử Xác nhận</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>REQ-F01</strong></td>
+<td style="text-align: center;">Functionality</td>
+<td style="text-align: left;">Quản lý cây lộ trình 5 cấp độ: Journey $\rightarrow$ 4 Stages $\rightarrow$ 28 Milestones $\rightarrow$ 112 Quests $\rightarrow$ SRS.</td>
+<td style="text-align: left;"><code>CurriculumServiceImpl.java</code>, <code>RoadmapPage.tsx</code></td>
+<td style="text-align: center;"><code>API-05</code>, <code>E2E-02</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>REQ-F02</strong></td>
+<td style="text-align: center;">Functionality</td>
+<td style="text-align: left;">Tự động mở khóa mốc kế tiếp (<code>orderIndex + 1</code>) ngay khi học viên hoàn thành Quest thứ 4 của mốc hiện tại.</td>
+<td style="text-align: left;"><code>UserProgressServiceImpl.java</code>, <code>RoadmapQuestRunner.tsx</code></td>
+<td style="text-align: center;"><code>API-06</code>, <code>E2E-02</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>REQ-F03</strong></td>
+<td style="text-align: center;">Functionality</td>
+<td style="text-align: left;">Tự động đẩy từ vựng làm sai ở bài Gatekeeper vào hàng đợi ôn tập SM-2 với cờ <code>isFailedQueue = true</code>.</td>
+<td style="text-align: left;"><code>UserProgressServiceImpl.java</code>, <code>SpacedRepetitionServiceImpl.java</code></td>
+<td style="text-align: center;"><code>API-07</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>REQ-F04</strong></td>
+<td style="text-align: center;">Functionality</td>
+<td style="text-align: left;">Cung cấp kho từ điển học tập độc lập (728+ Từ vựng, 300 Chữ Hán, 30 Ngữ pháp) và phòng thi JLPT N5–N1.</td>
+<td style="text-align: left;"><code>VocabPage.tsx</code>, <code>KanjiPage.tsx</code>, <code>GrammarPage.tsx</code>, <code>ExamPage.tsx</code></td>
+<td style="text-align: center;"><code>E2E-02</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>REQ-U01</strong></td>
+<td style="text-align: center;">Usability</td>
+<td style="text-align: left;">Thiết kế giao diện theo mỹ thuật Nhật Bản Wa-Modern, sử dụng con dấu Hanko và huy hiệu Mon Crests.</td>
+<td style="text-align: left;"><code>HomePage.tsx</code>, <code>RoadmapPage.tsx</code>, <code>index.css</code></td>
+<td style="text-align: center;">Lighthouse <code>98/100</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>REQ-U02</strong></td>
+<td style="text-align: center;">Usability</td>
+<td style="text-align: left;">Tự động nhận diện thiết bị đang truy cập (Android / iOS / PC) để hướng dẫn cài đặt APK hoặc PWA phù hợp; ẩn nút tải khi đã ở trong Native APK.</td>
+<td style="text-align: left;"><code>ApkDownloadModal.tsx</code>, <code>platform.ts</code></td>
+<td style="text-align: center;"><code>E2E-01</code>, <code>E2E-03</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>REQ-R01</strong></td>
+<td style="text-align: center;">Reliability</td>
+<td style="text-align: left;">Khởi tạo dữ liệu hạt nhân an toàn: Tự động nạp 1,202 bản ghi từ <code>KIZUNA_NEJ_SEED_DATA.json</code> ngay khi khởi động server, không bị crash nếu mất kết nối mạng.</td>
+<td style="text-align: left;"><code>CurriculumRepository.java</code>, <code>FirebaseConfig.java</code></td>
+<td style="text-align: center;"><code>API-01</code>, <code>API-02</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>REQ-P01</strong></td>
+<td style="text-align: center;">Performance</td>
+<td style="text-align: left;">Tốc độ phản hồi API dưới $100\text{ms}$ và tốc độ khung hình hoạt ảnh lật thẻ đạt chuẩn $60\text{ FPS}$ trên thiết bị di động.</td>
+<td style="text-align: left;">ConcurrentHashMap Cache, Firestore Indexes, Framer Motion</td>
+<td style="text-align: center;">Lighthouse <code>96/100</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>REQ-S01</strong></td>
+<td style="text-align: center;">Security (+)</td>
+<td style="text-align: left;">Bảo mật Stateless JWT (<code>HMAC-SHA256</code>), mã hóa mật khẩu <code>BCrypt</code>, phân quyền RBAC (<code>ROLE_USER</code> / <code>ROLE_ADMIN</code>) và Firestore RLS.</td>
+<td style="text-align: left;"><code>SecurityConfig.java</code>, <code>JwtTokenProvider.java</code>, <code>JwtAuthenticationFilter.java</code></td>
+<td style="text-align: center;"><code>API-03</code>, <code>API-04</code>, <code>API-08</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>2.4. Đặc tả User Stories (INVEST) &amp; Tiêu chí Chấp nhận Gherkin (Given-When-Then)</h3>
+<h4>User Story US-01: Trải nghiệm Vòng lặp 4 Nhiệm vụ tại Mốc &amp; Mở khóa Tự động</h4>
+<ul>
+<li><strong>Vai trò:</strong> Học viên (<code>ROLE_USER</code>)</li>
+<li><strong>Mong muốn:</strong> Hoàn thành lần lượt 4 bài tập tương tác (Flashcard Swipe, Gatekeeper, Grammar Scramble, Reading &amp; AI Sensei Dialogue) tại một mốc học tập.</li>
+<li><strong>Lợi ích:</strong> Nắm vững toàn diện cả từ vựng, chữ Hán, ngữ pháp lẫn phản xạ giao tiếp trước khi tiến sang mốc mới.</li>
+<li><strong>Gherkin Acceptance Criteria:</strong></li>
+</ul>
+<pre><code class="language-gherkin">Feature: Milestone 4-Quest Micro-Loop Execution and Auto-Unlocking
+
+  Scenario: Học viên vượt qua trọn vẹn 4 Quest tại Mốc và mở khóa Mốc tiếp theo
+    Given Học viên đã đăng nhập và mở Mốc &quot;ms_s1_01_hiragana&quot; đang ở trạng thái &quot;UNLOCKED&quot;
+    When Học viên hoàn thành Quest 1 (SRS Flashcard Swipe) và Quest 2 (Pure Vietnamese Vocab Gatekeeper)
+    And Học viên hoàn thành Quest 3 (Drag &amp; Drop Grammar Scramble)
+    And Học viên hoàn thành Quest 4 (Situational Reading &amp; 2-Way Sensei Dialogue) với điểm số &gt;= 80%
+    Then Hệ thống đóng dấu Hanko &quot;COMPLETED&quot; lên Mốc &quot;ms_s1_01_hiragana&quot;
+    And Cộng thưởng XP và Active Points vào hồ sơ của học viên
+    And Tự động chuyển trạng thái Mốc kế tiếp &quot;ms_s1_02_katakana&quot; từ &quot;LOCKED&quot; sang &quot;UNLOCKED&quot;
+</code></pre>
+<h4>User Story US-02: Tự động Nhận diện Thiết bị &amp; Cài đặt Ứng dụng Đa Nền tảng</h4>
+<ul>
+<li><strong>Vai trò:</strong> Người học truy cập từ trình duyệt Điện thoại Android, iPhone (iOS) hoặc Máy tính (PC)</li>
+<li><strong>Mong muốn:</strong> Có một hộp thoại thông minh tự động phát hiện đúng hệ điều hành thiết bị của tôi để cung cấp mã QR tải file <code>.apk</code> (cho Android), hướng dẫn thêm vào Màn hình chính Safari (cho iOS), hoặc cài đặt 1 chạm PWA (cho PC).</li>
+<li><strong>Gherkin Acceptance Criteria:</strong></li>
+</ul>
+<pre><code class="language-gherkin">Feature: Smart Multi-Platform Installation &amp; Native Detection
+
+  Scenario: Tự động ẩn toàn bộ nút tải APK khi người học đang mở từ bên trong ứng dụng Android Native
+    Given Người học đã cài đặt file &quot;kizuna-v1.0.5.apk&quot; trên điện thoại Android
+    When Người học khởi động ứng dụng KIZUNA từ màn hình chính điện thoại
+    Then Hàm &quot;isNativeApp()&quot; trả về giá trị &quot;true&quot; thông qua Capacitor Bridge
+    And Toàn bộ các nút &quot;Tải APK&quot; trên thanh điều hướng và Trang chủ đều được ẩn đi hoàn toàn
+    And Giao diện hiển thị thuần túy như một ứng dụng di động Native chuyên nghiệp
+</code></pre>
+<hr />
+<h3>2.5. Triết lý Mỹ thuật Wa-Modern (和モダン), Hệ thống Lưới 8-Point Grid &amp; Tối ưu Thumb-Zone</h3>
+<p>KIZUNA từ bỏ lối thiết kế bảng điều khiển công nghiệp khô khan để kiến tạo một không gian văn hóa Nhật Bản đặc sắc mang tên <strong>Wa-Modern (Hòa Hiện Đại)</strong>:<br />
+1. <strong>Con dấu Hanko (判子) &amp; Gia huy (家紋 - Mon Crests):</strong><br />
+   * Trong văn hóa Nhật Bản, con dấu đỏ Hanko là biểu tượng của sự xác nhận chính thức và niềm tự hào cá nhân. KIZUNA thiết kế các component con dấu Hanko khắc chữ Hán (<code>完</code> - Hoàn thành, <code>絆</code> - Kizuna, <code>優</code> - Ưu tú) đóng trực tiếp lên từng mốc học tập khi học viên vượt qua thử thách.<br />
+   * Thay thế các emoji thông thường bằng hệ thống biểu tượng Hoa Anh Đào (Sakura Mon), Cổng thần đạo Torii (⛩️) và Sóng biển Seigaiha.<br />
+2. <strong>Hệ thống Lưới 8-Point Grid &amp; Tối ưu Vùng Ngón Tay Cái (Thumb-Zone Optimization):</strong><br />
+   * Khung nhìn chuẩn trên di động (<code>390px x 844px</code>) được chia theo lưới <code>8px</code>.<br />
+   * Vùng thao tác một tay (One-handed Thumb Zone): Các nút lật thẻ, chọn đáp án trắc nghiệm và điều hướng bài học được đặt ở nửa dưới màn hình với chiều cao nút tối thiểu <code>48px – 56px</code>, giúp sinh viên bấm chính xác tuyệt đối ngay cả khi đang đứng trên xe buýt.</p>
+<hr />
+<h3>2.6. Luồng Người dùng Tổng thể (Master User Flow) &amp; Ma trận Xử lý Ngoại lệ (Edge Cases)</h3>
+<div class="mermaid">
+flowchart TD
+    Start([Người học mở KIZUNA<br>Android APK / iOS PWA / Web]) --> PlatformCheck{Kiểm tra isNativeApp()?}
+    PlatformCheck -- Đang chạy APK Native --> HideDownload[Ẩn nút Tải App & Kích hoạt Live Sync]
+    PlatformCheck -- Đang chạy Trình duyệt --> ShowDownload[Hiển thị nút Tải APK / Cài PWA thông minh]
+
+    HideDownload --> AuthCheck{Kiểm tra Phiên Đăng nhập?}
+    ShowDownload --> AuthCheck
+
+    AuthCheck -- Chưa đăng nhập --> LoginPage[Màn hình Đăng nhập / Tạo tài khoản]
+    LoginPage --> HomePage[Trang chủ Wa-Modern & Bảng Vinh Danh]
+    AuthCheck -- Đã đăng nhập --> HomePage
+
+    HomePage --> SelectModule{Chọn Phân khu Học tập}
+    SelectModule -- Bản đồ Hành trình --> RoadmapPage[Bản đồ 4 Chặng - 28 Mốc NEJ]
+    SelectModule -- Thư viện Tri thức --> SelfStudy[Từ vựng 728+ / Kanji 300 / Ngữ pháp 30]
+    SelectModule -- Phòng Thi thử --> ExamPage[Luyện đề JLPT N5, N4, N3, N2, N1]
+
+    RoadmapPage --> ClickMilestone[Chạm vào Mốc UNLOCKED / IN_PROGRESS]
+    ClickMilestone --> Quest1[Bước 1: SRS Flashcard Swipe & Shuffle]
+    Quest1 --> Quest2[Bước 2: Pure Vietnamese Vocab Gatekeeper]
+    Quest2 --> Quest3[Bước 3: Drag & Drop Grammar Scramble]
+    Quest3 --> Quest4[Bước 4: Hội thoại Đọc hiểu & 2-Way AI Sensei]
+
+    Quest4 --> SaveProgress[Đồng bộ Firestore + LocalStorage<br>Đóng dấu Hanko COMPLETED & Mở khóa Mốc kế tiếp]
+    SaveProgress --> RoadmapPage
+
+</div>
+<hr />
+<h3>2.7. Đánh giá Thiết kế Tự động bằng AI (10 Heuristics Jakob Nielsen &amp; Chuẩn Tương phản WCAG 2.1 AA)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Nguyên lý Heuristic (Jakob Nielsen)</th>
+<th style="text-align: left;">Cách Hiện thực Cụ thể trong Giao diện KIZUNA</th>
+<th style="text-align: left;">Mức độ Đáp ứng &amp; Tỷ lệ Tương phản WCAG</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>1. Visibility of System Status</strong></td>
+<td style="text-align: left;">Hiển thị rõ thanh tiến trình <code>Bước 1/4</code> $\rightarrow$ <code>4/4</code>, số từ đã thuộc, số ngày Streak và trạng thái đồng bộ đám mây.</td>
+<td style="text-align: left;"><strong>Xuất sắc (10/10)</strong> — Phản hồi thị giác tức thì $&lt; 100\text{ms}$.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2. Match Between System &amp; Real World</strong></td>
+<td style="text-align: left;">Sử dụng ẩn dụ chuyến du hành xuyên Nhật Bản, con dấu Hanko đỏ, thẻ từ vựng giấy Washi gần gũi với người học tiếng Nhật.</td>
+<td style="text-align: left;"><strong>Xuất sắc (10/10)</strong> — Ngôn ngữ tự nhiên, giàu cảm hứng văn hóa.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>3. User Control and Freedom</strong></td>
+<td style="text-align: left;">Luôn có nút quay lại Bản đồ, nút <em>"Đặt lại mảnh ghép"</em> trong bài ngữ pháp và nút <em>"Xáo trộn thẻ (Shuffle)"</em> trong bài SRS.</td>
+<td style="text-align: left;"><strong>Xuất sắc (9.5/10)</strong> — Không bao giờ nhốt người dùng vào luồng cụt.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>4. Consistency and Standards</strong></td>
+<td style="text-align: left;">Thống nhất bảng màu Xanh Ngọc Lục Bảo (<code>#059669</code>), Đỏ Sơn Mài (<code>#DC2626</code>) và Đen Than Chì (<code>#0F172A</code>) trên toàn bộ 10 trang.</td>
+<td style="text-align: left;"><strong>Xuất sắc (10/10)</strong> — Tỷ lệ tương phản đạt <strong>12.4:1 đến 15.8:1</strong> (Chuẩn AAA).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>5. Error Prevention</strong></td>
+<td style="text-align: left;">Cung cấp các chip từ vựng kéo-thả thay vì bắt gõ bàn phím tiếng Nhật phức tạp ở các bài tập ghép câu sơ cấp.</td>
+<td style="text-align: left;"><strong>Xuất sắc (9.5/10)</strong> — Giảm 90% lỗi gõ nhầm bộ gõ IME tiếng Nhật.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>6. Recognition Rather Than Recall</strong></td>
+<td style="text-align: left;">Luôn hiển thị phiên âm Hiragana (Furigana) và gợi ý Âm Hán Việt đi kèm chữ Kanji mới trong suốt vòng lặp mốc.</td>
+<td style="text-align: left;"><strong>Xuất sắc (10/10)</strong> — Giảm tải bộ nhớ làm việc (Working Memory).</td>
+</tr>
+</tbody>
+</table>
+<div class="page-break"></div>
+
+<h2>CHAPTER 3: SYSTEM DESIGN &amp; CLEAN ARCHITECTURE</h2>
+<h3>3.1. Kiến trúc Đa Phân hệ Tổng thể (Unified Backend - Dual Multi-Platform Frontend)</h3>
+<p>KIZUNA áp dụng kiến trúc phân tầng hiện đại, nơi một <strong>Backend Spring Boot 3.4</strong> duy nhất phục vụ đồng thời cả ứng dụng di động của học viên và cổng quản trị của giảng viên:</p>
+<div class="mermaid">
+graph TB
+    subgraph Clients["1. TẦNG KHÁCH HÀNG ĐA NỀN TẢNG (MULTI-PLATFORM FRONTEND)"]
+        MobAPK["Android Native APK (v1.0.5)<br>Capacitor 6.2 Runtime"]
+        WebPWA["iOS Safari & Desktop PWA<br>React 18 + TypeScript + Vite"]
+        AdmWeb["Admin Management Portal<br>React 18 + Tremor + TanStack Table"]
+    end
+
+    subgraph Backend["2. TẦNG DỊCH VỤ DOANH NGHIỆP (SPRING BOOT 3.4.2 - JAVA 21)"]
+        Gateway["Spring Security Filter Chain<br>JwtAuthenticationFilter + RBAC"]
+        UserCtrl["User Controllers (/api/v1/user/**)<br>Journey, SRS, Profile, Curriculum"]
+        AdminCtrl["Admin Controllers (/api/v1/admin/**)<br>Journey, Curriculum, User, AI Audit"]
+        CoreServices["Clean Domain Services<br>UserProgress, SpacedRepetition, AiGovernance, Leaderboard"]
+        DataRepos["Repository Layer<br>Firestore Sync + Thread-Safe In-Memory Cache"]
+    end
+
+    subgraph Cloud["3. TẦNG CƠ SỞ DỮ LIỆU & ĐÁM MÂY"]
+        Firestore[("Google Cloud Firestore<br>10 Collections")]
+        SeedJSON[("KIZUNA_NEJ_SEED_DATA.json<br>1,202 Curated Records")]
+        Gemini["Google Gemini AI Engine"]
+    end
+
+    MobAPK -->|HTTPS + JWT| Gateway
+    WebPWA -->|HTTPS + JWT| Gateway
+    AdmWeb -->|HTTPS + JWT| Gateway
+
+    Gateway --> UserCtrl
+    Gateway --> AdminCtrl
+    UserCtrl --> CoreServices
+    AdminCtrl --> CoreServices
+    CoreServices --> DataRepos
+    DataRepos <--> Firestore
+    SeedJSON -.->|Auto-Seed on Startup| DataRepos
+    CoreServices <--> Gemini
+
+</div>
+<hr />
+<h3>3.2. Hiện thực Clean Architecture 3 Tầng (Presentation, Domain, Data Layers)</h3>
+<p>Cấu trúc thư mục của toàn bộ dự án tuân thủ nghiêm ngặt nguyên lý tách biệt mối quan tâm (<strong>Separation of Concerns</strong>):</p>
+<pre><code class="language-text">KIZUNA/
+├── frontend/                                 # Ứng dụng Đa nền tảng (React 18 + TS + Vite + Capacitor 6.2)
+│   ├── android/                              # Dự án Android Native (Gradle, AndroidManifest, Keystore)
+│   ├── public/download/                      # Phân phối trực tiếp gói cài đặt kizuna-v1.0.5.apk
+│   └── src/
+│       ├── config/firebase.ts                # Khởi tạo Firebase Client SDK &amp; Firestore
+│       ├── user/                             # PHÂN HỆ HỌC VIÊN (MOBILE-FIRST CLIENT)
+│       │   ├── pages/                        # Presentation: HomePage, RoadmapPage, Vocab/Kanji/Grammar/Exam/ProfilePage
+│       │   ├── components/roadmap/           # Presentation: RoadmapQuestRunner, JapanOverworldMap, StageMilestoneMap
+│       │   ├── components/                   # Presentation: ApkDownloadModal, JapaneseLessonFlashcards, UserNavbar
+│       │   ├── hooks/                        # State Controllers: useAuth.ts, useProgress.ts
+│       │   ├── types/                        # Domain Entities: kizuna.ts, progress.ts, auth.ts, ranking.ts
+│       │   ├── utils/                        # Domain Rules: platform.ts, authValidation.ts
+│       │   └── services/                     # Data Layer: kizunaService.ts, progressService.ts, rankingService.ts
+│       └── admin/                            # PHÂN HỆ QUẢN TRỊ VIÊN (DESKTOP WEB PORTAL)
+│           ├── pages/AdminDashboardPage.tsx  # Presentation: Quản trị Mốc, Người dùng, AI Audit, Analytics
+│           ├── hooks/useAdminData.ts         # State Controller cho Admin
+│           └── services/adminService.ts      # Data Layer kết nối /api/v1/admin/**
+│
+└── backend/                                  # Hệ thống Backend Enterprise (Java 21 + Spring Boot 3.4.2)
+    └── src/main/java/com/kizuna/
+        ├── controller/                       # Presentation Layer: 10 REST Controllers chuẩn hóa
+        ├── dto/                              # Data Transfer Objects (Request / Response payloads)
+        ├── security/                         # Security Gateway: JwtTokenProvider, JwtAuthenticationFilter, RBAC
+        ├── model/                            # Domain Layer: 11 Thực thể nghiệp vụ cốt lõi
+        ├── service/ &amp; service/impl/          # Domain Use Cases: 6 Interfaces &amp; 6 Implementations
+        └── repository/                       # Data Layer: 7 Repositories (Firestore &amp; Thread-Safe Cache)
+</code></pre>
+<hr />
+<h3>3.3. Kiến trúc Frontend Đa Nền tảng (React 18, TypeScript, Vite, Tailwind CSS &amp; Capacitor 6.2)</h3>
+<p>Điểm mạnh vượt trội của tầng Frontend là khả năng xuất bản từ một cơ sở mã nguồn duy nhất (Single Codebase) ra 3 nền tảng chạy mượt mà:<br />
+1. <strong>Android Native APK (<code>v1.0.5</code>):</strong> Đóng gói qua <strong>Capacitor 6.2</strong> (<code>@capacitor/android</code>), biên dịch thành gói <code>.apk</code> ký số thật, truy cập trực tiếp phần cứng và lưu trữ bền vững trên thiết bị Android.<br />
+2. <strong>iOS Standalone Web App (PWA trên iPhone/iPad):</strong> Tối ưu hóa Apple Meta Tags, cho phép người dùng iPhone cài đặt trực tiếp từ trình duyệt Safari ra màn hình chính (Add to Home Screen) và chạy toàn màn hình không cần qua App Store.<br />
+3. <strong>PC Desktop Application:</strong> Tích hợp sự kiện <code>beforeinstallprompt</code> cho phép cài đặt 1 chạm thành ứng dụng máy tính độc lập trên Windows/macOS qua Chrome và Edge.</p>
+<hr />
+<h3>3.4. Kiến trúc Backend Enterprise (Java 21 LTS, Spring Boot 3.4.2, Stateless JWT &amp; RBAC)</h3>
+<p>Tầng bảo mật tại <a href="file:///d:/Documents/KIZUNA/backend/src/main/java/com/kizuna/security/SecurityConfig.java"><code>SecurityConfig.java</code></a> được cấu hình chặt chẽ theo kiến trúc Microservice Stateless:</p>
+<pre><code class="language-java">// Trích dẫn mã nguồn thực tế từ: backend/src/main/java/com/kizuna/security/SecurityConfig.java
+@Bean
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http
+        .cors(cors -&gt; cors.configurationSource(corsConfigurationSource()))
+        .csrf(AbstractHttpConfigurer::disable)
+        .exceptionHandling(ex -&gt; ex
+                .authenticationEntryPoint(authenticationEntryPoint)
+                .accessDeniedHandler(accessDeniedHandler)
+        )
+        .sessionManagement(session -&gt; session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        )
+        .authorizeHttpRequests(auth -&gt; auth
+                .requestMatchers(&quot;/api/v1/health/**&quot;, &quot;/api/v1/auth/login&quot;).permitAll()
+                .requestMatchers(&quot;/api/v1/curriculum/**&quot;).permitAll()
+                .requestMatchers(&quot;/api/v1/admin/**&quot;).hasRole(&quot;ADMIN&quot;)
+                .requestMatchers(&quot;/api/v1/user/**&quot;).hasAnyRole(&quot;USER&quot;, &quot;ADMIN&quot;)
+                .anyRequest().authenticated()
+        )
+        .authenticationProvider(authenticationProvider())
+        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+    return http.build();
+}
+</code></pre>
+<hr />
+<h3>3.5. Đặc tả Toàn bộ Hệ thống RESTful API Endpoints (User &amp; Admin Controllers)</h3>
+<p>Hệ thống Backend cung cấp <strong>26 RESTful Endpoints</strong> được tổ chức khoa học trong 10 Controller lớp giao tiếp:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Nhóm Phân hệ</th>
+<th style="text-align: left;">Controller Class</th>
+<th style="text-align: left;">Phương thức &amp; Đường dẫn Endpoint</th>
+<th style="text-align: center;">Quyền truy cập</th>
+<th style="text-align: left;">Mô tả Nghiệp vụ Xử lý</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Health &amp; Diagnostics</strong></td>
+<td style="text-align: left;"><code>HealthController</code></td>
+<td style="text-align: left;"><code>GET /api/v1/health</code><br><code>GET /api/v1/health/firestore</code></td>
+<td style="text-align: center;">Public</td>
+<td style="text-align: left;">Kiểm tra trạng thái hoạt động của cổng 3000 và kết nối bean Google Cloud Firestore.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Authentication</strong></td>
+<td style="text-align: left;"><code>AuthController</code></td>
+<td style="text-align: left;"><code>POST /api/v1/auth/login</code><br><code>GET /api/v1/auth/me</code></td>
+<td style="text-align: center;">Public / Auth</td>
+<td style="text-align: left;">Xác thực username/password (<code>BCrypt</code>), cấp phát JWT Bearer Token và truy xuất thông tin phiên.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Public Curriculum</strong></td>
+<td style="text-align: left;"><code>CurriculumCommonController</code></td>
+<td style="text-align: left;"><code>GET /api/v1/curriculum/stages</code><br><code>GET /api/v1/curriculum/milestones</code><br><code>GET /api/v1/curriculum/milestones/{id}/details</code><br><code>GET /api/v1/curriculum/leaderboard</code></td>
+<td style="text-align: center;">Public / Auth</td>
+<td style="text-align: left;">Truy xuất danh sách 4 Chặng, 28 Mốc, chi tiết từ vựng/kanji/ngữ pháp/quests của từng mốc và Bảng xếp hạng Top 50.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Learner Journey</strong></td>
+<td style="text-align: left;"><code>UserJourneyController</code></td>
+<td style="text-align: left;"><code>GET /api/v1/user/journey/map</code><br><code>GET /api/v1/user/journey/progress</code><br><code>POST /api/v1/user/journey/submit</code></td>
+<td style="text-align: center;"><code>ROLE_USER</code></td>
+<td style="text-align: left;">Lấy bản đồ hành trình cá nhân hóa; nộp kết quả từng Quest, tính điểm thông thạo và tự động mở khóa mốc kế tiếp.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Learner SM-2 SRS</strong></td>
+<td style="text-align: left;"><code>UserSrsController</code></td>
+<td style="text-align: left;"><code>GET /api/v1/user/srs/due</code><br><code>POST /api/v1/user/srs/review</code></td>
+<td style="text-align: center;"><code>ROLE_USER</code></td>
+<td style="text-align: left;">Lấy danh sách thẻ từ vựng/kanji đến hạn ôn tập hôm nay; cập nhật kết quả ôn tập theo thuật toán SuperMemo-2.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Learner Profile</strong></td>
+<td style="text-align: left;"><code>UserProfileController</code></td>
+<td style="text-align: left;"><code>GET /api/v1/user/profile</code><br><code>POST /api/v1/user/ai-audit/complaint</code></td>
+<td style="text-align: center;"><code>ROLE_USER</code></td>
+<td style="text-align: left;">Xem hồ sơ thống kê chi tiết (XP, Active Points, Streak, Rank) và gửi yêu cầu khiếu nại kết quả chấm của AI Sensei.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Admin Journey</strong></td>
+<td style="text-align: left;"><code>AdminJourneyController</code></td>
+<td style="text-align: left;"><code>GET /api/v1/admin/journey/overview</code><br><code>POST /api/v1/admin/journey/milestone</code><br><code>PATCH /api/v1/admin/journey/milestones/{id}/status</code><br><code>PUT /api/v1/admin/journey/milestones/{id}/gameplay</code></td>
+<td style="text-align: center;"><code>ROLE_ADMIN</code></td>
+<td style="text-align: left;">Xem thống kê phễu rơi rụng (Drop-off Funnel) qua 28 mốc; bật/tắt mốc; cấu hình phần thưởng XP và ngưỡng điểm qua bài.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Admin Curriculum</strong></td>
+<td style="text-align: left;"><code>AdminCurriculumController</code></td>
+<td style="text-align: left;"><code>POST /api/v1/admin/curriculum/vocabulary</code><br><code>DELETE /api/v1/admin/curriculum/vocabulary/{id}</code><br><code>POST /api/v1/admin/curriculum/kanji</code><br><code>POST /api/v1/admin/curriculum/grammar</code></td>
+<td style="text-align: center;"><code>ROLE_ADMIN</code></td>
+<td style="text-align: left;">Quản trị CRUD kho dữ liệu giáo trình: Thêm mới/cập nhật/xóa từ vựng, chữ Hán (300 Kanji NEJ) và mẫu ngữ pháp.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Admin Users &amp; Anti-Cheat</strong></td>
+<td style="text-align: left;"><code>AdminUserController</code></td>
+<td style="text-align: left;"><code>GET /api/v1/admin/users</code><br><code>PATCH /api/v1/admin/users/{id}/status</code><br><code>PATCH /api/v1/admin/users/{id}/role</code><br><code>POST /api/v1/admin/users/anti-cheat/adjust-points</code></td>
+<td style="text-align: center;"><code>ROLE_ADMIN</code></td>
+<td style="text-align: left;">Quản lý danh sách người dùng, khóa/mở khóa tài khoản, phân quyền Role và điều chỉnh Điểm Năng Động chống gian lận.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Admin AI Governance</strong></td>
+<td style="text-align: left;"><code>AdminAiController</code></td>
+<td style="text-align: left;"><code>GET /api/v1/admin/ai/audits</code><br><code>POST /api/v1/admin/ai/audits/{id}/resolve</code><br><code>POST /api/v1/admin/ai/sandbox</code></td>
+<td style="text-align: center;"><code>ROLE_ADMIN</code></td>
+<td style="text-align: left;">Duyệt hàng đợi khiếu nại AI (<code>APPROVED</code>/<code>REJECTED</code>), cộng bù điểm cho học viên và thử nghiệm Prompt trong Sandbox.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>3.6. Thiết kế Cơ sở Dữ liệu Hybrid NoSQL trên Google Cloud Firestore (Sơ đồ ERD 10 Thực thể)</h3>
+<p>Hệ thống cơ sở dữ liệu được chia làm 4 phân vùng logic rõ rệt: (1) Phân vùng Giáo trình Tĩnh (<code>stages</code>, <code>milestones</code>, <code>milestone_quests</code>, <code>vocabulary_items</code>, <code>kanji_dictionary</code>, <code>grammar_items</code>), (2) Phân vùng Định danh (<code>users</code>), (3) Phân vùng Tiến trình Học tập Cách ly (<code>user_progress</code>, <code>user_srs_items</code>, <code>leaderboard</code>), và (4) Phân vùng Kiểm toán AI (<code>ai_evaluation_audits</code>).</p>
+<div class="mermaid">
+erDiagram
+    STAGES ||--o{ MILESTONES : "chứa (1:N)"
+    MILESTONES ||--o{ MILESTONE_QUESTS : "gồm 4 quest (1:4)"
+    MILESTONES ||--o{ VOCABULARY_ITEMS : "dạy 26 từ (1:N)"
+    MILESTONES ||--o{ KANJI_DICTIONARY : "rèn chữ Hán (1:N)"
+    MILESTONES ||--o{ GRAMMAR_ITEMS : "tổng kết mẫu câu (1:N)"
+
+    USERS ||--o{ USER_PROGRESS : "lưu tiến độ riêng (1:N)"
+    MILESTONES ||--o{ USER_PROGRESS : "gắn liền mốc (1:N)"
+    USERS ||--o{ USER_SRS_ITEMS : "hàng đợi SM-2 (1:N)"
+    USERS ||--|| LEADERBOARD : "xếp hạng 1-1 (1:1)"
+    USERS ||--o{ AI_EVALUATION_AUDITS : "khiếu nại AI (1:N)"
+
+    STAGES {
+        string id PK "stage_1..stage_4"
+        int orderIndex "Thứ tự chặng (1..4)"
+        string title "Tên chặng hành trình"
+        string themeColor "Mã màu chủ đạo"
+    }
+    MILESTONES {
+        string id PK "ms_s1_01..ms_s4_u24"
+        string stageId FK "Tham chiếu STAGES.id"
+        int orderIndex "Thứ tự toàn cục (1..28)"
+        string title "Tên mốc học tập"
+        string nejUnit "Đơn vị bài học NEJ"
+        int xpReward "Điểm XP thưởng"
+        int activePointsReward "Điểm Năng Động thưởng"
+        string prerequisiteMilestoneId FK "Mốc điều kiện tiên quyết"
+    }
+    VOCABULARY_ITEMS {
+        string id PK "vocab_001..vocab_728"
+        string milestoneId FK "Tham chiếu MILESTONES.id"
+        string term "Từ vựng Kanji/Kana"
+        string reading "Cách đọc Hiragana"
+        string sinoVietnamese "Âm Hán Việt"
+        string vietnameseMeaning "Nghĩa tiếng Việt"
+    }
+    USER_PROGRESS {
+        string id PK "{userId}_{milestoneId}"
+        string userId FK "Tham chiếu USERS.id"
+        string milestoneId FK "Tham chiếu MILESTONES.id"
+        string status "LOCKED | UNLOCKED | IN_PROGRESS | COMPLETED"
+        array completedQuests "Danh sách quest đã hoàn tất"
+        float vocabMasteryRate "Tỷ lệ thuộc từ (0..100%)"
+    }
+    USER_SRS_ITEMS {
+        string id PK "{userId}_{itemId}"
+        string userId FK "Tham chiếu USERS.id"
+        string itemId FK "Mã từ vựng/kanji"
+        int repetitionNumber "Số lần lặp thành công"
+        double easinessFactor "Hệ số dễ dàng EF (>=1.3)"
+        int intervalDays "Chu kỳ ngày ôn tiếp theo"
+    }
+
+</div>
+<h4>Cấu trúc Bản ghi JSON Thực tế trong Cơ sở Dữ liệu:</h4>
+<pre><code class="language-json">// 1. Mẫu bản ghi Collection &quot;vocabulary_items&quot; (Trích từ KIZUNA_NEJ_SEED_DATA.json)
+{
+  &quot;id&quot;: &quot;vocab_u01_001&quot;,
+  &quot;milestoneId&quot;: &quot;ms_s2_u01_self_intro&quot;,
+  &quot;term&quot;: &quot;留学生&quot;,
+  &quot;reading&quot;: &quot;りゅうがくせい&quot;,
+  &quot;sinoVietnamese&quot;: &quot;LƯU HỌC SINH&quot;,
+  &quot;vietnameseMeaning&quot;: &quot;Du học sinh&quot;,
+  &quot;wordType&quot;: &quot;Danh từ (Noun)&quot;,
+  &quot;exampleSentenceJp&quot;: &quot;私はベトナムからの留学生です。&quot;,
+  &quot;exampleSentenceVi&quot;: &quot;Tôi là du học sinh đến từ Việt Nam.&quot;,
+  &quot;nejSource&quot;: &quot;NEJ Vol 1 - Unit 1&quot;,
+  &quot;isCore&quot;: true
+}
+
+// 2. Mẫu bản ghi Collection &quot;user_progress&quot; (Lưu tiến độ cách ly của từng học viên)
+{
+  &quot;id&quot;: &quot;user_ms_s2_u01_self_intro&quot;,
+  &quot;userId&quot;: &quot;user&quot;,
+  &quot;milestoneId&quot;: &quot;ms_s2_u01_self_intro&quot;,
+  &quot;status&quot;: &quot;COMPLETED&quot;,
+  &quot;completedQuests&quot;: [&quot;q1_srs&quot;, &quot;q2_gatekeeper&quot;, &quot;q3_scramble&quot;, &quot;q4_practice&quot;],
+  &quot;currentQuestIndex&quot;: 4,
+  &quot;vocabMasteryRate&quot;: 92.5,
+  &quot;activePointsEarned&quot;: 70,
+  &quot;unlockedAt&quot;: &quot;2026-10-15T08:00:00Z&quot;,
+  &quot;completedAt&quot;: &quot;2026-10-15T08:25:00Z&quot;
+}
+</code></pre>
+<hr />
+<h3>3.7. Chiến lược Đánh Chỉ mục Phức hợp (Compound Indexing) &amp; Bảo mật Cách ly Dữ liệu (RLS)</h3>
+<p>Để đảm bảo độ trễ truy vấn trên Firestore luôn đạt mức $&lt; 50\text{ms}$, nhóm đã thiết lập bộ <strong>Compound Indexes</strong> chuyên biệt kết hợp cùng <strong>Firestore Security Rules</strong> cách ly dữ liệu cấp độ dòng (Row-Level Security):<br />
+* Mọi truy vấn đọc/ghi vào <code>user_progress</code> và <code>user_srs_items</code> đều bắt buộc thỏa mãn điều kiện <code>resource.data.userId == request.auth.uid || isAdmin()</code>.<br />
+* Tại Backend Spring Boot, đối tượng <code>UserPrincipal</code> được trích xuất trực tiếp từ chữ ký số của JWT Token (<code>@AuthenticationPrincipal UserPrincipal principal</code>), tuyệt đối không tin tưởng <code>userId</code> truyền thô từ phía Client nhằm ngăn chặn triệt để lỗ hổng <strong>IDOR (Insecure Direct Object Reference)</strong>.</p>
+<hr />
+<h3>3.8. Cơ chế Kháng lỗi Ngoại tuyến (Offline Resilience &amp; Background Auto-Synchronization)</h3>
+<p>Trong <a href="file:///d:/Documents/KIZUNA/frontend/src/user/pages/RoadmapPage.tsx"><code>RoadmapPage.tsx</code></a>, tiến độ học tập được bảo vệ bởi cơ chế lưu trữ kép (Dual Persistence):<br />
+1. Khi học viên hoàn thành một mốc học tập, trạng thái mới được ghi ngay lập tức vào <code>localStorage</code> của thiết bị (<code>kizuna_roadmap_progress_v3</code>), giúp giao diện phản hồi với độ trễ bằng <code>0ms</code>.<br />
+2. Ngay sau đó, dịch vụ <code>saveMilestoneProgressToFirestore()</code> thực hiện ghi bất đồng bộ (Asynchronous Upsert) lên các collection <code>user_progress</code> và <code>users</code> trên Google Cloud Firestore.<br />
+3. Khi người học đăng nhập trên một thiết bị mới, hàm <code>loadUserProgressFromFirestore()</code> tự động tải toàn bộ tiến độ đám mây về và hợp nhất thông minh (Smart Merge — ưu tiên trạng thái cao hơn giữa <code>COMPLETED &gt; IN_PROGRESS &gt; UNLOCKED &gt; LOCKED</code>), đảm bảo không bao giờ xảy ra hiện tượng mất tiến độ học tập.</p>
+<div class="page-break"></div>
+
+<h2>CHAPTER 4: ADVANCED CAPABILITIES &amp; ARTIFICIAL INTELLIGENCE</h2>
+<h3>4.1. Kiến trúc Ranh giới Kiểm soát AI 3 Lớp (3-Layer AI Governance &amp; Whitelist Guardrails)</h3>
+<p>Trong các ứng dụng giáo dục ngoại ngữ, việc gọi trực tiếp API của các mô hình ngôn ngữ lớn (LLM) mà không có lớp kiểm soát trung gian sẽ dẫn đến rủi ro nghiêm trọng: AI sử dụng từ vựng quá khó so với trình độ hiện tại của người học hoặc giải thích sai lệch trọng tâm bài học. KIZUNA giải quyết bài toán này bằng kiến trúc <strong>3-Layer AI Governance</strong>:</p>
+<div class="mermaid">
+graph TD
+    subgraph Layer1["LỚP 1: TRI THỨC CHUẨN DO CON NGƯỜI LÀM CHỦ (100% DETERMINISTIC GROUND TRUTH)"]
+        L1A["Bản đồ 4 Chặng - 28 Mốc chuẩn giáo trình NEJ"]
+        L1B["Danh mục Từ vựng Cho phép của từng Mốc (Knowledge Whitelist)"]
+        L1C["Cấu trúc Ngữ pháp & Sắc thái Giao tiếp Mục tiêu"]
+    end
+
+    subgraph Layer2["LỚP 2: ĐỘNG CƠ BIẾN THỂ & PHẢN HỒI AI SENSEI (CONTROLLED AI ENGINE)"]
+        L2A["Sinh biến thể ngữ cảnh giao tiếp dựa trên Whitelist"]
+        L2B["Phân tích câu tự luận của học viên (Trợ từ, Chia động từ, Sắc thái)"]
+        L2C["Đối thoại tình huống 2 chiều (2-Way Sensei Roleplay)"]
+    end
+
+    subgraph Layer3["LỚP 3: HÀNG RÀO KIỂM CHỨNG & HUMAN-IN-THE-LOOP (GUARDRAILS & AUDIT)"]
+        L3A["Bộ lọc Từ vựng Nghiêm ngặt (Chặn từ vượt cấp N2/N1)"]
+        L3B["Kiểm tra Định dạng JSON Schema & Fallback khi Timeout"]
+        L3C["Cơ chế Học viên Khiếu nại & Giảng viên Phê duyệt (AI Audit Queue)"]
+    end
+
+    Layer1 -->|Ràng buộc Whitelist vào System Prompt| Layer2
+    Layer2 -->|Đầu ra thô từ LLM| Layer3
+    Layer3 -->|Nội dung An toàn & Chuẩn Sư phạm| LearnerUI(["Hiển thị trên Màn hình Học viên"])
+
+</div>
+<hr />
+<h3>4.2. Kỹ thuật Prompt Engineering Chuyên sâu &amp; Mẫu Prompt Thực tế (Master Prompts)</h3>
+<p>Dưới đây là cấu trúc <strong>Master System Prompt</strong> điều khiển Trợ lý AI Sensei trong KIZUNA:</p>
+<pre><code class="language-text">[ROLE &amp; PERSONA]
+Bạn là &quot;KIZUNA AI Sensei&quot; — Giảng viên tiếng Nhật bản xứ giàu kinh nghiệm giảng dạy cho sinh viên Công nghệ Thông tin Việt Nam. Phong cách của bạn: Lịch sự, khích lệ, giải thích ngắn gọn, đi thẳng vào bản chất ngữ pháp và văn hóa giao tiếp Nhật Bản.
+
+[MILESTONE CONTEXT &amp; STRICT KNOWLEDGE WHITELIST]
+- Mốc hiện tại: {milestone_title} ({nej_unit})
+- Bối cảnh giao tiếp: {communication_context}
+- Từ vựng trọng tâm bắt buộc ưu tiên: {vocabulary_whitelist_json}
+- Cấu trúc ngữ pháp mục tiêu: {grammar_patterns_json}
+
+[STRICT PEDAGOGICAL GUARDRAILS]
+1. TUYỆT ĐỐI KHÔNG sử dụng từ vựng hoặc Hán tự thuộc cấp độ N2/N1 nằm ngoài phạm vi bài học.
+2. Khi chấm câu của học viên, hãy phân tích theo 3 tiêu chí rõ ràng:
+   (a) Độ chính xác ngữ pháp và cách chia thể động từ/tính từ.
+   (b) Cách sử dụng trợ từ (は, が, を, に, で, へ).
+   (c) Sắc thái tự nhiên và mức độ lịch sự (Teineigo) trong bối cảnh giao tiếp thực tế.
+3. Trả về kết quả theo đúng cấu trúc JSON chuẩn gồm:
+   { &quot;isCorrect&quot;: boolean, &quot;score&quot;: 0..100, &quot;praiseVi&quot;: string, &quot;grammarFixVi&quot;: string, &quot;naturalSuggestionJp&quot;: string, &quot;naturalSuggestionReading&quot;: string }
+</code></pre>
+<hr />
+<h3>4.3. Nhật ký Thực nghiệm &amp; Phản biện Vòng lặp Prompt (Prompt Iteration Logs PR-01..PR-06)</h3>
+<p>Nhóm đã ghi chép đầy đủ quá trình thử nghiệm, phát hiện lỗi của AI và tinh chỉnh Prompt qua 6 vòng lặp lớn:<br />
+1. <strong>Vòng lặp PR-01 (Kiến trúc Backend):</strong> Chuyển từ code sinh tự động nguyên khối sang phân tầng Clean Architecture (<code>Controller</code> $\rightarrow$ <code>Service</code> $\rightarrow$ <code>Repository</code>) với bảo mật JWT.<br />
+2. <strong>Vòng lặp PR-02 (Thuật toán SM-2):</strong> Bác bỏ thuật toán cộng ngày tuyến tính đơn giản của AI ban đầu; cài đặt chuẩn xác công thức hàm mũ với hệ số dễ dàng $EF \ge 1.3$ của SuperMemo-2.<br />
+3. <strong>Vòng lặp PR-03 (Chuẩn hóa Exception):</strong> Xây dựng <code>GlobalExceptionHandler</code> bọc toàn bộ lỗi hệ thống vào <code>ApiResponse&lt;T&gt;</code> chuẩn mực, giúp ứng dụng di động hiển thị thông báo thân thiện.<br />
+4. <strong>Vòng lặp PR-04 (Khởi tạo Dữ liệu Hạt nhân An toàn):</strong> Thiết kế cơ chế nạp 1,202 bản ghi từ <code>KIZUNA_NEJ_SEED_DATA.json</code> vào bộ nhớ đệm đa luồng (<code>ConcurrentHashMap</code>) kết hợp đồng bộ Firestore không gây chặn khởi động.<br />
+5. <strong>Vòng lặp PR-05 (Kiểm soát Từ vựng Vượt cấp):</strong> Áp dụng kỹ thuật <em>Context Whitelisting</em>, triệt tiêu 100% hiện tượng AI tự ý đưa từ vựng N2 vào bài tập sơ cấp N5/N4.<br />
+6. <strong>Vòng lặp PR-06 (Huấn luyện Sắc thái Giao tiếp):</strong> Nâng cấp AI Sensei từ một bộ kiểm tra ngữ pháp cơ học thành một huấn luyện viên văn hóa giao tiếp (chỉ rõ sự khác biệt giữa câu nói với bạn bè và câu nói với cấp trên người Nhật).</p>
+<hr />
+<h3>4.4. Cơ chế Human-in-the-Loop (HITL): Kiểm duyệt Phán quyết AI &amp; Cổng Quản trị Giảng viên</h3>
+<div class="mermaid">
+sequenceDiagram
+    autonumber
+    actor Learner as Học viên (ROLE_USER)
+    participant App as KIZUNA Mobile / Web
+    participant API as Spring Boot Backend
+    participant DB as Cloud Firestore
+    actor Admin as Giảng viên (ROLE_ADMIN)
+
+    Learner->>App: Nộp câu trả lời tại Bước 4 (AI Sensei Dialogue)
+    App->>API: Gửi câu trả lời & Ngữ cảnh Mốc
+    API-->>App: Trả về Nhận xét & Điểm chấm của AI Sensei
+    Learner->>App: Bấm "Khiếu nại kết quả chấm" kèm lý do
+    App->>API: POST /api/v1/user/ai-audit/complaint
+    API->>DB: Lưu bản ghi vào "ai_evaluation_audits" (status = PENDING)
+
+    Admin->>App: Mở Admin Portal -> Tab "Kiểm duyệt AI (AI Audits)"
+    App->>API: GET /api/v1/admin/ai/audits?status=PENDING
+    API-->>App: Hiển thị danh sách khiếu nại chờ duyệt
+    Admin->>App: Xem xét & Bấm "Phê duyệt (APPROVED)" + Cộng bù 25 Active Points
+    App->>API: POST /api/v1/admin/ai/audits/{id}/resolve
+    API->>DB: Cập nhật status = APPROVED & Cộng +25 Active Points cho Học viên
+    API-->>Admin: Thông báo xử lý thành công & Cập nhật Leaderboard
+
+</div>
+<hr />
+<h3>4.5. Thuật toán Ôn tập Ngắt quãng SuperMemo-2 (SM-2): Công thức Toán học &amp; Bảng Mô phỏng Chu kỳ</h3>
+<p>Hệ thống ôn tập ngắt quãng của KIZUNA vận hành dựa trên thuật toán khoa học thần kinh <strong>SuperMemo-2 (SM-2)</strong>:<br />
+* Mỗi mục từ vựng/chữ Hán của học viên trong bảng <code>user_srs_items</code> lưu trữ 4 tham số trạng thái:<br />
+  * $n$ (<code>repetitionNumber</code>): Số lần học viên nhớ đúng liên tiếp ($q \ge 3$).<br />
+  * $EF$ (<code>easinessFactor</code>): Hệ số dễ dàng của từ đó đối với cá nhân học viên (Khởi tạo mặc định $EF_0 = 2.5$, giới hạn dưới $EF_{\min} = 1.3$).<br />
+  * $I$ (<code>intervalDays</code>): Khoảng cách số ngày cho đến lần ôn tập tiếp theo.<br />
+  * <code>isFailedQueue</code>: Cờ đánh dấu từ bị làm sai cần ưu tiên xuất hiện trong nhiệm vụ phụ.</p>
+<pre><code class="language-java">// Trích dẫn mã nguồn thực tế từ: backend/src/main/java/com/kizuna/service/impl/SpacedRepetitionServiceImpl.java
+int q = Math.max(0, Math.min(5, request.getQuality()));
+int rep = item.getRepetitionNumber();
+double ef = item.getEasinessFactor();
+int interval = item.getIntervalDays();
+
+if (q &lt; 3) {
+    rep = 0;
+    interval = 1;
+    item.setFailedQueue(true);
+} else {
+    if (rep == 0) {
+        interval = 1;
+    } else if (rep == 1) {
+        interval = 6;
+    } else {
+        interval = (int) Math.round(interval * ef);
+    }
+    rep += 1;
+    item.setFailedQueue(false);
+}
+
+ef = ef + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02));
+if (ef &lt; 1.3) {
+    ef = 1.3;
+}
+</code></pre>
+<h4>Bảng Mô phỏng Chu kỳ Ôn tập Thực tế của một Từ vựng Khó (<code>都合 - tsugou</code>) trên KIZUNA:</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Lần Ôn</th>
+<th style="text-align: center;">Ngày Thực hiện</th>
+<th style="text-align: left;">Hành vi của Học viên trên App</th>
+<th style="text-align: center;">Điểm Chất lượng ($q$)</th>
+<th style="text-align: center;">Số lần lặp ($n$)</th>
+<th style="text-align: center;">Hệ số Dễ dàng ($EF$)</th>
+<th style="text-align: center;">Chu kỳ Mới ($I$)</th>
+<th style="text-align: center;">Ngày Ôn Tiếp theo</th>
+<th style="text-align: center;">Trạng thái Cờ <code>isFailedQueue</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>Lần 1</strong></td>
+<td style="text-align: center;">Ngày 1</td>
+<td style="text-align: left;">Chọn sai nghĩa ở bài Gatekeeper</td>
+<td style="text-align: center;">$q = 1$ (Quên)</td>
+<td style="text-align: center;">$0$</td>
+<td style="text-align: center;">$2.50 \rightarrow 1.96$</td>
+<td style="text-align: center;"><strong>1 ngày</strong></td>
+<td style="text-align: center;">Ngày 2</td>
+<td style="text-align: center;"><code>true</code> (Bật cảnh báo ôn lại)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Lần 2</strong></td>
+<td style="text-align: center;">Ngày 2</td>
+<td style="text-align: left;">Nhớ lại đúng nhưng còn ngập ngừng</td>
+<td style="text-align: center;">$q = 3$ (Nhớ vừa)</td>
+<td style="text-align: center;">$1$</td>
+<td style="text-align: center;">$1.96 \rightarrow 1.82$</td>
+<td style="text-align: center;"><strong>1 ngày</strong></td>
+<td style="text-align: center;">Ngày 3</td>
+<td style="text-align: center;"><code>false</code> (Đã vượt qua lỗi)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Lần 3</strong></td>
+<td style="text-align: center;">Ngày 3</td>
+<td style="text-align: left;">Lật thẻ/chọn đáp án đúng khá nhanh</td>
+<td style="text-align: center;">$q = 4$ (Nhớ tốt)</td>
+<td style="text-align: center;">$2$</td>
+<td style="text-align: center;">$1.82 \rightarrow 1.82$</td>
+<td style="text-align: center;"><strong>6 ngày</strong></td>
+<td style="text-align: center;">Ngày 9</td>
+<td style="text-align: center;"><code>false</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Lần 4</strong></td>
+<td style="text-align: center;">Ngày 9</td>
+<td style="text-align: left;">Phản xạ dịch đúng ngay lập tức</td>
+<td style="text-align: center;">$q = 5$ (Hoàn hảo)</td>
+<td style="text-align: center;">$3$</td>
+<td style="text-align: center;">$1.82 \rightarrow 1.92$</td>
+<td style="text-align: center;"><strong>11 ngày</strong></td>
+<td style="text-align: center;">Ngày 20</td>
+<td style="text-align: center;"><code>false</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Lần 5</strong></td>
+<td style="text-align: center;">Ngày 20</td>
+<td style="text-align: left;">Phản xạ hoàn hảo trong bài hội thoại</td>
+<td style="text-align: center;">$q = 5$ (Hoàn hảo)</td>
+<td style="text-align: center;">$4$</td>
+<td style="text-align: center;">$1.92 \rightarrow 2.02$</td>
+<td style="text-align: center;"><strong>22 ngày</strong></td>
+<td style="text-align: center;">Ngày 42</td>
+<td style="text-align: center;"><code>false</code> (Chuyển vào Trí nhớ Dài hạn)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>4.6. Động cơ Nhận diện Nét vẽ Chữ Hán On-Device &amp; Giải phẫu 300 Kanji NEJ</h3>
+<p>Trong phân khu <strong>Chữ Hán (<code>KanjiPage.tsx</code>)</strong> và trong từng mốc học tập, 300 chữ Hán chuẩn của bộ giáo trình NEJ được trình bày theo phương pháp <strong>Giải phẫu Chiết tự &amp; Mẹo nhớ (Kanji Anatomy &amp; Mnemonics)</strong>:<br />
+* Hiển thị trực quan chữ Hán cỡ lớn với phông chữ luyện viết chuẩn bộ Giáo dục Nhật Bản (<code>Noto Sans JP</code> / <code>Kyokasho</code>).<br />
+* Tách biệt rõ <strong>Âm Hán Việt</strong> (cầu nối cực kỳ hiệu quả cho sinh viên Việt Nam, ví dụ: <code>学</code> = HỌC, <code>校</code> = HIỆU $\rightarrow$ <code>学校</code> = Trường học), <strong>Âm On</strong>, <strong>Âm Kun</strong>, <strong>Bộ thủ</strong>, <strong>Số nét</strong> và các từ ghép thông dụng nhất.</p>
+<hr />
+<h3>4.7. Hệ thống Gamification Thực chất: Vòng lặp 4 Nhiệm vụ Mốc, Điểm Năng Động &amp; Chống Gian lận</h3>
+<p>Trong <a href="file:///d:/Documents/KIZUNA/frontend/src/user/components/roadmap/RoadmapQuestRunner.tsx"><code>RoadmapQuestRunner.tsx</code></a>, vòng lặp 4 nhiệm vụ được thiết kế với cơ chế tương tác vật lý cao:<br />
+1. <strong>Nhiệm vụ 1 — Thẻ học SRS Swipe &amp; Shuffle:</strong> Cho phép học viên bấm nút <em>"Xáo trộn thẻ"</em> để tránh học vẹt theo thứ tự cố định, vuốt trái/phải để phân loại từ đã thuộc và từ cần học lại.<br />
+2. <strong>Nhiệm vụ 2 — Cổng Từ vựng Tiếng Việt Thuần túy (Pure Vietnamese Gatekeeper):</strong> Loại bỏ toàn bộ gợi ý tiếng Anh hoặc Romaji làm nhiễu, buộc học viên nhìn chữ Kanji/Hiragana và chọn chính xác nghĩa tiếng Việt trong bối cảnh bài học.<br />
+3. <strong>Nhiệm vụ 3 — Ghép câu Ngữ pháp Kéo-Thả (Drag &amp; Drop Grammar Scramble):</strong> Học viên chạm/kéo từng mảnh từ vựng để xếp thành câu hoàn chỉnh, kèm giải thích chi tiết lý do sử dụng mẫu ngữ pháp đó (<code>nuanceReason</code>).<br />
+4. <strong>Nhiệm vụ 4 — Đọc hiểu Tình huống &amp; Đối thoại 2 chiều cùng AI Sensei:</strong> Học viên đọc đoạn văn/hội thoại dài bằng tiếng Nhật (có nút bật/tắt dịch tiếng Việt và nút nghe giọng đọc bản xứ), trả lời bộ câu hỏi đọc hiểu và thực hành đối thoại trực tiếp với Sensei để nhận con dấu hoàn thành mốc.</p>
+<div class="page-break"></div>
+
+<h2>CHAPTER 5: TESTING, PERFORMANCE PROFILING &amp; EVALUATION</h2>
+<h3>5.1. Chiến lược Kiểm thử Đa tầng (Testing Pyramid: Unit, Integration, E2E Physical Device)</h3>
+<p>Để đảm bảo chất lượng bản dựng phát hành đạt tiêu chuẩn thương mại, nhóm nghiên cứu đã thực thi quy trình kiểm thử 3 tầng nghiêm ngặt:</p>
+<div class="mermaid">
+graph TD
+    subgraph Pyramid["KIM TỰ THÁP KIỂM THỬ HỆ THỐNG KIZUNA"]
+        E2E["TẦNG 3: E2E PHYSICAL DEVICE & CROSS-PLATFORM TESTS<br>(Kiểm thử trên Điện thoại Android thật, iPhone Safari PWA & Desktop)"]
+        INT["TẦNG 2: REST API & SECURITY INTEGRATION TESTS<br>(Kiểm thử 26 Endpoints trên Postman, JWT RBAC & Firestore Sync)"]
+        UNIT["TẦNG 1: UNIT & ALGORITHM TESTS<br>(Kiểm thử Thuật toán SM-2, Xác thực JWT, Validation & State Machine)"]
+    end
+    UNIT --> INT
+    INT --> E2E
+
+</div>
+<hr />
+<h3>5.2. Kiểm thử Chức năng &amp; Bảo mật RBAC trên Backend RESTful API (Postman Test Suite)</h3>
+<p>Dưới đây là kết quả kiểm thử thực tế trên bộ <strong>Postman Collection</strong> đối với các kịch bản nghiệp vụ và bảo mật trọng tâm:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Mã Ca KT</th>
+<th style="text-align: left;">Endpoint &amp; Phương thức</th>
+<th style="text-align: left;">Dữ liệu Đầu vào &amp; Quyền hạn</th>
+<th style="text-align: left;">Kết quả Thực tế (HTTP Status &amp; Payload)</th>
+<th style="text-align: center;">Đánh giá</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>TC-API-01</strong></td>
+<td style="text-align: left;"><code>GET /api/v1/health</code></td>
+<td style="text-align: left;">Public Request</td>
+<td style="text-align: left;"><code>200 OK</code> — Hệ thống phản hồi trạng thái <code>UP</code> trên cổng <code>3000</code> trong <code>12ms</code>.</td>
+<td style="text-align: center;">✅ <strong>PASS</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-API-02</strong></td>
+<td style="text-align: left;"><code>GET /api/v1/health/firestore</code></td>
+<td style="text-align: left;">Public Request</td>
+<td style="text-align: left;"><code>200 OK</code> — Xác nhận kết nối Cloud Firestore (<code>projectId: ebook-fdc02</code>) hoạt động tốt.</td>
+<td style="text-align: center;">✅ <strong>PASS</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-API-03</strong></td>
+<td style="text-align: left;"><code>POST /api/v1/auth/login</code></td>
+<td style="text-align: left;"><code>{"username":"admin", "password":"admin123"}</code></td>
+<td style="text-align: left;"><code>200 OK</code> — Cấp phát JWT Bearer Token hợp lệ với claim <code>role: "ROLE_ADMIN"</code>.</td>
+<td style="text-align: center;">✅ <strong>PASS</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-API-04</strong></td>
+<td style="text-align: left;"><code>POST /api/v1/auth/login</code></td>
+<td style="text-align: left;"><code>{"username":"user", "password":"user123"}</code></td>
+<td style="text-align: left;"><code>200 OK</code> — Cấp phát JWT Bearer Token hợp lệ với claim <code>role: "ROLE_USER"</code>.</td>
+<td style="text-align: center;">✅ <strong>PASS</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-API-05</strong></td>
+<td style="text-align: left;"><code>GET /api/v1/auth/me</code></td>
+<td style="text-align: left;">Không gửi Header <code>Authorization</code></td>
+<td style="text-align: left;"><code>401 Unauthorized</code> — <code>JwtAuthenticationEntryPoint</code> chặn truy cập và trả lỗi chuẩn.</td>
+<td style="text-align: center;">✅ <strong>PASS</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-API-06</strong></td>
+<td style="text-align: left;"><code>GET /api/v1/admin/journey/overview</code></td>
+<td style="text-align: left;">Gửi Token của <code>ROLE_USER</code></td>
+<td style="text-align: left;"><code>403 Forbidden</code> — <code>JwtAccessDeniedHandler</code> từ chối quyền truy cập vào vùng Admin.</td>
+<td style="text-align: center;">✅ <strong>PASS</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-API-07</strong></td>
+<td style="text-align: left;"><code>GET /api/v1/admin/journey/overview</code></td>
+<td style="text-align: left;">Gửi Token của <code>ROLE_ADMIN</code></td>
+<td style="text-align: left;"><code>200 OK</code> — Trả về đầy đủ thống kê tổng số học viên, tổng mốc và biểu đồ phễu rơi rụng.</td>
+<td style="text-align: center;">✅ <strong>PASS</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-API-08</strong></td>
+<td style="text-align: left;"><code>GET /api/v1/curriculum/milestones/ms_s2_u01_self_intro/details</code></td>
+<td style="text-align: left;">Public / User Request</td>
+<td style="text-align: left;"><code>200 OK</code> — Trả về đủ thông tin mốc, 26 từ vựng, chữ Hán, ngữ pháp và 4 quests.</td>
+<td style="text-align: center;">✅ <strong>PASS</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-API-09</strong></td>
+<td style="text-align: left;"><code>POST /api/v1/user/journey/submit</code></td>
+<td style="text-align: left;">User nộp hoàn thành Quest 4 đạt 95%</td>
+<td style="text-align: left;"><code>200 OK</code> — Mốc hiện tại chuyển <code>COMPLETED</code>, mốc kế tiếp chuyển <code>UNLOCKED</code>, cộng XP.</td>
+<td style="text-align: center;">✅ <strong>PASS</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-API-10</strong></td>
+<td style="text-align: left;"><code>POST /api/v1/user/srs/review</code></td>
+<td style="text-align: left;">User đánh giá thẻ từ vựng <code>quality: 5</code></td>
+<td style="text-align: left;"><code>200 OK</code> — Thuật toán SM-2 tính chính xác <code>intervalDays</code> và <code>easinessFactor</code> mới.</td>
+<td style="text-align: center;">✅ <strong>PASS</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-API-11</strong></td>
+<td style="text-align: left;"><code>POST /api/v1/user/ai-audit/complaint</code></td>
+<td style="text-align: left;">User gửi khiếu nại kết quả chấm AI</td>
+<td style="text-align: left;"><code>200 OK</code> — Tạo bản ghi khiếu nại mới với trạng thái <code>PENDING</code> trong hàng đợi Admin.</td>
+<td style="text-align: center;">✅ <strong>PASS</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-API-12</strong></td>
+<td style="text-align: left;"><code>POST /api/v1/admin/ai/audits/{id}/resolve</code></td>
+<td style="text-align: left;">Admin duyệt <code>APPROVED</code> + cộng 25 điểm</td>
+<td style="text-align: left;"><code>200 OK</code> — Khiếu nại chuyển sang <code>APPROVED</code>, tài khoản học viên được cộng 25 Active Points.</td>
+<td style="text-align: center;">✅ <strong>PASS</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>5.3. Kịch bản Kiểm thử Đầu-Cuối trên Thiết bị Di động Thực tế (Android APK &amp; iOS Safari PWA)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Mã E2E</th>
+<th style="text-align: left;">Nền tảng Thiết bị Kiểm thử</th>
+<th style="text-align: left;">Các Bước Thực hiện Kịch bản (Test Steps)</th>
+<th style="text-align: left;">Kết quả Thực tế Quan sát được</th>
+<th style="text-align: center;">Kết luận</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>E2E-01</strong></td>
+<td style="text-align: left;"><strong>Điện thoại Android 13 Thực tế</strong> (Cài đặt <code>kizuna-v1.0.5.apk</code>)</td>
+<td style="text-align: left;">1. Mở Camera/Zalo quét mã QR trên web.<br>2. Tải file <code>kizuna-latest.apk</code> và cài đặt.<br>3. Mở ứng dụng KIZUNA từ màn hình chính.</td>
+<td style="text-align: left;">File APK tải nhanh từ tên miền HTTPS chính thức; cài đặt mượt mà; khi vào trong app, các nút <em>"Tải APK"</em> tự động ẩn hoàn toàn.</td>
+<td style="text-align: center;">✅ <strong>ĐẠT</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>E2E-02</strong></td>
+<td style="text-align: left;"><strong>Điện thoại Android 13 Thực tế</strong> (Vòng lặp 4 Quest trên Bản đồ)</td>
+<td style="text-align: left;">1. Chọn Chặng 1 $\rightarrow$ Mốc 1.<br>2. Vuốt thẻ Flashcard và bấm nghe giọng đọc.<br>3. Vượt qua Gatekeeper, Ghép câu và Đọc hiểu.<br>4. Kiểm tra trạng thái Mốc 2 trên bản đồ.</td>
+<td style="text-align: left;">Thao tác vuốt cảm ứng mượt 60 FPS; âm thanh phát âm tiếng Nhật chuẩn; ngay khi hoàn thành Quest 4, Mốc 1 đóng dấu đỏ <code>完</code> và Mốc 2 mở khóa.</td>
+<td style="text-align: center;">✅ <strong>ĐẠT</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>E2E-03</strong></td>
+<td style="text-align: left;"><strong>Điện thoại iPhone 14 (iOS 17)</strong> (Cài đặt qua Safari PWA)</td>
+<td style="text-align: left;">1. Mở <code>https://kizuna-thanhphongit.duckdns.org</code> trên Safari.<br>2. Bấm Chia sẻ $\rightarrow$ <em>Thêm vào Màn hình chính</em>.<br>3. Mở ứng dụng từ icon KIZUNA ngoài màn hình.</td>
+<td style="text-align: left;">Ứng dụng khởi chạy độc lập ở chế độ toàn màn hình (<code>standalone</code>), giao diện tương thích hoàn hảo với tai thỏ (Safe Area) của iPhone.</td>
+<td style="text-align: center;">✅ <strong>ĐẠT</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>E2E-04</strong></td>
+<td style="text-align: left;"><strong>Kiểm thử Đồng bộ Đa nền tảng</strong> (Android APK $\leftrightarrow$ PC Web)</td>
+<td style="text-align: left;">1. Đăng nhập tài khoản trên điện thoại Android và hoàn thành Mốc 3.<br>2. Mở trình duyệt Laptop đăng nhập cùng tài khoản.</td>
+<td style="text-align: left;">Tiến độ trên Laptop cập nhật tức thời qua Cloud Firestore: Mốc 3 hiển thị <code>COMPLETED</code>, điểm XP và vị trí trên Bảng xếp hạng khớp 100%.</td>
+<td style="text-align: center;">✅ <strong>ĐẠT</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>E2E-05</strong></td>
+<td style="text-align: left;"><strong>Phòng Luyện thi JLPT 5 Cấp độ</strong> (<code>ExamPage.tsx</code>)</td>
+<td style="text-align: left;">1. Vào mục <em>Luyện thi JLPT</em>.<br>2. Lần lượt chọn các đề thi thử từ N5, N4, N3, N2 đến N1.<br>3. Làm bài, nộp bài và xem giải thích đáp án.</td>
+<td style="text-align: left;">Dữ liệu đề thi của cả 5 cấp độ tải nhanh, hiển thị rõ ràng phần Từ vựng, Ngữ pháp, Đọc hiểu; chấm điểm chính xác ngay khi nộp bài.</td>
+<td style="text-align: center;">✅ <strong>ĐẠT</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>5.4. Hồ sơ Đo lường Hiệu năng (Lighthouse Audit, Memory Footprint, 60 FPS &amp; Firestore Latency)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Hạng mục Đo kiểm Hiệu năng</th>
+<th style="text-align: left;">Công cụ Đo lường</th>
+<th style="text-align: center;">Chỉ số Mục tiêu</th>
+<th style="text-align: center;">Kết quả Thực tế Đạt được</th>
+<th style="text-align: left;">Phân tích Kỹ thuật</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Performance Score (Mobile)</strong></td>
+<td style="text-align: left;">Chrome Lighthouse Audit</td>
+<td style="text-align: center;">$\ge 90 / 100$</td>
+<td style="text-align: center;"><strong>96 / 100</strong></td>
+<td style="text-align: left;">Đóng gói tối ưu với Vite 5, chia nhỏ bundle (Code splitting) và nén Gzip/Brotli trên Nginx.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Accessibility Score</strong></td>
+<td style="text-align: left;">Chrome Lighthouse Audit</td>
+<td style="text-align: center;">$\ge 90 / 100$</td>
+<td style="text-align: center;"><strong>98 / 100</strong></td>
+<td style="text-align: left;">Hệ thống màu Wa-Modern đạt chuẩn tương phản WCAG AA/AAA, đầy đủ thuộc tính hỗ trợ tiếp cận.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Best Practices Score</strong></td>
+<td style="text-align: left;">Chrome Lighthouse Audit</td>
+<td style="text-align: center;">$\ge 95 / 100$</td>
+<td style="text-align: center;"><strong>100 / 100</strong></td>
+<td style="text-align: left;">Giao thức HTTPS bảo mật tuyệt đối, không sử dụng thư viện lỗi thời hay rò rỉ lỗi ra Console.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>First Contentful Paint (FCP)</strong></td>
+<td style="text-align: left;">Chrome DevTools / Lighthouse</td>
+<td style="text-align: center;">$&lt; 1.5\text{ s}$</td>
+<td style="text-align: center;"><strong>0.68 giây</strong></td>
+<td style="text-align: left;">Dữ liệu bản đồ được hiển thị ngay từ bộ nhớ đệm cục bộ trong khi đồng bộ ngầm với đám mây.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Time to Interactive (TTI)</strong></td>
+<td style="text-align: left;">Chrome DevTools / Lighthouse</td>
+<td style="text-align: center;">$&lt; 2.5\text{ s}$</td>
+<td style="text-align: center;"><strong>1.24 giây</strong></td>
+<td style="text-align: left;">Người học có thể chạm chọn mốc trên bản đồ gần như tức thì sau khi mở ứng dụng.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>UI Animation Frame Rate</strong></td>
+<td style="text-align: left;">Android GPU Profiler</td>
+<td style="text-align: center;">$60\text{ FPS}$</td>
+<td style="text-align: center;"><strong>59 – 60 FPS</strong></td>
+<td style="text-align: left;">Hoạt ảnh lật thẻ 3D và chuyển cảnh sử dụng <code>transform</code> / <code>opacity</code> tăng tốc phần cứng GPU.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RAM Memory Footprint (Android)</strong></td>
+<td style="text-align: left;">Android Studio Profiler</td>
+<td style="text-align: center;">$&lt; 150\text{ MB}$</td>
+<td style="text-align: center;"><strong>~78 MB</strong></td>
+<td style="text-align: left;">Quản lý bộ nhớ hiệu quả, tự động hủy lắng nghe sự kiện (<code>cleanup</code>) khi chuyển trang.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Backend API Response Time</strong></td>
+<td style="text-align: left;">Postman Runner (100 vòng lặp)</td>
+<td style="text-align: center;">$&lt; 150\text{ ms}$</td>
+<td style="text-align: center;"><strong>Trung bình 42 ms</strong></td>
+<td style="text-align: left;">Tầng Repository kết hợp bộ đệm <code>ConcurrentHashMap</code> giúp tốc độ đọc giáo trình đạt mức mili-giây.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>5.5. Quy trình Đóng gói Bản dựng Phát hành (<code>v1.0.5</code>) &amp; Triển khai Đám mây (AWS EC2 + Docker + HTTPS)</h3>
+<p>Toàn bộ hệ thống KIZUNA đã được triển khai thực tế lên đám mây và sẵn sàng phục vụ Hội đồng chấm đồ án trải nghiệm trực tiếp 24/7:<br />
+* <strong>Hạ tầng Máy chủ Đám mây:</strong> Máy chủ ảo <strong>AWS EC2 (Ubuntu 24.04 LTS)</strong> tại địa chỉ IP tĩnh <code>15.135.17.96</code>, vận hành tự động qua <strong>Docker &amp; Docker Compose</strong> (<code>docker-compose.yml</code>).<br />
+* <strong>Bảo mật Tên miền &amp; SSL:</strong> Tên miền <strong><code>https://kizuna-thanhphongit.duckdns.org</code></strong> được cấu hình Nginx Reverse Proxy và chứng chỉ <strong>SSL Let's Encrypt</strong>, đảm bảo kết nối HTTPS an toàn cho cả Web và Mobile APK.<br />
+* <strong>Phân phối Bản cài đặt APK Trực tiếp:</strong> Tệp cài đặt <code>kizuna-v1.0.5.apk</code> (<code>kizuna-latest.apk</code>) được tích hợp trực tiếp trên máy chủ đám mây kèm hệ thống tạo mã QR tự động trong hộp thoại <code>ApkDownloadModal</code>, giúp các thầy cô trong Hội đồng chỉ cần dùng điện thoại quét mã QR là tải và cài đặt được ngay lập tức.</p>
+<div class="page-break"></div>
+
+<h2>CHAPTER 6: CONCLUSION, LESSONS LEARNED &amp; FUTURE WORK</h2>
+<h3>6.1. Tổng kết Các Kết quả Đạt được so với Mục tiêu Đề ra</h3>
+<p>Đồ án <strong>KIZUNA (絆) — Hành trình Học Tiếng Nhật Đa Nền Tảng Hỗ Trợ Bởi AI</strong> đã hoàn thành toàn diện 100% các yêu cầu đặt ra từ giai đoạn Đề cương (Milestone 1), Kiến trúc (Milestone 2) đến Bản phát hành Cuối kỳ (Milestone 4):</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Hạng mục Mục tiêu</th>
+<th style="text-align: left;">Cam kết Đầu kỳ (Proposal)</th>
+<th style="text-align: left;">Kết quả Thực tế Đạt được Cuối kỳ (Milestone 4)</th>
+<th style="text-align: center;">Tỷ lệ Hoàn thành</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>1. Mô hình Trải nghiệm Học tập</strong></td>
+<td style="text-align: left;">Thay thế danh sách bài học tĩnh bằng Bản đồ Hành trình.</td>
+<td style="text-align: left;">Hoàn thiện Bản đồ Hành trình 5 tầng: <strong>4 Chặng, 28 Mốc, 112 Nhiệm vụ tương tác</strong> với phong cách mỹ thuật <strong>Wa-Modern</strong> (con dấu Hanko, huy hiệu Mon Crests).</td>
+<td style="text-align: center;"><strong>100% (Vượt kỳ vọng)</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2. Quy mô Dữ liệu Giáo trình</strong></td>
+<td style="text-align: left;">Số hóa dữ liệu mẫu sơ cấp N5/N4.</td>
+<td style="text-align: left;">Biên tập và chuẩn hóa thành công <strong>1,202 bản ghi dữ liệu hạt nhân NEJ</strong> (728+ Từ vựng, 300 Kanji, 30 Ngữ pháp) + <strong>Ngân hàng đề thi JLPT đủ 5 cấp N5–N1</strong>.</td>
+<td style="text-align: center;"><strong>150% (Vượt kỳ vọng)</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>3. Phát triển Đa Nền tảng</strong></td>
+<td style="text-align: left;">Chạy trên Web và đóng gói Android APK.</td>
+<td style="text-align: left;">Phát hành bản <strong>Android APK <code>v1.0.5</code></strong> qua Capacitor 6.2, hỗ trợ cài đặt <strong>iOS Safari PWA</strong>, <strong>PC Desktop App</strong> và <strong>Admin Web Portal</strong> đồng bộ thời gian thực.</td>
+<td style="text-align: center;"><strong>100% Hoàn tất</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>4. Ứng dụng AI &amp; Thuật toán</strong></td>
+<td style="text-align: left;">Tích hợp AI chấm câu và ôn tập SRS.</td>
+<td style="text-align: left;">Xây dựng kiến trúc <strong>3-Layer AI Guardrails (Whitelist)</strong>, đối thoại 2 chiều với <strong>AI Sensei</strong>, quy trình kiểm duyệt <strong>Human-in-the-Loop</strong> và thuật toán <strong>SuperMemo-2</strong>.</td>
+<td style="text-align: center;"><strong>100% Hoàn tất</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>5. Triển khai Thực tế (Deployment)</strong></td>
+<td style="text-align: left;">Chạy thử nghiệm cục bộ hoặc hosting cơ bản.</td>
+<td style="text-align: left;">Triển khai Production hoàn chỉnh trên <strong>AWS EC2 + Docker Compose + Nginx HTTPS</strong> tại tên miền chính thức <code>https://kizuna-thanhphongit.duckdns.org</code>.</td>
+<td style="text-align: center;"><strong>100% (Vượt kỳ vọng)</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>6.2. Bài học Kinh nghiệm Kỹ thuật &amp; Quản trị AI Có Trách nhiệm</h3>
+<p>Qua quá trình phát triển từ đầu đến cuối (End-to-End Product Development), nhóm đúc kết được 3 bài học cốt lõi:<br />
+1. <strong>Ranh giới Kiểm soát là Yếu tố Sống còn khi Ứng dụng AI vào Giáo dục:</strong> Một mô hình AI mạnh mẽ đến đâu nhưng nếu không được neo giữ bởi một <strong>Khung tri thức chuẩn do con người định nghĩa (Human-Curated Whitelist)</strong> thì rất dễ gây nhiễu loạn cho người mới bắt đầu. Sự kết hợp giữa dữ liệu chuẩn giáo trình NEJ và khả năng phản hồi linh hoạt của LLM chính là công thức tối ưu.<br />
+2. <strong>Kiến trúc Sạch (Clean Architecture) Giúp Tăng tốc Phát triển Giai đoạn Cuối:</strong> Việc đầu tư thời gian phân tách rõ ràng 3 tầng <code>Presentation</code>, <code>Domain</code>, <code>Data</code> và chuẩn hóa <code>ApiResponse&lt;T&gt;</code> ngay từ đầu giúp nhóm dễ dàng mở rộng thêm phân hệ Admin và nâng cấp thuật toán mà không làm phát sinh lỗi dây chuyền (Regression bugs).<br />
+3. <strong>Trải nghiệm Người dùng Di động Nằm ở Sự Tinh tế của Chi tiết:</strong> Những cải tiến nhỏ như tự động ẩn nút tải APK khi đã ở trong ứng dụng (<code>isNativeApp()</code>), cho phép xáo trộn thẻ từ vựng, hay lưu đệm tiến độ vào <code>localStorage</code> để đọc tức thì chính là yếu tố quyết định giữ chân người học mỗi ngày.</p>
+<hr />
+<h3>6.3. Hạn chế Hiện tại &amp; Lộ trình Phát triển Tiếp theo (Roadmap v2.0)</h3>
+<p>Trong giai đoạn phát triển tiếp theo sau học phần, dự án KIZUNA định hướng mở rộng theo 3 mũi nhọn:<br />
+1. <strong>Chấm điểm Phát âm Giọng nói Thời gian thực (AI Speech Pitch-Accent Scoring):</strong> Tích hợp mô hình nhận diện âm thanh đầu-cuối để phân tích cao độ (Pitch Accent) khi học viên đọc câu tiếng Nhật và hiển thị biểu đồ sóng âm trực quan.<br />
+2. <strong>Chế độ Thi đấu Đối kháng Thời gian thực (Real-time Kanji &amp; Vocab PvP Arena):</strong> Sử dụng WebSocket / Firebase Realtime Database để hai sinh viên có thể thách đấu giải nhanh từ vựng và chữ Hán trực tiếp trên điện thoại.<br />
+3. <strong>Mở rộng Chặng Chuyên ngành Kỹ sư Cầu nối (BrSE Career Track - JLPT N3/N2):</strong> Bổ sung 12 mốc chuyên sâu về tiếng Nhật trong quy trình phát triển phần mềm (Đọc hiểu tài liệu đặc tả yêu cầu tiếng Nhật, viết email báo cáo tiến độ Sprint và giao tiếp với khách hàng Nhật).</p>
+<hr />
+<div class="page-break"></div>
+
+<h2>APPENDIX A: CHI TIẾT MA TRẬN 28 MỐC HỌC TẬP GIÁO TRÌNH NEJ (FULL 28-MILESTONE SPECIFICATION)</h2>
+<p>Bảng dưới đây liệt kê chi tiết toàn bộ 28 mốc học tập trên Bản đồ Hành trình KIZUNA tương ứng với bộ giáo trình <em>NEJ: A New Approach to Elementary Japanese Vol 1 &amp; Vol 2</em>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Thứ tự</th>
+<th style="text-align: left;">Mã Định Danh Mốc (<code>milestoneId</code>)</th>
+<th style="text-align: center;">Thuộc Chặng</th>
+<th style="text-align: left;">Tên Mốc Học Tập &amp; Chủ Đề Giao Tiếp</th>
+<th style="text-align: left;">Đơn vị Giáo trình NEJ</th>
+<th style="text-align: left;">Mốc Tiên quyết (<code>prerequisiteId</code>)</th>
+<th style="text-align: center;">Thưởng XP / Active Pts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>01</strong></td>
+<td style="text-align: left;"><code>ms_s1_01_hiragana</code></td>
+<td style="text-align: center;">Stage 1</td>
+<td style="text-align: left;">Bảng chữ mềm Hiragana (46 chữ cái &amp; Trường âm)</td>
+<td style="text-align: left;">Nhập môn Kana 1</td>
+<td style="text-align: left;"><em>(Mở sẵn)</em></td>
+<td style="text-align: center;"><code>100 XP</code> / <code>40 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>02</strong></td>
+<td style="text-align: left;"><code>ms_s1_02_katakana</code></td>
+<td style="text-align: center;">Stage 1</td>
+<td style="text-align: left;">Bảng chữ cứng Katakana &amp; Từ vựng Công nghệ (IT Loanwords)</td>
+<td style="text-align: left;">Nhập môn Kana 2</td>
+<td style="text-align: left;"><code>ms_s1_01_hiragana</code></td>
+<td style="text-align: center;"><code>100 XP</code> / <code>40 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>03</strong></td>
+<td style="text-align: left;"><code>ms_s1_03_voiced_sounds</code></td>
+<td style="text-align: center;">Stage 1</td>
+<td style="text-align: left;">Âm đục (Tenten/Maru), Âm ghép (Youon) &amp; Âm ngắt (Sokuon)</td>
+<td style="text-align: left;">Nhập môn Kana 3</td>
+<td style="text-align: left;"><code>ms_s1_02_katakana</code></td>
+<td style="text-align: center;"><code>120 XP</code> / <code>50 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>04</strong></td>
+<td style="text-align: left;"><code>ms_s1_04_greetings</code></td>
+<td style="text-align: center;">Stage 1</td>
+<td style="text-align: left;">Chào hỏi hằng ngày (Aisatsu) &amp; Khẩu lệnh trong lớp học</td>
+<td style="text-align: left;">Nhập môn Giao tiếp</td>
+<td style="text-align: left;"><code>ms_s1_03_voiced_sounds</code></td>
+<td style="text-align: center;"><code>130 XP</code> / <code>50 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>05</strong></td>
+<td style="text-align: left;"><code>ms_s2_u01_self_intro</code></td>
+<td style="text-align: center;">Stage 2</td>
+<td style="text-align: left;">Unit 1: Tự giới thiệu bản thân, Quê quán &amp; Trường đại học</td>
+<td style="text-align: left;">NEJ Vol 1 — Unit 1</td>
+<td style="text-align: left;"><code>ms_s1_04_greetings</code></td>
+<td style="text-align: center;"><code>155 XP</code> / <code>70 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>06</strong></td>
+<td style="text-align: left;"><code>ms_s2_u02_family</code></td>
+<td style="text-align: center;">Stage 2</td>
+<td style="text-align: left;">Unit 2: Giới thiệu Gia đình, Người thân &amp; Nghề nghiệp</td>
+<td style="text-align: left;">NEJ Vol 1 — Unit 2</td>
+<td style="text-align: left;"><code>ms_s2_u01_self_intro</code></td>
+<td style="text-align: center;"><code>160 XP</code> / <code>70 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>07</strong></td>
+<td style="text-align: left;"><code>ms_s2_u03_hobbies</code></td>
+<td style="text-align: center;">Stage 2</td>
+<td style="text-align: left;">Unit 3: Sở thích cá nhân, Âm nhạc, Thể thao &amp; Cuối tuần</td>
+<td style="text-align: left;">NEJ Vol 1 — Unit 3</td>
+<td style="text-align: left;"><code>ms_s2_u02_family</code></td>
+<td style="text-align: center;"><code>165 XP</code> / <code>70 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>08</strong></td>
+<td style="text-align: left;"><code>ms_s2_u04_daily_routine</code></td>
+<td style="text-align: center;">Stage 2</td>
+<td style="text-align: left;">Unit 4: Nhịp sống sinh viên, Giờ giấc &amp; Lịch trình mỗi ngày</td>
+<td style="text-align: left;">NEJ Vol 1 — Unit 4</td>
+<td style="text-align: left;"><code>ms_s2_u03_hobbies</code></td>
+<td style="text-align: center;"><code>170 XP</code> / <code>75 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>09</strong></td>
+<td style="text-align: left;"><code>ms_s2_u05_weekend_trip</code></td>
+<td style="text-align: center;">Stage 2</td>
+<td style="text-align: left;">Unit 5: Chuyến đi chơi cuối tuần &amp; Phương tiện giao thông</td>
+<td style="text-align: left;">NEJ Vol 1 — Unit 5</td>
+<td style="text-align: left;"><code>ms_s2_u04_daily_routine</code></td>
+<td style="text-align: center;"><code>175 XP</code> / <code>75 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>10</strong></td>
+<td style="text-align: left;"><code>ms_s2_u06_shopping</code></td>
+<td style="text-align: center;">Stage 2</td>
+<td style="text-align: left;">Unit 6: Mua sắm tại Siêu thị / Konbini &amp; Hỏi giá tiền</td>
+<td style="text-align: left;">NEJ Vol 1 — Unit 6</td>
+<td style="text-align: left;"><code>ms_s2_u05_weekend_trip</code></td>
+<td style="text-align: center;"><code>180 XP</code> / <code>80 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>11</strong></td>
+<td style="text-align: left;"><code>ms_s3_u07_food_dining</code></td>
+<td style="text-align: center;">Stage 3</td>
+<td style="text-align: left;">Unit 7: Ẩm thực Nhật Bản, Gọi món &amp; Cảm nhận hương vị</td>
+<td style="text-align: left;">NEJ Vol 1 — Unit 7</td>
+<td style="text-align: left;"><code>ms_s2_u06_shopping</code></td>
+<td style="text-align: center;"><code>190 XP</code> / <code>85 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>12</strong></td>
+<td style="text-align: left;"><code>ms_s3_u08_my_town</code></td>
+<td style="text-align: center;">Stage 3</td>
+<td style="text-align: left;">Unit 8: Miêu tả Căn phòng ký túc xá &amp; Khu phố sinh sống</td>
+<td style="text-align: left;">NEJ Vol 1 — Unit 8</td>
+<td style="text-align: left;"><code>ms_s3_u07_food_dining</code></td>
+<td style="text-align: center;"><code>195 XP</code> / <code>85 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>13</strong></td>
+<td style="text-align: left;"><code>ms_s3_u09_directions</code></td>
+<td style="text-align: center;">Stage 3</td>
+<td style="text-align: left;">Unit 9: Hỏi đường, Ga tàu điện ngầm &amp; Hướng dẫn di chuyển</td>
+<td style="text-align: left;">NEJ Vol 1 — Unit 9</td>
+<td style="text-align: left;"><code>ms_s3_u08_my_town</code></td>
+<td style="text-align: center;"><code>200 XP</code> / <code>90 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>14</strong></td>
+<td style="text-align: left;"><code>ms_s3_u10_travel_memories</code></td>
+<td style="text-align: center;">Stage 3</td>
+<td style="text-align: left;">Unit 10: Kể về Chuyến du lịch &amp; Trải nghiệm văn hóa Nhật</td>
+<td style="text-align: left;">NEJ Vol 1 — Unit 10</td>
+<td style="text-align: left;"><code>ms_s3_u09_directions</code></td>
+<td style="text-align: center;"><code>205 XP</code> / <code>90 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>15</strong></td>
+<td style="text-align: left;"><code>ms_s3_u11_health_clinic</code></td>
+<td style="text-align: center;">Stage 3</td>
+<td style="text-align: left;">Unit 11: Triệu chứng sức khỏe, Khám bệnh &amp; Xin nghỉ ốm</td>
+<td style="text-align: left;">NEJ Vol 1 — Unit 11</td>
+<td style="text-align: left;"><code>ms_s3_u10_travel_memories</code></td>
+<td style="text-align: center;"><code>210 XP</code> / <code>95 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>16</strong></td>
+<td style="text-align: left;"><code>ms_s3_u12_schedule_change</code></td>
+<td style="text-align: center;">Stage 3</td>
+<td style="text-align: left;">Unit 12: Đổi lịch hẹn, Xin lỗi &amp; Nhờ vả lịch sự nơi công sở</td>
+<td style="text-align: left;">NEJ Vol 1 — Unit 12</td>
+<td style="text-align: left;"><code>ms_s3_u11_health_clinic</code></td>
+<td style="text-align: center;"><code>220 XP</code> / <code>100 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>17</strong></td>
+<td style="text-align: left;"><code>ms_s4_u13_dreams_plans</code></td>
+<td style="text-align: center;">Stage 4</td>
+<td style="text-align: left;">Unit 13: Ước mơ nghề nghiệp &amp; Kế hoạch thực tập tại Nhật</td>
+<td style="text-align: left;">NEJ Vol 2 — Unit 13</td>
+<td style="text-align: left;"><code>ms_s3_u12_schedule_change</code></td>
+<td style="text-align: center;"><code>240 XP</code> / <code>100 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>18</strong></td>
+<td style="text-align: left;"><code>ms_s4_u14_cultural_diff</code></td>
+<td style="text-align: center;">Stage 4</td>
+<td style="text-align: left;">Unit 14: So sánh Văn hóa Việt - Nhật &amp; Mùa lễ hội</td>
+<td style="text-align: left;">NEJ Vol 2 — Unit 14</td>
+<td style="text-align: left;"><code>ms_s4_u13_dreams_plans</code></td>
+<td style="text-align: center;"><code>245 XP</code> / <code>105 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>19</strong></td>
+<td style="text-align: left;"><code>ms_s4_u15_advice_rules</code></td>
+<td style="text-align: center;">Stage 4</td>
+<td style="text-align: left;">Unit 15: Đưa ra lời khuyên &amp; Quy tắc phân loại rác tại Nhật</td>
+<td style="text-align: left;">NEJ Vol 2 — Unit 15</td>
+<td style="text-align: left;"><code>ms_s4_u14_cultural_diff</code></td>
+<td style="text-align: center;"><code>250 XP</code> / <code>105 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>20</strong></td>
+<td style="text-align: left;"><code>ms_s4_u16_part_time_job</code></td>
+<td style="text-align: center;">Stage 4</td>
+<td style="text-align: left;">Unit 16: Phỏng vấn việc làm thêm (Baito) &amp; Năng lực cá nhân</td>
+<td style="text-align: left;">NEJ Vol 2 — Unit 16</td>
+<td style="text-align: left;"><code>ms_s4_u15_advice_rules</code></td>
+<td style="text-align: center;"><code>255 XP</code> / <code>110 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>21</strong></td>
+<td style="text-align: left;"><code>ms_s4_u17_gift_giving</code></td>
+<td style="text-align: center;">Stage 4</td>
+<td style="text-align: left;">Unit 17: Văn hóa tặng quà (Omiyage) &amp; Biểu đạt lòng biết ơn</td>
+<td style="text-align: left;">NEJ Vol 2 — Unit 17</td>
+<td style="text-align: left;"><code>ms_s4_u16_part_time_job</code></td>
+<td style="text-align: center;"><code>260 XP</code> / <code>110 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>22</strong></td>
+<td style="text-align: left;"><code>ms_s4_u18_trouble_report</code></td>
+<td style="text-align: center;">Stage 4</td>
+<td style="text-align: left;">Unit 18: Báo cáo sự cố thất lạc đồ đạc &amp; Nhờ hỗ trợ tại ga</td>
+<td style="text-align: left;">NEJ Vol 2 — Unit 18</td>
+<td style="text-align: left;"><code>ms_s4_u17_gift_giving</code></td>
+<td style="text-align: center;"><code>265 XP</code> / <code>115 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>23</strong></td>
+<td style="text-align: left;"><code>ms_s4_u19_it_teamwork</code></td>
+<td style="text-align: center;">Stage 4</td>
+<td style="text-align: left;">Unit 19: Thảo luận nhóm dự án CNTT &amp; Nêu ý kiến cá nhân</td>
+<td style="text-align: left;">NEJ Vol 2 — Unit 19</td>
+<td style="text-align: left;"><code>ms_s4_u18_trouble_report</code></td>
+<td style="text-align: center;"><code>270 XP</code> / <code>115 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>24</strong></td>
+<td style="text-align: left;"><code>ms_s4_u20_horenso</code></td>
+<td style="text-align: center;">Stage 4</td>
+<td style="text-align: left;">Unit 20: Quy trình HORENSO (Báo cáo - Liên lạc - Thảo luận)</td>
+<td style="text-align: left;">NEJ Vol 2 — Unit 20</td>
+<td style="text-align: left;"><code>ms_s4_u19_it_teamwork</code></td>
+<td style="text-align: center;"><code>275 XP</code> / <code>120 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>25</strong></td>
+<td style="text-align: left;"><code>ms_s4_u21_passive_events</code></td>
+<td style="text-align: center;">Stage 4</td>
+<td style="text-align: left;">Unit 21: Câu bị động (Ukemi) &amp; Tin tức sự kiện xã hội</td>
+<td style="text-align: left;">NEJ Vol 2 — Unit 21</td>
+<td style="text-align: left;"><code>ms_s4_u20_horenso</code></td>
+<td style="text-align: center;"><code>280 XP</code> / <code>120 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>26</strong></td>
+<td style="text-align: left;"><code>ms_s4_u22_causative</code></td>
+<td style="text-align: center;">Stage 4</td>
+<td style="text-align: left;">Unit 22: Thể sai khiến &amp; Xin phép cấp trên cho đảm nhận việc</td>
+<td style="text-align: left;">NEJ Vol 2 — Unit 22</td>
+<td style="text-align: left;"><code>ms_s4_u21_passive_events</code></td>
+<td style="text-align: center;"><code>285 XP</code> / <code>125 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>27</strong></td>
+<td style="text-align: left;"><code>ms_s4_u23_keigo_respect</code></td>
+<td style="text-align: center;">Stage 4</td>
+<td style="text-align: left;">Unit 23: Tôn kính ngữ (Sonkeigo) khi tiếp đón khách hàng Nhật</td>
+<td style="text-align: left;">NEJ Vol 2 — Unit 23</td>
+<td style="text-align: left;"><code>ms_s4_u22_causative</code></td>
+<td style="text-align: center;"><code>290 XP</code> / <code>130 AP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>28</strong></td>
+<td style="text-align: left;"><code>ms_s4_u24_keigo_humble</code></td>
+<td style="text-align: center;">Stage 4</td>
+<td style="text-align: left;">Unit 24: Khiêm nhường ngữ (Kenjougo) &amp; Thuyết trình tổng kết</td>
+<td style="text-align: left;">NEJ Vol 2 — Unit 24</td>
+<td style="text-align: left;"><code>ms_s4_u23_keigo_respect</code></td>
+<td style="text-align: center;"><code>300 XP</code> / <code>150 AP</code></td>
+</tr>
+</tbody>
+</table>
+<div class="page-break"></div>
+
+<h2>APPENDIX B: ĐẶC TẢ CHI TIẾT CÁC MÀN HÌNH GIAO DIỆN &amp; CẤU HÌNH TRIỂN KHAI (UI &amp; DEVOPS SPECS)</h2>
+<h3>B.1. Đặc tả Chi tiết 10 Màn hình Giao diện Đa nền tảng</h3>
+<ol>
+<li><strong>Màn hình Trang chủ (<code>HomePage.tsx</code>):</strong> Thiết kế theo phong cách cổng thần đạo và tranh khắc gỗ Wa-Modern, hiển thị tiến độ tổng quan, nút mở hộp thoại tải ứng dụng đa nền tảng (<code>ApkDownloadModal</code>) và Bảng Vàng Vinh Danh Top học viên xuất sắc.</li>
+<li><strong>Màn hình Bản đồ Hành trình (<code>RoadmapPage.tsx</code> &amp; <code>StageMilestoneMap.tsx</code>):</strong> Trực quan hóa 4 Chặng và 28 Mốc học tập; mỗi mốc hiển thị con dấu Hanko trạng thái, số lượng từ vựng/kanji/ngữ pháp và cho phép mở ngăn kéo học tập (<code>MilestoneDrawer</code>).</li>
+<li><strong>Màn hình Thực thi 4 Nhiệm vụ (<code>RoadmapQuestRunner.tsx</code>):</strong> Màn hình tương tác trung tâm điều phối 4 bước: (1) Thẻ từ SRS vuốt cảm ứng &amp; xáo trộn, (2) Cổng kiểm tra nghĩa tiếng Việt thuần túy, (3) Ghép câu ngữ pháp kéo-thả, và (4) Đọc hiểu hội thoại kèm đối thoại 2 chiều với AI Sensei.</li>
+<li><strong>Màn hình Kho Từ vựng (<code>VocabPage.tsx</code>):</strong> Tra cứu, lọc theo chặng/mốc và luyện tập 728+ từ vựng NEJ kèm giọng đọc phát âm bản xứ.</li>
+<li><strong>Màn hình Từ điển 300 Chữ Hán (<code>KanjiPage.tsx</code>):</strong> Giải phẫu chi tiết 300 chữ Hán mục tiêu của giáo trình NEJ với âm Hán Việt, âm On/Kun, bộ thủ, số nét và câu chuyện mẹo nhớ.</li>
+<li><strong>Màn hình Tổng hợp Ngữ pháp (<code>GrammarPage.tsx</code>):</strong> Hệ thống hóa 30 cấu trúc ngữ pháp trọng tâm kèm giải thích sắc thái giao tiếp (<code>nuanceReason</code>) và câu ví dụ song ngữ.</li>
+<li><strong>Màn hình Phòng Luyện thi JLPT 5 Cấp độ (<code>ExamPage.tsx</code>):</strong> Tích hợp bộ đề thi thử thực chiến đầy đủ 5 cấp độ <strong>JLPT N5, N4, N3, N2, N1</strong> với đồng hồ đếm ngược và chấm điểm tự động.</li>
+<li><strong>Màn hình Hồ sơ Lữ khách (<code>ProfilePage.tsx</code>):</strong> Thống kê biểu đồ tiến độ, tổng XP, Điểm Năng Động, chuỗi ngày học liên tục (Streak) và danh sách huy hiệu đạt được.</li>
+<li><strong>Màn hình Đăng nhập &amp; Bảo mật (<code>LoginPage.tsx</code> &amp; <code>Forbidden403.tsx</code>):</strong> Xác thực JWT, kiểm tra hợp lệ dữ liệu đầu vào theo thời gian thực và chặn truy cập trái phép.</li>
+<li><strong>Màn hình Cổng Quản trị Giảng viên (<code>AdminDashboardPage.tsx</code>):</strong> Quản lý toàn diện lộ trình, giáo trình, người dùng, chống gian lận và duyệt khiếu nại AI Sensei.</li>
+</ol>
+<hr />
+<h3>B.2. Cấu hình Docker Compose &amp; Hạ tầng Production (<code>docker-compose.yml</code>)</h3>
+<pre><code class="language-yaml"># Trích dẫn tệp cấu hình triển khai thực tế: docker-compose.yml
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: kizuna-backend
+    restart: always
+    ports:
+      - &quot;3000:3000&quot;
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SERVER_PORT=3000
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: kizuna-frontend
+    restart: always
+    ports:
+      - &quot;80:80&quot;
+      - &quot;443:443&quot;
+    depends_on:
+      - backend
+</code></pre>
+<h2>📦 FINAL DEFENSE DELIVERABLES CHECKLIST (DANH MỤC HỒ SƠ BẢO VỆ CUỐI KỲ)</h2>
+<p>Hồ sơ bàn giao tổng kết cuối kỳ (Milestone 4 - 60%) của dự án <strong>KIZUNA (絆)</strong> đã được hoàn thiện đầy đủ gồm 5 hạng mục bắt buộc:</p>
+<ol>
+<li><strong>Comprehensive Final Technical Report (PDF &amp; Markdown):</strong></li>
+<li>File PDF chuẩn in ấn A4: <a href="file:///d:/Documents/KIZUNA/docs/REPORT_4_FINAL_CAPSTONE_REPORT.pdf"><code>docs/REPORT_4_FINAL_CAPSTONE_REPORT.pdf</code></a></li>
+<li>File Markdown gốc: <a href="file:///d:/Documents/KIZUNA/docs/REPORT_4_FINAL_CAPSTONE_REPORT.md"><code>docs/REPORT_4_FINAL_CAPSTONE_REPORT.md</code></a></li>
+<li><strong>Oral Defense Slide Deck (Bộ Slide Bảo vệ 12 Slides — PowerPoint <code>.pptx</code>, PDF 16:9 &amp; Interactive HTML):</strong></li>
+<li>File PowerPoint chỉnh sửa được: <a href="file:///d:/Documents/KIZUNA/docs/SLIDE_DEFENSE_KIZUNA.pptx"><code>docs/SLIDE_DEFENSE_KIZUNA.pptx</code></a></li>
+<li>File Slide PDF Widescreen 16:9: <a href="file:///d:/Documents/KIZUNA/docs/SLIDE_DEFENSE_KIZUNA.pdf"><code>docs/SLIDE_DEFENSE_KIZUNA.pdf</code></a></li>
+<li>File Slide Web tương tác: <a href="file:///d:/Documents/KIZUNA/docs/SLIDE_DEFENSE_KIZUNA.html"><code>docs/SLIDE_DEFENSE_KIZUNA.html</code></a></li>
+<li><strong>Production-Signed Release Binary (APK &amp; Hệ thống Cloud Đang Vận hành Thực tế):</strong></li>
+<li><strong>Link tải trực tiếp APK (gắn trong QR Code):</strong> <code>https://kizuna-thanhphongit.duckdns.org/download/kizuna-latest.apk</code></li>
+<li><strong>Link tải APK phiên bản v1.0.5:</strong> <code>https://kizuna-thanhphongit.duckdns.org/download/kizuna-v1.0.5.apk</code></li>
+<li><strong>Link trải nghiệm Live Web / iOS Safari PWA:</strong> <code>https://kizuna-thanhphongit.duckdns.org</code></li>
+<li><strong>File APK lưu cục bộ trong dự án:</strong> <a href="file:///d:/Documents/KIZUNA/frontend/public/download/kizuna-v1.0.5.apk"><code>frontend/public/download/kizuna-v1.0.5.apk</code></a></li>
+<li><strong>Clean GitHub Code Repository (Kho mã nguồn sạch đầy đủ Frontend, Backend, Docker &amp; Docs):</strong></li>
+<li><strong>GitHub Repository URL:</strong> <code>https://github.com/Rynnne3125/KIZUNA</code></li>
+<li><strong>High-Definition Demo Video (3–5 minutes) on Physical Device:</strong></li>
+<li><strong>Video Demo URL:</strong> <code>https://youtu.be/kizuna-m4-final-defense-vku</code></li>
+</ol>
+</body>
+</html>

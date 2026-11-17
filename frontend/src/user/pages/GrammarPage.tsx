@@ -865,7 +865,7 @@ export const GrammarPage: React.FC = () => {
 
       {/* 2. CHỌN GIÁO TRÌNH CỦA CẤP ĐỘ HIỆN TẠI (Book Cover Wabi-sabi Style) */}
       {!selectedBook && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
           {currentLevelBooks.map(book => {
             const isMinna = book.bookId.includes('minna') || book.bookId.includes('n5') || book.bookId.includes('n4');
             const spineColor = isMinna ? '#c53d32' : '#1e40af';
@@ -1010,7 +1010,7 @@ export const GrammarPage: React.FC = () => {
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
             gap: 14
           }}>
             {selectedBook.units.map(unit => {

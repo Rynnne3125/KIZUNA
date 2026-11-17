@@ -2,6 +2,7 @@ package com.kizuna.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -75,6 +76,7 @@ public class SecurityConfig {
                         // Public endpoints
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/api/v1/health/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/placement/assessment").permitAll()
                         .requestMatchers("/error").permitAll()
 
                         // Shared endpoints for both USER and ADMIN

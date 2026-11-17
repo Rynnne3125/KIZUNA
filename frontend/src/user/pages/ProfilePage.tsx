@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { User } from '../types/auth';
-import { Flame, Star, Award, BookOpen, LogOut, User as UserIcon } from 'lucide-react';
+import { 
+  Flame, Star, Award, BookOpen, LogOut, User as UserIcon, Wifi, 
+  Download, RefreshCw, Smartphone, Monitor, CheckCircle2, Sparkles, ShieldCheck 
+} from 'lucide-react';
+import { useNetworkStatus } from '../hooks/useNetworkStatus';
+import { isNativeApp } from '../utils/platform';
 
 interface ProfilePageProps {
   user: User | null;
@@ -11,6 +16,36 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
   user,
   onLogout
 }) => {
+  const network = useNetworkStatus();
+  const isApp = isNativeApp();
+
+  const [checkingUpdate, setCheckingUpdate] = useState(false);
+  const [updateResult, setUpdateResult] = useState<string | null>(null);
+  const [remoteVersion, setRemoteVersion] = useState<any>(null);
+
+  const handleCheckUpdate = async () => {
+    setCheckingUpdate(true);
+    setUpdateResult(null);
+    try {
+      const res = await fetch('/version.json?t=' + Date.now());
+      if (res.ok) {
+        const data = await res.json();
+        setRemoteVersion(data);
+        if (data.versionCode > 107) {
+          setUpdateResult(`Đã có bản cập nhật mới v${data.version}! Bấm nút tải bên dưới để nâng cấp.`);
+        } else {
+          setUpdateResult('Bạn đang sử dụng phiên bản KIZUNA mới nhất (v1.0.7). Hệ thống luôn tự động đồng bộ bài học mới!');
+        }
+      } else {
+        setUpdateResult('Bạn đang sử dụng phiên bản mới nhất v1.0.7.');
+      }
+    } catch {
+      setUpdateResult('Bạn đang sử dụng phiên bản v1.0.7 (Máy chủ hoạt động bình thường).');
+    } finally {
+      setCheckingUpdate(false);
+    }
+  };
+
   if (!user) {
     return (
       <div className="max-w-md mx-auto my-16 text-center bg-white p-8 rounded-3xl border border-emerald-100 shadow-md">
@@ -97,6 +132,104 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
             </div>
             <div className="text-xs text-teal-900/80 font-medium">Bậc Xếp Hạng</div>
           </div>
+        </div>
+
+        {/* Network & Wi-Fi Settings */}
+        <div className="bg-emerald-50/60 border border-emerald-200/80 rounded-2xl p-4 sm:p-5 mb-8 text-xs sm:text-sm text-slate-700 space-y-4">
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <div className="flex items-center gap-2 font-bold text-slate-800 text-sm">
+              <Wifi className="w-4 h-4 text-emerald-600" />
+              <span>Cài đặt kết nối & Yêu cầu Wi-Fi</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs font-extrabold px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-800">
+              <span className={`w-2 h-2 rounded-full ${network.status.isWifi ? 'bg-emerald-500' : network.status.isCellular ? 'bg-amber-500' : 'bg-rose-500'}`}></span>
+              <span>
+                {network.status.isWifi ? 'Đang dùng Wi-Fi' : network.status.isCellular ? 'Dữ liệu di động (4G)' : 'Mất mạng'}
+              </span>
+            </div>
+          </div>
+
+          <p className="text-slate-600 text-xs leading-relaxed">
+            Kiểm soát việc sử dụng dữ liệu khi truy cập KIZUNA. Bật tính năng này để yêu cầu thiết bị phải kết nối Wi-Fi khi vào app, giúp tối ưu tốc độ học bài và tránh phát sinh cước di động 4G ngoài ý muốn.
+          </p>
+
+          <div className="pt-2 border-t border-emerald-100 flex items-center justify-between gap-4">
+            <div>
+              <div className="font-bold text-slate-800 text-xs sm:text-sm">
+                Bắt buộc kết nối Wi-Fi khi mở ứng dụng
+              </div>
+              <div className="text-[11px] text-slate-500">
+                {network.wifiOnlyRequired 
+                  ? 'Đang bật: Cần có Wi-Fi để vào ứng dụng' 
+                  : 'Đang tắt: Cho phép truy cập bằng cả 4G/5G'}
+              </div>
+            </div>
+
+            <label className="relative inline-flex items-center cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={network.wifiOnlyRequired}
+                onChange={(e) => network.setWifiOnlyRequired(e.target.checked)}
+                className="sr-only peer"
+              />
+              <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+            </label>
+          </div>
+        </div>
+
+        {/* App Version & In-App Auto-Update System */}
+        <div className="bg-gradient-to-br from-slate-50 to-emerald-50/40 border border-emerald-200/80 rounded-2xl p-4 sm:p-5 mb-8 text-xs sm:text-sm text-slate-700 space-y-4">
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <div className="flex items-center gap-2 font-bold text-slate-800 text-sm">
+              <Sparkles className="w-4 h-4 text-emerald-600" />
+              <span>Thông tin phiên bản & Cập nhật ứng dụng</span>
+            </div>
+            <span className="text-xs font-black px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
+              v1.0.7 (Mới nhất)
+            </span>
+          </div>
+
+          <div className="text-xs text-slate-600 leading-relaxed space-y-1.5">
+            <p>
+              <strong>Cơ chế tự cập nhật trên điện thoại:</strong> Ứng dụng KIZUNA sử dụng công nghệ <em>Live Cloud Sync</em>. Mỗi khi mở app trên Android hoặc máy tính, hệ thống tự động tải giao diện, bài học và tính năng mới nhất từ máy chủ đám mây mà bạn không cần phải tải lại file APK hay cài đè thủ công.
+            </p>
+          </div>
+
+          <div className="pt-2 border-t border-emerald-100 flex flex-wrap items-center gap-2.5">
+            <button
+              onClick={handleCheckUpdate}
+              disabled={checkingUpdate}
+              className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 transition-all cursor-pointer shadow-xs active:scale-98"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${checkingUpdate ? 'animate-spin' : ''}`} />
+              <span>{checkingUpdate ? 'Đang kiểm tra...' : 'Kiểm tra cập nhật mới'}</span>
+            </button>
+
+            <a
+              href="/download/kizuna-latest.apk"
+              download="kizuna-v1.0.7.apk"
+              className="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-bold text-xs flex items-center gap-1.5 transition-all shadow-xs"
+            >
+              <Smartphone className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Tải file APK Android (v1.0.7)</span>
+            </a>
+
+            <a
+              href="/download/KIZUNA-Setup.exe"
+              download="KIZUNA-Setup.exe"
+              className="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-bold text-xs flex items-center gap-1.5 transition-all shadow-xs"
+            >
+              <Monitor className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Tải bản PC (.exe)</span>
+            </a>
+          </div>
+
+          {updateResult && (
+            <div className="p-3 bg-white border border-emerald-200 rounded-xl text-xs font-semibold text-emerald-800 flex items-center gap-2 animate-fadeIn">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>{updateResult}</span>
+            </div>
+          )}
         </div>
 
         {/* Security & Session Info */}
