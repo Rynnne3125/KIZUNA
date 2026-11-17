@@ -398,7 +398,9 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
 
     isDrawingRef.current = true;
     ctx.beginPath();
-    ctx.moveTo(clientX - rect.left, clientY - rect.top);
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    ctx.moveTo((clientX - rect.left) * scaleX, (clientY - rect.top) * scaleY);
   };
 
   const drawStroke = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
@@ -412,11 +414,13 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
     const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
 
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
     ctx.lineWidth = 5.5; // Nét vẽ thanh mảnh thanh thoát
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
     ctx.strokeStyle = '#1c2536';
-    ctx.lineTo(clientX - rect.left, clientY - rect.top);
+    ctx.lineTo((clientX - rect.left) * scaleX, (clientY - rect.top) * scaleY);
     ctx.stroke();
   };
 
@@ -473,11 +477,13 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
         </button>
       </div>
 
-      {/* Khung vẽ nét 260px x 260px - HOÀN TOÀN KHÔNG CÓ ĐƯỜNG KẺ GIỮA - NÉT MẢNH KHẢNH */}
+      {/* Khung vẽ nét responsive - HOÀN TOÀN KHÔNG CÓ ĐƯỜNG KẺ GIỮA - NÉT MẢNH KHẢNH */}
       <div style={{
         position: 'relative',
-        width: 260,
+        width: '100%',
+        maxWidth: 260,
         height: 260,
+        aspectRatio: '1 / 1',
         background: '#ffffff',
         borderRadius: 12,
         border: '1.5px solid #e2e8f0',
@@ -496,9 +502,9 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
             <svg
               key={`kanji-svg-${kanji}-${loopCount}`}
               viewBox="0 0 109 109"
-              width={240}
-              height={240}
-              style={{ overflow: 'visible' }}
+              width="100%"
+              height="100%"
+              style={{ overflow: 'visible', maxWidth: 240, maxHeight: 240 }}
             >
               {/* 1. Lớp nét mờ dẫn đường phía dưới (Faint ghost guide) - Nét mảnh khảnh 1.6px */}
               {strokes.map((st) => (
@@ -596,8 +602,8 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
             </div>
           )
         ) : (
-          /* Bảng luyện viết tay không ô kẻ giữa */
-          <div style={{ position: 'relative', width: 260, height: 260 }}>
+          /* Bảng luyện viết tay không ô kẻ giữa responsive */
+          <div style={{ position: 'relative', width: '100%', height: '100%', maxWidth: 260, maxHeight: 260 }}>
             {showGhost && (
               <div style={{
                 position: 'absolute',
@@ -625,7 +631,7 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
               onTouchStart={startDrawing}
               onTouchMove={drawStroke}
               onTouchEnd={stopDrawing}
-              style={{ width: 260, height: 260, cursor: 'crosshair', touchAction: 'none' }}
+              style={{ width: '100%', height: '100%', cursor: 'crosshair', touchAction: 'none' }}
             />
           </div>
         )}
@@ -1207,8 +1213,9 @@ export const KanjiPage: React.FC = () => {
     <div style={{
       maxWidth: 1040,
       margin: '0 auto',
-      paddingBottom: 64,
-      fontFamily: '"Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+      padding: '0 12px 64px 12px',
+      fontFamily: '"Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+      boxSizing: 'border-box'
     }}>
       <style>{`
         @keyframes sakuraFall {
@@ -1281,11 +1288,75 @@ export const KanjiPage: React.FC = () => {
             transform: rotate(360deg);
           }
         }
+
+        /* Responsive Breakpoints cho Android & Mobile */
+        @media (max-width: 860px) {
+          .kanji-layout-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .kanji-grid-items {
+            grid-template-columns: repeat(auto-fill, minmax(68px, 1fr)) !important;
+            gap: 6px !important;
+          }
+          .kanji-header-bar {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 12px !important;
+          }
+          .kanji-level-fuda {
+            width: 100% !important;
+            overflow-x: auto !important;
+            scrollbar-width: none !important;
+          }
+          .kanji-level-fuda button {
+            flex: 1 0 auto !important;
+            min-width: 60px !important;
+            padding: 6px 10px !important;
+          }
+          .kanji-status-bar {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 12px !important;
+          }
+          .kanji-mode-tabs {
+            width: 100% !important;
+            display: flex !important;
+            flex-wrap: wrap !important;
+          }
+          .kanji-mode-tabs button {
+            flex: 1 1 auto !important;
+            text-align: center !important;
+            justify-content: center !important;
+          }
+          .kanji-pagination-bar {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 12px !important;
+          }
+          .kanji-search-box {
+            width: 100% !important;
+            max-width: 100% !important;
+          }
+          .kanji-page-buttons {
+            justify-content: center !important;
+            flex-wrap: wrap !important;
+          }
+          .kanji-detail-panel {
+            padding: 16px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .kanji-grid-items {
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 6px !important;
+          }
+        }
       `}</style>
 
       {/* 1. HEADER CHỮ HÁN PHONG CÁCH NHẬT BẢN HIỆN ĐẠI (和の美学) */}
       <div style={{ marginBottom: 20 }}>
-        <div style={{
+        <div className="kanji-header-bar" style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -1325,7 +1396,7 @@ export const KanjiPage: React.FC = () => {
           </div>
 
           {/* Thanh chuyển cấp độ N5 -> N1 phong cách Thẻ bài Nhật Bản (札 - Fuda) */}
-          <div style={{
+          <div className="kanji-level-fuda" style={{
             display: 'flex',
             background: '#f4f2ee',
             padding: 3,
@@ -1365,7 +1436,7 @@ export const KanjiPage: React.FC = () => {
         </div>
 
         {/* Thanh trạng thái cấp độ & Chế độ học tập */}
-        <div style={{
+        <div className="kanji-status-bar" style={{
           background: '#ffffff',
           borderRadius: 12,
           border: '1px solid #ebe7df',
@@ -1395,7 +1466,7 @@ export const KanjiPage: React.FC = () => {
           </div>
 
           {/* 3 Tabs chuyển chế độ học tập */}
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          <div className="kanji-mode-tabs" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             <button
               onClick={() => setCurrentMode('list')}
               style={{
@@ -1499,7 +1570,7 @@ export const KanjiPage: React.FC = () => {
           {currentMode === 'list' && (
             <div>
               {/* Thanh điều khiển phân trang & Tìm kiếm */}
-              <div style={{
+              <div className="kanji-pagination-bar" style={{
                 background: '#ffffff',
                 border: '1px solid #ebe7df',
                 borderRadius: 12,
@@ -1511,7 +1582,7 @@ export const KanjiPage: React.FC = () => {
                 flexWrap: 'wrap',
                 gap: 12
               }}>
-                <div style={{ minWidth: 260, flex: 1, position: 'relative', maxWidth: 380 }}>
+                <div className="kanji-search-box" style={{ minWidth: 260, flex: 1, position: 'relative', maxWidth: 380 }}>
                   <Search style={{
                     position: 'absolute',
                     left: 12,
@@ -1570,7 +1641,7 @@ export const KanjiPage: React.FC = () => {
                 </div>
 
                 {/* Phân trang: Hiển thị 40 từ / trang */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                <div className="kanji-page-buttons" style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
                   <span style={{ fontSize: 13, color: '#78716c', fontWeight: 600, marginRight: 6 }}>
                     Trang <strong>{activePage}</strong> / {totalPages} (Chữ {(activePage - 1) * PAGE_SIZE + 1} - {Math.min(activePage * PAGE_SIZE, filteredList.length)} / {filteredList.length})
                   </span>
@@ -1689,11 +1760,11 @@ export const KanjiPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Bố cục 2 Cột: Cột trái lưới 40 chữ Hán · Cột phải Chi tiết nét vẽ & Mẹo nhớ */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 340px) 1fr', gap: 20 }}>
+              {/* Bố cục 2 Cột: Cột trái lưới 40 chữ Hán · Cột phải Chi tiết nét vẽ & Mẹo nhớ (Responsive 1 cột trên mobile) */}
+              <div className="kanji-layout-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 340px) 1fr', gap: 20 }}>
                 {/* Cột trái: Lưới 40 chữ Hán của trang hiện tại */}
                 <div>
-                  <div style={{
+                  <div className="kanji-grid-items" style={{
                     display: 'grid',
                     gridTemplateColumns: 'repeat(auto-fill, minmax(78px, 1fr))',
                     gap: 8,
@@ -1705,7 +1776,14 @@ export const KanjiPage: React.FC = () => {
                       return (
                         <div
                           key={item.id}
-                          onClick={() => setSelectedKanji(item)}
+                          onClick={() => {
+                            setSelectedKanji(item);
+                            if (window.innerWidth <= 860) {
+                              setTimeout(() => {
+                                document.getElementById('kanji-detail-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                              }, 60);
+                            }
+                          }}
                           style={{
                             background: isSelected ? '#fdf2f0' : '#ffffff',
                             borderRadius: 10,
@@ -1752,12 +1830,27 @@ export const KanjiPage: React.FC = () => {
                         </div>
                       );
                     })}
+
+                    {currentPageItems.length === 0 && (
+                      <div style={{
+                        gridColumn: '1 / -1',
+                        padding: '48px 16px',
+                        textAlign: 'center',
+                        color: '#94a3b8',
+                        background: '#ffffff',
+                        borderRadius: 10,
+                        border: '1px dashed #e2e8f0',
+                        fontSize: 13
+                      }}>
+                        {searchTerm ? 'Không tìm thấy chữ Hán nào phù hợp với từ khóa.' : 'Đang chuẩn bị danh sách chữ Hán...'}
+                      </div>
+                    )}
                   </div>
                 </div>
 
                 {/* Cột phải: Bảng chi tiết toàn diện (Nét vẽ, Bộ thủ, Mẹo nhớ chiết tự, Âm On/Kun, Từ ghép) */}
-                {selectedKanji && (
-                  <div style={{
+                {selectedKanji ? (
+                  <div id="kanji-detail-section" className="kanji-detail-panel" style={{
                     background: '#ffffff',
                     borderRadius: 14,
                     border: '1px solid #ebe7df',
@@ -1940,7 +2033,7 @@ export const KanjiPage: React.FC = () => {
                         <BookOpen style={{ width: 14, height: 14, color: '#c53d32' }} />
                         <span>Cách Đọc Âm On & Âm Kun</span>
                       </div>
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12 }}>
                         {/* Âm On */}
                         <div style={{
                           background: '#f8fafc',
@@ -2113,6 +2206,28 @@ export const KanjiPage: React.FC = () => {
                         </div>
                       </div>
                     )}
+                  </div>
+                ) : (
+                  <div style={{
+                    background: '#ffffff',
+                    borderRadius: 14,
+                    border: '1px solid #ebe7df',
+                    padding: '60px 24px',
+                    textAlign: 'center',
+                    boxShadow: '0 2px 10px rgba(0,0,0,0.03)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 12
+                  }}>
+                    <BookOpen style={{ width: 44, height: 44, color: '#cbd5e1' }} />
+                    <div style={{ fontSize: 16, fontWeight: 700, color: '#334155' }}>
+                      Chọn một chữ Hán
+                    </div>
+                    <div style={{ fontSize: 13, color: '#94a3b8', maxWidth: 320, lineHeight: 1.5 }}>
+                      Nhấn vào bất kỳ chữ Hán nào trong danh sách bên trái để xem chi tiết thứ tự nét vẽ và mẹo ghi nhớ.
+                    </div>
                   </div>
                 )}
               </div>

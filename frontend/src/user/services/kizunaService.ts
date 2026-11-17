@@ -95,6 +95,81 @@ export const kizunaService = {
     return fallback;
   },
 
+  async getMilestoneQuests(milestoneId: string): Promise<any[]> {
+    const cacheKey = `kizuna_quests_${milestoneId}`;
+    const cached = getSessionCache<any[]>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      if (db) {
+        const q = query(collection(db, 'milestone_quests'), where('milestoneId', '==', milestoneId));
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          const quests: any[] = [];
+          snap.forEach(d => quests.push({ id: d.id, ...d.data() }));
+          quests.sort((a, b) => a.stepIndex - b.stepIndex);
+          setSessionCache(cacheKey, quests);
+          return quests;
+        }
+      }
+    } catch (e) {
+      console.warn('Firestore quests error:', e);
+    }
+    return [];
+  },
+
+  /**
+   * Lấy danh sách từ vựng của Mốc từ Firestore collection 'vocabulary_items'
+   */
+  async getVocabularyByMilestone(milestoneId: string): Promise<any[]> {
+    if (!milestoneId) return [];
+    const cacheKey = `kizuna_vocab_ms_${milestoneId}`;
+    const cached = getSessionCache<any[]>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      if (db) {
+        const q = query(collection(db, 'vocabulary_items'), where('milestoneId', '==', milestoneId));
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          const items: any[] = [];
+          snap.forEach(d => items.push({ id: d.id, ...d.data() }));
+          setSessionCache(cacheKey, items);
+          return items;
+        }
+      }
+    } catch (e) {
+      console.warn('Firestore vocab by milestone error:', e);
+    }
+    return [];
+  },
+
+  /**
+   * Lấy danh sách ngữ pháp của Mốc từ Firestore collection 'grammar_items'
+   */
+  async getGrammarByMilestone(milestoneId: string): Promise<any[]> {
+    if (!milestoneId) return [];
+    const cacheKey = `kizuna_grammar_ms_${milestoneId}`;
+    const cached = getSessionCache<any[]>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      if (db) {
+        const q = query(collection(db, 'grammar_items'), where('milestoneId', '==', milestoneId));
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          const items: any[] = [];
+          snap.forEach(d => items.push({ id: d.id, ...d.data() }));
+          setSessionCache(cacheKey, items);
+          return items;
+        }
+      }
+    } catch (e) {
+      console.warn('Firestore grammar by milestone error:', e);
+    }
+    return [];
+  },
+
   /**
    * Lấy danh mục 2 bộ sách (Mimi Kara Oboeru & Tango) và các Unit theo từng cấp độ N5 -> N1
    * Tối ưu hóa: 0 Firestore Read (dùng catalog tĩnh & cache)
@@ -129,19 +204,7 @@ export const kizunaService = {
         }
       }
     } catch (err) {
-      console.warn(`Firestore unit vocab (${unitId}) quota/network error, fallback to static:`, err);
-    }
-
-    // 2. Fallback sang file tĩnh public/data/units (0 Firestore Read, hoạt động mượt mà kể cả khi quota Firestore bị cạn kiệt)
-    try {
-      const res = await fetch(`/data/units/${unitId}.json`);
-      if (res.ok) {
-        const items = await res.json();
-        setSessionCache(cacheKey, items);
-        return items;
-      }
-    } catch (e) {
-      console.warn(`Fallback fetch unit ${unitId} failed:`, e);
+      console.warn(`Firestore unit vocab (${unitId}) quota/network error:`, err);
     }
 
     return [];
@@ -172,26 +235,11 @@ export const kizunaService = {
    * 0 Firestore read (tải từ static JSON cache)
    */
   async getGrammarCatalog(): Promise<GrammarCatalog | null> {
-    const cacheKey = 'kizuna_grammar_catalog_cache';
-    const cached = getSessionCache<GrammarCatalog>(cacheKey);
-    if (cached) return cached;
-
-    try {
-      const res = await fetch('/data/grammar/catalog.json');
-      if (res.ok) {
-        const data: GrammarCatalog = await res.json();
-        setSessionCache(cacheKey, data);
-        return data;
-      }
-    } catch (e) {
-      console.warn('Fetch grammar catalog error:', e);
-    }
     return null;
   },
 
   /**
-   * Lấy danh sách mẫu câu ngữ pháp theo bài học (Unit) cụ thể
-   * Tải từ /data/grammar/units/[unitId].json (0 Firestore read)
+   * Lấy danh sách mẫu câu ngữ pháp theo bài học (Unit) cụ thể trực tiếp từ Firestore
    */
   async getGrammarByUnit(unitId: string): Promise<GrammarItem[]> {
     const cacheKey = `kizuna_grammar_unit_${unitId}`;
@@ -199,14 +247,21 @@ export const kizunaService = {
     if (cached && cached.length > 0) return cached;
 
     try {
-      const res = await fetch(`/data/grammar/units/${unitId}.json`);
-      if (res.ok) {
-        const items: GrammarItem[] = await res.json();
-        setSessionCache(cacheKey, items);
-        return items;
+      if (db) {
+        const q = query(
+          collection(db, 'grammar_items'),
+          where('milestoneId', '==', unitId)
+        );
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          const items: GrammarItem[] = [];
+          snap.forEach(d => items.push({ id: d.id, ...d.data() } as GrammarItem));
+          setSessionCache(cacheKey, items);
+          return items;
+        }
       }
     } catch (e) {
-      console.warn(`Fetch grammar unit ${unitId} failed:`, e);
+      console.warn(`Firestore grammar unit ${unitId} failed:`, e);
     }
 
     return [];
@@ -250,26 +305,11 @@ export const kizunaService = {
    * 0 Firestore read (tải từ static JSON cache)
    */
   async getKanjiCatalog(): Promise<KanjiCatalog | null> {
-    const cacheKey = 'kizuna_kanji_catalog_cache';
-    const cached = getSessionCache<KanjiCatalog>(cacheKey);
-    if (cached) return cached;
-
-    try {
-      const res = await fetch('/data/kanji/catalog.json');
-      if (res.ok) {
-        const data: KanjiCatalog = await res.json();
-        setSessionCache(cacheKey, data);
-        return data;
-      }
-    } catch (e) {
-      console.warn('Fetch kanji catalog error:', e);
-    }
     return null;
   },
 
   /**
-   * Lấy danh sách chữ Hán theo bài học (Unit) cụ thể
-   * Tải từ /data/kanji/units/[unitId].json (0 Firestore read)
+   * Lấy danh sách chữ Hán theo bài học (Unit) cụ thể trực tiếp từ Firestore
    */
   async getKanjiByUnit(unitId: string): Promise<KanjiItem[]> {
     const cacheKey = `kizuna_kanji_unit_${unitId}`;
@@ -277,22 +317,54 @@ export const kizunaService = {
     if (cached && cached.length > 0) return cached;
 
     try {
-      const res = await fetch(`/data/kanji/units/${unitId}.json`);
-      if (res.ok) {
-        const items: KanjiItem[] = await res.json();
-        setSessionCache(cacheKey, items);
-        return items;
+      if (db) {
+        const q = query(
+          collection(db, 'kanji_dictionary'),
+          where('milestoneId', '==', unitId)
+        );
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          const items: KanjiItem[] = [];
+          snap.forEach(d => {
+            const data = d.data();
+            items.push({
+              id: d.id,
+              kanji_id: data.kanji_id || d.id,
+              kanji: data.kanji || data.character || '',
+              character: data.character || data.kanji || '',
+              strokeCount: data.strokeCount || 8,
+              radicals: data.radicals || data.kanji || '',
+              onyomi: data.onyomi || '',
+              kunyomi: data.kunyomi || '',
+              sinoVietnamese: data.sinoVietnamese || '',
+              vietnameseMeaning: data.vietnameseMeaning || data.meaning_vi || '',
+              meaning_vi: data.meaning_vi || data.vietnameseMeaning || '',
+              mnemonicStory: data.mnemonicStory || '',
+              exampleCompounds: data.exampleCompounds || [],
+              jlptLevel: data.jlptLevel || data.jlpt_level || 'N5',
+              jlpt_level: data.jlpt_level || data.jlptLevel || 'N5',
+              lessonNumber: data.lessonNumber,
+              kanjiNumber: data.kanjiNumber ?? 0,
+              milestoneId: data.milestoneId || data.milestone_id,
+              stageId: data.stageId || data.stage_id,
+              sourceUrl: data.sourceUrl || ''
+            } as KanjiItem);
+          });
+          items.sort((a, b) => (a.kanjiNumber ?? 0) - (b.kanjiNumber ?? 0));
+          setSessionCache(cacheKey, items);
+          return items;
+        }
       }
     } catch (e) {
-      console.warn(`Fetch kanji unit ${unitId} failed:`, e);
+      console.warn(`Firestore kanji unit ${unitId} failed:`, e);
     }
 
     return [];
   },
 
   /**
-   * Lấy danh sách toàn bộ chữ Hán trực tiếp theo cấp độ JLPT (N5 -> N1)
-   * Tải từ /data/kanji/levels/[level].json (0 Firestore read)
+   * Lấy danh sách toàn bộ chữ Hán trực tiếp từ Firestore collection 'kanji_dictionary'
+   * theo cấp độ JLPT (N5 -> N1), kèm lưu cache sessionStorage và fallback an toàn
    */
   async getKanjiByLevel(level: 'N5' | 'N4' | 'N3' | 'N2' | 'N1'): Promise<KanjiItem[]> {
     const lvlKey = level.toLowerCase();
@@ -300,15 +372,83 @@ export const kizunaService = {
     const cached = getSessionCache<KanjiItem[]>(cacheKey);
     if (cached && cached.length > 0) return cached;
 
+    // 1. Truy vấn trực tiếp từ Firestore collection 'kanji_dictionary'
     try {
-      const res = await fetch(`/data/kanji/levels/${lvlKey}.json`);
-      if (res.ok) {
-        const items: KanjiItem[] = await res.json();
-        setSessionCache(cacheKey, items);
-        return items;
+      if (db) {
+        const q = query(
+          collection(db, 'kanji_dictionary'),
+          where('jlptLevel', '==', level)
+        );
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          const items: KanjiItem[] = [];
+          snap.forEach(d => {
+            const data = d.data();
+            items.push({
+              id: d.id,
+              kanji_id: data.kanji_id || d.id,
+              kanji: data.kanji || data.character || '',
+              character: data.character || data.kanji || '',
+              strokeCount: data.strokeCount || 8,
+              radicals: data.radicals || data.kanji || '',
+              onyomi: data.onyomi || '',
+              kunyomi: data.kunyomi || '',
+              sinoVietnamese: data.sinoVietnamese || '',
+              vietnameseMeaning: data.vietnameseMeaning || data.meaning_vi || '',
+              meaning_vi: data.meaning_vi || data.vietnameseMeaning || '',
+              mnemonicStory: data.mnemonicStory || '',
+              exampleCompounds: data.exampleCompounds || [],
+              jlptLevel: data.jlptLevel || data.jlpt_level || level,
+              jlpt_level: data.jlpt_level || data.jlptLevel || level,
+              lessonNumber: data.lessonNumber,
+              kanjiNumber: data.kanjiNumber ?? 0,
+              milestoneId: data.milestoneId || data.milestone_id,
+              stageId: data.stageId || data.stage_id,
+              sourceUrl: data.sourceUrl || ''
+            } as KanjiItem);
+          });
+
+          // Sắp xếp chuẩn theo kanjiNumber / lessonNumber
+          items.sort((a, b) => {
+            if (a.kanjiNumber !== undefined && b.kanjiNumber !== undefined && a.kanjiNumber !== b.kanjiNumber) {
+              return a.kanjiNumber - b.kanjiNumber;
+            }
+            if (a.lessonNumber !== undefined && b.lessonNumber !== undefined && a.lessonNumber !== b.lessonNumber) {
+              return a.lessonNumber - b.lessonNumber;
+            }
+            return (a.id || '').localeCompare(b.id || '');
+          });
+
+          if (items.length > 0) {
+            setSessionCache(cacheKey, items);
+            return items;
+          }
+        }
       }
     } catch (e) {
-      console.warn(`Fetch kanji level ${level} failed:`, e);
+      console.warn(`Firestore kanji_dictionary query for level ${level} failed:`, e);
+    }
+
+    // 3. Dự phòng tầng 3: Bộ chữ Hán N5 khởi tạo đảm bảo không bao giờ bị trắng trang
+    if (level === 'N5') {
+      const defaultN5: KanjiItem[] = [
+        { id: 'kanji_n5_0001', kanji: '一', strokeCount: 1, sinoVietnamese: 'NHẤT', vietnameseMeaning: 'Một', onyomi: 'イチ, イツ', kunyomi: 'ひと, ひと.つ', mnemonicStory: 'Một nét ngang đơn giản tượng trưng cho con số 1.', exampleCompounds: [{ word: '一人', reading: 'ひとり', meaning: 'một mình', level: 'N5' }, { word: '一番', reading: 'いちばん', meaning: 'nhất, số 1', level: 'N5' }] },
+        { id: 'kanji_n5_0002', kanji: '二', strokeCount: 2, sinoVietnamese: 'NHỊ', vietnameseMeaning: 'Hai', onyomi: 'ニ, ジ', kunyomi: 'ふた, ふた.つ', mnemonicStory: 'Hai nét ngang song song tượng trưng cho con số 2.', exampleCompounds: [{ word: '二人', reading: 'ふたり', meaning: 'hai người', level: 'N5' }, { word: '二月', reading: 'にがつ', meaning: 'tháng 2', level: 'N5' }] },
+        { id: 'kanji_n5_0003', kanji: '三', strokeCount: 3, sinoVietnamese: 'TAM', vietnameseMeaning: 'Ba', onyomi: 'サン', kunyomi: 'み, み.つ', mnemonicStory: 'Ba nét ngang tượng trưng cho con số 3.', exampleCompounds: [{ word: '三人', reading: 'さんにん', meaning: 'ba người', level: 'N5' }, { word: '三日', reading: 'みっか', meaning: 'ngày 3', level: 'N5' }] },
+        { id: 'kanji_n5_0004', kanji: '四', strokeCount: 5, sinoVietnamese: 'TỨ', vietnameseMeaning: 'Bốn', onyomi: 'シ', kunyomi: 'よ, よ.つ, よん', mnemonicStory: 'Hình ảnh khung rèm cửa có 4 cạnh.', exampleCompounds: [{ word: '四月', reading: 'しがつ', meaning: 'tháng 4', level: 'N5' }, { word: '四季', reading: 'しき', meaning: 'bốn mùa', level: 'N5' }] },
+        { id: 'kanji_n5_0005', kanji: '五', strokeCount: 4, sinoVietnamese: 'NGŨ', vietnameseMeaning: 'Năm', onyomi: 'ゴ', kunyomi: 'いつ, いつ.つ', mnemonicStory: 'Con số 5 tượng trưng cho ngũ hành.', exampleCompounds: [{ word: '五月', reading: 'ごがつ', meaning: 'tháng 5', level: 'N5' }, { word: '五日', reading: 'いつか', meaning: 'ngày 5', level: 'N5' }] },
+        { id: 'kanji_n5_0006', kanji: '六', strokeCount: 4, sinoVietnamese: 'LỤC', vietnameseMeaning: 'Sáu', onyomi: 'ロク', kunyomi: 'む, む.つ', mnemonicStory: 'Hình ảnh một ngôi nhà có 6 góc.', exampleCompounds: [{ word: '六月', reading: 'ろくがつ', meaning: 'tháng 6', level: 'N5' }] },
+        { id: 'kanji_n5_0007', kanji: '七', strokeCount: 2, sinoVietnamese: 'THẤT', vietnameseMeaning: 'Bảy', onyomi: 'シチ', kunyomi: 'なな, なな.つ', mnemonicStory: 'Một đường cắt ngang tượng trưng cho số 7.', exampleCompounds: [{ word: '七月', reading: 'しちがつ', meaning: 'tháng 7', level: 'N5' }] },
+        { id: 'kanji_n5_0008', kanji: '八', strokeCount: 2, sinoVietnamese: 'BÁT', vietnameseMeaning: 'Tám', onyomi: 'ハチ', kunyomi: 'や, や.つ', mnemonicStory: 'Hai nét mở rộng ra tượng trưng cho số 8 phát tài.', exampleCompounds: [{ word: '八月', reading: 'はちがつ', meaning: 'tháng 8', level: 'N5' }] },
+        { id: 'kanji_n5_0009', kanji: '九', strokeCount: 2, sinoVietnamese: 'CỬU', vietnameseMeaning: 'Chín', onyomi: 'キュウ, ク', kunyomi: 'ここの, ここの.つ', mnemonicStory: 'Con số 9 uốn lượn tượng trưng cho sự trường cửu.', exampleCompounds: [{ word: '九月', reading: 'くがつ', meaning: 'tháng 9', level: 'N5' }] },
+        { id: 'kanji_n5_0010', kanji: '十', strokeCount: 2, sinoVietnamese: 'THẬP', vietnameseMeaning: 'Mười', onyomi: 'ジュウ', kunyomi: 'とお, と', mnemonicStory: 'Hình dấu cộng hoàn hảo tượng trưng cho số 10 thập toàn thập mỹ.', exampleCompounds: [{ word: '十月', reading: 'じゅうがつ', meaning: 'tháng 10', level: 'N5' }] },
+        { id: 'kanji_n5_0011', kanji: '日', strokeCount: 4, sinoVietnamese: 'NHẬT', vietnameseMeaning: 'Mặt trời, ngày', onyomi: 'ニチ, ジツ', kunyomi: 'ひ, -び, -か', mnemonicStory: 'Hình ảnh mặt trời tròn có một vệt sáng ở giữa.', exampleCompounds: [{ word: '日本', reading: 'にほん', meaning: 'Nhật Bản', level: 'N5' }, { word: '毎日', reading: 'まいにち', meaning: 'mỗi ngày', level: 'N5' }] },
+        { id: 'kanji_n5_0012', kanji: '本', strokeCount: 5, sinoVietnamese: 'BẢN', vietnameseMeaning: 'Gốc, sách', onyomi: 'ホン', kunyomi: 'もと', mnemonicStory: 'Cái cây (木) có thêm nét gạch ngang ở gốc để chỉ phần rễ/gốc rễ.', exampleCompounds: [{ word: '本', reading: 'ほん', meaning: 'sách', level: 'N5' }] },
+        { id: 'kanji_n5_0013', kanji: '人', strokeCount: 2, sinoVietnamese: 'NHÂN', vietnameseMeaning: 'Người', onyomi: 'ジン, ニン', kunyomi: 'ひと', mnemonicStory: 'Hình ảnh hai chân người đang bước đi tựa vào nhau.', exampleCompounds: [{ word: '日本人', reading: 'にほんじん', meaning: 'người Nhật', level: 'N5' }] },
+        { id: 'kanji_n5_0014', kanji: '月', strokeCount: 4, sinoVietnamese: 'NGUYỆT', vietnameseMeaning: 'Mặt trăng, tháng', onyomi: 'ゲツ, ガツ', kunyomi: 'つき', mnemonicStory: 'Hình ảnh vầng trăng khuyết trên bầu trời đêm.', exampleCompounds: [{ word: '今月', reading: 'こんげつ', meaning: 'tháng này', level: 'N5' }] },
+        { id: 'kanji_n5_0015', kanji: '火', strokeCount: 4, sinoVietnamese: 'HỎA', vietnameseMeaning: 'Lửa', onyomi: 'カ', kunyomi: 'ひ', mnemonicStory: 'Hình ảnh ngọn lửa đang bùng cháy với những tia lửa bắn ra hai bên.', exampleCompounds: [{ word: '火曜日', reading: 'かようび', meaning: 'thứ Ba', level: 'N5' }] }
+      ];
+      return defaultN5;
     }
 
     return [];
@@ -464,8 +604,7 @@ export const kizunaService = {
   },
 
   /**
-   * Lấy danh sách video shadowing / podcast tiếng Nhật
-   * Ưu tiên tải từ Firestore (video_lessons), có fallback JSON tĩnh và cache sessionStorage
+   * Lấy danh sách video shadowing / podcast tiếng Nhật trực tiếp từ Firestore
    */
   async getVideoLessons(level = 'ALL', category = 'ALL'): Promise<VideoLesson[]> {
     const cacheKey = `kizuna_videos_cache_${level}_${category}`;
@@ -474,7 +613,7 @@ export const kizunaService = {
 
     let allVideos: VideoLesson[] = [];
 
-    // 1. Thử lấy từ Firestore collection 'video_lessons'
+    // 1. Lấy từ Firestore collection 'video_lessons'
     try {
       if (db) {
         const q = query(collection(db, 'video_lessons'), limit(250));
@@ -486,22 +625,10 @@ export const kizunaService = {
         }
       }
     } catch (e) {
-      console.warn('Firestore video_lessons fetch failed, falling back to local dataset:', e);
+      console.warn('Firestore video_lessons fetch failed:', e);
     }
 
-    // 2. Fallback nếu Firestore rỗng hoặc lỗi mạng / quota
-    if (allVideos.length === 0) {
-      try {
-        const res = await fetch('/data/videos/video_lessons.json');
-        if (res.ok) {
-          allVideos = await res.json();
-        }
-      } catch (e) {
-        console.warn('Local video_lessons.json fetch failed:', e);
-      }
-    }
-
-    // 3. Lọc theo cấp độ & danh mục
+    // 2. Lọc theo cấp độ & danh mục
     let filtered = allVideos;
     if (level !== 'ALL') {
       filtered = filtered.filter(v => v.jlptLevel?.toUpperCase() === level.toUpperCase());
@@ -517,8 +644,7 @@ export const kizunaService = {
   },
 
   /**
-   * Lấy danh sách bài nghe Choukai cào từ Corodomo (65 đề thi có audio chính thức)
-   * Tải từ /data/audio/choukai_catalog.json (ưu tiên tốc độ 0ms) hoặc Firestore jlpt_exam_catalog
+   * Lấy danh sách bài nghe Choukai từ Firestore jlpt_exam_catalog
    */
   async getChoukaiAudioList(level = 'ALL'): Promise<ChoukaiAudioItem[]> {
     const cacheKey = `kizuna_choukai_audio_cache_${level}`;
@@ -527,47 +653,35 @@ export const kizunaService = {
 
     let items: ChoukaiAudioItem[] = [];
 
-    // 1. Ưu tiên tải nhanh từ file JSON tĩnh cục bộ (0ms, 0 Firestore Read, hoạt động ngay cả khi offline)
+    // 1. Lấy từ Firestore collection jlpt_exam_catalog
     try {
-      const res = await fetch('/data/audio/choukai_catalog.json');
-      if (res.ok) {
-        items = await res.json();
+      if (db) {
+        const snap = await getDocs(collection(db, 'jlpt_exam_catalog'));
+        if (!snap.empty) {
+          snap.forEach(d => {
+            const data = d.data();
+            if (data.audioUrl) {
+              items.push({
+                id: d.id,
+                label: data.label || '',
+                level: data.level || 'N3',
+                year: data.year,
+                month: data.month,
+                audioUrl: data.audioUrl,
+                durationMinutes: data.durationMinutes || 40,
+                totalQuestions: data.totalQuestions,
+                actualQuestionCount: data.actualQuestionCount,
+                listeningSetsCount: data.questionSetCount || 5
+              });
+            }
+          });
+        }
       }
     } catch (e) {
-      console.warn('Local choukai_catalog.json fetch failed:', e);
+      console.warn('Firestore choukai catalog fetch failed:', e);
     }
 
-    // 2. Fallback sang Firestore nếu chưa tải được file cục bộ
-    if (items.length === 0) {
-      try {
-        if (db) {
-          const snap = await getDocs(collection(db, 'jlpt_exam_catalog'));
-          if (!snap.empty) {
-            snap.forEach(d => {
-              const data = d.data();
-              if (data.audioUrl) {
-                items.push({
-                  id: d.id,
-                  label: data.label || '',
-                  level: data.level || 'N3',
-                  year: data.year,
-                  month: data.month,
-                  audioUrl: data.audioUrl,
-                  durationMinutes: data.durationMinutes || 40,
-                  totalQuestions: data.totalQuestions,
-                  actualQuestionCount: data.actualQuestionCount,
-                  listeningSetsCount: data.questionSetCount || 5
-                });
-              }
-            });
-          }
-        }
-      } catch (e) {
-        console.warn('Firestore choukai catalog fetch failed:', e);
-      }
-    }
-
-    // 3. Sắp xếp đề mới nhất lên trước
+    // 2. Sắp xếp đề mới nhất lên trước
     items.sort((a, b) => {
       if (a.year && b.year && a.year !== b.year) return b.year - a.year;
       return (b.month || 0) - (a.month || 0);
@@ -584,29 +698,14 @@ export const kizunaService = {
   },
 
   /**
-   * Lấy chi tiết bài thi Choukai kèm 5 Mondai câu hỏi & kịch bản nghe
+   * Lấy chi tiết bài thi Choukai kèm 5 Mondai câu hỏi & kịch bản nghe từ Firestore
    */
   async getChoukaiExamDetail(id: string): Promise<ChoukaiAudioItem | null> {
     const cacheKey = `kizuna_choukai_detail_${id}`;
     const cached = getSessionCache<ChoukaiAudioItem>(cacheKey);
     if (cached) return cached;
 
-    // 1. Thử lấy từ /data/audio/choukai_audio.json (Có đầy đủ 5 Mondai & scripts)
-    try {
-      const res = await fetch('/data/audio/choukai_audio.json');
-      if (res.ok) {
-        const list: ChoukaiAudioItem[] = await res.json();
-        const found = list.find(x => x.id === id);
-        if (found) {
-          setSessionCache(cacheKey, found);
-          return found;
-        }
-      }
-    } catch (e) {
-      console.warn('Fetch local choukai_audio.json error:', e);
-    }
-
-    // 2. Fallback nếu không có file cục bộ: Lấy từ Firestore jlpt_exams
+    // Lấy trực tiếp từ Firestore jlpt_exams
     try {
       if (db) {
         const snap = await getDoc(doc(db, 'jlpt_exams', id));

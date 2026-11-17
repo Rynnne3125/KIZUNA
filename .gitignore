@@ -63,12 +63,10 @@ scratch/
 .openjlpt_cache/
 frontend/.openjlpt_cache/
 
-
 ### Local Data & Mock Datasets (Do NOT commit to GitHub) ###
 public/data/
 **/public/data/
 frontend/public/data/
-
 
 ### Environment Variables ###
 .env
@@ -83,3 +81,4 @@ frontend/.env.*.local
 ### Security & SSH Keys ###
 *.pem
 *.key
+

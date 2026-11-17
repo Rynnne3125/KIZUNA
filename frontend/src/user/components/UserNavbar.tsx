@@ -3,9 +3,10 @@ import { User } from '../types/auth';
 import { 
   Home, BookOpen, FileText, Languages, Map, Film, 
   Target, UserCheck, Shield, LogOut, Menu, X, Flame, Star, Sparkles,
-  Smartphone, Download
+  Smartphone, Download, Wifi
 } from 'lucide-react';
 import { ApkDownloadModal } from './ApkDownloadModal';
+import { isNativeApp } from '../utils/platform';
 
 export type UserNavTab = 'home' | 'vocab' | 'grammar' | 'kanji' | 'roadmap' | 'library' | 'exam' | 'profile' | 'admin';
 
@@ -26,6 +27,7 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
 }) => {
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [internalApkModalOpen, setInternalApkModalOpen] = useState(false);
+  const isApp = isNativeApp();
 
   const handleOpenApk = () => {
     if (onOpenApkModal) {
@@ -84,19 +86,28 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
 
         {/* Mobile User Quick Info & APK Download */}
         <div className="flex items-center gap-1.5 sm:gap-2">
-          {/* Nút tải APK ở Topbar Mobile */}
-          <button
-            type="button"
-            onClick={handleOpenApk}
-            className="flex items-center gap-1 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white px-2.5 py-1.5 rounded-xl text-[11px] font-extrabold shadow-xs shadow-emerald-600/20 active:scale-95 transition-all cursor-pointer"
-            title="Tải app APK cho điện thoại Android"
-          >
-            <Smartphone className="w-3.5 h-3.5 text-emerald-200 shrink-0" />
-            <span>Tải APK</span>
-          </button>
+          {/* Nút tải APK ở Topbar Mobile (chỉ hiển thị trên Website) */}
+          {!isApp && (
+            <button
+              type="button"
+              onClick={handleOpenApk}
+              className="flex items-center gap-1 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white px-2.5 py-1.5 rounded-xl text-[11px] font-extrabold shadow-xs shadow-emerald-600/20 active:scale-95 transition-all cursor-pointer"
+              title="Tải app APK cho điện thoại Android"
+            >
+              <Smartphone className="w-3.5 h-3.5 text-emerald-200 shrink-0" />
+              <span>Tải APK</span>
+            </button>
+          )}
 
           {user ? (
             <>
+              <div 
+                className="hidden sm:flex items-center gap-1 bg-emerald-50 text-emerald-800 border border-emerald-200/80 px-2 py-0.5 rounded-full text-xs font-bold"
+                title="Đang kết nối Wi-Fi"
+              >
+                <Wifi className="w-3 h-3 text-emerald-600" />
+                <span>Wi-Fi</span>
+              </div>
               <div className="flex items-center gap-1 bg-amber-50 text-amber-800 border border-amber-200/80 px-2 py-0.5 rounded-full text-xs font-bold">
                 <Flame className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
                 <span>{user.currentStreak || 0}d</span>
@@ -228,25 +239,27 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
               )}
             </div>
 
-            {/* Drawer Multiplatform Download Banner */}
-            <div className="p-3 mx-3 my-2 bg-gradient-to-br from-emerald-600 to-green-700 rounded-2xl text-white shadow-md shadow-emerald-700/20">
-              <div className="flex items-center gap-2 mb-1">
-                <Download className="w-4 h-4 text-emerald-200" />
-                <span className="font-extrabold text-xs">Cài Đặt KIZUNA App</span>
-                <span className="ml-auto bg-white/20 text-[10px] px-1.5 py-0.2 rounded font-bold">Android • iOS • PC</span>
+            {/* Drawer Multiplatform Download Banner (chỉ hiển thị trên Website) */}
+            {!isApp && (
+              <div className="p-3 mx-3 my-2 bg-gradient-to-br from-emerald-600 to-green-700 rounded-2xl text-white shadow-md shadow-emerald-700/20">
+                <div className="flex items-center gap-2 mb-1">
+                  <Download className="w-4 h-4 text-emerald-200" />
+                  <span className="font-extrabold text-xs">Cài Đặt KIZUNA App</span>
+                  <span className="ml-auto bg-white/20 text-[10px] px-1.5 py-0.2 rounded font-bold">Android • iOS • PC</span>
+                </div>
+                <p className="text-[11px] text-emerald-100/90 leading-tight mb-2">
+                  Học tiếng Nhật mọi lúc trên Android, iPhone & Máy tính.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => { setIsMobileDrawerOpen(false); handleOpenApk(); }}
+                  className="w-full py-1.5 px-3 bg-white text-emerald-800 text-xs font-extrabold rounded-xl shadow-xs hover:bg-emerald-50 active:scale-98 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                  <Download className="w-3.5 h-3.5 text-emerald-700" />
+                  <span>Cài Đặt Ứng Dụng</span>
+                </button>
               </div>
-              <p className="text-[11px] text-emerald-100/90 leading-tight mb-2">
-                Học tiếng Nhật mọi lúc trên Android, iPhone & Máy tính.
-              </p>
-              <button
-                type="button"
-                onClick={() => { setIsMobileDrawerOpen(false); handleOpenApk(); }}
-                className="w-full py-1.5 px-3 bg-white text-emerald-800 text-xs font-extrabold rounded-xl shadow-xs hover:bg-emerald-50 active:scale-98 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-              >
-                <Download className="w-3.5 h-3.5 text-emerald-700" />
-                <span>Cài Đặt Ứng Dụng</span>
-              </button>
-            </div>
+            )}
 
             {/* Drawer Footer */}
             {user && (
@@ -395,26 +408,28 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
           )}
         </nav>
 
-        {/* Desktop Sidebar App Download Card */}
-        <div className="p-3 mx-3 mb-2 bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200/80 rounded-2xl">
-          <div className="flex items-center gap-2 mb-1.5">
-            <div className="w-7 h-7 rounded-lg bg-emerald-600 flex items-center justify-center text-white shrink-0">
-              <Download className="w-4 h-4" />
+        {/* Desktop Sidebar App Download Card (chỉ hiển thị trên Website) */}
+        {!isApp && (
+          <div className="p-3 mx-3 mb-2 bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200/80 rounded-2xl">
+            <div className="flex items-center gap-2 mb-1.5">
+              <div className="w-7 h-7 rounded-lg bg-emerald-600 flex items-center justify-center text-white shrink-0">
+                <Download className="w-4 h-4" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="font-extrabold text-slate-800 text-xs leading-none truncate">Cài Đặt App KIZUNA</div>
+                <div className="text-[10px] text-emerald-700 font-semibold mt-0.5">Android • iOS • PC</div>
+              </div>
             </div>
-            <div className="min-w-0 flex-1">
-              <div className="font-extrabold text-slate-800 text-xs leading-none truncate">Cài Đặt App KIZUNA</div>
-              <div className="text-[10px] text-emerald-700 font-semibold mt-0.5">Android • iOS • PC</div>
-            </div>
+            <button
+              type="button"
+              onClick={handleOpenApk}
+              className="w-full py-1.5 px-3 bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white text-xs font-extrabold rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>Tải & Cài Đặt App</span>
+            </button>
           </div>
-          <button
-            type="button"
-            onClick={handleOpenApk}
-            className="w-full py-1.5 px-3 bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white text-xs font-extrabold rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-          >
-            <Download className="w-3.5 h-3.5" />
-            <span>Tải & Cài Đặt App</span>
-          </button>
-        </div>
+        )}
 
         {/* Sidebar Footer */}
         <div className="p-3 border-t border-emerald-50 bg-slate-50/40">
@@ -463,11 +478,13 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
         })}
       </nav>
 
-      {/* APK DOWNLOAD MODAL */}
-      <ApkDownloadModal 
-        isOpen={internalApkModalOpen} 
-        onClose={() => setInternalApkModalOpen(false)} 
-      />
+      {/* APK DOWNLOAD MODAL (chỉ hiển thị trên Website) */}
+      {!isApp && (
+        <ApkDownloadModal 
+          isOpen={internalApkModalOpen} 
+          onClose={() => setInternalApkModalOpen(false)} 
+        />
+      )}
     </>
   );
 };
