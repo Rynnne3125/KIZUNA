@@ -24,7 +24,48 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="kizuna-offline-screen" style="display:none; min-height: 100vh; background-color: #fdfbf7; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 24px; box-sizing: border-box; align-items: center; justify-content: center; text-align: center;">
+        <div style="max-width: 440px; width: 100%; background: #ffffff; border-radius: 28px; padding: 36px 24px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.06); border: 1px solid #fee2e2;">
+          <div style="width: 72px; height: 72px; margin: 0 auto 16px; border-radius: 20px; background: #fff1f2; display: flex; align-items: center; justify-content: center;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="1" y1="1" x2="23" y2="23"></line>
+              <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+              <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+              <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+              <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+              <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+              <line x1="12" y1="20" x2="12.01" y2="20"></line>
+            </svg>
+          </div>
+          <div style="display: inline-block; padding: 4px 12px; background: #fee2e2; border-radius: 9999px; color: #991b1b; font-weight: 800; font-size: 11px; margin-bottom: 12px; letter-spacing: 0.5px;">
+            404 · INTERNET REQUIRED
+          </div>
+          <h1 style="font-size: 20px; font-weight: 900; color: #0f172a; margin: 0 0 8px;">
+            Không Có Kết Nối Internet
+          </h1>
+          <p style="font-size: 13px; color: #475569; margin: 0 0 24px; line-height: 1.5;">
+            Ứng dụng KIZUNA yêu cầu kết nối mạng (Wi-Fi hoặc Dữ liệu di động 4G/5G) để truy cập nội dung bài học. Vui lòng bật mạng và thử lại.
+          </p>
+          <button onclick="window.location.reload()" style="width: 100%; padding: 13px 20px; background: #e11d48; color: #ffffff; border: none; border-radius: 14px; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(225,29,72,0.25);">
+            Thử kết nối lại
+          </button>
+        </div>
+      </div>
+      <script>
+        (function() {
+          function checkOffline() {
+            var el = document.getElementById('kizuna-offline-screen');
+            if (el && !navigator.onLine) {
+              el.style.display = 'flex';
+            }
+          }
+          checkOffline();
+          window.addEventListener('offline', checkOffline);
+          window.addEventListener('online', function() { window.location.reload(); });
+        })();
+      </script>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

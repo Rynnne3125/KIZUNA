@@ -13,7 +13,7 @@ import { LibraryPage } from './user/pages/LibraryPage';
 import { ExamPage } from './user/pages/ExamPage';
 import { ProfilePage } from './user/pages/ProfilePage';
 import { AdminDashboardPage } from './admin/pages/AdminDashboardPage';
-import { Smartphone, Download, WifiOff, CheckCircle2, Wifi } from 'lucide-react';
+import { Smartphone, Download, CheckCircle2 } from 'lucide-react';
 import { ApkDownloadModal } from './user/components/ApkDownloadModal';
 import { isNativeApp } from './user/utils/platform';
 import { useNetworkStatus } from './user/hooks/useNetworkStatus';
@@ -160,9 +160,11 @@ export default function App() {
     setActiveTab('home');
   };
 
-  // 0. NẾU CHƯA ĐĂNG NHẬP VÀ MẤT KẾT NỐI INTERNET (KHÔNG CÓ CẢ WI-FI LẪN 4G/5G)
-  // Bắt buộc hiển thị trang 404 Không có Internet để thông báo yêu cầu mạng trước khi vào LoginPage
-  if (!user && network.isBlockedByNoInternet) {
+  // 0. BẮT BUỘC: Nếu không có kết nối Internet (mất cả Wi-Fi lẫn 4G/5G)
+  // Bất kể đã đăng nhập hay chưa (kể cả khi đã có phiên đăng nhập và vào HomePage),
+  // lập tức hiển thị trang 404 Không có Internet.
+  // Khi có Internet: Nếu có phiên đăng nhập -> vào HomePage; nếu chưa -> vào LoginPage.
+  if (network.isBlockedByNoInternet) {
     return (
       <NoInternet404Page
         status={network.status}
@@ -219,14 +221,6 @@ export default function App() {
             <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-100">
               Bậc: {user.level || 'Tân binh'}
             </span>
-            <span className="text-slate-300">•</span>
-            <div 
-              className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-800 bg-emerald-50/90 px-2.5 py-0.5 rounded-full border border-emerald-200 cursor-default"
-              title="Đã kết nối Wi-Fi sẵn sàng sử dụng"
-            >
-              <Wifi className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Wi-Fi Online</span>
-            </div>
           </div>
 
           <div className="flex items-center gap-3">
@@ -244,21 +238,6 @@ export default function App() {
             )}
           </div>
         </header>
-
-        {/* THANH THÔNG BÁO CHẾ ĐỘ NGOẠI TUYẾN (OFFLINE) / ĐỒNG BỘ TỰ ĐỘNG */}
-        {!isOnline && (
-          <div className="bg-amber-50 border-b border-amber-200 px-4 py-2.5 flex items-center justify-between gap-3 text-amber-900 text-xs font-semibold shadow-2xs">
-            <div className="flex items-center gap-2">
-              <WifiOff className="w-4 h-4 text-amber-600 shrink-0" />
-              <span>
-                <strong>Chế độ Ngoại tuyến (Offline):</strong> Không có kết nối Wi-Fi. Bạn vẫn có thể học Từ vựng, Ngữ pháp, Kanji, Lộ trình và làm Đề thi JLPT bình thường — tiến độ được lưu trên máy và sẽ tự động đồng bộ khi có mạng.
-              </span>
-            </div>
-            <span className="hidden sm:inline-block px-2 py-0.5 rounded-full bg-amber-200/70 text-amber-900 text-[10px] font-extrabold uppercase tracking-wider shrink-0">
-              Offline Ready
-            </span>
-          </div>
-        )}
 
         {isOnline && syncNotice && (
           <div className="bg-emerald-50 border-b border-emerald-200 px-4 py-2 flex items-center justify-between gap-3 text-emerald-800 text-xs font-semibold">

@@ -18,12 +18,15 @@ export interface UseNetworkStatusReturn {
 }
 
 export const useNetworkStatus = (): UseNetworkStatusReturn => {
-  const [status, setStatus] = useState<ExtendedNetworkStatus>({
-    connected: true,
-    connectionType: 'wifi',
-    isWifi: true,
-    isCellular: false,
-    isOffline: false
+  const [status, setStatus] = useState<ExtendedNetworkStatus>(() => {
+    const isOnline = typeof navigator !== 'undefined' ? navigator.onLine : true;
+    return {
+      connected: isOnline,
+      connectionType: isOnline ? 'wifi' : 'none',
+      isWifi: isOnline,
+      isCellular: false,
+      isOffline: !isOnline
+    };
   });
 
   const [isChecking, setIsChecking] = useState<boolean>(true);
@@ -46,13 +49,30 @@ export const useNetworkStatus = (): UseNetworkStatusReturn => {
     // 1. Kiểm tra trạng thái mạng ngay khi nạp hook
     fetchStatus();
 
-    // 2. Đăng ký lắng nghe thay đổi mạng từ hệ thống
+    // 2. Lắng nghe trực tiếp sự kiện online/offline của trình duyệt để phản hồi tức thì
+    const handleBrowserOffline = () => {
+      setStatus(prev => ({
+        ...prev,
+        connected: false,
+        connectionType: 'none',
+        isWifi: false,
+        isCellular: false,
+        isOffline: true
+      }));
+    };
+    const handleBrowserOnline = () => {
+      fetchStatus();
+    };
+    window.addEventListener('offline', handleBrowserOffline);
+    window.addEventListener('online', handleBrowserOnline);
+
+    // 3. Đăng ký lắng nghe thay đổi mạng từ hệ thống (Capacitor Network)
     const unsubscribe = networkService.addStatusListener((updatedStatus) => {
       setStatus(updatedStatus);
       setIsChecking(false);
     });
 
-    // 3. Lắng nghe thay đổi cấu hình nội bộ
+    // 4. Lắng nghe thay đổi cấu hình nội bộ
     const handleConfigChange = () => {
       setWifiOnlyRequiredState(networkService.isWifiOnlyRequired());
       setIsCellularBypassedState(networkService.isCellularBypassed());
@@ -63,15 +83,17 @@ export const useNetworkStatus = (): UseNetworkStatusReturn => {
     window.addEventListener('kizuna_network_config_changed', handleConfigChange);
 
     return () => {
+      window.removeEventListener('offline', handleBrowserOffline);
+      window.removeEventListener('online', handleBrowserOnline);
       unsubscribe();
       window.removeEventListener('kizuna_network_config_changed', handleConfigChange);
     };
   }, [fetchStatus]);
 
   // Kiểm tra xem ứng dụng có đang bị chặn do không có kết nối Internet hay không:
-  // - Nếu mất mạng (Offline / none / !connected): Bị chặn vào LoginPage, hiển thị trang 404 No Internet
+  // - Nếu mất mạng (Offline / none / !connected / !navigator.onLine): Hiển thị trang 404 No Internet
   // - Nếu có kết nối Wi-Fi HOẶC Dữ liệu di động (Cellular 4G/5G): Cho phép truy cập bình thường!
-  const isBlockedByNoInternet = status.isOffline || !status.connected;
+  const isBlockedByNoInternet = status.isOffline || !status.connected || (typeof navigator !== 'undefined' && !navigator.onLine);
   const isBlockedByWifiRequirement = isBlockedByNoInternet;
 
   const setWifiOnlyRequired = (required: boolean) => {

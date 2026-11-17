@@ -1,5 +1,5 @@
-// KIZUNA Progressive Web App (PWA) Service Worker - Offline Ready
-const CACHE_NAME = 'kizuna-pwa-v2';
+// KIZUNA Progressive Web App (PWA) Service Worker - Offline Ready v3
+const CACHE_NAME = 'kizuna-pwa-v3';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
@@ -41,32 +41,59 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  event.respondWith(
-    fetch(request)
-      .then((networkResponse) => {
-        if (
-          networkResponse &&
-          networkResponse.status === 200 &&
-          (url.origin === self.location.origin || url.pathname.endsWith('.json') || url.pathname.endsWith('.webp'))
-        ) {
-          const responseClone = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(request, responseClone).catch(() => {});
-          });
-        }
-        return networkResponse;
-      })
-      .catch(async () => {
-        const cached = await caches.match(request);
-        if (cached) return cached;
-        if (request.mode === 'navigate') {
+  // Đối với request tải trang (navigate): Ưu tiên mạng, nếu mất mạng thì trả về index.html từ cache
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone).catch(() => {}));
+          }
+          return response;
+        })
+        .catch(async () => {
+          const cached = await caches.match(request);
+          if (cached) return cached;
           const rootCached = await caches.match('/index.html');
           if (rootCached) return rootCached;
-        }
-        return new Response(JSON.stringify({ offline: true }), {
-          status: 503,
-          headers: { 'Content-Type': 'application/json' }
+          return new Response('Offline', { status: 200, headers: { 'Content-Type': 'text/html' } });
+        })
+    );
+    return;
+  }
+
+  // Đối với các static assets (js, css, images, fonts)
+  event.respondWith(
+    caches.match(request).then((cachedResponse) => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      return fetch(request)
+        .then((networkResponse) => {
+          if (
+            networkResponse &&
+            networkResponse.status === 200 &&
+            (url.origin === self.location.origin || url.pathname.includes('/assets/') || url.pathname.endsWith('.json') || url.pathname.endsWith('.webp'))
+          ) {
+            const responseClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(request, responseClone).catch(() => {});
+            });
+          }
+          return networkResponse;
+        })
+        .catch(() => {
+          // Khi mất mạng và asset chưa có trong cache:
+          // Tuyệt đối không trả về JSON 503 làm hỏng cú pháp script/css (gây lỗi Unexpected end of JSON input)
+          if (request.destination === 'style') {
+            return new Response('', { status: 200, headers: { 'Content-Type': 'text/css' } });
+          }
+          if (request.destination === 'script') {
+            return new Response('/* offline */', { status: 200, headers: { 'Content-Type': 'application/javascript' } });
+          }
+          return new Response('', { status: 404 });
         });
-      })
+    })
   );
 });

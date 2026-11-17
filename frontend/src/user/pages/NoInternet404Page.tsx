@@ -24,7 +24,8 @@ export const NoInternet404Page: React.FC<NoInternet404PageProps> = ({
     try {
       const fresh = await onRecheck();
       if (fresh.connected && !fresh.isOffline) {
-        setFeedbackMsg({ text: 'Đã phát hiện kết nối Internet! Đang chuyển vào trang đăng nhập...', type: 'success' });
+        setFeedbackMsg({ text: 'Đã phát hiện kết nối Internet! Đang vào ứng dụng...', type: 'success' });
+        setTimeout(() => window.location.reload(), 500);
       } else {
         setFeedbackMsg({ text: 'Vẫn chưa có kết nối Internet. Vui lòng bật Wi-Fi hoặc Dữ liệu di động (4G/5G)!', type: 'warn' });
       }
@@ -93,11 +94,11 @@ export const NoInternet404Page: React.FC<NoInternet404PageProps> = ({
           </div>
 
           <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mb-2">
-            Cần Có Kết Nối Internet Để Đăng Nhập
+            Không Có Kết Nối Internet
           </h1>
 
           <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6 max-w-md mx-auto">
-            Hệ thống nhận thấy thiết bị của bạn đang ngoại tuyến. Để xác thực danh tính, đồng bộ tiến độ học và bảo mật tài khoản, bạn cần kết nối <strong>Wi-Fi</strong> hoặc <strong>Dữ liệu di động (4G/5G)</strong> trước khi truy cập trang đăng nhập.
+            Hệ thống nhận thấy thiết bị của bạn đang ngoại tuyến. Để truy cập nội dung bài học, đồng bộ tiến độ và sử dụng KIZUNA, bạn cần kết nối <strong>Wi-Fi</strong> hoặc <strong>Dữ liệu di động (4G/5G)</strong>.
           </p>
 
           {/* NETWORK STATUS DETAILS */}
@@ -165,7 +166,7 @@ export const NoInternet404Page: React.FC<NoInternet404PageProps> = ({
         <div className="flex items-center justify-center gap-2">
           <span>KIZUNA 絆 Hệ thống học tiếng Nhật thông minh</span>
           <span>•</span>
-          <span>Yêu cầu mạng để đăng nhập</span>
+          <span>Yêu cầu kết nối mạng để sử dụng</span>
         </div>
       </footer>
     </div>

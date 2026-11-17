@@ -155,13 +155,10 @@ class NetworkService {
   }
 
   /**
-   * Cấu hình: Ứng dụng có bắt buộc dùng Wi-Fi không (Mặc định: true)
+   * Cấu hình: Ứng dụng chấp nhận cả Wi-Fi lẫn 4G/5G, chỉ chặn khi mất mạng hoàn toàn
    */
   public isWifiOnlyRequired(): boolean {
-    if (typeof localStorage === 'undefined') return true;
-    const val = localStorage.getItem(STORAGE_KEY_WIFI_ONLY);
-    // Mặc định luôn là true để thỏa mãn yêu cầu wifi của app
-    return val === null ? true : val === 'true';
+    return false;
   }
 
   public setWifiOnlyRequired(required: boolean): void {
