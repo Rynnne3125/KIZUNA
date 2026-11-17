@@ -518,6 +518,9 @@ export const authService = {
     } catch (authErr: any) {
       console.warn('[Firebase Auth Google] Error:', authErr);
       const code = authErr?.code || '';
+      if (code === 'auth/configuration-not-found') {
+        throw new Error('Dịch vụ Authentication hoặc phương thức Google chưa được bật trên Firebase Console (Lỗi: auth/configuration-not-found). Vui lòng vào Firebase Console > Authentication > Sign-in method và bật Google.');
+      }
       if (code === 'auth/popup-closed-by-user') {
         throw new Error('Bạn đã đóng cửa sổ đăng nhập Google trước khi hoàn tất.');
       }
@@ -528,7 +531,7 @@ export const authService = {
         throw new Error('Yêu cầu đăng nhập đã bị hủy.');
       }
       if (code === 'auth/unauthorized-domain') {
-        throw new Error('Tên miền hiện tại chưa được cấp quyền trên Firebase Auth console.');
+        throw new Error('Tên miền hiện tại chưa được cấp quyền trên Firebase Auth console (Authorized Domains). Vui lòng thêm tên miền vào Firebase Console > Authentication > Settings.');
       }
       if (code === 'auth/operation-not-allowed') {
         throw new Error('Phương thức đăng nhập Google chưa được kích hoạt trên Firebase.');
