@@ -7,18 +7,17 @@ import {
 import { db, firebaseConfig } from '../../config/firebase';
 import { collection, getDocs, getDoc, setDoc, deleteDoc, doc, updateDoc, query, where, limit } from 'firebase/firestore';
 import { hashPassword } from '../../user/services/authService';
-import { kizunaService } from '../../user/services/kizunaService';
 
-// Cờ kiểm tra nhanh nếu chưa cấu hình Firebase thực tế hoặc kết nối Firestore bị treo/offline
-let isFirestoreOfflineOrDummy =
+// Cờ kiểm tra nhanh nếu chưa cấu hình Firebase thực tế
+const isFirestoreDummy =
   !db ||
   !firebaseConfig.apiKey ||
   firebaseConfig.apiKey === 'dummy_api_key_for_ui_testing' ||
   firebaseConfig.apiKey === 'your_firebase_api_key_here';
 
-async function withFirestoreTimeout<T>(promise: Promise<T>, timeoutMs = 2200): Promise<T> {
-  if (isFirestoreOfflineOrDummy) {
-    throw new Error('FIRESTORE_OFFLINE_OR_DUMMY');
+async function withFirestoreTimeout<T>(promise: Promise<T>, timeoutMs = 15000): Promise<T> {
+  if (isFirestoreDummy) {
+    throw new Error('FIRESTORE_CONFIG_MISSING');
   }
   let timer: ReturnType<typeof setTimeout> | undefined;
   try {
@@ -26,7 +25,6 @@ async function withFirestoreTimeout<T>(promise: Promise<T>, timeoutMs = 2200): P
       promise,
       new Promise<T>((_, reject) => {
         timer = setTimeout(() => {
-          isFirestoreOfflineOrDummy = true;
           reject(new Error('FIRESTORE_TIMEOUT'));
         }, timeoutMs);
       })
@@ -37,154 +35,28 @@ async function withFirestoreTimeout<T>(promise: Promise<T>, timeoutMs = 2200): P
 }
 
 async function safeFirestoreWrite(writePromiseFactory: () => Promise<any>): Promise<void> {
-  if (isFirestoreOfflineOrDummy) return;
+  if (isFirestoreDummy) return;
   try {
-    await withFirestoreTimeout(writePromiseFactory(), 2000);
+    await withFirestoreTimeout(writePromiseFactory(), 10000);
   } catch (e) {
-    console.warn('[AdminService] Firestore write skipped/fallback to local state:', e);
+    console.warn('[AdminService] Firestore write error:', e);
+    throw e;
   }
 }
 
-const DEFAULT_FALLBACK_USERS: AdminUser[] = [
-  {
-    id: 'usr_admin_01',
-    username: 'banhbeothuy10',
-    fullName: 'Quản Trị Viên Kizuna',
-    email: 'banhbeothuy10@gmail.com',
-    role: 'ROLE_ADMIN',
-    status: 'ACTIVE',
-    enabled: true,
-    level: 'N1',
-    totalXp: 12500,
-    activePoints: 4800,
-    currentStreak: 42,
-    placementVerified: true,
-    placementScore: 95,
-    createdAt: new Date(Date.now() - 6 * 86400000).toISOString()
-  },
-  {
-    id: 'usr_learner_01',
-    username: 'minhanh_jp',
-    fullName: 'Nguyễn Minh Anh',
-    email: 'minhanh.jp@vku.udn.vn',
-    role: 'ROLE_USER',
-    status: 'ACTIVE',
-    enabled: true,
-    level: 'N3',
-    totalXp: 4280,
-    activePoints: 1950,
-    currentStreak: 19,
-    placementVerified: true,
-    placementScore: 78,
-    createdAt: new Date(Date.now() - 5 * 86400000).toISOString()
-  },
-  {
-    id: 'usr_learner_02',
-    username: 'hoangnam_n4',
-    fullName: 'Trần Hoàng Nam',
-    email: 'hoangnam@gmail.com',
-    role: 'ROLE_USER',
-    status: 'ACTIVE',
-    enabled: true,
-    level: 'N4',
-    totalXp: 2650,
-    activePoints: 1120,
-    currentStreak: 11,
-    placementVerified: true,
-    placementScore: 64,
-    createdAt: new Date(Date.now() - 4 * 86400000).toISOString()
-  },
-  {
-    id: 'usr_learner_03',
-    username: 'khanhlinh_kizuna',
-    fullName: 'Lê Khánh Linh',
-    email: 'khanhlinh@vku.udn.vn',
-    role: 'ROLE_USER',
-    status: 'ACTIVE',
-    enabled: true,
-    level: 'N5',
-    totalXp: 1340,
-    activePoints: 680,
-    currentStreak: 7,
-    placementVerified: true,
-    placementScore: 52,
-    createdAt: new Date(Date.now() - 3 * 86400000).toISOString()
-  },
-  {
-    id: 'usr_learner_04',
-    username: 'quocbao_dev',
-    fullName: 'Phạm Quốc Bảo',
-    email: 'quocbao@gmail.com',
-    role: 'ROLE_USER',
-    status: 'ACTIVE',
-    enabled: true,
-    level: 'N2',
-    totalXp: 6890,
-    activePoints: 2840,
-    currentStreak: 28,
-    placementVerified: true,
-    placementScore: 86,
-    createdAt: new Date(Date.now() - 2 * 86400000).toISOString()
-  },
-  {
-    id: 'usr_learner_05',
-    username: 'thaovy_n5',
-    fullName: 'Võ Thảo Vy',
-    email: 'thaovy@gmail.com',
-    role: 'ROLE_USER',
-    status: 'ACTIVE',
-    enabled: true,
-    level: 'Tân binh',
-    totalXp: 420,
-    activePoints: 210,
-    currentStreak: 3,
-    placementVerified: false,
-    placementScore: 0,
-    createdAt: new Date(Date.now() - 1 * 86400000).toISOString()
-  }
-];
-
-const DEFAULT_FALLBACK_AUDITS: AiEvaluationAudit[] = [
-  {
-    id: 'audit_01',
-    userId: 'usr_learner_01',
-    username: 'Nguyễn Minh Anh',
-    milestoneTitle: 'Bài 3: Giới thiệu bản thân & Nghề nghiệp',
-    questTitle: 'Bài 4: Điền Khuyết Thực Chiến & Về Đích Mốc',
-    userSubmission: 'はじめまして、私はベトナムから来ましたミンアンです。どうぞよろしくお願いします。',
-    aiScore: 72,
-    aiFeedback: 'Câu văn tự nhiên, đúng ngữ pháp N5 nhưng thiếu thông tin nghề nghiệp theo yêu cầu ngữ cảnh.',
-    studentAppealReason: 'Em đã giới thiệu đầy đủ tên và quốc tịch đúng mẫu câu trong bài học rồi ạ.',
-    status: 'PENDING',
-    submittedAt: new Date(Date.now() - 3600000 * 5).toISOString()
-  },
-  {
-    id: 'audit_02',
-    userId: 'usr_learner_02',
-    username: 'Trần Hoàng Nam',
-    milestoneTitle: 'Bài 4: Mua sắm & Giá tiền',
-    questTitle: 'Bài 3: Ghép Câu Ngữ Pháp & Bảng Tổng Kết',
-    userSubmission: 'このかばんはいくらですか。三千五百円です。',
-    aiScore: 85,
-    aiFeedback: 'Sử dụng đúng trợ từ は và mẫu câu hỏi giá tiền lịch sự.',
-    studentAppealReason: 'Bài làm đúng 100% nhưng hệ thống chỉ cộng 50 AP thay vì 70 AP.',
-    status: 'PENDING',
-    submittedAt: new Date(Date.now() - 3600000 * 18).toISOString()
-  }
-];
-
-async function fetchCollectionData<T>(collectionName: string, queryLimit: number = 100): Promise<T[]> {
-  if (isFirestoreOfflineOrDummy) return [];
+async function fetchCollectionData<T>(collectionName: string, queryLimit: number = 0): Promise<T[]> {
+  if (isFirestoreDummy) return [];
   try {
-    const q = query(collection(db, collectionName), limit(queryLimit));
-    const snap = await withFirestoreTimeout(getDocs(q), 2200);
+    const colRef = collection(db, collectionName);
+    const q = queryLimit > 0 ? query(colRef, limit(queryLimit)) : query(colRef);
+    const snap = await withFirestoreTimeout(getDocs(q), 15000);
     const list: T[] = [];
     if (!snap.empty) {
       snap.forEach(d => list.push({ id: d.id, ...d.data() } as unknown as T));
     }
     return list;
   } catch (e) {
-    console.warn(`[AdminService] Firestore collection '${collectionName}' unavailable/timeout, using fallback.`);
+    console.warn(`[AdminService] Firestore collection '${collectionName}' error/timeout:`, e);
     return [];
   }
 }
@@ -229,21 +101,15 @@ export const adminService = {
   },
 
   async getUsers(): Promise<AdminUser[]> {
-    const all = await fetchCollectionData<AdminUser>('users', 300);
+    const all = await fetchCollectionData<AdminUser>('users');
     if (all.length > 0) {
       return all.filter(u => !u.isDeleted);
     }
     try {
       const localReg: AdminUser[] = JSON.parse(localStorage.getItem('kizuna_registered_users') || '[]');
-      const merged = [...DEFAULT_FALLBACK_USERS];
-      localReg.forEach(lu => {
-        if (!merged.some(m => m.email === lu.email || m.id === lu.id)) {
-          merged.push(lu);
-        }
-      });
-      return merged.filter(u => !u.isDeleted);
+      return localReg.filter(u => !u.isDeleted);
     } catch {
-      return DEFAULT_FALLBACK_USERS;
+      return [];
     }
   },
 
@@ -360,17 +226,17 @@ export const adminService = {
     let progress: StudentDossierData['progress'] = null;
     let srsItems: StudentDossierData['srsItems'] = [];
 
-    if (!isFirestoreOfflineOrDummy) {
+    if (!isFirestoreDummy) {
       try {
-        const progSnap = await withFirestoreTimeout(getDoc(doc(db, 'user_progress', user.id)), 2000);
+        const progSnap = await withFirestoreTimeout(getDoc(doc(db, 'user_progress', user.id)), 8000);
         if (progSnap.exists()) {
           progress = progSnap.data() as StudentDossierData['progress'];
         }
       } catch {}
 
       try {
-        const srsQuery = query(collection(db, 'user_srs_items'), where('userId', '==', user.id), limit(50));
-        const srsSnap = await withFirestoreTimeout(getDocs(srsQuery), 2000);
+        const srsQuery = query(collection(db, 'user_srs_items'), where('userId', '==', user.id), limit(100));
+        const srsSnap = await withFirestoreTimeout(getDocs(srsQuery), 8000);
         if (!srsSnap.empty) {
           srsSnap.forEach(d => srsItems.push({ id: d.id, ...d.data() }));
         }
@@ -385,17 +251,12 @@ export const adminService = {
   },
 
   async getAiAudits(): Promise<AiEvaluationAudit[]> {
-    const list = await fetchCollectionData<AiEvaluationAudit>('ai_evaluation_audits');
-    return list.length > 0 ? list : DEFAULT_FALLBACK_AUDITS;
+    return await fetchCollectionData<AiEvaluationAudit>('ai_evaluation_audits');
   },
 
   async getStages(): Promise<Stage[]> {
-    const list = await fetchCollectionData<Stage>('stages', 100);
-    if (list.length > 0) {
-      return list.sort((a, b) => ((a.orderIndex ?? a.order_index ?? 0) - (b.orderIndex ?? b.order_index ?? 0)));
-    }
-    const fallback = await kizunaService.getStages();
-    return fallback.sort((a, b) => ((a.orderIndex ?? 0) - (b.orderIndex ?? 0)));
+    const list = await fetchCollectionData<Stage>('stages');
+    return list.sort((a, b) => ((a.orderIndex ?? a.order_index ?? 0) - (b.orderIndex ?? b.order_index ?? 0)));
   },
 
   async createStage(payload: Partial<Stage>): Promise<Stage> {
@@ -446,12 +307,8 @@ export const adminService = {
   },
 
   async getMilestones(): Promise<Milestone[]> {
-    const list = await fetchCollectionData<Milestone>('milestones', 200);
-    if (list.length > 0) {
-      return list.sort((a, b) => ((a.orderIndex ?? a.order_index ?? 0) - (b.orderIndex ?? b.order_index ?? 0)));
-    }
-    const fallback = await kizunaService.getMilestones();
-    return fallback.sort((a, b) => ((a.orderIndex ?? 0) - (b.orderIndex ?? 0)));
+    const list = await fetchCollectionData<Milestone>('milestones');
+    return list.sort((a, b) => ((a.orderIndex ?? a.order_index ?? 0) - (b.orderIndex ?? b.order_index ?? 0)));
   },
 
   async createMilestone(payload: Partial<Milestone>): Promise<Milestone> {
@@ -522,65 +379,20 @@ export const adminService = {
   },
 
   async getMilestoneQuests(milestoneId: string): Promise<MilestoneQuest[]> {
-    if (!isFirestoreOfflineOrDummy) {
+    if (!isFirestoreDummy) {
       try {
-        const q = query(collection(db, 'milestone_quests'), where('milestoneId', '==', milestoneId), limit(20));
-        const snap = await withFirestoreTimeout(getDocs(q), 2000);
+        const q = query(collection(db, 'milestone_quests'), where('milestoneId', '==', milestoneId));
+        const snap = await withFirestoreTimeout(getDocs(q), 10000);
         const list: MilestoneQuest[] = [];
         if (!snap.empty) {
           snap.forEach(d => list.push({ id: d.id, ...d.data() } as MilestoneQuest));
         }
-        if (list.length > 0) {
-          return list.sort((a, b) => (a.stepIndex || 0) - (b.stepIndex || 0));
-        }
+        return list.sort((a, b) => (a.stepIndex || 0) - (b.stepIndex || 0));
       } catch (e) {
         console.warn('Error fetching milestone_quests:', e);
       }
     }
-
-    // Nếu chưa có trong Firestore, trả về 4 bài học Quests chuẩn của cột mốc
-    return [
-      {
-        id: `${milestoneId}_quest_1`,
-        milestoneId,
-        stepIndex: 1,
-        questType: 'FLASHCARD_SRS',
-        title: 'Bài 1: Thẻ Ghi Nhớ Cốt Lõi (SRS Flashcard Deck)',
-        description: 'Làm quen và ghi nhớ sâu từ vựng & chữ Hán của mốc qua thẻ lật 3D.',
-        xpReward: 50,
-        activePointsReward: 20
-      },
-      {
-        id: `${milestoneId}_quest_2`,
-        milestoneId,
-        stepIndex: 2,
-        questType: 'VOCAB_GATEKEEPER',
-        title: 'Bài 2: Cổng Từ Vựng Phản Xạ 100% (Vocab Gatekeeper)',
-        description: 'Trắc nghiệm phản xạ từ vựng, yêu cầu trả lời chính xác 100% các từ trong bài.',
-        xpReward: 50,
-        activePointsReward: 20
-      },
-      {
-        id: `${milestoneId}_quest_3`,
-        milestoneId,
-        stepIndex: 3,
-        questType: 'GRAMMAR_SCRAMBLE',
-        title: 'Bài 3: Ghép Câu Ngữ Pháp & Bảng Tổng Kết',
-        description: 'Sắp xếp các thẻ từ xáo trộn thành câu chuẩn và đọc Bảng Tổng Kết Ngữ Pháp.',
-        xpReward: 60,
-        activePointsReward: 25
-      },
-      {
-        id: `${milestoneId}_quest_4`,
-        milestoneId,
-        stepIndex: 4,
-        questType: 'CLOZE_PRACTICE',
-        title: 'Bài 4: Điền Khuyết Thực Chiến & Về Đích Mốc',
-        description: 'Điền trợ từ/từ nối vào đoạn văn thực tế kèm gợi ý sửa lỗi (hintOnError).',
-        xpReward: 70,
-        activePointsReward: 30
-      }
-    ];
+    return [];
   },
 
   async saveMilestoneQuest(quest: MilestoneQuest): Promise<MilestoneQuest> {
@@ -616,21 +428,21 @@ export const adminService = {
     let kanjiList = cachedKanji.filter(k => (k.milestoneId || k.milestone_id) === milestoneId);
     let grammarList = cachedGrammar.filter(g => (g.milestoneId || g.milestone_id) === milestoneId);
 
-    if (!isFirestoreOfflineOrDummy) {
+    if (!isFirestoreDummy) {
       try {
         if (vocabList.length === 0) {
-          const qV = query(collection(db, 'vocabulary_items'), where('milestoneId', '==', milestoneId), limit(60));
-          const sV = await withFirestoreTimeout(getDocs(qV), 2000);
+          const qV = query(collection(db, 'vocabulary_items'), where('milestoneId', '==', milestoneId));
+          const sV = await withFirestoreTimeout(getDocs(qV), 10000);
           sV.forEach(d => vocabList.push({ id: d.id, ...d.data() }));
         }
         if (kanjiList.length === 0) {
-          const qK = query(collection(db, 'kanji_dictionary'), where('milestoneId', '==', milestoneId), limit(40));
-          const sK = await withFirestoreTimeout(getDocs(qK), 2000);
+          const qK = query(collection(db, 'kanji_dictionary'), where('milestoneId', '==', milestoneId));
+          const sK = await withFirestoreTimeout(getDocs(qK), 10000);
           sK.forEach(d => kanjiList.push({ id: d.id, ...d.data() }));
         }
         if (grammarList.length === 0) {
-          const qG = query(collection(db, 'grammar_items'), where('milestoneId', '==', milestoneId), limit(30));
-          const sG = await withFirestoreTimeout(getDocs(qG), 2000);
+          const qG = query(collection(db, 'grammar_items'), where('milestoneId', '==', milestoneId));
+          const sG = await withFirestoreTimeout(getDocs(qG), 10000);
           sG.forEach(d => grammarList.push({ id: d.id, ...d.data() }));
         }
       } catch (e) {
@@ -679,9 +491,7 @@ export const adminService = {
   },
 
   async getVocabulary(): Promise<VocabularyItem[]> {
-    const list = await fetchCollectionData<VocabularyItem>('vocabulary_items', 500);
-    if (list.length > 0) return list;
-    return await kizunaService.getVocabulary();
+    return await fetchCollectionData<VocabularyItem>('vocabulary_items');
   },
 
   async createVocabulary(payload: Partial<VocabularyItem>): Promise<VocabularyItem> {
@@ -748,9 +558,7 @@ export const adminService = {
   },
 
   async getGrammar(): Promise<GrammarItem[]> {
-    const list = await fetchCollectionData<GrammarItem>('grammar_items', 500);
-    if (list.length > 0) return list;
-    return await kizunaService.getGrammar();
+    return await fetchCollectionData<GrammarItem>('grammar_items');
   },
 
   async createGrammar(payload: Partial<GrammarItem>): Promise<GrammarItem> {
@@ -811,9 +619,7 @@ export const adminService = {
   },
 
   async getKanji(): Promise<KanjiDictionary[]> {
-    const list = await fetchCollectionData<KanjiDictionary>('kanji_dictionary', 500);
-    if (list.length > 0) return list;
-    return await kizunaService.getKanji();
+    return await fetchCollectionData<KanjiDictionary>('kanji_dictionary');
   },
 
   async createKanji(payload: Partial<KanjiDictionary>): Promise<KanjiDictionary> {
@@ -878,9 +684,7 @@ export const adminService = {
   },
 
   async getExams(): Promise<JlptExam[]> {
-    const list = await fetchCollectionData<JlptExam>('jlpt_exam_catalog');
-    if (list.length > 0) return list;
-    return await kizunaService.getExamCatalog();
+    return await fetchCollectionData<JlptExam>('jlpt_exam_catalog');
   },
 
   async createExam(payload: Partial<JlptExam>): Promise<JlptExam> {
@@ -970,12 +774,12 @@ export const adminService = {
   }): Promise<LearningAnalyticsData> {
     const { users, stages, milestones, vocabulary, kanji } = params;
     const [progressDocs, srsDocs] = await Promise.all([
-      fetchCollectionData<any>('user_progress', 500),
-      fetchCollectionData<any>('user_srs_items', 500)
+      fetchCollectionData<any>('user_progress'),
+      fetchCollectionData<any>('user_srs_items')
     ]);
 
     const learners = users.filter(u => u.role !== 'ROLE_ADMIN');
-    const totalLearners = Math.max(1, learners.length || users.length || 1);
+    const totalLearners = learners.length;
 
     // 1. Sắp xếp các cột mốc theo thứ tự Chặng -> Thứ tự Mốc
     const stageOrderMap = new Map<string, { order: number; title: string }>();
@@ -993,6 +797,18 @@ export const adminService = {
       return Number(a.orderIndex ?? a.order_index ?? 0) - Number(b.orderIndex ?? b.order_index ?? 0);
     });
 
+    if (totalLearners === 0 || sortedMilestones.length === 0) {
+      return {
+        totalLearnersAnalyzed: totalLearners,
+        avgFunnelRetention: 0,
+        bottleneckMilestoneTitle: 'Chưa có dữ liệu học viên',
+        bottleneckDropOffRate: 0,
+        funnelSteps: [],
+        killerVocabulary: [],
+        killerKanji: []
+      };
+    }
+
     // Map user_progress theo userId
     const progressByUser = new Map<string, any>();
     progressDocs.forEach(p => {
@@ -1000,73 +816,44 @@ export const adminService = {
       if (uid) progressByUser.set(uid, p);
     });
 
-    // Tính số học viên tiếp cận & hoàn thành từng mốc (kết hợp user_progress thực tế và XP/level của học viên)
-    const rawReachedCounts: number[] = [];
-    const rawCompletedCounts: number[] = [];
-
-    sortedMilestones.forEach((ms, idx) => {
-      const xpThresholdToReach = idx * 45;
-      const xpThresholdToComplete = (idx + 1) * 50;
-
-      let reached = 0;
-      let completed = 0;
-
-      learners.forEach(u => {
-        const prog = progressByUser.get(u.id);
-        const completedList: string[] = Array.isArray(prog?.completedMilestones) ? prog.completedMilestones : [];
-        const userXp = Number(u.totalXp || 0) + Number(u.activePoints || 0) * 0.4;
-
-        if (completedList.includes(ms.id) || userXp >= xpThresholdToComplete) {
-          reached++;
-          completed++;
-        } else if (
-          idx === 0 ||
-          prog?.currentMilestoneId === ms.id ||
-          userXp >= xpThresholdToReach
-        ) {
-          reached++;
-        }
-      });
-
-      rawReachedCounts.push(reached);
-      rawCompletedCounts.push(completed);
-    });
-
-    // Đảm bảo tính đơn điệu của phễu (Funnel) và phản ánh rõ tỷ lệ rơi rụng qua từng cột mốc
-    const topOfFunnel = Math.max(totalLearners, rawReachedCounts[0] || totalLearners);
-    let prevReached = topOfFunnel;
+    // Tính toán phễu dựa trên 100% dữ liệu thực tế từ user_progress
+    let prevReached = totalLearners;
+    let maxDropOff = -1;
+    let bottleneckIdx = -1;
 
     const funnelSteps: MilestoneFunnelStep[] = sortedMilestones.map((ms, idx) => {
       const stageId = ms.stageId || ms.stage_id || 'stage_01';
       const stageTitle = stageOrderMap.get(stageId)?.title || stageId;
 
-      // Nếu toàn bộ user chưa có nhiều XP chênh lệch, kết hợp đường suy giảm tự nhiên theo độ khó mốc để phễu trực quan
-      let reachedCount = rawReachedCounts[idx];
-      if (idx === 0) {
-        reachedCount = topOfFunnel;
-      } else {
-        const naturalRetention = Math.max(
-          1,
-          Math.round(topOfFunnel * Math.pow(0.86, idx) - (idx % 3 === 2 ? Math.ceil(topOfFunnel * 0.04) : 0))
-        );
-        reachedCount = reachedCount > 0 && reachedCount < prevReached
-          ? reachedCount
-          : Math.min(prevReached, Math.max(rawCompletedCounts[idx], naturalRetention));
-      }
+      let reachedCount = 0;
+      let completedCount = 0;
 
-      const completedCount = Math.min(
-        reachedCount,
-        rawCompletedCounts[idx] > 0 && rawCompletedCounts[idx] <= reachedCount
-          ? rawCompletedCounts[idx]
-          : Math.max(0, Math.round(reachedCount * (0.82 - (idx % 4) * 0.03)))
-      );
+      learners.forEach(u => {
+        const prog = progressByUser.get(u.id);
+        const completedList: string[] = Array.isArray(prog?.completedMilestones) ? prog.completedMilestones : [];
+        const isCompleted = completedList.includes(ms.id);
+        const isCurrent = prog?.currentMilestoneId === ms.id;
 
-      const retentionRate = Math.round((reachedCount / topOfFunnel) * 100);
+        if (isCompleted) {
+          reachedCount++;
+          completedCount++;
+        } else if (isCurrent || idx === 0) {
+          reachedCount++;
+        }
+      });
+
+      const retentionRate = totalLearners > 0 ? Math.round((reachedCount / totalLearners) * 100) : 0;
       const dropOffRate = idx === 0
-        ? Math.max(0, Math.round(((reachedCount - completedCount) / Math.max(1, reachedCount)) * 100))
-        : Math.max(0, Math.round(((prevReached - reachedCount) / Math.max(1, prevReached)) * 100));
+        ? (reachedCount > 0 ? Math.max(0, Math.round(((reachedCount - completedCount) / reachedCount) * 100)) : 0)
+        : (prevReached > 0 ? Math.max(0, Math.round(((prevReached - reachedCount) / prevReached) * 100)) : 0);
 
       prevReached = reachedCount;
+
+      const isBottleneck = dropOffRate >= 20 && dropOffRate > 0;
+      if (dropOffRate > maxDropOff && dropOffRate > 0) {
+        maxDropOff = dropOffRate;
+        bottleneckIdx = idx;
+      }
 
       return {
         milestoneId: ms.id,
@@ -1078,156 +865,104 @@ export const adminService = {
         completedCount,
         retentionRate,
         dropOffRate,
-        isBottleneck: false
+        isBottleneck
       };
     });
 
-    // Đánh dấu mốc có tỷ lệ rơi rụng cao nhất (Bottleneck)
-    let maxDropOff = -1;
-    let bottleneckIdx = -1;
-    funnelSteps.forEach((step, i) => {
-      if (step.dropOffRate > maxDropOff) {
-        maxDropOff = step.dropOffRate;
-        bottleneckIdx = i;
-      }
-      if (step.dropOffRate >= 18) {
-        step.isBottleneck = true;
-      }
-    });
     if (bottleneckIdx >= 0 && funnelSteps[bottleneckIdx]) {
       funnelSteps[bottleneckIdx].isBottleneck = true;
     }
 
-    // 2. Tổng hợp thống kê SRS từ `user_srs_items`
+    // 2. Thống kê SRS thực tế từ `user_srs_items` (CHỈ lấy dữ liệu đã có trong Firestore, KHÔNG dùng mock hay hash)
     const srsAggByKey = new Map<string, { wrongSum: number; attempts: number; easeSum: number; count: number; learners: Set<string> }>();
     srsDocs.forEach(item => {
       const key = String(item.itemId || item.term || item.id || '').trim();
       if (!key) return;
       const cur = srsAggByKey.get(key) || { wrongSum: 0, attempts: 0, easeSum: 0, count: 0, learners: new Set<string>() };
-      const wrong = Number(item.wrongCount ?? (Number(item.easeFactor || 2.5) < 2.0 ? 3 : 0));
+      const wrong = Number(item.wrongCount ?? (Number(item.easeFactor || 2.5) < 2.0 ? 1 : 0));
       const rep = Number(item.repetition ?? 1);
       cur.wrongSum += wrong;
       cur.attempts += Math.max(1, rep + wrong);
-      cur.easeSum += Number(item.easeFactor || 2.2);
+      cur.easeSum += Number(item.easeFactor || 2.5);
       cur.count += 1;
       if (item.userId) cur.learners.add(String(item.userId));
       srsAggByKey.set(key, cur);
     });
 
-    // Hàm băm ổn định theo ID học liệu để bổ sung chỉ số độ khó thực tế khi dữ liệu SRS đang tích lũy
-    const hashScore = (str: string): number => {
-      let h = 2166136261;
-      for (let i = 0; i < str.length; i++) {
-        h ^= str.charCodeAt(i);
-        h = Math.imul(h, 16777619);
-      }
-      return Math.abs(h);
-    };
+    // 3. Top Từ vựng "Tử thần" thực tế (CHỈ lấy các từ thực sự có trong Firestore và có lượt làm sai > 0)
+    const killerVocabulary: KillerKnowledgeItem[] = [];
+    vocabulary.forEach(v => {
+      const term = String(v.term || v.kanji || v.id || '');
+      const reading = String(v.reading || v.kana || '');
+      const meaning = String(v.vietnameseMeaning || v.meaning || '');
+      const level = String(v.level || v.jlptLevel || 'N5').toUpperCase();
+      const agg = srsAggByKey.get(v.id) || srsAggByKey.get(term);
 
-    // 3. Top Từ vựng "Tử thần" (hay làm sai nhất)
-    const killerVocabulary: KillerKnowledgeItem[] = vocabulary
-      .map(v => {
-        const term = String(v.term || v.kanji || v.id || '');
-        const reading = String(v.reading || v.kana || '');
-        const meaning = String(v.vietnameseMeaning || v.meaning || '');
-        const level = String(v.level || v.jlptLevel || 'N5').toUpperCase();
-        const agg = srsAggByKey.get(v.id) || srsAggByKey.get(term);
-
-        const h = hashScore(v.id + term);
-        // Độ khó tự nhiên dựa trên độ dài cách đọc, chữ Hán phức tạp và cấp độ JLPT
-        const levelWeight = level.includes('N1') ? 26 : level.includes('N2') ? 22 : level.includes('N3') ? 18 : level.includes('N4') ? 14 : 10;
-        const lengthWeight = Math.min(18, reading.length * 3 + term.length * 2);
-
-        const totalAttempts = agg ? Math.max(12, agg.attempts * 4) : 28 + (h % 65);
-        const wrongCount = agg && agg.wrongSum > 0
-          ? agg.wrongSum * 3 + (h % 7)
-          : Math.min(totalAttempts - 3, Math.max(6, Math.round((totalAttempts * (28 + levelWeight + lengthWeight + (h % 19))) / 100)));
-        const errorRate = Math.min(92, Math.max(25, Math.round((wrongCount / Math.max(1, totalAttempts)) * 100)));
-        const avgEaseFactor = agg && agg.count > 0
-          ? Number((agg.easeSum / agg.count).toFixed(2))
-          : Number(Math.max(1.3, 2.5 - errorRate / 72).toFixed(2));
-        const affectedLearners = agg && agg.learners.size > 0
-          ? agg.learners.size
-          : Math.max(1, Math.min(totalLearners, Math.ceil((totalLearners * errorRate) / 115)));
-
-        return {
+      if (agg && agg.attempts > 0 && agg.wrongSum > 0) {
+        const errorRate = Math.min(100, Math.round((agg.wrongSum / agg.attempts) * 100));
+        killerVocabulary.push({
           id: v.id,
-          type: 'VOCABULARY' as const,
+          type: 'VOCABULARY',
           term,
           reading,
           meaning,
           level,
           milestoneId: v.milestoneId || v.milestone_id,
-          totalAttempts,
-          wrongCount,
+          totalAttempts: agg.attempts,
+          wrongCount: agg.wrongSum,
           errorRate,
-          avgEaseFactor,
-          affectedLearners,
+          avgEaseFactor: Number((agg.easeSum / Math.max(1, agg.count)).toFixed(2)),
+          affectedLearners: agg.learners.size,
           rawItem: v
-        };
-      })
-      .sort((a, b) => b.errorRate - a.errorRate || b.wrongCount - a.wrongCount)
-      .slice(0, 15);
+        });
+      }
+    });
+    killerVocabulary.sort((a, b) => b.errorRate - a.errorRate || b.wrongCount - a.wrongCount);
 
-    // 4. Top Kanji "Tử thần" (hay làm sai nhất)
-    const killerKanji: KillerKnowledgeItem[] = kanji
-      .map(k => {
-        const char = String(k.kanji || k.id || '');
-        const reading = String(k.sinoVietnamese || k.hanviet || k.onyomi || 'N/A');
-        const meaning = String(k.vietnameseMeaning || k.meaning || '');
-        const level = String(k.level || k.jlptLevel || 'N5').toUpperCase();
-        const strokes = Number(k.strokeCount || 8);
-        const agg = srsAggByKey.get(k.id) || srsAggByKey.get(char);
+    // 4. Top Kanji "Tử thần" thực tế (CHỈ lấy các chữ Hán thực sự có trong Firestore và có lượt làm sai > 0)
+    const killerKanji: KillerKnowledgeItem[] = [];
+    kanji.forEach(k => {
+      const char = String(k.kanji || k.id || '');
+      const reading = String(k.sinoVietnamese || k.hanviet || k.onyomi || 'N/A');
+      const meaning = String(k.vietnameseMeaning || k.meaning || '');
+      const level = String(k.level || k.jlptLevel || 'N5').toUpperCase();
+      const agg = srsAggByKey.get(k.id) || srsAggByKey.get(char);
 
-        const h = hashScore(k.id + char);
-        const strokeWeight = Math.min(28, strokes * 1.8);
-        const levelWeight = level.includes('N1') ? 24 : level.includes('N2') ? 20 : level.includes('N3') ? 16 : level.includes('N4') ? 12 : 8;
-
-        const totalAttempts = agg ? Math.max(12, agg.attempts * 4) : 25 + (h % 60);
-        const wrongCount = agg && agg.wrongSum > 0
-          ? agg.wrongSum * 3 + (h % 6)
-          : Math.min(totalAttempts - 2, Math.max(6, Math.round((totalAttempts * (30 + strokeWeight + levelWeight + (h % 17))) / 100)));
-        const errorRate = Math.min(94, Math.max(28, Math.round((wrongCount / Math.max(1, totalAttempts)) * 100)));
-        const avgEaseFactor = agg && agg.count > 0
-          ? Number((agg.easeSum / agg.count).toFixed(2))
-          : Number(Math.max(1.3, 2.45 - errorRate / 70).toFixed(2));
-        const affectedLearners = agg && agg.learners.size > 0
-          ? agg.learners.size
-          : Math.max(1, Math.min(totalLearners, Math.ceil((totalLearners * errorRate) / 110)));
-
-        return {
+      if (agg && agg.attempts > 0 && agg.wrongSum > 0) {
+        const errorRate = Math.min(100, Math.round((agg.wrongSum / agg.attempts) * 100));
+        killerKanji.push({
           id: k.id,
-          type: 'KANJI' as const,
+          type: 'KANJI',
           term: char,
           reading,
           meaning,
           level,
           milestoneId: k.milestoneId || k.milestone_id,
-          totalAttempts,
-          wrongCount,
+          totalAttempts: agg.attempts,
+          wrongCount: agg.wrongSum,
           errorRate,
-          avgEaseFactor,
-          affectedLearners,
+          avgEaseFactor: Number((agg.easeSum / Math.max(1, agg.count)).toFixed(2)),
+          affectedLearners: agg.learners.size,
           rawItem: k
-        };
-      })
-      .sort((a, b) => b.errorRate - a.errorRate || b.wrongCount - a.wrongCount)
-      .slice(0, 15);
+        });
+      }
+    });
+    killerKanji.sort((a, b) => b.errorRate - a.errorRate || b.wrongCount - a.wrongCount);
 
     const avgFunnelRetention = funnelSteps.length > 0
       ? Math.round(funnelSteps.reduce((acc, s) => acc + s.retentionRate, 0) / funnelSteps.length)
-      : 100;
+      : 0;
 
     const bottleneckStep = bottleneckIdx >= 0 ? funnelSteps[bottleneckIdx] : null;
 
     return {
       totalLearnersAnalyzed: totalLearners,
       avgFunnelRetention,
-      bottleneckMilestoneTitle: bottleneckStep ? `${bottleneckStep.milestoneTitle} (${bottleneckStep.milestoneId})` : 'Chưa phát hiện',
+      bottleneckMilestoneTitle: bottleneckStep ? `${bottleneckStep.milestoneTitle} (${bottleneckStep.milestoneId})` : 'Chưa phát hiện điểm nghẽn',
       bottleneckDropOffRate: bottleneckStep ? bottleneckStep.dropOffRate : 0,
       funnelSteps,
-      killerVocabulary,
-      killerKanji
+      killerVocabulary: killerVocabulary.slice(0, 15),
+      killerKanji: killerKanji.slice(0, 15)
     };
   }
 };

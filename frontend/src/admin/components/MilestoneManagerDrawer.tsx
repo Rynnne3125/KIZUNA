@@ -918,6 +918,11 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
                       </div>
                     );
                   })}
+                  {quests.length === 0 && (
+                    <div className="py-8 text-center text-xs text-slate-500 bg-slate-50 dark:bg-slate-800/40 rounded-2xl border border-dashed border-slate-200 dark:border-slate-700">
+                      Cột mốc này chưa có bài học (Quest) nào trên Firestore. Hãy bấm "+ Thêm Quest" để tạo bài học cho học viên.
+                    </div>
+                  )}
                 </div>
               )}
             </div>

@@ -242,123 +242,191 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
     });
   }, [users, audits]);
 
-  const renderOverview = () => (
-    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 pb-12">
-      <BentoBox colSpan="col-span-12 lg:col-span-8" className="bg-gradient-to-br from-emerald-500/10 via-emerald-50/20 to-transparent dark:from-emerald-950/30 justify-center">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="text-xs font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/50 px-2.5 py-0.5 rounded-full">
-            KIZUNA 絆
-          </span>
-          <span className="text-xs text-slate-400 dark:text-slate-500">• Bảng điều khiển quản trị</span>
-        </div>
-        <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-800 dark:text-slate-100 mb-2">
-          Chào mừng trở lại, {user.fullName || user.username || 'Admin'}
-        </h2>
-        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-lg leading-relaxed">
-          Hệ thống hiện đang phục vụ <span className="font-bold text-slate-700 dark:text-slate-200">{users.length}</span> thành viên trên <span className="font-bold text-slate-700 dark:text-slate-200">{stages.length}</span> chặng và <span className="font-bold text-slate-700 dark:text-slate-200">{milestones.length}</span> cột mốc. Có <span className="font-bold text-amber-600 dark:text-amber-400">{stats?.pendingAiAudits || 0}</span> bài kiểm tra AI đang chờ đánh giá.
-        </p>
-        <div className="mt-5 flex flex-wrap gap-3">
-          <button onClick={() => setActiveMenu('audits')} className="bg-emerald-600 text-white px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold shadow-sm shadow-emerald-600/30 hover:bg-emerald-700 transition-colors cursor-pointer">
-            Xem bài kiểm tra
-          </button>
-          <button onClick={() => setActiveMenu('reports')} className="bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold shadow-2xs border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors cursor-pointer">
-            Xem báo cáo
-          </button>
-        </div>
-      </BentoBox>
+  const renderOverview = () => {
+    const activeLearnersCount = users.filter(u =>
+      (u.totalXp || 0) > 0 || (u.activePoints || 0) > 0 || (u.currentStreak || 0) > 0 || u.status === 'ACTIVE'
+    ).length;
 
-      <BentoBox colSpan="col-span-12 sm:col-span-6 lg:col-span-4">
-        <div className="flex justify-between items-start mb-4">
-          <div className="p-3 bg-emerald-100 dark:bg-emerald-500/20 rounded-2xl text-emerald-700 dark:text-emerald-400">
-            <Users className="w-5 h-5 sm:w-6 sm:h-6" />
-          </div>
-          <Badge variant="outline" className="text-emerald-700 bg-emerald-50 dark:bg-emerald-500/10 border-emerald-200 dark:border-emerald-800">
-            <TrendingUp className="w-3 h-3 mr-1" /> +12%
-          </Badge>
-        </div>
-        <div className="mt-auto">
-          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Tổng thành viên</p>
-          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white">
-            {((stats?.totalLearners || 0) + (stats?.totalAdmins || 0)).toLocaleString()}
-          </h3>
-        </div>
-      </BentoBox>
-
-      <BentoBox colSpan="col-span-12 lg:col-span-8" className="min-h-[360px]">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
-          <div>
-            <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white">Hoạt động nền tảng</h3>
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Số người dùng hoạt động & đăng ký mới hàng ngày</p>
-          </div>
-          <div className="p-2 bg-emerald-50 dark:bg-emerald-500/10 rounded-xl text-emerald-600 dark:text-emerald-400">
-            <Activity className="w-4 h-4 sm:w-5 sm:h-5" />
-          </div>
-        </div>
-        <div className="w-full h-[260px] sm:h-[300px] relative">
-          <AreaChart
-            data={chartData}
-            index="date"
-            categories={['Người dùng HĐ', 'Đăng ký mới']}
-            colors={['emerald', 'amber']}
-            valueFormatter={(num) => num.toString()}
-            showLegend={true}
-            showGridLines={false}
-            showAnimation={false}
-            curveType="monotone"
-            className="h-full w-full"
-          />
-        </div>
-      </BentoBox>
-
-      <div className="col-span-12 sm:col-span-6 lg:col-span-4 flex flex-col gap-4 sm:gap-6">
-        <BentoBox className="flex-1">
-          <div className="flex justify-between items-start">
-            <div className="p-3 bg-amber-100 dark:bg-amber-500/20 rounded-2xl text-amber-700 dark:text-amber-400">
-              <Database className="w-5 h-5 sm:w-6 sm:h-6" />
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 pb-12">
+        {/* ROW 1: HERO WELCOME BANNER (FULL WIDTH 12 COLS) */}
+        <BentoBox colSpan="col-span-12" className="bg-gradient-to-br from-emerald-500/10 via-emerald-50/20 to-transparent dark:from-emerald-950/30">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="max-w-2xl">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/50 px-2.5 py-0.5 rounded-full">
+                  KIZUNA 絆 OS
+                </span>
+                <span className="text-xs text-slate-400 dark:text-slate-500">• Bảng điều khiển quản trị trung tâm</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-800 dark:text-slate-100 mb-2">
+                Chào mừng trở lại, {user.fullName || user.username || 'Admin'}
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                Hệ thống KIZUNA đồng bộ trực tiếp <span className="font-bold text-slate-700 dark:text-slate-200">100% từ Firestore</span>. Hiện có <span className="font-bold text-slate-700 dark:text-slate-200">{users.length}</span> thành viên, <span className="font-bold text-slate-700 dark:text-slate-200">{stages.length}</span> chặng học và <span className="font-bold text-slate-700 dark:text-slate-200">{milestones.length}</span> cột mốc.
+              </p>
             </div>
-          </div>
-          <div className="mt-auto pt-4">
-            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Dữ liệu học tập</p>
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-800 dark:text-white">
-              {stages.length + milestones.length}
-            </h3>
+            <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+              <button
+                onClick={() => setActiveMenu('users')}
+                className="flex-1 md:flex-none inline-flex items-center justify-center gap-1.5 bg-emerald-600 text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold shadow-sm shadow-emerald-600/30 hover:bg-emerald-700 transition-colors cursor-pointer"
+              >
+                <Users className="w-4 h-4" /> Quản lý học viên
+              </button>
+              <button
+                onClick={() => setActiveMenu('milestones')}
+                className="flex-1 md:flex-none inline-flex items-center justify-center gap-1.5 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold shadow-2xs border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors cursor-pointer"
+              >
+                <Map className="w-4 h-4" /> Lộ trình cột mốc
+              </button>
+            </div>
           </div>
         </BentoBox>
 
-        <BentoBox className="flex-1">
-          <div className="flex justify-between items-start">
-            <div className="p-3 bg-teal-100 dark:bg-teal-500/20 rounded-2xl text-teal-700 dark:text-teal-400">
-              <Bot className="w-5 h-5 sm:w-6 sm:h-6" />
+        {/* ROW 2: 4 BALANCED KPI STAT CARDS (4 x 3 COLS = 12 COLS) */}
+        <BentoBox colSpan="col-span-12 sm:col-span-6 lg:col-span-3">
+          <div className="flex justify-between items-start mb-3">
+            <div className="p-2.5 bg-emerald-100 dark:bg-emerald-500/20 rounded-xl text-emerald-700 dark:text-emerald-400">
+              <Users className="w-5 h-5" />
+            </div>
+            <Badge variant="outline" className="text-emerald-700 bg-emerald-50 dark:bg-emerald-500/10 border-emerald-200 dark:border-emerald-800 text-[11px]">
+              Tài khoản
+            </Badge>
+          </div>
+          <div className="mt-auto">
+            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Tổng thành viên</p>
+            <h3 className="text-2xl sm:text-3xl font-black text-slate-800 dark:text-white">
+              {users.length.toLocaleString()}
+            </h3>
+            <p className="text-xs text-slate-500 mt-1">
+              {stats?.totalLearners || 0} học viên • {stats?.totalAdmins || 0} quản trị
+            </p>
+          </div>
+        </BentoBox>
+
+        <BentoBox colSpan="col-span-12 sm:col-span-6 lg:col-span-3">
+          <div className="flex justify-between items-start mb-3">
+            <div className="p-2.5 bg-blue-100 dark:bg-blue-500/20 rounded-xl text-blue-700 dark:text-blue-400">
+              <Activity className="w-5 h-5" />
+            </div>
+            <Badge variant="outline" className="text-blue-700 bg-blue-50 dark:bg-blue-500/10 border-blue-200 dark:border-blue-800 text-[11px]">
+              Hoạt động
+            </Badge>
+          </div>
+          <div className="mt-auto">
+            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Học viên tích cực</p>
+            <h3 className="text-2xl sm:text-3xl font-black text-slate-800 dark:text-white">
+              {activeLearnersCount.toLocaleString()}
+            </h3>
+            <p className="text-xs text-slate-500 mt-1">
+              Có XP, điểm AP hoặc streak duy trì
+            </p>
+          </div>
+        </BentoBox>
+
+        <BentoBox colSpan="col-span-12 sm:col-span-6 lg:col-span-3">
+          <div className="flex justify-between items-start mb-3">
+            <div className="p-2.5 bg-amber-100 dark:bg-amber-500/20 rounded-xl text-amber-700 dark:text-amber-400">
+              <Database className="w-5 h-5" />
+            </div>
+            <Badge variant="outline" className="text-amber-700 bg-amber-50 dark:bg-amber-500/10 border-amber-200 dark:border-amber-800 text-[11px]">
+              Học liệu
+            </Badge>
+          </div>
+          <div className="mt-auto">
+            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Dữ liệu học tập</p>
+            <h3 className="text-2xl sm:text-3xl font-black text-slate-800 dark:text-white">
+              {(stages.length + milestones.length).toLocaleString()}
+            </h3>
+            <p className="text-xs text-slate-500 mt-1">
+              {stages.length} chặng • {milestones.length} cột mốc
+            </p>
+          </div>
+        </BentoBox>
+
+        <BentoBox colSpan="col-span-12 sm:col-span-6 lg:col-span-3">
+          <div className="flex justify-between items-start mb-3">
+            <div className="p-2.5 bg-teal-100 dark:bg-teal-500/20 rounded-xl text-teal-700 dark:text-teal-400">
+              <Bot className="w-5 h-5" />
             </div>
             {stats?.pendingAiAudits && stats.pendingAiAudits > 0 ? (
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
               </span>
-            ) : null}
+            ) : (
+              <Badge variant="outline" className="text-teal-700 bg-teal-50 dark:bg-teal-500/10 border-teal-200 dark:border-teal-800 text-[11px]">
+                Kiểm duyệt
+              </Badge>
+            )}
           </div>
-          <div className="mt-auto pt-4">
-            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Chờ duyệt AI</p>
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-800 dark:text-white">
+          <div className="mt-auto">
+            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Chờ duyệt AI</p>
+            <h3 className="text-2xl sm:text-3xl font-black text-slate-800 dark:text-white">
               {stats?.pendingAiAudits || 0}
             </h3>
+            <p className="text-xs text-slate-500 mt-1">
+              Bài làm cần phúc khảo điểm AI
+            </p>
           </div>
         </BentoBox>
+
+        {/* ROW 3: PLATFORM ACTIVITY CHART (FULL WIDTH 12 COLS) */}
+        <BentoBox colSpan="col-span-12" className="min-h-[360px]">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <Activity className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white">Hoạt động nền tảng (7 ngày gần nhất)</h3>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                Dữ liệu đăng ký mới và người dùng hoạt động ghi nhận từ Firestore
+              </p>
+            </div>
+          </div>
+          <div className="w-full h-[260px] sm:h-[300px] relative">
+            <AreaChart
+              data={chartData}
+              index="date"
+              categories={['Người dùng HĐ', 'Đăng ký mới']}
+              colors={['emerald', 'amber']}
+              valueFormatter={(num) => num.toString()}
+              showLegend={true}
+              showGridLines={false}
+              showAnimation={false}
+              curveType="monotone"
+              className="h-full w-full"
+            />
+          </div>
+        </BentoBox>
+
+        {/* ROW 4: 2 BALANCED 6-COL CARDS (50% / 50% SPLIT) */}
+        <BentoBox colSpan="col-span-12 lg:col-span-6">
+          <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white mb-2">Thành phần người dùng</h3>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">Phân bố vai trò tài khoản theo phân quyền RBAC</p>
+          <div className="flex-1 flex flex-col items-center justify-center min-h-[220px]">
+            <DonutChart data={roleDistribution} category="value" index="name" colors={['amber', 'emerald']} className="w-44 h-44 sm:w-48 sm:h-48" showAnimation={false} />
+            <div className="flex items-center gap-6 mt-4 text-xs font-semibold">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-emerald-500"></span>
+                <span>Học viên: {stats?.totalLearners || 0}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-amber-500"></span>
+                <span>Quản trị: {stats?.totalAdmins || 0}</span>
+              </div>
+            </div>
+          </div>
+        </BentoBox>
+
+        <BentoBox colSpan="col-span-12 lg:col-span-6">
+          <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white mb-2">Phân bố nội dung học tập</h3>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">Số lượng tài nguyên học liệu thực tế đang lưu trữ trên Firestore</p>
+          <BarList data={contentStats} className="mt-2" color="emerald" />
+        </BentoBox>
       </div>
-
-      <BentoBox colSpan="col-span-12 lg:col-span-5">
-        <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white mb-4">Thành phần người dùng</h3>
-        <div className="flex-1 flex items-center justify-center min-h-[200px]">
-          <DonutChart data={roleDistribution} category="value" index="name" colors={['amber', 'emerald']} className="w-44 h-44 sm:w-48 sm:h-48" showAnimation={false} />
-        </div>
-      </BentoBox>
-
-      <BentoBox colSpan="col-span-12 lg:col-span-7">
-        <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white mb-4">Phân bố nội dung</h3>
-        <BarList data={contentStats} className="mt-2" color="emerald" />
-      </BentoBox>
-    </div>
-  );
+    );
+  };
 
   const renderUsers = () => (
     <BentoBox colSpan="col-span-12">
@@ -411,7 +479,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
       </div>
       
       <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
-        <Table>
+        <Table className="min-w-[700px]">
           <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
             <TableRow className="border-slate-100 dark:border-slate-800">
               <TableHead className="py-4 pl-6 text-slate-500 dark:text-slate-400">Hồ sơ người dùng</TableHead>
@@ -756,7 +824,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
         </div>
 
         <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
-          <Table>
+          <Table className="min-w-[700px]">
             <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
               <TableRow>
                 <TableHead className="pl-6">Tiêu đề & Mã Mốc</TableHead>
@@ -999,7 +1067,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
         </div>
 
         <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
-          <Table>
+          <Table className="min-w-[700px]">
             <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
               <TableRow>
                 <TableHead className="pl-6">Từ (Kanji)</TableHead>
@@ -1132,7 +1200,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
         </div>
 
         <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
-          <Table>
+          <Table className="min-w-[700px]">
             <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
               <TableRow>
                 <TableHead className="pl-6">Mẫu câu</TableHead>
@@ -1254,7 +1322,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
           </div>
         </div>
         <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
-          <Table>
+          <Table className="min-w-[700px]">
             <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
               <TableRow>
                 <TableHead className="pl-6">Tên đề thi</TableHead>
@@ -1503,7 +1571,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
             <p className="text-xs text-slate-500 dark:text-slate-400">Top học viên dẫn đầu về XP và Điểm Năng Động</p>
           </div>
           <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
-            <Table>
+            <Table className="min-w-[700px]">
               <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
                 <TableRow>
                   <TableHead className="pl-6">Hạng</TableHead>
@@ -1742,255 +1810,271 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2.5">
-              <div className="inline-flex rounded-xl bg-slate-100 dark:bg-slate-800 p-1">
-                <button
-                  type="button"
-                  onClick={() => setKillerTab('ALL')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
-                    killerTab === 'ALL'
-                      ? 'bg-white dark:bg-slate-900 text-red-600 shadow-sm'
-                      : 'text-slate-600 dark:text-slate-400'
-                  }`}
-                >
-                  Tất cả (Song song)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setKillerTab('VOCABULARY')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
-                    killerTab === 'VOCABULARY'
-                      ? 'bg-white dark:bg-slate-900 text-red-600 shadow-sm'
-                      : 'text-slate-600 dark:text-slate-400'
-                  }`}
-                >
-                  Từ vựng ({filteredKillerVocab.length})
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setKillerTab('KANJI')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
-                    killerTab === 'KANJI'
-                      ? 'bg-white dark:bg-slate-900 text-red-600 shadow-sm'
-                      : 'text-slate-600 dark:text-slate-400'
-                  }`}
-                >
-                  Kanji ({filteredKillerKanji.length})
-                </button>
-              </div>
+            {((analytics?.killerVocabulary?.length || 0) > 0 || (analytics?.killerKanji?.length || 0) > 0) && (
+              <div className="flex flex-wrap items-center gap-2.5">
+                <div className="inline-flex rounded-xl bg-slate-100 dark:bg-slate-800 p-1">
+                  <button
+                    type="button"
+                    onClick={() => setKillerTab('ALL')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
+                      killerTab === 'ALL'
+                        ? 'bg-white dark:bg-slate-900 text-red-600 shadow-sm'
+                        : 'text-slate-600 dark:text-slate-400'
+                    }`}
+                  >
+                    Tất cả (Song song)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setKillerTab('VOCABULARY')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
+                      killerTab === 'VOCABULARY'
+                        ? 'bg-white dark:bg-slate-900 text-red-600 shadow-sm'
+                        : 'text-slate-600 dark:text-slate-400'
+                    }`}
+                  >
+                    Từ vựng ({filteredKillerVocab.length})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setKillerTab('KANJI')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
+                      killerTab === 'KANJI'
+                        ? 'bg-white dark:bg-slate-900 text-red-600 shadow-sm'
+                        : 'text-slate-600 dark:text-slate-400'
+                    }`}
+                  >
+                    Kanji ({filteredKillerKanji.length})
+                  </button>
+                </div>
 
-              <select
-                value={killerLevelFilter}
-                onChange={e => setKillerLevelFilter(e.target.value)}
-                className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200"
-              >
-                <option value="ALL">Mọi cấp độ (N5-N1)</option>
-                <option value="N5">JLPT N5</option>
-                <option value="N4">JLPT N4</option>
-                <option value="N3">JLPT N3</option>
-                <option value="N2">JLPT N2</option>
-                <option value="N1">JLPT N1</option>
-              </select>
+                <select
+                  value={killerLevelFilter}
+                  onChange={e => setKillerLevelFilter(e.target.value)}
+                  className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200"
+                >
+                  <option value="ALL">Mọi cấp độ (N5-N1)</option>
+                  <option value="N5">JLPT N5</option>
+                  <option value="N4">JLPT N4</option>
+                  <option value="N3">JLPT N3</option>
+                  <option value="N2">JLPT N2</option>
+                  <option value="N1">JLPT N1</option>
+                </select>
+              </div>
+            )}
+          </div>
+
+          {(analytics?.killerVocabulary?.length || 0) === 0 && (analytics?.killerKanji?.length || 0) === 0 ? (
+            <div className="flex flex-col items-center justify-center py-10 px-4 text-center bg-slate-50/50 dark:bg-slate-800/30 rounded-2xl border border-dashed border-slate-200 dark:border-slate-700">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3">
+                <CheckCircle className="w-6 h-6" />
+              </div>
+              <h3 className="text-base font-bold text-slate-800 dark:text-white mb-1">
+                Chưa ghi nhận mục kiến thức "Tử thần" nào trong Firestore
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md">
+                Dữ liệu học tập SRS thực tế hiện chưa có bản ghi làm sai từ học viên. Khi học viên làm bài tập và gặp khó khăn, các từ vựng hoặc chữ Hán có tỷ lệ sai cao sẽ tự động hiển thị tại đây.
+              </p>
             </div>
-          </div>
+          ) : (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              {/* BẢNG TOP TỪ VỰNG TỬ THẦN */}
+              {(killerTab === 'ALL' || killerTab === 'VOCABULARY') && (
+                <div className={killerTab === 'ALL' ? 'lg:col-span-6' : 'lg:col-span-12'}>
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-base font-extrabold text-slate-800 dark:text-white flex items-center gap-2">
+                      <BookOpen className="w-4 h-4 text-red-500" />
+                      Top Từ vựng "Tử thần" hay nhầm lẫn nhất
+                    </h3>
+                    <Badge variant="outline" className="border-red-200 text-red-600 bg-red-50 dark:bg-red-900/20">
+                      Top {filteredKillerVocab.length}
+                    </Badge>
+                  </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            {/* BẢNG TOP TỪ VỰNG TỬ THẦN */}
-            {(killerTab === 'ALL' || killerTab === 'VOCABULARY') && (
-              <div className={killerTab === 'ALL' ? 'lg:col-span-6' : 'lg:col-span-12'}>
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-base font-extrabold text-slate-800 dark:text-white flex items-center gap-2">
-                    <BookOpen className="w-4 h-4 text-red-500" />
-                    Top Từ vựng "Tử thần" hay nhầm lẫn nhất
-                  </h3>
-                  <Badge variant="outline" className="border-red-200 text-red-600 bg-red-50 dark:bg-red-900/20">
-                    Top {filteredKillerVocab.length}
-                  </Badge>
-                </div>
-
-                <div className="overflow-x-auto rounded-2xl border border-slate-100 dark:border-slate-800">
-                  <Table>
-                    <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
-                      <TableRow>
-                        <TableHead className="pl-4">Hạng & Từ vựng</TableHead>
-                        <TableHead>Nghĩa & Cấp độ</TableHead>
-                        <TableHead>Tỷ lệ sai / SRS</TableHead>
-                        <TableHead className="text-right pr-4">Tối ưu</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {filteredKillerVocab.map((item, idx) => (
-                        <TableRow
-                          key={item.id}
-                          onClick={() => item.rawItem && openContentModal('vocabulary', item.rawItem)}
-                          className="hover:bg-slate-50/70 dark:hover:bg-slate-800/50 cursor-pointer"
-                        >
-                          <TableCell className="pl-4">
-                            <div className="flex items-center gap-2.5">
-                              <span
-                                className={`w-6 h-6 rounded-full text-[11px] font-black flex items-center justify-center shrink-0 ${
-                                  idx < 3
-                                    ? 'bg-red-600 text-white'
-                                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
-                                }`}
-                              >
-                                {idx + 1}
-                              </span>
-                              <div>
-                                <div className="font-bold text-base text-slate-800 dark:text-white">{item.term}</div>
-                                <div className="text-xs text-slate-500">{item.reading}</div>
-                              </div>
-                            </div>
-                          </TableCell>
-                          <TableCell>
-                            <div className="text-xs font-semibold text-slate-700 dark:text-slate-200 max-w-[160px] truncate">
-                              {item.meaning}
-                            </div>
-                            <div className="flex items-center gap-1.5 mt-1">
-                              <Badge variant="outline" className="text-[10px] px-1.5 py-0 border-red-200 text-red-600">
-                                {item.level}
-                              </Badge>
-                              <span className="text-[11px] text-slate-400">{item.affectedLearners} HV gặp khó</span>
-                            </div>
-                          </TableCell>
-                          <TableCell>
-                            <div className="flex items-center gap-2">
-                              <span className="text-xs font-black text-red-600 dark:text-red-400">{item.errorRate}% sai</span>
-                              <span className="text-[11px] text-slate-400">({item.wrongCount}/{item.totalAttempts})</span>
-                            </div>
-                            <div className="w-28 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden mt-1">
-                              <div
-                                style={{ width: `${item.errorRate}%` }}
-                                className="h-full bg-gradient-to-r from-orange-500 to-red-600 rounded-full"
-                              />
-                            </div>
-                            <div className="text-[10px] text-slate-400 mt-0.5">Ease Factor: {item.avgEaseFactor}</div>
-                          </TableCell>
-                          <TableCell className="text-right pr-4" onClick={e => e.stopPropagation()}>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => item.rawItem && openContentModal('vocabulary', item.rawItem)}
-                              className="h-8 px-2.5 text-xs text-slate-600 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 cursor-pointer"
-                              title="Chỉnh sửa ví dụ / giải thích cho từ vựng này"
-                            >
-                              <Settings className="w-3.5 h-3.5 mr-1" /> Sửa
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                      {filteredKillerVocab.length === 0 && (
+                  <div className="overflow-x-auto rounded-2xl border border-slate-100 dark:border-slate-800">
+                    <Table className="min-w-[550px]">
+                      <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
                         <TableRow>
-                          <TableCell colSpan={4} className="text-center py-6 text-slate-500 text-xs">
-                            Không có dữ liệu từ vựng ở cấp độ này.
-                          </TableCell>
+                          <TableHead className="pl-4">Hạng & Từ vựng</TableHead>
+                          <TableHead>Nghĩa & Cấp độ</TableHead>
+                          <TableHead>Tỷ lệ sai / SRS</TableHead>
+                          <TableHead className="text-right pr-4">Tối ưu</TableHead>
                         </TableRow>
-                      )}
-                    </TableBody>
-                  </Table>
-                </div>
-              </div>
-            )}
-
-            {/* BẢNG TOP KANJI TỬ THẦN */}
-            {(killerTab === 'ALL' || killerTab === 'KANJI') && (
-              <div className={killerTab === 'ALL' ? 'lg:col-span-6' : 'lg:col-span-12'}>
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-base font-extrabold text-slate-800 dark:text-white flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-purple-600" />
-                    Top Kanji "Tử thần" khó nhớ nhất
-                  </h3>
-                  <Badge variant="outline" className="border-purple-200 text-purple-600 bg-purple-50 dark:bg-purple-900/20">
-                    Top {filteredKillerKanji.length}
-                  </Badge>
-                </div>
-
-                <div className="overflow-x-auto rounded-2xl border border-slate-100 dark:border-slate-800">
-                  <Table>
-                    <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
-                      <TableRow>
-                        <TableHead className="pl-4">Hạng & Hán tự</TableHead>
-                        <TableHead>Âm Hán Việt & Nghĩa</TableHead>
-                        <TableHead>Tỷ lệ sai / SRS</TableHead>
-                        <TableHead className="text-right pr-4">Tối ưu</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {filteredKillerKanji.map((item, idx) => (
-                        <TableRow
-                          key={item.id}
-                          onClick={() => item.rawItem && openContentModal('kanji', item.rawItem)}
-                          className="hover:bg-slate-50/70 dark:hover:bg-slate-800/50 cursor-pointer"
-                        >
-                          <TableCell className="pl-4">
-                            <div className="flex items-center gap-2.5">
-                              <span
-                                className={`w-6 h-6 rounded-full text-[11px] font-black flex items-center justify-center shrink-0 ${
-                                  idx < 3
-                                    ? 'bg-purple-600 text-white'
-                                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
-                                }`}
-                              >
-                                {idx + 1}
-                              </span>
-                              <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-2xl font-serif font-bold text-slate-800 dark:text-white">
-                                {item.term}
+                      </TableHeader>
+                      <TableBody>
+                        {filteredKillerVocab.map((item, idx) => (
+                          <TableRow
+                            key={item.id}
+                            onClick={() => item.rawItem && openContentModal('vocabulary', item.rawItem)}
+                            className="hover:bg-slate-50/70 dark:hover:bg-slate-800/50 cursor-pointer"
+                          >
+                            <TableCell className="pl-4">
+                              <div className="flex items-center gap-2.5">
+                                <span
+                                  className={`w-6 h-6 rounded-full text-[11px] font-black flex items-center justify-center shrink-0 ${
+                                    idx < 3
+                                      ? 'bg-red-600 text-white'
+                                      : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
+                                  }`}
+                                >
+                                  {idx + 1}
+                                </span>
+                                <div>
+                                  <div className="font-bold text-base text-slate-800 dark:text-white">{item.term}</div>
+                                  <div className="text-xs text-slate-500">{item.reading}</div>
+                                </div>
                               </div>
-                            </div>
-                          </TableCell>
-                          <TableCell>
-                            <div className="text-xs font-extrabold text-red-600 dark:text-red-400 uppercase">
-                              {item.reading}
-                            </div>
-                            <div className="text-xs text-slate-600 dark:text-slate-300 max-w-[150px] truncate">
-                              {item.meaning}
-                            </div>
-                            <div className="flex items-center gap-1.5 mt-0.5">
-                              <Badge variant="outline" className="text-[10px] px-1.5 py-0 border-purple-200 text-purple-600">
-                                {item.level}
-                              </Badge>
-                              <span className="text-[11px] text-slate-400">{item.affectedLearners} HV sai</span>
-                            </div>
-                          </TableCell>
-                          <TableCell>
-                            <div className="flex items-center gap-2">
-                              <span className="text-xs font-black text-red-600 dark:text-red-400">{item.errorRate}% sai</span>
-                              <span className="text-[11px] text-slate-400">({item.wrongCount}/{item.totalAttempts})</span>
-                            </div>
-                            <div className="w-28 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden mt-1">
-                              <div
-                                style={{ width: `${item.errorRate}%` }}
-                                className="h-full bg-gradient-to-r from-purple-500 to-red-600 rounded-full"
-                              />
-                            </div>
-                            <div className="text-[10px] text-slate-400 mt-0.5">Ease Factor: {item.avgEaseFactor}</div>
-                          </TableCell>
-                          <TableCell className="text-right pr-4" onClick={e => e.stopPropagation()}>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => item.rawItem && openContentModal('kanji', item.rawItem)}
-                              className="h-8 px-2.5 text-xs text-slate-600 hover:text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/20 cursor-pointer"
-                              title="Bổ sung câu chuyện mẹo nhớ (Mnemonic) cho chữ Kanji này"
-                            >
-                              <Settings className="w-3.5 h-3.5 mr-1" /> Mẹo nhớ
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                      {filteredKillerKanji.length === 0 && (
-                        <TableRow>
-                          <TableCell colSpan={4} className="text-center py-6 text-slate-500 text-xs">
-                            Không có dữ liệu Kanji ở cấp độ này.
-                          </TableCell>
-                        </TableRow>
-                      )}
-                    </TableBody>
-                  </Table>
+                            </TableCell>
+                            <TableCell>
+                              <div className="text-xs font-semibold text-slate-700 dark:text-slate-200 max-w-[160px] truncate">
+                                {item.meaning}
+                              </div>
+                              <div className="flex items-center gap-1.5 mt-1">
+                                <Badge variant="outline" className="text-[10px] px-1.5 py-0 border-red-200 text-red-600">
+                                  {item.level}
+                                </Badge>
+                                <span className="text-[11px] text-slate-400">{item.affectedLearners} HV gặp khó</span>
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs font-black text-red-600 dark:text-red-400">{item.errorRate}% sai</span>
+                                <span className="text-[11px] text-slate-400">({item.wrongCount}/{item.totalAttempts})</span>
+                              </div>
+                              <div className="w-28 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden mt-1">
+                                <div
+                                  style={{ width: `${item.errorRate}%` }}
+                                  className="h-full bg-gradient-to-r from-orange-500 to-red-600 rounded-full"
+                                />
+                              </div>
+                              <div className="text-[10px] text-slate-400 mt-0.5">Ease Factor: {item.avgEaseFactor}</div>
+                            </TableCell>
+                            <TableCell className="text-right pr-4" onClick={e => e.stopPropagation()}>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => item.rawItem && openContentModal('vocabulary', item.rawItem)}
+                                className="h-8 px-2.5 text-xs text-slate-600 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 cursor-pointer"
+                                title="Chỉnh sửa ví dụ / giải thích cho từ vựng này"
+                              >
+                                <Settings className="w-3.5 h-3.5 mr-1" /> Sửa
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                        {filteredKillerVocab.length === 0 && (
+                          <TableRow>
+                            <TableCell colSpan={4} className="text-center py-6 text-slate-500 text-xs">
+                              Không có dữ liệu từ vựng ở cấp độ này.
+                            </TableCell>
+                          </TableRow>
+                        )}
+                      </TableBody>
+                    </Table>
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+
+              {/* BẢNG TOP KANJI TỬ THẦN */}
+              {(killerTab === 'ALL' || killerTab === 'KANJI') && (
+                <div className={killerTab === 'ALL' ? 'lg:col-span-6' : 'lg:col-span-12'}>
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-base font-extrabold text-slate-800 dark:text-white flex items-center gap-2">
+                      <FileText className="w-4 h-4 text-purple-600" />
+                      Top Kanji "Tử thần" khó nhớ nhất
+                    </h3>
+                    <Badge variant="outline" className="border-purple-200 text-purple-600 bg-purple-50 dark:bg-purple-900/20">
+                      Top {filteredKillerKanji.length}
+                    </Badge>
+                  </div>
+
+                  <div className="overflow-x-auto rounded-2xl border border-slate-100 dark:border-slate-800">
+                    <Table className="min-w-[550px]">
+                      <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
+                        <TableRow>
+                          <TableHead className="pl-4">Hạng & Hán tự</TableHead>
+                          <TableHead>Âm Hán Việt & Nghĩa</TableHead>
+                          <TableHead>Tỷ lệ sai / SRS</TableHead>
+                          <TableHead className="text-right pr-4">Tối ưu</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {filteredKillerKanji.map((item, idx) => (
+                          <TableRow
+                            key={item.id}
+                            onClick={() => item.rawItem && openContentModal('kanji', item.rawItem)}
+                            className="hover:bg-slate-50/70 dark:hover:bg-slate-800/50 cursor-pointer"
+                          >
+                            <TableCell className="pl-4">
+                              <div className="flex items-center gap-2.5">
+                                <span
+                                  className={`w-6 h-6 rounded-full text-[11px] font-black flex items-center justify-center shrink-0 ${
+                                    idx < 3
+                                      ? 'bg-purple-600 text-white'
+                                      : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
+                                  }`}
+                                >
+                                  {idx + 1}
+                                </span>
+                                <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-2xl font-serif font-bold text-slate-800 dark:text-white">
+                                  {item.term}
+                                </div>
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <div className="text-xs font-extrabold text-red-600 dark:text-red-400 uppercase">
+                                {item.reading}
+                              </div>
+                              <div className="text-xs text-slate-600 dark:text-slate-300 max-w-[150px] truncate">
+                                {item.meaning}
+                              </div>
+                              <div className="flex items-center gap-1.5 mt-0.5">
+                                <Badge variant="outline" className="text-[10px] px-1.5 py-0 border-purple-200 text-purple-600">
+                                  {item.level}
+                                </Badge>
+                                <span className="text-[11px] text-slate-400">{item.affectedLearners} HV sai</span>
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs font-black text-red-600 dark:text-red-400">{item.errorRate}% sai</span>
+                                <span className="text-[11px] text-slate-400">({item.wrongCount}/{item.totalAttempts})</span>
+                              </div>
+                              <div className="w-28 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden mt-1">
+                                <div
+                                  style={{ width: `${item.errorRate}%` }}
+                                  className="h-full bg-gradient-to-r from-purple-500 to-red-600 rounded-full"
+                                />
+                              </div>
+                              <div className="text-[10px] text-slate-400 mt-0.5">Ease Factor: {item.avgEaseFactor}</div>
+                            </TableCell>
+                            <TableCell className="text-right pr-4" onClick={e => e.stopPropagation()}>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => item.rawItem && openContentModal('kanji', item.rawItem)}
+                                className="h-8 px-2.5 text-xs text-slate-600 hover:text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/20 cursor-pointer"
+                                title="Bổ sung câu chuyện mẹo nhớ (Mnemonic) cho chữ Kanji này"
+                              >
+                                <Settings className="w-3.5 h-3.5 mr-1" /> Mẹo nhớ
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                        {filteredKillerKanji.length === 0 && (
+                          <TableRow>
+                            <TableCell colSpan={4} className="text-center py-6 text-slate-500 text-xs">
+                              Không có dữ liệu Kanji ở cấp độ này.
+                            </TableCell>
+                          </TableRow>
+                        )}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </BentoBox>
       </div>
     );
