@@ -1,18 +1,17 @@
 {
-  "version": "1.0.6",
-  "versionCode": 106,
-  "releaseDate": "2026-11-16",
+  "version": "1.0.7",
+  "versionCode": 107,
+  "releaseDate": "2026-11-17",
   "apkUrl": "/download/kizuna-latest.apk",
-  "apkVersionUrl": "/download/kizuna-v1.0.6.apk",
+  "apkVersionUrl": "/download/kizuna-v1.0.7.apk",
   "apkSize": "6.3 MB",
-  "pcAppUrl": "/download/kizuna-pc-app.zip",
-  "pcAppSize": "1.8 KB",
-  "title": "Bản cập nhật KIZUNA v1.0.6",
+  "pcAppUrl": "/download/KIZUNA-Setup.exe",
+  "pcAppSize": "74 KB",
+  "title": "Bản cập nhật KIZUNA v1.0.7",
   "changelog": [
-    "Đồng bộ giao diện lộ trình học & thẻ Flashcard theo chuẩn VocabPage Wabi-sabi.",
-    "Khắc phục triệt để lỗi khung nét vẽ Kanji trên thiết bị Android.",
-    "Khắc phục trình phát video bài giảng trong Thư viện trên Android WebView.",
-    "Cân đối bố cục responsive toàn diện cho điện thoại Android và máy tính.",
-    "Hỗ trợ tải và cài đặt trọn gói bản KIZUNA PC App cho máy tính."
+    "Cung cấp gói cài đặt KIZUNA Desktop (.exe) trực tiếp cho máy tính Windows thay cho tệp giải nén batch.",
+    "Tự động tạo biểu tượng ngoài màn hình Desktop và Start Menu với giao diện cài đặt 1 cú nhấp chuột.",
+    "Đóng gói bản cập nhật APK mới nhất v1.0.7 tích hợp toàn bộ tính năng và giao diện hiện tại.",
+    "Cập nhật hệ thống kiểm tra và thông báo phiên bản trong ProfilePage."
   ]
 }

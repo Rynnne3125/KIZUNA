@@ -31,16 +31,16 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
       if (res.ok) {
         const data = await res.json();
         setRemoteVersion(data);
-        if (data.versionCode > 106) {
+        if (data.versionCode > 107) {
           setUpdateResult(`Đã có bản cập nhật mới v${data.version}! Bấm nút tải bên dưới để nâng cấp.`);
         } else {
-          setUpdateResult('Bạn đang sử dụng phiên bản KIZUNA mới nhất (v1.0.6). Hệ thống luôn tự động đồng bộ bài học mới!');
+          setUpdateResult('Bạn đang sử dụng phiên bản KIZUNA mới nhất (v1.0.7). Hệ thống luôn tự động đồng bộ bài học mới!');
         }
       } else {
-        setUpdateResult('Bạn đang sử dụng phiên bản mới nhất v1.0.6.');
+        setUpdateResult('Bạn đang sử dụng phiên bản mới nhất v1.0.7.');
       }
     } catch {
-      setUpdateResult('Bạn đang sử dụng phiên bản v1.0.6 (Máy chủ hoạt động bình thường).');
+      setUpdateResult('Bạn đang sử dụng phiên bản v1.0.7 (Máy chủ hoạt động bình thường).');
     } finally {
       setCheckingUpdate(false);
     }
@@ -185,7 +185,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
               <span>Thông tin phiên bản & Cập nhật ứng dụng</span>
             </div>
             <span className="text-xs font-black px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
-              v1.0.6 (Mới nhất)
+              v1.0.7 (Mới nhất)
             </span>
           </div>
 
@@ -207,20 +207,20 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
 
             <a
               href="/download/kizuna-latest.apk"
-              download="kizuna-v1.0.6.apk"
+              download="kizuna-v1.0.7.apk"
               className="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-bold text-xs flex items-center gap-1.5 transition-all shadow-xs"
             >
               <Smartphone className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Tải file APK Android (v1.0.6)</span>
+              <span>Tải file APK Android (v1.0.7)</span>
             </a>
 
             <a
-              href="/download/kizuna-pc-app.zip"
-              download="kizuna-pc-app.zip"
+              href="/download/KIZUNA-Setup.exe"
+              download="KIZUNA-Setup.exe"
               className="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-bold text-xs flex items-center gap-1.5 transition-all shadow-xs"
             >
               <Monitor className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Tải bản PC (.zip)</span>
+              <span>Tải bản PC (.exe)</span>
             </a>
           </div>
 
