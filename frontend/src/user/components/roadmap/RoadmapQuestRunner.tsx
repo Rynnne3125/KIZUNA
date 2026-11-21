@@ -547,13 +547,14 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   return (
     <div
       ref={runnerContainerRef}
+      className="roadmap-quest-runner-root transition-colors"
       style={{
         animation: 'fadeIn 0.25s ease-out',
         ...(isFullscreen ? {
           position: 'fixed',
           inset: 0,
           zIndex: 99999,
-          backgroundColor: '#fcfbf9',
+          backgroundColor: 'var(--bg-main, #fcfbf9)',
           overflowY: 'auto',
           padding: '20px 24px'
         } : {})
@@ -578,12 +579,247 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
             font-size: clamp(22px, 7vw, 34px) !important;
           }
         }
+
+        /* Dark Mode Support cho toàn bộ Nhiệm vụ Lộ Trình */
+        .dark .roadmap-quest-runner-root {
+          color: #f8fafc !important;
+        }
+        .dark .roadmap-btn-back {
+          background-color: #1e293b !important;
+          border-color: #334155 !important;
+          color: #e2e8f0 !important;
+        }
+        .dark .roadmap-btn-back:hover {
+          background-color: #334155 !important;
+        }
+        .dark .roadmap-runner-actions span {
+          color: #f8fafc !important;
+        }
+        .dark .roadmap-quest-badge {
+          background-color: rgba(6, 78, 59, 0.7) !important;
+          color: #6ee7b7 !important;
+          border-color: #047857 !important;
+        }
+        .dark .roadmap-btn-fullscreen {
+          background-color: #1e293b !important;
+          border-color: #334155 !important;
+          color: #cbd5e1 !important;
+        }
+        .dark .roadmap-runner-card {
+          background-color: #0f172a !important;
+          border-color: #1e293b !important;
+          color: #f8fafc !important;
+        }
+        .dark .roadmap-runner-title {
+          color: #f8fafc !important;
+        }
+        .dark .roadmap-runner-muted {
+          color: #94a3b8 !important;
+        }
+        .dark .roadmap-success-box {
+          background-color: #0f172a !important;
+          border-color: #059669 !important;
+          box-shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.25) !important;
+        }
+        .dark .roadmap-success-title {
+          color: #34d399 !important;
+        }
+        .dark .roadmap-success-desc {
+          color: #94a3b8 !important;
+        }
+
+        /* Quest 1 Flashcard Dark Mode */
+        .dark .roadmap-flashcard-box {
+          background-color: #0f172a !important;
+          border-color: #334155 !important;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+        }
+        .dark .roadmap-flashcard-box.is-flipped {
+          border-color: #e11d48 !important;
+          background-color: #0b1120 !important;
+        }
+        .dark .roadmap-flashcard-term {
+          color: #ffffff !important;
+        }
+        .dark .roadmap-flashcard-reading {
+          color: #34d399 !important;
+        }
+        .dark .roadmap-flashcard-meaning {
+          color: #fb7185 !important;
+        }
+        .dark .roadmap-flashcard-sino {
+          color: #94a3b8 !important;
+        }
+        .dark .roadmap-flashcard-pos {
+          background-color: #1e293b !important;
+          color: #cbd5e1 !important;
+          border-color: #334155 !important;
+        }
+        .dark .roadmap-flashcard-sound-btn {
+          background-color: #1e293b !important;
+          border-color: #334155 !important;
+          color: #e2e8f0 !important;
+        }
+        .dark .roadmap-flashcard-fuda-front {
+          background-color: rgba(153, 27, 27, 0.4) !important;
+          color: #fca5a5 !important;
+          border-color: #991b1b !important;
+        }
+        .dark .roadmap-flashcard-fuda-back {
+          background-color: rgba(30, 58, 138, 0.4) !important;
+          color: #93c5fd !important;
+          border-color: #1e40af !important;
+        }
+        .dark .roadmap-flashcard-example-box {
+          background: rgba(15, 23, 42, 0.95) !important;
+          border-color: #334155 !important;
+          border-left-color: #f43f5e !important;
+        }
+        .dark .roadmap-flashcard-example-jp {
+          color: #f8fafc !important;
+        }
+        .dark .roadmap-flashcard-example-vi {
+          color: #94a3b8 !important;
+        }
+        .dark .roadmap-shuffle-btn-inactive {
+          background-color: #1e293b !important;
+          border-color: #334155 !important;
+          color: #cbd5e1 !important;
+        }
+
+        /* Quest 2 Gatekeeper Dark Mode */
+        .dark .roadmap-gatekeeper-wordbox {
+          background-color: #020617 !important;
+          border-color: #1e293b !important;
+        }
+        .dark .roadmap-gatekeeper-word {
+          color: #ffffff !important;
+        }
+        .dark .roadmap-gatekeeper-reading {
+          color: #94a3b8 !important;
+        }
+        .dark .roadmap-gatekeeper-option {
+          background-color: #1e293b !important;
+          border-color: #334155 !important;
+          color: #e2e8f0 !important;
+        }
+        .dark .roadmap-gatekeeper-option:hover {
+          background-color: #334155 !important;
+        }
+        .dark .roadmap-gatekeeper-option.is-correct {
+          background-color: rgba(6, 78, 59, 0.7) !important;
+          border-color: #10b981 !important;
+          color: #6ee7b7 !important;
+        }
+        .dark .roadmap-gatekeeper-option.is-wrong {
+          background-color: rgba(136, 19, 55, 0.7) !important;
+          border-color: #f43f5e !important;
+          color: #fda4af !important;
+        }
+        .dark .roadmap-btn-next {
+          background-color: #059669 !important;
+          color: #ffffff !important;
+        }
+        .dark .roadmap-btn-next:hover {
+          background-color: #047857 !important;
+        }
+
+        /* Quest 3 Drag & Drop Scramble Dark Mode */
+        .dark .roadmap-scramble-target {
+          background-color: rgba(6, 78, 59, 0.3) !important;
+          border-color: #047857 !important;
+        }
+        .dark .roadmap-scramble-target-title {
+          color: #34d399 !important;
+        }
+        .dark .roadmap-scramble-target-text {
+          color: #f8fafc !important;
+        }
+        .dark .roadmap-scramble-tray {
+          background-color: #020617 !important;
+          border-color: #475569 !important;
+        }
+        .dark .roadmap-scramble-tray-token {
+          background-color: #1e293b !important;
+          border-color: #10b981 !important;
+          color: #f8fafc !important;
+        }
+        .dark .roadmap-scramble-pool {
+          background-color: #020617 !important;
+        }
+        .dark .roadmap-scramble-pool-token {
+          background-color: #1e293b !important;
+          border-color: #334155 !important;
+          color: #f8fafc !important;
+        }
+        .dark .roadmap-scramble-pool-token:hover {
+          background-color: #334155 !important;
+        }
+        .dark .roadmap-scramble-feedback-pass {
+          background-color: rgba(6, 78, 59, 0.6) !important;
+          color: #6ee7b7 !important;
+          border: 1px solid #047857 !important;
+        }
+        .dark .roadmap-scramble-feedback-fail {
+          background-color: rgba(136, 19, 55, 0.6) !important;
+          color: #fda4af !important;
+          border: 1px solid #9f1239 !important;
+        }
+
+        /* Quest 4 AI Sensei Roleplay Dark Mode */
+        .dark .roadmap-sensei-avatar {
+          background-color: rgba(3, 105, 161, 0.4) !important;
+          border-color: #0284c7 !important;
+          color: #38bdf8 !important;
+        }
+        .dark .roadmap-sensei-bubble {
+          background-color: #1e293b !important;
+          border-color: #0369a1 !important;
+        }
+        .dark .roadmap-sensei-speech {
+          color: #f8fafc !important;
+        }
+        .dark .roadmap-sensei-name {
+          color: #38bdf8 !important;
+        }
+        .dark .roadmap-sensei-vi {
+          color: #7dd3fc !important;
+          border-top-color: #334155 !important;
+        }
+        .dark .roadmap-learner-box {
+          background-color: #020617 !important;
+          border-color: #1e293b !important;
+        }
+        .dark .roadmap-learner-title {
+          color: #34d399 !important;
+        }
+        .dark .roadmap-learner-prompt {
+          color: #f8fafc !important;
+        }
+        .dark .roadmap-learner-textarea {
+          background-color: #0f172a !important;
+          border-color: #334155 !important;
+          color: #f8fafc !important;
+        }
+        .dark .roadmap-sample-answer {
+          background-color: #0f172a !important;
+          border-color: #334155 !important;
+          color: #e2e8f0 !important;
+        }
+        .dark .roadmap-btn-send {
+          background-color: #059669 !important;
+          color: #ffffff !important;
+        }
+        .dark .roadmap-btn-send:hover {
+          background-color: #047857 !important;
+        }
       `}</style>
 
       {/* Top action header */}
       <div className="roadmap-runner-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 10 }}>
         <button
           onClick={handleBack}
+          className="roadmap-btn-back"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -604,10 +840,11 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
         </button>
 
         <div className="roadmap-runner-actions" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ fontSize: 13, fontWeight: 800, color: '#0f172a' }}>
+          <span className="roadmap-runner-title" style={{ fontSize: 13, fontWeight: 800, color: '#0f172a' }}>
             Nhiệm vụ {questIndex}/4:
           </span>
           <span
+            className="roadmap-quest-badge"
             style={{
               padding: '4px 10px',
               borderRadius: 6,
@@ -649,6 +886,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
 
           <button
             onClick={toggleFullscreen}
+            className="roadmap-btn-fullscreen"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -673,6 +911,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
       {/* SUCCESS BANNER WHEN QUEST IS COMPLETED */}
       {isQuestDone ? (
         <div
+          className="roadmap-success-box"
           style={{
             backgroundColor: '#ffffff',
             borderRadius: 16,
@@ -683,10 +922,10 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
           }}
         >
           <Trophy size={48} style={{ color: '#eab308', margin: '0 auto 16px', display: 'block' }} />
-          <h2 style={{ fontSize: 22, fontWeight: 900, color: '#065f46', marginBottom: 8 }}>
+          <h2 className="roadmap-success-title" style={{ fontSize: 22, fontWeight: 900, color: '#065f46', marginBottom: 8 }}>
             XUẤT SẮC! BẠN ĐÃ HOÀN THÀNH NHIỆM VỤ {questIndex}!
           </h2>
-          <p style={{ color: '#475569', fontSize: 14, maxWidth: 500, margin: '0 auto 24px auto', lineHeight: 1.6 }}>
+          <p className="roadmap-success-desc" style={{ color: '#475569', fontSize: 14, maxWidth: 500, margin: '0 auto 24px auto', lineHeight: 1.6 }}>
             Dữ liệu đã được lưu trực tiếp vào Firestore. Điểm năng động, kinh nghiệm XP và chuỗi ngày học Streak đã được cộng vào tài khoản của bạn!
           </p>
 
@@ -713,11 +952,11 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
               QUEST 1: SRS FLASHCARDS (TRỘN THẺ, VUỐT TRÁI/PHẢI, 100% VIỆT HÓA)
               ======================================================== */}
           {questIndex === 1 && (
-            <div style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
+            <div className="roadmap-runner-card" style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
               {/* Controls bar */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18, flexWrap: 'wrap', gap: 10 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <span style={{ fontSize: 14, fontWeight: 800, color: '#0f172a' }}>
+                  <span className="roadmap-runner-title" style={{ fontSize: 14, fontWeight: 800, color: '#0f172a' }}>
                     Thẻ {cardIndex + 1} / {displayVocabList.length || 1}
                   </span>
 
@@ -728,6 +967,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                       setCardIndex(0);
                       setIsFlipped(false);
                     }}
+                    className={isShuffle ? '' : 'roadmap-shuffle-btn-inactive'}
                     style={{
                       display: 'flex',
                       alignItems: 'center',
@@ -782,7 +1022,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                 <div>
                   {/* Swipeable 3D Flip Card - Đồng bộ phong cách Thẻ từ vựng VocabPage */}
                   <div
-                    className="roadmap-flashcard-box"
+                    className={`roadmap-flashcard-box ${isFlipped ? 'is-flipped' : ''}`}
                     onPointerDown={handlePointerDown}
                     onPointerMove={handlePointerMove}
                     onPointerUp={handlePointerUp}
@@ -822,6 +1062,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
 
                     {/* Fuda Seal Tag & Sound Button */}
                     <span
+                      className={isFlipped ? 'roadmap-flashcard-fuda-back' : 'roadmap-flashcard-fuda-front'}
                       style={{
                         position: 'absolute',
                         top: 14,
@@ -845,6 +1086,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                         speakJapanese(currentVocab.term || currentVocab.reading);
                       }}
                       title="Phát âm"
+                      className="roadmap-flashcard-sound-btn"
                       style={{
                         position: 'absolute',
                         top: 12,
@@ -874,7 +1116,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     {!isFlipped ? (
                       /* FRONT: JAPANESE */
                       <div style={{ width: '100%', maxWidth: 500, margin: 'auto' }}>
-                        <div style={{ fontSize: 16, color: '#78716c', marginBottom: 6, fontWeight: 700, letterSpacing: '0.5px' }}>
+                        <div className="roadmap-flashcard-reading" style={{ fontSize: 16, color: '#78716c', marginBottom: 6, fontWeight: 700, letterSpacing: '0.5px' }}>
                           {currentVocab.reading || currentVocab.hiragana}
                         </div>
                         <div
@@ -891,7 +1133,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                           {currentVocab.term || currentVocab.kanji || currentVocab.reading}
                         </div>
                         {currentVocab.part_of_speech && (
-                          <span style={{ fontSize: 11, padding: '2px 10px', borderRadius: 4, backgroundColor: '#f5f5f4', color: '#57534e', fontWeight: 700, border: '1px solid #e7e5e4' }}>
+                          <span className="roadmap-flashcard-pos" style={{ fontSize: 11, padding: '2px 10px', borderRadius: 4, backgroundColor: '#f5f5f4', color: '#57534e', fontWeight: 700, border: '1px solid #e7e5e4' }}>
                             {currentVocab.part_of_speech}
                           </span>
                         )}
@@ -899,16 +1141,17 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     ) : (
                       /* BACK: PURE VIETNAMESE */
                       <div style={{ width: '100%', maxWidth: 500, margin: 'auto' }}>
-                        <div style={{ fontSize: 26, fontWeight: 900, color: '#9c2a2a', marginBottom: 6 }}>
+                        <div className="roadmap-flashcard-meaning" style={{ fontSize: 26, fontWeight: 900, color: '#9c2a2a', marginBottom: 6 }}>
                           {currentVocab.meaning_vi || currentVocab.vietnameseMeaning}
                         </div>
                         {currentVocab.sinoVietnamese && (
-                          <div style={{ fontSize: 13, color: '#78716c', marginBottom: 12, fontWeight: 700 }}>
+                          <div className="roadmap-flashcard-sino" style={{ fontSize: 13, color: '#78716c', marginBottom: 12, fontWeight: 700 }}>
                             〔 {currentVocab.sinoVietnamese} 〕
                           </div>
                         )}
                         {currentVocab.exampleSentenceJp && (
                           <div
+                            className="roadmap-flashcard-example-box"
                             style={{
                               background: 'rgba(250, 248, 245, 0.95)',
                               padding: '12px 16px',
@@ -922,7 +1165,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                             }}
                           >
                             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 6, marginBottom: 3 }}>
-                              <div style={{ fontSize: 13.5, color: '#1c2536', fontWeight: 700 }}>
+                              <div className="roadmap-flashcard-example-jp" style={{ fontSize: 13.5, color: '#1c2536', fontWeight: 700 }}>
                                 {currentVocab.exampleSentenceJp}
                               </div>
                               <button
@@ -935,7 +1178,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                                 <Volume2 size={13} />
                               </button>
                             </div>
-                            <div style={{ fontSize: 12, color: '#57534e' }}>
+                            <div className="roadmap-flashcard-example-vi" style={{ fontSize: 12, color: '#57534e' }}>
                               {currentVocab.exampleSentenceVi || 'Câu ví dụ tiếng Nhật chuẩn.'}
                             </div>
                           </div>
@@ -999,7 +1242,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     </div>
 
                     {/* Chú thích duy nhất */}
-                    <div style={{
+                    <div className="roadmap-runner-muted" style={{
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -1019,7 +1262,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                   </div>
                 </div>
               ) : (
-                <div style={{ textAlign: 'center', padding: 32, color: '#64748b' }}>
+                <div className="roadmap-runner-muted" style={{ textAlign: 'center', padding: 32, color: '#64748b' }}>
                   Đang đồng bộ danh sách từ vựng từ Firestore...
                 </div>
               )}
@@ -1030,10 +1273,10 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
               QUEST 2: GATEKEEPER 100% (TRẮC NGHIỆM PHẢN XẠ THUẦN TIẾNG VIỆT)
               ======================================================== */}
           {questIndex === 2 && (
-            <div style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
+            <div className="roadmap-runner-card" style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
                 <div>
-                  <h3 style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <h3 className="roadmap-runner-title" style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
                     <Shield size={18} style={{ color: '#047857' }} />
                     <span>Cổng Phản Xạ 100% (Vocab Gatekeeper)</span>
                   </h3>
@@ -1042,7 +1285,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                   </div>
                 </div>
 
-                <div style={{ fontSize: 14, fontWeight: 800, color: '#0f172a' }}>
+                <div className="roadmap-runner-title" style={{ fontSize: 14, fontWeight: 800, color: '#0f172a' }}>
                   Câu {quizIndex + 1} / {gatekeeperQuestions.length || 1} • Đúng: <b style={{ color: '#16a34a' }}>{quizScore}</b>
                 </div>
               </div>
@@ -1051,11 +1294,11 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                 gatekeeperQuestions[quizIndex] ? (
                   <div>
                     {/* Word display card */}
-                    <div style={{ backgroundColor: '#f8fafc', padding: '24px 20px', borderRadius: 12, border: '1px solid #e2e8f0', textAlign: 'center', marginBottom: 24 }}>
-                      <div style={{ fontSize: 13.5, color: '#64748b', fontWeight: 700, marginBottom: 4 }}>
+                    <div className="roadmap-gatekeeper-wordbox" style={{ backgroundColor: '#f8fafc', padding: '24px 20px', borderRadius: 12, border: '1px solid #e2e8f0', textAlign: 'center', marginBottom: 24 }}>
+                      <div className="roadmap-gatekeeper-reading" style={{ fontSize: 13.5, color: '#64748b', fontWeight: 700, marginBottom: 4 }}>
                         {gatekeeperQuestions[quizIndex].reading}
                       </div>
-                      <div style={{ fontSize: 30, fontWeight: 900, color: '#0f172a', marginBottom: 8 }}>
+                      <div className="roadmap-gatekeeper-word" style={{ fontSize: 30, fontWeight: 900, color: '#0f172a', marginBottom: 8 }}>
                         {gatekeeperQuestions[quizIndex].word}
                       </div>
                       <button
@@ -1092,6 +1335,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                           <div
                             key={i}
                             onClick={() => handleSelectQuizOption(opt)}
+                            className={`roadmap-gatekeeper-option ${quizAnswered && isCorrect ? 'is-correct' : ''} ${quizAnswered && isChosen && !isCorrect ? 'is-wrong' : ''}`}
                             style={{
                               padding: '16px 20px',
                               borderRadius: 10,
@@ -1115,6 +1359,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                         <button
                           onClick={handleNextQuizQuestion}
+                          className="roadmap-btn-next"
                           style={{
                             padding: '10px 24px',
                             backgroundColor: '#0f172a',
@@ -1132,7 +1377,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     )}
                   </div>
                 ) : (
-                  <div style={{ textAlign: 'center', padding: 24, color: '#64748b' }}>Đang nạp câu hỏi trắc nghiệm...</div>
+                  <div className="roadmap-runner-muted" style={{ textAlign: 'center', padding: 24, color: '#64748b' }}>Đang nạp câu hỏi trắc nghiệm...</div>
                 )
               ) : (
                 /* Gatekeeper Finished */
@@ -1143,7 +1388,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                       <h3 style={{ fontSize: 22, fontWeight: 900, color: '#16a34a', marginBottom: 8 }}>
                         XUẤT SẮC! BẠN ĐẠT ĐIỂM TUYỆT ĐỐI 100%!
                       </h3>
-                      <p style={{ color: '#475569', fontSize: 14, marginBottom: 24 }}>
+                      <p className="roadmap-runner-muted" style={{ color: '#475569', fontSize: 14, marginBottom: 24 }}>
                         Bạn đã trả lời đúng {quizScore}/{gatekeeperQuestions.length} câu. Cổng phản xạ từ vựng đã mở ra thành công!
                       </p>
                       <button
@@ -1170,7 +1415,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                       <h3 style={{ fontSize: 22, fontWeight: 900, color: '#dc2626', marginBottom: 8 }}>
                         CHƯA ĐẠT 100% — CỔNG VẪN ĐANG KHÓA!
                       </h3>
-                      <p style={{ color: '#475569', fontSize: 14, marginBottom: 24 }}>
+                      <p className="roadmap-runner-muted" style={{ color: '#475569', fontSize: 14, marginBottom: 24 }}>
                         Bạn đạt {quizScore}/{gatekeeperQuestions.length} câu đúng. Người gác cổng yêu cầu 100% để đảm bảo phản xạ tiếng Nhật chuẩn mực.
                       </p>
                       <button
@@ -1200,14 +1445,14 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
               QUEST 3: GRAMMAR SCRAMBLE VỚI KÉO THẢ (DRAG & DROP)
               ======================================================== */}
           {questIndex === 3 && (
-            <div style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
+            <div className="roadmap-runner-card" style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
                 <div>
-                  <h3 style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <h3 className="roadmap-runner-title" style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
                     <Puzzle size={18} style={{ color: '#8b5cf6' }} />
                     <span>Kéo Thả Ghép Câu & Bẫy Trợ Từ</span>
                   </h3>
-                  <div style={{ fontSize: 13, color: '#64748b' }}>
+                  <div className="roadmap-runner-muted" style={{ fontSize: 13, color: '#64748b' }}>
                     Kéo thẻ từ hoặc nhấn vào thẻ để xếp vào khay câu tiếng Nhật ({scrambleIndex + 1}/{scrambleSentences.length || 1})
                   </div>
                 </div>
@@ -1237,11 +1482,11 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
               {currentScramble ? (
                 <div>
                   {/* Vietnamese target */}
-                  <div style={{ backgroundColor: '#f0fdf4', padding: '16px 20px', borderRadius: 12, border: '1px solid #bbf7d0', marginBottom: 20 }}>
-                    <div style={{ fontSize: 12, color: '#166534', fontWeight: 800, textTransform: 'uppercase', marginBottom: 2 }}>
+                  <div className="roadmap-scramble-target" style={{ backgroundColor: '#f0fdf4', padding: '16px 20px', borderRadius: 12, border: '1px solid #bbf7d0', marginBottom: 20 }}>
+                    <div className="roadmap-scramble-target-title" style={{ fontSize: 12, color: '#166534', fontWeight: 800, textTransform: 'uppercase', marginBottom: 2 }}>
                       Ý nghĩa tiếng Việt cần diễn đạt:
                     </div>
-                    <div style={{ fontSize: 16, fontWeight: 800, color: '#0f172a' }}>
+                    <div className="roadmap-scramble-target-text" style={{ fontSize: 16, fontWeight: 800, color: '#0f172a' }}>
                       {currentScramble.translation}
                     </div>
                   </div>
@@ -1250,6 +1495,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                   <div
                     onDragOver={e => e.preventDefault()}
                     onDrop={handleDropToTray}
+                    className="roadmap-scramble-tray"
                     style={{
                       minHeight: 70,
                       backgroundColor: '#f8fafc',
@@ -1264,7 +1510,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     }}
                   >
                     {userTokens.length === 0 ? (
-                      <span style={{ color: '#94a3b8', fontSize: 13.5 }}>
+                      <span className="roadmap-runner-muted" style={{ color: '#94a3b8', fontSize: 13.5 }}>
                         Kéo thẻ từ hoặc bấm vào các thẻ bên dưới để xếp vào đây...
                       </span>
                     ) : (
@@ -1272,6 +1518,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                         <span
                           key={idx}
                           onClick={() => handleRemoveToken(idx)}
+                          className="roadmap-scramble-tray-token"
                           style={{
                             padding: '8px 16px',
                             backgroundColor: '#ffffff',
@@ -1293,7 +1540,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
 
                   {/* Feedback */}
                   {scrambleChecked && (
-                    <div style={{ marginBottom: 18, padding: '12px 16px', borderRadius: 8, backgroundColor: scramblePassed ? '#dcfce7' : '#fee2e2', color: scramblePassed ? '#166534' : '#991b1b', fontSize: 13.5, fontWeight: 700 }}>
+                    <div className={scramblePassed ? 'roadmap-scramble-feedback-pass' : 'roadmap-scramble-feedback-fail'} style={{ marginBottom: 18, padding: '12px 16px', borderRadius: 8, backgroundColor: scramblePassed ? '#dcfce7' : '#fee2e2', color: scramblePassed ? '#166534' : '#991b1b', fontSize: 13.5, fontWeight: 700 }}>
                       {scramblePassed ? (
                         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                           <Check size={16} strokeWidth={3} style={{ color: '#16a34a' }} />
@@ -1306,13 +1553,14 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                   )}
 
                   {/* Scrambled tokens pool (Draggable) */}
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 24, padding: 12, backgroundColor: '#f1f5f9', borderRadius: 12 }}>
+                  <div className="roadmap-scramble-pool" style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 24, padding: 12, backgroundColor: '#f1f5f9', borderRadius: 12 }}>
                     {currentScramble.tokens.map((tok, idx) => (
                       <div
                         key={idx}
                         draggable={!scrambleChecked}
                         onDragStart={e => handleDragStartToken(e, idx)}
                         onClick={() => handlePickToken(tok)}
+                        className="roadmap-scramble-pool-token"
                         style={{
                           padding: '10px 20px',
                           borderRadius: 8,
@@ -1337,6 +1585,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                       <button
                         onClick={handleCheckScramble}
                         disabled={userTokens.length === 0}
+                        className="roadmap-btn-next"
                         style={{
                           padding: '10px 24px',
                           backgroundColor: userTokens.length > 0 ? '#0f172a' : '#94a3b8',
@@ -1353,6 +1602,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     ) : (
                       <button
                         onClick={handleNextScramble}
+                        className="roadmap-btn-next"
                         style={{
                           padding: '10px 24px',
                           backgroundColor: '#10b981',
@@ -1370,7 +1620,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                   </div>
                 </div>
               ) : (
-                <div style={{ textAlign: 'center', padding: 24, color: '#64748b' }}>
+                <div className="roadmap-runner-muted" style={{ textAlign: 'center', padding: 24, color: '#64748b' }}>
                   Đang tải câu mẫu ngữ pháp từ Firestore...
                 </div>
               )}
@@ -1381,14 +1631,14 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
               QUEST 4: ĐỐI THOẠI TÌNH HUỐNG 2 BÊN VỚI AI SENSEI (ROLEPLAY)
               ======================================================== */}
           {questIndex === 4 && (
-            <div style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
+            <div className="roadmap-runner-card" style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
                 <div>
-                  <h3 style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <h3 className="roadmap-runner-title" style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
                     <MessageCircle size={18} style={{ color: '#0284c7' }} />
                     <span>Đối Thoại Tình Huống 2 Bên & Gặp Gỡ AI Sensei</span>
                   </h3>
-                  <div style={{ fontSize: 13, color: '#64748b' }}>
+                  <div className="roadmap-runner-muted" style={{ fontSize: 13, color: '#64748b' }}>
                     Tình huống thực tế {dialogueIndex + 1} / {dialogues.length}
                   </div>
                 </div>
@@ -1426,6 +1676,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                   {/* SIDE A: SENSEI SPEECH BUBBLE */}
                   <div style={{ display: 'flex', gap: 14, marginBottom: 24, alignItems: 'flex-start' }}>
                     <div
+                      className="roadmap-sensei-avatar"
                       style={{
                         width: 44,
                         height: 44,
@@ -1445,11 +1696,12 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     </div>
 
                     <div style={{ flex: 1 }}>
-                      <div style={{ fontSize: 12.5, fontWeight: 800, color: '#0369a1', marginBottom: 4 }}>
-                        {currentDialogue.partnerName} · <span style={{ color: '#64748b', fontWeight: 600 }}>{currentDialogue.partnerRole}</span>
+                      <div className="roadmap-sensei-name" style={{ fontSize: 12.5, fontWeight: 800, color: '#0369a1', marginBottom: 4 }}>
+                        {currentDialogue.partnerName} · <span className="roadmap-runner-muted" style={{ color: '#64748b', fontWeight: 600 }}>{currentDialogue.partnerRole}</span>
                       </div>
 
                       <div
+                        className="roadmap-sensei-bubble"
                         style={{
                           backgroundColor: '#f0f9ff',
                           border: '1.5px solid #bae6fd',
@@ -1458,7 +1710,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                           position: 'relative'
                         }}
                       >
-                        <div style={{ fontSize: 16, fontWeight: 800, color: '#0f172a', marginBottom: 8, lineHeight: 1.5 }}>
+                        <div className="roadmap-sensei-speech" style={{ fontSize: 16, fontWeight: 800, color: '#0f172a', marginBottom: 8, lineHeight: 1.5 }}>
                           {currentDialogue.partnerSpeechJp}
                         </div>
 
@@ -1482,6 +1734,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
 
                           <button
                             onClick={() => setShowPartnerVi(!showPartnerVi)}
+                            className="roadmap-runner-muted"
                             style={{
                               background: 'none',
                               border: 'none',
@@ -1496,7 +1749,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                         </div>
 
                         {showPartnerVi && (
-                          <div style={{ marginTop: 8, fontSize: 13, color: '#0369a1', fontStyle: 'italic', borderTop: '1px solid #e0f2fe', paddingTop: 6 }}>
+                          <div className="roadmap-sensei-vi" style={{ marginTop: 8, fontSize: 13, color: '#0369a1', fontStyle: 'italic', borderTop: '1px solid #e0f2fe', paddingTop: 6 }}>
                             {currentDialogue.partnerSpeechVi}
                           </div>
                         )}
@@ -1505,12 +1758,12 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                   </div>
 
                   {/* SIDE B: LEARNER RESPONSE AREA */}
-                  <div style={{ backgroundColor: '#f8fafc', padding: '20px 22px', borderRadius: 16, border: '1.5px solid #e2e8f0', marginBottom: 20 }}>
-                    <div style={{ fontSize: 13, fontWeight: 800, color: '#166534', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 5 }}>
+                  <div className="roadmap-learner-box" style={{ backgroundColor: '#f8fafc', padding: '20px 22px', borderRadius: 16, border: '1.5px solid #e2e8f0', marginBottom: 20 }}>
+                    <div className="roadmap-learner-title" style={{ fontSize: 13, fontWeight: 800, color: '#166534', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 5 }}>
                       <Target size={14} style={{ color: '#166534' }} />
                       <span>Nhiệm vụ của bạn:</span>
                     </div>
-                    <div style={{ fontSize: 14.5, fontWeight: 700, color: '#0f172a', lineHeight: 1.5, marginBottom: 12 }}>
+                    <div className="roadmap-learner-prompt" style={{ fontSize: 14.5, fontWeight: 700, color: '#0f172a', lineHeight: 1.5, marginBottom: 12 }}>
                       {currentDialogue.learnerPrompt}
                     </div>
 
@@ -1520,6 +1773,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                         onChange={e => setLearnerInput(e.target.value)}
                         placeholder="Nhập câu tiếng Nhật đáp lại Sensei vào đây..."
                         rows={3}
+                        className="roadmap-learner-textarea"
                         style={{
                           width: '100%',
                           padding: '12px 16px',
@@ -1537,6 +1791,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     <div style={{ marginBottom: 14 }}>
                       <button
                         onClick={() => setShowSample(!showSample)}
+                        className="roadmap-runner-muted"
                         style={{ background: 'none', border: 'none', color: '#64748b', fontSize: 12.5, fontWeight: 700, cursor: 'pointer', textDecoration: 'underline', display: 'inline-flex', alignItems: 'center', gap: 4 }}
                       >
                         <Lightbulb size={13} style={{ color: '#ca8a04' }} />
@@ -1544,7 +1799,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                       </button>
 
                       {showSample && (
-                        <div style={{ marginTop: 6, padding: '8px 12px', backgroundColor: '#ffffff', borderRadius: 8, border: '1px solid #cbd5e1', fontSize: 13.5, color: '#0f172a' }}>
+                        <div className="roadmap-sample-answer" style={{ marginTop: 6, padding: '8px 12px', backgroundColor: '#ffffff', borderRadius: 8, border: '1px solid #cbd5e1', fontSize: 13.5, color: '#0f172a' }}>
                           Mẫu: <b>{currentDialogue.sampleAnswer}</b>
                         </div>
                       )}
@@ -1573,6 +1828,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                       <button
                         onClick={handleEvaluateDialogue}
                         disabled={!learnerInput.trim()}
+                        className="roadmap-btn-send"
                         style={{
                           display: 'flex',
                           alignItems: 'center',

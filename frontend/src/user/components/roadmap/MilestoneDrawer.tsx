@@ -90,12 +90,11 @@ export const MilestoneDrawer: React.FC<MilestoneDrawerProps> = ({
       onClick={onClose}
     >
       <div
+        className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100"
         style={{
           width: '100%',
           maxWidth: '580px',
           height: '100%',
-          backgroundColor: '#ffffff',
-          color: '#0f172a',
           boxShadow: '-10px 0 30px rgba(0, 0, 0, 0.25)',
           display: 'flex',
           flexDirection: 'column',
@@ -106,10 +105,9 @@ export const MilestoneDrawer: React.FC<MilestoneDrawerProps> = ({
       >
         {/* Top Header of Drawer */}
         <div
+          className={isBoss ? 'bg-indigo-950 dark:bg-indigo-950 text-white' : 'bg-slate-900 dark:bg-slate-950 text-white border-b dark:border-slate-800'}
           style={{
             padding: '24px',
-            backgroundColor: isBoss ? '#1e1b4b' : '#0f172a',
-            color: '#ffffff',
             position: 'sticky',
             top: 0,
             zIndex: 10
@@ -187,28 +185,19 @@ export const MilestoneDrawer: React.FC<MilestoneDrawerProps> = ({
 
         {/* Tab Controls */}
         <div
+          className="bg-slate-50 dark:bg-slate-950/70 border-b border-slate-200 dark:border-slate-800"
           style={{
             display: 'flex',
-            borderBottom: '1px solid #e2e8f0',
-            backgroundColor: '#f8fafc',
             padding: '4px 16px 0'
           }}
         >
           <button
             onClick={() => setActiveTab('quests')}
-            style={{
-              padding: '12px 16px',
-              border: 'none',
-              borderBottom: activeTab === 'quests' ? '3px solid #16a34a' : '3px solid transparent',
-              backgroundColor: 'transparent',
-              color: activeTab === 'quests' ? '#16a34a' : '#64748b',
-              fontWeight: 800,
-              fontSize: 13,
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 6
-            }}
+            className={`px-4 py-3 border-b-2 font-bold text-[13px] cursor-pointer flex items-center gap-1.5 bg-transparent transition-colors ${
+              activeTab === 'quests'
+                ? 'border-emerald-600 text-emerald-600 dark:border-emerald-400 dark:text-emerald-400'
+                : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+            }`}
           >
             <span>⚡ 4 Bài Học (Quests)</span>
           </button>
@@ -216,19 +205,11 @@ export const MilestoneDrawer: React.FC<MilestoneDrawerProps> = ({
           {milestone.readingPassage && (
             <button
               onClick={() => setActiveTab('reading')}
-              style={{
-                padding: '12px 16px',
-                border: 'none',
-                borderBottom: activeTab === 'reading' ? '3px solid #16a34a' : '3px solid transparent',
-                backgroundColor: 'transparent',
-                color: activeTab === 'reading' ? '#16a34a' : '#64748b',
-                fontWeight: 800,
-                fontSize: 13,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6
-              }}
+              className={`px-4 py-3 border-b-2 font-bold text-[13px] cursor-pointer flex items-center gap-1.5 bg-transparent transition-colors ${
+                activeTab === 'reading'
+                  ? 'border-emerald-600 text-emerald-600 dark:border-emerald-400 dark:text-emerald-400'
+                  : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+              }`}
             >
               <span>📖 Bài Đọc Hiểu</span>
             </button>
@@ -237,19 +218,11 @@ export const MilestoneDrawer: React.FC<MilestoneDrawerProps> = ({
           {milestone.nikkiDiary && (
             <button
               onClick={() => setActiveTab('nikki')}
-              style={{
-                padding: '12px 16px',
-                border: 'none',
-                borderBottom: activeTab === 'nikki' ? '3px solid #16a34a' : '3px solid transparent',
-                backgroundColor: 'transparent',
-                color: activeTab === 'nikki' ? '#16a34a' : '#64748b',
-                fontWeight: 800,
-                fontSize: 13,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6
-              }}
+              className={`px-4 py-3 border-b-2 font-bold text-[13px] cursor-pointer flex items-center gap-1.5 bg-transparent transition-colors ${
+                activeTab === 'nikki'
+                  ? 'border-emerald-600 text-emerald-600 dark:border-emerald-400 dark:text-emerald-400'
+                  : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+              }`}
             >
               <span>✍️ Nhật Ký Hội Thoại</span>
             </button>
@@ -260,7 +233,7 @@ export const MilestoneDrawer: React.FC<MilestoneDrawerProps> = ({
         <div style={{ padding: '24px', flex: 1 }}>
           {activeTab === 'quests' && (
             <div>
-              <div style={{ fontSize: 13, color: '#64748b', marginBottom: 16 }}>
+              <div className="text-[13px] text-slate-500 dark:text-slate-400 mb-4">
                 Hoàn thành tuần tự 4 bài học dưới đây để đạt 100% tỉ lệ thông thạo và mở khóa mốc tiếp theo trên bản đồ:
               </div>
 
@@ -270,45 +243,29 @@ export const MilestoneDrawer: React.FC<MilestoneDrawerProps> = ({
                   return (
                     <div
                       key={q.id || idx}
-                      style={{
-                        padding: '16px',
-                        borderRadius: 14,
-                        border: '1.5px solid #e2e8f0',
-                        backgroundColor: '#ffffff',
-                        boxShadow: 'var(--shadow-sm)',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: 10
-                      }}
+                      className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/80 shadow-sm flex flex-col gap-2.5 transition-colors"
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                           <span
-                            style={{
-                              width: 26,
-                              height: 26,
-                              borderRadius: '50%',
-                              backgroundColor: questDone ? '#dcfce7' : '#f1f5f9',
-                              color: questDone ? '#16a34a' : '#475569',
-                              fontWeight: 800,
-                              fontSize: 12,
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center'
-                            }}
+                            className={`w-6.5 h-6.5 rounded-full font-extrabold text-xs flex items-center justify-center ${
+                              questDone
+                                ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-950/80 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800'
+                                : 'bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300'
+                            }`}
                           >
                             {questDone ? '✓' : idx + 1}
                           </span>
-                          <span style={{ fontSize: 14, fontWeight: 700, color: '#0f172a' }}>
+                          <span className="text-sm font-bold text-slate-900 dark:text-white">
                             {q.title || `Bài ${idx + 1}`}
                           </span>
                         </div>
-                        <span style={{ fontSize: 12, fontWeight: 700, color: '#16a34a' }}>
+                        <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
                           +{q.xpReward || 30} XP
                         </span>
                       </div>
 
-                      <div style={{ fontSize: 12.5, color: '#64748b' }}>
+                      <div className="text-[12.5px] text-slate-500 dark:text-slate-400">
                         {q.description || 'Nhiệm vụ rèn luyện kỹ năng cốt lõi.'}
                       </div>
 
@@ -343,44 +300,26 @@ export const MilestoneDrawer: React.FC<MilestoneDrawerProps> = ({
           {activeTab === 'reading' && milestone.readingPassage && (
             <div>
               <div style={{ marginBottom: 16 }}>
-                <span style={{ fontSize: 11, fontWeight: 700, color: '#16a34a', textTransform: 'uppercase' }}>
+                <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase">
                   ĐOẠN VĂN HỘI THOẠI MẪU
                 </span>
-                <h3 style={{ fontSize: 17, fontWeight: 800, margin: '4px 0 2px' }}>
+                <h3 className="text-[17px] font-extrabold text-slate-900 dark:text-white mt-1 mb-0.5">
                   {milestone.readingPassage.title} ({milestone.readingPassage.titleVi})
                 </h3>
               </div>
 
               {/* Japanese dialogue text */}
               <div
-                style={{
-                  backgroundColor: '#f8fafc',
-                  border: '1.5px solid #e2e8f0',
-                  borderRadius: 14,
-                  padding: 16,
-                  fontSize: 15,
-                  lineHeight: 1.8,
-                  color: '#0f172a',
-                  marginBottom: 16
-                }}
+                className="bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 text-[15px] leading-relaxed text-slate-900 dark:text-slate-100 mb-4"
               >
                 {milestone.readingPassage.japanese}
               </div>
 
               {/* Vietnamese translation */}
               <div
-                style={{
-                  backgroundColor: '#f0fdf4',
-                  border: '1px solid #bbf7d0',
-                  borderRadius: 14,
-                  padding: 16,
-                  fontSize: 13.5,
-                  lineHeight: 1.6,
-                  color: '#166534',
-                  marginBottom: 20
-                }}
+                className="bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/80 rounded-2xl p-4 text-[13.5px] leading-relaxed text-emerald-800 dark:text-emerald-200 mb-5"
               >
-                <div style={{ fontWeight: 700, fontSize: 12, marginBottom: 4, color: '#15803d' }}>
+                <div className="font-bold text-xs mb-1 text-emerald-700 dark:text-emerald-400">
                   BẢN DỊCH TIẾNG VIỆT:
                 </div>
                 {milestone.readingPassage.vietnamese}
@@ -389,27 +328,20 @@ export const MilestoneDrawer: React.FC<MilestoneDrawerProps> = ({
               {/* Comprehension Questions */}
               {milestone.readingPassage.questions && milestone.readingPassage.questions.length > 0 && (
                 <div>
-                  <h4 style={{ fontSize: 14, fontWeight: 800, marginBottom: 10, color: '#0f172a' }}>
+                  <h4 className="text-sm font-extrabold mb-2.5 text-slate-900 dark:text-white">
                     Câu hỏi trắc nghiệm kiểm tra độ hiểu:
                   </h4>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                     {milestone.readingPassage.questions.map((q: any, i: number) => (
-                      <div key={i} style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 10, border: '1px solid #e2e8f0' }}>
-                        <div style={{ fontWeight: 700, fontSize: 13, marginBottom: 8 }}>
+                      <div key={i} className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700">
+                        <div className="font-bold text-[13px] mb-2 text-slate-800 dark:text-slate-200">
                           {i + 1}. {q.q}
                         </div>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
                           {q.options?.map((opt: string, optIdx: number) => (
                             <div
                               key={optIdx}
-                              style={{
-                                padding: '6px 10px',
-                                borderRadius: 6,
-                                backgroundColor: '#ffffff',
-                                border: '1px solid #cbd5e1',
-                                fontSize: 12,
-                                color: '#334155'
-                              }}
+                              className="px-2.5 py-1.5 rounded-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-300"
                             >
                               {opt}
                             </div>
@@ -426,10 +358,10 @@ export const MilestoneDrawer: React.FC<MilestoneDrawerProps> = ({
           {activeTab === 'nikki' && milestone.nikkiDiary && (
             <div>
               <div style={{ marginBottom: 16 }}>
-                <span style={{ fontSize: 11, fontWeight: 700, color: '#0d9488', textTransform: 'uppercase' }}>
+                <span className="text-[11px] font-bold text-teal-600 dark:text-teal-400 uppercase">
                   CHỦ ĐỀ LUYỆN VIẾT & HỘI THOẠI AI SENSEI
                 </span>
-                <h3 style={{ fontSize: 17, fontWeight: 800, margin: '4px 0 2px' }}>
+                <h3 className="text-[17px] font-extrabold text-slate-900 dark:text-white mt-1 mb-0.5">
                   {milestone.nikkiDiary.title} ({milestone.nikkiDiary.vi})
                 </h3>
               </div>
@@ -438,23 +370,18 @@ export const MilestoneDrawer: React.FC<MilestoneDrawerProps> = ({
                 {milestone.nikkiDiary.prompts?.map((p: any, idx: number) => (
                   <div
                     key={idx}
-                    style={{
-                      padding: 14,
-                      backgroundColor: '#f8fafc',
-                      borderRadius: 12,
-                      border: '1px solid #e2e8f0'
-                    }}
+                    className="p-3.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700"
                   >
-                    <div style={{ fontWeight: 700, fontSize: 13, color: '#0f172a', marginBottom: 6 }}>
+                    <div className="font-bold text-[13px] text-slate-900 dark:text-slate-100 mb-1.5">
                       Tình huống {idx + 1}: {p.q}
                     </div>
                     {p.hint && (
-                      <div style={{ fontSize: 12, color: '#64748b', marginBottom: 4 }}>
-                        💡 <b>Mẫu gợi ý:</b> <code style={{ backgroundColor: '#e2e8f0', padding: '2px 6px', borderRadius: 4 }}>{p.hint}</code>
+                      <div className="text-xs text-slate-500 dark:text-slate-400 mb-1">
+                        💡 <b>Mẫu gợi ý:</b> <code className="bg-slate-200 dark:bg-slate-700 px-1.5 py-0.5 rounded text-slate-800 dark:text-slate-200">{p.hint}</code>
                       </div>
                     )}
                     {p.ex && (
-                      <div style={{ fontSize: 12, color: '#16a34a' }}>
+                      <div className="text-xs text-emerald-600 dark:text-emerald-400">
                         ✍️ <b>Ví dụ:</b> {p.ex}
                       </div>
                     )}
@@ -467,24 +394,36 @@ export const MilestoneDrawer: React.FC<MilestoneDrawerProps> = ({
 
         {/* Sticky Footer CTA */}
         <div
-          style={{
-            padding: '16px 24px',
-            borderTop: '1px solid #e2e8f0',
-            backgroundColor: '#ffffff',
-            position: 'sticky',
-            bottom: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: 12
-          }}
+          className="p-4 px-6 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 sticky bottom-0 flex items-center justify-between gap-3"
         >
           <div>
-            <div style={{ fontSize: 11, color: '#64748b' }}>Trạng thái:</div>
-            <div style={{ fontSize: 13, fontWeight: 800, color: isCompleted ? '#16a34a' : '#0f172a' }}>
+            <div className="text-[11px] text-slate-500 dark:text-slate-400">Trạng thái:</div>
+            <div className={`text-[13px] font-extrabold ${isCompleted ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-900 dark:text-white'}`}>
               {isCompleted ? 'Đã tốt nghiệp mốc' : 'Sẵn sàng học tập'}
             </div>
           </div>
+
+          <button
+            onClick={() => onStartQuest?.(milestone, 1)}
+            style={{
+              padding: '12px 24px',
+              borderRadius: 12,
+              border: 'none',
+              backgroundColor: '#16a34a',
+              color: '#ffffff',
+              fontSize: 14,
+              fontWeight: 800,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              boxShadow: '0 4px 14px rgba(22, 163, 74, 0.4)'
+            }}
+          >
+            <span>{isCompleted ? 'ÔN TẬP MỐC NÀY' : 'BẮT ĐẦU BÀI HỌC NGAY'}</span>
+            <ArrowRight size={16} />
+          </button>
+        </div>
 
           <button
             onClick={() => onStartQuest?.(milestone, 1)}

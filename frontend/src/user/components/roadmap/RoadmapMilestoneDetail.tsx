@@ -220,7 +220,7 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
       <div className="flex items-center justify-between flex-wrap gap-3">
         <button
           onClick={handleBackToMilestones}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 text-xs sm:text-sm font-bold shadow-xs hover:bg-slate-50 cursor-pointer transition-colors"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-bold shadow-xs hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer transition-colors"
         >
           <ArrowLeft size={16} />
           <span>Quay lại danh sách Mốc</span>
@@ -230,8 +230,8 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
           <span
             className={`px-3 py-1 rounded-lg text-xs font-extrabold flex items-center gap-1.5 border ${
               isBoss 
-                ? 'bg-amber-50 text-amber-700 border-amber-200' 
-                : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                ? 'bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800' 
+                : 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800'
             }`}
           >
             {isBoss ? (
@@ -244,7 +244,7 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
             )}
           </span>
           {milestone.kanjiMark && (
-            <span className="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
+            <span className="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
               Hán tự: {milestone.kanjiMark}
             </span>
           )}
@@ -252,40 +252,40 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
       </div>
 
       {/* 2. Milestone Overview Banner */}
-      <div className={`bg-white rounded-3xl p-6 sm:p-7 border shadow-md transition-colors ${
+      <div className={`bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border shadow-md transition-colors ${
         isBoss 
-          ? 'border-amber-400 ring-2 ring-amber-400/20' 
-          : 'border-emerald-100'
+          ? 'border-amber-400 dark:border-amber-500/60 ring-2 ring-amber-400/20' 
+          : 'border-emerald-100 dark:border-slate-800'
       }`}>
         <div className="flex justify-between items-start flex-wrap gap-5">
           <div className="flex-1 min-w-[260px]">
             <div className="flex items-center gap-2 mb-2 flex-wrap">
-              <span className="text-xs font-extrabold text-slate-500 uppercase tracking-wider">
+              <span className="text-xs font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 {milestone.nejUnit || `Bài ${milestone.orderIndex || 1}`}
               </span>
               {isMilestoneCompleted ? (
-                <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
+                <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800 flex items-center gap-1">
                   <Check size={12} strokeWidth={3} />
                   <span>Đã hoàn thành</span>
                 </span>
               ) : (
-                <span className="text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-0.5 rounded-full border border-sky-200">
+                <span className="text-xs font-bold text-sky-700 dark:text-sky-300 bg-sky-50 dark:bg-sky-950/60 px-2.5 py-0.5 rounded-full border border-sky-200 dark:border-sky-800">
                   Đang học ({completedQuestIndices.length}/4 nhiệm vụ)
                 </span>
               )}
             </div>
 
-            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 mb-2 tracking-tight">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
               {milestone.nejUnit ? cleanMilestoneTitle(milestone.title) : milestone.title}
             </h1>
 
-            <div className="text-xs sm:text-sm text-slate-700 leading-relaxed flex items-start gap-2 mb-3">
-              <Target size={15} className="text-emerald-600 shrink-0 mt-0.5" />
+            <div className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed flex items-start gap-2 mb-3">
+              <Target size={15} className="text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
               <span><b>Mục tiêu:</b> {milestone.canDoGoal || milestone.communicationContext || 'Thực hành giao tiếp tiếng Nhật cốt lõi'}</span>
             </div>
 
             {milestone.grammarSummary && (
-              <div className="text-xs sm:text-sm text-slate-600 bg-slate-50 p-3 rounded-2xl border border-slate-200 flex items-start gap-2">
+              <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/60 p-3 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-start gap-2">
                 <Lightbulb size={14} className="text-amber-500 shrink-0 mt-0.5" />
                 <span><b>Trọng tâm:</b> {milestone.grammarSummary}</span>
               </div>
@@ -293,16 +293,16 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
           </div>
 
           {/* Stats Box */}
-          <div className="flex flex-col gap-2 min-w-[170px] bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs">
-            <div className="flex items-center gap-2 font-extrabold text-emerald-700">
+          <div className="flex flex-col gap-2 min-w-[170px] bg-slate-50 dark:bg-slate-800/80 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-xs">
+            <div className="flex items-center gap-2 font-extrabold text-emerald-700 dark:text-emerald-400">
               <Zap size={15} />
               <span>+{milestone.xpReward || 60} XP</span>
             </div>
-            <div className="flex items-center gap-2 font-extrabold text-amber-700">
+            <div className="flex items-center gap-2 font-extrabold text-amber-700 dark:text-amber-400">
               <Trophy size={15} />
               <span>+{milestone.activePointsReward || 40} Năng động</span>
             </div>
-            <div className="text-slate-500 text-[11px] mt-1 pt-2 border-t border-slate-200">
+            <div className="text-slate-500 dark:text-slate-400 text-[11px] mt-1 pt-2 border-t border-slate-200 dark:border-slate-700">
               Từ vựng: {milestone.vocabIds?.length || 26} · Ngữ pháp: {milestone.grammarIds?.length || 4}
             </div>
           </div>
@@ -310,13 +310,13 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
       </div>
 
       {/* 3. Streamlined Tabs: [Nhiệm vụ] & [Đọc hiểu] */}
-      <div className="flex gap-2 border-b-2 border-slate-200 pb-0.5">
+      <div className="flex gap-2 border-b-2 border-slate-200 dark:border-slate-800 pb-0.5">
         <button
           onClick={() => handleTabChange('quests')}
           className={`flex items-center gap-2 px-5 py-2.5 text-sm font-extrabold border-b-2 -mb-1 transition-all cursor-pointer ${
             activeTab === 'quests'
-              ? 'text-emerald-600 border-emerald-600'
-              : 'text-slate-500 border-transparent hover:text-slate-700'
+              ? 'text-emerald-600 dark:text-emerald-400 border-emerald-600 dark:border-emerald-500'
+              : 'text-slate-500 dark:text-slate-400 border-transparent hover:text-slate-700 dark:hover:text-slate-200'
           }`}
         >
           <BookOpen size={16} />
@@ -327,13 +327,13 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
           onClick={() => handleTabChange('reading')}
           className={`flex items-center gap-2 px-5 py-2.5 text-sm font-extrabold border-b-2 -mb-1 transition-all cursor-pointer ${
             activeTab === 'reading'
-              ? 'text-emerald-600 border-emerald-600'
-              : 'text-slate-500 border-transparent hover:text-slate-700'
+              ? 'text-emerald-600 dark:text-emerald-400 border-emerald-600 dark:border-emerald-500'
+              : 'text-slate-500 dark:text-slate-400 border-transparent hover:text-slate-700 dark:hover:text-slate-200'
           }`}
         >
           <Sparkles size={16} />
           <span className="flex items-center gap-1.5">
-            Đọc hiểu {isReadingDone && <Check size={13} strokeWidth={3} className="text-emerald-600" />}
+            Đọc hiểu {isReadingDone && <Check size={13} strokeWidth={3} className="text-emerald-600 dark:text-emerald-400" />}
           </span>
         </button>
       </div>
@@ -350,19 +350,19 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
                 key={idx}
                 className={`rounded-2xl p-4 sm:p-5 flex items-center justify-between gap-4 flex-wrap border transition-all ${
                   !isUnlocked
-                    ? 'bg-slate-50/50 border-slate-200/60 opacity-60'
+                    ? 'bg-slate-50/50 dark:bg-slate-900/40 border-slate-200/60 dark:border-slate-800/50 opacity-60'
                     : questDone
-                    ? 'bg-white border-emerald-200 shadow-xs'
-                    : 'bg-white border-emerald-500/50 shadow-sm ring-1 ring-emerald-500/20'
+                    ? 'bg-white dark:bg-slate-900 border-emerald-200 dark:border-emerald-700/60 shadow-xs'
+                    : 'bg-white dark:bg-slate-900 border-emerald-500/50 dark:border-emerald-500/60 shadow-sm ring-1 ring-emerald-500/20'
                 }`}
               >
                 <div className="flex items-center gap-4 flex-1 min-w-[240px]">
                   {/* Step indicator */}
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-sm shrink-0 border ${
                     !isUnlocked
-                      ? 'bg-slate-100 text-slate-400 border-slate-200'
+                      ? 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 border-slate-200 dark:border-slate-700'
                       : questDone
-                      ? 'bg-emerald-50 text-emerald-600 border-emerald-200'
+                      ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800'
                       : 'bg-emerald-500 text-white border-emerald-600 shadow-xs'
                   }`}>
                     {!isUnlocked ? <Lock size={15} /> : questDone ? <Check size={16} strokeWidth={3} /> : idx + 1}
@@ -370,31 +370,31 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
 
                   <div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <h3 className="text-sm sm:text-base font-extrabold text-slate-900">
+                      <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">
                         {q.title}
                       </h3>
                       {questDone ? (
-                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center gap-1">
+                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1">
                           <Check size={11} strokeWidth={3} /> Đã hoàn thành
                         </span>
                       ) : isUnlocked ? (
-                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200">
+                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
                           Sẵn sàng
                         </span>
                       ) : (
-                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 border border-slate-200 flex items-center gap-1">
+                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 flex items-center gap-1">
                           <Lock size={10} /> Đang khóa (cần qua Bài {idx})
                         </span>
                       )}
                     </div>
 
-                    <div className="text-xs sm:text-sm text-slate-500 mt-1 line-clamp-2">
+                    <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
                       {q.description}
                     </div>
 
                     <div className="flex items-center gap-3 mt-2 text-xs font-bold">
-                      <span className="text-emerald-600">+{q.xpReward || 30} XP</span>
-                      <span className="text-amber-600">+{q.activePointsReward || 15} AP</span>
+                      <span className="text-emerald-600 dark:text-emerald-400">+{q.xpReward || 30} XP</span>
+                      <span className="text-amber-600 dark:text-amber-400">+{q.activePointsReward || 15} AP</span>
                     </div>
                   </div>
                 </div>
@@ -408,7 +408,7 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
                     }}
                     className={`px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 shadow-xs cursor-pointer transition-all active:scale-95 ${
                       questDone
-                        ? 'bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200'
+                        ? 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700'
                         : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/20'
                     }`}
                   >
@@ -418,7 +418,7 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
                 ) : (
                   <button
                     disabled
-                    className="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed"
+                    className="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 border border-slate-200 dark:border-slate-700 cursor-not-allowed"
                   >
                     <Lock size={14} />
                     <span>Đang khóa</span>
@@ -432,15 +432,15 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
 
       {/* 5. TAB 2: ĐỌC HIỂU */}
       {activeTab === 'reading' && (
-        <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm transition-colors">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
           {milestone.readingPassage ? (
             <div>
               <div className="flex justify-between items-center mb-4 flex-wrap gap-3">
                 <div>
-                  <span className="text-xs font-extrabold text-emerald-600 uppercase tracking-wider">
+                  <span className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
                     HỘI THOẠI ĐỌC HIỂU GIAO TIẾP
                   </span>
-                  <h2 className="text-base sm:text-lg font-extrabold text-slate-900 mt-1">
+                  <h2 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white mt-1">
                     {milestone.readingPassage.title} · {milestone.readingPassage.titleVi}
                   </h2>
                 </div>
@@ -450,19 +450,19 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
                     onClick={handleToggleReading}
                     className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl border text-xs font-bold cursor-pointer transition-all ${
                       isPlayingPassage
-                        ? 'bg-rose-50 border-rose-300 text-rose-700 ring-2 ring-rose-400/20'
-                        : 'bg-emerald-50 border-emerald-200 text-emerald-800 hover:bg-emerald-100'
+                        ? 'bg-rose-50 dark:bg-rose-950/60 border-rose-300 dark:border-rose-800 text-rose-700 dark:text-rose-300 ring-2 ring-rose-400/20'
+                        : 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/60'
                     }`}
                     title={isPlayingPassage ? 'Dừng phát bài đọc' : 'Nghe toàn bộ bài đọc'}
                   >
                     {isPlayingPassage ? (
                       <>
-                        <Square size={13} className="fill-rose-600 text-rose-600" />
+                        <Square size={13} className="fill-rose-600 text-rose-600 dark:fill-rose-400 dark:text-rose-400" />
                         <span>Dừng bài đọc</span>
                       </>
                     ) : (
                       <>
-                        <Volume2 size={15} className="text-emerald-600" />
+                        <Volume2 size={15} className="text-emerald-600 dark:text-emerald-400" />
                         <span>Nghe bài đọc</span>
                       </>
                     )}
@@ -472,8 +472,8 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
                     onClick={() => setShowTranslation(!showTranslation)}
                     className={`px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${
                       showTranslation
-                        ? 'bg-emerald-50 border-emerald-300 text-emerald-700'
-                        : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
+                        ? 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300'
+                        : 'bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'
                     }`}
                   >
                     {showTranslation ? 'Ẩn bản dịch' : 'Hiện bản dịch'}
@@ -482,14 +482,14 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
               </div>
 
               {/* Japanese reading passage */}
-              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 text-base sm:text-lg leading-loose text-slate-900 mb-4 font-['Noto_Sans_JP',sans-serif]">
+              <div className="bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 text-base sm:text-lg leading-loose text-slate-900 dark:text-slate-100 mb-4 font-['Noto_Sans_JP',sans-serif]">
                 {milestone.readingPassage.japanese}
               </div>
 
               {/* Vietnamese translation toggle */}
               {showTranslation && (
-                <div className="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-4 text-xs sm:text-sm leading-relaxed text-emerald-900 mb-5">
-                  <div className="font-extrabold text-xs mb-1.5 text-emerald-800">
+                <div className="bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/80 rounded-2xl p-4 text-xs sm:text-sm leading-relaxed text-emerald-900 dark:text-emerald-200 mb-5">
+                  <div className="font-extrabold text-xs mb-1.5 text-emerald-800 dark:text-emerald-300">
                     DỊCH NGHĨA TIẾNG VIỆT:
                   </div>
                   {milestone.readingPassage.vietnamese}
@@ -499,16 +499,16 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
               {/* Highlights */}
               {milestone.readingPassage.highlights && milestone.readingPassage.highlights.length > 0 && (
                 <div className="mb-6">
-                  <div className="text-xs sm:text-sm font-extrabold text-slate-900 mb-2.5">
+                  <div className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white mb-2.5">
                     Trọng tâm ngữ pháp trong bài đọc:
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {milestone.readingPassage.highlights.map((h: any, i: number) => (
                       <div
                         key={i}
-                        className="px-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-xs text-slate-700"
+                        className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-300"
                       >
-                        <b className="text-slate-900">{h.excerpt}</b> ➔ <span className="text-emerald-600 font-bold">{h.label}</span>
+                        <b className="text-slate-900 dark:text-white">{h.excerpt}</b> ➔ <span className="text-emerald-600 dark:text-emerald-400 font-bold">{h.label}</span>
                       </div>
                     ))}
                   </div>
@@ -517,14 +517,14 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
 
               {/* Interactive Reading Comprehension Quiz */}
               {milestone.readingPassage.questions && milestone.readingPassage.questions.length > 0 && (
-                <div className="border-t border-slate-200 pt-5 mt-5">
+                <div className="border-t border-slate-200 dark:border-slate-800 pt-5 mt-5">
                   <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
-                    <div className="text-sm sm:text-base font-extrabold text-slate-900 flex items-center gap-2">
-                      <FileText size={16} className="text-slate-500" />
+                    <div className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                      <FileText size={16} className="text-slate-500 dark:text-slate-400" />
                       <span>Câu hỏi trắc nghiệm kiểm tra độ hiểu:</span>
                     </div>
                     {isReadingDone && (
-                      <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
+                      <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800 flex items-center gap-1">
                         <Check size={12} strokeWidth={3} />
                         <span>Đã hoàn thành Đọc hiểu</span>
                       </span>
@@ -536,23 +536,23 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
                       const selectedOpt = userReadingAnswers[i];
 
                       return (
-                        <div key={i} className="p-4 sm:p-5 bg-slate-50 rounded-2xl border border-slate-200">
-                          <div className="font-extrabold text-xs sm:text-sm text-slate-900 mb-3">
+                        <div key={i} className="p-4 sm:p-5 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700">
+                          <div className="font-extrabold text-xs sm:text-sm text-slate-900 dark:text-white mb-3">
                             Câu {i + 1}: {q.q}
                           </div>
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                             {q.options?.map((opt: string, optIdx: number) => {
                               const isChosen = selectedOpt === optIdx;
-                              let btnClass = 'bg-white border-slate-200 text-slate-700';
+                              let btnClass = 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700';
 
                               if (readingQuizChecked) {
                                 if (optIdx === q.answer) {
-                                  btnClass = 'bg-emerald-50 border-emerald-500 text-emerald-800 font-extrabold';
+                                  btnClass = 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-500 text-emerald-800 dark:text-emerald-300 font-extrabold';
                                 } else if (isChosen && optIdx !== q.answer) {
-                                  btnClass = 'bg-rose-50 border-rose-500 text-rose-800 font-extrabold';
+                                  btnClass = 'bg-rose-50 dark:bg-rose-950/60 border-rose-500 text-rose-800 dark:text-rose-300 font-extrabold';
                                 }
                               } else if (isChosen) {
-                                btnClass = 'bg-sky-50 border-sky-500 text-sky-800 font-extrabold ring-1 ring-sky-500';
+                                btnClass = 'bg-sky-50 dark:bg-sky-950/60 border-sky-500 text-sky-800 dark:text-sky-300 font-extrabold ring-1 ring-sky-500';
                               }
 
                               return (
@@ -574,8 +574,8 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
                           </div>
 
                           {readingQuizChecked && q.explanation && (
-                            <div className="mt-3 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 flex items-start gap-2">
-                              <Lightbulb size={14} className="text-emerald-600 shrink-0 mt-0.5" />
+                            <div className="mt-3 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-xs text-emerald-800 dark:text-emerald-300 flex items-start gap-2">
+                              <Lightbulb size={14} className="text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                               <span><b>Giải thích:</b> {q.explanation}</span>
                             </div>
                           )}
@@ -592,8 +592,8 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
                         disabled={Object.keys(userReadingAnswers).length < milestone.readingPassage.questions.length}
                         className={`px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-white transition-all cursor-pointer ${
                           Object.keys(userReadingAnswers).length >= milestone.readingPassage.questions.length
-                            ? 'bg-slate-900 hover:bg-slate-800 shadow-sm'
-                            : 'bg-slate-300 cursor-not-allowed opacity-60'
+                            ? 'bg-slate-900 dark:bg-emerald-600 hover:bg-slate-800 dark:hover:bg-emerald-500 shadow-sm'
+                            : 'bg-slate-300 dark:bg-slate-800 text-slate-500 dark:text-slate-600 cursor-not-allowed opacity-60'
                         }`}
                       >
                         Kiểm tra kết quả trắc nghiệm
@@ -605,7 +605,7 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
                             setReadingQuizChecked(false);
                             setUserReadingAnswers({});
                           }}
-                          className="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 border border-slate-200 font-bold text-xs sm:text-sm hover:bg-slate-200 cursor-pointer flex items-center gap-1.5"
+                          className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-bold text-xs sm:text-sm hover:bg-slate-200 dark:hover:bg-slate-700 cursor-pointer flex items-center gap-1.5"
                         >
                           <RotateCcw size={14} />
                           <span>Làm lại</span>
@@ -632,7 +632,7 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
               )}
             </div>
           ) : (
-            <div className="text-center py-8 text-slate-500 text-sm">
+            <div className="text-center py-8 text-slate-500 dark:text-slate-400 text-sm">
               Đang đồng bộ đoạn hội thoại đọc hiểu của mốc từ Firestore...
             </div>
           )}
