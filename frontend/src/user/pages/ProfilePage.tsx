@@ -34,16 +34,16 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
       if (res.ok) {
         const data = await res.json();
         setRemoteVersion(data);
-        if (data.versionCode > 108) {
+        if (data.versionCode > 109) {
           setUpdateResult(`Đã có bản cập nhật mới v${data.version}! Bấm nút tải bên dưới để nâng cấp.`);
         } else {
-          setUpdateResult('Bạn đang sử dụng phiên bản KIZUNA mới nhất (v1.0.8). Hệ thống luôn tự động đồng bộ bài học mới!');
+          setUpdateResult('Bạn đang sử dụng phiên bản KIZUNA mới nhất (v1.0.9). Hệ thống luôn tự động đồng bộ bài học mới!');
         }
       } else {
-        setUpdateResult('Bạn đang sử dụng phiên bản mới nhất v1.0.8.');
+        setUpdateResult('Bạn đang sử dụng phiên bản mới nhất v1.0.9.');
       }
     } catch {
-      setUpdateResult('Bạn đang sử dụng phiên bản v1.0.8 (Máy chủ hoạt động bình thường).');
+      setUpdateResult('Bạn đang sử dụng phiên bản v1.0.9 (Máy chủ hoạt động bình thường).');
     } finally {
       setCheckingUpdate(false);
     }
@@ -171,7 +171,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
               <span>Thông tin phiên bản & Cập nhật ứng dụng</span>
             </div>
             <span className="text-xs font-black px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
-              v1.0.8 (Mới nhất)
+              v1.0.9 (Mới nhất)
             </span>
           </div>
 
@@ -196,11 +196,11 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
               <>
                 <a
                   href="/download/kizuna-latest.apk"
-                  download="kizuna-v1.0.8.apk"
+                  download="kizuna-v1.0.9.apk"
                   className="px-3.5 py-2 rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 font-bold text-xs flex items-center gap-1.5 transition-all shadow-xs"
                 >
                   <Smartphone className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                  <span>Tải file APK Android (v1.0.8)</span>
+                  <span>Tải file APK Android (v1.0.9)</span>
                 </a>
 
                 <a
