@@ -1581,38 +1581,15 @@ export const ExamPage: React.FC = () => {
         marginBottom: 20,
         boxShadow: '0 4px 16px -2px rgba(44, 30, 20, 0.04)'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-          <span style={{
-            background: '#fdf2f0',
-            color: '#c53d32',
-            border: '1px solid #f3d5d2',
-            borderRadius: 4,
-            padding: '2px 8px',
-            fontSize: 11,
-            fontWeight: 900,
-            letterSpacing: '1px',
-            fontFamily: 'serif'
-          }}>
-            演習 · 模擬試験
-          </span>
-          <span style={{ fontSize: 12, fontWeight: 700, color: '#78716c' }}>
-            NGÂN HÀNG ĐỀ THI JLPT CHUẨN HOÁ
-          </span>
-        </div>
-
         <h1 style={{
-          fontSize: 24,
+          fontSize: 22,
           fontWeight: 900,
           color: '#1c2536',
-          margin: '0 0 8px 0',
+          margin: '0 0 12px 0',
           fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
         }}>
-          Luyện Thi Thực Chiến & Chấm Điểm Chi Tiết
+          Ôn Thi JLPT
         </h1>
-
-        <p style={{ color: '#57534e', fontSize: 13, lineHeight: 1.6, margin: '0 0 16px 0', maxWidth: 760 }}>
-          Hệ thống 85 bộ đề thi chính thức N5 → N1 qua các năm (2011 → 2024), tích hợp audio Choukai bản quyền, tự động tính giờ thi theo đúng kỳ thi JLPT thật và lưu tiến trình học tập cá nhân.
-        </p>
 
         {/* Thống kê tính năng nổi bật */}
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>

@@ -844,13 +844,10 @@ export const GrammarPage: React.FC = () => {
               }}>
                 絆
               </span>
-              <h1 className="grammar-header-title" style={{ fontSize: 23, fontWeight: 900, color: '#1c2536', margin: 0, letterSpacing: '-0.3px' }}>
-                文法帳 <span className="grammar-header-sub" style={{ fontSize: 17, fontWeight: 700, color: '#475569' }}>· Ngữ Pháp Tiếng Nhật</span>
+              <h1 className="grammar-header-title" style={{ fontSize: 22, fontWeight: 900, color: '#1c2536', margin: 0, letterSpacing: '-0.3px' }}>
+                Ngữ Pháp
               </h1>
             </div>
-            <p style={{ color: '#78716c', fontSize: 13, margin: 0 }}>
-              Giáo trình chuẩn ngữ cảnh: <strong>みんなの日本語</strong> (Minna) & <strong>新完全マスター</strong> (Shinkanzen)
-            </p>
           </div>
 
           {/* Thanh chuyển cấp độ N phong cách Thẻ bài Nhật Bản (札 - Fuda) */}

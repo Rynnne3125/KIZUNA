@@ -4,6 +4,7 @@ import { Stage, Milestone, VocabularyItem, VocabularyCatalog, GrammarItem, Gramm
 import { VOCABULARY_CATALOG } from '../data/vocabularyCatalog';
 import { GRAMMAR_CATALOG } from '../data/grammarCatalog';
 import { KANJI_CATALOG } from '../data/kanjiCatalog';
+import { STAGES_CATALOG, MILESTONES_CATALOG } from '../data/roadmapCatalog';
 
 let isKizunaFirestoreOffline =
   !db ||
@@ -91,29 +92,32 @@ const OFFLINE_KANJI_DECK: KanjiItem[] = [
 export const kizunaService = {
   async getStages(): Promise<Stage[]> {
     const cached = getSessionCache<Stage[]>('kizuna_stages_cache');
-    if (cached) return cached;
+    if (cached && Array.isArray(cached) && cached.length > 4) return cached;
 
     try {
-      const snap = await safeGetDocs(collection(db, 'stages'));
+      const snap = await safeGetDocs(collection(db, 'stages'), 15000);
       if (!snap.empty) {
         const stages: Stage[] = [];
-        snap.forEach(d => stages.push({ id: d.id, ...d.data() } as Stage));
+        snap.forEach(d => {
+          const raw = d.data();
+          stages.push({
+            id: d.id,
+            ...raw,
+            jlptLevel: raw.jlptLevel || raw.jlpt_level || 'N5',
+            orderIndex: raw.orderIndex ?? raw.order_index ?? 0,
+            title: raw.title || raw.jpTitle || 'Chặng học'
+          } as Stage);
+        });
         stages.sort((a, b) => a.orderIndex - b.orderIndex);
         setSessionCache('kizuna_stages_cache', stages);
         return stages;
       }
     } catch (e) {
-      console.warn('Firestore stages fetch error, using default stages:', e);
+      console.warn('Firestore stages fetch error, using STAGES_CATALOG:', e);
     }
 
-    const fallback: Stage[] = [
-      { id: 'stage_01', orderIndex: 1, title: 'Chặng 1: Bảng Chữ Cái & Phát Âm Cơ Bản', description: 'Làm quen Hiragana, Katakana và các mẫu câu chào hỏi căn bản.' },
-      { id: 'stage_02', orderIndex: 2, title: 'Chặng 2: Giao Tiếp Sơ Cấp (N5 - Minna 1-12)', description: 'Tự giới thiệu bản thân, mua sắm, hỏi đường và sinh hoạt thường nhật.' },
-      { id: 'stage_03', orderIndex: 3, title: 'Chặng 3: Đời Sống & Công Việc (N5 - Minna 13-25)', description: 'Các thể động từ Te, Nai, Ta và cấu trúc xin phép, cấm đoán.' },
-      { id: 'stage_04', orderIndex: 4, title: 'Chặng 4: Nâng Cao & Giao Tiếp Tự Nhiên (N4)', description: 'Thể điều kiện, bị động, sai khiến và kính ngữ thương mại cơ bản.' }
-    ];
-    setSessionCache('kizuna_stages_cache', fallback);
-    return fallback;
+    setSessionCache('kizuna_stages_cache', STAGES_CATALOG);
+    return STAGES_CATALOG;
   },
 
   async getStagesByLevel(level: 'N5' | 'N4' | 'N3' | 'N2' | 'N1'): Promise<Stage[]> {
@@ -125,17 +129,23 @@ export const kizunaService = {
   async getMilestones(stageId?: string): Promise<Milestone[]> {
     const cacheKey = `kizuna_milestones_cache_${stageId || 'all'}`;
     const cached = getSessionCache<Milestone[]>(cacheKey);
-    if (cached) return cached;
+    if (cached && Array.isArray(cached) && cached.length > 5) return cached;
 
     try {
-      let q = collection(db, 'milestones');
-      const snap = await safeGetDocs(q);
+      const snap = await safeGetDocs(collection(db, 'milestones'), 15000);
       if (!snap.empty) {
         const milestones: Milestone[] = [];
         snap.forEach(d => {
-          const data = d.data();
-          if (!stageId || data.stageId === stageId) {
-            milestones.push({ id: d.id, ...data } as Milestone);
+          const raw = d.data();
+          const sid = raw.stageId || raw.stage_id;
+          if (!stageId || sid === stageId) {
+            milestones.push({
+              id: d.id,
+              ...raw,
+              stageId: sid,
+              jlptLevel: raw.jlptLevel || raw.jlpt_level || 'N5',
+              orderIndex: raw.orderIndex ?? raw.order_index ?? 0
+            } as Milestone);
           }
         });
         milestones.sort((a, b) => a.orderIndex - b.orderIndex);
@@ -143,16 +153,12 @@ export const kizunaService = {
         return milestones;
       }
     } catch (e) {
-      console.warn('Firestore milestones fetch error:', e);
+      console.warn('Firestore milestones fetch error, using MILESTONES_CATALOG:', e);
     }
 
-    const fallback: Milestone[] = [
-      { id: 'ms_01', stageId: 'stage_01', title: 'Hiragana & Âm ghép', nejUnit: 'Bài 1', orderIndex: 1, communicationContext: 'Chào hỏi & Đọc âm', xpReward: 50, activePointsReward: 20, status: 'COMPLETED', vocabCount: 26, kanjiCount: 10, grammarCount: 4 },
-      { id: 'ms_02', stageId: 'stage_01', title: 'Katakana & Từ mượn', nejUnit: 'Bài 2', orderIndex: 2, communicationContext: 'Đọc tên nước, món ăn', xpReward: 60, activePointsReward: 25, status: 'COMPLETED', vocabCount: 30, kanjiCount: 15, grammarCount: 5 },
-      { id: 'ms_03', stageId: 'stage_01', title: 'Giới thiệu bản thân & Nghề nghiệp', nejUnit: 'Bài 3', orderIndex: 3, communicationContext: 'Gặp gỡ lần đầu', xpReward: 80, activePointsReward: 30, status: 'UNLOCKED', vocabCount: 35, kanjiCount: 20, grammarCount: 6 },
-      { id: 'ms_04', stageId: 'stage_02', title: 'Mua sắm & Giá tiền', nejUnit: 'Bài 4', orderIndex: 4, communicationContext: 'Đi siêu thị & cửa hàng tiện lợi', xpReward: 90, activePointsReward: 35, status: 'LOCKED', vocabCount: 40, kanjiCount: 25, grammarCount: 6 },
-      { id: 'ms_05', stageId: 'stage_02', title: 'Thời gian & Lịch trình', nejUnit: 'Bài 5', orderIndex: 5, communicationContext: 'Hẹn giờ, xem lịch tàu', xpReward: 100, activePointsReward: 40, status: 'LOCKED', vocabCount: 45, kanjiCount: 25, grammarCount: 7 }
-    ];
+    const fallback = stageId 
+      ? MILESTONES_CATALOG.filter(m => (m.stageId || (m as any).stage_id) === stageId)
+      : MILESTONES_CATALOG;
     setSessionCache(cacheKey, fallback);
     return fallback;
   },

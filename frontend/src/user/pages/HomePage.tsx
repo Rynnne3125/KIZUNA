@@ -173,23 +173,12 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
           </div>
 
           <div>
-            <div className="text-[11px] font-bold text-emerald-200/80 uppercase tracking-widest font-jp-sans flex items-center gap-1.5 mb-1">
-              <span>実践日本語とビジネスマナー</span>
-              <span className="text-emerald-400/50">•</span>
-              <span>日進月歩</span>
-            </div>
             <h1 className="text-2xl sm:text-3xl font-black tracking-tight leading-snug">
-              Học Tiếng Nhật Thực Chiến & Chuẩn Tác Phong Doanh Nghiệp
+              Học Tiếng Nhật KIZUNA
             </h1>
-          </div>
-
-          <p className="text-emerald-100/90 text-xs sm:text-sm leading-relaxed">
-            Đồng hành cùng bạn từ con số 0 đến tự tin giao tiếp, phỏng vấn và làm việc chuẩn môi trường doanh nghiệp Nhật Bản.
-          </p>
-
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-white/10 text-emerald-100 text-[11px] border border-white/10">
-            <span className="font-jp-serif text-amber-300 font-bold">「千里の道も一歩から」</span>
-            <span className="opacity-80">Hành trình vạn dặm khởi đầu từ một bước chân</span>
+            <p className="text-emerald-200 text-xs sm:text-sm mt-1 font-medium">
+              Giao tiếp thực chiến & Luyện thi JLPT
+            </p>
           </div>
         </div>
 
@@ -228,35 +217,29 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
           2. TIẾN ĐỘ HỌC TẬP THỰC TẾ (HỆ THỐNG HUY HIỆU CHỮ HÁN MON & THẺ CHUẨN NHẬT)
           ========================================================================= */}
       <div className="bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-7 border border-emerald-100 dark:border-slate-800 shadow-md shadow-emerald-950/5 relative overflow-hidden bg-seigaiha-light transition-colors">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5 relative z-10">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4 relative z-10">
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="hanko-seal px-2 py-0.2 text-[11px]">
-                進
-              </span>
-              <span className="inline-block bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800 px-3 py-0.5 rounded-full text-xs font-bold font-jp-sans">
-                学習の進捗 • TIẾN ĐỘ HỌC TẬP THỰC TẾ
-              </span>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="hanko-seal px-2 py-0.5 text-xs">進</span>
+              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+                {hasStarted 
+                  ? (userProgress?.currentMilestoneTitle || 'Tiến độ học tập')
+                  : 'Tiến độ học tập'
+                }
+              </h2>
             </div>
-            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-              {hasStarted 
-                ? `Bạn đang học: ${userProgress?.currentMilestoneTitle || 'Mốc rèn luyện'}`
-                : 'Khởi đầu hành trình học tập'
-              }
-            </h2>
-            <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-              {hasStarted
-                ? `${userProgress?.currentStageTitle || 'Chặng 1: Bảng Chữ Cái & Giao Tiếp Cơ Bản'} • ${userProgress?.currentMilestoneContext || 'Rèn luyện phản xạ'}`
-                : 'Bắt đầu từ Chặng 1 để rèn luyện bảng chữ cái, phát âm chuẩn Tokyo và tích lũy những Điểm Năng Động đầu tiên.'
-              }
-            </div>
+            {hasStarted && userProgress?.currentStageTitle && (
+              <div className="text-xs text-slate-500 dark:text-slate-400 font-medium ml-7">
+                {userProgress.currentStageTitle}
+              </div>
+            )}
           </div>
 
           <button
             onClick={() => onNavigate('roadmap')}
             className="w-full md:w-auto px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white font-bold text-xs sm:text-sm shadow-md shadow-emerald-700/20 transition-all cursor-pointer whitespace-nowrap self-start md:self-auto flex items-center justify-center gap-2 group"
           >
-            <span>{hasStarted ? 'Tiếp tục bài học' : 'Bắt đầu bài học đầu tiên'}</span>
+            <span>{hasStarted ? 'Tiếp tục học' : 'Bắt đầu học'}</span>
             <ArrowRight className="w-4 h-4 text-emerald-200 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
@@ -379,201 +362,7 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
       </div>
 
       {/* =========================================================================
-          3. KHÁM PHÁ KHO TÀNG TRI THỨC KIZUNA (6 THẺ HỌC PHONG CÁCH KARUTA NHẬT BẢN)
-          ========================================================================= */}
-      <div className="bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-7 border border-emerald-100 dark:border-slate-800 shadow-md shadow-emerald-950/5 space-y-5 transition-colors">
-        <div>
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="hanko-seal px-2 py-0.2 text-[11px]">
-              知
-            </span>
-            <span className="bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800 px-3 py-0.5 rounded-full text-xs font-bold font-jp-sans">
-              知識の森 • KHÁM PHÁ KHO TÀNG TRI THỨC KIZUNA
-            </span>
-          </div>
-          <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
-            Hệ Thống Rèn Luyện Toàn Diện Cho Người Học Tiếng Nhật
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-            Bấm vào từng khu vực để bắt đầu học và nâng cao phản xạ tiếng Nhật tự nhiên chuẩn người bản xứ.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-1">
-          
-          {/* Card 1: Từ vựng (語彙 - Kotoba) */}
-          <div 
-            onClick={() => onNavigate('vocab')}
-            className="group p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-emerald-400 dark:hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-emerald-50/20 dark:from-slate-800/90 dark:to-slate-800/40 flex flex-col justify-between"
-          >
-            <div>
-              <div className="flex items-center justify-between mb-3.5">
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center text-emerald-800 dark:text-emerald-300 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
-                  語
-                </div>
-                <span className="text-[11px] font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 px-2.5 py-0.5 rounded-full font-jp-sans">
-                  語彙 • {catalogStats.vocabCount.toLocaleString()}+ Từ
-                </span>
-              </div>
-              <h3 className="font-extrabold text-slate-900 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors text-base mb-1.5 flex items-center justify-between">
-                <span>Từ Vựng Giao Tiếp Thực Chiến</span>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 group-hover:translate-x-1 transition-all" />
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Tích hợp âm Hán Việt, phiên âm Hiragana, phát âm chuẩn Tokyo cùng ngữ cảnh hội thoại sinh động trong đời sống và văn phòng tại Nhật.
-              </p>
-            </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 text-[11px] font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5 group-hover:text-emerald-800 dark:group-hover:text-emerald-300">
-              <BookOpen className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-              <span>Học qua Flashcard tương tác</span>
-            </div>
-          </div>
-
-          {/* Card 2: Ngữ pháp (文法 - Bunpou) */}
-          <div 
-            onClick={() => onNavigate('grammar')}
-            className="group p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-teal-400 dark:hover:border-teal-500 hover:shadow-lg hover:shadow-teal-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-teal-50/20 dark:from-slate-800/90 dark:to-slate-800/40 flex flex-col justify-between"
-          >
-            <div>
-              <div className="flex items-center justify-between mb-3.5">
-                <div className="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 flex items-center justify-center text-teal-800 dark:text-teal-300 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
-                  文
-                </div>
-                <span className="text-[11px] font-bold bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800 px-2.5 py-0.5 rounded-full font-jp-sans">
-                  文法 • {catalogStats.grammarCount.toLocaleString()}+ Mẫu
-                </span>
-              </div>
-              <h3 className="font-extrabold text-slate-900 dark:text-white group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors text-base mb-1.5 flex items-center justify-between">
-                <span>Ngữ Pháp Ứng Dụng Chuẩn Mực</span>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-teal-600 dark:group-hover:text-teal-400 group-hover:translate-x-1 transition-all" />
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Giải thích cặn kẽ sắc thái biểu đạt, kính ngữ Keigo, khiêm nhường ngữ và văn phong email, báo cáo công việc chuẩn người Nhật.
-              </p>
-            </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 text-[11px] font-bold text-teal-700 dark:text-teal-400 flex items-center gap-1.5 group-hover:text-teal-800 dark:group-hover:text-teal-300">
-              <FileText className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
-              <span>Nắm vững cấu trúc câu</span>
-            </div>
-          </div>
-
-          {/* Card 3: Kanji (漢字 - Chữ Hán) */}
-          <div 
-            onClick={() => onNavigate('kanji')}
-            className="group p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-indigo-400 dark:hover:border-indigo-500 hover:shadow-lg hover:shadow-indigo-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-indigo-50/20 dark:from-slate-800/90 dark:to-slate-800/40 flex flex-col justify-between"
-          >
-            <div>
-              <div className="flex items-center justify-between mb-3.5">
-                <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 flex items-center justify-center text-indigo-800 dark:text-indigo-300 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
-                  漢
-                </div>
-                <span className="text-[11px] font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-800 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 px-2.5 py-0.5 rounded-full font-jp-sans">
-                  漢字 • {catalogStats.kanjiCount.toLocaleString()}+ Chữ
-                </span>
-              </div>
-              <h3 className="font-extrabold text-slate-900 dark:text-white group-hover:text-indigo-700 dark:group-hover:text-indigo-400 transition-colors text-base mb-1.5 flex items-center justify-between">
-                <span>Chữ Hán Kanji Tư Duy Hình Ảnh</span>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 group-hover:translate-x-1 transition-all" />
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Phương pháp nhớ chữ qua câu chuyện bộ thủ tượng hình, dễ dàng nhận diện từ ghép trong văn bản, hợp đồng và bảng biểu.
-              </p>
-            </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 text-[11px] font-bold text-indigo-700 dark:text-indigo-400 flex items-center gap-1.5 group-hover:text-indigo-800 dark:group-hover:text-indigo-300">
-              <Languages className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
-              <span>Khám phá bí quyết nhớ chữ Hán</span>
-            </div>
-          </div>
-
-          {/* Card 4: Lộ trình (道標 - Michishirube) */}
-          <div 
-            onClick={() => onNavigate('roadmap')}
-            className="group p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-amber-400 dark:hover:border-amber-500 hover:shadow-lg hover:shadow-amber-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-amber-50/20 dark:from-slate-800/90 dark:to-slate-800/40 flex flex-col justify-between"
-          >
-            <div>
-              <div className="flex items-center justify-between mb-3.5">
-                <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 flex items-center justify-center text-amber-900 dark:text-amber-300 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
-                  道
-                </div>
-                <span className="text-[11px] font-bold bg-amber-50 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 border border-amber-200 dark:border-amber-800 px-2.5 py-0.5 rounded-full font-jp-sans">
-                  道標 • 4 Chặng 28 Mốc
-                </span>
-              </div>
-              <h3 className="font-extrabold text-slate-900 dark:text-white group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors text-base mb-1.5 flex items-center justify-between">
-                <span>Lộ Trình Từng Bước Từ Số 0</span>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-amber-600 dark:group-hover:text-amber-400 group-hover:translate-x-1 transition-all" />
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Đi từ bảng chữ cái, phát âm, hội thoại mua sắm đến kỹ năng phỏng vấn xin việc và nguyên tắc báo cáo Ho-Ren-So.
-              </p>
-            </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 text-[11px] font-bold text-amber-700 dark:text-amber-400 flex items-center gap-1.5 group-hover:text-amber-800 dark:group-hover:text-amber-300">
-              <Compass className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-              <span>Xem chi tiết các mốc học</span>
-            </div>
-          </div>
-
-          {/* Card 5: Thư viện văn hóa (礼法 - Reihou) */}
-          <div 
-            onClick={() => onNavigate('library')}
-            className="group p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-purple-400 dark:hover:border-purple-500 hover:shadow-lg hover:shadow-purple-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-purple-50/20 dark:from-slate-800/90 dark:to-slate-800/40 flex flex-col justify-between"
-          >
-            <div>
-              <div className="flex items-center justify-between mb-3.5">
-                <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800 flex items-center justify-center text-purple-900 dark:text-purple-300 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
-                  礼
-                </div>
-                <span className="text-[11px] font-bold bg-purple-50 dark:bg-purple-950/60 text-purple-900 dark:text-purple-300 border border-purple-200 dark:border-purple-800 px-2.5 py-0.5 rounded-full font-jp-sans">
-                  礼法 • Tác phong Nhật
-                </span>
-              </div>
-              <h3 className="font-extrabold text-slate-900 dark:text-white group-hover:text-purple-700 dark:group-hover:text-purple-400 transition-colors text-base mb-1.5 flex items-center justify-between">
-                <span>Cẩm Nang Doanh Nghiệp Nhật Bản</span>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 group-hover:translate-x-1 transition-all" />
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Cẩm nang ứng xử văn hóa, nghi thức cúi chào Ojigi, tác phong làm việc giúp bạn tự tin hòa nhập môi trường công ty Nhật.
-              </p>
-            </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 text-[11px] font-bold text-purple-700 dark:text-purple-400 flex items-center gap-1.5 group-hover:text-purple-800 dark:group-hover:text-purple-300">
-              <Library className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-              <span>Đọc cẩm nang doanh nghiệp</span>
-            </div>
-          </div>
-
-          {/* Card 6: Luyện thi JLPT (試験 - Shiken) */}
-          <div 
-            onClick={() => onNavigate('exam')}
-            className="group p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-rose-400 dark:hover:border-rose-500 hover:shadow-lg hover:shadow-rose-950/5 transition-all duration-300 cursor-pointer bg-gradient-to-b from-white to-rose-50/20 dark:from-slate-800/90 dark:to-slate-800/40 flex flex-col justify-between"
-          >
-            <div>
-              <div className="flex items-center justify-between mb-3.5">
-                <div className="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800 flex items-center justify-center text-rose-900 dark:text-rose-300 font-jp-serif font-black text-lg group-hover:scale-110 transition-transform">
-                  試
-                </div>
-                <span className="text-[11px] font-bold bg-rose-50 dark:bg-rose-950/60 text-rose-900 dark:text-rose-300 border border-rose-200 dark:border-rose-800 px-2.5 py-0.5 rounded-full font-jp-sans">
-                  試験 • {catalogStats.examsCount}+ Đề thi
-                </span>
-              </div>
-              <h3 className="font-extrabold text-slate-900 dark:text-white group-hover:text-rose-700 dark:group-hover:text-rose-400 transition-colors text-base mb-1.5 flex items-center justify-between">
-                <span>Phòng Luyện Thi JLPT (Bổ Trợ)</span>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-rose-600 dark:group-hover:text-rose-400 group-hover:translate-x-1 transition-all" />
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Ngân hàng đề thi thử các cấp độ N5 - N1 kèm chấm điểm tự động và lời giải chi tiết, phục vụ khi bạn cần thi lấy chứng chỉ.
-              </p>
-            </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 text-[11px] font-bold text-rose-700 dark:text-rose-400 flex items-center gap-1.5 group-hover:text-rose-800 dark:group-hover:text-rose-300">
-              <Target className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
-              <span>Vào phòng thi thử tự do</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      {/* =========================================================================
-          4. BẢNG XẾP HẠNG HỌC VIÊN TÍCH CỰC (順位表 - PODIUM NHẬT BẢN 壱 弐 参)
+          3. BẢNG XẾP HẠNG HỌC VIÊN TÍCH CỰC (順位表 - PODIUM NHẬT BẢN 壱 弐 参)
           ========================================================================= */}
       <div className="bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-7 border border-emerald-100 dark:border-slate-800 shadow-md shadow-emerald-950/5 space-y-5 transition-colors">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -588,11 +377,9 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
               </span>
             </div>
             <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
-              Vinh Danh Học Viên Theo Điểm Năng Động (Active Points)
+              Bảng Xếp Hạng
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Xếp hạng dựa trên nỗ lực học tập thực tế trên hệ thống. Chỉ người dùng học viên mới tham gia bảng xếp hạng.
-            </p>
+            
           </div>
 
           {user && (

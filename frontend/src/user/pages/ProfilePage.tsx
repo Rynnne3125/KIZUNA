@@ -66,12 +66,8 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <div>
-        <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 px-3 py-1 rounded-full text-xs font-bold mb-2">
-          <UserIcon className="w-3.5 h-3.5" />
-          <span>HỒ SƠ HỌC VIÊN KIZUNA</span>
-        </div>
         <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          Quản Lý Tài Khoản Cá Nhân
+          Hồ Sơ Cá Nhân
         </h1>
       </div>
 

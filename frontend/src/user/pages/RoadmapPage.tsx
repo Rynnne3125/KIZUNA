@@ -134,6 +134,17 @@ export const RoadmapPage: React.FC = () => {
   // Load real user and Firestore data
   useEffect(() => {
     async function loadData() {
+      // Clear out stale dummy cache (<= 4 stages)
+      try {
+        const cachedRaw = sessionStorage.getItem('kizuna_stages_cache') || localStorage.getItem('offline_kizuna_stages_cache');
+        if (cachedRaw && cachedRaw.includes('stage_01') && !cachedRaw.includes('stage_n5_1')) {
+          sessionStorage.removeItem('kizuna_stages_cache');
+          localStorage.removeItem('offline_kizuna_stages_cache');
+          sessionStorage.removeItem('kizuna_milestones_cache_all');
+          localStorage.removeItem('offline_kizuna_milestones_cache_all');
+        }
+      } catch {}
+
       try {
         const u = authService.getCurrentUser();
         if (u) {
@@ -173,21 +184,27 @@ export const RoadmapPage: React.FC = () => {
   // Filter stages of selected level
   const levelStages = useMemo(() => {
     return stages
-      .filter(s => s.jlptLevel === selectedLevel || (!s.jlptLevel && selectedLevel === 'N5'))
-      .sort((a, b) => a.orderIndex - b.orderIndex);
+      .filter(s => {
+        const lvl = (s.jlptLevel || (s as any).jlpt_level || 'N5').toUpperCase();
+        return lvl === selectedLevel.toUpperCase();
+      })
+      .sort((a, b) => ((a.orderIndex ?? (a as any).order_index ?? 0) - (b.orderIndex ?? (b as any).order_index ?? 0)));
   }, [stages, selectedLevel]);
 
   // Filter milestones of selected stage
   const stageMilestones = useMemo(() => {
     return milestones
-      .filter(m => m.stageId === selectedStage?.id)
-      .sort((a, b) => a.orderIndex - b.orderIndex);
+      .filter(m => {
+        const sid = m.stageId || (m as any).stage_id;
+        return sid === selectedStage?.id;
+      })
+      .sort((a, b) => ((a.orderIndex ?? (a as any).order_index ?? 0) - (b.orderIndex ?? (b as any).order_index ?? 0)));
   }, [milestones, selectedStage?.id]);
 
   // Check if a stage is completed based on its milestones
   const isStageCompleted = (st?: Stage) => {
     if (!st) return false;
-    const mils = milestones.filter(m => m.stageId === st.id);
+    const mils = milestones.filter(m => (m.stageId || (m as any).stage_id) === st.id);
     if (mils.length === 0) return false;
     return mils.every(m => userProgress?.completedMilestones?.includes(m.id));
   };
@@ -363,7 +380,7 @@ export const RoadmapPage: React.FC = () => {
                 絆
               </span>
               <span style={{ fontSize: 12, fontWeight: 800, color: '#c53d32', letterSpacing: 1.5, textTransform: 'uppercase' }}>
-                HỌC PHẦN CHUẨN HOÁ · 日本語ロードマップ
+                LỘ TRÌNH CHUẨN HOÁ
               </span>
             </div>
 
@@ -577,12 +594,9 @@ export const RoadmapPage: React.FC = () => {
               <div style={{ fontSize: 12, fontWeight: 800, color: LEVEL_CONFIG[selectedLevel].color, textTransform: 'uppercase', marginBottom: 2 }}>
                 CẤP ĐỘ {selectedLevel} · {LEVEL_CONFIG[selectedLevel].kanji}
               </div>
-              <h2 style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0' }}>
+              <h2 style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: 0 }}>
                 {LEVEL_CONFIG[selectedLevel].range}
               </h2>
-              <p style={{ fontSize: 13, color: '#64748b', margin: 0 }}>
-                {LEVEL_CONFIG[selectedLevel].desc}
-              </p>
             </div>
 
             <div
@@ -603,7 +617,7 @@ export const RoadmapPage: React.FC = () => {
           {/* Stages Grid Cards */}
           <div className="roadmap-stages-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
             {levelStages.map((st, idx) => {
-              const stageMils = milestones.filter(m => m.stageId === st.id);
+              const stageMils = milestones.filter(m => (m.stageId || (m as any).stage_id) === st.id);
               const milestoneCount = stageMils.length || st.total_milestones || 5;
               const completedCount = stageMils.filter(m => userProgress?.completedMilestones?.includes(m.id)).length;
               const percent = stageMils.length > 0 ? Math.round((completedCount / stageMils.length) * 100) : 0;

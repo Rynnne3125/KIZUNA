@@ -292,38 +292,15 @@ export const LibraryPage: React.FC = () => {
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-              <span style={{
-                background: '#fdf2f0',
-                color: '#c53d32',
-                border: '1px solid #f3d5d2',
-                borderRadius: 4,
-                padding: '2px 8px',
-                fontSize: 11,
-                fontWeight: 900,
-                letterSpacing: '1px',
-                fontFamily: 'serif'
-              }}>
-                多言語 · メディアライブラリ
-              </span>
-              <span style={{ fontSize: 12, fontWeight: 700, color: '#78716c' }}>
-                HỌC LIỆU ĐA PHƯƠNG TIỆN KIZUNA
-              </span>
-            </div>
-
             <h1 style={{
-              fontSize: 24,
+              fontSize: 22,
               fontWeight: 900,
               color: '#1c2536',
-              margin: '0 0 8px 0',
+              margin: '0 0 4px 0',
               fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
             }}>
-              Kho Học Liệu Video & Luyện Đề Nghe Choukai
+              Thư Viện Video & Luyện Nghe
             </h1>
-
-            <p style={{ color: '#57534e', fontSize: 13, lineHeight: 1.6, margin: 0, maxWidth: 780 }}>
-              Học liệu tiếng Nhật bản ngữ chuẩn xác: Kho 1.015 video bài giảng đa chủ đề phân loại N5-N1 và ngân hàng 65 đề thi nghe Choukai chính thức có chấm điểm kèm kịch bản đối chiếu.
-            </p>
           </div>
 
           {/* CHUYỂN ĐỔI 2 PHÂN HỆ HỌC TẬP CHÍNH */}

@@ -1378,13 +1378,10 @@ export const KanjiPage: React.FC = () => {
               }}>
                 絆
               </span>
-              <h1 style={{ fontSize: 23, fontWeight: 900, color: '#1c2536', margin: 0, letterSpacing: '-0.3px' }}>
-                漢字帳 <span style={{ fontSize: 17, fontWeight: 700, color: '#475569' }}>· Chữ Hán Theo Cấp Độ</span>
+              <h1 style={{ fontSize: 22, fontWeight: 900, color: '#1c2536', margin: 0, letterSpacing: '-0.3px' }}>
+                Kanji
               </h1>
             </div>
-            <p style={{ color: '#78716c', fontSize: 13, margin: 0 }}>
-              Học <strong>2,216 chữ Hán</strong> chuẩn JLPT theo cấp độ (N5 → N1), phân trang 40 chữ/trang, thứ tự nét đỏ & mẹo nhớ chiết tự bộ thủ.
-            </p>
           </div>
 
           {/* Thanh chuyển cấp độ N5 -> N1 phong cách Thẻ bài Nhật Bản (札 - Fuda) */}
