@@ -947,6 +947,25 @@ export const VocabPage: React.FC = () => {
         }
 
         /* Responsive Media Queries */
+        @media (max-width: 900px) {
+          .vocab-unit-header-card {
+            padding: 12px 14px !important;
+          }
+          .vocab-mode-tabs {
+            width: 100% !important;
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 6px !important;
+          }
+          .vocab-mode-tabs button {
+            flex: 1 1 calc(50% - 6px) !important;
+            min-width: 120px !important;
+            text-align: center !important;
+            justify-content: center !important;
+            padding: 7px 8px !important;
+            font-size: 12px !important;
+          }
+        }
         @media (max-width: 768px) {
           .vocab-desktop-table {
             display: none !important;
@@ -1342,7 +1361,7 @@ export const VocabPage: React.FC = () => {
       {selectedBook && selectedUnit && (
         <div>
           {/* Header của bài học */}
-          <div style={{
+          <div className="vocab-unit-header-card" style={{
             background: '#ffffff',
             borderRadius: 12,
             border: '1px solid #ebe7df',
@@ -1382,9 +1401,9 @@ export const VocabPage: React.FC = () => {
             </div>
 
             {/* Tabs chuyển chế độ: Danh sách + 3 dạng bài tập (1: Ôn tập, 2: Luyện ghi nhớ, 3: Gõ ghi nhớ) */}
-            <div style={{
+            <div className="vocab-mode-tabs" style={{
               display: 'flex',
-              gap: 8,
+              gap: 6,
               borderTop: '1px solid #f2eee8',
               paddingTop: 12,
               flexWrap: 'wrap'
@@ -1393,7 +1412,7 @@ export const VocabPage: React.FC = () => {
               <button
                 onClick={() => setCurrentMode('list')}
                 style={{
-                  padding: '8px 14px',
+                  padding: '6px 14px',
                   borderRadius: 8,
                   fontSize: 13,
                   fontWeight: 700,
@@ -1402,10 +1421,13 @@ export const VocabPage: React.FC = () => {
                   background: currentMode === 'list' ? '#1c2536' : '#faf8f5',
                   color: currentMode === 'list' ? '#ffffff' : '#78716c',
                   borderBottom: currentMode === 'list' ? '2px solid #1c2536' : '1px solid #e7e3da',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   transition: 'all 0.15s ease'
                 }}
               >
-                Danh sách từ vựng
+                Danh sách
               </button>
 
               {/* DẠNG 1: ÔN TẬP (Flashcard Lật 3D SRS) */}
@@ -1415,7 +1437,7 @@ export const VocabPage: React.FC = () => {
                   restartAllFlip();
                 }}
                 style={{
-                  padding: '8px 16px',
+                  padding: '6px 14px',
                   borderRadius: 8,
                   fontSize: 13,
                   fontWeight: 700,
@@ -1426,15 +1448,16 @@ export const VocabPage: React.FC = () => {
                   borderBottom: currentMode === 'flip' ? '2px solid #c53d32' : '1px solid #e7e3da',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 7,
+                  justifyContent: 'center',
+                  gap: 6,
                   transition: 'all 0.15s ease'
                 }}
               >
                 <span style={{
                   background: currentMode === 'flip' ? 'rgba(255,255,255,0.25)' : '#ede7de',
-                  padding: '2px 7px',
-                  borderRadius: 5,
-                  fontSize: 12,
+                  padding: '1px 6px',
+                  borderRadius: 4,
+                  fontSize: 11,
                   fontWeight: 900
                 }}>1</span>
                 <span>Ôn tập</span>
@@ -1447,7 +1470,7 @@ export const VocabPage: React.FC = () => {
                   initQuizMode();
                 }}
                 style={{
-                  padding: '8px 16px',
+                  padding: '6px 14px',
                   borderRadius: 8,
                   fontSize: 13,
                   fontWeight: 700,
@@ -1458,15 +1481,16 @@ export const VocabPage: React.FC = () => {
                   borderBottom: currentMode === 'quiz' ? '2px solid #2563eb' : '1px solid #e7e3da',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 7,
+                  justifyContent: 'center',
+                  gap: 6,
                   transition: 'all 0.15s ease'
                 }}
               >
                 <span style={{
                   background: currentMode === 'quiz' ? 'rgba(255,255,255,0.25)' : '#ede7de',
-                  padding: '2px 7px',
-                  borderRadius: 5,
-                  fontSize: 12,
+                  padding: '1px 6px',
+                  borderRadius: 4,
+                  fontSize: 11,
                   fontWeight: 900
                 }}>2</span>
                 <span>Luyện ghi nhớ</span>
@@ -1479,7 +1503,7 @@ export const VocabPage: React.FC = () => {
                   initTypingMode();
                 }}
                 style={{
-                  padding: '8px 16px',
+                  padding: '6px 14px',
                   borderRadius: 8,
                   fontSize: 13,
                   fontWeight: 700,
@@ -1490,15 +1514,16 @@ export const VocabPage: React.FC = () => {
                   borderBottom: currentMode === 'typing' ? '2px solid #2d6d4b' : '1px solid #e7e3da',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 7,
+                  justifyContent: 'center',
+                  gap: 6,
                   transition: 'all 0.15s ease'
                 }}
               >
                 <span style={{
                   background: currentMode === 'typing' ? 'rgba(255,255,255,0.25)' : '#ede7de',
-                  padding: '2px 7px',
-                  borderRadius: 5,
-                  fontSize: 12,
+                  padding: '1px 6px',
+                  borderRadius: 4,
+                  fontSize: 11,
                   fontWeight: 900
                 }}>3</span>
                 <span>Gõ ghi nhớ</span>

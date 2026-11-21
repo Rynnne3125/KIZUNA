@@ -1540,7 +1540,7 @@ export const KanjiPage: React.FC = () => {
                 transition: 'all 0.15s ease'
               }}
             >
-              0 · Danh sách chữ Hán
+              Danh sách chữ Hán
             </button>
 
             <button
