@@ -509,7 +509,7 @@ export const authService = {
         GoogleAuth.initialize({
           clientId: '657175691442-eeqc6uhf4a8hl4m27oat1pmghk99df0b.apps.googleusercontent.com',
           scopes: ['profile', 'email'],
-          grantOfflineAccess: true
+          grantOfflineAccess: false
         });
       } catch (err) {
         console.warn('[GoogleAuth Native] Init warning:', err);
@@ -683,11 +683,15 @@ export const authService = {
         } catch (nativeErr: any) {
           console.warn('[GoogleAuth Native] Error:', nativeErr);
           const msg = nativeErr?.message || '';
-          if (msg.includes('12501') || msg.includes('cancelled') || nativeErr?.code === '12501') {
+          const code = (nativeErr?.code ?? '').toString();
+          if (msg.includes('12501') || msg.includes('cancelled') || code === '12501') {
             throw new Error('Bạn đã hủy thao tác đăng nhập Google.');
           }
-          if (msg.includes('10') || msg.includes('DEVELOPER_ERROR')) {
-            throw new Error('Cấu hình xác thực Google trên Android chưa khớp SHA-1 hoặc Client ID.');
+          if (code === '10' || msg.includes('10') || msg.includes('DEVELOPER_ERROR') || msg.toLowerCase().includes('something went wrong')) {
+            throw new Error('Lỗi xác thực Google (DEVELOPER_ERROR). Vui lòng: 1) Đợi 5-10 phút để Google cập nhật mã SHA-1 vừa thêm; 2) Đảm bảo Firebase Console đã chọn "Email hỗ trợ dự án" (Support email).');
+          }
+          if (code === '12500' || msg.includes('12500')) {
+            throw new Error('Lỗi xác thực Google (Code 12500). Vui lòng thử lại sau vài phút hoặc kiểm tra tài khoản Google trên thiết bị.');
           }
           throw new Error(msg || 'Đăng nhập Google trên ứng dụng di động thất bại. Vui lòng thử lại.');
         }
