@@ -1521,7 +1521,7 @@ export const GrammarPage: React.FC = () => {
                               <button
                                 onClick={e => {
                                   e.stopPropagation();
-                                  speakJapanese(item.pattern);
+                                  speakJapanese(item.masterExampleJp || item.pattern);
                                 }}
                                 title="Phát âm mẫu câu"
                                 style={{
@@ -2019,7 +2019,7 @@ export const GrammarPage: React.FC = () => {
                               <button
                                 onClick={e => {
                                   e.stopPropagation();
-                                  speakJapanese(flipStudyList[flipActiveIndex].pattern);
+                                  speakJapanese(flipStudyList[flipActiveIndex].masterExampleJp || flipStudyList[flipActiveIndex].pattern);
                                 }}
                                 title="Phát âm"
                                 style={{

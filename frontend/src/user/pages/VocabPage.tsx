@@ -1598,7 +1598,7 @@ export const VocabPage: React.FC = () => {
                                     {item.term}
                                   </span>
                                   <button
-                                    onClick={() => speakJapanese(item.term)}
+                                    onClick={() => speakJapanese(item.reading || item.term)}
                                     title="Phát âm từ"
                                     style={{
                                       background: '#faf8f5',
@@ -1697,7 +1697,7 @@ export const VocabPage: React.FC = () => {
                                 {item.term}
                               </span>
                               <button
-                                onClick={() => speakJapanese(item.term)}
+                                onClick={() => speakJapanese(item.reading || item.term)}
                                 style={{
                                   background: '#faf8f5',
                                   border: '1px solid #e7e5e4',
@@ -2065,7 +2065,7 @@ export const VocabPage: React.FC = () => {
                               <button
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  speakJapanese(flipStudyList[flipActiveIndex].term);
+                                  speakJapanese(flipStudyList[flipActiveIndex].reading || flipStudyList[flipActiveIndex].term);
                                 }}
                                 title="Phát âm từ"
                                 style={{
@@ -2149,7 +2149,7 @@ export const VocabPage: React.FC = () => {
                               <button
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  speakJapanese(flipStudyList[flipActiveIndex].term);
+                                  speakJapanese(flipStudyList[flipActiveIndex].reading || flipStudyList[flipActiveIndex].term);
                                 }}
                                 title="Phát âm"
                                 style={{
@@ -2534,7 +2534,7 @@ export const VocabPage: React.FC = () => {
 
                         {/* Nút phát âm */}
                         <button
-                          onClick={() => speakJapanese(currentQuizQuestion.item.term)}
+                          onClick={() => speakJapanese(currentQuizQuestion.item.reading || currentQuizQuestion.item.term)}
                           title="Phát âm từ"
                           style={{
                             position: 'absolute',
@@ -2985,7 +2985,7 @@ export const VocabPage: React.FC = () => {
 
                         {/* Nút phát âm khi đã kiểm tra hoặc khi làm */}
                         <button
-                          onClick={() => speakJapanese(typingStudyList[typingActiveIndex].term)}
+                          onClick={() => speakJapanese(typingStudyList[typingActiveIndex].reading || typingStudyList[typingActiveIndex].term)}
                           title="Phát âm từ"
                           style={{
                             position: 'absolute',

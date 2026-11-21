@@ -2110,7 +2110,7 @@ export const KanjiPage: React.FC = () => {
                           </div>
                           {selectedKanji.onyomi && selectedKanji.onyomi !== '—' && (
                             <button
-                              onClick={() => speakJapanese(selectedKanji.onyomi!.replace(/[\,\s]/g, '、'))}
+                              onClick={() => speakJapanese(selectedKanji.onyomi || '')}
                               title="Nghe âm On"
                               style={{
                                 background: '#ffffff',
@@ -2148,7 +2148,7 @@ export const KanjiPage: React.FC = () => {
                           </div>
                           {selectedKanji.kunyomi && selectedKanji.kunyomi !== '—' && (
                             <button
-                              onClick={() => speakJapanese(selectedKanji.kunyomi!.replace(/[\,\s\.]/g, '、'))}
+                              onClick={() => speakJapanese(selectedKanji.kunyomi || '')}
                               title="Nghe âm Kun"
                               style={{
                                 background: '#ffffff',
@@ -2240,7 +2240,7 @@ export const KanjiPage: React.FC = () => {
                                   </span>
                                 </div>
                                 <button
-                                  onClick={() => speakJapanese(wordText || comp.reading)}
+                                  onClick={() => speakJapanese(comp.reading || wordText)}
                                   title="Phát âm từ ghép"
                                   style={{
                                     background: '#ffffff',
