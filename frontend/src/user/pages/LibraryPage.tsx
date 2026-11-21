@@ -427,9 +427,9 @@ export const LibraryPage: React.FC = () => {
               {/* CỘT TRÁI: VIDEO PLAYER & THÔNG TIN BÀI HỌC */}
               <div id="kizuna-main-player">
                 {/* Visual Anchor: VÙNG PHÁT VIDEO ĐANG CHẠY */}
-                <div className="flex items-center justify-between px-4 py-2.5 bg-rose-50/80 rounded-t-2xl border border-rose-200 border-b-0">
-                  <div className="flex items-center gap-2 text-rose-700 font-extrabold text-xs">
-                    <Play size={14} className="fill-rose-600" />
+                <div className="flex items-center justify-between px-4 py-2.5 bg-rose-50/80 dark:bg-rose-950/60 rounded-t-2xl border border-rose-200 dark:border-rose-900/60 border-b-0 transition-colors">
+                  <div className="flex items-center gap-2 text-rose-700 dark:text-rose-400 font-extrabold text-xs">
+                    <Play size={14} className="fill-rose-600 dark:fill-rose-400" />
                     <span>TRÌNH PHÁT BÀI GIẢNG ĐANG CHỌN</span>
                   </div>
                   {(() => {
@@ -439,7 +439,7 @@ export const LibraryPage: React.FC = () => {
                         href={`https://www.youtube.com/watch?v=${cleanVideoId}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs font-bold text-sky-700 no-underline inline-flex items-center gap-1 hover:underline cursor-pointer"
+                        className="text-xs font-bold text-sky-700 dark:text-sky-400 no-underline inline-flex items-center gap-1 hover:underline cursor-pointer"
                         title="Mở video này trên ứng dụng hoặc trang YouTube"
                       >
                         <span>Mở YouTube</span> ↗
@@ -448,7 +448,7 @@ export const LibraryPage: React.FC = () => {
                   })()}
                 </div>
 
-                <div className="bg-white rounded-b-2xl border border-rose-200 overflow-hidden shadow-xs">
+                <div className="bg-white dark:bg-slate-900 rounded-b-2xl border border-rose-200 dark:border-rose-900/60 overflow-hidden shadow-xs transition-colors">
                   {/* Trình phát nhúng YouTube chuẩn (Hỗ trợ tốt trên cả Web và Android APK) */}
                   <div style={{
                     position: 'relative',
@@ -639,7 +639,7 @@ export const LibraryPage: React.FC = () => {
               </div>
             </div>
           ) : (
-            <div style={{ textAlign: 'center', padding: 40, color: '#78716c' }}>
+            <div className="text-center py-10 text-slate-500 dark:text-slate-400 text-xs">
               Không tìm thấy video nào phù hợp với bộ lọc hiện tại.
             </div>
           )}
@@ -702,44 +702,35 @@ export const LibraryPage: React.FC = () => {
 
                 {/* FILE ÂM THANH OFFICIAL CHOUKAI AUDIO */}
                 <div className="mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800">
-                  <div className="text-xs font-bold text-teal-600 dark:text-teal-400 mb-1 flex items-center gap-1">
+                  <div className="text-xs font-bold text-teal-600 dark:text-teal-400 mb-1.5 flex items-center gap-1">
                     <Headphones size={13} /> FILE GHI ÂM CHÍNH THỨC (CORODOMO JLPT CHOUKAI AUDIO):
                   </div>
-                  <audio src={activeExamDetail.audioUrl} controls className="w-full h-9 outline-none" />
+                  <div className="bg-slate-100 dark:bg-slate-800/80 p-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <audio src={activeExamDetail.audioUrl} controls className="w-full h-9 outline-none" />
+                  </div>
                 </div>
               </div>
 
               {/* BẢNG ĐIỂM TỔNG KẾT SAU KHI NỘP BÀI CHOUKAI */}
               {isSubmitted && scoreResult && (
-                <div style={{
-                  background: scoreResult.isPassed ? '#f0fdf4' : '#fef2f2',
-                  border: scoreResult.isPassed ? '1.5px solid #86efac' : '1.5px solid #fca5a5',
-                  borderLeft: scoreResult.isPassed ? '5px solid #16a34a' : '5px solid #dc2626',
-                  borderRadius: 12,
-                  padding: '20px 24px',
-                  marginBottom: 20,
-                  textAlign: 'center'
-                }}>
-                  <div style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 6,
-                    padding: '3px 12px',
-                    borderRadius: 20,
-                    fontSize: 12,
-                    fontWeight: 800,
-                    marginBottom: 8,
-                    background: scoreResult.isPassed ? '#dcfce7' : '#fee2e2',
-                    color: scoreResult.isPassed ? '#15803d' : '#b91c1c'
-                  }}>
+                <div className={`p-5 sm:p-6 mb-5 text-center rounded-2xl border-l-4 transition-colors ${
+                  scoreResult.isPassed
+                    ? 'bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/60 border-l-emerald-600 dark:border-l-emerald-500'
+                    : 'bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800/60 border-l-rose-600 dark:border-l-rose-500'
+                }`}>
+                  <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold mb-2 ${
+                    scoreResult.isPassed
+                      ? 'bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300'
+                      : 'bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300'
+                  }`}>
                     {scoreResult.isPassed ? <CheckCircle2 size={14} /> : <AlertCircle size={14} />}
                     <span>{scoreResult.isPassed ? 'ĐẠT CHUẨN ĐỖ CHOUKAI (合格)' : 'CẦN LUYỆN TẬP THÊM (要復習)'}</span>
                   </div>
-                  <div style={{ fontSize: 26, fontWeight: 900, color: '#1c2536' }}>
-                    {scoreResult.correct} <span style={{ fontSize: 20, color: '#78716c' }}>/ {scoreResult.total} câu đúng</span>
-                    <span style={{ fontSize: 22, color: '#c53d32', marginLeft: 10 }}>({scoreResult.percentage}%)</span>
+                  <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+                    {scoreResult.correct} <span className="text-lg sm:text-xl text-slate-500 dark:text-slate-400">/ {scoreResult.total} câu đúng</span>
+                    <span className="text-xl text-rose-600 dark:text-rose-400 ml-2.5">({scoreResult.percentage}%)</span>
                   </div>
-                  <div style={{ fontSize: 13, color: '#57534e', marginTop: 4 }}>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                     Toàn bộ kịch bản nghe thoại chi tiết đã được hiển thị bên dưới từng câu hỏi để bạn đối chiếu.
                   </div>
                 </div>
@@ -749,24 +740,9 @@ export const LibraryPage: React.FC = () => {
               {activeExamDetail.questionSets && activeExamDetail.questionSets.map((qs, qsIdx) => (
                 <div
                   key={qs.id || qsIdx}
-                  style={{
-                    background: '#ffffff',
-                    borderRadius: 12,
-                    border: '1px solid #ebe7df',
-                    padding: '20px 24px',
-                    marginBottom: 20
-                  }}
+                  className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 mb-5 shadow-xs transition-colors"
                 >
-                  <div style={{
-                    background: '#faf8f5',
-                    padding: '10px 14px',
-                    borderRadius: 8,
-                    fontSize: 14,
-                    fontWeight: 800,
-                    color: '#1c2536',
-                    marginBottom: 16,
-                    borderLeft: '4px solid #0d9488'
-                  }}>
+                  <div className="bg-slate-50 dark:bg-slate-800/80 p-2.5 px-3.5 rounded-xl text-sm font-extrabold text-slate-900 dark:text-white mb-4 border-l-4 border-l-teal-600 dark:border-l-teal-500">
                     Mondai {qsIdx + 1}: {qs.title}
                   </div>
 
@@ -777,47 +753,33 @@ export const LibraryPage: React.FC = () => {
                       const isWrong = isSubmitted && !!userChoice && userChoice !== q.correctAnswer;
                       const isUnanswered = isSubmitted && !userChoice;
 
-                      let cardBg = '#ffffff';
-                      let cardBorder = '1px solid #ebe7df';
-                      let cardBorderLeft = '1px solid #ebe7df';
-
+                      let cardClass = "bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-xl p-4 sm:p-4.5 transition-all";
                       if (isSubmitted) {
                         if (isCorrect) {
-                          cardBg = '#fbfdfb';
-                          cardBorder = '1.5px solid #86efac';
-                          cardBorderLeft = '5px solid #16a34a';
+                          cardClass = "bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-300 dark:border-emerald-800/80 border-l-4 border-l-emerald-600 dark:border-l-emerald-500 rounded-xl p-4 sm:p-4.5 transition-all";
                         } else {
-                          cardBg = '#fffafa';
-                          cardBorder = '1.5px solid #fca5a5';
-                          cardBorderLeft = '5px solid #dc2626';
+                          cardClass = "bg-rose-50/50 dark:bg-rose-950/20 border border-rose-300 dark:border-rose-800/80 border-l-4 border-l-rose-600 dark:border-l-rose-500 rounded-xl p-4 sm:p-4.5 transition-all";
                         }
                       }
 
                       return (
                         <div
                           key={q.id || qIdx}
-                          style={{
-                            background: cardBg,
-                            border: cardBorder,
-                            borderLeft: cardBorderLeft,
-                            borderRadius: 10,
-                            padding: '16px 18px',
-                            transition: 'all 0.15s ease'
-                          }}
+                          className={cardClass}
                         >
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                            <span style={{ fontSize: 13, fontWeight: 800, color: '#1c2536' }}>
+                            <span className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">
                               Câu {qIdx + 1}
                             </span>
 
                             {isSubmitted && (
                               <div>
                                 {isCorrect ? (
-                                  <span style={{ fontSize: 11, fontWeight: 800, color: '#15803d', background: '#dcfce7', padding: '2px 8px', borderRadius: 4, display: 'flex', alignItems: 'center', gap: 4 }}>
+                                  <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-950/60 px-2 py-0.5 rounded flex items-center gap-1">
                                     <Check size={12} /> Chính xác
                                   </span>
                                 ) : (
-                                  <span style={{ fontSize: 11, fontWeight: 800, color: '#b91c1c', background: '#fee2e2', padding: '2px 8px', borderRadius: 4, display: 'flex', alignItems: 'center', gap: 4 }}>
+                                  <span className="text-xs font-bold text-rose-700 dark:text-rose-400 bg-rose-100 dark:bg-rose-950/60 px-2 py-0.5 rounded flex items-center gap-1">
                                     <X size={12} /> {isUnanswered ? 'Chưa trả lời' : 'Chưa chính xác'} (Đáp án đúng: {q.correctAnswer})
                                   </span>
                                 )}
@@ -828,13 +790,7 @@ export const LibraryPage: React.FC = () => {
                           {/* Nội dung câu hỏi (chứa ảnh nếu có, ví dụ hình vẽ Mondai 4) */}
                           {q.question && q.question !== '番' && (
                             <div
-                              style={{
-                                fontSize: 14,
-                                color: '#1e293b',
-                                marginBottom: 12,
-                                lineHeight: 1.6,
-                                fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
-                              }}
+                              className="text-sm text-slate-800 dark:text-slate-100 mb-3 leading-relaxed font-serif"
                               dangerouslySetInnerHTML={{ __html: q.question.replace(/^番\s*/, '') }}
                             />
                           )}
@@ -842,15 +798,7 @@ export const LibraryPage: React.FC = () => {
                           {/* Đoạn văn/nội dung phụ nếu có */}
                           {q.content && (
                             <div
-                              style={{
-                                fontSize: 13,
-                                color: '#475569',
-                                marginBottom: 12,
-                                lineHeight: 1.6,
-                                background: '#f8fafc',
-                                padding: '10px 14px',
-                                borderRadius: 6
-                              }}
+                              className="text-xs text-slate-600 dark:text-slate-300 mb-3 leading-relaxed bg-slate-50 dark:bg-slate-800/60 p-2.5 px-3.5 rounded-lg border border-slate-200 dark:border-slate-700/60"
                               dangerouslySetInnerHTML={{ __html: q.content }}
                             />
                           )}
@@ -863,25 +811,20 @@ export const LibraryPage: React.FC = () => {
                               const isSelected = userChoice === optId;
                               const isTargetCorrect = isSubmitted && q.correctAnswer === optId;
 
-                              let optBorder = '1px solid #ebe7df';
-                              let optBg = '#ffffff';
-                              let optColor = '#334155';
-
+                              let btnClass = "text-left p-2.5 px-3.5 rounded-xl border text-xs sm:text-sm transition-all flex items-center gap-2.5 ";
                               if (!isSubmitted) {
                                 if (isSelected) {
-                                  optBorder = '1.5px solid #c53d32';
-                                  optBg = '#fdf2f0';
-                                  optColor = '#c53d32';
+                                  btnClass += "border-rose-500 bg-rose-50 dark:bg-rose-950/50 text-rose-700 dark:text-rose-300 font-bold shadow-xs";
+                                } else {
+                                  btnClass += "border-slate-200 dark:border-slate-700/80 bg-white dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 hover:border-slate-300 dark:hover:border-slate-600 font-medium cursor-pointer";
                                 }
                               } else {
                                 if (isTargetCorrect) {
-                                  optBorder = '2px solid #16a34a';
-                                  optBg = '#f0fdf4';
-                                  optColor = '#15803d';
+                                  btnClass += "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-200 font-bold";
                                 } else if (isSelected && !isTargetCorrect) {
-                                  optBorder = '2px solid #dc2626';
-                                  optBg = '#fef2f2';
-                                  optColor = '#b91c1c';
+                                  btnClass += "border-rose-500 bg-rose-50 dark:bg-rose-950/50 text-rose-800 dark:text-rose-200 font-bold";
+                                } else {
+                                  btnClass += "border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 text-slate-500 dark:text-slate-400 opacity-60";
                                 }
                               }
 
@@ -894,42 +837,22 @@ export const LibraryPage: React.FC = () => {
                                     if (isSubmitted) return;
                                     setUserAnswers(prev => ({ ...prev, [q.id]: optId }));
                                   }}
-                                  style={{
-                                    textAlign: 'left',
-                                    padding: '10px 14px',
-                                    borderRadius: 8,
-                                    border: optBorder,
-                                    background: optBg,
-                                    color: optColor,
-                                    fontSize: 13,
-                                    fontWeight: isSelected || isTargetCorrect ? 700 : 500,
-                                    cursor: isSubmitted ? 'default' : 'pointer',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: 10,
-                                    transition: 'all 0.15s ease'
-                                  }}
+                                  className={btnClass}
                                 >
-                                  <span style={{
-                                    width: 24,
-                                    height: 24,
-                                    borderRadius: '50%',
-                                    background: isSelected ? '#c53d32' : isTargetCorrect ? '#16a34a' : '#f1f5f9',
-                                    color: isSelected || isTargetCorrect ? '#ffffff' : '#64748b',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: 12,
-                                    fontWeight: 800,
-                                    flexShrink: 0
-                                  }}>
+                                  <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-extrabold shrink-0 ${
+                                    isSelected
+                                      ? 'bg-rose-600 text-white'
+                                      : isTargetCorrect
+                                      ? 'bg-emerald-600 text-white'
+                                      : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
+                                  }`}>
                                     {optId}
                                   </span>
                                   <span style={{ flex: 1, lineHeight: 1.5 }}>
                                     {optText ? (
                                       <span dangerouslySetInnerHTML={{ __html: optText }} />
                                     ) : (
-                                      <span style={{ color: '#94a3b8', fontStyle: 'italic', fontSize: 12 }}>
+                                      <span className="text-slate-400 italic text-xs">
                                         Phương án ({optId})
                                       </span>
                                     )}
@@ -941,30 +864,18 @@ export const LibraryPage: React.FC = () => {
 
                           {/* KỊCH BẢN NGHE (AUDIO SCRIPT) - MỞ KHÓA KHI NỘP BÀI */}
                           {isSubmitted && (q.script || (q as any).audioScript) && (
-                            <div style={{
-                              background: '#f8fafc',
-                              border: '1px dashed #cbd5e1',
-                              borderRadius: 8,
-                              padding: '14px 16px',
-                              marginTop: 10
-                            }}>
-                              <div style={{ fontSize: 11, fontWeight: 800, color: '#0d9488', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 6 }}>
+                            <div className="bg-slate-50 dark:bg-slate-950/70 border border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-3.5 sm:p-4 mt-2.5">
+                              <div className="text-[11px] font-extrabold text-teal-600 dark:text-teal-400 mb-1.5 flex items-center gap-1.5">
                                 <FileText size={13} />
                                 <span>KỊCH BẢN HỘI THOẠI (AUDIO SCRIPT):</span>
                               </div>
                               <div
-                                style={{
-                                  fontSize: 13,
-                                  color: '#1e293b',
-                                  lineHeight: 1.7,
-                                  whiteSpace: 'pre-wrap',
-                                  fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
-                                }}
+                                className="text-xs sm:text-[13px] text-slate-800 dark:text-slate-200 leading-relaxed whitespace-pre-wrap font-serif"
                                 dangerouslySetInnerHTML={{ __html: q.script || (q as any).audioScript || '' }}
                               />
                               {q.explanation && (
-                                <div style={{ fontSize: 12, color: '#64748b', marginTop: 8, paddingTop: 8, borderTop: '1px solid #e2e8f0' }}>
-                                  <strong>Giải thích:</strong> <span dangerouslySetInnerHTML={{ __html: q.explanation }} />
+                                <div className="text-xs text-slate-500 dark:text-slate-400 mt-2 pt-2 border-t border-slate-200 dark:border-slate-800">
+                                  <strong className="text-slate-700 dark:text-slate-300">Giải thích:</strong> <span dangerouslySetInnerHTML={{ __html: q.explanation }} />
                                 </div>
                               )}
                             </div>
@@ -1017,27 +928,15 @@ export const LibraryPage: React.FC = () => {
 
               {/* Thông báo nếu có lỗi nạp đề thi */}
               {examErrorMsg && (
-                <div style={{
-                  background: '#fef2f2',
-                  border: '1px solid #fecaca',
-                  borderRadius: 8,
-                  padding: '12px 16px',
-                  marginBottom: 16,
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  color: '#991b1b',
-                  fontSize: 13,
-                  fontWeight: 600
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <AlertCircle size={16} color="#dc2626" />
+                <div className="bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 rounded-xl p-3 px-4 mb-4 flex justify-between items-center text-rose-800 dark:text-rose-300 text-xs font-semibold">
+                  <div className="flex items-center gap-2">
+                    <AlertCircle size={16} className="text-rose-600 dark:text-rose-400" />
                     <span>{examErrorMsg}</span>
                   </div>
                   <button
                     type="button"
                     onClick={() => setExamErrorMsg(null)}
-                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#991b1b', padding: 4 }}
+                    className="bg-transparent border-none cursor-pointer text-rose-800 dark:text-rose-300 p-1"
                   >
                     <X size={14} />
                   </button>
@@ -1046,7 +945,7 @@ export const LibraryPage: React.FC = () => {
 
               {/* Danh sách 65 đề thi dạng Grid */}
               {loadingChoukai ? (
-                <div style={{ textAlign: 'center', padding: 60, color: '#78716c' }}>
+                <div className="text-center py-14 text-slate-500 dark:text-slate-400 text-xs">
                   Đang tải danh mục 65 đề thi nghe Choukai...
                 </div>
               ) : (
