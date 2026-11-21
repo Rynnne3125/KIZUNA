@@ -350,7 +350,7 @@ export const ExamPage: React.FC = () => {
     const progressPercent = Math.min(100, Math.round((answeredCount / totalQuestionsCount) * 100));
 
     return (
-      <div style={{ maxWidth: 960, margin: '0 auto', paddingBottom: 60 }}>
+      <div className="kizuna-exam-page" style={{ maxWidth: 960, margin: '0 auto', paddingBottom: 60 }}>
         <style>{`
           @keyframes kanjiSpin {
             from { transform: rotate(0deg); }
@@ -1559,7 +1559,7 @@ export const ExamPage: React.FC = () => {
   // GIAO DIỆN DANH MỤC ĐỀ THI JLPT (CATALOG VIEW)
   // =========================================================================
   return (
-    <div style={{ maxWidth: 1100, margin: '0 auto', paddingBottom: 60 }}>
+    <div className="kizuna-exam-page" style={{ maxWidth: 1100, margin: '0 auto', paddingBottom: 60 }}>
       <style>{`
         @keyframes kanjiSpin {
           from { transform: rotate(0deg); }

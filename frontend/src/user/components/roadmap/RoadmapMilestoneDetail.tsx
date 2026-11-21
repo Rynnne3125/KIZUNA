@@ -20,7 +20,8 @@ import {
   Crown,
   Target,
   Lightbulb,
-  FileText
+  FileText,
+  Lock
 } from 'lucide-react';
 
 interface RoadmapMilestoneDetailProps {
@@ -33,6 +34,14 @@ interface RoadmapMilestoneDetailProps {
   onProgressUpdate?: (updated: UserRoadmapProgress) => void;
 }
 
+const cleanStageTitle = (title?: string) => {
+  if (!title) return '';
+  return title
+    .replace(/^\[N\d\]\s*/i, '')
+    .replace(/^Chặng\s*\d+\s*[—–-]\s*/i, '')
+    .trim();
+};
+
 export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
   milestone,
   stage,
@@ -42,7 +51,7 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
   onBack,
   onProgressUpdate
 }) => {
-  // 2 Tabs: Quests & Đọc hiểu (loại bỏ Nhật ký theo yêu cầu)
+  // 2 Tabs: Quests & Đọc hiểu
   const [activeTab, setActiveTab] = useState<'quests' | 'reading'>('quests');
   const [quests, setQuests] = useState<any[]>([]);
   const [loadingQuests, setLoadingQuests] = useState(false);
@@ -166,53 +175,24 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
   }
 
   return (
-    <div style={{ animation: 'fadeIn 0.25s ease-out' }}>
+    <div className="space-y-6 animate-fadeIn">
       {/* 1. Header Navigation Bar */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 12 }}>
+      <div className="flex items-center justify-between flex-wrap gap-3">
         <button
           onClick={onBack}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 8,
-            padding: '8px 16px',
-            borderRadius: 8,
-            backgroundColor: '#ffffff',
-            border: '1px solid #e2e8f0',
-            color: '#334155',
-            fontSize: 13.5,
-            fontWeight: 700,
-            cursor: 'pointer',
-            transition: 'all 0.15s',
-            boxShadow: 'var(--shadow-sm)'
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.backgroundColor = '#f8fafc';
-            e.currentTarget.style.borderColor = '#cbd5e1';
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.backgroundColor = '#ffffff';
-            e.currentTarget.style.borderColor = '#e2e8f0';
-          }}
+          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-bold shadow-xs hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer transition-colors"
         >
           <ArrowLeft size={16} />
           <span>Quay lại danh sách Mốc</span>
         </button>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div className="flex items-center gap-2.5">
           <span
-            style={{
-              padding: '4px 12px',
-              borderRadius: 6,
-              fontSize: 12,
-              fontWeight: 800,
-              backgroundColor: isBoss ? '#fef3c7' : '#ecfdf5',
-              color: isBoss ? '#d97706' : '#15803d',
-              border: isBoss ? '1px solid #fde68a' : '1px solid #bbf7d0',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 5
-            }}
+            className={`px-3 py-1 rounded-lg text-xs font-extrabold flex items-center gap-1.5 border ${
+              isBoss 
+                ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-900' 
+                : 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-900'
+            }`}
           >
             {isBoss ? (
               <>
@@ -224,17 +204,7 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
             )}
           </span>
           {milestone.kanjiMark && (
-            <span
-              style={{
-                padding: '4px 10px',
-                borderRadius: 6,
-                fontSize: 12,
-                fontWeight: 800,
-                backgroundColor: '#f1f5f9',
-                color: '#475569',
-                border: '1px solid #e2e8f0'
-              }}
-            >
+            <span className="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
               Hán tự: {milestone.kanjiMark}
             </span>
           )}
@@ -242,101 +212,72 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
       </div>
 
       {/* 2. Milestone Overview Banner */}
-      <div
-        style={{
-          backgroundColor: '#ffffff',
-          borderRadius: 16,
-          border: isBoss ? '2px solid #f59e0b' : '1.5px solid #e2e8f0',
-          padding: '24px 28px',
-          boxShadow: 'var(--shadow-md)',
-          marginBottom: 24,
-          position: 'relative',
-          overflow: 'hidden'
-        }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
-          <div style={{ flex: '1 1 auto', minWidth: 260 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-              <span style={{ fontSize: 12, fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>
+      <div className={`bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border shadow-md transition-colors ${
+        isBoss 
+          ? 'border-amber-400 dark:border-amber-600 ring-2 ring-amber-400/20' 
+          : 'border-emerald-100 dark:border-slate-800'
+      }`}>
+        <div className="flex justify-between items-start flex-wrap gap-5">
+          <div className="flex-1 min-w-[260px]">
+            <div className="flex items-center gap-2 mb-2 flex-wrap">
+              <span className="text-xs font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 {milestone.nejUnit || `Bài ${milestone.orderIndex || 1}`}
               </span>
               {isMilestoneCompleted ? (
-                <span style={{ fontSize: 11, fontWeight: 700, color: '#16a34a', backgroundColor: '#dcfce7', padding: '2px 8px', borderRadius: 4, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-900 flex items-center gap-1">
                   <Check size={12} strokeWidth={3} />
-                  <span>Đã hoàn thành mốc</span>
+                  <span>Đã hoàn thành</span>
                 </span>
               ) : (
-                <span style={{ fontSize: 11, fontWeight: 700, color: '#0284c7', backgroundColor: '#e0f2fe', padding: '2px 8px', borderRadius: 4 }}>
-                  Đang học ({completedQuestIndices.length}/4 quests)
+                <span className="text-xs font-bold text-sky-700 dark:text-sky-400 bg-sky-50 dark:bg-sky-950/50 px-2.5 py-0.5 rounded-full border border-sky-200 dark:border-sky-900">
+                  Đang học ({completedQuestIndices.length}/4 nhiệm vụ)
                 </span>
               )}
             </div>
 
-            <h1 style={{ fontSize: 22, fontWeight: 900, color: '#0f172a', margin: '0 0 10px 0' }}>
+            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
               {milestone.title}
             </h1>
 
-            <div style={{ fontSize: 14, color: '#334155', lineHeight: 1.6, marginBottom: 12, display: 'flex', alignItems: 'flex-start', gap: 6 }}>
-              <Target size={15} style={{ color: '#0d9488', flexShrink: 0, marginTop: 3 }} />
-              <span><b>Mục tiêu giao tiếp:</b> {milestone.canDoGoal || milestone.communicationContext || 'Thực hành giao tiếp tiếng Nhật cốt lõi'}</span>
+            <div className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed flex items-start gap-2 mb-3">
+              <Target size={15} className="text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+              <span><b>Mục tiêu:</b> {milestone.canDoGoal || milestone.communicationContext || 'Thực hành giao tiếp tiếng Nhật cốt lõi'}</span>
             </div>
 
-            {/* Grammar summary tags from Firestore */}
             {milestone.grammarSummary && (
-              <div style={{ fontSize: 13, color: '#475569', backgroundColor: '#f8fafc', padding: '8px 12px', borderRadius: 8, border: '1px solid #e2e8f0', display: 'flex', alignItems: 'flex-start', gap: 6 }}>
-                <Lightbulb size={14} style={{ color: '#ca8a04', flexShrink: 0, marginTop: 2 }} />
+              <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/60 p-3 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-start gap-2">
+                <Lightbulb size={14} className="text-amber-500 shrink-0 mt-0.5" />
                 <span><b>Trọng tâm:</b> {milestone.grammarSummary}</span>
               </div>
             )}
           </div>
 
-          {/* Milestone Stats / Rewards */}
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 8,
-              minWidth: 160,
-              backgroundColor: '#f8fafc',
-              padding: '14px 18px',
-              borderRadius: 12,
-              border: '1px solid #e2e8f0'
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, fontWeight: 800, color: '#0f172a' }}>
-              <Zap size={16} style={{ color: '#10b981' }} />
-              <span>+{milestone.xpReward || 60} Kinh nghiệm XP</span>
+          {/* Stats Box */}
+          <div className="flex flex-col gap-2 min-w-[170px] bg-slate-50 dark:bg-slate-800/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-xs">
+            <div className="flex items-center gap-2 font-extrabold text-emerald-700 dark:text-emerald-400">
+              <Zap size={15} />
+              <span>+{milestone.xpReward || 60} XP</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, fontWeight: 800, color: '#b45309' }}>
-              <Trophy size={16} style={{ color: '#f59e0b' }} />
-              <span>+{milestone.activePointsReward || 40} Điểm năng động</span>
+            <div className="flex items-center gap-2 font-extrabold text-amber-700 dark:text-amber-400">
+              <Trophy size={15} />
+              <span>+{milestone.activePointsReward || 40} Năng động</span>
             </div>
-            <div style={{ fontSize: 11.5, color: '#64748b', marginTop: 4 }}>
-              Từ vựng: {milestone.vocabIds?.length || 26} từ · Ngữ pháp: {milestone.grammarIds?.length || 4} mẫu
+            <div className="text-slate-500 dark:text-slate-400 text-[11px] mt-1 pt-2 border-t border-slate-200 dark:border-slate-700">
+              Từ vựng: {milestone.vocabIds?.length || 26} · Ngữ pháp: {milestone.grammarIds?.length || 4}
             </div>
           </div>
         </div>
       </div>
 
-      {/* 3. Streamlined Tabs: [Nhiệm vụ] & [Đọc hiểu] (Loại bỏ Nhật ký theo yêu cầu) */}
-      <div style={{ display: 'flex', gap: 8, marginBottom: 20, borderBottom: '2px solid #e2e8f0', paddingBottom: 2 }}>
+      {/* 3. Streamlined Tabs: [Nhiệm vụ] & [Đọc hiểu] */}
+      <div className="flex gap-2 border-b-2 border-slate-200 dark:border-slate-800 pb-0.5">
         <button
           onClick={() => setActiveTab('quests')}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 8,
-            padding: '10px 20px',
-            fontSize: 14,
-            fontWeight: 800,
-            cursor: 'pointer',
-            border: 'none',
-            background: 'none',
-            color: activeTab === 'quests' ? '#16a34a' : '#64748b',
-            borderBottom: activeTab === 'quests' ? '3px solid #16a34a' : '3px solid transparent',
-            marginBottom: -2,
-            transition: 'all 0.15s'
-          }}
+          className={`flex items-center gap-2 px-5 py-2.5 text-sm font-extrabold border-b-2 -mb-1 transition-all cursor-pointer ${
+            activeTab === 'quests'
+              ? 'text-emerald-600 dark:text-emerald-400 border-emerald-600 dark:border-emerald-400'
+              : 'text-slate-500 dark:text-slate-400 border-transparent hover:text-slate-700 dark:hover:text-slate-200'
+          }`}
         >
           <BookOpen size={16} />
           <span>Nhiệm vụ ({completedQuestIndices.length}/4)</span>
@@ -344,182 +285,141 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
 
         <button
           onClick={() => setActiveTab('reading')}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 8,
-            padding: '10px 20px',
-            fontSize: 14,
-            fontWeight: 800,
-            cursor: 'pointer',
-            border: 'none',
-            background: 'none',
-            color: activeTab === 'reading' ? '#16a34a' : '#64748b',
-            borderBottom: activeTab === 'reading' ? '3px solid #16a34a' : '3px solid transparent',
-            marginBottom: -2,
-            transition: 'all 0.15s'
-          }}
+          className={`flex items-center gap-2 px-5 py-2.5 text-sm font-extrabold border-b-2 -mb-1 transition-all cursor-pointer ${
+            activeTab === 'reading'
+              ? 'text-emerald-600 dark:text-emerald-400 border-emerald-600 dark:border-emerald-400'
+              : 'text-slate-500 dark:text-slate-400 border-transparent hover:text-slate-700 dark:hover:text-slate-200'
+          }`}
         >
           <Sparkles size={16} />
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-            Đọc hiểu {isReadingDone && <Check size={13} strokeWidth={3} style={{ color: '#16a34a' }} />}
+          <span className="flex items-center gap-1.5">
+            Đọc hiểu {isReadingDone && <Check size={13} strokeWidth={3} className="text-emerald-600 dark:text-emerald-400" />}
           </span>
         </button>
       </div>
 
-      {/* 4. TAB 1: 4 QUESTS LIST */}
+      {/* 4. TAB 1: 4 QUESTS LIST (Sequential Unlocking 1 -> 2 -> 3 -> 4) */}
       {activeTab === 'quests' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <div className="space-y-3.5">
           {displayQuests.map((q, idx) => {
             const questDone = completedQuestIndices.includes(idx + 1);
+            // Quy tắc mở khóa tuần tự:
+            // Nhiệm vụ 1 luôn mở. Nhiệm vụ 2 mở khi xong nhiệm vụ 1. Nhiệm vụ 3 mở khi xong nhiệm vụ 2, v.v.
+            const isUnlocked = idx === 0 || completedQuestIndices.includes(idx);
 
             return (
               <div
                 key={idx}
-                style={{
-                  backgroundColor: '#ffffff',
-                  borderRadius: 14,
-                  border: questDone ? '1.5px solid #86efac' : '1.5px solid #e2e8f0',
-                  padding: '18px 22px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: 16,
-                  flexWrap: 'wrap',
-                  boxShadow: 'var(--shadow-sm)',
-                  transition: 'all 0.15s'
-                }}
+                className={`rounded-2xl p-4 sm:p-5 flex items-center justify-between gap-4 flex-wrap border transition-all ${
+                  !isUnlocked
+                    ? 'bg-slate-50/50 dark:bg-slate-900/30 border-slate-200/60 dark:border-slate-800/60 opacity-60'
+                    : questDone
+                    ? 'bg-white dark:bg-slate-900 border-emerald-200 dark:border-emerald-800/80 shadow-xs'
+                    : 'bg-white dark:bg-slate-900 border-emerald-500/50 dark:border-emerald-600/50 shadow-sm ring-1 ring-emerald-500/20'
+                }`}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: '1 1 auto', minWidth: 240 }}>
-                  {/* Step order indicator */}
-                  <div
-                    style={{
-                      width: 38,
-                      height: 38,
-                      borderRadius: 10,
-                      backgroundColor: questDone ? '#dcfce7' : '#f1f5f9',
-                      color: questDone ? '#16a34a' : '#475569',
-                      fontSize: 14,
-                      fontWeight: 900,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      border: questDone ? '1.5px solid #86efac' : '1px solid #cbd5e1',
-                      flexShrink: 0
-                    }}
-                  >
-                    {questDone ? <Check size={16} strokeWidth={3} /> : idx + 1}
+                <div className="flex items-center gap-4 flex-1 min-w-[240px]">
+                  {/* Step indicator */}
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-sm shrink-0 border ${
+                    !isUnlocked
+                      ? 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 border-slate-200 dark:border-slate-700'
+                      : questDone
+                      ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800'
+                      : 'bg-emerald-500 text-white border-emerald-600 shadow-xs'
+                  }`}>
+                    {!isUnlocked ? <Lock size={15} /> : questDone ? <Check size={16} strokeWidth={3} /> : idx + 1}
                   </div>
 
                   <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 2 }}>
-                      <h3 style={{ fontSize: 15, fontWeight: 800, color: '#0f172a', margin: 0 }}>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">
                         {q.title}
                       </h3>
                       {questDone ? (
-                        <span style={{ fontSize: 11, fontWeight: 700, padding: '1px 8px', borderRadius: 4, backgroundColor: '#dcfce7', color: '#15803d' }}>
-                          Đã hoàn thành
+                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1">
+                          <Check size={11} strokeWidth={3} /> Đã hoàn thành
+                        </span>
+                      ) : isUnlocked ? (
+                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
+                          Sẵn sàng
                         </span>
                       ) : (
-                        <span style={{ fontSize: 11, fontWeight: 700, padding: '1px 8px', borderRadius: 4, backgroundColor: '#f1f5f9', color: '#64748b' }}>
-                          Chưa học
+                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 flex items-center gap-1">
+                          <Lock size={10} /> Đang khóa (cần qua Bài {idx})
                         </span>
                       )}
                     </div>
 
-                    <div style={{ fontSize: 13, color: '#64748b', lineHeight: 1.5, marginTop: 4 }}>
+                    <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
                       {q.description}
                     </div>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 6 }}>
-                      <span style={{ fontSize: 11.5, fontWeight: 700, color: '#16a34a' }}>
-                        +{q.xpReward || 30} XP
-                      </span>
-                      <span style={{ fontSize: 11.5, fontWeight: 700, color: '#b45309' }}>
-                        +{q.activePointsReward || 15} pts
-                      </span>
+                    <div className="flex items-center gap-3 mt-2 text-xs font-bold">
+                      <span className="text-emerald-600 dark:text-emerald-400">+{q.xpReward || 30} XP</span>
+                      <span className="text-amber-600 dark:text-amber-400">+{q.activePointsReward || 15} AP</span>
                     </div>
                   </div>
                 </div>
 
-                <button
-                  onClick={() => setRunningQuestIndex(idx + 1)}
-                  style={{
-                    padding: '10px 22px',
-                    borderRadius: 8,
-                    border: 'none',
-                    backgroundColor: questDone ? '#f8fafc' : '#16a34a',
-                    color: questDone ? '#334155' : '#ffffff',
-                    borderStyle: questDone ? 'solid' : 'none',
-                    borderWidth: questDone ? 1 : 0,
-                    borderColor: '#cbd5e1',
-                    fontSize: 13.5,
-                    fontWeight: 800,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 6,
-                    boxShadow: questDone ? 'none' : '0 2px 6px rgba(22, 163, 74, 0.3)',
-                    transition: 'all 0.15s'
-                  }}
-                >
-                  <Play size={14} />
-                  <span>{questDone ? 'Ôn tập lại' : 'Vào học ngay'}</span>
-                </button>
+                {/* Action Button */}
+                {isUnlocked ? (
+                  <button
+                    onClick={() => setRunningQuestIndex(idx + 1)}
+                    className={`px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 shadow-xs cursor-pointer transition-all active:scale-95 ${
+                      questDone
+                        ? 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700'
+                        : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/20'
+                    }`}
+                  >
+                    {questDone ? <RotateCcw size={14} /> : <Play size={14} />}
+                    <span>{questDone ? 'Ôn tập lại' : 'Vào học ngay'}</span>
+                  </button>
+                ) : (
+                  <button
+                    disabled
+                    className="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-600 border border-slate-200 dark:border-slate-800 cursor-not-allowed"
+                  >
+                    <Lock size={14} />
+                    <span>Đang khóa</span>
+                  </button>
+                )}
               </div>
             );
           })}
         </div>
       )}
 
-      {/* 5. TAB 2: ĐỌC HIỂU (BÀI ĐỌC TIẾNG NHẬT + TRẮC NGHIỆM ĐỌC HIỂU TƯƠNG TÁC) */}
+      {/* 5. TAB 2: ĐỌC HIỂU */}
       {activeTab === 'reading' && (
-        <div style={{ backgroundColor: '#ffffff', borderRadius: 16, border: '1.5px solid #e2e8f0', padding: 24, boxShadow: 'var(--shadow-sm)' }}>
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
           {milestone.readingPassage ? (
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
+              <div className="flex justify-between items-center mb-4 flex-wrap gap-3">
                 <div>
-                  <span style={{ fontSize: 12, fontWeight: 800, color: '#16a34a', textTransform: 'uppercase' }}>
+                  <span className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
                     HỘI THOẠI ĐỌC HIỂU GIAO TIẾP
                   </span>
-                  <h2 style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '4px 0 0' }}>
+                  <h2 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white mt-1">
                     {milestone.readingPassage.title} · {milestone.readingPassage.titleVi}
                   </h2>
                 </div>
 
-                <div style={{ display: 'flex', gap: 10 }}>
+                <div className="flex gap-2.5">
                   <button
                     onClick={() => speakJapanese(milestone.readingPassage.japanese)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 6,
-                      padding: '8px 14px',
-                      borderRadius: 8,
-                      backgroundColor: '#f8fafc',
-                      border: '1px solid #cbd5e1',
-                      color: '#334155',
-                      fontSize: 13,
-                      fontWeight: 700,
-                      cursor: 'pointer'
-                    }}
+                    className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer"
                   >
-                    <Volume2 size={16} style={{ color: '#16a34a' }} />
+                    <Volume2 size={15} className="text-emerald-600 dark:text-emerald-400" />
                     <span>Nghe bài đọc</span>
                   </button>
 
                   <button
                     onClick={() => setShowTranslation(!showTranslation)}
-                    style={{
-                      padding: '8px 14px',
-                      borderRadius: 8,
-                      backgroundColor: showTranslation ? '#dcfce7' : '#f8fafc',
-                      border: showTranslation ? '1px solid #86efac' : '1px solid #cbd5e1',
-                      color: showTranslation ? '#15803d' : '#334155',
-                      fontSize: 13,
-                      fontWeight: 700,
-                      cursor: 'pointer'
-                    }}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${
+                      showTranslation
+                        ? 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300'
+                        : 'bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300'
+                    }`}
                   >
                     {showTranslation ? 'Ẩn bản dịch' : 'Hiện bản dịch'}
                   </button>
@@ -527,37 +427,14 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
               </div>
 
               {/* Japanese reading passage */}
-              <div
-                style={{
-                  backgroundColor: '#f8fafc',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: 12,
-                  padding: 20,
-                  fontSize: 16,
-                  lineHeight: 1.9,
-                  color: '#0f172a',
-                  marginBottom: 16,
-                  fontFamily: '"Noto Sans JP", sans-serif'
-                }}
-              >
+              <div className="bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 text-base sm:text-lg leading-loose text-slate-900 dark:text-slate-100 mb-4 font-['Noto_Sans_JP',sans-serif]">
                 {milestone.readingPassage.japanese}
               </div>
 
               {/* Vietnamese translation toggle */}
               {showTranslation && (
-                <div
-                  style={{
-                    backgroundColor: '#f0fdf4',
-                    border: '1px solid #bbf7d0',
-                    borderRadius: 12,
-                    padding: 16,
-                    fontSize: 14,
-                    lineHeight: 1.7,
-                    color: '#166534',
-                    marginBottom: 20
-                  }}
-                >
-                  <div style={{ fontWeight: 800, fontSize: 12, marginBottom: 4, color: '#15803d' }}>
+                <div className="bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/60 rounded-2xl p-4 text-xs sm:text-sm leading-relaxed text-emerald-900 dark:text-emerald-200 mb-5">
+                  <div className="font-extrabold text-xs mb-1.5 text-emerald-800 dark:text-emerald-300">
                     DỊCH NGHĨA TIẾNG VIỆT:
                   </div>
                   {milestone.readingPassage.vietnamese}
@@ -566,24 +443,17 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
 
               {/* Highlights */}
               {milestone.readingPassage.highlights && milestone.readingPassage.highlights.length > 0 && (
-                <div style={{ marginBottom: 24 }}>
-                  <div style={{ fontSize: 13, fontWeight: 800, color: '#0f172a', marginBottom: 10 }}>
+                <div className="mb-6">
+                  <div className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white mb-2.5">
                     Trọng tâm ngữ pháp trong bài đọc:
                   </div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                  <div className="flex flex-wrap gap-2">
                     {milestone.readingPassage.highlights.map((h: any, i: number) => (
                       <div
                         key={i}
-                        style={{
-                          padding: '6px 12px',
-                          borderRadius: 8,
-                          backgroundColor: '#f1f5f9',
-                          border: '1px solid #e2e8f0',
-                          fontSize: 12.5,
-                          color: '#334155'
-                        }}
+                        className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-300"
                       >
-                        <b style={{ color: '#0f172a' }}>{h.excerpt}</b> ➔ <span style={{ color: '#16a34a', fontWeight: 700 }}>{h.label}</span>
+                        <b className="text-slate-900 dark:text-white">{h.excerpt}</b> ➔ <span className="text-emerald-600 dark:text-emerald-400 font-bold">{h.label}</span>
                       </div>
                     ))}
                   </div>
@@ -592,84 +462,66 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
 
               {/* Interactive Reading Comprehension Quiz */}
               {milestone.readingPassage.questions && milestone.readingPassage.questions.length > 0 && (
-                <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 20, marginTop: 20 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-                    <div style={{ fontSize: 15, fontWeight: 900, color: '#0f172a', display: 'flex', alignItems: 'center', gap: 6 }}>
-                      <FileText size={16} style={{ color: '#475569' }} />
+                <div className="border-t border-slate-200 dark:border-slate-800 pt-5 mt-5">
+                  <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+                    <div className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                      <FileText size={16} className="text-slate-500" />
                       <span>Câu hỏi trắc nghiệm kiểm tra độ hiểu:</span>
                     </div>
                     {isReadingDone && (
-                      <span style={{ fontSize: 12, fontWeight: 800, color: '#16a34a', backgroundColor: '#dcfce7', padding: '3px 10px', borderRadius: 6, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                        <Check size={13} strokeWidth={3} />
+                      <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800 flex items-center gap-1">
+                        <Check size={12} strokeWidth={3} />
                         <span>Đã hoàn thành Đọc hiểu</span>
                       </span>
                     )}
                   </div>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 20 }}>
+                  <div className="space-y-4 mb-5">
                     {milestone.readingPassage.questions.map((q: any, i: number) => {
                       const selectedOpt = userReadingAnswers[i];
-                      const isCorrect = selectedOpt === q.answer;
 
                       return (
-                        <div key={i} style={{ padding: 18, backgroundColor: '#f8fafc', borderRadius: 12, border: '1px solid #e2e8f0' }}>
-                          <div style={{ fontWeight: 800, fontSize: 14, marginBottom: 10, color: '#0f172a' }}>
+                        <div key={i} className="p-4 sm:p-5 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700">
+                          <div className="font-extrabold text-xs sm:text-sm text-slate-900 dark:text-white mb-3">
                             Câu {i + 1}: {q.q}
                           </div>
-                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 8 }}>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                             {q.options?.map((opt: string, optIdx: number) => {
                               const isChosen = selectedOpt === optIdx;
-                              let bg = '#ffffff';
-                              let border = '1px solid #cbd5e1';
-                              let color = '#334155';
+                              let btnClass = 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300';
 
                               if (readingQuizChecked) {
                                 if (optIdx === q.answer) {
-                                  bg = '#ecfdf5';
-                                  border = '2px solid #10b981';
-                                  color = '#065f46';
+                                  btnClass = 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-500 text-emerald-800 dark:text-emerald-300 font-extrabold';
                                 } else if (isChosen && optIdx !== q.answer) {
-                                  bg = '#fff1f2';
-                                  border = '2px solid #f43f5e';
-                                  color = '#9f1239';
+                                  btnClass = 'bg-rose-50 dark:bg-rose-950/60 border-rose-500 text-rose-800 dark:text-rose-300 font-extrabold';
                                 }
                               } else if (isChosen) {
-                                bg = '#eff6ff';
-                                border = '2px solid #3b82f6';
-                                color = '#1d4ed8';
+                                btnClass = 'bg-sky-50 dark:bg-sky-950/60 border-sky-500 text-sky-800 dark:text-sky-300 font-extrabold ring-1 ring-sky-500';
                               }
 
                               return (
-                                <div
+                                <button
                                   key={optIdx}
+                                  type="button"
                                   onClick={() => {
                                     if (!readingQuizChecked) {
                                       setUserReadingAnswers(prev => ({ ...prev, [i]: optIdx }));
                                     }
                                   }}
-                                  style={{
-                                    padding: '10px 14px',
-                                    borderRadius: 8,
-                                    backgroundColor: bg,
-                                    border,
-                                    color,
-                                    fontSize: 13.5,
-                                    fontWeight: isChosen ? 800 : 600,
-                                    cursor: readingQuizChecked ? 'default' : 'pointer',
-                                    transition: 'all 0.15s'
-                                  }}
+                                  className={`p-3 rounded-xl border text-left text-xs sm:text-sm transition-all cursor-pointer ${btnClass}`}
                                 >
-                                  <span style={{ marginRight: 6, color: '#64748b' }}>{String.fromCharCode(65 + optIdx)}.</span>
+                                  <span className="mr-2 font-bold opacity-60">{String.fromCharCode(65 + optIdx)}.</span>
                                   {opt}
-                                </div>
+                                </button>
                               );
                             })}
                           </div>
 
                           {readingQuizChecked && q.explanation && (
-                            <div style={{ marginTop: 12, padding: '8px 14px', borderRadius: 8, backgroundColor: '#ecfdf5', border: '1px solid #a7f3d0', fontSize: 13, color: '#065f46', display: 'flex', alignItems: 'flex-start', gap: 6 }}>
-                              <Lightbulb size={14} style={{ color: '#059669', flexShrink: 0, marginTop: 2 }} />
-                              <span><b>Giải thích chi tiết:</b> {q.explanation}</span>
+                            <div className="mt-3 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-xs text-emerald-800 dark:text-emerald-300 flex items-start gap-2">
+                              <Lightbulb size={14} className="text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                              <span><b>Giải thích:</b> {q.explanation}</span>
                             </div>
                           )}
                         </div>
@@ -678,63 +530,36 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
                   </div>
 
                   {/* Reading Quiz action buttons */}
-                  <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12 }}>
+                  <div className="flex justify-end gap-3">
                     {!readingQuizChecked ? (
                       <button
                         onClick={handleCheckReadingQuiz}
                         disabled={Object.keys(userReadingAnswers).length < milestone.readingPassage.questions.length}
-                        style={{
-                          padding: '10px 24px',
-                          backgroundColor: Object.keys(userReadingAnswers).length >= milestone.readingPassage.questions.length ? '#0f172a' : '#94a3b8',
-                          color: '#ffffff',
-                          borderRadius: 8,
-                          fontWeight: 800,
-                          fontSize: 14,
-                          border: 'none',
-                          cursor: Object.keys(userReadingAnswers).length >= milestone.readingPassage.questions.length ? 'pointer' : 'not-allowed'
-                        }}
+                        className={`px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-white transition-all cursor-pointer ${
+                          Object.keys(userReadingAnswers).length >= milestone.readingPassage.questions.length
+                            ? 'bg-slate-900 dark:bg-emerald-600 hover:bg-slate-800 dark:hover:bg-emerald-500 shadow-sm'
+                            : 'bg-slate-300 dark:bg-slate-700 cursor-not-allowed opacity-60'
+                        }`}
                       >
                         Kiểm tra kết quả trắc nghiệm
                       </button>
                     ) : (
-                      <div style={{ display: 'flex', gap: 10 }}>
+                      <div className="flex gap-2.5">
                         <button
                           onClick={() => {
                             setReadingQuizChecked(false);
                             setUserReadingAnswers({});
                           }}
-                          style={{
-                            padding: '10px 18px',
-                            backgroundColor: '#f1f5f9',
-                            color: '#334155',
-                            borderRadius: 8,
-                            fontWeight: 700,
-                            fontSize: 13.5,
-                            border: '1px solid #cbd5e1',
-                            cursor: 'pointer'
-                          }}
+                          className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 font-bold text-xs sm:text-sm hover:bg-slate-200 dark:hover:bg-slate-700 cursor-pointer flex items-center gap-1.5"
                         >
-                          <RotateCcw size={14} style={{ verticalAlign: 'middle', marginRight: 4 }} />
-                          Làm lại
+                          <RotateCcw size={14} />
+                          <span>Làm lại</span>
                         </button>
 
                         <button
                           onClick={handleSaveReadingPassage}
                           disabled={savingReading}
-                          style={{
-                            padding: '10px 24px',
-                            backgroundColor: '#10b981',
-                            color: '#ffffff',
-                            borderRadius: 8,
-                            fontWeight: 800,
-                            fontSize: 14,
-                            border: 'none',
-                            cursor: 'pointer',
-                            boxShadow: '0 2px 8px rgba(16, 185, 129, 0.3)',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: 6
-                          }}
+                          className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow-sm shadow-emerald-600/20 cursor-pointer flex items-center gap-1.5"
                         >
                           {savingReading ? (
                             'Đang lưu...'
@@ -752,7 +577,7 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
               )}
             </div>
           ) : (
-            <div style={{ textAlign: 'center', padding: 32, color: '#64748b' }}>
+            <div className="text-center py-8 text-slate-500 dark:text-slate-400 text-sm">
               Đang đồng bộ đoạn hội thoại đọc hiểu của mốc từ Firestore...
             </div>
           )}

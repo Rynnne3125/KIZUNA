@@ -17,7 +17,6 @@ import {
   Check,
   Crown,
   Target,
-  MapPin,
   Sparkles,
   BookOpen
 } from 'lucide-react';
@@ -62,50 +61,12 @@ const LEVEL_CONFIG: Record<JlptLevelKey, { kanji: string; vi: string; desc: stri
   }
 };
 
-// Component Animation Hoa anh đào rơi động chuẩn phong cách Nhật Bản
-const SakuraFallingBackground: React.FC = () => {
-  return (
-    <div
-      style={{
-        position: 'absolute',
-        inset: 0,
-        pointerEvents: 'none',
-        overflow: 'hidden',
-        zIndex: 0
-      }}
-    >
-      {[
-        { left: '4%', delay: '0s', duration: '7.5s', size: 14, rotate: 20 },
-        { left: '24%', delay: '2s', duration: '8.2s', size: 17, rotate: -30 },
-        { left: '45%', delay: '4s', duration: '6.8s', size: 13, rotate: 40 },
-        { left: '68%', delay: '1s', duration: '9.0s', size: 16, rotate: 10 },
-        { left: '88%', delay: '3.5s', duration: '7.2s', size: 15, rotate: -20 }
-      ].map((p, i) => (
-        <span
-          key={i}
-          style={{
-            position: 'absolute',
-            left: p.left,
-            top: '-20px',
-            width: p.size,
-            height: p.size * 1.3,
-            animation: `sakuraFall ${p.duration} linear infinite`,
-            animationDelay: p.delay,
-            opacity: 0.65,
-            display: 'block'
-          }}
-        >
-          <svg viewBox="0 0 30 40" width="100%" height="100%" style={{ transform: `rotate(${p.rotate}deg)` }}>
-            <path
-              d="M 15 2 C 22 10, 30 22, 24 32 C 18 40, 8 38, 4 30 C 0 20, 8 10, 15 2 Z"
-              fill="#fda4af"
-              opacity="0.8"
-            />
-          </svg>
-        </span>
-      ))}
-    </div>
-  );
+const cleanStageTitle = (title?: string) => {
+  if (!title) return '';
+  return title
+    .replace(/^\[N\d\]\s*/i, '')
+    .replace(/^Chặng\s*\d+\s*[—–-]\s*/i, '')
+    .trim();
 };
 
 export const RoadmapPage: React.FC = () => {
@@ -216,10 +177,18 @@ export const RoadmapPage: React.FC = () => {
     setViewMode('STAGES');
   };
 
-  const handleSelectStage = (st: Stage) => {
+  const handleSelectStage = (st: Stage, isUnlocked: boolean) => {
+    if (!isUnlocked) {
+      setLockedNotice(`Chặng này đang khóa. Bạn cần hoàn thành tất cả các mốc của Chặng trước để mở khóa!`);
+      setTimeout(() => setLockedNotice(null), 3500);
+      return;
+    }
     setSelectedStage(st);
     setSelectedMilestone(null);
     setViewMode('MILESTONES');
+    try {
+      window.history.pushState({ tab: 'roadmap', viewMode: 'MILESTONES', stageId: st.id }, '', '/roadmap');
+    } catch {}
   };
 
   const handleSelectMilestone = (ms: Milestone, isUnlocked: boolean) => {
@@ -230,6 +199,9 @@ export const RoadmapPage: React.FC = () => {
     }
     setSelectedMilestone(ms);
     setViewMode('LESSON');
+    try {
+      window.history.pushState({ tab: 'roadmap', viewMode: 'LESSON', milestoneId: ms.id }, '', '/roadmap');
+    } catch {}
   };
 
   const handleBackToStages = () => {
@@ -243,227 +215,61 @@ export const RoadmapPage: React.FC = () => {
     setViewMode('MILESTONES');
   };
 
+  // Support browser / Android back within Roadmap
+  useEffect(() => {
+    const handlePopState = (e: PopStateEvent) => {
+      if (viewMode === 'LESSON') {
+        setSelectedMilestone(null);
+        setViewMode('MILESTONES');
+      } else if (viewMode === 'MILESTONES') {
+        setSelectedStage(null);
+        setSelectedMilestone(null);
+        setViewMode('STAGES');
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [viewMode]);
+
   return (
-    <div
-      style={{
-        maxWidth: 1040,
-        margin: '0 auto',
-        padding: '0 12px 64px 12px',
-        position: 'relative',
-        boxSizing: 'border-box',
-        fontFamily: '"Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-      }}
-    >
-      <SakuraFallingBackground />
-
-      <style>{`
-        @keyframes sakuraFall {
-          0% {
-            top: -8%;
-            transform: translateX(0) rotate(0deg);
-            opacity: 0;
-          }
-          15% {
-            opacity: 0.8;
-          }
-          50% {
-            transform: translateX(20px) rotate(180deg);
-          }
-          85% {
-            opacity: 0.8;
-          }
-          100% {
-            top: 108%;
-            transform: translateX(-15px) rotate(360deg);
-            opacity: 0;
-          }
-        }
-
-        /* Responsive Breakpoints cho Roadmap */
-        @media (max-width: 768px) {
-          .roadmap-header-row {
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            gap: 12px !important;
-          }
-          .roadmap-stats-row {
-            width: 100% !important;
-            flex-wrap: wrap !important;
-          }
-          .roadmap-level-bar {
-            width: 100% !important;
-            overflow-x: auto !important;
-            scrollbar-width: none !important;
-          }
-          .roadmap-level-bar button {
-            min-width: 76px !important;
-            padding: 8px 10px !important;
-          }
-          .roadmap-stages-grid {
-            grid-template-columns: 1fr !important;
-          }
-          .roadmap-milestone-item {
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            padding: 14px 16px !important;
-          }
-          .roadmap-milestone-actions {
-            width: 100% !important;
-            justify-content: space-between !important;
-            border-top: 1px dashed #e2e8f0 !important;
-            padding-top: 10px !important;
-            margin-top: 6px !important;
-          }
-        }
-      `}</style>
-
+    <div className="max-w-5xl mx-auto space-y-6 pb-12 transition-colors">
       {/* Toast Notification for Locked Milestone */}
       {lockedNotice && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 24,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            zIndex: 9999,
-            backgroundColor: '#0f172a',
-            color: '#ffffff',
-            padding: '12px 24px',
-            borderRadius: 12,
-            boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.3)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 10,
-            fontSize: 14,
-            fontWeight: 700,
-            animation: 'fadeIn 0.2s ease-out'
-          }}
-        >
-          <AlertCircle size={18} style={{ color: '#f59e0b' }} />
+        <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl flex items-center gap-2.5 text-xs sm:text-sm font-bold border border-slate-700 animate-fadeIn">
+          <AlertCircle size={18} className="text-amber-400 shrink-0" />
           <span>{lockedNotice}</span>
         </div>
       )}
 
-      {/* 1. HEADER MANG PHONG CÁCH NHẬT BẢN HIỆN ĐẠI (和の美学) */}
-      <div style={{ position: 'relative', zIndex: 1, marginBottom: 24 }}>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: 16,
-            marginBottom: 16,
-            paddingBottom: 16,
-            borderBottom: '1px solid #ebe7df'
-          }}
-        >
+      {/* 1. HEADER CHÍNH */}
+      <div className="bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-7 border border-emerald-100 dark:border-slate-800 shadow-md transition-colors">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
-              {/* Dấu triện Hanko đỏ (印鑑) KIZUNA */}
-              <span
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 26,
-                  height: 26,
-                  border: '1.5px solid #c53d32',
-                  borderRadius: 4,
-                  color: '#c53d32',
-                  fontSize: 13,
-                  fontWeight: 900,
-                  fontFamily: 'serif',
-                  backgroundColor: '#fffaf9'
-                }}
-              >
-                絆
-              </span>
-              <span style={{ fontSize: 12, fontWeight: 800, color: '#c53d32', letterSpacing: 1.5, textTransform: 'uppercase' }}>
-                LỘ TRÌNH CHUẨN HOÁ
-              </span>
-            </div>
-
-            <h1 style={{ fontSize: 24, fontWeight: 900, color: '#1c1917', margin: 0 }}>
-              Lộ Trình Học Tiếng Nhật
+            <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              Lộ Trình Học
             </h1>
           </div>
 
-          {/* Gamification Stats: 100% REAL FROM USER PROFILE & FIRESTORE */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 5,
-                padding: '5px 12px',
-                borderRadius: 9999,
-                backgroundColor: '#fff1f2',
-                border: '1px solid #fecdd3',
-                color: '#e11d48',
-                fontSize: 12,
-                fontWeight: 800
-              }}
-              title="Chuỗi ngày học liên tục"
-            >
+          <div className="flex items-center gap-2 flex-wrap text-xs font-bold">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-rose-700 dark:text-rose-400">
               <Flame size={14} />
               <span>{currentUser?.currentStreak || 0} ngày streak</span>
             </div>
 
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 5,
-                padding: '5px 12px',
-                borderRadius: 9999,
-                backgroundColor: '#f0f9ff',
-                border: '1px solid #bae6fd',
-                color: '#0284c7',
-                fontSize: 12,
-                fontWeight: 800
-              }}
-              title="Điểm năng động rèn luyện"
-            >
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-900/60 text-sky-700 dark:text-sky-400">
               <Zap size={14} />
               <span>{currentUser?.activePoints || 0} pts</span>
             </div>
 
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 5,
-                padding: '5px 12px',
-                borderRadius: 9999,
-                backgroundColor: '#fefce8',
-                border: '1px solid #fef08a',
-                color: '#ca8a04',
-                fontSize: 12,
-                fontWeight: 800
-              }}
-              title="Kinh nghiệm tích lũy"
-            >
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/60 text-amber-700 dark:text-amber-400">
               <Trophy size={14} />
               <span>{currentUser?.totalXp || 0} XP</span>
             </div>
           </div>
         </div>
 
-        {/* Thanh chuyển cấp độ N phong cách Thẻ bài Nhật Bản (札 - Fuda) */}
-        <div
-          className="roadmap-level-bar"
-          style={{
-            display: 'flex',
-            background: '#f4f2ee',
-            padding: 4,
-            borderRadius: 12,
-            border: '1px solid #e5e0d8',
-            gap: 4,
-            overflowX: 'auto',
-            scrollbarWidth: 'none'
-          }}
-        >
+        {/* Thanh chuyển cấp độ N (Fuda tabs) */}
+        <div className="flex bg-slate-100 dark:bg-slate-800/80 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-700 gap-1.5 overflow-x-auto scrollbar-none">
           {(['N5', 'N4', 'N3', 'N2', 'N1'] as JlptLevelKey[]).map(lvl => {
             const isActive = selectedLevel === lvl;
             const meta = LEVEL_CONFIG[lvl];
@@ -471,41 +277,14 @@ export const RoadmapPage: React.FC = () => {
               <button
                 key={lvl}
                 onClick={() => handleSelectLevel(lvl)}
-                style={{
-                  flex: 1,
-                  minWidth: 80,
-                  padding: '8px 12px',
-                  borderRadius: 8,
-                  border: 'none',
-                  backgroundColor: isActive ? '#c53d32' : 'transparent',
-                  color: isActive ? '#ffffff' : '#57534e',
-                  cursor: 'pointer',
-                  boxShadow: isActive ? '0 2px 6px rgba(197, 61, 50, 0.25)' : 'none',
-                  transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: 6
-                }}
+                className={`flex-1 min-w-[76px] py-2 px-3 rounded-xl border-none font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                  isActive
+                    ? 'bg-emerald-600 dark:bg-emerald-600 text-white shadow-xs'
+                    : 'bg-transparent text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-700/60'
+                }`}
               >
-                <span
-                  style={{
-                    fontSize: 14,
-                    fontWeight: 900,
-                    letterSpacing: '0.5px',
-                    color: isActive ? '#ffffff' : '#1c1917'
-                  }}
-                >
-                  {lvl}
-                </span>
-
-                <span
-                  style={{
-                    fontSize: 11,
-                    fontWeight: 700,
-                    color: isActive ? 'rgba(255,255,255,0.92)' : '#78716c'
-                  }}
-                >
+                <span className="font-extrabold">{lvl}</span>
+                <span className={`text-[11px] ${isActive ? 'text-white/90' : 'text-slate-500 dark:text-slate-400'}`}>
                   {meta.kanji}
                 </span>
               </button>
@@ -514,51 +293,31 @@ export const RoadmapPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. BREADCRUMBS TRAIL (Dấu vết di chuyển qua các tầng) */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 8,
-          fontSize: 13,
-          color: '#78716c',
-          marginBottom: 20,
-          flexWrap: 'wrap'
-        }}
-      >
+      {/* 2. BREADCRUMBS TRAIL */}
+      <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 px-1 flex-wrap">
         <span
           onClick={handleBackToStages}
-          style={{
-            cursor: viewMode !== 'STAGES' ? 'pointer' : 'default',
-            fontWeight: viewMode === 'STAGES' ? 800 : 600,
-            color: viewMode === 'STAGES' ? '#1c1917' : '#78716c',
-            textDecoration: viewMode !== 'STAGES' ? 'underline' : 'none'
-          }}
+          className={`cursor-pointer transition-colors ${viewMode === 'STAGES' ? 'font-extrabold text-slate-900 dark:text-white' : 'hover:underline text-slate-600 dark:text-slate-400'}`}
         >
           {selectedLevel} · {LEVEL_CONFIG[selectedLevel].desc}
         </span>
 
         {selectedStage && (
           <>
-            <ChevronRight size={14} style={{ color: '#a8a29e' }} />
+            <ChevronRight size={14} className="text-slate-400 shrink-0" />
             <span
               onClick={handleBackToMilestones}
-              style={{
-                cursor: viewMode === 'LESSON' ? 'pointer' : 'default',
-                fontWeight: viewMode === 'MILESTONES' ? 800 : 600,
-                color: viewMode === 'MILESTONES' ? '#1c1917' : '#78716c',
-                textDecoration: viewMode === 'LESSON' ? 'underline' : 'none'
-              }}
+              className={`cursor-pointer transition-colors ${viewMode === 'MILESTONES' ? 'font-extrabold text-slate-900 dark:text-white' : 'hover:underline text-slate-600 dark:text-slate-400'}`}
             >
-              Chặng {selectedStage.orderIndex || 1}: {selectedStage.title.replace(/^\[N\d\]\s*/, '')}
+              Chặng {selectedStage.orderIndex || 1}: {cleanStageTitle(selectedStage.title)}
             </span>
           </>
         )}
 
         {selectedMilestone && viewMode === 'LESSON' && (
           <>
-            <ChevronRight size={14} style={{ color: '#a8a29e' }} />
-            <span style={{ fontWeight: 800, color: '#16a34a' }}>
+            <ChevronRight size={14} className="text-slate-400 shrink-0" />
+            <span className="font-extrabold text-emerald-600 dark:text-emerald-400">
               Mốc: {selectedMilestone.title}
             </span>
           </>
@@ -567,179 +326,98 @@ export const RoadmapPage: React.FC = () => {
 
       {/* 3. NỘI DUNG CHÍNH (THEO VIEW MODE) */}
       {loading ? (
-        <div style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: 48, textAlign: 'center', border: '1px solid #e2e8f0' }}>
-          <Sparkles size={32} style={{ color: '#c53d32', margin: '0 auto 12px', display: 'block' }} />
-          <p style={{ color: '#64748b', fontWeight: 600 }}>Đang tải lộ trình học tiếng Nhật từ Firestore...</p>
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-12 text-center border border-slate-200 dark:border-slate-800 shadow-sm">
+          <Sparkles size={32} className="text-emerald-600 dark:text-emerald-400 mx-auto mb-3 animate-pulse" />
+          <p className="text-slate-600 dark:text-slate-300 font-bold text-sm">Đang tải lộ trình học tiếng Nhật từ Firestore...</p>
         </div>
       ) : viewMode === 'STAGES' ? (
         /* ================= TẦNG 2: DANH SÁCH CHẶNG (STAGES) ================= */
-        <div>
+        <div className="space-y-4">
           {/* Header Banner cho Cấp độ N hiện tại */}
-          <div
-            style={{
-              backgroundColor: '#ffffff',
-              borderRadius: 16,
-              border: '1.5px solid #e2e8f0',
-              padding: '20px 24px',
-              marginBottom: 20,
-              boxShadow: 'var(--shadow-sm)',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              flexWrap: 'wrap',
-              gap: 12
-            }}
-          >
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 shadow-sm flex justify-between items-center flex-wrap gap-3 transition-colors">
             <div>
-              <div style={{ fontSize: 12, fontWeight: 800, color: LEVEL_CONFIG[selectedLevel].color, textTransform: 'uppercase', marginBottom: 2 }}>
+              <div className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-1">
                 CẤP ĐỘ {selectedLevel} · {LEVEL_CONFIG[selectedLevel].kanji}
               </div>
-              <h2 style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: 0 }}>
+              <h2 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">
                 {LEVEL_CONFIG[selectedLevel].range}
               </h2>
             </div>
 
-            <div
-              style={{
-                fontSize: 13,
-                fontWeight: 800,
-                color: '#0f172a',
-                padding: '6px 14px',
-                borderRadius: 8,
-                backgroundColor: '#f8fafc',
-                border: '1px solid #e2e8f0'
-              }}
-            >
+            <div className="text-xs font-bold text-slate-700 dark:text-slate-300 px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               Tổng số: {levelStages.length} Chặng
             </div>
           </div>
 
           {/* Stages Grid Cards */}
-          <div className="roadmap-stages-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {levelStages.map((st, idx) => {
               const stageMils = milestones.filter(m => (m.stageId || (m as any).stage_id) === st.id);
               const milestoneCount = stageMils.length || st.total_milestones || 5;
               const completedCount = stageMils.filter(m => userProgress?.completedMilestones?.includes(m.id)).length;
               const percent = stageMils.length > 0 ? Math.round((completedCount / stageMils.length) * 100) : 0;
               const isComp = completedCount === stageMils.length && stageMils.length > 0;
+              // Khóa / Mở khóa Chặng theo thứ tự tuần tự:
+              // Chặng 1 luôn mở; Chặng 2 mở khi Chặng 1 hoàn thành; Chặng k mở khi Chặng k-1 hoàn thành
+              const isStageUnlocked = idx === 0 || isStageCompleted(levelStages[idx - 1]);
 
               return (
                 <div
                   key={st.id}
-                  onClick={() => handleSelectStage(st)}
-                  className="kizuna-card"
-                  style={{
-                    backgroundColor: '#ffffff',
-                    borderRadius: 16,
-                    border: isComp ? '1.5px solid #86efac' : '1.5px solid #e2e8f0',
-                    padding: '20px 22px',
-                    cursor: 'pointer',
-                    boxShadow: 'var(--shadow-sm)',
-                    transition: 'all 0.2s',
-                    position: 'relative',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between'
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = LEVEL_CONFIG[selectedLevel].color;
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = isComp ? '#86efac' : '#e2e8f0';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
-                  }}
+                  onClick={() => handleSelectStage(st, isStageUnlocked)}
+                  className={`rounded-3xl p-5 sm:p-6 flex flex-col justify-between border transition-all ${
+                    !isStageUnlocked
+                      ? 'bg-slate-50/50 dark:bg-slate-900/30 border-slate-200/60 dark:border-slate-800/60 opacity-65 cursor-not-allowed'
+                      : isComp
+                      ? 'bg-white dark:bg-slate-900 border-emerald-300 dark:border-emerald-800/80 shadow-xs hover:-translate-y-1 hover:shadow-md cursor-pointer'
+                      : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 shadow-xs hover:-translate-y-1 hover:shadow-md hover:border-emerald-400 cursor-pointer'
+                  }`}
                 >
                   <div>
-                    {/* Top Tag & Hanko Seal */}
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                      <span
-                        style={{
-                          fontSize: 11.5,
-                          fontWeight: 800,
-                          padding: '3px 10px',
-                          borderRadius: 6,
-                          backgroundColor: isComp ? '#dcfce7' : '#f1f5f9',
-                          color: isComp ? '#15803d' : '#0f172a'
-                        }}
-                      >
+                    {/* Top Tag & Status */}
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
                         Chặng {st.orderIndex || idx + 1} • {st.range || 'Bài học'}
                       </span>
 
-                      {st.hanko && (
-                        <span
-                          style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            width: 28,
-                            height: 28,
-                            borderRadius: 6,
-                            border: `1.5px solid ${LEVEL_CONFIG[selectedLevel].color}`,
-                            color: LEVEL_CONFIG[selectedLevel].color,
-                            fontSize: 13,
-                            fontWeight: 900,
-                            fontFamily: 'serif',
-                            backgroundColor: '#ffffff'
-                          }}
-                        >
-                          {st.hanko}
+                      {isComp ? (
+                        <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1">
+                          <Check size={12} strokeWidth={3} /> Hoàn thành
+                        </span>
+                      ) : !isStageUnlocked ? (
+                        <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 flex items-center gap-1 border border-slate-200 dark:border-slate-700">
+                          <Lock size={11} /> Khóa
+                        </span>
+                      ) : (
+                        <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-sky-50 dark:bg-sky-950/50 text-sky-700 dark:text-sky-300">
+                          {percent > 0 ? `${percent}%` : 'Mở'}
                         </span>
                       )}
                     </div>
 
-                    {/* Stage Title */}
-                    <h3 style={{ fontSize: 16, fontWeight: 800, color: '#0f172a', margin: '0 0 8px 0', lineHeight: 1.4 }}>
-                      {st.title.replace(/^\[N\d\]\s*/, '')}
+                    {/* Stage Title Clean (Không lặp lại Chặng X: Chặng X) */}
+                    <h3 className="text-base font-extrabold text-slate-900 dark:text-white mb-2 line-clamp-2">
+                      {cleanStageTitle(st.title)}
                     </h3>
 
                     {/* Stage Description */}
-                    <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.6, margin: '0 0 16px 0', minHeight: 40 }}>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4 line-clamp-2">
                       {st.description || 'Chinh phục kiến thức và kỹ năng giao tiếp trong chặng.'}
                     </p>
                   </div>
 
-                  {/* Stage Progress Bar */}
-                  <div style={{ marginBottom: 12 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11.5, fontWeight: 700, color: '#64748b', marginBottom: 4 }}>
+                  {/* Progress bar */}
+                  <div className="pt-3 border-t border-slate-100 dark:border-slate-800">
+                    <div className="flex justify-between items-center text-xs font-bold text-slate-500 dark:text-slate-400 mb-1.5">
                       <span>Tiến độ</span>
-                      <span>{completedCount}/{milestoneCount} mốc ({percent}%)</span>
+                      <span>{completedCount}/{milestoneCount} Mốc</span>
                     </div>
-                    <div style={{ width: '100%', height: 6, backgroundColor: '#f1f5f9', borderRadius: 9999, overflow: 'hidden' }}>
+                    <div className="w-full h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
                       <div
-                        style={{
-                          width: `${percent}%`,
-                          height: '100%',
-                          backgroundColor: isComp ? '#16a34a' : LEVEL_CONFIG[selectedLevel].color,
-                          borderRadius: 9999,
-                          transition: 'width 0.3s ease'
-                        }}
+                        className={`h-full rounded-full transition-all duration-300 ${isComp ? 'bg-emerald-500' : 'bg-emerald-600'}`}
+                        style={{ width: `${percent}%` }}
                       />
                     </div>
-                  </div>
-
-                  {/* Stage Footer */}
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      borderTop: '1px solid #f1f5f9',
-                      paddingTop: 12,
-                      fontSize: 12.5
-                    }}
-                  >
-                    <span style={{ color: '#475569', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-                      <MapPin size={13} style={{ color: '#0d9488' }} />
-                      <span>{milestoneCount} Mốc học tập</span>
-                    </span>
-
-                    <span style={{ color: LEVEL_CONFIG[selectedLevel].color, fontWeight: 800, display: 'flex', alignItems: 'center', gap: 4 }}>
-                      <span>Xem mốc học</span>
-                      <ChevronRight size={14} />
-                    </span>
                   </div>
                 </div>
               );
@@ -748,58 +426,47 @@ export const RoadmapPage: React.FC = () => {
         </div>
       ) : viewMode === 'MILESTONES' ? (
         /* ================= TẦNG 3: DANH SÁCH MỐC (MILESTONES) CỦA CHẶNG ================= */
-        <div>
+        <div className="space-y-4">
           {/* Back Button and Stage Header */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>
+          <div className="flex items-center justify-between gap-3 flex-wrap">
             <button
               onClick={handleBackToStages}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6,
-                padding: '8px 14px',
-                borderRadius: 8,
-                backgroundColor: '#ffffff',
-                border: '1px solid #e2e8f0',
-                color: '#334155',
-                fontSize: 13,
-                fontWeight: 700,
-                cursor: 'pointer',
-                boxShadow: 'var(--shadow-sm)'
-              }}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-bold shadow-xs hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer transition-colors"
             >
               <ArrowLeft size={16} />
               <span>Quay lại danh sách Chặng</span>
             </button>
 
             {selectedStage && (
-              <span style={{ fontSize: 12.5, fontWeight: 800, color: '#16a34a', backgroundColor: '#ecfdf5', padding: '4px 12px', borderRadius: 6, border: '1px solid #bbf7d0' }}>
+              <span className="text-xs font-extrabold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1.5 rounded-xl border border-emerald-200 dark:border-emerald-800">
                 {selectedStage.range || `Chặng ${selectedStage.orderIndex}`} · {stageMilestones.length} Mốc học
               </span>
             )}
           </div>
 
           {selectedStage && (
-            <div style={{ backgroundColor: '#ffffff', borderRadius: 16, border: '1.5px solid #e2e8f0', padding: '20px 24px', marginBottom: 20 }}>
-              <div style={{ fontSize: 12, fontWeight: 800, color: LEVEL_CONFIG[selectedLevel].color, textTransform: 'uppercase', marginBottom: 2 }}>
+            <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-7 shadow-sm transition-colors">
+              <div className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-1">
                 CHẶNG {selectedStage.orderIndex || 1}
               </div>
-              <h2 style={{ fontSize: 20, fontWeight: 900, color: '#0f172a', margin: '0 0 6px 0' }}>
-                {selectedStage.title.replace(/^\[N\d\]\s*/, '')}
+              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mb-2">
+                {cleanStageTitle(selectedStage.title)}
               </h2>
-              <p style={{ fontSize: 13.5, color: '#64748b', margin: 0, lineHeight: 1.6 }}>
-                {selectedStage.description}
-              </p>
+              {selectedStage.description && (
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed m-0">
+                  {selectedStage.description}
+                </p>
+              )}
             </div>
           )}
 
-          {/* Milestones List: 100% REAL DYNAMIC STATUS FROM FIRESTORE */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          {/* Milestones List */}
+          <div className="space-y-3">
             {stageMilestones.map((ms, idx) => {
               const isCompleted = userProgress?.completedMilestones?.includes(ms.id) || false;
 
               // Unlock logic based on real progress
-              const isFirstOfStage1 = (selectedLevel === 'N5' && selectedStage?.orderIndex === 1 && idx === 0);
+              const isFirstOfStage1 = ((selectedStage?.orderIndex || 1) === 1 && idx === 0);
               const prevCompleted = idx > 0 ? (userProgress?.completedMilestones?.includes(stageMilestones[idx - 1].id) || false) : false;
               const prevStageComp = (selectedStage && selectedStage.orderIndex > 1)
                 ? isStageCompleted(levelStages.find(s => s.orderIndex === selectedStage.orderIndex - 1))
@@ -812,70 +479,28 @@ export const RoadmapPage: React.FC = () => {
                 <div
                   key={ms.id}
                   onClick={() => handleSelectMilestone(ms, isUnlocked)}
-                  className="roadmap-milestone-item"
-                  style={{
-                    backgroundColor: isUnlocked ? '#ffffff' : '#f8fafc',
-                    border: isBoss
-                      ? '2px solid #f59e0b'
+                  className={`rounded-2xl p-4 sm:p-5 flex items-center justify-between gap-4 flex-wrap border transition-all ${
+                    !isUnlocked
+                      ? 'bg-slate-50/50 dark:bg-slate-900/30 border-slate-200/60 dark:border-slate-800/60 opacity-65 cursor-not-allowed'
+                      : isBoss
+                      ? 'bg-white dark:bg-slate-900 border-amber-300 dark:border-amber-700 shadow-xs hover:border-amber-400 cursor-pointer'
                       : isCompleted
-                      ? '1.5px solid #86efac'
-                      : isUnlocked
-                      ? '1.5px solid #16a34a'
-                      : '1.5px solid #e2e8f0',
-                    borderRadius: 14,
-                    padding: '16px 20px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    cursor: isUnlocked ? 'pointer' : 'not-allowed',
-                    opacity: isUnlocked ? 1 : 0.75,
-                    boxShadow: 'var(--shadow-sm)',
-                    transition: 'all 0.15s',
-                    flexWrap: 'wrap',
-                    gap: 12
-                  }}
-                  onMouseEnter={e => {
-                    if (isUnlocked) {
-                      e.currentTarget.style.transform = 'translateX(4px)';
-                      e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    if (isUnlocked) {
-                      e.currentTarget.style.transform = 'translateX(0)';
-                      e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
-                    }
-                  }}
+                      ? 'bg-white dark:bg-slate-900 border-emerald-200 dark:border-emerald-800/80 shadow-xs cursor-pointer'
+                      : 'bg-white dark:bg-slate-900 border-emerald-400/80 dark:border-emerald-600/60 shadow-sm ring-1 ring-emerald-500/20 cursor-pointer'
+                  }`}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: '1 1 auto', minWidth: 240 }}>
-                    {/* Milestone Order Circle */}
+                  <div className="flex items-center gap-4 flex-1 min-w-[240px]">
+                    {/* Circle icon */}
                     <div
-                      style={{
-                        width: 40,
-                        height: 40,
-                        borderRadius: '50%',
-                        backgroundColor: isBoss
-                          ? '#fef3c7'
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-sm shrink-0 border ${
+                        isBoss
+                          ? 'bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 border-amber-300 dark:border-amber-700'
                           : isCompleted
-                          ? '#dcfce7'
-                          : isUnlocked
-                          ? '#ecfdf5'
-                          : '#f1f5f9',
-                        color: isBoss
-                          ? '#d97706'
-                          : isCompleted
-                          ? '#16a34a'
-                          : isUnlocked
-                          ? '#15803d'
-                          : '#94a3b8',
-                        fontWeight: 900,
-                        fontSize: isBoss ? 16 : 14,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        border: isBoss ? '1.5px solid #fde68a' : isCompleted ? '1.5px solid #86efac' : '1px solid #cbd5e1',
-                        flexShrink: 0
-                      }}
+                          ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800'
+                          : !isUnlocked
+                          ? 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 border-slate-200 dark:border-slate-700'
+                          : 'bg-emerald-500 text-white border-emerald-600 shadow-xs'
+                      }`}
                     >
                       {isBoss ? (
                         <Crown size={18} />
@@ -889,18 +514,10 @@ export const RoadmapPage: React.FC = () => {
                     </div>
 
                     <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 2 }}>
-                        <span
-                          style={{
-                            fontSize: 11,
-                            fontWeight: 800,
-                            color: isBoss ? '#d97706' : '#64748b',
-                            textTransform: 'uppercase',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: 4
-                          }}
-                        >
+                      <div className="flex items-center gap-2 mb-1 flex-wrap">
+                        <span className={`text-[11px] font-extrabold uppercase flex items-center gap-1 ${
+                          isBoss ? 'text-amber-600 dark:text-amber-400' : 'text-slate-500 dark:text-slate-400'
+                        }`}>
                           {isBoss ? (
                             <>
                               <Crown size={12} />
@@ -912,58 +529,52 @@ export const RoadmapPage: React.FC = () => {
                         </span>
 
                         {isCompleted && (
-                          <span style={{ fontSize: 11, fontWeight: 700, color: '#16a34a', backgroundColor: '#dcfce7', padding: '1px 6px', borderRadius: 4 }}>
-                            Đã hoàn thành
+                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1">
+                            <Check size={11} strokeWidth={3} /> Đã hoàn thành
                           </span>
                         )}
 
                         {isUnlocked && !isCompleted && (
-                          <span style={{ fontSize: 11, fontWeight: 700, color: '#0284c7', backgroundColor: '#e0f2fe', padding: '1px 6px', borderRadius: 4 }}>
+                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
                             Đang học
                           </span>
                         )}
 
                         {!isUnlocked && (
-                          <span style={{ fontSize: 11, fontWeight: 700, color: '#64748b', backgroundColor: '#f1f5f9', padding: '1px 6px', borderRadius: 4 }}>
-                            Đang khóa
+                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 flex items-center gap-1">
+                            <Lock size={10} /> Đang khóa
                           </span>
                         )}
                       </div>
 
-                      <h3 style={{ fontSize: 15, fontWeight: 800, color: isUnlocked ? '#0f172a' : '#64748b', margin: '0 0 4px 0' }}>
+                      <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white mb-1">
                         {ms.title}
                       </h3>
 
-                      <div style={{ fontSize: 12.5, color: '#475569', display: 'flex', alignItems: 'center', gap: 5 }}>
-                        <Target size={13} style={{ color: '#0d9488', flexShrink: 0 }} />
+                      <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 flex items-center gap-1.5">
+                        <Target size={13} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
                         <span><b>Mục tiêu:</b> {ms.canDoGoal || ms.communicationContext || 'Thực hành mục tiêu hội thoại cốt lõi'}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Right side rewards and button */}
-                  <div className="roadmap-milestone-actions" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                    <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontSize: 12, fontWeight: 800, color: '#d97706' }}>
+                  <div className="flex items-center gap-3">
+                    <div className="text-right text-xs">
+                      <div className="font-extrabold text-amber-600 dark:text-amber-400">
                         +{ms.xpReward || 100} XP
                       </div>
-                      <div style={{ fontSize: 11, fontWeight: 700, color: '#0284c7' }}>
+                      <div className="font-bold text-sky-600 dark:text-sky-400 text-[11px]">
                         +{ms.activePointsReward || 80} pts
                       </div>
                     </div>
 
                     <div
-                      style={{
-                        padding: '6px 12px',
-                        borderRadius: 8,
-                        backgroundColor: isUnlocked ? '#16a34a' : '#f1f5f9',
-                        color: isUnlocked ? '#ffffff' : '#64748b',
-                        fontSize: 12,
-                        fontWeight: 800,
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 4
-                      }}
+                      className={`px-3.5 py-2 rounded-xl text-xs font-extrabold flex items-center gap-1.5 shadow-xs ${
+                        isUnlocked
+                          ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                          : 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 border border-slate-200 dark:border-slate-700'
+                      }`}
                     >
                       {isUnlocked ? (
                         <>

@@ -424,4 +424,158 @@ body {
   user-select: none;
 }
 
+/* ==========================================================================
+   COHESIVE DARK THEME (和モダン・ダークモード) MATCHING PROFILEPAGE
+   ========================================================================== */
+.dark .kizuna-vocab-page,
+.dark .kizuna-grammar-page,
+.dark .kizuna-kanji-page,
+.dark .kizuna-exam-page,
+.dark .kizuna-library-page {
+  color: #f1f5f9;
+}
+
+/* Cards, boxes, lists and panels in dark mode */
+.dark .kizuna-vocab-page div[style*="background: #ffffff"],
+.dark .kizuna-vocab-page div[style*="background:#ffffff"],
+.dark .kizuna-vocab-page div[style*="backgroundColor: '#ffffff'"],
+.dark .kizuna-vocab-page div[style*="background: #fdfbf7"],
+.dark .kizuna-vocab-page div[style*="background: #faf8f5"],
+.dark .kizuna-vocab-page div[style*="background: #fcfbfa"],
+.dark .kizuna-vocab-page div[style*="background: linear-gradient(135deg, #ffffff"],
+.dark .kizuna-vocab-page div[style*="background: linear-gradient(150deg, #ffffff"],
+.dark .kizuna-grammar-page div[style*="background: #ffffff"],
+.dark .kizuna-grammar-page div[style*="background:#ffffff"],
+.dark .kizuna-grammar-page div[style*="background: #fdfbf7"],
+.dark .kizuna-grammar-page div[style*="background: #faf8f5"],
+.dark .kizuna-grammar-page div[style*="background: linear-gradient(135deg, #ffffff"],
+.dark .kizuna-kanji-page div[style*="background: #ffffff"],
+.dark .kizuna-kanji-page div[style*="background:#ffffff"],
+.dark .kizuna-kanji-page div[style*="background: #fdfbf7"],
+.dark .kizuna-kanji-page div[style*="background: #faf8f5"],
+.dark .kizuna-kanji-page div[style*="background: linear-gradient(135deg, #ffffff"],
+.dark .kizuna-kanji-page div[style*="background: linear-gradient(150deg, #ffffff"],
+.dark .kizuna-exam-page div[style*="background: #ffffff"],
+.dark .kizuna-exam-page div[style*="background:#ffffff"],
+.dark .kizuna-exam-page div[style*="background: linear-gradient(135deg, #ffffff"],
+.dark .kizuna-library-page div[style*="background: #ffffff"],
+.dark .kizuna-library-page div[style*="background:#ffffff"],
+.dark .kizuna-library-page div[style*="background: linear-gradient(135deg, #ffffff"] {
+  background: #0f172a !important;
+  border-color: #1e293b !important;
+  color: #f1f5f9 !important;
+}
+
+/* Secondary light backgrounds in dark mode */
+.dark .kizuna-vocab-page div[style*="background: #f4f2ee"],
+.dark .kizuna-vocab-page div[style*="background: #f1ede6"],
+.dark .kizuna-vocab-page div[style*="background: #f8fafc"],
+.dark .kizuna-vocab-page div[style*="background: #f1f5f9"],
+.dark .kizuna-grammar-page div[style*="background: #f4f2ee"],
+.dark .kizuna-grammar-page div[style*="background: #f8fafc"],
+.dark .kizuna-grammar-page div[style*="background: #f1f5f9"],
+.dark .kizuna-kanji-page div[style*="background: #f4f2ee"],
+.dark .kizuna-kanji-page div[style*="background: #f1ede6"],
+.dark .kizuna-kanji-page div[style*="background: #f8fafc"],
+.dark .kizuna-kanji-page div[style*="background: #f1f5f9"],
+.dark .kizuna-exam-page div[style*="background: #f8fafc"],
+.dark .kizuna-exam-page div[style*="background: #f1f5f9"],
+.dark .kizuna-library-page div[style*="background: #f8fafc"],
+.dark .kizuna-library-page div[style*="background: #f1f5f9"],
+.dark .kizuna-library-page div[style*="background: #f4f2ee"] {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f1f5f9 !important;
+}
+
+/* Headings in dark mode */
+.dark .kizuna-vocab-page h1,
+.dark .kizuna-vocab-page h2,
+.dark .kizuna-vocab-page h3,
+.dark .kizuna-vocab-page h4,
+.dark .kizuna-grammar-page h1,
+.dark .kizuna-grammar-page h2,
+.dark .kizuna-grammar-page h3,
+.dark .kizuna-grammar-page h4,
+.dark .kizuna-kanji-page h1,
+.dark .kizuna-kanji-page h2,
+.dark .kizuna-kanji-page h3,
+.dark .kizuna-kanji-page h4,
+.dark .kizuna-exam-page h1,
+.dark .kizuna-exam-page h2,
+.dark .kizuna-exam-page h3,
+.dark .kizuna-exam-page h4,
+.dark .kizuna-library-page h1,
+.dark .kizuna-library-page h2,
+.dark .kizuna-library-page h3,
+.dark .kizuna-library-page h4 {
+  color: #ffffff !important;
+}
+
+/* Primary text colors */
+.dark .kizuna-vocab-page [style*="color: #1c1917"],
+.dark .kizuna-vocab-page [style*="color: #1c2536"],
+.dark .kizuna-vocab-page [style*="color: #0f172a"],
+.dark .kizuna-vocab-page [style*="color: #292524"],
+.dark .kizuna-grammar-page [style*="color: #1c1917"],
+.dark .kizuna-grammar-page [style*="color: #1c2536"],
+.dark .kizuna-grammar-page [style*="color: #0f172a"],
+.dark .kizuna-kanji-page [style*="color: #1c1917"],
+.dark .kizuna-kanji-page [style*="color: #1c2536"],
+.dark .kizuna-kanji-page [style*="color: #0f172a"],
+.dark .kizuna-exam-page [style*="color: #1c1917"],
+.dark .kizuna-exam-page [style*="color: #1c2536"],
+.dark .kizuna-exam-page [style*="color: #0f172a"],
+.dark .kizuna-library-page [style*="color: #1c1917"],
+.dark .kizuna-library-page [style*="color: #1c2536"],
+.dark .kizuna-library-page [style*="color: #0f172a"] {
+  color: #f8fafc !important;
+}
+
+/* Muted text colors */
+.dark .kizuna-vocab-page [style*="color: #78716c"],
+.dark .kizuna-vocab-page [style*="color: #57534e"],
+.dark .kizuna-vocab-page [style*="color: #475569"],
+.dark .kizuna-vocab-page [style*="color: #64748b"],
+.dark .kizuna-grammar-page [style*="color: #78716c"],
+.dark .kizuna-grammar-page [style*="color: #57534e"],
+.dark .kizuna-grammar-page [style*="color: #64748b"],
+.dark .kizuna-kanji-page [style*="color: #78716c"],
+.dark .kizuna-kanji-page [style*="color: #57534e"],
+.dark .kizuna-kanji-page [style*="color: #64748b"],
+.dark .kizuna-exam-page [style*="color: #64748b"],
+.dark .kizuna-library-page [style*="color: #64748b"] {
+  color: #94a3b8 !important;
+}
+
+/* Inputs, textareas and selects in dark mode */
+.dark .kizuna-vocab-page input,
+.dark .kizuna-grammar-page input,
+.dark .kizuna-kanji-page input,
+.dark .kizuna-exam-page input,
+.dark .kizuna-library-page input,
+.dark .kizuna-vocab-page select,
+.dark .kizuna-grammar-page select,
+.dark .kizuna-kanji-page select,
+.dark .kizuna-exam-page select,
+.dark .kizuna-library-page select {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+/* Buttons in dark mode */
+.dark .kizuna-vocab-page button[style*="background: #ffffff"],
+.dark .kizuna-vocab-page button[style*="background:#ffffff"],
+.dark .kizuna-grammar-page button[style*="background: #ffffff"],
+.dark .kizuna-grammar-page button[style*="background:#ffffff"],
+.dark .kizuna-kanji-page button[style*="background: #ffffff"],
+.dark .kizuna-kanji-page button[style*="background:#ffffff"],
+.dark .kizuna-exam-page button[style*="background: #ffffff"],
+.dark .kizuna-library-page button[style*="background: #ffffff"] {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
 

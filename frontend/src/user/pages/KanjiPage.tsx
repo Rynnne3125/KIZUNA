@@ -1202,7 +1202,7 @@ export const KanjiPage: React.FC = () => {
   const currentQuizQuestion = quizQuestions[quizActiveIndex];
 
   return (
-    <div style={{
+    <div className="kizuna-kanji-page" style={{
       maxWidth: 1040,
       margin: '0 auto',
       padding: '0 12px 64px 12px',

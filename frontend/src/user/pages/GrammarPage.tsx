@@ -656,7 +656,7 @@ export const GrammarPage: React.FC = () => {
   const currentQuestion = quizQuestions[quizActiveIndex];
 
   return (
-    <div style={{
+    <div className="kizuna-grammar-page" style={{
       maxWidth: 1040,
       margin: '0 auto',
       paddingBottom: 64,

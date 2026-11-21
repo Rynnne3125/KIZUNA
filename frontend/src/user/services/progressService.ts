@@ -411,12 +411,11 @@ export const progressService = {
       [milestoneId]: updatedQuestsForMilestone
     };
 
-    // Kiểm tra xem đã hoàn thành cả 4 quests và bài đọc hiểu chưa
+    // Kiểm tra xem đã hoàn thành cả 4 quests của bài học chưa -> đánh dấu hoàn thành Mốc!
     const hasFinishedAllQuests = [1, 2, 3, 4].every(idx => updatedQuestsForMilestone.includes(idx));
-    const hasFinishedReading = current.readingCompleted.includes(milestoneId);
 
     const updatedCompletedMilestones = [...current.completedMilestones];
-    if (hasFinishedAllQuests && hasFinishedReading && !updatedCompletedMilestones.includes(milestoneId)) {
+    if (hasFinishedAllQuests && !updatedCompletedMilestones.includes(milestoneId)) {
       updatedCompletedMilestones.push(milestoneId);
     }
 

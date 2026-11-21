@@ -237,7 +237,7 @@ export const LibraryPage: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 12px 60px 12px', boxSizing: 'border-box' }}>
+    <div className="kizuna-library-page" style={{ maxWidth: 1200, margin: '0 auto', padding: '0 12px 60px 12px', boxSizing: 'border-box' }}>
       <style>{`
         /* Responsive Media Queries cho Mobile / Android */
         @media (max-width: 900px) {

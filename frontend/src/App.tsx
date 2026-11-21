@@ -24,6 +24,24 @@ import { AiPlacementModal } from './user/components/placement/AiPlacementModal';
 import { progressService } from './user/services/progressService';
 import { placementService } from './user/services/placementService';
 
+const getTabFromPath = (): UserNavTab => {
+  if (typeof window === 'undefined') return 'home';
+  const path = window.location.pathname.toLowerCase().replace(/^\/+|\/+$/g, '');
+  const tabMap: Record<string, UserNavTab> = {
+    '': 'home',
+    'home': 'home',
+    'vocab': 'vocab',
+    'grammar': 'grammar',
+    'kanji': 'kanji',
+    'roadmap': 'roadmap',
+    'library': 'library',
+    'exam': 'exam',
+    'profile': 'profile',
+    'admin': 'admin'
+  };
+  return tabMap[path] || 'home';
+};
+
 export default function App() {
   const isApp = isNativeApp();
   const network = useNetworkStatus();
@@ -31,10 +49,10 @@ export default function App() {
   // Lấy người dùng từ session được lưu trong localStorage (tối đa 24h)
   const [user, setUser] = useState<User | null>(() => authService.getCurrentUser());
   
-  // Tự động điều hướng đến 'admin' nếu là ROLE_ADMIN, ngược lại vào 'home'
+  // Tự động điều hướng đến 'admin' nếu là ROLE_ADMIN, ngược lại vào tab theo URL hoặc 'home'
   const [activeTab, setActiveTab] = useState<UserNavTab>(() => {
     const current = authService.getCurrentUser();
-    return current?.role === 'ROLE_ADMIN' ? 'admin' : 'home';
+    return current?.role === 'ROLE_ADMIN' ? 'admin' : getTabFromPath();
   });
 
   // Trạng thái mở modal tải APK
@@ -150,18 +168,89 @@ export default function App() {
     };
   }, [user]);
 
-  const handleTabChange = (tab: UserNavTab) => {
+  const handleTabChange = (tab: UserNavTab, replace = false) => {
     setActiveTab(tab);
+    const targetPath = tab === 'home' ? '/' : `/${tab}`;
+    if (typeof window !== 'undefined' && window.location.pathname !== targetPath) {
+      if (replace) {
+        window.history.replaceState({ tab }, '', targetPath);
+      } else {
+        window.history.pushState({ tab }, '', targetPath);
+      }
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Đồng bộ lịch sử ban đầu với URL
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const initialTab = getTabFromPath();
+      const targetPath = initialTab === 'home' ? '/' : `/${initialTab}`;
+      window.history.replaceState({ tab: initialTab }, '', targetPath);
+    }
+  }, []);
+
+  // Lắng nghe phím Back / Forward của trình duyệt web
+  useEffect(() => {
+    const handlePopState = (e: PopStateEvent) => {
+      const tabFromState = (e.state && e.state.tab) ? e.state.tab : getTabFromPath();
+      setActiveTab(tabFromState);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Hỗ trợ nút Back vật lý / cử chỉ vuốt Back trên điện thoại Android (Capacitor)
+  useEffect(() => {
+    let backListener: any = null;
+    if (isNativeApp()) {
+      import('@capacitor/app').then(({ App: CapApp }) => {
+        CapApp.addListener('backButton', () => {
+          // 1. Đóng modal nếu đang mở
+          if (isApkModalOpen) {
+            setIsApkModalOpen(false);
+            return;
+          }
+          if (isPlacementModalOpen) {
+            setIsPlacementModalOpen(false);
+            return;
+          }
+          // 2. Nếu đang ở trang con khác trang chủ và có lịch sử -> quay về trang trước
+          if (window.history.length > 1 && window.location.pathname !== '/' && window.location.pathname !== '/home') {
+            window.history.back();
+            return;
+          }
+          // 3. Nếu đang ở tab khác 'home' -> điều hướng về 'home'
+          if (activeTab !== 'home') {
+            handleTabChange('home');
+            return;
+          }
+          // 4. Nếu đang ở 'home' -> thoát app
+          CapApp.exitApp();
+        }).then(h => {
+          backListener = h;
+        });
+      }).catch(err => {
+        console.warn('Capacitor App listener error:', err);
+      });
+    }
+
+    return () => {
+      if (backListener) {
+        backListener.remove();
+      }
+    };
+  }, [activeTab, isApkModalOpen, isPlacementModalOpen]);
 
   // Khi đăng nhập thành công: Nếu là Admin chuyển ngay đến Admin Dashboard, ngược lại vào Trang Chủ
   const handleLoginSuccess = (authenticatedUser: User) => {
     setUser(authenticatedUser);
     if (authenticatedUser.role === 'ROLE_ADMIN') {
-      setActiveTab('admin');
+      handleTabChange('admin', true);
     } else {
-      setActiveTab('home');
+      handleTabChange(getTabFromPath(), true);
     }
   };
 
@@ -169,7 +258,7 @@ export default function App() {
   const handleLogout = () => {
     authService.logout();
     setUser(null);
-    setActiveTab('home');
+    handleTabChange('home', true);
   };
 
   // 0. BẮT BUỘC: Nếu không có kết nối Internet (mất cả Wi-Fi lẫn 4G/5G)

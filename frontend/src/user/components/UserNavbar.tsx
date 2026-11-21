@@ -203,10 +203,15 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
             <div className="flex-1 overflow-y-auto p-3 space-y-1">
               {navItems.map(item => {
                 const isActive = activeTab === item.id;
+                const path = item.id === 'home' ? '/' : `/${item.id}`;
                 return (
-                  <button
+                  <a
                     key={item.id}
-                    onClick={() => handleNavClick(item.id)}
+                    href={path}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(item.id);
+                    }}
                     className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
                       isActive 
                         ? 'bg-emerald-600 text-white shadow-xs' 
@@ -224,7 +229,7 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
                         {item.badge}
                       </span>
                     )}
-                  </button>
+                  </a>
                 );
               })}
 
@@ -389,10 +394,15 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
 
           {navItems.map(item => {
             const isActive = activeTab === item.id;
+            const path = item.id === 'home' ? '/' : `/${item.id}`;
             return (
-              <button
+              <a
                 key={item.id}
-                onClick={() => onTabChange(item.id)}
+                href={path}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onTabChange(item.id);
+                }}
                 className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
                   isActive 
                     ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 font-bold border-l-4 border-emerald-600 dark:border-emerald-500 shadow-2xs' 
@@ -410,7 +420,7 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
                     {item.badge}
                   </span>
                 )}
-              </button>
+              </a>
             );
           })}
 
@@ -504,10 +514,15 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
           { id: 'profile' as UserNavTab, label: 'Cá nhân', icon: <UserCheck className="w-5 h-5" /> },
         ].map(item => {
           const isActive = activeTab === item.id;
+          const path = item.id === 'home' ? '/' : `/${item.id}`;
           return (
-            <button
+            <a
               key={item.id}
-              onClick={() => handleNavClick(item.id)}
+              href={path}
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick(item.id);
+              }}
               className={`flex flex-col items-center justify-center flex-1 py-1 transition-colors cursor-pointer ${
                 isActive ? 'text-emerald-700 dark:text-emerald-400 font-bold' : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-medium'
               }`}
@@ -516,7 +531,7 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
                 {item.icon}
               </span>
               <span className="text-[10px] mt-0.5">{item.label}</span>
-            </button>
+            </a>
           );
         })}
       </nav>

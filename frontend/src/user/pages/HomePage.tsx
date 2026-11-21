@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { User } from '../types/auth';
 import { UserNavTab } from '../components/UserNavbar';
-import { progressService } from '../services/progressService';
+import { progressService, UserRoadmapProgress } from '../services/progressService';
 import { rankingService } from '../services/rankingService';
 import { kizunaService } from '../services/kizunaService';
 import { UserProgressData } from '../types/progress';
 import { RankTier, UserLeaderboardItem } from '../types/ranking';
+import { STAGES_CATALOG, MILESTONES_CATALOG } from '../data/roadmapCatalog';
 import { 
   Flame, Award, BookOpen, ArrowRight, Trophy, Sparkles, 
   Target, Compass, Library, ChevronRight, Crown, 
@@ -39,7 +40,14 @@ function getRankMeta(tierId?: string) {
 export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth }) => {
   // Tiến độ học tập thực tế từ Firestore
   const [userProgress, setUserProgress] = useState<UserProgressData | null>(null);
+  const [roadmapProgress, setRoadmapProgress] = useState<UserRoadmapProgress | null>(null);
   const [loadingProgress, setLoadingProgress] = useState(true);
+
+  // Tải tiến độ lộ trình chi tiết
+  useEffect(() => {
+    if (!user?.id) return;
+    progressService.getUserRoadmapProgress(user.id).then(r => setRoadmapProgress(r));
+  }, [user?.id]);
 
   // Dữ liệu bảng xếp hạng và mốc rank từ Firestore
   const [rankTiers, setRankTiers] = useState<RankTier[]>([]);
@@ -119,6 +127,49 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
   );
   const userPosition = userRankIndex >= 0 ? userRankIndex + 1 : null;
 
+  // Tính toán chính xác vị trí bài học trên Lộ Trình (Cấp độ N mấy, Chặng mấy, Bài mấy)
+  const currentRoadmapTarget = useMemo(() => {
+    const completed = roadmapProgress?.completedMilestones || [];
+    const userLvl = (user?.level && ['N5', 'N4', 'N3', 'N2', 'N1'].includes(user.level)) ? user.level : 'N5';
+
+    const levelStages = STAGES_CATALOG
+      .filter(s => (s.jlptLevel || (s as any).jlpt_level || 'N5').toUpperCase() === userLvl.toUpperCase())
+      .sort((a, b) => ((a.orderIndex ?? (a as any).order_index ?? 0) - (b.orderIndex ?? (b as any).order_index ?? 0)));
+    const levelStageIds = levelStages.map(s => s.id);
+    const levelMilestones = MILESTONES_CATALOG
+      .filter(m => levelStageIds.includes(m.stageId || (m as any).stage_id))
+      .sort((a, b) => ((a.orderIndex ?? (a as any).order_index ?? 0) - (b.orderIndex ?? (b as any).order_index ?? 0)));
+
+    const nextMilestone = levelMilestones.find(m => !completed.includes(m.id)) || levelMilestones[0];
+    const currentStage = levelStages.find(s => s.id === (nextMilestone?.stageId || (nextMilestone as any)?.stage_id)) || levelStages[0];
+
+    const stageMilestones = levelMilestones.filter(m => (m.stageId || (m as any).stage_id) === currentStage?.id);
+    const completedInStage = stageMilestones.filter(m => completed.includes(m.id)).length;
+    const stagePercent = stageMilestones.length > 0 ? Math.round((completedInStage / stageMilestones.length) * 100) : 0;
+
+    const completedInLevel = levelMilestones.filter(m => completed.includes(m.id)).length;
+    const levelPercent = levelMilestones.length > 0 ? Math.round((completedInLevel / levelMilestones.length) * 100) : 0;
+
+    const cleanTitle = (currentStage?.title || '')
+      .replace(/^\[N\d\]\s*/i, '')
+      .replace(/^Chặng\s*\d+\s*[—–-]\s*/i, '')
+      .trim();
+
+    return {
+      level: userLvl,
+      stage: currentStage,
+      stageTitleClean: cleanTitle,
+      milestone: nextMilestone,
+      completedInStage,
+      totalInStage: stageMilestones.length || 5,
+      stagePercent,
+      completedInLevel,
+      totalInLevel: levelMilestones.length || 30,
+      levelPercent,
+      hasStarted: completed.length > 0
+    };
+  }, [roadmapProgress, user?.level]);
+
   // Kiểm tra user đã thực sự có tiến trình học tập trên Firestore chưa
   const hasStarted = Boolean(
     userProgress && (
@@ -126,7 +177,8 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
       userProgress.kanjiLearned > 0 ||
       userProgress.grammarLearned > 0 ||
       userProgress.examsCompleted > 0 ||
-      userProgress.currentMilestoneId
+      userProgress.currentMilestoneId ||
+      currentRoadmapTarget.hasStarted
     )
   );
 
@@ -214,51 +266,52 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
       </div>
 
       {/* =========================================================================
-          2. TIẾN ĐỘ HỌC TẬP THỰC TẾ (HỆ THỐNG HUY HIỆU CHỮ HÁN MON & THẺ CHUẨN NHẬT)
+          2. TIẾN ĐỘ HỌC TẬP THỰC TẾ (LỘ TRÌNH MINH BẠCH THEO CẤP ĐỘ, CHẶNG & BÀI HỌC)
           ========================================================================= */}
       <div className="bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-7 border border-emerald-100 dark:border-slate-800 shadow-md shadow-emerald-950/5 relative overflow-hidden bg-seigaiha-light transition-colors">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4 relative z-10">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 relative z-10">
           <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="hanko-seal px-2 py-0.5 text-xs">進</span>
-              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
-                {hasStarted 
-                  ? (userProgress?.currentMilestoneTitle || 'Tiến độ học tập')
-                  : 'Tiến độ học tập'
-                }
-              </h2>
+            <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+              <span className="text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                JLPT {currentRoadmapTarget.level}
+              </span>
+              <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
+                Chặng {currentRoadmapTarget.stage?.orderIndex || 1} • {currentRoadmapTarget.stage?.range || 'Bài học'}
+              </span>
             </div>
-            {hasStarted && userProgress?.currentStageTitle && (
-              <div className="text-xs text-slate-500 dark:text-slate-400 font-medium ml-7">
-                {userProgress.currentStageTitle}
-              </div>
-            )}
+            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+              {currentRoadmapTarget.stageTitleClean || 'Lộ trình tiếng Nhật thực chiến'}
+            </h2>
+            <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium mt-1 flex items-center gap-1.5">
+              <span className="font-bold text-emerald-700 dark:text-emerald-400">Đang học:</span>
+              <span>{currentRoadmapTarget.milestone?.nejUnit || `Bài ${currentRoadmapTarget.milestone?.orderIndex || 1}`} — {currentRoadmapTarget.milestone?.title || 'Bắt đầu học'}</span>
+            </div>
           </div>
 
           <button
             onClick={() => onNavigate('roadmap')}
             className="w-full md:w-auto px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white font-bold text-xs sm:text-sm shadow-md shadow-emerald-700/20 transition-all cursor-pointer whitespace-nowrap self-start md:self-auto flex items-center justify-center gap-2 group"
           >
-            <span>{hasStarted ? 'Tiếp tục học' : 'Bắt đầu học'}</span>
+            <span>{currentRoadmapTarget.hasStarted ? 'Tiếp tục học' : 'Bắt đầu học ngay'}</span>
             <ArrowRight className="w-4 h-4 text-emerald-200 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
 
-        {/* Thanh tiến độ thực tế */}
-        <div className="mb-6 relative z-10">
-          <div className="flex justify-between items-center text-xs font-bold mb-1.5">
+        {/* Thanh tiến độ Chặng rõ ràng minh bạch */}
+        <div className="mb-6 relative z-10 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl border border-slate-200/60 dark:border-slate-800">
+          <div className="flex justify-between items-center text-xs font-bold mb-2 flex-wrap gap-1">
             <span className="text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-              <span>{hasStarted ? (userProgress?.currentStageTitle || 'Tiến độ hiện tại') : 'Khởi động hành trình (Chặng 1)'}</span>
+              <span>Tiến độ Chặng {currentRoadmapTarget.stage?.orderIndex || 1}: {currentRoadmapTarget.completedInStage}/{currentRoadmapTarget.totalInStage} bài ({currentRoadmapTarget.stagePercent}%)</span>
             </span>
-            <span className="text-emerald-700 dark:text-emerald-400 font-extrabold font-mono">
-              {hasStarted ? `${userProgress?.stageCompletionPercentage || 0}% hoàn thành` : '0% (Sẵn sàng bắt đầu)'}
+            <span className="text-emerald-700 dark:text-emerald-400 font-extrabold font-mono text-[11px]">
+              {currentRoadmapTarget.completedInLevel}/{currentRoadmapTarget.totalInLevel} mốc {currentRoadmapTarget.level} ({currentRoadmapTarget.levelPercent}%)
             </span>
           </div>
-          <div className="w-full h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden border border-slate-200/50 dark:border-slate-700">
+          <div className="w-full h-3 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
             <div 
-              className="h-full bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full transition-all duration-500"
-              style={{ width: `${hasStarted ? Math.min(100, userProgress?.stageCompletionPercentage || 0) : 0}%` }}
+              className="h-full bg-gradient-to-r from-emerald-600 to-teal-500 rounded-full transition-all duration-500"
+              style={{ width: `${currentRoadmapTarget.stagePercent}%` }}
             />
           </div>
         </div>

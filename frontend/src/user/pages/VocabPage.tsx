@@ -862,7 +862,7 @@ export const VocabPage: React.FC = () => {
   const currentLevelBooks = catalog[selectedLevel] || [];
 
   return (
-    <div style={{
+    <div className="kizuna-vocab-page" style={{
       maxWidth: 1040,
       margin: '0 auto',
       paddingBottom: 64,
