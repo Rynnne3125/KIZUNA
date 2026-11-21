@@ -1037,38 +1037,49 @@ export const VocabPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Breadcrumb Navigation phong cách chỉ mục Nhật */}
+        {/* Breadcrumb Navigation phong cách chỉ mục Nhật (Responsive một dòng, vuốt ngang mượt mà trên Mobile) */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 8,
+          gap: 6,
           fontSize: 13,
           color: '#78716c',
           padding: '8px 14px',
           background: '#faf8f5',
           borderRadius: 8,
-          border: '1px solid #ebe7df'
+          border: '1px solid #ebe7df',
+          overflowX: 'auto',
+          whiteSpace: 'nowrap',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+          WebkitOverflowScrolling: 'touch'
         }}>
           <span 
             onClick={handleBackToBooks}
             style={{
               cursor: selectedBook ? 'pointer' : 'default',
               color: selectedBook ? '#2563eb' : '#1c2536',
-              fontWeight: 700
+              fontWeight: 700,
+              flexShrink: 0
             }}
           >
             【 {selectedLevel} · {LEVEL_LABELS[selectedLevel].kanji} 】
           </span>
           {selectedBook && (
             <>
-              <span style={{ color: '#d6d3d1' }}>／</span>
+              <ChevronRight size={13} style={{ color: '#a8a29e', flexShrink: 0 }} />
               <span 
                 onClick={handleBackToUnits}
                 style={{
                   cursor: selectedUnit ? 'pointer' : 'default',
                   color: selectedUnit ? '#2563eb' : '#1c2536',
-                  fontWeight: 600
+                  fontWeight: 600,
+                  flexShrink: 0,
+                  maxWidth: 240,
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
                 }}
+                title={selectedBook.bookName}
               >
                 {selectedBook.bookName}
               </span>
@@ -1076,8 +1087,17 @@ export const VocabPage: React.FC = () => {
           )}
           {selectedUnit && (
             <>
-              <span style={{ color: '#d6d3d1' }}>／</span>
-              <span style={{ color: '#1c2536', fontWeight: 700 }}>
+              <ChevronRight size={13} style={{ color: '#a8a29e', flexShrink: 0 }} />
+              <span style={{
+                color: '#1c2536',
+                fontWeight: 700,
+                flexShrink: 0,
+                maxWidth: 300,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis'
+              }}
+              title={selectedUnit.unitTitle}
+              >
                 {selectedUnit.unitTitle}
               </span>
             </>

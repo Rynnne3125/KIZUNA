@@ -827,20 +827,21 @@ export const GrammarPage: React.FC = () => {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
               {/* Dấu triện Hanko đỏ (印鑑) KIZUNA */}
+              {/* Dấu triện Hanko đỏ (印鑑) KIZUNA */}
               <span style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: 26,
-                height: 26,
-                border: '1.5px solid #c53d32',
-                borderRadius: 4,
-                color: '#c53d32',
-                fontSize: 13,
+                width: 32,
+                height: 32,
+                borderRadius: 8,
+                background: '#c53d32',
+                color: '#ffffff',
+                fontSize: 16,
                 fontWeight: 900,
                 fontFamily: 'serif',
                 lineHeight: 1,
-                background: '#fffcfb'
+                boxShadow: '0 3px 8px rgba(197, 61, 50, 0.25)'
               }}>
                 絆
               </span>
@@ -889,38 +890,49 @@ export const GrammarPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Breadcrumb Navigation phong cách chỉ mục Nhật */}
+        {/* Breadcrumb Navigation phong cách chỉ mục Nhật (Responsive một dòng, vuốt ngang mượt mà trên Mobile) */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 8,
+          gap: 6,
           fontSize: 13,
           color: '#78716c',
           padding: '8px 14px',
           background: '#faf8f5',
           borderRadius: 8,
-          border: '1px solid #ebe7df'
+          border: '1px solid #ebe7df',
+          overflowX: 'auto',
+          whiteSpace: 'nowrap',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+          WebkitOverflowScrolling: 'touch'
         }}>
           <span
             onClick={handleBackToBooks}
             style={{
               cursor: selectedBook ? 'pointer' : 'default',
               color: selectedBook ? '#2563eb' : '#1c2536',
-              fontWeight: 700
+              fontWeight: 700,
+              flexShrink: 0
             }}
           >
             【 {selectedLevel} · {LEVEL_LABELS[selectedLevel].kanji} 】
           </span>
           {selectedBook && (
             <>
-              <span style={{ color: '#d6d3d1' }}>／</span>
+              <ChevronRight size={13} style={{ color: '#a8a29e', flexShrink: 0 }} />
               <span
                 onClick={handleBackToUnits}
                 style={{
                   cursor: selectedUnit ? 'pointer' : 'default',
                   color: selectedUnit ? '#2563eb' : '#1c2536',
-                  fontWeight: 600
+                  fontWeight: 600,
+                  flexShrink: 0,
+                  maxWidth: 240,
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
                 }}
+                title={selectedBook.bookName}
               >
                 {selectedBook.bookName}
               </span>
@@ -928,8 +940,17 @@ export const GrammarPage: React.FC = () => {
           )}
           {selectedUnit && (
             <>
-              <span style={{ color: '#d6d3d1' }}>／</span>
-              <span style={{ color: '#1c2536', fontWeight: 700 }}>
+              <ChevronRight size={13} style={{ color: '#a8a29e', flexShrink: 0 }} />
+              <span style={{
+                color: '#1c2536',
+                fontWeight: 700,
+                flexShrink: 0,
+                maxWidth: 300,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis'
+              }}
+              title={selectedUnit.unitTitle}
+              >
                 {selectedUnit.unitTitle}
               </span>
             </>
@@ -1033,7 +1054,11 @@ export const GrammarPage: React.FC = () => {
                     fontWeight: 700,
                     fontSize: 14,
                     cursor: 'pointer',
-                    transition: 'background 0.15s'
+                    transition: 'background 0.15s',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 6
                   }}
                   onMouseEnter={e => e.currentTarget.style.background = '#c53d32'}
                   onMouseLeave={e => e.currentTarget.style.background = '#1c2536'}
@@ -1042,7 +1067,8 @@ export const GrammarPage: React.FC = () => {
                     handleSelectBook(book);
                   }}
                 >
-                  開く (Mở sách) →
+                  <span>開く (Mở sách)</span>
+                  <ChevronRight size={16} />
                 </button>
               </div>
             );
@@ -1159,12 +1185,6 @@ export const GrammarPage: React.FC = () => {
                       </div>
                     )}
                   </div>
-
-                  <div style={{ marginTop: 12, paddingTop: 10, borderTop: '1px dashed #f0ece3', display: 'flex', justifyContent: 'flex-end' }}>
-                    <span style={{ fontSize: 12, fontWeight: 700, color: '#c53d32' }}>
-                      Vào học bài →
-                    </span>
-                  </div>
                 </div>
               );
             })}
@@ -1199,15 +1219,20 @@ export const GrammarPage: React.FC = () => {
                 style={{
                   background: '#faf8f5',
                   border: '1px solid #d6d3d1',
-                  padding: '6px 12px',
-                  borderRadius: 7,
+                  padding: '6px 14px',
+                  borderRadius: 8,
                   fontSize: 13,
                   fontWeight: 600,
                   color: '#44403c',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 5,
+                  transition: 'all 0.15s ease'
                 }}
               >
-                ⬅️ Danh sách bài
+                <ChevronLeft size={15} />
+                <span>Danh sách bài</span>
               </button>
             </div>
 
@@ -1867,10 +1892,14 @@ export const GrammarPage: React.FC = () => {
                                   fontSize: 12,
                                   fontWeight: 600,
                                   color: '#44403c',
-                                  zIndex: 2
+                                  zIndex: 2,
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: 5
                                 }}
                               >
-                                Phát âm
+                                <Volume2 size={13} />
+                                <span>Phát âm</span>
                               </button>
 
                               <div style={{ position: 'relative', zIndex: 2 }}>
@@ -1956,10 +1985,14 @@ export const GrammarPage: React.FC = () => {
                                     cursor: 'pointer',
                                     fontSize: 11,
                                     fontWeight: 600,
-                                    color: '#44403c'
+                                    color: '#44403c',
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: 5
                                   }}
                                 >
-                                  Phát âm ví dụ
+                                  <Volume2 size={12} />
+                                  <span>Phát âm ví dụ</span>
                                 </button>
                               </div>
 

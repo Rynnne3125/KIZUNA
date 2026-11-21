@@ -1437,7 +1437,7 @@ export const KanjiPage: React.FC = () => {
           gap: 12,
           boxShadow: '0 2px 6px rgba(0,0,0,0.02)'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
             <span style={{
               background: '#fdf2f0',
               color: '#c53d32',
@@ -1445,7 +1445,8 @@ export const KanjiPage: React.FC = () => {
               padding: '3px 10px',
               borderRadius: 6,
               fontSize: 13,
-              fontWeight: 900
+              fontWeight: 900,
+              flexShrink: 0
             }}>
               【 {selectedLevel} · {LEVEL_LABELS[selectedLevel].kanji} 】
             </span>

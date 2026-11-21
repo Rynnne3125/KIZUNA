@@ -301,11 +301,11 @@ export const RoadmapPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. BREADCRUMBS TRAIL */}
-      <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 px-1 flex-wrap">
+      {/* 2. BREADCRUMBS TRAIL (Responsive một dòng, cuộn ngang mượt mà trên Mobile) */}
+      <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 px-1 overflow-x-auto whitespace-nowrap scrollbar-none py-1">
         <span
           onClick={handleBackToStages}
-          className={`cursor-pointer transition-colors ${viewMode === 'STAGES' ? 'font-extrabold text-slate-900 dark:text-white' : 'hover:underline text-slate-600 dark:text-slate-400'}`}
+          className={`cursor-pointer transition-colors shrink-0 ${viewMode === 'STAGES' ? 'font-extrabold text-slate-900 dark:text-white' : 'hover:underline text-slate-600 dark:text-slate-400'}`}
         >
           {selectedLevel} · {LEVEL_CONFIG[selectedLevel].desc}
         </span>
@@ -315,7 +315,8 @@ export const RoadmapPage: React.FC = () => {
             <ChevronRight size={14} className="text-slate-400 shrink-0" />
             <span
               onClick={handleBackToMilestones}
-              className={`cursor-pointer transition-colors ${viewMode === 'MILESTONES' ? 'font-extrabold text-slate-900 dark:text-white' : 'hover:underline text-slate-600 dark:text-slate-400'}`}
+              className={`cursor-pointer transition-colors shrink-0 max-w-[240px] truncate ${viewMode === 'MILESTONES' ? 'font-extrabold text-slate-900 dark:text-white' : 'hover:underline text-slate-600 dark:text-slate-400'}`}
+              title={`Chặng ${selectedStage.orderIndex || 1}: ${cleanStageTitle(selectedStage.title)}`}
             >
               Chặng {selectedStage.orderIndex || 1}: {cleanStageTitle(selectedStage.title)}
             </span>
@@ -325,7 +326,10 @@ export const RoadmapPage: React.FC = () => {
         {selectedMilestone && viewMode === 'LESSON' && (
           <>
             <ChevronRight size={14} className="text-slate-400 shrink-0" />
-            <span className="font-extrabold text-emerald-600 dark:text-emerald-400">
+            <span 
+              className="font-extrabold text-emerald-600 dark:text-emerald-400 shrink-0 max-w-[280px] truncate"
+              title={selectedMilestone.nejUnit ? `${selectedMilestone.nejUnit} — ${cleanMilestoneTitle(selectedMilestone.title)}` : selectedMilestone.title}
+            >
               Mốc: {selectedMilestone.nejUnit ? `${selectedMilestone.nejUnit} — ${cleanMilestoneTitle(selectedMilestone.title)}` : selectedMilestone.title}
             </span>
           </>
