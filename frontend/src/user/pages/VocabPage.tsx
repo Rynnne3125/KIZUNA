@@ -202,6 +202,13 @@ export const VocabPage: React.FC = () => {
     soundService.speakJapanese(text);
   };
 
+  // Tự động ngắt toàn bộ âm thanh khi người dùng rời khỏi trang từ vựng
+  useEffect(() => {
+    return () => {
+      soundService.stop();
+    };
+  }, []);
+
   // Tải catalog lúc mount
   useEffect(() => {
     kizunaService.getVocabularyCatalog().then(cat => {
@@ -2565,7 +2572,7 @@ export const VocabPage: React.FC = () => {
                           </div>
 
                           <div style={{
-                            fontSize: 42,
+                            fontSize: 34,
                             fontWeight: 900,
                             color: '#1c2536',
                             lineHeight: 1.2,
@@ -3016,7 +3023,7 @@ export const VocabPage: React.FC = () => {
                           </div>
 
                           <div style={{
-                            fontSize: 44,
+                            fontSize: 36,
                             fontWeight: 900,
                             color: '#1c2536',
                             lineHeight: 1.2,

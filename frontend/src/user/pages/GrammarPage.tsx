@@ -257,6 +257,13 @@ export const GrammarPage: React.FC = () => {
     soundService.speakJapanese(text);
   };
 
+  // Tự động ngắt toàn bộ âm thanh khi người dùng rời khỏi trang ngữ pháp
+  useEffect(() => {
+    return () => {
+      soundService.stop();
+    };
+  }, []);
+
   const handleSelectLevel = (lvl: JlptLevelKey) => {
     setSelectedLevel(lvl);
     setSelectedBook(null);
@@ -1521,9 +1528,9 @@ export const GrammarPage: React.FC = () => {
                               <button
                                 onClick={e => {
                                   e.stopPropagation();
-                                  speakJapanese(item.masterExampleJp || item.pattern);
+                                  speakJapanese(item.pattern || item.masterExampleJp);
                                 }}
-                                title="Phát âm mẫu câu"
+                                title="Phát âm cấu trúc ngữ pháp"
                                 style={{
                                   background: '#faf8f5',
                                   border: '1px solid #e7e5e4',
@@ -2019,9 +2026,9 @@ export const GrammarPage: React.FC = () => {
                               <button
                                 onClick={e => {
                                   e.stopPropagation();
-                                  speakJapanese(flipStudyList[flipActiveIndex].masterExampleJp || flipStudyList[flipActiveIndex].pattern);
+                                  speakJapanese(flipStudyList[flipActiveIndex].pattern || flipStudyList[flipActiveIndex].masterExampleJp);
                                 }}
-                                title="Phát âm"
+                                title="Phát âm cấu trúc ngữ pháp"
                                 style={{
                                   position: 'absolute',
                                   top: 16,
@@ -2046,7 +2053,7 @@ export const GrammarPage: React.FC = () => {
 
                               <div style={{ position: 'relative', zIndex: 2 }}>
                                 <div className="pattern-big" style={{
-                                  fontSize: 32,
+                                  fontSize: 26,
                                   fontWeight: 900,
                                   color: '#1c2536',
                                   marginBottom: 14,

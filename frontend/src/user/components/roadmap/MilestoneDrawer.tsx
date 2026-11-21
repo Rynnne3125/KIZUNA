@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Milestone } from '../../types/kizuna';
 import { kizunaService } from '../../services/kizunaService';
+import { soundService } from '../../services/soundService';
 import { X, BookOpen, Sparkles, Trophy, Zap, CheckCircle2, Lock, ArrowRight, Play, MessageSquare, HelpCircle } from 'lucide-react';
 
 interface MilestoneDrawerProps {
@@ -27,6 +28,9 @@ export const MilestoneDrawer: React.FC<MilestoneDrawerProps> = ({
         .then(res => setQuests(res))
         .finally(() => setLoadingQuests(false));
     }
+    return () => {
+      soundService.stop();
+    };
   }, [milestone?.id]);
 
   if (!isOpen || !milestone) return null;

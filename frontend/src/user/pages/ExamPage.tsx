@@ -578,7 +578,7 @@ export const ExamPage: React.FC = () => {
               </div>
 
               {/* Điểm số to rõ ràng */}
-              <div style={{ fontSize: 36, fontWeight: 900, color: '#1c2536', marginBottom: 4 }}>
+              <div style={{ fontSize: 28, fontWeight: 900, color: '#1c2536', marginBottom: 4 }}>
                 {scoreResult.correct} <span style={{ fontSize: 22, color: '#78716c' }}>/ {scoreResult.total} câu đúng</span>
                 <span style={{ fontSize: 24, color: '#c53d32', marginLeft: 10 }}>
                   ({scoreResult.percentage}%)

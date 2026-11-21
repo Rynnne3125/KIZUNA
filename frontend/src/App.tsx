@@ -23,6 +23,7 @@ import { NoInternet404Page } from './user/pages/NoInternet404Page';
 import { AiPlacementModal } from './user/components/placement/AiPlacementModal';
 import { progressService } from './user/services/progressService';
 import { placementService } from './user/services/placementService';
+import { soundService } from './user/services/soundService';
 
 const getTabFromPath = (): UserNavTab => {
   if (typeof window === 'undefined') return 'home';
@@ -169,6 +170,7 @@ export default function App() {
   }, [user]);
 
   const handleTabChange = (tab: UserNavTab, replace = false) => {
+    soundService.stop();
     setActiveTab(tab);
     const targetPath = tab === 'home' ? '/' : `/${tab}`;
     if (typeof window !== 'undefined' && window.location.pathname !== targetPath) {
@@ -193,6 +195,7 @@ export default function App() {
   // Lắng nghe phím Back / Forward của trình duyệt web
   useEffect(() => {
     const handlePopState = (e: PopStateEvent) => {
+      soundService.stop();
       const tabFromState = (e.state && e.state.tab) ? e.state.tab : getTabFromPath();
       setActiveTab(tabFromState);
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -256,6 +259,7 @@ export default function App() {
 
   // Đăng xuất: Xóa toàn bộ session lưu trữ và quay về trang đăng nhập
   const handleLogout = () => {
+    soundService.stop();
     authService.logout();
     setUser(null);
     handleTabChange('home', true);

@@ -2,14 +2,16 @@
  * KIZUNA Sound & Text-To-Speech (TTS) Service
  * Hỗ trợ phát âm tiếng Nhật chuẩn xác 100% trên cả Web Desktop và Thiết bị di động (Android APK / Capacitor).
  * 
- * Vấn đề kỹ thuật đã được khắc phục triệt để:
- * 1. Referer Header: Google TTS chặn 404/400 khi trình duyệt gửi Referer từ domain khác.
- *    -> Áp dụng referrerPolicy = 'no-referrer' trên audio element và no-referrer meta tag.
- * 2. Ngữ pháp & Ký tự đặc biệt (Kunyomi / Okurigana / Formula placeholders):
- *    -> Bộ chuẩn hoá Japanese Text Normalizer tự động làm sạch okurigana (. -> bỏ dấu chấm: ひと.つ -> ひとつ, た.べる -> たべる),
- *       tiền/hậu tố (-び -> び), loại bỏ các placeholder công thức (A は B です -> は です, S + を + V-ます -> を ます),
- *       loại bỏ chú thích tiếng Việt trong ngoặc.
- * 3. Fallback đa tầng (Google TTS HD -> Google APIs TTS -> Youdao Japanese -> SpeechSynthesis).
+ * Các nâng cấp kỹ thuật triệt để:
+ * 1. Chống phát trùng âm thanh (Single Audio Channel với Session ID Generation):
+ *    - Khi bắt đầu phát bất kỳ âm thanh mới nào, ngay lập tức huỷ bỏ toàn bộ các luồng âm thanh cũ (cả HTMLAudioElement và SpeechSynthesis).
+ *    - Các callback, timeout hay fallback của âm thanh trước sẽ bị vô hiệu hoá lập tức thông qua session token, không bao giờ xảy ra hiện tượng 2 câu vang tiếng đè lên nhau.
+ * 2. Tự động ngắt khi thoát màn hình / đóng modal / chuyển tab:
+ *    - Hỗ trợ phương thức stop() triệt để.
+ *    - Lắng nghe và phát event kizuna_sound_started / kizuna_sound_stopped để UI cập nhật trạng thái icon/nút (ví dụ nút "Dừng nghe bài đọc").
+ * 3. Hỗ trợ toggle phát / dừng:
+ *    - Đang phát mà bấm lại sẽ lập tức dừng lại thay vì phát lại từ đầu.
+ * 4. Fallback đa tầng (Google TTS HD -> Google APIs TTS -> Youdao Japanese -> SpeechSynthesis) với No-Referrer.
  */
 
 import { isNativeApp } from '../utils/platform';
@@ -53,6 +55,9 @@ class SoundService {
   private currentAudio: HTMLAudioElement | null = null;
   private jaVoice: SpeechSynthesisVoice | null = null;
   private voicesLoaded = false;
+  private sessionId = 0;
+  private isPlayingAudio = false;
+  private currentSpokenText = '';
 
   constructor() {
     this.initVoices();
@@ -78,14 +83,36 @@ class SoundService {
   }
 
   /**
-   * Dừng âm thanh hoặc giọng đọc đang phát
+   * Kiểm tra xem hiện tại có đang phát âm thanh không
+   */
+  public isSpeaking(): boolean {
+    return this.isPlayingAudio;
+  }
+
+  /**
+   * Lấy đoạn văn bản đang được phát hiện tại
+   */
+  public getCurrentText(): string {
+    return this.currentSpokenText;
+  }
+
+  /**
+   * Dừng toàn bộ âm thanh hoặc giọng đọc đang phát ngay lập tức
    */
   public stop() {
+    // Tăng session ID để vô hiệu hóa ngay lập tức mọi callback/timeout cũ đang chờ
+    this.sessionId++;
+    this.isPlayingAudio = false;
+    this.currentSpokenText = '';
+
     if (this.currentAudio) {
       try {
+        this.currentAudio.onended = null;
+        this.currentAudio.onerror = null;
         this.currentAudio.pause();
         this.currentAudio.currentTime = 0;
-        this.currentAudio.src = '';
+        this.currentAudio.removeAttribute('src');
+        this.currentAudio.load();
       } catch {}
       this.currentAudio = null;
     }
@@ -95,15 +122,33 @@ class SoundService {
         window.speechSynthesis.cancel();
       } catch {}
     }
+
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('kizuna_sound_stopped'));
+    }
   }
 
   /**
-   * Phát âm câu / từ tiếng Nhật chuẩn xác
+   * Phát âm hoặc dừng câu tiếng Nhật (nếu đang phát chính câu đó thì dừng lại)
+   */
+  public toggleSpeak(rawText: string, rate = 0.9): Promise<void> {
+    if (this.isPlayingAudio && this.currentSpokenText === rawText.trim()) {
+      this.stop();
+      return Promise.resolve();
+    }
+    return this.speakJapanese(rawText, rate);
+  }
+
+  /**
+   * Phát âm câu / từ tiếng Nhật chuẩn xác, đảm bảo không trùng lặp âm thanh
    * @param rawText Đoạn văn bản tiếng Nhật cần đọc
    * @param rate Tốc độ đọc (mặc định 0.9 cho học viên dễ nghe)
    */
   public speakJapanese(rawText: string, rate = 0.9): Promise<void> {
     return new Promise((resolve) => {
+      // 1. Dừng ngay lập tức âm thanh cũ
+      this.stop();
+
       if (!rawText || !rawText.trim()) {
         resolve();
         return;
@@ -117,38 +162,57 @@ class SoundService {
         return;
       }
 
-      // Dừng phát âm thanh cũ trước khi phát âm mới
-      this.stop();
+      const activeSession = this.sessionId;
+      this.isPlayingAudio = true;
+      this.currentSpokenText = rawText.trim();
+
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('kizuna_sound_started', { detail: { text: rawText.trim() } }));
+      }
+
+      const handleDone = () => {
+        if (this.sessionId === activeSession) {
+          this.isPlayingAudio = false;
+          this.currentSpokenText = '';
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new CustomEvent('kizuna_sound_stopped'));
+          }
+        }
+        resolve();
+      };
 
       const isMobileDevice = isNativeApp() || (typeof navigator !== 'undefined' && /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent));
 
       // Trên điện thoại (Android APK / iOS / Mobile) hoặc máy tính không có voice ja-JP offline:
       // Ưu tiên Audio Stream không gửi Referer (Google TTS HD + Google APIs + Youdao ja)
       if (isMobileDevice || !this.jaVoice) {
-        this.playAudioStream(cleanText, rate, () => {
-          resolve();
-        });
+        this.playAudioStream(cleanText, rate, handleDone, activeSession);
         return;
       }
 
       // Trên máy tính có cài voice ja-JP: Ưu tiên phát bằng SpeechSynthesis, nếu lỗi tự fallback sang Audio Stream
       this.speakWithSpeechSynthesis(cleanText, rate, (success) => {
-        if (!success) {
-          this.playAudioStream(cleanText, rate, resolve);
-        } else {
+        if (this.sessionId !== activeSession) {
           resolve();
+          return;
         }
-      });
+        if (!success) {
+          this.playAudioStream(cleanText, rate, handleDone, activeSession);
+        } else {
+          handleDone();
+        }
+      }, activeSession);
     });
   }
 
   /**
    * Phát âm thanh qua Audio Stream đa tầng với cơ chế No-Referrer & Fallback tự động
    */
-  private playAudioStream(cleanText: string, rate: number, onDone: () => void) {
+  private playAudioStream(cleanText: string, rate: number, onDone: () => void, activeSession: number) {
+    if (this.sessionId !== activeSession) return;
+
     // Cắt chuỗi an toàn dưới 190 ký tự (giới hạn của TTS GET query)
     let safeSlice = cleanText.slice(0, 190);
-    // Tránh cắt đứt ngang giữa từ nếu có dấu ngắt câu
     const lastPunctuation = Math.max(safeSlice.lastIndexOf('。'), safeSlice.lastIndexOf('、'), safeSlice.lastIndexOf(' '));
     if (safeSlice.length === 190 && lastPunctuation > 100) {
       safeSlice = safeSlice.slice(0, lastPunctuation + 1);
@@ -160,7 +224,6 @@ class SoundService {
       `https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=ja&q=${encoded}`,
     ];
 
-    // Đối với từ vựng ngắn (dưới 15 ký tự), thêm Youdao Japanese vào danh sách dự phòng
     if (safeSlice.length <= 15) {
       sources.push(`https://dict.youdao.com/dictvoice?audio=${encoded}&le=ja`);
     }
@@ -168,16 +231,19 @@ class SoundService {
     let sourceIndex = 0;
 
     const tryNext = () => {
+      // Nếu session đã bị thay thế hoặc đã dừng, dừng lại ngay lập tức
+      if (this.sessionId !== activeSession) {
+        return;
+      }
+
       if (sourceIndex >= sources.length) {
         // Cả các luồng audio đều không tải được, thử cứu cánh cuối cùng bằng SpeechSynthesis
-        this.speakWithSpeechSynthesis(cleanText, rate, () => onDone());
+        this.speakWithSpeechSynthesis(cleanText, rate, () => onDone(), activeSession);
         return;
       }
 
       const url = sources[sourceIndex++];
       try {
-        // Sử dụng document.createElement('audio') với referrerpolicy='no-referrer'
-        // Đây là chìa khóa then chốt giúp tránh bị Google chặn 404/400 do Referer header
         const audio = document.createElement('audio');
         audio.referrerPolicy = 'no-referrer';
         audio.preload = 'auto';
@@ -187,6 +253,7 @@ class SoundService {
 
         let isEnded = false;
         const cleanupAndFinish = () => {
+          if (this.sessionId !== activeSession) return;
           if (!isEnded) {
             isEnded = true;
             this.currentAudio = null;
@@ -197,6 +264,7 @@ class SoundService {
         audio.onended = cleanupAndFinish;
 
         audio.onerror = () => {
+          if (this.sessionId !== activeSession) return;
           this.currentAudio = null;
           tryNext();
         };
@@ -204,11 +272,13 @@ class SoundService {
         const playPromise = audio.play();
         if (playPromise !== undefined) {
           playPromise.catch(() => {
+            if (this.sessionId !== activeSession) return;
             this.currentAudio = null;
             tryNext();
           });
         }
       } catch {
+        if (this.sessionId !== activeSession) return;
         this.currentAudio = null;
         tryNext();
       }
@@ -218,9 +288,11 @@ class SoundService {
   }
 
   /**
-   * Phát âm thanh qua Web SpeechSynthesis API (Hỗ trợ máy tính & thiết bị có voice ja-JP)
+   * Phát âm thanh qua Web SpeechSynthesis API
    */
-  private speakWithSpeechSynthesis(text: string, rate: number, onDone: (success: boolean) => void) {
+  private speakWithSpeechSynthesis(text: string, rate: number, onDone: (success: boolean) => void, activeSession: number) {
+    if (this.sessionId !== activeSession) return;
+
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
       onDone(false);
       return;
@@ -237,20 +309,22 @@ class SoundService {
 
       let finished = false;
       utterance.onend = () => {
+        if (this.sessionId !== activeSession) return;
         if (!finished) {
           finished = true;
           onDone(true);
         }
       };
       utterance.onerror = () => {
+        if (this.sessionId !== activeSession) return;
         if (!finished) {
           finished = true;
           onDone(false);
         }
       };
 
-      // Trì hoãn 50ms để tránh bug hủy âm thanh ngầm trên Android WebView
       setTimeout(() => {
+        if (this.sessionId !== activeSession) return;
         try {
           window.speechSynthesis.speak(utterance);
         } catch {

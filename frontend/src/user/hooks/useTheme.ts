@@ -12,11 +12,7 @@ export function getInitialTheme(): ThemeMode {
     return saved;
   }
   
-  // Kiểm tra tuỳ chọn hệ điều hành (prefers-color-scheme)
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    return 'dark';
-  }
-  
+  // Mặc định luôn là giao diện sáng 'light' (chuẩn phong cách giấy Washi truyền thống KIZUNA 絆)
   return 'light';
 }
 

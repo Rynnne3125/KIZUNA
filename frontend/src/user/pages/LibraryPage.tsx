@@ -26,6 +26,7 @@ import {
 import { kizunaService } from '../services/kizunaService';
 import { authService } from '../services/authService';
 import { progressService } from '../services/progressService';
+import { soundService } from '../services/soundService';
 import { VideoLesson, ChoukaiAudioItem, QuestionSet } from '../types/kizuna';
 import { isNativeApp } from '../utils/platform';
 
@@ -49,7 +50,23 @@ const CATEGORY_FILTERS = [
 
 const VIDEO_THUMB_FALLBACK = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='180' viewBox='0 0 320 180' fill='%231e293b'><rect width='320' height='180' fill='%231e293b'/><text x='50%' y='50%' fill='%2394a3b8' font-size='13' font-family='sans-serif' text-anchor='middle' dominant-baseline='middle'>KIZUNA Video</text></svg>";
 
+const extractYoutubeId = (video: VideoLesson | null | undefined): string => {
+  if (!video) return '';
+  const raw = (video.youtubeVideoId || (video as any).video_id || video.youtubeUrl || '').trim();
+  if (!raw) return '';
+  const match = raw.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+  if (match && match[1]) return match[1];
+  if (/^[\w-]{11}$/.test(raw)) return raw;
+  return raw;
+};
+
 export const LibraryPage: React.FC = () => {
+  // Dừng âm thanh khi rời khỏi thư viện
+  useEffect(() => {
+    return () => {
+      soundService.stop();
+    };
+  }, []);
   // 2 Phân hệ học tập thực tế & chuẩn xác:
   // 1. 'video': Kho học liệu video tiếng Nhật tổng hợp (1.015 video chính thức từ CSDL)
   // 2. 'choukai': Luyện đề thi nghe Choukai (65 bộ đề thi chính thức kèm âm thanh gốc & kịch bản)
@@ -409,39 +426,56 @@ export const LibraryPage: React.FC = () => {
             }}>
               {/* CỘT TRÁI: VIDEO PLAYER & THÔNG TIN BÀI HỌC */}
               <div id="kizuna-main-player">
-                {/* Visual Anchor: VÙNG PHÁT VIDEO ĐANG CHẠY (Hiển thị rõ ràng trên Android & Web) */}
-                <div className="flex items-center justify-between px-4 py-2.5 bg-rose-50/80 dark:bg-rose-950/40 rounded-t-2xl border border-rose-200 dark:border-rose-900/60 border-b-0">
-                  <div className="flex items-center gap-2 text-rose-600 dark:text-rose-400 font-extrabold text-xs">
-                    <Play size={14} className="fill-rose-600 dark:fill-rose-400" />
+                {/* Visual Anchor: VÙNG PHÁT VIDEO ĐANG CHẠY */}
+                <div className="flex items-center justify-between px-4 py-2.5 bg-rose-50/80 rounded-t-2xl border border-rose-200 border-b-0">
+                  <div className="flex items-center gap-2 text-rose-700 font-extrabold text-xs">
+                    <Play size={14} className="fill-rose-600" />
                     <span>TRÌNH PHÁT BÀI GIẢNG ĐANG CHỌN</span>
                   </div>
-                  <a
-                    href={`https://www.youtube.com/watch?v=${activeVideo.youtubeVideoId}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs font-bold text-sky-600 dark:text-sky-400 no-underline inline-flex items-center gap-1 hover:underline"
-                  >
-                    <span>Mở app YouTube</span> ↗
-                  </a>
+                  {(() => {
+                    const cleanVideoId = extractYoutubeId(activeVideo);
+                    return (
+                      <a
+                        href={`https://www.youtube.com/watch?v=${cleanVideoId}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-bold text-sky-700 no-underline inline-flex items-center gap-1 hover:underline cursor-pointer"
+                        title="Mở video này trên ứng dụng hoặc trang YouTube"
+                      >
+                        <span>Mở YouTube</span> ↗
+                      </a>
+                    );
+                  })()}
                 </div>
 
-                <div className="bg-white dark:bg-slate-900 rounded-b-2xl border border-rose-200 dark:border-rose-900/60 overflow-hidden shadow-xs">
-                  {/* Trình phát nhúng YouTube chuẩn (Hỗ trợ tốt trên Android WebView) */}
+                <div className="bg-white rounded-b-2xl border border-rose-200 overflow-hidden shadow-xs">
+                  {/* Trình phát nhúng YouTube chuẩn (Hỗ trợ tốt trên cả Web và Android APK) */}
                   <div style={{
                     position: 'relative',
                     width: '100%',
                     paddingTop: '56.25%',
                     background: '#0a0f1d'
                   }}>
-                    <iframe
-                      id="kizuna-video-player"
-                      src={`https://www.youtube.com/embed/${activeVideo.youtubeVideoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
-                      title={activeVideo.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                      sandbox="allow-scripts allow-same-origin allow-presentation allow-forms allow-popups"
-                      style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
-                    />
+                    {(() => {
+                      const cleanVideoId = extractYoutubeId(activeVideo);
+                      return cleanVideoId ? (
+                        <iframe
+                          key={cleanVideoId}
+                          id="kizuna-video-player"
+                          src={`https://www.youtube-nocookie.com/embed/${cleanVideoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+                          title={activeVideo.title}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                          referrerPolicy="strict-origin-when-cross-origin"
+                          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center text-slate-300">
+                          <Play size={36} className="text-slate-500 mb-2" />
+                          <p className="text-xs">Không tìm thấy mã video bài giảng.</p>
+                        </div>
+                      );
+                    })()}
                   </div>
 
                   {/* Thông tin Video */}
@@ -701,7 +735,7 @@ export const LibraryPage: React.FC = () => {
                     {scoreResult.isPassed ? <CheckCircle2 size={14} /> : <AlertCircle size={14} />}
                     <span>{scoreResult.isPassed ? 'ĐẠT CHUẨN ĐỖ CHOUKAI (合格)' : 'CẦN LUYỆN TẬP THÊM (要復習)'}</span>
                   </div>
-                  <div style={{ fontSize: 32, fontWeight: 900, color: '#1c2536' }}>
+                  <div style={{ fontSize: 26, fontWeight: 900, color: '#1c2536' }}>
                     {scoreResult.correct} <span style={{ fontSize: 20, color: '#78716c' }}>/ {scoreResult.total} câu đúng</span>
                     <span style={{ fontSize: 22, color: '#c53d32', marginLeft: 10 }}>({scoreResult.percentage}%)</span>
                   </div>

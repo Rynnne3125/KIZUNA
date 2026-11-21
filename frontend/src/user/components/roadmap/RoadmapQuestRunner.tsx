@@ -65,6 +65,18 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
     soundService.speakJapanese(text);
   };
 
+  const handleBack = () => {
+    soundService.stop();
+    onBack();
+  };
+
+  // Tự động ngắt toàn bộ âm thanh khi người dùng rời khỏi nhiệm vụ
+  useEffect(() => {
+    return () => {
+      soundService.stop();
+    };
+  }, []);
+
   const toggleFullscreen = () => {
     if (!isFullscreen) {
       const elem = runnerContainerRef.current || document.documentElement;
@@ -563,7 +575,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
             min-height: 240px !important;
           }
           .roadmap-flashcard-term {
-            font-size: clamp(28px, 9vw, 42px) !important;
+            font-size: clamp(22px, 7vw, 34px) !important;
           }
         }
       `}</style>
@@ -571,7 +583,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
       {/* Top action header */}
       <div className="roadmap-runner-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 10 }}>
         <button
-          onClick={onBack}
+          onClick={handleBack}
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -679,7 +691,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
           </p>
 
           <button
-            onClick={onBack}
+            onClick={handleBack}
             style={{
               padding: '12px 28px',
               backgroundColor: '#10b981',
@@ -869,7 +881,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                           className="roadmap-flashcard-term"
                           style={{
                             fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif",
-                            fontSize: 46,
+                            fontSize: 38,
                             fontWeight: 900,
                             color: '#1c1917',
                             marginBottom: 10,
@@ -1043,7 +1055,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                       <div style={{ fontSize: 13.5, color: '#64748b', fontWeight: 700, marginBottom: 4 }}>
                         {gatekeeperQuestions[quizIndex].reading}
                       </div>
-                      <div style={{ fontSize: 38, fontWeight: 900, color: '#0f172a', marginBottom: 8 }}>
+                      <div style={{ fontSize: 30, fontWeight: 900, color: '#0f172a', marginBottom: 8 }}>
                         {gatekeeperQuestions[quizIndex].word}
                       </div>
                       <button

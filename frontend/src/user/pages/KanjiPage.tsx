@@ -863,6 +863,13 @@ export const KanjiPage: React.FC = () => {
     soundService.speakJapanese(text);
   };
 
+  // Tự động ngắt toàn bộ âm thanh khi người dùng rời khỏi trang Kanji
+  useEffect(() => {
+    return () => {
+      soundService.stop();
+    };
+  }, []);
+
   const handleSelectLevel = (lvl: JlptLevelKey) => {
     setSelectedLevel(lvl);
     setCurrentMode('list');
@@ -1865,7 +1872,7 @@ export const KanjiPage: React.FC = () => {
                             {globalIndex}
                           </span>
                           <div style={{
-                            fontSize: 32,
+                            fontSize: 26,
                             fontWeight: 600,
                             color: isSelected ? '#c53d32' : '#1c2536',
                             fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
@@ -1930,7 +1937,7 @@ export const KanjiPage: React.FC = () => {
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          fontSize: 50,
+                          fontSize: 42,
                           fontWeight: 600,
                           color: '#1c2536',
                           fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif",
@@ -3132,7 +3139,7 @@ export const KanjiPage: React.FC = () => {
                       </div>
 
                       <div style={{
-                        fontSize: 32,
+                        fontSize: 26,
                         fontWeight: 900,
                         color: '#c53d32',
                         marginBottom: 6,
@@ -3249,7 +3256,7 @@ export const KanjiPage: React.FC = () => {
                               </span>
 
                               <span style={{
-                                fontSize: 34,
+                                fontSize: 26,
                                 fontWeight: 600,
                                 color: optTextColor,
                                 fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"

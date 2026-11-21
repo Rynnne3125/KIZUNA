@@ -50,6 +50,9 @@
 }
 
 @layer base {
+  html {
+    font-size: 87.5%; /* Giảm kích cỡ font toàn app xuống ~14px base, giúp giao diện thanh thoát và giảm 5-8px cho các khối nội dung/tiêu đề */
+  }
   * {
     @apply border-border;
   }

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { kizunaService } from '../services/kizunaService';
 import { authService } from '../services/authService';
 import { progressService, UserRoadmapProgress } from '../services/progressService';
+import { soundService } from '../services/soundService';
 import { Stage, Milestone } from '../types/kizuna';
 import { User } from '../types/auth';
 import { RoadmapMilestoneDetail } from '../components/roadmap/RoadmapMilestoneDetail';
@@ -178,7 +179,15 @@ export const RoadmapPage: React.FC = () => {
     return mils.every(m => userProgress?.completedMilestones?.includes(m.id));
   };
 
+  // Tự động ngắt toàn bộ âm thanh khi người dùng rời khỏi trang lộ trình
+  useEffect(() => {
+    return () => {
+      soundService.stop();
+    };
+  }, []);
+
   const handleSelectLevel = (lvl: JlptLevelKey) => {
+    soundService.stop();
     setSelectedLevel(lvl);
     setSelectedStage(null);
     setSelectedMilestone(null);
@@ -191,6 +200,7 @@ export const RoadmapPage: React.FC = () => {
       setTimeout(() => setLockedNotice(null), 3500);
       return;
     }
+    soundService.stop();
     setSelectedStage(st);
     setSelectedMilestone(null);
     setViewMode('MILESTONES');
@@ -205,6 +215,7 @@ export const RoadmapPage: React.FC = () => {
       setTimeout(() => setLockedNotice(null), 3500);
       return;
     }
+    soundService.stop();
     setSelectedMilestone(ms);
     setViewMode('LESSON');
     try {
@@ -213,12 +224,14 @@ export const RoadmapPage: React.FC = () => {
   };
 
   const handleBackToStages = () => {
+    soundService.stop();
     setSelectedStage(null);
     setSelectedMilestone(null);
     setViewMode('STAGES');
   };
 
   const handleBackToMilestones = () => {
+    soundService.stop();
     setSelectedMilestone(null);
     setViewMode('MILESTONES');
   };
@@ -250,26 +263,26 @@ export const RoadmapPage: React.FC = () => {
       )}
 
       {/* 1. HEADER CHÍNH */}
-      <div className="bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-7 border border-emerald-100 dark:border-slate-800 shadow-md transition-colors">
+      <div className="bg-white rounded-3xl p-5 sm:p-7 border border-emerald-100 shadow-md transition-colors">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
           <div>
-            <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
               Lộ Trình Học
             </h1>
           </div>
 
           <div className="flex items-center gap-2 flex-wrap text-xs font-bold">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-rose-700 dark:text-rose-400">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-rose-50 border border-rose-200 text-rose-700">
               <Flame size={14} />
               <span>{currentUser?.currentStreak || 0} ngày streak</span>
             </div>
 
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-900/60 text-sky-700 dark:text-sky-400">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-sky-700">
               <Zap size={14} />
               <span>{currentUser?.activePoints || 0} pts</span>
             </div>
 
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/60 text-amber-700 dark:text-amber-400">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-700">
               <Trophy size={14} />
               <span>{currentUser?.totalXp || 0} XP</span>
             </div>
@@ -277,7 +290,7 @@ export const RoadmapPage: React.FC = () => {
         </div>
 
         {/* Thanh chuyển cấp độ N (Fuda tabs) */}
-        <div className="flex bg-slate-100 dark:bg-slate-800/80 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-700 gap-1.5 overflow-x-auto scrollbar-none">
+        <div className="flex bg-slate-100 p-1.5 rounded-2xl border border-slate-200 gap-1.5 overflow-x-auto scrollbar-none">
           {(['N5', 'N4', 'N3', 'N2', 'N1'] as JlptLevelKey[]).map(lvl => {
             const isActive = selectedLevel === lvl;
             const meta = LEVEL_CONFIG[lvl];
@@ -287,12 +300,12 @@ export const RoadmapPage: React.FC = () => {
                 onClick={() => handleSelectLevel(lvl)}
                 className={`flex-1 min-w-[76px] py-2 px-3 rounded-xl border-none font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-emerald-600 dark:bg-emerald-600 text-white shadow-xs'
-                    : 'bg-transparent text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-700/60'
+                    ? 'bg-emerald-600 text-white shadow-xs'
+                    : 'bg-transparent text-slate-600 hover:bg-white/60'
                 }`}
               >
                 <span className="font-extrabold">{lvl}</span>
-                <span className={`text-[11px] ${isActive ? 'text-white/90' : 'text-slate-500 dark:text-slate-400'}`}>
+                <span className={`text-[11px] ${isActive ? 'text-white/90' : 'text-slate-500'}`}>
                   {meta.kanji}
                 </span>
               </button>
@@ -302,10 +315,10 @@ export const RoadmapPage: React.FC = () => {
       </div>
 
       {/* 2. BREADCRUMBS TRAIL (Responsive một dòng, cuộn ngang mượt mà trên Mobile) */}
-      <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 px-1 overflow-x-auto whitespace-nowrap scrollbar-none py-1">
+      <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 px-1 overflow-x-auto whitespace-nowrap scrollbar-none py-1">
         <span
           onClick={handleBackToStages}
-          className={`cursor-pointer transition-colors shrink-0 ${viewMode === 'STAGES' ? 'font-extrabold text-slate-900 dark:text-white' : 'hover:underline text-slate-600 dark:text-slate-400'}`}
+          className={`cursor-pointer transition-colors shrink-0 ${viewMode === 'STAGES' ? 'font-extrabold text-slate-900' : 'hover:underline text-slate-600'}`}
         >
           {selectedLevel} · {LEVEL_CONFIG[selectedLevel].desc}
         </span>
@@ -315,7 +328,7 @@ export const RoadmapPage: React.FC = () => {
             <ChevronRight size={14} className="text-slate-400 shrink-0" />
             <span
               onClick={handleBackToMilestones}
-              className={`cursor-pointer transition-colors shrink-0 max-w-[240px] truncate ${viewMode === 'MILESTONES' ? 'font-extrabold text-slate-900 dark:text-white' : 'hover:underline text-slate-600 dark:text-slate-400'}`}
+              className={`cursor-pointer transition-colors shrink-0 max-w-[240px] truncate ${viewMode === 'MILESTONES' ? 'font-extrabold text-slate-900' : 'hover:underline text-slate-600'}`}
               title={`Chặng ${selectedStage.orderIndex || 1}: ${cleanStageTitle(selectedStage.title)}`}
             >
               Chặng {selectedStage.orderIndex || 1}: {cleanStageTitle(selectedStage.title)}
@@ -327,7 +340,7 @@ export const RoadmapPage: React.FC = () => {
           <>
             <ChevronRight size={14} className="text-slate-400 shrink-0" />
             <span 
-              className="font-extrabold text-emerald-600 dark:text-emerald-400 shrink-0 max-w-[280px] truncate"
+              className="font-extrabold text-emerald-600 shrink-0 max-w-[280px] truncate"
               title={selectedMilestone.nejUnit ? `${selectedMilestone.nejUnit} — ${cleanMilestoneTitle(selectedMilestone.title)}` : selectedMilestone.title}
             >
               Mốc: {selectedMilestone.nejUnit ? `${selectedMilestone.nejUnit} — ${cleanMilestoneTitle(selectedMilestone.title)}` : selectedMilestone.title}
@@ -338,25 +351,25 @@ export const RoadmapPage: React.FC = () => {
 
       {/* 3. NỘI DUNG CHÍNH (THEO VIEW MODE) */}
       {loading ? (
-        <div className="bg-white dark:bg-slate-900 rounded-3xl p-12 text-center border border-slate-200 dark:border-slate-800 shadow-sm">
-          <Sparkles size={32} className="text-emerald-600 dark:text-emerald-400 mx-auto mb-3 animate-pulse" />
-          <p className="text-slate-600 dark:text-slate-300 font-bold text-sm">Đang tải lộ trình học tiếng Nhật từ Firestore...</p>
+        <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 shadow-sm">
+          <Sparkles size={32} className="text-emerald-600 mx-auto mb-3 animate-pulse" />
+          <p className="text-slate-600 font-bold text-sm">Đang tải lộ trình học tiếng Nhật từ Firestore...</p>
         </div>
       ) : viewMode === 'STAGES' ? (
         /* ================= TẦNG 2: DANH SÁCH CHẶNG (STAGES) ================= */
         <div className="space-y-4">
           {/* Header Banner cho Cấp độ N hiện tại */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 shadow-sm flex justify-between items-center flex-wrap gap-3 transition-colors">
+          <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm flex justify-between items-center flex-wrap gap-3 transition-colors">
             <div>
-              <div className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-1">
+              <div className="text-xs font-extrabold text-emerald-600 uppercase tracking-wider mb-1">
                 CẤP ĐỘ {selectedLevel} · {LEVEL_CONFIG[selectedLevel].kanji}
               </div>
-              <h2 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">
+              <h2 className="text-base sm:text-lg font-extrabold text-slate-900">
                 {LEVEL_CONFIG[selectedLevel].range}
               </h2>
             </div>
 
-            <div className="text-xs font-bold text-slate-700 dark:text-slate-300 px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+            <div className="text-xs font-bold text-slate-700 px-3.5 py-1.5 rounded-xl bg-slate-100 border border-slate-200">
               Tổng số: {levelStages.length} Chặng
             </div>
           </div>
@@ -369,8 +382,6 @@ export const RoadmapPage: React.FC = () => {
               const completedCount = stageMils.filter(m => userProgress?.completedMilestones?.includes(m.id)).length;
               const percent = stageMils.length > 0 ? Math.round((completedCount / stageMils.length) * 100) : 0;
               const isComp = completedCount === stageMils.length && stageMils.length > 0;
-              // Khóa / Mở khóa Chặng theo thứ tự tuần tự:
-              // Chặng 1 luôn mở; Chặng 2 mở khi Chặng 1 hoàn thành; Chặng k mở khi Chặng k-1 hoàn thành
               const isStageUnlocked = idx === 0 || isStageCompleted(levelStages[idx - 1]);
 
               return (
@@ -379,52 +390,52 @@ export const RoadmapPage: React.FC = () => {
                   onClick={() => handleSelectStage(st, isStageUnlocked)}
                   className={`rounded-3xl p-5 sm:p-6 flex flex-col justify-between border transition-all ${
                     !isStageUnlocked
-                      ? 'bg-slate-50/50 dark:bg-slate-900/30 border-slate-200/60 dark:border-slate-800/60 opacity-65 cursor-not-allowed'
+                      ? 'bg-slate-50/50 border-slate-200/60 opacity-65 cursor-not-allowed'
                       : isComp
-                      ? 'bg-white dark:bg-slate-900 border-emerald-300 dark:border-emerald-800/80 shadow-xs hover:-translate-y-1 hover:shadow-md cursor-pointer'
-                      : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 shadow-xs hover:-translate-y-1 hover:shadow-md hover:border-emerald-400 cursor-pointer'
+                      ? 'bg-white border-emerald-300 shadow-xs hover:-translate-y-1 hover:shadow-md cursor-pointer'
+                      : 'bg-white border-slate-200 shadow-xs hover:-translate-y-1 hover:shadow-md hover:border-emerald-400 cursor-pointer'
                   }`}
                 >
                   <div>
                     {/* Top Tag & Status */}
                     <div className="flex justify-between items-center mb-3">
-                      <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                      <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700">
                         Chặng {st.orderIndex || idx + 1} • {st.range || 'Bài học'}
                       </span>
 
                       {isComp ? (
-                        <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1">
+                        <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center gap-1">
                           <Check size={12} strokeWidth={3} /> Hoàn thành
                         </span>
                       ) : !isStageUnlocked ? (
-                        <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 flex items-center gap-1 border border-slate-200 dark:border-slate-700">
+                        <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-100 text-slate-400 flex items-center gap-1 border border-slate-200">
                           <Lock size={11} /> Khóa
                         </span>
                       ) : (
-                        <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-sky-50 dark:bg-sky-950/50 text-sky-700 dark:text-sky-300">
+                        <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-sky-50 text-sky-700">
                           {percent > 0 ? `${percent}%` : 'Mở'}
                         </span>
                       )}
                     </div>
 
                     {/* Stage Title Clean (Không lặp lại Chặng X: Chặng X) */}
-                    <h3 className="text-base font-extrabold text-slate-900 dark:text-white mb-2 line-clamp-2">
+                    <h3 className="text-base font-extrabold text-slate-900 mb-2 line-clamp-2">
                       {cleanStageTitle(st.title)}
                     </h3>
 
                     {/* Stage Description */}
-                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4 line-clamp-2">
+                    <p className="text-xs text-slate-500 leading-relaxed mb-4 line-clamp-2">
                       {st.description || 'Chinh phục kiến thức và kỹ năng giao tiếp trong chặng.'}
                     </p>
                   </div>
 
                   {/* Progress bar */}
-                  <div className="pt-3 border-t border-slate-100 dark:border-slate-800">
-                    <div className="flex justify-between items-center text-xs font-bold text-slate-500 dark:text-slate-400 mb-1.5">
+                  <div className="pt-3 border-t border-slate-100">
+                    <div className="flex justify-between items-center text-xs font-bold text-slate-500 mb-1.5">
                       <span>Tiến độ</span>
                       <span>{completedCount}/{milestoneCount} Mốc</span>
                     </div>
-                    <div className="w-full h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                    <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
                       <div
                         className={`h-full rounded-full transition-all duration-300 ${isComp ? 'bg-emerald-500' : 'bg-emerald-600'}`}
                         style={{ width: `${percent}%` }}
@@ -443,29 +454,29 @@ export const RoadmapPage: React.FC = () => {
           <div className="flex items-center justify-between gap-3 flex-wrap">
             <button
               onClick={handleBackToStages}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-bold shadow-xs hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 text-xs sm:text-sm font-bold shadow-xs hover:bg-slate-50 cursor-pointer transition-colors"
             >
               <ArrowLeft size={16} />
               <span>Quay lại danh sách Chặng</span>
             </button>
 
             {selectedStage && (
-              <span className="text-xs font-extrabold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1.5 rounded-xl border border-emerald-200 dark:border-emerald-800">
+              <span className="text-xs font-extrabold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200">
                 {selectedStage.range || `Chặng ${selectedStage.orderIndex}`} · {stageMilestones.length} Mốc học
               </span>
             )}
           </div>
 
           {selectedStage && (
-            <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-7 shadow-sm transition-colors">
-              <div className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-1">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-7 shadow-sm transition-colors">
+              <div className="text-xs font-extrabold text-emerald-600 uppercase tracking-wider mb-1">
                 CHẶNG {selectedStage.orderIndex || 1}
               </div>
-              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mb-2">
+              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">
                 {cleanStageTitle(selectedStage.title)}
               </h2>
               {selectedStage.description && (
-                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed m-0">
+                <p className="text-xs sm:text-sm text-slate-500 leading-relaxed m-0">
                   {selectedStage.description}
                 </p>
               )}
@@ -476,15 +487,12 @@ export const RoadmapPage: React.FC = () => {
           <div className="space-y-3">
             {stageMilestones.map((ms, idx) => {
               const isCompleted = userProgress?.completedMilestones?.includes(ms.id) || false;
-
-              // Unlock logic based on real progress
               const isFirstOfStage1 = ((selectedStage?.orderIndex || 1) === 1 && idx === 0);
               const prevCompleted = idx > 0 ? (userProgress?.completedMilestones?.includes(stageMilestones[idx - 1].id) || false) : false;
               const prevStageComp = (selectedStage && selectedStage.orderIndex > 1)
                 ? isStageCompleted(levelStages.find(s => s.orderIndex === selectedStage.orderIndex - 1))
                 : false;
               const isUnlocked = isCompleted || isFirstOfStage1 || (idx === 0 ? prevStageComp : prevCompleted);
-
               const isBoss = ms.milestone_type === 'BOSS_CHALLENGE' || idx === stageMilestones.length - 1;
 
               return (
@@ -493,12 +501,12 @@ export const RoadmapPage: React.FC = () => {
                   onClick={() => handleSelectMilestone(ms, isUnlocked)}
                   className={`rounded-2xl p-4 sm:p-5 flex items-center justify-between gap-4 flex-wrap border transition-all ${
                     !isUnlocked
-                      ? 'bg-slate-50/50 dark:bg-slate-900/30 border-slate-200/60 dark:border-slate-800/60 opacity-65 cursor-not-allowed'
+                      ? 'bg-slate-50/50 border-slate-200/60 opacity-65 cursor-not-allowed'
                       : isBoss
-                      ? 'bg-white dark:bg-slate-900 border-amber-300 dark:border-amber-700 shadow-xs hover:border-amber-400 cursor-pointer'
+                      ? 'bg-white border-amber-300 shadow-xs hover:border-amber-400 cursor-pointer'
                       : isCompleted
-                      ? 'bg-white dark:bg-slate-900 border-emerald-200 dark:border-emerald-800/80 shadow-xs cursor-pointer'
-                      : 'bg-white dark:bg-slate-900 border-emerald-400/80 dark:border-emerald-600/60 shadow-sm ring-1 ring-emerald-500/20 cursor-pointer'
+                      ? 'bg-white border-emerald-200 shadow-xs cursor-pointer'
+                      : 'bg-white border-emerald-400/80 shadow-sm ring-1 ring-emerald-500/20 cursor-pointer'
                   }`}
                 >
                   <div className="flex items-center gap-4 flex-1 min-w-[240px]">
@@ -506,11 +514,11 @@ export const RoadmapPage: React.FC = () => {
                     <div
                       className={`w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-sm shrink-0 border ${
                         isBoss
-                          ? 'bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 border-amber-300 dark:border-amber-700'
+                          ? 'bg-amber-50 text-amber-600 border-amber-300'
                           : isCompleted
-                          ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800'
+                          ? 'bg-emerald-50 text-emerald-600 border-emerald-200'
                           : !isUnlocked
-                          ? 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 border-slate-200 dark:border-slate-700'
+                          ? 'bg-slate-100 text-slate-400 border-slate-200'
                           : 'bg-emerald-500 text-white border-emerald-600 shadow-xs'
                       }`}
                     >
@@ -528,7 +536,7 @@ export const RoadmapPage: React.FC = () => {
                     <div>
                       <div className="flex items-center gap-2 mb-1 flex-wrap">
                         <span className={`text-[11px] font-extrabold uppercase flex items-center gap-1 ${
-                          isBoss ? 'text-amber-600 dark:text-amber-400' : 'text-slate-500 dark:text-slate-400'
+                          isBoss ? 'text-amber-600' : 'text-slate-500'
                         }`}>
                           {isBoss ? (
                             <>
@@ -541,30 +549,30 @@ export const RoadmapPage: React.FC = () => {
                         </span>
 
                         {isCompleted && (
-                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1">
+                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center gap-1">
                             <Check size={11} strokeWidth={3} /> Đã hoàn thành
                           </span>
                         )}
 
                         {isUnlocked && !isCompleted && (
-                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
+                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200">
                             Đang học
                           </span>
                         )}
 
                         {!isUnlocked && (
-                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 flex items-center gap-1">
+                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 border border-slate-200 flex items-center gap-1">
                             <Lock size={10} /> Đang khóa
                           </span>
                         )}
                       </div>
 
-                      <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white mb-1">
+                      <h3 className="text-sm sm:text-base font-extrabold text-slate-900 mb-1">
                         {ms.nejUnit ? cleanMilestoneTitle(ms.title) : ms.title}
                       </h3>
 
-                      <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 flex items-center gap-1.5">
-                        <Target size={13} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
+                      <div className="text-xs sm:text-sm text-slate-600 flex items-center gap-1.5">
+                        <Target size={13} className="text-emerald-600 shrink-0" />
                         <span><b>Mục tiêu:</b> {ms.canDoGoal || ms.communicationContext || 'Thực hành mục tiêu hội thoại cốt lõi'}</span>
                       </div>
                     </div>
@@ -573,10 +581,10 @@ export const RoadmapPage: React.FC = () => {
                   {/* Right side rewards and button */}
                   <div className="flex items-center gap-3">
                     <div className="text-right text-xs">
-                      <div className="font-extrabold text-amber-600 dark:text-amber-400">
+                      <div className="font-extrabold text-amber-600">
                         +{ms.xpReward || 100} XP
                       </div>
-                      <div className="font-bold text-sky-600 dark:text-sky-400 text-[11px]">
+                      <div className="font-bold text-sky-600 text-[11px]">
                         +{ms.activePointsReward || 80} pts
                       </div>
                     </div>
@@ -585,7 +593,7 @@ export const RoadmapPage: React.FC = () => {
                       className={`px-3.5 py-2 rounded-xl text-xs font-extrabold flex items-center gap-1.5 shadow-xs ${
                         isUnlocked
                           ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
-                          : 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 border border-slate-200 dark:border-slate-700'
+                          : 'bg-slate-100 text-slate-400 border border-slate-200'
                       }`}
                     >
                       {isUnlocked ? (
