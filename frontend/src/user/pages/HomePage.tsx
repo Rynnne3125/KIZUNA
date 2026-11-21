@@ -155,11 +155,17 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
       .replace(/^Chặng\s*\d+\s*[—–-]\s*/i, '')
       .trim();
 
+    const cleanMilestoneTitle = (nextMilestone?.title || '')
+      .replace(/^\[N\d\]\s*/i, '')
+      .replace(/^Bài\s*\d+\s*[:—–-]\s*/i, '')
+      .trim();
+
     return {
       level: userLvl,
       stage: currentStage,
       stageTitleClean: cleanTitle,
       milestone: nextMilestone,
+      milestoneTitleClean: cleanMilestoneTitle,
       completedInStage,
       totalInStage: stageMilestones.length || 5,
       stagePercent,
@@ -284,7 +290,11 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
             </h2>
             <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium mt-1 flex items-center gap-1.5">
               <span className="font-bold text-emerald-700 dark:text-emerald-400">Đang học:</span>
-              <span>{currentRoadmapTarget.milestone?.nejUnit || `Bài ${currentRoadmapTarget.milestone?.orderIndex || 1}`} — {currentRoadmapTarget.milestone?.title || 'Bắt đầu học'}</span>
+              <span>
+                {currentRoadmapTarget.milestone?.nejUnit
+                  ? `${currentRoadmapTarget.milestone.nejUnit} — ${currentRoadmapTarget.milestoneTitleClean || currentRoadmapTarget.milestone.title}`
+                  : (currentRoadmapTarget.milestoneTitleClean || currentRoadmapTarget.milestone?.title || 'Bắt đầu học')}
+              </span>
             </div>
           </div>
 

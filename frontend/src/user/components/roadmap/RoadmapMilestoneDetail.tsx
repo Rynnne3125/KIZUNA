@@ -42,6 +42,14 @@ const cleanStageTitle = (title?: string) => {
     .trim();
 };
 
+const cleanMilestoneTitle = (title?: string) => {
+  if (!title) return '';
+  return title
+    .replace(/^\[N\d\]\s*/i, '')
+    .replace(/^Bài\s*\d+\s*[:—–-]\s*/i, '')
+    .trim();
+};
+
 export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
   milestone,
   stage,
@@ -236,7 +244,7 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
             </div>
 
             <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
-              {milestone.title}
+              {milestone.nejUnit ? cleanMilestoneTitle(milestone.title) : milestone.title}
             </h1>
 
             <div className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed flex items-start gap-2 mb-3">

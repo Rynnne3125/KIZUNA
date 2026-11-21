@@ -69,6 +69,14 @@ const cleanStageTitle = (title?: string) => {
     .trim();
 };
 
+const cleanMilestoneTitle = (title?: string) => {
+  if (!title) return '';
+  return title
+    .replace(/^\[N\d\]\s*/i, '')
+    .replace(/^Bài\s*\d+\s*[:—–-]\s*/i, '')
+    .trim();
+};
+
 export const RoadmapPage: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(() => authService.getCurrentUser());
   const [userProgress, setUserProgress] = useState<UserRoadmapProgress | null>(null);
@@ -318,7 +326,7 @@ export const RoadmapPage: React.FC = () => {
           <>
             <ChevronRight size={14} className="text-slate-400 shrink-0" />
             <span className="font-extrabold text-emerald-600 dark:text-emerald-400">
-              Mốc: {selectedMilestone.title}
+              Mốc: {selectedMilestone.nejUnit ? `${selectedMilestone.nejUnit} — ${cleanMilestoneTitle(selectedMilestone.title)}` : selectedMilestone.title}
             </span>
           </>
         )}
@@ -548,7 +556,7 @@ export const RoadmapPage: React.FC = () => {
                       </div>
 
                       <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white mb-1">
-                        {ms.title}
+                        {ms.nejUnit ? cleanMilestoneTitle(ms.title) : ms.title}
                       </h3>
 
                       <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 flex items-center gap-1.5">
