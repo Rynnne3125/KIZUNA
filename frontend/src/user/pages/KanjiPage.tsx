@@ -706,6 +706,17 @@ export const KanjiPage: React.FC = () => {
   const [flipStudyList, setFlipStudyList] = useState<KanjiItem[]>([]);
   const [flipFinished, setFlipFinished] = useState(false);
 
+  // --- Drag / Swipe state cho Flashcard (Áp dụng cho cả Web chuột lẫn App điện thoại) ---
+  const [dragX, setDragX] = useState<number>(0);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const dragStartRef = useRef<{ x: number; y: number; time: number; active: boolean; pointerId: number }>({
+    x: 0,
+    y: 0,
+    time: 0,
+    active: false,
+    pointerId: -1
+  });
+
   // --- State Dạng 2: Bài tập Luyện Ghi Nhớ (Nhìn Hán Việt & Nghĩa chọn chữ Hán) ---
   const [quizQuestions, setQuizQuestions] = useState<KanjiQuizQuestion[]>([]);
   const [quizActiveIndex, setQuizActiveIndex] = useState(0);
@@ -867,6 +878,75 @@ export const KanjiPage: React.FC = () => {
   // --- LOGIC CHO DẠNG 1: LẬT THẺ 3D ---
   const handleFlipCard = () => {
     setIsFlipped(!isFlipped);
+  };
+
+  // --- XỬ LÝ SWIPE / DRAG CHO CẢ WEB (CHUỘT) LẪN APP (CẢM ỨNG ĐIỆN THOẠI) ---
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if ((e.target as HTMLElement).closest('button, a, input, [role="button"]')) {
+      return;
+    }
+    dragStartRef.current = {
+      x: e.clientX,
+      y: e.clientY,
+      time: Date.now(),
+      active: true,
+      pointerId: e.pointerId
+    };
+    setIsDragging(true);
+    setDragX(0);
+    try {
+      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    } catch {}
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!dragStartRef.current.active) return;
+    const diffX = e.clientX - dragStartRef.current.x;
+    const diffY = e.clientY - dragStartRef.current.y;
+
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      const damp = Math.abs(diffX) > 130 ? 130 + (Math.abs(diffX) - 130) * 0.25 : Math.abs(diffX);
+      setDragX(diffX < 0 ? -damp : damp);
+    }
+  };
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (!dragStartRef.current.active) return;
+    try {
+      if ((e.currentTarget as HTMLElement).hasPointerCapture(e.pointerId)) {
+        (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+      }
+    } catch {}
+
+    const duration = Date.now() - dragStartRef.current.time;
+    const distance = dragX;
+    const absDistance = Math.abs(distance);
+
+    dragStartRef.current.active = false;
+    setIsDragging(false);
+    setDragX(0);
+
+    // Chạm / click nhẹ (< 10px và < 350ms) -> Lật thẻ
+    if (absDistance < 10 && duration < 350) {
+      handleFlipCard();
+      return;
+    }
+
+    // Vuốt ngang (> 50px hoặc lướt nhanh > 25px dưới 250ms)
+    const isSwipe = absDistance > 50 || (absDistance > 25 && duration < 250);
+    if (isSwipe) {
+      if (distance > 0) {
+        handleMarkFlipResult(true);
+      } else {
+        handleMarkFlipResult(false);
+      }
+    }
+  };
+
+  const handlePointerCancel = () => {
+    dragStartRef.current.active = false;
+    setIsDragging(false);
+    setDragX(0);
   };
 
   const handleMarkFlipResult = (mastered: boolean) => {
@@ -1137,22 +1217,10 @@ export const KanjiPage: React.FC = () => {
 
         if (e.key === 'ArrowRight') {
           e.preventDefault();
-          if (!isFlipped) {
-            setIsFlipped(true);
-          } else {
-            handleMarkFlipResult(true);
-          }
+          handleMarkFlipResult(true);
         } else if (e.key === 'ArrowLeft') {
           e.preventDefault();
-          if (isFlipped) {
-            setIsFlipped(false);
-          } else {
-            if (flipActiveIndex > 0) {
-              setSlideDirection('prev');
-              setFlipActiveIndex(prev => prev - 1);
-              setIsFlipped(false);
-            }
-          }
+          handleMarkFlipResult(false);
         } else if (e.key === ' ' || e.code === 'Space') {
           e.preventDefault();
           handleFlipCard();
@@ -2453,17 +2521,67 @@ export const KanjiPage: React.FC = () => {
                       }}
                     >
                       <div
-                        onClick={handleFlipCard}
+                        onPointerDown={handlePointerDown}
+                        onPointerMove={handlePointerMove}
+                        onPointerUp={handlePointerUp}
+                        onPointerCancel={handlePointerCancel}
                         style={{
                           position: 'relative',
                           width: '100%',
                           minHeight: 380,
-                          cursor: 'pointer',
+                          cursor: isDragging ? 'grabbing' : 'pointer',
                           transformStyle: 'preserve-3d',
-                          transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-                          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
+                          transition: isDragging ? 'none' : 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)',
+                          transform: `translateX(${dragX}px) rotate(${dragX * 0.04}deg) ${isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'}`,
+                          touchAction: 'pan-y',
+                          userSelect: 'none'
                         }}
                       >
+                        {/* Visual Feedback Badge khi vuốt sang phải: ĐÃ HỌC */}
+                        {dragX > 20 && (
+                          <div style={{
+                            position: 'absolute',
+                            top: 20,
+                            left: 20,
+                            background: '#16a34a',
+                            color: '#ffffff',
+                            padding: '6px 14px',
+                            borderRadius: 8,
+                            fontWeight: 800,
+                            fontSize: 13,
+                            letterSpacing: '0.5px',
+                            boxShadow: '0 4px 12px rgba(22, 163, 74, 0.35)',
+                            opacity: Math.min(1, (dragX - 20) / 40),
+                            transform: 'rotate(-8deg)',
+                            zIndex: 30,
+                            pointerEvents: 'none'
+                          }}>
+                            ✓ ĐÃ HỌC
+                          </div>
+                        )}
+
+                        {/* Visual Feedback Badge khi vuốt sang trái: CHƯA HỌC */}
+                        {dragX < -20 && (
+                          <div style={{
+                            position: 'absolute',
+                            top: 20,
+                            right: 20,
+                            background: '#dc2626',
+                            color: '#ffffff',
+                            padding: '6px 14px',
+                            borderRadius: 8,
+                            fontWeight: 800,
+                            fontSize: 13,
+                            letterSpacing: '0.5px',
+                            boxShadow: '0 4px 12px rgba(220, 38, 38, 0.35)',
+                            opacity: Math.min(1, (-dragX - 20) / 40),
+                            transform: 'rotate(8deg)',
+                            zIndex: 30,
+                            pointerEvents: 'none'
+                          }}>
+                            ✕ CHƯA HỌC
+                          </div>
+                        )}
                         {/* MẶT TRƯỚC: Chữ Hán to, số nét, âm đọc */}
                         <div
                           style={{
@@ -2648,126 +2766,77 @@ export const KanjiPage: React.FC = () => {
                     </div>
                   )}
 
-                  {/* Nút hành động đánh giá kết quả ôn tập & Điều hướng */}
+                  {/* Các nút điều hướng thẻ & Chỉ dẫn duy nhất */}
                   <div>
-                    <div style={{ display: 'flex', gap: 10, marginTop: 20 }}>
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: 28,
+                      marginTop: 20
+                    }}>
                       <button
-                        onClick={handlePrevCard}
-                        disabled={flipActiveIndex === 0}
+                        onClick={() => handleMarkFlipResult(false)}
+                        title="Mũi tên trái: Chưa học (←)"
+                        aria-label="Chưa học"
+                        className="transition-all hover:scale-110 active:scale-95"
                         style={{
-                          padding: '12px 14px',
-                          background: '#ffffff',
-                          color: flipActiveIndex === 0 ? '#d6d3d1' : '#57534e',
-                          border: '1px solid #e7dfd5',
-                          borderRadius: 10,
-                          cursor: flipActiveIndex === 0 ? 'not-allowed' : 'pointer',
+                          width: 48,
+                          height: 48,
+                          borderRadius: '50%',
+                          background: 'rgba(239, 68, 68, 0.08)',
+                          color: '#ef4444',
+                          border: '1.5px solid rgba(239, 68, 68, 0.25)',
                           display: 'inline-flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          transition: 'all 0.15s ease'
-                        }}
-                        title="Thẻ trước (←)"
-                      >
-                        <ChevronLeft size={18} />
-                      </button>
-
-                      <button
-                        onClick={() => handleMarkFlipResult(false)}
-                        style={{
-                          flex: 1,
-                          padding: '12px 14px',
-                          background: '#fdf2f0',
-                          color: '#c53d32',
-                          border: '1.5px solid #fecaca',
-                          borderRadius: 10,
-                          fontWeight: 700,
-                          fontSize: 14,
                           cursor: 'pointer',
-                          transition: 'all 0.15s ease'
+                          boxShadow: '0 2px 8px rgba(239, 68, 68, 0.12)'
                         }}
                       >
-                        Chưa thuộc
-                      </button>
-
-                      <button
-                        onClick={handleFlipCard}
-                        style={{
-                          padding: '12px 22px',
-                          background: '#ffffff',
-                          color: '#44403c',
-                          border: '1px solid #d6d3d1',
-                          borderRadius: 10,
-                          fontWeight: 700,
-                          fontSize: 14,
-                          cursor: 'pointer',
-                          transition: 'all 0.15s ease'
-                        }}
-                      >
-                        Lật thẻ
+                        <ChevronLeft size={24} strokeWidth={2.5} />
                       </button>
 
                       <button
                         onClick={() => handleMarkFlipResult(true)}
+                        title="Mũi tên phải: Đã học (→)"
+                        aria-label="Đã học"
+                        className="transition-all hover:scale-110 active:scale-95"
                         style={{
-                          flex: 1,
-                          padding: '12px 14px',
-                          background: '#2d6d4b',
-                          border: 'none',
-                          color: '#ffffff',
-                          borderRadius: 10,
-                          fontWeight: 700,
-                          fontSize: 14,
-                          cursor: 'pointer',
-                          transition: 'all 0.15s ease'
-                        }}
-                      >
-                        Đã thuộc
-                      </button>
-
-                      <button
-                        onClick={handleNextCard}
-                        disabled={flipActiveIndex >= flipStudyList.length - 1}
-                        style={{
-                          padding: '12px 14px',
-                          background: '#ffffff',
-                          color: flipActiveIndex >= flipStudyList.length - 1 ? '#d6d3d1' : '#57534e',
-                          border: '1px solid #e7dfd5',
-                          borderRadius: 10,
-                          cursor: flipActiveIndex >= flipStudyList.length - 1 ? 'not-allowed' : 'pointer',
+                          width: 48,
+                          height: 48,
+                          borderRadius: '50%',
+                          background: 'rgba(34, 197, 94, 0.08)',
+                          color: '#16a34a',
+                          border: '1.5px solid rgba(34, 197, 94, 0.25)',
                           display: 'inline-flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          transition: 'all 0.15s ease'
+                          cursor: 'pointer',
+                          boxShadow: '0 2px 8px rgba(34, 197, 94, 0.12)'
                         }}
-                        title="Thẻ tiếp theo (→)"
                       >
-                        <ChevronRight size={18} />
+                        <ChevronRight size={24} strokeWidth={2.5} />
                       </button>
                     </div>
 
+                    {/* Chú thích duy nhất */}
                     <div style={{
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       gap: 8,
-                      marginTop: 12,
-                      fontSize: 12,
-                      color: '#78716c',
-                      background: '#faf8f5',
-                      padding: '6px 14px',
-                      borderRadius: 20,
-                      border: '1px solid #ebe7df',
-                      maxWidth: 460,
-                      margin: '12px auto 0 auto',
+                      marginTop: 14,
+                      fontSize: 12.5,
+                      color: '#64748b',
+                      textAlign: 'center',
                       flexWrap: 'wrap'
                     }}>
-                      <span>Space: Lật thẻ</span>
-                      <span style={{ color: '#d6d3d1' }}>·</span>
-                      <span>← / →: Trước / Sau</span>
-                      <span style={{ color: '#d6d3d1' }}>·</span>
-                      <span>S: Đổi thứ tự</span>
-                      <span style={{ color: '#d6d3d1' }}>·</span>
-                      <span>F: Toàn màn hình</span>
+                      <span>Chạm vào thẻ để lật (hoặc phím Space)</span>
+                      <span style={{ color: '#94a3b8' }}>·</span>
+                      <span>Mũi tên trái (hoặc vuốt trái) là chưa học</span>
+                      <span style={{ color: '#94a3b8' }}>·</span>
+                      <span>Mũi tên phải (hoặc vuốt phải) là đã học</span>
                     </div>
                   </div>
                 </div>

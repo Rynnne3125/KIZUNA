@@ -127,10 +127,16 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   const [masteredCards, setMasteredCards] = useState<Set<number>>(new Set());
   const [learningCards, setLearningCards] = useState<Set<number>>(new Set());
 
-  // Swipe / Touch gesture state
-  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  // Drag / Swipe state cho Flashcard (Áp dụng cho cả Web chuột lẫn App điện thoại)
   const [dragX, setDragX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const dragStartRef = useRef<{ x: number; y: number; time: number; active: boolean; pointerId: number }>({
+    x: 0,
+    y: 0,
+    time: 0,
+    active: false,
+    pointerId: -1
+  });
 
   const displayVocabList = useMemo(() => {
     if (!vocabList || vocabList.length === 0) return [];
@@ -184,10 +190,10 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
         setIsFlipped(prev => !prev);
       } else if (e.key === 'ArrowRight') {
         e.preventDefault();
-        handleNextCard();
+        handleNextCard(true);
       } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
-        handlePrevCard();
+        handleNextCard(false);
       } else if (e.key === 'f' || e.key === 'F') {
         e.preventDefault();
         toggleFullscreen();
@@ -197,32 +203,71 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [questIndex, cardIndex, displayVocabList.length]);
 
-  // Touch Swipe Handlers
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStartX(e.touches[0].clientX);
+  // Pointer Drag & Swipe Handlers (Web & App)
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if ((e.target as HTMLElement).closest('button, a, input, [role="button"]')) {
+      return;
+    }
+    dragStartRef.current = {
+      x: e.clientX,
+      y: e.clientY,
+      time: Date.now(),
+      active: true,
+      pointerId: e.pointerId
+    };
     setIsDragging(true);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (touchStartX === null) return;
-    const currentX = e.touches[0].clientX;
-    const diff = currentX - touchStartX;
-    if (Math.abs(diff) < 140) {
-      setDragX(diff);
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-    if (dragX > 45) {
-      // Swiped Right -> Mastered
-      handleNextCard(true);
-    } else if (dragX < -45) {
-      // Swiped Left -> Learning
-      handleNextCard(false);
-    }
     setDragX(0);
-    setTouchStartX(null);
+    try {
+      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    } catch {}
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!dragStartRef.current.active) return;
+    const diffX = e.clientX - dragStartRef.current.x;
+    const diffY = e.clientY - dragStartRef.current.y;
+
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      const damp = Math.abs(diffX) > 130 ? 130 + (Math.abs(diffX) - 130) * 0.25 : Math.abs(diffX);
+      setDragX(diffX < 0 ? -damp : damp);
+    }
+  };
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (!dragStartRef.current.active) return;
+    try {
+      if ((e.currentTarget as HTMLElement).hasPointerCapture(e.pointerId)) {
+        (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+      }
+    } catch {}
+
+    const duration = Date.now() - dragStartRef.current.time;
+    const distance = dragX;
+    const absDistance = Math.abs(distance);
+
+    dragStartRef.current.active = false;
+    setIsDragging(false);
+    setDragX(0);
+
+    if (absDistance < 10 && duration < 350) {
+      setIsFlipped(prev => !prev);
+      return;
+    }
+
+    const isSwipe = absDistance > 50 || (absDistance > 25 && duration < 250);
+    if (isSwipe) {
+      if (distance > 0) {
+        handleNextCard(true);
+      } else {
+        handleNextCard(false);
+      }
+    }
+  };
+
+  const handlePointerCancel = () => {
+    dragStartRef.current.active = false;
+    setIsDragging(false);
+    setDragX(0);
   };
 
   // -------------------------------------------------------------
@@ -726,14 +771,10 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                   {/* Swipeable 3D Flip Card - Đồng bộ phong cách Thẻ từ vựng VocabPage */}
                   <div
                     className="roadmap-flashcard-box"
-                    onTouchStart={handleTouchStart}
-                    onTouchMove={handleTouchMove}
-                    onTouchEnd={handleTouchEnd}
-                    onClick={() => {
-                      if (Math.abs(dragX) < 10) {
-                        setIsFlipped(!isFlipped);
-                      }
-                    }}
+                    onPointerDown={handlePointerDown}
+                    onPointerMove={handlePointerMove}
+                    onPointerUp={handlePointerUp}
+                    onPointerCancel={handlePointerCancel}
                     style={{
                       minHeight: 280,
                       backgroundColor: isFlipped ? '#fcfbf9' : '#ffffff',
@@ -744,25 +785,26 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                       alignItems: 'center',
                       justifyContent: 'center',
                       padding: '36px 24px',
-                      cursor: 'pointer',
+                      cursor: isDragging ? 'grabbing' : 'pointer',
                       position: 'relative',
                       boxShadow: 'var(--shadow-md)',
                       textAlign: 'center',
                       marginBottom: 16,
                       userSelect: 'none',
+                      touchAction: 'pan-y',
                       transform: `translateX(${dragX}px) rotate(${dragX * 0.04}deg)`,
                       transition: isDragging ? 'none' : 'transform 0.25s ease-out'
                     }}
                   >
                     {/* Badge when dragging */}
-                    {dragX > 25 && (
-                      <span style={{ position: 'absolute', top: 16, left: 16, backgroundColor: '#15803d', color: '#ffffff', padding: '4px 10px', borderRadius: 6, fontSize: 12, fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: 4, zIndex: 10 }}>
-                        <Check size={13} strokeWidth={3} /> ĐÃ THUỘC
+                    {dragX > 20 && (
+                      <span style={{ position: 'absolute', top: 16, left: 16, backgroundColor: '#16a34a', color: '#ffffff', padding: '4px 10px', borderRadius: 6, fontSize: 12, fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: 4, zIndex: 10, pointerEvents: 'none' }}>
+                        <Check size={13} strokeWidth={3} /> ĐÃ HỌC
                       </span>
                     )}
-                    {dragX < -25 && (
-                      <span style={{ position: 'absolute', top: 16, right: 16, backgroundColor: '#c53d32', color: '#ffffff', padding: '4px 10px', borderRadius: 6, fontSize: 12, fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: 4, zIndex: 10 }}>
-                        <RotateCcw size={13} /> CHƯA THUỘC
+                    {dragX < -20 && (
+                      <span style={{ position: 'absolute', top: 16, right: 16, backgroundColor: '#dc2626', color: '#ffffff', padding: '4px 10px', borderRadius: 6, fontSize: 12, fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: 4, zIndex: 10, pointerEvents: 'none' }}>
+                        ✕ CHƯA HỌC
                       </span>
                     )}
 
@@ -890,124 +932,78 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     )}
                   </div>
 
-                  {/* Navigation Toolbar */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: 12, gap: 10 }}>
-                    <button
-                      onClick={handlePrevCard}
-                      disabled={cardIndex === 0}
-                      style={{
-                        padding: '10px 16px',
-                        borderRadius: 10,
-                        backgroundColor: '#ffffff',
-                        border: '1px solid #d6d3d1',
-                        color: cardIndex === 0 ? '#d6d3d1' : '#44403c',
-                        fontWeight: 700,
-                        fontSize: 13,
-                        cursor: cardIndex > 0 ? 'pointer' : 'not-allowed',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: 4
-                      }}
-                      title="Thẻ trước (←)"
-                    >
-                      <ChevronLeft size={16} /> <span>Trước</span>
-                    </button>
+                  {/* Các nút điều hướng mũi tên & Chỉ dẫn duy nhất */}
+                  <div>
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: 28,
+                      marginTop: 20
+                    }}>
+                      <button
+                        onClick={() => handleNextCard(false)}
+                        title="Mũi tên trái: Chưa học (←)"
+                        aria-label="Chưa học"
+                        className="transition-all hover:scale-110 active:scale-95"
+                        style={{
+                          width: 48,
+                          height: 48,
+                          borderRadius: '50%',
+                          background: 'rgba(239, 68, 68, 0.08)',
+                          color: '#ef4444',
+                          border: '1.5px solid rgba(239, 68, 68, 0.25)',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          cursor: 'pointer',
+                          boxShadow: '0 2px 8px rgba(239, 68, 68, 0.12)'
+                        }}
+                      >
+                        <ChevronLeft size={24} strokeWidth={2.5} />
+                      </button>
 
-                    <div style={{ fontSize: 12, color: '#78716c', background: '#faf8f5', padding: '6px 14px', borderRadius: 20, border: '1px solid #ebe7df' }}>
-                      <span>Space: Lật</span> · <span>← / →: Trước / Sau</span>
+                      <button
+                        onClick={() => handleNextCard(true)}
+                        title="Mũi tên phải: Đã học (→)"
+                        aria-label="Đã học"
+                        className="transition-all hover:scale-110 active:scale-95"
+                        style={{
+                          width: 48,
+                          height: 48,
+                          borderRadius: '50%',
+                          background: 'rgba(34, 197, 94, 0.08)',
+                          color: '#16a34a',
+                          border: '1.5px solid rgba(34, 197, 94, 0.25)',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          cursor: 'pointer',
+                          boxShadow: '0 2px 8px rgba(34, 197, 94, 0.12)'
+                        }}
+                      >
+                        <ChevronRight size={24} strokeWidth={2.5} />
+                      </button>
                     </div>
 
-                    <button
-                      onClick={() => handleNextCard()}
-                      disabled={cardIndex === displayVocabList.length - 1}
-                      style={{
-                        padding: '10px 16px',
-                        borderRadius: 10,
-                        backgroundColor: '#ffffff',
-                        border: '1px solid #d6d3d1',
-                        color: cardIndex < displayVocabList.length - 1 ? '#44403c' : '#d6d3d1',
-                        fontWeight: 700,
-                        fontSize: 13,
-                        cursor: cardIndex < displayVocabList.length - 1 ? 'pointer' : 'not-allowed',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: 4
-                      }}
-                      title="Thẻ tiếp theo (→)"
-                    >
-                      <span>Sau</span> <ChevronRight size={16} />
-                    </button>
-                  </div>
-
-                  {/* Actions Buttons - Đồng bộ nút Chấm thẻ VocabPage */}
-                  <div style={{ display: 'flex', gap: 10, width: '100%' }}>
-                    <button
-                      onClick={() => handleNextCard(false)}
-                      style={{
-                        flex: 1,
-                        padding: '12px 14px',
-                        backgroundColor: '#fdf2f0',
-                        color: '#c53d32',
-                        border: '1px solid #f3d5d2',
-                        borderRadius: 10,
-                        fontWeight: 700,
-                        fontSize: 14,
-                        cursor: 'pointer',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: 6,
-                        transition: 'all 0.15s ease'
-                      }}
-                    >
-                      <RotateCcw size={15} />
-                      <span>Chưa thuộc</span>
-                    </button>
-
-                    <button
-                      onClick={() => setIsFlipped(!isFlipped)}
-                      style={{
-                        padding: '12px 20px',
-                        backgroundColor: '#ffffff',
-                        color: '#44403c',
-                        border: '1px solid #d6d3d1',
-                        borderRadius: 10,
-                        fontWeight: 700,
-                        fontSize: 14,
-                        cursor: 'pointer',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: 6,
-                        transition: 'all 0.15s ease'
-                      }}
-                    >
-                      <RotateCw size={15} />
-                      <span>Lật thẻ</span>
-                    </button>
-
-                    <button
-                      onClick={() => handleNextCard(true)}
-                      style={{
-                        flex: 1,
-                        padding: '12px 14px',
-                        backgroundColor: '#f1f8f3',
-                        color: '#2d6d4b',
-                        border: '1px solid #c6e2ce',
-                        borderRadius: 10,
-                        fontWeight: 700,
-                        fontSize: 14,
-                        cursor: 'pointer',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: 6,
-                        transition: 'all 0.15s ease'
-                      }}
-                    >
-                      <Check size={16} strokeWidth={3} />
-                      <span>Đã thuộc</span>
-                    </button>
+                    {/* Chú thích duy nhất */}
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: 8,
+                      marginTop: 14,
+                      fontSize: 12.5,
+                      color: '#64748b',
+                      textAlign: 'center',
+                      flexWrap: 'wrap'
+                    }}>
+                      <span>Chạm vào thẻ để lật (hoặc phím Space)</span>
+                      <span style={{ color: '#94a3b8' }}>·</span>
+                      <span>Mũi tên trái (hoặc vuốt trái) là chưa học</span>
+                      <span style={{ color: '#94a3b8' }}>·</span>
+                      <span>Mũi tên phải (hoặc vuốt phải) là đã học</span>
+                    </div>
                   </div>
                 </div>
               ) : (
