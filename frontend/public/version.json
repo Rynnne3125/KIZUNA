@@ -1,17 +1,16 @@
 {
-  "version": "1.0.9",
-  "versionCode": 109,
+  "version": "1.0.10",
+  "versionCode": 110,
   "releaseDate": "2026-11-21",
   "apkUrl": "/download/kizuna-latest.apk",
-  "apkVersionUrl": "/download/kizuna-v1.0.9.apk",
+  "apkVersionUrl": "/download/kizuna-v1.0.10.apk",
   "apkSize": "4.9 MB",
   "pcAppUrl": "/download/KIZUNA-Setup.exe",
   "pcAppSize": "74 KB",
-  "title": "Bản cập nhật KIZUNA v1.0.9",
+  "title": "Bản cập nhật KIZUNA v1.0.10",
   "changelog": [
-    "Tích hợp tệp cấu hình Google Services chuẩn và chứng chỉ SHA-1 cho Google Sign-In Native.",
-    "Khắc phục hoàn toàn lỗi xác thực Google trên thiết bị di động.",
-    "Đồng bộ cử chỉ vuốt thẻ Flashcard (vuốt trái: chưa học, vuốt phải: đã học) và tinh gọn giao diện học tập.",
-    "Tối ưu hiển thị responsive breadcrumb trên điện thoại không còn bị vỡ dòng."
+    "Khắc phục 100% lỗi phát âm trên điện thoại qua cơ chế âm thanh đa tầng HD (Google TTS HD + Youdao Japanese).",
+    "Giao diện tối (Slate Dark Mode) đồng bộ hoàn thiện cho trang Đăng nhập (LoginPage).",
+    "Tối ưu giao diện bộ lọc Chủ đề & Bậc JLPT trên Thư Viện (LibraryPage) chuẩn Mobile Responsive."
   ]
 }

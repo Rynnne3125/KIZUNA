@@ -6,11 +6,12 @@ import { Label } from '@/admin/components/ui/label';
 import { 
   Mail, Lock, User, LogIn, UserPlus, Star, 
   CheckCircle2, ArrowRight, RefreshCw, KeyRound, Sparkles, AlertCircle, MailCheck,
-  Eye, EyeOff, Check
+  Eye, EyeOff, Check, Sun, Moon
 } from 'lucide-react';
 import { authService } from '../services/authService';
 import { User as KizunaUser } from '../types/auth';
 import { validateEmail, validatePassword } from '../utils/authValidation';
+import { useTheme } from '../hooks/useTheme';
 
 export interface LoginPageProps {
   onLoginSuccess: (user: KizunaUser) => void;
@@ -62,6 +63,7 @@ const MascotParticles = () => {
 };
 
 export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }) => {
+  const { isDark, toggleTheme } = useTheme();
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -316,20 +318,31 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
   };
 
   return (
-    <div className="flex min-h-screen w-full font-sans overflow-x-hidden kanji-paper-bg">
+    <div className={`flex min-h-screen w-full font-sans overflow-x-hidden ${isDark ? 'dark bg-slate-950 text-slate-100' : 'bg-[#f7f9f6] kanji-paper-bg text-slate-800'}`}>
       
       {/* ======================= LEFT: FORM SECTION ======================= */}
       <div className="w-full lg:w-1/2 relative flex flex-col justify-center items-center p-4 sm:p-8 lg:p-12 z-10">
         
         {onCancel && (
           <button 
+            type="button"
             onClick={onCancel}
-            className="absolute top-6 left-6 flex items-center gap-2 text-slate-600 hover:text-emerald-700 transition-colors font-medium bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl shadow-xs border border-emerald-100 z-20 text-xs sm:text-sm cursor-pointer"
+            className="absolute top-6 left-6 flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors font-medium bg-white/90 dark:bg-slate-800/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl shadow-xs border border-emerald-100 dark:border-slate-700 z-20 text-xs sm:text-sm cursor-pointer"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Quay lại
           </button>
         )}
+
+        {/* Nút chuyển đổi Dark Mode / Light Mode */}
+        <button
+          type="button"
+          onClick={toggleTheme}
+          className="absolute top-6 right-6 flex items-center justify-center w-9 h-9 rounded-xl bg-white/90 dark:bg-slate-800/90 backdrop-blur-md text-slate-600 dark:text-slate-300 hover:text-emerald-700 dark:hover:text-emerald-400 border border-emerald-100 dark:border-slate-700 shadow-xs z-20 cursor-pointer transition-colors"
+          title={isDark ? 'Chuyển sang giao diện sáng' : 'Chuyển sang giao diện tối'}
+        >
+          {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-600 dark:text-slate-300" />}
+        </button>
 
         <motion.div 
           initial={{ opacity: 0, y: 15 }}
@@ -343,19 +356,19 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
               <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-600 to-green-700 flex items-center justify-center text-white font-extrabold text-2xl shadow-md shadow-emerald-600/20">
                 絆
               </div>
-              <h1 className="text-3xl font-extrabold text-emerald-950 tracking-tight">
+              <h1 className="text-3xl font-extrabold text-emerald-950 dark:text-white tracking-tight">
                 KIZUNA
               </h1>
             </div>
-            <p className="text-slate-600 text-sm font-medium">
+            <p className="text-slate-600 dark:text-slate-400 text-sm font-medium">
               Nền tảng học tiếng Nhật thông minh & Rèn luyện phản xạ chuẩn bản xứ
             </p>
           </div>
 
-          {/* Form Card (Crisp White Contrasting with Kanji Paper Background) */}
-          <Card className="border border-emerald-100 bg-white shadow-xl shadow-emerald-950/5 rounded-3xl overflow-hidden">
+          {/* Form Card */}
+          <Card className="border border-emerald-100 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xl shadow-emerald-950/5 dark:shadow-none rounded-3xl overflow-hidden transition-colors">
             {/* Toggle Tabs */}
-            <div className="flex bg-slate-50 border-b border-emerald-50 p-1.5 gap-1.5">
+            <div className="flex bg-slate-50 dark:bg-slate-800/80 border-b border-emerald-50 dark:border-slate-800 p-1.5 gap-1.5">
               <button 
                 type="button"
                 onClick={() => { 
@@ -369,7 +382,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                 className={`flex-1 py-2.5 rounded-2xl text-sm font-bold transition-all cursor-pointer ${
                   isLoginMode 
                     ? 'bg-emerald-600 text-white shadow-sm' 
-                    : 'text-slate-600 hover:text-emerald-800 hover:bg-white/60'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-emerald-800 dark:hover:text-emerald-300 hover:bg-white/60 dark:hover:bg-slate-700'
                 }`}
               >
                 Đăng nhập
@@ -386,7 +399,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                 className={`flex-1 py-2.5 rounded-2xl text-sm font-bold transition-all cursor-pointer ${
                   !isLoginMode 
                     ? 'bg-emerald-600 text-white shadow-sm' 
-                    : 'text-slate-600 hover:text-emerald-800 hover:bg-white/60'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-emerald-800 dark:hover:text-emerald-300 hover:bg-white/60 dark:hover:bg-slate-700'
                 }`}
               >
                 Đăng ký tài khoản
@@ -400,7 +413,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                 <motion.div 
                   initial={{ opacity: 0, y: -6 }} 
                   animate={{ opacity: 1, y: 0 }} 
-                  className="mb-4 text-xs sm:text-sm font-medium text-rose-700 bg-rose-50 p-3 rounded-xl border border-rose-200 flex items-start gap-2"
+                  className="mb-4 text-xs sm:text-sm font-medium text-rose-700 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/50 p-3 rounded-xl border border-rose-200 dark:border-rose-900/60 flex items-start gap-2"
                 >
                   <AlertCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
                   <span>{error}</span>
@@ -412,7 +425,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                 <motion.div 
                   initial={{ opacity: 0, y: -6 }} 
                   animate={{ opacity: 1, y: 0 }} 
-                  className="mb-4 text-xs sm:text-sm font-medium text-emerald-800 bg-emerald-50 p-3 rounded-xl border border-emerald-200 flex items-start gap-2"
+                  className="mb-4 text-xs sm:text-sm font-medium text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 p-3 rounded-xl border border-emerald-200 dark:border-emerald-900/60 flex items-start gap-2"
                 >
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                   <span>{successMsg}</span>
@@ -437,11 +450,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                     <input type="password" name="chrome_anti_autofill_pwd" style={{ display: 'none' }} tabIndex={-1} aria-hidden="true" autoComplete="off" />
 
                     <div className="space-y-1.5 group">
-                      <Label htmlFor="login-email" className="text-slate-700 font-semibold text-xs uppercase tracking-wide">
+                      <Label htmlFor="login-email" className="text-slate-700 dark:text-slate-300 font-semibold text-xs uppercase tracking-wide">
                         Địa chỉ Email
                       </Label>
                       <div className="relative">
-                        <Mail className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400 group-focus-within:text-emerald-600 transition-colors" />
+                        <Mail className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400 group-focus-within:text-emerald-600 dark:group-focus-within:text-emerald-400 transition-colors" />
                         <Input 
                           id="login-email" 
                           type="email"
@@ -451,17 +464,17 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                           onChange={e => setLoginEmail(e.target.value)} 
                           required 
                           placeholder="name@example.com" 
-                          className="pl-10 h-11 bg-white border-slate-200 hover:border-emerald-300 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl transition-all" 
+                          className="pl-10 h-11 bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 hover:border-emerald-300 dark:hover:border-emerald-600 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl transition-all" 
                         />
                       </div>
                     </div>
 
                     <div className="space-y-1.5 group">
-                      <Label htmlFor="login-password" className="text-slate-700 font-semibold text-xs uppercase tracking-wide">
+                      <Label htmlFor="login-password" className="text-slate-700 dark:text-slate-300 font-semibold text-xs uppercase tracking-wide">
                         Mật khẩu
                       </Label>
                       <div className="relative">
-                        <Lock className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400 group-focus-within:text-emerald-600 transition-colors" />
+                        <Lock className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400 group-focus-within:text-emerald-600 dark:group-focus-within:text-emerald-400 transition-colors" />
                         <Input 
                           id="login-password" 
                           type={showLoginPassword ? 'text' : 'password'} 
@@ -473,13 +486,13 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                           onBlur={() => setIsPasswordFocused(false)} 
                           required 
                           placeholder="••••••••" 
-                          className="pl-10 pr-11 h-11 bg-white border-slate-200 hover:border-emerald-300 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl transition-all" 
+                          className="pl-10 pr-11 h-11 bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 hover:border-emerald-300 dark:hover:border-emerald-600 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl transition-all" 
                         />
                         <button
                           type="button"
                           onMouseDown={e => e.preventDefault()}
                           onClick={() => setShowLoginPassword(prev => !prev)}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-emerald-600 focus:outline-none transition-colors cursor-pointer p-1 rounded-lg"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 focus:outline-none transition-colors cursor-pointer p-1 rounded-lg"
                           title={showLoginPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
                           aria-label={showLoginPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
                           tabIndex={-1}
@@ -514,18 +527,18 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
 
                     {/* Phân cách hoặc tiếp tục với Google */}
                     <div className="relative my-3 flex items-center justify-center">
-                      <div className="border-t border-slate-200 w-full" />
-                      <span className="bg-white px-3 text-[11px] font-semibold text-slate-400 uppercase tracking-wider shrink-0">
+                      <div className="border-t border-slate-200 dark:border-slate-800 w-full" />
+                      <span className="bg-white dark:bg-slate-900 px-3 text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider shrink-0">
                         Hoặc tiếp tục với
                       </span>
-                      <div className="border-t border-slate-200 w-full" />
+                      <div className="border-t border-slate-200 dark:border-slate-800 w-full" />
                     </div>
 
                     <button
                       type="button"
                       onClick={handleGoogleSignIn}
                       disabled={loading}
-                      className="w-full h-11 sm:h-12 flex items-center justify-center gap-3 bg-white hover:bg-slate-50 active:bg-slate-100 disabled:opacity-60 text-slate-700 font-semibold rounded-xl border border-slate-200 hover:border-slate-300 shadow-xs text-sm sm:text-[15px] transition-all cursor-pointer"
+                      className="w-full h-11 sm:h-12 flex items-center justify-center gap-3 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 active:bg-slate-100 dark:active:bg-slate-600 disabled:opacity-60 text-slate-700 dark:text-slate-200 font-semibold rounded-xl border border-slate-200 dark:border-slate-700 shadow-xs text-sm sm:text-[15px] transition-all cursor-pointer"
                     >
                       <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
                         <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -553,11 +566,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                     <input type="password" name="chrome_anti_autofill_reg_pwd" style={{ display: 'none' }} tabIndex={-1} aria-hidden="true" autoComplete="off" />
 
                     <div className="space-y-1 group">
-                      <Label htmlFor="reg-fullname" className="text-slate-700 font-semibold text-xs uppercase tracking-wide">
+                      <Label htmlFor="reg-fullname" className="text-slate-700 dark:text-slate-300 font-semibold text-xs uppercase tracking-wide">
                         Họ và tên
                       </Label>
                       <div className="relative">
-                        <User className="absolute left-3.5 top-3 h-4 w-4 text-slate-400 group-focus-within:text-emerald-600" />
+                        <User className="absolute left-3.5 top-3 h-4 w-4 text-slate-400 group-focus-within:text-emerald-600 dark:group-focus-within:text-emerald-400" />
                         <Input 
                           id="reg-fullname" 
                           type="text"
@@ -567,13 +580,13 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                           onChange={e => setRegFullName(e.target.value)}
                           required 
                           placeholder="Ví dụ: Nguyễn Văn A" 
-                          className="pl-10 h-10 bg-white border-slate-200 hover:border-emerald-300 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl" 
+                          className="pl-10 h-10 bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 hover:border-emerald-300 dark:hover:border-emerald-600 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl" 
                         />
                       </div>
                     </div>
                     
                     <div className="space-y-1 group">
-                      <Label htmlFor="reg-email" className="text-slate-700 font-semibold text-xs uppercase tracking-wide">
+                      <Label htmlFor="reg-email" className="text-slate-700 dark:text-slate-300 font-semibold text-xs uppercase tracking-wide">
                         Email nhận mã OTP xác thực
                       </Label>
                       <div className="relative">
@@ -587,18 +600,18 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                           onChange={e => setRegEmail(e.target.value)}
                           required 
                           placeholder="tenban@gmail.com" 
-                          className="pl-10 h-10 bg-white border-slate-200 hover:border-emerald-300 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl" 
+                          className="pl-10 h-10 bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 hover:border-emerald-300 dark:hover:border-emerald-600 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl" 
                         />
                       </div>
-                      <p className="text-[11px] text-slate-500">Chỉ gửi mã OTP khi email đúng định dạng (có @, tên miền hợp lệ như @gmail.com).</p>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400">Chỉ gửi mã OTP khi email đúng định dạng (có @, tên miền hợp lệ như @gmail.com).</p>
                     </div>
 
                     <div className="space-y-1 group">
-                      <Label htmlFor="reg-pass" className="text-slate-700 font-semibold text-xs uppercase tracking-wide">
+                      <Label htmlFor="reg-pass" className="text-slate-700 dark:text-slate-300 font-semibold text-xs uppercase tracking-wide">
                         Mật khẩu
                       </Label>
                       <div className="relative">
-                        <Lock className="absolute left-3.5 top-3 h-4 w-4 text-slate-400 group-focus-within:text-emerald-600" />
+                        <Lock className="absolute left-3.5 top-3 h-4 w-4 text-slate-400 group-focus-within:text-emerald-600 dark:group-focus-within:text-emerald-400" />
                         <Input 
                           id="reg-pass" 
                           type={showRegPassword ? 'text' : 'password'} 
@@ -610,13 +623,13 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                           onBlur={() => setIsPasswordFocused(false)} 
                           required 
                           placeholder="Tối thiểu 8 ký tự (Hoa, thường, số, ký tự đặc biệt)" 
-                          className="pl-10 pr-11 h-10 bg-white border-slate-200 hover:border-emerald-300 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl" 
+                          className="pl-10 pr-11 h-10 bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 hover:border-emerald-300 dark:hover:border-emerald-600 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/10 rounded-xl" 
                         />
                         <button
                           type="button"
                           onMouseDown={e => e.preventDefault()}
                           onClick={() => setShowRegPassword(prev => !prev)}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-emerald-600 focus:outline-none transition-colors cursor-pointer p-1 rounded-lg"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 focus:outline-none transition-colors cursor-pointer p-1 rounded-lg"
                           title={showRegPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
                           aria-label={showRegPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
                           tabIndex={-1}
@@ -630,8 +643,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                       </div>
 
                       {/* Checklist điều kiện mật khẩu khi đăng ký */}
-                      <div className="pt-1.5 space-y-1 bg-slate-50/80 p-2.5 rounded-xl border border-slate-200/60 text-xs">
-                        <div className="text-[11px] font-semibold text-slate-600 flex items-center justify-between">
+                      <div className="pt-1.5 space-y-1 bg-slate-50/80 dark:bg-slate-800/60 p-2.5 rounded-xl border border-slate-200/60 dark:border-slate-700/60 text-xs">
+                        <div className="text-[11px] font-semibold text-slate-600 dark:text-slate-300 flex items-center justify-between">
                           <span>Yêu cầu mật khẩu:</span>
                           {regPassword.length > 0 && (
                             <span className={regPasswordCheck.isValid ? "text-emerald-600 font-bold flex items-center gap-1" : "text-amber-600 font-medium"}>
@@ -640,24 +653,24 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                           )}
                         </div>
                         <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-[11px]">
-                          <div className={`flex items-center gap-1.5 ${regPasswordCheck.criteria.minLength ? 'text-emerald-700 font-semibold' : 'text-slate-500'}`}>
-                            {regPasswordCheck.criteria.minLength ? <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 stroke-[3]" /> : <div className="w-1.5 h-1.5 rounded-full bg-slate-300 ml-1 mr-1 shrink-0" />}
+                          <div className={`flex items-center gap-1.5 ${regPasswordCheck.criteria.minLength ? 'text-emerald-700 dark:text-emerald-400 font-semibold' : 'text-slate-500 dark:text-slate-400'}`}>
+                            {regPasswordCheck.criteria.minLength ? <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 stroke-[3]" /> : <div className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 ml-1 mr-1 shrink-0" />}
                             <span>Tối thiểu 8 ký tự</span>
                           </div>
-                          <div className={`flex items-center gap-1.5 ${regPasswordCheck.criteria.hasUpper ? 'text-emerald-700 font-semibold' : 'text-slate-500'}`}>
-                            {regPasswordCheck.criteria.hasUpper ? <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 stroke-[3]" /> : <div className="w-1.5 h-1.5 rounded-full bg-slate-300 ml-1 mr-1 shrink-0" />}
+                          <div className={`flex items-center gap-1.5 ${regPasswordCheck.criteria.hasUpper ? 'text-emerald-700 dark:text-emerald-400 font-semibold' : 'text-slate-500 dark:text-slate-400'}`}>
+                            {regPasswordCheck.criteria.hasUpper ? <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 stroke-[3]" /> : <div className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 ml-1 mr-1 shrink-0" />}
                             <span>Chữ in hoa (A-Z)</span>
                           </div>
-                          <div className={`flex items-center gap-1.5 ${regPasswordCheck.criteria.hasLower ? 'text-emerald-700 font-semibold' : 'text-slate-500'}`}>
-                            {regPasswordCheck.criteria.hasLower ? <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 stroke-[3]" /> : <div className="w-1.5 h-1.5 rounded-full bg-slate-300 ml-1 mr-1 shrink-0" />}
+                          <div className={`flex items-center gap-1.5 ${regPasswordCheck.criteria.hasLower ? 'text-emerald-700 dark:text-emerald-400 font-semibold' : 'text-slate-500 dark:text-slate-400'}`}>
+                            {regPasswordCheck.criteria.hasLower ? <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 stroke-[3]" /> : <div className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 ml-1 mr-1 shrink-0" />}
                             <span>Chữ thường (a-z)</span>
                           </div>
-                          <div className={`flex items-center gap-1.5 ${regPasswordCheck.criteria.hasNumber ? 'text-emerald-700 font-semibold' : 'text-slate-500'}`}>
-                            {regPasswordCheck.criteria.hasNumber ? <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 stroke-[3]" /> : <div className="w-1.5 h-1.5 rounded-full bg-slate-300 ml-1 mr-1 shrink-0" />}
+                          <div className={`flex items-center gap-1.5 ${regPasswordCheck.criteria.hasNumber ? 'text-emerald-700 dark:text-emerald-400 font-semibold' : 'text-slate-500 dark:text-slate-400'}`}>
+                            {regPasswordCheck.criteria.hasNumber ? <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 stroke-[3]" /> : <div className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 ml-1 mr-1 shrink-0" />}
                             <span>Chữ số (0-9)</span>
                           </div>
-                          <div className={`flex items-center gap-1.5 col-span-2 ${regPasswordCheck.criteria.hasSpecial ? 'text-emerald-700 font-semibold' : 'text-slate-500'}`}>
-                            {regPasswordCheck.criteria.hasSpecial ? <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 stroke-[3]" /> : <div className="w-1.5 h-1.5 rounded-full bg-slate-300 ml-1 mr-1 shrink-0" />}
+                          <div className={`flex items-center gap-1.5 col-span-2 ${regPasswordCheck.criteria.hasSpecial ? 'text-emerald-700 dark:text-emerald-400 font-semibold' : 'text-slate-500 dark:text-slate-400'}`}>
+                            {regPasswordCheck.criteria.hasSpecial ? <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 stroke-[3]" /> : <div className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 ml-1 mr-1 shrink-0" />}
                             <span>Ký tự đặc biệt (!@#$%^&*...)</span>
                           </div>
                         </div>
@@ -720,16 +733,16 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                     className="space-y-4"
                   >
                     {/* Thông báo kiểm tra email đơn giản */}
-                    <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-2xl p-4 text-center">
-                      <div className="flex items-center justify-center gap-2 text-emerald-900 font-semibold text-sm">
-                        <MailCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+                    <div className="bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/60 rounded-2xl p-4 text-center">
+                      <div className="flex items-center justify-center gap-2 text-emerald-900 dark:text-emerald-300 font-semibold text-sm">
+                        <MailCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                         <span>Hãy kiểm tra hòm thư email của bạn</span>
                       </div>
                     </div>
 
                     {/* 6-Digit OTP Code Input */}
                     <div className="space-y-1.5">
-                      <Label htmlFor="otp-input" className="text-slate-700 font-bold text-xs uppercase tracking-wide">
+                      <Label htmlFor="otp-input" className="text-slate-700 dark:text-slate-300 font-bold text-xs uppercase tracking-wide">
                         Nhập mã OTP xác thực (6 chữ số)
                       </Label>
                       <Input 
@@ -745,7 +758,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                         required 
                         autoFocus
                         placeholder="••••••" 
-                        className="text-center font-mono text-2xl tracking-[0.4em] font-extrabold h-12 bg-white border-emerald-300 focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/15 rounded-xl"
+                        className="text-center font-mono text-2xl tracking-[0.4em] font-extrabold h-12 bg-white dark:bg-slate-800 border-emerald-300 dark:border-emerald-600 text-slate-900 dark:text-white focus-visible:border-emerald-600 focus-visible:ring-4 focus-visible:ring-emerald-500/15 rounded-xl"
                       />
                     </div>
 
@@ -768,11 +781,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                     </button>
 
                     {/* Resend & Back controls */}
-                    <div className="flex items-center justify-between text-xs pt-1 text-slate-500">
+                    <div className="flex items-center justify-between text-xs pt-1 text-slate-500 dark:text-slate-400">
                       <button 
                         type="button" 
                         onClick={() => { setRegStep('FORM'); setError(null); }}
-                        className="text-slate-600 hover:text-emerald-700 underline font-medium cursor-pointer"
+                        className="text-slate-600 dark:text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-400 underline font-medium cursor-pointer"
                       >
                         ← Thay đổi địa chỉ email
                       </button>
@@ -780,7 +793,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
                         type="button" 
                         onClick={handleResendOtp}
                         disabled={resendCooldown > 0 || loading}
-                        className="text-emerald-700 hover:text-emerald-800 font-bold disabled:text-slate-400 cursor-pointer"
+                        className="text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 font-bold disabled:text-slate-400 dark:disabled:text-slate-600 cursor-pointer"
                       >
                         {resendCooldown > 0 ? `Gửi lại sau (${resendCooldown}s)` : 'Gửi lại mã OTP'}
                       </button>

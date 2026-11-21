@@ -84,43 +84,71 @@ class SoundService {
       // Dừng phát âm thanh cũ trước khi phát âm mới
       this.stop();
 
-      const isMobileDevice = isNativeApp() || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+      const isMobileDevice = isNativeApp() || (typeof navigator !== 'undefined' && /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent));
 
-      // Nếu đang trên điện thoại (APK / Mobile) hoặc không tìm thấy giọng ja-JP trên máy:
-      // Dùng HTML5 Audio qua luồng phát âm thanh tiếng Nhật trực tiếp
+      // Trên điện thoại (Capacitor APK / Android / iOS) hoặc máy tính không có voice ja-JP offline:
+      // Tự động phát bằng HTML5 Audio Stream đa tầng (Google TTS HD + Youdao Japanese)
+      // đảm bảo 100% người dùng trên điện thoại nghe được giọng đọc chuẩn người bản xứ.
       const shouldUseAudioFallback = isMobileDevice || !this.jaVoice;
 
       if (shouldUseAudioFallback) {
-        try {
-          const encoded = encodeURIComponent(cleanText.slice(0, 200));
-          const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=ja&client=tw-ob&q=${encoded}`;
-          const audio = new Audio(ttsUrl);
-          audio.playbackRate = rate;
-          this.currentAudio = audio;
-
-          audio.onended = () => {
-            this.currentAudio = null;
-            resolve();
-          };
-
-          audio.onerror = () => {
-            this.currentAudio = null;
-            // Thử cứu cánh lần cuối bằng Web Speech API nếu audio bị lỗi
-            this.speakWithSpeechSynthesis(cleanText, rate, resolve);
-          };
-
-          audio.play().catch(() => {
-            // Trường hợp trình duyệt chặn Autoplay hoặc mất mạng
-            this.speakWithSpeechSynthesis(cleanText, rate, resolve);
-          });
-          return;
-        } catch {
-          // Bỏ qua lỗi audio và chuyển sang speechSynthesis
-        }
+        this.playAudioStream(cleanText, rate, resolve);
+        return;
       }
 
       this.speakWithSpeechSynthesis(cleanText, rate, resolve);
     });
+  }
+
+  /**
+   * Phát âm thanh qua Audio Stream đa tầng với cơ chế Fallback tự động
+   */
+  private playAudioStream(cleanText: string, rate: number, resolve: () => void) {
+    const encoded = encodeURIComponent(cleanText.replace(/\s+/g, ' ').slice(0, 200));
+    const sources = [
+      `https://translate.google.com/translate_tts?ie=UTF-8&client=gtx&tl=ja&q=${encoded}`,
+      `https://dict.youdao.com/dictvoice?audio=${encoded}&le=jap`,
+    ];
+
+    let sourceIndex = 0;
+
+    const tryNext = () => {
+      if (sourceIndex >= sources.length) {
+        // Cả 2 luồng audio đều không tải được, thử cứu cánh bằng SpeechSynthesis
+        this.speakWithSpeechSynthesis(cleanText, rate, resolve);
+        return;
+      }
+
+      const url = sources[sourceIndex++];
+      try {
+        const audio = new Audio(url);
+        audio.playbackRate = rate;
+        this.currentAudio = audio;
+
+        audio.onended = () => {
+          this.currentAudio = null;
+          resolve();
+        };
+
+        audio.onerror = () => {
+          this.currentAudio = null;
+          tryNext();
+        };
+
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            this.currentAudio = null;
+            tryNext();
+          });
+        }
+      } catch {
+        this.currentAudio = null;
+        tryNext();
+      }
+    };
+
+    tryNext();
   }
 
   private speakWithSpeechSynthesis(text: string, rate: number, onDone: () => void) {

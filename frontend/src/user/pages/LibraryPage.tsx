@@ -281,77 +281,37 @@ export const LibraryPage: React.FC = () => {
         }
       `}</style>
       {/* 1. HERO HEADER PHONG CÁCH NHẬT BẢN */}
-      <div className="library-header-card" style={{
-        background: 'linear-gradient(135deg, #ffffff 0%, #faf8f5 100%)',
-        border: '1px solid #e7dfd5',
-        borderLeft: '4px solid #c53d32',
-        borderRadius: 14,
-        padding: '24px 28px',
-        marginBottom: 20,
-        boxShadow: '0 4px 16px -2px rgba(44, 30, 20, 0.04)'
-      }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 border-l-4 border-l-rose-600 rounded-3xl p-5 sm:p-6 mb-5 shadow-xs transition-colors">
+        <div className="flex justify-between items-center flex-wrap gap-4">
           <div>
-            <h1 style={{
-              fontSize: 22,
-              fontWeight: 900,
-              color: '#1c2536',
-              margin: '0 0 4px 0',
-              fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
-            }}>
+            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white m-0">
               Thư Viện Video & Luyện Nghe
             </h1>
           </div>
 
           {/* CHUYỂN ĐỔI 2 PHÂN HỆ HỌC TẬP CHÍNH */}
-          <div style={{
-            display: 'inline-flex',
-            background: '#ffffff',
-            padding: 4,
-            borderRadius: 10,
-            border: '1px solid #ebe7df',
-            boxShadow: '0 2px 6px rgba(0,0,0,0.03)',
-            gap: 4
-          }}>
+          <div className="inline-flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl border border-slate-200 dark:border-slate-700 gap-1">
             <button
+              type="button"
               onClick={() => { setActiveTab('video'); setActiveExamDetail(null); }}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6,
-                padding: '8px 16px',
-                borderRadius: 8,
-                fontSize: 12,
-                fontWeight: 800,
-                border: 'none',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease',
-                background: activeTab === 'video' ? '#c53d32' : 'transparent',
-                color: activeTab === 'video' ? '#ffffff' : '#57534e',
-                boxShadow: activeTab === 'video' ? '0 2px 6px rgba(197, 61, 50, 0.25)' : 'none'
-              }}
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-extrabold border-none cursor-pointer transition-all ${
+                activeTab === 'video'
+                  ? 'bg-rose-600 text-white shadow-xs'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
             >
               <Film size={14} />
               <span>Kho Học Liệu Video ({allVideos.length || '1.015'})</span>
             </button>
 
             <button
+              type="button"
               onClick={() => setActiveTab('choukai')}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6,
-                padding: '8px 16px',
-                borderRadius: 8,
-                fontSize: 12,
-                fontWeight: 800,
-                border: 'none',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease',
-                background: activeTab === 'choukai' ? '#c53d32' : 'transparent',
-                color: activeTab === 'choukai' ? '#ffffff' : '#57534e',
-                boxShadow: activeTab === 'choukai' ? '0 2px 6px rgba(197, 61, 50, 0.25)' : 'none'
-              }}
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-extrabold border-none cursor-pointer transition-all ${
+                activeTab === 'choukai'
+                  ? 'bg-rose-600 text-white shadow-xs'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
             >
               <Headphones size={14} />
               <span>Luyện Đề Nghe Choukai (65 Đề)</span>
@@ -366,40 +326,26 @@ export const LibraryPage: React.FC = () => {
       {activeTab === 'video' && (
         <div>
           {/* Thanh lọc & tìm kiếm Kho Học Liệu Video */}
-          <div style={{
-            background: '#ffffff',
-            borderRadius: 12,
-            border: '1px solid #ebe7df',
-            padding: '14px 18px',
-            marginBottom: 20,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 12
-          }}>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-3.5 sm:p-4 mb-5 shadow-xs transition-colors flex flex-col gap-3">
             {/* Hàng 1: Bộ lọc Bậc JLPT và Tìm kiếm */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                <span style={{ fontSize: 12, fontWeight: 800, color: '#78716c' }}>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-xs font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-wide shrink-0">
                   BẬC JLPT:
                 </span>
-                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                <div className="flex gap-1.5 flex-wrap">
                   {LEVEL_FILTERS.map(lvl => {
                     const isSelected = videoLevel === lvl.id;
                     return (
                       <button
                         key={lvl.id}
+                        type="button"
                         onClick={() => setVideoLevel(lvl.id)}
-                        style={{
-                          padding: '5px 12px',
-                          borderRadius: 6,
-                          fontSize: 12,
-                          fontWeight: 700,
-                          cursor: 'pointer',
-                          border: isSelected ? '1px solid #c53d32' : '1px solid #ebe7df',
-                          background: isSelected ? '#fdf2f0' : '#faf8f5',
-                          color: isSelected ? '#c53d32' : '#57534e',
-                          transition: 'all 0.15s ease'
-                        }}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          isSelected
+                            ? 'bg-rose-600 text-white shadow-xs'
+                            : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                        }`}
                       >
                         {lvl.label}
                       </button>
@@ -409,57 +355,46 @@ export const LibraryPage: React.FC = () => {
               </div>
 
               {/* Ô tìm kiếm */}
-              <div style={{ position: 'relative', width: 280, maxWidth: '100%' }}>
-                <Search size={14} color="#78716c" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+              <div className="relative w-full sm:w-72">
+                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                 <input
                   type="text"
                   placeholder="Tìm video, bài giảng, kênh..."
                   value={videoSearch}
                   onChange={e => setVideoSearch(e.target.value)}
-                  style={{
-                    width: '100%',
-                    padding: '7px 12px 7px 32px',
-                    borderRadius: 6,
-                    border: '1px solid #d6d3d1',
-                    fontSize: 12,
-                    outline: 'none',
-                    background: '#ffffff'
-                  }}
+                  className="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 text-xs outline-none focus:border-rose-500 transition-colors"
                 />
               </div>
             </div>
 
             {/* Hàng 2: Bộ lọc Danh mục chủ đề */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', paddingTop: 8, borderTop: '1px dashed #f1f5f9' }}>
-              <span style={{ fontSize: 12, fontWeight: 800, color: '#78716c' }}>
-                CHỦ ĐỀ:
-              </span>
-              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                {CATEGORY_FILTERS.map(cat => {
-                  const isSelected = videoCategory === cat.id;
-                  return (
-                    <button
-                      key={cat.id}
-                      onClick={() => setVideoCategory(cat.id)}
-                      style={{
-                        padding: '4px 10px',
-                        borderRadius: 6,
-                        fontSize: 11,
-                        fontWeight: 700,
-                        cursor: 'pointer',
-                        border: isSelected ? '1px solid #c53d32' : '1px solid #ebe7df',
-                        background: isSelected ? '#c53d32' : '#ffffff',
-                        color: isSelected ? '#ffffff' : '#57534e',
-                        transition: 'all 0.15s ease'
-                      }}
-                    >
-                      {cat.label}
-                    </button>
-                  );
-                })}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pt-3 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-xs font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-wide shrink-0">
+                  CHỦ ĐỀ:
+                </span>
+                <div className="flex gap-1.5 flex-wrap">
+                  {CATEGORY_FILTERS.map(cat => {
+                    const isSelected = videoCategory === cat.id;
+                    return (
+                      <button
+                        key={cat.id}
+                        type="button"
+                        onClick={() => setVideoCategory(cat.id)}
+                        className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                          isSelected
+                            ? 'bg-rose-600 text-white shadow-xs'
+                            : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                        }`}
+                      >
+                        {cat.label}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
-              <span style={{ fontSize: 11, color: '#78716c', marginLeft: 'auto' }}>
-                Hiển thị <strong>{filteredVideos.length}</strong> video bài giảng
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium sm:text-right shrink-0">
+                Hiển thị <strong className="text-slate-900 dark:text-white font-bold">{filteredVideos.length}</strong> video bài giảng
               </span>
             </div>
           </div>
@@ -475,45 +410,22 @@ export const LibraryPage: React.FC = () => {
               {/* CỘT TRÁI: VIDEO PLAYER & THÔNG TIN BÀI HỌC */}
               <div id="kizuna-main-player">
                 {/* Visual Anchor: VÙNG PHÁT VIDEO ĐANG CHẠY (Hiển thị rõ ràng trên Android & Web) */}
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '10px 16px',
-                  background: 'linear-gradient(135deg, #fdf2f0 0%, #fff7f6 100%)',
-                  borderRadius: '14px 14px 0 0',
-                  border: '1.5px solid #fecaca',
-                  borderBottom: 'none'
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#c53d32', fontWeight: 900, fontSize: 13 }}>
-                    <Play size={15} style={{ fill: '#c53d32' }} />
+                <div className="flex items-center justify-between px-4 py-2.5 bg-rose-50/80 dark:bg-rose-950/40 rounded-t-2xl border border-rose-200 dark:border-rose-900/60 border-b-0">
+                  <div className="flex items-center gap-2 text-rose-600 dark:text-rose-400 font-extrabold text-xs">
+                    <Play size={14} className="fill-rose-600 dark:fill-rose-400" />
                     <span>TRÌNH PHÁT BÀI GIẢNG ĐANG CHỌN</span>
                   </div>
                   <a
                     href={`https://www.youtube.com/watch?v=${activeVideo.youtubeVideoId}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{
-                      fontSize: 12,
-                      fontWeight: 700,
-                      color: '#0284c7',
-                      textDecoration: 'none',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 4
-                    }}
+                    className="text-xs font-bold text-sky-600 dark:text-sky-400 no-underline inline-flex items-center gap-1 hover:underline"
                   >
                     <span>Mở app YouTube</span> ↗
                   </a>
                 </div>
 
-                <div style={{
-                  background: '#ffffff',
-                  borderRadius: '0 0 14px 14px',
-                  border: '1.5px solid #fecaca',
-                  overflow: 'hidden',
-                  boxShadow: '0 4px 16px rgba(197, 61, 50, 0.08)'
-                }}>
+                <div className="bg-white dark:bg-slate-900 rounded-b-2xl border border-rose-200 dark:border-rose-900/60 overflow-hidden shadow-xs">
                   {/* Trình phát nhúng YouTube chuẩn (Hỗ trợ tốt trên Android WebView) */}
                   <div style={{
                     position: 'relative',
@@ -533,61 +445,50 @@ export const LibraryPage: React.FC = () => {
                   </div>
 
                   {/* Thông tin Video */}
-                  <div style={{ padding: '18px 20px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 8 }}>
-                      <span style={{
-                        background: '#fdf2f0',
-                        color: '#c53d32',
-                        border: '1px solid #f3d5d2',
-                        borderRadius: 4,
-                        padding: '2px 8px',
-                        fontSize: 11,
-                        fontWeight: 900
-                      }}>
+                  <div className="p-4 sm:p-5">
+                    <div className="flex items-center gap-2 flex-wrap mb-2">
+                      <span className="bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800 rounded px-2 py-0.5 text-[11px] font-extrabold">
                         {activeVideo.jlptLevel}
                       </span>
-                      <span style={{ background: '#f1f5f9', color: '#475569', borderRadius: 4, padding: '2px 8px', fontSize: 11, fontWeight: 700 }}>
+                      <span className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded px-2 py-0.5 text-[11px] font-bold">
                         {activeVideo.category}
                       </span>
-                      <span style={{ fontSize: 12, color: '#78716c', display: 'flex', alignItems: 'center', gap: 4 }}>
+                      <span className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
                         <Clock size={12} /> {formatDuration(activeVideo.durationSeconds)}
                       </span>
                       {activeVideo.channelName && (
-                        <span style={{ fontSize: 12, color: '#0d9488', fontWeight: 700 }}>
+                        <span className="text-xs text-teal-600 dark:text-teal-400 font-bold">
                           • {activeVideo.channelName}
                         </span>
                       )}
                     </div>
 
-                    <h2 style={{ fontSize: 18, fontWeight: 800, color: '#1c2536', margin: '0 0 8px 0', lineHeight: 1.4 }}>
+                    <h2 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white mb-2 leading-snug">
                       {activeVideo.title}
                     </h2>
 
-                    <div style={{ fontSize: 12, color: '#78716c', lineHeight: 1.5 }}>
+                    <div className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
                       Video bài giảng chính thức thuộc kho học liệu KIZUNA. Học tập trực tiếp ngay trong ứng dụng không bị chuyển hướng.
                     </div>
                   </div>
                 </div>
 
                 {/* VIDEO CÙNG CHỦ ĐỀ ĐƯỢC ĐỀ XUẤT TIẾP THEO TRONG KIZUNA */}
-                <div style={{ marginTop: 20 }}>
-                  <div style={{ fontSize: 13, fontWeight: 800, color: '#1c2536', marginBottom: 10, display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <Layers size={14} color="#c53d32" />
+                <div className="mt-5">
+                  <div className="text-xs font-extrabold text-slate-900 dark:text-white mb-2.5 flex items-center gap-1.5">
+                    <Layers size={14} className="text-rose-600 dark:text-rose-400" />
                     <span>BÀI HỌC LIÊN QUAN TIẾP THEO TRONG KIZUNA:</span>
                   </div>
-                  <div className="library-related-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: 12 }}>
+                  <div className="library-related-grid grid grid-cols-2 sm:grid-cols-3 gap-3">
                     {relatedVideos.map(v => (
                       <div
                         key={v.id}
                         onClick={() => handleSelectVideo(v)}
-                        style={{
-                          background: '#ffffff',
-                          borderRadius: 8,
-                          border: activeVideo.id === v.id ? '2px solid #c53d32' : '1px solid #ebe7df',
-                          padding: 8,
-                          cursor: 'pointer',
-                          transition: 'all 0.15s ease'
-                        }}
+                        className={`rounded-xl p-2 cursor-pointer transition-all border ${
+                          activeVideo.id === v.id
+                            ? 'bg-rose-50/60 dark:bg-rose-950/40 border-rose-500 dark:border-rose-600 ring-2 ring-rose-500/20'
+                            : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
+                        }`}
                       >
                         <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%', borderRadius: 6, overflow: 'hidden', background: '#0a0f1d' }}>
                           <img
@@ -611,10 +512,10 @@ export const LibraryPage: React.FC = () => {
                             {formatDuration(v.durationSeconds)}
                           </div>
                         </div>
-                        <div style={{ fontSize: 12, fontWeight: 700, color: '#1c2536', marginTop: 6, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
+                        <div className="text-xs font-bold text-slate-900 dark:text-white mt-1.5 line-clamp-2 leading-snug">
                           {v.title}
                         </div>
-                        <div style={{ fontSize: 11, color: '#78716c', marginTop: 2 }}>
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
                           {v.channelName}
                         </div>
                       </div>
@@ -624,52 +525,32 @@ export const LibraryPage: React.FC = () => {
               </div>
 
               {/* CỘT PHẢI: PLAYLIST DANH SÁCH BÀI HỌC CÙNG BỘ LỌC */}
-              <div style={{
-                background: '#ffffff',
-                borderRadius: 14,
-                border: '1px solid #ebe7df',
-                display: 'flex',
-                flexDirection: 'column',
-                overflow: 'hidden',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.03)'
-              }}>
-                <div style={{
-                  padding: '14px 16px',
-                  background: '#faf8f5',
-                  borderBottom: '1px solid #ebe7df',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <BookOpen size={16} color="#c53d32" />
-                    <span style={{ fontSize: 14, fontWeight: 800, color: '#1c2536' }}>
+              <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col overflow-hidden shadow-xs">
+                <div className="px-4 py-3 bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <BookOpen size={16} className="text-rose-600 dark:text-rose-400" />
+                    <span className="text-sm font-extrabold text-slate-900 dark:text-white">
                       Danh Sách Phát ({filteredVideos.length} bài)
                     </span>
                   </div>
-                  <span style={{ fontSize: 11, color: '#78716c' }}>
+                  <span className="text-xs text-slate-500 dark:text-slate-400">
                     {videoLevel !== 'ALL' ? videoLevel : 'Tất cả'} · {videoCategory !== 'ALL' ? videoCategory : 'Đa chủ đề'}
                   </span>
                 </div>
 
                 {/* Danh sách video cuộn mượt mà */}
-                <div className="library-playlist-list" style={{ maxHeight: 680, overflowY: 'auto' }}>
+                <div className="library-playlist-list max-h-[680px] overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800">
                   {filteredVideos.map(v => {
                     const isCurrent = activeVideo.id === v.id;
                     return (
                       <div
                         key={v.id}
                         onClick={() => handleSelectVideo(v)}
-                        style={{
-                          display: 'flex',
-                          gap: 10,
-                          padding: '12px 14px',
-                          borderBottom: '1px solid #f1f5f9',
-                          cursor: 'pointer',
-                          background: isCurrent ? '#fdf2f0' : '#ffffff',
-                          borderLeft: isCurrent ? '4px solid #c53d32' : '4px solid transparent',
-                          transition: 'all 0.15s ease'
-                        }}
+                        className={`flex gap-2.5 p-3 cursor-pointer transition-colors ${
+                          isCurrent
+                            ? 'bg-rose-50/80 dark:bg-rose-950/40 border-l-4 border-l-rose-600'
+                            : 'bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/60 border-l-4 border-l-transparent'
+                        }`}
                       >
                         <div style={{ position: 'relative', width: 100, height: 58, borderRadius: 6, overflow: 'hidden', flexShrink: 0, background: '#0a0f1d' }}>
                           <img
@@ -695,39 +576,25 @@ export const LibraryPage: React.FC = () => {
                         </div>
 
                         <div style={{ flex: 1, minWidth: 0 }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
-                            <span style={{
-                              fontSize: 9,
-                              fontWeight: 900,
-                              background: '#f1f5f9',
-                              color: '#475569',
-                              padding: '1px 4px',
-                              borderRadius: 3
-                            }}>
+                          <div className="flex items-center gap-1.5 mb-1">
+                            <span className="text-[10px] font-extrabold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-1.5 py-0.5 rounded">
                               {v.jlptLevel}
                             </span>
-                            <span style={{ fontSize: 9, color: '#78716c' }}>
+                            <span className="text-[10px] text-slate-500 dark:text-slate-400">
                               {v.category}
                             </span>
                             {isCurrent && (
-                              <span style={{ fontSize: 9, fontWeight: 900, color: '#c53d32', marginLeft: 'auto' }}>
+                              <span className="text-[10px] font-extrabold text-rose-600 dark:text-rose-400 ml-auto">
                                 • ĐANG XEM
                               </span>
                             )}
                           </div>
-                          <div style={{
-                            fontSize: 12,
-                            fontWeight: 700,
-                            color: isCurrent ? '#c53d32' : '#1c2536',
-                            overflow: 'hidden',
-                            display: '-webkit-box',
-                            WebkitLineClamp: 2,
-                            WebkitBoxOrient: 'vertical',
-                            lineHeight: 1.3
-                          }}>
+                          <div className={`text-xs font-bold line-clamp-2 leading-snug ${
+                            isCurrent ? 'text-rose-600 dark:text-rose-400' : 'text-slate-900 dark:text-white'
+                          }`}>
                             {v.title}
                           </div>
-                          <div style={{ fontSize: 11, color: '#78716c', marginTop: 3 }}>
+                          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
                             {v.channelName}
                           </div>
                         </div>
@@ -754,101 +621,57 @@ export const LibraryPage: React.FC = () => {
           {activeExamDetail ? (
             <div>
               {/* THANH ĐIỀU HƯỚNG GHIM PHÒNG THI CHOUKAI */}
-              <div style={{
-                position: 'sticky',
-                top: 60,
-                background: 'rgba(255, 255, 255, 0.96)',
-                backdropFilter: 'blur(8px)',
-                zIndex: 90,
-                padding: '14px 20px',
-                borderRadius: 12,
-                boxShadow: '0 4px 14px rgba(44, 30, 20, 0.05)',
-                border: '1px solid #ebe7df',
-                marginBottom: 20
-              }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+              <div className="sticky top-14 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md z-40 p-3.5 sm:p-4 rounded-2xl shadow-xs border border-slate-200 dark:border-slate-800 mb-5 transition-colors">
+                <div className="flex justify-between items-center flex-wrap gap-3">
                   <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span style={{ background: '#fdf2f0', color: '#c53d32', border: '1px solid #f3d5d2', borderRadius: 4, padding: '2px 8px', fontSize: 11, fontWeight: 900 }}>
+                    <div className="flex items-center gap-2">
+                      <span className="bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800 rounded px-2 py-0.5 text-[11px] font-extrabold">
                         {activeExamDetail.level}
                       </span>
-                      <h2 style={{ fontSize: 16, fontWeight: 800, color: '#1c2536', margin: 0, fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif" }}>
+                      <h2 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white m-0">
                         {activeExamDetail.label} · Luyện Nghe Choukai
                       </h2>
                     </div>
-                    <div style={{ fontSize: 12, color: '#78716c', marginTop: 4 }}>
-                      Đã chọn: <strong style={{ color: '#c53d32' }}>{Object.keys(userAnswers).length}</strong> câu hỏi
+                    <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                      Đã chọn: <strong className="text-rose-600 dark:text-rose-400 font-bold">{Object.keys(userAnswers).length}</strong> câu hỏi
                     </div>
                   </div>
 
-                  <div style={{ display: 'flex', gap: 8 }}>
+                  <div className="flex gap-2">
                     {!isSubmitted ? (
                       <button
+                        type="button"
                         onClick={() => setShowSubmitModal(true)}
-                        style={{
-                          padding: '8px 18px',
-                          background: '#c53d32',
-                          color: '#ffffff',
-                          border: 'none',
-                          borderRadius: 8,
-                          fontWeight: 700,
-                          fontSize: 13,
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 6
-                        }}
+                        className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-bold text-xs flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer border-none"
                       >
-                        <CheckCircle2 size={15} /> Nộp bài chấm điểm
+                        <CheckCircle2 size={14} /> Nộp bài chấm điểm
                       </button>
                     ) : (
                       <button
+                        type="button"
                         onClick={() => { setUserAnswers({}); setIsSubmitted(false); setScoreResult(null); }}
-                        style={{
-                          padding: '8px 16px',
-                          background: '#1c2536',
-                          color: '#ffffff',
-                          border: 'none',
-                          borderRadius: 8,
-                          fontWeight: 700,
-                          fontSize: 13,
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 6
-                        }}
+                        className="px-4 py-2 bg-slate-800 dark:bg-slate-700 hover:bg-slate-900 text-white rounded-xl font-bold text-xs flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer border-none"
                       >
-                        <RotateCcw size={15} /> Làm lại đề này
+                        <RotateCcw size={14} /> Làm lại đề này
                       </button>
                     )}
 
                     <button
+                      type="button"
                       onClick={() => setActiveExamDetail(null)}
-                      style={{
-                        padding: '8px 14px',
-                        background: '#faf8f5',
-                        color: '#57534e',
-                        border: '1px solid #d6d3d1',
-                        borderRadius: 8,
-                        fontWeight: 600,
-                        fontSize: 13,
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 4
-                      }}
+                      className="px-3.5 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-xl font-semibold text-xs flex items-center gap-1 border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
                     >
-                      <ChevronLeft size={15} /> Danh mục đề
+                      <ChevronLeft size={14} /> Danh mục đề
                     </button>
                   </div>
                 </div>
 
                 {/* FILE ÂM THANH OFFICIAL CHOUKAI AUDIO */}
-                <div style={{ marginTop: 12, paddingTop: 10, borderTop: '1px solid #f1f5f9' }}>
-                  <div style={{ fontSize: 11, fontWeight: 700, color: '#0d9488', marginBottom: 4, display: 'flex', alignItems: 'center', gap: 4 }}>
+                <div className="mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800">
+                  <div className="text-xs font-bold text-teal-600 dark:text-teal-400 mb-1 flex items-center gap-1">
                     <Headphones size={13} /> FILE GHI ÂM CHÍNH THỨC (CORODOMO JLPT CHOUKAI AUDIO):
                   </div>
-                  <audio src={activeExamDetail.audioUrl} controls style={{ width: '100%', height: 36, outline: 'none' }} />
+                  <audio src={activeExamDetail.audioUrl} controls className="w-full h-9 outline-none" />
                 </div>
               </div>
 
@@ -1123,37 +946,22 @@ export const LibraryPage: React.FC = () => {
             /* DANH MỤC 65 BỘ ĐỀ THI CHOUKAI CHÍNH THỨC */
             <div>
               {/* Thanh lọc & tìm kiếm Đề thi */}
-              <div style={{
-                background: '#ffffff',
-                borderRadius: 12,
-                border: '1px solid #ebe7df',
-                padding: '14px 18px',
-                marginBottom: 20,
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-                gap: 12
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                  <span style={{ fontSize: 12, fontWeight: 800, color: '#78716c' }}>
+              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-3.5 sm:p-4 mb-5 shadow-xs transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-xs font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-wide shrink-0">
                     BẬC JLPT:
                   </span>
-                  <div style={{ display: 'flex', gap: 6 }}>
+                  <div className="flex gap-1.5 flex-wrap">
                     {['ALL', 'N3', 'N2', 'N1'].map(lvl => (
                       <button
                         key={lvl}
+                        type="button"
                         onClick={() => setChoukaiLevel(lvl)}
-                        style={{
-                          padding: '5px 12px',
-                          borderRadius: 6,
-                          fontSize: 12,
-                          fontWeight: 700,
-                          cursor: 'pointer',
-                          border: choukaiLevel === lvl ? '1px solid #c53d32' : '1px solid #ebe7df',
-                          background: choukaiLevel === lvl ? '#c53d32' : '#faf8f5',
-                          color: choukaiLevel === lvl ? '#ffffff' : '#57534e'
-                        }}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          choukaiLevel === lvl
+                            ? 'bg-rose-600 text-white shadow-xs'
+                            : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                        }`}
                       >
                         {lvl === 'ALL' ? 'Tất cả' : lvl}
                       </button>
@@ -1161,22 +969,14 @@ export const LibraryPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ position: 'relative', width: 280, maxWidth: '100%' }}>
-                  <Search size={14} color="#78716c" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+                <div className="relative w-full sm:w-72">
+                  <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                   <input
                     type="text"
                     placeholder="Tìm năm thi, mã đề (vd: 2024, N3)..."
                     value={choukaiSearch}
                     onChange={e => setChoukaiSearch(e.target.value)}
-                    style={{
-                      width: '100%',
-                      padding: '7px 12px 7px 32px',
-                      borderRadius: 6,
-                      border: '1px solid #d6d3d1',
-                      fontSize: 12,
-                      outline: 'none',
-                      background: '#ffffff'
-                    }}
+                    className="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 text-xs outline-none focus:border-rose-500 transition-colors"
                   />
                 </div>
               </div>
@@ -1220,42 +1020,24 @@ export const LibraryPage: React.FC = () => {
                   {filteredChoukai.map(item => (
                     <div
                       key={item.id}
-                      style={{
-                        background: '#ffffff',
-                        borderRadius: 12,
-                        border: '1px solid #ebe7df',
-                        padding: '18px 20px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
-                        transition: 'transform 0.15s ease'
-                      }}
+                      className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 flex flex-col justify-between shadow-xs transition-colors"
                     >
                       <div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                          <span style={{
-                            background: '#fdf2f0',
-                            color: '#c53d32',
-                            border: '1px solid #f3d5d2',
-                            borderRadius: 4,
-                            padding: '2px 8px',
-                            fontSize: 11,
-                            fontWeight: 900
-                          }}>
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800 rounded px-2 py-0.5 text-[11px] font-extrabold">
                             {item.level}
                           </span>
-                          <span style={{ fontSize: 11, color: '#78716c' }}>
+                          <span className="text-xs text-slate-500 dark:text-slate-400">
                             Kỳ thi tháng {item.month}/{item.year}
                           </span>
                         </div>
 
-                        <h3 style={{ fontSize: 15, fontWeight: 800, color: '#1c2536', margin: '0 0 8px 0', lineHeight: 1.4 }}>
+                        <h3 className="text-sm font-extrabold text-slate-900 dark:text-white mb-2 leading-snug">
                           {item.label}
                         </h3>
 
-                        <div style={{ fontSize: 12, color: '#57534e', display: 'flex', flexDirection: 'column', gap: 4, marginBottom: 16 }}>
-                          <div>• Cấu trúc: <strong>5 Mondai</strong> câu hỏi chính quy</div>
+                        <div className="text-xs text-slate-600 dark:text-slate-400 flex flex-col gap-1 mb-4">
+                          <div>• Cấu trúc: <strong className="text-slate-900 dark:text-white">5 Mondai</strong> câu hỏi chính quy</div>
                           <div>• Thời lượng nghe: ~{item.durationMinutes} phút</div>
                           <div>• Dữ liệu: File audio chính thức & kịch bản đối chiếu</div>
                         </div>
@@ -1265,23 +1047,11 @@ export const LibraryPage: React.FC = () => {
                         type="button"
                         disabled={loadingExamId === item.id}
                         onClick={() => handleStartChoukaiExam(item.id)}
-                        style={{
-                          width: '100%',
-                          padding: '10px 16px',
-                          background: loadingExamId === item.id ? '#94a3b8' : '#c53d32',
-                          color: '#ffffff',
-                          border: 'none',
-                          borderRadius: 8,
-                          fontSize: 13,
-                          fontWeight: 800,
-                          cursor: loadingExamId === item.id ? 'not-allowed' : 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          gap: 8,
-                          boxShadow: '0 2px 6px rgba(197, 61, 50, 0.25)',
-                          transition: 'all 0.15s ease'
-                        }}
+                        className={`w-full py-2.5 px-4 rounded-xl text-xs font-extrabold border-none flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer ${
+                          loadingExamId === item.id
+                            ? 'bg-slate-400 dark:bg-slate-700 text-white cursor-not-allowed'
+                            : 'bg-rose-600 hover:bg-rose-700 text-white shadow-rose-600/20'
+                        }`}
                       >
                         {loadingExamId === item.id ? (
                           <>
@@ -1321,48 +1091,37 @@ export const LibraryPage: React.FC = () => {
           justifyContent: 'center',
           padding: 20
         }}>
-          <div style={{
-            background: '#ffffff',
-            borderRadius: 16,
-            maxWidth: 440,
-            width: '100%',
-            padding: '24px',
-            boxShadow: '0 20px 45px rgba(0, 0, 0, 0.25)',
-            border: '1px solid #ebe7df',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 16
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-              <div style={{ width: 44, height: 44, borderRadius: 12, background: '#fef2f2', border: '1px solid #fecaca', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <CheckCircle2 size={24} color="#dc2626" />
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-2xl bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-900/60 flex items-center justify-center shrink-0">
+                <CheckCircle2 size={22} className="text-rose-600 dark:text-rose-400" />
               </div>
               <div>
-                <h3 style={{ fontSize: 17, fontWeight: 800, color: '#1c2536', margin: 0 }}>
+                <h3 className="text-base font-extrabold text-slate-900 dark:text-white m-0">
                   Xác nhận nộp bài Choukai?
                 </h3>
-                <div style={{ fontSize: 12, color: '#78716c', marginTop: 2 }}>
+                <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                   Đã trả lời {Object.keys(userAnswers).length} câu hỏi
                 </div>
               </div>
             </div>
 
-            <p style={{ fontSize: 13, color: '#57534e', lineHeight: 1.5, margin: 0 }}>
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed m-0">
               Hệ thống sẽ tiến hành chấm điểm bài làm và hiển thị kịch bản nghe thoại chi tiết của từng câu hỏi để bạn đối chiếu.
             </p>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 4 }}>
+            <div className="flex justify-end gap-2.5 mt-2">
               <button
                 type="button"
                 onClick={() => setShowSubmitModal(false)}
-                style={{ padding: '8px 16px', background: '#ffffff', color: '#57534e', border: '1px solid #d6d3d1', borderRadius: 6, fontSize: 12, fontWeight: 700, cursor: 'pointer' }}
+                className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold cursor-pointer transition-colors"
               >
                 Làm tiếp
               </button>
               <button
                 type="button"
                 onClick={handleConfirmSubmitChoukai}
-                style={{ padding: '8px 20px', background: '#c53d32', color: '#ffffff', border: 'none', borderRadius: 6, fontSize: 12, fontWeight: 800, cursor: 'pointer' }}
+                className="px-5 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-extrabold cursor-pointer border-none shadow-xs transition-colors"
               >
                 Xác nhận nộp bài
               </button>
