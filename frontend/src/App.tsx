@@ -85,8 +85,18 @@ export default function App() {
     return () => window.removeEventListener('online', sync);
   }, [user?.id]);
 
-  // Đồng bộ quyền mới nhất từ Firestore khi mở ứng dụng (đảm bảo quyền mới sửa trên console ăn ngay)
+  // Đồng bộ quyền mới nhất từ Firestore khi mở ứng dụng và khởi tạo Google Auth
   useEffect(() => {
+    authService.initGoogleAuthNative();
+    authService.checkRedirectResult().then(redirected => {
+      if (redirected) {
+        setUser(redirected);
+        if (redirected.role === 'ROLE_ADMIN') {
+          setActiveTab('admin');
+        }
+      }
+    });
+
     const current = authService.getCurrentUser();
     if (current?.email) {
       authService.syncUserFromFirestore(current.email).then(synced => {

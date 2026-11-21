@@ -254,12 +254,12 @@ export const ApkDownloadModal: React.FC<ApkDownloadModalProps> = ({
                 <div>
                   <a
                     href={apkDownloadPath}
-                    download="kizuna-v1.0.7.apk"
+                    download="kizuna-v1.0.8.apk"
                     className="w-full flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 active:scale-[0.99] text-white font-extrabold text-sm sm:text-base shadow-lg shadow-emerald-600/25 transition-all text-center cursor-pointer"
                   >
                     <Download className="w-5 h-5" />
                     <span>Tải File Cài Đặt APK (.apk)</span>
-                    <span className="bg-white/20 text-xs px-2 py-0.5 rounded-md font-extrabold">v1.0.7</span>
+                    <span className="bg-white/20 text-xs px-2 py-0.5 rounded-md font-extrabold">v1.0.8</span>
                   </a>
                   <div className="text-center mt-2">
                     <span className="text-[11px] text-slate-500">
@@ -275,7 +275,7 @@ export const ApkDownloadModal: React.FC<ApkDownloadModalProps> = ({
                   </div>
                   <ol className="space-y-1.5 text-xs text-slate-600 list-decimal list-inside leading-relaxed">
                     <li>Bấm nút <strong>Tải File Cài Đặt APK</strong> hoặc quét mã QR ở trên.</li>
-                    <li>Mở file <code className="bg-slate-100 px-1 py-0.5 rounded text-slate-700 font-mono text-[11px]">kizuna-v1.0.7.apk</code> trong thông báo tải xong hoặc thư mục <em>Tải về (Downloads)</em>.</li>
+                    <li>Mở file <code className="bg-slate-100 px-1 py-0.5 rounded text-slate-700 font-mono text-[11px]">kizuna-v1.0.8.apk</code> trong thông báo tải xong hoặc thư mục <em>Tải về (Downloads)</em>.</li>
                     <li>Chọn <strong>Cài đặt</strong> (nếu máy hỏi, bật <em>"Cho phép cài đặt từ nguồn này"</em>) và bắt đầu học ngay.</li>
                   </ol>
                 </div>

@@ -4,4 +4,5 @@
     <string name="title_activity_main">KIZUNA</string>
     <string name="package_name">com.kizuna.app</string>
     <string name="custom_url_scheme">com.kizuna.app</string>
+    <string name="server_client_id">657175691442-eeqc6uhf4a8hl4m27oat1pmghk99df0b.apps.googleusercontent.com</string>
 </resources>

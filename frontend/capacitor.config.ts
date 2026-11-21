@@ -9,7 +9,14 @@ const config: CapacitorConfig = {
     cleartext: false,
     androidScheme: 'https'
   },
-  appendUserAgent: 'KIZUNA_APP'
+  appendUserAgent: 'KIZUNA_APP',
+  plugins: {
+    GoogleAuth: {
+      scopes: ['profile', 'email'],
+      serverClientId: '657175691442-eeqc6uhf4a8hl4m27oat1pmghk99df0b.apps.googleusercontent.com',
+      forceCodeForRefreshToken: true
+    }
+  }
 };
 
 export default config;

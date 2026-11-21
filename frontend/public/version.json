@@ -1,17 +1,17 @@
 {
-  "version": "1.0.7",
-  "versionCode": 107,
-  "releaseDate": "2026-11-17",
+  "version": "1.0.8",
+  "versionCode": 108,
+  "releaseDate": "2026-11-21",
   "apkUrl": "/download/kizuna-latest.apk",
-  "apkVersionUrl": "/download/kizuna-v1.0.7.apk",
-  "apkSize": "6.3 MB",
+  "apkVersionUrl": "/download/kizuna-v1.0.8.apk",
+  "apkSize": "4.9 MB",
   "pcAppUrl": "/download/KIZUNA-Setup.exe",
   "pcAppSize": "74 KB",
-  "title": "Bản cập nhật KIZUNA v1.0.7",
+  "title": "Bản cập nhật KIZUNA v1.0.8",
   "changelog": [
-    "Cung cấp gói cài đặt KIZUNA Desktop (.exe) trực tiếp cho máy tính Windows thay cho tệp giải nén batch.",
-    "Tự động tạo biểu tượng ngoài màn hình Desktop và Start Menu với giao diện cài đặt 1 cú nhấp chuột.",
-    "Đóng gói bản cập nhật APK mới nhất v1.0.7 tích hợp toàn bộ tính năng và giao diện hiện tại.",
-    "Cập nhật hệ thống kiểm tra và thông báo phiên bản trong ProfilePage."
+    "Khắc phục sự cố đăng nhập Google trên ứng dụng Android: tích hợp Google Sign-In Native trực tiếp trong app.",
+    "Không còn bị văng ra ngoài trình duyệt web hoặc treo màn hình khi xác thực tài khoản Google.",
+    "Hỗ trợ đồng bộ đăng nhập Google trên cả trình duyệt Web di động (Mobile Web) và ứng dụng máy tính.",
+    "Cải thiện độ ổn định và bảo mật kết nối Firebase Authentication."
   ]
 }

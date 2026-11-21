@@ -1,7 +1,9 @@
 import { User, Role, LoginCredentials, RegisterData } from '../types/auth';
 import { db, auth } from '../../config/firebase';
 import { doc, setDoc, updateDoc, collection, getDocs, getDoc, query, where, limit } from 'firebase/firestore';
-import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signInWithCredential, signInWithRedirect, getRedirectResult, signOut } from 'firebase/auth';
+import { Capacitor } from '@capacitor/core';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { emailService, OFFICIAL_SENDER_EMAIL } from './emailService';
 import { validateEmail, validatePassword } from '../utils/authValidation';
 
@@ -498,47 +500,27 @@ export const authService = {
   },
 
   /**
-   * Đăng nhập hoặc đăng ký nhanh bằng tài khoản Google (Firebase Authentication Popup)
-   * Tự động liên kết và đồng bộ hồ sơ, điểm số, XP, cấp độ với Firestore 'users'
+   * Khởi tạo GoogleAuth native nếu đang chạy trong môi trường Capacitor Native (Android / iOS)
    */
-  async loginWithGoogle(): Promise<{ user: User; token: string }> {
-    if (!auth) {
-      throw new Error('Hệ thống Firebase Authentication chưa được khởi tạo. Vui lòng kiểm tra lại cấu hình.');
+  initGoogleAuthNative() {
+    if (typeof window === 'undefined') return;
+    if (Capacitor.isNativePlatform() && Capacitor.isPluginAvailable('GoogleAuth')) {
+      try {
+        GoogleAuth.initialize({
+          clientId: '657175691442-eeqc6uhf4a8hl4m27oat1pmghk99df0b.apps.googleusercontent.com',
+          scopes: ['profile', 'email'],
+          grantOfflineAccess: true
+        });
+      } catch (err) {
+        console.warn('[GoogleAuth Native] Init warning:', err);
+      }
     }
+  },
 
-    const provider = new GoogleAuthProvider();
-    provider.setCustomParameters({
-      prompt: 'select_account'
-    });
-
-    let fbUser: any = null;
-    try {
-      const result = await signInWithPopup(auth, provider);
-      fbUser = result.user;
-    } catch (authErr: any) {
-      console.warn('[Firebase Auth Google] Error:', authErr);
-      const code = authErr?.code || '';
-      if (code === 'auth/configuration-not-found') {
-        throw new Error('Dịch vụ Authentication hoặc phương thức Google chưa được bật trên Firebase Console (Lỗi: auth/configuration-not-found). Vui lòng vào Firebase Console > Authentication > Sign-in method và bật Google.');
-      }
-      if (code === 'auth/popup-closed-by-user') {
-        throw new Error('Bạn đã đóng cửa sổ đăng nhập Google trước khi hoàn tất.');
-      }
-      if (code === 'auth/popup-blocked') {
-        throw new Error('Trình duyệt đã chặn cửa sổ Popup. Vui lòng cho phép popup để đăng nhập bằng Google.');
-      }
-      if (code === 'auth/cancelled-popup-request') {
-        throw new Error('Yêu cầu đăng nhập đã bị hủy.');
-      }
-      if (code === 'auth/unauthorized-domain') {
-        throw new Error('Tên miền hiện tại chưa được cấp quyền trên Firebase Auth console (Authorized Domains). Vui lòng thêm tên miền vào Firebase Console > Authentication > Settings.');
-      }
-      if (code === 'auth/operation-not-allowed') {
-        throw new Error('Phương thức đăng nhập Google chưa được kích hoạt trên Firebase.');
-      }
-      throw new Error(authErr?.message || 'Đăng nhập Google thất bại. Vui lòng thử lại.');
-    }
-
+  /**
+   * Đồng bộ và quản lý phiên làm việc người dùng Firebase với Firestore
+   */
+  async handleFirebaseUser(fbUser: any): Promise<{ user: User; token: string }> {
     if (!fbUser || !fbUser.email) {
       throw new Error('Không thể lấy thông tin email từ tài khoản Google của bạn.');
     }
@@ -555,14 +537,12 @@ export const authService = {
     if (db) {
       try {
         const usersRef = collection(db, 'users');
-        // Thử tìm theo email
         const qEmail = query(usersRef, where('email', '==', emailClean), limit(1));
         const snapEmail = await getDocs(qEmail);
         if (!snapEmail.empty) {
           matchedDoc = snapEmail.docs[0].data();
           matchedDocId = snapEmail.docs[0].id;
         } else {
-          // Thử tìm theo UID
           try {
             const directDoc = await getDoc(doc(db, 'users', fbUser.uid));
             if (directDoc.exists()) {
@@ -677,8 +657,112 @@ export const authService = {
     return { user: appUser, token };
   },
 
+  /**
+   * Đăng nhập hoặc đăng ký nhanh bằng tài khoản Google
+   * - Trên ứng dụng di động (Android APK / Capacitor): Sử dụng native Google Play Services dialog trực tiếp trong app
+   * - Trên trình duyệt Web máy tính / điện thoại: Sử dụng Firebase Popup / Redirect
+   */
+  async loginWithGoogle(): Promise<{ user: User; token: string }> {
+    if (!auth) {
+      throw new Error('Hệ thống Firebase Authentication chưa được khởi tạo. Vui lòng kiểm tra lại cấu hình.');
+    }
+
+    // 1. Nếu đang chạy trong Native App (Capacitor Android / iOS)
+    if (Capacitor.isNativePlatform()) {
+      if (Capacitor.isPluginAvailable('GoogleAuth')) {
+        try {
+          this.initGoogleAuthNative();
+          const googleUser = await GoogleAuth.signIn();
+          const idToken = googleUser.authentication?.idToken || (googleUser as any).idToken;
+          if (!idToken) {
+            throw new Error('Không thể nhận diện mã xác thực Google từ ứng dụng.');
+          }
+          const credential = GoogleAuthProvider.credential(idToken);
+          const result = await signInWithCredential(auth, credential);
+          return await this.handleFirebaseUser(result.user);
+        } catch (nativeErr: any) {
+          console.warn('[GoogleAuth Native] Error:', nativeErr);
+          const msg = nativeErr?.message || '';
+          if (msg.includes('12501') || msg.includes('cancelled') || nativeErr?.code === '12501') {
+            throw new Error('Bạn đã hủy thao tác đăng nhập Google.');
+          }
+          if (msg.includes('10') || msg.includes('DEVELOPER_ERROR')) {
+            throw new Error('Cấu hình xác thực Google trên Android chưa khớp SHA-1 hoặc Client ID.');
+          }
+          throw new Error(msg || 'Đăng nhập Google trên ứng dụng di động thất bại. Vui lòng thử lại.');
+        }
+      } else {
+        throw new Error('Phiên bản APK trên máy bạn chưa hỗ trợ Google Sign-In trực tiếp. Vui lòng cập nhật bản APK mới nhất hoặc đăng nhập bằng Email / Mật khẩu.');
+      }
+    }
+
+    // 2. Chạy trên trình duyệt Web (Desktop / Mobile Web)
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({
+      prompt: 'select_account'
+    });
+
+    let fbUser: any = null;
+    try {
+      const result = await signInWithPopup(auth, provider);
+      fbUser = result.user;
+    } catch (authErr: any) {
+      console.warn('[Firebase Auth Google] Error:', authErr);
+      const code = authErr?.code || '';
+      if (code === 'auth/configuration-not-found') {
+        throw new Error('Dịch vụ Authentication hoặc phương thức Google chưa được bật trên Firebase Console (Lỗi: auth/configuration-not-found). Vui lòng vào Firebase Console > Authentication > Sign-in method và bật Google.');
+      }
+      if (code === 'auth/popup-closed-by-user') {
+        throw new Error('Bạn đã đóng cửa sổ đăng nhập Google trước khi hoàn tất.');
+      }
+      if (code === 'auth/popup-blocked') {
+        // Nếu trình duyệt di động chặn popup, thử dùng signInWithRedirect
+        try {
+          await signInWithRedirect(auth, provider);
+          return new Promise(() => {}); // Chờ điều hướng
+        } catch (redirErr: any) {
+          throw new Error('Trình duyệt đã chặn cửa sổ Popup. Vui lòng cho phép popup để đăng nhập bằng Google.');
+        }
+      }
+      if (code === 'auth/cancelled-popup-request') {
+        throw new Error('Yêu cầu đăng nhập đã bị hủy.');
+      }
+      if (code === 'auth/unauthorized-domain') {
+        throw new Error('Tên miền hiện tại chưa được cấp quyền trên Firebase Auth console (Authorized Domains). Vui lòng thêm tên miền vào Firebase Console > Authentication > Settings.');
+      }
+      if (code === 'auth/operation-not-allowed') {
+        throw new Error('Phương thức đăng nhập Google chưa được kích hoạt trên Firebase.');
+      }
+      throw new Error(authErr?.message || 'Đăng nhập Google thất bại. Vui lòng thử lại.');
+    }
+
+    return await this.handleFirebaseUser(fbUser);
+  },
+
+  /**
+   * Kiểm tra kết quả redirect đăng nhập Google (dành cho Web Mobile nếu dùng signInWithRedirect)
+   */
+  async checkRedirectResult(): Promise<User | null> {
+    if (!auth || Capacitor.isNativePlatform()) return null;
+    try {
+      const result = await getRedirectResult(auth);
+      if (result && result.user) {
+        const { user } = await this.handleFirebaseUser(result.user);
+        return user;
+      }
+    } catch (err) {
+      console.warn('[Firebase Auth Redirect] Error checking redirect result:', err);
+    }
+    return null;
+  },
+
   logout() {
     this.clearSession();
+    if (Capacitor.isNativePlatform() && Capacitor.isPluginAvailable('GoogleAuth')) {
+      try {
+        GoogleAuth.signOut().catch(() => {});
+      } catch {}
+    }
     if (auth) {
       signOut(auth).catch(() => {});
     }

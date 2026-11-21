@@ -130,6 +130,28 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
     return () => clearTimeout(timer);
   }, [resendCooldown]);
 
+  // Kiểm tra nếu người dùng vừa quay về từ màn hình xác thực Google Redirect (Web Mobile)
+  useEffect(() => {
+    let isMounted = true;
+    authService.checkRedirectResult().then(user => {
+      if (isMounted && user) {
+        const isAdmin = user.role === 'ROLE_ADMIN';
+        setSuccessMsg(isAdmin 
+          ? 'Đăng nhập Google thành công! Đang chuyển đến trang quản trị...'
+          : 'Đăng nhập Google thành công! Đang chuyển đến trang chủ...'
+        );
+        setTimeout(() => {
+          onLoginSuccess(user);
+        }, 500);
+      }
+    }).catch(err => {
+      if (isMounted) {
+        console.warn('[LoginPage] checkRedirectResult error:', err);
+      }
+    });
+    return () => { isMounted = false; };
+  }, [onLoginSuccess]);
+
   // Handle Login with Email
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
