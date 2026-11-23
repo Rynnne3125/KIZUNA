@@ -237,17 +237,17 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
   const quotaDanger = quotaPct >= 85;
 
   return (
-    <div className="space-y-6 pb-12">
+    <div className="space-y-5 sm:space-y-6 pb-8">
       {/* HEADER + SUB-TAB NAVIGATION */}
-      <div className="rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-5 sm:p-6 shadow-xs">
+      <div className="rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-4 sm:p-6 shadow-xs">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div>
+          <div className="min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
-              <Bot className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
-              <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
+              <Bot className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600 dark:text-emerald-400 shrink-0" />
+              <h2 className="text-lg sm:text-2xl font-extrabold text-slate-900 dark:text-white leading-tight">
                 Trung Tâm Giám Sát & Kiểm Duyệt AI
               </h2>
-              <Badge variant="outline" className="border-emerald-200 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300 font-mono text-xs">
+              <Badge variant="outline" className="border-emerald-200 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300 font-mono text-[11px] sm:text-xs">
                 {monitor?.model || cfgModel}
               </Badge>
             </div>
@@ -256,31 +256,35 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
             </p>
           </div>
 
-          <div className="flex items-center gap-2 flex-wrap">
-            <div className="inline-flex rounded-xl bg-slate-100 dark:bg-slate-800 p-1">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full lg:w-auto shrink-0">
+            <div className="grid grid-cols-3 sm:inline-flex w-full sm:w-auto rounded-xl bg-slate-100 dark:bg-slate-800 p-1 gap-1">
               <button
                 type="button"
                 onClick={() => setSubTab('monitor')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 ${
+                className={`px-2 sm:px-3 py-2 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-1 sm:gap-1.5 ${
                   subTab === 'monitor'
                     ? 'bg-white dark:bg-slate-900 text-emerald-700 dark:text-emerald-400 shadow-xs'
                     : 'text-slate-600 dark:text-slate-400'
                 }`}
               >
-                <Gauge className="w-3.5 h-3.5" /> Giám sát AI Xếp Lớp
+                <Gauge className="w-3.5 h-3.5 shrink-0" />
+                <span className="sm:hidden truncate">Giám sát</span>
+                <span className="hidden sm:inline">Giám sát AI Xếp Lớp</span>
               </button>
               <button
                 type="button"
                 onClick={() => setSubTab('audits')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 ${
+                className={`px-2 sm:px-3 py-2 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-1 sm:gap-1.5 ${
                   subTab === 'audits'
                     ? 'bg-white dark:bg-slate-900 text-emerald-700 dark:text-emerald-400 shadow-xs'
                     : 'text-slate-600 dark:text-slate-400'
                 }`}
               >
-                <ShieldAlert className="w-3.5 h-3.5" /> Khiếu nại AI
+                <ShieldAlert className="w-3.5 h-3.5 shrink-0" />
+                <span className="sm:hidden truncate">Khiếu nại</span>
+                <span className="hidden sm:inline">Khiếu nại AI</span>
                 {pendingAuditsCount > 0 && (
-                  <span className="ml-1 px-1.5 py-0.2 rounded-full bg-rose-600 text-white text-[10px]">
+                  <span className="px-1.5 py-0.5 rounded-full bg-rose-600 text-white text-[10px] leading-none">
                     {pendingAuditsCount}
                   </span>
                 )}
@@ -288,13 +292,15 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
               <button
                 type="button"
                 onClick={() => setSubTab('config')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 ${
+                className={`px-2 sm:px-3 py-2 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-1 sm:gap-1.5 ${
                   subTab === 'config'
                     ? 'bg-white dark:bg-slate-900 text-emerald-700 dark:text-emerald-400 shadow-xs'
                     : 'text-slate-600 dark:text-slate-400'
                 }`}
               >
-                <Sliders className="w-3.5 h-3.5" /> Cấu hình AI
+                <Sliders className="w-3.5 h-3.5 shrink-0" />
+                <span className="sm:hidden truncate">Cấu hình</span>
+                <span className="hidden sm:inline">Cấu hình AI</span>
               </button>
             </div>
 
@@ -304,7 +310,7 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
               size="sm"
               onClick={handleRefresh}
               disabled={refreshing}
-              className="rounded-xl cursor-pointer"
+              className="rounded-xl cursor-pointer w-full sm:w-auto h-9"
             >
               <RefreshCw className={`w-3.5 h-3.5 mr-1.5 ${refreshing ? 'animate-spin' : ''}`} />
               Làm mới
@@ -317,40 +323,40 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
           SUB-TAB 1: AI PLACEMENT MONITOR (P0)
       ==================================================================== */}
       {subTab === 'monitor' && (
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5">
           {/* DAILY QUOTA & BUDGET MONITOR WIDGET */}
-          <div className="col-span-12 lg:col-span-6 rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-5 sm:p-6 shadow-xs flex flex-col justify-between">
+          <div className="lg:col-span-6 rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-4 sm:p-6 shadow-xs flex flex-col justify-between min-w-0">
             <div>
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <div className="flex items-center gap-2">
-                  <div className="p-2 rounded-xl bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400">
+              <div className="flex items-start sm:items-center justify-between gap-2 mb-3 flex-wrap">
+                <div className="flex items-start sm:items-center gap-2.5 min-w-0">
+                  <div className="p-2 rounded-xl bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 shrink-0">
                     <Cpu className="w-5 h-5" />
                   </div>
-                  <div>
-                    <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
+                  <div className="min-w-0">
+                    <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white leading-snug">
                       Hạn Mức & Ngân Sách Gemini Hôm Nay
                     </h3>
-                    <p className="text-xs text-slate-500">
-                      Ngày UTC: {monitor?.budgetDate || new Date().toISOString().slice(0, 10)} • Timeout {monitor?.timeoutSeconds ?? 5}s • Đồng thời {monitor?.inFlightActive ?? 0}/{monitor?.inFlightMax ?? 2}
+                    <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5">
+                      UTC: {monitor?.budgetDate || new Date().toISOString().slice(0, 10)} • Timeout {monitor?.timeoutSeconds ?? 5}s • Đồng thời {monitor?.inFlightActive ?? 0}/{monitor?.inFlightMax ?? 2}
                     </p>
                   </div>
                 </div>
                 <Badge
                   variant="outline"
-                  className={
+                  className={`shrink-0 ${
                     quotaDanger
                       ? 'border-rose-300 bg-rose-50 text-rose-700'
                       : 'border-emerald-300 bg-emerald-50 text-emerald-700'
-                  }
+                  }`}
                 >
                   {quotaPct}% đã dùng
                 </Badge>
               </div>
 
-              <div className="flex items-baseline justify-between mt-4 mb-2">
-                <div className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">
+              <div className="flex flex-wrap items-baseline justify-between gap-2 mt-4 mb-2">
+                <div className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white">
                   {callsToday}
-                  <span className="text-lg font-bold text-slate-400"> / {dailyLimit} lượt</span>
+                  <span className="text-sm sm:text-lg font-bold text-slate-400"> / {dailyLimit} lượt</span>
                 </div>
                 <div className="text-xs font-bold text-emerald-700 dark:text-emerald-400">
                   Còn lại: {Math.max(0, dailyLimit - callsToday)} lượt
@@ -369,22 +375,22 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-3 mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 text-center">
-              <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50">
-                <div className="text-[11px] font-semibold text-slate-400">Lỗi chạm trần 429</div>
-                <div className={`text-lg font-black ${(monitor?.rateLimitErrors429Count || 0) > 0 ? 'text-rose-600' : 'text-slate-800 dark:text-white'}`}>
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 text-center">
+              <div className="p-2 sm:p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 min-w-0">
+                <div className="text-[10px] sm:text-[11px] font-semibold text-slate-400 leading-tight">Lỗi 429</div>
+                <div className={`text-base sm:text-lg font-black mt-0.5 ${(monitor?.rateLimitErrors429Count || 0) > 0 ? 'text-rose-600' : 'text-slate-800 dark:text-white'}`}>
                   {monitor?.rateLimitErrors429Count ?? 0}
                 </div>
               </div>
-              <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50">
-                <div className="text-[11px] font-semibold text-slate-400">Tỷ lệ thành công</div>
-                <div className="text-lg font-black text-emerald-600">
+              <div className="p-2 sm:p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 min-w-0">
+                <div className="text-[10px] sm:text-[11px] font-semibold text-slate-400 leading-tight">Thành công</div>
+                <div className="text-base sm:text-lg font-black text-emerald-600 mt-0.5">
                   {monitor?.successRatePercent ?? 100}%
                 </div>
               </div>
-              <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50">
-                <div className="text-[11px] font-semibold text-slate-400">Fallback cục bộ</div>
-                <div className="text-lg font-black text-amber-600">
+              <div className="p-2 sm:p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 min-w-0">
+                <div className="text-[10px] sm:text-[11px] font-semibold text-slate-400 leading-tight">Fallback</div>
+                <div className="text-base sm:text-lg font-black text-amber-600 mt-0.5">
                   {monitor?.fallbackOrErrorCount ?? 0}
                 </div>
               </div>
@@ -392,40 +398,43 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
           </div>
 
           {/* AVERAGE LATENCY & PLACEMENT SUMMARY KPI */}
-          <div className="col-span-12 lg:col-span-6 rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-5 sm:p-6 shadow-xs flex flex-col justify-between">
-            <div className="flex items-center justify-between gap-2 mb-3">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-indigo-100 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-400">
+          <div className="lg:col-span-6 rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-4 sm:p-6 shadow-xs flex flex-col justify-between min-w-0">
+            <div className="flex items-start sm:items-center justify-between gap-2 mb-3">
+              <div className="flex items-start sm:items-center gap-2.5 min-w-0">
+                <div className="p-2 rounded-xl bg-indigo-100 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-400 shrink-0">
                   <Clock className="w-5 h-5" />
                 </div>
-                <div>
-                  <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
+                <div className="min-w-0">
+                  <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white leading-snug">
                     Độ Trễ Phản Hồi Gemini (`latencyMs`)
                   </h3>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5">
                     Đo từ lúc gọi API xếp lớp đến khi trả về cột mốc đề xuất (giới hạn 5.000 ms)
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-3 my-3">
-              <div className="p-3 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/50">
-                <div className="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 uppercase">Trung bình</div>
-                <div className="text-2xl font-black text-slate-900 dark:text-white mt-0.5">
-                  {monitor?.averageLatencyMs ?? 0} <span className="text-xs font-semibold text-slate-400">ms</span>
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 my-3">
+              <div className="p-2.5 sm:p-3 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/50 min-w-0">
+                <div className="text-[10px] sm:text-[11px] font-bold text-indigo-600 dark:text-indigo-400 uppercase truncate">Trung bình</div>
+                <div className="text-lg sm:text-2xl font-black text-slate-900 dark:text-white mt-0.5 leading-tight">
+                  {monitor?.averageLatencyMs ?? 0}{' '}
+                  <span className="text-[10px] sm:text-xs font-semibold text-slate-400 block sm:inline">ms</span>
                 </div>
               </div>
-              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
-                <div className="text-[11px] font-bold text-slate-400 uppercase">Đã xếp lớp</div>
-                <div className="text-2xl font-black text-emerald-600 mt-0.5">
-                  {monitor?.totalPlacedUsers ?? 0} <span className="text-xs font-semibold text-slate-400">HV</span>
+              <div className="p-2.5 sm:p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 min-w-0">
+                <div className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase truncate">Đã xếp lớp</div>
+                <div className="text-lg sm:text-2xl font-black text-emerald-600 mt-0.5 leading-tight">
+                  {monitor?.totalPlacedUsers ?? 0}{' '}
+                  <span className="text-[10px] sm:text-xs font-semibold text-slate-400 block sm:inline">HV</span>
                 </div>
               </div>
-              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
-                <div className="text-[11px] font-bold text-slate-400 uppercase">Có AI hỗ trợ</div>
-                <div className="text-2xl font-black text-amber-600 mt-0.5">
-                  {monitor?.aiAssistedPlacements ?? 0} <span className="text-xs font-semibold text-slate-400">phiên</span>
+              <div className="p-2.5 sm:p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 min-w-0">
+                <div className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase truncate">AI hỗ trợ</div>
+                <div className="text-lg sm:text-2xl font-black text-amber-600 mt-0.5 leading-tight">
+                  {monitor?.aiAssistedPlacements ?? 0}{' '}
+                  <span className="text-[10px] sm:text-xs font-semibold text-slate-400 block sm:inline">phiên</span>
                 </div>
               </div>
             </div>
@@ -453,22 +462,22 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
           </div>
 
           {/* CONFIDENCE DISTRIBUTION (HIGH / MODERATE / LOW) */}
-          <div className="col-span-12 lg:col-span-5 rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-5 sm:p-6 shadow-xs">
-            <h3 className="text-base font-extrabold text-slate-900 dark:text-white mb-1">
+          <div className="lg:col-span-5 rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-4 sm:p-6 shadow-xs min-w-0">
+            <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white mb-1">
               Phân Bố Độ Tin Cậy AI (`confidence`)
             </h3>
             <p className="text-xs text-slate-500 mb-4">
               Đánh giá mức độ chắc chắn của Gemini khi gợi ý cột mốc xuất phát cho học viên
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-6">
+            <div className="flex flex-col sm:flex-row items-center gap-5 sm:gap-6">
               <DonutChart
                 data={confidenceChartData}
                 category="value"
                 index="name"
                 colors={['emerald', 'amber', 'rose']}
                 showAnimation={false}
-                className="w-40 h-40 shrink-0"
+                className="w-36 h-36 sm:w-40 sm:h-40 shrink-0"
               />
               <div className="flex-1 w-full space-y-3">
                 {[
@@ -495,9 +504,9 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
                   const pct = totalConfidenceSamples > 0 ? Math.round((val / totalConfidenceSamples) * 100) : 0;
                   return (
                     <div key={row.key}>
-                      <div className="flex justify-between text-xs font-bold mb-1">
-                        <span className="text-slate-700 dark:text-slate-300">{row.label}</span>
-                        <span className={row.text}>
+                      <div className="flex justify-between text-xs font-bold mb-1 gap-2">
+                        <span className="text-slate-700 dark:text-slate-300 truncate">{row.label}</span>
+                        <span className={`${row.text} shrink-0`}>
                           {val} ({pct}%)
                         </span>
                       </div>
@@ -512,15 +521,15 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
           </div>
 
           {/* LEVEL & STAGE PLACEMENT DISTRIBUTION */}
-          <div className="col-span-12 lg:col-span-7 rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-5 sm:p-6 shadow-xs">
-            <h3 className="text-base font-extrabold text-slate-900 dark:text-white mb-1">
+          <div className="lg:col-span-7 rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-4 sm:p-6 shadow-xs min-w-0">
+            <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white mb-1">
               Phân Bổ Điều Hướng Sau Bài Test (JLPT & Chặng)
             </h3>
             <p className="text-xs text-slate-500 mb-4">
               Tỷ lệ học viên được AI điều hướng vào các cấp độ N5 – N1 và các chặng học phổ biến nhất
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
               <div>
                 <div className="text-xs font-bold uppercase text-slate-400 mb-2">Theo cấp độ JLPT</div>
                 <BarList data={levelBarData} color="emerald" />
@@ -538,21 +547,89 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
             </div>
           </div>
 
-          {/* RECENT AI TELEMETRY EVENTS TABLE */}
-          <div className="col-span-12 rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-5 sm:p-6 shadow-xs">
-            <div className="flex items-center justify-between mb-4">
+          {/* RECENT AI TELEMETRY EVENTS TABLE / MOBILE CARDS */}
+          <div className="lg:col-span-12 rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-4 sm:p-6 shadow-xs min-w-0">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
               <div>
-                <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
+                <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">
                   Lịch Sử Phiên Gọi AI Gần Đây
                 </h3>
                 <p className="text-xs text-slate-500">
                   Ghi nhận trực tiếp các lượt gọi AI Placement & AI Sensei (model, độ tin cậy, cột mốc, độ trễ)
                 </p>
               </div>
-              <Badge variant="secondary">{monitor?.recentEvents?.length || 0} phiên gần nhất</Badge>
+              <Badge variant="secondary" className="self-start sm:self-auto shrink-0">
+                {monitor?.recentEvents?.length || 0} phiên gần nhất
+              </Badge>
             </div>
 
-            <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
+            {/* Mobile-First Card List */}
+            <div className="block md:hidden space-y-2.5">
+              {(monitor?.recentEvents || []).slice(0, 12).map(evt => (
+                <div
+                  key={evt.id}
+                  className="p-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/30 space-y-2"
+                >
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <Badge variant="outline" className="text-[10px]">
+                        {evt.type === 'SENSEI' ? 'AI Sensei' : 'AI Placement'}
+                      </Badge>
+                      <Badge
+                        variant="outline"
+                        className={`text-[10px] ${
+                          evt.confidence === 'HIGH'
+                            ? 'border-emerald-300 bg-emerald-50 text-emerald-700'
+                            : evt.confidence === 'MODERATE'
+                            ? 'border-amber-300 bg-amber-50 text-amber-700'
+                            : 'border-slate-200 text-slate-600'
+                        }`}
+                      >
+                        {evt.confidence || 'N/A'}
+                      </Badge>
+                    </div>
+                    <Badge
+                      className={`text-[10px] ${
+                        evt.status === 'SUCCESS'
+                          ? 'bg-emerald-100 text-emerald-800 border-emerald-200'
+                          : evt.status === 'RATE_LIMITED'
+                          ? 'bg-rose-100 text-rose-800 border-rose-200'
+                          : 'bg-amber-100 text-amber-800 border-amber-200'
+                      }`}
+                    >
+                      {evt.status}
+                    </Badge>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-2 text-xs">
+                    <div className="min-w-0 truncate">
+                      <span className="font-bold text-slate-800 dark:text-slate-100">{evt.milestoneId || '—'}</span>
+                      {evt.assignedLevel && (
+                        <span className="ml-1.5 text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold">
+                          {evt.assignedLevel}
+                        </span>
+                      )}
+                    </div>
+                    <span className="font-bold text-indigo-600 dark:text-indigo-400 shrink-0">{evt.latencyMs} ms</span>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-2 text-[11px] text-slate-500 pt-1.5 border-t border-slate-200/70 dark:border-slate-700/60">
+                    <span className="font-mono truncate">{evt.model}</span>
+                    <span className="shrink-0">
+                      {evt.timestamp ? new Date(evt.timestamp).toLocaleString('vi-VN') : 'N/A'}
+                    </span>
+                  </div>
+                </div>
+              ))}
+              {(!monitor?.recentEvents || monitor.recentEvents.length === 0) && (
+                <div className="text-center py-8 px-4 text-xs text-slate-500 rounded-2xl border border-dashed border-slate-200 dark:border-slate-700">
+                  Chưa ghi nhận phiên gọi AI nào. Dữ liệu sẽ xuất hiện ngay khi học viên thực hiện bài test Xếp lớp hoặc Quest 4 AI Sensei.
+                </div>
+              )}
+            </div>
+
+            {/* Desktop Table */}
+            <div className="hidden md:block overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
               <Table className="min-w-[680px]">
                 <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
                   <TableRow>
@@ -635,32 +712,32 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
           SUB-TAB 2: HUMAN-IN-THE-LOOP AUDIT QUEUE & PROMPT SANDBOX
       ==================================================================== */}
       {subTab === 'audits' && (
-        <div className="space-y-6">
+        <div className="space-y-5 sm:space-y-6">
           {/* AUDIT QUEUE */}
-          <div className="rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-5 sm:p-6 shadow-xs space-y-5">
+          <div className="rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-4 sm:p-6 shadow-xs space-y-5">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h3 className="text-lg font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-                  <ShieldAlert className="w-5 h-5 text-rose-600" />
-                  Hàng Đợi Phúc Khảo Khiếu Nại AI (Human-in-the-loop)
+                <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                  <ShieldAlert className="w-5 h-5 text-rose-600 shrink-0" />
+                  Hàng Đợi Phúc Khảo Khiếu Nại AI
                 </h3>
                 <p className="text-xs text-slate-500 mt-0.5">
                   Nhận khiếu nại trực tiếp từ Quest 4 (AI Sensei) của học viên. Phê duyệt sẽ tự động hoàn Điểm Năng Động (AP).
                 </p>
               </div>
-              <div className="inline-flex rounded-xl bg-slate-100 dark:bg-slate-800 p-1">
+              <div className="grid grid-cols-3 sm:inline-flex w-full sm:w-auto rounded-xl bg-slate-100 dark:bg-slate-800 p-1 gap-1 shrink-0">
                 {(
                   [
                     { id: 'ALL', label: `Tất cả (${audits.length})` },
-                    { id: 'PENDING', label: `Chờ duyệt (${pendingAuditsCount})` },
-                    { id: 'RESOLVED', label: `Đã xử lý (${audits.length - pendingAuditsCount})` }
+                    { id: 'PENDING', label: `Chờ (${pendingAuditsCount})` },
+                    { id: 'RESOLVED', label: `Xong (${audits.length - pendingAuditsCount})` }
                   ] as const
                 ).map(tab => (
                   <button
                     key={tab.id}
                     type="button"
                     onClick={() => setAuditFilter(tab.id)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer ${
+                    className={`px-2 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-bold cursor-pointer text-center truncate ${
                       auditFilter === tab.id
                         ? 'bg-white dark:bg-slate-900 text-emerald-700 dark:text-emerald-400 shadow-xs'
                         : 'text-slate-600 dark:text-slate-400'
@@ -686,7 +763,7 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
             )}
 
             {filteredAudits.length === 0 ? (
-              <div className="py-10 text-center rounded-2xl border border-dashed border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/20">
+              <div className="py-10 px-4 text-center rounded-2xl border border-dashed border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/20">
                 <CheckCircle className="w-10 h-10 text-emerald-500 mx-auto mb-2.5" />
                 <div className="text-sm font-bold text-slate-800 dark:text-white">
                   Không có khiếu nại AI nào trong danh mục này
@@ -707,12 +784,12 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
                   return (
                     <div
                       key={audit.id}
-                      className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/40 dark:bg-slate-800/30 space-y-4"
+                      className="p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/40 dark:bg-slate-800/30 space-y-4"
                     >
                       <div className="flex flex-col md:flex-row justify-between md:items-center gap-3">
-                        <div>
+                        <div className="min-w-0">
                           <div className="flex items-center gap-2 flex-wrap">
-                            <h4 className="font-extrabold text-base text-slate-900 dark:text-white">
+                            <h4 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">
                               {audit.milestoneTitle || audit.milestoneId || 'Bài viết AI Sensei'}
                             </h4>
                             <Badge
@@ -733,18 +810,18 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
                           </p>
                         </div>
 
-                        <div className="flex items-center gap-3 bg-white dark:bg-slate-900 px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 shrink-0">
+                        <div className="flex items-center gap-3 bg-white dark:bg-slate-900 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 self-start md:self-auto shrink-0">
                           <span className="text-xs font-bold text-slate-500">Điểm AI</span>
-                          <span className="text-2xl font-black text-rose-600">{audit.aiScore ?? 0}/10</span>
+                          <span className="text-xl sm:text-2xl font-black text-rose-600">{audit.aiScore ?? 0}/10</span>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white dark:bg-slate-900 p-3.5 sm:p-4 rounded-xl border border-slate-100 dark:border-slate-800">
                         <div className="space-y-2">
                           <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
                             Câu viết của học viên
                           </div>
-                          <div className="text-sm font-bold text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-800/60 p-3 rounded-lg">
+                          <div className="text-sm font-bold text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-800/60 p-3 rounded-lg break-words">
                             "{audit.userSubmission || audit.studentInput}"
                           </div>
                           {audit.promptText && (
@@ -786,7 +863,7 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
                                 onChange={e =>
                                   setBonusByAudit(prev => ({ ...prev, [audit.id]: Math.max(0, Number(e.target.value)) }))
                                 }
-                                className="h-9 text-xs bg-white dark:bg-slate-900"
+                                className="h-10 sm:h-9 text-xs bg-white dark:bg-slate-900"
                               />
                             </div>
                             <div className="sm:col-span-2 space-y-1">
@@ -797,18 +874,18 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
                                   setNoteByAudit(prev => ({ ...prev, [audit.id]: e.target.value }))
                                 }
                                 placeholder="VD: Câu tự nhiên theo văn nói Nhật, chấp nhận hoàn điểm..."
-                                className="h-9 text-xs bg-white dark:bg-slate-900"
+                                className="h-10 sm:h-9 text-xs bg-white dark:bg-slate-900"
                               />
                             </div>
                           </div>
 
-                          <div className="flex items-center gap-2 shrink-0">
+                          <div className="grid grid-cols-2 sm:flex items-center gap-2 shrink-0 w-full md:w-auto">
                             <Button
                               type="button"
                               variant="outline"
                               disabled={isBusy}
                               onClick={() => handleResolveAudit(audit, 'REJECT')}
-                              className="border-slate-300 text-slate-700 hover:bg-slate-100 rounded-xl cursor-pointer"
+                              className="border-slate-300 text-slate-700 hover:bg-slate-100 rounded-xl cursor-pointer h-10 sm:h-9 text-xs w-full sm:w-auto"
                             >
                               <XCircle className="w-4 h-4 mr-1.5" /> Từ chối
                             </Button>
@@ -816,10 +893,10 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
                               type="button"
                               disabled={isBusy}
                               onClick={() => handleResolveAudit(audit, 'APPROVE')}
-                              className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl cursor-pointer"
+                              className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl cursor-pointer h-10 sm:h-9 text-xs w-full sm:w-auto"
                             >
                               <CheckCircle className="w-4 h-4 mr-1.5" />
-                              {isBusy ? 'Đang xử lý...' : `Phê duyệt (+${bonusVal} AP)`}
+                              {isBusy ? 'Đang xử lý...' : `Duyệt (+${bonusVal} AP)`}
                             </Button>
                           </div>
                         </div>
@@ -840,10 +917,10 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
           </div>
 
           {/* AI SENSEI PROMPT SANDBOX */}
-          <div className="rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-5 sm:p-6 shadow-xs space-y-4">
+          <div className="rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-4 sm:p-6 shadow-xs space-y-4">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-amber-500" />
-              <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
+              <Sparkles className="w-5 h-5 text-amber-500 shrink-0" />
+              <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">
                 AI Sensei Whitelist Sandbox (Kiểm thử chấm bài trực tiếp)
               </h3>
             </div>
@@ -869,7 +946,7 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
                   value={sandboxInput}
                   onChange={e => setSandboxInput(e.target.value)}
                   placeholder="Nhập câu tiếng Nhật..."
-                  className="rounded-xl"
+                  className="rounded-xl h-10"
                 />
               </div>
               <div className="md:col-span-2 flex items-end">
@@ -916,10 +993,10 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
           SUB-TAB 3: DYNAMIC AI CONFIGURATION
       ==================================================================== */}
       {subTab === 'config' && (
-        <div className="rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-5 sm:p-6 shadow-xs max-w-3xl">
+        <div className="rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-emerald-100/70 dark:border-slate-800 p-4 sm:p-6 shadow-xs max-w-3xl">
           <div className="mb-5">
-            <h3 className="text-lg font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-              <Sliders className="w-5 h-5 text-emerald-600" />
+            <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+              <Sliders className="w-5 h-5 text-emerald-600 shrink-0" />
               Cấu Hình Tham Số Gemini & AI Sensei Động
             </h3>
             <p className="text-xs text-slate-500 mt-1">
@@ -935,7 +1012,7 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
                   : 'bg-rose-50 text-rose-800 border-rose-200'
               }`}
             >
-              {configMsg.type === 'success' ? <CheckCircle2 className="w-4 h-4" /> : <AlertTriangle className="w-4 h-4" />}
+              {configMsg.type === 'success' ? <CheckCircle2 className="w-4 h-4 shrink-0" /> : <AlertTriangle className="w-4 h-4 shrink-0" />}
               <span>{configMsg.msg}</span>
             </div>
           )}
@@ -966,7 +1043,7 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
                   value={cfgModel}
                   onChange={e => setCfgModel(e.target.value)}
                   placeholder="gemini-3.5-flash-lite"
-                  className="font-mono text-xs"
+                  className="font-mono text-xs h-10"
                   required
                 />
               </div>
@@ -981,6 +1058,7 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
                   max={100000}
                   value={cfgDailyLimit}
                   onChange={e => setCfgDailyLimit(Number(e.target.value))}
+                  className="h-10"
                   required
                 />
                 <p className="text-[11px] text-slate-400">Đặt 0 để tạm khóa gọi Gemini API (tự động dùng Fallback cục bộ).</p>
@@ -994,18 +1072,19 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
                   max={30}
                   value={cfgTimeout}
                   onChange={e => setCfgTimeout(Number(e.target.value))}
+                  className="h-10"
                   required
                 />
                 <p className="text-[11px] text-slate-400">Khuyến nghị: 5 giây để đảm bảo trải nghiệm mượt trên di động.</p>
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/40 flex items-center justify-between gap-4">
+            <div className="p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/40 flex items-start sm:items-center justify-between gap-3">
               <div>
-                <div className="text-sm font-bold text-slate-800 dark:text-white">
+                <div className="text-xs sm:text-sm font-bold text-slate-800 dark:text-white">
                   Bật tính năng AI Sensei chấm viết câu tại Quest 4
                 </div>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5">
                   Khi bật, Quest 4 ở giao diện học viên sẽ gọi Gemini API kèm Whitelist từ vựng & ngữ pháp của mốc để chấm bài.
                 </p>
               </div>
@@ -1034,8 +1113,8 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
               />
             </div>
 
-            <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800">
-              <div className="text-[11px] text-slate-400">
+            <div className="flex flex-col-reverse sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+              <div className="text-[11px] text-slate-400 text-center sm:text-left">
                 {aiConfig?.updatedAt
                   ? `Cập nhật lần cuối bởi ${aiConfig.updatedBy || 'Admin'} lúc ${new Date(aiConfig.updatedAt).toLocaleString('vi-VN')}`
                   : 'Cấu hình mặc định hệ thống'}
@@ -1043,7 +1122,7 @@ export const AiGovernancePanel: React.FC<AiGovernancePanelProps> = ({
               <Button
                 type="submit"
                 disabled={savingConfig}
-                className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl cursor-pointer"
+                className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl cursor-pointer w-full sm:w-auto h-10"
               >
                 <Save className="w-4 h-4 mr-1.5" />
                 {savingConfig ? 'Đang lưu...' : 'Lưu Cấu Hình AI'}

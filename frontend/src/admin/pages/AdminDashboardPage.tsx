@@ -318,7 +318,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
     const dailyLimit = placementMonitor?.dailyLimit ?? aiConfig?.dailyLimit ?? 100;
 
     return (
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 pb-12">
+      <div className="grid grid-cols-12 gap-4 sm:gap-6 pb-8">
         {/* ROW 1: HERO WELCOME BANNER (FULL WIDTH 12 COLS) */}
         <BentoBox colSpan="col-span-12" className="bg-gradient-to-br from-emerald-500/10 via-emerald-50/20 to-transparent dark:from-emerald-950/30">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -550,16 +550,16 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                       </ul>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-1.5 shrink-0">
+                    <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-1.5 w-full lg:w-auto shrink-0">
                       <Button
                         type="button"
                         size="sm"
                         variant="outline"
                         disabled={antiCheatBusyId !== null || item.currentStreak === 0}
                         onClick={() => handleQuickAntiCheatAction(item, 'RESET_STREAK')}
-                        className="h-8 text-xs border-amber-300 text-amber-700 hover:bg-amber-50 rounded-lg cursor-pointer"
+                        className="h-9 sm:h-8 text-xs border-amber-300 text-amber-700 hover:bg-amber-50 rounded-lg cursor-pointer justify-center"
                       >
-                        <Flame className="w-3.5 h-3.5 mr-1" /> Reset Streak
+                        <Flame className="w-3.5 h-3.5 mr-1 shrink-0" /> Reset Streak
                       </Button>
                       <Button
                         type="button"
@@ -567,9 +567,9 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                         variant="outline"
                         disabled={antiCheatBusyId !== null || item.activePoints === 0}
                         onClick={() => handleQuickAntiCheatAction(item, 'DEDUCT_AP')}
-                        className="h-8 text-xs border-rose-300 text-rose-700 hover:bg-rose-50 rounded-lg cursor-pointer"
+                        className="h-9 sm:h-8 text-xs border-rose-300 text-rose-700 hover:bg-rose-50 rounded-lg cursor-pointer justify-center"
                       >
-                        <Zap className="w-3.5 h-3.5 mr-1" /> -500 AP
+                        <Zap className="w-3.5 h-3.5 mr-1 shrink-0" /> -500 AP
                       </Button>
                       <Button
                         type="button"
@@ -577,9 +577,9 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                         variant="outline"
                         disabled={antiCheatBusyId !== null || !item.enabled}
                         onClick={() => handleQuickAntiCheatAction(item, 'BAN')}
-                        className="h-8 text-xs border-rose-400 bg-rose-600 text-white hover:bg-rose-700 rounded-lg cursor-pointer"
+                        className="h-9 sm:h-8 text-xs border-rose-400 bg-rose-600 text-white hover:bg-rose-700 rounded-lg cursor-pointer justify-center"
                       >
-                        <Ban className="w-3.5 h-3.5 mr-1" /> {item.enabled ? 'Khóa' : 'Đã khóa'}
+                        <Ban className="w-3.5 h-3.5 mr-1 shrink-0" /> {item.enabled ? 'Khóa' : 'Đã khóa'}
                       </Button>
                       {targetUser && (
                         <Button
@@ -587,7 +587,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                           size="sm"
                           variant="ghost"
                           onClick={() => setSelectedUser(targetUser)}
-                          className="h-8 text-xs text-slate-600 hover:text-slate-900 rounded-lg cursor-pointer"
+                          className="h-9 sm:h-8 text-xs text-slate-600 hover:text-slate-900 rounded-lg cursor-pointer justify-center border border-slate-200 sm:border-transparent dark:border-slate-700"
                         >
                           Thanh tra
                         </Button>
@@ -659,15 +659,15 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
   const renderUsers = () => (
     <BentoBox colSpan="col-span-12">
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-5 sm:mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-slate-800 dark:text-white">Quản lý người dùng</h2>
-          <p className="text-slate-500 dark:text-slate-400">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-white">Quản lý người dùng</h2>
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
             Quản lý danh sách học viên ({filteredUsers.length}/{users.length}), phân quyền RBAC, chống gian lận và hồ sơ học tập.
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto">
-          <div className="relative flex-1 sm:flex-none">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 sm:gap-2.5 w-full lg:w-auto">
+          <div className="relative col-span-2 sm:flex-none">
             <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
             <Input
               placeholder="Tìm tên, email..."
@@ -680,17 +680,17 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
           <select
             value={roleFilter}
             onChange={e => setRoleFilter(e.target.value as 'ALL' | 'ROLE_ADMIN' | 'ROLE_USER')}
-            className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200"
+            className="h-10 px-2.5 sm:px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 w-full sm:w-auto"
           >
             <option value="ALL">Mọi vai trò</option>
-            <option value="ROLE_USER">Học viên (ROLE_USER)</option>
-            <option value="ROLE_ADMIN">Quản trị (ROLE_ADMIN)</option>
+            <option value="ROLE_USER">Học viên</option>
+            <option value="ROLE_ADMIN">Quản trị</option>
           </select>
 
           <select
             value={statusFilter}
             onChange={e => setStatusFilter(e.target.value as 'ALL' | 'ACTIVE' | 'BANNED')}
-            className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200"
+            className="h-10 px-2.5 sm:px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 w-full sm:w-auto"
           >
             <option value="ALL">Mọi trạng thái</option>
             <option value="ACTIVE">Đang hoạt động</option>
@@ -699,15 +699,79 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
           <Button
             onClick={() => setIsCreateUserOpen(true)}
-            className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer"
+            className="col-span-2 sm:col-span-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer h-10"
           >
             <UserPlus className="w-4 h-4 mr-1.5" />
             Thêm người dùng
           </Button>
         </div>
       </div>
-      
-      <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
+
+      {/* MOBILE-FIRST CARD LIST (< md) */}
+      <div className="block md:hidden space-y-3">
+        {filteredUsers.map(u => {
+          const isBanned = u.status === 'BANNED' || u.enabled === false;
+          return (
+            <div
+              key={u.id}
+              onClick={() => setSelectedUser(u)}
+              className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 active:scale-[0.99] transition-all cursor-pointer space-y-3"
+            >
+              <div className="flex items-start justify-between gap-2.5">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center font-bold shrink-0 shadow-xs">
+                    {(u.fullName || u.username || 'U').charAt(0).toUpperCase()}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="font-bold text-sm text-slate-900 dark:text-white truncate">
+                      {u.fullName || u.username || 'Người dùng ẩn danh'}
+                    </div>
+                    <div className="text-xs text-slate-500 dark:text-slate-400 truncate">
+                      {u.email || 'Không có email'}
+                    </div>
+                  </div>
+                </div>
+                <Badge
+                  variant="outline"
+                  className={`shrink-0 text-[10px] ${
+                    u.role === 'ROLE_ADMIN'
+                      ? 'border-red-200 bg-red-50 text-red-700 dark:bg-red-500/10 dark:text-red-400'
+                      : 'border-slate-200 bg-white text-slate-600 dark:bg-slate-900 dark:text-slate-400'
+                  }`}
+                >
+                  {u.role === 'ROLE_ADMIN' ? 'ADMIN' : 'USER'}
+                </Badge>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-200/70 dark:border-slate-700/70 text-xs">
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <span className="font-bold text-slate-700 dark:text-slate-200">{u.level || 'Tân binh'}</span>
+                  <span className="text-slate-400">•</span>
+                  <span className="text-slate-600 dark:text-slate-300">{(u.totalXp || 0).toLocaleString()} XP</span>
+                  <span className="inline-flex items-center gap-0.5 font-bold text-orange-600">
+                    <Flame className="w-3.5 h-3.5" /> {u.currentStreak || 0}d
+                  </span>
+                  <span className="inline-flex items-center gap-0.5 font-bold text-emerald-600">
+                    <Zap className="w-3.5 h-3.5" /> {(u.activePoints || 0).toLocaleString()} AP
+                  </span>
+                </div>
+                <span className={`inline-flex items-center gap-1 font-bold ${!isBanned ? 'text-emerald-600' : 'text-rose-600'}`}>
+                  <span className={`w-2 h-2 rounded-full ${!isBanned ? 'bg-emerald-500' : 'bg-rose-500'}`} />
+                  {!isBanned ? 'Hoạt động' : 'Bị khóa'}
+                </span>
+              </div>
+            </div>
+          );
+        })}
+        {filteredUsers.length === 0 && (
+          <div className="text-center py-8 text-xs text-slate-500 border border-dashed border-slate-200 dark:border-slate-700 rounded-2xl">
+            Không tìm thấy người dùng nào phù hợp bộ lọc
+          </div>
+        )}
+      </div>
+
+      {/* DESKTOP TABLE (>= md) */}
+      <div className="hidden md:block overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
         <Table className="min-w-[700px]">
           <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
             <TableRow className="border-slate-100 dark:border-slate-800">
@@ -962,16 +1026,16 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
     return (
       <BentoBox colSpan="col-span-12">
-        <div className="mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+        <div className="mb-5 sm:mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
           <div>
-            <h2 className="text-2xl font-bold text-slate-800 dark:text-white">Quản lý Cột mốc (Milestones)</h2>
-            <p className="text-slate-500 dark:text-slate-400">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-white">Quản lý Cột mốc (Milestones)</h2>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
               Cấu hình bài học, Bật/Tắt hiển thị, Cân bằng Gameplay, Whitelist và 4 Quests ({filteredMilestones.length}/{milestones.length} mốc)
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto">
-            <div className="relative flex-1 sm:flex-none">
+          <div className="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-2 sm:gap-2.5 w-full lg:w-auto">
+            <div className="relative w-full sm:w-auto">
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
               <Input
                 placeholder="Tìm tiêu đề, ID mốc..."
@@ -984,7 +1048,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
             <select
               value={milestoneStageFilter}
               onChange={e => setMilestoneStageFilter(e.target.value)}
-              className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200"
+              className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 w-full sm:w-auto"
             >
               <option value="ALL">Tất cả Chặng ({stages.length})</option>
               {stages.map(s => (
@@ -999,14 +1063,81 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                 setEditingMilestone(null);
                 setIsMilestoneDrawerOpen(true);
               }}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer h-10 w-full sm:w-auto"
             >
               <Plus className="w-4 h-4 mr-1.5" /> Thêm Cột mốc
             </Button>
           </div>
         </div>
 
-        <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
+        {/* MOBILE-FIRST CARD LIST (< md) */}
+        <div className="block md:hidden space-y-3">
+          {filteredMilestones.map(m => {
+            const isActive = m.isActive !== false && m.active !== false;
+            return (
+              <div
+                key={m.id}
+                onClick={() => {
+                  setEditingMilestone(m);
+                  setIsMilestoneDrawerOpen(true);
+                }}
+                className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 space-y-2.5 cursor-pointer"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <div className="font-bold text-sm text-slate-900 dark:text-white leading-snug">
+                      {m.title || `Cột mốc ${m.order_index || m.orderIndex}`}
+                    </div>
+                    <div className="text-[11px] text-slate-400 font-mono mt-0.5 truncate">
+                      {m.id} • {m.stage_id || m.stageId}
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={e => {
+                      e.stopPropagation();
+                      void handleToggleMilestoneActive(m);
+                    }}
+                    className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold shrink-0 cursor-pointer ${
+                      isActive
+                        ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                        : 'bg-slate-100 text-slate-500 border border-slate-200'
+                    }`}
+                  >
+                    {isActive ? <Eye className="w-3 h-3" /> : <EyeOff className="w-3 h-3" />}
+                    {isActive ? 'Bật' : 'Ẩn'}
+                  </button>
+                </div>
+
+                {m.communicationContext && (
+                  <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">{m.communicationContext}</p>
+                )}
+
+                <div className="flex items-center justify-between gap-2 pt-2 border-t border-slate-200/60 dark:border-slate-700/60">
+                  <div className="flex items-center gap-1.5">
+                    <Badge variant="outline" className="text-[10px] border-orange-200 text-orange-600 bg-orange-50">
+                      {m.xpReward ?? 50} XP
+                    </Badge>
+                    <Badge variant="outline" className="text-[10px] border-emerald-200 text-emerald-700 bg-emerald-50">
+                      {m.activePointsReward ?? 70} AP
+                    </Badge>
+                  </div>
+                  <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-1">
+                    <Settings className="w-3.5 h-3.5" /> Cấu hình
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+          {filteredMilestones.length === 0 && (
+            <div className="text-center py-8 text-xs text-slate-500 border border-dashed border-slate-200 dark:border-slate-700 rounded-2xl">
+              Không tìm thấy cột mốc nào phù hợp
+            </div>
+          )}
+        </div>
+
+        {/* DESKTOP TABLE (>= md) */}
+        <div className="hidden md:block overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
           <Table className="min-w-[700px]">
             <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
               <TableRow>
@@ -1202,16 +1333,16 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
     return (
       <BentoBox colSpan="col-span-12">
-        <div className="mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+        <div className="mb-5 sm:mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
           <div>
-            <h2 className="text-2xl font-bold text-slate-800 dark:text-white">Kho Từ vựng</h2>
-            <p className="text-slate-500 dark:text-slate-400">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-white">Kho Từ vựng</h2>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
               Quản lý từ vựng, kanji, nghĩa tiếng Việt ({filtered.length}/{vocabulary.length} từ)
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto">
-            <div className="relative flex-1 sm:flex-none">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 sm:gap-2.5 w-full lg:w-auto">
+            <div className="relative col-span-2 sm:flex-none">
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
               <Input
                 placeholder="Tìm từ vựng, kana, nghĩa..."
@@ -1230,7 +1361,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                 setVocabLevelFilter(e.target.value);
                 setVocabPage(1);
               }}
-              className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200"
+              className="col-span-2 sm:col-span-1 h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 w-full sm:w-auto"
             >
               <option value="ALL">Mọi cấp độ (N5-N1)</option>
               <option value="N5">JLPT N5</option>
@@ -1246,7 +1377,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                 setBulkCsvKind('vocabulary');
                 setBulkCsvOpen(true);
               }}
-              className="rounded-xl border-emerald-200 text-emerald-700 hover:bg-emerald-50 dark:border-emerald-800 dark:text-emerald-300 cursor-pointer"
+              className="rounded-xl border-emerald-200 text-emerald-700 hover:bg-emerald-50 dark:border-emerald-800 dark:text-emerald-300 cursor-pointer h-10"
             >
               <Upload className="w-4 h-4 mr-1.5" /> Nhập CSV
             </Button>
@@ -1254,7 +1385,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
             <Button
               variant="outline"
               onClick={() => exportItemsToCsv('vocabulary', filtered)}
-              className="rounded-xl cursor-pointer"
+              className="rounded-xl cursor-pointer h-10"
               title="Xuất danh sách từ vựng đang lọc ra file CSV"
             >
               <Download className="w-4 h-4 mr-1.5" /> Xuất CSV
@@ -1262,14 +1393,55 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
             <Button
               onClick={() => openContentModal('vocabulary', null)}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer"
+              className="col-span-2 sm:col-span-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer h-10"
             >
               <Plus className="w-4 h-4 mr-1.5" /> Thêm từ mới
             </Button>
           </div>
         </div>
 
-        <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
+        {/* MOBILE-FIRST CARD LIST (< md) */}
+        <div className="block md:hidden space-y-2.5">
+          {pagedItems.map(v => (
+            <div
+              key={v.id}
+              onClick={() => openContentModal('vocabulary', v)}
+              className="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 cursor-pointer space-y-1.5"
+            >
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <div className="font-extrabold text-base text-slate-900 dark:text-white truncate">
+                    {v.term || v.kanji}
+                  </div>
+                  <div className="text-xs text-emerald-700 dark:text-emerald-400 font-medium">
+                    {v.reading || v.kana}
+                  </div>
+                </div>
+                <div className="flex items-center gap-1 shrink-0">
+                  {(v.level || v.jlptLevel) && (
+                    <Badge variant="outline" className="text-[10px] border-red-200 text-red-600 bg-red-50">
+                      {v.level || v.jlptLevel}
+                    </Badge>
+                  )}
+                  <Badge variant="secondary" className="text-[10px] bg-blue-50 text-blue-600">
+                    {v.wordType || 'N/A'}
+                  </Badge>
+                </div>
+              </div>
+              <div className="text-xs text-slate-600 dark:text-slate-300 line-clamp-2">
+                {v.vietnameseMeaning || v.meaning}
+              </div>
+            </div>
+          ))}
+          {pagedItems.length === 0 && (
+            <div className="text-center py-8 text-xs text-slate-500 border border-dashed border-slate-200 dark:border-slate-700 rounded-2xl">
+              Không tìm thấy từ vựng nào phù hợp
+            </div>
+          )}
+        </div>
+
+        {/* DESKTOP TABLE (>= md) */}
+        <div className="hidden md:block overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
           <Table className="min-w-[700px]">
             <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
               <TableRow>
@@ -1355,16 +1527,16 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
     return (
       <BentoBox colSpan="col-span-12">
-        <div className="mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+        <div className="mb-5 sm:mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
           <div>
-            <h2 className="text-2xl font-bold text-slate-800 dark:text-white">Ngữ pháp</h2>
-            <p className="text-slate-500 dark:text-slate-400">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-white">Ngữ pháp</h2>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
               Quản lý cấu trúc ngữ pháp ({filtered.length}/{grammar.length} mẫu câu)
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto">
-            <div className="relative flex-1 sm:flex-none">
+          <div className="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-2 sm:gap-2.5 w-full lg:w-auto">
+            <div className="relative w-full sm:w-auto">
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
               <Input
                 placeholder="Tìm mẫu câu, ý nghĩa..."
@@ -1383,7 +1555,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                 setGrammarLevelFilter(e.target.value);
                 setGrammarPage(1);
               }}
-              className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200"
+              className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 w-full sm:w-auto"
             >
               <option value="ALL">Mọi cấp độ (N5-N1)</option>
               <option value="N5">JLPT N5</option>
@@ -1395,14 +1567,44 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
             <Button
               onClick={() => openContentModal('grammar', null)}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer h-10 w-full sm:w-auto"
             >
               <Plus className="w-4 h-4 mr-1.5" /> Thêm ngữ pháp
             </Button>
           </div>
         </div>
 
-        <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
+        {/* MOBILE-FIRST CARD LIST (< md) */}
+        <div className="block md:hidden space-y-2.5">
+          {pagedItems.map(g => (
+            <div
+              key={g.id}
+              onClick={() => openContentModal('grammar', g)}
+              className="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 cursor-pointer space-y-1.5"
+            >
+              <div className="flex items-start justify-between gap-2">
+                <div className="font-bold text-sm text-slate-900 dark:text-white leading-snug">
+                  {g.pattern || g.title}
+                </div>
+                <Badge variant="outline" className="text-[10px] shrink-0 border-purple-200 text-purple-600 bg-purple-50">
+                  {g.level || g.jlptLevel || 'N/A'}
+                </Badge>
+              </div>
+              <div className="text-xs text-slate-600 dark:text-slate-300 line-clamp-2">
+                {g.titleVi || g.meaning || g.explanation}
+              </div>
+              <div className="text-[10px] font-mono text-slate-400">ID: {g.id}</div>
+            </div>
+          ))}
+          {pagedItems.length === 0 && (
+            <div className="text-center py-8 text-xs text-slate-500 border border-dashed border-slate-200 dark:border-slate-700 rounded-2xl">
+              Không tìm thấy cấu trúc ngữ pháp nào phù hợp
+            </div>
+          )}
+        </div>
+
+        {/* DESKTOP TABLE (>= md) */}
+        <div className="hidden md:block overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
           <Table className="min-w-[700px]">
             <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
               <TableRow>
@@ -1478,16 +1680,16 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
     return (
       <BentoBox colSpan="col-span-12">
-        <div className="mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+        <div className="mb-5 sm:mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
           <div>
-            <h2 className="text-2xl font-bold text-slate-800 dark:text-white">Đề thi JLPT</h2>
-            <p className="text-slate-500 dark:text-slate-400">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-white">Đề thi JLPT</h2>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
               Quản lý kho đề thi ({filtered.length}/{exams.length} đề)
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto">
-            <div className="relative flex-1 sm:flex-none">
+          <div className="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-2 sm:gap-2.5 w-full lg:w-auto">
+            <div className="relative w-full sm:w-auto">
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
               <Input
                 placeholder="Tìm tên hoặc mã đề thi..."
@@ -1506,7 +1708,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                 setExamLevelFilter(e.target.value);
                 setExamPage(1);
               }}
-              className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200"
+              className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 w-full sm:w-auto"
             >
               <option value="ALL">Mọi cấp độ (N5-N1)</option>
               <option value="N5">JLPT N5</option>
@@ -1518,13 +1720,52 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
             <Button
               onClick={() => openContentModal('exam', null)}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer h-10 w-full sm:w-auto"
             >
               <Plus className="w-4 h-4 mr-1.5" /> Thêm Đề thi
             </Button>
           </div>
         </div>
-        <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
+
+        {/* MOBILE-FIRST CARD LIST (< md) */}
+        <div className="block md:hidden space-y-2.5">
+          {pagedItems.map(e => (
+            <div
+              key={e.id}
+              onClick={() => openContentModal('exam', e)}
+              className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 cursor-pointer space-y-2"
+            >
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <div className="font-bold text-sm text-slate-900 dark:text-white truncate">
+                    {e.label || e.title || e.id}
+                  </div>
+                  <div className="text-[11px] font-mono text-slate-400">
+                    {e.id} {e.year ? `• Kỳ ${e.month || 7}/${e.year}` : ''}
+                  </div>
+                </div>
+                <Badge className="bg-red-50 text-red-600 border border-red-200 shrink-0 text-[10px]">
+                  {e.level || 'N/A'}
+                </Badge>
+              </div>
+              <div className="flex items-center justify-between text-xs text-slate-600 dark:text-slate-300 pt-2 border-t border-slate-200/60 dark:border-slate-700/60">
+                <span>⏱ {e.durationMinutes ? `${e.durationMinutes} phút` : 'N/A'}</span>
+                <span className="font-semibold">
+                  {e.totalQuestions || e.questionCount || 0} câu
+                  {e.explanationCount !== undefined ? ` (${e.explanationCount} giải thích)` : ''}
+                </span>
+              </div>
+            </div>
+          ))}
+          {pagedItems.length === 0 && (
+            <div className="text-center py-8 text-xs text-slate-500 border border-dashed border-slate-200 dark:border-slate-700 rounded-2xl">
+              Không tìm thấy đề thi nào phù hợp
+            </div>
+          )}
+        </div>
+
+        {/* DESKTOP TABLE (>= md) */}
+        <div className="hidden md:block overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
           <Table className="min-w-[700px]">
             <TableHeader className="bg-slate-50 dark:bg-slate-800/50">
               <TableRow>
@@ -1626,8 +1867,8 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto">
-            <div className="relative flex-1 sm:flex-none">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 sm:gap-2.5 w-full lg:w-auto">
+            <div className="relative col-span-2 sm:flex-none">
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
               <Input
                 placeholder="Tìm Hán tự, âm Hán Việt, nghĩa..."
@@ -1646,7 +1887,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                 setKanjiLevelFilter(e.target.value);
                 setKanjiPage(1);
               }}
-              className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200"
+              className="col-span-2 sm:col-span-1 h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 w-full sm:w-auto"
             >
               <option value="ALL">Mọi cấp độ (N5-N1)</option>
               <option value="N5">JLPT N5</option>
@@ -1662,7 +1903,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                 setBulkCsvKind('kanji');
                 setBulkCsvOpen(true);
               }}
-              className="rounded-xl border-emerald-200 text-emerald-700 hover:bg-emerald-50 dark:border-emerald-800 dark:text-emerald-300 cursor-pointer"
+              className="rounded-xl border-emerald-200 text-emerald-700 hover:bg-emerald-50 dark:border-emerald-800 dark:text-emerald-300 cursor-pointer h-10"
             >
               <Upload className="w-4 h-4 mr-1.5" /> Nhập CSV
             </Button>
@@ -1670,7 +1911,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
             <Button
               variant="outline"
               onClick={() => exportItemsToCsv('kanji', filtered)}
-              className="rounded-xl cursor-pointer"
+              className="rounded-xl cursor-pointer h-10"
               title="Xuất danh sách Kanji đang lọc ra file CSV"
             >
               <Download className="w-4 h-4 mr-1.5" /> Xuất CSV
@@ -1678,7 +1919,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
 
             <Button
               onClick={() => openContentModal('kanji', null)}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer"
+              className="col-span-2 sm:col-span-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-xs shadow-emerald-600/20 cursor-pointer h-10"
             >
               <Plus className="w-4 h-4 mr-1.5" /> Thêm Kanji
             </Button>
@@ -1755,7 +1996,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
       .slice(0, 6);
 
     return (
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 pb-12 w-full min-w-0">
+      <div className="grid grid-cols-12 gap-4 sm:gap-6 pb-8 w-full min-w-0">
         <BentoBox colSpan="col-span-12 sm:col-span-4 md:col-span-4">
           <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Tổng XP toàn hệ thống</div>
           <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-800 dark:text-white truncate">{totalXpSystem.toLocaleString()} XP</div>
@@ -1895,7 +2136,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
     const maxReached = Math.max(1, ...(analytics?.funnelSteps.map(s => s.reachedCount) || [1]));
 
     return (
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 pb-12 w-full min-w-0">
+      <div className="grid grid-cols-12 gap-4 sm:gap-6 pb-8 w-full min-w-0">
         {/* KPI SUMMARY CARDS */}
         <BentoBox colSpan="col-span-12 sm:col-span-4 md:col-span-4">
           <div className="flex items-center justify-between mb-2">
@@ -2696,8 +2937,8 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
           </div>
         </header>
 
-        {/* SCROLLABLE PAGE CONTENT */}
-        <main className="flex-1 overflow-y-auto overflow-x-hidden px-3 sm:px-6 md:px-8 pb-12 w-full min-w-0">
+        {/* SCROLLABLE PAGE CONTENT (extra bottom padding on mobile for sticky bottom nav) */}
+        <main className="flex-1 overflow-y-auto overflow-x-hidden px-3 sm:px-6 md:px-8 pt-4 sm:pt-6 pb-24 lg:pb-12 w-full min-w-0">
           {loading ? (
             <div className="h-full flex items-center justify-center">
               <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: "linear" }} className="w-10 h-10 border-4 border-slate-200 dark:border-slate-800 border-t-red-500 rounded-full" />
@@ -2732,6 +2973,51 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
             </div>
           )}
         </main>
+
+        {/* MOBILE-FIRST STICKY BOTTOM NAVIGATION BAR (< lg) */}
+        <nav
+          aria-label="Điều hướng nhanh quản trị"
+          className="lg:hidden fixed bottom-0 inset-x-0 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-emerald-100 dark:border-slate-800 px-2 py-1.5 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]"
+        >
+          <div className="grid grid-cols-5 gap-1 max-w-lg mx-auto">
+            {[
+              { id: 'overview', icon: LayoutDashboard, label: 'Tổng quan' },
+              { id: 'users', icon: Users, label: 'Học viên' },
+              { id: 'audits', icon: Bot, label: 'Giám sát AI', badge: stats?.pendingAiAudits || 0 },
+              { id: 'milestones', icon: Layers, label: 'Cột mốc' },
+              { id: '__menu__', icon: Menu, label: 'Thêm' }
+            ].map(tab => {
+              const Icon = tab.icon;
+              const isTabActive = tab.id !== '__menu__' && activeMenu === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => {
+                    if (tab.id === '__menu__') {
+                      setIsMobileMenuOpen(true);
+                    } else {
+                      setActiveMenu(tab.id);
+                    }
+                  }}
+                  className={`relative flex flex-col items-center justify-center py-1.5 rounded-xl transition-colors cursor-pointer ${
+                    isTabActive
+                      ? 'text-emerald-700 dark:text-emerald-400 bg-emerald-50/80 dark:bg-emerald-950/50 font-bold'
+                      : 'text-slate-500 dark:text-slate-400 hover:text-emerald-600 font-medium'
+                  }`}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span className="text-[10px] mt-0.5 truncate max-w-full px-0.5">{tab.label}</span>
+                  {'badge' in tab && (tab.badge ?? 0) > 0 && (
+                    <span className="absolute top-1 right-2.5 min-w-[16px] h-4 px-1 rounded-full bg-rose-600 text-white text-[9px] font-extrabold flex items-center justify-center">
+                      {tab.badge}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </nav>
       </div>
 
       {/* DRAWER QUẢN TRỊ CHI TIẾT USER, RBAC, ANTI-CHEAT & HỒ SƠ HỌC TẬP */}

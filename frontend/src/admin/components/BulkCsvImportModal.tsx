@@ -203,30 +203,30 @@ export const BulkCsvImportModal: React.FC<BulkCsvImportModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 backdrop-blur-xs p-4">
-      <div className="w-full max-w-3xl bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-slate-950/60 backdrop-blur-xs p-0 sm:p-4">
+      <div className="w-full max-w-3xl bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/70 dark:bg-slate-800/40 shrink-0">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-sm">
+        <div className="px-4 sm:px-6 py-3.5 sm:py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 bg-slate-50/70 dark:bg-slate-800/40 shrink-0">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-sm shrink-0">
               <FileSpreadsheet className="w-5 h-5" />
             </div>
-            <div>
-              <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
+            <div className="min-w-0">
+              <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white truncate">
                 Nhập Hàng Loạt {isVocab ? 'Từ Vựng' : 'Chữ Hán (Kanji)'} qua CSV
               </h3>
-              <p className="text-xs text-slate-500">
-                Tải file mẫu UTF-8, điền danh sách bằng Excel/Google Sheets và tải lên 1 lần duy nhất
+              <p className="text-[11px] sm:text-xs text-slate-500 truncate">
+                Tải file mẫu UTF-8, điền danh sách bằng Excel/Google Sheets và tải lên 1 lần
               </p>
             </div>
           </div>
-          <button onClick={onClose} className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 cursor-pointer">
+          <button onClick={onClose} className="p-2 rounded-lg text-slate-400 hover:text-slate-700 cursor-pointer shrink-0">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Body */}
-        <div className="p-6 space-y-4 overflow-y-auto flex-1">
+        <div className="p-4 sm:p-6 space-y-4 overflow-y-auto flex-1">
           {error && (
             <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold flex items-center gap-2">
               <AlertCircle className="w-4 h-4 shrink-0" />
@@ -242,20 +242,20 @@ export const BulkCsvImportModal: React.FC<BulkCsvImportModalProps> = ({
 
           {/* Step 1 & 2 Controls */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40 flex flex-col justify-between gap-3">
+            <div className="p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40 flex flex-col justify-between gap-3">
               <div>
                 <div className="text-xs font-bold text-slate-800 dark:text-white">Bước 1: Tải file mẫu CSV chuẩn</div>
                 <p className="text-[11px] text-slate-500 mt-0.5">
                   File đã gắn sẵn UTF-8 BOM, mở trực tiếp bằng Excel không bị lỗi phông chữ Nhật/Việt.
                 </p>
               </div>
-              <Button type="button" variant="outline" onClick={handleDownloadTemplate} className="w-full rounded-xl cursor-pointer">
+              <Button type="button" variant="outline" onClick={handleDownloadTemplate} className="w-full h-10 rounded-xl cursor-pointer">
                 <Download className="w-4 h-4 mr-1.5 text-emerald-600" />
-                Tải file mẫu {isVocab ? 'Vocabulary' : 'Kanji'}.csv
+                Tải mẫu {isVocab ? 'Vocabulary' : 'Kanji'}.csv
               </Button>
             </div>
 
-            <div className="p-4 rounded-2xl border border-dashed border-emerald-300 dark:border-emerald-800 bg-emerald-50/40 dark:bg-emerald-950/20 flex flex-col justify-between gap-3">
+            <div className="p-3.5 sm:p-4 rounded-2xl border border-dashed border-emerald-300 dark:border-emerald-800 bg-emerald-50/40 dark:bg-emerald-950/20 flex flex-col justify-between gap-3">
               <div>
                 <div className="text-xs font-bold text-emerald-900 dark:text-emerald-300">Bước 2: Chọn file CSV cần nhập</div>
                 <p className="text-[11px] text-emerald-700/80 dark:text-emerald-400 mt-0.5">
@@ -272,7 +272,7 @@ export const BulkCsvImportModal: React.FC<BulkCsvImportModalProps> = ({
               <Button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl cursor-pointer"
+                className="w-full h-10 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl cursor-pointer"
               >
                 <Upload className="w-4 h-4 mr-1.5" /> Chọn file .CSV từ máy
               </Button>
@@ -281,9 +281,9 @@ export const BulkCsvImportModal: React.FC<BulkCsvImportModalProps> = ({
 
           {/* Paste CSV textarea */}
           <div className="space-y-1.5">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-1.5">
               <span className="text-xs font-bold text-slate-600 dark:text-slate-300">
-                Nội dung CSV (hỗ trợ chỉnh sửa nhanh trước khi nhập)
+                Nội dung CSV (hỗ trợ chỉnh sửa nhanh)
               </span>
               <button
                 type="button"
@@ -305,7 +305,7 @@ export const BulkCsvImportModal: React.FC<BulkCsvImportModalProps> = ({
           {/* Live Preview */}
           {parsedRows.length > 0 && (
             <div className="space-y-2">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="text-xs font-extrabold text-slate-800 dark:text-white">
                   Xem trước dữ liệu ({validRows.length}/{parsedRows.length} dòng hợp lệ)
                 </span>
@@ -316,7 +316,33 @@ export const BulkCsvImportModal: React.FC<BulkCsvImportModalProps> = ({
                 )}
               </div>
 
-              <div className="max-h-52 overflow-auto rounded-xl border border-slate-200 dark:border-slate-800">
+              {/* Mobile-First Preview Card List */}
+              <div className="block sm:hidden space-y-2 max-h-56 overflow-y-auto">
+                {validRows.slice(0, 15).map((r, i) => (
+                  <div key={i} className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/40 space-y-1">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-baseline gap-1.5 min-w-0">
+                        <span className="font-bold text-sm text-slate-900 dark:text-white truncate">
+                          {isVocab ? r.term || r.kanji : r.kanji}
+                        </span>
+                        <span className="text-[11px] text-slate-500 truncate">
+                          {isVocab ? r.reading || r.kana : r.sinoVietnamese || r.hanviet}
+                        </span>
+                      </div>
+                      <Badge variant="outline" className="text-[10px] shrink-0">
+                        {(r.level || r.jlptLevel || 'N5').toUpperCase()}
+                      </Badge>
+                    </div>
+                    <div className="text-xs text-slate-700 dark:text-slate-300">{r.vietnameseMeaning || r.meaning}</div>
+                    {r.milestoneId && (
+                      <div className="text-[10px] font-mono text-slate-400">Mốc: {r.milestoneId}</div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop Preview Table */}
+              <div className="hidden sm:block max-h-52 overflow-auto rounded-xl border border-slate-200 dark:border-slate-800">
                 <Table>
                   <TableHeader className="bg-slate-50 dark:bg-slate-800/60">
                     <TableRow>
@@ -347,22 +373,22 @@ export const BulkCsvImportModal: React.FC<BulkCsvImportModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-900 shrink-0">
-          <div className="text-xs text-slate-500">
+        <div className="px-4 sm:px-6 py-3.5 sm:py-4 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 bg-slate-50/50 dark:bg-slate-900 shrink-0">
+          <div className="text-xs text-slate-500 text-center sm:text-left">
             Sẵn sàng nhập: <strong className="text-emerald-600">{validRows.length}</strong> bản ghi
           </div>
-          <div className="flex items-center gap-2">
-            <Button type="button" variant="outline" onClick={onClose} className="rounded-xl cursor-pointer">
+          <div className="grid grid-cols-2 sm:flex items-center gap-2 w-full sm:w-auto">
+            <Button type="button" variant="outline" onClick={onClose} className="h-10 sm:h-9 rounded-xl cursor-pointer">
               Hủy
             </Button>
             <Button
               type="button"
               disabled={importing || validRows.length === 0}
               onClick={handleImport}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl cursor-pointer"
+              className="h-10 sm:h-9 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl cursor-pointer"
             >
               <Upload className="w-4 h-4 mr-1.5" />
-              {importing ? 'Đang nhập...' : `Nhập ${validRows.length} mục ngay`}
+              {importing ? 'Đang nhập...' : `Nhập (${validRows.length})`}
             </Button>
           </div>
         </div>
