@@ -13,7 +13,7 @@ import { LibraryPage } from './user/pages/LibraryPage';
 import { ExamPage } from './user/pages/ExamPage';
 import { ProfilePage } from './user/pages/ProfilePage';
 import { AdminDashboardPage } from './admin/pages/AdminDashboardPage';
-import { Smartphone, Download, CheckCircle2, Moon, Sun } from 'lucide-react';
+import { Smartphone, Download, CheckCircle2, Moon, Sun, Flame, X } from 'lucide-react';
 import { ApkDownloadModal } from './user/components/ApkDownloadModal';
 import { isNativeApp } from './user/utils/platform';
 import { useNetworkStatus } from './user/hooks/useNetworkStatus';
@@ -67,6 +67,7 @@ export default function App() {
     typeof navigator !== 'undefined' ? navigator.onLine : true
   );
   const [syncNotice, setSyncNotice] = useState<string | null>(null);
+  const [streakNotice, setStreakNotice] = useState<string | null>(null);
 
   useEffect(() => {
     const handleOnline = async () => {
@@ -104,7 +105,7 @@ export default function App() {
     return () => window.removeEventListener('online', sync);
   }, [user?.id]);
 
-  // Đồng bộ quyền mới nhất từ Firestore khi mở ứng dụng và khởi tạo Google Auth
+  // Đồng bộ quyền mới nhất từ Firestore khi mở ứng dụng và khởi tạo Google Auth & Real-day Streak
   useEffect(() => {
     authService.initGoogleAuthNative();
     authService.checkRedirectResult().then(redirected => {
@@ -117,6 +118,18 @@ export default function App() {
     });
 
     const current = authService.getCurrentUser();
+    if (current?.id) {
+      authService.checkAndUpdateDailyStreak(current).then(res => {
+        if (res?.evaluation.streakUpdated) {
+          setUser({ ...res.user });
+          if (res.evaluation.message && res.evaluation.isConsecutive) {
+            setStreakNotice(res.evaluation.message);
+            setTimeout(() => setStreakNotice(null), 6000);
+          }
+        }
+      });
+    }
+
     if (current?.email) {
       authService.syncUserFromFirestore(current.email).then(synced => {
         if (synced && synced.role !== current.role) {
@@ -130,7 +143,7 @@ export default function App() {
     }
   }, []);
 
-  // Lắng nghe sự kiện kizuna_user_updated để đồng bộ tức thời Navbar & Profile khi hoàn thành bài học
+  // Lắng nghe sự kiện kizuna_user_updated & kizuna_streak_increased để đồng bộ tức thời Navbar, Profile & Banner
   useEffect(() => {
     const handleUserUpdate = () => {
       const fresh = authService.getCurrentUser();
@@ -138,30 +151,56 @@ export default function App() {
         setUser({ ...fresh });
       }
     };
+
+    const handleStreakIncreased = (e: any) => {
+      const msg = e?.detail?.message;
+      if (msg) {
+        setStreakNotice(msg);
+        setTimeout(() => setStreakNotice(null), 6000);
+      }
+    };
+
     window.addEventListener('kizuna_user_updated', handleUserUpdate);
-    return () => window.removeEventListener('kizuna_user_updated', handleUserUpdate);
+    window.addEventListener('kizuna_streak_increased', handleStreakIncreased);
+    return () => {
+      window.removeEventListener('kizuna_user_updated', handleUserUpdate);
+      window.removeEventListener('kizuna_streak_increased', handleStreakIncreased);
+    };
   }, []);
 
-  // Tự động kiểm tra thời hạn phiên đăng nhập (tối đa 24h) kể cả khi tab ở ẩn nền (background)
+  // Tự động kiểm tra thời hạn phiên đăng nhập (tối đa 24h) và cập nhật streak theo ngày thực (Real-day Streak)
   useEffect(() => {
-    const checkSessionExpiry = () => {
+    const checkSessionAndDailyStreak = () => {
       const current = authService.getCurrentUser();
       if (!current && user) {
         console.info('[KIZUNA] Phiên đăng nhập đã hết hạn 24 giờ.');
         setUser(null);
         setActiveTab('home');
+        return;
+      }
+
+      if (current?.id) {
+        authService.checkAndUpdateDailyStreak(current).then(res => {
+          if (res?.evaluation.streakUpdated) {
+            setUser({ ...res.user });
+            if (res.evaluation.message && res.evaluation.isConsecutive) {
+              setStreakNotice(res.evaluation.message);
+              setTimeout(() => setStreakNotice(null), 6000);
+            }
+          }
+        });
       }
     };
 
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
-        checkSessionExpiry();
+        checkSessionAndDailyStreak();
       }
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    // Kiểm tra định kỳ mỗi 60 giây
-    const timer = setInterval(checkSessionExpiry, 60 * 1000);
+    // Kiểm tra định kỳ mỗi 60 giây (đảm bảo nếu người dùng mở app qua đêm thì đúng 00:00 ngày mới sẽ nhận diện streak)
+    const timer = setInterval(checkSessionAndDailyStreak, 60 * 1000);
 
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
@@ -360,6 +399,24 @@ export default function App() {
             )}
           </div>
         </header>
+
+        {streakNotice && (
+          <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white px-4 py-2.5 flex items-center justify-between gap-3 text-xs sm:text-sm font-bold shadow-md transition-all">
+            <div className="flex items-center gap-2.5">
+              <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+                <Flame className="w-4 h-4 text-amber-200 fill-amber-200 animate-pulse" />
+              </div>
+              <span>{streakNotice}</span>
+            </div>
+            <button
+              onClick={() => setStreakNotice(null)}
+              className="text-white/80 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors cursor-pointer shrink-0"
+              aria-label="Đóng thông báo chuỗi học tập"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        )}
 
         {isOnline && syncNotice && (
           <div className="bg-emerald-50 dark:bg-emerald-950/50 border-b border-emerald-200 dark:border-emerald-900 px-4 py-2 flex items-center justify-between gap-3 text-emerald-800 dark:text-emerald-300 text-xs font-semibold">

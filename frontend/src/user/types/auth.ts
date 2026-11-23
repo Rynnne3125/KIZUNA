@@ -13,6 +13,8 @@ export interface User {
   level?: string;
   placementVerified?: boolean;
   placementScore?: number;
+  lastActiveDate?: string;
+  lastStudiedAt?: string;
 }
 
 export interface AuthState {

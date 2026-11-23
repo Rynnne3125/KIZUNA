@@ -1,6 +1,7 @@
 import { db } from '../../config/firebase';
 import { doc, getDoc, setDoc, updateDoc, increment, collection, query, where, getDocs } from 'firebase/firestore';
 import { UserProgressData } from '../types/progress';
+import { getLocalDateString, evaluateDailyStreak } from './authService';
 
 export interface UserExamResult {
   userId: string;
@@ -184,7 +185,7 @@ export const progressService = {
     const targetField = fieldMap[type] || 'activitiesCompleted';
 
     const finalXp = typeof xpEarned === 'number' ? xpEarned : activePointsEarned * 2;
-    const todayStr = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    const todayStr = getLocalDateString(new Date());
     let currentStreak = 0;
 
     try {
@@ -199,23 +200,15 @@ export const progressService = {
           u.activePoints = (u.activePoints || 0) + activePointsEarned;
           u.totalXp = (u.totalXp || 0) + finalXp;
 
-          const lastActive = u.lastActiveDate;
-          let streak = typeof u.currentStreak === 'number' ? u.currentStreak : 0;
-          if (lastActive !== todayStr) {
-            if (lastActive) {
-              const lastDate = new Date(lastActive);
-              const curDate = new Date(todayStr);
-              const diffDays = Math.round((curDate.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
-              if (diffDays === 1) {
-                streak += 1;
-              } else {
-                streak = 1;
-              }
-            } else {
-              streak = 1;
+          const streakEval = evaluateDailyStreak(u.currentStreak, u.lastActiveDate);
+          if (streakEval.streakUpdated) {
+            u.currentStreak = streakEval.newStreak;
+            u.lastActiveDate = streakEval.todayStr;
+            if (typeof window !== 'undefined' && streakEval.isConsecutive) {
+              window.dispatchEvent(new CustomEvent('kizuna_streak_increased', {
+                detail: { newStreak: streakEval.newStreak, message: streakEval.message }
+              }));
             }
-            u.currentStreak = streak;
-            u.lastActiveDate = todayStr;
           }
           currentStreak = u.currentStreak || 1;
           u.lastStudiedAt = new Date().toISOString();
@@ -223,7 +216,7 @@ export const progressService = {
 
           // Phát sự kiện để App.tsx và UserNavbar cập nhật ngay lập tức
           if (typeof window !== 'undefined') {
-            window.dispatchEvent(new Event('kizuna_user_updated'));
+            window.dispatchEvent(new CustomEvent('kizuna_user_updated', { detail: { user: u, evaluation: streakEval } }));
           }
         }
       }

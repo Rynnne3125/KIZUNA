@@ -70,7 +70,198 @@ export interface PendingOtpData {
   expiresAt: number;
 }
 
+/**
+ * Lấy chuỗi ngày lịch địa phương theo định dạng YYYY-MM-DD (dựa trên múi giờ thực tế của thiết bị)
+ */
+export function getLocalDateString(date: Date = new Date()): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+export function normalizeDateToLocalString(dateOrIso?: string | null): string | null {
+  if (!dateOrIso) return null;
+  const trimmed = dateOrIso.trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) return trimmed;
+  try {
+    const d = new Date(trimmed);
+    if (!isNaN(d.getTime())) {
+      return getLocalDateString(d);
+    }
+  } catch {
+    // fallback
+  }
+  return trimmed.slice(0, 10);
+}
+
+export function calculateCalendarDaysDiff(fromDateStr: string, toDateStr: string): number {
+  const [fy, fm, fd] = fromDateStr.split('-').map(Number);
+  const [ty, tm, td] = toDateStr.split('-').map(Number);
+  const fromMidnight = new Date(fy, fm - 1, fd, 0, 0, 0, 0);
+  const toMidnight = new Date(ty, tm - 1, td, 0, 0, 0, 0);
+  const diffMs = toMidnight.getTime() - fromMidnight.getTime();
+  return Math.round(diffMs / (1000 * 60 * 60 * 24));
+}
+
+export interface StreakEvaluationResult {
+  newStreak: number;
+  streakUpdated: boolean;
+  daysDifference: number;
+  isConsecutive: boolean;
+  isBroken: boolean;
+  todayStr: string;
+  message?: string;
+}
+
+export function evaluateDailyStreak(
+  currentStreak: number = 0,
+  lastActiveDateRaw?: string | null,
+  now: Date = new Date()
+): StreakEvaluationResult {
+  const todayStr = getLocalDateString(now);
+  const lastActiveStr = normalizeDateToLocalString(lastActiveDateRaw);
+
+  if (!lastActiveStr) {
+    const initialStreak = Math.max(1, currentStreak || 1);
+    return {
+      newStreak: initialStreak,
+      streakUpdated: true,
+      daysDifference: 0,
+      isConsecutive: false,
+      isBroken: false,
+      todayStr,
+      message: 'Chào mừng bạn! Chuỗi học tập KIZUNA bắt đầu từ hôm nay.'
+    };
+  }
+
+  if (lastActiveStr === todayStr) {
+    return {
+      newStreak: Math.max(1, currentStreak || 1),
+      streakUpdated: false,
+      daysDifference: 0,
+      isConsecutive: false,
+      isBroken: false,
+      todayStr
+    };
+  }
+
+  const diffDays = calculateCalendarDaysDiff(lastActiveStr, todayStr);
+
+  if (diffDays === 1) {
+    const newStreak = (currentStreak || 0) + 1;
+    return {
+      newStreak,
+      streakUpdated: true,
+      daysDifference: 1,
+      isConsecutive: true,
+      isBroken: false,
+      todayStr,
+      message: `🔥 Tuyệt vời! Bạn đã duy trì chuỗi học tập ${newStreak} ngày liên tiếp!`
+    };
+  }
+
+  if (diffDays > 1) {
+    return {
+      newStreak: 1,
+      streakUpdated: true,
+      daysDifference: diffDays,
+      isConsecutive: false,
+      isBroken: true,
+      todayStr,
+      message: 'Chuỗi học tập mới đã bắt đầu hôm nay. Hãy duy trì đều đặn mỗi ngày nhé!'
+    };
+  }
+
+  return {
+    newStreak: Math.max(1, currentStreak || 1),
+    streakUpdated: false,
+    daysDifference: diffDays,
+    isConsecutive: false,
+    isBroken: false,
+    todayStr
+  };
+}
+
 export const authService = {
+  /**
+   * Tự động kiểm tra và cập nhật chuỗi Streak theo ngày thực tế (Real-day Streak)
+   * Khi qua ngày mới mà người dùng vào app:
+   * - Nếu là ngày liên tiếp (diffDays === 1): Tăng streak thêm 1 (+1 day streak)
+   * - Nếu bị lỡ >= 1 ngày (diffDays > 1): Khởi tạo lại chuỗi streak = 1
+   * - Nếu đã vào app hôm nay (diffDays === 0): Giữ nguyên streak
+   */
+  async checkAndUpdateDailyStreak(targetUser?: User | null): Promise<{ user: User; evaluation: StreakEvaluationResult } | null> {
+    const user = targetUser || this.getCurrentUser();
+    if (!user || !user.id) return null;
+
+    const evaluation = evaluateDailyStreak(user.currentStreak, user.lastActiveDate);
+    if (!evaluation.streakUpdated) {
+      return { user, evaluation };
+    }
+
+    const updatedUser: User = {
+      ...user,
+      currentStreak: evaluation.newStreak,
+      lastActiveDate: evaluation.todayStr,
+      lastStudiedAt: new Date().toISOString()
+    };
+
+    // 1. Cập nhật localStorage phiên đăng nhập
+    localStorage.setItem(USER_KEY, JSON.stringify(updatedUser));
+
+    // 2. Cập nhật cache kizuna_registered_users
+    try {
+      const regRaw = localStorage.getItem('kizuna_registered_users');
+      if (regRaw) {
+        const regUsers = safeJsonParse<any[]>(regRaw, []);
+        const idx = regUsers.findIndex((u: any) => u.id === user.id || (u.email && u.email.toLowerCase() === user.email?.toLowerCase()));
+        if (idx >= 0) {
+          regUsers[idx].currentStreak = evaluation.newStreak;
+          regUsers[idx].lastActiveDate = evaluation.todayStr;
+          regUsers[idx].lastStudiedAt = updatedUser.lastStudiedAt;
+          localStorage.setItem('kizuna_registered_users', JSON.stringify(regUsers));
+        }
+      }
+    } catch {
+      // ignore
+    }
+
+    // 3. Đồng bộ lên Firestore (nếu có mạng)
+    if (db && user.id) {
+      try {
+        const userRef = doc(db, 'users', user.id);
+        await updateDoc(userRef, {
+          currentStreak: evaluation.newStreak,
+          lastActiveDate: evaluation.todayStr,
+          lastStudiedAt: updatedUser.lastStudiedAt
+        });
+      } catch (err) {
+        console.warn('[Streak] Lỗi cập nhật Firestore users:', err);
+      }
+
+      try {
+        const lbRef = doc(db, 'leaderboard', user.id);
+        await updateDoc(lbRef, {
+          currentStreak: evaluation.newStreak,
+          updatedAt: new Date().toISOString()
+        });
+      } catch {
+        // bỏ qua nếu doc leaderboard chưa tồn tại
+      }
+    }
+
+    // 4. Phát sự kiện để Header, Navbar, Profile cập nhật tức thì
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('kizuna_user_updated', { detail: { user: updatedUser, evaluation } }));
+      if (evaluation.isConsecutive) {
+        window.dispatchEvent(new CustomEvent('kizuna_streak_increased', { detail: { newStreak: evaluation.newStreak, message: evaluation.message } }));
+      }
+    }
+
+    return { user: updatedUser, evaluation };
+  },
+
   getToken(): string | null {
     return localStorage.getItem(TOKEN_KEY);
   },
@@ -336,28 +527,34 @@ export const authService = {
             totalXp: typeof matchedDoc.totalXp === 'number' ? matchedDoc.totalXp : 0,
             currentStreak: typeof matchedDoc.currentStreak === 'number' ? matchedDoc.currentStreak : 0,
             level: matchedDoc.level || 'Tân binh',
-            avatarUrl: matchedDoc.avatarUrl || (role === 'ROLE_ADMIN' ? 'https://api.dicebear.com/7.x/bottts/svg?seed=admin' : `https://api.dicebear.com/7.x/avataaars/svg?seed=${emailInput}`)
+            avatarUrl: matchedDoc.avatarUrl || (role === 'ROLE_ADMIN' ? 'https://api.dicebear.com/7.x/bottts/svg?seed=admin' : `https://api.dicebear.com/7.x/avataaars/svg?seed=${emailInput}`),
+            lastActiveDate: matchedDoc.lastActiveDate,
+            lastStudiedAt: matchedDoc.lastStudiedAt
           };
+
+          // Tự động kiểm tra và cập nhật streak theo ngày thực tế ngay khi đăng nhập
+          const streakRes = await this.checkAndUpdateDailyStreak(user);
+          const finalUser = streakRes?.user || user;
 
           // Đồng bộ và cập nhật lại cache cục bộ kizuna_registered_users để không bao giờ bị lệch dữ liệu cũ
           try {
             const registeredUsers = safeJsonParse<any[]>(localStorage.getItem('kizuna_registered_users'), []);
             const idx = registeredUsers.findIndex((u: any) => 
-              u.email?.toLowerCase() === emailInput || u.id === user.id
+              u.email?.toLowerCase() === emailInput || u.id === finalUser.id
             );
             if (idx >= 0) {
-              registeredUsers[idx] = { ...registeredUsers[idx], ...user, role, password: matchedDoc.password || hashedInput };
+              registeredUsers[idx] = { ...registeredUsers[idx], ...finalUser, role, password: matchedDoc.password || hashedInput };
             } else {
-              registeredUsers.push({ ...user, role, password: matchedDoc.password || hashedInput });
+              registeredUsers.push({ ...finalUser, role, password: matchedDoc.password || hashedInput });
             }
             localStorage.setItem('kizuna_registered_users', JSON.stringify(registeredUsers));
           } catch {
             // bỏ qua lỗi storage
           }
 
-          const token = `token_fs_${Date.now()}_${user.id}`;
-          this.setSession(token, user);
-          return { user, token };
+          const token = `token_fs_${Date.now()}_${finalUser.id}`;
+          this.setSession(token, finalUser);
+          return { user: finalUser, token };
         }
       }
     } catch (e: any) {
@@ -412,11 +609,15 @@ export const authService = {
         totalXp: found.totalXp || 0,
         currentStreak: found.currentStreak || 0,
         level: found.level || 'Tân binh',
-        avatarUrl: found.avatarUrl || (role === 'ROLE_ADMIN' ? 'https://api.dicebear.com/7.x/bottts/svg?seed=admin' : `https://api.dicebear.com/7.x/avataaars/svg?seed=${emailInput}`)
+        avatarUrl: found.avatarUrl || (role === 'ROLE_ADMIN' ? 'https://api.dicebear.com/7.x/bottts/svg?seed=admin' : `https://api.dicebear.com/7.x/avataaars/svg?seed=${emailInput}`),
+        lastActiveDate: found.lastActiveDate,
+        lastStudiedAt: found.lastStudiedAt
       };
-      const token = `token_offline_${Date.now()}_${user.id}`;
-      this.setSession(token, user);
-      return { user, token };
+      const streakRes = await this.checkAndUpdateDailyStreak(user);
+      const finalUser = streakRes?.user || user;
+      const token = `token_offline_${Date.now()}_${finalUser.id}`;
+      this.setSession(token, finalUser);
+      return { user: finalUser, token };
     }
 
     throw new Error('Tài khoản với email này chưa được đăng ký hoặc thông tin không hợp lệ.');
@@ -487,11 +688,15 @@ export const authService = {
           totalXp: typeof matchedDoc.totalXp === 'number' ? matchedDoc.totalXp : (currentUser?.totalXp ?? 0),
           currentStreak: typeof matchedDoc.currentStreak === 'number' ? matchedDoc.currentStreak : (currentUser?.currentStreak ?? 0),
           level: matchedDoc.level || (currentUser?.level ?? 'Tân binh'),
-          avatarUrl: matchedDoc.avatarUrl || (currentUser?.avatarUrl ?? (role === 'ROLE_ADMIN' ? 'https://api.dicebear.com/7.x/bottts/svg?seed=admin' : `https://api.dicebear.com/7.x/avataaars/svg?seed=${clean}`))
+          avatarUrl: matchedDoc.avatarUrl || (currentUser?.avatarUrl ?? (role === 'ROLE_ADMIN' ? 'https://api.dicebear.com/7.x/bottts/svg?seed=admin' : `https://api.dicebear.com/7.x/avataaars/svg?seed=${clean}`)),
+          lastActiveDate: matchedDoc.lastActiveDate || currentUser?.lastActiveDate,
+          lastStudiedAt: matchedDoc.lastStudiedAt || currentUser?.lastStudiedAt
         };
+        const streakRes = await this.checkAndUpdateDailyStreak(updatedUser);
+        const finalUser = streakRes?.user || updatedUser;
         const token = this.getToken() || `token_${Date.now()}`;
-        this.setSession(token, updatedUser);
-        return updatedUser;
+        this.setSession(token, finalUser);
+        return finalUser;
       }
     } catch (e) {
       console.warn('[Firestore Sync] Lỗi đồng bộ user từ Firestore:', e);
@@ -573,15 +778,23 @@ export const authService = {
         totalXp: typeof matchedDoc.totalXp === 'number' ? matchedDoc.totalXp : 0,
         currentStreak: typeof matchedDoc.currentStreak === 'number' ? matchedDoc.currentStreak : 1,
         level: matchedDoc.level || 'Tân binh',
-        avatarUrl: matchedDoc.avatarUrl || photoURL
+        avatarUrl: matchedDoc.avatarUrl || photoURL,
+        lastActiveDate: matchedDoc.lastActiveDate,
+        lastStudiedAt: matchedDoc.lastStudiedAt
       };
+
+      const streakRes = await this.checkAndUpdateDailyStreak(appUser);
+      if (streakRes?.user) {
+        appUser = streakRes.user;
+      }
 
       // Cập nhật lastActiveDate, avatarUrl nếu có thay đổi
       if (db && matchedDocId) {
         try {
           await updateDoc(doc(db, 'users', matchedDocId), {
-            lastActiveDate: new Date().toISOString(),
-            lastStudiedAt: new Date().toISOString(),
+            lastActiveDate: appUser.lastActiveDate || getLocalDateString(),
+            lastStudiedAt: appUser.lastStudiedAt || new Date().toISOString(),
+            currentStreak: appUser.currentStreak || 1,
             authProvider: 'google',
             ...(matchedDoc.avatarUrl ? {} : { avatarUrl: photoURL })
           });

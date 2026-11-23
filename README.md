@@ -8,16 +8,13 @@ Dự án học tiếng Nhật đa nền tảng **KIZUNA** kết hợp Frontend h
 
 ```
 KIZUNA/
-├── docs/                                     # Tài liệu học phần CS2028 (Chương 2, Chương 3 & Chương 4)
-│   ├── 3.1_PRODUCT_DISCOVERY.md              # 3.1 Khám phá sản phẩm, Lean Canvas, Empathy Map
-│   ├── PRD_KIZUNA.md                         # 3.2 Tài liệu Yêu cầu Sản phẩm (PRD) chuẩn chỉnh
-│   ├── 3.3_REQUIREMENTS_ANALYSIS.md          # 3.3 Phân tích yêu cầu FURPS+, Use Cases, RTM
-│   ├── 3.4_USER_STORIES_AND_ACCEPTANCE_CRITERIA.md # 3.4 User Stories (INVEST) & Gherkin AC
-│   ├── 3.5_FEATURE_SPECIFICATIONS.md         # 3.5 Đặc tả kỹ thuật các tính năng, SM-2 SRS, AI Sensei
-│   ├── PRACTICE_LAB3_DEMO_GUIDE.md           # Kịch bản demo thực hành Bài 3
-│   ├── PRD_UX_UI_DESIGN_KIZUNA.md            # Chương 4: PRD UX/UI Thiết kế Sản phẩm tích hợp AI (User Flow, Wireframing, Prototyping, AI Design Review)
-│   ├── PRACTICE_LAB4_DEMO_GUIDE.md           # Hướng dẫn thực hành & Kịch bản Demo Bài 4 (Rubric, Prompts)
-│   └── AI_PROMPT_ENGINEERING_LOGS.md         # Nhật ký Prompt Engineering
+├── docs/                                     # Bộ tài liệu tổng hợp đặc tả sản phẩm & kiến trúc (Authoritative Suite)
+│   ├── 01_PRD_PRODUCT_REQUIREMENTS.md        # Yêu cầu Sản phẩm, Discovery, Lean Canvas, Use Cases & User Stories
+│   ├── 02_UX_UI_DESIGN_SYSTEM.md             # Thiết kế Giao diện, Master User Flow, Tokens & Bố cục Bento Box
+│   ├── 03_DATABASE_ARCHITECTURE_AND_ERD.md   # Thiết kế CSDL NoSQL Firestore, ERD Mermaid & Data Dictionary
+│   ├── 04_SYSTEM_ARCHITECTURE_AND_API_SPECS.md # Kiến trúc Hệ thống, Spring Boot, Gemini Live API & REST Specs
+│   ├── 05_ADMIN_GAP_ANALYSIS_AND_ROADMAP.md  # Đánh giá thiếu sót Admin & Lộ trình đồng bộ thực tế với User
+│   └── 06_PROJECT_DEVELOPMENT_TRACKER.md     # Kế hoạch thực thi, phân rã 12 ADM Tasks & 10 USR Tasks
 │
 ├── backend/                                  # Spring Boot 3.4 + Java 21 + Gradle (Cổng: 3000)
 │   ├── src/main/java/com/kizuna/
