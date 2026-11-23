@@ -1,11 +1,18 @@
 package com.kizuna.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Stage {
     private String id;
     private String title;
     private int orderIndex;
     private String description;
     private String themeColor;
+    private String jlptLevel = "N5";
+    private List<String> colorGradient;
 
     public Stage() {}
 
@@ -31,4 +38,10 @@ public class Stage {
 
     public String getThemeColor() { return themeColor; }
     public void setThemeColor(String themeColor) { this.themeColor = themeColor; }
+
+    public String getJlptLevel() { return jlptLevel; }
+    public void setJlptLevel(String jlptLevel) { this.jlptLevel = jlptLevel; }
+
+    public List<String> getColorGradient() { return colorGradient; }
+    public void setColorGradient(List<String> colorGradient) { this.colorGradient = colorGradient; }
 }

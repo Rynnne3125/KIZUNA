@@ -172,6 +172,11 @@ public class CurriculumServiceImpl implements CurriculumService {
         curriculumRepository.deleteVocabulary(id);
     }
 
+    @Override
+    public List<VocabularyItem> bulkImportVocabulary(List<VocabularyItem> items) {
+        return curriculumRepository.bulkSaveVocabulary(items);
+    }
+
     // --- KANJI ---
     @Override
     public List<KanjiItem> getKanjiByMilestone(String milestoneId) {
@@ -207,10 +212,74 @@ public class CurriculumServiceImpl implements CurriculumService {
         curriculumRepository.deleteKanji(id);
     }
 
+    @Override
+    public List<KanjiItem> bulkImportKanji(List<KanjiItem> items) {
+        return curriculumRepository.bulkSaveKanji(items);
+    }
+
     // --- GRAMMAR ---
+    @Override
+    public List<GrammarItem> getAllGrammar() {
+        return curriculumRepository.getAllGrammar();
+    }
+
     @Override
     public List<GrammarItem> getGrammarByMilestone(String milestoneId) {
         return curriculumRepository.getGrammarByMilestoneId(milestoneId);
+    }
+
+    @Override
+    public GrammarItem getGrammarById(String id) {
+        return curriculumRepository.getGrammarById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Grammar item not found with id: " + id));
+    }
+
+    @Override
+    public GrammarItem createGrammar(GrammarItem item) {
+        return curriculumRepository.saveGrammar(item);
+    }
+
+    @Override
+    public GrammarItem updateGrammar(String id, GrammarItem item) {
+        getGrammarById(id);
+        item.setId(id);
+        return curriculumRepository.saveGrammar(item);
+    }
+
+    @Override
+    public void deleteGrammar(String id) {
+        getGrammarById(id);
+        curriculumRepository.deleteGrammar(id);
+    }
+
+    // --- EXAMS ---
+    @Override
+    public List<JlptExam> getAllExams() {
+        return curriculumRepository.getAllExams();
+    }
+
+    @Override
+    public JlptExam getExamById(String id) {
+        return curriculumRepository.getExamById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Exam not found with id: " + id));
+    }
+
+    @Override
+    public JlptExam createExam(JlptExam exam) {
+        return curriculumRepository.saveExam(exam);
+    }
+
+    @Override
+    public JlptExam updateExam(String id, JlptExam exam) {
+        getExamById(id);
+        exam.setId(id);
+        return curriculumRepository.saveExam(exam);
+    }
+
+    @Override
+    public void deleteExam(String id) {
+        getExamById(id);
+        curriculumRepository.deleteExam(id);
     }
 
     // --- WHITELIST ---
@@ -239,5 +308,16 @@ public class CurriculumServiceImpl implements CurriculumService {
         getMilestoneById(milestoneId);
         item.setMilestoneId(milestoneId);
         return curriculumRepository.saveVocabulary(item);
+    }
+
+    // --- BACKUP & RESTORE ---
+    @Override
+    public Map<String, Object> exportBackup() {
+        return curriculumRepository.exportBackupSnapshot();
+    }
+
+    @Override
+    public Map<String, Object> restoreSeedData() {
+        return curriculumRepository.restoreFromSeedData();
     }
 }

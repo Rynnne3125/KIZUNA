@@ -38,6 +38,7 @@ public interface CurriculumService {
     VocabularyItem createVocabulary(VocabularyItem item);
     VocabularyItem updateVocabulary(String id, VocabularyItem item);
     void deleteVocabulary(String id);
+    List<VocabularyItem> bulkImportVocabulary(List<VocabularyItem> items);
 
     // Kanji
     List<KanjiItem> getKanjiByMilestone(String milestoneId);
@@ -46,11 +47,28 @@ public interface CurriculumService {
     KanjiItem createKanji(KanjiItem item);
     KanjiItem updateKanji(String id, KanjiItem item);
     void deleteKanji(String id);
+    List<KanjiItem> bulkImportKanji(List<KanjiItem> items);
 
     // Grammar
+    List<GrammarItem> getAllGrammar();
     List<GrammarItem> getGrammarByMilestone(String milestoneId);
+    GrammarItem getGrammarById(String id);
+    GrammarItem createGrammar(GrammarItem item);
+    GrammarItem updateGrammar(String id, GrammarItem item);
+    void deleteGrammar(String id);
+
+    // Exams
+    List<JlptExam> getAllExams();
+    JlptExam getExamById(String id);
+    JlptExam createExam(JlptExam exam);
+    JlptExam updateExam(String id, JlptExam exam);
+    void deleteExam(String id);
 
     // Whitelist
     Map<String, Object> getWhitelistByMilestone(String milestoneId);
     VocabularyItem addWhitelistItem(String milestoneId, VocabularyItem item);
+
+    // Backup & Restore
+    Map<String, Object> exportBackup();
+    Map<String, Object> restoreSeedData();
 }

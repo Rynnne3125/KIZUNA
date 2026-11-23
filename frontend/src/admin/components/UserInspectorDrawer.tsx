@@ -7,8 +7,23 @@ import { Input } from '@/admin/components/ui/input';
 import { Label } from '@/admin/components/ui/label';
 import {
   X, Shield, UserCheck, Ban, CheckCircle2, Flame, Zap,
-  Trash2, Save, BookOpen, RefreshCw, AlertTriangle, Award, Clock
+  Trash2, Save, BookOpen, RefreshCw, AlertTriangle, Award, Clock,
+  Bot, MapPin, Target
 } from 'lucide-react';
+
+const SKILL_LABELS: Record<string, string> = {
+  alphabet: 'Bảng chữ cái',
+  vocabulary: 'Từ vựng',
+  grammar: 'Ngữ pháp',
+  kanji: 'Chữ Hán (Kanji)',
+  reading: 'Đọc hiểu'
+};
+
+const CONFIDENCE_STYLES: Record<string, { label: string; cls: string }> = {
+  HIGH: { label: 'Tin cậy Cao (HIGH)', cls: 'border-emerald-300 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300' },
+  MODERATE: { label: 'Trung bình (MODERATE)', cls: 'border-amber-300 bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300' },
+  LOW: { label: 'Thấp / Cơ bản (LOW)', cls: 'border-rose-300 bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300' }
+};
 
 interface UserInspectorDrawerProps {
   user: AdminUser | null;
@@ -513,31 +528,187 @@ export const UserInspectorDrawer: React.FC<UserInspectorDrawerProps> = ({
                 <div className="py-12 text-center text-sm text-slate-500">Đang tải hồ sơ học tập từ Firestore...</div>
               ) : (
                 <>
-                  {/* Placement Test Info */}
-                  <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold uppercase text-slate-400 flex items-center gap-1.5">
-                        <Award className="w-4 h-4 text-red-500" /> Kết quả Thẩm định Đầu vào (Placement)
-                      </span>
-                      <Badge variant="outline" className={user.placementVerified ? 'border-emerald-300 text-emerald-700 bg-emerald-50' : ''}>
-                        {user.placementVerified ? `Đã thẩm định (${user.placementScore || 0}%)` : 'Chưa làm bài test'}
-                      </Badge>
-                    </div>
-                    <div className="grid grid-cols-3 gap-2 pt-2 text-center">
-                      <div className="bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
-                        <div className="text-[11px] text-slate-400">Trình độ xếp lớp</div>
-                        <div className="text-base font-extrabold text-slate-800 dark:text-white">{user.level || 'Tân binh'}</div>
+                  {/* Placement Test & AI Diagnosis Card (Stage 1 P0) */}
+                  {(() => {
+                    const effectiveUser = dossier?.user || user;
+                    const pd = effectiveUser.placementDetails;
+                    const ai = pd?.aiAssessment;
+
+                    // Aggregate skill scores across levels
+                    const skillAgg = new Map<string, { correct: number; total: number }>();
+                    if (Array.isArray(pd?.skillBreakdown)) {
+                      pd.skillBreakdown.forEach(lvl => {
+                        (lvl.skills || []).forEach(sk => {
+                          const cur = skillAgg.get(sk.category) || { correct: 0, total: 0 };
+                          cur.correct += Number(sk.correct || 0);
+                          cur.total += Number(sk.total || 0);
+                          skillAgg.set(sk.category, cur);
+                        });
+                      });
+                    }
+                    const skillRows = [...skillAgg.entries()].map(([category, val]) => {
+                      const pct = val.total > 0 ? Math.round((val.correct / val.total) * 100) : 0;
+                      return {
+                        category,
+                        label: SKILL_LABELS[category] || category,
+                        correct: val.correct,
+                        total: val.total,
+                        pct,
+                        isWeak: pct < 60
+                      };
+                    }).sort((a, b) => a.pct - b.pct);
+
+                    const weakSkills = skillRows.filter(s => s.isWeak);
+                    const confInfo = ai?.confidence ? CONFIDENCE_STYLES[ai.confidence] : null;
+
+                    return (
+                      <div className="p-4 rounded-2xl border border-indigo-200/80 dark:border-indigo-900/50 bg-gradient-to-br from-indigo-50/50 via-white to-emerald-50/30 dark:from-indigo-950/20 dark:via-slate-900 dark:to-slate-900 space-y-3.5">
+                        <div className="flex items-center justify-between gap-2 flex-wrap">
+                          <span className="text-xs font-extrabold uppercase text-indigo-700 dark:text-indigo-400 flex items-center gap-1.5">
+                            <Bot className="w-4 h-4 text-indigo-600" /> Kết quả Chẩn đoán AI Placement
+                          </span>
+                          <Badge variant="outline" className={effectiveUser.placementVerified || pd ? 'border-emerald-300 text-emerald-700 bg-emerald-50 dark:bg-emerald-950/40 dark:text-emerald-300' : ''}>
+                            {pd
+                              ? `Đã thẩm định (${pd.percentage ?? effectiveUser.placementScore ?? 0}%)`
+                              : effectiveUser.placementVerified
+                              ? `Đã thẩm định (${effectiveUser.placementScore || 0}%)`
+                              : 'Chưa làm bài test'}
+                          </Badge>
+                        </div>
+
+                        {/* Top KPIs */}
+                        <div className="grid grid-cols-3 gap-2 text-center">
+                          <div className="bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
+                            <div className="text-[11px] text-slate-400">Trình độ xếp lớp</div>
+                            <div className="text-base font-extrabold text-slate-800 dark:text-white">
+                              {pd?.assignedLevel || effectiveUser.level || 'Tân binh'}
+                            </div>
+                          </div>
+                          <div className="bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
+                            <div className="text-[11px] text-slate-400">Điểm trắc nghiệm</div>
+                            <div className="text-base font-extrabold text-emerald-600">
+                              {pd?.answeredCount ? `${pd.correctCount}/${pd.answeredCount} (${pd.percentage}%)` : `${effectiveUser.placementScore ?? 0}%`}
+                            </div>
+                          </div>
+                          <div className="bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
+                            <div className="text-[11px] text-slate-400">Tổng kinh nghiệm</div>
+                            <div className="text-base font-extrabold text-slate-800 dark:text-white">
+                              {(effectiveUser.totalXp || 0).toLocaleString()} XP
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* AI Recommended Milestone & Confidence */}
+                        {pd ? (
+                          <>
+                            <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-indigo-100 dark:border-slate-800 space-y-2">
+                              <div className="flex items-center justify-between gap-2 flex-wrap">
+                                <div className="text-[11px] font-bold uppercase text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+                                  <MapPin className="w-3.5 h-3.5" />
+                                  {ai ? 'Cột mốc Gemini AI đề xuất xuất phát' : 'Cột mốc xuất phát theo bài test'}
+                                </div>
+                                {confInfo && (
+                                  <Badge variant="outline" className={`text-[10px] ${confInfo.cls}`}>
+                                    {confInfo.label}
+                                  </Badge>
+                                )}
+                              </div>
+                              <div className="text-sm font-extrabold text-slate-900 dark:text-white">
+                                {pd.recommendedMilestoneTitle || pd.recommendedMilestoneId || 'Mốc 1 nhập môn'}
+                              </div>
+                              <div className="text-xs text-slate-500 flex flex-wrap items-center gap-2">
+                                <span>Chặng: <strong className="text-slate-700 dark:text-slate-300">{pd.recommendedStageTitle || pd.recommendedStageId || 'N5'}</strong></span>
+                                {pd.recommendedMilestoneId && (
+                                  <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800">
+                                    {pd.recommendedMilestoneId}
+                                  </span>
+                                )}
+                              </div>
+                              {ai && (
+                                <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px] text-slate-400 border-t border-slate-100 dark:border-slate-800">
+                                  <span>Model: <strong className="font-mono text-slate-600 dark:text-slate-300">{ai.model}</strong></span>
+                                  <span>•</span>
+                                  <span>Latency: <strong className="text-indigo-600">{ai.latencyMs} ms</strong></span>
+                                  {pd.questionSetId && (
+                                    <>
+                                      <span>•</span>
+                                      <span>Bộ đề #{String(pd.questionSetId).padStart(2, '0')}</span>
+                                    </>
+                                  )}
+                                  {pd.testedAt && (
+                                    <>
+                                      <span>•</span>
+                                      <span>{new Date(pd.testedAt).toLocaleString('vi-VN')}</span>
+                                    </>
+                                  )}
+                                </div>
+                              )}
+                              {Array.isArray(pd.passedLevels) && pd.passedLevels.length > 0 && (
+                                <div className="flex items-center gap-1.5 flex-wrap pt-1">
+                                  <span className="text-[11px] text-slate-400">Đã vượt tầng:</span>
+                                  {pd.passedLevels.map(lvl => (
+                                    <span key={lvl} className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                      {lvl}
+                                    </span>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Per-skill weakness analysis */}
+                            <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 space-y-2.5">
+                              <div className="flex items-center justify-between gap-2">
+                                <span className="text-[11px] font-bold uppercase text-slate-500 flex items-center gap-1">
+                                  <Target className="w-3.5 h-3.5 text-rose-500" /> Phân tích Điểm mạnh / Điểm yếu theo kỹ năng
+                                </span>
+                                {weakSkills.length > 0 && (
+                                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200">
+                                    Yếu: {weakSkills.map(w => w.label).join(', ')}
+                                  </span>
+                                )}
+                              </div>
+
+                              {skillRows.length > 0 ? (
+                                <div className="space-y-2">
+                                  {skillRows.map(sk => (
+                                    <div key={sk.category} className="space-y-1">
+                                      <div className="flex items-center justify-between text-xs">
+                                        <span className="font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                                          {sk.label}
+                                          {sk.isWeak && (
+                                            <span className="text-[10px] font-bold text-rose-600 bg-rose-50 px-1.5 rounded">Cần cải thiện</span>
+                                          )}
+                                        </span>
+                                        <span className={`font-extrabold ${sk.isWeak ? 'text-rose-600' : sk.pct >= 75 ? 'text-emerald-600' : 'text-amber-600'}`}>
+                                          {sk.correct}/{sk.total} ({sk.pct}%)
+                                        </span>
+                                      </div>
+                                      <div className="w-full h-1.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                                        <div
+                                          style={{ width: `${Math.max(4, sk.pct)}%` }}
+                                          className={`h-full rounded-full ${
+                                            sk.isWeak ? 'bg-rose-500' : sk.pct >= 75 ? 'bg-emerald-500' : 'bg-amber-500'
+                                          }`}
+                                        />
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              ) : (
+                                <p className="text-[11px] text-slate-400">
+                                  Bản ghi xếp lớp này thực hiện trước khi bật chi tiết từng kỹ năng (hoặc học viên chọn nhập môn từ đầu không qua trắc nghiệm).
+                                </p>
+                              )}
+                            </div>
+                          </>
+                        ) : (
+                          <div className="p-3 rounded-xl bg-white/80 dark:bg-slate-900 border border-dashed border-slate-200 dark:border-slate-700 text-xs text-slate-500 text-center">
+                            Học viên chưa hoàn thành bài kiểm tra chẩn đoán AI Placement.
+                          </div>
+                        )}
                       </div>
-                      <div className="bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
-                        <div className="text-[11px] text-slate-400">Tổng kinh nghiệm</div>
-                        <div className="text-base font-extrabold text-slate-800 dark:text-white">{(user.totalXp || 0).toLocaleString()} XP</div>
-                      </div>
-                      <div className="bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
-                        <div className="text-[11px] text-slate-400">Điểm bài test</div>
-                        <div className="text-base font-extrabold text-emerald-600">{user.placementScore ?? 0}%</div>
-                      </div>
-                    </div>
-                  </div>
+                    );
+                  })()}
 
                   {/* Roadmap Progress */}
                   <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-3">

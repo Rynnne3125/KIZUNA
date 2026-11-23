@@ -13,7 +13,9 @@ import { LibraryPage } from './user/pages/LibraryPage';
 import { ExamPage } from './user/pages/ExamPage';
 import { ProfilePage } from './user/pages/ProfilePage';
 import { AdminDashboardPage } from './admin/pages/AdminDashboardPage';
-import { Smartphone, Download, CheckCircle2, Moon, Sun, Flame, X } from 'lucide-react';
+import { Smartphone, Download, CheckCircle2, Moon, Sun, Flame, X, Wrench, LogOut, RefreshCw } from 'lucide-react';
+import { db } from './config/firebase';
+import { doc, getDoc } from 'firebase/firestore';
 import { ApkDownloadModal } from './user/components/ApkDownloadModal';
 import { isNativeApp } from './user/utils/platform';
 import { useNetworkStatus } from './user/hooks/useNetworkStatus';
@@ -68,6 +70,46 @@ export default function App() {
   );
   const [syncNotice, setSyncNotice] = useState<string | null>(null);
   const [streakNotice, setStreakNotice] = useState<string | null>(null);
+  const [maintenanceState, setMaintenanceState] = useState<{ active: boolean; message: string }>({
+    active: false,
+    message: 'Hệ thống KIZUNA đang được bảo trì và cập nhật nội dung giáo trình. Vui lòng quay lại sau ít phút.'
+  });
+
+  const checkMaintenanceStatus = async () => {
+    try {
+      const apiBase = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
+      const res = await fetch(`${apiBase}/api/v1/system/status`, { signal: AbortSignal.timeout(3000) });
+      if (res.ok) {
+        const json = await res.json();
+        const data = json?.data;
+        if (data && typeof data.maintenanceMode === 'boolean') {
+          setMaintenanceState({
+            active: data.maintenanceMode,
+            message: data.maintenanceMessage || maintenanceState.message
+          });
+          return;
+        }
+      }
+    } catch {}
+
+    try {
+      if (db) {
+        const snap = await getDoc(doc(db, 'system_config', 'settings'));
+        if (snap.exists()) {
+          const data = snap.data();
+          setMaintenanceState({
+            active: Boolean(data?.maintenanceMode),
+            message: data?.maintenanceMessage || maintenanceState.message
+          });
+          return;
+        }
+      }
+    } catch {}
+  };
+
+  useEffect(() => {
+    void checkMaintenanceStatus();
+  }, [user?.id, activeTab]);
 
   useEffect(() => {
     const handleOnline = async () => {
@@ -332,13 +374,51 @@ export default function App() {
     );
   }
 
-  // 2. Chế độ Quản trị viên (Admin Dashboard)
+  // 2. Chế độ Quản trị viên (Admin Dashboard - luôn truy cập được kể cả khi đang bật bảo trì)
   if (activeTab === 'admin') {
     return (
       <AdminDashboardPage
         user={user}
         onLogout={handleLogout}
       />
+    );
+  }
+
+  // 2.5. Chế độ Bảo trì Hệ thống (Maintenance Mode áp dụng cho học viên ROLE_USER)
+  if (maintenanceState.active && user.role !== 'ROLE_ADMIN') {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 p-6">
+        <div className="max-w-md w-full bg-white dark:bg-slate-900 rounded-3xl border border-amber-200 dark:border-amber-900/60 p-8 text-center shadow-xl space-y-5">
+          <div className="w-16 h-16 mx-auto rounded-2xl bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+            <Wrench className="w-8 h-8" />
+          </div>
+          <div>
+            <span className="text-[11px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
+              KIZUNA • Đang Bảo Trì Hệ Thống
+            </span>
+            <h1 className="text-2xl font-black text-slate-900 dark:text-white mt-3">
+              Hệ thống đang được nâng cấp
+            </h1>
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
+              {maintenanceState.message}
+            </p>
+          </div>
+          <div className="flex items-center justify-center gap-3 pt-2">
+            <button
+              onClick={() => void checkMaintenanceStatus()}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold cursor-pointer transition-colors"
+            >
+              <RefreshCw className="w-4 h-4" /> Kiểm tra lại
+            </button>
+            <button
+              onClick={handleLogout}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-bold hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors"
+            >
+              <LogOut className="w-4 h-4" /> Đăng xuất
+            </button>
+          </div>
+        </div>
+      </div>
     );
   }
 

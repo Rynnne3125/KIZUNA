@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 @Repository
 public class UserFirestoreRepository {
@@ -24,7 +25,7 @@ public class UserFirestoreRepository {
         if (user.getId() == null || user.getId().isBlank()) {
             user.setId(String.valueOf(System.currentTimeMillis()));
         }
-        WriteResult result = firestore.collection(COLLECTION_NAME)
+        firestore.collection(COLLECTION_NAME)
                 .document(user.getId())
                 .set(user).get();
         return user.getId();
@@ -33,12 +34,16 @@ public class UserFirestoreRepository {
     // READ ALL (GET)
     public List<User> getAllUsers() throws ExecutionException, InterruptedException {
         ApiFuture<QuerySnapshot> future = firestore.collection(COLLECTION_NAME)
-                .whereEqualTo("isDeleted", false) // Chỉ lấy các user chưa bị xóa
+                .whereEqualTo("isDeleted", false)
                 .get();
         List<QueryDocumentSnapshot> documents = future.get().getDocuments();
         List<User> users = new ArrayList<>();
         for (DocumentSnapshot document : documents) {
-            users.add(document.toObject(User.class));
+            User u = document.toObject(User.class);
+            if (u != null) {
+                if (u.getId() == null || u.getId().isBlank()) u.setId(document.getId());
+                users.add(u);
+            }
         }
         return users;
     }
@@ -49,7 +54,47 @@ public class UserFirestoreRepository {
         ApiFuture<DocumentSnapshot> future = docRef.get();
         DocumentSnapshot document = future.get();
         if (document.exists()) {
-            return document.toObject(User.class);
+            User u = document.toObject(User.class);
+            if (u != null && (u.getId() == null || u.getId().isBlank())) {
+                u.setId(document.getId());
+            }
+            return u;
+        }
+        return null;
+    }
+
+    // FIND BY EMAIL OR USERNAME
+    public User findByEmailOrUsername(String identifier) {
+        if (firestore == null || identifier == null || identifier.isBlank()) return null;
+        String clean = identifier.trim().toLowerCase();
+        try {
+            var snapEmail = firestore.collection(COLLECTION_NAME)
+                    .whereEqualTo("email", clean)
+                    .limit(1)
+                    .get()
+                    .get(3, TimeUnit.SECONDS);
+            if (!snapEmail.isEmpty()) {
+                DocumentSnapshot doc = snapEmail.getDocuments().get(0);
+                User u = doc.toObject(User.class);
+                if (u != null) {
+                    if (u.getId() == null || u.getId().isBlank()) u.setId(doc.getId());
+                    return u;
+                }
+            }
+            var snapUser = firestore.collection(COLLECTION_NAME)
+                    .whereEqualTo("username", clean)
+                    .limit(1)
+                    .get()
+                    .get(3, TimeUnit.SECONDS);
+            if (!snapUser.isEmpty()) {
+                DocumentSnapshot doc = snapUser.getDocuments().get(0);
+                User u = doc.toObject(User.class);
+                if (u != null) {
+                    if (u.getId() == null || u.getId().isBlank()) u.setId(doc.getId());
+                    return u;
+                }
+            }
+        } catch (Exception ignored) {
         }
         return null;
     }

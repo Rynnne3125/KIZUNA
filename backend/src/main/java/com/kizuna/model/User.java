@@ -1,5 +1,10 @@
 package com.kizuna.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.Map;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
     private String id;
@@ -8,8 +13,8 @@ public class User {
     private String fullName;
     private String email;
     private String role; // "ROLE_ADMIN" or "ROLE_USER"
-    private boolean enabled;
-    // Bổ sung vào phần khai báo biến
+    private boolean enabled = true;
+    private String status = "ACTIVE";
     private boolean isDeleted = false;
     private int activePoints = 0;
     private int totalXp = 0;
@@ -17,6 +22,15 @@ public class User {
     private int longestStreak = 0;
     private String avatarUrl = "";
     private String level = "N5";
+    private Boolean placementVerified;
+    private Integer placementScore;
+    private String placementMethod;
+    private Map<String, Object> placementDetails;
+    private String lastAntiCheatNote;
+    private String lastActiveDate;
+    private String lastStudiedAt;
+    private String createdAt;
+    private String updatedAt;
 
     public User() {
     }
@@ -29,116 +43,81 @@ public class User {
         this.email = email;
         this.role = role;
         this.enabled = enabled;
+        this.status = enabled ? "ACTIVE" : "BANNED";
     }
 
-    public String getId() {
-        return id;
-    }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
 
-    public String getUsername() {
-        return username;
-    }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
 
-    public String getPassword() {
-        return password;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
+    public boolean isEnabled() { return enabled; }
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-    }
-    public boolean isDeleted() {
-        return isDeleted;
+        this.status = enabled ? "ACTIVE" : "BANNED";
     }
 
-    public void setDeleted(boolean deleted) {
-        this.isDeleted = deleted;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public int getActivePoints() {
-        return activePoints;
-    }
+    public boolean isDeleted() { return isDeleted; }
+    public void setDeleted(boolean deleted) { isDeleted = deleted; }
 
-    public void setActivePoints(int activePoints) {
-        this.activePoints = activePoints;
-    }
+    public int getActivePoints() { return activePoints; }
+    public void setActivePoints(int activePoints) { this.activePoints = activePoints; }
 
-    public int getTotalXp() {
-        return totalXp;
-    }
+    public int getTotalXp() { return totalXp; }
+    public void setTotalXp(int totalXp) { this.totalXp = totalXp; }
 
-    public void setTotalXp(int totalXp) {
-        this.totalXp = totalXp;
-    }
+    public int getCurrentStreak() { return currentStreak; }
+    public void setCurrentStreak(int currentStreak) { this.currentStreak = currentStreak; }
 
-    public int getCurrentStreak() {
-        return currentStreak;
-    }
+    public int getLongestStreak() { return longestStreak; }
+    public void setLongestStreak(int longestStreak) { this.longestStreak = longestStreak; }
 
-    public void setCurrentStreak(int currentStreak) {
-        this.currentStreak = currentStreak;
-    }
+    public String getAvatarUrl() { return avatarUrl; }
+    public void setAvatarUrl(String avatarUrl) { this.avatarUrl = avatarUrl; }
 
-    public int getLongestStreak() {
-        return longestStreak;
-    }
+    public String getLevel() { return level; }
+    public void setLevel(String level) { this.level = level; }
 
-    public void setLongestStreak(int longestStreak) {
-        this.longestStreak = longestStreak;
-    }
+    public Boolean getPlacementVerified() { return placementVerified; }
+    public void setPlacementVerified(Boolean placementVerified) { this.placementVerified = placementVerified; }
 
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
+    public Integer getPlacementScore() { return placementScore; }
+    public void setPlacementScore(Integer placementScore) { this.placementScore = placementScore; }
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-    }
+    public String getPlacementMethod() { return placementMethod; }
+    public void setPlacementMethod(String placementMethod) { this.placementMethod = placementMethod; }
 
-    public String getLevel() {
-        return level;
-    }
+    public Map<String, Object> getPlacementDetails() { return placementDetails; }
+    public void setPlacementDetails(Map<String, Object> placementDetails) { this.placementDetails = placementDetails; }
 
-    public void setLevel(String level) {
-        this.level = level;
-    }
+    public String getLastAntiCheatNote() { return lastAntiCheatNote; }
+    public void setLastAntiCheatNote(String lastAntiCheatNote) { this.lastAntiCheatNote = lastAntiCheatNote; }
+
+    public String getLastActiveDate() { return lastActiveDate; }
+    public void setLastActiveDate(String lastActiveDate) { this.lastActiveDate = lastActiveDate; }
+
+    public String getLastStudiedAt() { return lastStudiedAt; }
+    public void setLastStudiedAt(String lastStudiedAt) { this.lastStudiedAt = lastStudiedAt; }
+
+    public String getCreatedAt() { return createdAt; }
+    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
+
+    public String getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(String updatedAt) { this.updatedAt = updatedAt; }
 }

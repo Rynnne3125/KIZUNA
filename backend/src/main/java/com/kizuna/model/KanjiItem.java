@@ -1,8 +1,11 @@
 package com.kizuna.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class KanjiItem {
     private String id;
     private String milestoneId;
@@ -15,6 +18,8 @@ public class KanjiItem {
     private String sinoVietnamese;
     private String vietnameseMeaning;
     private String mnemonicStory;
+    private String level = "N5";
+    private String jlptLevel = "N5";
     private List<Object> exampleCompounds = new ArrayList<>();
 
     public KanjiItem() {}
@@ -51,6 +56,18 @@ public class KanjiItem {
 
     public String getMnemonicStory() { return mnemonicStory; }
     public void setMnemonicStory(String mnemonicStory) { this.mnemonicStory = mnemonicStory; }
+
+    public String getLevel() { return level != null ? level : jlptLevel; }
+    public void setLevel(String level) {
+        this.level = level;
+        if (level != null) this.jlptLevel = level;
+    }
+
+    public String getJlptLevel() { return jlptLevel != null ? jlptLevel : level; }
+    public void setJlptLevel(String jlptLevel) {
+        this.jlptLevel = jlptLevel;
+        if (jlptLevel != null) this.level = jlptLevel;
+    }
 
     public List<Object> getExampleCompounds() { return exampleCompounds; }
     public void setExampleCompounds(List<Object> exampleCompounds) { this.exampleCompounds = exampleCompounds; }

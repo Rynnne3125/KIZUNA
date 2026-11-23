@@ -20,9 +20,58 @@ export function isAdminEmail(email: string): boolean {
 }
 
 const TOKEN_KEY = 'kizuna_token';
+const BACKEND_JWT_KEY = 'kizuna_backend_jwt';
 const USER_KEY = 'kizuna_user';
 const SESSION_EXPIRES_KEY = 'kizuna_session_expires_at';
 const OTP_STORAGE_KEY = 'kizuna_pending_otp';
+
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
+
+async function requestBackendJwtLogin(usernameOrEmail: string, password: string): Promise<string | null> {
+  if (!usernameOrEmail || !password) return null;
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/v1/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: usernameOrEmail, password }),
+      signal: AbortSignal.timeout(4000)
+    });
+    if (!res.ok) return null;
+    const payload = await res.json();
+    const jwt = payload?.data?.token;
+    if (typeof jwt === 'string' && jwt.includes('.')) {
+      localStorage.setItem(BACKEND_JWT_KEY, jwt);
+      return jwt;
+    }
+  } catch {
+    // Backend may be offline in static/offline environments; Firestore session still works.
+  }
+  return null;
+}
+
+async function requestBackendJwtFromFirebase(fbUser: any): Promise<string | null> {
+  try {
+    if (!fbUser || typeof fbUser.getIdToken !== 'function') return null;
+    const idToken = await fbUser.getIdToken();
+    if (!idToken) return null;
+    const res = await fetch(`${API_BASE_URL}/api/v1/auth/firebase-exchange`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ idToken }),
+      signal: AbortSignal.timeout(4000)
+    });
+    if (!res.ok) return null;
+    const payload = await res.json();
+    const jwt = payload?.data?.token;
+    if (typeof jwt === 'string' && jwt.includes('.')) {
+      localStorage.setItem(BACKEND_JWT_KEY, jwt);
+      return jwt;
+    }
+  } catch {
+    // Non-fatal fallback
+  }
+  return null;
+}
 // Chuẩn hóa role linh hoạt (hỗ trợ admin, ADMIN, ROLE_ADMIN,...)
 export function normalizeRole(rawRole: any): Role {
   if (!rawRole) return 'ROLE_USER';
@@ -263,7 +312,15 @@ export const authService = {
   },
 
   getToken(): string | null {
-    return localStorage.getItem(TOKEN_KEY);
+    return localStorage.getItem(BACKEND_JWT_KEY) || localStorage.getItem(TOKEN_KEY);
+  },
+
+  getBackendJwt(): string | null {
+    const jwt = localStorage.getItem(BACKEND_JWT_KEY);
+    if (jwt && jwt.split('.').length === 3) return jwt;
+    const tok = localStorage.getItem(TOKEN_KEY);
+    if (tok && tok.split('.').length === 3 && !tok.includes('mock_signature')) return tok;
+    return null;
   },
 
   getCurrentUser(): User | null {
@@ -312,6 +369,7 @@ export const authService = {
 
   clearSession() {
     localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(BACKEND_JWT_KEY);
     localStorage.removeItem(USER_KEY);
     localStorage.removeItem(SESSION_EXPIRES_KEY);
     localStorage.removeItem(OTP_STORAGE_KEY);
@@ -552,7 +610,8 @@ export const authService = {
             // bỏ qua lỗi storage
           }
 
-          const token = `token_fs_${Date.now()}_${finalUser.id}`;
+          const backendJwt = await requestBackendJwtLogin(emailInput, password);
+          const token = backendJwt || `token_fs_${Date.now()}_${finalUser.id}`;
           this.setSession(token, finalUser);
           return { user: finalUser, token };
         }
@@ -579,7 +638,8 @@ export const authService = {
         level: 'N1',
         avatarUrl: 'https://api.dicebear.com/7.x/bottts/svg?seed=admin'
       };
-      const token = `token_admin_${Date.now()}`;
+      const backendJwt = await requestBackendJwtLogin(emailInput, password);
+      const token = backendJwt || `token_admin_${Date.now()}`;
       this.setSession(token, adminUser);
       return { user: adminUser, token };
     }
@@ -864,7 +924,8 @@ export const authService = {
       // bỏ qua lỗi storage
     }
 
-    const token = `token_google_${Date.now()}_${appUser.id}`;
+    const backendJwt = await requestBackendJwtFromFirebase(fbUser);
+    const token = backendJwt || `token_google_${Date.now()}_${appUser.id}`;
     this.setSession(token, appUser);
     window.dispatchEvent(new Event('kizuna_user_updated'));
     return { user: appUser, token };
