@@ -5,6 +5,7 @@ import { VOCABULARY_CATALOG } from '../data/vocabularyCatalog';
 import { GRAMMAR_CATALOG } from '../data/grammarCatalog';
 import { KANJI_CATALOG } from '../data/kanjiCatalog';
 import { STAGES_CATALOG, MILESTONES_CATALOG } from '../data/roadmapCatalog';
+import { shouldSkipFirestore, handleFirestoreError } from '../utils/firestoreGuard';
 
 let isKizunaFirestoreOffline =
   !db ||
@@ -13,8 +14,8 @@ let isKizunaFirestoreOffline =
   firebaseConfig.apiKey === 'your_firebase_api_key_here';
 
 async function safeGetDocs(q: any, timeoutMs = 8000): Promise<any> {
-  if (isKizunaFirestoreOffline || (typeof navigator !== 'undefined' && !navigator.onLine)) {
-    throw new Error('FIRESTORE_OFFLINE');
+  if (isKizunaFirestoreOffline || shouldSkipFirestore() || (typeof navigator !== 'undefined' && !navigator.onLine)) {
+    throw new Error('FIRESTORE_OFFLINE_OR_QUOTA_EXHAUSTED');
   }
   let timer: ReturnType<typeof setTimeout> | undefined;
   try {
@@ -26,6 +27,9 @@ async function safeGetDocs(q: any, timeoutMs = 8000): Promise<any> {
         }, timeoutMs);
       })
     ]);
+  } catch (e: any) {
+    handleFirestoreError(e);
+    throw e;
   } finally {
     if (timer) clearTimeout(timer);
   }

@@ -1,6 +1,7 @@
 import { db } from '../../config/firebase';
-import { collection, getDocs, doc, getDoc, setDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc, setDoc, query, limit } from 'firebase/firestore';
 import { RankTier, UserLeaderboardItem } from '../types/ranking';
+import { shouldSkipFirestore, handleFirestoreError } from '../utils/firestoreGuard';
 
 export const DEFAULT_RANK_TIERS: RankTier[] = [
   {
@@ -75,7 +76,7 @@ export const rankingService = {
       // ignore
     }
 
-    if (!db) return DEFAULT_RANK_TIERS;
+    if (!db || shouldSkipFirestore()) return DEFAULT_RANK_TIERS;
     try {
       const snap = await getDoc(doc(db, CONFIG_DOC_PATH, CONFIG_DOC_ID));
       if (snap.exists()) {
@@ -92,6 +93,7 @@ export const rankingService = {
       await this.saveRankTiers(DEFAULT_RANK_TIERS);
       return DEFAULT_RANK_TIERS;
     } catch (e) {
+      handleFirestoreError(e);
       console.warn('[Ranking] Không thể tải mốc rank từ Firestore, dùng mặc định:', e);
       return DEFAULT_RANK_TIERS;
     }
@@ -101,7 +103,7 @@ export const rankingService = {
    * Admin lưu hoặc chỉnh sửa các mốc điểm xếp hạng lên Firestore
    */
   async saveRankTiers(tiers: RankTier[]): Promise<boolean> {
-    if (!db) return false;
+    if (!db || shouldSkipFirestore()) return false;
     try {
       const sorted = [...tiers].sort((a, b) => a.minPoints - b.minPoints);
       await setDoc(doc(db, CONFIG_DOC_PATH, CONFIG_DOC_ID), {
@@ -114,6 +116,7 @@ export const rankingService = {
       sessionStorage.removeItem('kizuna_leaderboard_cache');
       return true;
     } catch (e) {
+      handleFirestoreError(e);
       console.error('[Ranking] Lỗi lưu cấu hình rank lên Firestore:', e);
       return false;
     }
@@ -151,7 +154,7 @@ export const rankingService = {
   /**
    * Lấy danh sách bảng xếp hạng học viên từ Firestore
    * QUY TẮC BẮT BUỘC: CHỈ người dùng role user mới tham gia xếp hạng (loại bỏ admin)
-   * TỐI ƯU HÓA: Dùng cache sessionStorage (TTL 5 phút) để tránh đọc Firestore liên tục mỗi khi chuyển tab.
+   * TỐI ƯU HÓA: Dùng cache sessionStorage (TTL 5 phút), limit(50), và fallback localStorage.
    */
   async getLearnerLeaderboard(tiers: RankTier[] = DEFAULT_RANK_TIERS): Promise<UserLeaderboardItem[]> {
     const CACHE_KEY = 'kizuna_leaderboard_cache';
@@ -167,9 +170,52 @@ export const rankingService = {
       // ignore
     }
 
-    if (!db) return [];
+    const buildLocalLeaderboard = (): UserLeaderboardItem[] => {
+      try {
+        const raw = localStorage.getItem('kizuna_registered_users');
+        const users: any[] = raw ? JSON.parse(raw) : [];
+        const curRaw = localStorage.getItem('kizuna_user');
+        if (curRaw) {
+          const cur = JSON.parse(curRaw);
+          if (!users.some(u => u.id === cur.id || u.email === cur.email)) {
+            users.push(cur);
+          }
+        }
+        const validLearners = users
+          .filter(u => !String(u.role || '').toLowerCase().includes('admin') && !u.isDeleted)
+          .map((u, idx) => {
+            const ap = typeof u.activePoints === 'number' ? u.activePoints : 0;
+            return {
+              id: u.id || `local_user_${idx}`,
+              fullName: u.fullName || u.username || 'Học viên KIZUNA',
+              username: u.username || 'learner',
+              email: u.email || '',
+              avatarUrl: u.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${u.username || idx}`,
+              activePoints: ap,
+              totalXp: typeof u.totalXp === 'number' ? u.totalXp : 0,
+              currentStreak: typeof u.currentStreak === 'number' ? u.currentStreak : 0,
+              rankTier: this.calculateRank(ap, tiers),
+              position: 0
+            };
+          })
+          .sort((a, b) => b.activePoints - a.activePoints);
+
+        validLearners.forEach((item, index) => {
+          item.position = index + 1;
+        });
+        return validLearners;
+      } catch {
+        return [];
+      }
+    };
+
+    if (!db || shouldSkipFirestore()) {
+      return buildLocalLeaderboard();
+    }
+
     try {
-      const snap = await getDocs(collection(db, 'users'));
+      const q = query(collection(db, 'users'), limit(50));
+      const snap = await getDocs(q);
       const items: UserLeaderboardItem[] = [];
 
       snap.forEach(d => {
@@ -177,7 +223,7 @@ export const rankingService = {
         const role = String(u.role || '').trim().toLowerCase();
         
         // CHỈ LẤY HỌC VIÊN (ROLE_USER), KHÔNG XẾP HẠNG TÀI KHOẢN ADMIN
-        if (role.includes('admin')) {
+        if (role.includes('admin') || u.isDeleted) {
           return;
         }
 
@@ -208,14 +254,19 @@ export const rankingService = {
         item.position = index + 1;
       });
 
-      try {
-        sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: items, exp: Date.now() + 5 * 60 * 1000 }));
-      } catch {}
+      if (items.length > 0) {
+        try {
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: items, exp: Date.now() + 5 * 60 * 1000 }));
+        } catch {}
+        return items;
+      }
 
-      return items;
+      return buildLocalLeaderboard();
     } catch (e) {
-      console.warn('[Ranking] Lỗi tải bảng xếp hạng từ Firestore:', e);
-      return [];
+      handleFirestoreError(e);
+      console.warn('[Ranking] Lỗi tải bảng xếp hạng từ Firestore, chuyển sang bộ nhớ cục bộ:', e);
+      return buildLocalLeaderboard();
     }
   }
 };
+

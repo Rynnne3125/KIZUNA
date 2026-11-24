@@ -10,6 +10,16 @@ import { db, firebaseConfig } from '../../config/firebase';
 import { collection, getDocs, getDoc, setDoc, deleteDoc, doc, updateDoc, query, where, limit } from 'firebase/firestore';
 import { hashPassword, authService } from '../../user/services/authService';
 import { adminApiClient } from './adminApiClient';
+import { STAGES_CATALOG, MILESTONES_CATALOG } from '../../user/data/roadmapCatalog';
+import { shouldSkipFirestore, handleFirestoreError } from '../../user/utils/firestoreGuard';
+import {
+  FALLBACK_EXAMS,
+  FALLBACK_VOCABULARY,
+  FALLBACK_GRAMMAR,
+  FALLBACK_KANJI,
+  FALLBACK_AI_AUDITS,
+  ROOT_ADMIN_USER
+} from '../data/adminFallbackData';
 
 const isFirestoreDummy =
   !db ||
@@ -40,8 +50,8 @@ const LOCAL_SETTINGS_KEY = 'kizuna_system_settings';
 const LOCAL_AI_CONFIG_KEY = 'kizuna_ai_runtime_config';
 
 async function withFirestoreTimeout<T>(promise: Promise<T>, timeoutMs = 15000): Promise<T> {
-  if (isFirestoreDummy) {
-    throw new Error('FIRESTORE_CONFIG_MISSING');
+  if (isFirestoreDummy || shouldSkipFirestore()) {
+    throw new Error('FIRESTORE_CONFIG_MISSING_OR_QUOTA_EXHAUSTED');
   }
   let timer: ReturnType<typeof setTimeout> | undefined;
   try {
@@ -53,13 +63,16 @@ async function withFirestoreTimeout<T>(promise: Promise<T>, timeoutMs = 15000): 
         }, timeoutMs);
       })
     ]);
+  } catch (e: any) {
+    handleFirestoreError(e);
+    throw e;
   } finally {
     if (timer) clearTimeout(timer);
   }
 }
 
 async function safeFirestoreWrite(writePromiseFactory: () => Promise<any>): Promise<void> {
-  if (isFirestoreDummy) return;
+  if (isFirestoreDummy || shouldSkipFirestore()) return;
   try {
     await withFirestoreTimeout(writePromiseFactory(), 10000);
   } catch (e) {
@@ -69,10 +82,15 @@ async function safeFirestoreWrite(writePromiseFactory: () => Promise<any>): Prom
 }
 
 async function fetchCollectionData<T>(collectionName: string, queryLimit: number = 0): Promise<T[]> {
-  if (isFirestoreDummy) return [];
+  if (isFirestoreDummy || shouldSkipFirestore()) return [];
   try {
     const colRef = collection(db, collectionName);
-    const q = queryLimit > 0 ? query(colRef, limit(queryLimit)) : query(colRef);
+    // Bảo vệ Quota: Giới hạn an toàn mặc định cho các collection kích thước lớn
+    const effectiveLimit = queryLimit > 0
+      ? queryLimit
+      : (['vocabulary_items', 'kanji_dictionary', 'grammar_items', 'user_srs_items', 'user_progress'].includes(collectionName) ? 100 : 0);
+
+    const q = effectiveLimit > 0 ? query(colRef, limit(effectiveLimit)) : query(colRef);
     const snap = await withFirestoreTimeout(getDocs(q), 15000);
     const list: T[] = [];
     if (!snap.empty) {
@@ -81,6 +99,7 @@ async function fetchCollectionData<T>(collectionName: string, queryLimit: number
     return list;
   } catch (e) {
     console.warn(`[AdminService] Firestore collection '${collectionName}' error/timeout:`, e);
+    handleFirestoreError(e);
     return [];
   }
 }
@@ -279,16 +298,23 @@ export const adminService = {
     if (apiRes.ok && Array.isArray(apiRes.data) && apiRes.data.length > 0) {
       return apiRes.data.filter(u => !u.isDeleted);
     }
-    const all = await fetchCollectionData<AdminUser>('users');
+    const all = await fetchCollectionData<AdminUser>('users', 100);
     if (all.length > 0) {
       return all.filter(u => !u.isDeleted);
     }
     try {
       const localReg: AdminUser[] = JSON.parse(localStorage.getItem('kizuna_registered_users') || '[]');
-      return localReg.filter(u => !u.isDeleted);
+      const filtered = localReg.filter(u => !u.isDeleted);
+      if (filtered.length > 0) {
+        if (!filtered.some(u => u.email === ROOT_ADMIN_USER.email || u.role === 'ROLE_ADMIN')) {
+          return [ROOT_ADMIN_USER, ...filtered];
+        }
+        return filtered;
+      }
     } catch {
-      return [];
+      // fallback
     }
+    return [ROOT_ADMIN_USER];
   },
 
   async createUser(payload: {
@@ -584,10 +610,16 @@ export const adminService = {
   // =========================================================================
   async getAiAudits(): Promise<AiEvaluationAudit[]> {
     const apiRes = await adminApiClient.request<AiEvaluationAudit[]>('/api/v1/admin/ai/audit-queue');
-    const fsAudits = await fetchCollectionData<AiEvaluationAudit>('ai_evaluation_audits');
+    const fsAudits = await fetchCollectionData<AiEvaluationAudit>('ai_evaluation_audits', 50);
+
+    const rawList = [
+      ...(apiRes.ok && Array.isArray(apiRes.data) ? apiRes.data : []),
+      ...fsAudits
+    ];
+    const sourceList = rawList.length > 0 ? rawList : FALLBACK_AI_AUDITS;
 
     const map = new Map<string, AiEvaluationAudit>();
-    for (const item of [...fsAudits, ...(apiRes.ok && Array.isArray(apiRes.data) ? apiRes.data : [])]) {
+    for (const item of sourceList) {
       if (item && item.id) {
         map.set(item.id, {
           ...item,
@@ -995,10 +1027,14 @@ export const adminService = {
   // =========================================================================
   async getStages(): Promise<Stage[]> {
     const apiRes = await adminApiClient.request<Stage[]>('/api/v1/admin/stages');
-    const list = (apiRes.ok && Array.isArray(apiRes.data) && apiRes.data.length > 0)
-      ? apiRes.data
-      : await fetchCollectionData<Stage>('stages');
-    return list.sort((a, b) => ((a.orderIndex ?? a.order_index ?? 0) - (b.orderIndex ?? b.order_index ?? 0)));
+    if (apiRes.ok && Array.isArray(apiRes.data) && apiRes.data.length > 0) {
+      return apiRes.data.sort((a, b) => ((a.orderIndex ?? a.order_index ?? 0) - (b.orderIndex ?? b.order_index ?? 0)));
+    }
+    const fsList = await fetchCollectionData<Stage>('stages');
+    if (fsList.length > 0) {
+      return fsList.sort((a, b) => ((a.orderIndex ?? a.order_index ?? 0) - (b.orderIndex ?? b.order_index ?? 0)));
+    }
+    return [...STAGES_CATALOG].sort((a, b) => ((a.orderIndex ?? a.order_index ?? 0) - (b.orderIndex ?? b.order_index ?? 0)));
   },
 
   async createStage(payload: Partial<Stage>): Promise<Stage> {
@@ -1079,10 +1115,14 @@ export const adminService = {
 
   async getMilestones(): Promise<Milestone[]> {
     const apiRes = await adminApiClient.request<Milestone[]>('/api/v1/admin/milestones');
-    const list = (apiRes.ok && Array.isArray(apiRes.data) && apiRes.data.length > 0)
-      ? apiRes.data
-      : await fetchCollectionData<Milestone>('milestones');
-    return list.sort((a, b) => ((a.orderIndex ?? a.order_index ?? 0) - (b.orderIndex ?? b.order_index ?? 0)));
+    if (apiRes.ok && Array.isArray(apiRes.data) && apiRes.data.length > 0) {
+      return apiRes.data.sort((a, b) => ((a.orderIndex ?? a.order_index ?? 0) - (b.orderIndex ?? b.order_index ?? 0)));
+    }
+    const fsList = await fetchCollectionData<Milestone>('milestones');
+    if (fsList.length > 0) {
+      return fsList.sort((a, b) => ((a.orderIndex ?? a.order_index ?? 0) - (b.orderIndex ?? b.order_index ?? 0)));
+    }
+    return [...MILESTONES_CATALOG].sort((a, b) => ((a.orderIndex ?? a.order_index ?? 0) - (b.orderIndex ?? b.order_index ?? 0)));
   },
 
   async createMilestone(payload: Partial<Milestone>): Promise<Milestone> {
@@ -1301,26 +1341,35 @@ export const adminService = {
       }
     }
 
-    if (!isFirestoreDummy) {
+    if (!isFirestoreDummy && !shouldSkipFirestore()) {
       try {
         if (vocabList.length === 0) {
-          const qV = query(collection(db, 'vocabulary_items'), where('milestoneId', '==', milestoneId));
+          const qV = query(collection(db, 'vocabulary_items'), where('milestoneId', '==', milestoneId), limit(50));
           const sV = await withFirestoreTimeout(getDocs(qV), 10000);
           sV.forEach(d => vocabList.push({ id: d.id, ...d.data() }));
         }
         if (kanjiList.length === 0) {
-          const qK = query(collection(db, 'kanji_dictionary'), where('milestoneId', '==', milestoneId));
+          const qK = query(collection(db, 'kanji_dictionary'), where('milestoneId', '==', milestoneId), limit(50));
           const sK = await withFirestoreTimeout(getDocs(qK), 10000);
           sK.forEach(d => kanjiList.push({ id: d.id, ...d.data() }));
         }
         if (grammarList.length === 0) {
-          const qG = query(collection(db, 'grammar_items'), where('milestoneId', '==', milestoneId));
+          const qG = query(collection(db, 'grammar_items'), where('milestoneId', '==', milestoneId), limit(50));
           const sG = await withFirestoreTimeout(getDocs(qG), 10000);
           sG.forEach(d => grammarList.push({ id: d.id, ...d.data() }));
         }
       } catch (e) {
         console.warn('Error querying milestone whitelist:', e);
       }
+    }
+
+    if (vocabList.length === 0 && kanjiList.length === 0 && grammarList.length === 0) {
+      const fbV = FALLBACK_VOCABULARY.filter(v => (v.milestoneId || v.milestone_id) === milestoneId);
+      const fbK = FALLBACK_KANJI.filter(k => (k.milestoneId || k.milestone_id) === milestoneId);
+      const fbG = FALLBACK_GRAMMAR.filter(g => (g.milestoneId || g.milestone_id) === milestoneId);
+      vocabList = fbV.length > 0 ? fbV : FALLBACK_VOCABULARY.slice(0, 3);
+      kanjiList = fbK.length > 0 ? fbK : FALLBACK_KANJI.slice(0, 2);
+      grammarList = fbG.length > 0 ? fbG : FALLBACK_GRAMMAR.slice(0, 2);
     }
 
     return {
@@ -1377,10 +1426,13 @@ export const adminService = {
   // VOCABULARY, GRAMMAR, KANJI, EXAMS CRUD + BULK CSV + BACKUP/RESTORE
   // =========================================================================
   async getVocabulary(): Promise<VocabularyItem[]> {
-    const fsList = await fetchCollectionData<VocabularyItem>('vocabulary_items');
-    if (fsList.length > 0) return fsList;
     const apiRes = await adminApiClient.request<VocabularyItem[]>('/api/v1/admin/vocabulary');
-    return apiRes.ok && Array.isArray(apiRes.data) ? apiRes.data : [];
+    if (apiRes.ok && Array.isArray(apiRes.data) && apiRes.data.length > 0) {
+      return apiRes.data;
+    }
+    const fsList = await fetchCollectionData<VocabularyItem>('vocabulary_items', 100);
+    if (fsList.length > 0) return fsList;
+    return FALLBACK_VOCABULARY;
   },
 
   async createVocabulary(payload: Partial<VocabularyItem>): Promise<VocabularyItem> {
@@ -1520,10 +1572,13 @@ export const adminService = {
   },
 
   async getGrammar(): Promise<GrammarItem[]> {
-    const fsList = await fetchCollectionData<GrammarItem>('grammar_items');
-    if (fsList.length > 0) return fsList;
     const apiRes = await adminApiClient.request<GrammarItem[]>('/api/v1/admin/grammar');
-    return apiRes.ok && Array.isArray(apiRes.data) ? apiRes.data : [];
+    if (apiRes.ok && Array.isArray(apiRes.data) && apiRes.data.length > 0) {
+      return apiRes.data;
+    }
+    const fsList = await fetchCollectionData<GrammarItem>('grammar_items', 100);
+    if (fsList.length > 0) return fsList;
+    return FALLBACK_GRAMMAR;
   },
 
   async createGrammar(payload: Partial<GrammarItem>): Promise<GrammarItem> {
@@ -1610,10 +1665,13 @@ export const adminService = {
   },
 
   async getKanji(): Promise<KanjiDictionary[]> {
-    const fsList = await fetchCollectionData<KanjiDictionary>('kanji_dictionary');
-    if (fsList.length > 0) return fsList;
     const apiRes = await adminApiClient.request<KanjiDictionary[]>('/api/v1/admin/kanji');
-    return apiRes.ok && Array.isArray(apiRes.data) ? apiRes.data : [];
+    if (apiRes.ok && Array.isArray(apiRes.data) && apiRes.data.length > 0) {
+      return apiRes.data;
+    }
+    const fsList = await fetchCollectionData<KanjiDictionary>('kanji_dictionary', 100);
+    if (fsList.length > 0) return fsList;
+    return FALLBACK_KANJI;
   },
 
   async createKanji(payload: Partial<KanjiDictionary>): Promise<KanjiDictionary> {
@@ -1751,10 +1809,13 @@ export const adminService = {
   },
 
   async getExams(): Promise<JlptExam[]> {
-    const fsList = await fetchCollectionData<JlptExam>('jlpt_exam_catalog');
-    if (fsList.length > 0) return fsList;
     const apiRes = await adminApiClient.request<JlptExam[]>('/api/v1/admin/exams');
-    return apiRes.ok && Array.isArray(apiRes.data) ? apiRes.data : [];
+    if (apiRes.ok && Array.isArray(apiRes.data) && apiRes.data.length > 0) {
+      return apiRes.data;
+    }
+    const fsList = await fetchCollectionData<JlptExam>('jlpt_exam_catalog', 50);
+    if (fsList.length > 0) return fsList;
+    return FALLBACK_EXAMS;
   },
 
   async createExam(payload: Partial<JlptExam>): Promise<JlptExam> {

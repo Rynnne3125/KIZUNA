@@ -12,7 +12,8 @@ import {
 import { User } from '../types/auth';
 import { Milestone, Stage } from '../types/kizuna';
 import { assessPlacement, type PlacementAiAssessment, type PlacementCandidate, type PlacementTierScore } from './placementAssessmentApi';
-import { comparePlacementVersions, placementStorage } from './placementStorage';
+import { STAGES_CATALOG, MILESTONES_CATALOG } from '../data/roadmapCatalog';
+import { shouldSkipFirestore, handleFirestoreError } from '../utils/firestoreGuard';
 
 export interface PlacementAssessmentResult {
   userId: string;
@@ -198,7 +199,7 @@ export const placementService = {
   },
 
   async getPlacementCatalog(): Promise<{ stages: Stage[]; milestones: Milestone[] }> {
-    if (db && navigator.onLine !== false) {
+    if (db && navigator.onLine !== false && !shouldSkipFirestore()) {
       try {
         const [stageSnapshot, milestoneSnapshot] = await Promise.all([
           getDocsFromServer(collection(db, 'stages')),
@@ -212,12 +213,15 @@ export const placementService = {
           await placementStorage.writeCatalog(catalog).catch(() => undefined);
         }
         return catalog;
-      } catch {
-        // Use the most recent Firestore catalog saved on this device.
+      } catch (e) {
+        handleFirestoreError(e);
+        // Use the most recent Firestore catalog saved on this device or static catalog fallback.
       }
     }
     const cached = await placementStorage.readCatalog().catch(() => undefined);
-    if (!cached) throw new Error('Cần tải lộ trình khi có mạng trước khi làm bài xếp lớp offline.');
+    if (!cached) {
+      return { stages: STAGES_CATALOG, milestones: MILESTONES_CATALOG };
+    }
     return cached;
   },
 
