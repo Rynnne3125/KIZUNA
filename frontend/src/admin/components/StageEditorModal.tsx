@@ -114,30 +114,30 @@ export const StageEditorModal: React.FC<StageEditorModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 backdrop-blur-xs p-4">
-      <div className="w-full max-w-lg bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-slate-950/50 backdrop-blur-xs p-0 sm:p-4">
+      <div className="w-full max-w-lg bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden max-h-[92vh] flex flex-col">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/70 dark:bg-slate-800/40">
-          <div className="flex items-center gap-3">
+        <div className="px-4 sm:px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 bg-slate-50/70 dark:bg-slate-800/40 shrink-0">
+          <div className="flex items-center gap-3 min-w-0">
             <div
-              className="w-10 h-10 rounded-xl text-white flex items-center justify-center shadow-sm"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl text-white flex items-center justify-center shadow-sm shrink-0"
               style={{ background: `linear-gradient(135deg, ${colorStart}, ${colorEnd})` }}
             >
               <Map className="w-5 h-5" />
             </div>
-            <div>
-              <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
+            <div className="min-w-0">
+              <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white truncate">
                 {isEditing ? `Chỉnh sửa Chặng: ${stage?.id}` : 'Thêm Chặng học mới'}
               </h3>
-              <p className="text-xs text-slate-500">Đồng bộ trực tiếp lên Firestore `stages`</p>
+              <p className="text-[11px] sm:text-xs text-slate-500 truncate">Đồng bộ trực tiếp lên Firestore `stages`</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 cursor-pointer">
+          <button onClick={onClose} className="p-2 rounded-lg text-slate-400 hover:text-slate-700 cursor-pointer shrink-0">
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 overflow-y-auto flex-1">
           {error && (
             <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium flex items-center gap-2">
               <AlertCircle className="w-4 h-4 shrink-0" />
@@ -205,7 +205,7 @@ export const StageEditorModal: React.FC<StageEditorModalProps> = ({
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="space-y-1.5">
               <Label className="text-xs font-semibold">Màu chủ đạo (Start)</Label>
               <div className="flex items-center gap-2">
@@ -213,7 +213,7 @@ export const StageEditorModal: React.FC<StageEditorModalProps> = ({
                   type="color"
                   value={colorStart}
                   onChange={e => setColorStart(e.target.value)}
-                  className="w-10 h-10 rounded-lg border border-slate-200 cursor-pointer"
+                  className="w-10 h-10 rounded-lg border border-slate-200 cursor-pointer shrink-0"
                 />
                 <Input value={colorStart} onChange={e => setColorStart(e.target.value)} />
               </div>
@@ -226,7 +226,7 @@ export const StageEditorModal: React.FC<StageEditorModalProps> = ({
                   type="color"
                   value={colorEnd}
                   onChange={e => setColorEnd(e.target.value)}
-                  className="w-10 h-10 rounded-lg border border-slate-200 cursor-pointer"
+                  className="w-10 h-10 rounded-lg border border-slate-200 cursor-pointer shrink-0"
                 />
                 <Input value={colorEnd} onChange={e => setColorEnd(e.target.value)} />
               </div>
@@ -234,50 +234,50 @@ export const StageEditorModal: React.FC<StageEditorModalProps> = ({
           </div>
 
           {/* Footer actions */}
-          <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+          <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col-reverse sm:flex-row sm:items-center justify-between gap-3">
             {isEditing ? (
               !confirmDelete ? (
                 <Button
                   type="button"
                   variant="outline"
                   onClick={() => setConfirmDelete(true)}
-                  className="border-rose-200 text-rose-600 hover:bg-rose-50 cursor-pointer"
+                  className="w-full sm:w-auto h-10 border-rose-200 text-rose-600 hover:bg-rose-50 cursor-pointer"
                 >
                   <Trash2 className="w-4 h-4 mr-1.5" /> Xóa Chặng
                 </Button>
               ) : (
-                <div className="flex items-center gap-2">
+                <div className="grid grid-cols-2 sm:flex items-center gap-2 w-full sm:w-auto">
                   <Button
                     type="button"
                     size="sm"
                     disabled={saving}
                     onClick={handleDelete}
-                    className="bg-rose-600 hover:bg-rose-700 text-white cursor-pointer"
+                    className="h-10 sm:h-9 bg-rose-600 hover:bg-rose-700 text-white cursor-pointer"
                   >
                     Xác nhận xóa
                   </Button>
                   <Button
                     type="button"
                     size="sm"
-                    variant="ghost"
+                    variant="outline"
                     onClick={() => setConfirmDelete(false)}
-                    className="cursor-pointer"
+                    className="h-10 sm:h-9 cursor-pointer"
                   >
                     Hủy
                   </Button>
                 </div>
               )
             ) : (
-              <div />
+              <div className="hidden sm:block" />
             )}
 
-            <div className="flex items-center gap-2">
-              <Button type="button" variant="outline" onClick={onClose} className="cursor-pointer">
+            <div className="grid grid-cols-2 sm:flex items-center gap-2 w-full sm:w-auto">
+              <Button type="button" variant="outline" onClick={onClose} className="h-10 cursor-pointer">
                 Đóng
               </Button>
-              <Button type="submit" disabled={saving} className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs shadow-emerald-600/20 cursor-pointer">
+              <Button type="submit" disabled={saving} className="h-10 bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs shadow-emerald-600/20 cursor-pointer">
                 <Save className="w-4 h-4 mr-1.5" />
-                {saving ? 'Đang lưu...' : isEditing ? 'Lưu cập nhật' : 'Tạo Chặng mới'}
+                {saving ? 'Đang lưu...' : isEditing ? 'Lưu cập nhật' : 'Tạo mới'}
               </Button>
             </div>
           </div>

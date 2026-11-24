@@ -11,7 +11,7 @@ import {
 } from '../data/placementQuestionBank';
 import { User } from '../types/auth';
 import { Milestone, Stage } from '../types/kizuna';
-import { assessPlacement, type PlacementAiAssessment, type PlacementCandidate } from './placementAssessmentApi';
+import { assessPlacement, type PlacementAiAssessment, type PlacementCandidate, type PlacementTierScore } from './placementAssessmentApi';
 import { comparePlacementVersions, placementStorage } from './placementStorage';
 
 export interface PlacementAssessmentResult {
@@ -38,6 +38,7 @@ export interface PlacementAssessmentResult {
   unlockedRegionIds: string[];
   testedAt: string;
   attemptId?: string;
+  skillBreakdown?: PlacementTierScore[];
   aiAssessment?: PlacementAiAssessment;
 }
 
@@ -336,6 +337,7 @@ export const placementService = {
       unlockedRegionIds,
       testedAt,
       attemptId: crypto.randomUUID?.() ?? Math.random().toString(36).slice(2),
+      ...(levels.length > 0 ? { skillBreakdown: levels } : {}),
       ...(aiAssessment ? { aiAssessment } : {})
     };
   },

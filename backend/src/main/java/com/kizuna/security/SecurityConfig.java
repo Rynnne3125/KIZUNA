@@ -76,7 +76,10 @@ public class SecurityConfig {
                         // Public endpoints
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/api/v1/health/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/system/status").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/placement/assessment").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/ai/sensei/evaluate").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/ai/appeals").permitAll()
                         .requestMatchers("/error").permitAll()
 
                         // Shared endpoints for both USER and ADMIN

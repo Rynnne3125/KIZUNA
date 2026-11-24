@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Milestone } from '../../types/kizuna';
 import { kizunaService } from '../../services/kizunaService';
 import { soundService } from '../../services/soundService';
+import { aiSenseiService, AiSenseiEvaluationResult } from '../../services/aiSenseiService';
 import { 
   ArrowLeft, 
   Volume2, 
@@ -485,36 +486,90 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   const [showPartnerVi, setShowPartnerVi] = useState(false);
   const [completedDialoguesCount, setCompletedDialoguesCount] = useState(0);
 
+  // Stage 3 (P2): AI Sensei Whitelist evaluation & Human-in-the-loop Appeal states
+  const [evaluatingSensei, setEvaluatingSensei] = useState(false);
+  const [senseiResult, setSenseiResult] = useState<AiSenseiEvaluationResult | null>(null);
+  const [showAppealForm, setShowAppealForm] = useState(false);
+  const [appealReason, setAppealReason] = useState('');
+  const [submittingAppeal, setSubmittingAppeal] = useState(false);
+  const [appealSubmittedId, setAppealSubmittedId] = useState<string | null>(null);
+
   const currentDialogue = dialogues[dialogueIndex];
 
-  const handleEvaluateDialogue = () => {
-    if (!learnerInput.trim() || !currentDialogue) return;
+  const handleEvaluateDialogue = async () => {
+    if (!learnerInput.trim() || !currentDialogue || evaluatingSensei) return;
     const input = learnerInput.trim();
-    const required = currentDialogue.requiredKeywords || ['です'];
-    const hasRequired = required.some((k: string) => input.includes(k));
 
-    if (input.length < 4) {
-      setDialogueFeedback('⚠️ Câu trả lời quá ngắn. Hãy diễn đạt đầy đủ câu có vị ngữ lịch sự (〜です／〜ます) nhé!');
-      setDialoguePassed(false);
-      return;
+    setEvaluatingSensei(true);
+    setShowAppealForm(false);
+    setAppealSubmittedId(null);
+
+    try {
+      const whitelistVocab = vocabList
+        .map(v => v.term || v.kanji || v.reading)
+        .filter((t): t is string => Boolean(t))
+        .slice(0, 40);
+      const whitelistGram = grammarList
+        .map(g => g.pattern || g.title)
+        .filter((p): p is string => Boolean(p))
+        .slice(0, 15);
+
+      const result = await aiSenseiService.evaluateSentence({
+        milestoneId: milestone.id,
+        milestoneTitle: milestone.title,
+        dialogueTitle: currentDialogue.title,
+        partnerSpeechJp: currentDialogue.partnerSpeechJp,
+        learnerPrompt: currentDialogue.learnerPrompt,
+        sampleAnswer: currentDialogue.sampleAnswer,
+        studentInput: input,
+        requiredKeywords: currentDialogue.requiredKeywords || ['です'],
+        whitelistVocabulary: whitelistVocab,
+        whitelistGrammar: whitelistGram
+      });
+
+      setSenseiResult(result);
+      setDialogueFeedback(result.pedagogicalFeedback);
+      setDialoguePassed(result.passed);
+      if (result.passed) {
+        setCompletedDialoguesCount(prev => prev + 1);
+      }
+    } finally {
+      setEvaluatingSensei(false);
     }
+  };
 
-    if (!hasRequired) {
-      setDialogueFeedback(`⚠️ Bạn nên vận dụng mẫu câu trọng tâm [${required.join(' / ')}] theo đúng hướng dẫn tình huống nhé!`);
-      setDialoguePassed(false);
-      return;
+  const handleSubmitAppeal = async () => {
+    if (!senseiResult || !appealReason.trim() || submittingAppeal) return;
+    setSubmittingAppeal(true);
+    try {
+      const res = await aiSenseiService.submitAppeal({
+        milestoneId: milestone.id,
+        milestoneTitle: milestone.title,
+        questTitle: `Quest 4: ${currentDialogue?.title || 'Đối thoại AI Sensei'}`,
+        promptText: currentDialogue?.learnerPrompt || 'Viết câu tiếng Nhật theo tình huống',
+        studentInput: senseiResult.studentInput,
+        aiFeedback: senseiResult.pedagogicalFeedback,
+        aiScore: senseiResult.evaluatedScore,
+        studentReason: appealReason.trim()
+      });
+      if (res.ok) {
+        setAppealSubmittedId(res.id);
+        setShowAppealForm(false);
+        setAppealReason('');
+      }
+    } finally {
+      setSubmittingAppeal(false);
     }
-
-    // Success
-    setDialogueFeedback('Tuyệt vời! Bạn đã đáp lại đúng mẫu câu, ngữ pháp chính xác và phong thái rất tự nhiên!');
-    setDialoguePassed(true);
-    setCompletedDialoguesCount(prev => prev + 1);
   };
 
   const handleNextDialogue = () => {
     setLearnerInput('');
     setDialogueFeedback(null);
     setDialoguePassed(false);
+    setSenseiResult(null);
+    setShowAppealForm(false);
+    setAppealReason('');
+    setAppealSubmittedId(null);
     setShowSample(false);
     setShowPartnerVi(false);
     if (dialogueIndex < dialogues.length - 1) {
@@ -1805,21 +1860,219 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                       )}
                     </div>
 
-                    {/* Evaluation Feedback */}
-                    {dialogueFeedback && (
+                    {/* AI Sensei Evaluation Feedback + Human-in-the-loop Appeal (Stage 3 P2) */}
+                    {senseiResult && (
                       <div
                         style={{
-                          padding: '12px 16px',
-                          borderRadius: 10,
+                          padding: '14px 18px',
+                          borderRadius: 12,
                           backgroundColor: dialoguePassed ? '#ecfdf5' : '#fffbeb',
-                          border: dialoguePassed ? '1px solid #86efac' : '1px solid #fde68a',
-                          color: dialoguePassed ? '#166534' : '#b45309',
+                          border: dialoguePassed ? '1.5px solid #86efac' : '1.5px solid #fde68a',
+                          color: dialoguePassed ? '#14532d' : '#92400e',
                           fontSize: 13.5,
-                          fontWeight: 700,
                           marginBottom: 16
                         }}
                       >
-                        {dialogueFeedback}
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, marginBottom: 8 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 900 }}>
+                            <Sparkles size={15} style={{ color: dialoguePassed ? '#059669' : '#d97706' }} />
+                            <span>AI Sensei chấm: {senseiResult.evaluatedScore}/10 điểm</span>
+                            <span
+                              style={{
+                                fontSize: 11,
+                                padding: '2px 8px',
+                                borderRadius: 999,
+                                backgroundColor: dialoguePassed ? '#d1fae5' : '#fef3c7',
+                                color: dialoguePassed ? '#065f46' : '#92400e',
+                                fontWeight: 800
+                              }}
+                            >
+                              {dialoguePassed ? 'Đạt chuẩn' : 'Cần cải thiện'}
+                            </span>
+                          </div>
+                          <span style={{ fontSize: 11, opacity: 0.75, fontFamily: 'monospace' }}>
+                            {senseiResult.model} • {senseiResult.latencyMs}ms
+                          </span>
+                        </div>
+
+                        <div style={{ fontWeight: 700, lineHeight: 1.5, marginBottom: 8 }}>
+                          {senseiResult.pedagogicalFeedback}
+                        </div>
+
+                        {senseiResult.particleErrors.length > 0 && (
+                          <div
+                            style={{
+                              padding: '8px 12px',
+                              borderRadius: 8,
+                              backgroundColor: 'rgba(254, 226, 226, 0.75)',
+                              border: '1px solid #fca5a5',
+                              color: '#991b1b',
+                              fontSize: 12.5,
+                              marginBottom: 8
+                            }}
+                          >
+                            <strong>Phát hiện lỗi trợ từ / cấu trúc:</strong>
+                            <ul style={{ margin: '4px 0 0 18px', padding: 0 }}>
+                              {senseiResult.particleErrors.map((err, idx) => (
+                                <li key={idx}>{err}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {senseiResult.naturalExpressionSuggestion && (
+                          <div
+                            style={{
+                              padding: '8px 12px',
+                              borderRadius: 8,
+                              backgroundColor: 'rgba(255, 255, 255, 0.85)',
+                              border: '1px solid rgba(15, 23, 42, 0.1)',
+                              color: '#0f172a',
+                              fontSize: 13,
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              gap: 10,
+                              marginBottom: 10
+                            }}
+                          >
+                            <div>
+                              <span style={{ fontSize: 11, fontWeight: 800, color: '#0284c7', display: 'block' }}>
+                                Gợi ý diễn đạt tự nhiên bản xứ:
+                              </span>
+                              <strong>{senseiResult.naturalExpressionSuggestion}</strong>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => speakJapanese(senseiResult.naturalExpressionSuggestion)}
+                              style={{
+                                background: '#e0f2fe',
+                                border: 'none',
+                                borderRadius: 8,
+                                padding: '6px 10px',
+                                color: '#0369a1',
+                                fontSize: 12,
+                                fontWeight: 700,
+                                cursor: 'pointer',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: 4,
+                                flexShrink: 0
+                              }}
+                            >
+                              <Volume2 size={13} /> Nghe
+                            </button>
+                          </div>
+                        )}
+
+                        {/* Human-in-the-loop Appeal Trigger */}
+                        {appealSubmittedId ? (
+                          <div
+                            style={{
+                              padding: '8px 12px',
+                              borderRadius: 8,
+                              backgroundColor: '#eff6ff',
+                              border: '1px solid #bfdbfe',
+                              color: '#1d4ed8',
+                              fontSize: 12.5,
+                              fontWeight: 700,
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: 6
+                            }}
+                          >
+                            <CheckCircle2 size={14} />
+                            <span>Đã gửi khiếu nại phúc khảo (#{appealSubmittedId}) lên Admin. Nếu được phê duyệt, bạn sẽ được hoàn +25 AP!</span>
+                          </div>
+                        ) : !showAppealForm ? (
+                          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                            <button
+                              type="button"
+                              onClick={() => setShowAppealForm(true)}
+                              style={{
+                                background: 'none',
+                                border: '1px solid rgba(180, 83, 9, 0.35)',
+                                borderRadius: 8,
+                                padding: '5px 10px',
+                                color: '#b45309',
+                                fontSize: 12,
+                                fontWeight: 700,
+                                cursor: 'pointer',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: 5
+                              }}
+                            >
+                              <ShieldAlert size={13} />
+                              <span>Khiếu nại AI chấm sai (Gửi Admin phúc khảo)</span>
+                            </button>
+                          </div>
+                        ) : (
+                          <div
+                            style={{
+                              marginTop: 8,
+                              padding: 12,
+                              borderRadius: 10,
+                              backgroundColor: '#ffffff',
+                              border: '1px solid #fcd34d',
+                              color: '#0f172a'
+                            }}
+                          >
+                            <div style={{ fontSize: 12, fontWeight: 800, color: '#b45309', marginBottom: 6 }}>
+                              Gửi phiếu phúc khảo điểm AI cho Giáo viên / Admin:
+                            </div>
+                            <textarea
+                              value={appealReason}
+                              onChange={e => setAppealReason(e.target.value)}
+                              rows={2}
+                              placeholder="Giải thích lý do bạn cho rằng câu của mình đúng ngữ cảnh hoặc tự nhiên..."
+                              style={{
+                                width: '100%',
+                                padding: '8px 10px',
+                                borderRadius: 8,
+                                border: '1px solid #cbd5e1',
+                                fontSize: 13,
+                                boxSizing: 'border-box',
+                                marginBottom: 8
+                              }}
+                            />
+                            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+                              <button
+                                type="button"
+                                onClick={() => setShowAppealForm(false)}
+                                style={{
+                                  padding: '6px 12px',
+                                  borderRadius: 8,
+                                  border: '1px solid #cbd5e1',
+                                  backgroundColor: '#ffffff',
+                                  color: '#475569',
+                                  fontSize: 12,
+                                  fontWeight: 700,
+                                  cursor: 'pointer'
+                                }}
+                              >
+                                Hủy
+                              </button>
+                              <button
+                                type="button"
+                                disabled={!appealReason.trim() || submittingAppeal}
+                                onClick={handleSubmitAppeal}
+                                style={{
+                                  padding: '6px 14px',
+                                  borderRadius: 8,
+                                  border: 'none',
+                                  backgroundColor: appealReason.trim() ? '#d97706' : '#94a3b8',
+                                  color: '#ffffff',
+                                  fontSize: 12,
+                                  fontWeight: 800,
+                                  cursor: appealReason.trim() ? 'pointer' : 'not-allowed'
+                                }}
+                              >
+                                {submittingAppeal ? 'Đang gửi...' : 'Gửi khiếu nại phúc khảo'}
+                              </button>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     )}
 
@@ -1827,23 +2080,23 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10 }}>
                       <button
                         onClick={handleEvaluateDialogue}
-                        disabled={!learnerInput.trim()}
+                        disabled={!learnerInput.trim() || evaluatingSensei}
                         className="roadmap-btn-send"
                         style={{
                           display: 'flex',
                           alignItems: 'center',
                           gap: 6,
                           padding: '10px 22px',
-                          backgroundColor: learnerInput.trim() ? '#0f172a' : '#94a3b8',
+                          backgroundColor: learnerInput.trim() && !evaluatingSensei ? '#0f172a' : '#94a3b8',
                           color: '#ffffff',
                           borderRadius: 8,
                           fontWeight: 800,
                           fontSize: 13.5,
                           border: 'none',
-                          cursor: learnerInput.trim() ? 'pointer' : 'not-allowed'
+                          cursor: learnerInput.trim() && !evaluatingSensei ? 'pointer' : 'not-allowed'
                         }}
                       >
-                        <Send size={14} /> Gửi câu trả lời
+                        <Send size={14} /> {evaluatingSensei ? 'AI Sensei đang chấm...' : 'Gửi AI Sensei chấm điểm'}
                       </button>
 
                       {dialoguePassed && dialogueIndex < dialogues.length - 1 && (

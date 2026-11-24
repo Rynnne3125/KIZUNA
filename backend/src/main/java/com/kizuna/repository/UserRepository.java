@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutionException;
 
 @Repository
 public class UserRepository {
@@ -16,8 +15,25 @@ public class UserRepository {
     private final Map<String, User> userStorage = new ConcurrentHashMap<>();
 
     public Optional<User> findByUsername(String username) {
+        if (username == null) return Optional.empty();
         return userStorage.values().stream()
-                .filter(u -> u.getUsername().equalsIgnoreCase(username))
+                .filter(u -> u.getUsername() != null && u.getUsername().equalsIgnoreCase(username))
+                .findFirst();
+    }
+
+    public Optional<User> findByEmail(String email) {
+        if (email == null) return Optional.empty();
+        return userStorage.values().stream()
+                .filter(u -> u.getEmail() != null && u.getEmail().equalsIgnoreCase(email))
+                .findFirst();
+    }
+
+    public Optional<User> findByUsernameOrEmail(String identifier) {
+        if (identifier == null || identifier.isBlank()) return Optional.empty();
+        String trimmed = identifier.trim();
+        return userStorage.values().stream()
+                .filter(u -> (u.getUsername() != null && u.getUsername().equalsIgnoreCase(trimmed))
+                        || (u.getEmail() != null && u.getEmail().equalsIgnoreCase(trimmed)))
                 .findFirst();
     }
 
@@ -26,8 +42,7 @@ public class UserRepository {
     }
 
     public boolean existsByUsername(String username) {
-        return userStorage.values().stream()
-                .anyMatch(u -> u.getUsername().equalsIgnoreCase(username));
+        return findByUsername(username).isPresent();
     }
 
     public User save(User user) {
@@ -41,5 +56,4 @@ public class UserRepository {
     public List<User> findAll() {
         return new ArrayList<>(userStorage.values());
     }
-
 }

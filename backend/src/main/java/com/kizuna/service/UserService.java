@@ -9,6 +9,8 @@ public interface UserService {
 
     LoginResponse login(LoginRequest loginRequest);
 
+    LoginResponse exchangeFirebaseIdToken(String idToken);
+
     UserResponse getCurrentUser(String username);
 
     User findByUsername(String username);

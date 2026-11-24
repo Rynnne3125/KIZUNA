@@ -30,6 +30,7 @@ public class CurriculumRepository {
     private final Map<String, VocabularyItem> vocabularyMap = new ConcurrentHashMap<>();
     private final Map<String, KanjiItem> kanjiMap = new ConcurrentHashMap<>();
     private final Map<String, GrammarItem> grammarMap = new ConcurrentHashMap<>();
+    private final Map<String, JlptExam> examsMap = new ConcurrentHashMap<>();
 
     public CurriculumRepository(ObjectMapper objectMapper, @Autowired(required = false) Firestore firestore) {
         this.objectMapper = objectMapper;
@@ -76,9 +77,11 @@ public class CurriculumRepository {
                     stage.setDescription(node.path("description").asText());
                     if (node.has("colorGradient") && node.get("colorGradient").isArray() && node.get("colorGradient").size() > 0) {
                         stage.setThemeColor(node.get("colorGradient").get(0).asText());
+                        stage.setColorGradient(objectMapper.convertValue(node.get("colorGradient"), new TypeReference<>() {}));
                     } else {
                         stage.setThemeColor("#DC2626");
                     }
+                    stage.setJlptLevel(node.path("jlptLevel").asText(node.path("jlpt_level").asText("N5")));
                     stagesMap.put(stage.getId(), stage);
                 }
                 logger.info("Loaded {} stages into memory.", stagesMap.size());
@@ -143,6 +146,7 @@ public class CurriculumRepository {
                     vocab.setExampleSentenceJp(node.path("exampleSentenceJp").asText());
                     vocab.setExampleSentenceVi(node.path("exampleSentenceVi").asText());
                     vocab.setNejSource(node.path("nejSource").asText());
+                    vocab.setLevel(node.path("level").asText(node.path("jlptLevel").asText("N5")));
                     vocabularyMap.put(vocab.getId(), vocab);
                 }
                 logger.info("Loaded {} vocabulary items into memory.", vocabularyMap.size());
@@ -163,6 +167,7 @@ public class CurriculumRepository {
                     kanji.setSinoVietnamese(node.path("sinoVietnamese").asText());
                     kanji.setVietnameseMeaning(node.path("vietnameseMeaning").asText());
                     kanji.setMnemonicStory(node.path("mnemonicStory").asText());
+                    kanji.setLevel(node.path("level").asText(node.path("jlptLevel").asText("N5")));
                     if (node.has("exampleCompounds") && node.get("exampleCompounds").isArray()) {
                         kanji.setExampleCompounds(objectMapper.convertValue(node.get("exampleCompounds"), new TypeReference<>() {}));
                     }
@@ -183,6 +188,7 @@ public class CurriculumRepository {
                     grammar.setNuanceReason(node.path("nuanceReason").asText());
                     grammar.setMasterExampleJp(node.path("masterExampleJp").asText());
                     grammar.setMasterExampleVi(node.path("masterExampleVi").asText());
+                    grammar.setLevel(node.path("level").asText(node.path("jlptLevel").asText("N5")));
                     if (node.has("scrambledTest")) {
                         grammar.setScrambledTest(objectMapper.convertValue(node.get("scrambledTest"), new TypeReference<>() {}));
                     }
@@ -367,10 +373,142 @@ public class CurriculumRepository {
     }
 
     // --- GRAMMAR ---
+    public List<GrammarItem> getAllGrammar() {
+        return new ArrayList<>(grammarMap.values());
+    }
+
     public List<GrammarItem> getGrammarByMilestoneId(String milestoneId) {
         return grammarMap.values().stream()
                 .filter(g -> milestoneId.equalsIgnoreCase(g.getMilestoneId()))
                 .collect(Collectors.toList());
+    }
+
+    public Optional<GrammarItem> getGrammarById(String id) {
+        return Optional.ofNullable(grammarMap.get(id));
+    }
+
+    public GrammarItem saveGrammar(GrammarItem item) {
+        if (item.getId() == null || item.getId().isBlank()) {
+            item.setId("gram_" + System.currentTimeMillis() + "_" + UUID.randomUUID().toString().substring(0, 4));
+        }
+        grammarMap.put(item.getId(), item);
+        syncToFirestore("grammar_items", item.getId(), item);
+        return item;
+    }
+
+    public boolean deleteGrammar(String id) {
+        GrammarItem removed = grammarMap.remove(id);
+        if (removed != null) {
+            deleteFromFirestore("grammar_items", id);
+            return true;
+        }
+        return false;
+    }
+
+    // --- EXAMS ---
+    public List<JlptExam> getAllExams() {
+        if (examsMap.isEmpty() && firestore != null) {
+            try {
+                var docs = firestore.collection("jlpt_exam_catalog").limit(200).get().get(2, java.util.concurrent.TimeUnit.SECONDS).getDocuments();
+                for (var doc : docs) {
+                    JlptExam exam = doc.toObject(JlptExam.class);
+                    if (exam != null) {
+                        if (exam.getId() == null || exam.getId().isBlank()) exam.setId(doc.getId());
+                        examsMap.putIfAbsent(exam.getId(), exam);
+                    }
+                }
+            } catch (Exception e) {
+                logger.debug("Firestore exams load skipped: {}", e.getMessage());
+            }
+        }
+        return new ArrayList<>(examsMap.values());
+    }
+
+    public Optional<JlptExam> getExamById(String id) {
+        return Optional.ofNullable(examsMap.get(id));
+    }
+
+    public JlptExam saveExam(JlptExam exam) {
+        if (exam.getId() == null || exam.getId().isBlank()) {
+            exam.setId("ex_" + System.currentTimeMillis() + "_" + UUID.randomUUID().toString().substring(0, 4));
+        }
+        examsMap.put(exam.getId(), exam);
+        syncToFirestore("jlpt_exam_catalog", exam.getId(), exam);
+        return exam;
+    }
+
+    public boolean deleteExam(String id) {
+        JlptExam removed = examsMap.remove(id);
+        if (removed != null) {
+            deleteFromFirestore("jlpt_exam_catalog", id);
+            return true;
+        }
+        return false;
+    }
+
+    // --- BULK SAVE & SEED RESTORE ---
+    public List<VocabularyItem> bulkSaveVocabulary(List<VocabularyItem> items) {
+        List<VocabularyItem> saved = new ArrayList<>();
+        for (VocabularyItem item : items) {
+            if (item == null || item.getTerm() == null || item.getTerm().isBlank()) continue;
+            if (item.getId() == null || item.getId().isBlank()) {
+                item.setId("vocab_" + System.currentTimeMillis() + "_" + UUID.randomUUID().toString().substring(0, 5));
+            }
+            saved.add(saveVocabulary(item));
+        }
+        return saved;
+    }
+
+    public List<KanjiItem> bulkSaveKanji(List<KanjiItem> items) {
+        List<KanjiItem> saved = new ArrayList<>();
+        for (KanjiItem item : items) {
+            if (item == null || item.getKanji() == null || item.getKanji().isBlank()) continue;
+            if (item.getId() == null || item.getId().isBlank()) {
+                item.setId("kanji_" + System.currentTimeMillis() + "_" + UUID.randomUUID().toString().substring(0, 5));
+            }
+            saved.add(saveKanji(item));
+        }
+        return saved;
+    }
+
+    public synchronized Map<String, Object> restoreFromSeedData() {
+        stagesMap.clear();
+        milestonesMap.clear();
+        questsMap.clear();
+        vocabularyMap.clear();
+        kanjiMap.clear();
+        grammarMap.clear();
+        loadSeedData();
+
+        Map<String, Object> counts = new LinkedHashMap<>();
+        counts.put("stages", stagesMap.size());
+        counts.put("milestones", milestonesMap.size());
+        counts.put("quests", questsMap.size());
+        counts.put("vocabulary", vocabularyMap.size());
+        counts.put("kanji", kanjiMap.size());
+        counts.put("grammar", grammarMap.size());
+        return counts;
+    }
+
+    public Map<String, Object> exportBackupSnapshot() {
+        Map<String, Object> backup = new LinkedHashMap<>();
+        backup.put("exportedAt", java.time.Instant.now().toString());
+        backup.put("counts", Map.of(
+                "stages", stagesMap.size(),
+                "milestones", milestonesMap.size(),
+                "quests", questsMap.size(),
+                "vocabulary", vocabularyMap.size(),
+                "kanji", kanjiMap.size(),
+                "grammar", grammarMap.size(),
+                "exams", examsMap.size()
+        ));
+        backup.put("stages", getAllStages());
+        backup.put("milestones", getAllMilestones());
+        backup.put("vocabulary_items", getAllVocabulary());
+        backup.put("kanji_dictionary", getAllKanji());
+        backup.put("grammar_items", getAllGrammar());
+        backup.put("jlpt_exam_catalog", getAllExams());
+        return backup;
     }
 
     // Helper to asynchronously sync to Firestore if client is active

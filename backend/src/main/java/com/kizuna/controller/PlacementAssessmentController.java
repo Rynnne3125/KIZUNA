@@ -2,13 +2,15 @@ package com.kizuna.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kizuna.model.AiTelemetryEvent;
+import com.kizuna.service.AiRuntimeService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,17 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.time.Duration;
-import java.time.LocalDate;
-import java.time.ZoneOffset;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.HashSet;
-import java.util.concurrent.Semaphore;
+import java.util.UUID;
 
 @RestController
 public class PlacementAssessmentController {
@@ -46,35 +42,39 @@ public class PlacementAssessmentController {
     record AssessmentResponse(Confidence confidence, String milestoneId, String model, long latencyMs) {}
 
     private final ObjectMapper json;
-    private final HttpClient client;
-    private final String key;
-    private final String model;
-    private final int dailyLimit;
-    private final Semaphore inFlight = new Semaphore(2);
-    private LocalDate budgetDate;
-    private int callsToday;
+    private final AiRuntimeService aiRuntimeService;
 
-    public PlacementAssessmentController(
-            ObjectMapper json,
-            @Value("${GEMINI_API_KEY:}") String key,
-            @Value("${KIZUNA_GEMINI_MODEL:gemini-3.5-flash-lite}") String model,
-            @Value("${KIZUNA_AI_DAILY_LIMIT:100}") int dailyLimit) {
-        if (!model.matches("gemini-[a-z0-9.-]+")) throw new IllegalArgumentException("Invalid Gemini model ID");
+    @Autowired
+    public PlacementAssessmentController(ObjectMapper json, AiRuntimeService aiRuntimeService) {
         this.json = json;
-        this.key = key.trim();
-        this.model = model;
-        this.dailyLimit = Math.max(0, dailyLimit);
-        this.client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build();
+        this.aiRuntimeService = aiRuntimeService;
+    }
+
+    // Preserved constructor for unit tests (PlacementAssessmentControllerTest)
+    public PlacementAssessmentController(ObjectMapper json, String key, String model, int dailyLimit) {
+        this(json, new AiRuntimeService(json, null, key, model, dailyLimit));
     }
 
     @PostMapping("/api/v1/placement/assessment")
     public AssessmentResponse assess(@Valid @RequestBody AssessmentRequest request) {
         var allowedIds = validateRequest(request);
-        if (key.isEmpty()) throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE);
-        if (!inFlight.tryAcquire()) throw new ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS);
+        String topLevel = resolveAssignedLevel(request);
+        if (!aiRuntimeService.hasApiKey()) {
+            aiRuntimeService.recordEvent(new AiTelemetryEvent(
+                    "evt_" + System.currentTimeMillis() + "_" + UUID.randomUUID().toString().substring(0, 5),
+                    "PLACEMENT", aiRuntimeService.getConfig().getModel(), "N/A",
+                    null, topLevel, 0, "FALLBACK", 503, System.currentTimeMillis()));
+            throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE);
+        }
+        if (!aiRuntimeService.tryAcquireSlot()) {
+            aiRuntimeService.recordRateLimit429("PLACEMENT", topLevel);
+            throw new ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS);
+        }
 
+        long started = System.nanoTime();
+        String activeModel = aiRuntimeService.getConfig().getModel();
         try {
-            reserveDailyCall();
+            aiRuntimeService.reserveDailyCall();
             String prompt = """
                     Recommend one existing Japanese lesson to review or study next.
                     Compare correct and incorrect counts by JLPT tier and question category to the lesson goals.
@@ -97,29 +97,69 @@ public class PlacementAssessmentController {
                                             "confidence", Map.of("type", "STRING", "enum", List.of("LOW", "MODERATE", "HIGH")),
                                             "milestoneId", Map.of("type", "STRING")),
                                     "required", List.of("confidence", "milestoneId"))));
-            var upstream = HttpRequest.newBuilder(
-                            URI.create("https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent"))
-                    .timeout(Duration.ofSeconds(5))
-                    .header("x-goog-api-key", key)
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(json.writeValueAsString(payload)))
-                    .build();
 
-            long started = System.nanoTime();
-            var response = client.send(upstream, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() != 200) throw new ResponseStatusException(HttpStatus.BAD_GATEWAY);
+            started = System.nanoTime();
+            var response = aiRuntimeService.sendGeminiGenerateContent(payload);
+            long latencyMs = Duration.ofNanos(System.nanoTime() - started).toMillis();
+
+            if (response.statusCode() == 429) {
+                aiRuntimeService.recordRateLimit429("PLACEMENT", topLevel);
+                throw new ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS);
+            }
+            if (response.statusCode() != 200) {
+                aiRuntimeService.recordEvent(new AiTelemetryEvent(
+                        "evt_" + System.currentTimeMillis() + "_" + UUID.randomUUID().toString().substring(0, 5),
+                        "PLACEMENT", activeModel, "N/A", null, topLevel, latencyMs,
+                        "ERROR", response.statusCode(), System.currentTimeMillis()));
+                throw new ResponseStatusException(HttpStatus.BAD_GATEWAY);
+            }
+
             var recommendation = parseRecommendation(json, response.body());
-            if (!allowedIds.contains(recommendation.milestoneId())) throw new ResponseStatusException(HttpStatus.BAD_GATEWAY);
-            return new AssessmentResponse(recommendation.confidence(), recommendation.milestoneId(), model,
-                    Duration.ofNanos(System.nanoTime() - started).toMillis());
+            if (!allowedIds.contains(recommendation.milestoneId())) {
+                aiRuntimeService.recordEvent(new AiTelemetryEvent(
+                        "evt_" + System.currentTimeMillis() + "_" + UUID.randomUUID().toString().substring(0, 5),
+                        "PLACEMENT", activeModel, recommendation.confidence().name(), recommendation.milestoneId(),
+                        topLevel, latencyMs, "ERROR", 502, System.currentTimeMillis()));
+                throw new ResponseStatusException(HttpStatus.BAD_GATEWAY);
+            }
+
+            aiRuntimeService.recordEvent(new AiTelemetryEvent(
+                    "evt_" + System.currentTimeMillis() + "_" + UUID.randomUUID().toString().substring(0, 5),
+                    "PLACEMENT", activeModel, recommendation.confidence().name(), recommendation.milestoneId(),
+                    topLevel, latencyMs, "SUCCESS", 200, System.currentTimeMillis()));
+
+            return new AssessmentResponse(recommendation.confidence(), recommendation.milestoneId(), activeModel, latencyMs);
+        } catch (ResponseStatusException rse) {
+            throw rse;
         } catch (InterruptedException exception) {
             Thread.currentThread().interrupt();
+            long latencyMs = Duration.ofNanos(System.nanoTime() - started).toMillis();
+            aiRuntimeService.recordEvent(new AiTelemetryEvent(
+                    "evt_" + System.currentTimeMillis() + "_" + UUID.randomUUID().toString().substring(0, 5),
+                    "PLACEMENT", activeModel, "N/A", null, topLevel, latencyMs,
+                    "ERROR", 503, System.currentTimeMillis()));
             throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE);
         } catch (IOException | IllegalArgumentException exception) {
+            long latencyMs = Duration.ofNanos(System.nanoTime() - started).toMillis();
+            aiRuntimeService.recordEvent(new AiTelemetryEvent(
+                    "evt_" + System.currentTimeMillis() + "_" + UUID.randomUUID().toString().substring(0, 5),
+                    "PLACEMENT", activeModel, "N/A", null, topLevel, latencyMs,
+                    "ERROR", 502, System.currentTimeMillis()));
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY);
         } finally {
-            inFlight.release();
+            aiRuntimeService.releaseSlot();
         }
+    }
+
+    private static String resolveAssignedLevel(AssessmentRequest request) {
+        String highest = "N5";
+        for (var score : request.levels()) {
+            boolean passed = score.correct() * 4 >= score.total() * 3;
+            if (passed) {
+                highest = score.level().name();
+            }
+        }
+        return highest;
     }
 
     static HashSet<String> validateRequest(AssessmentRequest request) {
@@ -159,15 +199,5 @@ public class PlacementAssessmentController {
             }
         }
         throw new IllegalArgumentException("Gemini response has no assessment");
-    }
-
-    private synchronized void reserveDailyCall() {
-        LocalDate today = LocalDate.now(ZoneOffset.UTC);
-        if (!today.equals(budgetDate)) {
-            budgetDate = today;
-            callsToday = 0;
-        }
-        if (callsToday >= dailyLimit) throw new ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS);
-        callsToday++;
     }
 }

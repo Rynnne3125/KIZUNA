@@ -1,7 +1,10 @@
 package com.kizuna.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Map;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GrammarItem {
     private String id;
     private String milestoneId;
@@ -11,6 +14,8 @@ public class GrammarItem {
     private String nuanceReason;
     private String masterExampleJp;
     private String masterExampleVi;
+    private String level = "N5";
+    private String jlptLevel = "N5";
     private Map<String, Object> scrambledTest;
 
     public GrammarItem() {}
@@ -38,6 +43,18 @@ public class GrammarItem {
 
     public String getMasterExampleVi() { return masterExampleVi; }
     public void setMasterExampleVi(String masterExampleVi) { this.masterExampleVi = masterExampleVi; }
+
+    public String getLevel() { return level != null ? level : jlptLevel; }
+    public void setLevel(String level) {
+        this.level = level;
+        if (level != null) this.jlptLevel = level;
+    }
+
+    public String getJlptLevel() { return jlptLevel != null ? jlptLevel : level; }
+    public void setJlptLevel(String jlptLevel) {
+        this.jlptLevel = jlptLevel;
+        if (jlptLevel != null) this.level = jlptLevel;
+    }
 
     public Map<String, Object> getScrambledTest() { return scrambledTest; }
     public void setScrambledTest(Map<String, Object> scrambledTest) { this.scrambledTest = scrambledTest; }
