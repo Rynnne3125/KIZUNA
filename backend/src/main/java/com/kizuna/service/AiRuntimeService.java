@@ -69,10 +69,10 @@ public class AiRuntimeService {
         this.apiKey = apiKey == null ? "" : apiKey.trim();
         this.config.setModel(model);
         this.config.setDailyLimit(Math.max(0, dailyLimit));
-        this.config.setTimeoutSeconds(5);
+        this.config.setTimeoutSeconds(15);
         this.config.setMaxConcurrency(2);
         this.config.setUpdatedAt(Instant.now().toString());
-        this.client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build();
+        this.client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(5)).build();
         loadConfigFromFirestoreIfAvailable();
     }
 
@@ -402,6 +402,13 @@ public class AiRuntimeService {
                             return result;
                         }
                     }
+                } else {
+                    logger.warn("Gemini Sensei returned HTTP {} (latencyMs={}): {}",
+                            response.statusCode(), latencyMs,
+                            response.body() != null ? response.body().substring(0, Math.min(240, response.body().length())) : "");
+                    if (response.statusCode() == 429) {
+                        recordRateLimit429("SENSEI", null);
+                    }
                 }
             } catch (ResponseStatusException rse) {
                 if (rse.getStatusCode().value() == 429) {
@@ -410,7 +417,8 @@ public class AiRuntimeService {
             } catch (InterruptedException ie) {
                 Thread.currentThread().interrupt();
             } catch (Exception e) {
-                logger.debug("Gemini Sensei live evaluation fell back to local analyzer: {}", e.getMessage());
+                logger.warn("Gemini Sensei live evaluation fell back to local analyzer ({}): {}",
+                        e.getClass().getSimpleName(), e.getMessage());
             } finally {
                 inFlight.release();
             }

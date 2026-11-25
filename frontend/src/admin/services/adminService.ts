@@ -30,7 +30,7 @@ const isFirestoreDummy =
 const DEFAULT_AI_CONFIG: AiRuntimeConfig = {
   model: 'gemini-3.5-flash-lite',
   dailyLimit: 100,
-  timeoutSeconds: 5,
+  timeoutSeconds: 15,
   maxConcurrency: 2,
   senseiEnabled: true,
   senseiSystemPrompt:

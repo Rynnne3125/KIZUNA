@@ -162,7 +162,7 @@ export const aiSenseiService = {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(params),
-          signal: AbortSignal.timeout(7000)
+          signal: AbortSignal.timeout(20000)
         });
         if (res.ok) {
           const envelope = await res.json();
