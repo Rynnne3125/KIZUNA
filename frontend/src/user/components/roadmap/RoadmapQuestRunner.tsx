@@ -264,9 +264,18 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
       setCardIndex(prev => prev + 1);
     } else {
       setSrsFinished(true);
-      if (nextMastered.size > 0) {
+      if (displayVocabList.length > 0 && nextMastered.size >= displayVocabList.length) {
         void triggerAutoSaveQuest();
       }
+    }
+  };
+
+  const handleFinishSrsRound = () => {
+    setIsFlipped(false);
+    setDragX(0);
+    setSrsFinished(true);
+    if (displayVocabList.length > 0 && masteredIds.size >= displayVocabList.length) {
+      void triggerAutoSaveQuest();
     }
   };
 
@@ -280,7 +289,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   };
 
   const handleRestartSrsUnlearned = () => {
-    const unlearned = displayVocabList.filter((item: any) => learningIds.has(String(item.id)));
+    const unlearned = displayVocabList.filter((item: any) => !masteredIds.has(String(item.id)));
     if (unlearned.length === 0) {
       handleRestartSrsAll();
       return;
@@ -391,9 +400,12 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   };
 
   // -------------------------------------------------------------
-  // QUEST 2: GATEKEEPER 100% QUIZ (RANDOM A/B/C/D + TỰ CHUYỂN SAU 5S)
+  // QUEST 2: GATEKEEPER 100% QUIZ (RANDOM A/B/C/D + ÔN CÂU SAI NHƯ QUEST 1)
   // -------------------------------------------------------------
   const [quizAttemptSeed, setQuizAttemptSeed] = useState(0);
+  const [quizRoundSeed, setQuizRoundSeed] = useState(0);
+  const [quizStudyIndices, setQuizStudyIndices] = useState<number[] | null>(null);
+  const [masteredQuizIds, setMasteredQuizIds] = useState<Set<number>>(new Set());
 
   const gatekeeperQuestions = useMemo(() => {
     const rawQuestions: Array<{ word: string; reading: string; correctAnswer: string; options: string[] }> = [];
@@ -456,36 +468,57 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
     });
   }, [questData?.quizQuestions, milestone.gatekeeperQuiz, displayVocabList, vocabList, quizAttemptSeed]);
 
+  const activeQuizItems = useMemo(() => {
+    const idxs = quizStudyIndices && quizStudyIndices.length > 0
+      ? quizStudyIndices
+      : gatekeeperQuestions.map((_, i) => i);
+    return idxs
+      .map(origIdx => {
+        const q = gatekeeperQuestions[origIdx];
+        if (!q) return null;
+        return { ...q, origIdx, options: shuffleArray(q.options) };
+      })
+      .filter((x): x is { word: string; reading: string; correctAnswer: string; options: string[]; origIdx: number } => Boolean(x));
+  }, [gatekeeperQuestions, quizStudyIndices, quizRoundSeed]);
+
   const [quizIndex, setQuizIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [quizScore, setQuizScore] = useState(0);
   const [quizAnswered, setQuizAnswered] = useState(false);
   const [quizFinished, setQuizFinished] = useState(false);
   const [quizCountdown, setQuizCountdown] = useState<number | null>(null);
 
-  const handleNextQuizQuestion = (overrideScore?: number) => {
+  const handleFinishQuizRound = (overrideMastered?: Set<number>) => {
     setQuizCountdown(null);
-    if (quizIndex < gatekeeperQuestions.length - 1) {
+    setQuizFinished(true);
+    const masteredSet = overrideMastered || masteredQuizIds;
+    if (gatekeeperQuestions.length > 0 && masteredSet.size >= gatekeeperQuestions.length) {
+      void triggerAutoSaveQuest();
+    }
+  };
+
+  const handleNextQuizQuestion = (overrideMastered?: Set<number>) => {
+    setQuizCountdown(null);
+    if (quizIndex < activeQuizItems.length - 1) {
       setQuizIndex(prev => prev + 1);
       setSelectedAnswer(null);
       setQuizAnswered(false);
     } else {
-      setQuizFinished(true);
-      const finalScore = typeof overrideScore === 'number' ? overrideScore : quizScore;
-      if (gatekeeperQuestions.length > 0 && finalScore === gatekeeperQuestions.length) {
-        void triggerAutoSaveQuest();
-      }
+      handleFinishQuizRound(overrideMastered);
     }
   };
 
   const handleSelectQuizOption = (opt: string) => {
-    if (quizAnswered) return;
+    if (quizAnswered || !activeQuizItems[quizIndex]) return;
+    const currentQ = activeQuizItems[quizIndex];
     setSelectedAnswer(opt);
     setQuizAnswered(true);
-    const currentQ = gatekeeperQuestions[quizIndex];
+    const nextMastered = new Set(masteredQuizIds);
     if (opt === currentQ.correctAnswer) {
-      setQuizScore(prev => prev + 1);
+      nextMastered.add(currentQ.origIdx);
+    } else {
+      nextMastered.delete(currentQ.origIdx);
     }
+    setMasteredQuizIds(nextMastered);
     setQuizCountdown(5);
   };
 
@@ -499,23 +532,43 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
       setQuizCountdown(prev => (prev !== null ? prev - 1 : null));
     }, 1000);
     return () => clearTimeout(timer);
-  }, [questMode, quizAnswered, quizFinished, quizCountdown, quizIndex, quizScore, gatekeeperQuestions.length]);
+  }, [questMode, quizAnswered, quizFinished, quizCountdown, quizIndex, masteredQuizIds, activeQuizItems.length]);
 
   const handleRetryQuiz = () => {
+    setQuizStudyIndices(null);
+    setMasteredQuizIds(new Set());
     setQuizAttemptSeed(s => s + 1);
+    setQuizRoundSeed(s => s + 1);
     setQuizIndex(0);
     setSelectedAnswer(null);
     setQuizAnswered(false);
-    setQuizScore(0);
+    setQuizFinished(false);
+    setQuizCountdown(null);
+  };
+
+  const handleRetryQuizWrong = () => {
+    const remaining = gatekeeperQuestions
+      .map((_, i) => i)
+      .filter(i => !masteredQuizIds.has(i));
+    if (remaining.length === 0) {
+      handleRetryQuiz();
+      return;
+    }
+    setQuizStudyIndices(remaining);
+    setQuizRoundSeed(s => s + 1);
+    setQuizIndex(0);
+    setSelectedAnswer(null);
+    setQuizAnswered(false);
     setQuizFinished(false);
     setQuizCountdown(null);
   };
 
   // -------------------------------------------------------------
-  // QUEST 3: GRAMMAR SCRAMBLE VỚI KÉO THẢ (KHÔNG LẶP CÂU 3 + TỰ CHUYỂN)
+  // QUEST 3: GRAMMAR SCRAMBLE VỚI KÉO THẢ (ÔN CÂU SAI + 100% MỚI QUA)
   // -------------------------------------------------------------
   const [scrambleAttemptSeed, setScrambleAttemptSeed] = useState(0);
-  const [scrambleRetryIndices, setScrambleRetryIndices] = useState<number[] | null>(null);
+  const [scrambleStudyIndices, setScrambleStudyIndices] = useState<number[] | null>(null);
+  const [masteredScrambleIds, setMasteredScrambleIds] = useState<Set<number>>(new Set());
 
   const allScrambleSentences = useMemo(() => {
     const list: Array<{ original: string; translation: string; tokens: string[] }> = [];
@@ -581,22 +634,28 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   }, [questData?.scrambleSentences, grammarList, displayVocabList, scrambleAttemptSeed]);
 
   const scrambleSentences = useMemo(() => {
-    if (!scrambleRetryIndices || scrambleRetryIndices.length === 0) return allScrambleSentences;
-    const subset = scrambleRetryIndices.map(i => allScrambleSentences[i]).filter(Boolean);
-    return subset.length > 0 ? subset : allScrambleSentences;
-  }, [allScrambleSentences, scrambleRetryIndices]);
+    const idxs = scrambleStudyIndices && scrambleStudyIndices.length > 0
+      ? scrambleStudyIndices
+      : allScrambleSentences.map((_, i) => i);
+    return idxs
+      .map(origIdx => {
+        const s = allScrambleSentences[origIdx];
+        if (!s) return null;
+        return { ...s, origIdx };
+      })
+      .filter((x): x is { original: string; translation: string; tokens: string[]; origIdx: number } => Boolean(x));
+  }, [allScrambleSentences, scrambleStudyIndices]);
 
   const [scrambleIndex, setScrambleIndex] = useState(0);
   const [userTokens, setUserTokens] = useState<string[]>([]);
   const [scrambleChecked, setScrambleChecked] = useState(false);
   const [scramblePassed, setScramblePassed] = useState(false);
-  const [scrambleResults, setScrambleResults] = useState<Record<number, boolean>>({});
   const [scrambleFinished, setScrambleFinished] = useState(false);
   const [scrambleCountdown, setScrambleCountdown] = useState<number | null>(null);
   const [draggedTokenIndex, setDraggedTokenIndex] = useState<number | null>(null);
 
   const currentScramble = scrambleSentences[scrambleIndex];
-  const scrambleCompletedCount = Object.values(scrambleResults).filter(Boolean).length;
+  const scrambleCompletedCount = masteredScrambleIds.size;
 
   // Drag & drop handlers
   const handleDragStartToken = (e: React.DragEvent, index: number) => {
@@ -622,7 +681,19 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
     setUserTokens(prev => prev.filter((_, i) => i !== idx));
   };
 
-  const handleNextScramble = (overrideResults?: Record<number, boolean>) => {
+  const handleFinishScrambleRound = (overrideMastered?: Set<number>) => {
+    setScrambleCountdown(null);
+    setUserTokens([]);
+    setScrambleChecked(false);
+    setScramblePassed(false);
+    setScrambleFinished(true);
+    const masteredSet = overrideMastered || masteredScrambleIds;
+    if (allScrambleSentences.length > 0 && masteredSet.size >= allScrambleSentences.length) {
+      void triggerAutoSaveQuest();
+    }
+  };
+
+  const handleNextScramble = (overrideMastered?: Set<number>) => {
     setScrambleCountdown(null);
     setUserTokens([]);
     setScrambleChecked(false);
@@ -630,12 +701,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
     if (scrambleIndex < scrambleSentences.length - 1) {
       setScrambleIndex(prev => prev + 1);
     } else {
-      setScrambleFinished(true);
-      const resMap = overrideResults || scrambleResults;
-      const passedCount = Object.values(resMap).filter(Boolean).length;
-      if (scrambleSentences.length > 0 && passedCount === scrambleSentences.length) {
-        void triggerAutoSaveQuest();
-      }
+      handleFinishScrambleRound(overrideMastered);
     }
   };
 
@@ -648,7 +714,13 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
     const correct = userClean === targetClean;
     setScramblePassed(correct);
     setScrambleChecked(true);
-    setScrambleResults(prev => ({ ...prev, [scrambleIndex]: correct }));
+    const nextMastered = new Set(masteredScrambleIds);
+    if (correct) {
+      nextMastered.add(currentScramble.origIdx);
+    } else {
+      nextMastered.delete(currentScramble.origIdx);
+    }
+    setMasteredScrambleIds(nextMastered);
     setScrambleCountdown(3);
   };
 
@@ -662,34 +734,33 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
       setScrambleCountdown(prev => (prev !== null ? prev - 1 : null));
     }, 1000);
     return () => clearTimeout(timer);
-  }, [questMode, scrambleChecked, scrambleFinished, scrambleCountdown, scrambleIndex, scrambleSentences.length]);
+  }, [questMode, scrambleChecked, scrambleFinished, scrambleCountdown, scrambleIndex, scrambleSentences.length, masteredScrambleIds]);
 
   const handleRetryScrambleAll = () => {
-    setScrambleRetryIndices(null);
+    setScrambleStudyIndices(null);
+    setMasteredScrambleIds(new Set());
     setScrambleAttemptSeed(s => s + 1);
     setScrambleIndex(0);
     setUserTokens([]);
     setScrambleChecked(false);
     setScramblePassed(false);
-    setScrambleResults({});
     setScrambleFinished(false);
     setScrambleCountdown(null);
   };
 
   const handleRetryScrambleWrong = () => {
-    const failedIdx = scrambleSentences
-      .map((_, i) => (scrambleResults[i] ? -1 : i))
-      .filter(i => i >= 0);
+    const failedIdx = allScrambleSentences
+      .map((_, i) => i)
+      .filter(i => !masteredScrambleIds.has(i));
     if (failedIdx.length === 0) {
       handleRetryScrambleAll();
       return;
     }
-    setScrambleRetryIndices(failedIdx);
+    setScrambleStudyIndices(failedIdx);
     setScrambleIndex(0);
     setUserTokens([]);
     setScrambleChecked(false);
     setScramblePassed(false);
-    setScrambleResults({});
     setScrambleFinished(false);
     setScrambleCountdown(null);
   };
@@ -874,7 +945,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
     return (
       <div style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: 48, textAlign: 'center', border: '1px solid #e2e8f0' }}>
         <Sparkles size={32} style={{ color: '#c53d32', margin: '0 auto 12px', display: 'block' }} />
-        <p style={{ color: '#64748b', fontWeight: 600 }}>Đang tải bài học từ Firestore...</p>
+        <p style={{ color: '#64748b', fontWeight: 600 }}>Đang tải bài học...</p>
       </div>
     );
   }
@@ -1298,10 +1369,10 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
         >
           <Trophy size={48} style={{ color: '#eab308', margin: '0 auto 16px', display: 'block' }} />
           <h2 className="roadmap-success-title" style={{ fontSize: 22, fontWeight: 900, color: '#065f46', marginBottom: 8 }}>
-            XUẤT SẮC! BẠN ĐÃ HOÀN THÀNH NHIỆM VỤ {questIndex}!
+            HOÀN THÀNH NHIỆM VỤ {questIndex}!
           </h2>
-          <p className="roadmap-success-desc" style={{ color: '#475569', fontSize: 14, maxWidth: 500, margin: '0 auto 24px auto', lineHeight: 1.6 }}>
-            Dữ liệu đã được lưu trực tiếp vào Firestore. Điểm năng động, kinh nghiệm XP và chuỗi ngày học Streak đã được cộng vào tài khoản của bạn!
+          <p className="roadmap-success-desc" style={{ color: '#475569', fontSize: 14, maxWidth: 460, margin: '0 auto 24px auto', lineHeight: 1.5 }}>
+            Tiến trình, XP và Streak đã được cập nhật.
           </p>
 
           <button
@@ -1360,13 +1431,32 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                       </button>
                     </div>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
                       <span style={{ fontSize: 13, color: '#16a34a', fontWeight: 800 }}>
-                        Đã thuộc: {masteredIds.size}
+                        Đã thuộc: {masteredIds.size}/{displayVocabList.length}
                       </span>
                       <span style={{ fontSize: 13, color: '#b45309', fontWeight: 800 }}>
-                        Cần ôn: {learningIds.size}
+                        Cần ôn: {Math.max(0, displayVocabList.length - masteredIds.size)}
                       </span>
+                      {srsStudyList.length > 0 && (
+                        <button
+                          type="button"
+                          onClick={handleFinishSrsRound}
+                          className="roadmap-btn-back"
+                          style={{
+                            padding: '4px 10px',
+                            borderRadius: 8,
+                            border: '1px solid #cbd5e1',
+                            backgroundColor: '#f8fafc',
+                            color: '#334155',
+                            fontSize: 12,
+                            fontWeight: 700,
+                            cursor: 'pointer'
+                          }}
+                        >
+                          Tổng kết lượt
+                        </button>
+                      )}
                     </div>
                   </div>
 
@@ -1614,171 +1704,194 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                           alignItems: 'center',
                           justifyContent: 'center',
                           gap: 8,
-                          marginTop: 14,
-                          fontSize: 12.5,
+                          marginTop: 12,
+                          fontSize: 12,
                           color: '#64748b',
                           textAlign: 'center',
                           flexWrap: 'wrap'
                         }}>
-                          <span>Chạm vào thẻ để lật (Space)</span>
+                          <span>Chạm lật (Space)</span>
                           <span style={{ color: '#94a3b8' }}>·</span>
                           <span>Vuốt / ← Cần ôn</span>
                           <span style={{ color: '#94a3b8' }}>·</span>
-                          <span>Vuốt / → Đã thuộc (học hết thẻ để tự tổng kết)</span>
+                          <span>Vuốt / → Đã thuộc</span>
                         </div>
                       </div>
                     </div>
                   ) : (
                     <div className="roadmap-runner-muted" style={{ textAlign: 'center', padding: 32, color: '#64748b' }}>
-                      Đang đồng bộ danh sách thẻ SRS...
+                      Đang tải thẻ SRS...
                     </div>
                   )}
                 </>
               ) : (
-                /* Màn hình Tổng kết Dạng 1 (Mẫu chuẩn VocabPage) */
-                <div style={{ maxWidth: 480, margin: '8px auto', textAlign: 'center', padding: '12px 8px' }}>
-                  <div style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: 48,
-                    height: 48,
-                    borderRadius: 24,
-                    background: 'rgba(16, 185, 129, 0.12)',
-                    color: '#10b981',
-                    fontSize: 22,
-                    fontWeight: 900,
-                    marginBottom: 10
-                  }}>
-                    完
-                  </div>
-                  <h3 className="roadmap-runner-title" style={{ fontSize: 20, fontWeight: 900, color: '#0f172a', marginBottom: 6 }}>
-                    Hoàn thành lượt học thẻ SRS
-                  </h3>
-                  <p className="roadmap-runner-muted" style={{ fontSize: 13, color: '#64748b', marginBottom: 16 }}>
-                    {questSaved || masteredIds.size > 0
-                      ? 'Tiến trình Quest 1 đã được tự động lưu và mở khóa Quest tiếp theo!'
-                      : 'Hãy ghi nhớ ít nhất 1 thẻ để hệ thống ghi nhận hoàn thành Quest 1.'}
-                  </p>
-
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, margin: '18px 0' }}>
-                    <div style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: 12, padding: 14 }}>
-                      <div style={{ fontSize: 11, fontWeight: 800, color: '#10b981' }}>覚えた · ĐÃ THUỘC</div>
-                      <div style={{ fontSize: 28, fontWeight: 900, color: '#10b981', marginTop: 4 }}>
-                        {masteredIds.size}
-                      </div>
-                    </div>
-
-                    <div style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.25)', borderRadius: 12, padding: 14 }}>
-                      <div style={{ fontSize: 11, fontWeight: 800, color: '#ef4444' }}>まだ · CẦN ÔN LẠI</div>
-                      <div style={{ fontSize: 28, fontWeight: 900, color: '#ef4444', marginTop: 4 }}>
-                        {learningIds.size}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                    {learningIds.size > 0 && (
-                      <button
-                        onClick={handleRestartSrsUnlearned}
-                        style={{
-                          padding: '11px 16px',
-                          background: '#c53d32',
-                          color: '#ffffff',
-                          border: 'none',
-                          borderRadius: 10,
-                          fontWeight: 800,
-                          fontSize: 14,
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          gap: 8
-                        }}
-                      >
-                        <RotateCcw size={16} /> Làm lại các thẻ chưa thuộc ({learningIds.size} thẻ)
-                      </button>
-                    )}
-
-                    <button
-                      onClick={handleRestartSrsAll}
-                      className="roadmap-btn-back"
-                      style={{
-                        padding: '11px 16px',
-                        background: '#f1f5f9',
-                        color: '#0f172a',
-                        border: '1px solid #cbd5e1',
-                        borderRadius: 10,
-                        fontWeight: 800,
-                        fontSize: 14,
-                        cursor: 'pointer',
-                        display: 'flex',
+                /* Màn hình Tổng kết Quest 1 */
+                (() => {
+                  const srsTotal = displayVocabList.length;
+                  const srsRemaining = Math.max(0, srsTotal - masteredIds.size);
+                  const srsFullPass = srsTotal > 0 && masteredIds.size >= srsTotal;
+                  return (
+                    <div style={{ maxWidth: 460, margin: '8px auto', textAlign: 'center', padding: '12px 8px' }}>
+                      <div style={{
+                        display: 'inline-flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        gap: 8
-                      }}
-                    >
-                      <RotateCcw size={16} /> Làm lại tất cả ({displayVocabList.length} thẻ)
-                    </button>
+                        width: 48,
+                        height: 48,
+                        borderRadius: 24,
+                        background: srsFullPass ? 'rgba(16, 185, 129, 0.12)' : 'rgba(245, 158, 11, 0.12)',
+                        color: srsFullPass ? '#10b981' : '#d97706',
+                        fontSize: 22,
+                        fontWeight: 900,
+                        marginBottom: 10
+                      }}>
+                        {srsFullPass ? '完' : '復'}
+                      </div>
+                      <h3 className="roadmap-runner-title" style={{ fontSize: 20, fontWeight: 900, color: '#0f172a', marginBottom: 6 }}>
+                        {srsFullPass ? 'Đạt 100% Quest 1!' : 'Tổng kết lượt học SRS'}
+                      </h3>
+                      <p className="roadmap-runner-muted" style={{ fontSize: 13, color: '#64748b', marginBottom: 16 }}>
+                        {srsFullPass || questSaved
+                          ? 'Đã tự động lưu và mở khóa Quest 2.'
+                          : 'Đạt 100% thẻ để mở khóa Quest 2.'}
+                      </p>
 
-                    {(questSaved || masteredIds.size > 0) && (
-                      <button
-                        onClick={handleBack}
-                        style={{
-                          padding: '12px 16px',
-                          background: '#10b981',
-                          color: '#ffffff',
-                          border: 'none',
-                          borderRadius: 10,
-                          fontWeight: 800,
-                          fontSize: 14,
-                          cursor: 'pointer',
-                          marginTop: 4
-                        }}
-                      >
-                        Tiếp tục nhiệm vụ tiếp theo ➔
-                      </button>
-                    )}
-                  </div>
-                </div>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, margin: '18px 0' }}>
+                        <div style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: 12, padding: 14 }}>
+                          <div style={{ fontSize: 11, fontWeight: 800, color: '#10b981' }}>覚えた · ĐÃ THUỘC</div>
+                          <div style={{ fontSize: 28, fontWeight: 900, color: '#10b981', marginTop: 4 }}>
+                            {masteredIds.size}
+                          </div>
+                        </div>
+
+                        <div style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.25)', borderRadius: 12, padding: 14 }}>
+                          <div style={{ fontSize: 11, fontWeight: 800, color: '#ef4444' }}>まだ · CẦN ÔN</div>
+                          <div style={{ fontSize: 28, fontWeight: 900, color: '#ef4444', marginTop: 4 }}>
+                            {srsRemaining}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                        {srsRemaining > 0 && (
+                          <button
+                            onClick={handleRestartSrsUnlearned}
+                            style={{
+                              padding: '11px 16px',
+                              background: '#c53d32',
+                              color: '#ffffff',
+                              border: 'none',
+                              borderRadius: 10,
+                              fontWeight: 800,
+                              fontSize: 14,
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              gap: 8
+                            }}
+                          >
+                            <RotateCcw size={16} /> Ôn lại thẻ chưa thuộc ({srsRemaining} thẻ)
+                          </button>
+                        )}
+
+                        <button
+                          onClick={handleRestartSrsAll}
+                          className="roadmap-btn-back"
+                          style={{
+                            padding: '11px 16px',
+                            background: '#f1f5f9',
+                            color: '#0f172a',
+                            border: '1px solid #cbd5e1',
+                            borderRadius: 10,
+                            fontWeight: 800,
+                            fontSize: 14,
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: 8
+                          }}
+                        >
+                          <RotateCcw size={16} /> Làm lại tất cả ({srsTotal} thẻ)
+                        </button>
+
+                        {(srsFullPass || questSaved) && (
+                          <button
+                            onClick={handleBack}
+                            style={{
+                              padding: '12px 16px',
+                              background: '#10b981',
+                              color: '#ffffff',
+                              border: 'none',
+                              borderRadius: 10,
+                              fontWeight: 800,
+                              fontSize: 14,
+                              cursor: 'pointer',
+                              marginTop: 4
+                            }}
+                          >
+                            Tiếp tục nhiệm vụ tiếp theo ➔
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })()
               )}
             </div>
           )}
 
           {/* ========================================================
-              QUEST 2: GATEKEEPER 100% (RANDOM A/B/C/D + TỰ CHUYỂN 5S)
+              QUEST 2: GATEKEEPER 100% (RANDOM A/B/C/D + ÔN CÂU SAI NHƯ QUEST 1)
               ======================================================== */}
           {questMode === 'GATEKEEPER' && (
             <div className="roadmap-runner-card" style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 10 }}>
-                <div>
-                  <h3 className="roadmap-runner-title" style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <Shield size={18} style={{ color: '#047857' }} />
-                    <span>Cổng Phản Xạ 100% (Vocab Gatekeeper)</span>
-                  </h3>
-                  <div style={{ fontSize: 13, color: '#dc2626', fontWeight: 700 }}>
-                    Tiêu chuẩn Người gác cổng: Đạt 100% ({gatekeeperQuestions.length || 8}/{gatekeeperQuestions.length || 8} câu đúng) để mở khóa bước tiếp theo!
-                  </div>
-                </div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18, flexWrap: 'wrap', gap: 10 }}>
+                <h3 className="roadmap-runner-title" style={{ fontSize: 17, fontWeight: 900, color: '#0f172a', margin: 0, display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <Shield size={18} style={{ color: '#047857' }} />
+                  <span>Cổng Phản Xạ 100%</span>
+                </h3>
 
-                <div className="roadmap-runner-title" style={{ fontSize: 14, fontWeight: 800, color: '#0f172a' }}>
-                  Câu {quizIndex + 1} / {gatekeeperQuestions.length || 1} • Đúng: <b style={{ color: '#16a34a' }}>{quizScore}</b>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                  <span className="roadmap-runner-title" style={{ fontSize: 13.5, fontWeight: 800, color: '#0f172a' }}>
+                    Câu {quizIndex + 1}/{activeQuizItems.length || 1} • Đạt: <b style={{ color: '#16a34a' }}>{masteredQuizIds.size}/{gatekeeperQuestions.length}</b>
+                  </span>
+                  {!quizFinished && activeQuizItems.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => handleFinishQuizRound()}
+                      className="roadmap-btn-back"
+                      style={{
+                        padding: '4px 10px',
+                        borderRadius: 8,
+                        border: '1px solid #cbd5e1',
+                        backgroundColor: '#f8fafc',
+                        color: '#334155',
+                        fontSize: 12,
+                        fontWeight: 700,
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Tổng kết lượt
+                    </button>
+                  )}
                 </div>
               </div>
 
               {!quizFinished ? (
-                gatekeeperQuestions[quizIndex] ? (
+                activeQuizItems[quizIndex] ? (
                   <div>
                     {/* Word display card */}
-                    <div className="roadmap-gatekeeper-wordbox" style={{ backgroundColor: '#f8fafc', padding: '24px 20px', borderRadius: 12, border: '1px solid #e2e8f0', textAlign: 'center', marginBottom: 24 }}>
+                    <div className="roadmap-gatekeeper-wordbox" style={{ backgroundColor: '#f8fafc', padding: '24px 20px', borderRadius: 12, border: '1px solid #e2e8f0', textAlign: 'center', marginBottom: 20 }}>
                       <div className="roadmap-gatekeeper-reading" style={{ fontSize: 13.5, color: '#64748b', fontWeight: 700, marginBottom: 4 }}>
-                        {gatekeeperQuestions[quizIndex].reading}
+                        {activeQuizItems[quizIndex].reading}
                       </div>
                       <div className="roadmap-gatekeeper-word" style={{ fontSize: 30, fontWeight: 900, color: '#0f172a', marginBottom: 8 }}>
-                        {gatekeeperQuestions[quizIndex].word}
+                        {activeQuizItems[quizIndex].word}
                       </div>
                       <button
-                        onClick={() => speakJapanese(gatekeeperQuestions[quizIndex].word)}
+                        onClick={() => speakJapanese(activeQuizItems[quizIndex].word)}
                         style={{ background: 'none', border: 'none', color: '#3b82f6', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 13, fontWeight: 700 }}
                       >
                         <Volume2 size={16} /> Nghe phát âm
@@ -1786,9 +1899,9 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     </div>
 
                     {/* Options list: Randomized ABCD */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 12, marginBottom: 20 }}>
-                      {gatekeeperQuestions[quizIndex].options.map((opt: string, i: number) => {
-                        const isCorrect = opt === gatekeeperQuestions[quizIndex].correctAnswer;
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 12, marginBottom: 18 }}>
+                      {activeQuizItems[quizIndex].options.map((opt: string, i: number) => {
+                        const isCorrect = opt === activeQuizItems[quizIndex].correctAnswer;
                         const isChosen = opt === selectedAnswer;
 
                         let bg = '#ffffff';
@@ -1833,16 +1946,16 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
 
                     {quizAnswered && (
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
-                        <span className="roadmap-runner-muted" style={{ fontSize: 12.5, fontWeight: 700, color: '#64748b' }}>
-                          {selectedAnswer === gatekeeperQuestions[quizIndex].correctAnswer
-                            ? `✓ Chính xác! Tự động chuyển sau ${quizCountdown ?? 0}s...`
-                            : `✕ Đáp án đúng là: "${gatekeeperQuestions[quizIndex].correctAnswer}" • Tự động chuyển sau ${quizCountdown ?? 0}s...`}
+                        <span className="roadmap-runner-muted" style={{ fontSize: 13, fontWeight: 700, color: selectedAnswer === activeQuizItems[quizIndex].correctAnswer ? '#16a34a' : '#dc2626' }}>
+                          {selectedAnswer === activeQuizItems[quizIndex].correctAnswer
+                            ? `✓ Chính xác (${quizCountdown ?? 0}s)`
+                            : `✕ Đúng là: "${activeQuizItems[quizIndex].correctAnswer}" (${quizCountdown ?? 0}s)`}
                         </span>
                         <button
                           onClick={() => handleNextQuizQuestion()}
                           className="roadmap-btn-next"
                           style={{
-                            padding: '10px 22px',
+                            padding: '9px 20px',
                             backgroundColor: '#0f172a',
                             color: '#ffffff',
                             borderRadius: 8,
@@ -1852,108 +1965,166 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                             cursor: 'pointer'
                           }}
                         >
-                          {quizIndex < gatekeeperQuestions.length - 1 ? 'Chuyển ngay ➔' : 'Xem kết quả ngay ➔'}
+                          {quizIndex < activeQuizItems.length - 1 ? 'Chuyển ngay ➔' : 'Xem kết quả ➔'}
                         </button>
                       </div>
                     )}
                   </div>
                 ) : (
-                  <div className="roadmap-runner-muted" style={{ textAlign: 'center', padding: 24, color: '#64748b' }}>Đang nạp câu hỏi trắc nghiệm...</div>
+                  <div className="roadmap-runner-muted" style={{ textAlign: 'center', padding: 24, color: '#64748b' }}>Đang nạp câu hỏi...</div>
                 )
               ) : (
-                /* Gatekeeper Finished (Auto-saved on 100%) */
-                <div style={{ textAlign: 'center', padding: '24px 16px' }}>
-                  {quizScore === gatekeeperQuestions.length ? (
-                    <div>
-                      <Crown size={56} style={{ color: '#eab308', margin: '0 auto 12px', display: 'block' }} />
-                      <h3 style={{ fontSize: 22, fontWeight: 900, color: '#16a34a', marginBottom: 8 }}>
-                        XUẤT SẮC! BẠN ĐẠT ĐIỂM TUYỆT ĐỐI 100%!
+                /* Quest 2 Summary (Tương tự Quest 1) */
+                (() => {
+                  const totalQ = gatekeeperQuestions.length;
+                  const wrongCount = Math.max(0, totalQ - masteredQuizIds.size);
+                  const fullPass = totalQ > 0 && masteredQuizIds.size >= totalQ;
+                  return (
+                    <div style={{ maxWidth: 460, margin: '8px auto', textAlign: 'center', padding: '12px 8px' }}>
+                      <div style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: 48,
+                        height: 48,
+                        borderRadius: 24,
+                        background: fullPass ? 'rgba(16, 185, 129, 0.12)' : 'rgba(245, 158, 11, 0.12)',
+                        color: fullPass ? '#10b981' : '#d97706',
+                        fontSize: 22,
+                        fontWeight: 900,
+                        marginBottom: 10
+                      }}>
+                        {fullPass ? '完' : '復'}
+                      </div>
+                      <h3 className="roadmap-runner-title" style={{ fontSize: 20, fontWeight: 900, color: '#0f172a', marginBottom: 6 }}>
+                        {fullPass ? 'Đạt 100% Quest 2!' : 'Tổng kết lượt trắc nghiệm'}
                       </h3>
-                      <p className="roadmap-runner-muted" style={{ color: '#475569', fontSize: 14, marginBottom: 24 }}>
-                        Bạn đã trả lời đúng {quizScore}/{gatekeeperQuestions.length} câu. {submitting ? 'Đang lưu kết quả...' : 'Kết quả Quest 2 đã được tự động lưu và mở khóa Quest 3!'}
+                      <p className="roadmap-runner-muted" style={{ fontSize: 13, color: '#64748b', marginBottom: 16 }}>
+                        {fullPass || questSaved
+                          ? 'Đã tự động lưu và mở khóa Quest 3.'
+                          : 'Đạt 100% để mở khóa Quest 3.'}
                       </p>
-                      <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, margin: '18px 0' }}>
+                        <div style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: 12, padding: 14 }}>
+                          <div style={{ fontSize: 11, fontWeight: 800, color: '#10b981' }}>正解 · ĐÃ ĐÚNG</div>
+                          <div style={{ fontSize: 28, fontWeight: 900, color: '#10b981', marginTop: 4 }}>
+                            {masteredQuizIds.size}
+                          </div>
+                        </div>
+
+                        <div style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.25)', borderRadius: 12, padding: 14 }}>
+                          <div style={{ fontSize: 11, fontWeight: 800, color: '#ef4444' }}>復習 · CẦN ÔN</div>
+                          <div style={{ fontSize: 28, fontWeight: 900, color: '#ef4444', marginTop: 4 }}>
+                            {wrongCount}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                        {wrongCount > 0 && (
+                          <button
+                            onClick={handleRetryQuizWrong}
+                            style={{
+                              padding: '11px 16px',
+                              background: '#c53d32',
+                              color: '#ffffff',
+                              border: 'none',
+                              borderRadius: 10,
+                              fontWeight: 800,
+                              fontSize: 14,
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              gap: 8
+                            }}
+                          >
+                            <RotateCcw size={16} /> Ôn lại các câu sai ({wrongCount} câu)
+                          </button>
+                        )}
+
                         <button
                           onClick={handleRetryQuiz}
                           className="roadmap-btn-back"
                           style={{
-                            padding: '11px 22px',
-                            backgroundColor: '#f1f5f9',
+                            padding: '11px 16px',
+                            background: '#f1f5f9',
                             color: '#0f172a',
-                            borderRadius: 10,
-                            fontSize: 14,
-                            fontWeight: 800,
                             border: '1px solid #cbd5e1',
-                            cursor: 'pointer'
-                          }}
-                        >
-                          <RefreshCw size={15} style={{ verticalAlign: 'middle', marginRight: 6 }} />
-                          Ôn tập lại
-                        </button>
-                        <button
-                          onClick={handleBack}
-                          style={{
-                            padding: '12px 28px',
-                            backgroundColor: '#10b981',
-                            color: '#ffffff',
                             borderRadius: 10,
-                            fontSize: 15,
                             fontWeight: 800,
-                            border: 'none',
+                            fontSize: 14,
                             cursor: 'pointer',
-                            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: 8
                           }}
                         >
-                          Tiếp tục lộ trình ➔
+                          <RefreshCw size={16} /> Làm lại tất cả ({totalQ} câu)
                         </button>
+
+                        {(fullPass || questSaved) && (
+                          <button
+                            onClick={handleBack}
+                            style={{
+                              padding: '12px 16px',
+                              background: '#10b981',
+                              color: '#ffffff',
+                              border: 'none',
+                              borderRadius: 10,
+                              fontWeight: 800,
+                              fontSize: 14,
+                              cursor: 'pointer',
+                              marginTop: 4
+                            }}
+                          >
+                            Tiếp tục nhiệm vụ tiếp theo ➔
+                          </button>
+                        )}
                       </div>
                     </div>
-                  ) : (
-                    <div>
-                      <Lock size={56} style={{ color: '#94a3b8', margin: '0 auto 12px', display: 'block' }} />
-                      <h3 style={{ fontSize: 22, fontWeight: 900, color: '#dc2626', marginBottom: 8 }}>
-                        CHƯA ĐẠT 100% — CỔNG VẪN ĐANG KHÓA!
-                      </h3>
-                      <p className="roadmap-runner-muted" style={{ color: '#475569', fontSize: 14, marginBottom: 24 }}>
-                        Bạn đạt {quizScore}/{gatekeeperQuestions.length} câu đúng. Người gác cổng yêu cầu 100% để đảm bảo phản xạ tiếng Nhật chuẩn mực.
-                      </p>
-                      <button
-                        onClick={handleRetryQuiz}
-                        style={{
-                          padding: '12px 28px',
-                          backgroundColor: '#f59e0b',
-                          color: '#ffffff',
-                          borderRadius: 10,
-                          fontSize: 14,
-                          fontWeight: 800,
-                          border: 'none',
-                          cursor: 'pointer'
-                        }}
-                      >
-                        <RefreshCw size={16} style={{ verticalAlign: 'middle', marginRight: 6 }} />
-                        Làm lại bài kiểm tra (Xáo trộn đáp án mới)
-                      </button>
-                    </div>
-                  )}
-                </div>
+                  );
+                })()
               )}
             </div>
           )}
 
           {/* ========================================================
-              QUEST 3: GRAMMAR SCRAMBLE VỚI KÉO THẢ (ĐỦ CÂU + TỰ TỔNG KẾT)
+              QUEST 3: GRAMMAR SCRAMBLE VỚI KÉO THẢ (ÔN CÂU SAI NHƯ QUEST 1)
               ======================================================== */}
           {questMode === 'SCRAMBLE' && (
             <div className="roadmap-runner-card" style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 10 }}>
-                <div>
-                  <h3 className="roadmap-runner-title" style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <Puzzle size={18} style={{ color: '#8b5cf6' }} />
-                    <span>Kéo Thả Ghép Câu & Bẫy Trợ Từ</span>
-                  </h3>
-                  <div className="roadmap-runner-muted" style={{ fontSize: 13, color: '#64748b' }}>
-                    Hoàn thành tất cả {scrambleSentences.length} câu ghép ({scrambleIndex + 1}/{scrambleSentences.length}) • Đúng: <b style={{ color: '#16a34a' }}>{scrambleCompletedCount}</b>
-                  </div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18, flexWrap: 'wrap', gap: 10 }}>
+                <h3 className="roadmap-runner-title" style={{ fontSize: 17, fontWeight: 900, color: '#0f172a', margin: 0, display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <Puzzle size={18} style={{ color: '#8b5cf6' }} />
+                  <span>Ghép Câu Ngữ Pháp</span>
+                </h3>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                  <span className="roadmap-runner-title" style={{ fontSize: 13.5, fontWeight: 800, color: '#0f172a' }}>
+                    Câu {scrambleIndex + 1}/{scrambleSentences.length || 1} • Đạt: <b style={{ color: '#16a34a' }}>{scrambleCompletedCount}/{allScrambleSentences.length}</b>
+                  </span>
+                  {!scrambleFinished && scrambleSentences.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => handleFinishScrambleRound()}
+                      className="roadmap-btn-back"
+                      style={{
+                        padding: '4px 10px',
+                        borderRadius: 8,
+                        border: '1px solid #cbd5e1',
+                        backgroundColor: '#f8fafc',
+                        color: '#334155',
+                        fontSize: 12,
+                        fontWeight: 700,
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Tổng kết lượt
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -1961,10 +2132,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                 currentScramble ? (
                   <div>
                     {/* Vietnamese target */}
-                    <div className="roadmap-scramble-target" style={{ backgroundColor: '#f0fdf4', padding: '16px 20px', borderRadius: 12, border: '1px solid #bbf7d0', marginBottom: 20 }}>
-                      <div className="roadmap-scramble-target-title" style={{ fontSize: 12, color: '#166534', fontWeight: 800, textTransform: 'uppercase', marginBottom: 2 }}>
-                        Ý nghĩa tiếng Việt cần diễn đạt:
-                      </div>
+                    <div className="roadmap-scramble-target" style={{ backgroundColor: '#f0fdf4', padding: '14px 18px', borderRadius: 12, border: '1px solid #bbf7d0', marginBottom: 18 }}>
                       <div className="roadmap-scramble-target-text" style={{ fontSize: 16, fontWeight: 800, color: '#0f172a' }}>
                         {currentScramble.translation}
                       </div>
@@ -1985,12 +2153,12 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                         flexWrap: 'wrap',
                         gap: 10,
                         alignItems: 'center',
-                        marginBottom: 20
+                        marginBottom: 18
                       }}
                     >
                       {userTokens.length === 0 ? (
-                        <span className="roadmap-runner-muted" style={{ color: '#94a3b8', fontSize: 13.5 }}>
-                          Kéo thẻ từ hoặc bấm vào các thẻ bên dưới để xếp vào đây...
+                        <span className="roadmap-runner-muted" style={{ color: '#94a3b8', fontSize: 13 }}>
+                          Kéo hoặc bấm thẻ từ bên dưới để ghép câu
                         </span>
                       ) : (
                         userTokens.map((tok, idx) => (
@@ -2009,7 +2177,6 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                               cursor: 'pointer',
                               boxShadow: 'var(--shadow-sm)'
                             }}
-                            title="Bấm để gỡ bỏ thẻ"
                           >
                             {tok} ✕
                           </span>
@@ -2019,20 +2186,20 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
 
                     {/* Feedback */}
                     {scrambleChecked && (
-                      <div className={scramblePassed ? 'roadmap-scramble-feedback-pass' : 'roadmap-scramble-feedback-fail'} style={{ marginBottom: 18, padding: '12px 16px', borderRadius: 8, backgroundColor: scramblePassed ? '#dcfce7' : '#fee2e2', color: scramblePassed ? '#166534' : '#991b1b', fontSize: 13.5, fontWeight: 700 }}>
+                      <div className={scramblePassed ? 'roadmap-scramble-feedback-pass' : 'roadmap-scramble-feedback-fail'} style={{ marginBottom: 16, padding: '10px 14px', borderRadius: 8, backgroundColor: scramblePassed ? '#dcfce7' : '#fee2e2', color: scramblePassed ? '#166534' : '#991b1b', fontSize: 13.5, fontWeight: 700 }}>
                         {scramblePassed ? (
                           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                             <Check size={16} strokeWidth={3} style={{ color: '#16a34a' }} />
-                            <span>Rất chính xác! Câu hoàn chỉnh: <b>{currentScramble.original}</b> ({scrambleCountdown ?? 0}s...)</span>
+                            <span>Chính xác: <b>{currentScramble.original}</b> ({scrambleCountdown ?? 0}s)</span>
                           </div>
                         ) : (
-                          <div>✕ Chưa chính xác! Câu mẫu chuẩn là: <b>{currentScramble.original}</b> ({scrambleCountdown ?? 0}s...)</div>
+                          <div>✕ Đáp án đúng: <b>{currentScramble.original}</b> ({scrambleCountdown ?? 0}s)</div>
                         )}
                       </div>
                     )}
 
                     {/* Scrambled tokens pool (Draggable) */}
-                    <div className="roadmap-scramble-pool" style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 24, padding: 12, backgroundColor: '#f1f5f9', borderRadius: 12 }}>
+                    <div className="roadmap-scramble-pool" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 20, padding: 12, backgroundColor: '#f1f5f9', borderRadius: 12 }}>
                       {currentScramble.tokens.map((tok, idx) => (
                         <div
                           key={idx}
@@ -2041,7 +2208,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                           onClick={() => handlePickToken(tok)}
                           className="roadmap-scramble-pool-token"
                           style={{
-                            padding: '10px 20px',
+                            padding: '10px 18px',
                             borderRadius: 8,
                             backgroundColor: '#ffffff',
                             border: '1.5px solid #cbd5e1',
@@ -2066,7 +2233,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                           disabled={userTokens.length === 0}
                           className="roadmap-btn-next"
                           style={{
-                            padding: '10px 24px',
+                            padding: '10px 22px',
                             backgroundColor: userTokens.length > 0 ? '#0f172a' : '#94a3b8',
                             color: '#ffffff',
                             borderRadius: 8,
@@ -2076,14 +2243,14 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                             cursor: userTokens.length > 0 ? 'pointer' : 'not-allowed'
                           }}
                         >
-                          Kiểm tra câu ghép
+                          Kiểm tra
                         </button>
                       ) : (
                         <button
                           onClick={() => handleNextScramble()}
                           className="roadmap-btn-next"
                           style={{
-                            padding: '10px 24px',
+                            padding: '10px 22px',
                             backgroundColor: '#10b981',
                             color: '#ffffff',
                             borderRadius: 8,
@@ -2093,109 +2260,130 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                             cursor: 'pointer'
                           }}
                         >
-                          {scrambleIndex < scrambleSentences.length - 1 ? 'Câu tiếp theo ngay ➔' : 'Xem kết quả ngay ➔'}
+                          {scrambleIndex < scrambleSentences.length - 1 ? 'Chuyển ngay ➔' : 'Xem kết quả ➔'}
                         </button>
                       )}
                     </div>
                   </div>
                 ) : (
                   <div className="roadmap-runner-muted" style={{ textAlign: 'center', padding: 24, color: '#64748b' }}>
-                    Đang tải câu mẫu ngữ pháp...
+                    Đang tải câu mẫu...
                   </div>
                 )
               ) : (
-                /* Scramble Finished Summary */
-                <div style={{ textAlign: 'center', padding: '24px 16px' }}>
-                  {scrambleCompletedCount === scrambleSentences.length ? (
-                    <div>
-                      <Trophy size={56} style={{ color: '#eab308', margin: '0 auto 12px', display: 'block' }} />
-                      <h3 style={{ fontSize: 22, fontWeight: 900, color: '#16a34a', marginBottom: 8 }}>
-                        HOÀN THÀNH XUẤT SẮC QUEST 3!
+                /* Quest 3 Summary (Tương tự Quest 1 & 2) */
+                (() => {
+                  const totalS = allScrambleSentences.length;
+                  const wrongS = Math.max(0, totalS - scrambleCompletedCount);
+                  const fullPass = totalS > 0 && scrambleCompletedCount >= totalS;
+                  return (
+                    <div style={{ maxWidth: 460, margin: '8px auto', textAlign: 'center', padding: '12px 8px' }}>
+                      <div style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: 48,
+                        height: 48,
+                        borderRadius: 24,
+                        background: fullPass ? 'rgba(16, 185, 129, 0.12)' : 'rgba(245, 158, 11, 0.12)',
+                        color: fullPass ? '#10b981' : '#d97706',
+                        fontSize: 22,
+                        fontWeight: 900,
+                        marginBottom: 10
+                      }}>
+                        {fullPass ? '完' : '復'}
+                      </div>
+                      <h3 className="roadmap-runner-title" style={{ fontSize: 20, fontWeight: 900, color: '#0f172a', marginBottom: 6 }}>
+                        {fullPass ? 'Đạt 100% Quest 3!' : 'Tổng kết lượt ghép câu'}
                       </h3>
-                      <p className="roadmap-runner-muted" style={{ color: '#475569', fontSize: 14, marginBottom: 24 }}>
-                        Bạn đã ghép chính xác {scrambleCompletedCount}/{scrambleSentences.length} câu ngữ pháp. {submitting ? 'Đang lưu...' : 'Tiến trình đã được tự động lưu và mở khóa Quest 4!'}
+                      <p className="roadmap-runner-muted" style={{ fontSize: 13, color: '#64748b', marginBottom: 16 }}>
+                        {fullPass || questSaved
+                          ? 'Đã tự động lưu và mở khóa Quest 4.'
+                          : 'Đạt 100% câu ghép để mở khóa Quest 4.'}
                       </p>
-                      <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, margin: '18px 0' }}>
+                        <div style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: 12, padding: 14 }}>
+                          <div style={{ fontSize: 11, fontWeight: 800, color: '#10b981' }}>正解 · ĐÃ ĐÚNG</div>
+                          <div style={{ fontSize: 28, fontWeight: 900, color: '#10b981', marginTop: 4 }}>
+                            {scrambleCompletedCount}
+                          </div>
+                        </div>
+
+                        <div style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.25)', borderRadius: 12, padding: 14 }}>
+                          <div style={{ fontSize: 11, fontWeight: 800, color: '#ef4444' }}>復習 · CẦN ÔN</div>
+                          <div style={{ fontSize: 28, fontWeight: 900, color: '#ef4444', marginTop: 4 }}>
+                            {wrongS}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                        {wrongS > 0 && (
+                          <button
+                            onClick={handleRetryScrambleWrong}
+                            style={{
+                              padding: '11px 16px',
+                              background: '#c53d32',
+                              color: '#ffffff',
+                              border: 'none',
+                              borderRadius: 10,
+                              fontWeight: 800,
+                              fontSize: 14,
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              gap: 8
+                            }}
+                          >
+                            <RotateCcw size={16} /> Ôn lại các câu sai ({wrongS} câu)
+                          </button>
+                        )}
+
                         <button
                           onClick={handleRetryScrambleAll}
                           className="roadmap-btn-back"
                           style={{
-                            padding: '11px 22px',
-                            backgroundColor: '#f1f5f9',
+                            padding: '11px 16px',
+                            background: '#f1f5f9',
                             color: '#0f172a',
-                            borderRadius: 10,
-                            fontSize: 14,
-                            fontWeight: 800,
                             border: '1px solid #cbd5e1',
-                            cursor: 'pointer'
-                          }}
-                        >
-                          <RotateCcw size={15} style={{ verticalAlign: 'middle', marginRight: 6 }} />
-                          Làm lại tất cả
-                        </button>
-                        <button
-                          onClick={handleBack}
-                          style={{
-                            padding: '12px 28px',
-                            backgroundColor: '#10b981',
-                            color: '#ffffff',
                             borderRadius: 10,
-                            fontSize: 15,
                             fontWeight: 800,
-                            border: 'none',
-                            cursor: 'pointer'
+                            fontSize: 14,
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: 8
                           }}
                         >
-                          Tiếp tục lộ trình ➔
+                          <RotateCcw size={16} /> Làm lại tất cả ({totalS} câu)
                         </button>
+
+                        {(fullPass || questSaved) && (
+                          <button
+                            onClick={handleBack}
+                            style={{
+                              padding: '12px 16px',
+                              background: '#10b981',
+                              color: '#ffffff',
+                              border: 'none',
+                              borderRadius: 10,
+                              fontWeight: 800,
+                              fontSize: 14,
+                              cursor: 'pointer',
+                              marginTop: 4
+                            }}
+                          >
+                            Tiếp tục nhiệm vụ tiếp theo ➔
+                          </button>
+                        )}
                       </div>
                     </div>
-                  ) : (
-                    <div>
-                      <AlertTriangle size={52} style={{ color: '#f59e0b', margin: '0 auto 12px', display: 'block' }} />
-                      <h3 className="roadmap-runner-title" style={{ fontSize: 20, fontWeight: 900, color: '#0f172a', marginBottom: 8 }}>
-                        Bạn ghép đúng {scrambleCompletedCount}/{scrambleSentences.length} câu
-                      </h3>
-                      <p className="roadmap-runner-muted" style={{ color: '#475569', fontSize: 14, marginBottom: 24 }}>
-                        Hãy hoàn thiện các câu còn sai để nắm vững cấu trúc trợ từ trước khi sang Quest 4 nhé!
-                      </p>
-                      <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
-                        <button
-                          onClick={handleRetryScrambleWrong}
-                          style={{
-                            padding: '12px 24px',
-                            backgroundColor: '#f59e0b',
-                            color: '#ffffff',
-                            borderRadius: 10,
-                            fontSize: 14,
-                            fontWeight: 800,
-                            border: 'none',
-                            cursor: 'pointer'
-                          }}
-                        >
-                          <RotateCcw size={15} style={{ verticalAlign: 'middle', marginRight: 6 }} />
-                          Làm lại các câu chưa đúng ({scrambleSentences.length - scrambleCompletedCount} câu)
-                        </button>
-                        <button
-                          onClick={handleRetryScrambleAll}
-                          className="roadmap-btn-back"
-                          style={{
-                            padding: '12px 24px',
-                            backgroundColor: '#f1f5f9',
-                            color: '#0f172a',
-                            borderRadius: 10,
-                            fontSize: 14,
-                            fontWeight: 800,
-                            border: '1px solid #cbd5e1',
-                            cursor: 'pointer'
-                          }}
-                        >
-                          Làm lại tất cả
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                  );
+                })()
               )}
             </div>
           )}
@@ -2220,11 +2408,11 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
               {roleplayFinished ? (
                 <div style={{ textAlign: 'center', padding: '24px 16px' }}>
                   <Crown size={56} style={{ color: '#eab308', margin: '0 auto 12px', display: 'block' }} />
-                  <h3 style={{ fontSize: 22, fontWeight: 900, color: '#16a34a', marginBottom: 8 }}>
-                    XUẤT SẮC! HOÀN THÀNH TOÀN BỘ TÌNH HUỐNG QUEST 4!
+                  <h3 style={{ fontSize: 20, fontWeight: 900, color: '#16a34a', marginBottom: 8 }}>
+                    Đạt 100% Quest 4!
                   </h3>
-                  <p className="roadmap-runner-muted" style={{ color: '#475569', fontSize: 14, marginBottom: 24 }}>
-                    Bạn đã vượt qua {completedDialoguesCount}/{dialogues.length} tình huống giao tiếp cùng AI Sensei. {submitting ? 'Đang lưu kết quả...' : 'Cột mốc đã được hoàn thành và tự động mở khóa mốc tiếp theo!'}
+                  <p className="roadmap-runner-muted" style={{ color: '#475569', fontSize: 13.5, marginBottom: 20 }}>
+                    Đã vượt qua {completedDialoguesCount}/{dialogues.length} tình huống · Đã mở khóa cột mốc tiếp theo.
                   </p>
                   <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
                     <button
@@ -2375,10 +2563,10 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                           const sampleClean = String(currentDialogue.sampleAnswer || '').trim();
                           if (pasted && sampleClean && (pasted === sampleClean || (pasted.length >= 6 && sampleClean.includes(pasted)))) {
                             e.preventDefault();
-                            setPasteWarning('Không được dán trực tiếp câu mẫu. Hãy tự gõ câu tiếng Nhật của bạn để AI Sensei chấm nhé!');
+                            setPasteWarning('Hãy tự gõ câu tiếng Nhật, không dán câu mẫu.');
                           }
                         }}
-                        placeholder="Nhập câu tiếng Nhật đáp lại Sensei vào đây..."
+                        placeholder="Nhập câu tiếng Nhật..."
                         rows={3}
                         className="roadmap-learner-textarea"
                         style={{
@@ -2407,7 +2595,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                         style={{ background: 'none', border: 'none', color: '#64748b', fontSize: 12.5, fontWeight: 700, cursor: 'pointer', textDecoration: 'underline', display: 'inline-flex', alignItems: 'center', gap: 4 }}
                       >
                         <Lightbulb size={13} style={{ color: '#ca8a04' }} />
-                        <span>{showSample ? 'Ẩn câu mẫu ví dụ' : 'Xem câu mẫu ví dụ (không thể sao chép)'}</span>
+                        <span>{showSample ? 'Ẩn câu mẫu' : 'Xem câu mẫu'}</span>
                       </button>
 
                       {showSample && (
