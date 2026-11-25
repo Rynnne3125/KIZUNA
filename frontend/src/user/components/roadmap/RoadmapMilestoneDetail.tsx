@@ -156,24 +156,23 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
     }
   ];
 
-  // Prioritize Admin-configured quests from Firestore/API, fallback to defaultQuests when empty
-  const displayQuests = quests.length > 0
-    ? [...quests]
-        .sort((a, b) => (a.stepIndex || 0) - (b.stepIndex || 0))
-        .map((q, idx) => {
-          const defQ = defaultQuests[idx] || defaultQuests[0];
-          return {
-            ...defQ,
-            ...q,
-            stepIndex: q.stepIndex || idx + 1,
-            title: q.title || defQ.title,
-            questType: q.questType || defQ.questType,
-            description: q.description || defQ.description,
-            xpReward: q.xpReward ?? defQ.xpReward,
-            activePointsReward: q.activePointsReward ?? defQ.activePointsReward
-          };
-        })
-    : defaultQuests;
+  // Always provide full 4 steps (1..4): merge backend/Firestore quests by stepIndex onto defaultQuests
+  const displayQuests = defaultQuests.map((defQ, idx) => {
+    const stepNum = idx + 1;
+    const matched = quests.find(q => Number(q.stepIndex) === stepNum) ||
+      (quests.length === 1 && stepNum === 4 ? quests[0] : undefined);
+    if (!matched) return defQ;
+    return {
+      ...defQ,
+      ...matched,
+      stepIndex: stepNum,
+      title: matched.title || defQ.title,
+      questType: matched.questType || defQ.questType,
+      description: matched.description || defQ.description,
+      xpReward: matched.xpReward ?? defQ.xpReward,
+      activePointsReward: matched.activePointsReward ?? defQ.activePointsReward
+    };
+  });
 
   // Handle complete quest from Runner
   const handleCompleteQuest = async (qIndex: number, xp: number, ap: number) => {
@@ -343,12 +342,14 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
         </button>
       </div>
 
-      {/* 4. TAB 1: 4 QUESTS LIST (Sequential Unlocking 1 -> 2 -> 3 -> 4) */}
+      {/* 4. TAB 1: 4 QUESTS LIST (Sequential Unlocking 1 -> 2 -> 3 -> 4; completed quests remain unlocked for review) */}
       {activeTab === 'quests' && (
         <div className="space-y-3.5">
           {displayQuests.map((q, idx) => {
-            const questDone = completedQuestIndices.includes(idx + 1);
-            const isUnlocked = idx === 0 || completedQuestIndices.includes(idx);
+            const stepNum = q.stepIndex || idx + 1;
+            const prevStep = idx > 0 ? (displayQuests[idx - 1]?.stepIndex || idx) : 0;
+            const questDone = completedQuestIndices.includes(stepNum);
+            const isUnlocked = isMilestoneCompleted || questDone || idx === 0 || completedQuestIndices.includes(prevStep);
 
             return (
               <div

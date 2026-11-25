@@ -113,6 +113,7 @@ function invalidateUserCurriculumCache(milestoneId?: string) {
     if (milestoneId) {
       keys.push(
         `kizuna_quests_${milestoneId}`,
+        `kizuna_quests_v2_${milestoneId}`,
         `kizuna_vocab_ms_${milestoneId}`,
         `kizuna_kanji_unit_${milestoneId}`,
         `kizuna_grammar_ms_${milestoneId}`,

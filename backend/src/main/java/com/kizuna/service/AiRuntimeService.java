@@ -330,7 +330,7 @@ public class AiRuntimeService {
                         + "- Whitelist từ vựng của mốc: " + req.getWhitelistVocabulary() + "\n"
                         + "- Whitelist ngữ pháp của mốc: " + req.getWhitelistGrammar() + "\n"
                         + "- Câu trả lời của học viên: " + studentInput + "\n\n"
-                        + "Hãy chấm điểm thang 0-10, kiểm tra lỗi trợ từ (は, が, を, に, で, へ, の), đánh giá tuân thủ Whitelist, đưa ra nhận xét sư phạm ngắn gọn bằng tiếng Việt và 1 câu gợi ý tự nhiên chuẩn người Nhật.";
+                        + "Hãy chấm điểm thang 0-10, kiểm tra lỗi trợ từ (は, が, を, に, で, へ, の), đánh giá tuân thủ Whitelist, đưa ra nhận xét sư phạm ngắn gọn bằng tiếng Việt (chỉ rõ điểm tốt hoặc lỗi cụ thể trong câu học viên vừa viết) và 1 câu gợi ý diễn đạt tự nhiên được chỉnh sửa/nâng cấp dựa trên chính ý của học viên (không sao chép nguyên xi câu mẫu có sẵn).";
 
                 Map<String, Object> payload = Map.of(
                         "contents", List.of(Map.of("parts", List.of(Map.of("text", prompt)))),
@@ -501,9 +501,29 @@ public class AiRuntimeService {
             }
         }
 
-        String suggestion = (req.getSampleAnswer() != null && !req.getSampleAnswer().isBlank())
-                ? req.getSampleAnswer()
-                : (input.endsWith("。") ? input : input + "。");
+        String suggestion;
+        if (!hasJapaneseChars) {
+            suggestion = (req.getSampleAnswer() != null && !req.getSampleAnswer().isBlank())
+                    ? req.getSampleAnswer()
+                    : "すみません、もう一度お願いします。";
+        } else {
+            String polished = input
+                    .replace("私わ", "私は")
+                    .replace("わたしわ", "わたしは")
+                    .replace("はは", "は")
+                    .replace("をを", "を")
+                    .replace("にに", "に");
+            if (polished.contains("行きます") && polished.contains("を") && !polished.contains("へ") && !polished.contains("に")) {
+                polished = polished.replaceFirst("を", "へ");
+            }
+            if (!hasPoliteEnding && !polished.endsWith("です") && !polished.endsWith("ます")
+                    && !polished.endsWith("です。") && !polished.endsWith("ます。")) {
+                polished = polished.replaceAll("[。？！?!]+$", "") + "です。";
+            } else if (!polished.endsWith("。") && !polished.endsWith("？") && !polished.endsWith("！")) {
+                polished = polished + "。";
+            }
+            suggestion = polished;
+        }
 
         long latencyMs = Math.max(12, Duration.ofNanos(System.nanoTime() - startedNanos).toMillis());
         recordEvent(new AiTelemetryEvent(

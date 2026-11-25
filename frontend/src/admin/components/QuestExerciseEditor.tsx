@@ -717,19 +717,28 @@ export const QuestExerciseEditor: React.FC<QuestExerciseEditorProps> = ({
     const handleAutoGenerateQuiz = () => {
       const pool = whitelist?.vocabulary || [];
       if (pool.length < 4) return;
+      const shuffle = <T,>(arr: T[]): T[] => {
+        const copy = [...arr];
+        for (let i = copy.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+      };
       const generated: QuestQuizQuestion[] = pool.slice(0, 10).map((item, idx) => {
         const correct = String(item.vietnameseMeaning || item.meaning || 'Nghĩa từ vựng');
-        const wrongs = pool
-          .filter(w => w.id !== item.id)
-          .map(w => String(w.vietnameseMeaning || w.meaning || ''))
-          .filter(m => m && m !== correct)
-          .slice(0, 3);
+        const wrongs = shuffle(
+          pool
+            .filter(w => w.id !== item.id)
+            .map(w => String(w.vietnameseMeaning || w.meaning || ''))
+            .filter(m => m && m !== correct)
+        ).slice(0, 3);
         return {
           id: `gq_${item.id}_${idx}`,
           word: String(item.term || item.kanji || item.reading),
           reading: String(item.reading || item.kana || ''),
           correctAnswer: correct,
-          options: [correct, ...wrongs]
+          options: shuffle([correct, ...wrongs])
         };
       });
       onChange({ ...quest, quizQuestions: generated });

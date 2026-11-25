@@ -171,7 +171,7 @@ export const kizunaService = {
   },
 
   async getMilestoneQuests(milestoneId: string): Promise<any[]> {
-    const cacheKey = `kizuna_quests_${milestoneId}`;
+    const cacheKey = `kizuna_quests_v2_${milestoneId}`;
     const cached = getSessionCache<any[]>(cacheKey);
     if (cached) return cached;
 

@@ -190,7 +190,6 @@ export const progressService = {
 
     try {
       sessionStorage.removeItem(`kizuna_user_progress_${userId}`);
-      sessionStorage.removeItem(`kizuna_roadmap_progress_${userId}`);
 
       // 1. Cập nhật session user trong localStorage để thanh header nhảy điểm ngay (kể cả khi Offline)
       const userRaw = localStorage.getItem('kizuna_user');
@@ -347,21 +346,51 @@ export const progressService = {
     if (!userId) return fallbackProgress;
 
     const CACHE_KEY = `kizuna_roadmap_progress_${userId}`;
+    const OFFLINE_KEY = `kizuna_roadmap_progress_offline_${userId}`;
+
+    let localSaved: UserRoadmapProgress | null = null;
+    try {
+      const offlineRaw = localStorage.getItem(OFFLINE_KEY);
+      localSaved = safeJsonParse<UserRoadmapProgress | null>(offlineRaw, null);
+    } catch {}
+
+    const mergeProgress = (a: UserRoadmapProgress, b: UserRoadmapProgress | null): UserRoadmapProgress => {
+      if (!b) return a;
+      const mergedCompleted = Array.from(new Set([...(a.completedMilestones || []), ...(b.completedMilestones || [])]));
+      const mergedReading = Array.from(new Set([...(a.readingCompleted || []), ...(b.readingCompleted || [])]));
+      const mergedQuests: Record<string, number[]> = { ...(a.completedQuests || {}) };
+      for (const [mId, list] of Object.entries(b.completedQuests || {})) {
+        const combined = Array.from(new Set([...(mergedQuests[mId] || []), ...(Array.isArray(list) ? list : [])])).sort((x, y) => x - y);
+        mergedQuests[mId] = combined;
+        if ([1, 2, 3, 4].every(idx => combined.includes(idx)) && !mergedCompleted.includes(mId)) {
+          mergedCompleted.push(mId);
+        }
+      }
+      return {
+        ...a,
+        completedMilestones: mergedCompleted,
+        completedQuests: mergedQuests,
+        readingCompleted: mergedReading
+      };
+    };
+
     try {
       const cached = sessionStorage.getItem(CACHE_KEY);
       if (cached) {
         const parsed = safeJsonParse<{ data: UserRoadmapProgress; exp: number } | null>(cached, null);
-        if (parsed && Date.now() < parsed.exp) return parsed.data;
+        if (parsed && Date.now() < parsed.exp) return mergeProgress(parsed.data, localSaved);
       }
     } catch {}
 
-    if (!db) return fallbackProgress;
+    if (!db || (typeof navigator !== 'undefined' && !navigator.onLine)) {
+      return localSaved ? mergeProgress(fallbackProgress, localSaved) : fallbackProgress;
+    }
 
     try {
-      const snap = await getDoc(doc(db, 'user_progress', userId));
+      const snap = await withProgressTimeout(getDoc(doc(db, 'user_progress', userId)), 3000);
       if (snap.exists()) {
         const d = snap.data();
-        const res: UserRoadmapProgress = {
+        const remote: UserRoadmapProgress = {
           userId,
           completedMilestones: Array.isArray(d?.completedMilestones) ? d.completedMilestones : [],
           completedQuests: (typeof d?.completedQuests === 'object' && d?.completedQuests !== null) ? d.completedQuests : {},
@@ -370,15 +399,17 @@ export const progressService = {
           currentMilestoneId: d?.currentMilestoneId || 'ms_minna_b01',
           lastStudiedAt: d?.lastStudiedAt
         };
+        const merged = mergeProgress(remote, localSaved);
         try {
-          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: res, exp: Date.now() + 5 * 60 * 1000 }));
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: merged, exp: Date.now() + 5 * 60 * 1000 }));
+          localStorage.setItem(OFFLINE_KEY, JSON.stringify(merged));
         } catch {}
-        return res;
+        return merged;
       }
     } catch (e) {
       console.warn('[Progress] Lỗi lấy roadmap progress từ Firestore:', e);
     }
-    return fallbackProgress;
+    return localSaved ? mergeProgress(fallbackProgress, localSaved) : fallbackProgress;
   },
 
   /**
@@ -435,6 +466,7 @@ export const progressService = {
 
     try {
       sessionStorage.setItem(`kizuna_roadmap_progress_${userId}`, JSON.stringify({ data: updated, exp: Date.now() + 5 * 60 * 1000 }));
+      localStorage.setItem(`kizuna_roadmap_progress_offline_${userId}`, JSON.stringify(updated));
     } catch {}
 
     // Ghi nhận hoạt động, cộng điểm năng động, XP & Streak
@@ -488,6 +520,7 @@ export const progressService = {
 
     try {
       sessionStorage.setItem(`kizuna_roadmap_progress_${userId}`, JSON.stringify({ data: updated, exp: Date.now() + 5 * 60 * 1000 }));
+      localStorage.setItem(`kizuna_roadmap_progress_offline_${userId}`, JSON.stringify(updated));
     } catch {}
 
     await this.recordActivity(userId, 'roadmap', 1, activePointsReward, xpReward);

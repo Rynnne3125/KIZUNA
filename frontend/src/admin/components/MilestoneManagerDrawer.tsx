@@ -277,6 +277,64 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
     }
   };
 
+  const handleEnsure4StandardQuests = async () => {
+    if (!milestone) return;
+    const templates: Array<{ stepIndex: number; questType: string; title: string; description: string; xpReward: number; activePointsReward: number }> = [
+      {
+        stepIndex: 1,
+        questType: 'FLASHCARD_SRS',
+        title: `Bài 1: Thẻ Ghi Nhớ Cốt Lõi (SRS Flashcards)`,
+        description: 'Ghi nhớ từ vựng và Hán tự trọng tâm theo chu trình lặp lại ngắt quãng.',
+        xpReward: 30,
+        activePointsReward: 15
+      },
+      {
+        stepIndex: 2,
+        questType: 'VOCAB_GATEKEEPER',
+        title: `Bài 2: Cổng Phản Xạ Từ Vựng (Gatekeeper 100%)`,
+        description: 'Trả lời chính xác 100% trắc nghiệm phản xạ nghĩa tiếng Việt.',
+        xpReward: 35,
+        activePointsReward: 20
+      },
+      {
+        stepIndex: 3,
+        questType: 'GRAMMAR_SCRAMBLE',
+        title: `Bài 3: Ngữ Pháp Ghép Câu Kéo Thả`,
+        description: 'Sắp xếp thẻ từ thành câu tiếng Nhật hoàn chỉnh đúng ngữ pháp.',
+        xpReward: 40,
+        activePointsReward: 25
+      },
+      {
+        stepIndex: 4,
+        questType: 'CLOZE_PRACTICE',
+        title: `Bài 4: Đối Thoại Tình Huống AI Sensei`,
+        description: 'Thực hành hội thoại 2 chiều cùng AI Sensei theo bối cảnh cột mốc.',
+        xpReward: 50,
+        activePointsReward: 30
+      }
+    ];
+    const existingSteps = new Set(quests.map(q => Number(q.stepIndex)));
+    const missing = templates.filter(t => !existingSteps.has(t.stepIndex));
+    if (missing.length === 0) return;
+
+    setSaving(true);
+    try {
+      const created: MilestoneQuest[] = [];
+      for (const tpl of missing) {
+        const saved = await adminService.saveMilestoneQuest({
+          id: `quest_${milestone.id}_${tpl.stepIndex}_${Date.now().toString(36)}`,
+          milestoneId: milestone.id,
+          ...tpl
+        });
+        created.push(saved);
+      }
+      setQuests(prev => [...prev, ...created].sort((a, b) => (a.stepIndex || 0) - (b.stepIndex || 0)));
+      showMessage('success', `Đã khởi tạo bổ sung ${created.length} Quest chuẩn (đủ 4 bước 1–4).`);
+    } finally {
+      setSaving(false);
+    }
+  };
+
   const handleDeleteQuest = async (questId: string) => {
     setSaving(true);
     await adminService.deleteMilestoneQuest(questId, milestone?.id);
@@ -823,15 +881,29 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
                     Cấu hình tên bài, loại thử thách và điểm thưởng cho từng bước trong phòng luyện tập Quest Room.
                   </p>
                 </div>
-                <Button
-                  type="button"
-                  size="sm"
-                  onClick={handleAddNewQuest}
-                  disabled={saving}
-                  className="w-full sm:w-auto h-9 bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs shadow-emerald-600/20 cursor-pointer shrink-0"
-                >
-                  <Plus className="w-4 h-4 mr-1" /> Thêm Quest
-                </Button>
+                <div className="flex flex-wrap items-center gap-2 shrink-0">
+                  {quests.length < 4 && (
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      onClick={handleEnsure4StandardQuests}
+                      disabled={saving}
+                      className="h-9 border-emerald-300 text-emerald-700 hover:bg-emerald-50 cursor-pointer shrink-0"
+                    >
+                      <Plus className="w-4 h-4 mr-1" /> Khởi tạo đủ 4 Quest chuẩn
+                    </Button>
+                  )}
+                  <Button
+                    type="button"
+                    size="sm"
+                    onClick={handleAddNewQuest}
+                    disabled={saving}
+                    className="h-9 bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs shadow-emerald-600/20 cursor-pointer shrink-0"
+                  >
+                    <Plus className="w-4 h-4 mr-1" /> Thêm Quest
+                  </Button>
+                </div>
               </div>
 
               {loadingQuests ? (

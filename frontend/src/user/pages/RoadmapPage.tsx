@@ -161,20 +161,25 @@ export const RoadmapPage: React.FC = () => {
       .sort((a, b) => ((a.orderIndex ?? (a as any).order_index ?? 0) - (b.orderIndex ?? (b as any).order_index ?? 0)));
   }, [stages, selectedLevel]);
 
-  // Filter milestones of selected stage
+  // Filter milestones of selected stage (only active milestones)
   const stageMilestones = useMemo(() => {
     return milestones
       .filter(m => {
         const sid = m.stageId || (m as any).stage_id;
-        return sid === selectedStage?.id;
+        const isActive = m.isActive !== false && (m as any).active !== false;
+        return sid === selectedStage?.id && isActive;
       })
       .sort((a, b) => ((a.orderIndex ?? (a as any).order_index ?? 0) - (b.orderIndex ?? (b as any).order_index ?? 0)));
   }, [milestones, selectedStage?.id]);
 
-  // Check if a stage is completed based on its milestones
+  // Check if a stage is completed based on its active milestones
   const isStageCompleted = (st?: Stage) => {
     if (!st) return false;
-    const mils = milestones.filter(m => (m.stageId || (m as any).stage_id) === st.id);
+    const mils = milestones.filter(m => {
+      const sid = m.stageId || (m as any).stage_id;
+      const isActive = m.isActive !== false && (m as any).active !== false;
+      return sid === st.id && isActive;
+    });
     if (mils.length === 0) return false;
     return mils.every(m => userProgress?.completedMilestones?.includes(m.id));
   };
@@ -377,12 +382,16 @@ export const RoadmapPage: React.FC = () => {
           {/* Stages Grid Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {levelStages.map((st, idx) => {
-              const stageMils = milestones.filter(m => (m.stageId || (m as any).stage_id) === st.id);
+              const stageMils = milestones.filter(m => {
+                const sid = m.stageId || (m as any).stage_id;
+                const isActive = m.isActive !== false && (m as any).active !== false;
+                return sid === st.id && isActive;
+              });
               const milestoneCount = stageMils.length || st.total_milestones || 5;
               const completedCount = stageMils.filter(m => userProgress?.completedMilestones?.includes(m.id)).length;
               const percent = stageMils.length > 0 ? Math.round((completedCount / stageMils.length) * 100) : 0;
               const isComp = completedCount === stageMils.length && stageMils.length > 0;
-              const isStageUnlocked = idx === 0 || isStageCompleted(levelStages[idx - 1]);
+              const isStageUnlocked = isComp || completedCount > 0 || idx === 0 || isStageCompleted(levelStages[idx - 1]);
 
               return (
                 <div
@@ -487,12 +496,12 @@ export const RoadmapPage: React.FC = () => {
           <div className="space-y-3">
             {stageMilestones.map((ms, idx) => {
               const isCompleted = userProgress?.completedMilestones?.includes(ms.id) || false;
-              const isFirstOfStage1 = ((selectedStage?.orderIndex || 1) === 1 && idx === 0);
+              const stageIdx = selectedStage ? levelStages.findIndex(s => s.id === selectedStage.id) : 0;
+              const isFirstOfStage1 = stageIdx <= 0 && idx === 0;
               const prevCompleted = idx > 0 ? (userProgress?.completedMilestones?.includes(stageMilestones[idx - 1].id) || false) : false;
-              const prevStageComp = (selectedStage && selectedStage.orderIndex > 1)
-                ? isStageCompleted(levelStages.find(s => s.orderIndex === selectedStage.orderIndex - 1))
-                : false;
-              const isUnlocked = isCompleted || isFirstOfStage1 || (idx === 0 ? prevStageComp : prevCompleted);
+              const prevStageComp = stageIdx > 0 ? isStageCompleted(levelStages[stageIdx - 1]) : false;
+              const hasQuestProgress = (userProgress?.completedQuests?.[ms.id]?.length || 0) > 0;
+              const isUnlocked = isCompleted || hasQuestProgress || isFirstOfStage1 || (idx === 0 ? prevStageComp : prevCompleted);
               const isBoss = ms.milestone_type === 'BOSS_CHALLENGE' || idx === stageMilestones.length - 1;
 
               return (
