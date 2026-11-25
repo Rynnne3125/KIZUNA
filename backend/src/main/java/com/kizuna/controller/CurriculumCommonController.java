@@ -50,6 +50,12 @@ public class CurriculumCommonController {
         return ResponseEntity.ok(ApiResponse.success("Lấy chi tiết mốc học thành công", curriculumService.getMilestoneById(id)));
     }
 
+    // --- QUESTS ---
+    @GetMapping("/curriculum/milestones/{id}/quests")
+    public ResponseEntity<ApiResponse<List<MilestoneQuest>>> getMilestoneQuests(@PathVariable String id) {
+        return ResponseEntity.ok(ApiResponse.success("Lấy danh sách bài học của mốc thành công", curriculumService.getQuestsByMilestone(id)));
+    }
+
     // --- VOCABULARY ---
     @GetMapping("/curriculum/milestones/{id}/vocabulary")
     public ResponseEntity<ApiResponse<List<VocabularyItem>>> getMilestoneVocabulary(@PathVariable String id) {

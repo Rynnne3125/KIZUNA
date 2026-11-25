@@ -104,6 +104,28 @@ async function fetchCollectionData<T>(collectionName: string, queryLimit: number
   }
 }
 
+function invalidateUserCurriculumCache(milestoneId?: string) {
+  try {
+    const keys = [
+      'kizuna_stages_cache',
+      'kizuna_milestones_cache_all'
+    ];
+    if (milestoneId) {
+      keys.push(
+        `kizuna_quests_${milestoneId}`,
+        `kizuna_vocab_ms_${milestoneId}`,
+        `kizuna_kanji_unit_${milestoneId}`,
+        `kizuna_grammar_ms_${milestoneId}`,
+        `kizuna_grammar_unit_${milestoneId}`
+      );
+    }
+    keys.forEach(k => {
+      sessionStorage.removeItem(k);
+      localStorage.removeItem(`offline_${k}`);
+    });
+  } catch {}
+}
+
 function getCurrentAdminName(): string {
   const u = authService.getCurrentUser();
   return u?.username || u?.email || u?.fullName || 'admin';
@@ -1286,12 +1308,22 @@ export const adminService = {
 
   async saveMilestoneQuest(quest: MilestoneQuest): Promise<MilestoneQuest> {
     const id = quest.id?.trim() || `quest_${Date.now().toString(36)}`;
+    const srsCards = Array.isArray(quest.srsCards) ? quest.srsCards : [];
+    const srsCardIds = Array.isArray(quest.srsCardIds) && quest.srsCardIds.length > 0
+      ? quest.srsCardIds
+      : srsCards.map(c => c.sourceItemId || c.id).filter(Boolean);
+
     const payload: MilestoneQuest = {
       ...quest,
       id,
       stepIndex: Number(quest.stepIndex || 1),
       xpReward: Number(quest.xpReward ?? 50),
       activePointsReward: Number(quest.activePointsReward ?? 25),
+      srsCardIds,
+      srsCards,
+      quizQuestions: Array.isArray(quest.quizQuestions) ? quest.quizQuestions : [],
+      scrambleSentences: Array.isArray(quest.scrambleSentences) ? quest.scrambleSentences : [],
+      roleplayDialogues: Array.isArray(quest.roleplayDialogues) ? quest.roleplayDialogues : [],
       updatedAt: new Date().toISOString()
     };
 
@@ -1305,10 +1337,11 @@ export const adminService = {
     if (!apiRes.ok) {
       await this.recordActivityLog('QUEST_SAVE', 'QUEST', id, `Lưu bài học Quest: ${payload.title}`);
     }
+    invalidateUserCurriculumCache(payload.milestoneId);
     return apiRes.ok && apiRes.data ? { ...payload, ...apiRes.data } : payload;
   },
 
-  async deleteMilestoneQuest(questId: string): Promise<boolean> {
+  async deleteMilestoneQuest(questId: string, milestoneId?: string): Promise<boolean> {
     try {
       await adminApiClient.request<string>(`/api/v1/admin/quests/${encodeURIComponent(questId)}`, {
         method: 'DELETE'
@@ -1316,6 +1349,7 @@ export const adminService = {
       if (!isFirestoreDummy) {
         await safeFirestoreWrite(() => deleteDoc(doc(db, 'milestone_quests', questId))).catch(() => {});
       }
+      invalidateUserCurriculumCache(milestoneId);
       return true;
     } catch {
       return false;
@@ -1419,6 +1453,7 @@ export const adminService = {
     if (!apiRes.ok) {
       await this.recordActivityLog('WHITELIST_ADD', 'MILESTONE', milestoneId, `Thêm từ vào Whitelist: ${newDoc.term}`);
     }
+    invalidateUserCurriculumCache(milestoneId);
     return apiRes.ok && apiRes.data ? { ...newDoc, ...apiRes.data } : newDoc;
   },
 

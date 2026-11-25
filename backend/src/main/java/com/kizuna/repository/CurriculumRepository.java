@@ -123,9 +123,25 @@ public class CurriculumRepository {
                     Iterator<Map.Entry<String, JsonNode>> fields = node.fields();
                     while (fields.hasNext()) {
                         Map.Entry<String, JsonNode> entry = fields.next();
-                        if (!List.of("id", "milestoneId", "stepIndex", "questType", "title", "description", "xpReward", "activePointsReward").contains(entry.getKey())) {
+                        if (!List.of("id", "milestoneId", "stepIndex", "questType", "title", "description", "xpReward", "activePointsReward",
+                                "srsCardIds", "srsCards", "quizQuestions", "scrambleSentences", "roleplayDialogues").contains(entry.getKey())) {
                             quest.setAdditionalData(entry.getKey(), objectMapper.convertValue(entry.getValue(), Object.class));
                         }
+                    }
+                    if (node.has("srsCardIds") && node.get("srsCardIds").isArray()) {
+                        quest.setSrsCardIds(objectMapper.convertValue(node.get("srsCardIds"), new TypeReference<>() {}));
+                    }
+                    if (node.has("srsCards") && node.get("srsCards").isArray()) {
+                        quest.setSrsCards(objectMapper.convertValue(node.get("srsCards"), new TypeReference<>() {}));
+                    }
+                    if (node.has("quizQuestions") && node.get("quizQuestions").isArray()) {
+                        quest.setQuizQuestions(objectMapper.convertValue(node.get("quizQuestions"), new TypeReference<>() {}));
+                    }
+                    if (node.has("scrambleSentences") && node.get("scrambleSentences").isArray()) {
+                        quest.setScrambleSentences(objectMapper.convertValue(node.get("scrambleSentences"), new TypeReference<>() {}));
+                    }
+                    if (node.has("roleplayDialogues") && node.get("roleplayDialogues").isArray()) {
+                        quest.setRoleplayDialogues(objectMapper.convertValue(node.get("roleplayDialogues"), new TypeReference<>() {}));
                     }
                     questsMap.put(quest.getId(), quest);
                 }
@@ -296,11 +312,8 @@ public class CurriculumRepository {
 
     public boolean deleteQuest(String id) {
         MilestoneQuest removed = questsMap.remove(id);
-        if (removed != null) {
-            deleteFromFirestore("milestone_quests", id);
-            return true;
-        }
-        return false;
+        deleteFromFirestore("milestone_quests", id);
+        return removed != null;
     }
 
     // --- VOCABULARY ---

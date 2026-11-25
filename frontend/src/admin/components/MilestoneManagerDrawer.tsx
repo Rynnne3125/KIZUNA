@@ -12,6 +12,7 @@ import {
   X, Layers, Sliders, BookOpen, ListChecks, Save, Trash2,
   Plus, CheckCircle2, Eye, EyeOff, Zap, Award
 } from 'lucide-react';
+import { QuestExerciseEditor, getQuestExerciseSummary } from './QuestExerciseEditor';
 
 interface MilestoneManagerDrawerProps {
   isOpen: boolean;
@@ -278,10 +279,38 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
 
   const handleDeleteQuest = async (questId: string) => {
     setSaving(true);
-    await adminService.deleteMilestoneQuest(questId);
+    await adminService.deleteMilestoneQuest(questId, milestone?.id);
     setQuests(prev => prev.filter(q => q.id !== questId));
     setSaving(false);
     showMessage('success', 'Đã xóa bài học Quest.');
+  };
+
+  const handleRemoveWhitelistItem = async (kind: 'vocab' | 'kanji' | 'grammar', itemId: string) => {
+    if (!milestone) return;
+    setSaving(true);
+    try {
+      let ok = false;
+      if (kind === 'vocab') ok = await adminService.deleteVocabulary(itemId);
+      else if (kind === 'kanji') ok = await adminService.deleteKanji(itemId);
+      else ok = await adminService.deleteGrammar(itemId);
+
+      if (ok) {
+        setWhitelist(prev => {
+          if (!prev) return prev;
+          return {
+            ...prev,
+            vocabulary: kind === 'vocab' ? prev.vocabulary.filter(v => v.id !== itemId) : prev.vocabulary,
+            kanji: kind === 'kanji' ? prev.kanji.filter(k => k.id !== itemId) : prev.kanji,
+            grammar: kind === 'grammar' ? prev.grammar.filter(g => g.id !== itemId) : prev.grammar
+          };
+        });
+        showMessage('success', 'Đã xóa mục học liệu khỏi Whitelist của cột mốc.');
+      } else {
+        showMessage('error', 'Không thể xóa mục học liệu này.');
+      }
+    } finally {
+      setSaving(false);
+    }
   };
 
   const handleDeleteMilestone = async () => {
@@ -703,9 +732,20 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
                               {v.vietnameseMeaning || v.meaning}
                             </div>
                           </div>
-                          <Badge variant="outline" className="text-[10px]">
-                            {v.whitelistTier === 'SUPPLEMENTARY' ? 'Mở rộng' : 'Trọng tâm'}
-                          </Badge>
+                          <div className="flex items-center gap-2 shrink-0">
+                            <Badge variant="outline" className="text-[10px]">
+                              {v.whitelistTier === 'SUPPLEMENTARY' ? 'Mở rộng' : 'Trọng tâm'}
+                            </Badge>
+                            <button
+                              type="button"
+                              disabled={saving}
+                              onClick={() => handleRemoveWhitelistItem('vocab', v.id)}
+                              className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 cursor-pointer"
+                              title="Xóa từ khỏi Whitelist"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
                         </div>
                       ))
                     ) : (
@@ -716,7 +756,7 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
                   {whitelistSubTab === 'kanji' && (
                     whitelist?.kanji.length ? (
                       whitelist.kanji.map(k => (
-                        <div key={k.id} className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-between">
+                        <div key={k.id} className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-between gap-3">
                           <div className="flex items-center gap-3">
                             <span className="text-2xl font-serif font-bold text-slate-900 dark:text-white">{k.kanji || k.id}</span>
                             <div>
@@ -724,7 +764,18 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
                               <div className="text-xs text-slate-600 dark:text-slate-300">{k.vietnameseMeaning || k.meaning}</div>
                             </div>
                           </div>
-                          <span className="text-xs text-slate-400">{k.strokeCount ? `${k.strokeCount} nét` : ''}</span>
+                          <div className="flex items-center gap-2 shrink-0">
+                            <span className="text-xs text-slate-400">{k.strokeCount ? `${k.strokeCount} nét` : ''}</span>
+                            <button
+                              type="button"
+                              disabled={saving}
+                              onClick={() => handleRemoveWhitelistItem('kanji', k.id)}
+                              className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 cursor-pointer"
+                              title="Xóa Kanji khỏi Whitelist"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
                         </div>
                       ))
                     ) : (
@@ -735,9 +786,20 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
                   {whitelistSubTab === 'grammar' && (
                     whitelist?.grammar.length ? (
                       whitelist.grammar.map(g => (
-                        <div key={g.id} className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
-                          <div className="font-bold text-sm text-slate-900 dark:text-white">{g.pattern || g.title}</div>
-                          <div className="text-xs text-slate-600 dark:text-slate-300 mt-0.5">{g.titleVi || g.explanation}</div>
+                        <div key={g.id} className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-between gap-3">
+                          <div>
+                            <div className="font-bold text-sm text-slate-900 dark:text-white">{g.pattern || g.title}</div>
+                            <div className="text-xs text-slate-600 dark:text-slate-300 mt-0.5">{g.titleVi || g.explanation}</div>
+                          </div>
+                          <button
+                            type="button"
+                            disabled={saving}
+                            onClick={() => handleRemoveWhitelistItem('grammar', g.id)}
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 cursor-pointer shrink-0"
+                            title="Xóa ngữ pháp khỏi Whitelist"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
                         </div>
                       ))
                     ) : (
@@ -790,8 +852,11 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
                               <div className="text-xs text-slate-500">{q.description}</div>
                             </div>
                           </div>
-                          <div className="flex items-center justify-between sm:justify-end gap-2 shrink-0 pt-1 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
+                          <div className="flex items-center justify-between sm:justify-end gap-2 flex-wrap shrink-0 pt-1 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
                             <Badge variant="outline" className="text-[10px] sm:text-xs">{q.questType}</Badge>
+                            <Badge variant="secondary" className="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200">
+                              {getQuestExerciseSummary(q)}
+                            </Badge>
                             <Button
                               type="button"
                               size="sm"
@@ -832,10 +897,13 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
                                   }
                                   className="w-full h-10 px-3 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-semibold"
                                 >
-                                  <option value="FLASHCARD_SRS">FLASHCARD_SRS (Thẻ lật 3D)</option>
+                                  <option value="FLASHCARD_SRS">FLASHCARD_SRS (Thẻ lật SRS 3D)</option>
                                   <option value="VOCAB_GATEKEEPER">VOCAB_GATEKEEPER (Phản xạ 100%)</option>
                                   <option value="GRAMMAR_SCRAMBLE">GRAMMAR_SCRAMBLE (Ghép câu ngữ pháp)</option>
-                                  <option value="CLOZE_PRACTICE">CLOZE_PRACTICE (Điền khuyết thực chiến)</option>
+                                  <option value="CLOZE_PRACTICE">CLOZE_PRACTICE (Đối thoại AI Sensei)</option>
+                                  {!['FLASHCARD_SRS', 'VOCAB_GATEKEEPER', 'GRAMMAR_SCRAMBLE', 'CLOZE_PRACTICE'].includes(q.questType) && (
+                                    <option value={q.questType}>{q.questType} (Di sản Seed)</option>
+                                  )}
                                 </select>
                               </div>
                             </div>
@@ -892,6 +960,29 @@ export const MilestoneManagerDrawer: React.FC<MilestoneManagerDrawerProps> = ({
                                 />
                               </div>
                             </div>
+
+                            {/* Exercise & SRS Card Builder */}
+                            {milestone && (
+                              <QuestExerciseEditor
+                                quest={q}
+                                milestoneId={milestone.id}
+                                whitelist={whitelist}
+                                allVocab={cachedVocab}
+                                allKanji={cachedKanji}
+                                allGrammar={cachedGrammar}
+                                onChange={updatedQuest =>
+                                  setQuests(prev => prev.map(item => (item.id === updatedQuest.id ? updatedQuest : item)))
+                                }
+                                onVocabCreatedInMilestone={newVocab => {
+                                  setWhitelist(prev =>
+                                    prev
+                                      ? { ...prev, vocabulary: [newVocab, ...prev.vocabulary] }
+                                      : { milestoneId: milestone.id, vocabulary: [newVocab], kanji: [], grammar: [] }
+                                  );
+                                  onWhitelistVocabAdded?.(newVocab);
+                                }}
+                              />
+                            )}
 
                             <div className="flex flex-col-reverse sm:flex-row justify-between gap-2 pt-1">
                               <Button

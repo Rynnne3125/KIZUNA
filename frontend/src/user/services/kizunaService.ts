@@ -6,6 +6,9 @@ import { GRAMMAR_CATALOG } from '../data/grammarCatalog';
 import { KANJI_CATALOG } from '../data/kanjiCatalog';
 import { STAGES_CATALOG, MILESTONES_CATALOG } from '../data/roadmapCatalog';
 import { shouldSkipFirestore, handleFirestoreError } from '../utils/firestoreGuard';
+import { authService } from './authService';
+
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
 
 let isKizunaFirestoreOffline =
   !db ||
@@ -173,14 +176,34 @@ export const kizunaService = {
     if (cached) return cached;
 
     try {
-      if (db) {
+      const jwt = authService.getBackendJwt();
+      if (jwt) {
+        const res = await fetch(`${API_BASE_URL}/api/v1/curriculum/milestones/${encodeURIComponent(milestoneId)}/quests`, {
+          headers: { Authorization: `Bearer ${jwt}` },
+          signal: AbortSignal.timeout(4000)
+        });
+        if (res.ok) {
+          const json = await res.json();
+          if (Array.isArray(json?.data) && json.data.length > 0) {
+            const sorted = [...json.data].sort((a, b) => (a.stepIndex || 0) - (b.stepIndex || 0));
+            setSessionCache(cacheKey, sorted, 5 * 60 * 1000);
+            return sorted;
+          }
+        }
+      }
+    } catch {
+      // fallback to Firestore
+    }
+
+    try {
+      if (db && !isKizunaFirestoreOffline && !shouldSkipFirestore()) {
         const q = query(collection(db, 'milestone_quests'), where('milestoneId', '==', milestoneId));
-        const snap = await getDocs(q);
+        const snap = await safeGetDocs(q);
         if (!snap.empty) {
           const quests: any[] = [];
-          snap.forEach(d => quests.push({ id: d.id, ...d.data() }));
-          quests.sort((a, b) => a.stepIndex - b.stepIndex);
-          setSessionCache(cacheKey, quests);
+          snap.forEach((d: any) => quests.push({ id: d.id, ...d.data() }));
+          quests.sort((a, b) => (a.stepIndex || 0) - (b.stepIndex || 0));
+          setSessionCache(cacheKey, quests, 5 * 60 * 1000);
           return quests;
         }
       }
@@ -200,12 +223,12 @@ export const kizunaService = {
     if (cached) return cached;
 
     try {
-      if (db) {
+      if (db && !isKizunaFirestoreOffline && !shouldSkipFirestore()) {
         const q = query(collection(db, 'vocabulary_items'), where('milestoneId', '==', milestoneId));
-        const snap = await getDocs(q);
+        const snap = await safeGetDocs(q);
         if (!snap.empty) {
           const items: any[] = [];
-          snap.forEach(d => items.push({ id: d.id, ...d.data() }));
+          snap.forEach((d: any) => items.push({ id: d.id, ...d.data() }));
           setSessionCache(cacheKey, items);
           return items;
         }
@@ -213,6 +236,23 @@ export const kizunaService = {
     } catch (e) {
       console.warn('Firestore vocab by milestone error:', e);
     }
+
+    try {
+      const jwt = authService.getBackendJwt();
+      if (jwt) {
+        const res = await fetch(`${API_BASE_URL}/api/v1/curriculum/milestones/${encodeURIComponent(milestoneId)}/vocabulary`, {
+          headers: { Authorization: `Bearer ${jwt}` },
+          signal: AbortSignal.timeout(4000)
+        });
+        if (res.ok) {
+          const json = await res.json();
+          if (Array.isArray(json?.data) && json.data.length > 0) {
+            setSessionCache(cacheKey, json.data);
+            return json.data;
+          }
+        }
+      }
+    } catch {}
     return [];
   },
 

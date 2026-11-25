@@ -290,4 +290,63 @@ public class AdminRoadmapFeaturesIntegrationTest {
                         .header("Authorization", "Bearer " + userToken))
                 .andExpect(status().isForbidden());
     }
+
+    @Test
+    @DisplayName("Quest SRS Cards CRUD: Admin creates/updates FLASHCARD_SRS quest with explicit srsCards and User reads them")
+    void adminQuestSrsCardsCrudAndUserRead() throws Exception {
+        String questPayload = """
+                {
+                  "id": "quest_test_srs_b01",
+                  "milestoneId": "ms_minna_b01",
+                  "stepIndex": 1,
+                  "questType": "FLASHCARD_SRS",
+                  "title": "Thẻ SRS tùy chỉnh Bài 1",
+                  "description": "Bộ thẻ chọn lọc",
+                  "xpReward": 45,
+                  "activePointsReward": 20,
+                  "srsCardIds": ["v_test_1", "k_test_1"],
+                  "srsCards": [
+                    {
+                      "id": "v_test_1",
+                      "itemType": "VOCABULARY",
+                      "term": "先生",
+                      "reading": "せんせい",
+                      "sinoVietnamese": "TIÊN SINH",
+                      "meaning": "Giáo viên",
+                      "exampleJp": "田中さんは先生です。",
+                      "exampleVi": "Anh Tanaka là giáo viên."
+                    },
+                    {
+                      "id": "k_test_1",
+                      "itemType": "KANJI",
+                      "term": "学",
+                      "reading": "ガク / まな.ぶ",
+                      "sinoVietnamese": "HỌC",
+                      "meaning": "Học tập",
+                      "exampleJp": "日本語を学びます。",
+                      "exampleVi": "Tôi học tiếng Nhật."
+                    }
+                  ]
+                }
+                """;
+
+        mockMvc.perform(post("/api/v1/admin/quests")
+                        .header("Authorization", "Bearer " + adminToken)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(questPayload))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.data.questType", is("FLASHCARD_SRS")))
+                .andExpect(jsonPath("$.data.srsCards", hasSize(2)))
+                .andExpect(jsonPath("$.data.srsCards[0].term", is("先生")))
+                .andExpect(jsonPath("$.data.srsCardIds", hasSize(2)));
+
+        mockMvc.perform(get("/api/v1/curriculum/milestones/ms_minna_b01/quests")
+                        .header("Authorization", "Bearer " + userToken))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data[?(@.id=='quest_test_srs_b01')].srsCards[0].term", hasItem("先生")));
+
+        mockMvc.perform(delete("/api/v1/admin/quests/quest_test_srs_b01")
+                        .header("Authorization", "Bearer " + adminToken))
+                .andExpect(status().isOk());
+    }
 }

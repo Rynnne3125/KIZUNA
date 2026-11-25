@@ -57,6 +57,18 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   const [submitting, setSubmitting] = useState(false);
   const [isQuestDone, setIsQuestDone] = useState(false);
 
+  const questMode = useMemo<'SRS' | 'GATEKEEPER' | 'SCRAMBLE' | 'ROLEPLAY'>(() => {
+    const t = String(questData?.questType || '').toUpperCase();
+    if (t.includes('GATEKEEPER')) return 'GATEKEEPER';
+    if (t.includes('SCRAMBLE') || t.includes('GRAMMAR')) return 'SCRAMBLE';
+    if (t.includes('CLOZE') || t.includes('PRACTICE') || t.includes('ROLEPLAY')) return 'ROLEPLAY';
+    if (t.includes('FLASHCARD') || t.includes('SRS') || t.includes('VOCAB_KANJI')) return 'SRS';
+    if (questIndex === 2) return 'GATEKEEPER';
+    if (questIndex === 3) return 'SCRAMBLE';
+    if (questIndex === 4) return 'ROLEPLAY';
+    return 'SRS';
+  }, [questData?.questType, questIndex]);
+
   // Fullscreen state
   const [isFullscreen, setIsFullscreen] = useState(false);
   const runnerContainerRef = useRef<HTMLDivElement>(null);
@@ -152,10 +164,35 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   });
 
   const displayVocabList = useMemo(() => {
-    if (!vocabList || vocabList.length === 0) return [];
-    if (!isShuffle) return vocabList;
-    return [...vocabList].sort(() => Math.random() - 0.5);
-  }, [vocabList, isShuffle]);
+    const customCards = Array.isArray(questData?.srsCards) && questData.srsCards.length > 0
+      ? questData.srsCards.map((c: any) => ({
+          id: c.sourceItemId || c.id,
+          itemType: c.itemType || 'VOCABULARY',
+          term: c.term || c.kanji || '',
+          reading: c.reading || c.kana || '',
+          sinoVietnamese: c.sinoVietnamese || '',
+          vietnameseMeaning: c.meaning || c.vietnameseMeaning || '',
+          part_of_speech: c.wordType || (c.itemType === 'KANJI' ? 'Kanji' : c.itemType === 'GRAMMAR' ? 'Ngữ pháp' : 'Từ vựng'),
+          exampleSentenceJp: c.exampleJp || c.exampleSentenceJp || '',
+          exampleSentenceVi: c.exampleVi || c.exampleSentenceVi || ''
+        }))
+      : null;
+
+    let baseList = customCards;
+    if (!baseList) {
+      if (Array.isArray(questData?.srsCardIds) && questData.srsCardIds.length > 0 && vocabList.length > 0) {
+        const idSet = new Set(questData.srsCardIds);
+        const filtered = vocabList.filter(v => idSet.has(v.id));
+        baseList = filtered.length > 0 ? filtered : vocabList;
+      } else {
+        baseList = vocabList;
+      }
+    }
+
+    if (!baseList || baseList.length === 0) return [];
+    if (!isShuffle) return baseList;
+    return [...baseList].sort(() => Math.random() - 0.5);
+  }, [questData?.srsCards, questData?.srsCardIds, vocabList, isShuffle]);
 
   const currentVocab = displayVocabList[cardIndex] || null;
 
@@ -194,7 +231,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
 
   // Keyboard navigation for Flashcards
   useEffect(() => {
-    if (questIndex !== 1) return;
+    if (questMode !== 'SRS') return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
 
@@ -214,7 +251,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [questIndex, cardIndex, displayVocabList.length]);
+  }, [questMode, cardIndex, displayVocabList.length]);
 
   // Pointer Drag & Swipe Handlers (Web & App)
   const handlePointerDown = (e: React.PointerEvent) => {
@@ -287,7 +324,12 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   // QUEST 2: GATEKEEPER 100% QUIZ (THUẦN TIẾNG VIỆT 100%)
   // -------------------------------------------------------------
   const gatekeeperQuestions = useMemo(() => {
-    // 1. Ưu tiên lấy trực tiếp câu hỏi chuẩn từ Firestore (milestone.gatekeeperQuiz)
+    // 0. Ưu tiên câu hỏi Admin cấu hình riêng cho Quest
+    if (Array.isArray(questData?.quizQuestions) && questData.quizQuestions.length > 0) {
+      return questData.quizQuestions;
+    }
+
+    // 1. Lấy câu hỏi chuẩn từ Firestore (milestone.gatekeeperQuiz)
     if (Array.isArray(milestone.gatekeeperQuiz) && milestone.gatekeeperQuiz.length > 0) {
       return milestone.gatekeeperQuiz;
     }
@@ -357,6 +399,24 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   const scrambleSentences = useMemo(() => {
     const list: Array<{ original: string; translation: string; tokens: string[] }> = [];
 
+    // 0. Ưu tiên câu ghép Admin cấu hình riêng cho Quest
+    if (Array.isArray(questData?.scrambleSentences) && questData.scrambleSentences.length > 0) {
+      questData.scrambleSentences.forEach((s: any) => {
+        if (s.original && s.translation) {
+          const clean = String(s.original).replace(/。$/, '');
+          const rawTokens = Array.isArray(s.tokens) && s.tokens.length > 0
+            ? s.tokens
+            : clean.match(/[\u4e00-\u9faf]+|[ぁ-ん]+|[ァ-ヴー]+|[A-Za-z0-9]+|[^\s]/g) || [clean];
+          list.push({
+            original: s.original,
+            translation: s.translation,
+            tokens: [...rawTokens].sort(() => Math.random() - 0.5)
+          });
+        }
+      });
+      if (list.length > 0) return list;
+    }
+
     // Từ grammar_items
     grammarList.forEach(g => {
       if (Array.isArray(g.examples)) {
@@ -385,7 +445,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
     }
 
     return list.slice(0, 3);
-  }, [grammarList]);
+  }, [questData?.scrambleSentences, grammarList]);
 
   const [scrambleIndex, setScrambleIndex] = useState(0);
   const [userTokens, setUserTokens] = useState<string[]>([]);
@@ -448,6 +508,10 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   // QUEST 4: HỘI THOẠI TÌNH HUỐNG 2 BÊN VỚI AI SENSEI (ROLEPLAY)
   // -------------------------------------------------------------
   const dialogues = useMemo(() => {
+    if (Array.isArray(questData?.roleplayDialogues) && questData.roleplayDialogues.length > 0) {
+      return questData.roleplayDialogues;
+    }
+
     if (Array.isArray(milestone.roleplayDialogues) && milestone.roleplayDialogues.length > 0) {
       return milestone.roleplayDialogues;
     }
@@ -476,7 +540,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
         requiredKeywords: ['です', 'ではありません', 'じゃありません']
       }
     ];
-  }, [milestone.roleplayDialogues]);
+  }, [questData?.roleplayDialogues, milestone.roleplayDialogues]);
 
   const [dialogueIndex, setDialogueIndex] = useState(0);
   const [learnerInput, setLearnerInput] = useState('');
@@ -580,8 +644,10 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   // Submit quest completion
   const handleCompleteCurrentQuest = async () => {
     setSubmitting(true);
-    const xp = questIndex === 1 ? 30 : questIndex === 2 ? 35 : questIndex === 3 ? 40 : 50;
-    const ap = questIndex === 1 ? 15 : questIndex === 2 ? 20 : questIndex === 3 ? 25 : 30;
+    const defaultXp = questMode === 'SRS' ? 30 : questMode === 'GATEKEEPER' ? 35 : questMode === 'SCRAMBLE' ? 40 : 50;
+    const defaultAp = questMode === 'SRS' ? 15 : questMode === 'GATEKEEPER' ? 20 : questMode === 'SCRAMBLE' ? 25 : 30;
+    const xp = Number(questData?.xpReward ?? defaultXp);
+    const ap = Number(questData?.activePointsReward ?? defaultAp);
     try {
       await onCompleteQuest(questIndex, xp, ap);
       setIsQuestDone(true);
@@ -913,28 +979,28 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
               gap: 5
             }}
           >
-            {questIndex === 1 && (
+            {questMode === 'SRS' && (
               <>
                 <Layers size={14} />
-                <span>Thẻ Ghi Nhớ (SRS Flashcards)</span>
+                <span>{questData?.title || 'Thẻ Ghi Nhớ (SRS Flashcards)'}</span>
               </>
             )}
-            {questIndex === 2 && (
+            {questMode === 'GATEKEEPER' && (
               <>
                 <Shield size={14} />
-                <span>Cổng Phản Xạ 100% (Gatekeeper)</span>
+                <span>{questData?.title || 'Cổng Phản Xạ 100% (Gatekeeper)'}</span>
               </>
             )}
-            {questIndex === 3 && (
+            {questMode === 'SCRAMBLE' && (
               <>
                 <Puzzle size={14} />
-                <span>Ngữ Pháp Ghép Câu Kéo Thả</span>
+                <span>{questData?.title || 'Ngữ Pháp Ghép Câu Kéo Thả'}</span>
               </>
             )}
-            {questIndex === 4 && (
+            {questMode === 'ROLEPLAY' && (
               <>
                 <MessageCircle size={14} />
-                <span>Đối Thoại Tình Huống AI Sensei</span>
+                <span>{questData?.title || 'Đối Thoại Tình Huống AI Sensei'}</span>
               </>
             )}
           </span>
@@ -1006,7 +1072,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
           {/* ========================================================
               QUEST 1: SRS FLASHCARDS (TRỘN THẺ, VUỐT TRÁI/PHẢI, 100% VIỆT HÓA)
               ======================================================== */}
-          {questIndex === 1 && (
+          {questMode === 'SRS' && (
             <div className="roadmap-runner-card" style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
               {/* Controls bar */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18, flexWrap: 'wrap', gap: 10 }}>
@@ -1132,7 +1198,9 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                         fontFamily: 'serif'
                       }}
                     >
-                      {isFlipped ? '意味 · Ý NGHĨA' : `語 · TỪ VỰNG (${cardIndex + 1}/${displayVocabList.length})`}
+                      {isFlipped
+                        ? '意味 · Ý NGHĨA'
+                        : `${currentVocab.itemType === 'KANJI' ? '漢 · CHỮ HÁN' : currentVocab.itemType === 'GRAMMAR' ? '文 · NGỮ PHÁP' : '語 · TỪ VỰNG'} (${cardIndex + 1}/${displayVocabList.length})`}
                     </span>
 
                     <button
@@ -1327,7 +1395,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
           {/* ========================================================
               QUEST 2: GATEKEEPER 100% (TRẮC NGHIỆM PHẢN XẠ THUẦN TIẾNG VIỆT)
               ======================================================== */}
-          {questIndex === 2 && (
+          {questMode === 'GATEKEEPER' && (
             <div className="roadmap-runner-card" style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
                 <div>
@@ -1499,7 +1567,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
           {/* ========================================================
               QUEST 3: GRAMMAR SCRAMBLE VỚI KÉO THẢ (DRAG & DROP)
               ======================================================== */}
-          {questIndex === 3 && (
+          {questMode === 'SCRAMBLE' && (
             <div className="roadmap-runner-card" style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
                 <div>
@@ -1685,7 +1753,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
           {/* ========================================================
               QUEST 4: ĐỐI THOẠI TÌNH HUỐNG 2 BÊN VỚI AI SENSEI (ROLEPLAY)
               ======================================================== */}
-          {questIndex === 4 && (
+          {questMode === 'ROLEPLAY' && (
             <div className="roadmap-runner-card" style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
                 <div>

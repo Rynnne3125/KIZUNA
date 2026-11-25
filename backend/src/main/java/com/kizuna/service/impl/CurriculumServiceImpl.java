@@ -126,14 +126,12 @@ public class CurriculumServiceImpl implements CurriculumService {
 
     @Override
     public MilestoneQuest updateQuest(String id, MilestoneQuest quest) {
-        getQuestById(id);
         quest.setId(id);
         return curriculumRepository.saveQuest(quest);
     }
 
     @Override
     public void deleteQuest(String id) {
-        getQuestById(id);
         curriculumRepository.deleteQuest(id);
     }
 
