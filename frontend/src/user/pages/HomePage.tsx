@@ -4,6 +4,7 @@ import { UserNavTab } from '../components/UserNavbar';
 import { progressService, UserRoadmapProgress } from '../services/progressService';
 import { rankingService } from '../services/rankingService';
 import { kizunaService } from '../services/kizunaService';
+import { getLocalDateString } from '../services/authService';
 import {
   dailyQuestService,
   DailyQuestBundle,
@@ -21,7 +22,7 @@ import { STAGES_CATALOG, MILESTONES_CATALOG } from '../data/roadmapCatalog';
 import { 
   Flame, Award, BookOpen, ArrowRight, Trophy, Sparkles, 
   Target, Crown, Languages, FileText, Zap, CheckCircle2,
-  Shield, Gift, X, Check, AlertCircle, RotateCcw
+  Shield, Gift, X, Check, AlertCircle
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -66,13 +67,15 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
   const [leaderboardMode, setLeaderboardMode] = useState<LeaderboardMode>('weekly');
   const [loadingLeaderboard, setLoadingLeaderboard] = useState(true);
 
-  // Dữ liệu Nhiệm Vụ Ngày (AI Daily Quest) & Khiên Bảo Vệ Streak
-  const [dailyQuestBundle, setDailyQuestBundle] = useState<DailyQuestBundle | null>(null);
-  const [loadingDailyQuests, setLoadingDailyQuests] = useState(false);
+  // Dữ liệu Nhiệm Vụ Ngày (đọc đồng bộ cache trong ngày để hiển thị tức thì, không nháy loading)
+  const [dailyQuestBundle, setDailyQuestBundle] = useState<DailyQuestBundle | null>(() =>
+    user?.id ? dailyQuestService.getCachedDailyQuestsSync(user.id) : null
+  );
   const [activeDailyQuest, setActiveDailyQuest] = useState<DailyQuestItem | null>(null);
   const [selectedOptionIdx, setSelectedOptionIdx] = useState<number | null>(null);
   const [questAnswerChecked, setQuestAnswerChecked] = useState(false);
   const [questRewardNotice, setQuestRewardNotice] = useState<string | null>(null);
+  const [questBannerToast, setQuestBannerToast] = useState<string | null>(null);
   const [shieldNotice, setShieldNotice] = useState<{ ok: boolean; text: string } | null>(null);
   const [buyingShield, setBuyingShield] = useState(false);
 
@@ -124,11 +127,21 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
     loadLeaderboardData(leaderboardMode);
   }, [leaderboardMode]);
 
-  // Nạp hoặc sinh 3 Nhiệm Vụ Ngày bằng AI Gemini từ user_progress
+  // Nạp hoặc sinh 3 Nhiệm Vụ Ngày (chỉ tạo tối đa 1 lần mỗi ngày; chỉ hiển thị khi đã sẵn sàng)
   useEffect(() => {
-    if (!user?.id || loadingProgress) return;
+    if (!user?.id) {
+      setDailyQuestBundle(null);
+      return;
+    }
+    const today = getLocalDateString(new Date());
+    const cachedToday = dailyQuestService.getCachedDailyQuestsSync(user.id);
+    if (cachedToday && cachedToday.date === today) {
+      setDailyQuestBundle(cachedToday);
+      return;
+    }
+    if (loadingProgress) return;
+
     let cancelled = false;
-    setLoadingDailyQuests(true);
     dailyQuestService
       .getOrGenerateDailyQuests(
         user,
@@ -139,14 +152,11 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
       )
       .then(bundle => {
         if (!cancelled) setDailyQuestBundle(bundle);
-      })
-      .finally(() => {
-        if (!cancelled) setLoadingDailyQuests(false);
       });
     return () => {
       cancelled = true;
     };
-  }, [user?.id, user?.level, loadingProgress]);
+  }, [user?.id, loadingProgress]);
 
   // Tải số liệu tài nguyên ứng dụng
   useEffect(() => {
@@ -182,21 +192,46 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
 
   const handleSubmitDailyQuestAnswer = async () => {
     if (!activeDailyQuest || selectedOptionIdx === null || !dailyQuestBundle || !user?.id) return;
+    if (questAnswerChecked || activeDailyQuest.completed || activeDailyQuest.failed) return;
+
     setQuestAnswerChecked(true);
-    if (selectedOptionIdx === activeDailyQuest.correctIndex && !activeDailyQuest.completed) {
-      const res = await dailyQuestService.completeDailyQuest(user.id, dailyQuestBundle, activeDailyQuest.id);
+    const isCorrect = selectedOptionIdx === activeDailyQuest.correctIndex;
+
+    if (isCorrect) {
+      const res = await dailyQuestService.completeDailyQuest(
+        user.id,
+        dailyQuestBundle,
+        activeDailyQuest.id,
+        selectedOptionIdx
+      );
       setDailyQuestBundle(res.updatedBundle);
       const updatedItem = res.updatedBundle.quests.find(q => q.id === activeDailyQuest.id) || {
         ...activeDailyQuest,
-        completed: true
+        completed: true,
+        selectedOptionIndex: selectedOptionIdx
       };
       setActiveDailyQuest(updatedItem);
-      setQuestRewardNotice(
-        res.bonusJustAwarded
-          ? `🎉 Hoàn thành cả 3/3 nhiệm vụ ngày! Nhận +${res.pointsAwarded} Điểm năng động & +${res.xpAwarded} XP (đã gồm Rương thưởng)!`
-          : `Chính xác! Bạn nhận được +${res.pointsAwarded} Điểm năng động & +${res.xpAwarded} XP.`
-      );
+      const msg = res.bonusJustAwarded
+        ? `🎉 Hoàn thành cả 3/3 nhiệm vụ ngày! Đã cộng +${res.pointsAwarded} Điểm năng động & +${res.xpAwarded} XP (gồm Rương thưởng)!`
+        : `✅ Chính xác! Đã cộng +${res.pointsAwarded} Điểm năng động & +${res.xpAwarded} XP.`;
+      setQuestRewardNotice(msg);
+      setQuestBannerToast(msg);
+      setTimeout(() => setQuestBannerToast(null), 6500);
       loadLeaderboardData(leaderboardMode);
+    } else {
+      const updatedBundle = await dailyQuestService.failDailyQuest(
+        user.id,
+        dailyQuestBundle,
+        activeDailyQuest.id,
+        selectedOptionIdx
+      );
+      setDailyQuestBundle(updatedBundle);
+      const updatedItem = updatedBundle.quests.find(q => q.id === activeDailyQuest.id) || {
+        ...activeDailyQuest,
+        failed: true,
+        selectedOptionIndex: selectedOptionIdx
+      };
+      setActiveDailyQuest(updatedItem);
     }
   };
 
@@ -280,8 +315,28 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
     )
   );
 
+  const remainingDailyQuests = useMemo(
+    () => (dailyQuestBundle ? dailyQuestBundle.quests.filter(q => !q.completed && !q.failed) : []),
+    [dailyQuestBundle]
+  );
+
   return (
     <div className="max-w-5xl mx-auto space-y-7">
+      <style>{`
+        @keyframes dailyQuestReveal {
+          0% {
+            opacity: 0;
+            transform: translateY(-10px) scale(0.985);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+        .animate-daily-quest-in {
+          animation: dailyQuestReveal 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+      `}</style>
       
       {/* =========================================================================
           1. BANNER CHÀO MỪNG - WA-MODERN (HOA VĂN SEIGAIHA, TRIỆN HANKO, PHONG CÁCH NHẬT)
@@ -378,24 +433,39 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
         )}
       </div>
 
+      {/* Thông báo cộng điểm khi vượt qua thử thách ngày */}
+      {questBannerToast && (
+        <div className="animate-daily-quest-in bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-700 text-emerald-900 dark:text-emerald-200 px-4 py-3 rounded-2xl shadow-sm flex items-center justify-between gap-3 text-xs sm:text-sm font-extrabold">
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+            <span>{questBannerToast}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setQuestBannerToast(null)}
+            className="p-1 rounded-lg hover:bg-emerald-100 dark:hover:bg-emerald-900/60 cursor-pointer shrink-0"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
+
       {/* =========================================================================
-          1.5. NHIỆM VỤ NGÀY CÙNG AI SENSEI & KHIÊN BẢO VỆ STREAK
+          1.5. NHIỆM VỤ NGÀY (Chỉ hiển thị khi đã tạo xong & còn thử thách chưa làm; xong cả 3 sẽ ẩn)
           ========================================================================= */}
-      {user && (
-        <div className="bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-7 border border-emerald-100 dark:border-slate-800 shadow-md shadow-emerald-950/5 space-y-5 transition-colors">
+      {user && dailyQuestBundle && remainingDailyQuests.length > 0 && (
+        <div className="animate-daily-quest-in bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-7 border border-emerald-100 dark:border-slate-800 shadow-md shadow-emerald-950/5 space-y-5 transition-colors">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
             <div>
               <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                 <span className="hanko-seal px-2 py-0.2 text-[11px]">挑</span>
                 <span className="bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 px-3 py-0.5 rounded-full text-xs font-bold flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                  <span>NHIỆM VỤ NGÀY • AI SENSEI</span>
+                  <span>NHIỆM VỤ NGÀY</span>
                 </span>
-                {dailyQuestBundle && (
-                  <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
-                    {dailyQuestBundle.level} • {dailyQuestBundle.weakFocus}
-                  </span>
-                )}
+                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                  {dailyQuestBundle.level} • {dailyQuestBundle.weakFocus}
+                </span>
               </div>
               <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
                 Thử Thách Hằng Ngày Theo Tiến Độ
@@ -403,97 +473,68 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
             </div>
 
             {/* Rương Thưởng 3/3 + Tiến độ */}
-            {dailyQuestBundle && (
-              <div className={`px-4 py-2 rounded-2xl border flex items-center gap-3 self-start md:self-auto ${
-                dailyQuestBundle.bonusClaimed
-                  ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800'
-                  : 'bg-amber-50/80 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800/70'
-              }`}>
-                <Gift className={`w-5 h-5 shrink-0 ${dailyQuestBundle.bonusClaimed ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`} />
-                <div>
-                  <div className="text-xs font-extrabold text-slate-900 dark:text-white">
-                    Hoàn thành {dailyQuestBundle.quests.filter(q => q.completed).length}/3 nhiệm vụ
-                  </div>
-                  <div className="text-[11px] font-semibold text-amber-800 dark:text-amber-300">
-                    {dailyQuestBundle.bonusClaimed
-                      ? 'Đã nhận Rương thưởng ngày!'
-                      : `Xong 3/3: +${DAILY_BONUS_POINTS} pts & +${DAILY_BONUS_XP} XP`}
-                  </div>
+            <div className="px-4 py-2 rounded-2xl border bg-amber-50/80 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800/70 flex items-center gap-3 self-start md:self-auto">
+              <Gift className="w-5 h-5 shrink-0 text-amber-600 dark:text-amber-400" />
+              <div>
+                <div className="text-xs font-extrabold text-slate-900 dark:text-white">
+                  Còn {remainingDailyQuests.length}/3 thử thách hôm nay
+                </div>
+                <div className="text-[11px] font-semibold text-amber-800 dark:text-amber-300">
+                  Đúng 3/3: +{DAILY_BONUS_POINTS} pts & +{DAILY_BONUS_XP} XP
                 </div>
               </div>
-            )}
+            </div>
           </div>
 
-          {loadingDailyQuests ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
-              {[1, 2, 3].map(n => (
-                <div key={n} className="h-36 rounded-2xl bg-slate-100 dark:bg-slate-800/60 animate-pulse border border-slate-200 dark:border-slate-800" />
-              ))}
-            </div>
-          ) : dailyQuestBundle ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
-              {dailyQuestBundle.quests.map((q) => (
-                <div
-                  key={q.id}
-                  className={`rounded-2xl p-4 border flex flex-col justify-between gap-3 transition-all ${
-                    q.completed
-                      ? 'bg-emerald-50/60 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800/80'
-                      : 'bg-slate-50/70 dark:bg-slate-800/70 border-slate-200 dark:border-slate-700 hover:border-emerald-400 dark:hover:border-emerald-500'
-                  }`}
-                >
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between gap-2 flex-wrap">
-                      <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white dark:bg-slate-900 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
-                        {q.categoryLabel}
-                      </span>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-900/60">
-                        {q.difficultyLabel}
-                      </span>
-                    </div>
-                    <h3 className="text-sm font-extrabold text-slate-900 dark:text-white leading-snug">
-                      {q.title}
-                    </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+            {remainingDailyQuests.map((q) => (
+              <div
+                key={q.id}
+                className="rounded-2xl p-4 border flex flex-col justify-between gap-3 transition-all bg-slate-50/70 dark:bg-slate-800/70 border-slate-200 dark:border-slate-700 hover:border-emerald-400 dark:hover:border-emerald-500"
+              >
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white dark:bg-slate-900 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                      {q.categoryLabel}
+                    </span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-900/60">
+                      {q.difficultyLabel}
+                    </span>
                   </div>
-
-                  <div className="space-y-2.5 pt-1">
-                    <div className="flex items-center gap-2 text-[11px] font-bold">
-                      <span className="text-emerald-700 dark:text-emerald-400 flex items-center gap-0.5">
-                        <Zap className="w-3.5 h-3.5 fill-emerald-500 text-emerald-500" />+{q.pointsReward} pts
-                      </span>
-                      <span className="text-slate-300 dark:text-slate-600">•</span>
-                      <span className="text-indigo-700 dark:text-indigo-400 flex items-center gap-0.5">
-                        <Award className="w-3.5 h-3.5" />+{q.xpReward} XP
-                      </span>
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={() => handleOpenDailyQuest(q)}
-                      className={`w-full py-2 px-3 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                        q.completed
-                          ? 'bg-emerald-600/15 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700'
-                          : 'bg-emerald-700 hover:bg-emerald-800 text-white shadow-xs'
-                      }`}
-                    >
-                      {q.completed ? (
-                        <>
-                          <CheckCircle2 className="w-3.5 h-3.5" />
-                          <span>Đã hoàn thành • Xem lại</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>Thử thách ngay</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </>
-                      )}
-                    </button>
-                  </div>
+                  <h3 className="text-sm font-extrabold text-slate-900 dark:text-white leading-snug">
+                    {q.title}
+                  </h3>
                 </div>
-              ))}
-            </div>
-          ) : null}
 
-          {/* Thanh đổi Điểm Năng Động lấy Khiên Bảo Vệ Streak */}
+                <div className="space-y-2.5 pt-1">
+                  <div className="flex items-center gap-2 text-[11px] font-bold">
+                    <span className="text-emerald-700 dark:text-emerald-400 flex items-center gap-0.5">
+                      <Zap className="w-3.5 h-3.5 fill-emerald-500 text-emerald-500" />+{q.pointsReward} pts
+                    </span>
+                    <span className="text-slate-300 dark:text-slate-600">•</span>
+                    <span className="text-indigo-700 dark:text-indigo-400 flex items-center gap-0.5">
+                      <Award className="w-3.5 h-3.5" />+{q.xpReward} XP
+                    </span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => handleOpenDailyQuest(q)}
+                    className="w-full py-2 px-3 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition-all cursor-pointer bg-emerald-700 hover:bg-emerald-800 text-white shadow-xs"
+                  >
+                    <span>Thử thách ngay</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Thanh đổi Điểm Năng Động lấy Khiên Bảo Vệ Streak (luôn hiển thị độc lập cho người dùng) */}
+      {user && (
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-4 sm:p-5 border border-sky-100 dark:border-slate-800 shadow-sm space-y-3 transition-colors">
           <div className="rounded-2xl p-4 bg-gradient-to-r from-sky-50 via-emerald-50/60 to-amber-50/50 dark:from-slate-800/80 dark:via-slate-800/60 dark:to-slate-800/80 border border-sky-200/80 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="flex items-start sm:items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-sky-600 text-white flex items-center justify-center shrink-0 shadow-xs">
@@ -1046,7 +1087,7 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
               {activeDailyQuest.options.map((opt, idx) => {
                 const isSelected = selectedOptionIdx === idx;
                 const isCorrectOpt = idx === activeDailyQuest.correctIndex;
-                const showResult = questAnswerChecked || activeDailyQuest.completed;
+                const showResult = questAnswerChecked || activeDailyQuest.completed || activeDailyQuest.failed;
 
                 let btnClass = 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:border-emerald-400';
                 if (showResult) {
@@ -1063,34 +1104,39 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
                   <button
                     key={idx}
                     type="button"
-                    disabled={activeDailyQuest.completed || (questAnswerChecked && selectedOptionIdx === activeDailyQuest.correctIndex)}
-                    onClick={() => {
-                      setSelectedOptionIdx(idx);
-                      if (questAnswerChecked && selectedOptionIdx !== activeDailyQuest.correctIndex) {
-                        setQuestAnswerChecked(false);
-                      }
-                    }}
-                    className={`w-full text-left px-4 py-3 rounded-2xl border-2 text-sm flex items-center gap-3 transition-all cursor-pointer ${btnClass}`}
+                    disabled={Boolean(showResult)}
+                    onClick={() => setSelectedOptionIdx(idx)}
+                    className={`w-full text-left px-4 py-3 rounded-2xl border-2 text-sm flex items-center gap-3 transition-all ${showResult ? 'cursor-default' : 'cursor-pointer'} ${btnClass}`}
                   >
                     <span className="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-extrabold flex items-center justify-center shrink-0">
                       {String.fromCharCode(65 + idx)}
                     </span>
                     <span className="flex-1">{opt}</span>
-                    {showResult && isCorrectOpt && <Check className="w-4 h-4 text-emerald-600 shrink-0" />}
-                    {showResult && isSelected && !isCorrectOpt && <X className="w-4 h-4 text-rose-600 shrink-0" />}
+                    {showResult && isCorrectOpt && (
+                      <span className="inline-flex items-center gap-1 text-[11px] font-extrabold text-emerald-700 dark:text-emerald-300 shrink-0">
+                        <Check className="w-4 h-4 text-emerald-600" />
+                        <span>Đáp án đúng</span>
+                      </span>
+                    )}
+                    {showResult && isSelected && !isCorrectOpt && (
+                      <span className="inline-flex items-center gap-1 text-[11px] font-extrabold text-rose-600 dark:text-rose-300 shrink-0">
+                        <X className="w-4 h-4 text-rose-600" />
+                        <span>Bạn chọn</span>
+                      </span>
+                    )}
                   </button>
                 );
               })}
             </div>
 
-            {(questAnswerChecked || activeDailyQuest.completed) && (
+            {(questAnswerChecked || activeDailyQuest.completed || activeDailyQuest.failed) && (
               <div className={`p-4 rounded-2xl border text-xs leading-relaxed space-y-1.5 ${
-                activeDailyQuest.completed || selectedOptionIdx === activeDailyQuest.correctIndex
+                activeDailyQuest.completed || (!activeDailyQuest.failed && selectedOptionIdx === activeDailyQuest.correctIndex)
                   ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200'
                   : 'bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-800 text-rose-900 dark:text-rose-200'
               }`}>
                 <div className="font-extrabold flex items-center gap-1.5">
-                  {activeDailyQuest.completed || selectedOptionIdx === activeDailyQuest.correctIndex ? (
+                  {activeDailyQuest.completed || (!activeDailyQuest.failed && selectedOptionIdx === activeDailyQuest.correctIndex) ? (
                     <>
                       <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                       <span>{questRewardNotice || 'Bạn đã hoàn thành nhiệm vụ này!'}</span>
@@ -1098,7 +1144,9 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
                   ) : (
                     <>
                       <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400" />
-                      <span>Chưa chính xác — hãy đọc giải thích và thử lại nhé!</span>
+                      <span>
+                        Chưa chính xác — đáp án đúng là phương án {String.fromCharCode(65 + activeDailyQuest.correctIndex)} (không được làm lại).
+                      </span>
                     </>
                   )}
                 </div>
@@ -1107,21 +1155,7 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
             )}
 
             <div className="flex items-center justify-end gap-2.5 pt-2">
-              {questAnswerChecked && selectedOptionIdx !== activeDailyQuest.correctIndex && !activeDailyQuest.completed && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setQuestAnswerChecked(false);
-                    setSelectedOptionIdx(null);
-                  }}
-                  className="px-4 py-2 rounded-xl bg-amber-100 dark:bg-amber-950/50 text-amber-900 dark:text-amber-300 text-xs font-extrabold flex items-center gap-1.5 cursor-pointer"
-                >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                  <span>Chọn lại</span>
-                </button>
-              )}
-
-              {!activeDailyQuest.completed && (!questAnswerChecked || selectedOptionIdx !== activeDailyQuest.correctIndex) ? (
+              {!questAnswerChecked && !activeDailyQuest.completed && !activeDailyQuest.failed ? (
                 <button
                   type="button"
                   disabled={selectedOptionIdx === null}

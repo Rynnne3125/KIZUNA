@@ -22,6 +22,8 @@ export interface DailyQuestItem {
   pointsReward: number;
   xpReward: number;
   completed: boolean;
+  failed?: boolean;
+  selectedOptionIndex?: number;
 }
 
 export interface DailyQuestBundle {
@@ -439,7 +441,26 @@ function buildLocalCuratedBundle(
 
 export const dailyQuestService = {
   /**
-   * Lấy hoặc sinh 3 Nhiệm Vụ Ngày cho học viên (cache 1 lần/ngày trong localStorage + Firestore).
+   * Đọc đồng bộ bộ Nhiệm Vụ Ngày đã lưu trong ngày từ localStorage (0ms, không nháy loading).
+   */
+  getCachedDailyQuestsSync(userId?: string | null): DailyQuestBundle | null {
+    if (!userId) return null;
+    const today = getLocalDateString(new Date());
+    try {
+      const raw = localStorage.getItem(getStorageKey(userId, today));
+      if (!raw) return null;
+      const parsed = JSON.parse(raw) as DailyQuestBundle;
+      if (parsed && parsed.date === today && Array.isArray(parsed.quests) && parsed.quests.length === 3) {
+        return parsed;
+      }
+    } catch {
+      // ignore
+    }
+    return null;
+  },
+
+  /**
+   * Lấy hoặc sinh 3 Nhiệm Vụ Ngày cho học viên (chỉ sinh tối đa 1 lần/ngày, lưu theo ngày trong localStorage + Firestore).
    */
   async getOrGenerateDailyQuests(
     user: User,
@@ -453,16 +474,9 @@ export const dailyQuestService = {
     const level = normalizeLevel(user.level);
 
     // 1. Kiểm tra localStorage cache trong ngày (0 token, phản hồi tức thì)
-    try {
-      const raw = localStorage.getItem(storageKey);
-      if (raw) {
-        const parsed = JSON.parse(raw) as DailyQuestBundle;
-        if (parsed && parsed.date === today && Array.isArray(parsed.quests) && parsed.quests.length === 3 && parsed.quests.every(isValidQuestItem)) {
-          return parsed;
-        }
-      }
-    } catch {
-      // ignore parse errors
+    const cachedSync = this.getCachedDailyQuestsSync(user.id);
+    if (cachedSync && cachedSync.quests.every(isValidQuestItem)) {
+      return cachedSync;
     }
 
     // 2. Kiểm tra Firestore daily_quests/{userId}_{date}
@@ -517,7 +531,9 @@ export const dailyQuestService = {
           if (data && Array.isArray(data.quests) && data.quests.length === 3) {
             // Đảm bảo từng câu hỏi đạt chuẩn không tiếng Anh & đủ 4 đáp án khác nhau
             const validatedQuests = data.quests.map((q, idx) =>
-              isValidQuestItem(q) ? { ...q, completed: Boolean(q.completed) } : fallbackBundle.quests[idx]
+              isValidQuestItem(q)
+                ? { ...q, completed: Boolean(q.completed), failed: Boolean(q.failed) }
+                : fallbackBundle.quests[idx]
             );
             const finalBundle: DailyQuestBundle = {
               date: data.date || today,
@@ -554,20 +570,23 @@ export const dailyQuestService = {
   },
 
   /**
-   * Đánh dấu hoàn thành 1 nhiệm vụ ngày và tự cộng điểm năng động + XP (+ bonus 3/3 nếu vừa xong câu cuối).
+   * Đánh dấu hoàn thành 1 nhiệm vụ ngày và tự cộng điểm năng động + XP (+ bonus 3/3 nếu vừa xong câu cuối với cả 3 đúng).
    */
   async completeDailyQuest(
     userId: string,
     bundle: DailyQuestBundle,
-    questId: string
+    questId: string,
+    selectedOptionIndex?: number
   ): Promise<{ updatedBundle: DailyQuestBundle; bonusJustAwarded: boolean; pointsAwarded: number; xpAwarded: number }> {
     const target = bundle.quests.find(q => q.id === questId);
-    if (!target || target.completed) {
+    if (!target || target.completed || target.failed) {
       return { updatedBundle: bundle, bonusJustAwarded: false, pointsAwarded: 0, xpAwarded: 0 };
     }
 
     const updatedQuests = bundle.quests.map(q =>
-      q.id === questId ? { ...q, completed: true } : q
+      q.id === questId
+        ? { ...q, completed: true, failed: false, selectedOptionIndex: selectedOptionIndex ?? q.correctIndex }
+        : q
     );
     const allCompleted = updatedQuests.every(q => q.completed);
     const bonusJustAwarded = allCompleted && !bundle.bonusClaimed;
@@ -593,6 +612,42 @@ export const dailyQuestService = {
 
     await progressService.recordActivity(userId, 'roadmap', 1, pointsAwarded, xpAwarded);
     return { updatedBundle, bonusJustAwarded, pointsAwarded, xpAwarded };
+  },
+
+  /**
+   * Đánh dấu thử thách đã trả lời sai (không cho làm lại trong ngày, lưu trạng thái để ẩn sau khi đóng).
+   */
+  async failDailyQuest(
+    userId: string,
+    bundle: DailyQuestBundle,
+    questId: string,
+    selectedOptionIndex: number
+  ): Promise<DailyQuestBundle> {
+    const target = bundle.quests.find(q => q.id === questId);
+    if (!target || target.completed || target.failed) {
+      return bundle;
+    }
+
+    const updatedQuests = bundle.quests.map(q =>
+      q.id === questId ? { ...q, completed: false, failed: true, selectedOptionIndex } : q
+    );
+
+    const updatedBundle: DailyQuestBundle = {
+      ...bundle,
+      quests: updatedQuests
+    };
+
+    const storageKey = getStorageKey(userId, bundle.date);
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(updatedBundle));
+    } catch {}
+
+    if (db && (typeof navigator === 'undefined' || navigator.onLine)) {
+      const docId = `${userId}_${bundle.date}`;
+      setDoc(doc(db, 'daily_quests', docId), updatedBundle, { merge: true }).catch(() => {});
+    }
+
+    return updatedBundle;
   },
 
   /**
