@@ -1,7 +1,7 @@
 {
   "level": "N5",
-  "totalExams": 11,
-  "totalQuestions": 419,
+  "totalExams": 13,
+  "totalQuestions": 553,
   "exams": [
     {
       "id": "cm2vcw4rk0002r7miym4lgttg",
@@ -979,7 +979,7 @@
                 },
                 {
                   "id": "4",
-                  "value": "こ��クラスはがくせいがすくないです。"
+                  "value": "このクラスはがくせいがすくないです。"
                 }
               ],
               "correctAnswer": "3",
@@ -1187,34 +1187,6 @@
               "score": 0
             },
             {
-              "id": "cm2vcw5hz001cr7mirvsrvrlo",
-              "index": 5,
-              "question": "<span class=\"watupro_num\">5. </span>わたしはあまり（　　）ありませんでした。",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "じょうぶだ"
-                },
-                {
-                  "id": "2",
-                  "value": "じようぶには"
-                },
-                {
-                  "id": "3",
-                  "value": "じょうぶな"
-                },
-                {
-                  "id": "4",
-                  "value": "じょうぶでは"
-                }
-              ],
-              "correctAnswer": "4",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
               "id": "cm2vcw5hz001dr7mikhjrll1b",
               "index": 6,
               "question": "<span class=\"watupro_num\">6. </span>字をもうすこし （　　）かきましょう。",
@@ -1327,34 +1299,6 @@
               "score": 0
             },
             {
-              "id": "cm2vcw5i0001hr7mi038un2xw",
-              "index": 10,
-              "question": "<span class=\"watupro_num\">10. </span>わたしはいしやに（　　）たいです。",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "なった"
-                },
-                {
-                  "id": "2",
-                  "value": "なり"
-                },
-                {
-                  "id": "3",
-                  "value": "なら"
-                },
-                {
-                  "id": "4",
-                  "value": "なる"
-                }
-              ],
-              "correctAnswer": "2",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
               "id": "cm2vcw5i0001ir7mi3od918zj",
               "index": 11,
               "question": "<span class=\"watupro_num\">11. </span>まどを（　　）ください。きょうはかぜがつよいですから。",
@@ -1439,34 +1383,6 @@
               "score": 0
             },
             {
-              "id": "cm2vcw5i0001lr7mi4c3euntu",
-              "index": 14,
-              "question": "<span class=\"watupro_num\">14. </span>日本に来て（　　）雪が見ました。",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "はじめて"
-                },
-                {
-                  "id": "2",
-                  "value": "はじまして"
-                },
-                {
-                  "id": "3",
-                  "value": "はじまって"
-                },
-                {
-                  "id": "4",
-                  "value": "はじめ"
-                }
-              ],
-              "correctAnswer": "1",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
               "id": "cm2vcw5i0001mr7mik4zth49x",
               "index": 15,
               "question": "<span class=\"watupro_num\">15. </span>山下さんはわたしにプレゼントを（　　）。",
@@ -1518,6 +1434,90 @@
                 }
               ],
               "correctAnswer": "3",
+              "explanation": "",
+              "script": "",
+              "score": 0
+            },
+            {
+              "id": "cm2vcw5hz001cr7mirvsrvrlo",
+              "index": 5,
+              "question": "<span class=\"watupro_num\">5. </span>わたしはあまり（　　）ありませんでした。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "じょうぶだ"
+                },
+                {
+                  "id": "2",
+                  "value": "じょうぶには"
+                },
+                {
+                  "id": "3",
+                  "value": "じょうぶな"
+                },
+                {
+                  "id": "4",
+                  "value": "じょうぶでは"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "",
+              "score": 0
+            },
+            {
+              "id": "cm2vcw5i0001hr7mi038un2xw",
+              "index": 10,
+              "question": "<span class=\"watupro_num\">10. </span>わたしはいしゃに（　　）たいです。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "なった"
+                },
+                {
+                  "id": "2",
+                  "value": "なり"
+                },
+                {
+                  "id": "3",
+                  "value": "なら"
+                },
+                {
+                  "id": "4",
+                  "value": "なる"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "",
+              "score": 0
+            },
+            {
+              "id": "cm2vcw5i0001lr7mi4c3euntu",
+              "index": 14,
+              "question": "<span class=\"watupro_num\">14. </span>日本に来て（　　）雪を見ました。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "はじめて"
+                },
+                {
+                  "id": "2",
+                  "value": "はじまして"
+                },
+                {
+                  "id": "3",
+                  "value": "はじまって"
+                },
+                {
+                  "id": "4",
+                  "value": "はじめ"
+                }
+              ],
+              "correctAnswer": "1",
               "explanation": "",
               "script": "",
               "score": 0
@@ -1685,34 +1685,6 @@
           "questionCount": 5,
           "questions": [
             {
-              "id": "cm2vcw5xk001wr7mihhne64xd",
-              "index": 23,
-              "question": "<span class=\"watupro_num\">23. </span>(23)",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "やさしい"
-                },
-                {
-                  "id": "2",
-                  "value": "むずかしい"
-                },
-                {
-                  "id": "3",
-                  "value": "くるしい"
-                },
-                {
-                  "id": "4",
-                  "value": "たのしい"
-                }
-              ],
-              "correctAnswer": "3",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
               "id": "cm2vcw5xk001vr7miryb0mqgc",
               "index": 22,
               "question": "<span class=\"watupro_num\">22. </span>かいしゃからうちに (22) いつもテレビを見ます。ニュースを見たりあたらしい歌を聞いたりします。とても (23) です。学生だったときは、よく本をよみました。(24) このごろは、よみません。べんきょうもしません。しごと (25) つかれたあとは、テレビを見て、(26) 。<p></p>\n<p>22. (22)</p>",
@@ -1823,6 +1795,34 @@
               "explanation": "",
               "script": "",
               "score": 0
+            },
+            {
+              "id": "cm2vcw5xk001wr7mihhne64xd",
+              "index": 23,
+              "question": "<span class=\"watupro_num\">23. </span>(23)",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "やさしい"
+                },
+                {
+                  "id": "2",
+                  "value": "むずかしい"
+                },
+                {
+                  "id": "3",
+                  "value": "くるしい"
+                },
+                {
+                  "id": "4",
+                  "value": "たのしい"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "",
+              "score": 0
             }
           ]
         },
@@ -1866,7 +1866,7 @@
             {
               "id": "cm2vcw64y0022r7mixtr5lcnr",
               "index": 28,
-              "question": "<span class=\"watupro_num\">28. </span><strong>(2)</strong><strong>　</strong>あしたはだいがくのしけんがあります。しけんはじゅうじはんに　はじまりますから、20分まえにきょうしつにはいります。しけんは日本語の会話とさくぶんです。かいわはだいじょうぶですが、さくぶんは　むずかしいです。ごごはなにもありませんから、ゆっくりやすみたいです。<p></p>\n<p>28. あまり 自信を もっていない 科目は なんですか。</p>",
+              "question": "<span class=\"watupro_num\">28. </span><strong>(2)</strong><strong>　</strong>あしたはだいがくのしけんがあります。しけんはじゅうじはんに　はじまりますから、20分まえにきょうしつにはいりま��。しけんは日本語の会話とさくぶんです。かいわはだいじょうぶですが、さくぶんは　むずかしいです。ごごはなにもありませんから、ゆっくりやすみたいです。<p></p>\n<p>28. あまり 自信を もっていない 科目は なんですか。</p>",
               "content": "",
               "options": [
                 {
@@ -1933,7 +1933,7 @@
             {
               "id": "cm2vcw6c10025r7miogm8em91",
               "index": 30,
-              "question": "<span class=\"watupro_num\">30. </span>良子さんは田中さんのおくさんで、でんきがいしゃのしゃいんです。ふたりはけっこんして、もう15ねんになりました。こどもがふたりで、みんながっこうにいっています。<br>\nかいしゃがいそがしいですから、良子さんは　かえりがいつも、おそいです。りよ うりなどは田中さんがやります。せんたくなどはうえのこがときどき　します。<br>\nらいしゅう、おくさんのたんじょうびです。きょねんのたんじょうびにごしゅじんからたかいコートをもらいました。ことしはなにをあげるか、田中さんはもうかいましたが、なにかはいっていません。そのひにみせるといっています。 こどもたちもおかあさんになにかをあげたいといっています。<p></p>\n<p>30. こどもたちはいまなにをしていますか。</p>",
+              "question": "<span class=\"watupro_num\">30. </span>良子さんは田中さんのおくさんで、でんきがいしゃのしゃいんです。ふたりはけっこんして、もう15ねんになりました。こどもがふたりで、みんながっこうにいっています。<br>\nかいしゃがいそがしいですから、良子さんは　かえりがいつも、おそいです。りょうりなどは田中さんがやります。せんたくなどはうえのこがときどき　します。<br>\nらいしゅう、おくさんのたんじょうびです。きょねんのたんじょうびにごしゅじんからたかいコートをもらいました。ことしはなにをあげるか、田中さんはもうかいましたが、なにかはいっていません。そのひにみせるといっています。 こどもたちもおかあさんになにかをあげたいといっています。<p></p>\n<p>30. こどもたちはいまなにをしていますか。</p>",
               "content": "",
               "options": [
                 {
@@ -1950,7 +1950,7 @@
                 },
                 {
                   "id": "4",
-                  "value": "もうかいしやいんです。"
+                  "value": "もうかいしゃいんです。"
                 }
               ],
               "correctAnswer": "2",
@@ -1961,7 +1961,7 @@
             {
               "id": "cm2vcw6c10026r7mi3ya5ut83",
               "index": 31,
-              "question": "<span class=\"watupro_num\">31. </span>ことしのおくさんのたんじょうびにごしゆじんはなにをあげますか。",
+              "question": "<span class=\"watupro_num\">31. </span>ことしのおくさんのたんじょうびにごしゅじんはなにをあげますか。",
               "content": "",
               "options": [
                 {
@@ -2000,7 +2000,7 @@
             {
               "id": "cm2vcw6ji0028r7mitgshnnez",
               "index": 32,
-              "question": "<span class=\"watupro_num\">32. </span><strong>パーティーのお知らせ<br>\n</strong>こんしゆうのもくよう日のパーティーに　出る人は、まえの日にキムさんに600 円はらってください。おかねをはらってパーティーに来なかった人には、つぎの日にキムさんがはんぶんかえします。<p></p>\n<p>32. 林さんはおかねをはらいましたが、パーティーに行きませんでした。キムさんは林さんにいついくらかえしますか。</p>",
+              "question": "<span class=\"watupro_num\">32. </span><strong>パーティーのお知らせ<br>\n</strong>こんしゅうのもくよう日のパーティーに　出る人は、まえの日にキムさんに600 円はらってください。おかねをはらってパーティーに来なかった人には、つぎの日にキムさんがはんぶんかえします。<p></p>\n<p>32. 林さんはおかねをはらいましたが、パーティーに行きませんでした。キムさんは林さんにいついくらかえしますか。</p>",
               "content": "",
               "options": [
                 {
@@ -2412,7 +2412,7 @@
                 },
                 {
                   "id": "4",
-                  "value": "��もくてない"
+                  "value": "おもくてない"
                 }
               ],
               "correctAnswer": "1",
@@ -2818,34 +2818,6 @@
           "questionCount": 3,
           "questions": [
             {
-              "id": "cm2vcw7e00034r7miy7kzbgxl",
-              "index": 27,
-              "question": "<span class=\"watupro_num\">27. </span><p></p>\n<p style=\"text-align: left;\">アンさん、こんにちは、お元気ですか。<br>\nアンさんが、3月に国へ帰りました。アンさんの部屋はいまだれも使っていません。アンさんのことがとても懐かしいです。そして、アンさんに教えていただいたケーキもときどき作っています。<br>\n私は4月に高校生になりました。高校は家から遠くて、電車に乗って通わければなりません。1時間もかかるので、少し大変です。勉強はそれほど難しくありません。新しい学校で新しい友達がたくさんできました。<br>\nおととい、アンさんと一緒にいった公園で写真をとりました、一緒に送ります。<br>\nそれでは、また手紙を書きます。<br>\n田中</p>\n<p>文章の内容と合っているのはどれですか。</p>",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "田中さんは今友達があまりいません。"
-                },
-                {
-                  "id": "2",
-                  "value": "田中さんの家は高校から遠いので不便です。"
-                },
-                {
-                  "id": "3",
-                  "value": "田中さんは今勉強が難しくてたいへんです。"
-                },
-                {
-                  "id": "4",
-                  "value": "田中さんが高校で撮った写真をアンさんに送りました。"
-                }
-              ],
-              "correctAnswer": "2",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
               "id": "cm2vcw7e00035r7mibkzs9qfs",
               "index": 28,
               "question": "<span class=\"watupro_num\">28. </span>この建物の中では静かに絵を見てください。写真を撮らないでください。たばこも困ります。たばこは外ですってください。絵を見ながら食べたり、飲んだりしないでください。<p></p>\n<p>あなたはこの建物の中で何をしますか。</p>",
@@ -2894,6 +2866,34 @@
                 {
                   "id": "4",
                   "value": "友達はあまり食べませんでした。"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "",
+              "score": 0
+            },
+            {
+              "id": "cm2vcw7e00034r7miy7kzbgxl",
+              "index": 27,
+              "question": "<span class=\"watupro_num\">27. </span><p></p>\n<p style=\"text-align: left;\">アンさん、こんにちは、お元気ですか。<br>\nアンさんが、3月に国へ帰りました。アンさんの部屋はいまだれも使っていません。アンさんのことがとても懐かしいです。そして、アンさんに教えていただいたケーキもときどき作っています。<br>\n私は4月に高校生になりました。高校は家から遠くて、電車に乗って通わなければなりません。1時間もかかるので、少し大変です。勉強はそれほど難しくありません。新しい学校で新しい友達がたくさんできました。<br>\nおととい、アンさんと一緒にいった公園で写真をとりました、一緒に送ります。<br>\nそれでは、また手紙を書きます。<br>\n田中</p>\n<p>文章の内容と合っているのはどれですか。</p>",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "田中さんは今友達があまりいません。"
+                },
+                {
+                  "id": "2",
+                  "value": "田中さんの家は高校から遠いので不便です。"
+                },
+                {
+                  "id": "3",
+                  "value": "田中さんは今勉強が難しくてたいへんです。"
+                },
+                {
+                  "id": "4",
+                  "value": "田中さんが高校で撮った写真をアンさんに送りました。"
                 }
               ],
               "correctAnswer": "2",
@@ -3347,34 +3347,6 @@
               "score": 0
             },
             {
-              "id": "cm2vcw80l003pr7miosbra4yw",
-              "index": 12,
-              "question": "<span class=\"watupro_num\">12. </span>わたしは 山下きん (&nbsp; 　　　　) 買いものをしました。",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "と"
-                },
-                {
-                  "id": "2",
-                  "value": "を"
-                },
-                {
-                  "id": "3",
-                  "value": "は"
-                },
-                {
-                  "id": "4",
-                  "value": "で"
-                }
-              ],
-              "correctAnswer": "1",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
               "id": "cm2vcw80l003qr7miprvbhlq4",
               "index": 13,
               "question": "<span class=\"watupro_num\">13. </span>よるは 何( 　　　　 ) 食べましょうか。",
@@ -3541,6 +3513,34 @@
               "explanation": "",
               "script": "",
               "score": 0
+            },
+            {
+              "id": "cm2vcw80l003pr7miosbra4yw",
+              "index": 12,
+              "question": "<span class=\"watupro_num\">12. </span>わたしは 山下さん (&nbsp; 　　　　) 買いものをしました。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "と"
+                },
+                {
+                  "id": "2",
+                  "value": "を"
+                },
+                {
+                  "id": "3",
+                  "value": "は"
+                },
+                {
+                  "id": "4",
+                  "value": "で"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "",
+              "score": 0
             }
           ]
         },
@@ -3694,34 +3694,6 @@
               "score": 0
             },
             {
-              "id": "cm2vcw8840042r7mi48hg4t35",
-              "index": 24,
-              "question": "<span class=\"watupro_num\">24. </span>きんぼ<u>_</u>______ &nbsp;&nbsp;<u>　</u><u>★</u><u>　 </u>&nbsp; ______ &nbsp;&nbsp;______<u></u>。",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "あとで"
-                },
-                {
-                  "id": "2",
-                  "value": "ごはんを"
-                },
-                {
-                  "id": "3",
-                  "value": "の"
-                },
-                {
-                  "id": "4",
-                  "value": "食べます"
-                }
-              ],
-              "correctAnswer": "1",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
               "id": "cm2vcw8840043r7miwmb8eyqt",
               "index": 25,
               "question": "<span class=\"watupro_num\">25. </span>かんじが わかりません______ &nbsp;&nbsp;______ &nbsp;&nbsp;<u>　</u><u>★</u><u>　 </u>&nbsp; ______ください。",
@@ -3773,34 +3745,6 @@
                 }
               ],
               "correctAnswer": "2",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
-              "id": "cm2vcw8840045r7mim9xrss2w",
-              "index": 27,
-              "question": "<span class=\"watupro_num\">27. </span>すみませんが、<u>_</u>______ &nbsp;&nbsp;______ &nbsp;&nbsp;<u>　</u><u>★</u><u>　 </u>&nbsp; ______<u></u>&nbsp;くだきい。",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "話(はな)して"
-                },
-                {
-                  "id": "2",
-                  "value": "もう"
-                },
-                {
-                  "id": "3",
-                  "value": "ゆっくり"
-                },
-                {
-                  "id": "4",
-                  "value": "少(すこ)し"
-                }
-              ],
-              "correctAnswer": "3",
               "explanation": "",
               "script": "",
               "score": 0
@@ -3885,6 +3829,62 @@
                 }
               ],
               "correctAnswer": "2",
+              "explanation": "",
+              "script": "",
+              "score": 0
+            },
+            {
+              "id": "cm2vcw8840042r7mi48hg4t35",
+              "index": 24,
+              "question": "<span class=\"watupro_num\">24. </span>さんぽ<u>_</u>______ &nbsp;&nbsp;<u>　</u><u>★</u><u>　 </u>&nbsp; ______ &nbsp;&nbsp;______<u></u>。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "あとで"
+                },
+                {
+                  "id": "2",
+                  "value": "ごはんを"
+                },
+                {
+                  "id": "3",
+                  "value": "の"
+                },
+                {
+                  "id": "4",
+                  "value": "食べます"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "",
+              "score": 0
+            },
+            {
+              "id": "cm2vcw8840045r7mim9xrss2w",
+              "index": 27,
+              "question": "<span class=\"watupro_num\">27. </span>すみませんが、<u>_</u>______ &nbsp;&nbsp;______ &nbsp;&nbsp;<u>　</u><u>★</u><u>　 </u>&nbsp; ______<u></u>&nbsp;ください。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "話(はな)して"
+                },
+                {
+                  "id": "2",
+                  "value": "もう"
+                },
+                {
+                  "id": "3",
+                  "value": "ゆっくり"
+                },
+                {
+                  "id": "4",
+                  "value": "少(すこ)し"
+                }
+              ],
+              "correctAnswer": "3",
               "explanation": "",
               "script": "",
               "score": 0
@@ -4360,34 +4360,6 @@
           "questionCount": 15,
           "questions": [
             {
-              "id": "cm2vcw8mi0055r7mi5vkwx7u0",
-              "index": 61,
-              "question": "<span class=\"watupro_num\">61. </span>[5]",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "に"
-                },
-                {
-                  "id": "2",
-                  "value": "で"
-                },
-                {
-                  "id": "3",
-                  "value": "を"
-                },
-                {
-                  "id": "4",
-                  "value": "と"
-                }
-              ],
-              "correctAnswer": "1",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
               "id": "cm2vcw8mi004zr7mih4gsuqf2",
               "index": 55,
               "question": "<span class=\"watupro_num\">55. </span>[4]",
@@ -4696,34 +4668,6 @@
               "score": 0
             },
             {
-              "id": "cm2vcw8mi0051r7mi6206tci8",
-              "index": 57,
-              "question": "<span class=\"watupro_num\">57. </span>キムきんとスミスきさんが メールを 書きました。<br>\nスミスさん<br>\nあきって [ 1 ] 日曜日(にちようび)は ひまですか。いっしょに 駅(えき)の 前(まえ)に[2]デパートへ 行きませんか。いま 服(ふく)を とても [3] 売って います。<br>\nどうですか ?<br>\nキム<p></p>\n<p>キムさん<br>\nいいですね。[4 ] デパートは どこに ありますか。わたしは よく知り ません。朝(あさ) 10 時半(じはん)に駅(えき)の 前(まえ) [5] 会(あ)ってそれから 行(い)きましょう。<br>\nよろしくね。<br>\nスミス<br>\n57. [1]</p>",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "が"
-                },
-                {
-                  "id": "2",
-                  "value": "に"
-                },
-                {
-                  "id": "3",
-                  "value": "の"
-                },
-                {
-                  "id": "4",
-                  "value": "は"
-                }
-              ],
-              "correctAnswer": "3",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
               "id": "cm2vcw8mi0052r7miwilqzq1c",
               "index": 58,
               "question": "<span class=\"watupro_num\">58. </span>[2]",
@@ -4772,6 +4716,62 @@
                 {
                   "id": "4",
                   "value": "安(やす)かった"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "",
+              "score": 0
+            },
+            {
+              "id": "cm2vcw8mi0055r7mi5vkwx7u0",
+              "index": 61,
+              "question": "<span class=\"watupro_num\">61. </span>[5]",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "に"
+                },
+                {
+                  "id": "2",
+                  "value": "で"
+                },
+                {
+                  "id": "3",
+                  "value": "を"
+                },
+                {
+                  "id": "4",
+                  "value": "と"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "",
+              "score": 0
+            },
+            {
+              "id": "cm2vcw8mi0051r7mi6206tci8",
+              "index": 57,
+              "question": "<span class=\"watupro_num\">57. </span>キムさんとスミスさんが メールを 書きました。<br>\nスミスさん<br>\nあさって [ 1 ] 日曜日(にちようび)は ひまですか。いっしょに 駅(えき)の 前(まえ)に[2]デパートへ 行きませんか。いま 服(ふく)を とても [3] 売って います。<br>\nどうですか ?<br>\nキム<p></p>\n<p>キムさん<br>\nいいですね。[4 ] デパートは どこに ありますか。わたしは よく知り ません。朝(あさ) 10 時半(じはん)に駅(えき)の 前(まえ) [5] 会(あ)ってそれから 行(い)きましょう。<br>\nよろしくね。<br>\nスミス<br>\n57. [1]</p>",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "が"
+                },
+                {
+                  "id": "2",
+                  "value": "に"
+                },
+                {
+                  "id": "3",
+                  "value": "の"
+                },
+                {
+                  "id": "4",
+                  "value": "は"
                 }
               ],
               "correctAnswer": "3",
@@ -4862,7 +4862,7 @@
                 },
                 {
                   "id": "3",
-                  "value": "あさと ひる��� パンで、 よるは しょくどうで ごはんを 食べます。"
+                  "value": "あさと ひるは パンで、 よるは しょくどうで ごはんを 食べます。"
                 },
                 {
                   "id": "4",
@@ -4877,7 +4877,7 @@
             {
               "id": "cm2vcw8ti005ar7mixgkg26xf",
               "index": 65,
-              "question": "<span class=\"watupro_num\">65. </span>リーきんが スミスさんに メールを 書きました。<br>\nスミスさん<br>\n今週の 土よう日の 午後は いそがしいですか。わたしの 国のたいしかんでパーティーが あります。いっしょに行きませんか ?<br>\n木よう日の あさまでに へんじを くだきい。<br>\nリー<p></p>\n<p>65. とい:　パーティーは　いつですか。</p>",
+              "question": "<span class=\"watupro_num\">65. </span>リーさんが スミスさんに メールを 書きました。<br>\nスミスさん<br>\n今週の 土よう日の 午後は いそがしいですか。わたしの 国のたいしかんでパーティーが あります。いっしょに行きませんか ?<br>\n木よう日の あさまでに へんじを ください。<br>\nリー<p></p>\n<p>65. とい:　パーティーは　いつですか。</p>",
               "content": "",
               "options": [
                 {
@@ -5026,34 +5026,6 @@
               "score": 0
             },
             {
-              "id": "cm2vcw911005gr7mi4wox6rdu",
-              "index": 70,
-              "question": "<span class=\"watupro_num\">70. </span>わたしは学生ですが、あまり 大学に行きません。たいてい としょかんで 本を 読んで います。大学の としょかんでは ありません。うちの そばの としょかんです。<br>\n大学のとしょかんは、いつも人がおおぜいいて しずかではありません。 本は たくさんありますが、べんりでは ありません。ふるい 本は、としょかんの 人に たのんで、としょかんの人が 出して 来ます。時間がかかります。<br>\nうちの そばの としょかんは、大きくありませんが、ふるい 本がたくさん あります。本は じぶんで 本だなから出して読みます。としょかんの 外は | にぎやかですが、中は しずかです。<br>\n70. <strong>とい１</strong>　この人は、いつもどんなことをしますか。",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "大学のじゅぎょうを聞いてべんきょうします。"
-                },
-                {
-                  "id": "2",
-                  "value": "うちのそばのとしょかんで本を読みます。"
-                },
-                {
-                  "id": "3",
-                  "value": "大学のとしょかんで本を読みます。"
-                },
-                {
-                  "id": "4",
-                  "value": "うちで本を読んでべんきょうします。"
-                }
-              ],
-              "correctAnswer": "2",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
               "id": "cm2vcw911005hr7miw46r29x3",
               "index": 71,
               "question": "<span class=\"watupro_num\">71. </span><strong>とい２:</strong>　大学のとしょかんはどうですか。",
@@ -5108,6 +5080,34 @@
               "explanation": "",
               "script": "",
               "score": 0
+            },
+            {
+              "id": "cm2vcw911005gr7mi4wox6rdu",
+              "index": 70,
+              "question": "<span class=\"watupro_num\">70. </span>わたしは学生ですが、あまり 大学に行きません。たいてい としょかんで 本を 読んで います。大学の としょかんでは ありません。うちの そばの としょかんです。<br>\n大学のとしょかんは、いつも人がおおぜいいて しずかではありません。 本は たくさんありますが、べんりでは ありません。ふるい 本は、としょかんの 人に たのんで、としょかんの人が 出して 来ます。時間がかかります。<br>\nうちの そばの としょかんは、大きくありませんが、ふるい 本がたくさん あります。本は じぶんで 本だなから出して読みます。としょかんの 外は にぎやかですが、中は しずかです。<br>\n70. <strong>とい１</strong>　この人は、いつもどんなことをしますか。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "大学のじゅぎょうを聞いてべんきょうします。"
+                },
+                {
+                  "id": "2",
+                  "value": "うちのそばのとしょかんで本を読みます。"
+                },
+                {
+                  "id": "3",
+                  "value": "大学のとしょかんで本を読みます。"
+                },
+                {
+                  "id": "4",
+                  "value": "うちで本を読んでべんきょうします。"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "",
+              "score": 0
             }
           ]
         },
@@ -5120,34 +5120,6 @@
           "content": "",
           "questionCount": 3,
           "questions": [
-            {
-              "id": "cm2vcw982005kr7mixpdltv8t",
-              "index": 73,
-              "question": "<span class=\"watupro_num\">73. </span><b>みぎのページは、かぞく　みんなで　りょうり　きょうしつ」のです。つぎのぶんを<strong>読ん</strong>で、しつもんにこたえてください。こたえは　1・2・3・4からいちばんいいものを一つえらんでください。<br>\n</b><span style=\"font-weight: 400;\">おとさんと、おかあさんと、おねえさんと、おとうとの　4人　かぞくが、いっしょに　りょうり　きょうしつに　行きます。おねえさんは今９さいで、おとうとは　7さいです。<br>\n</span>かぞく みんなで りょうり きょうしつ<br>\nおとうさんも、おかあさんも、おとこの子も、おんなの子も、 かぞく みんなでたのしく りょうりを つくって いっしょに たべませんか。まいしゅう、どようび 3時からです。<br>\n▼お金マ<br>\nおとな・・・・・・・・・・・・500円<br>\nこども 15 さいまで .....................300円<br>\n5さいまで.................0円<br>\nおとこの人は おとなも こどももお金がはんぶんです!<p></p>\n<p>73. <b>とい:</b><span style=\"font-weight: 400;\">　おはぜんぶでいくらかかりますか。</span></p>",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "800円"
-                },
-                {
-                  "id": "2",
-                  "value": "2000円"
-                },
-                {
-                  "id": "3",
-                  "value": "1600円"
-                },
-                {
-                  "id": "4",
-                  "value": "1200円"
-                }
-              ],
-              "correctAnswer": "4",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
             {
               "id": "cm2vcw982005lr7miz79ek4dt",
               "index": 74,
@@ -5200,6 +5172,34 @@
                 }
               ],
               "correctAnswer": "2",
+              "explanation": "",
+              "script": "",
+              "score": 0
+            },
+            {
+              "id": "cm2vcw982005kr7mixpdltv8t",
+              "index": 73,
+              "question": "<span class=\"watupro_num\">73. </span><b>みぎのページは、かぞく　みんなで　りょうり　きょうしつ」のです。つぎのぶんを<strong>読ん</strong>で、しつもんにこたえてください。こたえは　1・2・3・4からいちばんいいものを一つえらんでください。<br>\n</b><span style=\"font-weight: 400;\">おとうさんと、おかあさんと、おねえさんと、おとうとの　4人　かぞくが、いっしょに　りょうり　きょうしつに　行きます。おねえさんは今９さいで、おとうとは　7さいです。<br>\n</span>かぞく みんなで りょうり きょうしつ<br>\nおとうさんも、おかあさんも、おとこの子も、おんなの子も、 かぞく みんなでたのしく りょうりを つくって いっしょに たべませんか。まいしゅう、どようび 3時からです。<br>\n▼お金マ<br>\nおとな・・・・・・・・・・・・500円<br>\nこども 15 さいまで .....................300円<br>\n5さいまで.................0円<br>\nおとこの人は おとなも こどももお金がはんぶんです!<p></p>\n<p>73. <b>とい:</b><span style=\"font-weight: 400;\">　お金はぜんぶでいくらかかりますか。</span></p>",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "800円"
+                },
+                {
+                  "id": "2",
+                  "value": "2000円"
+                },
+                {
+                  "id": "3",
+                  "value": "1600円"
+                },
+                {
+                  "id": "4",
+                  "value": "1200円"
+                }
+              ],
+              "correctAnswer": "4",
               "explanation": "",
               "script": "",
               "score": 0
@@ -5284,34 +5284,6 @@
                 {
                   "id": "4",
                   "value": "しても"
-                }
-              ],
-              "correctAnswer": "2",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
-              "id": "cm2vcw9gr0062r7miz3z1123p",
-              "index": 14,
-              "question": "<span class=\"watupro_num\">14. </span>これは山本さんがわたしに（&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 　）本です。",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "いただいた"
-                },
-                {
-                  "id": "2",
-                  "value": "さしあげた"
-                },
-                {
-                  "id": "3",
-                  "value": "くださった"
-                },
-                {
-                  "id": "4",
-                  "value": "なさった"
                 }
               ],
               "correctAnswer": "2",
@@ -5516,6 +5488,34 @@
               "score": 0
             },
             {
+              "id": "cm2vcw9gr0063r7min1ogbzt0",
+              "index": 15,
+              "question": "<span class=\"watupro_num\">15. </span>留学(&nbsp; &nbsp; &nbsp; &nbsp; 　)日本語がだんだんじょうずになりました。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "あって"
+                },
+                {
+                  "id": "2",
+                  "value": "した"
+                },
+                {
+                  "id": "3",
+                  "value": "して"
+                },
+                {
+                  "id": "4",
+                  "value": "になって"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "",
+              "score": 0
+            },
+            {
               "id": "cm2vcw9gq005wr7mixwiln2ey",
               "index": 8,
               "question": "<span class=\"watupro_num\">8. </span>こんどあなたとあう日は (&nbsp; &nbsp; &nbsp; &nbsp; 　)にしますか。",
@@ -5527,7 +5527,7 @@
                 },
                 {
                   "id": "2",
-                  "value": "いくっ"
+                  "value": "いくつ"
                 },
                 {
                   "id": "3",
@@ -5546,7 +5546,7 @@
             {
               "id": "cm2vcw9gr005xr7mizcb4yt92",
               "index": 9,
-              "question": "<span class=\"watupro_num\">9. </span>食事のまえにはかならず手を&nbsp; (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 　）なけらばなりません。",
+              "question": "<span class=\"watupro_num\">9. </span>食事のまえにはかならず手を&nbsp; (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 　）なければなりません。",
               "content": "",
               "options": [
                 {
@@ -5574,7 +5574,7 @@
             {
               "id": "cm2vcw9gr005yr7mix18jz3uj",
               "index": 10,
-              "question": "<span class=\"watupro_num\">10. </span>食事わたしはいつも&nbsp; (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 　)まえにはをみがきます.",
+              "question": "<span class=\"watupro_num\">10. </span>わたしはいつも&nbsp; (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 　)まえにはをみがきます.",
               "content": "",
               "options": [
                 {
@@ -5602,7 +5602,7 @@
             {
               "id": "cm2vcw9gr005zr7miml3mv82l",
               "index": 11,
-              "question": "<span class=\"watupro_num\">11. </span>ストープをつけてへやを&nbsp; 暖かく(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 　）。",
+              "question": "<span class=\"watupro_num\">11. </span>ストーブをつけてへやを&nbsp; 暖かく(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 　）。",
               "content": "",
               "options": [
                 {
@@ -5628,26 +5628,26 @@
               "score": 0
             },
             {
-              "id": "cm2vcw9gr0063r7min1ogbzt0",
-              "index": 15,
-              "question": "<span class=\"watupro_num\">15. </span>留学(&nbsp; &nbsp; &nbsp; &nbsp; 　)日本語がだんだんじょうずになりました。",
+              "id": "cm2vcw9gr0062r7miz3z1123p",
+              "index": 14,
+              "question": "<span class=\"watupro_num\">14. </span>これは山本さんがわたしに（&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 　）本です。",
               "content": "",
               "options": [
                 {
                   "id": "1",
-                  "value": "あって"
+                  "value": "いただいた"
                 },
                 {
                   "id": "2",
-                  "value": "した"
+                  "value": "さしあげた"
                 },
                 {
                   "id": "3",
-                  "value": "して"
+                  "value": "くださった"
                 },
                 {
                   "id": "4",
-                  "value": "になって"
+                  "value": "なさった"
                 }
               ],
               "correctAnswer": "3",
@@ -5818,34 +5818,6 @@
           "questionCount": 5,
           "questions": [
             {
-              "id": "cm2vcw9v7006br7mijs4o19dw",
-              "index": 21,
-              "question": "<span class=\"watupro_num\">21. </span>学校の　近くに　[21] スーパーが　できました。日曜日、わたしは木村さんと　いっしょにそこ [22] 座買い物に行きました。とても広いスーパーです。わたしは　ノートを二冊とボールペンを10本 買いました。木村さんも ボールペンを5本買いました。 ノートは買いませんでした。それから、[23] わたしは小説を2冊買いました。みんなベストセラーです。[24] わたしは高校のときはよく小説を　読みました。週に五冊 [25] でした。わたしはあまり時間がありません。一ヶ月に2冊ぐらい読みま す。今日は買い物をたくさんしました。<p></p>\n<p>21. [21]</p>",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "新しい"
-                },
-                {
-                  "id": "2",
-                  "value": "新しな"
-                },
-                {
-                  "id": "3",
-                  "value": "新し"
-                },
-                {
-                  "id": "4",
-                  "value": "新しく"
-                }
-              ],
-              "correctAnswer": "1",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
               "id": "cm2vcw9v8006cr7mi4edvsmp2",
               "index": 22,
               "question": "<span class=\"watupro_num\">22. </span>[22]",
@@ -5869,34 +5841,6 @@
                 }
               ],
               "correctAnswer": "3",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
-              "id": "cm2vcw9v8006dr7mixgsdvzi2",
-              "index": 23,
-              "question": "<span class=\"watupro_num\">23. </span>[23]",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "わたしたちは本屋へ行きません。"
-                },
-                {
-                  "id": "2",
-                  "value": "わたしたちは本屋へ行きませんでした。"
-                },
-                {
-                  "id": "3",
-                  "value": "わたしたちは本屋へ行きました。"
-                },
-                {
-                  "id": "4",
-                  "value": "わたしたちは本屋へ行きます。"
-                }
-              ],
-              "correctAnswer": "2",
               "explanation": "",
               "script": "",
               "score": 0
@@ -5956,6 +5900,62 @@
               "explanation": "",
               "script": "",
               "score": 0
+            },
+            {
+              "id": "cm2vcw9v7006br7mijs4o19dw",
+              "index": 21,
+              "question": "<span class=\"watupro_num\">21. </span>学校の　近くに　[21] スーパーが　できました。日曜日、わたしは木村さんと　いっしょにそこ [22] 買い物に行きました。とても広いスーパーです。わたしは　ノートを二冊とボールペンを10本 買いました。木村さんも ボールペンを5本買いました。 ノートは買いませんでした。それから、[23] わたしは小説を2冊買いました。みんなベストセラーです。[24] わたしは高校のときはよく小説を　読みました。週に五冊 [25] でした。わたしはあまり時間がありません。一ヶ月に2冊ぐらい読みま す。今日は買い物をたくさんしました。<p></p>\n<p>21. [21]</p>",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "新しい"
+                },
+                {
+                  "id": "2",
+                  "value": "新しな"
+                },
+                {
+                  "id": "3",
+                  "value": "新し"
+                },
+                {
+                  "id": "4",
+                  "value": "新しく"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "",
+              "score": 0
+            },
+            {
+              "id": "cm2vcw9v8006dr7mixgsdvzi2",
+              "index": 23,
+              "question": "<span class=\"watupro_num\">23. </span>[23]",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "わたしたちは本屋へ行きません。"
+                },
+                {
+                  "id": "2",
+                  "value": "わたしたちは本屋へ行きませんでした。"
+                },
+                {
+                  "id": "3",
+                  "value": "わたしたちは本屋へ行きました。"
+                },
+                {
+                  "id": "4",
+                  "value": "わたしたちは本屋へ行きます。"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "",
+              "score": 0
             }
           ]
         },
@@ -5971,7 +5971,7 @@
             {
               "id": "cm2vcwa4l006hr7miq3mb9k7c",
               "index": 26,
-              "question": "<span class=\"watupro_num\">26. </span>ジョンさん<br>\n来週の土曜日（5月26日）は、ひまですか。〇〇市で　アカシア祭りがありますから、いっしょにいきませんか。<br>\n田中<br>\n田中さん<br>\nごめんなさい。<br>\nその日は、クラスメートと 一緒にサッカーの 試合を　見に行きます。また今度あそびましょう。<br>\nジョン<br>\n[27]　どうして田中さんはジョンさんにメールをしましたか。",
+              "question": "<span class=\"watupro_num\">26. </span>ジョンさん<br>\n���週の土曜日（5月26日）は、ひまですか。〇〇市で　アカシア祭りがありますから、いっしょにいきませんか。<br>\n田中<br>\n田中さん<br>\nごめんなさい。<br>\nその日は、クラスメートと 一緒にサッカーの 試合を　見に行きます。また今度あそびましょう。<br>\nジョン<br>\n[27]　どうして田中さんはジョンさんにメールをしましたか。",
               "content": "",
               "options": [
                 {
@@ -5997,37 +5997,9 @@
               "score": 0
             },
             {
-              "id": "cm2vcwa4l006ir7mimyt1141m",
-              "index": 27,
-              "question": "<span class=\"watupro_num\">27. </span>(２) 最近、[PK]や[KO]といったあたらしいことばがでましたね。そのいみを知ってしますか。また,「ハイビジョンテレビ」というあたらしいテレビがでました。言葉はみえないものです。 テレビはみえるものです。わたしたちはいつもふるいものをすてて、あたらしくてべんりなものをつくります。わたしたちは<u>こんな どうぶつ</u>です。<p></p>\n<p>[27]「こんなどうぶつです」とあるが、どんなどうぶつですか。</p>",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "ことばをつくるどうぶつです。"
-                },
-                {
-                  "id": "2",
-                  "value": "べんりなものをつくるどうぶつです。"
-                },
-                {
-                  "id": "3",
-                  "value": "[PK」などをつくるどうぶつです。"
-                },
-                {
-                  "id": "4",
-                  "value": "テレビをつくるどうぶつです。"
-                }
-              ],
-              "correctAnswer": "2",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
               "id": "cm2vcwa4l006jr7mipxi2zooy",
               "index": 28,
-              "question": "<span class=\"watupro_num\">28. </span>(３)<br>\n川村：「すみません、皆さん。」<br>\n大家:　「は��、なんですか。」<br>\n川村：「ペットをかいたいんですが、ねこをかってもいいですか。」<br>\n大家:　「ねこでもいぬでもだいじょうぶですよ。」<br>\n[28]　 ペットをかってもいいですか。",
+              "question": "<span class=\"watupro_num\">28. </span>(３)<br>\n川村：「すみません、皆さん。」<br>\n大家:　「はい、なんですか。」<br>\n川村：「ペットをかいたいんですが、ねこをかってもいいですか。」<br>\n大家:　「ねこでもいぬでもだいじょうぶですよ。」<br>\n[28]　 ペットをかってもいいですか。",
               "content": "",
               "options": [
                 {
@@ -6048,6 +6020,34 @@
                 }
               ],
               "correctAnswer": "1",
+              "explanation": "",
+              "script": "",
+              "score": 0
+            },
+            {
+              "id": "cm2vcwa4l006ir7mimyt1141m",
+              "index": 27,
+              "question": "<span class=\"watupro_num\">27. </span>(２) 最近、[PK]や[KO]といったあたらしいことばがでましたね。そのいみを知っていますか。また,「ハイビジョンテレビ」というあたらしいテレビがでました。言葉はみえないものです。 テレビはみえるものです。わたしたちはいつもふるいものをすてて、あたらしくてべんりなものをつくります。わたしたちは<u>こんな どうぶつ</u>です。<p></p>\n<p>[27]「こんなどうぶつです」とあるが、どんなどうぶつですか。</p>",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "ことばをつくるどうぶつです。"
+                },
+                {
+                  "id": "2",
+                  "value": "べんりなものをつくるどうぶつです。"
+                },
+                {
+                  "id": "3",
+                  "value": "[PK」などをつくるどうぶつです。"
+                },
+                {
+                  "id": "4",
+                  "value": "テレビをつくるどうぶつです。"
+                }
+              ],
+              "correctAnswer": "2",
               "explanation": "",
               "script": "",
               "score": 0
@@ -7848,7 +7848,7 @@
         {
           "id": "cm2vcwc8b008ir7mi4o3qb29a",
           "index": 4,
-          "title": "もんだい4 ：つぎの　⑴から　⑵の　ぶんしょうを読んんで、しつもんに　こたえて　ください。こたえは、1• 2 • 3 • 4から　いちばん　いい　ものを　一つ　えらんで　 ください。",
+          "title": "もんだい4 ：つぎの　⑴から　⑵の　ぶんしょうを読んで、しつもんに　こたえて　ください。こたえは、1• 2 • 3 • 4から　いちばん　いい　ものを　一つ　えらんで　 ください。",
           "part": 1,
           "audioUrl": null,
           "content": "",
@@ -7885,16 +7885,16 @@
             {
               "id": "cm2vcwc9d008kr7mixvqjcc15",
               "index": 28,
-              "question": "<span class=\"watupro_num\">28. </span>⑵<p></p>\n<p>森さんの上に、山口先生のメモと本があります。<br>\n森さん<br>\nクラスで使う本を中川先生にかりました。5ページを5枚コピーしてください。コピーは南さんにわたしてください。本は、わたしがあしたかえしますから、わたしの机の上においてください。<br>\n山口</p>\n<p>森さんはコピーをしたあとで、本をどうしますか。</p>",
+              "question": "<span class=\"watupro_num\">28. </span>⑵<p></p>\n<p>森さんの机の上に、山口先生のメモと本があります。<br>\n森さん<br>\nクラスで使う本を中川先生にかりました。5ページを5枚コピーしてください。コピーは南さんにわたしてください。本は、わたしがあしたかえしますから、わたしの机の上においてください。<br>\n山口</p>\n<p>森さんはコピーをしたあとで、本をどうしますか。</p>",
               "content": "",
               "options": [
                 {
                   "id": "1",
-                  "value": "市白先生の机の上におきます。"
+                  "value": "山口先生の机の上におきます。"
                 },
                 {
                   "id": "2",
-                  "value": "川先生にかえします。"
+                  "value": "中川先生にかえします。"
                 },
                 {
                   "id": "3",
@@ -7922,34 +7922,6 @@
           "questionCount": 2,
           "questions": [
             {
-              "id": "cm2vcwcgk008mr7mikwq77m7q",
-              "index": 29,
-              "question": "<span class=\"watupro_num\">29. </span>きのうの夜はおそくまでしごとをしました。とてもつかれました。しごとのあと、電車で帰りました。<br>\n家の近くの駅で電車をおりました。外は雨でしたが、わたしはかさがありませんでした。とても<u>こまりました</u>。<br>\n駅の人がわたしを見て、「あのはこの中のかさを使ってください。」と言いました。はこの中にはかさが3本ありました。わたしは「えっ、いいんですか。」と聞きました。<br>\n駅の次は「あれは『みんなのかさ』です。お金はいりません。あした、あのはこにかえしてください。」と言いました。<br>\nわたしは「わかりました。ありがとうございます。」と言って、かさをかりて帰りました。<p></p>\n<p>29.（１）どうして <u>こまりました</u>か。</p>",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "かさがなかったから"
-                },
-                {
-                  "id": "2",
-                  "value": "とてもつかれたから"
-                },
-                {
-                  "id": "3",
-                  "value": "おそい時間に駅に着いたから"
-                },
-                {
-                  "id": "4",
-                  "value": "しごとがたくさんあったから"
-                }
-              ],
-              "correctAnswer": "1",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
               "id": "cm2vcwcgk008nr7mi5coz8uto",
               "index": 30,
               "question": "<span class=\"watupro_num\">30. </span>（２）「わたし」は、あしたどうしますか。",
@@ -7973,6 +7945,34 @@
                 }
               ],
               "correctAnswer": "2",
+              "explanation": "",
+              "script": "",
+              "score": 0
+            },
+            {
+              "id": "cm2vcwcgk008mr7mikwq77m7q",
+              "index": 29,
+              "question": "<span class=\"watupro_num\">29. </span>きのうの夜はおそくまでしごとをしました。とてもつかれました。しごとのあと、電車で帰りました。<br>\n家の近くの駅で電車をおりました。外は雨でしたが、わたしはかさがありませんでした。とても<u>こまりました</u>。<br>\n駅の人がわたしを見て、「あのはこの中のかさを使ってください。」と言いました。はこの中にはかさが3本ありました。わたしは「えっ、いいんですか。」と聞きました。<br>\n駅の人は「あれは『みんなのかさ』です。お金はいりません。あした、あのはこにかえしてください。」と言いました。<br>\nわたしは「わかりました。ありがとうございます。」と言って、かさをかりて帰りました。<p></p>\n<p>29.（１）どうして <u>こまりました</u>か。</p>",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "かさがなかったから"
+                },
+                {
+                  "id": "2",
+                  "value": "とてもつかれたから"
+                },
+                {
+                  "id": "3",
+                  "value": "おそい時間に駅に着いたから"
+                },
+                {
+                  "id": "4",
+                  "value": "しごとがたくさんあったから"
+                }
+              ],
+              "correctAnswer": "1",
               "explanation": "",
               "script": "",
               "score": 0
@@ -9814,34 +9814,6 @@
           "questionCount": 3,
           "questions": [
             {
-              "id": "cm2vcwe8b00anr7mieuy5gq8s",
-              "index": 27,
-              "question": "<span class=\"watupro_num\">27. </span><p></p>\n<p style=\"text-align: left;\">アンさん、こんにちは、お元気ですか。<br>\nアンさんが、3月に国へ帰りました。アンさんの部屋はいまだれも使っていません。アンさんのことがとても懐かしいです。そして、アンさんに教えていただいたケーキもときどき作っています。<br>\n私は4月に高校生になりました。高校は家から遠くて、電車に乗って通わければなりません。1時間もかかるので、少し大変です。勉強はそれほど難しくありません。新しい学校で新しい友達がたくさんできました。<br>\nおととい、アンさんと一緒にいった公園で写真をとりました、一緒に送ります。<br>\nそれでは、また手紙を書きます。<br>\n田中</p>\n<p>文章の内容と合っているのはどれですか。</p>",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "田中さんは今友達があまりいません。"
-                },
-                {
-                  "id": "2",
-                  "value": "田中さんは今勉強が難しくてたいへんです。"
-                },
-                {
-                  "id": "3",
-                  "value": "田中さんの家は高校から遠いので不便です。"
-                },
-                {
-                  "id": "4",
-                  "value": "田中さんが高校で撮った写真をアンさんに送りました。"
-                }
-              ],
-              "correctAnswer": "3",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
               "id": "cm2vcwe8b00aor7mife7018lz",
               "index": 28,
               "question": "<span class=\"watupro_num\">28. </span>この建物の中では静かに絵を見てください。写真を撮らないでください。たばこも困ります。たばこは外ですってください。絵を見ながら食べたり、飲んだりしないでください。<p></p>\n<p>あなたはこの建物の中で何をしますか。</p>",
@@ -9872,7 +9844,7 @@
             {
               "id": "cm2vcwe8b00apr7mistr1by68",
               "index": 29,
-              "question": "<span class=\"watupro_num\">29. </span>きのうは友達の家へ行って、友達がつくった料理を食べました。すこしからかったですが、とてもおいしいです。わたしも友達もたくさん食べました。ご飯のあと、ドラマを見ながら、リンゴとか、イチゴなどの果物もたくさんたべました。おなかがいっぱいでした。<p></p>\n<p>ただしいものはどれですか。</p>",
+              "question": "<span class=\"watupro_num\">29. </span>きのうは友達の家へ行って、友達がつくった料理を食べました。すこしからかったですが、とてもお���しいです。わたしも友達もたくさん食べました。ご飯のあと、ドラマを見ながら、リンゴとか、イチゴなどの果物もたくさんたべました。おなかがいっぱいでした。<p></p>\n<p>ただしいものはどれですか。</p>",
               "content": "",
               "options": [
                 {
@@ -9893,6 +9865,34 @@
                 }
               ],
               "correctAnswer": "2",
+              "explanation": "",
+              "script": "",
+              "score": 0
+            },
+            {
+              "id": "cm2vcwe8b00anr7mieuy5gq8s",
+              "index": 27,
+              "question": "<span class=\"watupro_num\">27. </span><p></p>\n<p style=\"text-align: left;\">アンさん、こんにちは、お元気ですか。<br>\nアンさんが、3月に国へ帰りました。アンさんの部屋はいまだれも使っていません。アンさんのことがとても懐かしいです。そして、アンさんに教えていただいたケーキもときどき作っています。<br>\n私は4月に高校生になりました。高校は家から遠くて、電車に乗って通わなければなりません。1時間もかかるので、少し大変です。勉強はそれほど難しくありません。新しい学校で新しい友達がたくさんできました。<br>\nおととい、アンさんと一緒にいった公園で写真をとりました、一緒に送ります。<br>\nそれでは、また手紙を書きます。<br>\n田中</p>\n<p>文章の内容と合っているのはどれですか。</p>",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "田中さんは今友達があまりいません。"
+                },
+                {
+                  "id": "2",
+                  "value": "田中さんは今勉強が難しくてたいへんです。"
+                },
+                {
+                  "id": "3",
+                  "value": "田中さんの家は高校から遠いので不便です。"
+                },
+                {
+                  "id": "4",
+                  "value": "田中さんが高校で撮った写真をアンさんに送りました。"
+                }
+              ],
+              "correctAnswer": "3",
               "explanation": "",
               "script": "",
               "score": 0
@@ -10996,7 +10996,7 @@
                 },
                 {
                   "id": "3",
-                  "value": "��ード"
+                  "value": "コード"
                 },
                 {
                   "id": "4",
@@ -11132,62 +11132,6 @@
               "score": 0
             },
             {
-              "id": "cm2vcwfgt00c2r7mi52yuze48",
-              "index": 39,
-              "question": "<span class=\"watupro_num\">39. </span><u>わたしはくだものをかいました。</u>",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "わたしはリンごやみかんをかいました。"
-                },
-                {
-                  "id": "2",
-                  "value": "わたしはさかなやにくをかいました。"
-                },
-                {
-                  "id": "3",
-                  "value": "わたしはさらやコップをかいました。"
-                },
-                {
-                  "id": "4",
-                  "value": "わたしはノートやえんぴつをかいました。"
-                }
-              ],
-              "correctAnswer": "1",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
-              "id": "cm2vcwfgt00c3r7mi80aw87u3",
-              "index": 40,
-              "question": "<span class=\"watupro_num\">40. </span><u>こばやしさんは</u><u>すずきさんに</u><u>ほんを</u><u>かりました。</u>",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "すずきさんはこばやしさんにほんをかえしました。"
-                },
-                {
-                  "id": "2",
-                  "value": "こばやしさんはずきさんにほんをかえしました。"
-                },
-                {
-                  "id": "3",
-                  "value": "こばやしさんはすずきさんにほんをかしました。"
-                },
-                {
-                  "id": "4",
-                  "value": "すずきさんはこばやしさんにほんをかしました。"
-                }
-              ],
-              "correctAnswer": "4",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
               "id": "cm2vcwfgt00c4r7mig40612ng",
               "index": 41,
               "question": "<span class=\"watupro_num\">41. </span><u>１０がつ１１にちはわたしのたんじょうびです。</u>",
@@ -11292,6 +11236,62 @@
                 {
                   "id": "4",
                   "value": "あさって、しごとをしません。"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "",
+              "score": 0
+            },
+            {
+              "id": "cm2vcwfgt00c2r7mi52yuze48",
+              "index": 39,
+              "question": "<span class=\"watupro_num\">39. </span><u>わたしはくだものをかいました。</u>",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "わたしはリンゴやみかんをかいました。"
+                },
+                {
+                  "id": "2",
+                  "value": "わたしはさかなやにくをかいました。"
+                },
+                {
+                  "id": "3",
+                  "value": "わたしはさらやコップをかいました。"
+                },
+                {
+                  "id": "4",
+                  "value": "わたしはノートやえんぴつをかいました。"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "",
+              "score": 0
+            },
+            {
+              "id": "cm2vcwfgt00c3r7mi80aw87u3",
+              "index": 40,
+              "question": "<span class=\"watupro_num\">40. </span><u>こばやしさんは</u><u>すずきさんに</u><u>ほんを</u><u>かりました。</u>",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "すずきさんはこばやしさんにほんをかえしました。"
+                },
+                {
+                  "id": "2",
+                  "value": "こばやしさんはすずきさんにほんをかえしました。"
+                },
+                {
+                  "id": "3",
+                  "value": "こばやしさんはすずきさんにほんをかしました。"
+                },
+                {
+                  "id": "4",
+                  "value": "すずきさんはこばやしさんにほんをかしました。"
                 }
               ],
               "correctAnswer": "4",
@@ -12098,34 +12098,6 @@
               "score": 0
             },
             {
-              "id": "cm2vcwfwx00d2r7mi0ffivrtd",
-              "index": 28,
-              "question": "<span class=\"watupro_num\">28. </span>土よう日に、デパート<u>　　</u>　<u>　　</u>　<u>　</u><u>★</u><u>　</u>　<u>　　</u>。",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "買いものひと"
-                },
-                {
-                  "id": "2",
-                  "value": "に"
-                },
-                {
-                  "id": "3",
-                  "value": "行きました"
-                },
-                {
-                  "id": "4",
-                  "value": "へ"
-                }
-              ],
-              "correctAnswer": "2",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
-            {
               "id": "cm2vcwfwx00d3r7mim0jcu23j",
               "index": 29,
               "question": "<span class=\"watupro_num\">29. </span>佐藤さんは、<u>　　</u>　<u>　</u><u>★</u><u>　</u>　<u>　　</u>　<u>　　</u>人です。",
@@ -12208,6 +12180,34 @@
               "explanation": "",
               "script": "",
               "score": 0
+            },
+            {
+              "id": "cm2vcwfwx00d2r7mi0ffivrtd",
+              "index": 28,
+              "question": "<span class=\"watupro_num\">28. </span>土よう日に、デパート<u>　　</u>　<u>　　</u>　<u>　</u><u>★</u><u>　</u>　<u>　　</u>。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "買いもの"
+                },
+                {
+                  "id": "2",
+                  "value": "に"
+                },
+                {
+                  "id": "3",
+                  "value": "行きました"
+                },
+                {
+                  "id": "4",
+                  "value": "へ"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "",
+              "score": 0
             }
           ]
         },
@@ -12220,34 +12220,6 @@
           "content": "",
           "questionCount": 5,
           "questions": [
-            {
-              "id": "cm2vcwg6x00d7r7miv43vujm2",
-              "index": 32,
-              "question": "<span class=\"watupro_num\">32. </span>ナンシーさんとワンさんはあしたじこしょうかいをします。二人はじこしょうかいのぶんしょうをかきました。<br>\n1.<br>\nみなさん、こんにちは。ナンシーです。イギリスから（１）<br>\nわたしはうあたが好きです。英語のうたも日本語のうたも好きです。でも、日本語のうたはあまり（２）<br>\nみんなは、どんなうたが好きですか。<br>\nわたしはカラオケへ行きたいです。みんなさん、わたしといっしょにカラオケへ（３）。どうぞよろしくおねがいします。<br>\n2.<br>\nこんにちは。はじめまして。ワンです。<br>\n中国ですこし日本語をべんきょうしました。ひら��なはぜんぶおぼえました。でも、カタカナはまだぜんぶわかりません。<br>\n来週から、わたしは毎日、午後、レストランではたらきます。レストランはここからちかいです。<br>\n（４）、レストランのりょうりは安くておいしいです。みなさん、レストランへ（５）。どうぞよろしくおねがいします。<p></p>\n<p>32（１）</p>",
-              "content": "",
-              "options": [
-                {
-                  "id": "1",
-                  "value": "来ます"
-                },
-                {
-                  "id": "2",
-                  "value": "来ません"
-                },
-                {
-                  "id": "3",
-                  "value": "来ませんでした"
-                },
-                {
-                  "id": "4",
-                  "value": "来ました"
-                }
-              ],
-              "correctAnswer": "4",
-              "explanation": "",
-              "script": "",
-              "score": 0
-            },
             {
               "id": "cm2vcwg6x00d8r7miqlahpw7r",
               "index": 33,
@@ -12359,6 +12331,34 @@
               "explanation": "",
               "script": "",
               "score": 0
+            },
+            {
+              "id": "cm2vcwg6x00d7r7miv43vujm2",
+              "index": 32,
+              "question": "<span class=\"watupro_num\">32. </span>ナンシーさんとワンさんはあしたじこしょうかいをします。二人はじこしょうかいのぶんしょうをかきました。<br>\n1.<br>\nみなさん、こんにちは。ナンシーです。イギリスから（１）<br>\nわたしはうたが好きです。英語のうたも日本語のうたも好きです。でも、日本語のうたはあまり（２）<br>\nみんなは、どんなうたが好きですか。<br>\nわたしはカラオケへ行きたいです。みなさん、わたしといっしょにカラオケへ（３）。どうぞよろしくおねがいします。<br>\n2.<br>\nこんにちは。はじめまして。ワンです。<br>\n中国ですこし日本語をべんきょうしました。ひらがなはぜんぶおぼえました。でも、カタカナはまだぜんぶわかりません。<br>\n来週から、わたしは毎日、午後、レストランではたらきます。レストランはここからちかいです。<br>\n（４）、レストランのりょうりは安くておいしいです。みなさん、レストランへ（５）。どうぞよろしくおねがいします。<p></p>\n<p>32（１）</p>",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "来ます"
+                },
+                {
+                  "id": "2",
+                  "value": "来ません"
+                },
+                {
+                  "id": "3",
+                  "value": "来ませんでした"
+                },
+                {
+                  "id": "4",
+                  "value": "来ました"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "",
+              "score": 0
             }
           ]
         },
@@ -12379,7 +12379,7 @@
               "options": [
                 {
                   "id": "1",
-                  "value": "月ようと木よう日と土よう日のよるです。"
+                  "value": "月よう日と木よう日と土よう日のよるです。"
                 },
                 {
                   "id": "2",
@@ -12621,6 +12621,4018 @@
               "explanation": "",
               "script": "",
               "score": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cmvud4qin00s0ipfmcap014ov",
+      "label": "JLPT-N5 Thi thử 2026",
+      "level": "N5",
+      "type": "jlpt-n5",
+      "year": 2026,
+      "month": null,
+      "testNumber": null,
+      "durationMinutes": 105,
+      "totalQuestions": 67,
+      "parts": 2,
+      "audioUrl": null,
+      "createdAt": "2026-10-30T02:38:23.807Z",
+      "questionSetCount": 14,
+      "actualQuestionCount": 67,
+      "explanationCount": 0,
+      "scriptCount": 62,
+      "questionSets": [
+        {
+          "id": "cmvud4s4t00tiipfmpfokqxta",
+          "index": 1,
+          "title": "もんだい1では、はじめに しつもんを 聞いて ください。それから 話を 聞いて、もんだいようしの １から４の 中から、いちばん いい ものを 一つ えらんで ください。",
+          "part": 2,
+          "audioUrl": "https://video.corodomo.com/exam/jlpt-mock/jlpt-n5-2026/mondai-1-wm-ece32b78.mp3",
+          "content": "",
+          "questionCount": 7,
+          "questions": [
+            {
+              "id": "cmvud4s4t00tjipfmwnt2tvwf",
+              "index": 1,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "きょうしつ"
+                },
+                {
+                  "id": "2",
+                  "value": "グラウンド"
+                },
+                {
+                  "id": "3",
+                  "value": "たいいくかん"
+                },
+                {
+                  "id": "4",
+                  "value": "こうえん"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "Tham khảo: 1ばん<br>学校で先生が話しています。学生はあしたの朝、まずどこへ行きますか。<br>女：みなさん、あしたの朝は、地震のときの練習があります。<br>男：先生、何時に学校に来ますか。<br>女：いつもと同じ、8時半です。まず教室に入ってください。9時にベルが鳴りますから、そのあと、みんなでグラウンドに出ます。<br>男：体育館じゃありませんか。<br>女：はい、体育館じゃありません。グラウンドです。<br>学生はあしたの朝、まずどこへ行きますか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4s4t00tkipfm0oyob55j",
+              "index": 2,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "ジュースと おかし"
+                },
+                {
+                  "id": "2",
+                  "value": "おさらと コップ"
+                },
+                {
+                  "id": "3",
+                  "value": "くだもの"
+                },
+                {
+                  "id": "4",
+                  "value": "ゴミぶくろ"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "Tham khảo: 2ばん<br>女の人と男の人が話しています。男の人は何を持っていきますか。<br>女：あしたのパーティー、ジュースとおかしは私が買いますね。<br>男：じゃ、僕は何を持っていきま���ょうか。お皿？<br>女：お皿とコップは山田さんが持ってきます。<br>男：じゃ、果物は？<br>女：果物は今、高いですから……。あ、ゴミ袋をお願いします。<br>男：わかりました。<br>男の人は何を持っていきますか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4s4t00tlipfmigtj8a5y",
+              "index": 3,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "10時5分"
+                },
+                {
+                  "id": "2",
+                  "value": "10時20分"
+                },
+                {
+                  "id": "3",
+                  "value": "10時35分"
+                },
+                {
+                  "id": "4",
+                  "value": "11時半"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "Tham khảo: 3ばん<br>駅で女の人と駅の人が話しています。女の人は何時の電車に乗りますか。<br>女：すみません、東京まで行きたいです。次の電車は何時ですか。<br>男：10時5分と、10時20分と、10時35分です。東京まで1時間かかります。<br>女：11時半には東京に着きたいです。<br>男：10時20分のは特急ですから、45分で着きますよ。でも、500円高いです。<br>女：500円ですか……。じゃ、10時5分のにします。<br>女の人は何時の電車に乗りますか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4s4t00tmipfm3w11cf18",
+              "index": 4,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "あたらしい カメラを かう"
+                },
+                {
+                  "id": "2",
+                  "value": "かいぎの 人に メールを 書く"
+                },
+                {
+                  "id": "3",
+                  "value": "かいぎに 出る"
+                },
+                {
+                  "id": "4",
+                  "value": "パソコンを けして、また つける"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "Tham khảo: 4ばん<br>会社で男の人と女の人が話しています。男の人はこのあとまず何をしますか。<br>男：あれ、パソコンのカメラがつきません。<br>女：もうすぐ会議ですよ。まず、パソコンを一回消して、もう一度つけてください。<br>男：わかりました。あ、その前に、会議の人たちにメールを書きましょうか。<br>女：メールは私が書きますから、だいじょうぶです。<br>男：すみません。お願いします。<br>男の人はこのあとまず何をしますか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4s4t00tnipfmujcuha81",
+              "index": 5,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "ラーメン"
+                },
+                {
+                  "id": "2",
+                  "value": "カレー"
+                },
+                {
+                  "id": "3",
+                  "value": "すし"
+                },
+                {
+                  "id": "4",
+                  "value": "そば"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "Tham khảo: 5ばん<br>男の人と女の人が話しています。二人は昼ごはんに何を食べますか。<br>男：昼ごはん、ラーメンはどう？<br>女：きのうもラーメンだったよ。<br>男：じゃ、カレーは？<br>女：いいね。あ、でもカレーの店は、きょう休みだよ。月曜日だから。<br>男：そうか。じゃ、すしは？<br>女：おすしはちょっと高いね。駅の前のそば屋は？安くて、おいしいよ。<br>男：いいね。そうしよう。<br>二人は昼ごはんに何を食べますか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4s4t00toipfmhz59fdhl",
+              "index": 6,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "あおい コップ 二つ"
+                },
+                {
+                  "id": "2",
+                  "value": "白い コップ 二つ"
+                },
+                {
+                  "id": "3",
+                  "value": "白い コップ 一つと くろい コップ 一つ"
+                },
+                {
+                  "id": "4",
+                  "value": "くろい コップ 二つ"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: 6ばん<br>店で女の人と店の人が話しています。女の人は何を買いますか。<br>女：すみません、この青いコップ、ありますか。<br>男：すみません、青いのはもうありません。白いのと黒いのがあります。<br>女：じゃ、白いのを二つください。あ、やっぱり、一つは黒いのにします。<br>男：はい、白いのと黒いのを一つずつですね。<br>女の人は何を買いますか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4s4t00tpipfmksr2257c",
+              "index": 7,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "8時に えきの 前"
+                },
+                {
+                  "id": "2",
+                  "value": "8時に 川"
+                },
+                {
+                  "id": "3",
+                  "value": "8時半に えきの 前"
+                },
+                {
+                  "id": "4",
+                  "value": "8時半に 川"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "Tham khảo: 7ばん<br>男の人と女の人が話しています。男の人は日曜日、何時にどこへ行きますか。<br>男：日曜日の川の掃除、何時にどこですか。<br>女：8時に駅の前に集まって、みんなで川へ行きます。<br>男：僕の家は川の近くですから、川で待っていてもいいですか。<br>女：ええ、いいですよ。みんな8時半ごろ川に着きます。<br>男：じゃ、8時半に川で待っています。<br>男の人は日曜日、何時にどこへ行きますか。",
+              "score": 2.5
+            }
+          ]
+        },
+        {
+          "id": "cmvud4qla00s1ipfm3k0ls7eo",
+          "index": 1,
+          "title": "もんだい1 ＿＿＿の ことばは ひらがなで どう かきますか。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "",
+          "questionCount": 7,
+          "questions": [
+            {
+              "id": "cmvud4qla00s4ipfmt6ca30ww",
+              "index": 3,
+              "question": "<u>白い</u> ねこが にわで ねて います。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "しろい"
+                },
+                {
+                  "id": "2",
+                  "value": "くろい"
+                },
+                {
+                  "id": "3",
+                  "value": "しらい"
+                },
+                {
+                  "id": "4",
+                  "value": "あおい"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "<p>Con mèo trắng đang ngủ ngoài vườn.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4qla00s5ipfmpzqhwbxj",
+              "index": 4,
+              "question": "七月 <u>八日</u>は わたしの たんじょうびです。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "よっか"
+                },
+                {
+                  "id": "2",
+                  "value": "はちにち"
+                },
+                {
+                  "id": "3",
+                  "value": "やっか"
+                },
+                {
+                  "id": "4",
+                  "value": "ようか"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>Ngày 8 tháng 7 là sinh nhật tôi.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4qla00s6ipfmb6jmjrd4",
+              "index": 5,
+              "question": "<u>父</u>は まいあさ しん��んを 読みます。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "はは"
+                },
+                {
+                  "id": "2",
+                  "value": "ちち"
+                },
+                {
+                  "id": "3",
+                  "value": "あに"
+                },
+                {
+                  "id": "4",
+                  "value": "そふ"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "<p>Bố tôi đọc báo mỗi sáng.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4qla00s7ipfmiz0zbd2u",
+              "index": 6,
+              "question": "先生が きょうしつに <u>入りました</u>。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "いれました"
+                },
+                {
+                  "id": "2",
+                  "value": "かえりました"
+                },
+                {
+                  "id": "3",
+                  "value": "はいりました"
+                },
+                {
+                  "id": "4",
+                  "value": "にゅうりました"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "<p>Thầy giáo đã vào lớp.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4qla00s8ipfmyfhdhk93",
+              "index": 7,
+              "question": "きょうは <u>空</u>が とても きれいです。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "うみ"
+                },
+                {
+                  "id": "2",
+                  "value": "くも"
+                },
+                {
+                  "id": "3",
+                  "value": "くう"
+                },
+                {
+                  "id": "4",
+                  "value": "そら"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>Hôm nay bầu trời rất đẹp.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4qla00s2ipfmh0o6al74",
+              "index": 1,
+              "question": "わたしは <u>来年</u>、日本へ 行きます。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "らいとし"
+                },
+                {
+                  "id": "2",
+                  "value": "きねん"
+                },
+                {
+                  "id": "3",
+                  "value": "くねん"
+                },
+                {
+                  "id": "4",
+                  "value": "らいねん"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>Năm sau tôi sẽ đi Nhật.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4qla00s3ipfmcgguzjsf",
+              "index": 2,
+              "question": "ぎんこうは あの ビルの <u>左</u>です。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "みぎ"
+                },
+                {
+                  "id": "2",
+                  "value": "ひたり"
+                },
+                {
+                  "id": "3",
+                  "value": "ひだり"
+                },
+                {
+                  "id": "4",
+                  "value": "ひがり"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "<p>Ngân hàng ở bên trái tòa nhà kia.</p>",
+              "score": 2
+            }
+          ]
+        },
+        {
+          "id": "cmvud4sap00tqipfmubw6pzrm",
+          "index": 2,
+          "title": "もんだい2では、はじめに しつもんを 聞いて ください。それから 話を 聞いて、もんだいようしの １から４の 中から、いちばん いい ものを 一つ えらんで ください。",
+          "part": 2,
+          "audioUrl": "https://video.corodomo.com/exam/jlpt-mock/jlpt-n5-2026/mondai-2-bed8d348d4.mp3",
+          "content": "",
+          "questionCount": 6,
+          "questions": [
+            {
+              "id": "cmvud4sap00tripfm5schmwar",
+              "index": 8,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "でんしゃが おくれたから"
+                },
+                {
+                  "id": "2",
+                  "value": "がいこくの 人と ホテルまで 行ったから"
+                },
+                {
+                  "id": "3",
+                  "value": "あさ おそく おきたから"
+                },
+                {
+                  "id": "4",
+                  "value": "みちが わからなかったから"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "Tham khảo: 1ばん<br>会社で女の人と男の人が話しています。女の人はどうして遅れましたか。<br>女：すみません、遅くなりました。<br>男：だいじょうぶですか。電車が遅れましたか。<br>女：いいえ、電車はだいじょうぶでした。駅で外国の人が道がわからなくて困っていましたから、いっしょにホテルまで行きました。<br>男：そうですか。それはよかったですね。<br>女の人はどうして遅れましたか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4sap00tsipfmypcju4dj",
+              "index": 9,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "7月20日"
+                },
+                {
+                  "id": "2",
+                  "value": "7月30日"
+                },
+                {
+                  "id": "3",
+                  "value": "8月3日"
+                },
+                {
+                  "id": "4",
+                  "value": "8月20日"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: 2ばん<br>男の人と女の人が話��ています。男の人はいつ国へ帰りますか。<br>女：夏休み、国へ帰りますか。<br>男：はい。はじめは7月20日に帰りたかったですが、飛行機がとても高かったです。<br>女：そうですか。<br>男：それで、8月3日にしました。8月20日まで国にいます。<br>男の人はいつ国へ帰りますか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4sap00ttipfmbxrmw2qu",
+              "index": 10,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "しゃしん"
+                },
+                {
+                  "id": "2",
+                  "value": "テニス"
+                },
+                {
+                  "id": "3",
+                  "value": "りょうり"
+                },
+                {
+                  "id": "4",
+                  "value": "えいが"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "Tham khảo: 3ばん<br>女の学生と男の学生が話しています。女の学生は何のクラブに入りましたか。<br>男：クラブ、何に入りましたか。テニスですか。<br>女：テニスは人が多かったです。料理のクラブも見ましたが、日曜日だけでした。日曜日はアルバイトがありますから。<br>男：じゃあ……。<br>女：写真のクラブにしました。カメラはありませんが、スマホでいいです。<br>女の学生は何のクラブに入りましたか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4sap00tuipfmhljw56qg",
+              "index": 11,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "4時間"
+                },
+                {
+                  "id": "2",
+                  "value": "5時間"
+                },
+                {
+                  "id": "3",
+                  "value": "6時間"
+                },
+                {
+                  "id": "4",
+                  "value": "7時間"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "Tham khảo: 4ばん<br>男の人と女の人が話しています。男の人はゆうべ何時間寝ましたか。<br>男：ああ、眠いです。<br>女：ゆうべ、何時に寝ましたか。<br>男：1時です。いつもは11時に寝ますが、ゲームをしていました。<br>女：朝は何時に起きましたか。<br>男：6時です。<br>男の人はゆうべ何時間寝ましたか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4sap00tvipfm3oib5707",
+              "index": 12,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "たかかったから"
+                },
+                {
+                  "id": "2",
+                  "value": "大きかったから"
+                },
+                {
+                  "id": "3",
+                  "value": "ほしい いろが なかったから"
+                },
+                {
+                  "id": "4",
+                  "value": "お金が なかったから"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: 5ばん<br>女の人と男の人が話しています。男の人はどうして新しいスマホを買いませんでしたか。<br>男：きのう、新しいスマホを見に行きました。<br>女：買いましたか。<br>男：いいえ。高くなかったですが、ほしい色がありませんでした。<br>女：何色がほしいですか。<br>男：緑です。来月、緑のが出ますから、待ちます。<br>男の人はどうして新しいスマホを買いませんでしたか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4sap00twipfmpysru3nm",
+              "index": 13,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "3人"
+                },
+                {
+                  "id": "2",
+                  "value": "4人"
+                },
+                {
+                  "id": "3",
+                  "value": "5人"
+                },
+                {
+                  "id": "4",
+                  "value": "6人"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "Tham khảo: 6ばん<br>男の人と女の人が話しています。女の人の家には今、何人住んでいますか。<br>男：中村さんの家族は何人ですか。<br>女：父と母と兄と私です。それから、祖母もいっしょに住んでいます。<br>男：じゃ、5人ですね。<br>女：いいえ。兄はいま大阪の大学にいますから、家は4人です。<br>女の人の家には今、何人住んでいますか。",
+              "score": 2.5
+            }
+          ]
+        },
+        {
+          "id": "cmvud4qqt00s9ipfmbaza7exi",
+          "index": 2,
+          "title": "もんだい2 ＿＿＿の ことばは どう か���ますか。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "",
+          "questionCount": 5,
+          "questions": [
+            {
+              "id": "cmvud4qqt00saipfmg1iexukb",
+              "index": 8,
+              "question": "わたしは まいあさ <u>こーひー</u>を のみます。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "ユーヒー"
+                },
+                {
+                  "id": "2",
+                  "value": "コーヒー"
+                },
+                {
+                  "id": "3",
+                  "value": "コーピー"
+                },
+                {
+                  "id": "4",
+                  "value": "ローヒー"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "<p>Mỗi sáng tôi uống cà phê.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4qqt00sbipfm6gfvj00f",
+              "index": 9,
+              "question": "この くつは ちょっと <u>ちいさい</u>です。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "少さい"
+                },
+                {
+                  "id": "2",
+                  "value": "水さい"
+                },
+                {
+                  "id": "3",
+                  "value": "中さい"
+                },
+                {
+                  "id": "4",
+                  "value": "小さい"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>Đôi giày này hơi nhỏ.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4qqt00scipfmlsz8cjfk",
+              "index": 10,
+              "question": "スーパーで やさいを <u>かいました</u>。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "買いました"
+                },
+                {
+                  "id": "2",
+                  "value": "貝いました"
+                },
+                {
+                  "id": "3",
+                  "value": "員いました"
+                },
+                {
+                  "id": "4",
+                  "value": "賀いました"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "<p>Tôi đã mua rau ở siêu thị.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4qqt00sdipfmm9fdsdkh",
+              "index": 11,
+              "question": "まいにち <u>でんしゃ</u>で 学校へ 行きます。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "雷車"
+                },
+                {
+                  "id": "2",
+                  "value": "電東"
+                },
+                {
+                  "id": "3",
+                  "value": "雪車"
+                },
+                {
+                  "id": "4",
+                  "value": "電車"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>Hằng ngày tôi đi tàu điện đến trường.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4qqt00seipfmv82onify",
+              "index": 12,
+              "question": "<u>みみ</u>が いたいですから、びょういんへ 行きます。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "目"
+                },
+                {
+                  "id": "2",
+                  "value": "耳"
+                },
+                {
+                  "id": "3",
+                  "value": "自"
+                },
+                {
+                  "id": "4",
+                  "value": "月"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "<p>Vì đau tai nên tôi đi bệnh viện.</p>",
+              "score": 2
+            }
+          ]
+        },
+        {
+          "id": "cmvud4qwl00sfipfmvrwpadwl",
+          "index": 3,
+          "title": "もんだい3 （　　）に なにが はいりますか。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "",
+          "questionCount": 6,
+          "questions": [
+            {
+              "id": "cmvud4qwl00sgipfm8n7yyddd",
+              "index": 13,
+              "question": "雨が ふって いますから、（　　）を もって 行きましょう。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "くつ"
+                },
+                {
+                  "id": "2",
+                  "value": "めがね"
+                },
+                {
+                  "id": "3",
+                  "value": "かさ"
+                },
+                {
+                  "id": "4",
+                  "value": "とけい"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "<p>Trời đang mưa nên mang ô đi thôi.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4qwl00shipfmd7onxnfa",
+              "index": 14,
+              "question": "へやが くらいですね。でんきを （　　） ください。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "つけて"
+                },
+                {
+                  "id": "2",
+                  "value": "けして"
+                },
+                {
+                  "id": "3",
+                  "value": "しめて"
+                },
+                {
+                  "id": "4",
+                  "value": "あけて"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "<p>Phòng tối nhỉ. Bật đèn lên đi.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4qwl00siipfmzcs910zi",
+              "index": 15,
+              "question": "きってを 三（　　） ください。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "ほん"
+                },
+                {
+                  "id": "2",
+                  "value": "こ"
+                },
+                {
+                  "id": "3",
+                  "value": "さつ"
+                },
+                {
+                  "id": "4",
+                  "value": "まい"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>Cho tôi 3 con tem.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4qwl00sjipfmpfrjqqp6",
+              "index": 16,
+              "question": "（　　）に のって、十かいへ 行きます。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "エアコン"
+                },
+                {
+                  "id": "2",
+                  "value": "エレベーター"
+                },
+                {
+                  "id": "3",
+                  "value": "カレンダー"
+                },
+                {
+                  "id": "4",
+                  "value": "ストーブ"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "<p>Tôi đi thang máy lên tầng 10.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4qwl00skipfmk694ku7b",
+              "index": 17,
+              "question": "この こうえんは 人が 多くて、いつも （　　）です。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "しずか"
+                },
+                {
+                  "id": "2",
+                  "value": "ひま"
+                },
+                {
+                  "id": "3",
+                  "value": "にぎやか"
+                },
+                {
+                  "id": "4",
+                  "value": "じょうぶ"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "<p>Công viên này đông người nên lúc nào cũng nhộn nhịp.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4qwl00slipfmi5lfyfp2",
+              "index": 18,
+              "question": "この りょうりは （　　） からく ないです。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "とても"
+                },
+                {
+                  "id": "2",
+                  "value": "たくさん"
+                },
+                {
+                  "id": "3",
+                  "value": "もっと"
+                },
+                {
+                  "id": "4",
+                  "value": "あまり"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>Món này không cay lắm.</p>",
+              "score": 2
+            }
+          ]
+        },
+        {
+          "id": "cmvud4sg700txipfmd3p0id62",
+          "index": 3,
+          "title": "もんだい3では、えを 見ながら しつもんを 聞いて ください。やじるし（→）の 人は 何と 言いますか。１から３の 中から、いちばん いい ものを 一つ えらんで ください。",
+          "part": 2,
+          "audioUrl": "https://video.corodomo.com/exam/jlpt-mock/jlpt-n5-2026/mondai-3-459ebcda6a.mp3",
+          "content": "",
+          "questionCount": 5,
+          "questions": [
+            {
+              "id": "cmvud4sg700tyipfm1cce9gt2",
+              "index": 14,
+              "question": "ばん",
+              "content": "【え】友だちに おみやげの はこを わたして いる 女の 人（→）",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: 1ばん<br>友達におみやげをあげます。何と言いますか。<br>1. これ、ください。<br>2. これ、いただきます。<br>3. これ、どうぞ。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4sg700tzipfmw41alu0k",
+              "index": 15,
+              "question": "ばん",
+              "content": "【え】ちずを もって、みちで 男の 人に 話しかけて いる 女の 人（→）",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "Tham khảo: 2ばん<br>駅への道がわかりません。何と言いますか。<br>1. すみません、駅はどこですか。<br>2. 駅へ行きましょうか。<br>3. 駅はどうですか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4sg700u0ipfmc8hw6mf9",
+              "index": 16,
+              "question": "ばん",
+              "content": "【え】先生の へやの ドアを あけて いる 学生（→）",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "Tham khảo: 3ばん<br>先生の部屋に入ります。何と言いますか。<br>1. しつれいしました。<br>2. しつれいします。<br>3. おかえりなさい。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4sg700u1ipfmr2txinpr",
+              "index": 17,
+              "question": "ばん",
+              "content": "【え】友だちの うちで、ごはんを 食べおわった 男の 人（→）",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: 4ばん<br>友達の家でごはんを食べました。食べたあとで、何と言いますか。<br>1. いただきます。<br>2. どういたしまして。<br>3. ごちそうさまでした。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4sg700u2ipfmlapu00z4",
+              "index": 18,
+              "question": "ばん",
+              "content": "【え】友だちの うちの げんかんで、くつを はいて いる 女の 人（→）",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "Tham khảo: 5ばん<br>友達の家から帰ります。何と言いますか。<br>1. おじゃましました。<br>2. いらっしゃい。<br>3. 行ってらっしゃい。",
+              "score": 2.5
+            }
+          ]
+        },
+        {
+          "id": "cmvud4slt00u3ipfmeb5jnixk",
+          "index": 4,
+          "title": "もんだい4は、えなどが ありません。ぶんを 聞いて、１から３の 中から、いちばん いい ものを 一つ えらんで ください。",
+          "part": 2,
+          "audioUrl": "https://video.corodomo.com/exam/jlpt-mock/jlpt-n5-2026/mondai-4-wm-d3daa477.mp3",
+          "content": "",
+          "questionCount": 6,
+          "questions": [
+            {
+              "id": "cmvud4slt00u5ipfm2ni7thko",
+              "index": 20,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: 2ばん<br>男：おなかがすきましたね。<br>女：1. ええ、もう食べません。<br>女：2. はい、いっぱいです。<br>女：3. じゃ、何か食べましょう。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4slt00u6ipfm5p3jdyms",
+              "index": 21,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "Tham khảo: 3ばん<br>女：お国はどちらですか。<br>男：1. ベトナムです。<br>男：2. あちらです。<br>男：3. 駅の近くです。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4slt00u4ipfm9190is5h",
+              "index": 19,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "Tham khảo: 1ばん<br>女：きょうは何曜日ですか。<br>男：1. 9日です。<br>男：2. 水曜日です。<br>男：3. きのうでした。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4slt00u7ipfmxu4ih1qe",
+              "index": 22,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "Tham khảo: 4ばん<br>男：いっしょに帰りませんか。<br>女：1. いいえ、帰りませんでした。<br>女：2. ええ、帰りましょう。<br>女：3. はい、帰ってください。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4slt00u8ipfm1xclibz2",
+              "index": 23,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: 5ばん<br>女：お先に失礼します。<br>男：1. おじゃまします。<br>男：2. 行ってきます。<br>男：3. おつかれさまでした。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4slt00u9ipfmsdrpzkg7",
+              "index": 24,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "Tham khảo: 6ばん<br>女：宿題はもう終わりましたか。<br>男：1. いいえ、まだです。<br>男：2. はい、まだです。<br>男：3. いいえ、もう終わりました。",
+              "score": 2.5
+            }
+          ]
+        },
+        {
+          "id": "cmvud4r2200smipfm9o8nef4k",
+          "index": 4,
+          "title": "もんだい4 ＿＿＿の ぶんと だいたい おなじ いみの ぶんが あります。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "",
+          "questionCount": 3,
+          "questions": [
+            {
+              "id": "cmvud4r2200snipfm46zdl9k2",
+              "index": 19,
+              "question": "<u>ゆうべ</u> 母に てがみを 書きました。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "きのうの よる 母に てがみを 書きました。"
+                },
+                {
+                  "id": "2",
+                  "value": "きのうの あさ 母に てがみを 書きました。"
+                },
+                {
+                  "id": "3",
+                  "value": "けさ 母に てがみを 書きました。"
+                },
+                {
+                  "id": "4",
+                  "value": "こんばん 母に てがみを 書きます。"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "<p>Tối qua tôi đã viết thư cho mẹ.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4r2200soipfmpyls7t8c",
+              "index": 20,
+              "question": "<u>こちらは ちちの あにです。</u>",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "こちらは おばです。"
+                },
+                {
+                  "id": "2",
+                  "value": "こちらは おじです。"
+                },
+                {
+                  "id": "3",
+                  "value": "こちらは そふです。"
+                },
+                {
+                  "id": "4",
+                  "value": "こちらは あにです。"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "<p>Đây là anh trai của bố tôi.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4r2200spipfm30sy0gta",
+              "index": 21,
+              "question": "<u>テストは かんたんでした。</u>",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "テストは むずかしかったです。"
+                },
+                {
+                  "id": "2",
+                  "value": "テストは ながかったです。"
+                },
+                {
+                  "id": "3",
+                  "value": "テストは やさしかったです。"
+                },
+                {
+                  "id": "4",
+                  "value": "テストは つまらなかったです。"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "<p>Bài kiểm tra đã dễ.</p>",
+              "score": 2
+            }
+          ]
+        },
+        {
+          "id": "cmvud4r7z00sqipfmne49ty1y",
+          "index": 5,
+          "title": "もんだい1 （　　）に 何を 入れますか。１・２・３・４から いちばん いい ものを 一つ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "",
+          "questionCount": 9,
+          "questions": [
+            {
+              "id": "cmvud4r7z00ssipfmgj2f9224",
+              "index": 23,
+              "question": "ぎんこうは 九時（　　） 三時までです。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "から"
+                },
+                {
+                  "id": "2",
+                  "value": "まで"
+                },
+                {
+                  "id": "3",
+                  "value": "に"
+                },
+                {
+                  "id": "4",
+                  "value": "で"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "<p>Ngân hàng mở từ 9 giờ đến 3 giờ.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4r7z00sripfmj6vpsoby",
+              "index": 22,
+              "question": "友だち（　　） いっしょに えいがを 見ました。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "を"
+                },
+                {
+                  "id": "2",
+                  "value": "に"
+                },
+                {
+                  "id": "3",
+                  "value": "と"
+                },
+                {
+                  "id": "4",
+                  "value": "が"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "<p>Tôi đã xem phim cùng với bạn.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4r7z00stipfmyadhd4s1",
+              "index": 24,
+              "question": "日よう日は そうじを したり、せんたくを （　　） します。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "して"
+                },
+                {
+                  "id": "2",
+                  "value": "する"
+                },
+                {
+                  "id": "3",
+                  "value": "した"
+                },
+                {
+                  "id": "4",
+                  "value": "したり"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>Chủ nhật tôi làm những việc như dọn dẹp, giặt giũ.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4r7z00suipfmnss1c0lq",
+              "index": 25,
+              "question": "A「バスと タクシーと どちらが はやいですか。」<br>B「タクシーの （　　）が はやいです。」",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "より"
+                },
+                {
+                  "id": "2",
+                  "value": "ほう"
+                },
+                {
+                  "id": "3",
+                  "value": "もの"
+                },
+                {
+                  "id": "4",
+                  "value": "こと"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "<p>A: Xe buýt và taxi, cái nào nhanh hơn? B: Taxi nhanh hơn.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4r7z00svipfmo7zxfym1",
+              "index": 26,
+              "question": "ねる （　　）、はを みがきます。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "あとで"
+                },
+                {
+                  "id": "2",
+                  "value": "ながら"
+                },
+                {
+                  "id": "3",
+                  "value": "まえに"
+                },
+                {
+                  "id": "4",
+                  "value": "たり"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "<p>Trước khi ngủ tôi đánh răng.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4r7z00swipfm32d46rd9",
+              "index": 27,
+              "question": "ここで しゃしんを （　　） ください。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "とらなくて"
+                },
+                {
+                  "id": "2",
+                  "value": "とらないで"
+                },
+                {
+                  "id": "3",
+                  "value": "とらない"
+                },
+                {
+                  "id": "4",
+                  "value": "とらなかった"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "<p>Xin đừng chụp ảnh ở đây.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4r7z00sxipfm4g6c773e",
+              "index": 28,
+              "question": "A「たなかさんは どこですか。」<br>B「いま、へやで 本を （　　）。」",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "読んで います"
+                },
+                {
+                  "id": "2",
+                  "value": "読んで ください"
+                },
+                {
+                  "id": "3",
+                  "value": "読みましょう"
+                },
+                {
+                  "id": "4",
+                  "value": "読みませんか"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "<p>A: Anh Tanaka đâu rồi? B: Bây giờ anh ấy đang đọc sách trong phòng.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4r7z00syipfmxwqxvd9d",
+              "index": 29,
+              "question": "A「ひるごはんは もう 食べましたか。」<br>B「いいえ、まだ （　　）。」",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "食べました"
+                },
+                {
+                  "id": "2",
+                  "value": "食べなかったです"
+                },
+                {
+                  "id": "3",
+                  "value": "食べましょう"
+                },
+                {
+                  "id": "4",
+                  "value": "食べて いません"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>A: Bạn ăn trưa chưa? B: Chưa, tôi vẫn chưa ăn.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4r7z00szipfmz04doz8o",
+              "index": 30,
+              "question": "子どもの （　　）、よく この こうえんで あそびました。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "まえ"
+                },
+                {
+                  "id": "2",
+                  "value": "とき"
+                },
+                {
+                  "id": "3",
+                  "value": "あと"
+                },
+                {
+                  "id": "4",
+                  "value": "まで"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "<p>Hồi nhỏ, tôi hay chơi ở công viên này.</p>",
+              "score": 2.5
+            }
+          ]
+        },
+        {
+          "id": "cmvud4rdv00t0ipfmmeefkoio",
+          "index": 6,
+          "title": "もんだい2 　★　に 入る ものは どれですか。１・２・３・４から いちばん いい ものを 一つ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "",
+          "questionCount": 4,
+          "questions": [
+            {
+              "id": "cmvud4rdv00t1ipfmm0ipp8la",
+              "index": 31,
+              "question": "せんしゅう ＿＿＿ ＿＿＿ ＿★＿ ＿＿＿ おいしかったです。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "とても"
+                },
+                {
+                  "id": "2",
+                  "value": "カレーは"
+                },
+                {
+                  "id": "3",
+                  "value": "食べた"
+                },
+                {
+                  "id": "4",
+                  "value": "レストランで"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "Tham khảo: せんしゅう レストランで 食べた <u>カレーは</u> とても おいしかったです。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4rdv00t2ipfmyhvcikhz",
+              "index": 32,
+              "question": "A「すみません、ゆうびんきょくは どこですか。」<br>B「あそこの ＿＿＿ ＿★＿ ＿＿＿ ＿＿＿ ありますよ。」",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "となり"
+                },
+                {
+                  "id": "2",
+                  "value": "に"
+                },
+                {
+                  "id": "3",
+                  "value": "ぎんこう"
+                },
+                {
+                  "id": "4",
+                  "value": "の"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "Tham khảo: あそこの ぎんこう <u>の</u> となり に ありますよ。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4rdv00t3ipfm338u0r6m",
+              "index": 33,
+              "question": "わたしは ＿＿＿ ＿＿＿ ＿★＿ ＿＿＿ ほしいです。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "へや"
+                },
+                {
+                  "id": "2",
+                  "value": "ひろい"
+                },
+                {
+                  "id": "3",
+                  "value": "が"
+                },
+                {
+                  "id": "4",
+                  "value": "あたらしくて"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "Tham khảo: わたしは あたらしくて ひろい <u>へや</u> が ほしいです。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4rdv00t4ipfm410qg4g2",
+              "index": 34,
+              "question": "A「あそこで ＿＿＿ ＿★＿ ＿＿＿ ＿＿＿ 人は だれですか。」<br>B「母の 友だちです。」",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "いる"
+                },
+                {
+                  "id": "2",
+                  "value": "女の"
+                },
+                {
+                  "id": "3",
+                  "value": "かけて"
+                },
+                {
+                  "id": "4",
+                  "value": "めがねを"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: あそこで めがねを <u>かけて</u> いる 女の 人は だれですか。",
+              "score": 2.5
+            }
+          ]
+        },
+        {
+          "id": "cmvud4rjg00t5ipfmffyu9wis",
+          "index": 7,
+          "title": "もんだい3 【35】から【38】に 何を 入れますか。ぶんしょうの いみを かんがえて、１・２・３・４から いちばん いい ものを 一つ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "<p>リーさんは 日本に すんで いる りゅうがくせいです。「あたらしい まち」の さくぶんを 書きました。</p><center><b>あたらしい まち</b></center><div style=\"text-align:right\">リー・ウェイ</div><p>　わたしは 三月に、とうきょうから 山の ちかくの しずかな まちに ひっこしました。まちには 大きい スーパーが 【35】、かいものが すこし たいへんです。でも、いまの アパートは ひろくて、やすいです。<br>　まちの 人は みんな やさしいです。せんしゅう、となりの おばあさん【36】 やさいを たくさん もらいました。<br>　いまは まいあさ 六時に おきて、山の ちかくを さんぽします。まえは いつも 八時ごろ 【37】。<br>　こんど、とうきょうの 友だちが あそびに 来ます。いっしょに 山に のぼりたいです。山の 上から 見る まちは、とても 【38】ですよ。</p>",
+          "questionCount": 4,
+          "questions": [
+            {
+              "id": "cmvud4rjh00t6ipfmz5m2lhwz",
+              "index": 35,
+              "question": "【35】",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "ありますから"
+                },
+                {
+                  "id": "2",
+                  "value": "あって"
+                },
+                {
+                  "id": "3",
+                  "value": "ありませんから"
+                },
+                {
+                  "id": "4",
+                  "value": "ありましたが"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "<p>Ở thị trấn không có siêu thị lớn nên mua sắm hơi vất vả.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4rjh00t7ipfmj6reou9o",
+              "index": 36,
+              "question": "【36】",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "を"
+                },
+                {
+                  "id": "2",
+                  "value": "に"
+                },
+                {
+                  "id": "3",
+                  "value": "で"
+                },
+                {
+                  "id": "4",
+                  "value": "へ"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "<p>Tuần trước tôi được bà cụ hàng xóm cho nhiều rau.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4rjh00t8ipfmedwbfgia",
+              "index": 37,
+              "question": "【37】",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "おきました"
+                },
+                {
+                  "id": "2",
+                  "value": "おきます"
+                },
+                {
+                  "id": "3",
+                  "value": "おきましょう"
+                },
+                {
+                  "id": "4",
+                  "value": "おきたいです"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "<p>Trước đây tôi luôn dậy vào khoảng 8 giờ.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4rjh00t9ipfm45p8m2oo",
+              "index": 38,
+              "question": "【38】",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "きれいな"
+                },
+                {
+                  "id": "2",
+                  "value": "きれいに"
+                },
+                {
+                  "id": "3",
+                  "value": "きれいで"
+                },
+                {
+                  "id": "4",
+                  "value": "きれい"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>Thị trấn nhìn từ trên núi rất đẹp.</p>",
+              "score": 2.5
+            }
+          ]
+        },
+        {
+          "id": "cmvud4rp500taipfmlii7qc60",
+          "index": 8,
+          "title": "もんだい4 つぎの（1）と��2）の ぶんしょうを 読んで、しつもんに こたえて ください。こたえは、１・２・３・４から いちばん いい ものを 一つ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "(1)<br>アパートの 前に この おしらせが あります。<br><br><b>ゴミの 日</b><br>・りょうりの ゴミ、かみ：月よう日、木よう日<br>・びん、かん、ペットボトル：水よう日<br>・ふるい 本、ざっし：金よう日<br>ゴミは その 日の あさ 七時から 八時の あいだに 出して ください。",
+          "questionCount": 2,
+          "questions": [
+            {
+              "id": "cmvud4rp500tbipfmv22ilwx0",
+              "index": 39,
+              "question": "火よう日の よる、ジュースの びんを 出したいです。いつ 出しますか。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "火よう日の よる"
+                },
+                {
+                  "id": "2",
+                  "value": "水よう日の あさ"
+                },
+                {
+                  "id": "3",
+                  "value": "水よう日の よる"
+                },
+                {
+                  "id": "4",
+                  "value": "木よう日の あさ"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "",
+              "score": 7
+            },
+            {
+              "id": "cmvud4rp500tcipfmg9t05cr5",
+              "index": 40,
+              "question": "マリアさんは あした 何を したいですか。",
+              "content": "(2)<br>マリアさんが ケンさんに メールを 書きました。<br><br>ケンさん<br><br>　あしたの ハイキングですが、雨ですから、やめましょう。三時に えきの 前の きっさてんで あいませんか。来月の りょこうの ことを 話したいです。わたしは 二時まで アルバイトが ありますから、三時が いいです。三時で いいですか。<div style=\"text-align:right\">マリア</div>",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "ケンさんと ハイキングに 行きたいです。"
+                },
+                {
+                  "id": "2",
+                  "value": "三時まで アルバイトを したいです。"
+                },
+                {
+                  "id": "3",
+                  "value": "アルバイトの あとで、ケンさんと きっさてんで 話したいです。"
+                },
+                {
+                  "id": "4",
+                  "value": "きっさてんで アルバイトを したいです。"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "",
+              "score": 7
+            }
+          ]
+        },
+        {
+          "id": "cmvud4ruy00tdipfmf9zhfd2l",
+          "index": 9,
+          "title": "もんだい5 つぎの ぶんしょうを 読んで、しつもんに こたえて ください。こたえは、１・２・３・４から いちばん いい ものを 一つ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "<p>これは アンナさんが 書いた さくぶんです。</p><center><b>はじめての 日本りょこう</b></center><p>　わたしは なつに はじめて 日本へ りょこうに 行きました。日本語が あまり 上手では ありませんから、スマホの アプリを つかいました。わたしが えいごで 話します。そして、アプリが それを 日本語で 言います。とても べんりでした。<br>　三日目に、ふるい レストランに 入りました。でも、その 日は スマホを ホテルに わすれました。わたしは <u>とても こまりました</u>。店の おばあさんは えいごが 分かりませんでした。<br>　おばあさんは メニューの しゃしんを 見せて、ゆっくり 日本語で 話しました。わたしは 日本語で「これを ください。」と 言いました。おばあさんは わらって、「日本語、上手ですね。」と 言いました。わたしは とても うれしかったです。<br>　アプリは べんりです。でも、来年は もっと 日本語を べんきょうして、日本の 人と たくさん 話したいです。</p>",
+          "questionCount": 2,
+          "questions": [
+            {
+              "id": "cmvud4ruy00teipfm09ereiwk",
+              "index": 41,
+              "question": "どうして <u>とても こまりました</u>か。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "スマホを ホテルに わすれたから"
+                },
+                {
+                  "id": "2",
+                  "value": "レストランが ふるかったから"
+                },
+                {
+                  "id": "3",
+                  "value": "メニューに しゃしんが なかったから"
+                },
+                {
+                  "id": "4",
+                  "value": "おばあさんが えいごで 話��たから"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "",
+              "score": 7
+            },
+            {
+              "id": "cmvud4ruy00tfipfmz6ms3pke",
+              "index": 42,
+              "question": "アンナさんは 来年 何を したいと 言って いますか。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "また その レストランへ 行きたい。"
+                },
+                {
+                  "id": "2",
+                  "value": "あたらしい アプリを つかいたい。"
+                },
+                {
+                  "id": "3",
+                  "value": "おばあさんに えいごを おしえたい。"
+                },
+                {
+                  "id": "4",
+                  "value": "もっと 日本語を べんきょうしたい。"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "",
+              "score": 7
+            }
+          ]
+        },
+        {
+          "id": "cmvud4s0j00tgipfmbohk3vjv",
+          "index": 10,
+          "title": "もんだい6 右の ページを 見て、しつもんに こたえて ください。こたえは、１・２・３・４から いちばん いい ものを 一つ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "<center><h3>みどり としょかん　７月の イベント</h3></center><table><tr><th>イベント</th><th>日</th><th>時間</th><th>どんな 人</th></tr><tr><td>えほんの 時間</td><td>７月５日（土）</td><td>午前１０時～１０時半</td><td>３さい～６さいの 子ども</td></tr><tr><td>スマホ きょうしつ</td><td>７月１０日（木）</td><td>午後２時～３時半</td><td>６５さいからの 人</td></tr><tr><td>日本語で 話しましょう①</td><td>７月１２日（土）</td><td>午後２時～４時</td><td>がいこくの 人</td></tr><tr><td>日本語で 話しましょう②</td><td>７月１７日（木）</td><td>午後６時～８時</td><td>がいこくの 人</td></tr><tr><td>古い 本の リサイクル</td><td>７月２０日（日）</td><td>午前１０時～１２時</td><td>だれでも</td></tr></table><p>※ どの イベントも お金は いりません。</p>",
+          "questionCount": 1,
+          "questions": [
+            {
+              "id": "cmvud4s0j00thipfmcafpmbnm",
+              "index": 43,
+              "question": "チャンさんは がいこくから 来た りゅうがくせいです。日本の 人と 日本語で 話したいです。火よう日と 木よう日は 午後５時まで じゅぎょうが あります。土よう日と 日よう日は あさから よるまで アルバイトを して います。チャンさんは どれに 行きますか。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "スマホ きょうしつ"
+                },
+                {
+                  "id": "2",
+                  "value": "日本語で 話しましょう①"
+                },
+                {
+                  "id": "3",
+                  "value": "日本語で 話しましょう②"
+                },
+                {
+                  "id": "4",
+                  "value": "古い 本の リサイクル"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "",
+              "score": 7.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cmvud4dg200cvipfme3qozznp",
+      "label": "JLPT-N5 Thi thử 2025",
+      "level": "N5",
+      "type": "jlpt-n5",
+      "year": 2025,
+      "month": null,
+      "testNumber": null,
+      "durationMinutes": 105,
+      "totalQuestions": 67,
+      "parts": 2,
+      "audioUrl": null,
+      "createdAt": "2026-10-30T02:38:06.867Z",
+      "questionSetCount": 14,
+      "actualQuestionCount": 67,
+      "explanationCount": 0,
+      "scriptCount": 62,
+      "questionSets": [
+        {
+          "id": "cmvud4ez300edipfmvnp5p2lf",
+          "index": 1,
+          "title": "もんだい1では、はじめに しつもんを 聞いて ください。それから 話を 聞いて、もんだいようしの １から４の 中から、いちばん いい ものを 一つ えらんで ください。",
+          "part": 2,
+          "audioUrl": "https://video.corodomo.com/exam/jlpt-mock/jlpt-n5-2025/mondai-1-wm-2908f05e.mp3",
+          "content": "",
+          "questionCount": 7,
+          "questions": [
+            {
+              "id": "cmvud4ez300eeipfmbrqx80mg",
+              "index": 1,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "えんぴつと いろえんぴつ"
+                },
+                {
+                  "id": "2",
+                  "value": "ノートと おべんとう"
+                },
+                {
+                  "id": "3",
+                  "value": "えんぴつと ノートと 水"
+                },
+                {
+                  "id": "4",
+                  "value": "えんぴつと ノート"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: 1ばん<br>クラスで先生が話しています。学生はあした何を持ってきますか。<br>女：みなさん、あしたは公園で絵をかきます。えんぴつとノートを持ってきてください。<br>男：先生、色えんぴつもいりますか。<br>女：色えんぴつは学校にありますから、いりません。<br>男：お弁当は？<br>女：あしたは午前だけですから、いりません。でも、暑いですから、水を忘れないでくださいね。<br>学生はあした何を持ってきますか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4ez300efipfm5i18obyz",
+              "index": 2,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "メロンパン 二つと ぎゅうにゅう"
+                },
+                {
+                  "id": "2",
+                  "value": "メロンパン 二つと ジュース"
+                },
+                {
+                  "id": "3",
+                  "value": "メロンパン 三つ"
+                },
+                {
+                  "id": "4",
+                  "value": "メロンパン 三つと ジュース"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: 2ばん<br>パン屋で男の人と店の人が話しています。男の人は何を買いますか。<br>男：すみません、このメロンパンを二つください。それから、牛乳も。<br>女：すみません、牛乳は今ありません。オレンジジュースはどうですか。<br>男：うーん、ジュースはいいです。じゃあ、メロンパンをもう一つください。<br>女：はい、メロンパン三つですね。<br>男の人は何を買いますか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4ez300egipfm35fm80zg",
+              "index": 3,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "えきの 南口"
+                },
+                {
+                  "id": "2",
+                  "value": "えきの 北口の ほんやの 前"
+                },
+                {
+                  "id": "3",
+                  "value": "えいがかんの 前"
+                },
+                {
+                  "id": "4",
+                  "value": "南口の ほんやの 前"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "Tham khảo: 3ばん<br>男の人と女の人が電話で話しています。二人はどこで会いますか。<br>男：あしたの映画、二時からですね。どこで会いましょうか。<br>女：駅の南口はどうですか。<br>男：南口は今、工事で人が多いですよ。北口のほうがいいです。<br>女：じゃあ、北口の本屋の前にしましょう。<br>男：はい。一時半に北口の本屋の前ですね。<br>二人はどこで会いますか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4ez300ehipfmm7tbimum",
+              "index": 4,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "手を あらう"
+                },
+                {
+                  "id": "2",
+                  "value": "ゴミを 出す"
+                },
+                {
+                  "id": "3",
+                  "value": "しゅくだいを する"
+                },
+                {
+                  "id": "4",
+                  "value": "ごはんを 食べる"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "Tham khảo: 4ばん<br>家で男の子とお母さんが話しています。男の子はこのあとまず何をしますか。<br>男：ただいま。おなかすいた。<br>女：おかえり。ごはんの前に、手を洗ってね。<br>男：うん。あ、でも先にゴミを出してくるよ。あしたはびんの日だから。<br>女：ゴミはもうお父さんが出したよ。<br>男：そう。じゃ、宿題は？<br>女：宿題はごはんのあとでいいよ。<br>男の子はこのあとまず何をしますか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4ez300eiipfmz0b1pxud",
+              "index": 5,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "たまご"
+                },
+                {
+                  "id": "2",
+                  "value": "ぎゅうにゅう"
+                },
+                {
+                  "id": "3",
+                  "value": "パン"
+                },
+                {
+                  "id": "4",
+                  "value": "バナナ"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "Tham khảo: 5ばん<br>女の人と男の人が電話で話しています。女の人は何を買って帰りますか。<br>女：もしもし、今スーパーにいるよ。卵、買う？<br>男：卵はまだあるよ。牛乳をお願い。<br>女：わかった。パンは？<br>男：パンもある。あ、バナナがないよ。<br>女：じゃ、牛乳とバナナね。<br>男：あ、牛乳はあした僕が会社の帰りに買うから、いいよ。<br>女：わかった。じゃ、バナナだけね。<br>女の人は何を買って帰りますか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4ez300ejipfmhgouyko1",
+              "index": 6,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "12ページから 20ページまで"
+                },
+                {
+                  "id": "2",
+                  "value": "12ページから 17ページまでと 20ページ"
+                },
+                {
+                  "id": "3",
+                  "value": "18ページと 19ページ"
+                },
+                {
+                  "id": "4",
+                  "value": "12ページから 19ページまで"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "Tham khảo: 6ばん<br>先生が話しています。学生はテストのためにどこを勉強しますか。<br>女：来週のテストは、教科書の12ページから20ページまでです。<br>男：先生、18ページの漢字もテストに出ますか。<br>女：いいえ、18ページと19ページはテストに出ません。ですから、そこは勉強しなくていいですよ。<br>男：わかりました。<br>学生はテストのためにどこを勉強しますか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4ez300ekipfmfgzny541",
+              "index": 7,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "12ばんの バス"
+                },
+                {
+                  "id": "2",
+                  "value": "12ばんと 15ばんの バス"
+                },
+                {
+                  "id": "3",
+                  "value": "15ばんの バス"
+                },
+                {
+                  "id": "4",
+                  "value": "バスに のらないで あるく"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: 7ばん<br>男の人と女の人が話しています。男の人はどのバスに乗りますか。<br>男：すみません、みどり病院へ行きたいです。どのバスに乗りますか。<br>女：12番のバスです。病院の前に止まります。でも、12番は一時間に一本だけです。<br>男：そうですか。<br>女：15番のバスは10分に一本来ますよ。15番は病院の近くの公園で降りて、5分ぐらい歩きます。<br>男：じゃ、すぐ来るバスに乗って、少し歩きます。<br>男の人はどのバスに乗りますか。",
+              "score": 2.5
+            }
+          ]
+        },
+        {
+          "id": "cmvud4din00cwipfmjs82brz6",
+          "index": 1,
+          "title": "もんだい1 ＿＿＿の ことばは ひらがなで どう かきますか。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "",
+          "questionCount": 7,
+          "questions": [
+            {
+              "id": "cmvud4din00cxipfm5kc46dy2",
+              "index": 1,
+              "question": "わたしは <u>毎日</u> 日本語を べんきょうします。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "まいにち"
+                },
+                {
+                  "id": "2",
+                  "value": "まいび"
+                },
+                {
+                  "id": "3",
+                  "value": "めいにち"
+                },
+                {
+                  "id": "4",
+                  "value": "まいひ"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "<p>Tôi học tiếng Nhật mỗi ngày.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4din00cyipfmzhvwugnr",
+              "index": 2,
+              "question": "えきの <u>北</u>がわに こうえんが あります。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "みなみ"
+                },
+                {
+                  "id": "2",
+                  "value": "ひがし"
+                },
+                {
+                  "id": "3",
+                  "value": "きた"
+                },
+                {
+                  "id": "4",
+                  "value": "にし"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "<p>Ở phía bắc nhà ga có công viên.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4din00czipfmaye6gbar",
+              "index": 3,
+              "question": "<u>午後</u> 三時に 友だちと あいます。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "ごご"
+                },
+                {
+                  "id": "2",
+                  "value": "ごこ"
+                },
+                {
+                  "id": "3",
+                  "value": "こご"
+                },
+                {
+                  "id": "4",
+                  "value": "ここ"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "<p>Tôi gặp bạn lúc 3 giờ chiều.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4din00d0ipfmejkxvh94",
+              "index": 4,
+              "question": "けさ、ラジオで ニュースを <u>聞きました</u>。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "かきました"
+                },
+                {
+                  "id": "2",
+                  "value": "きぎました"
+                },
+                {
+                  "id": "3",
+                  "value": "ひきました"
+                },
+                {
+                  "id": "4",
+                  "value": "ききました"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>Sáng nay tôi đã nghe tin tức trên radio.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4din00d1ipfmheyff3jg",
+              "index": 5,
+              "question": "きょうは 雨ですから、<u>外</u>で あそびません。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "なか"
+                },
+                {
+                  "id": "2",
+                  "value": "そと"
+                },
+                {
+                  "id": "3",
+                  "value": "うち"
+                },
+                {
+                  "id": "4",
+                  "value": "そば"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "<p>Hôm nay trời mưa nên tôi không chơi ở ngoài.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4din00d2ipfm3wcjga7j",
+              "index": 6,
+              "question": "この くつは <u>三千円</u>でした。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "さんせんえん"
+                },
+                {
+                  "id": "2",
+                  "value": "さんぜねん"
+                },
+                {
+                  "id": "3",
+                  "value": "さんぜんえん"
+                },
+                {
+                  "id": "4",
+                  "value": "さんせねん"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "<p>Đôi giày này giá 3.000 yên.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4din00d3ipfmpmnrgqod",
+              "index": 7,
+              "question": "かみが <u>長い</u> 女の 人が わたしの あねです。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "なかい"
+                },
+                {
+                  "id": "2",
+                  "value": "ちょうい"
+                },
+                {
+                  "id": "3",
+                  "value": "なごい"
+                },
+                {
+                  "id": "4",
+                  "value": "ながい"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>Người con gái tóc dài là chị gái tôi.</p>",
+              "score": 2
+            }
+          ]
+        },
+        {
+          "id": "cmvud4f4c00elipfmjqfa8621",
+          "index": 2,
+          "title": "もんだい2では、はじめに しつもんを 聞いて ください。それから 話を 聞いて、もんだいようしの １から４の 中から、いちばん いい ものを 一つ えらんで ください。",
+          "part": 2,
+          "audioUrl": "https://video.corodomo.com/exam/jlpt-mock/jlpt-n5-2025/mondai-2-ebeb399308.mp3",
+          "content": "",
+          "questionCount": 6,
+          "questions": [
+            {
+              "id": "cmvud4f4c00emipfmt0ay5aym",
+              "index": 8,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "うみ"
+                },
+                {
+                  "id": "2",
+                  "value": "やま"
+                },
+                {
+                  "id": "3",
+                  "value": "おばあさんの いえ"
+                },
+                {
+                  "id": "4",
+                  "value": "がいこく"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: 1ばん<br>男の人と女の人が話しています。女の人は夏休みにどこへ行きましたか。<br>男：夏休みはどこかへ行きましたか。<br>女：はい。海へ行きたかったですが、とても暑かったので、やめました。<br>男：そうですか。<br>女：それで、いなかのおばあさんの家へ行きました。山が近くて、すずしかったです。<br>男：いいですね。<br>女の人は夏休みにどこへ行きましたか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4f4c00enipfmjep83usk",
+              "index": 9,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "バスが こんで いるから"
+                },
+                {
+                  "id": "2",
+                  "value": "バスの お金が 高く なったから"
+                },
+                {
+                  "id": "3",
+                  "value": "うんどうを したいから"
+                },
+                {
+                  "id": "4",
+                  "value": "いえが かいしゃから ちかいから"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: 2ばん<br>会社で女の人と男の人が話しています。男の人はどうして自転車で会社に来ましたか。<br>女：あれ、田中さん、きょうは自転車ですか。<br>男：はい。きょうから自転車で来ます。<br>女：バス、高くなりましたからね。<br>男：いいえ、お金じゃありません。最近、ぜんぜん運動していませんから。<br>女：ああ、そうですか。<br>男の人はどうして自転車で会社に来ましたか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4f4c00eoipfmdzmkg86m",
+              "index": 10,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "6時"
+                },
+                {
+                  "id": "2",
+                  "value": "6時半"
+                },
+                {
+                  "id": "3",
+                  "value": "7時"
+                },
+                {
+                  "id": "4",
+                  "value": "7時半"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "Tham khảo: 3ばん<br>女の人と男の人が話しています。女の人はけさ何時に起きましたか。<br>男：けさは何時に起きましたか。<br>女：いつもは6時ですが、きょうは7時半に起きました。<br>男：え、会社、だいじょうぶですか。<br>女：ええ。きょうは家で仕事をする日ですから。<br>女の人はけさ何時に起きましたか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4f4c00epipfmjczi7qc4",
+              "index": 11,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "カラオケ"
+                },
+                {
+                  "id": "2",
+                  "value": "へやの そうじ"
+                },
+                {
+                  "id": "3",
+                  "value": "テニス"
+                },
+                {
+                  "id": "4",
+                  "value": "かいもの"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "Tham khảo: 4ばん<br>男の人と女の人が話しています。男の人は日曜日に何をしましたか。<br>女：週末は何をしましたか。<br>男：土曜日は部屋の掃除をしました。日曜日は友達とテニスをしに行きましたが、雨でしたから、カラオケに行きました。<br>女：楽しかったですか。<br>男：はい、とても。<br>男の人は日曜日に何をしましたか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4f4c00eqipfmhto1kc5v",
+              "index": 12,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "あかくて 大きい かばん"
+                },
+                {
+                  "id": "2",
+                  "value": "くろくて 大きい かばん"
+                },
+                {
+                  "id": "3",
+                  "value": "あかくて 小さい かばん"
+                },
+                {
+                  "id": "4",
+                  "value": "くろくて 小さい かばん"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "Tham khảo: 5ばん<br>男の人と女の人が話しています。女の人はどんなかばんを買いましたか。<br>男：新しいかばんですね。<br>女：ええ、きのう買いました。赤いのがほしかったですが、赤いのは小さかったです。<br>男：そうですか。<br>女：パソコンを入れますから、大きいのがいいです。それで、この黒いのにしました。<br>女の人はどんなかばんを買いましたか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4f4c00eripfmps3g1ucr",
+              "index": 13,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "1,500円"
+                },
+                {
+                  "id": "2",
+                  "value": "2,500円"
+                },
+                {
+                  "id": "3",
+                  "value": "2,505円"
+                },
+                {
+                  "id": "4",
+                  "value": "3,000円"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "Tham khảo: 6ばん<br>店で男の人と店の人が話しています。男の人はぜんぶでいくら払いますか。<br>男：すみません、このTシャツはいくらですか。<br>女：1枚1,500円です。2枚で2,500円です。<br>男：じゃ、2枚ください。<br>女：ありがとうございます。袋はいりますか。袋は5円です。<br>男：いいえ、いりません。<br>男の人はぜんぶでいくら払いますか。",
+              "score": 2.5
+            }
+          ]
+        },
+        {
+          "id": "cmvud4dnr00d4ipfmoocagmd4",
+          "index": 2,
+          "title": "もんだい2 ＿＿＿の ことばは どう かきますか。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "",
+          "questionCount": 5,
+          "questions": [
+            {
+              "id": "cmvud4dnr00d7ipfm9nsvamg2",
+              "index": 10,
+              "question": "あの <u>おおきい</u> たてものは びょういんです。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "大きい"
+                },
+                {
+                  "id": "2",
+                  "value": "犬きい"
+                },
+                {
+                  "id": "3",
+                  "value": "太きい"
+                },
+                {
+                  "id": "4",
+                  "value": "天きい"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "<p>Tòa nhà to kia là bệnh viện.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4dnr00d8ipfmtw4rs5oc",
+              "index": 11,
+              "question": "<u>ひがし</u>の 空が あかるく なりました。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "車"
+                },
+                {
+                  "id": "2",
+                  "value": "東"
+                },
+                {
+                  "id": "3",
+                  "value": "束"
+                },
+                {
+                  "id": "4",
+                  "value": "果"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "<p>Bầu trời phía đông đã sáng lên.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4dnr00d9ipfm10xwhge5",
+              "index": 12,
+              "question": "<u>みぎ</u>の 手を あげて ください。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "石"
+                },
+                {
+                  "id": "2",
+                  "value": "左"
+                },
+                {
+                  "id": "3",
+                  "value": "右"
+                },
+                {
+                  "id": "4",
+                  "value": "古"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "<p>Hãy giơ tay phải lên.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4dnr00d5ipfm6krkbuss",
+              "index": 8,
+              "question": "よる、<u>てれび</u>で サッカーを 見ました。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "テレビ"
+                },
+                {
+                  "id": "2",
+                  "value": "テルビ"
+                },
+                {
+                  "id": "3",
+                  "value": "ラレビ"
+                },
+                {
+                  "id": "4",
+                  "value": "テレヒ"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "<p>Buổi tối tôi đã xem bóng đá trên tivi.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4dnr00d6ipfm5gdrjaiu",
+              "index": 9,
+              "question": "なつ休みに 友だちと <u>やま</u>へ 行きました。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "出"
+                },
+                {
+                  "id": "2",
+                  "value": "川"
+                },
+                {
+                  "id": "3",
+                  "value": "止"
+                },
+                {
+                  "id": "4",
+                  "value": "山"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>Kỳ nghỉ hè tôi đã đi núi cùng bạn.</p>",
+              "score": 2
+            }
+          ]
+        },
+        {
+          "id": "cmvud4dt900daipfmo48hdxl7",
+          "index": 3,
+          "title": "もんだい3 （　　）に なにが はいりますか。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "",
+          "questionCount": 6,
+          "questions": [
+            {
+              "id": "cmvud4dt900dbipfm75lij3r7",
+              "index": 13,
+              "question": "きょうは とても あついですね。つめたい 水を たくさん （　　） ください。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "のんで"
+                },
+                {
+                  "id": "2",
+                  "value": "たべて"
+                },
+                {
+                  "id": "3",
+                  "value": "きって"
+                },
+                {
+                  "id": "4",
+                  "value": "すって"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "<p>Hôm nay nóng quá nhỉ. Hãy uống thật nhiều nước lạnh nhé.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4dt900dcipfmv1ksu75p",
+              "index": 14,
+              "question": "この かばんは ちょっと （　　）ですね。もう すこし やすいのは ありませんか。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "ひくい"
+                },
+                {
+                  "id": "2",
+                  "value": "おもい"
+                },
+                {
+                  "id": "3",
+                  "value": "ふるい"
+                },
+                {
+                  "id": "4",
+                  "value": "たかい"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>Cái túi này hơi đắt nhỉ. Có cái nào rẻ hơn một chút không?</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4dt900ddipfmkxh2s8f4",
+              "index": 15,
+              "question": "えんぴつを 二（　　） かいました。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "ほん"
+                },
+                {
+                  "id": "2",
+                  "value": "まい"
+                },
+                {
+                  "id": "3",
+                  "value": "さつ"
+                },
+                {
+                  "id": "4",
+                  "value": "だい"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "<p>Tôi đã mua 2 cây bút chì.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4dt900deipfmrje84omk",
+              "index": 16,
+              "question": "さむいですから、（　　）を きて 出かけます。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "スプーン"
+                },
+                {
+                  "id": "2",
+                  "value": "コート"
+                },
+                {
+                  "id": "3",
+                  "value": "ノート"
+                },
+                {
+                  "id": "4",
+                  "value": "テープ"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "<p>Vì trời lạnh nên tôi mặc áo khoác rồi ra ngoài.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4dt900dfipfm55a54779",
+              "index": 17,
+              "question": "こうえんで 友だちと しゃしんを （　　）。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "かきました"
+                },
+                {
+                  "id": "2",
+                  "value": "ひきました"
+                },
+                {
+                  "id": "3",
+                  "value": "とりました"
+                },
+                {
+                  "id": "4",
+                  "value": "みがきました"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "<p>Tôi đã chụp ảnh với bạn ở công viên.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4dt900dgipfms3gz7mp3",
+              "index": 18,
+              "question": "日本語は まだ （　　） 分かりません。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "もう"
+                },
+                {
+                  "id": "2",
+                  "value": "すぐ"
+                },
+                {
+                  "id": "3",
+                  "value": "ちょうど"
+                },
+                {
+                  "id": "4",
+                  "value": "よく"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>Tôi vẫn chưa hiểu rõ tiếng Nhật lắm.</p>",
+              "score": 2
+            }
+          ]
+        },
+        {
+          "id": "cmvud4f9j00esipfmnwivzz5c",
+          "index": 3,
+          "title": "もんだい3では、えを 見ながら しつもんを 聞いて ください。やじるし（→）の 人は 何と 言いますか。１から３の 中から、いちばん いい ものを 一つ えらんで ください。",
+          "part": 2,
+          "audioUrl": "https://video.corodomo.com/exam/jlpt-mock/jlpt-n5-2025/mondai-3-35c2a7731b.mp3",
+          "content": "",
+          "questionCount": 5,
+          "questions": [
+            {
+              "id": "cmvud4f9j00etipfmfvkn5ty6",
+              "index": 14,
+              "question": "ばん",
+              "content": "【え】きょうしつの 入口で、先生に あたまを さげて いる 学生（→）",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "Tham khảo: 1ばん<br>学校に遅れました。先生に何と言いますか。<br>1. 遅くなって、すみません。<br>2. どういたしまして。<br>3. 行ってきます。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4f9j00euipfm7ddexdqu",
+              "index": 15,
+              "question": "ばん",
+              "content": "【え】となりの せきの 友だちの けしゴムを ゆびで さして いる 女の 学生（→）",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "Tham khảo: 2ばん<br>友達の消しゴムを借りたいです。何と言いますか。<br>1. 消しゴム、借りてください。<br>2. 消しゴム、貸してください。<br>3. 消しゴム、どうぞ。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4f9j00evipfmhekwslqy",
+              "index": 16,
+              "question": "ばん",
+              "content": "【え】レジで、スマホを 手に もって いる 男の 人（→）と 店の 人",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: 3ばん<br>店でスマホでお金を払いたいです。何と言いますか。<br>1. スマホは いかがですか。<br>2. スマホで はらいましたか。<br>3. スマホで いいですか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4f9j00ewipfmyqgk1419",
+              "index": 17,
+              "question": "ばん",
+              "content": "【え】先生の つくえの よこで、ノートを もって 立って いる 学生（→）",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "Tham khảo: 4ばん<br>先生に聞きたいことがあります。何と言いますか。<br>1. 先生、ちょっと待ってください。<br>2. 先生、ちょっといいですか。<br>3. 先生、どうぞよろしく。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4f9j00exipfmjeusy2jk",
+              "index": 18,
+              "question": "ばん",
+              "content": "【え】でんしゃの 中で、すわって いる 男の 人（→）と、その 前に 立って いる おばあさん",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: 5ばん<br>電車の中です。おばあさんが立っています。何と言いますか。<br>1. すわっても いいですか。<br>2. ここに すわりましょう。<br>3. どうぞ、すわって ください。",
+              "score": 2.5
+            }
+          ]
+        },
+        {
+          "id": "cmvud4few00eyipfmvn90210f",
+          "index": 4,
+          "title": "もんだい4は、えなどが ありません。ぶんを 聞いて、１から３の 中から、いちばん いい ものを 一つ えらんで ください。",
+          "part": 2,
+          "audioUrl": "https://video.corodomo.com/exam/jlpt-mock/jlpt-n5-2025/mondai-4-wm-6a7cbc12.mp3",
+          "content": "",
+          "questionCount": 6,
+          "questions": [
+            {
+              "id": "cmvud4few00f1ipfmk3senv0k",
+              "index": 21,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "Tham khảo: 3ばん<br>男：それ、だれのかさですか。<br>女：1. わたしのです。<br>女：2. あそこにあります。<br>女：3. 赤いかさです。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4few00f2ipfm4k5md8fs",
+              "index": 22,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: 4ばん<br>女：週末、どこか行きましたか。<br>男：1. はい、来週行きます。<br>男：2. いいえ、どこかへ行きます。<br>男：3. いいえ、どこも行きませんでした。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4few00ezipfm2b3odv37",
+              "index": 19,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "Tham khảo: 1ばん<br>男：あしたは何時に来ますか。<br>女：1. 9時ごろ来ます。<br>女：2. きのう来ました。<br>女：3. 1時間かかります。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4few00f0ipfmksbd8ld3",
+              "index": 20,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: 2ばん<br>女：お茶、もう一杯いかがですか。<br>男：1. どういたしまして。<br>男：2. はい、どうぞ。<br>男：3. いいえ、けっこうです。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4few00f3ipfm72vouor8",
+              "index": 23,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "Tham khảo: 5ばん<br>女：あのう、窓を開けてもいいですか。<br>男：1. ええ、どうぞ。<br>男：2. ええ、開けました。<br>男：3. いいえ、どういたしまして。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4few00f4ipfmftdjaaeu",
+              "index": 24,
+              "question": "ばん",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": ""
+                },
+                {
+                  "id": "2",
+                  "value": ""
+                },
+                {
+                  "id": "3",
+                  "value": ""
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "Tham khảo: 6ばん<br>男：行ってきます。<br>女：1. ただいま。<br>女：2. 行ってらっしゃい。<br>女：3. おかえりなさい。",
+              "score": 2.5
+            }
+          ]
+        },
+        {
+          "id": "cmvud4dyh00dhipfma3toblxu",
+          "index": 4,
+          "title": "もんだい4 ＿＿＿の ぶんと だいたい おなじ いみの ぶんが あります。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "",
+          "questionCount": 3,
+          "questions": [
+            {
+              "id": "cmvud4dyh00diipfmngmly1il",
+              "index": 19,
+              "question": "<u>おととい</u> デパートへ 行きました。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "ふつか まえに デパートへ 行きました。"
+                },
+                {
+                  "id": "2",
+                  "value": "きのう デパートへ 行きました。"
+                },
+                {
+                  "id": "3",
+                  "value": "あした デパートへ 行きます。"
+                },
+                {
+                  "id": "4",
+                  "value": "あさって デパートへ 行きます。"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "<p>Hôm kia tôi đã đi trung tâm thương mại.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4dyh00djipfmqfeoghbu",
+              "index": 20,
+              "question": "<u>この へやは あかるく ないです。</u>",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "この へやは ひろいです。"
+                },
+                {
+                  "id": "2",
+                  "value": "この へやは しずかです。"
+                },
+                {
+                  "id": "3",
+                  "value": "この へやは くらいです。"
+                },
+                {
+                  "id": "4",
+                  "value": "この へやは きれいです。"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "<p>Căn phòng này không sáng.</p>",
+              "score": 2
+            },
+            {
+              "id": "cmvud4dyh00dkipfmmfipc5qv",
+              "index": 21,
+              "question": "<u>たなかさんは ぎんこうに つとめて います。</u>",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "たなかさんは ぎんこうで まって います。"
+                },
+                {
+                  "id": "2",
+                  "value": "たなかさんは ぎんこうの 前に すんで います。"
+                },
+                {
+                  "id": "3",
+                  "value": "たなかさんは ぎんこうへ あそびに 行きます。"
+                },
+                {
+                  "id": "4",
+                  "value": "たなかさんは ぎんこうで はたらいて います。"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>Anh Tanaka làm việc ở ngân hàng.</p>",
+              "score": 2
+            }
+          ]
+        },
+        {
+          "id": "cmvud4e3m00dlipfmzobo6q6w",
+          "index": 5,
+          "title": "もんだい1 （　　）に 何を 入れますか。１・２・３・４から いちばん いい ものを 一つ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "",
+          "questionCount": 9,
+          "questions": [
+            {
+              "id": "cmvud4e3m00dmipfmple74n2e",
+              "index": 22,
+              "question": "わたしは まいあさ 七時（　　） おきます。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "に"
+                },
+                {
+                  "id": "2",
+                  "value": "で"
+                },
+                {
+                  "id": "3",
+                  "value": "を"
+                },
+                {
+                  "id": "4",
+                  "value": "が"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "<p>Mỗi sáng tôi dậy lúc 7 giờ.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4e3m00dnipfmhoytb8vq",
+              "index": 23,
+              "question": "学校まで じてんしゃ（　　） 行きます。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "に"
+                },
+                {
+                  "id": "2",
+                  "value": "を"
+                },
+                {
+                  "id": "3",
+                  "value": "で"
+                },
+                {
+                  "id": "4",
+                  "value": "が"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "<p>Tôi đi đến trường bằng xe đạp.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4e3m00doipfm6i2tzpgc",
+              "index": 24,
+              "question": "A「きのうの よる、何を 食べましたか。」<br>B「おなかが いたかったから、（　　）も 食べませんでした。」",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "だれ"
+                },
+                {
+                  "id": "2",
+                  "value": "どこ"
+                },
+                {
+                  "id": "3",
+                  "value": "いつ"
+                },
+                {
+                  "id": "4",
+                  "value": "何"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>A: Tối qua bạn đã ăn gì? B: Vì đau bụng nên tôi không ăn gì cả.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4e3m00dpipfm69rip5jc",
+              "index": 25,
+              "question": "おんがくを （　　）ながら べんきょうします。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "きき"
+                },
+                {
+                  "id": "2",
+                  "value": "きく"
+                },
+                {
+                  "id": "3",
+                  "value": "きいて"
+                },
+                {
+                  "id": "4",
+                  "value": "きいた"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "<p>Tôi vừa nghe nhạc vừa học bài.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4e3m00dqipfm40hpd410",
+              "index": 26,
+              "question": "A「こんどの 土よう日、いっしょに えいがを （　　）。」<br>B「いいですね。見ましょう。」",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "見ましたか"
+                },
+                {
+                  "id": "2",
+                  "value": "見ませんか"
+                },
+                {
+                  "id": "3",
+                  "value": "見て いますか"
+                },
+                {
+                  "id": "4",
+                  "value": "見ましたね"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "<p>A: Thứ bảy tới cùng đi xem phim không? B: Hay đấy. Cùng xem nhé.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4e3m00dripfm3eea6nr6",
+              "index": 27,
+              "question": "デパートへ くつを （　　） 行きます。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "かう"
+                },
+                {
+                  "id": "2",
+                  "value": "かった"
+                },
+                {
+                  "id": "3",
+                  "value": "かいに"
+                },
+                {
+                  "id": "4",
+                  "value": "かわない"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "<p>Tôi đi trung tâm thương mại để mua giày.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4e3m00dsipfmbukg0tsx",
+              "index": 28,
+              "question": "A「にもつが たくさん ありますね。一つ （　　）。」<br>B「すみません。ありがとうございます。」",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "もって ください"
+                },
+                {
+                  "id": "2",
+                  "value": "もちませんか"
+                },
+                {
+                  "id": "3",
+                  "value": "もちたいですか"
+                },
+                {
+                  "id": "4",
+                  "value": "もちましょうか"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>A: Hành lý nhiều quá nhỉ. Để tôi cầm giúp một cái nhé? B: Làm phiền anh quá. Cảm ơn anh.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4e3m00dtipfm7y1eef00",
+              "index": 29,
+              "question": "A「どうして きのう 学校を 休みましたか。」<br>B「ねつが あった（　　）です。」",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "まで"
+                },
+                {
+                  "id": "2",
+                  "value": "から"
+                },
+                {
+                  "id": "3",
+                  "value": "けど"
+                },
+                {
+                  "id": "4",
+                  "value": "ので"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "<p>A: Sao hôm qua bạn nghỉ học? B: Vì tôi bị sốt.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4e3m00duipfmmswz1xoq",
+              "index": 30,
+              "question": "A「りんごは （　　） ありますか。」<br>B「五つ あります。」",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "いくら"
+                },
+                {
+                  "id": "2",
+                  "value": "どれ"
+                },
+                {
+                  "id": "3",
+                  "value": "なん"
+                },
+                {
+                  "id": "4",
+                  "value": "いくつ"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>A: Có mấy quả táo? B: Có 5 quả.</p>",
+              "score": 2.5
+            }
+          ]
+        },
+        {
+          "id": "cmvud4e8t00dvipfmex5zz8ta",
+          "index": 6,
+          "title": "もんだい2 　★　に 入る ものは どれですか。１・２・３・４から いちばん いい ものを 一つ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "",
+          "questionCount": 4,
+          "questions": [
+            {
+              "id": "cmvud4e8t00dwipfmoktqb5rc",
+              "index": 31,
+              "question": "わたしは ＿＿＿ ＿＿＿ ＿★＿ ＿＿＿ すきです。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "のが"
+                },
+                {
+                  "id": "2",
+                  "value": "え"
+                },
+                {
+                  "id": "3",
+                  "value": "かく"
+                },
+                {
+                  "id": "4",
+                  "value": "を"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "Tham khảo: わたしは えを <u>かく</u> のが すきです。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4e8t00dxipfm8s94iouz",
+              "index": 32,
+              "question": "つくえの ＿＿＿ ＿★＿ ＿＿＿ ＿＿＿ だれのですか。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "ある"
+                },
+                {
+                  "id": "2",
+                  "value": "うえ"
+                },
+                {
+                  "id": "3",
+                  "value": "本は"
+                },
+                {
+                  "id": "4",
+                  "value": "に"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "Tham khảo: つくえの うえ <u>に</u> ある 本は だれのですか。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4e8t00dyipfmyb9rtqvh",
+              "index": 33,
+              "question": "A「その シャツ、いいですね。」<br>B「ありがとう。これは ＿＿＿ ＿＿＿ ＿★＿ ＿＿＿ です。」",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "かった"
+                },
+                {
+                  "id": "2",
+                  "value": "シャツ"
+                },
+                {
+                  "id": "3",
+                  "value": "きょねん"
+                },
+                {
+                  "id": "4",
+                  "value": "母が"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "Tham khảo: これは きょねん 母が <u>かった</u> シャツです。",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4e8t00dzipfmrsg2fyd9",
+              "index": 34,
+              "question": "あには ＿＿＿ ＿＿＿ ＿★＿ ＿＿＿ アルバイトを して います。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "で"
+                },
+                {
+                  "id": "2",
+                  "value": "ホテル"
+                },
+                {
+                  "id": "3",
+                  "value": "えきの"
+                },
+                {
+                  "id": "4",
+                  "value": "ちかくの"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "Tham khảo: あには えきの ちかくの <u>ホテル</u> で アルバイトを して います。",
+              "score": 2.5
+            }
+          ]
+        },
+        {
+          "id": "cmvud4edz00e0ipfmcdwt6xyv",
+          "index": 7,
+          "title": "もんだい3 【35】から【38】に 何を 入れますか。ぶんしょうの いみを かんがえて、１・２・３・４から いちばん いい ものを 一つ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "<p>グエンさんは 日本で べんきょうして いる りゅうがくせいです。「わたしの アルバイト」の さくぶんを 書きました。</p><center><b>わたしの アルバイト</b></center><div style=\"text-align:right\">グエン・ミン</div><p>　わたしは まいしゅう 土よう日と 日よう日に、えきの 前の コンビニで アルバイトを して います。【35】は 日本語が あまり 分かりませんでしたから、とても たいへんでした。でも、店の 人は みんな しんせつでした。<br>　コンビニには いろいろな 国の 人が 来ます。お金を はらう とき、カードや スマホを つかう 人が おおいです。でも、げんきんで はらう 人は 【36】。<br>　アルバイトの あとは、とても つかれます。でも、店で 日本語を たくさん 話しますから、日本語が 上手に 【37】。<br>　来月から、アルバイトは 日よう日だけです。土よう日は 日本語の しけんの べんきょうを 【38】からです。</p>",
+          "questionCount": 4,
+          "questions": [
+            {
+              "id": "cmvud4edz00e1ipfmz5yls9ia",
+              "index": 35,
+              "question": "【35】",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "あと"
+                },
+                {
+                  "id": "2",
+                  "value": "はじめ"
+                },
+                {
+                  "id": "3",
+                  "value": "つぎ"
+                },
+                {
+                  "id": "4",
+                  "value": "いま"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "<p>Lúc đầu tôi không hiểu tiếng Nhật lắm nên rất vất vả.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4edz00e2ipfmdpqa4brj",
+              "index": 36,
+              "question": "【36】",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "おおいです"
+                },
+                {
+                  "id": "2",
+                  "value": "たかいです"
+                },
+                {
+                  "id": "3",
+                  "value": "すくないです"
+                },
+                {
+                  "id": "4",
+                  "value": "ひくいです"
+                }
+              ],
+              "correctAnswer": "3",
+              "explanation": "",
+              "script": "<p>Người trả bằng tiền mặt thì ít.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4ee000e3ipfmyknhl9nb",
+              "index": 37,
+              "question": "【37】",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "なりました"
+                },
+                {
+                  "id": "2",
+                  "value": "しました"
+                },
+                {
+                  "id": "3",
+                  "value": "ありました"
+                },
+                {
+                  "id": "4",
+                  "value": "いました"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "<p>Vì ở cửa hàng tôi nói tiếng Nhật nhiều nên tiếng Nhật đã giỏi lên.</p>",
+              "score": 2.5
+            },
+            {
+              "id": "cmvud4ee000e4ipfmdfa0twoj",
+              "index": 38,
+              "question": "【38】",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "した"
+                },
+                {
+                  "id": "2",
+                  "value": "しない"
+                },
+                {
+                  "id": "3",
+                  "value": "しましょう"
+                },
+                {
+                  "id": "4",
+                  "value": "したい"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "<p>Vì thứ bảy tôi muốn học để chuẩn bị cho kỳ thi tiếng Nhật.</p>",
+              "score": 2.5
+            }
+          ]
+        },
+        {
+          "id": "cmvud4ej700e5ipfmr1j67y68",
+          "index": 8,
+          "title": "もんだい4 つぎの（1）と（2）の ぶんしょうを 読んで、しつもんに こたえて ください。こたえは、１・２・３・４から いちばん いい ものを 一つ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "(1)<br>これは マイさんの にっきです。<br><br>　きのうは とても あつかったです。学校の あと、すぐ うちへ かえりませんでした。としょかんへ 行って、すずしい へやで 本を 読みました。水も たくさん のみました。六時ごろ、外が すこし すずしく なってから、うちへ かえりました。",
+          "questionCount": 2,
+          "questions": [
+            {
+              "id": "cmvud4ej700e6ipfmh5lat7hi",
+              "index": 39,
+              "question": "マイさんは きのう、学校の あと はじめに 何を しましたか。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "すぐ うちへ かえりました。"
+                },
+                {
+                  "id": "2",
+                  "value": "としょかんで 本を 読みました。"
+                },
+                {
+                  "id": "3",
+                  "value": "水を かいに 行きました。"
+                },
+                {
+                  "id": "4",
+                  "value": "外で 六時まで あそびました。"
+                }
+              ],
+              "correctAnswer": "2",
+              "explanation": "",
+              "script": "",
+              "score": 7
+            },
+            {
+              "id": "cmvud4ej700e7ipfm5vnvuebt",
+              "index": 40,
+              "question": "学生は あした 何を しますか。",
+              "content": "(2)<br>先生が 学生に メールを おくりました。<br><br>クラスの みなさんへ<br><br>　あしたは つよい たいふうが 来ますから、学校は 休みです。でも、じゅぎょうは あります。九時に、うちの パソコンか スマホで オンラインの じゅぎょうに 入って ください。しゅくだいは 金よう日に 学校へ もって 来て ください。<div style=\"text-align:right\">川口</div>",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "九時に 学校へ 行きます。"
+                },
+                {
+                  "id": "2",
+                  "value": "一日 休んで、べんきょうしません。"
+                },
+                {
+                  "id": "3",
+                  "value": "しゅくだいを 学校へ もって 行きます。"
+                },
+                {
+                  "id": "4",
+                  "value": "うちで、九時から オンラインの じゅぎょうに 入ります。"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "",
+              "score": 7
+            }
+          ]
+        },
+        {
+          "id": "cmvud4eoi00e8ipfmu6jeio12",
+          "index": 9,
+          "title": "もんだい5 つぎの ぶんしょうを 読んで、しつもんに こたえて ください。こたえは、１・２・３・４から いちばん いい ものを 一つ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "<p>これは リンさんが 書いた さくぶんです。</p><center><b>そぼと スマホ</b></center><p>　わたしの そぼは いなかに 一人で すんで います。ことし 八十さいです。そぼの うちは とおいですから、わたしは なつ休みと ふゆ休みにしか 行きません。<br>　先月、母が そぼに スマホを あげました。そぼは「むずかしくて、よく 分からない。」と 言って、<u>はじめは ぜんぜん つかいませんでした</u>。<br>　それで、わたしは 日よう日に そぼの うちへ 行って、スマホの つかいかたを おしえました。そぼは つかいかたを ノートに 書いて、なんかいも れんしゅうしました。<br>　いま、そぼは 毎ばん わたしと ビデオで 話します。そぼは「スマホで はなの しゃしんを とるのが たのしいよ。」と 言って います。わたしも そぼの かおを 見て 話しますから、とても うれしいです。</p>",
+          "questionCount": 2,
+          "questions": [
+            {
+              "id": "cmvud4eoi00e9ipfmfqja6mwu",
+              "index": 41,
+              "question": "そぼは どうして <u>はじめは ぜんぜん つかいませんでした</u>か。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "スマホが ふるかったから"
+                },
+                {
+                  "id": "2",
+                  "value": "目が わるかったから"
+                },
+                {
+                  "id": "3",
+                  "value": "スマホを もって いなかったから"
+                },
+                {
+                  "id": "4",
+                  "value": "スマホは むずかしいと おもったから"
+                }
+              ],
+              "correctAnswer": "4",
+              "explanation": "",
+              "script": "",
+              "score": 7
+            },
+            {
+              "id": "cmvud4eoi00eaipfmokvhdsgt",
+              "index": 42,
+              "question": "いま、そぼは スマホで 何を して いますか。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "毎ばん リンさんと ビデオで 話して います。"
+                },
+                {
+                  "id": "2",
+                  "value": "毎ばん 母と ビデオで 話して います。"
+                },
+                {
+                  "id": "3",
+                  "value": "ノートに はなの えを かいて います。"
+                },
+                {
+                  "id": "4",
+                  "value": "リンさんに スマホの つかいかたを おしえて います。"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "",
+              "score": 7
+            }
+          ]
+        },
+        {
+          "id": "cmvud4etw00ebipfmle5766lb",
+          "index": 10,
+          "title": "もんだい6 右の ページを 見て、しつもんに こたえて ください。こたえは、１・２・３・４から いちばん いい ものを 一つ えらんで ください。",
+          "part": 1,
+          "audioUrl": null,
+          "content": "<center><h3>あおば スポーツセンター　４月の きょうしつ</h3></center><table><tr><th>きょうしつ</th><th>よう日</th><th>時間</th><th>お金（１かい）</th></tr><tr><td>ヨガ</td><td>月よう日</td><td>午前１０時～１１時</td><td>５００円</td></tr><tr><td>すいえい</td><td>火よう日</td><td>午後６時～７時</td><td>７００円</td></tr><tr><td>テニス</td><td>水よう日</td><td>午後７時～９時</td><td>１，０００円</td></tr><tr><td>ダンス</td><td>土よう日</td><td>午前１０時～１１時半</td><td>６００円</td></tr><tr><td>たっきゅう</td><td>日よう日</td><td>午後２時～４時</td><td>８００円</td></tr></table><p>※ お金は カードか スマホで はらって ください。げんきんは だめです。</p>",
+          "questionCount": 1,
+          "questions": [
+            {
+              "id": "cmvud4etw00ecipfmun8oq9lq",
+              "index": 43,
+              "question": "マリアさんは 月よう日から 金よう日まで、午前９時から 午後５時まで はたらいて います。土よう日の 午前は 日本語の じゅぎょうが あります。１かい ７００円までの きょうしつに 入りたいです。マリアさんは どの きょうしつに 入りますか。",
+              "content": "",
+              "options": [
+                {
+                  "id": "1",
+                  "value": "すいえい"
+                },
+                {
+                  "id": "2",
+                  "value": "テニス"
+                },
+                {
+                  "id": "3",
+                  "value": "ダンス"
+                },
+                {
+                  "id": "4",
+                  "value": "たっきゅう"
+                }
+              ],
+              "correctAnswer": "1",
+              "explanation": "",
+              "script": "",
+              "score": 7.5
             }
           ]
         }

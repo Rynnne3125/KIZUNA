@@ -48,7 +48,7 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
     { id: 'kanji', label: 'Kanji', icon: <Languages className="w-5 h-5" />, badge: '2k+' },
     { id: 'roadmap', label: 'Lộ trình', icon: <Map className="w-5 h-5" /> },
     { id: 'library', label: 'Thư viện', icon: <Film className="w-5 h-5" /> },
-    { id: 'exam', label: 'Ôn thi JLPT', icon: <Target className="w-5 h-5" />, badge: '85 Đề' },
+    { id: 'exam', label: 'Ôn thi JLPT', icon: <Target className="w-5 h-5" />, badge: '95 Đề' },
     { id: 'profile', label: 'Cá nhân', icon: <UserCheck className="w-5 h-5" /> },
   ];
 
@@ -144,7 +144,7 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
           2. MOBILE DRAWER SIDEBAR (Slide-over with Backdrop)
           ========================================================================= */}
       {isMobileDrawerOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 flex">
+        <div className="lg:hidden fixed inset-0 z-[100] flex">
           {/* Backdrop */}
           <div 
             className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs transition-opacity"

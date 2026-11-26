@@ -1,5 +1,5 @@
-// KIZUNA Progressive Web App (PWA) Service Worker - Offline Ready v4
-const CACHE_NAME = 'kizuna-pwa-v4';
+// KIZUNA Progressive Web App (PWA) Service Worker - Offline Ready v5
+const CACHE_NAME = 'kizuna-pwa-v5';
 const PRECACHE_URLS = [
   '/',
   '/index.html',

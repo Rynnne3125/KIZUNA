@@ -655,7 +655,7 @@ export const LibraryPage: React.FC = () => {
           {activeExamDetail ? (
             <div>
               {/* THANH ĐIỀU HƯỚNG GHIM PHÒNG THI CHOUKAI */}
-              <div className="sticky top-14 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md z-40 p-3.5 sm:p-4 rounded-2xl shadow-xs border border-slate-200 dark:border-slate-800 mb-5 transition-colors">
+              <div className="sticky top-14 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md z-10 p-3.5 sm:p-4 rounded-2xl shadow-xs border border-slate-200 dark:border-slate-800 mb-5 transition-colors">
                 <div className="flex justify-between items-center flex-wrap gap-3">
                   <div>
                     <div className="flex items-center gap-2">

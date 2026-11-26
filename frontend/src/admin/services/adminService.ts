@@ -1916,6 +1916,7 @@ export const adminService = {
       });
       if (!isFirestoreDummy) {
         await safeFirestoreWrite(() => setDoc(doc(db, 'jlpt_exam_catalog', id), payload, { merge: true })).catch(() => {});
+        await safeFirestoreWrite(() => setDoc(doc(db, 'jlpt_exams', id), payload, { merge: true })).catch(() => {});
       }
       if (!apiRes.ok) {
         await this.recordActivityLog('EXAM_UPDATE', 'EXAM', id, `Cập nhật đề thi: ${label}`);
@@ -1934,6 +1935,7 @@ export const adminService = {
       });
       if (!isFirestoreDummy) {
         await safeFirestoreWrite(() => deleteDoc(doc(db, 'jlpt_exam_catalog', id))).catch(() => {});
+        await safeFirestoreWrite(() => deleteDoc(doc(db, 'jlpt_exams', id))).catch(() => {});
       }
       if (!apiRes.ok) {
         await this.recordActivityLog('EXAM_DELETE', 'EXAM', id, 'Xóa đề thi');
