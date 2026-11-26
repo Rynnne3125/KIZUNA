@@ -4,13 +4,24 @@ import { UserNavTab } from '../components/UserNavbar';
 import { progressService, UserRoadmapProgress } from '../services/progressService';
 import { rankingService } from '../services/rankingService';
 import { kizunaService } from '../services/kizunaService';
+import {
+  dailyQuestService,
+  DailyQuestBundle,
+  DailyQuestItem,
+  DAILY_BONUS_POINTS,
+  DAILY_BONUS_XP,
+  MAX_STREAK_FREEZES,
+  STREAK_FREEZE_COST,
+  getCurrentIsoWeekKey,
+  getDaysRemainingInWeek
+} from '../services/dailyQuestService';
 import { UserProgressData } from '../types/progress';
-import { RankTier, UserLeaderboardItem } from '../types/ranking';
+import { RankTier, UserLeaderboardItem, LeaderboardMode } from '../types/ranking';
 import { STAGES_CATALOG, MILESTONES_CATALOG } from '../data/roadmapCatalog';
 import { 
   Flame, Award, BookOpen, ArrowRight, Trophy, Sparkles, 
-  Target, Compass, Library, ChevronRight, Crown, 
-  Medal, Languages, FileText, Zap, CheckCircle2
+  Target, Crown, Languages, FileText, Zap, CheckCircle2,
+  Shield, Gift, X, Check, AlertCircle, RotateCcw
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -52,7 +63,18 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
   // Dữ liệu bảng xếp hạng và mốc rank từ Firestore
   const [rankTiers, setRankTiers] = useState<RankTier[]>([]);
   const [leaderboard, setLeaderboard] = useState<UserLeaderboardItem[]>([]);
+  const [leaderboardMode, setLeaderboardMode] = useState<LeaderboardMode>('weekly');
   const [loadingLeaderboard, setLoadingLeaderboard] = useState(true);
+
+  // Dữ liệu Nhiệm Vụ Ngày (AI Daily Quest) & Khiên Bảo Vệ Streak
+  const [dailyQuestBundle, setDailyQuestBundle] = useState<DailyQuestBundle | null>(null);
+  const [loadingDailyQuests, setLoadingDailyQuests] = useState(false);
+  const [activeDailyQuest, setActiveDailyQuest] = useState<DailyQuestItem | null>(null);
+  const [selectedOptionIdx, setSelectedOptionIdx] = useState<number | null>(null);
+  const [questAnswerChecked, setQuestAnswerChecked] = useState(false);
+  const [questRewardNotice, setQuestRewardNotice] = useState<string | null>(null);
+  const [shieldNotice, setShieldNotice] = useState<{ ok: boolean; text: string } | null>(null);
+  const [buyingShield, setBuyingShield] = useState(false);
 
   // Số liệu tổng thể tài nguyên ứng dụng
   const [catalogStats, setCatalogStats] = useState({
@@ -84,22 +106,47 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
   }, [user?.id]);
 
   // Tải bảng xếp hạng và mốc rank từ Firestore
-  useEffect(() => {
-    async function loadRanking() {
-      setLoadingLeaderboard(true);
-      try {
-        const tiers = await rankingService.getRankTiers();
-        setRankTiers(tiers);
-        const lb = await rankingService.getLearnerLeaderboard(tiers);
-        setLeaderboard(lb);
-      } catch (e) {
-        console.warn('Lỗi tải bảng xếp hạng:', e);
-      } finally {
-        setLoadingLeaderboard(false);
-      }
+  const loadLeaderboardData = async (mode: LeaderboardMode = leaderboardMode) => {
+    setLoadingLeaderboard(true);
+    try {
+      const tiers = rankTiers.length > 0 ? rankTiers : await rankingService.getRankTiers();
+      if (rankTiers.length === 0) setRankTiers(tiers);
+      const lb = await rankingService.getLearnerLeaderboard(tiers, mode);
+      setLeaderboard(lb);
+    } catch (e) {
+      console.warn('Lỗi tải bảng xếp hạng:', e);
+    } finally {
+      setLoadingLeaderboard(false);
     }
-    loadRanking();
-  }, []);
+  };
+
+  useEffect(() => {
+    loadLeaderboardData(leaderboardMode);
+  }, [leaderboardMode]);
+
+  // Nạp hoặc sinh 3 Nhiệm Vụ Ngày bằng AI Gemini từ user_progress
+  useEffect(() => {
+    if (!user?.id || loadingProgress) return;
+    let cancelled = false;
+    setLoadingDailyQuests(true);
+    dailyQuestService
+      .getOrGenerateDailyQuests(
+        user,
+        userProgress,
+        currentRoadmapTarget.stageTitleClean,
+        currentRoadmapTarget.milestoneTitleClean,
+        roadmapProgress?.completedMilestones?.length || 0
+      )
+      .then(bundle => {
+        if (!cancelled) setDailyQuestBundle(bundle);
+      })
+      .finally(() => {
+        if (!cancelled) setLoadingDailyQuests(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [user?.id, user?.level, loadingProgress]);
 
   // Tải số liệu tài nguyên ứng dụng
   useEffect(() => {
@@ -114,12 +161,57 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
     loadStats();
   }, []);
 
-  // Tính bậc rank hiện tại và mốc thăng hạng tiếp theo của user
+  // Tính bậc rank hiện tại và mốc thăng hạng tiếp theo của user (dựa trên XP tích lũy để không bị rớt hạng khi tiêu activePoints)
   const userActivePoints = user?.activePoints ?? 0;
-  const currentRank = rankingService.calculateRank(userActivePoints, rankTiers);
+  const userTotalXp = user?.totalXp ?? 0;
+  const currentWeekKey = getCurrentIsoWeekKey(new Date());
+  const daysRemainingInWeek = getDaysRemainingInWeek(new Date());
+  const userWeeklyPoints = user?.weeklyPointsWeek === currentWeekKey ? (user?.weeklyActivePoints ?? 0) : 0;
+  const rankScoreBaseline = userTotalXp > 0 ? Math.max(userActivePoints, Math.floor(userTotalXp / 2)) : userActivePoints;
+  const currentRank = rankingService.calculateRank(rankScoreBaseline, rankTiers);
   const currentRankMeta = getRankMeta(currentRank.id);
-  const nextRankInfo = rankingService.getNextRankTier(userActivePoints, rankTiers);
+  const nextRankInfo = rankingService.getNextRankTier(rankScoreBaseline, rankTiers);
   const nextRankMeta = nextRankInfo.nextTier ? getRankMeta(nextRankInfo.nextTier.id) : null;
+
+  const handleOpenDailyQuest = (quest: DailyQuestItem) => {
+    setActiveDailyQuest(quest);
+    setSelectedOptionIdx(null);
+    setQuestAnswerChecked(false);
+    setQuestRewardNotice(null);
+  };
+
+  const handleSubmitDailyQuestAnswer = async () => {
+    if (!activeDailyQuest || selectedOptionIdx === null || !dailyQuestBundle || !user?.id) return;
+    setQuestAnswerChecked(true);
+    if (selectedOptionIdx === activeDailyQuest.correctIndex && !activeDailyQuest.completed) {
+      const res = await dailyQuestService.completeDailyQuest(user.id, dailyQuestBundle, activeDailyQuest.id);
+      setDailyQuestBundle(res.updatedBundle);
+      const updatedItem = res.updatedBundle.quests.find(q => q.id === activeDailyQuest.id) || {
+        ...activeDailyQuest,
+        completed: true
+      };
+      setActiveDailyQuest(updatedItem);
+      setQuestRewardNotice(
+        res.bonusJustAwarded
+          ? `🎉 Hoàn thành cả 3/3 nhiệm vụ ngày! Nhận +${res.pointsAwarded} Điểm năng động & +${res.xpAwarded} XP (đã gồm Rương thưởng)!`
+          : `Chính xác! Bạn nhận được +${res.pointsAwarded} Điểm năng động & +${res.xpAwarded} XP.`
+      );
+      loadLeaderboardData(leaderboardMode);
+    }
+  };
+
+  const handleBuyStreakFreeze = async () => {
+    if (!user?.id || buyingShield) return;
+    setBuyingShield(true);
+    setShieldNotice(null);
+    try {
+      const res = await dailyQuestService.buyStreakFreeze(user.id);
+      setShieldNotice({ ok: res.ok, text: res.message });
+      setTimeout(() => setShieldNotice(null), 5000);
+    } finally {
+      setBuyingShield(false);
+    }
+  };
 
   // Vị trí của user trên bảng xếp hạng (chỉ tính role user)
   const userRankIndex = leaderboard.findIndex(
@@ -249,27 +341,204 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
             <ArrowRight className="w-4 h-4 text-emerald-700 group-hover:translate-x-0.5 transition-transform" />
           </button>
         ) : (
-          <div className="flex items-center gap-3 w-full md:w-auto justify-start relative z-10 flex-wrap sm:flex-nowrap">
-            {/* Thẻ Chuỗi chuyên cần (Streak) - Bỏ emoji thô, dùng Lucide Flame sang trọng */}
-            <div className="flex-1 min-w-[110px] bg-white/15 backdrop-blur-xs px-4 py-3 rounded-2xl text-center border border-white/20 shadow-xs">
+          <div className="flex items-center gap-2.5 sm:gap-3 w-full md:w-auto justify-start relative z-10 flex-wrap sm:flex-nowrap">
+            {/* Thẻ Chuỗi chuyên cần (Streak + Khiên bảo vệ) */}
+            <div className="flex-1 min-w-[105px] bg-white/15 backdrop-blur-xs px-3.5 py-2.5 rounded-2xl text-center border border-white/20 shadow-xs">
               <div className="flex items-center justify-center gap-1.5 text-xl sm:text-2xl font-black text-amber-300">
                 <Flame className="w-5 h-5 text-amber-400 fill-amber-400" />
                 <span>{user.currentStreak || 0}</span>
+                {(user.streakFreezes || 0) > 0 && (
+                  <span className="inline-flex items-center gap-0.5 text-[10px] font-extrabold bg-sky-500/30 border border-sky-300/40 text-sky-100 px-1.5 py-0.5 rounded-full">
+                    <Shield className="w-3 h-3 text-sky-200" />
+                    {user.streakFreezes}
+                  </span>
+                )}
               </div>
               <div className="text-[11px] text-emerald-100 font-medium mt-0.5">Chuỗi chuyên cần</div>
             </div>
 
-            {/* Thẻ Điểm Năng Động (Active Points) - Dùng Lucide Zap tinh tế */}
-            <div className="flex-1 min-w-[110px] bg-white/15 backdrop-blur-xs px-4 py-3 rounded-2xl text-center border border-white/20 shadow-xs">
+            {/* Thẻ Ví Điểm Năng Động (Active Points) */}
+            <div className="flex-1 min-w-[105px] bg-white/15 backdrop-blur-xs px-3.5 py-2.5 rounded-2xl text-center border border-white/20 shadow-xs">
               <div className="flex items-center justify-center gap-1.5 text-xl sm:text-2xl font-black text-emerald-200">
                 <Zap className="w-5 h-5 text-emerald-300 fill-emerald-300" />
                 <span>{user.activePoints || 0}</span>
               </div>
               <div className="text-[11px] text-emerald-100 font-medium mt-0.5">Điểm Năng Động</div>
             </div>
+
+            {/* Thẻ Kinh Nghiệm Tích Lũy (XP) */}
+            <div className="flex-1 min-w-[105px] bg-white/15 backdrop-blur-xs px-3.5 py-2.5 rounded-2xl text-center border border-white/20 shadow-xs">
+              <div className="flex items-center justify-center gap-1.5 text-xl sm:text-2xl font-black text-indigo-200">
+                <Award className="w-5 h-5 text-indigo-300" />
+                <span>{(user.totalXp || 0).toLocaleString()}</span>
+              </div>
+              <div className="text-[11px] text-emerald-100 font-medium mt-0.5">Kinh Nghiệm XP</div>
+            </div>
           </div>
         )}
       </div>
+
+      {/* =========================================================================
+          1.5. NHIỆM VỤ NGÀY CÙNG AI SENSEI & KHIÊN BẢO VỆ STREAK
+          ========================================================================= */}
+      {user && (
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-7 border border-emerald-100 dark:border-slate-800 shadow-md shadow-emerald-950/5 space-y-5 transition-colors">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div>
+              <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                <span className="hanko-seal px-2 py-0.2 text-[11px]">挑</span>
+                <span className="bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 px-3 py-0.5 rounded-full text-xs font-bold flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                  <span>NHIỆM VỤ NGÀY • AI SENSEI</span>
+                </span>
+                {dailyQuestBundle && (
+                  <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                    {dailyQuestBundle.level} • {dailyQuestBundle.weakFocus}
+                  </span>
+                )}
+              </div>
+              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+                Thử Thách Hằng Ngày Theo Tiến Độ
+              </h2>
+            </div>
+
+            {/* Rương Thưởng 3/3 + Tiến độ */}
+            {dailyQuestBundle && (
+              <div className={`px-4 py-2 rounded-2xl border flex items-center gap-3 self-start md:self-auto ${
+                dailyQuestBundle.bonusClaimed
+                  ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800'
+                  : 'bg-amber-50/80 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800/70'
+              }`}>
+                <Gift className={`w-5 h-5 shrink-0 ${dailyQuestBundle.bonusClaimed ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`} />
+                <div>
+                  <div className="text-xs font-extrabold text-slate-900 dark:text-white">
+                    Hoàn thành {dailyQuestBundle.quests.filter(q => q.completed).length}/3 nhiệm vụ
+                  </div>
+                  <div className="text-[11px] font-semibold text-amber-800 dark:text-amber-300">
+                    {dailyQuestBundle.bonusClaimed
+                      ? 'Đã nhận Rương thưởng ngày!'
+                      : `Xong 3/3: +${DAILY_BONUS_POINTS} pts & +${DAILY_BONUS_XP} XP`}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {loadingDailyQuests ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+              {[1, 2, 3].map(n => (
+                <div key={n} className="h-36 rounded-2xl bg-slate-100 dark:bg-slate-800/60 animate-pulse border border-slate-200 dark:border-slate-800" />
+              ))}
+            </div>
+          ) : dailyQuestBundle ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+              {dailyQuestBundle.quests.map((q) => (
+                <div
+                  key={q.id}
+                  className={`rounded-2xl p-4 border flex flex-col justify-between gap-3 transition-all ${
+                    q.completed
+                      ? 'bg-emerald-50/60 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800/80'
+                      : 'bg-slate-50/70 dark:bg-slate-800/70 border-slate-200 dark:border-slate-700 hover:border-emerald-400 dark:hover:border-emerald-500'
+                  }`}
+                >
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between gap-2 flex-wrap">
+                      <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white dark:bg-slate-900 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                        {q.categoryLabel}
+                      </span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-900/60">
+                        {q.difficultyLabel}
+                      </span>
+                    </div>
+                    <h3 className="text-sm font-extrabold text-slate-900 dark:text-white leading-snug">
+                      {q.title}
+                    </h3>
+                  </div>
+
+                  <div className="space-y-2.5 pt-1">
+                    <div className="flex items-center gap-2 text-[11px] font-bold">
+                      <span className="text-emerald-700 dark:text-emerald-400 flex items-center gap-0.5">
+                        <Zap className="w-3.5 h-3.5 fill-emerald-500 text-emerald-500" />+{q.pointsReward} pts
+                      </span>
+                      <span className="text-slate-300 dark:text-slate-600">•</span>
+                      <span className="text-indigo-700 dark:text-indigo-400 flex items-center gap-0.5">
+                        <Award className="w-3.5 h-3.5" />+{q.xpReward} XP
+                      </span>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => handleOpenDailyQuest(q)}
+                      className={`w-full py-2 px-3 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                        q.completed
+                          ? 'bg-emerald-600/15 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700'
+                          : 'bg-emerald-700 hover:bg-emerald-800 text-white shadow-xs'
+                      }`}
+                    >
+                      {q.completed ? (
+                        <>
+                          <CheckCircle2 className="w-3.5 h-3.5" />
+                          <span>Đã hoàn thành • Xem lại</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Thử thách ngay</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : null}
+
+          {/* Thanh đổi Điểm Năng Động lấy Khiên Bảo Vệ Streak */}
+          <div className="rounded-2xl p-4 bg-gradient-to-r from-sky-50 via-emerald-50/60 to-amber-50/50 dark:from-slate-800/80 dark:via-slate-800/60 dark:to-slate-800/80 border border-sky-200/80 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-start sm:items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-sky-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                <Shield className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="text-sm font-extrabold text-slate-900 dark:text-white flex items-center gap-2 flex-wrap">
+                  <span>Khiên Bảo Vệ Streak</span>
+                  <span className="text-[11px] font-black px-2 py-0.5 rounded-full bg-sky-100 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
+                    Đang có: {user.streakFreezes || 0}/{MAX_STREAK_FREEZES} khiên
+                  </span>
+                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
+                  Tự động tiêu 1 khiên để giữ nguyên chuỗi ngày học nếu bạn lỡ nghỉ 1 ngày. Đổi bằng Điểm năng động (không trừ XP).
+                </p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleBuyStreakFreeze}
+              disabled={buyingShield || (user.streakFreezes || 0) >= MAX_STREAK_FREEZES || (user.activePoints || 0) < STREAK_FREEZE_COST}
+              className="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-extrabold flex items-center justify-center gap-1.5 shadow-xs transition-all cursor-pointer shrink-0"
+            >
+              <Shield className="w-3.5 h-3.5" />
+              <span>
+                {(user.streakFreezes || 0) >= MAX_STREAK_FREEZES
+                  ? 'Đã tối đa (2/2)'
+                  : `Đổi 1 Khiên (${STREAK_FREEZE_COST} pts)`}
+              </span>
+            </button>
+          </div>
+
+          {shieldNotice && (
+            <div className={`p-3 rounded-xl text-xs font-bold border flex items-center gap-2 ${
+              shieldNotice.ok
+                ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300'
+                : 'bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300'
+            }`}>
+              {shieldNotice.ok ? <CheckCircle2 className="w-4 h-4 shrink-0" /> : <AlertCircle className="w-4 h-4 shrink-0" />}
+              <span>{shieldNotice.text}</span>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* =========================================================================
           2. TIẾN ĐỘ HỌC TẬP THỰC TẾ (LỘ TRÌNH MINH BẠCH THEO CẤP ĐỘ, CHẶNG & BÀI HỌC)
@@ -430,25 +699,56 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
       <div className="bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-7 border border-emerald-100 dark:border-slate-800 shadow-md shadow-emerald-950/5 space-y-5 transition-colors">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <div className="flex items-center gap-2 mb-1.5">
+            <div className="flex items-center gap-2 mb-1.5 flex-wrap">
               <span className="hanko-seal px-2 py-0.2 text-[11px]">
                 誉
               </span>
               <span className="bg-amber-50 dark:bg-amber-950/50 text-amber-900 dark:text-amber-300 border border-amber-200/80 dark:border-amber-800 px-3 py-0.5 rounded-full text-xs font-bold font-jp-sans flex items-center gap-1.5">
                 <Trophy className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-                <span>順位表 • BẢNG XẾP HẠNG HỌC VIÊN TÍCH CỰC</span>
+                <span>
+                  {leaderboardMode === 'weekly'
+                    ? `BXH TUẦN ${currentWeekKey} • CÒN ${daysRemainingInWeek} NGÀY`
+                    : '順位表 • BẢNG XẾP HẠNG TÍCH LŨY (XP)'}
+                </span>
               </span>
             </div>
-            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
-              Bảng Xếp Hạng
-            </h2>
-            
+            <div className="flex items-center gap-3 flex-wrap">
+              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+                Bảng Xếp Hạng
+              </h2>
+              <div className="inline-flex rounded-xl bg-slate-100 dark:bg-slate-800 p-1 border border-slate-200 dark:border-slate-700">
+                <button
+                  type="button"
+                  onClick={() => setLeaderboardMode('weekly')}
+                  className={`px-3 py-1 rounded-lg text-xs font-extrabold transition-all cursor-pointer ${
+                    leaderboardMode === 'weekly'
+                      ? 'bg-emerald-700 text-white shadow-xs'
+                      : 'text-slate-600 dark:text-slate-300 hover:text-emerald-700'
+                  }`}
+                >
+                  Tuần này
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLeaderboardMode('all_time')}
+                  className={`px-3 py-1 rounded-lg text-xs font-extrabold transition-all cursor-pointer ${
+                    leaderboardMode === 'all_time'
+                      ? 'bg-indigo-600 text-white shadow-xs'
+                      : 'text-slate-600 dark:text-slate-300 hover:text-indigo-600'
+                  }`}
+                >
+                  Tích lũy XP
+                </button>
+              </div>
+            </div>
           </div>
 
           {user && (
             <div className="bg-emerald-50/80 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800 px-4 py-2 rounded-2xl flex items-center gap-3 self-start sm:self-auto">
               <div className="text-right">
-                <div className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold">Thứ hạng của bạn</div>
+                <div className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold">
+                  {leaderboardMode === 'weekly' ? `Tuần này: ${userWeeklyPoints} pts` : 'Thứ hạng tích lũy'}
+                </div>
                 <div className="text-sm font-black text-emerald-800 dark:text-emerald-300 font-jp-sans">
                   {userPosition ? `#${userPosition} / ${leaderboard.length} học viên` : 'Chưa xếp hạng'}
                 </div>
@@ -532,7 +832,11 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
               </div>
               <div className="mt-2 text-xs font-black text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 px-2.5 py-0.5 rounded-full border border-slate-200 dark:border-slate-700 flex items-center gap-1">
                 <Zap className="w-3 h-3 text-amber-500 fill-amber-500" />
-                <span>{leaderboard[1].activePoints.toLocaleString()}</span>
+                <span>
+                  {leaderboardMode === 'weekly'
+                    ? `${leaderboard[1].weeklyActivePoints.toLocaleString()} pts`
+                    : `${leaderboard[1].totalXp.toLocaleString()} XP`}
+                </span>
               </div>
             </div>
 
@@ -560,7 +864,11 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
               </div>
               <div className="mt-2 text-xs sm:text-sm font-black text-amber-950 bg-amber-300/90 px-3 py-0.5 rounded-full shadow-xs flex items-center gap-1 border border-amber-400/60">
                 <Zap className="w-3.5 h-3.5 text-amber-900 fill-amber-900" />
-                <span>{leaderboard[0].activePoints.toLocaleString()} pts</span>
+                <span>
+                  {leaderboardMode === 'weekly'
+                    ? `${leaderboard[0].weeklyActivePoints.toLocaleString()} pts`
+                    : `${leaderboard[0].totalXp.toLocaleString()} XP`}
+                </span>
               </div>
             </div>
 
@@ -583,7 +891,11 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
               </div>
               <div className="mt-2 text-xs font-black text-amber-900 dark:text-amber-400 bg-white dark:bg-slate-800 px-2.5 py-0.5 rounded-full border border-amber-200 dark:border-amber-800 flex items-center gap-1">
                 <Zap className="w-3 h-3 text-amber-500 fill-amber-500" />
-                <span>{leaderboard[2].activePoints.toLocaleString()}</span>
+                <span>
+                  {leaderboardMode === 'weekly'
+                    ? `${leaderboard[2].weeklyActivePoints.toLocaleString()} pts`
+                    : `${leaderboard[2].totalXp.toLocaleString()} XP`}
+                </span>
               </div>
             </div>
 
@@ -667,11 +979,19 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
                   <div className="text-right shrink-0">
                     <div className="font-black text-emerald-800 dark:text-emerald-400 text-sm sm:text-base flex items-center justify-end gap-1 font-mono">
                       <Zap className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                      <span>{item.activePoints.toLocaleString()}</span>
-                      <span className="text-xs font-normal text-slate-400">pts</span>
+                      <span>
+                        {leaderboardMode === 'weekly'
+                          ? item.weeklyActivePoints.toLocaleString()
+                          : item.totalXp.toLocaleString()}
+                      </span>
+                      <span className="text-xs font-normal text-slate-400">
+                        {leaderboardMode === 'weekly' ? 'pts tuần' : 'XP'}
+                      </span>
                     </div>
                     <div className="text-[11px] text-slate-400 dark:text-slate-500 font-medium">
-                      {item.totalXp.toLocaleString()} XP
+                      {leaderboardMode === 'weekly'
+                        ? `${item.totalXp.toLocaleString()} XP tổng`
+                        : `${item.activePoints.toLocaleString()} pts khả dụng`}
                     </div>
                   </div>
                 </div>
@@ -680,6 +1000,149 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
           )}
         </div>
       </div>
+
+      {/* =========================================================================
+          4. MODAL LÀM NHIỆM VỤ NGÀY (DAILY QUEST CHALLENGE RUNNER)
+          ========================================================================= */}
+      {activeDailyQuest && (
+        <div className="fixed inset-0 z-[110] bg-slate-950/65 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white dark:bg-slate-900 border border-emerald-100 dark:border-slate-800 rounded-3xl max-w-xl w-full p-6 shadow-2xl space-y-5 my-auto">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <div className="flex items-center gap-2 mb-1 flex-wrap">
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                    {activeDailyQuest.categoryLabel}
+                  </span>
+                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/50 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
+                    +{activeDailyQuest.pointsReward} pts • +{activeDailyQuest.xpReward} XP
+                  </span>
+                </div>
+                <h3 className="text-lg font-extrabold text-slate-900 dark:text-white">
+                  {activeDailyQuest.title}
+                </h3>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setActiveDailyQuest(null)}
+                className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {activeDailyQuest.passage && (
+              <div className="p-4 rounded-2xl bg-amber-50/60 dark:bg-slate-800/80 border border-amber-200/70 dark:border-slate-700 text-sm text-slate-800 dark:text-slate-200 leading-relaxed whitespace-pre-wrap font-jp-serif">
+                {activeDailyQuest.passage}
+              </div>
+            )}
+
+            <div
+              className="text-base font-bold text-slate-900 dark:text-white leading-relaxed whitespace-pre-wrap"
+              dangerouslySetInnerHTML={{ __html: activeDailyQuest.question }}
+            />
+
+            <div className="space-y-2.5">
+              {activeDailyQuest.options.map((opt, idx) => {
+                const isSelected = selectedOptionIdx === idx;
+                const isCorrectOpt = idx === activeDailyQuest.correctIndex;
+                const showResult = questAnswerChecked || activeDailyQuest.completed;
+
+                let btnClass = 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:border-emerald-400';
+                if (showResult) {
+                  if (isCorrectOpt) {
+                    btnClass = 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-500 text-emerald-800 dark:text-emerald-300 font-bold';
+                  } else if (isSelected && !isCorrectOpt) {
+                    btnClass = 'bg-rose-50 dark:bg-rose-950/50 border-rose-500 text-rose-700 dark:text-rose-300 font-bold';
+                  }
+                } else if (isSelected) {
+                  btnClass = 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-600 text-emerald-900 dark:text-emerald-200 font-bold';
+                }
+
+                return (
+                  <button
+                    key={idx}
+                    type="button"
+                    disabled={activeDailyQuest.completed || (questAnswerChecked && selectedOptionIdx === activeDailyQuest.correctIndex)}
+                    onClick={() => {
+                      setSelectedOptionIdx(idx);
+                      if (questAnswerChecked && selectedOptionIdx !== activeDailyQuest.correctIndex) {
+                        setQuestAnswerChecked(false);
+                      }
+                    }}
+                    className={`w-full text-left px-4 py-3 rounded-2xl border-2 text-sm flex items-center gap-3 transition-all cursor-pointer ${btnClass}`}
+                  >
+                    <span className="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-extrabold flex items-center justify-center shrink-0">
+                      {String.fromCharCode(65 + idx)}
+                    </span>
+                    <span className="flex-1">{opt}</span>
+                    {showResult && isCorrectOpt && <Check className="w-4 h-4 text-emerald-600 shrink-0" />}
+                    {showResult && isSelected && !isCorrectOpt && <X className="w-4 h-4 text-rose-600 shrink-0" />}
+                  </button>
+                );
+              })}
+            </div>
+
+            {(questAnswerChecked || activeDailyQuest.completed) && (
+              <div className={`p-4 rounded-2xl border text-xs leading-relaxed space-y-1.5 ${
+                activeDailyQuest.completed || selectedOptionIdx === activeDailyQuest.correctIndex
+                  ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200'
+                  : 'bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-800 text-rose-900 dark:text-rose-200'
+              }`}>
+                <div className="font-extrabold flex items-center gap-1.5">
+                  {activeDailyQuest.completed || selectedOptionIdx === activeDailyQuest.correctIndex ? (
+                    <>
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                      <span>{questRewardNotice || 'Bạn đã hoàn thành nhiệm vụ này!'}</span>
+                    </>
+                  ) : (
+                    <>
+                      <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400" />
+                      <span>Chưa chính xác — hãy đọc giải thích và thử lại nhé!</span>
+                    </>
+                  )}
+                </div>
+                <p>{activeDailyQuest.explanation}</p>
+              </div>
+            )}
+
+            <div className="flex items-center justify-end gap-2.5 pt-2">
+              {questAnswerChecked && selectedOptionIdx !== activeDailyQuest.correctIndex && !activeDailyQuest.completed && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setQuestAnswerChecked(false);
+                    setSelectedOptionIdx(null);
+                  }}
+                  className="px-4 py-2 rounded-xl bg-amber-100 dark:bg-amber-950/50 text-amber-900 dark:text-amber-300 text-xs font-extrabold flex items-center gap-1.5 cursor-pointer"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>Chọn lại</span>
+                </button>
+              )}
+
+              {!activeDailyQuest.completed && (!questAnswerChecked || selectedOptionIdx !== activeDailyQuest.correctIndex) ? (
+                <button
+                  type="button"
+                  disabled={selectedOptionIdx === null}
+                  onClick={handleSubmitDailyQuestAnswer}
+                  className="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 disabled:opacity-50 text-white text-xs font-extrabold cursor-pointer shadow-xs"
+                >
+                  Kiểm tra đáp án
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setActiveDailyQuest(null)}
+                  className="px-5 py-2.5 rounded-xl bg-slate-900 dark:bg-emerald-700 text-white text-xs font-extrabold cursor-pointer"
+                >
+                  Đóng
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

@@ -159,6 +159,8 @@ export interface StreakEvaluationResult {
   daysDifference: number;
   isConsecutive: boolean;
   isBroken: boolean;
+  shieldUsed?: boolean;
+  remainingFreezes?: number;
   todayStr: string;
   message?: string;
 }
@@ -166,7 +168,8 @@ export interface StreakEvaluationResult {
 export function evaluateDailyStreak(
   currentStreak: number = 0,
   lastActiveDateRaw?: string | null,
-  now: Date = new Date()
+  now: Date = new Date(),
+  streakFreezes: number = 0
 ): StreakEvaluationResult {
   const todayStr = getLocalDateString(now);
   const lastActiveStr = normalizeDateToLocalString(lastActiveDateRaw);
@@ -210,6 +213,23 @@ export function evaluateDailyStreak(
     };
   }
 
+  // Nếu lỡ đúng 1 ngày (diffDays === 2) và có Khiên Bảo Vệ Streak: tự động kích hoạt khiên giữ chuỗi!
+  if (diffDays === 2 && streakFreezes > 0 && currentStreak > 0) {
+    const newStreak = currentStreak + 1;
+    const remaining = Math.max(0, streakFreezes - 1);
+    return {
+      newStreak,
+      streakUpdated: true,
+      daysDifference: diffDays,
+      isConsecutive: true,
+      isBroken: false,
+      shieldUsed: true,
+      remainingFreezes: remaining,
+      todayStr,
+      message: `🛡️ Khiên Bảo Vệ đã giữ chuỗi ${newStreak} ngày cho bạn! (Còn ${remaining} khiên)`
+    };
+  }
+
   if (diffDays > 1) {
     return {
       newStreak: 1,
@@ -244,14 +264,24 @@ export const authService = {
     const user = targetUser || this.getCurrentUser();
     if (!user || !user.id) return null;
 
-    const evaluation = evaluateDailyStreak(user.currentStreak, user.lastActiveDate);
+    const evaluation = evaluateDailyStreak(
+      user.currentStreak,
+      user.lastActiveDate,
+      new Date(),
+      user.streakFreezes || 0
+    );
     if (!evaluation.streakUpdated) {
       return { user, evaluation };
     }
 
+    const nextFreezes = evaluation.shieldUsed
+      ? (evaluation.remainingFreezes ?? Math.max(0, (user.streakFreezes || 0) - 1))
+      : (user.streakFreezes || 0);
+
     const updatedUser: User = {
       ...user,
       currentStreak: evaluation.newStreak,
+      streakFreezes: nextFreezes,
       lastActiveDate: evaluation.todayStr,
       lastStudiedAt: new Date().toISOString()
     };
@@ -267,6 +297,7 @@ export const authService = {
         const idx = regUsers.findIndex((u: any) => u.id === user.id || (u.email && u.email.toLowerCase() === user.email?.toLowerCase()));
         if (idx >= 0) {
           regUsers[idx].currentStreak = evaluation.newStreak;
+          regUsers[idx].streakFreezes = nextFreezes;
           regUsers[idx].lastActiveDate = evaluation.todayStr;
           regUsers[idx].lastStudiedAt = updatedUser.lastStudiedAt;
           localStorage.setItem('kizuna_registered_users', JSON.stringify(regUsers));
@@ -282,6 +313,7 @@ export const authService = {
         const userRef = doc(db, 'users', user.id);
         await updateDoc(userRef, {
           currentStreak: evaluation.newStreak,
+          ...(evaluation.shieldUsed ? { streakFreezes: nextFreezes } : {}),
           lastActiveDate: evaluation.todayStr,
           lastStudiedAt: updatedUser.lastStudiedAt
         });
@@ -584,6 +616,9 @@ export const authService = {
             activePoints: typeof matchedDoc.activePoints === 'number' ? matchedDoc.activePoints : 0,
             totalXp: typeof matchedDoc.totalXp === 'number' ? matchedDoc.totalXp : 0,
             currentStreak: typeof matchedDoc.currentStreak === 'number' ? matchedDoc.currentStreak : 0,
+            streakFreezes: typeof matchedDoc.streakFreezes === 'number' ? matchedDoc.streakFreezes : 0,
+            weeklyActivePoints: typeof matchedDoc.weeklyActivePoints === 'number' ? matchedDoc.weeklyActivePoints : 0,
+            weeklyPointsWeek: matchedDoc.weeklyPointsWeek,
             level: matchedDoc.level || 'Tân binh',
             avatarUrl: matchedDoc.avatarUrl || (role === 'ROLE_ADMIN' ? 'https://api.dicebear.com/7.x/bottts/svg?seed=admin' : `https://api.dicebear.com/7.x/avataaars/svg?seed=${emailInput}`),
             lastActiveDate: matchedDoc.lastActiveDate,
@@ -747,6 +782,9 @@ export const authService = {
           activePoints: typeof matchedDoc.activePoints === 'number' ? matchedDoc.activePoints : (currentUser?.activePoints ?? 0),
           totalXp: typeof matchedDoc.totalXp === 'number' ? matchedDoc.totalXp : (currentUser?.totalXp ?? 0),
           currentStreak: typeof matchedDoc.currentStreak === 'number' ? matchedDoc.currentStreak : (currentUser?.currentStreak ?? 0),
+          streakFreezes: typeof matchedDoc.streakFreezes === 'number' ? matchedDoc.streakFreezes : (currentUser?.streakFreezes ?? 0),
+          weeklyActivePoints: typeof matchedDoc.weeklyActivePoints === 'number' ? matchedDoc.weeklyActivePoints : (currentUser?.weeklyActivePoints ?? 0),
+          weeklyPointsWeek: matchedDoc.weeklyPointsWeek || currentUser?.weeklyPointsWeek,
           level: matchedDoc.level || (currentUser?.level ?? 'Tân binh'),
           avatarUrl: matchedDoc.avatarUrl || (currentUser?.avatarUrl ?? (role === 'ROLE_ADMIN' ? 'https://api.dicebear.com/7.x/bottts/svg?seed=admin' : `https://api.dicebear.com/7.x/avataaars/svg?seed=${clean}`)),
           lastActiveDate: matchedDoc.lastActiveDate || currentUser?.lastActiveDate,
@@ -837,6 +875,9 @@ export const authService = {
         activePoints: typeof matchedDoc.activePoints === 'number' ? matchedDoc.activePoints : 0,
         totalXp: typeof matchedDoc.totalXp === 'number' ? matchedDoc.totalXp : 0,
         currentStreak: typeof matchedDoc.currentStreak === 'number' ? matchedDoc.currentStreak : 1,
+        streakFreezes: typeof matchedDoc.streakFreezes === 'number' ? matchedDoc.streakFreezes : 0,
+        weeklyActivePoints: typeof matchedDoc.weeklyActivePoints === 'number' ? matchedDoc.weeklyActivePoints : 0,
+        weeklyPointsWeek: matchedDoc.weeklyPointsWeek,
         level: matchedDoc.level || 'Tân binh',
         avatarUrl: matchedDoc.avatarUrl || photoURL,
         lastActiveDate: matchedDoc.lastActiveDate,

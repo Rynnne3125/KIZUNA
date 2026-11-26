@@ -3,12 +3,14 @@ package com.kizuna.controller;
 import com.kizuna.common.ApiResponse;
 import com.kizuna.dto.request.AiAppealCreateRequest;
 import com.kizuna.dto.request.AiSenseiEvaluateRequest;
+import com.kizuna.dto.request.DailyQuestGenerateRequest;
 import com.kizuna.model.AiAuditEntry;
 import com.kizuna.model.GrammarItem;
 import com.kizuna.model.VocabularyItem;
 import com.kizuna.repository.AiAuditRepository;
 import com.kizuna.repository.CurriculumRepository;
 import com.kizuna.security.UserPrincipal;
+import com.kizuna.service.AiDailyQuestService;
 import com.kizuna.service.AiRuntimeService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -24,15 +26,32 @@ import java.util.Map;
 public class AiSenseiController {
 
     private final AiRuntimeService aiRuntimeService;
+    private final AiDailyQuestService aiDailyQuestService;
     private final AiAuditRepository aiAuditRepository;
     private final CurriculumRepository curriculumRepository;
 
     public AiSenseiController(AiRuntimeService aiRuntimeService,
+                              AiDailyQuestService aiDailyQuestService,
                               AiAuditRepository aiAuditRepository,
                               CurriculumRepository curriculumRepository) {
         this.aiRuntimeService = aiRuntimeService;
+        this.aiDailyQuestService = aiDailyQuestService;
         this.aiAuditRepository = aiAuditRepository;
         this.curriculumRepository = curriculumRepository;
+    }
+
+    /**
+     * Sinh bộ 3 Nhiệm vụ ngày (Daily Quest) từ tiến độ học tập user_progress qua Gemini API (cache theo ngày).
+     */
+    @PostMapping("/daily-quest/generate")
+    public ResponseEntity<ApiResponse<Map<String, Object>>> generateDailyQuest(
+            @AuthenticationPrincipal UserPrincipal principal,
+            @Valid @RequestBody DailyQuestGenerateRequest request) {
+        if ((request.getUserId() == null || request.getUserId().isBlank()) && principal != null) {
+            request.setUserId(principal.getId());
+        }
+        Map<String, Object> bundle = aiDailyQuestService.generateOrGetDailyQuests(request);
+        return ResponseEntity.ok(ApiResponse.success("Đã sẵn sàng nhiệm vụ ngày hôm nay", bundle));
     }
 
     /**

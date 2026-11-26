@@ -2,6 +2,7 @@ import { db } from '../../config/firebase';
 import { doc, getDoc, setDoc, updateDoc, increment, collection, query, where, getDocs } from 'firebase/firestore';
 import { UserProgressData } from '../types/progress';
 import { getLocalDateString, evaluateDailyStreak } from './authService';
+import { getCurrentIsoWeekKey } from './dailyQuestService';
 
 export interface UserExamResult {
   userId: string;
@@ -64,6 +65,7 @@ export const progressService = {
     if (!userId) return null;
     const CACHE_KEY = `kizuna_user_progress_${userId}`;
     const OFFLINE_KEY = `kizuna_offline_progress_${userId}`;
+    void CACHE_KEY;
 
     try {
       const raw = sessionStorage.getItem(CACHE_KEY);
@@ -186,10 +188,15 @@ export const progressService = {
 
     const finalXp = typeof xpEarned === 'number' ? xpEarned : activePointsEarned * 2;
     const todayStr = getLocalDateString(new Date());
+    const currentWeekKey = getCurrentIsoWeekKey(new Date());
     let currentStreak = 0;
+    let nextWeeklyPoints = activePointsEarned;
+    let nextStreakFreezes: number | undefined;
 
     try {
       sessionStorage.removeItem(`kizuna_user_progress_${userId}`);
+      sessionStorage.removeItem(`kizuna_leaderboard_cache_weekly_${currentWeekKey}`);
+      sessionStorage.removeItem(`kizuna_leaderboard_cache_all_time_${currentWeekKey}`);
 
       // 1. Cập nhật session user trong localStorage để thanh header nhảy điểm ngay (kể cả khi Offline)
       const userRaw = localStorage.getItem('kizuna_user');
@@ -198,11 +205,27 @@ export const progressService = {
         if (u) {
           u.activePoints = (u.activePoints || 0) + activePointsEarned;
           u.totalXp = (u.totalXp || 0) + finalXp;
+          if (u.weeklyPointsWeek === currentWeekKey) {
+            u.weeklyActivePoints = (u.weeklyActivePoints || 0) + activePointsEarned;
+          } else {
+            u.weeklyPointsWeek = currentWeekKey;
+            u.weeklyActivePoints = activePointsEarned;
+          }
+          nextWeeklyPoints = u.weeklyActivePoints;
 
-          const streakEval = evaluateDailyStreak(u.currentStreak, u.lastActiveDate);
+          const streakEval = evaluateDailyStreak(
+            u.currentStreak,
+            u.lastActiveDate,
+            new Date(),
+            u.streakFreezes || 0
+          );
           if (streakEval.streakUpdated) {
             u.currentStreak = streakEval.newStreak;
             u.lastActiveDate = streakEval.todayStr;
+            if (streakEval.shieldUsed) {
+              u.streakFreezes = streakEval.remainingFreezes ?? Math.max(0, (u.streakFreezes || 0) - 1);
+              nextStreakFreezes = u.streakFreezes;
+            }
             if (typeof window !== 'undefined' && streakEval.isConsecutive) {
               window.dispatchEvent(new CustomEvent('kizuna_streak_increased', {
                 detail: { newStreak: streakEval.newStreak, message: streakEval.message }
@@ -267,9 +290,14 @@ export const progressService = {
       const updatePayload: any = {
         activePoints: increment(activePointsEarned),
         totalXp: increment(finalXp),
+        weeklyActivePoints: nextWeeklyPoints,
+        weeklyPointsWeek: currentWeekKey,
         lastStudiedAt: new Date().toISOString(),
         lastActiveDate: todayStr
       };
+      if (typeof nextStreakFreezes === 'number') {
+        updatePayload.streakFreezes = nextStreakFreezes;
+      }
       if (currentStreak > 0) {
         updatePayload.currentStreak = currentStreak;
       }

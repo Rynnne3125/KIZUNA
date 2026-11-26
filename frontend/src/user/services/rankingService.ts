@@ -1,7 +1,8 @@
 import { db } from '../../config/firebase';
 import { collection, getDocs, doc, getDoc, setDoc, query, limit } from 'firebase/firestore';
-import { RankTier, UserLeaderboardItem } from '../types/ranking';
+import { RankTier, UserLeaderboardItem, LeaderboardMode } from '../types/ranking';
 import { shouldSkipFirestore, handleFirestoreError } from '../utils/firestoreGuard';
+import { getCurrentIsoWeekKey } from './dailyQuestService';
 
 export const DEFAULT_RANK_TIERS: RankTier[] = [
   {
@@ -153,11 +154,15 @@ export const rankingService = {
 
   /**
    * Lấy danh sách bảng xếp hạng học viên từ Firestore
-   * QUY TẮC BẮT BUỘC: CHỈ người dùng role user mới tham gia xếp hạng (loại bỏ admin)
-   * TỐI ƯU HÓA: Dùng cache sessionStorage (TTL 5 phút), limit(50), và fallback localStorage.
+   * - mode = 'weekly': xếp hạng theo điểm năng động kiếm được trong tuần ISO hiện tại (reset mỗi tuần)
+   * - mode = 'all_time': xếp hạng theo tổng XP vĩnh viễn (không bị ảnh hưởng khi tiêu activePoints mua Khiên)
    */
-  async getLearnerLeaderboard(tiers: RankTier[] = DEFAULT_RANK_TIERS): Promise<UserLeaderboardItem[]> {
-    const CACHE_KEY = 'kizuna_leaderboard_cache';
+  async getLearnerLeaderboard(
+    tiers: RankTier[] = DEFAULT_RANK_TIERS,
+    mode: LeaderboardMode = 'weekly'
+  ): Promise<UserLeaderboardItem[]> {
+    const currentWeekKey = getCurrentIsoWeekKey(new Date());
+    const CACHE_KEY = `kizuna_leaderboard_cache_${mode}_${currentWeekKey}`;
     try {
       const raw = sessionStorage.getItem(CACHE_KEY);
       if (raw) {
@@ -170,6 +175,24 @@ export const rankingService = {
       // ignore
     }
 
+    const sortItems = (list: UserLeaderboardItem[]): UserLeaderboardItem[] => {
+      list.sort((a, b) => {
+        if (mode === 'weekly') {
+          if (b.weeklyActivePoints !== a.weeklyActivePoints) {
+            return b.weeklyActivePoints - a.weeklyActivePoints;
+          }
+          if (b.totalXp !== a.totalXp) return b.totalXp - a.totalXp;
+          return b.activePoints - a.activePoints;
+        }
+        if (b.totalXp !== a.totalXp) return b.totalXp - a.totalXp;
+        return b.activePoints - a.activePoints;
+      });
+      list.forEach((item, index) => {
+        item.position = index + 1;
+      });
+      return list;
+    };
+
     const buildLocalLeaderboard = (): UserLeaderboardItem[] => {
       try {
         const raw = localStorage.getItem('kizuna_registered_users');
@@ -177,7 +200,10 @@ export const rankingService = {
         const curRaw = localStorage.getItem('kizuna_user');
         if (curRaw) {
           const cur = JSON.parse(curRaw);
-          if (!users.some(u => u.id === cur.id || u.email === cur.email)) {
+          const idx = users.findIndex(u => u.id === cur.id || u.email === cur.email);
+          if (idx >= 0) {
+            users[idx] = { ...users[idx], ...cur };
+          } else {
             users.push(cur);
           }
         }
@@ -185,6 +211,10 @@ export const rankingService = {
           .filter(u => !String(u.role || '').toLowerCase().includes('admin') && !u.isDeleted)
           .map((u, idx) => {
             const ap = typeof u.activePoints === 'number' ? u.activePoints : 0;
+            const totalXp = typeof u.totalXp === 'number' ? u.totalXp : 0;
+            const weeklyPts = (u.weeklyPointsWeek === currentWeekKey && typeof u.weeklyActivePoints === 'number')
+              ? u.weeklyActivePoints
+              : 0;
             return {
               id: u.id || `local_user_${idx}`,
               fullName: u.fullName || u.username || 'Học viên KIZUNA',
@@ -192,18 +222,16 @@ export const rankingService = {
               email: u.email || '',
               avatarUrl: u.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${u.username || idx}`,
               activePoints: ap,
-              totalXp: typeof u.totalXp === 'number' ? u.totalXp : 0,
+              weeklyActivePoints: weeklyPts,
+              weeklyPointsWeek: currentWeekKey,
+              totalXp,
               currentStreak: typeof u.currentStreak === 'number' ? u.currentStreak : 0,
-              rankTier: this.calculateRank(ap, tiers),
+              streakFreezes: typeof u.streakFreezes === 'number' ? u.streakFreezes : 0,
+              rankTier: this.calculateRank(totalXp > 0 ? Math.max(ap, Math.floor(totalXp / 2)) : ap, tiers),
               position: 0
             };
-          })
-          .sort((a, b) => b.activePoints - a.activePoints);
-
-        validLearners.forEach((item, index) => {
-          item.position = index + 1;
-        });
-        return validLearners;
+          });
+        return sortItems(validLearners);
       } catch {
         return [];
       }
@@ -214,14 +242,14 @@ export const rankingService = {
     }
 
     try {
-      const q = query(collection(db, 'users'), limit(50));
+      const q = query(collection(db, 'users'), limit(60));
       const snap = await getDocs(q);
       const items: UserLeaderboardItem[] = [];
 
       snap.forEach(d => {
         const u = d.data();
         const role = String(u.role || '').trim().toLowerCase();
-        
+
         // CHỈ LẤY HỌC VIÊN (ROLE_USER), KHÔNG XẾP HẠNG TÀI KHOẢN ADMIN
         if (role.includes('admin') || u.isDeleted) {
           return;
@@ -230,7 +258,10 @@ export const rankingService = {
         const activePoints = typeof u.activePoints === 'number' ? u.activePoints : 0;
         const totalXp = typeof u.totalXp === 'number' ? u.totalXp : 0;
         const currentStreak = typeof u.currentStreak === 'number' ? u.currentStreak : 0;
-        const rankTier = this.calculateRank(activePoints, tiers);
+        const weeklyActivePoints = (u.weeklyPointsWeek === currentWeekKey && typeof u.weeklyActivePoints === 'number')
+          ? u.weeklyActivePoints
+          : 0;
+        const rankTier = this.calculateRank(totalXp > 0 ? Math.max(activePoints, Math.floor(totalXp / 2)) : activePoints, tiers);
 
         items.push({
           id: d.id,
@@ -239,20 +270,17 @@ export const rankingService = {
           email: u.email || '',
           avatarUrl: u.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${u.username || d.id}`,
           activePoints,
+          weeklyActivePoints,
+          weeklyPointsWeek: currentWeekKey,
           totalXp,
           currentStreak,
+          streakFreezes: typeof u.streakFreezes === 'number' ? u.streakFreezes : 0,
           rankTier,
           position: 0
         });
       });
 
-      // Sắp xếp giảm dần theo điểm năng động (activePoints)
-      items.sort((a, b) => b.activePoints - a.activePoints);
-
-      // Gán thứ hạng position: #1, #2, #3...
-      items.forEach((item, index) => {
-        item.position = index + 1;
-      });
+      sortItems(items);
 
       if (items.length > 0) {
         try {

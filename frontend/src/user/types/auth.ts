@@ -10,6 +10,9 @@ export interface User {
   activePoints?: number;
   totalXp?: number;
   currentStreak?: number;
+  streakFreezes?: number;
+  weeklyActivePoints?: number;
+  weeklyPointsWeek?: string;
   level?: string;
   placementVerified?: boolean;
   placementScore?: number;

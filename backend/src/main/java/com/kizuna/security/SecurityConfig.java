@@ -79,6 +79,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/v1/system/status").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/placement/assessment").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/ai/sensei/evaluate").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/ai/daily-quest/generate").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/ai/appeals").permitAll()
                         .requestMatchers("/error").permitAll()
 
