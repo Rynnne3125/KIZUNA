@@ -13,6 +13,8 @@ export interface User {
   streakFreezes?: number;
   weeklyActivePoints?: number;
   weeklyPointsWeek?: string;
+  weeklyXp?: number;
+  weeklyXpWeek?: string;
   level?: string;
   placementVerified?: boolean;
   placementScore?: number;

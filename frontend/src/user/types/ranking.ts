@@ -18,6 +18,8 @@ export interface UserLeaderboardItem {
   activePoints: number;
   weeklyActivePoints: number;
   weeklyPointsWeek?: string;
+  weeklyXp: number;
+  weeklyXpWeek?: string;
   totalXp: number;
   currentStreak: number;
   streakFreezes?: number;

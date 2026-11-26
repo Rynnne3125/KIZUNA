@@ -191,6 +191,7 @@ export const progressService = {
     const currentWeekKey = getCurrentIsoWeekKey(new Date());
     let currentStreak = 0;
     let nextWeeklyPoints = activePointsEarned;
+    let nextWeeklyXp = finalXp;
     let nextStreakFreezes: number | undefined;
 
     try {
@@ -211,7 +212,14 @@ export const progressService = {
             u.weeklyPointsWeek = currentWeekKey;
             u.weeklyActivePoints = activePointsEarned;
           }
+          if (u.weeklyXpWeek === currentWeekKey) {
+            u.weeklyXp = (u.weeklyXp || 0) + finalXp;
+          } else {
+            u.weeklyXpWeek = currentWeekKey;
+            u.weeklyXp = finalXp;
+          }
           nextWeeklyPoints = u.weeklyActivePoints;
+          nextWeeklyXp = u.weeklyXp;
 
           const streakEval = evaluateDailyStreak(
             u.currentStreak,
@@ -292,6 +300,8 @@ export const progressService = {
         totalXp: increment(finalXp),
         weeklyActivePoints: nextWeeklyPoints,
         weeklyPointsWeek: currentWeekKey,
+        weeklyXp: nextWeeklyXp,
+        weeklyXpWeek: currentWeekKey,
         lastStudiedAt: new Date().toISOString(),
         lastActiveDate: todayStr
       };

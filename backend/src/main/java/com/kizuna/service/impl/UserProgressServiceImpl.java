@@ -220,6 +220,22 @@ public class UserProgressServiceImpl implements UserProgressService {
         if (user != null) {
             user.setTotalXp(user.getTotalXp() + xpGained);
             user.setActivePoints(user.getActivePoints() + apGained);
+            java.time.LocalDate todayVn = java.time.LocalDate.now(java.time.ZoneId.of("Asia/Ho_Chi_Minh"));
+            var weekFields = java.time.temporal.WeekFields.ISO;
+            String currentWeekKey = todayVn.get(weekFields.weekBasedYear()) + "-W"
+                    + String.format("%02d", todayVn.get(weekFields.weekOfWeekBasedYear()));
+            if (currentWeekKey.equals(user.getWeeklyXpWeek())) {
+                user.setWeeklyXp(user.getWeeklyXp() + xpGained);
+            } else {
+                user.setWeeklyXpWeek(currentWeekKey);
+                user.setWeeklyXp(xpGained);
+            }
+            if (currentWeekKey.equals(user.getWeeklyPointsWeek())) {
+                user.setWeeklyActivePoints(user.getWeeklyActivePoints() + apGained);
+            } else {
+                user.setWeeklyPointsWeek(currentWeekKey);
+                user.setWeeklyActivePoints(apGained);
+            }
             if (milestoneCompleted) {
                 user.setCurrentStreak(user.getCurrentStreak() + 1);
                 if (user.getCurrentStreak() > user.getLongestStreak()) {

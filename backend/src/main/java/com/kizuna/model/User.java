@@ -23,6 +23,8 @@ public class User {
     private int streakFreezes = 0;
     private int weeklyActivePoints = 0;
     private String weeklyPointsWeek;
+    private int weeklyXp = 0;
+    private String weeklyXpWeek;
     private String avatarUrl = "";
     private String level = "N5";
     private Boolean placementVerified;
@@ -99,6 +101,12 @@ public class User {
 
     public String getWeeklyPointsWeek() { return weeklyPointsWeek; }
     public void setWeeklyPointsWeek(String weeklyPointsWeek) { this.weeklyPointsWeek = weeklyPointsWeek; }
+
+    public int getWeeklyXp() { return weeklyXp; }
+    public void setWeeklyXp(int weeklyXp) { this.weeklyXp = weeklyXp; }
+
+    public String getWeeklyXpWeek() { return weeklyXpWeek; }
+    public void setWeeklyXpWeek(String weeklyXpWeek) { this.weeklyXpWeek = weeklyXpWeek; }
 
     public String getAvatarUrl() { return avatarUrl; }
     public void setAvatarUrl(String avatarUrl) { this.avatarUrl = avatarUrl; }

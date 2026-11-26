@@ -171,16 +171,19 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
     loadStats();
   }, []);
 
-  // Tính bậc rank hiện tại và mốc thăng hạng tiếp theo của user (dựa trên XP tích lũy để không bị rớt hạng khi tiêu activePoints)
-  const userActivePoints = user?.activePoints ?? 0;
+  // Tính bậc rank hiện tại và mốc thăng hạng tiếp theo hoàn toàn theo Kinh nghiệm (XP)
   const userTotalXp = user?.totalXp ?? 0;
   const currentWeekKey = getCurrentIsoWeekKey(new Date());
   const daysRemainingInWeek = getDaysRemainingInWeek(new Date());
-  const userWeeklyPoints = user?.weeklyPointsWeek === currentWeekKey ? (user?.weeklyActivePoints ?? 0) : 0;
-  const rankScoreBaseline = userTotalXp > 0 ? Math.max(userActivePoints, Math.floor(userTotalXp / 2)) : userActivePoints;
-  const currentRank = rankingService.calculateRank(rankScoreBaseline, rankTiers);
+  const userWeeklyXp =
+    user?.weeklyXpWeek === currentWeekKey
+      ? (user?.weeklyXp ?? 0)
+      : user?.weeklyPointsWeek === currentWeekKey
+      ? (user?.weeklyActivePoints ?? 0) * 2
+      : 0;
+  const currentRank = rankingService.calculateRank(userTotalXp, rankTiers);
   const currentRankMeta = getRankMeta(currentRank.id);
-  const nextRankInfo = rankingService.getNextRankTier(rankScoreBaseline, rankTiers);
+  const nextRankInfo = rankingService.getNextRankTier(userTotalXp, rankTiers);
   const nextRankMeta = nextRankInfo.nextTier ? getRankMeta(nextRankInfo.nextTier.id) : null;
 
   const handleOpenDailyQuest = (quest: DailyQuestItem) => {
@@ -788,7 +791,7 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
             <div className="bg-emerald-50/80 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800 px-4 py-2 rounded-2xl flex items-center gap-3 self-start sm:self-auto">
               <div className="text-right">
                 <div className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold">
-                  {leaderboardMode === 'weekly' ? `Tuần này: ${userWeeklyPoints} pts` : 'Thứ hạng tích lũy'}
+                  {leaderboardMode === 'weekly' ? `Tuần này: ${userWeeklyXp.toLocaleString()} XP` : 'Thứ hạng tích lũy'}
                 </div>
                 <div className="text-sm font-black text-emerald-800 dark:text-emerald-300 font-jp-sans">
                   {userPosition ? `#${userPosition} / ${leaderboard.length} học viên` : 'Chưa xếp hạng'}
@@ -813,7 +816,7 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
                   <span>Bậc hiện tại: {currentRank.name}</span>
                   <span className="text-emerald-800 dark:text-emerald-300 font-bold bg-white dark:bg-slate-900 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800 text-xs flex items-center gap-1">
                     <Zap className="w-3 h-3 text-amber-500 fill-amber-500" />
-                    <span>{userActivePoints.toLocaleString()} pts</span>
+                    <span>{userTotalXp.toLocaleString()} XP</span>
                   </span>
                 </div>
                 <div className="text-slate-600 dark:text-slate-400 mt-0.5">
@@ -826,7 +829,7 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
               {nextRankInfo.nextTier ? (
                 <div className="bg-white/95 dark:bg-slate-900/95 border border-amber-200 dark:border-amber-800/60 px-3.5 py-1.5 rounded-xl text-center shadow-2xs">
                   <div className="text-[11px] text-amber-950 dark:text-amber-300 font-bold">
-                    Cần thêm <span className="text-amber-700 dark:text-amber-400 font-extrabold">{nextRankInfo.pointsNeeded.toLocaleString()}</span> pts
+                    Cần thêm <span className="text-amber-700 dark:text-amber-400 font-extrabold">{nextRankInfo.pointsNeeded.toLocaleString()}</span> XP
                   </div>
                   <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 flex items-center justify-center gap-1 font-jp-sans">
                     <span>để thăng hạng:</span>
@@ -875,7 +878,7 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
                 <Zap className="w-3 h-3 text-amber-500 fill-amber-500" />
                 <span>
                   {leaderboardMode === 'weekly'
-                    ? `${leaderboard[1].weeklyActivePoints.toLocaleString()} pts`
+                    ? `${leaderboard[1].weeklyXp.toLocaleString()} XP`
                     : `${leaderboard[1].totalXp.toLocaleString()} XP`}
                 </span>
               </div>
@@ -907,7 +910,7 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
                 <Zap className="w-3.5 h-3.5 text-amber-900 fill-amber-900" />
                 <span>
                   {leaderboardMode === 'weekly'
-                    ? `${leaderboard[0].weeklyActivePoints.toLocaleString()} pts`
+                    ? `${leaderboard[0].weeklyXp.toLocaleString()} XP`
                     : `${leaderboard[0].totalXp.toLocaleString()} XP`}
                 </span>
               </div>
@@ -934,7 +937,7 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
                 <Zap className="w-3 h-3 text-amber-500 fill-amber-500" />
                 <span>
                   {leaderboardMode === 'weekly'
-                    ? `${leaderboard[2].weeklyActivePoints.toLocaleString()} pts`
+                    ? `${leaderboard[2].weeklyXp.toLocaleString()} XP`
                     : `${leaderboard[2].totalXp.toLocaleString()} XP`}
                 </span>
               </div>
@@ -1022,17 +1025,17 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
                       <Zap className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
                       <span>
                         {leaderboardMode === 'weekly'
-                          ? item.weeklyActivePoints.toLocaleString()
+                          ? item.weeklyXp.toLocaleString()
                           : item.totalXp.toLocaleString()}
                       </span>
                       <span className="text-xs font-normal text-slate-400">
-                        {leaderboardMode === 'weekly' ? 'pts tuần' : 'XP'}
+                        {leaderboardMode === 'weekly' ? 'XP tuần' : 'XP'}
                       </span>
                     </div>
                     <div className="text-[11px] text-slate-400 dark:text-slate-500 font-medium">
                       {leaderboardMode === 'weekly'
-                        ? `${item.totalXp.toLocaleString()} XP tổng`
-                        : `${item.activePoints.toLocaleString()} pts khả dụng`}
+                        ? `Tổng ${item.totalXp.toLocaleString()} XP`
+                        : `Tuần này: ${item.weeklyXp.toLocaleString()} XP`}
                     </div>
                   </div>
                 </div>

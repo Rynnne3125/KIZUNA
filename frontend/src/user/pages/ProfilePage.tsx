@@ -30,7 +30,12 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
   const [shieldResult, setShieldResult] = useState<{ ok: boolean; text: string } | null>(null);
 
   const currentWeekKey = getCurrentIsoWeekKey(new Date());
-  const weeklyPts = user?.weeklyPointsWeek === currentWeekKey ? (user?.weeklyActivePoints || 0) : 0;
+  const weeklyXp =
+    user?.weeklyXpWeek === currentWeekKey
+      ? (user?.weeklyXp || 0)
+      : user?.weeklyPointsWeek === currentWeekKey
+      ? (user?.weeklyActivePoints || 0) * 2
+      : 0;
 
   const handleBuyShield = async () => {
     if (!user?.id || buyingShield) return;
@@ -160,7 +165,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300">
-                Tuần này: {weeklyPts} pts
+                Tuần này: {weeklyXp.toLocaleString()} XP
               </span>
               <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-sky-100 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300">
                 Khiên: {user.streakFreezes || 0}/{MAX_STREAK_FREEZES}

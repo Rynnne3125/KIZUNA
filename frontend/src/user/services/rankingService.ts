@@ -124,12 +124,12 @@ export const rankingService = {
   },
 
   /**
-   * Tính bậc rank dựa trên điểm năng động (activePoints)
+   * Tính bậc rank dựa trên Kinh Nghiệm tích lũy (totalXp)
    */
-  calculateRank(activePoints = 0, tiers: RankTier[] = DEFAULT_RANK_TIERS): RankTier {
+  calculateRank(xp = 0, tiers: RankTier[] = DEFAULT_RANK_TIERS): RankTier {
     const sorted = [...tiers].sort((a, b) => b.minPoints - a.minPoints);
     for (const tier of sorted) {
-      if (activePoints >= tier.minPoints) {
+      if (xp >= tier.minPoints) {
         return tier;
       }
     }
@@ -137,15 +137,15 @@ export const rankingService = {
   },
 
   /**
-   * Tính mốc rank tiếp theo và số điểm cần đạt để thăng hạng
+   * Tính mốc rank tiếp theo và số XP cần đạt để thăng hạng
    */
-  getNextRankTier(activePoints = 0, tiers: RankTier[] = DEFAULT_RANK_TIERS): { nextTier: RankTier | null; pointsNeeded: number } {
+  getNextRankTier(xp = 0, tiers: RankTier[] = DEFAULT_RANK_TIERS): { nextTier: RankTier | null; pointsNeeded: number } {
     const sorted = [...tiers].sort((a, b) => a.minPoints - b.minPoints);
     for (const tier of sorted) {
-      if (tier.minPoints > activePoints) {
+      if (tier.minPoints > xp) {
         return {
           nextTier: tier,
-          pointsNeeded: tier.minPoints - activePoints
+          pointsNeeded: tier.minPoints - xp
         };
       }
     }
@@ -153,9 +153,9 @@ export const rankingService = {
   },
 
   /**
-   * Lấy danh sách bảng xếp hạng học viên từ Firestore
-   * - mode = 'weekly': xếp hạng theo điểm năng động kiếm được trong tuần ISO hiện tại (reset mỗi tuần)
-   * - mode = 'all_time': xếp hạng theo tổng XP vĩnh viễn (không bị ảnh hưởng khi tiêu activePoints mua Khiên)
+   * Lấy danh sách bảng xếp hạng học viên từ Firestore (hoàn toàn theo XP)
+   * - mode = 'weekly': xếp hạng theo XP kiếm được trong tuần ISO hiện tại (reset mỗi tuần)
+   * - mode = 'all_time': xếp hạng theo tổng XP tích lũy vĩnh viễn
    */
   async getLearnerLeaderboard(
     tiers: RankTier[] = DEFAULT_RANK_TIERS,
@@ -178,19 +178,29 @@ export const rankingService = {
     const sortItems = (list: UserLeaderboardItem[]): UserLeaderboardItem[] => {
       list.sort((a, b) => {
         if (mode === 'weekly') {
-          if (b.weeklyActivePoints !== a.weeklyActivePoints) {
-            return b.weeklyActivePoints - a.weeklyActivePoints;
+          if (b.weeklyXp !== a.weeklyXp) {
+            return b.weeklyXp - a.weeklyXp;
           }
           if (b.totalXp !== a.totalXp) return b.totalXp - a.totalXp;
-          return b.activePoints - a.activePoints;
+          return b.currentStreak - a.currentStreak;
         }
         if (b.totalXp !== a.totalXp) return b.totalXp - a.totalXp;
-        return b.activePoints - a.activePoints;
+        return b.currentStreak - a.currentStreak;
       });
       list.forEach((item, index) => {
         item.position = index + 1;
       });
       return list;
+    };
+
+    const resolveWeeklyXp = (u: any): number => {
+      if (u.weeklyXpWeek === currentWeekKey && typeof u.weeklyXp === 'number') {
+        return u.weeklyXp;
+      }
+      if (u.weeklyPointsWeek === currentWeekKey && typeof u.weeklyActivePoints === 'number') {
+        return u.weeklyActivePoints * 2;
+      }
+      return 0;
     };
 
     const buildLocalLeaderboard = (): UserLeaderboardItem[] => {
@@ -215,6 +225,7 @@ export const rankingService = {
             const weeklyPts = (u.weeklyPointsWeek === currentWeekKey && typeof u.weeklyActivePoints === 'number')
               ? u.weeklyActivePoints
               : 0;
+            const weeklyXp = resolveWeeklyXp(u);
             return {
               id: u.id || `local_user_${idx}`,
               fullName: u.fullName || u.username || 'Học viên KIZUNA',
@@ -224,10 +235,12 @@ export const rankingService = {
               activePoints: ap,
               weeklyActivePoints: weeklyPts,
               weeklyPointsWeek: currentWeekKey,
+              weeklyXp,
+              weeklyXpWeek: currentWeekKey,
               totalXp,
               currentStreak: typeof u.currentStreak === 'number' ? u.currentStreak : 0,
               streakFreezes: typeof u.streakFreezes === 'number' ? u.streakFreezes : 0,
-              rankTier: this.calculateRank(totalXp > 0 ? Math.max(ap, Math.floor(totalXp / 2)) : ap, tiers),
+              rankTier: this.calculateRank(totalXp, tiers),
               position: 0
             };
           });
@@ -261,7 +274,8 @@ export const rankingService = {
         const weeklyActivePoints = (u.weeklyPointsWeek === currentWeekKey && typeof u.weeklyActivePoints === 'number')
           ? u.weeklyActivePoints
           : 0;
-        const rankTier = this.calculateRank(totalXp > 0 ? Math.max(activePoints, Math.floor(totalXp / 2)) : activePoints, tiers);
+        const weeklyXp = resolveWeeklyXp(u);
+        const rankTier = this.calculateRank(totalXp, tiers);
 
         items.push({
           id: d.id,
@@ -272,6 +286,8 @@ export const rankingService = {
           activePoints,
           weeklyActivePoints,
           weeklyPointsWeek: currentWeekKey,
+          weeklyXp,
+          weeklyXpWeek: currentWeekKey,
           totalXp,
           currentStreak,
           streakFreezes: typeof u.streakFreezes === 'number' ? u.streakFreezes : 0,
