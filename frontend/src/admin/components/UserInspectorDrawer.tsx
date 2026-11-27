@@ -49,9 +49,12 @@ export const UserInspectorDrawer: React.FC<UserInspectorDrawerProps> = ({
   const [level, setLevel] = useState('Tân binh');
   const [isBanned, setIsBanned] = useState(false);
 
-  // Anti-cheat states
+  // Streak & Điểm Năng Động management states
   const [pointsDelta, setPointsDelta] = useState<string>('');
+  const [exactPointsInput, setExactPointsInput] = useState<string>('');
   const [antiCheatReason, setAntiCheatReason] = useState('');
+  const [streakInput, setStreakInput] = useState<string>('');
+  const [streakReason, setStreakReason] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
 
   // Dossier states
@@ -66,7 +69,10 @@ export const UserInspectorDrawer: React.FC<UserInspectorDrawerProps> = ({
       setLevel(user.level || 'Tân binh');
       setIsBanned(user.status === 'BANNED' || user.enabled === false);
       setPointsDelta('');
+      setExactPointsInput(String(user.activePoints ?? 0));
       setAntiCheatReason('');
+      setStreakInput(String(user.currentStreak ?? 0));
+      setStreakReason('');
       setConfirmDelete(false);
       setFeedback(null);
 
@@ -143,13 +149,48 @@ export const UserInspectorDrawer: React.FC<UserInspectorDrawerProps> = ({
 
   const handleResetStreak = async () => {
     setSaving(true);
-    const ok = await adminService.resetUserStreak(user.id);
+    const prevStreak = user.currentStreak || 0;
+    const ok = await adminService.resetUserStreak(user.id, prevStreak);
     setSaving(false);
     if (ok) {
-      onUserUpdated({ ...user, currentStreak: 0 });
-      showMessage('success', 'Đã reset chuỗi Streak của học viên về 0 ngày.');
+      setStreakInput('0');
+      onUserUpdated({
+        ...user,
+        currentStreak: 0,
+        ...(prevStreak > 0 ? { previousStreak: prevStreak } : {})
+      });
+      showMessage('success', 'Đã hủy chuỗi Streak của học viên về 0 ngày (có thể khôi phục lại bất cứ lúc nào).');
     } else {
-      showMessage('error', 'Lỗi khi reset chuỗi Streak.');
+      showMessage('error', 'Lỗi khi hủy chuỗi Streak.');
+    }
+  };
+
+  const handleSetStreak = async (targetOverride?: number) => {
+    const rawNum = typeof targetOverride === 'number' ? targetOverride : parseInt(streakInput, 10);
+    if (isNaN(rawNum) || rawNum < 0) {
+      showMessage('error', 'Vui lòng nhập số ngày Streak hợp lệ (>= 0).');
+      return;
+    }
+    setSaving(true);
+    const res = await adminService.setUserStreak(
+      user.id,
+      rawNum,
+      user.currentStreak || 0,
+      streakReason.trim() || (rawNum > (user.currentStreak || 0) ? 'Admin khôi phục chuỗi Streak' : 'Admin điều chỉnh Streak')
+    );
+    setSaving(false);
+    if (res.ok) {
+      setStreakInput(String(res.streak));
+      onUserUpdated({
+        ...user,
+        currentStreak: res.streak,
+        longestStreak: Math.max(user.longestStreak || 0, res.streak),
+        ...(res.lastActiveDate ? { lastActiveDate: res.lastActiveDate } : {}),
+        ...(typeof res.previousStreak === 'number' ? { previousStreak: res.previousStreak } : {})
+      });
+      showMessage('success', `Đã cập nhật chuỗi Streak thành ${res.streak} ngày.`);
+    } else {
+      showMessage('error', 'Lỗi khi cập nhật chuỗi Streak.');
     }
   };
 
@@ -159,21 +200,55 @@ export const UserInspectorDrawer: React.FC<UserInspectorDrawerProps> = ({
       showMessage('error', 'Vui lòng nhập số Điểm Năng Động hợp lệ (> 0).');
       return;
     }
+    const prevPoints = user.activePoints || 0;
     const delta = rawNum * multiplier;
     setSaving(true);
     const newPoints = await adminService.adjustUserActivePoints(
       user.id,
-      user.activePoints || 0,
+      prevPoints,
       delta,
       antiCheatReason.trim() || (multiplier > 0 ? 'Admin cộng thưởng điểm' : 'Admin trừ điểm chống gian lận')
     );
     setSaving(false);
     if (newPoints !== null) {
-      onUserUpdated({ ...user, activePoints: newPoints });
+      setExactPointsInput(String(newPoints));
+      onUserUpdated({
+        ...user,
+        activePoints: newPoints,
+        ...(delta < 0 && prevPoints > 0 ? { previousActivePoints: prevPoints } : {})
+      });
       setPointsDelta('');
       showMessage('success', `Đã điều chỉnh ${delta > 0 ? `+${delta}` : delta} AP. Điểm Năng Động mới: ${newPoints} AP.`);
     } else {
       showMessage('error', 'Lỗi khi điều chỉnh Điểm Năng Động.');
+    }
+  };
+
+  const handleSetExactPoints = async (targetOverride?: number) => {
+    const rawNum = typeof targetOverride === 'number' ? targetOverride : parseInt(exactPointsInput, 10);
+    if (isNaN(rawNum) || rawNum < 0) {
+      showMessage('error', 'Vui lòng nhập mức Điểm Năng Động hợp lệ (>= 0).');
+      return;
+    }
+    const prevPoints = user.activePoints || 0;
+    setSaving(true);
+    const res = await adminService.setUserActivePoints(
+      user.id,
+      prevPoints,
+      rawNum,
+      antiCheatReason.trim() || (rawNum === 0 ? 'Admin hủy Điểm Năng Động về 0' : 'Admin khôi phục / đặt lại Điểm Năng Động')
+    );
+    setSaving(false);
+    if (res.ok) {
+      setExactPointsInput(String(res.activePoints));
+      onUserUpdated({
+        ...user,
+        activePoints: res.activePoints,
+        ...(typeof res.previousActivePoints === 'number' ? { previousActivePoints: res.previousActivePoints } : {})
+      });
+      showMessage('success', `Đã đặt Điểm Năng Động thành ${res.activePoints.toLocaleString()} AP.`);
+    } else {
+      showMessage('error', 'Lỗi khi cập nhật Điểm Năng Động.');
     }
   };
 
@@ -226,7 +301,7 @@ export const UserInspectorDrawer: React.FC<UserInspectorDrawerProps> = ({
         <div className="flex border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 bg-white dark:bg-slate-900 gap-1 sm:gap-2 pt-2 overflow-x-auto shrink-0">
           {[
             { id: 'profile' as const, label: 'Hồ sơ & Phân quyền', icon: Shield },
-            { id: 'anticheat' as const, label: 'Chống gian lận', icon: Flame },
+            { id: 'anticheat' as const, label: 'Streak & Điểm AP', icon: Flame },
             { id: 'dossier' as const, label: 'Hồ sơ Học tập', icon: BookOpen },
           ].map(tab => {
             const Icon = tab.icon;
@@ -420,73 +495,132 @@ export const UserInspectorDrawer: React.FC<UserInspectorDrawerProps> = ({
             </div>
           )}
 
-          {/* TAB 2: CHỐNG GIAN LẬN (ANTI-CHEAT) */}
+          {/* TAB 2: QUẢN LÝ STREAK & ĐIỂM NĂNG ĐỘNG (KHÔI PHỤC / HỦY / CHỐNG GIAN LẬN) */}
           {activeTab === 'anticheat' && (
             <div className="space-y-5 sm:space-y-6">
-              <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                <div className="p-3.5 sm:p-4 rounded-2xl border border-orange-200 dark:border-orange-900/50 bg-orange-50/50 dark:bg-orange-950/20 min-w-0">
-                  <div className="flex items-center gap-1.5 text-orange-600 text-[11px] sm:text-xs font-bold uppercase">
-                    <Flame className="w-4 h-4 shrink-0" /> <span className="truncate">Chuỗi Streak</span>
+              <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
+                <div className="p-3 sm:p-4 rounded-2xl border border-orange-200 dark:border-orange-900/50 bg-orange-50/50 dark:bg-orange-950/20 min-w-0">
+                  <div className="flex items-center gap-1.5 text-orange-600 text-[10px] sm:text-xs font-bold uppercase">
+                    <Flame className="w-3.5 h-3.5 shrink-0" /> <span className="truncate">Streak</span>
                   </div>
-                  <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-1">
-                    {user.currentStreak || 0} <span className="text-xs sm:text-sm font-semibold text-slate-500">ngày</span>
+                  <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
+                    {user.currentStreak || 0} <span className="text-xs font-semibold text-slate-500">ngày</span>
                   </div>
+                  {(user.previousStreak || 0) > 0 && (
+                    <div className="text-[10px] text-slate-500 mt-0.5 truncate">Trước khi hủy: {user.previousStreak}d</div>
+                  )}
                 </div>
 
-                <div className="p-3.5 sm:p-4 rounded-2xl border border-emerald-200 dark:border-emerald-900/50 bg-emerald-50/50 dark:bg-emerald-950/20 min-w-0">
-                  <div className="flex items-center gap-1.5 text-emerald-600 text-[11px] sm:text-xs font-bold uppercase">
-                    <Zap className="w-4 h-4 shrink-0" /> <span className="truncate">Điểm Năng Động</span>
+                <div className="p-3 sm:p-4 rounded-2xl border border-emerald-200 dark:border-emerald-900/50 bg-emerald-50/50 dark:bg-emerald-950/20 min-w-0">
+                  <div className="flex items-center gap-1.5 text-emerald-600 text-[10px] sm:text-xs font-bold uppercase">
+                    <Zap className="w-3.5 h-3.5 shrink-0" /> <span className="truncate">Điểm AP</span>
                   </div>
-                  <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-1">
-                    {(user.activePoints || 0).toLocaleString()} <span className="text-xs sm:text-sm font-semibold text-slate-500">AP</span>
+                  <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1 truncate">
+                    {(user.activePoints || 0).toLocaleString()}
                   </div>
+                  {(user.previousActivePoints || 0) > 0 && (
+                    <div className="text-[10px] text-slate-500 mt-0.5 truncate">Mức trước: {user.previousActivePoints?.toLocaleString()} AP</div>
+                  )}
                 </div>
-              </div>
 
-              {/* Reset Streak */}
-              <div className="p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-3">
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
-                  <div>
-                    <h4 className="text-sm font-bold text-slate-800 dark:text-white flex items-center gap-2">
-                      <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0" />
-                      Can thiệp Chuỗi Streak (Chống đổi giờ thiết bị)
-                    </h4>
-                    <p className="text-xs text-slate-500 mt-1">
-                      Đặt lại chuỗi ngày học liên tiếp (`currentStreak`) về 0 trên cả hồ sơ cá nhân và bảng xếp hạng.
-                    </p>
+                <div className="p-3 sm:p-4 rounded-2xl border border-sky-200 dark:border-sky-900/50 bg-sky-50/50 dark:bg-sky-950/20 min-w-0">
+                  <div className="flex items-center gap-1.5 text-sky-600 text-[10px] sm:text-xs font-bold uppercase">
+                    <Shield className="w-3.5 h-3.5 shrink-0" /> <span className="truncate">Khiên</span>
                   </div>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    disabled={saving || (user.currentStreak || 0) === 0}
-                    onClick={handleResetStreak}
-                    className="w-full sm:w-auto border-amber-300 text-amber-700 hover:bg-amber-50 shrink-0 cursor-pointer h-10 sm:h-9"
-                  >
-                    <RefreshCw className="w-3.5 h-3.5 mr-1.5" /> Reset Streak về 0
-                  </Button>
+                  <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
+                    {user.streakFreezes || 0} <span className="text-xs font-semibold text-slate-500">/ 2</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Adjust Active Points */}
+              {/* Quản lý Chuỗi Streak: Khôi phục / Đặt lại / Hủy */}
               <div className="p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-4">
                 <div>
-                  <h4 className="text-sm font-bold text-slate-800 dark:text-white">
-                    Điều chỉnh Điểm Năng Động (Active Points)
+                  <h4 className="text-sm font-bold text-slate-800 dark:text-white flex items-center gap-2">
+                    <Flame className="w-4 h-4 text-orange-500 shrink-0" />
+                    Quản lý Chuỗi Streak (Khôi phục / Điều chỉnh / Hủy)
                   </h4>
-                  <p className="text-xs text-slate-500 mt-0.5">
-                    Thưởng điểm khuyến khích hoặc trừ điểm ảo do spam bài tập trên Bảng Xếp Hạng.
+                  <p className="text-xs text-slate-500 mt-1">
+                    Khôi phục lại chuỗi ngày học cho học viên hoặc hủy về 0 nếu phát hiện gian lận đổi giờ thiết bị.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1.5">
-                    <Label className="text-xs font-semibold">Số điểm điều chỉnh (AP)</Label>
+                    <Label className="text-xs font-semibold">Số ngày Streak muốn đặt / khôi phục</Label>
+                    <Input
+                      type="number"
+                      min={0}
+                      value={streakInput}
+                      onChange={e => setStreakInput(e.target.value)}
+                      placeholder="VD: 14"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-xs font-semibold">Ghi chú / Lý do</Label>
+                    <Input
+                      value={streakReason}
+                      onChange={e => setStreakReason(e.target.value)}
+                      placeholder="VD: Khôi phục streak mất do lỗi..."
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row flex-wrap gap-2">
+                  <Button
+                    type="button"
+                    disabled={saving}
+                    onClick={() => handleSetStreak()}
+                    className="flex-1 h-10 bg-orange-600 hover:bg-orange-700 text-white cursor-pointer"
+                  >
+                    <Save className="w-3.5 h-3.5 mr-1.5" /> Cập nhật / Khôi phục Streak
+                  </Button>
+
+                  {(user.previousStreak || 0) > 0 && (user.currentStreak || 0) !== user.previousStreak && (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      disabled={saving}
+                      onClick={() => handleSetStreak(user.previousStreak)}
+                      className="h-10 border-emerald-300 text-emerald-700 hover:bg-emerald-50 cursor-pointer"
+                    >
+                      <RefreshCw className="w-3.5 h-3.5 mr-1.5" /> Khôi phục ({user.previousStreak} ngày)
+                    </Button>
+                  )}
+
+                  <Button
+                    type="button"
+                    variant="outline"
+                    disabled={saving || (user.currentStreak || 0) === 0}
+                    onClick={handleResetStreak}
+                    className="h-10 border-amber-300 text-amber-700 hover:bg-amber-50 cursor-pointer"
+                  >
+                    <AlertTriangle className="w-3.5 h-3.5 mr-1.5" /> Hủy Streak (về 0)
+                  </Button>
+                </div>
+              </div>
+
+              {/* Quản lý Điểm Năng Động (Active Points): Cộng / Trừ / Đặt lại / Khôi phục / Hủy */}
+              <div className="p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-4">
+                <div>
+                  <h4 className="text-sm font-bold text-slate-800 dark:text-white flex items-center gap-2">
+                    <Zap className="w-4 h-4 text-emerald-500 shrink-0" />
+                    Quản lý Điểm Năng Động (Active Points)
+                  </h4>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Cộng/trừ theo chênh lệch, đặt mức điểm chính xác, khôi phục điểm cũ hoặc hủy điểm về 0.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <Label className="text-xs font-semibold">Cộng / Trừ nhanh (AP)</Label>
                     <Input
                       type="number"
                       min={1}
                       value={pointsDelta}
                       onChange={e => setPointsDelta(e.target.value)}
-                      placeholder="Ví dụ: 50"
+                      placeholder="Ví dụ: 500"
                     />
                   </div>
                   <div className="space-y-1.5">
@@ -494,12 +628,12 @@ export const UserInspectorDrawer: React.FC<UserInspectorDrawerProps> = ({
                     <Input
                       value={antiCheatReason}
                       onChange={e => setAntiCheatReason(e.target.value)}
-                      placeholder="VD: Hoàn điểm / Phạt spam..."
+                      placeholder="VD: Khôi phục điểm / Phạt spam..."
                     />
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 pt-1">
+                <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3">
                   <Button
                     type="button"
                     disabled={saving}
@@ -516,6 +650,55 @@ export const UserInspectorDrawer: React.FC<UserInspectorDrawerProps> = ({
                   >
                     - Trừ Điểm Năng Động
                   </Button>
+                </div>
+
+                <div className="pt-3 border-t border-slate-100 dark:border-slate-800 space-y-3">
+                  <div className="space-y-1.5">
+                    <Label className="text-xs font-semibold">Đặt mức Điểm Năng Động trực tiếp (AP)</Label>
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <Input
+                        type="number"
+                        min={0}
+                        value={exactPointsInput}
+                        onChange={e => setExactPointsInput(e.target.value)}
+                        placeholder="Nhập tổng điểm mới..."
+                        className="flex-1"
+                      />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        disabled={saving}
+                        onClick={() => handleSetExactPoints()}
+                        className="h-10 border-emerald-300 text-emerald-700 hover:bg-emerald-50 cursor-pointer shrink-0"
+                      >
+                        <Save className="w-3.5 h-3.5 mr-1.5" /> Đặt mức điểm
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row flex-wrap gap-2">
+                    {(user.previousActivePoints || 0) > 0 && (user.activePoints || 0) !== user.previousActivePoints && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        disabled={saving}
+                        onClick={() => handleSetExactPoints(user.previousActivePoints)}
+                        className="flex-1 h-9 border-sky-300 text-sky-700 hover:bg-sky-50 cursor-pointer"
+                      >
+                        <RefreshCw className="w-3.5 h-3.5 mr-1.5" /> Khôi phục về {user.previousActivePoints?.toLocaleString()} AP
+                      </Button>
+                    )}
+
+                    <Button
+                      type="button"
+                      variant="outline"
+                      disabled={saving || (user.activePoints || 0) === 0}
+                      onClick={() => handleSetExactPoints(0)}
+                      className="flex-1 h-9 border-rose-300 text-rose-700 hover:bg-rose-50 cursor-pointer"
+                    >
+                      <AlertTriangle className="w-3.5 h-3.5 mr-1.5" /> Hủy toàn bộ AP (về 0)
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>

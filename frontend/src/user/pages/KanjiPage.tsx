@@ -23,6 +23,8 @@ import {
 } from 'lucide-react';
 import { kizunaService } from '../services/kizunaService';
 import { soundService } from '../services/soundService';
+import { authService } from '../services/authService';
+import { progressService } from '../services/progressService';
 import { useTheme } from '../hooks/useTheme';
 import { KanjiItem } from '../types/kizuna';
 
@@ -1051,6 +1053,17 @@ export const KanjiPage: React.FC = () => {
       setIsFlipped(false);
     } else {
       setFlipFinished(true);
+      const currentUser = authService.getCurrentUser();
+      const finalMastered = mastered ? new Set(masteredIds).add(currentItem.id) : masteredIds;
+      if (finalMastered.size > 0 && currentUser?.id) {
+        const exerciseKey = `kanji_${selectedLevel}_${studyScope === 'page' ? `p${activePage}` : 'all'}_flip`;
+        void progressService.saveKanjiProgress(
+          currentUser.id,
+          Array.from(finalMastered),
+          exerciseKey,
+          finalMastered.size === flipStudyList.length
+        );
+      }
     }
   };
 
@@ -1118,6 +1131,25 @@ export const KanjiPage: React.FC = () => {
       setQuizIsSkipped(false);
     } else {
       setQuizFinished(true);
+      const currentUser = authService.getCurrentUser();
+      if (currentUser?.id) {
+        const wrongOrSkippedIds = new Set([
+          ...quizWrongQuestions.map(q => q.item.id),
+          ...quizSkippedQuestions.map(q => q.item.id)
+        ]);
+        const correctIds = quizQuestions
+          .filter(q => !wrongOrSkippedIds.has(q.item.id))
+          .map(q => q.item.id);
+        if (correctIds.length > 0) {
+          const exerciseKey = `kanji_${selectedLevel}_${studyScope === 'page' ? `p${activePage}` : 'all'}_quiz`;
+          void progressService.saveKanjiProgress(
+            currentUser.id,
+            correctIds,
+            exerciseKey,
+            quizWrongQuestions.length === 0 && quizSkippedQuestions.length === 0
+          );
+        }
+      }
     }
   };
 

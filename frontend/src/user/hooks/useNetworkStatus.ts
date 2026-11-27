@@ -25,7 +25,9 @@ export const useNetworkStatus = (): UseNetworkStatusReturn => {
       connectionType: isOnline ? 'wifi' : 'none',
       isWifi: isOnline,
       isCellular: false,
-      isOffline: !isOnline
+      isOffline: !isOnline,
+      isWeak: false,
+      quality: isOnline ? 'online' : 'offline'
     };
   });
 
@@ -37,10 +39,7 @@ export const useNetworkStatus = (): UseNetworkStatusReturn => {
   const fetchStatus = useCallback(async (force = false) => {
     setIsChecking(true);
     try {
-      if (force) {
-        await networkService.probeInternet(true);
-      }
-      const fresh = await networkService.getStatus();
+      const fresh = await networkService.getStatus(force);
       setStatus(fresh);
       return fresh;
     } finally {
@@ -49,38 +48,38 @@ export const useNetworkStatus = (): UseNetworkStatusReturn => {
   }, []);
 
   useEffect(() => {
-    // 1. Kiểm tra trạng thái mạng ngay khi nạp hook
-    fetchStatus();
+    void fetchStatus(false);
 
-    // 2. Lắng nghe trực tiếp sự kiện online/offline của trình duyệt để phản hồi tức thì
     const handleBrowserOffline = () => {
-      setStatus(prev => ({
-        ...prev,
-        connected: false,
-        connectionType: 'none',
-        isWifi: false,
-        isCellular: false,
-        isOffline: true
-      }));
+      if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+        setStatus(prev => ({
+          ...prev,
+          connected: false,
+          connectionType: 'none',
+          isWifi: false,
+          isCellular: false,
+          isOffline: true,
+          isWeak: false,
+          quality: 'offline'
+        }));
+      }
     };
     const handleBrowserOnline = () => {
-      fetchStatus(true);
+      void fetchStatus(true);
     };
     window.addEventListener('offline', handleBrowserOffline);
     window.addEventListener('online', handleBrowserOnline);
 
-    // 3. Đăng ký lắng nghe thay đổi mạng từ hệ thống (Capacitor Network + Probe)
     const unsubscribe = networkService.addStatusListener((updatedStatus) => {
       setStatus(updatedStatus);
       setIsChecking(false);
     });
 
-    // 4. Lắng nghe thay đổi cấu hình nội bộ
     const handleConfigChange = () => {
       setWifiOnlyRequiredState(networkService.isWifiOnlyRequired());
       setIsCellularBypassedState(networkService.isCellularBypassed());
       setSimulatedTypeState(networkService.getSimulatedType());
-      fetchStatus(true);
+      void fetchStatus(true);
     };
 
     window.addEventListener('kizuna_network_config_changed', handleConfigChange);
@@ -93,11 +92,9 @@ export const useNetworkStatus = (): UseNetworkStatusReturn => {
     };
   }, [fetchStatus]);
 
-  // Kiểm tra xem ứng dụng có đang bị chặn do không có kết nối Internet hay không:
-  // - Nếu mất mạng (Offline / none / !connected / !navigator.onLine): Hiển thị trang 404 No Internet
-  // - Nếu có kết nối Wi-Fi HOẶC Dữ liệu di động (Cellular 4G/5G): Cho phép truy cập bình thường!
-  const isBlockedByNoInternet = status.isOffline || !status.connected || (typeof navigator !== 'undefined' && !navigator.onLine);
-  const isBlockedByWifiRequirement = isBlockedByNoInternet;
+  // App hỗ trợ học tập Offline hoàn toàn, không còn chặn truy cập khi mất mạng
+  const isBlockedByNoInternet = false;
+  const isBlockedByWifiRequirement = false;
 
   const setWifiOnlyRequired = (required: boolean) => {
     networkService.setWifiOnlyRequired(required);
@@ -117,7 +114,7 @@ export const useNetworkStatus = (): UseNetworkStatusReturn => {
   const setSimulatedType = (type: ConnectionType | null) => {
     networkService.setSimulatedType(type);
     setSimulatedTypeState(type);
-    fetchStatus(true);
+    void fetchStatus(true);
   };
 
   const recheck = useCallback(async () => {

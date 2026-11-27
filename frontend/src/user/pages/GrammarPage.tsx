@@ -391,9 +391,17 @@ export const GrammarPage: React.FC = () => {
     } else {
       setFlipFinished(true);
       const finalMastered = mastered ? new Set(masteredIds).add(currentItem.id) : masteredIds;
-      if (finalMastered.size === unitGrammarList.length && currentUser?.id && selectedUnit) {
-        progressService.saveGrammarUnitProgress(currentUser.id, selectedUnit.unitId, unitGrammarList.length);
-        setCompletedUnits(prev => prev.includes(selectedUnit.unitId) ? prev : [...prev, selectedUnit.unitId]);
+      if (finalMastered.size > 0 && currentUser?.id && selectedUnit) {
+        progressService.saveGrammarExerciseProgress(
+          currentUser.id,
+          selectedUnit.unitId,
+          unitGrammarList.length,
+          Array.from(finalMastered),
+          'flip'
+        );
+        if (finalMastered.size === unitGrammarList.length) {
+          setCompletedUnits(prev => prev.includes(selectedUnit.unitId) ? prev : [...prev, selectedUnit.unitId]);
+        }
       }
     }
   };
@@ -468,9 +476,26 @@ export const GrammarPage: React.FC = () => {
       setQuizIsSkipped(false);
     } else {
       setQuizFinished(true);
-      if (quizWrongQuestions.length === 0 && quizSkippedQuestions.length === 0 && currentUser?.id && selectedUnit) {
-        progressService.saveGrammarUnitProgress(currentUser.id, selectedUnit.unitId, unitGrammarList.length);
-        setCompletedUnits(prev => prev.includes(selectedUnit.unitId) ? prev : [...prev, selectedUnit.unitId]);
+      if (currentUser?.id && selectedUnit) {
+        const wrongOrSkippedIds = new Set([
+          ...quizWrongQuestions.map(q => q.item.id),
+          ...quizSkippedQuestions.map(q => q.item.id)
+        ]);
+        const correctIds = quizQuestions
+          .filter(q => !wrongOrSkippedIds.has(q.item.id))
+          .map(q => q.item.id);
+        if (correctIds.length > 0) {
+          progressService.saveGrammarExerciseProgress(
+            currentUser.id,
+            selectedUnit.unitId,
+            unitGrammarList.length,
+            correctIds,
+            'quiz'
+          );
+        }
+        if (quizWrongQuestions.length === 0 && quizSkippedQuestions.length === 0) {
+          setCompletedUnits(prev => prev.includes(selectedUnit.unitId) ? prev : [...prev, selectedUnit.unitId]);
+        }
       }
     }
   };

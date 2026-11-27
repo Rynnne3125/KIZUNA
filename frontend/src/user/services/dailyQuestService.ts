@@ -39,10 +39,13 @@ export interface DailyQuestBundle {
   generatedAt?: string;
 }
 
-export const STREAK_FREEZE_COST = 100;
+export const STREAK_FREEZE_COST = 1000;
 export const MAX_STREAK_FREEZES = 2;
 export const DAILY_BONUS_POINTS = 50;
 export const DAILY_BONUS_XP = 100;
+
+const PENDING_DAILY_QUEST_SYNC_KEY = (userId: string) => `kizuna_pending_daily_quest_sync_${userId}`;
+const PENDING_SHIELD_SYNC_KEY = (userId: string) => `kizuna_pending_shield_sync_${userId}`;
 
 const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
 const JAPANESE_CHAR_REGEX = /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/;
@@ -605,9 +608,24 @@ export const dailyQuestService = {
       localStorage.setItem(storageKey, JSON.stringify(updatedBundle));
     } catch {}
 
+    const enqueueDailyQuestSync = () => {
+      try {
+        const raw = localStorage.getItem(PENDING_DAILY_QUEST_SYNC_KEY(userId));
+        const dates: string[] = raw ? JSON.parse(raw) : [];
+        if (!dates.includes(bundle.date)) {
+          dates.push(bundle.date);
+          localStorage.setItem(PENDING_DAILY_QUEST_SYNC_KEY(userId), JSON.stringify(dates));
+        }
+      } catch {}
+    };
+
     if (db && (typeof navigator === 'undefined' || navigator.onLine)) {
       const docId = `${userId}_${bundle.date}`;
-      setDoc(doc(db, 'daily_quests', docId), updatedBundle, { merge: true }).catch(() => {});
+      setDoc(doc(db, 'daily_quests', docId), updatedBundle, { merge: true }).catch(() => {
+        enqueueDailyQuestSync();
+      });
+    } else {
+      enqueueDailyQuestSync();
     }
 
     await progressService.recordActivity(userId, 'roadmap', 1, pointsAwarded, xpAwarded);
@@ -642,16 +660,31 @@ export const dailyQuestService = {
       localStorage.setItem(storageKey, JSON.stringify(updatedBundle));
     } catch {}
 
+    const enqueueDailyQuestSync = () => {
+      try {
+        const raw = localStorage.getItem(PENDING_DAILY_QUEST_SYNC_KEY(userId));
+        const dates: string[] = raw ? JSON.parse(raw) : [];
+        if (!dates.includes(bundle.date)) {
+          dates.push(bundle.date);
+          localStorage.setItem(PENDING_DAILY_QUEST_SYNC_KEY(userId), JSON.stringify(dates));
+        }
+      } catch {}
+    };
+
     if (db && (typeof navigator === 'undefined' || navigator.onLine)) {
       const docId = `${userId}_${bundle.date}`;
-      setDoc(doc(db, 'daily_quests', docId), updatedBundle, { merge: true }).catch(() => {});
+      setDoc(doc(db, 'daily_quests', docId), updatedBundle, { merge: true }).catch(() => {
+        enqueueDailyQuestSync();
+      });
+    } else {
+      enqueueDailyQuestSync();
     }
 
     return updatedBundle;
   },
 
   /**
-   * Đổi Điểm Năng Động lấy Khiên Bảo Vệ Streak (giá 100 pts, tối đa 2 khiên).
+   * Đổi Điểm Năng Động lấy Khiên Bảo Vệ Streak (giá 1000 pts, tối đa 2 khiên).
    * Chỉ trừ từ activePoints (ví điểm năng động), KHÔNG trừ totalXp hay weeklyActivePoints.
    */
   async buyStreakFreeze(userId: string): Promise<{ ok: boolean; message: string; user?: User }> {
@@ -699,6 +732,16 @@ export const dailyQuestService = {
       }
     } catch {}
 
+    const enqueueShieldSync = () => {
+      try {
+        localStorage.setItem(PENDING_SHIELD_SYNC_KEY(userId), JSON.stringify({
+          activePoints: nextPoints,
+          streakFreezes: nextFreezes,
+          updatedAt: new Date().toISOString()
+        }));
+      } catch {}
+    };
+
     if (db && (typeof navigator === 'undefined' || navigator.onLine)) {
       try {
         await updateDoc(doc(db, 'users', userId), {
@@ -709,8 +752,12 @@ export const dailyQuestService = {
         setDoc(doc(db, 'users', userId), {
           activePoints: nextPoints,
           streakFreezes: nextFreezes
-        }, { merge: true }).catch(() => {});
+        }, { merge: true }).catch(() => {
+          enqueueShieldSync();
+        });
       }
+    } else {
+      enqueueShieldSync();
     }
 
     return {
@@ -718,5 +765,52 @@ export const dailyQuestService = {
       message: `Đã đổi thành công 1 Khiên Bảo Vệ Streak! (Hiện có ${nextFreezes}/${MAX_STREAK_FREEZES} khiên)`,
       user: updatedUser
     };
+  },
+
+  /**
+   * Đồng bộ trạng thái nhiệm vụ ngày và giao dịch đổi khiên từ chế độ Offline lên Firestore khi có mạng lại.
+   */
+  async syncOfflineDailyQuests(userId: string): Promise<number> {
+    if (!userId || !db || (typeof navigator !== 'undefined' && !navigator.onLine)) return 0;
+    let synced = 0;
+
+    try {
+      const rawDates = localStorage.getItem(PENDING_DAILY_QUEST_SYNC_KEY(userId));
+      const dates: string[] = rawDates ? JSON.parse(rawDates) : [];
+      const remainingDates: string[] = [];
+      for (const date of dates) {
+        try {
+          const rawBundle = localStorage.getItem(getStorageKey(userId, date));
+          if (rawBundle) {
+            const bundle: DailyQuestBundle = JSON.parse(rawBundle);
+            await setDoc(doc(db, 'daily_quests', `${userId}_${date}`), bundle, { merge: true });
+            synced++;
+          }
+        } catch {
+          remainingDates.push(date);
+        }
+      }
+      if (remainingDates.length === 0) {
+        localStorage.removeItem(PENDING_DAILY_QUEST_SYNC_KEY(userId));
+      } else {
+        localStorage.setItem(PENDING_DAILY_QUEST_SYNC_KEY(userId), JSON.stringify(remainingDates));
+      }
+    } catch {}
+
+    try {
+      const rawShield = localStorage.getItem(PENDING_SHIELD_SYNC_KEY(userId));
+      if (rawShield) {
+        const payload = JSON.parse(rawShield);
+        await setDoc(doc(db, 'users', userId), {
+          activePoints: payload.activePoints,
+          streakFreezes: payload.streakFreezes,
+          updatedAt: payload.updatedAt || new Date().toISOString()
+        }, { merge: true });
+        localStorage.removeItem(PENDING_SHIELD_SYNC_KEY(userId));
+        synced++;
+      }
+    } catch {}
+
+    return synced;
   }
 };

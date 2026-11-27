@@ -7,6 +7,7 @@ import { KANJI_CATALOG } from '../data/kanjiCatalog';
 import { STAGES_CATALOG, MILESTONES_CATALOG } from '../data/roadmapCatalog';
 import { shouldSkipFirestore, handleFirestoreError } from '../utils/firestoreGuard';
 import { authService } from './authService';
+import { networkService } from './networkService';
 
 const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
 
@@ -17,7 +18,7 @@ let isKizunaFirestoreOffline =
   firebaseConfig.apiKey === 'your_firebase_api_key_here';
 
 async function safeGetDocs(q: any, timeoutMs = 8000): Promise<any> {
-  if (isKizunaFirestoreOffline || shouldSkipFirestore() || (typeof navigator !== 'undefined' && !navigator.onLine)) {
+  if (isKizunaFirestoreOffline || shouldSkipFirestore() || networkService.isCurrentlyOffline()) {
     throw new Error('FIRESTORE_OFFLINE_OR_QUOTA_EXHAUSTED');
   }
   let timer: ReturnType<typeof setTimeout> | undefined;
@@ -38,13 +39,35 @@ async function safeGetDocs(q: any, timeoutMs = 8000): Promise<any> {
   }
 }
 
+async function safeGetDoc(ref: any, timeoutMs = 8000): Promise<any> {
+  if (isKizunaFirestoreOffline || shouldSkipFirestore() || networkService.isCurrentlyOffline()) {
+    throw new Error('FIRESTORE_OFFLINE_OR_QUOTA_EXHAUSTED');
+  }
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    return await Promise.race([
+      getDoc(ref),
+      new Promise((_, reject) => {
+        timer = setTimeout(() => {
+          reject(new Error('FIRESTORE_TIMEOUT'));
+        }, timeoutMs);
+      })
+    ]);
+  } catch (e: any) {
+    handleFirestoreError(e);
+    throw e;
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
 function getSessionCache<T>(key: string): T | null {
   try {
     const raw = sessionStorage.getItem(key) || localStorage.getItem(`offline_${key}`);
     if (!raw || typeof raw !== 'string' || !raw.trim()) return null;
     const { data, exp } = JSON.parse(raw);
-    const isOffline = typeof navigator !== 'undefined' && !navigator.onLine;
-    // Khi không có Wi-Fi (Offline), cho phép dùng dữ liệu đã lưu trong localStorage bất kể TTL
+    const isOffline = networkService.isCurrentlyOffline();
+    // Khi không có Internet (Offline), cho phép dùng dữ liệu đã lưu trong localStorage bất kể TTL
     if (!isOffline && Date.now() > exp) {
       sessionStorage.removeItem(key);
       return null;
@@ -268,7 +291,7 @@ export const kizunaService = {
     try {
       if (db) {
         const q = query(collection(db, 'grammar_items'), where('milestoneId', '==', milestoneId));
-        const snap = await getDocs(q);
+        const snap = await safeGetDocs(q);
         if (!snap.empty) {
           const items: any[] = [];
           snap.forEach(d => items.push({ id: d.id, ...d.data() }));
@@ -516,7 +539,7 @@ export const kizunaService = {
           collection(db, 'kanji_dictionary'),
           where('milestoneId', '==', unitId)
         );
-        const snap = await getDocs(q);
+        const snap = await safeGetDocs(q);
         if (!snap.empty) {
           const items: KanjiItem[] = [];
           snap.forEach(d => {
@@ -573,7 +596,7 @@ export const kizunaService = {
           collection(db, 'kanji_dictionary'),
           where('jlptLevel', '==', level)
         );
-        const snap = await getDocs(q);
+        const snap = await safeGetDocs(q);
         if (!snap.empty) {
           const items: KanjiItem[] = [];
           snap.forEach(d => {
@@ -747,7 +770,7 @@ export const kizunaService = {
 
     try {
       if (db) {
-        const snap = await getDoc(doc(db, 'jlpt_exams', id));
+        const snap = await safeGetDoc(doc(db, 'jlpt_exams', id));
         if (snap.exists()) {
           const exam = { id: snap.id, ...snap.data() } as Exam;
           if (isValidExam(exam)) {
@@ -813,7 +836,7 @@ export const kizunaService = {
     try {
       if (db) {
         // Chỉ đọc đúng 1 document cấu hình nếu có (chi phí đúng 1 read duy nhất)
-        const statsDoc = await getDoc(doc(db, 'system_config', 'stats'));
+        const statsDoc = await safeGetDoc(doc(db, 'system_config', 'stats'), 4000);
         if (statsDoc.exists()) {
           const data = statsDoc.data();
           const result = {
@@ -943,7 +966,7 @@ export const kizunaService = {
     // Lấy trực tiếp từ Firestore jlpt_exams
     try {
       if (db) {
-        const snap = await getDoc(doc(db, 'jlpt_exams', id));
+        const snap = await safeGetDoc(doc(db, 'jlpt_exams', id));
         if (snap.exists()) {
           const full = { id: snap.id, ...snap.data() } as Exam;
           const item: ChoukaiAudioItem = {

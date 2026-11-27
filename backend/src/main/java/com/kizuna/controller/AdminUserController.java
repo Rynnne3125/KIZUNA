@@ -220,7 +220,7 @@ public class AdminUserController {
         return ResponseEntity.ok(ApiResponse.success(statusMsg, user));
     }
 
-    // 8. CHỐNG GIAN LẬN: RESET STREAK (POST /api/v1/admin/users/{uid}/reset-streak)
+    // 8. CHỐNG GIAN LẬN: HỦY / RESET STREAK (POST /api/v1/admin/users/{uid}/reset-streak)
     @PostMapping("/{id}/reset-streak")
     public ResponseEntity<ApiResponse<User>> resetStreak(
             @AuthenticationPrincipal UserPrincipal principal,
@@ -236,7 +236,11 @@ public class AdminUserController {
         }
 
         int prevStreak = user.getCurrentStreak();
+        if (prevStreak > 0) {
+            user.setPreviousStreak(prevStreak);
+        }
         user.setCurrentStreak(0);
+        user.setUpdatedAt(java.time.Instant.now().toString());
         userRepository.save(user);
         try {
             userFirestoreRepository.saveUser(user);
@@ -248,9 +252,64 @@ public class AdminUserController {
         });
 
         activityLogRepository.record(actor(principal), "ANTI_CHEAT_RESET_STREAK", "USER", id,
-                "Reset streak từ " + prevStreak + " về 0 ngày");
+                "Hủy/Reset streak từ " + prevStreak + " về 0 ngày");
 
-        return ResponseEntity.ok(ApiResponse.success("Đã reset chuỗi streak của người dùng về 0", user));
+        return ResponseEntity.ok(ApiResponse.success("Đã hủy chuỗi streak của người dùng về 0", user));
+    }
+
+    // 8b. QUẢN LÝ STREAK: ĐẶT / KHÔI PHỤC STREAK (PUT /api/v1/admin/users/{uid}/streak)
+    @PutMapping("/{id}/streak")
+    public ResponseEntity<ApiResponse<User>> setOrRestoreStreak(
+            @AuthenticationPrincipal UserPrincipal principal,
+            @PathVariable String id,
+            @RequestBody Map<String, Object> body) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            try {
+                user = userFirestoreRepository.getUserById(id);
+            } catch (Exception ignored) {}
+        }
+        if (user == null || user.isDeleted()) {
+            throw new ResourceNotFoundException("Không tìm thấy người dùng với ID: " + id);
+        }
+
+        Object rawStreak = body.get("streak");
+        if (!(rawStreak instanceof Number)) {
+            return ResponseEntity.badRequest().body(ApiResponse.error("Giá trị streak không hợp lệ"));
+        }
+        int targetStreak = Math.max(0, ((Number) rawStreak).intValue());
+        String reason = body.get("reason") != null ? String.valueOf(body.get("reason")) : "Admin điều chỉnh Streak";
+        int prevStreak = user.getCurrentStreak();
+
+        if (targetStreak == 0 && prevStreak > 0) {
+            user.setPreviousStreak(prevStreak);
+        }
+        user.setCurrentStreak(targetStreak);
+        if (targetStreak > user.getLongestStreak()) {
+            user.setLongestStreak(targetStreak);
+        }
+        if (targetStreak > 0) {
+            String todayVn = java.time.LocalDate.now(java.time.ZoneId.of("Asia/Ho_Chi_Minh")).toString();
+            user.setLastActiveDate(todayVn);
+        }
+        user.setLastAntiCheatNote(reason);
+        user.setUpdatedAt(java.time.Instant.now().toString());
+        userRepository.save(user);
+        try {
+            userFirestoreRepository.saveUser(user);
+        } catch (Exception ignored) {}
+
+        leaderboardRepository.findByUserId(id).ifPresent(le -> {
+            le.setCurrentStreak(targetStreak);
+            leaderboardRepository.save(le);
+        });
+
+        activityLogRepository.record(actor(principal),
+                targetStreak > prevStreak ? "ADMIN_RESTORE_STREAK" : "ADMIN_SET_STREAK",
+                "USER", id,
+                String.format("Điều chỉnh Streak từ %d -> %d ngày. Lý do: %s", prevStreak, targetStreak, reason));
+
+        return ResponseEntity.ok(ApiResponse.success("Đã cập nhật chuỗi streak thành " + targetStreak + " ngày", user));
     }
 
     // 9. ĐIỀU CHỈNH ĐIỂM NĂNG ĐỘNG (POST /api/v1/admin/users/{uid}/adjust-points)
@@ -269,11 +328,16 @@ public class AdminUserController {
             throw new ResourceNotFoundException("Không tìm thấy người dùng với ID: " + id);
         }
 
-        int newPoints = Math.max(0, user.getActivePoints() + request.getPointsAdjustment());
+        int prevPoints = user.getActivePoints();
+        int newPoints = Math.max(0, prevPoints + request.getPointsAdjustment());
+        if (request.getPointsAdjustment() < 0 && prevPoints > 0) {
+            user.setPreviousActivePoints(prevPoints);
+        }
         user.setActivePoints(newPoints);
         if (request.getReason() != null && !request.getReason().isBlank()) {
             user.setLastAntiCheatNote(request.getReason());
         }
+        user.setUpdatedAt(java.time.Instant.now().toString());
         userRepository.save(user);
         try {
             userFirestoreRepository.saveUser(user);
@@ -290,6 +354,54 @@ public class AdminUserController {
                         request.getReason() != null ? request.getReason() : "Admin điều chỉnh"));
 
         return ResponseEntity.ok(ApiResponse.success("Điều chỉnh điểm thành công. Điểm mới: " + newPoints, user));
+    }
+
+    // 9b. ĐẶT / KHÔI PHỤC / HỦY ĐIỂM NĂNG ĐỘNG (PUT /api/v1/admin/users/{uid}/active-points)
+    @PutMapping("/{id}/active-points")
+    public ResponseEntity<ApiResponse<User>> setOrRestoreActivePoints(
+            @AuthenticationPrincipal UserPrincipal principal,
+            @PathVariable String id,
+            @RequestBody Map<String, Object> body) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            try {
+                user = userFirestoreRepository.getUserById(id);
+            } catch (Exception ignored) {}
+        }
+        if (user == null || user.isDeleted()) {
+            throw new ResourceNotFoundException("Không tìm thấy người dùng với ID: " + id);
+        }
+
+        Object rawPoints = body.get("activePoints");
+        if (!(rawPoints instanceof Number)) {
+            return ResponseEntity.badRequest().body(ApiResponse.error("Giá trị điểm năng động không hợp lệ"));
+        }
+        int targetPoints = Math.max(0, ((Number) rawPoints).intValue());
+        String reason = body.get("reason") != null ? String.valueOf(body.get("reason")) : "Admin điều chỉnh Điểm Năng Động";
+        int prevPoints = user.getActivePoints();
+
+        if (targetPoints < prevPoints && prevPoints > 0) {
+            user.setPreviousActivePoints(prevPoints);
+        }
+        user.setActivePoints(targetPoints);
+        user.setLastAntiCheatNote(reason);
+        user.setUpdatedAt(java.time.Instant.now().toString());
+        userRepository.save(user);
+        try {
+            userFirestoreRepository.saveUser(user);
+        } catch (Exception ignored) {}
+
+        leaderboardRepository.findByUserId(id).ifPresent(le -> {
+            le.setActivePoints(targetPoints);
+            leaderboardRepository.save(le);
+        });
+
+        activityLogRepository.record(actor(principal),
+                targetPoints == 0 ? "ADMIN_RESET_ACTIVE_POINTS" : "ADMIN_SET_ACTIVE_POINTS",
+                "USER", id,
+                String.format("Đặt Điểm Năng Động từ %d -> %d AP. Lý do: %s", prevPoints, targetPoints, reason));
+
+        return ResponseEntity.ok(ApiResponse.success("Đã cập nhật Điểm Năng Động thành " + targetPoints + " AP", user));
     }
 
     // 10. THANH TRA HỒ SƠ HỌC VIÊN (GET /api/v1/admin/users/{uid}/learning-dossier)

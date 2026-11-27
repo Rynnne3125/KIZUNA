@@ -20,6 +20,8 @@ public class User {
     private int totalXp = 0;
     private int currentStreak = 0;
     private int longestStreak = 0;
+    private Integer previousStreak;
+    private Integer previousActivePoints;
     private int streakFreezes = 0;
     private int weeklyActivePoints = 0;
     private String weeklyPointsWeek;
@@ -92,6 +94,12 @@ public class User {
 
     public int getLongestStreak() { return longestStreak; }
     public void setLongestStreak(int longestStreak) { this.longestStreak = longestStreak; }
+
+    public Integer getPreviousStreak() { return previousStreak; }
+    public void setPreviousStreak(Integer previousStreak) { this.previousStreak = previousStreak; }
+
+    public Integer getPreviousActivePoints() { return previousActivePoints; }
+    public void setPreviousActivePoints(Integer previousActivePoints) { this.previousActivePoints = previousActivePoints; }
 
     public int getStreakFreezes() { return streakFreezes; }
     public void setStreakFreezes(int streakFreezes) { this.streakFreezes = streakFreezes; }

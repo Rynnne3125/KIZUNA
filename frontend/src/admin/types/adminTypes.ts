@@ -65,8 +65,12 @@ export interface AdminUser {
   level?: string;
   totalXp?: number;
   activePoints?: number;
+  previousActivePoints?: number;
   currentStreak?: number;
   longestStreak?: number;
+  previousStreak?: number;
+  streakFreezes?: number;
+  lastActiveDate?: string;
   placementVerified?: boolean;
   placementScore?: number;
   placementDetails?: PlacementDetailsRecord | null;

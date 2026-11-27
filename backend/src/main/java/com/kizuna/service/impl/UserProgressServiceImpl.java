@@ -236,12 +236,46 @@ public class UserProgressServiceImpl implements UserProgressService {
                 user.setWeeklyPointsWeek(currentWeekKey);
                 user.setWeeklyActivePoints(apGained);
             }
-            if (milestoneCompleted) {
-                user.setCurrentStreak(user.getCurrentStreak() + 1);
-                if (user.getCurrentStreak() > user.getLongestStreak()) {
-                    user.setLongestStreak(user.getCurrentStreak());
+            String todayStr = todayVn.toString();
+            String lastActiveRaw = user.getLastActiveDate();
+            String lastActiveDateStr = (lastActiveRaw != null && lastActiveRaw.length() >= 10)
+                    ? lastActiveRaw.substring(0, 10)
+                    : null;
+
+            if (lastActiveDateStr == null) {
+                user.setCurrentStreak(1);
+                user.setLastActiveDate(todayStr);
+            } else if (lastActiveDateStr.equals(todayStr)) {
+                if (user.getCurrentStreak() <= 0) {
+                    user.setCurrentStreak(1);
+                }
+            } else {
+                try {
+                    java.time.LocalDate lastDate = java.time.LocalDate.parse(lastActiveDateStr);
+                    long diffDays = java.time.temporal.ChronoUnit.DAYS.between(lastDate, todayVn);
+                    if (diffDays == 1) {
+                        user.setCurrentStreak(Math.max(0, user.getCurrentStreak()) + 1);
+                        user.setLastActiveDate(todayStr);
+                    } else if (diffDays > 1) {
+                        long missedDays = diffDays - 1;
+                        if (user.getCurrentStreak() > 0 && user.getStreakFreezes() >= missedDays) {
+                            user.setStreakFreezes((int) (user.getStreakFreezes() - missedDays));
+                            user.setCurrentStreak(user.getCurrentStreak() + 1);
+                        } else {
+                            user.setCurrentStreak(1);
+                        }
+                        user.setLastActiveDate(todayStr);
+                    }
+                } catch (Exception ignored) {
+                    user.setCurrentStreak(Math.max(1, user.getCurrentStreak()));
+                    user.setLastActiveDate(todayStr);
                 }
             }
+
+            if (user.getCurrentStreak() > user.getLongestStreak()) {
+                user.setLongestStreak(user.getCurrentStreak());
+            }
+            user.setLastStudiedAt(java.time.Instant.now().toString());
             userRepository.save(user);
 
             updatedXp = user.getTotalXp();
