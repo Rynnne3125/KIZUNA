@@ -73,9 +73,16 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
   );
   const [activeDailyQuest, setActiveDailyQuest] = useState<DailyQuestItem | null>(null);
   const [selectedOptionIdx, setSelectedOptionIdx] = useState<number | null>(null);
-  const [questAnswerChecked, setQuestAnswerChecked] = useState(false);
-  const [questRewardNotice, setQuestRewardNotice] = useState<string | null>(null);
-  const [questBannerToast, setQuestBannerToast] = useState<string | null>(null);
+  const [questSubmitting, setQuestSubmitting] = useState(false);
+  const [questResultModal, setQuestResultModal] = useState<{
+    quest: DailyQuestItem;
+    isCorrect: boolean;
+    selectedIndex: number;
+    pointsAwarded: number;
+    xpAwarded: number;
+    bonusJustAwarded: boolean;
+    remainingCount: number;
+  } | null>(null);
   const [shieldNotice, setShieldNotice] = useState<{ ok: boolean; text: string } | null>(null);
   const [buyingShield, setBuyingShield] = useState(false);
 
@@ -187,54 +194,73 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
   const nextRankMeta = nextRankInfo.nextTier ? getRankMeta(nextRankInfo.nextTier.id) : null;
 
   const handleOpenDailyQuest = (quest: DailyQuestItem) => {
+    setQuestResultModal(null);
     setActiveDailyQuest(quest);
     setSelectedOptionIdx(null);
-    setQuestAnswerChecked(false);
-    setQuestRewardNotice(null);
+    setQuestSubmitting(false);
   };
 
   const handleSubmitDailyQuestAnswer = async () => {
     if (!activeDailyQuest || selectedOptionIdx === null || !dailyQuestBundle || !user?.id) return;
-    if (questAnswerChecked || activeDailyQuest.completed || activeDailyQuest.failed) return;
+    if (questSubmitting || activeDailyQuest.completed || activeDailyQuest.failed) return;
 
-    setQuestAnswerChecked(true);
-    const isCorrect = selectedOptionIdx === activeDailyQuest.correctIndex;
+    setQuestSubmitting(true);
+    const chosenIdx = selectedOptionIdx;
+    const isCorrect = chosenIdx === activeDailyQuest.correctIndex;
 
-    if (isCorrect) {
-      const res = await dailyQuestService.completeDailyQuest(
-        user.id,
-        dailyQuestBundle,
-        activeDailyQuest.id,
-        selectedOptionIdx
-      );
-      setDailyQuestBundle(res.updatedBundle);
-      const updatedItem = res.updatedBundle.quests.find(q => q.id === activeDailyQuest.id) || {
-        ...activeDailyQuest,
-        completed: true,
-        selectedOptionIndex: selectedOptionIdx
-      };
-      setActiveDailyQuest(updatedItem);
-      const msg = res.bonusJustAwarded
-        ? `🎉 Hoàn thành cả 3/3 nhiệm vụ ngày! Đã cộng +${res.pointsAwarded} Điểm năng động & +${res.xpAwarded} XP (gồm Rương thưởng)!`
-        : `✅ Chính xác! Đã cộng +${res.pointsAwarded} Điểm năng động & +${res.xpAwarded} XP.`;
-      setQuestRewardNotice(msg);
-      setQuestBannerToast(msg);
-      setTimeout(() => setQuestBannerToast(null), 6500);
-      loadLeaderboardData(leaderboardMode);
-    } else {
-      const updatedBundle = await dailyQuestService.failDailyQuest(
-        user.id,
-        dailyQuestBundle,
-        activeDailyQuest.id,
-        selectedOptionIdx
-      );
-      setDailyQuestBundle(updatedBundle);
-      const updatedItem = updatedBundle.quests.find(q => q.id === activeDailyQuest.id) || {
-        ...activeDailyQuest,
-        failed: true,
-        selectedOptionIndex: selectedOptionIdx
-      };
-      setActiveDailyQuest(updatedItem);
+    try {
+      if (isCorrect) {
+        const res = await dailyQuestService.completeDailyQuest(
+          user.id,
+          dailyQuestBundle,
+          activeDailyQuest.id,
+          chosenIdx
+        );
+        setDailyQuestBundle(res.updatedBundle);
+        const updatedItem = res.updatedBundle.quests.find(q => q.id === activeDailyQuest.id) || {
+          ...activeDailyQuest,
+          completed: true,
+          selectedOptionIndex: chosenIdx
+        };
+        const remainingCount = res.updatedBundle.quests.filter(q => !q.completed && !q.failed).length;
+        setActiveDailyQuest(null);
+        setQuestResultModal({
+          quest: updatedItem,
+          isCorrect: true,
+          selectedIndex: chosenIdx,
+          pointsAwarded: res.pointsAwarded,
+          xpAwarded: res.xpAwarded,
+          bonusJustAwarded: res.bonusJustAwarded,
+          remainingCount
+        });
+        loadLeaderboardData(leaderboardMode);
+      } else {
+        const updatedBundle = await dailyQuestService.failDailyQuest(
+          user.id,
+          dailyQuestBundle,
+          activeDailyQuest.id,
+          chosenIdx
+        );
+        setDailyQuestBundle(updatedBundle);
+        const updatedItem = updatedBundle.quests.find(q => q.id === activeDailyQuest.id) || {
+          ...activeDailyQuest,
+          failed: true,
+          selectedOptionIndex: chosenIdx
+        };
+        const remainingCount = updatedBundle.quests.filter(q => !q.completed && !q.failed).length;
+        setActiveDailyQuest(null);
+        setQuestResultModal({
+          quest: updatedItem,
+          isCorrect: false,
+          selectedIndex: chosenIdx,
+          pointsAwarded: 0,
+          xpAwarded: 0,
+          bonusJustAwarded: false,
+          remainingCount
+        });
+      }
+    } finally {
+      setQuestSubmitting(false);
     }
   };
 
@@ -435,23 +461,6 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
           </div>
         )}
       </div>
-
-      {/* Thông báo cộng điểm khi vượt qua thử thách ngày */}
-      {questBannerToast && (
-        <div className="animate-daily-quest-in bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-700 text-emerald-900 dark:text-emerald-200 px-4 py-3 rounded-2xl shadow-sm flex items-center justify-between gap-3 text-xs sm:text-sm font-extrabold">
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-            <span>{questBannerToast}</span>
-          </div>
-          <button
-            type="button"
-            onClick={() => setQuestBannerToast(null)}
-            className="p-1 rounded-lg hover:bg-emerald-100 dark:hover:bg-emerald-900/60 cursor-pointer shrink-0"
-          >
-            <X className="w-4 h-4" />
-          </button>
-        </div>
-      )}
 
       {/* =========================================================================
           1.5. NHIỆM VỤ NGÀY (Chỉ hiển thị khi đã tạo xong & còn thử thách chưa làm; xong cả 3 sẽ ẩn)
@@ -1089,93 +1098,150 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
             <div className="space-y-2.5">
               {activeDailyQuest.options.map((opt, idx) => {
                 const isSelected = selectedOptionIdx === idx;
-                const isCorrectOpt = idx === activeDailyQuest.correctIndex;
-                const showResult = questAnswerChecked || activeDailyQuest.completed || activeDailyQuest.failed;
-
-                let btnClass = 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:border-emerald-400';
-                if (showResult) {
-                  if (isCorrectOpt) {
-                    btnClass = 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-500 text-emerald-800 dark:text-emerald-300 font-bold';
-                  } else if (isSelected && !isCorrectOpt) {
-                    btnClass = 'bg-rose-50 dark:bg-rose-950/50 border-rose-500 text-rose-700 dark:text-rose-300 font-bold';
-                  }
-                } else if (isSelected) {
-                  btnClass = 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-600 text-emerald-900 dark:text-emerald-200 font-bold';
-                }
+                const btnClass = isSelected
+                  ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-600 text-emerald-900 dark:text-emerald-200 font-bold'
+                  : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:border-emerald-400';
 
                 return (
                   <button
                     key={idx}
                     type="button"
-                    disabled={Boolean(showResult)}
+                    disabled={questSubmitting}
                     onClick={() => setSelectedOptionIdx(idx)}
-                    className={`w-full text-left px-4 py-3 rounded-2xl border-2 text-sm flex items-center gap-3 transition-all ${showResult ? 'cursor-default' : 'cursor-pointer'} ${btnClass}`}
+                    className={`w-full text-left px-4 py-3 rounded-2xl border-2 text-sm flex items-center gap-3 transition-all cursor-pointer disabled:opacity-70 ${btnClass}`}
                   >
                     <span className="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-extrabold flex items-center justify-center shrink-0">
                       {String.fromCharCode(65 + idx)}
                     </span>
                     <span className="flex-1">{opt}</span>
-                    {showResult && isCorrectOpt && (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-extrabold text-emerald-700 dark:text-emerald-300 shrink-0">
-                        <Check className="w-4 h-4 text-emerald-600" />
-                        <span>Đáp án đúng</span>
-                      </span>
-                    )}
-                    {showResult && isSelected && !isCorrectOpt && (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-extrabold text-rose-600 dark:text-rose-300 shrink-0">
-                        <X className="w-4 h-4 text-rose-600" />
-                        <span>Bạn chọn</span>
-                      </span>
-                    )}
                   </button>
                 );
               })}
             </div>
 
-            {(questAnswerChecked || activeDailyQuest.completed || activeDailyQuest.failed) && (
-              <div className={`p-4 rounded-2xl border text-xs leading-relaxed space-y-1.5 ${
-                activeDailyQuest.completed || (!activeDailyQuest.failed && selectedOptionIdx === activeDailyQuest.correctIndex)
-                  ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200'
-                  : 'bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-800 text-rose-900 dark:text-rose-200'
-              }`}>
-                <div className="font-extrabold flex items-center gap-1.5">
-                  {activeDailyQuest.completed || (!activeDailyQuest.failed && selectedOptionIdx === activeDailyQuest.correctIndex) ? (
-                    <>
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                      <span>{questRewardNotice || 'Bạn đã hoàn thành nhiệm vụ này!'}</span>
-                    </>
+            <div className="flex items-center justify-end gap-2.5 pt-2">
+              <button
+                type="button"
+                onClick={() => setActiveDailyQuest(null)}
+                disabled={questSubmitting}
+                className="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs font-bold cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800"
+              >
+                Hủy
+              </button>
+              <button
+                type="button"
+                disabled={selectedOptionIdx === null || questSubmitting}
+                onClick={handleSubmitDailyQuestAnswer}
+                className="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 disabled:opacity-50 text-white text-xs font-extrabold cursor-pointer shadow-xs"
+              >
+                {questSubmitting ? 'Đang chấm...' : 'Hoàn thành & Xem kết quả'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* =========================================================================
+          5. MODAL KẾT QUẢ THỬ THÁCH NGÀY (HIỂN THỊ KẾT QUẢ & CỘNG THƯỞNG TRỰC TIẾP)
+          ========================================================================= */}
+      {questResultModal && (
+        <div className="fixed inset-0 z-[120] bg-slate-950/65 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+          <div className="animate-daily-quest-in bg-white dark:bg-slate-900 border border-emerald-100 dark:border-slate-800 rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-5 my-auto">
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${
+                  questResultModal.isCorrect
+                    ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400'
+                    : 'bg-rose-100 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400'
+                }`}>
+                  {questResultModal.isCorrect ? (
+                    <CheckCircle2 className="w-7 h-7" />
                   ) : (
-                    <>
-                      <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400" />
-                      <span>
-                        Chưa chính xác — đáp án đúng là phương án {String.fromCharCode(65 + activeDailyQuest.correctIndex)} (không được làm lại).
-                      </span>
-                    </>
+                    <AlertCircle className="w-7 h-7" />
                   )}
                 </div>
-                <p>{activeDailyQuest.explanation}</p>
+                <div>
+                  <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
+                    questResultModal.isCorrect
+                      ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800'
+                      : 'bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800'
+                  }`}>
+                    {questResultModal.quest.categoryLabel}
+                  </span>
+                  <h3 className="text-lg font-extrabold text-slate-900 dark:text-white mt-1">
+                    {questResultModal.isCorrect ? 'Chính xác! Đã cộng điểm thưởng' : 'Chưa chính xác'}
+                  </h3>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setQuestResultModal(null)}
+                className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {questResultModal.isCorrect ? (
+              <div className="space-y-3">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="p-3.5 rounded-2xl bg-emerald-50/80 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-center">
+                    <div className="flex items-center justify-center gap-1.5 text-xl font-black text-emerald-700 dark:text-emerald-300">
+                      <Zap className="w-5 h-5 fill-emerald-500 text-emerald-500" />
+                      <span>+{questResultModal.pointsAwarded}</span>
+                    </div>
+                    <div className="text-[11px] font-bold text-emerald-800/80 dark:text-emerald-300/80 mt-0.5">
+                      Điểm Năng Động
+                    </div>
+                  </div>
+                  <div className="p-3.5 rounded-2xl bg-indigo-50/80 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 text-center">
+                    <div className="flex items-center justify-center gap-1.5 text-xl font-black text-indigo-700 dark:text-indigo-300">
+                      <Award className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                      <span>+{questResultModal.xpAwarded}</span>
+                    </div>
+                    <div className="text-[11px] font-bold text-indigo-800/80 dark:text-indigo-300/80 mt-0.5">
+                      Kinh Nghiệm XP
+                    </div>
+                  </div>
+                </div>
+
+                {questResultModal.bonusJustAwarded && (
+                  <div className="p-3 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-xs font-extrabold flex items-center gap-2">
+                    <Gift className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
+                    <span>Hoàn thành 3/3 thử thách hôm nay! Đã cộng luôn Rương thưởng (+{DAILY_BONUS_POINTS} pts & +{DAILY_BONUS_XP} XP).</span>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-xs text-rose-900 dark:text-rose-200 space-y-1">
+                <div className="font-extrabold">
+                  Bạn chọn: {String.fromCharCode(65 + questResultModal.selectedIndex)}. {questResultModal.quest.options[questResultModal.selectedIndex]}
+                </div>
+                <div className="font-extrabold text-emerald-700 dark:text-emerald-300">
+                  Đáp án đúng: {String.fromCharCode(65 + questResultModal.quest.correctIndex)}. {questResultModal.quest.options[questResultModal.quest.correctIndex]}
+                </div>
               </div>
             )}
 
-            <div className="flex items-center justify-end gap-2.5 pt-2">
-              {!questAnswerChecked && !activeDailyQuest.completed && !activeDailyQuest.failed ? (
-                <button
-                  type="button"
-                  disabled={selectedOptionIdx === null}
-                  onClick={handleSubmitDailyQuestAnswer}
-                  className="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 disabled:opacity-50 text-white text-xs font-extrabold cursor-pointer shadow-xs"
-                >
-                  Kiểm tra đáp án
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => setActiveDailyQuest(null)}
-                  className="px-5 py-2.5 rounded-xl bg-slate-900 dark:bg-emerald-700 text-white text-xs font-extrabold cursor-pointer"
-                >
-                  Đóng
-                </button>
-              )}
+            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-300 leading-relaxed space-y-1">
+              <div className="font-extrabold text-slate-900 dark:text-white">Giải thích:</div>
+              <p>{questResultModal.quest.explanation}</p>
+            </div>
+
+            <div className="flex items-center justify-between gap-3 pt-1">
+              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                {questResultModal.remainingCount > 0
+                  ? `Còn ${questResultModal.remainingCount}/3 thử thách hôm nay`
+                  : 'Bạn đã hoàn tất toàn bộ thử thách hôm nay!'}
+              </span>
+              <button
+                type="button"
+                onClick={() => setQuestResultModal(null)}
+                className="px-6 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-extrabold cursor-pointer shadow-xs"
+              >
+                Hoàn tất
+              </button>
             </div>
           </div>
         </div>

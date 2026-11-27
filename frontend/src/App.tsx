@@ -145,7 +145,7 @@ export default function App() {
     if (current?.id) {
       void syncAllOfflineData(current.id).then(syncedCount => {
         if (syncedCount > 0) {
-          setSyncNotice(`Đã kết nối Internet và đồng bộ ${syncedCount} thay đổi học tập lên Firestore!`);
+          setSyncNotice(`Đã kết nối Internet và đồng bộ ${syncedCount} thay đổi học tập thành công!`);
           setTimeout(() => setSyncNotice(null), 5000);
         } else if (wasOffline) {
           setSyncNotice('Đã kết nối lại Internet — Dữ liệu trực tuyến đã sẵn sàng.');
@@ -177,7 +177,7 @@ export default function App() {
       if (!isOffline) {
         const syncedCount = await syncAllOfflineData(current.id);
         if (syncedCount > 0) {
-          setSyncNotice(`Đã đồng bộ ${syncedCount} thay đổi ngoại tuyến lên Firestore!`);
+          setSyncNotice(`Đã đồng bộ ${syncedCount} thay đổi ngoại tuyến thành công!`);
           setTimeout(() => setSyncNotice(null), 5000);
         }
       }
@@ -506,8 +506,8 @@ export default function App() {
               <span className="leading-snug">
                 Mất kết nối Internet — Đang dùng chế độ Ngoại tuyến.
                 {pendingSyncCount > 0
-                  ? ` Có ${pendingSyncCount} thay đổi đang chờ tự động đồng bộ lên Firestore khi có mạng lại.`
-                  : ' Bạn vẫn có thể học tập bình thường, tiến độ sẽ tự động đồng bộ lên Firestore khi có mạng lại.'}
+                  ? ` Có ${pendingSyncCount} thay đổi đang chờ tự động đồng bộ khi có mạng lại.`
+                  : ' Bạn vẫn có thể học tập bình thường, tiến độ sẽ tự động đồng bộ khi có mạng lại.'}
               </span>
             </div>
             <div className="flex items-center gap-1.5 shrink-0">
