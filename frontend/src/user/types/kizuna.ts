@@ -231,6 +231,8 @@ export interface ExamQuestion {
   index: number;
   question: string;
   content?: string;
+  imageUrl?: string | null;
+  audioUrl?: string | null;
   options: ExamOption[];
   correctAnswer: string;
   explanation?: string;
@@ -243,8 +245,11 @@ export interface QuestionSet {
   index: number;
   title: string;
   part: number; // 1: Knowledge/Reading, 2: Listening
-  audioUrl?: string;
+  sectionCode?: string;
+  audioUrl?: string | null;
+  imageUrl?: string | null;
   content?: string;
+  script?: string | null;
   questionCount?: number;
   questions: ExamQuestion[];
 }
@@ -254,17 +259,19 @@ export interface Exam {
   label: string;
   level: string;
   type: string;
-  year?: number;
-  month?: number;
-  testNumber?: number;
+  year?: number | null;
+  month?: number | null;
+  testNumber?: number | null;
+  isMock?: boolean;
   durationMinutes: number;
   totalQuestions: number;
   actualQuestionCount?: number;
   parts?: number;
-  audioUrl?: string;
+  audioUrl?: string | null;
   questionSetCount?: number;
   explanationCount?: number;
   scriptCount?: number;
+  sourceUrl?: string;
   createdAt?: string;
   questionSets?: QuestionSet[];
 }

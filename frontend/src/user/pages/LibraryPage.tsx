@@ -92,6 +92,7 @@ export const LibraryPage: React.FC = () => {
 
   // Làm bài thi Choukai chi tiết
   const [activeExamDetail, setActiveExamDetail] = useState<ChoukaiAudioItem | null>(null);
+  const [choukaiMode, setChoukaiMode] = useState<'exam' | 'practice'>('exam');
   const [loadingExamId, setLoadingExamId] = useState<string | null>(null);
   const [examErrorMsg, setExamErrorMsg] = useState<string | null>(null);
   const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
@@ -173,13 +174,14 @@ export const LibraryPage: React.FC = () => {
   };
 
   // Bắt đầu làm bài thi Choukai (Tải đề chi tiết 5 Mondai kèm kịch bản)
-  const handleStartChoukaiExam = async (examId: string) => {
+  const handleStartChoukaiExam = async (examId: string, mode: 'exam' | 'practice' = 'exam') => {
     setLoadingExamId(examId);
     setExamErrorMsg(null);
     try {
       const full = await kizunaService.getChoukaiExamDetail(examId);
       if (full && full.questionSets && full.questionSets.length > 0) {
         setActiveExamDetail(full);
+        setChoukaiMode(mode);
         setUserAnswers({});
         setIsSubmitted(false);
         setScoreResult(null);
@@ -668,18 +670,63 @@ export const LibraryPage: React.FC = () => {
                     </div>
                     <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                       Đã chọn: <strong className="text-rose-600 dark:text-rose-400 font-bold">{Object.keys(userAnswers).length}</strong> câu hỏi
+                      {choukaiMode === 'practice' && (
+                        <span className="ml-2 text-teal-600 dark:text-teal-400 font-bold">· Chế độ Luyện tập (Xem đáp án ngay)</span>
+                      )}
                     </div>
                   </div>
 
-                  <div className="flex gap-2">
-                    {!isSubmitted ? (
+                  <div className="flex gap-2 items-center flex-wrap">
+                    <div className="inline-flex bg-slate-100 dark:bg-slate-800 p-0.5 rounded-lg border border-slate-200 dark:border-slate-700 gap-0.5">
                       <button
                         type="button"
-                        onClick={() => setShowSubmitModal(true)}
-                        className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-bold text-xs flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer border-none"
+                        onClick={() => {
+                          if (choukaiMode !== 'exam') {
+                            setChoukaiMode('exam');
+                            setUserAnswers({});
+                            setIsSubmitted(false);
+                            setScoreResult(null);
+                          }
+                        }}
+                        className={`px-2.5 py-1 rounded-md text-[11px] font-bold border-none cursor-pointer transition-colors ${
+                          choukaiMode === 'exam'
+                            ? 'bg-slate-900 dark:bg-rose-600 text-white'
+                            : 'bg-transparent text-slate-600 dark:text-slate-300'
+                        }`}
                       >
-                        <CheckCircle2 size={14} /> Nộp bài chấm điểm
+                        Thi thật
                       </button>
+                      <button
+                        type="button"
+                        onClick={() => setChoukaiMode('practice')}
+                        className={`px-2.5 py-1 rounded-md text-[11px] font-bold border-none cursor-pointer transition-colors ${
+                          choukaiMode === 'practice'
+                            ? 'bg-teal-600 text-white'
+                            : 'bg-transparent text-slate-600 dark:text-slate-300'
+                        }`}
+                      >
+                        Luyện tập
+                      </button>
+                    </div>
+
+                    {!isSubmitted ? (
+                      choukaiMode === 'exam' ? (
+                        <button
+                          type="button"
+                          onClick={() => setShowSubmitModal(true)}
+                          className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-bold text-xs flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer border-none"
+                        >
+                          <CheckCircle2 size={14} /> Nộp bài chấm điểm
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={handleConfirmSubmitChoukai}
+                          className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-xl font-bold text-xs flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer border-none"
+                        >
+                          <CheckCircle2 size={14} /> Tổng kết & Lưu
+                        </button>
+                      )
                     ) : (
                       <button
                         type="button"
@@ -700,15 +747,17 @@ export const LibraryPage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* FILE ÂM THANH OFFICIAL CHOUKAI AUDIO */}
-                <div className="mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800">
-                  <div className="text-xs font-bold text-teal-600 dark:text-teal-400 mb-1.5 flex items-center gap-1">
-                    <Headphones size={13} /> FILE GHI ÂM CHÍNH THỨC (CORODOMO JLPT CHOUKAI AUDIO):
+                {/* FILE ÂM THANH OFFICIAL CHOUKAI AUDIO (CHỈ HIỆN NẾU KHÔNG DÙNG AUDIO RIÊNG TỪNG MONDAI) */}
+                {activeExamDetail.audioUrl && !(activeExamDetail.questionSets || []).some(qs => Boolean(qs.audioUrl)) && (
+                  <div className="mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800">
+                    <div className="text-xs font-bold text-teal-600 dark:text-teal-400 mb-1.5 flex items-center gap-1">
+                      <Headphones size={13} /> FILE GHI ÂM CHÍNH THỨC (JLPT CHOUKAI AUDIO):
+                    </div>
+                    <div className="bg-slate-100 dark:bg-slate-800/80 p-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
+                      <audio src={activeExamDetail.audioUrl} controls className="w-full h-9 outline-none" />
+                    </div>
                   </div>
-                  <div className="bg-slate-100 dark:bg-slate-800/80 p-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
-                    <audio src={activeExamDetail.audioUrl} controls className="w-full h-9 outline-none" />
-                  </div>
-                </div>
+                )}
               </div>
 
               {/* BẢNG ĐIỂM TỔNG KẾT SAU KHI NỘP BÀI CHOUKAI */}
@@ -743,18 +792,38 @@ export const LibraryPage: React.FC = () => {
                   className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 mb-5 shadow-xs transition-colors"
                 >
                   <div className="bg-slate-50 dark:bg-slate-800/80 p-2.5 px-3.5 rounded-xl text-sm font-extrabold text-slate-900 dark:text-white mb-4 border-l-4 border-l-teal-600 dark:border-l-teal-500">
-                    Mondai {qsIdx + 1}: {qs.title}
+                    Mondai {qsIdx + 1}: <span dangerouslySetInnerHTML={{ __html: qs.title }} />
                   </div>
+
+                  {qs.audioUrl && (
+                    <div className="bg-teal-50/70 dark:bg-teal-950/30 border border-teal-200 dark:border-teal-800/60 p-2.5 rounded-xl mb-4">
+                      <div className="text-xs font-bold text-teal-700 dark:text-teal-300 mb-1.5 flex items-center gap-1.5">
+                        <Headphones size={13} /> File nghe Mondai {qsIdx + 1}:
+                      </div>
+                      <audio src={qs.audioUrl} controls preload="none" className="w-full h-9 outline-none" />
+                    </div>
+                  )}
+
+                  {qs.script && (isSubmitted || (choukaiMode === 'practice' && qs.questions.some(q => Boolean(userAnswers[q.id])))) && (
+                    <details className="bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 rounded-xl p-3 mb-4 text-xs">
+                      <summary className="font-bold text-teal-700 dark:text-teal-400 cursor-pointer">
+                        Xem kịch bản & dịch nghĩa Mondai {qsIdx + 1}
+                      </summary>
+                      <div className="mt-2 text-slate-700 dark:text-slate-300 leading-relaxed" dangerouslySetInnerHTML={{ __html: qs.script }} />
+                    </details>
+                  )}
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                     {qs.questions.map((q, qIdx) => {
                       const userChoice = userAnswers[q.id];
-                      const isCorrect = isSubmitted && userChoice === q.correctAnswer;
-                      const isWrong = isSubmitted && !!userChoice && userChoice !== q.correctAnswer;
-                      const isUnanswered = isSubmitted && !userChoice;
+                      const hasAnswered = !!userChoice;
+                      const isGraded = isSubmitted || (choukaiMode === 'practice' && hasAnswered);
+                      const isCorrect = isGraded && userChoice === q.correctAnswer;
+                      const isWrong = isGraded && hasAnswered && userChoice !== q.correctAnswer;
+                      const isUnanswered = isSubmitted && !hasAnswered;
 
                       let cardClass = "bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-xl p-4 sm:p-4.5 transition-all";
-                      if (isSubmitted) {
+                      if (isGraded) {
                         if (isCorrect) {
                           cardClass = "bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-300 dark:border-emerald-800/80 border-l-4 border-l-emerald-600 dark:border-l-emerald-500 rounded-xl p-4 sm:p-4.5 transition-all";
                         } else {
@@ -772,8 +841,8 @@ export const LibraryPage: React.FC = () => {
                               Câu {qIdx + 1}
                             </span>
 
-                            {isSubmitted && (
-                              <div>
+                            {isGraded && (
+                              <div className="flex items-center gap-2">
                                 {isCorrect ? (
                                   <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-950/60 px-2 py-0.5 rounded flex items-center gap-1">
                                     <Check size={12} /> Chính xác
@@ -783,11 +852,31 @@ export const LibraryPage: React.FC = () => {
                                     <X size={12} /> {isUnanswered ? 'Chưa trả lời' : 'Chưa chính xác'} (Đáp án đúng: {q.correctAnswer})
                                   </span>
                                 )}
+                                {choukaiMode === 'practice' && hasAnswered && !isSubmitted && (
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      setUserAnswers(prev => {
+                                        const next = { ...prev };
+                                        delete next[q.id];
+                                        return next;
+                                      });
+                                    }}
+                                    className="text-[11px] font-bold text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2 py-0.5 rounded cursor-pointer"
+                                  >
+                                    Làm lại câu
+                                  </button>
+                                )}
                               </div>
                             )}
                           </div>
 
                           {/* Nội dung câu hỏi (chứa ảnh nếu có, ví dụ hình vẽ Mondai 4) */}
+                          {q.imageUrl && (
+                            <div className="mb-3 text-center">
+                              <img src={q.imageUrl} alt={`Câu ${qIdx + 1}`} className="max-w-full max-h-80 mx-auto rounded-lg border border-slate-200 dark:border-slate-700" />
+                            </div>
+                          )}
                           {q.question && q.question !== '番' && (
                             <div
                               className="text-sm text-slate-800 dark:text-slate-100 mb-3 leading-relaxed font-serif"
@@ -809,10 +898,10 @@ export const LibraryPage: React.FC = () => {
                               const optId = typeof opt === 'object' && opt !== null ? String(opt.id) : (optIdx + 1).toString();
                               const optText = typeof opt === 'object' && opt !== null ? opt.value : String(opt);
                               const isSelected = userChoice === optId;
-                              const isTargetCorrect = isSubmitted && q.correctAnswer === optId;
+                              const isTargetCorrect = isGraded && q.correctAnswer === optId;
 
                               let btnClass = "text-left p-2.5 px-3.5 rounded-xl border text-xs sm:text-sm transition-all flex items-center gap-2.5 ";
-                              if (!isSubmitted) {
+                              if (!isGraded) {
                                 if (isSelected) {
                                   btnClass += "border-rose-500 bg-rose-50 dark:bg-rose-950/50 text-rose-700 dark:text-rose-300 font-bold shadow-xs";
                                 } else {
@@ -832,18 +921,18 @@ export const LibraryPage: React.FC = () => {
                                 <button
                                   key={optId || optIdx}
                                   type="button"
-                                  disabled={isSubmitted}
+                                  disabled={isGraded}
                                   onClick={() => {
-                                    if (isSubmitted) return;
+                                    if (isGraded) return;
                                     setUserAnswers(prev => ({ ...prev, [q.id]: optId }));
                                   }}
                                   className={btnClass}
                                 >
                                   <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-extrabold shrink-0 ${
-                                    isSelected
-                                      ? 'bg-rose-600 text-white'
-                                      : isTargetCorrect
+                                    isTargetCorrect
                                       ? 'bg-emerald-600 text-white'
+                                      : isSelected
+                                      ? 'bg-rose-600 text-white'
                                       : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
                                   }`}>
                                     {optId}
@@ -862,8 +951,8 @@ export const LibraryPage: React.FC = () => {
                             })}
                           </div>
 
-                          {/* KỊCH BẢN NGHE (AUDIO SCRIPT) - MỞ KHÓA KHI NỘP BÀI */}
-                          {isSubmitted && (q.script || (q as any).audioScript) && (
+                          {/* KỊCH BẢN NGHE (AUDIO SCRIPT) - MỞ KHÓA KHI NỘP BÀI HOẶC KHI CHỌN Ở CHẾ ĐỘ LUYỆN TẬP */}
+                          {isGraded && (q.script || (q as any).audioScript) && (
                             <div className="bg-slate-50 dark:bg-slate-950/70 border border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-3.5 sm:p-4 mt-2.5">
                               <div className="text-[11px] font-extrabold text-teal-600 dark:text-teal-400 mb-1.5 flex items-center gap-1.5">
                                 <FileText size={13} />
@@ -943,10 +1032,10 @@ export const LibraryPage: React.FC = () => {
                 </div>
               )}
 
-              {/* Danh sách 65 đề thi dạng Grid */}
+              {/* Danh sách đề thi nghe Choukai dạng Grid */}
               {loadingChoukai ? (
                 <div className="text-center py-14 text-slate-500 dark:text-slate-400 text-xs">
-                  Đang tải danh mục 65 đề thi nghe Choukai...
+                  Đang tải danh mục đề thi nghe Choukai...
                 </div>
               ) : (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
@@ -976,29 +1065,43 @@ export const LibraryPage: React.FC = () => {
                         </div>
                       </div>
 
-                      <button
-                        type="button"
-                        disabled={loadingExamId === item.id}
-                        onClick={() => handleStartChoukaiExam(item.id)}
-                        className={`w-full py-2.5 px-4 rounded-xl text-xs font-extrabold border-none flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer ${
-                          loadingExamId === item.id
-                            ? 'bg-slate-400 dark:bg-slate-700 text-white cursor-not-allowed'
-                            : 'bg-rose-600 hover:bg-rose-700 text-white shadow-rose-600/20'
-                        }`}
-                      >
-                        {loadingExamId === item.id ? (
-                          <>
-                            <span className="inline-block w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                            <span>Đang vào phòng thi...</span>
-                          </>
-                        ) : (
-                          <>
-                            <Headphones size={14} />
-                            <span>Vào thi thử Choukai</span>
-                            <ArrowRight size={14} />
-                          </>
-                        )}
-                      </button>
+                      <div className="grid grid-cols-2 gap-2">
+                        <button
+                          type="button"
+                          disabled={loadingExamId === item.id}
+                          onClick={() => handleStartChoukaiExam(item.id, 'exam')}
+                          className={`w-full py-2.5 px-3 rounded-xl text-xs font-extrabold border-none flex items-center justify-center gap-1.5 shadow-xs transition-all cursor-pointer ${
+                            loadingExamId === item.id
+                              ? 'bg-slate-400 dark:bg-slate-700 text-white cursor-not-allowed'
+                              : 'bg-rose-600 hover:bg-rose-700 text-white shadow-rose-600/20'
+                          }`}
+                        >
+                          {loadingExamId === item.id ? (
+                            <>
+                              <span className="inline-block w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                              <span>Đang tải...</span>
+                            </>
+                          ) : (
+                            <>
+                              <Headphones size={13} />
+                              <span>Thi thật</span>
+                            </>
+                          )}
+                        </button>
+                        <button
+                          type="button"
+                          disabled={loadingExamId === item.id}
+                          onClick={() => handleStartChoukaiExam(item.id, 'practice')}
+                          className={`w-full py-2.5 px-3 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition-all cursor-pointer border ${
+                            loadingExamId === item.id
+                              ? 'bg-slate-200 dark:bg-slate-800 text-slate-400 border-slate-200 dark:border-slate-700 cursor-not-allowed'
+                              : 'bg-teal-50 dark:bg-teal-950/40 hover:bg-teal-600 text-teal-700 dark:text-teal-300 hover:text-white border-teal-200 dark:border-teal-800'
+                          }`}
+                        >
+                          <span>Luyện tập</span>
+                          <ArrowRight size={13} />
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>

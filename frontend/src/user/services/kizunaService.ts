@@ -642,54 +642,91 @@ export const kizunaService = {
   },
 
   async getExamCatalog(levelFilter = 'ALL'): Promise<Exam[]> {
+    const cacheKey = `kizuna_exam_catalog_v4_${levelFilter}`;
+    const cached = getSessionCache<Exam[]>(cacheKey);
+    if (cached && cached.length > 0) return cached;
+
+    const cleanLabel = (raw?: string) =>
+      String(raw || '').replace(/\s*Thi\s*thử\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
+
     try {
       const snap = await safeGetDocs(collection(db, 'jlpt_exam_catalog'));
       if (!snap.empty) {
         const exams: Exam[] = [];
         snap.forEach(d => {
-          const item = { id: d.id, ...d.data() } as Exam;
-          if (levelFilter === 'ALL' || item.level.toUpperCase() === levelFilter.toUpperCase()) {
+          const raw = d.data();
+          const item = { ...raw, id: d.id, label: cleanLabel(raw.label) } as Exam;
+          if (levelFilter === 'ALL' || item.level?.toUpperCase() === levelFilter.toUpperCase()) {
             exams.push(item);
           }
         });
         exams.sort((a, b) => {
           if (a.year && b.year && a.year !== b.year) return b.year - a.year;
-          return (b.month || 0) - (a.month || 0);
+          if (a.year && !b.year) return -1;
+          if (!a.year && b.year) return 1;
+          if ((a.month || 0) !== (b.month || 0)) return (b.month || 0) - (a.month || 0);
+          if (a.testNumber && b.testNumber) return a.testNumber - b.testNumber;
+          return (a.label || '').localeCompare(b.label || '');
         });
+        if (exams.length > 0) {
+          setSessionCache(cacheKey, exams);
+        }
         return exams;
       }
     } catch (e) {
       console.warn('Firestore exam catalog error:', e);
     }
 
-    return [
-      { id: 'ex_n3_2024_07', label: 'JLPT-N3 07 2024', level: 'N3', type: 'jlpt-n3', year: 2024, month: 7, durationMinutes: 140, totalQuestions: 101, actualQuestionCount: 101, audioUrl: 'https://firebasestorage.googleapis.com/...', explanationCount: 68 },
-      { id: 'ex_n2_2024_07', label: 'JLPT-N2 07 2024', level: 'N2', type: 'jlpt-n2', year: 2024, month: 7, durationMinutes: 155, totalQuestions: 101, actualQuestionCount: 101, audioUrl: 'https://firebasestorage.googleapis.com/...', explanationCount: 64 },
-      { id: 'ex_n1_2024_07', label: 'JLPT-N1 07 2024', level: 'N1', type: 'jlpt-n1', year: 2024, month: 7, durationMinutes: 170, totalQuestions: 96, actualQuestionCount: 96, audioUrl: 'https://firebasestorage.googleapis.com/...', explanationCount: 61 },
-      { id: 'ex_n4_de_1', label: 'JLPT N4 Đề 1', level: 'N4', type: 'jlpt-n4', durationMinutes: 125, totalQuestions: 68, actualQuestionCount: 68 },
-      { id: 'ex_n5_ontap_1', label: 'JLPT N5 Ôn tập 1', level: 'N5', type: 'jlpt-n5', durationMinutes: 105, totalQuestions: 35, actualQuestionCount: 35 }
+    const fallbackList: Exam[] = [
+      { id: 'onjlpt_n3_202512', label: 'JLPT N3 - 12/2025', level: 'N3', type: 'jlpt-n3', year: 2025, month: 12, durationMinutes: 140, totalQuestions: 104, actualQuestionCount: 104, explanationCount: 104 },
+      { id: 'onjlpt_n2_202512', label: 'JLPT N2 - 12/2025', level: 'N2', type: 'jlpt-n2', year: 2025, month: 12, durationMinutes: 155, totalQuestions: 101, actualQuestionCount: 101, explanationCount: 101 },
+      { id: 'onjlpt_n1_202412', label: 'JLPT N1 - 12/2024', level: 'N1', type: 'jlpt-n1', year: 2024, month: 12, durationMinutes: 170, totalQuestions: 96, actualQuestionCount: 96, explanationCount: 96 },
+      { id: 'onjlpt_n4_202512', label: 'JLPT N4 - 12/2025', level: 'N4', type: 'jlpt-n4', year: 2025, month: 12, durationMinutes: 125, totalQuestions: 85, actualQuestionCount: 85, explanationCount: 85 },
+      { id: 'onjlpt_n5_n5-mock-test-1', label: 'JLPT N5 - Đề chuẩn 1', level: 'N5', type: 'jlpt-n5', testNumber: 1, durationMinutes: 105, totalQuestions: 97, actualQuestionCount: 97, explanationCount: 97 }
     ];
+    return levelFilter === 'ALL'
+      ? fallbackList
+      : fallbackList.filter(e => e.level.toUpperCase() === levelFilter.toUpperCase());
   },
 
   async getExamById(id: string): Promise<Exam | null> {
+    if (!id) return null;
+    const cacheKey = `kizuna_exam_detail_v3_${id}`;
+    const cleanLabel = (raw?: string) =>
+      String(raw || '').replace(/\s*Thi\s*thử\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
+    const isValidExam = (ex: Exam | null | undefined): ex is Exam =>
+      Boolean(
+        ex &&
+        Array.isArray(ex.questionSets) &&
+        ex.questionSets.some(qs => Array.isArray(qs.questions) && qs.questions.length > 0)
+      );
+
+    const cached = getSessionCache<Exam>(cacheKey);
+    if (isValidExam(cached)) return cached;
+
     try {
       if (db) {
         const snap = await getDoc(doc(db, 'jlpt_exams', id));
         if (snap.exists()) {
-          return { id: snap.id, ...snap.data() } as Exam;
+          const raw = snap.data();
+          const exam = { ...raw, id: snap.id, label: cleanLabel(raw.label) } as Exam;
+          if (isValidExam(exam)) {
+            setSessionCache(cacheKey, exam);
+            return exam;
+          }
         }
       }
     } catch (e) {
       console.warn(`Error fetching full exam ${id} from Firestore:`, e);
     }
 
-    // Fallback nếu Firestore không có hoặc lỗi: Tìm trong choukai_audio.json
+    // Fallback nếu Firestore không có hoặc lỗi: Tìm trong choukai_audio
     try {
       const choukai = await this.getChoukaiExamDetail(id);
-      if (choukai) {
-        return {
+      if (choukai && Array.isArray(choukai.questionSets) && choukai.questionSets.length > 0) {
+        const fallbackExam: Exam = {
           id: choukai.id,
-          label: choukai.label,
+          label: cleanLabel(choukai.label),
           level: choukai.level,
           type: `jlpt-${choukai.level.toLowerCase()}`,
           year: choukai.year,
@@ -700,6 +737,10 @@ export const kizunaService = {
           audioUrl: choukai.audioUrl,
           questionSets: choukai.questionSets
         };
+        if (isValidExam(fallbackExam)) {
+          setSessionCache(cacheKey, fallbackExam);
+          return fallbackExam;
+        }
       }
     } catch (e) {
       console.warn('Fallback getExamById failed:', e);
@@ -717,9 +758,9 @@ export const kizunaService = {
       vocabCount: 13096,
       grammarCount: 605,
       kanjiCount: 2216,
-      examsCount: 85
+      examsCount: 105
     };
-    const CACHE_KEY = 'kizuna_app_catalog_stats_v2';
+    const CACHE_KEY = 'kizuna_app_catalog_stats_v4';
     try {
       const cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
@@ -801,9 +842,12 @@ export const kizunaService = {
    * Lấy danh sách bài nghe Choukai từ Firestore jlpt_exam_catalog
    */
   async getChoukaiAudioList(level = 'ALL'): Promise<ChoukaiAudioItem[]> {
-    const cacheKey = `kizuna_choukai_audio_cache_${level}`;
+    const cacheKey = `kizuna_choukai_audio_cache_v3_${level}`;
     const cached = getSessionCache<ChoukaiAudioItem[]>(cacheKey);
     if (cached && cached.length > 0) return cached;
+
+    const cleanLabel = (raw?: string) =>
+      String(raw || '').replace(/\s*Thi\s*thử\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
 
     let items: ChoukaiAudioItem[] = [];
 
@@ -817,7 +861,7 @@ export const kizunaService = {
             if (data.audioUrl) {
               items.push({
                 id: d.id,
-                label: data.label || '',
+                label: cleanLabel(data.label),
                 level: data.level || 'N3',
                 year: data.year,
                 month: data.month,

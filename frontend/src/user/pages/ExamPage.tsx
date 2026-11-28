@@ -43,6 +43,8 @@ const LEVEL_FILTERS = [
   { id: 'N1', label: 'N1 Thượng cấp (170p)', kanji: '上級' },
 ];
 
+type ExamMode = 'exam' | 'practice';
+
 interface ScoreDetail {
   total: number;
   correct: number;
@@ -64,8 +66,9 @@ export const ExamPage: React.FC = () => {
   // Lưu lịch sử làm bài thi của người dùng từ Firestore / LocalStorage
   const [examResults, setExamResults] = useState<Record<string, UserExamResult>>({});
 
-  // Chế độ phòng thi (Exam Room)
+  // Chế độ phòng thi (Exam Room): 'exam' (Thi thật) hoặc 'practice' (Luyện tập xem đáp án ngay)
   const [activeExam, setActiveExam] = useState<Exam | null>(null);
+  const [examMode, setExamMode] = useState<ExamMode>('exam');
   const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [scoreResult, setScoreResult] = useState<ScoreDetail | null>(null);
@@ -104,9 +107,9 @@ export const ExamPage: React.FC = () => {
     }
   }, [currentUser?.id]);
 
-  // Bộ đếm ngược thời gian thi thực chiến (tự động nộp bài khi hết giờ)
+  // Bộ đếm ngược thời gian thi thực chiến (chỉ chạy trong chế độ Thi thật)
   useEffect(() => {
-    if (isTimerRunning && secondsRemaining > 0 && !isSubmitted) {
+    if (examMode === 'exam' && isTimerRunning && secondsRemaining > 0 && !isSubmitted) {
       const timer = setInterval(() => {
         setSecondsRemaining(prev => {
           if (prev <= 1) {
@@ -120,7 +123,7 @@ export const ExamPage: React.FC = () => {
       }, 1000);
       return () => clearInterval(timer);
     }
-  }, [isTimerRunning, secondsRemaining, isSubmitted]);
+  }, [examMode, isTimerRunning, secondsRemaining, isSubmitted]);
 
   // Format thời gian hiển thị (MM:SS hoặc HH:MM:SS)
   const formatTime = (secs: number) => {
@@ -158,18 +161,19 @@ export const ExamPage: React.FC = () => {
     );
   }, [exams, searchQuery]);
 
-  // Bắt đầu làm bài thi
-  const handleStartExam = async (examId: string) => {
+  // Bắt đầu làm bài (hỗ trợ 2 chế độ: 'exam' Thi thật và 'practice' Luyện tập)
+  const handleStartExam = async (examId: string, mode: ExamMode = 'exam') => {
     setLoadingExamDetail(true);
     try {
       const fullExam = await kizunaService.getExamById(examId);
       if (fullExam) {
         setActiveExam(fullExam);
+        setExamMode(mode);
         setUserAnswers({});
         setIsSubmitted(false);
         setScoreResult(null);
 
-        // Áp dụng giới hạn thời gian chuẩn JLPT cho từng bậc N
+        // Áp dụng giới hạn thời gian chuẩn JLPT cho từng bậc N (chạy đồng hồ khi ở chế độ Thi thật)
         const standardDurationMin = JLPT_STANDARD_DURATIONS[fullExam.level?.toUpperCase()] || 120;
         const examDurationMin = (fullExam.durationMinutes && fullExam.durationMinutes > 0)
           ? fullExam.durationMinutes
@@ -178,7 +182,7 @@ export const ExamPage: React.FC = () => {
         const totalSecs = examDurationMin * 60;
         setSecondsRemaining(totalSecs);
         setTotalDurationSeconds(totalSecs);
-        setIsTimerRunning(true);
+        setIsTimerRunning(mode === 'exam');
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
@@ -193,7 +197,37 @@ export const ExamPage: React.FC = () => {
 
   const handleSelectOption = (questionId: string, optionId: string) => {
     if (isSubmitted) return;
+    if (examMode === 'practice' && userAnswers[questionId]) return;
     setUserAnswers(prev => ({ ...prev, [questionId]: optionId }));
+  };
+
+  // Xóa lựa chọn của 1 câu để làm lại trong chế độ Luyện tập
+  const handleRetryQuestion = (questionId: string) => {
+    if (isSubmitted || examMode !== 'practice') return;
+    setUserAnswers(prev => {
+      const next = { ...prev };
+      delete next[questionId];
+      return next;
+    });
+  };
+
+  // Chuyển đổi qua lại giữa 2 chế độ Thi thật & Luyện tập ngay trong phòng thi
+  const handleSwitchExamMode = (nextMode: ExamMode) => {
+    if (nextMode === examMode) return;
+    if (isSubmitted) {
+      handleResetExam(nextMode);
+      return;
+    }
+    if (nextMode === 'practice') {
+      setExamMode('practice');
+      setIsTimerRunning(false);
+    } else {
+      // Chuyển từ Luyện tập -> Thi thật: reset đáp án đã xem trước đó & khởi động đồng hồ chuẩn JLPT
+      setUserAnswers({});
+      setExamMode('exam');
+      setSecondsRemaining(totalDurationSeconds);
+      setIsTimerRunning(true);
+    }
   };
 
   // Tự động nộp bài khi hết giờ
@@ -297,10 +331,11 @@ export const ExamPage: React.FC = () => {
   };
 
   // Làm lại đề thi hiện tại
-  const handleResetExam = () => {
+  const handleResetExam = (targetMode: ExamMode = examMode) => {
     setUserAnswers({});
     setIsSubmitted(false);
     setScoreResult(null);
+    setExamMode(targetMode);
     if (activeExam) {
       const standardDurationMin = JLPT_STANDARD_DURATIONS[activeExam.level?.toUpperCase()] || 120;
       const examDurationMin = (activeExam.durationMinutes && activeExam.durationMinutes > 0)
@@ -309,14 +344,14 @@ export const ExamPage: React.FC = () => {
       const totalSecs = examDurationMin * 60;
       setSecondsRemaining(totalSecs);
       setTotalDurationSeconds(totalSecs);
-      setIsTimerRunning(true);
+      setIsTimerRunning(targetMode === 'exam');
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // Thoát khỏi phòng thi -> Mở modal xác nhận thay vì window.confirm
   const handleExitExam = () => {
-    if (!isSubmitted && Object.keys(userAnswers).length > 0) {
+    if (examMode === 'exam' && !isSubmitted && Object.keys(userAnswers).length > 0) {
       setShowExitModal(true);
       return;
     }
@@ -334,14 +369,23 @@ export const ExamPage: React.FC = () => {
   };
 
   // =========================================================================
-  // GIAO DIỆN PHÒNG THI THỰC CHIẾN (EXAM ROOM)
+  // GIAO DIỆN PHÒNG THI & LUYỆN TẬP (EXAM ROOM)
   // =========================================================================
   if (activeExam) {
     const answeredCount = Object.keys(userAnswers).length;
     let totalQuestionsCount = 0;
+    let liveCorrectCount = 0;
+    let liveWrongCount = 0;
     if (activeExam.questionSets) {
       for (const qs of activeExam.questionSets) {
         totalQuestionsCount += qs.questions.length;
+        for (const q of qs.questions) {
+          const chosen = userAnswers[q.id];
+          if (chosen) {
+            if (chosen === q.correctAnswer) liveCorrectCount++;
+            else liveWrongCount++;
+          }
+        }
       }
     }
     if (totalQuestionsCount === 0) {
@@ -401,44 +445,148 @@ export const ExamPage: React.FC = () => {
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 12, color: '#78716c', marginTop: 4, flexWrap: 'wrap' }}>
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                  <Timer size={13} color={secondsRemaining < 300 && !isSubmitted ? '#ef4444' : '#78716c'} />
-                  Thời gian: <strong style={{ color: secondsRemaining < 300 && !isSubmitted ? '#ef4444' : '#1c2536' }}>{formatTime(secondsRemaining)}</strong>
-                </span>
+                {examMode === 'exam' ? (
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                    <Timer size={13} color={secondsRemaining < 300 && !isSubmitted ? '#ef4444' : '#78716c'} />
+                    Thời gian: <strong style={{ color: secondsRemaining < 300 && !isSubmitted ? '#ef4444' : '#1c2536' }}>{formatTime(secondsRemaining)}</strong>
+                  </span>
+                ) : (
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                    <Lightbulb size={13} color="#0d9488" />
+                    <span style={{ color: '#0f766e', fontWeight: 700 }}>Chế độ Luyện tập · Xem đáp án ngay</span>
+                  </span>
+                )}
                 <span>•</span>
                 <span>
                   Tiến độ: <strong style={{ color: '#c53d32' }}>{answeredCount}</strong> / {totalQuestionsCount} câu ({progressPercent}%)
                 </span>
+                {examMode === 'practice' && answeredCount > 0 && (
+                  <>
+                    <span>•</span>
+                    <span style={{ color: '#15803d', fontWeight: 800 }}>Đúng: {liveCorrectCount}</span>
+                    <span style={{ color: '#b91c1c', fontWeight: 800 }}>Sai: {liveWrongCount}</span>
+                  </>
+                )}
               </div>
             </div>
 
             <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-              {!isSubmitted ? (
+              {/* BỘ CHUYỂN ĐỔI 2 CHẾ ĐỘ: THI THẬT / LUYỆN TẬP */}
+              <div style={{
+                display: 'inline-flex',
+                background: '#f5f2ed',
+                padding: 3,
+                borderRadius: 9,
+                border: '1px solid #e7dfd5',
+                gap: 2
+              }}>
                 <button
-                  onClick={handleSubmitExam}
+                  type="button"
+                  onClick={() => handleSwitchExamMode('exam')}
                   style={{
-                    padding: '8px 18px',
-                    background: '#c53d32',
-                    color: '#ffffff',
+                    padding: '5px 10px',
+                    borderRadius: 6,
                     border: 'none',
-                    borderRadius: 8,
+                    fontSize: 12,
                     fontWeight: 700,
-                    fontSize: 13,
                     cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 6,
-                    boxShadow: '0 2px 6px rgba(197, 61, 50, 0.25)',
-                    transition: 'background 0.15s ease'
+                    background: examMode === 'exam' ? '#1c2536' : 'transparent',
+                    color: examMode === 'exam' ? '#ffffff' : '#57534e',
+                    transition: 'all 0.15s ease'
                   }}
-                  onMouseEnter={e => e.currentTarget.style.background = '#9c2a2a'}
-                  onMouseLeave={e => e.currentTarget.style.background = '#c53d32'}
                 >
-                  <CheckCircle2 size={15} /> Nộp bài chấm điểm
+                  Thi thật
                 </button>
+                <button
+                  type="button"
+                  onClick={() => handleSwitchExamMode('practice')}
+                  style={{
+                    padding: '5px 10px',
+                    borderRadius: 6,
+                    border: 'none',
+                    fontSize: 12,
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    background: examMode === 'practice' ? '#0d9488' : 'transparent',
+                    color: examMode === 'practice' ? '#ffffff' : '#57534e',
+                    transition: 'all 0.15s ease'
+                  }}
+                >
+                  Luyện tập
+                </button>
+              </div>
+
+              {!isSubmitted ? (
+                examMode === 'exam' ? (
+                  <button
+                    onClick={handleSubmitExam}
+                    style={{
+                      padding: '8px 18px',
+                      background: '#c53d32',
+                      color: '#ffffff',
+                      border: 'none',
+                      borderRadius: 8,
+                      fontWeight: 700,
+                      fontSize: 13,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 6,
+                      boxShadow: '0 2px 6px rgba(197, 61, 50, 0.25)',
+                      transition: 'background 0.15s ease'
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.background = '#9c2a2a'}
+                    onMouseLeave={e => e.currentTarget.style.background = '#c53d32'}
+                  >
+                    <CheckCircle2 size={15} /> Nộp bài chấm điểm
+                  </button>
+                ) : (
+                  <>
+                    {answeredCount > 0 && (
+                      <button
+                        type="button"
+                        onClick={() => executeSubmission(false)}
+                        style={{
+                          padding: '8px 14px',
+                          background: '#0d9488',
+                          color: '#ffffff',
+                          border: 'none',
+                          borderRadius: 8,
+                          fontWeight: 700,
+                          fontSize: 13,
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 6
+                        }}
+                      >
+                        <CheckCircle2 size={15} /> Tổng kết & Lưu
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => handleResetExam('practice')}
+                      style={{
+                        padding: '8px 14px',
+                        background: '#1c2536',
+                        color: '#ffffff',
+                        border: 'none',
+                        borderRadius: 8,
+                        fontWeight: 700,
+                        fontSize: 13,
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 6
+                      }}
+                    >
+                      <RotateCcw size={14} /> Làm lại
+                    </button>
+                  </>
+                )
               ) : (
                 <button
-                  onClick={handleResetExam}
+                  onClick={() => handleResetExam()}
                   style={{
                     padding: '8px 16px',
                     background: '#1c2536',
@@ -495,7 +643,7 @@ export const ExamPage: React.FC = () => {
             <div style={{
               width: `${progressPercent}%`,
               height: '100%',
-              background: isSubmitted ? '#16a34a' : '#c53d32',
+              background: isSubmitted ? '#16a34a' : (examMode === 'practice' ? '#0d9488' : '#c53d32'),
               transition: 'width 0.3s ease'
             }} />
           </div>
@@ -662,8 +810,8 @@ export const ExamPage: React.FC = () => {
           </div>
         )}
 
-        {/* 3. AUDIO PLAYER CHO PHẦN CHOUKAI (NẾU ĐỀ CÓ FILE NGHE) */}
-        {activeExam.audioUrl && (
+        {/* 3. AUDIO PLAYER CHO PHẦN CHOUKAI (CHỈ HIỆN Ở ĐẦU TRANG NẾU ĐỀ DÙNG 1 FILE AUDIO CHUNG) */}
+        {activeExam.audioUrl && !(activeExam.questionSets || []).some(qs => Boolean(qs.audioUrl)) && (
           <div style={{
             padding: '16px 20px',
             marginBottom: 24,
@@ -691,6 +839,8 @@ export const ExamPage: React.FC = () => {
         {/* 4. TOÀN BỘ CÁC PHẦN THI (MONDAI QUESTION SETS) VÀ CÂU HỎI */}
         {activeExam.questionSets && activeExam.questionSets.map((qs, setIdx) => {
           const isListeningPart = qs.part === 2;
+          const anyQuestionAnsweredInSet = qs.questions.some(q => Boolean(userAnswers[q.id]));
+          const showSetScript = Boolean(qs.script) && (isSubmitted || (examMode === 'practice' && anyQuestionAnsweredInSet));
 
           return (
             <div
@@ -731,9 +881,34 @@ export const ExamPage: React.FC = () => {
                   {isListeningPart ? 'CHOUKAI' : 'BUNPOU / DOKKAI'}
                 </span>
                 <span>
-                  Phần {qs.part === 1 ? 'Kiến Thức Ngôn Ngữ & Đọc Hiểu' : 'Nghe Hiểu (Choukai)'}: {qs.title}
+                  Phần {qs.part === 1 ? 'Kiến Thức Ngôn Ngữ & Đọc Hiểu' : 'Nghe Hiểu (Choukai)'}:{' '}
+                  <span dangerouslySetInnerHTML={{ __html: qs.title }} />
                 </span>
               </div>
+
+              {/* Audio player riêng cho Mondai (nếu có) */}
+              {qs.audioUrl && (
+                <div style={{
+                  background: '#f0fdfa',
+                  border: '1px solid #ccfbf1',
+                  borderRadius: 10,
+                  padding: '12px 14px',
+                  marginBottom: 16
+                }}>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: '#0f766e', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <Headphones size={14} color="#0d9488" />
+                    <span>File nghe Mondai này:</span>
+                  </div>
+                  <audio src={qs.audioUrl} controls preload="none" style={{ width: '100%', outline: 'none' }} />
+                </div>
+              )}
+
+              {/* Ảnh minh họa của Mondai (nếu có) */}
+              {qs.imageUrl && (
+                <div style={{ marginBottom: 16, textAlign: 'center' }}>
+                  <img src={qs.imageUrl} alt={qs.title || 'Mondai illustration'} style={{ maxWidth: '100%', maxHeight: 420, borderRadius: 8, border: '1px solid #e7dfd5' }} />
+                </div>
+              )}
 
               {/* Đoạn văn đọc hiểu nếu có */}
               {qs.content && (
@@ -754,13 +929,34 @@ export const ExamPage: React.FC = () => {
                 />
               )}
 
+              {/* Kịch bản nghe tổng thể của Mondai (hiện sau khi nộp hoặc khi đang luyện tập Mondai này) */}
+              {showSetScript && qs.script && (
+                <details style={{
+                  background: '#f8fafc',
+                  border: '1px solid #cbd5e1',
+                  borderRadius: 8,
+                  padding: '10px 14px',
+                  marginBottom: 18,
+                  fontSize: 13
+                }}>
+                  <summary style={{ fontWeight: 800, color: '#0f766e', cursor: 'pointer' }}>
+                    Xem kịch bản & dịch nghĩa toàn Mondai này
+                  </summary>
+                  <div
+                    style={{ marginTop: 10, color: '#334155', lineHeight: 1.7 }}
+                    dangerouslySetInnerHTML={{ __html: qs.script }}
+                  />
+                </details>
+              )}
+
               {/* Danh sách câu hỏi */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
                 {qs.questions.map((q, qIdx) => {
                   const userChoice = userAnswers[q.id];
                   const hasAnswered = !!userChoice;
-                  const isCorrect = isSubmitted && userChoice === q.correctAnswer;
-                  const isWrong = isSubmitted && hasAnswered && userChoice !== q.correctAnswer;
+                  const isGraded = isSubmitted || (examMode === 'practice' && hasAnswered);
+                  const isCorrect = isGraded && userChoice === q.correctAnswer;
+                  const isWrong = isGraded && hasAnswered && userChoice !== q.correctAnswer;
                   const isUnanswered = isSubmitted && !hasAnswered;
 
                   // Thiết lập khung viền: ĐỎ cho câu sai hoặc câu chưa làm, XANH LÁ cho câu đúng
@@ -769,14 +965,14 @@ export const ExamPage: React.FC = () => {
                   let cardBorderLeft = '1px solid #ebe7df';
                   let cardShadow = '0 1px 3px rgba(0,0,0,0.02)';
 
-                  if (isSubmitted) {
+                  if (isGraded) {
                     if (isCorrect) {
                       cardBg = '#fbfdfb';
                       cardBorder = '1.5px solid #86efac';
                       cardBorderLeft = '5px solid #16a34a';
                       cardShadow = '0 3px 10px rgba(22, 163, 74, 0.06)';
                     } else {
-                      // isWrong hoặc isUnanswered: Khung đỏ nổi bật rõ ràng theo yêu cầu
+                      // isWrong hoặc isUnanswered: Khung đỏ nổi bật rõ ràng
                       cardBg = '#fffafa';
                       cardBorder = '1.5px solid #fca5a5';
                       cardBorderLeft = '5px solid #dc2626';
@@ -800,7 +996,35 @@ export const ExamPage: React.FC = () => {
                         transition: 'all 0.15s ease'
                       }}
                     >
-                      {/* Tiêu đề câu hỏi kèm huy hiệu trạng thái đúng/sai sau khi nộp */}
+                      {/* Đoạn văn riêng của câu hỏi (nếu Mondai có nhiều đoạn văn) */}
+                      {q.content && (
+                        <div
+                          style={{
+                            background: '#fdfbf7',
+                            border: '1px solid #e7dfd5',
+                            borderRadius: 8,
+                            padding: '14px 18px',
+                            fontSize: 14,
+                            lineHeight: 1.8,
+                            whiteSpace: 'pre-wrap',
+                            color: '#334155',
+                            fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
+                          }}
+                          dangerouslySetInnerHTML={{ __html: q.content }}
+                        />
+                      )}
+
+                      {/* Ảnh minh họa hoặc file nghe riêng của câu hỏi (nếu có) */}
+                      {q.imageUrl && (
+                        <div style={{ textAlign: 'center' }}>
+                          <img src={q.imageUrl} alt={`Câu ${q.index || (qIdx + 1)}`} style={{ maxWidth: '100%', maxHeight: 380, borderRadius: 8, border: '1px solid #e7dfd5' }} />
+                        </div>
+                      )}
+                      {q.audioUrl && (
+                        <audio src={q.audioUrl} controls preload="none" style={{ width: '100%', outline: 'none' }} />
+                      )}
+
+                      {/* Tiêu đề câu hỏi kèm huy hiệu trạng thái đúng/sai */}
                       <div style={{
                         display: 'flex',
                         alignItems: 'flex-start',
@@ -820,13 +1044,13 @@ export const ExamPage: React.FC = () => {
                             display: 'inline-flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            background: isSubmitted
+                            background: isGraded
                               ? (isCorrect ? '#dcfce7' : '#fee2e2')
                               : '#fdf2f0',
-                            color: isSubmitted
+                            color: isGraded
                               ? (isCorrect ? '#15803d' : '#b91c1c')
                               : '#c53d32',
-                            border: isSubmitted
+                            border: isGraded
                               ? (isCorrect ? '1px solid #86efac' : '1px solid #fca5a5')
                               : '1px solid #f3d5d2',
                             padding: '2px 8px',
@@ -840,9 +1064,9 @@ export const ExamPage: React.FC = () => {
                           <span dangerouslySetInnerHTML={{ __html: q.question }} />
                         </div>
 
-                        {/* Huy hiệu đánh giá đúng/sai sau khi nộp bài */}
-                        {isSubmitted && (
-                          <div style={{ flexShrink: 0 }}>
+                        {/* Huy hiệu đánh giá đúng/sai (sau khi nộp hoặc ngay khi chọn ở chế độ Luyện tập) */}
+                        {isGraded && (
+                          <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 6 }}>
                             {isCorrect && (
                               <span style={{
                                 display: 'inline-flex',
@@ -891,6 +1115,28 @@ export const ExamPage: React.FC = () => {
                                 <AlertCircle size={13} /> CHƯA LÀM
                               </span>
                             )}
+                            {examMode === 'practice' && hasAnswered && !isSubmitted && (
+                              <button
+                                type="button"
+                                onClick={() => handleRetryQuestion(q.id)}
+                                title="Xóa chọn câu này để làm lại"
+                                style={{
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: 4,
+                                  background: '#ffffff',
+                                  color: '#57534e',
+                                  border: '1px solid #d6d3d1',
+                                  padding: '4px 8px',
+                                  borderRadius: 6,
+                                  fontSize: 11,
+                                  fontWeight: 700,
+                                  cursor: 'pointer'
+                                }}
+                              >
+                                <RotateCcw size={11} /> Làm lại câu này
+                              </button>
+                            )}
                           </div>
                         )}
                       </div>
@@ -903,7 +1149,8 @@ export const ExamPage: React.FC = () => {
                       }}>
                         {q.options.map(opt => {
                           const isChosen = userChoice === opt.id;
-                          const isOfficialCorrect = isSubmitted && q.correctAnswer === opt.id;
+                          const isOfficialCorrect = isGraded && q.correctAnswer === opt.id;
+                          const isOptionLocked = isGraded;
 
                           let optBg = '#ffffff';
                           let optBorder = '1.5px solid #e2e8f0';
@@ -911,7 +1158,7 @@ export const ExamPage: React.FC = () => {
                           let badgeBg = '#f1f5f9';
                           let badgeColor = '#475569';
 
-                          if (isSubmitted) {
+                          if (isGraded) {
                             if (isOfficialCorrect) {
                               optBg = '#f0fdf4';
                               optBorder = '1.5px solid #16a34a';
@@ -953,21 +1200,21 @@ export const ExamPage: React.FC = () => {
                                 textAlign: 'left',
                                 fontSize: 14,
                                 fontWeight: isChosen || isOfficialCorrect ? 700 : 500,
-                                cursor: isSubmitted ? 'default' : 'pointer',
+                                cursor: isOptionLocked ? 'default' : 'pointer',
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: 10,
                                 transition: 'all 0.15s ease',
-                                boxShadow: isChosen && !isSubmitted ? '0 1px 4px rgba(197, 61, 50, 0.15)' : 'none'
+                                boxShadow: isChosen && !isGraded ? '0 1px 4px rgba(197, 61, 50, 0.15)' : 'none'
                               }}
                               onMouseEnter={e => {
-                                if (!isSubmitted && !isChosen) {
+                                if (!isOptionLocked && !isChosen) {
                                   e.currentTarget.style.borderColor = '#c53d32';
                                   e.currentTarget.style.transform = 'translateY(-1px)';
                                 }
                               }}
                               onMouseLeave={e => {
-                                if (!isSubmitted && !isChosen) {
+                                if (!isOptionLocked && !isChosen) {
                                   e.currentTarget.style.borderColor = '#e2e8f0';
                                   e.currentTarget.style.transform = 'translateY(0)';
                                 }
@@ -991,7 +1238,7 @@ export const ExamPage: React.FC = () => {
 
                               <span style={{ flex: 1, fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif" }}>
                                 {opt.value ? (
-                                  opt.value
+                                  <span dangerouslySetInnerHTML={{ __html: opt.value }} />
                                 ) : (
                                   <span style={{ color: '#94a3b8', fontStyle: 'italic', fontSize: 13 }}>
                                     Phương án ({opt.id})
@@ -999,7 +1246,7 @@ export const ExamPage: React.FC = () => {
                                 )}
                               </span>
 
-                              {isSubmitted && isOfficialCorrect && (
+                              {isGraded && isOfficialCorrect && (
                                 <span style={{
                                   display: 'inline-flex',
                                   alignItems: 'center',
@@ -1018,7 +1265,7 @@ export const ExamPage: React.FC = () => {
                                 </span>
                               )}
 
-                              {isSubmitted && isChosen && !isOfficialCorrect && (
+                              {isGraded && isChosen && !isOfficialCorrect && (
                                 <span style={{
                                   display: 'inline-flex',
                                   alignItems: 'center',
@@ -1041,8 +1288,8 @@ export const ExamPage: React.FC = () => {
                         })}
                       </div>
 
-                      {/* BẢNG ĐỐI CHIẾU KẾT QUẢ & LỜI GIẢI CHI TIẾT (HIỂN THỊ TỰ ĐỘNG SAU KHI NỘP) */}
-                      {isSubmitted && (
+                      {/* BẢNG ĐỐI CHIẾU KẾT QUẢ & LỜI GIẢI CHI TIẾT (HIỂN THỊ NGAY KHI CHỌN Ở CHẾ ĐỘ LUYỆN TẬP HOẶC SAU KHI NỘP) */}
+                      {isGraded && (
                         <div style={{
                           marginTop: 4,
                           background: isCorrect ? '#f0fdf4' : '#fef2f2',
@@ -1148,57 +1395,128 @@ export const ExamPage: React.FC = () => {
         })}
         {/* 5. THANH ĐIỀU HƯỚNG / NỘP BÀI CUỐI TRANG */}
         {!isSubmitted ? (
-          <div style={{
-            marginTop: 20,
-            padding: '20px 24px',
-            background: '#ffffff',
-            borderRadius: 12,
-            border: '1px solid #ebe7df',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: 16,
-            boxShadow: '0 2px 6px rgba(0,0,0,0.02)'
-          }}>
-            <div>
-              <div style={{ fontSize: 16, fontWeight: 800, color: '#1c2536' }}>
-                Đã hoàn thành các câu hỏi của đề thi?
+          examMode === 'exam' ? (
+            <div style={{
+              marginTop: 20,
+              padding: '20px 24px',
+              background: '#ffffff',
+              borderRadius: 12,
+              border: '1px solid #ebe7df',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: 16,
+              boxShadow: '0 2px 6px rgba(0,0,0,0.02)'
+            }}>
+              <div>
+                <div style={{ fontSize: 16, fontWeight: 800, color: '#1c2536' }}>
+                  Đã hoàn thành các câu hỏi của đề thi?
+                </div>
+                <div style={{ fontSize: 13, color: '#78716c', marginTop: 4 }}>
+                  Đã trả lời: <strong style={{ color: '#c53d32' }}>{answeredCount}</strong> / {totalQuestionsCount} câu ({progressPercent}%)
+                  {countUnansweredQuestions() > 0 && (
+                    <span style={{ color: '#dc2626', marginLeft: 8, fontWeight: 700 }}>
+                      (Còn {countUnansweredQuestions()} câu chưa làm)
+                    </span>
+                  )}
+                </div>
               </div>
-              <div style={{ fontSize: 13, color: '#78716c', marginTop: 4 }}>
-                Đã trả lời: <strong style={{ color: '#c53d32' }}>{answeredCount}</strong> / {totalQuestionsCount} câu ({progressPercent}%)
-                {countUnansweredQuestions() > 0 && (
-                  <span style={{ color: '#dc2626', marginLeft: 8, fontWeight: 700 }}>
-                    (Còn {countUnansweredQuestions()} câu chưa làm)
-                  </span>
+
+              <button
+                type="button"
+                onClick={handleSubmitExam}
+                style={{
+                  padding: '12px 26px',
+                  background: '#c53d32',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: 8,
+                  fontWeight: 800,
+                  fontSize: 14,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  boxShadow: '0 4px 12px rgba(197, 61, 50, 0.25)',
+                  transition: 'background 0.15s ease'
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = '#9c2a2a'}
+                onMouseLeave={e => e.currentTarget.style.background = '#c53d32'}
+              >
+                <CheckCircle2 size={18} /> Nộp bài chấm điểm
+              </button>
+            </div>
+          ) : (
+            <div style={{
+              marginTop: 20,
+              padding: '20px 24px',
+              background: '#ffffff',
+              borderRadius: 12,
+              border: '1px solid #ccfbf1',
+              borderLeft: '4px solid #0d9488',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: 16,
+              boxShadow: '0 2px 6px rgba(0,0,0,0.02)'
+            }}>
+              <div>
+                <div style={{ fontSize: 16, fontWeight: 800, color: '#1c2536' }}>
+                  Chế độ Luyện tập · Đáp án hiển thị ngay sau khi chọn
+                </div>
+                <div style={{ fontSize: 13, color: '#57534e', marginTop: 4 }}>
+                  Đã làm: <strong style={{ color: '#0f766e' }}>{answeredCount}</strong> / {totalQuestionsCount} câu ·{' '}
+                  <strong style={{ color: '#15803d' }}>Đúng {liveCorrectCount}</strong> ·{' '}
+                  <strong style={{ color: '#b91c1c' }}>Sai {liveWrongCount}</strong>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                <button
+                  type="button"
+                  onClick={() => handleResetExam('practice')}
+                  style={{
+                    padding: '10px 18px',
+                    background: '#1c2536',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: 8,
+                    fontWeight: 700,
+                    fontSize: 13,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6
+                  }}
+                >
+                  <RotateCcw size={15} /> Làm lại từ đầu
+                </button>
+                {answeredCount > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => executeSubmission(false)}
+                    style={{
+                      padding: '10px 20px',
+                      background: '#0d9488',
+                      color: '#ffffff',
+                      border: 'none',
+                      borderRadius: 8,
+                      fontWeight: 800,
+                      fontSize: 13,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 6
+                    }}
+                  >
+                    <CheckCircle2 size={16} /> Tổng kết & Lưu kết quả
+                  </button>
                 )}
               </div>
             </div>
-
-            <button
-              type="button"
-              onClick={handleSubmitExam}
-              style={{
-                padding: '12px 26px',
-                background: '#c53d32',
-                color: '#ffffff',
-                border: 'none',
-                borderRadius: 8,
-                fontWeight: 800,
-                fontSize: 14,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-                boxShadow: '0 4px 12px rgba(197, 61, 50, 0.25)',
-                transition: 'background 0.15s ease'
-              }}
-              onMouseEnter={e => e.currentTarget.style.background = '#9c2a2a'}
-              onMouseLeave={e => e.currentTarget.style.background = '#c53d32'}
-            >
-              <CheckCircle2 size={18} /> Nộp bài chấm điểm
-            </button>
-          </div>
+          )
         ) : (
           <div style={{
             marginTop: 20,
@@ -1225,7 +1543,7 @@ export const ExamPage: React.FC = () => {
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
               <button
                 type="button"
-                onClick={handleResetExam}
+                onClick={() => handleResetExam()}
                 style={{
                   padding: '10px 18px',
                   background: '#1c2536',
@@ -1588,7 +1906,7 @@ export const ExamPage: React.FC = () => {
           margin: '0 0 12px 0',
           fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
         }}>
-          Ôn Thi JLPT
+          Kho Đề Thi JLPT (N5 – N1)
         </h1>
 
         {/* Thống kê tính năng nổi bật */}
@@ -1606,7 +1924,7 @@ export const ExamPage: React.FC = () => {
             color: '#1c2536'
           }}>
             <Target size={14} color="#c53d32" />
-            <span>85 bộ đề chuẩn hóa N5 - N1</span>
+            <span>{levelFilter === 'ALL' && exams.length > 0 ? exams.length : 105} bộ đề JLPT chuẩn hóa N5 - N1</span>
           </div>
 
           <div style={{
@@ -1622,7 +1940,7 @@ export const ExamPage: React.FC = () => {
             color: '#1c2536'
           }}>
             <Clock size={14} color="#0d9488" />
-            <span>Giới hạn thời gian chuẩn JLPT</span>
+            <span>2 chế độ: Thi thật (tính giờ) & Luyện tập (xem đáp án ngay)</span>
           </div>
 
           <div style={{
@@ -1916,36 +2234,72 @@ export const ExamPage: React.FC = () => {
                   ) : null}
                 </div>
 
-                {/* Nút vào thi hoặc thi lại */}
-                <button
-                  onClick={() => handleStartExam(exam.id)}
-                  style={{
-                    marginTop: 'auto',
-                    width: '100%',
-                    padding: '10px 0',
-                    background: pastResult ? '#c53d32' : '#1c2536',
-                    color: '#ffffff',
-                    border: 'none',
-                    borderRadius: 8,
-                    fontWeight: 700,
-                    fontSize: 13,
-                    cursor: 'pointer',
-                    transition: 'all 0.15s ease',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: 6
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.background = pastResult ? '#9c2a2a' : '#c53d32';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.background = pastResult ? '#c53d32' : '#1c2536';
-                  }}
-                >
-                  <span>{pastResult ? 'Thi lại đề thi này' : 'Vào làm bài thi thử'}</span>
-                  <ArrowRight size={14} />
-                </button>
+                {/* 2 chế độ: Thi thật & Luyện tập */}
+                <div style={{ marginTop: 'auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                  <button
+                    type="button"
+                    onClick={() => handleStartExam(exam.id, 'exam')}
+                    style={{
+                      width: '100%',
+                      padding: '10px 8px',
+                      background: pastResult ? '#c53d32' : '#1c2536',
+                      color: '#ffffff',
+                      border: 'none',
+                      borderRadius: 8,
+                      fontWeight: 700,
+                      fontSize: 13,
+                      cursor: 'pointer',
+                      transition: 'all 0.15s ease',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: 5
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.background = pastResult ? '#9c2a2a' : '#c53d32';
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.background = pastResult ? '#c53d32' : '#1c2536';
+                    }}
+                  >
+                    <span>{pastResult ? 'Thi lại' : 'Thi thật'}</span>
+                    <ArrowRight size={13} />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => handleStartExam(exam.id, 'practice')}
+                    style={{
+                      width: '100%',
+                      padding: '10px 8px',
+                      background: '#f0fdfa',
+                      color: '#0f766e',
+                      border: '1px solid #99f6e4',
+                      borderRadius: 8,
+                      fontWeight: 700,
+                      fontSize: 13,
+                      cursor: 'pointer',
+                      transition: 'all 0.15s ease',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: 5
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.background = '#0d9488';
+                      e.currentTarget.style.color = '#ffffff';
+                      e.currentTarget.style.borderColor = '#0d9488';
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.background = '#f0fdfa';
+                      e.currentTarget.style.color = '#0f766e';
+                      e.currentTarget.style.borderColor = '#99f6e4';
+                    }}
+                  >
+                    <Lightbulb size={13} />
+                    <span>Luyện tập</span>
+                  </button>
+                </div>
               </div>
             );
           })}
