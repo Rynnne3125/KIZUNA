@@ -65,8 +65,12 @@ export interface AdminUser {
   level?: string;
   totalXp?: number;
   activePoints?: number;
+  previousActivePoints?: number;
   currentStreak?: number;
   longestStreak?: number;
+  previousStreak?: number;
+  streakFreezes?: number;
+  lastActiveDate?: string;
   placementVerified?: boolean;
   placementScore?: number;
   placementDetails?: PlacementDetailsRecord | null;
@@ -257,15 +261,69 @@ export interface Milestone {
   [key: string]: any;
 }
 
+export interface QuestSrsCard {
+  id: string;
+  itemType: 'VOCABULARY' | 'KANJI' | 'GRAMMAR' | 'CUSTOM';
+  term: string;
+  reading?: string;
+  sinoVietnamese?: string;
+  meaning: string;
+  wordType?: string;
+  exampleJp?: string;
+  exampleVi?: string;
+  sourceItemId?: string;
+}
+
+export interface QuestQuizQuestion {
+  id?: string;
+  word: string;
+  reading?: string;
+  correctAnswer: string;
+  options: string[];
+}
+
+export interface QuestScrambleSentence {
+  id?: string;
+  original: string;
+  translation: string;
+  tokens?: string[];
+}
+
+export interface QuestRoleplayDialogue {
+  id?: string;
+  title: string;
+  partnerName: string;
+  partnerRole?: string;
+  partnerSpeechJp: string;
+  partnerSpeechVi?: string;
+  learnerPrompt: string;
+  sampleAnswer: string;
+  requiredKeywords?: string[];
+}
+
 export interface MilestoneQuest {
   id: string;
   milestoneId: string;
   stepIndex: number; // 1..4
-  questType: 'FLASHCARD_SRS' | 'VOCAB_GATEKEEPER' | 'GRAMMAR_SCRAMBLE' | 'CLOZE_PRACTICE' | string;
+  questType:
+    | 'FLASHCARD_SRS'
+    | 'SRS_FLASHCARD'
+    | 'VOCAB_GATEKEEPER'
+    | 'GRAMMAR_SCRAMBLE'
+    | 'GRAMMAR_DRILL'
+    | 'CLOZE_PRACTICE'
+    | 'PRACTICE_FINAL'
+    | 'VOCAB_KANJI_MASTERY'
+    | string;
   title: string;
   description?: string;
   xpReward?: number;
   activePointsReward?: number;
+  srsCardIds?: string[];
+  srsCards?: QuestSrsCard[];
+  quizQuestions?: QuestQuizQuestion[];
+  scrambleSentences?: QuestScrambleSentence[];
+  roleplayDialogues?: QuestRoleplayDialogue[];
   [key: string]: any;
 }
 

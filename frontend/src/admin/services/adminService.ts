@@ -30,7 +30,7 @@ const isFirestoreDummy =
 const DEFAULT_AI_CONFIG: AiRuntimeConfig = {
   model: 'gemini-3.5-flash-lite',
   dailyLimit: 100,
-  timeoutSeconds: 5,
+  timeoutSeconds: 15,
   maxConcurrency: 2,
   senseiEnabled: true,
   senseiSystemPrompt:
@@ -102,6 +102,29 @@ async function fetchCollectionData<T>(collectionName: string, queryLimit: number
     handleFirestoreError(e);
     return [];
   }
+}
+
+function invalidateUserCurriculumCache(milestoneId?: string) {
+  try {
+    const keys = [
+      'kizuna_stages_cache',
+      'kizuna_milestones_cache_all'
+    ];
+    if (milestoneId) {
+      keys.push(
+        `kizuna_quests_${milestoneId}`,
+        `kizuna_quests_v2_${milestoneId}`,
+        `kizuna_vocab_ms_${milestoneId}`,
+        `kizuna_kanji_unit_${milestoneId}`,
+        `kizuna_grammar_ms_${milestoneId}`,
+        `kizuna_grammar_unit_${milestoneId}`
+      );
+    }
+    keys.forEach(k => {
+      sessionStorage.removeItem(k);
+      localStorage.removeItem(`offline_${k}`);
+    });
+  } catch {}
 }
 
 function getCurrentAdminName(): string {
@@ -468,28 +491,47 @@ export const adminService = {
     return ok;
   },
 
-  async resetUserStreak(userId: string): Promise<boolean> {
+  async resetUserStreak(userId: string, currentStreak?: number): Promise<boolean> {
     try {
+      const nowIso = new Date().toISOString();
+      const backupFields = (typeof currentStreak === 'number' && currentStreak > 0)
+        ? { previousStreak: currentStreak }
+        : {};
+      const syncLocal = () => {
+        try {
+          const raw = localStorage.getItem('kizuna_user');
+          if (raw) {
+            const u = JSON.parse(raw);
+            if (u && u.id === userId) {
+              localStorage.setItem('kizuna_user', JSON.stringify({ ...u, currentStreak: 0, ...backupFields }));
+              window.dispatchEvent(new Event('kizuna_user_updated'));
+            }
+          }
+        } catch {}
+      };
+
       const apiRes = await adminApiClient.request<AdminUser>(`/api/v1/admin/users/${encodeURIComponent(userId)}/reset-streak`, {
         method: 'POST'
       });
       if (apiRes.ok) {
         if (!isFirestoreDummy) {
-          safeFirestoreWrite(() => updateDoc(doc(db, 'users', userId), { currentStreak: 0, updatedAt: new Date().toISOString() })).catch(() => {});
-          safeFirestoreWrite(() => updateDoc(doc(db, 'leaderboard', userId), { currentStreak: 0, updatedAt: new Date().toISOString() })).catch(() => {});
+          safeFirestoreWrite(() => updateDoc(doc(db, 'users', userId), { currentStreak: 0, ...backupFields, updatedAt: nowIso })).catch(() => {});
+          safeFirestoreWrite(() => updateDoc(doc(db, 'leaderboard', userId), { currentStreak: 0, updatedAt: nowIso })).catch(() => {});
         }
+        syncLocal();
         return true;
       }
 
-      const ok = await this.updateUser(userId, { currentStreak: 0 });
+      const ok = await this.updateUser(userId, { currentStreak: 0, ...backupFields });
       await safeFirestoreWrite(() =>
         updateDoc(doc(db, 'leaderboard', userId), {
           currentStreak: 0,
-          updatedAt: new Date().toISOString()
+          updatedAt: nowIso
         })
       ).catch(() => {});
       if (ok) {
-        await this.recordActivityLog('ANTI_CHEAT_RESET_STREAK', 'USER', userId, 'Reset chuỗi Streak về 0');
+        syncLocal();
+        await this.recordActivityLog('ANTI_CHEAT_RESET_STREAK', 'USER', userId, 'Hủy/Reset chuỗi Streak về 0');
       }
       return ok;
     } catch {
@@ -497,8 +539,112 @@ export const adminService = {
     }
   },
 
+  async setUserStreak(
+    userId: string,
+    targetStreak: number,
+    currentStreak = 0,
+    reason?: string
+  ): Promise<{ ok: boolean; streak: number; lastActiveDate?: string; previousStreak?: number }> {
+    const cleanTarget = Math.max(0, Math.floor(Number(targetStreak) || 0));
+    const now = new Date();
+    const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    const nowIso = now.toISOString();
+    const note = reason?.trim() || (cleanTarget > currentStreak ? 'Admin khôi phục Streak' : 'Admin điều chỉnh Streak');
+    const previousStreak = cleanTarget === 0 && currentStreak > 0 ? currentStreak : undefined;
+
+    const patch: Record<string, any> = {
+      currentStreak: cleanTarget,
+      lastAntiCheatNote: note,
+      updatedAt: nowIso
+    };
+    if (cleanTarget > 0) {
+      patch.lastActiveDate = todayStr;
+    }
+    if (typeof previousStreak === 'number') {
+      patch.previousStreak = previousStreak;
+    }
+
+    const syncLocal = (finalStreak: number, finalLastActive?: string) => {
+      try {
+        const raw = localStorage.getItem('kizuna_user');
+        if (raw) {
+          const u = JSON.parse(raw);
+          if (u && u.id === userId) {
+            localStorage.setItem('kizuna_user', JSON.stringify({
+              ...u,
+              currentStreak: finalStreak,
+              ...(finalLastActive ? { lastActiveDate: finalLastActive } : {}),
+              ...(typeof previousStreak === 'number' ? { previousStreak } : {})
+            }));
+            window.dispatchEvent(new Event('kizuna_user_updated'));
+          }
+        }
+      } catch {}
+    };
+
+    try {
+      const apiRes = await adminApiClient.request<AdminUser>(`/api/v1/admin/users/${encodeURIComponent(userId)}/streak`, {
+        method: 'PUT',
+        body: { streak: cleanTarget, reason: note }
+      });
+      if (apiRes.ok) {
+        if (!isFirestoreDummy) {
+          safeFirestoreWrite(() => updateDoc(doc(db, 'users', userId), patch)).catch(() => {});
+          safeFirestoreWrite(() => updateDoc(doc(db, 'leaderboard', userId), { currentStreak: cleanTarget, updatedAt: nowIso })).catch(() => {});
+        }
+        syncLocal(cleanTarget, cleanTarget > 0 ? todayStr : undefined);
+        return {
+          ok: true,
+          streak: cleanTarget,
+          lastActiveDate: cleanTarget > 0 ? todayStr : undefined,
+          previousStreak
+        };
+      }
+
+      const ok = await this.updateUser(userId, patch);
+      await safeFirestoreWrite(() =>
+        updateDoc(doc(db, 'leaderboard', userId), {
+          currentStreak: cleanTarget,
+          updatedAt: nowIso
+        })
+      ).catch(() => {});
+      if (ok) {
+        syncLocal(cleanTarget, cleanTarget > 0 ? todayStr : undefined);
+        await this.recordActivityLog(
+          cleanTarget > currentStreak ? 'ADMIN_RESTORE_STREAK' : 'ADMIN_SET_STREAK',
+          'USER',
+          userId,
+          `Điều chỉnh Streak từ ${currentStreak} -> ${cleanTarget} ngày. Lý do: ${note}`
+        );
+      }
+      return {
+        ok,
+        streak: cleanTarget,
+        lastActiveDate: cleanTarget > 0 ? todayStr : undefined,
+        previousStreak
+      };
+    } catch {
+      return { ok: false, streak: currentStreak };
+    }
+  },
+
   async adjustUserActivePoints(userId: string, currentPoints: number, delta: number, reason?: string): Promise<number | null> {
     try {
+      const nowIso = new Date().toISOString();
+      const backupFields = (delta < 0 && currentPoints > 0) ? { previousActivePoints: currentPoints } : {};
+      const syncLocal = (pts: number) => {
+        try {
+          const raw = localStorage.getItem('kizuna_user');
+          if (raw) {
+            const u = JSON.parse(raw);
+            if (u && u.id === userId) {
+              localStorage.setItem('kizuna_user', JSON.stringify({ ...u, activePoints: pts, ...backupFields }));
+              window.dispatchEvent(new Event('kizuna_user_updated'));
+            }
+          }
+        } catch {}
+      };
+
       const apiRes = await adminApiClient.request<AdminUser>(`/api/v1/admin/users/${encodeURIComponent(userId)}/adjust-points`, {
         method: 'POST',
         body: { pointsAdjustment: Number(delta), reason: reason || 'Điều chỉnh bởi Admin' }
@@ -509,31 +655,35 @@ export const adminService = {
           safeFirestoreWrite(() =>
             updateDoc(doc(db, 'users', userId), {
               activePoints: updatedPoints,
+              ...backupFields,
               lastAntiCheatNote: reason || 'Điều chỉnh bởi Admin',
-              updatedAt: new Date().toISOString()
+              updatedAt: nowIso
             })
           ).catch(() => {});
           safeFirestoreWrite(() =>
             updateDoc(doc(db, 'leaderboard', userId), {
               activePoints: updatedPoints,
-              updatedAt: new Date().toISOString()
+              updatedAt: nowIso
             })
           ).catch(() => {});
         }
+        syncLocal(updatedPoints);
         return updatedPoints;
       }
 
       const newPoints = Math.max(0, (Number(currentPoints) || 0) + Number(delta));
       await this.updateUser(userId, {
         activePoints: newPoints,
+        ...backupFields,
         lastAntiCheatNote: reason || 'Điều chỉnh bởi Admin'
       });
       await safeFirestoreWrite(() =>
         updateDoc(doc(db, 'leaderboard', userId), {
           activePoints: newPoints,
-          updatedAt: new Date().toISOString()
+          updatedAt: nowIso
         })
       ).catch(() => {});
+      syncLocal(newPoints);
       await this.recordActivityLog(
         'ANTI_CHEAT_ADJUST_POINTS',
         'USER',
@@ -543,6 +693,78 @@ export const adminService = {
       return newPoints;
     } catch {
       return null;
+    }
+  },
+
+  async setUserActivePoints(
+    userId: string,
+    currentPoints: number,
+    targetPoints: number,
+    reason?: string
+  ): Promise<{ ok: boolean; activePoints: number; previousActivePoints?: number }> {
+    const cleanTarget = Math.max(0, Math.floor(Number(targetPoints) || 0));
+    const nowIso = new Date().toISOString();
+    const note = reason?.trim() || (cleanTarget === 0 ? 'Admin hủy Điểm Năng Động' : 'Admin đặt lại Điểm Năng Động');
+    const previousActivePoints = (cleanTarget < currentPoints && currentPoints > 0) ? currentPoints : undefined;
+    const patch: Record<string, any> = {
+      activePoints: cleanTarget,
+      lastAntiCheatNote: note,
+      updatedAt: nowIso
+    };
+    if (typeof previousActivePoints === 'number') {
+      patch.previousActivePoints = previousActivePoints;
+    }
+
+    const syncLocal = (pts: number) => {
+      try {
+        const raw = localStorage.getItem('kizuna_user');
+        if (raw) {
+          const u = JSON.parse(raw);
+          if (u && u.id === userId) {
+            localStorage.setItem('kizuna_user', JSON.stringify({
+              ...u,
+              activePoints: pts,
+              ...(typeof previousActivePoints === 'number' ? { previousActivePoints } : {})
+            }));
+            window.dispatchEvent(new Event('kizuna_user_updated'));
+          }
+        }
+      } catch {}
+    };
+
+    try {
+      const apiRes = await adminApiClient.request<AdminUser>(`/api/v1/admin/users/${encodeURIComponent(userId)}/active-points`, {
+        method: 'PUT',
+        body: { activePoints: cleanTarget, reason: note }
+      });
+      if (apiRes.ok) {
+        if (!isFirestoreDummy) {
+          safeFirestoreWrite(() => updateDoc(doc(db, 'users', userId), patch)).catch(() => {});
+          safeFirestoreWrite(() => updateDoc(doc(db, 'leaderboard', userId), { activePoints: cleanTarget, updatedAt: nowIso })).catch(() => {});
+        }
+        syncLocal(cleanTarget);
+        return { ok: true, activePoints: cleanTarget, previousActivePoints };
+      }
+
+      const ok = await this.updateUser(userId, patch);
+      await safeFirestoreWrite(() =>
+        updateDoc(doc(db, 'leaderboard', userId), {
+          activePoints: cleanTarget,
+          updatedAt: nowIso
+        })
+      ).catch(() => {});
+      if (ok) {
+        syncLocal(cleanTarget);
+        await this.recordActivityLog(
+          cleanTarget === 0 ? 'ADMIN_RESET_ACTIVE_POINTS' : 'ADMIN_SET_ACTIVE_POINTS',
+          'USER',
+          userId,
+          `Đặt Điểm Năng Động từ ${currentPoints} -> ${cleanTarget} AP. Lý do: ${note}`
+        );
+      }
+      return { ok, activePoints: cleanTarget, previousActivePoints };
+    } catch {
+      return { ok: false, activePoints: currentPoints };
     }
   },
 
@@ -1286,12 +1508,22 @@ export const adminService = {
 
   async saveMilestoneQuest(quest: MilestoneQuest): Promise<MilestoneQuest> {
     const id = quest.id?.trim() || `quest_${Date.now().toString(36)}`;
+    const srsCards = Array.isArray(quest.srsCards) ? quest.srsCards : [];
+    const srsCardIds = Array.isArray(quest.srsCardIds) && quest.srsCardIds.length > 0
+      ? quest.srsCardIds
+      : srsCards.map(c => c.sourceItemId || c.id).filter(Boolean);
+
     const payload: MilestoneQuest = {
       ...quest,
       id,
       stepIndex: Number(quest.stepIndex || 1),
       xpReward: Number(quest.xpReward ?? 50),
       activePointsReward: Number(quest.activePointsReward ?? 25),
+      srsCardIds,
+      srsCards,
+      quizQuestions: Array.isArray(quest.quizQuestions) ? quest.quizQuestions : [],
+      scrambleSentences: Array.isArray(quest.scrambleSentences) ? quest.scrambleSentences : [],
+      roleplayDialogues: Array.isArray(quest.roleplayDialogues) ? quest.roleplayDialogues : [],
       updatedAt: new Date().toISOString()
     };
 
@@ -1305,10 +1537,11 @@ export const adminService = {
     if (!apiRes.ok) {
       await this.recordActivityLog('QUEST_SAVE', 'QUEST', id, `Lưu bài học Quest: ${payload.title}`);
     }
+    invalidateUserCurriculumCache(payload.milestoneId);
     return apiRes.ok && apiRes.data ? { ...payload, ...apiRes.data } : payload;
   },
 
-  async deleteMilestoneQuest(questId: string): Promise<boolean> {
+  async deleteMilestoneQuest(questId: string, milestoneId?: string): Promise<boolean> {
     try {
       await adminApiClient.request<string>(`/api/v1/admin/quests/${encodeURIComponent(questId)}`, {
         method: 'DELETE'
@@ -1316,6 +1549,7 @@ export const adminService = {
       if (!isFirestoreDummy) {
         await safeFirestoreWrite(() => deleteDoc(doc(db, 'milestone_quests', questId))).catch(() => {});
       }
+      invalidateUserCurriculumCache(milestoneId);
       return true;
     } catch {
       return false;
@@ -1419,6 +1653,7 @@ export const adminService = {
     if (!apiRes.ok) {
       await this.recordActivityLog('WHITELIST_ADD', 'MILESTONE', milestoneId, `Thêm từ vào Whitelist: ${newDoc.term}`);
     }
+    invalidateUserCurriculumCache(milestoneId);
     return apiRes.ok && apiRes.data ? { ...newDoc, ...apiRes.data } : newDoc;
   },
 
@@ -1880,6 +2115,7 @@ export const adminService = {
       });
       if (!isFirestoreDummy) {
         await safeFirestoreWrite(() => setDoc(doc(db, 'jlpt_exam_catalog', id), payload, { merge: true })).catch(() => {});
+        await safeFirestoreWrite(() => setDoc(doc(db, 'jlpt_exams', id), payload, { merge: true })).catch(() => {});
       }
       if (!apiRes.ok) {
         await this.recordActivityLog('EXAM_UPDATE', 'EXAM', id, `Cập nhật đề thi: ${label}`);
@@ -1898,6 +2134,7 @@ export const adminService = {
       });
       if (!isFirestoreDummy) {
         await safeFirestoreWrite(() => deleteDoc(doc(db, 'jlpt_exam_catalog', id))).catch(() => {});
+        await safeFirestoreWrite(() => deleteDoc(doc(db, 'jlpt_exams', id))).catch(() => {});
       }
       if (!apiRes.ok) {
         await this.recordActivityLog('EXAM_DELETE', 'EXAM', id, 'Xóa đề thi');

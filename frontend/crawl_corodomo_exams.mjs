@@ -113,10 +113,55 @@ async function main() {
   console.log('🚀 CRAWLING JLPT EXAMS FROM CORODOMO.COM (N5 -> N1)');
   console.log('====================================================\n');
 
-  console.log('1. Fetching complete exam catalog...');
-  const catalogRes = await fetchJson('https://corodomo.com/api/exam?page=1&limit=100');
-  const rawExams = catalogRes.data || [];
-  console.log(`Found ${rawExams.length} total exams in catalog.\n`);
+  // Preserve any existing detailed explanations on disk if API omits them
+  const existingExplanations = new Map();
+  for (const lvl of ['n5', 'n4', 'n3', 'n2', 'n1']) {
+    const existingFile = path.join(EXAMS_DIR, `jlpt_${lvl}.json`);
+    if (fs.existsSync(existingFile)) {
+      try {
+        const parsed = JSON.parse(fs.readFileSync(existingFile, 'utf-8'));
+        for (const ex of (parsed.exams || [])) {
+          for (const qs of (ex.questionSets || [])) {
+            for (const q of (qs.questions || [])) {
+              if (q?.id && q.explanation && q.explanation.trim()) {
+                existingExplanations.set(q.id, q.explanation.trim());
+              }
+            }
+          }
+        }
+      } catch {
+        // ignore parse errors on old files
+      }
+    }
+  }
+  if (existingExplanations.size > 0) {
+    console.log(`Loaded ${existingExplanations.size} existing question explanations to preserve.`);
+  }
+
+  console.log('1. Fetching complete exam catalog (paginated)...');
+  const rawAll = [];
+  let page = 1;
+  const pageLimit = 100;
+  while (true) {
+    const catalogRes = await fetchJson(`https://corodomo.com/api/exam?page=${page}&limit=${pageLimit}`);
+    const batch = Array.isArray(catalogRes?.data) ? catalogRes.data : [];
+    if (batch.length === 0) break;
+    rawAll.push(...batch);
+    const total = Number(catalogRes?.pagination || catalogRes?.total || 0);
+    if (batch.length < pageLimit || (total > 0 && rawAll.length >= total)) break;
+    page++;
+  }
+
+  // Filter exclusively to JLPT exams (jlpt-n5 .. jlpt-n1) and deduplicate by id
+  const seenIds = new Set();
+  const rawExams = [];
+  for (const ex of rawAll) {
+    if (!ex?.id || seenIds.has(ex.id)) continue;
+    if (!/^jlpt-n[1-5]$/i.test(ex.type || '')) continue;
+    seenIds.add(ex.id);
+    rawExams.push(ex);
+  }
+  console.log(`Found ${rawExams.length} JLPT exams across ${rawAll.length} total catalog entries.\n`);
 
   // Group by level
   const levelOrder = ['jlpt-n5', 'jlpt-n4', 'jlpt-n3', 'jlpt-n2', 'jlpt-n1'];
@@ -173,7 +218,8 @@ async function main() {
     const normalizedQuestionSets = qSets.map((qs, setIdx) => {
       const questions = (qs.questions || []).map((q, qIdx) => {
         examTotalQuestions++;
-        const hasExp = q.explanation && q.explanation.trim().length > 0;
+        const mergedExp = cleanHtml(q.explanation) || existingExplanations.get(q.id) || '';
+        const hasExp = mergedExp.length > 0;
         const hasScr = q.script && q.script.trim().length > 0;
         if (hasExp) examExpCount++;
         if (hasScr) examScriptCount++;
@@ -188,7 +234,7 @@ async function main() {
             value: cleanHtml(opt.value)
           })),
           correctAnswer: String(q.correctAnswer || '').trim(),
-          explanation: cleanHtml(q.explanation),
+          explanation: mergedExp,
           script: cleanHtml(q.script),
           score: q.score ?? 1
         };
@@ -205,6 +251,11 @@ async function main() {
         questions
       };
     });
+
+    if (normalizedQuestionSets.length === 0 || examTotalQuestions === 0) {
+      console.warn(`\n⚠️ Skipping empty exam ${meta.id} (${meta.label}): ${normalizedQuestionSets.length} sets, ${examTotalQuestions} questions`);
+      continue;
+    }
 
     const fullExamData = {
       ...meta,
@@ -280,18 +331,6 @@ async function main() {
     exams: summaryList
   }, null, 2), 'utf-8');
   console.log(` Saved ${summaryPath}`);
-
-  // Save full consolidated dataset
-  const fullPath = path.join(DOCS_DIR, 'CORODOMO_JLPT_EXAMS_FULL.json');
-  fs.writeFileSync(fullPath, JSON.stringify({
-    metadata: {
-      source: 'https://corodomo.com/practice/exams',
-      scrapedAt: new Date().toISOString(),
-      stats: overallStats
-    },
-    exams: allExamsDetailed
-  }, null, 2), 'utf-8');
-  console.log(` Saved ${fullPath}`);
 
   console.log('\n====================================================');
   console.log('✅ ALL CRAWLING & COMPILATION COMPLETED SUCCESSFULLY!');

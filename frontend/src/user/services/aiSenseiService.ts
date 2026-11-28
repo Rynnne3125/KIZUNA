@@ -105,6 +105,27 @@ function evaluateLocally(params: {
     }
   }
 
+  let suggestion: string;
+  if (!hasJapanese) {
+    suggestion = params.sampleAnswer || '初めまして、どうぞよろしくお願いします。';
+  } else {
+    let polished = input
+      .replace(/私わ/g, '私は')
+      .replace(/わたしわ/g, 'わたしは')
+      .replace(/はは/g, 'は')
+      .replace(/をを/g, 'を')
+      .replace(/にに/g, 'に');
+    if (polished.includes('行きます') && polished.includes('を') && !polished.includes('へ') && !polished.includes('に')) {
+      polished = polished.replace('を', 'へ');
+    }
+    if (!hasPolite && !/(です|ます)[。？！?!]?$/.test(polished)) {
+      polished = polished.replace(/[。？！?!]+$/, '') + 'です。';
+    } else if (!/[。？！?!]$/.test(polished)) {
+      polished = `${polished}。`;
+    }
+    suggestion = polished;
+  }
+
   return {
     milestoneId: params.milestoneId,
     milestoneTitle: params.milestoneTitle,
@@ -115,7 +136,7 @@ function evaluateLocally(params: {
     matchedWhitelistTerms,
     particleErrors,
     pedagogicalFeedback: feedbackParts.join(' '),
-    naturalExpressionSuggestion: params.sampleAnswer || (input.endsWith('。') ? input : `${input}。`),
+    naturalExpressionSuggestion: suggestion,
     model: 'kizuna-whitelist-local',
     source: 'LOCAL_CLIENT',
     latencyMs: Math.max(10, Math.round(performance.now() - started))
@@ -141,7 +162,7 @@ export const aiSenseiService = {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(params),
-          signal: AbortSignal.timeout(7000)
+          signal: AbortSignal.timeout(20000)
         });
         if (res.ok) {
           const envelope = await res.json();

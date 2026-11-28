@@ -157,4 +157,47 @@ public class AdminUserCrudIntegrationTest {
                 .andExpect(jsonPath("$.success", is(true)))
                 .andExpect(jsonPath("$.message", containsString("Xóa mềm người dùng thành công")));
     }
+
+    @Test
+    @DisplayName("Admin quản lý Streak & Điểm Năng Động: Hủy và Khôi phục tùy ý -> 200 OK")
+    void adminManageStreakAndActivePointsSuccess() throws Exception {
+        User existing = new User("user-200", "kenji", "pass123", "Kenji Sato", "kenji@vku.udn.vn", "ROLE_USER", true);
+        existing.setCurrentStreak(12);
+        existing.setActivePoints(1500);
+        when(userFirestoreRepository.getUserById("user-200")).thenReturn(existing);
+        when(userFirestoreRepository.saveUser(any(User.class))).thenReturn("user-200");
+
+        // 1. Hủy Streak về 0 -> lưu previousStreak = 12
+        mockMvc.perform(post("/api/v1/admin/users/user-200/reset-streak")
+                        .header("Authorization", "Bearer " + adminToken))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.currentStreak", is(0)))
+                .andExpect(jsonPath("$.data.previousStreak", is(12)));
+
+        // 2. Khôi phục Streak về 12 ngày
+        mockMvc.perform(put("/api/v1/admin/users/user-200/streak")
+                        .header("Authorization", "Bearer " + adminToken)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"streak\":12,\"reason\":\"Khôi phục streak\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.currentStreak", is(12)))
+                .andExpect(jsonPath("$.data.lastActiveDate", notNullValue()));
+
+        // 3. Hủy Điểm Năng Động về 0 -> lưu previousActivePoints = 1500
+        mockMvc.perform(put("/api/v1/admin/users/user-200/active-points")
+                        .header("Authorization", "Bearer " + adminToken)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"activePoints\":0,\"reason\":\"Hủy điểm vi phạm\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.activePoints", is(0)))
+                .andExpect(jsonPath("$.data.previousActivePoints", is(1500)));
+
+        // 4. Khôi phục Điểm Năng Động về 1500 AP
+        mockMvc.perform(put("/api/v1/admin/users/user-200/active-points")
+                        .header("Authorization", "Bearer " + adminToken)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"activePoints\":1500,\"reason\":\"Khôi phục điểm\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.activePoints", is(1500)));
+    }
 }

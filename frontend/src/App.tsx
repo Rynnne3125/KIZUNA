@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './index.css';
 import { User } from './user/types/auth';
 import { authService } from './user/services/authService';
@@ -13,18 +13,18 @@ import { LibraryPage } from './user/pages/LibraryPage';
 import { ExamPage } from './user/pages/ExamPage';
 import { ProfilePage } from './user/pages/ProfilePage';
 import { AdminDashboardPage } from './admin/pages/AdminDashboardPage';
-import { Smartphone, Download, CheckCircle2, Moon, Sun, Flame, X, Wrench, LogOut, RefreshCw } from 'lucide-react';
+import { Smartphone, Download, CheckCircle2, Moon, Sun, Flame, X, Wrench, LogOut, RefreshCw, WifiOff } from 'lucide-react';
 import { db } from './config/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { ApkDownloadModal } from './user/components/ApkDownloadModal';
 import { isNativeApp } from './user/utils/platform';
 import { useNetworkStatus } from './user/hooks/useNetworkStatus';
 import { useTheme } from './user/hooks/useTheme';
-import { NoInternet404Page } from './user/pages/NoInternet404Page';
 
 import { AiPlacementModal } from './user/components/placement/AiPlacementModal';
 import { progressService } from './user/services/progressService';
 import { placementService } from './user/services/placementService';
+import { dailyQuestService } from './user/services/dailyQuestService';
 import { soundService } from './user/services/soundService';
 
 const getTabFromPath = (): UserNavTab => {
@@ -64,9 +64,13 @@ export default function App() {
   // Trạng thái mở modal làm bài test thẩm định trình độ thích ứng
   const [isPlacementModalOpen, setIsPlacementModalOpen] = useState(false);
 
-  // Trạng thái kết nối mạng (Online / Offline) và thông báo đồng bộ
-  const [isOnline, setIsOnline] = useState<boolean>(() =>
-    typeof navigator !== 'undefined' ? navigator.onLine : true
+  // Trạng thái kết nối mạng (Online / Weak / Offline) và hàng đợi đồng bộ Firestore
+  const isOffline = network.status.isOffline;
+  const isOnline = !isOffline;
+  const prevOfflineRef = useRef<boolean>(isOffline);
+  const [offlineBannerDismissed, setOfflineBannerDismissed] = useState(false);
+  const [pendingSyncCount, setPendingSyncCount] = useState<number>(() =>
+    user?.id ? progressService.getPendingSyncCount(user.id) : 0
   );
   const [syncNotice, setSyncNotice] = useState<string | null>(null);
   const [streakNotice, setStreakNotice] = useState<string | null>(null);
@@ -75,7 +79,20 @@ export default function App() {
     message: 'Hệ thống KIZUNA đang được bảo trì và cập nhật nội dung giáo trình. Vui lòng quay lại sau ít phút.'
   });
 
+  const syncAllOfflineData = useCallback(async (userId: string): Promise<number> => {
+    if (!userId) return 0;
+    const [progressCount, dailyCount, placementSynced] = await Promise.all([
+      progressService.syncOfflineQueue(userId),
+      dailyQuestService.syncOfflineDailyQuests(userId),
+      placementService.syncPendingPlacement(userId).catch(() => null)
+    ]);
+    const total = progressCount + dailyCount + (placementSynced ? 1 : 0);
+    setPendingSyncCount(progressService.getPendingSyncCount(userId));
+    return total;
+  }, []);
+
   const checkMaintenanceStatus = async () => {
+    if (isOffline) return;
     try {
       const apiBase = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
       const res = await fetch(`${apiBase}/api/v1/system/status`, { signal: AbortSignal.timeout(3000) });
@@ -109,45 +126,39 @@ export default function App() {
 
   useEffect(() => {
     void checkMaintenanceStatus();
-  }, [user?.id, activeTab]);
+  }, [user?.id, activeTab, isOffline]);
 
   useEffect(() => {
-    const handleOnline = async () => {
-      setIsOnline(true);
-      const current = authService.getCurrentUser();
-      if (current?.id) {
-        const syncedCount = await progressService.syncOfflineQueue(current.id);
-        if (syncedCount > 0) {
-          setSyncNotice(`Đã kết nối lại Wi-Fi và đồng bộ ${syncedCount} hoạt động học tập ngoại tuyến!`);
-        } else {
-          setSyncNotice('Đã kết nối lại Wi-Fi — Chế độ Trực tuyến hoạt động bình thường.');
-        }
-        setTimeout(() => setSyncNotice(null), 4500);
-      }
-    };
+    const wasOffline = prevOfflineRef.current;
+    prevOfflineRef.current = isOffline;
 
-    const handleOffline = () => {
-      setIsOnline(false);
+    if (isOffline) {
+      setOfflineBannerDismissed(false);
       setSyncNotice(null);
-    };
+      if (user?.id) {
+        setPendingSyncCount(progressService.getPendingSyncCount(user.id));
+      }
+      return;
+    }
 
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
-  }, []);
-  useEffect(() => {
-    const userId = user?.id;
-    if (!userId) return;
-    const sync = () => { void placementService.syncPendingPlacement(userId); };
-    sync();
-    window.addEventListener('online', sync);
-    return () => window.removeEventListener('online', sync);
-  }, [user?.id]);
+    const current = authService.getCurrentUser();
+    if (current?.id) {
+      void syncAllOfflineData(current.id).then(syncedCount => {
+        if (syncedCount > 0) {
+          setSyncNotice(`Đã kết nối Internet và đồng bộ ${syncedCount} thay đổi học tập thành công!`);
+          setTimeout(() => setSyncNotice(null), 5000);
+        } else if (wasOffline) {
+          setSyncNotice('Đã kết nối lại Internet — Dữ liệu trực tuyến đã sẵn sàng.');
+          setTimeout(() => setSyncNotice(null), 4000);
+        }
+      });
+    } else if (wasOffline) {
+      setSyncNotice('Đã kết nối lại Internet.');
+      setTimeout(() => setSyncNotice(null), 3500);
+    }
+  }, [isOffline, user?.id, syncAllOfflineData]);
 
-  // Đồng bộ quyền mới nhất từ Firestore khi mở ứng dụng và khởi tạo Google Auth & Real-day Streak
+  // Đồng bộ quyền mới nhất từ Firestore khi mở ứng dụng (đẩy dữ liệu offline lên trước rồi mới đọc về)
   useEffect(() => {
     authService.initGoogleAuthNative();
     authService.checkRedirectResult().then(redirected => {
@@ -159,30 +170,35 @@ export default function App() {
       }
     });
 
-    const current = authService.getCurrentUser();
-    if (current?.id) {
-      authService.checkAndUpdateDailyStreak(current).then(res => {
-        if (res?.evaluation.streakUpdated) {
-          setUser({ ...res.user });
-          if (res.evaluation.message && res.evaluation.isConsecutive) {
-            setStreakNotice(res.evaluation.message);
-            setTimeout(() => setStreakNotice(null), 6000);
-          }
-        }
-      });
-    }
+    const bootstrapSession = async () => {
+      const current = authService.getCurrentUser();
+      if (!current?.id) return;
 
-    if (current?.email) {
-      authService.syncUserFromFirestore(current.email).then(synced => {
-        if (synced && synced.role !== current.role) {
-          console.info(`[KIZUNA] Đồng bộ quyền từ Firestore: ${current.role} -> ${synced.role}`);
-          setUser(synced);
+      if (!isOffline) {
+        const syncedCount = await syncAllOfflineData(current.id);
+        if (syncedCount > 0) {
+          setSyncNotice(`Đã đồng bộ ${syncedCount} thay đổi ngoại tuyến thành công!`);
+          setTimeout(() => setSyncNotice(null), 5000);
+        }
+      }
+
+      const expiryRes = await authService.checkAndUpdateDailyStreak(current);
+      if (expiryRes?.evaluation.streakUpdated) {
+        setUser({ ...expiryRes.user });
+      }
+
+      if (current.email && !isOffline) {
+        const synced = await authService.syncUserFromFirestore(current.email);
+        if (synced) {
+          setUser({ ...synced });
           if (synced.role === 'ROLE_ADMIN') {
             setActiveTab('admin');
           }
         }
-      });
-    }
+      }
+    };
+
+    void bootstrapSession();
   }, []);
 
   // Lắng nghe sự kiện kizuna_user_updated & kizuna_streak_increased để đồng bộ tức thời Navbar, Profile & Banner
@@ -191,6 +207,7 @@ export default function App() {
       const fresh = authService.getCurrentUser();
       if (fresh) {
         setUser({ ...fresh });
+        setPendingSyncCount(progressService.getPendingSyncCount(fresh.id));
       }
     };
 
@@ -346,30 +363,14 @@ export default function App() {
     handleTabChange('home', true);
   };
 
-  // 0. BẮT BUỘC: Nếu không có kết nối Internet (mất cả Wi-Fi lẫn 4G/5G)
-  // Bất kể đã đăng nhập hay chưa (kể cả khi đã có phiên đăng nhập và vào HomePage),
-  // lập tức hiển thị trang 404 Không có Internet.
-  // Khi có Internet: Nếu có phiên đăng nhập -> vào HomePage; nếu chưa -> vào LoginPage.
-  const isOffline = network.isBlockedByNoInternet || !isOnline;
-  if (isOffline) {
-    return (
-      <NoInternet404Page
-        status={network.status}
-        isChecking={network.isChecking}
-        onRecheck={async () => {
-          const fresh = await network.recheck();
-          setIsOnline(fresh.connected && !fresh.isOffline);
-          return fresh;
-        }}
-      />
-    );
-  }
-
-  // 1. Nếu chưa đăng nhập hoặc phiên đã hết hạn, hiển thị LoginPage (Yêu cầu có mạng Wi-Fi hoặc 4G/5G)
+  // 1. Nếu chưa đăng nhập hoặc phiên đã hết hạn, hiển thị LoginPage (vẫn giữ thông báo mất mạng nếu đang offline)
   if (!user) {
     return (
       <LoginPage
         onLoginSuccess={handleLoginSuccess}
+        isOffline={isOffline}
+        onRecheckNetwork={network.recheck}
+        isCheckingNetwork={network.isChecking}
       />
     );
   }
@@ -495,6 +496,39 @@ export default function App() {
             >
               <X className="w-4 h-4" />
             </button>
+          </div>
+        )}
+
+        {isOffline && !offlineBannerDismissed && (
+          <div className="bg-amber-50 dark:bg-amber-950/60 border-b border-amber-200 dark:border-amber-800 px-4 py-2.5 flex items-center justify-between gap-3 text-amber-900 dark:text-amber-200 text-xs font-semibold">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <WifiOff className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
+              <span className="leading-snug">
+                Mất kết nối Internet — Đang dùng chế độ Ngoại tuyến.
+                {pendingSyncCount > 0
+                  ? ` Có ${pendingSyncCount} thay đổi đang chờ tự động đồng bộ khi có mạng lại.`
+                  : ' Bạn vẫn có thể học tập bình thường, tiến độ sẽ tự động đồng bộ khi có mạng lại.'}
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5 shrink-0">
+              <button
+                type="button"
+                onClick={() => void network.recheck()}
+                disabled={network.isChecking}
+                className="px-2.5 py-1 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-bold text-[11px] flex items-center gap-1 cursor-pointer disabled:opacity-60"
+              >
+                <RefreshCw className={`w-3 h-3 ${network.isChecking ? 'animate-spin' : ''}`} />
+                <span>Kiểm tra</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setOfflineBannerDismissed(true)}
+                className="p-1 rounded-lg text-amber-700 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/50 cursor-pointer"
+                aria-label="Đóng thông báo mất mạng"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         )}
 

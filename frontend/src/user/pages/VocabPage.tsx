@@ -336,9 +336,18 @@ export const VocabPage: React.FC = () => {
     } else {
       setFlipFinished(true);
       const finalMastered = mastered ? new Set(masteredIds).add(currentItem.id) : masteredIds;
-      if (finalMastered.size === unitVocabList.length && currentUser?.id && selectedBook && selectedUnit) {
-        progressService.saveVocabUnitProgress(currentUser.id, selectedBook.bookId, selectedUnit.unitId, unitVocabList.length);
-        setCompletedUnits(prev => prev.includes(selectedUnit.unitId) ? prev : [...prev, selectedUnit.unitId]);
+      if (finalMastered.size > 0 && currentUser?.id && selectedBook && selectedUnit) {
+        progressService.saveVocabExerciseProgress(
+          currentUser.id,
+          selectedBook.bookId,
+          selectedUnit.unitId,
+          unitVocabList.length,
+          Array.from(finalMastered),
+          'flip'
+        );
+        if (finalMastered.size === unitVocabList.length) {
+          setCompletedUnits(prev => prev.includes(selectedUnit.unitId) ? prev : [...prev, selectedUnit.unitId]);
+        }
       }
     }
   };
@@ -494,9 +503,27 @@ export const VocabPage: React.FC = () => {
       setQuizIsSkipped(false);
     } else {
       setQuizFinished(true);
-      if (quizWrongQuestions.length === 0 && quizSkippedQuestions.length === 0 && currentUser?.id && selectedBook && selectedUnit) {
-        progressService.saveVocabUnitProgress(currentUser.id, selectedBook.bookId, selectedUnit.unitId, unitVocabList.length);
-        setCompletedUnits(prev => prev.includes(selectedUnit.unitId) ? prev : [...prev, selectedUnit.unitId]);
+      if (currentUser?.id && selectedBook && selectedUnit) {
+        const wrongOrSkippedIds = new Set([
+          ...quizWrongQuestions.map(q => q.item.id),
+          ...quizSkippedQuestions.map(q => q.item.id)
+        ]);
+        const correctIds = quizQuestions
+          .filter(q => !wrongOrSkippedIds.has(q.item.id))
+          .map(q => q.item.id);
+        if (correctIds.length > 0) {
+          progressService.saveVocabExerciseProgress(
+            currentUser.id,
+            selectedBook.bookId,
+            selectedUnit.unitId,
+            unitVocabList.length,
+            correctIds,
+            'quiz'
+          );
+        }
+        if (quizWrongQuestions.length === 0 && quizSkippedQuestions.length === 0) {
+          setCompletedUnits(prev => prev.includes(selectedUnit.unitId) ? prev : [...prev, selectedUnit.unitId]);
+        }
       }
     }
   };
@@ -593,9 +620,27 @@ export const VocabPage: React.FC = () => {
       setTypingIsSkipped(false);
     } else {
       setTypingFinished(true);
-      if (typingWrongItems.length === 0 && typingSkippedItems.length === 0 && currentUser?.id && selectedBook && selectedUnit) {
-        progressService.saveVocabUnitProgress(currentUser.id, selectedBook.bookId, selectedUnit.unitId, unitVocabList.length);
-        setCompletedUnits(prev => prev.includes(selectedUnit.unitId) ? prev : [...prev, selectedUnit.unitId]);
+      if (currentUser?.id && selectedBook && selectedUnit) {
+        const wrongOrSkippedIds = new Set([
+          ...typingWrongItems.map(i => i.id),
+          ...typingSkippedItems.map(i => i.id)
+        ]);
+        const correctIds = typingStudyList
+          .filter(i => !wrongOrSkippedIds.has(i.id))
+          .map(i => i.id);
+        if (correctIds.length > 0) {
+          progressService.saveVocabExerciseProgress(
+            currentUser.id,
+            selectedBook.bookId,
+            selectedUnit.unitId,
+            unitVocabList.length,
+            correctIds,
+            'typing'
+          );
+        }
+        if (typingWrongItems.length === 0 && typingSkippedItems.length === 0) {
+          setCompletedUnits(prev => prev.includes(selectedUnit.unitId) ? prev : [...prev, selectedUnit.unitId]);
+        }
       }
     }
   };

@@ -6,7 +6,7 @@ import { Label } from '@/admin/components/ui/label';
 import { 
   Mail, Lock, User, LogIn, UserPlus, Star, 
   CheckCircle2, ArrowRight, RefreshCw, KeyRound, Sparkles, AlertCircle, MailCheck,
-  Eye, EyeOff, Check, Sun, Moon
+  Eye, EyeOff, Check, Sun, Moon, WifiOff
 } from 'lucide-react';
 import { authService } from '../services/authService';
 import { User as KizunaUser } from '../types/auth';
@@ -16,6 +16,9 @@ import { useTheme } from '../hooks/useTheme';
 export interface LoginPageProps {
   onLoginSuccess: (user: KizunaUser) => void;
   onCancel?: () => void;
+  isOffline?: boolean;
+  onRecheckNetwork?: () => Promise<any>;
+  isCheckingNetwork?: boolean;
 }
 
 // Particle emitter with soft matcha / golden particles
@@ -62,7 +65,13 @@ const MascotParticles = () => {
   );
 };
 
-export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }) => {
+export const LoginPage: React.FC<LoginPageProps> = ({
+  onLoginSuccess,
+  onCancel,
+  isOffline,
+  onRecheckNetwork,
+  isCheckingNetwork
+}) => {
   const { isDark, toggleTheme } = useTheme();
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -364,6 +373,26 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
               Nền tảng học tiếng Nhật thông minh & Rèn luyện phản xạ chuẩn bản xứ
             </p>
           </div>
+
+          {/* Thông báo mất kết nối Internet (không chặn đăng nhập Offline bằng tài khoản đã lưu) */}
+          {isOffline && (
+            <div className="mb-4 p-3 rounded-2xl bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-xs font-semibold flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <WifiOff className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
+                <span>Mất kết nối Internet — Bạn vẫn có thể đăng nhập bằng tài khoản đã lưu trên thiết bị để học ngoại tuyến.</span>
+              </div>
+              {onRecheckNetwork && (
+                <button
+                  type="button"
+                  onClick={() => void onRecheckNetwork()}
+                  disabled={isCheckingNetwork}
+                  className="px-2.5 py-1 rounded-lg bg-amber-600 text-white font-bold text-[11px] shrink-0 cursor-pointer disabled:opacity-60"
+                >
+                  {isCheckingNetwork ? '...' : 'Thử lại'}
+                </button>
+              )}
+            </div>
+          )}
 
           {/* Form Card */}
           <Card className="border border-emerald-100 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xl shadow-emerald-950/5 dark:shadow-none rounded-3xl overflow-hidden transition-colors">

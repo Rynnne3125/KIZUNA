@@ -69,10 +69,10 @@ public class AiRuntimeService {
         this.apiKey = apiKey == null ? "" : apiKey.trim();
         this.config.setModel(model);
         this.config.setDailyLimit(Math.max(0, dailyLimit));
-        this.config.setTimeoutSeconds(5);
+        this.config.setTimeoutSeconds(15);
         this.config.setMaxConcurrency(2);
         this.config.setUpdatedAt(Instant.now().toString());
-        this.client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build();
+        this.client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(5)).build();
         loadConfigFromFirestoreIfAvailable();
     }
 
@@ -330,7 +330,7 @@ public class AiRuntimeService {
                         + "- Whitelist từ vựng của mốc: " + req.getWhitelistVocabulary() + "\n"
                         + "- Whitelist ngữ pháp của mốc: " + req.getWhitelistGrammar() + "\n"
                         + "- Câu trả lời của học viên: " + studentInput + "\n\n"
-                        + "Hãy chấm điểm thang 0-10, kiểm tra lỗi trợ từ (は, が, を, に, で, へ, の), đánh giá tuân thủ Whitelist, đưa ra nhận xét sư phạm ngắn gọn bằng tiếng Việt và 1 câu gợi ý tự nhiên chuẩn người Nhật.";
+                        + "Hãy chấm điểm thang 0-10, kiểm tra lỗi trợ từ (は, が, を, に, で, へ, の), đánh giá tuân thủ Whitelist, đưa ra nhận xét sư phạm ngắn gọn bằng tiếng Việt (chỉ rõ điểm tốt hoặc lỗi cụ thể trong câu học viên vừa viết) và 1 câu gợi ý diễn đạt tự nhiên được chỉnh sửa/nâng cấp dựa trên chính ý của học viên (không sao chép nguyên xi câu mẫu có sẵn).";
 
                 Map<String, Object> payload = Map.of(
                         "contents", List.of(Map.of("parts", List.of(Map.of("text", prompt)))),
@@ -402,6 +402,13 @@ public class AiRuntimeService {
                             return result;
                         }
                     }
+                } else {
+                    logger.warn("Gemini Sensei returned HTTP {} (latencyMs={}): {}",
+                            response.statusCode(), latencyMs,
+                            response.body() != null ? response.body().substring(0, Math.min(240, response.body().length())) : "");
+                    if (response.statusCode() == 429) {
+                        recordRateLimit429("SENSEI", null);
+                    }
                 }
             } catch (ResponseStatusException rse) {
                 if (rse.getStatusCode().value() == 429) {
@@ -410,7 +417,8 @@ public class AiRuntimeService {
             } catch (InterruptedException ie) {
                 Thread.currentThread().interrupt();
             } catch (Exception e) {
-                logger.debug("Gemini Sensei live evaluation fell back to local analyzer: {}", e.getMessage());
+                logger.warn("Gemini Sensei live evaluation fell back to local analyzer ({}): {}",
+                        e.getClass().getSimpleName(), e.getMessage());
             } finally {
                 inFlight.release();
             }
@@ -501,9 +509,29 @@ public class AiRuntimeService {
             }
         }
 
-        String suggestion = (req.getSampleAnswer() != null && !req.getSampleAnswer().isBlank())
-                ? req.getSampleAnswer()
-                : (input.endsWith("。") ? input : input + "。");
+        String suggestion;
+        if (!hasJapaneseChars) {
+            suggestion = (req.getSampleAnswer() != null && !req.getSampleAnswer().isBlank())
+                    ? req.getSampleAnswer()
+                    : "すみません、もう一度お願いします。";
+        } else {
+            String polished = input
+                    .replace("私わ", "私は")
+                    .replace("わたしわ", "わたしは")
+                    .replace("はは", "は")
+                    .replace("をを", "を")
+                    .replace("にに", "に");
+            if (polished.contains("行きます") && polished.contains("を") && !polished.contains("へ") && !polished.contains("に")) {
+                polished = polished.replaceFirst("を", "へ");
+            }
+            if (!hasPoliteEnding && !polished.endsWith("です") && !polished.endsWith("ます")
+                    && !polished.endsWith("です。") && !polished.endsWith("ます。")) {
+                polished = polished.replaceAll("[。？！?!]+$", "") + "です。";
+            } else if (!polished.endsWith("。") && !polished.endsWith("？") && !polished.endsWith("！")) {
+                polished = polished + "。";
+            }
+            suggestion = polished;
+        }
 
         long latencyMs = Math.max(12, Duration.ofNanos(System.nanoTime() - startedNanos).toMillis());
         recordEvent(new AiTelemetryEvent(

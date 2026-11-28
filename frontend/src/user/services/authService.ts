@@ -159,6 +159,8 @@ export interface StreakEvaluationResult {
   daysDifference: number;
   isConsecutive: boolean;
   isBroken: boolean;
+  shieldUsed?: boolean;
+  remainingFreezes?: number;
   todayStr: string;
   message?: string;
 }
@@ -166,27 +168,38 @@ export interface StreakEvaluationResult {
 export function evaluateDailyStreak(
   currentStreak: number = 0,
   lastActiveDateRaw?: string | null,
-  now: Date = new Date()
+  now: Date = new Date(),
+  streakFreezes: number = 0
 ): StreakEvaluationResult {
   const todayStr = getLocalDateString(now);
   const lastActiveStr = normalizeDateToLocalString(lastActiveDateRaw);
 
   if (!lastActiveStr) {
-    const initialStreak = Math.max(1, currentStreak || 1);
     return {
-      newStreak: initialStreak,
+      newStreak: 1,
       streakUpdated: true,
       daysDifference: 0,
-      isConsecutive: false,
+      isConsecutive: true,
       isBroken: false,
       todayStr,
-      message: 'Chào mừng bạn! Chuỗi học tập KIZUNA bắt đầu từ hôm nay.'
+      message: '🔥 Tuyệt vời! Bạn đã bắt đầu chuỗi học tập 1 ngày!'
     };
   }
 
   if (lastActiveStr === todayStr) {
+    if ((currentStreak || 0) <= 0) {
+      return {
+        newStreak: 1,
+        streakUpdated: true,
+        daysDifference: 0,
+        isConsecutive: true,
+        isBroken: false,
+        todayStr,
+        message: '🔥 Tuyệt vời! Bạn đã bắt đầu chuỗi học tập mới hôm nay!'
+      };
+    }
     return {
-      newStreak: Math.max(1, currentStreak || 1),
+      newStreak: currentStreak,
       streakUpdated: false,
       daysDifference: 0,
       isConsecutive: false,
@@ -210,20 +223,38 @@ export function evaluateDailyStreak(
     };
   }
 
+  // Nếu lỡ >= 1 ngày và có đủ Khiên Bảo Vệ Streak (1 khiên/ngày lỡ): tự động kích hoạt khiên giữ chuỗi!
+  const missedDays = diffDays - 1;
+  if (diffDays > 1 && streakFreezes >= missedDays && currentStreak > 0) {
+    const newStreak = currentStreak + 1;
+    const remaining = Math.max(0, streakFreezes - missedDays);
+    return {
+      newStreak,
+      streakUpdated: true,
+      daysDifference: diffDays,
+      isConsecutive: true,
+      isBroken: false,
+      shieldUsed: true,
+      remainingFreezes: remaining,
+      todayStr,
+      message: `🛡️ Khiên Bảo Vệ đã giữ chuỗi ${newStreak} ngày cho bạn! (Còn ${remaining} khiên)`
+    };
+  }
+
   if (diffDays > 1) {
     return {
       newStreak: 1,
       streakUpdated: true,
       daysDifference: diffDays,
       isConsecutive: false,
-      isBroken: true,
+      isBroken: currentStreak > 0,
       todayStr,
       message: 'Chuỗi học tập mới đã bắt đầu hôm nay. Hãy duy trì đều đặn mỗi ngày nhé!'
     };
   }
 
   return {
-    newStreak: Math.max(1, currentStreak || 1),
+    newStreak: Math.max(0, currentStreak || 0),
     streakUpdated: false,
     daysDifference: diffDays,
     isConsecutive: false,
@@ -232,83 +263,111 @@ export function evaluateDailyStreak(
   };
 }
 
+/**
+ * Kiểm tra xem chuỗi Streak có bị đứt do bỏ lỡ quá số ngày được Khiên bảo vệ hay không khi mở app.
+ * KHÔNG tự cộng Streak khi chỉ mở app — Streak chỉ được cộng khi có thay đổi trong progress bài học.
+ */
+export function evaluateStreakExpiry(
+  currentStreak: number = 0,
+  lastActiveDateRaw?: string | null,
+  now: Date = new Date(),
+  streakFreezes: number = 0
+): { expired: boolean; nextStreak: number; daysDifference: number } {
+  if (!currentStreak || currentStreak <= 0) {
+    return { expired: false, nextStreak: 0, daysDifference: 0 };
+  }
+  const todayStr = getLocalDateString(now);
+  const lastActiveStr = normalizeDateToLocalString(lastActiveDateRaw);
+  if (!lastActiveStr) {
+    return { expired: false, nextStreak: currentStreak, daysDifference: 0 };
+  }
+  const diffDays = calculateCalendarDaysDiff(lastActiveStr, todayStr);
+  const missedDays = diffDays - 1;
+  if (diffDays > 1 && missedDays > (streakFreezes || 0)) {
+    return { expired: true, nextStreak: 0, daysDifference: diffDays };
+  }
+  return { expired: false, nextStreak: currentStreak, daysDifference: diffDays };
+}
+
 export const authService = {
   /**
-   * Tự động kiểm tra và cập nhật chuỗi Streak theo ngày thực tế (Real-day Streak)
-   * Khi qua ngày mới mà người dùng vào app:
-   * - Nếu là ngày liên tiếp (diffDays === 1): Tăng streak thêm 1 (+1 day streak)
-   * - Nếu bị lỡ >= 1 ngày (diffDays > 1): Khởi tạo lại chuỗi streak = 1
-   * - Nếu đã vào app hôm nay (diffDays === 0): Giữ nguyên streak
+   * Kiểm tra hạn chuỗi Streak khi mở app / đăng nhập (chỉ reset về 0 nếu bị đứt chuỗi và không đủ Khiên).
+   * Việc tăng Streak theo ngày chỉ diễn ra khi người dùng hoàn thành bài tập làm thay đổi progress.
    */
   async checkAndUpdateDailyStreak(targetUser?: User | null): Promise<{ user: User; evaluation: StreakEvaluationResult } | null> {
     const user = targetUser || this.getCurrentUser();
     if (!user || !user.id) return null;
 
-    const evaluation = evaluateDailyStreak(user.currentStreak, user.lastActiveDate);
-    if (!evaluation.streakUpdated) {
-      return { user, evaluation };
+    const todayStr = getLocalDateString(new Date());
+    const expiry = evaluateStreakExpiry(
+      user.currentStreak,
+      user.lastActiveDate,
+      new Date(),
+      user.streakFreezes || 0
+    );
+
+    if (!expiry.expired) {
+      return {
+        user,
+        evaluation: {
+          newStreak: user.currentStreak || 0,
+          streakUpdated: false,
+          daysDifference: expiry.daysDifference,
+          isConsecutive: false,
+          isBroken: false,
+          todayStr
+        }
+      };
     }
 
     const updatedUser: User = {
       ...user,
-      currentStreak: evaluation.newStreak,
-      lastActiveDate: evaluation.todayStr,
-      lastStudiedAt: new Date().toISOString()
+      currentStreak: 0
     };
 
-    // 1. Cập nhật localStorage phiên đăng nhập
     localStorage.setItem(USER_KEY, JSON.stringify(updatedUser));
 
-    // 2. Cập nhật cache kizuna_registered_users
     try {
       const regRaw = localStorage.getItem('kizuna_registered_users');
       if (regRaw) {
         const regUsers = safeJsonParse<any[]>(regRaw, []);
         const idx = regUsers.findIndex((u: any) => u.id === user.id || (u.email && u.email.toLowerCase() === user.email?.toLowerCase()));
         if (idx >= 0) {
-          regUsers[idx].currentStreak = evaluation.newStreak;
-          regUsers[idx].lastActiveDate = evaluation.todayStr;
-          regUsers[idx].lastStudiedAt = updatedUser.lastStudiedAt;
+          regUsers[idx].currentStreak = 0;
           localStorage.setItem('kizuna_registered_users', JSON.stringify(regUsers));
         }
       }
-    } catch {
-      // ignore
-    }
+    } catch {}
 
-    // 3. Đồng bộ lên Firestore (nếu có mạng)
-    if (db && user.id) {
+    if (db && user.id && (typeof navigator === 'undefined' || navigator.onLine)) {
       try {
-        const userRef = doc(db, 'users', user.id);
-        await updateDoc(userRef, {
-          currentStreak: evaluation.newStreak,
-          lastActiveDate: evaluation.todayStr,
-          lastStudiedAt: updatedUser.lastStudiedAt
-        });
+        await updateDoc(doc(db, 'users', user.id), { currentStreak: 0 });
       } catch (err) {
-        console.warn('[Streak] Lỗi cập nhật Firestore users:', err);
+        console.warn('[Streak] Lỗi cập nhật expiry Firestore users:', err);
       }
-
       try {
-        const lbRef = doc(db, 'leaderboard', user.id);
-        await updateDoc(lbRef, {
-          currentStreak: evaluation.newStreak,
+        await updateDoc(doc(db, 'leaderboard', user.id), {
+          currentStreak: 0,
           updatedAt: new Date().toISOString()
         });
-      } catch {
-        // bỏ qua nếu doc leaderboard chưa tồn tại
-      }
+      } catch {}
     }
 
-    // 4. Phát sự kiện để Header, Navbar, Profile cập nhật tức thì
     if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('kizuna_user_updated', { detail: { user: updatedUser, evaluation } }));
-      if (evaluation.isConsecutive) {
-        window.dispatchEvent(new CustomEvent('kizuna_streak_increased', { detail: { newStreak: evaluation.newStreak, message: evaluation.message } }));
-      }
+      window.dispatchEvent(new CustomEvent('kizuna_user_updated', { detail: { user: updatedUser } }));
     }
 
-    return { user: updatedUser, evaluation };
+    return {
+      user: updatedUser,
+      evaluation: {
+        newStreak: 0,
+        streakUpdated: true,
+        daysDifference: expiry.daysDifference,
+        isConsecutive: false,
+        isBroken: true,
+        todayStr
+      }
+    };
   },
 
   getToken(): string | null {
@@ -332,8 +391,9 @@ export const authService = {
 
     if (expiresAtStr) {
       const expiresAt = parseInt(expiresAtStr, 10);
-      // Giới hạn thời gian đăng nhập tối đa 24h
-      if (Date.now() > expiresAt) {
+      const isBrowserOffline = typeof navigator !== 'undefined' && navigator.onLine === false;
+      // Khi mất mạng (Offline), giữ nguyên phiên cục bộ để người dùng vẫn học tập được
+      if (!isBrowserOffline && Date.now() > expiresAt) {
         console.warn('[KIZUNA Auth] Phiên đăng nhập đã hết hạn 24 giờ. Tự động xóa phiên.');
         this.clearSession();
         return null;
@@ -584,6 +644,11 @@ export const authService = {
             activePoints: typeof matchedDoc.activePoints === 'number' ? matchedDoc.activePoints : 0,
             totalXp: typeof matchedDoc.totalXp === 'number' ? matchedDoc.totalXp : 0,
             currentStreak: typeof matchedDoc.currentStreak === 'number' ? matchedDoc.currentStreak : 0,
+            streakFreezes: typeof matchedDoc.streakFreezes === 'number' ? matchedDoc.streakFreezes : 0,
+            weeklyActivePoints: typeof matchedDoc.weeklyActivePoints === 'number' ? matchedDoc.weeklyActivePoints : 0,
+            weeklyPointsWeek: matchedDoc.weeklyPointsWeek,
+            weeklyXp: typeof matchedDoc.weeklyXp === 'number' ? matchedDoc.weeklyXp : 0,
+            weeklyXpWeek: matchedDoc.weeklyXpWeek,
             level: matchedDoc.level || 'Tân binh',
             avatarUrl: matchedDoc.avatarUrl || (role === 'ROLE_ADMIN' ? 'https://api.dicebear.com/7.x/bottts/svg?seed=admin' : `https://api.dicebear.com/7.x/avataaars/svg?seed=${emailInput}`),
             lastActiveDate: matchedDoc.lastActiveDate,
@@ -668,6 +733,11 @@ export const authService = {
         activePoints: found.activePoints || 0,
         totalXp: found.totalXp || 0,
         currentStreak: found.currentStreak || 0,
+        streakFreezes: found.streakFreezes || 0,
+        weeklyActivePoints: found.weeklyActivePoints || 0,
+        weeklyPointsWeek: found.weeklyPointsWeek,
+        weeklyXp: found.weeklyXp || 0,
+        weeklyXpWeek: found.weeklyXpWeek,
         level: found.level || 'Tân binh',
         avatarUrl: found.avatarUrl || (role === 'ROLE_ADMIN' ? 'https://api.dicebear.com/7.x/bottts/svg?seed=admin' : `https://api.dicebear.com/7.x/avataaars/svg?seed=${emailInput}`),
         lastActiveDate: found.lastActiveDate,
@@ -747,6 +817,11 @@ export const authService = {
           activePoints: typeof matchedDoc.activePoints === 'number' ? matchedDoc.activePoints : (currentUser?.activePoints ?? 0),
           totalXp: typeof matchedDoc.totalXp === 'number' ? matchedDoc.totalXp : (currentUser?.totalXp ?? 0),
           currentStreak: typeof matchedDoc.currentStreak === 'number' ? matchedDoc.currentStreak : (currentUser?.currentStreak ?? 0),
+          streakFreezes: typeof matchedDoc.streakFreezes === 'number' ? matchedDoc.streakFreezes : (currentUser?.streakFreezes ?? 0),
+          weeklyActivePoints: typeof matchedDoc.weeklyActivePoints === 'number' ? matchedDoc.weeklyActivePoints : (currentUser?.weeklyActivePoints ?? 0),
+          weeklyPointsWeek: matchedDoc.weeklyPointsWeek || currentUser?.weeklyPointsWeek,
+          weeklyXp: typeof matchedDoc.weeklyXp === 'number' ? matchedDoc.weeklyXp : (currentUser?.weeklyXp ?? 0),
+          weeklyXpWeek: matchedDoc.weeklyXpWeek || currentUser?.weeklyXpWeek,
           level: matchedDoc.level || (currentUser?.level ?? 'Tân binh'),
           avatarUrl: matchedDoc.avatarUrl || (currentUser?.avatarUrl ?? (role === 'ROLE_ADMIN' ? 'https://api.dicebear.com/7.x/bottts/svg?seed=admin' : `https://api.dicebear.com/7.x/avataaars/svg?seed=${clean}`)),
           lastActiveDate: matchedDoc.lastActiveDate || currentUser?.lastActiveDate,
@@ -836,7 +911,12 @@ export const authService = {
         role,
         activePoints: typeof matchedDoc.activePoints === 'number' ? matchedDoc.activePoints : 0,
         totalXp: typeof matchedDoc.totalXp === 'number' ? matchedDoc.totalXp : 0,
-        currentStreak: typeof matchedDoc.currentStreak === 'number' ? matchedDoc.currentStreak : 1,
+        currentStreak: typeof matchedDoc.currentStreak === 'number' ? matchedDoc.currentStreak : 0,
+        streakFreezes: typeof matchedDoc.streakFreezes === 'number' ? matchedDoc.streakFreezes : 0,
+        weeklyActivePoints: typeof matchedDoc.weeklyActivePoints === 'number' ? matchedDoc.weeklyActivePoints : 0,
+        weeklyPointsWeek: matchedDoc.weeklyPointsWeek,
+        weeklyXp: typeof matchedDoc.weeklyXp === 'number' ? matchedDoc.weeklyXp : 0,
+        weeklyXpWeek: matchedDoc.weeklyXpWeek,
         level: matchedDoc.level || 'Tân binh',
         avatarUrl: matchedDoc.avatarUrl || photoURL,
         lastActiveDate: matchedDoc.lastActiveDate,
@@ -848,22 +928,19 @@ export const authService = {
         appUser = streakRes.user;
       }
 
-      // Cập nhật lastActiveDate, avatarUrl nếu có thay đổi
-      if (db && matchedDocId) {
+      // Cập nhật avatarUrl nếu chưa có (KHÔNG tự cộng streak khi chỉ đăng nhập Google)
+      if (db && matchedDocId && !matchedDoc.avatarUrl) {
         try {
           await updateDoc(doc(db, 'users', matchedDocId), {
-            lastActiveDate: appUser.lastActiveDate || getLocalDateString(),
-            lastStudiedAt: appUser.lastStudiedAt || new Date().toISOString(),
-            currentStreak: appUser.currentStreak || 1,
             authProvider: 'google',
-            ...(matchedDoc.avatarUrl ? {} : { avatarUrl: photoURL })
+            avatarUrl: photoURL
           });
         } catch (uErr) {
-          console.warn('[Firestore] Lỗi cập nhật lastActiveDate cho Google user:', uErr);
+          console.warn('[Firestore] Lỗi cập nhật avatarUrl cho Google user:', uErr);
         }
       }
     } else {
-      // Người dùng mới: Khởi tạo tài khoản
+      // Người dùng mới: Khởi tạo tài khoản với currentStreak = 0 (chỉ cộng khi làm bài tập)
       const role: Role = isAdmin ? 'ROLE_ADMIN' : 'ROLE_USER';
       const userId = fbUser.uid || `usr_g_${Date.now().toString(36)}`;
       const username = emailClean.split('@')[0];
@@ -876,7 +953,7 @@ export const authService = {
         role,
         activePoints: 0,
         totalXp: 0,
-        currentStreak: 1,
+        currentStreak: 0,
         level: 'Tân binh',
         avatarUrl: photoURL
       };
@@ -891,15 +968,13 @@ export const authService = {
             role,
             activePoints: 0,
             totalXp: 0,
-            currentStreak: 1,
+            currentStreak: 0,
             level: 'Tân binh',
             enabled: true,
             isDeleted: false,
             avatarUrl: photoURL,
             authProvider: 'google',
-            createdAt: new Date().toISOString(),
-            lastActiveDate: new Date().toISOString(),
-            lastStudiedAt: new Date().toISOString()
+            createdAt: new Date().toISOString()
           });
           console.log(`[Firestore] Đã tạo tài khoản Google mới (${emailClean}) thành công.`);
         } catch (setErr) {

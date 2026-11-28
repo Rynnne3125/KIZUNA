@@ -6,6 +6,10 @@ import { GRAMMAR_CATALOG } from '../data/grammarCatalog';
 import { KANJI_CATALOG } from '../data/kanjiCatalog';
 import { STAGES_CATALOG, MILESTONES_CATALOG } from '../data/roadmapCatalog';
 import { shouldSkipFirestore, handleFirestoreError } from '../utils/firestoreGuard';
+import { authService } from './authService';
+import { networkService } from './networkService';
+
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
 
 let isKizunaFirestoreOffline =
   !db ||
@@ -14,7 +18,7 @@ let isKizunaFirestoreOffline =
   firebaseConfig.apiKey === 'your_firebase_api_key_here';
 
 async function safeGetDocs(q: any, timeoutMs = 8000): Promise<any> {
-  if (isKizunaFirestoreOffline || shouldSkipFirestore() || (typeof navigator !== 'undefined' && !navigator.onLine)) {
+  if (isKizunaFirestoreOffline || shouldSkipFirestore() || networkService.isCurrentlyOffline()) {
     throw new Error('FIRESTORE_OFFLINE_OR_QUOTA_EXHAUSTED');
   }
   let timer: ReturnType<typeof setTimeout> | undefined;
@@ -35,13 +39,35 @@ async function safeGetDocs(q: any, timeoutMs = 8000): Promise<any> {
   }
 }
 
+async function safeGetDoc(ref: any, timeoutMs = 8000): Promise<any> {
+  if (isKizunaFirestoreOffline || shouldSkipFirestore() || networkService.isCurrentlyOffline()) {
+    throw new Error('FIRESTORE_OFFLINE_OR_QUOTA_EXHAUSTED');
+  }
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    return await Promise.race([
+      getDoc(ref),
+      new Promise((_, reject) => {
+        timer = setTimeout(() => {
+          reject(new Error('FIRESTORE_TIMEOUT'));
+        }, timeoutMs);
+      })
+    ]);
+  } catch (e: any) {
+    handleFirestoreError(e);
+    throw e;
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
 function getSessionCache<T>(key: string): T | null {
   try {
     const raw = sessionStorage.getItem(key) || localStorage.getItem(`offline_${key}`);
     if (!raw || typeof raw !== 'string' || !raw.trim()) return null;
     const { data, exp } = JSON.parse(raw);
-    const isOffline = typeof navigator !== 'undefined' && !navigator.onLine;
-    // Khi không có Wi-Fi (Offline), cho phép dùng dữ liệu đã lưu trong localStorage bất kể TTL
+    const isOffline = networkService.isCurrentlyOffline();
+    // Khi không có Internet (Offline), cho phép dùng dữ liệu đã lưu trong localStorage bất kể TTL
     if (!isOffline && Date.now() > exp) {
       sessionStorage.removeItem(key);
       return null;
@@ -168,19 +194,39 @@ export const kizunaService = {
   },
 
   async getMilestoneQuests(milestoneId: string): Promise<any[]> {
-    const cacheKey = `kizuna_quests_${milestoneId}`;
+    const cacheKey = `kizuna_quests_v2_${milestoneId}`;
     const cached = getSessionCache<any[]>(cacheKey);
     if (cached) return cached;
 
     try {
-      if (db) {
+      const jwt = authService.getBackendJwt();
+      if (jwt) {
+        const res = await fetch(`${API_BASE_URL}/api/v1/curriculum/milestones/${encodeURIComponent(milestoneId)}/quests`, {
+          headers: { Authorization: `Bearer ${jwt}` },
+          signal: AbortSignal.timeout(4000)
+        });
+        if (res.ok) {
+          const json = await res.json();
+          if (Array.isArray(json?.data) && json.data.length > 0) {
+            const sorted = [...json.data].sort((a, b) => (a.stepIndex || 0) - (b.stepIndex || 0));
+            setSessionCache(cacheKey, sorted, 5 * 60 * 1000);
+            return sorted;
+          }
+        }
+      }
+    } catch {
+      // fallback to Firestore
+    }
+
+    try {
+      if (db && !isKizunaFirestoreOffline && !shouldSkipFirestore()) {
         const q = query(collection(db, 'milestone_quests'), where('milestoneId', '==', milestoneId));
-        const snap = await getDocs(q);
+        const snap = await safeGetDocs(q);
         if (!snap.empty) {
           const quests: any[] = [];
-          snap.forEach(d => quests.push({ id: d.id, ...d.data() }));
-          quests.sort((a, b) => a.stepIndex - b.stepIndex);
-          setSessionCache(cacheKey, quests);
+          snap.forEach((d: any) => quests.push({ id: d.id, ...d.data() }));
+          quests.sort((a, b) => (a.stepIndex || 0) - (b.stepIndex || 0));
+          setSessionCache(cacheKey, quests, 5 * 60 * 1000);
           return quests;
         }
       }
@@ -200,12 +246,12 @@ export const kizunaService = {
     if (cached) return cached;
 
     try {
-      if (db) {
+      if (db && !isKizunaFirestoreOffline && !shouldSkipFirestore()) {
         const q = query(collection(db, 'vocabulary_items'), where('milestoneId', '==', milestoneId));
-        const snap = await getDocs(q);
+        const snap = await safeGetDocs(q);
         if (!snap.empty) {
           const items: any[] = [];
-          snap.forEach(d => items.push({ id: d.id, ...d.data() }));
+          snap.forEach((d: any) => items.push({ id: d.id, ...d.data() }));
           setSessionCache(cacheKey, items);
           return items;
         }
@@ -213,6 +259,23 @@ export const kizunaService = {
     } catch (e) {
       console.warn('Firestore vocab by milestone error:', e);
     }
+
+    try {
+      const jwt = authService.getBackendJwt();
+      if (jwt) {
+        const res = await fetch(`${API_BASE_URL}/api/v1/curriculum/milestones/${encodeURIComponent(milestoneId)}/vocabulary`, {
+          headers: { Authorization: `Bearer ${jwt}` },
+          signal: AbortSignal.timeout(4000)
+        });
+        if (res.ok) {
+          const json = await res.json();
+          if (Array.isArray(json?.data) && json.data.length > 0) {
+            setSessionCache(cacheKey, json.data);
+            return json.data;
+          }
+        }
+      }
+    } catch {}
     return [];
   },
 
@@ -228,7 +291,7 @@ export const kizunaService = {
     try {
       if (db) {
         const q = query(collection(db, 'grammar_items'), where('milestoneId', '==', milestoneId));
-        const snap = await getDocs(q);
+        const snap = await safeGetDocs(q);
         if (!snap.empty) {
           const items: any[] = [];
           snap.forEach(d => items.push({ id: d.id, ...d.data() }));
@@ -476,7 +539,7 @@ export const kizunaService = {
           collection(db, 'kanji_dictionary'),
           where('milestoneId', '==', unitId)
         );
-        const snap = await getDocs(q);
+        const snap = await safeGetDocs(q);
         if (!snap.empty) {
           const items: KanjiItem[] = [];
           snap.forEach(d => {
@@ -533,7 +596,7 @@ export const kizunaService = {
           collection(db, 'kanji_dictionary'),
           where('jlptLevel', '==', level)
         );
-        const snap = await getDocs(q);
+        const snap = await safeGetDocs(q);
         if (!snap.empty) {
           const items: KanjiItem[] = [];
           snap.forEach(d => {
@@ -642,9 +705,9 @@ export const kizunaService = {
   },
 
   async getExamCatalog(levelFilter = 'ALL'): Promise<Exam[]> {
-    const cacheKey = `kizuna_exam_catalog_v4_${levelFilter}`;
+    const cacheKey = `kizuna_exam_catalog_v4_${levelFilter.toUpperCase()}`;
     const cached = getSessionCache<Exam[]>(cacheKey);
-    if (cached && cached.length > 0) return cached;
+    if (cached && Array.isArray(cached) && cached.length > 0) return cached;
 
     const cleanLabel = (raw?: string) =>
       String(raw || '').replace(/\s*Thi\s*thử\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
@@ -654,9 +717,15 @@ export const kizunaService = {
       if (!snap.empty) {
         const exams: Exam[] = [];
         snap.forEach(d => {
-          const raw = d.data();
+          const raw = d.data() as Exam;
+          const qSetCount = typeof raw.questionSetCount === 'number' ? raw.questionSetCount : undefined;
+          const actualCount = typeof raw.actualQuestionCount === 'number' ? raw.actualQuestionCount : raw.totalQuestions;
+          // Bỏ qua các bản ghi lỗi/rỗng chưa có bộ câu hỏi
+          if (qSetCount === 0 || (actualCount !== undefined && actualCount <= 0)) return;
+          if (!raw.label || !raw.level) return;
+
           const item = { ...raw, id: d.id, label: cleanLabel(raw.label) } as Exam;
-          if (levelFilter === 'ALL' || item.level?.toUpperCase() === levelFilter.toUpperCase()) {
+          if (levelFilter === 'ALL' || item.level.toUpperCase() === levelFilter.toUpperCase()) {
             exams.push(item);
           }
         });
@@ -706,7 +775,7 @@ export const kizunaService = {
 
     try {
       if (db) {
-        const snap = await getDoc(doc(db, 'jlpt_exams', id));
+        const snap = await safeGetDoc(doc(db, 'jlpt_exams', id));
         if (snap.exists()) {
           const raw = snap.data();
           const exam = { ...raw, id: snap.id, label: cleanLabel(raw.label) } as Exam;
@@ -773,7 +842,7 @@ export const kizunaService = {
     try {
       if (db) {
         // Chỉ đọc đúng 1 document cấu hình nếu có (chi phí đúng 1 read duy nhất)
-        const statsDoc = await getDoc(doc(db, 'system_config', 'stats'));
+        const statsDoc = await safeGetDoc(doc(db, 'system_config', 'stats'), 4000);
         if (statsDoc.exists()) {
           const data = statsDoc.data();
           const result = {
@@ -906,7 +975,7 @@ export const kizunaService = {
     // Lấy trực tiếp từ Firestore jlpt_exams
     try {
       if (db) {
-        const snap = await getDoc(doc(db, 'jlpt_exams', id));
+        const snap = await safeGetDoc(doc(db, 'jlpt_exams', id));
         if (snap.exists()) {
           const full = { id: snap.id, ...snap.data() } as Exam;
           const item: ChoukaiAudioItem = {

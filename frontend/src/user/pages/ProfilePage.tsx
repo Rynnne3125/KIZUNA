@@ -3,9 +3,10 @@ import { User } from '../types/auth';
 import { 
   Flame, Star, Award, BookOpen, LogOut, User as UserIcon, 
   Download, RefreshCw, Smartphone, Monitor, CheckCircle2, Sparkles, ShieldCheck,
-  Moon, Sun 
+  Moon, Sun, Shield, AlertCircle
 } from 'lucide-react';
 import { isNativeApp } from '../utils/platform';
+import { dailyQuestService, MAX_STREAK_FREEZES, STREAK_FREEZE_COST, getCurrentIsoWeekKey } from '../services/dailyQuestService';
 
 interface ProfilePageProps {
   user: User | null;
@@ -25,6 +26,28 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
   const [checkingUpdate, setCheckingUpdate] = useState(false);
   const [updateResult, setUpdateResult] = useState<string | null>(null);
   const [remoteVersion, setRemoteVersion] = useState<any>(null);
+  const [buyingShield, setBuyingShield] = useState(false);
+  const [shieldResult, setShieldResult] = useState<{ ok: boolean; text: string } | null>(null);
+
+  const currentWeekKey = getCurrentIsoWeekKey(new Date());
+  const weeklyXp =
+    user?.weeklyXpWeek === currentWeekKey
+      ? (user?.weeklyXp || 0)
+      : user?.weeklyPointsWeek === currentWeekKey
+      ? (user?.weeklyActivePoints || 0) * 2
+      : 0;
+
+  const handleBuyShield = async () => {
+    if (!user?.id || buyingShield) return;
+    setBuyingShield(true);
+    setShieldResult(null);
+    try {
+      const res = await dailyQuestService.buyStreakFreeze(user.id);
+      setShieldResult({ ok: res.ok, text: res.message });
+    } finally {
+      setBuyingShield(false);
+    }
+  };
 
   const handleCheckUpdate = async () => {
     setCheckingUpdate(true);
@@ -131,6 +154,52 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
             </div>
             <div className="text-xs text-teal-900/80 dark:text-teal-300/80 font-medium">Bậc Xếp Hạng</div>
           </div>
+        </div>
+
+        {/* Streak Shield & Weekly Points Box */}
+        <div className="bg-gradient-to-br from-sky-50/80 to-emerald-50/40 dark:from-slate-800/70 dark:to-slate-800/40 border border-sky-200/80 dark:border-slate-700 rounded-2xl p-4 sm:p-5 mb-8 text-xs sm:text-sm space-y-3">
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <div className="flex items-center gap-2 font-bold text-slate-800 dark:text-white text-sm">
+              <Shield className="w-4 h-4 text-sky-600 dark:text-sky-400" />
+              <span>Khiên Bảo Vệ Streak & Tuần {currentWeekKey}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300">
+                Tuần này: {weeklyXp.toLocaleString()} XP
+              </span>
+              <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-sky-100 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300">
+                Khiên: {user.streakFreezes || 0}/{MAX_STREAK_FREEZES}
+              </span>
+            </div>
+          </div>
+          <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            Dùng Điểm năng động ({STREAK_FREEZE_COST} pts) để đổi Khiên Bảo Vệ. Khi lỡ nghỉ học 1 ngày, Khiên tự động bảo toàn chuỗi Streak của bạn (không trừ XP vĩnh viễn hay điểm BXH Tuần).
+          </p>
+          <div className="flex items-center gap-3 flex-wrap">
+            <button
+              type="button"
+              onClick={handleBuyShield}
+              disabled={buyingShield || (user.streakFreezes || 0) >= MAX_STREAK_FREEZES || (user.activePoints || 0) < STREAK_FREEZE_COST}
+              className="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-xs flex items-center gap-1.5 shadow-xs transition-all cursor-pointer"
+            >
+              <Shield className="w-3.5 h-3.5" />
+              <span>
+                {(user.streakFreezes || 0) >= MAX_STREAK_FREEZES
+                  ? 'Đã đạt tối đa 2/2 Khiên'
+                  : `Đổi 1 Khiên (${STREAK_FREEZE_COST} pts)`}
+              </span>
+            </button>
+          </div>
+          {shieldResult && (
+            <div className={`p-3 rounded-xl text-xs font-semibold border flex items-center gap-2 ${
+              shieldResult.ok
+                ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300'
+                : 'bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300'
+            }`}>
+              {shieldResult.ok ? <CheckCircle2 className="w-4 h-4 shrink-0" /> : <AlertCircle className="w-4 h-4 shrink-0" />}
+              <span>{shieldResult.text}</span>
+            </div>
+          )}
         </div>
 
         {/* Theme Preference Setting Box */}

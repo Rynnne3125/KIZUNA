@@ -23,6 +23,9 @@ import {
 } from 'lucide-react';
 import { kizunaService } from '../services/kizunaService';
 import { soundService } from '../services/soundService';
+import { authService } from '../services/authService';
+import { progressService } from '../services/progressService';
+import { useTheme } from '../hooks/useTheme';
 import { KanjiItem } from '../types/kizuna';
 
 type JlptLevelKey = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
@@ -284,6 +287,7 @@ const SakuraFallingBackground: React.FC = () => {
 // - Vẽ ĐƯỜNG ĐỎ CHẠY TỪ ĐIỂM ĐẦU ĐẾN ĐIỂM KẾT của từng nét theo đúng quỹ đạo viết
 // - TỰ ĐỘNG CHẠY LIÊN TỤC LẶP LẠI (Continuous Loop) không cần người dùng phải bấm nút
 const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanji, strokeCount }) => {
+  const { isDark } = useTheme();
   const [tab, setTab] = useState<'diagram' | 'canvas'>('diagram');
   const [loadingSvg, setLoadingSvg] = useState<boolean>(true);
   const [strokes, setStrokes] = useState<StrokeData[]>([]);
@@ -294,6 +298,8 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const isDrawingRef = useRef<boolean>(false);
+  const strokesHistoryRef = useRef<Array<Array<{ x: number; y: number }>>>([]);
+  const currentPathRef = useRef<Array<{ x: number; y: number }>>([]);
 
   // Lấy mã hex unicode của chữ Hán (ví dụ: 休 -> 04f11)
   const hex = useMemo(() => {
@@ -378,13 +384,70 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
 
   const totalStrokes = strokes.length > 0 ? strokes.length : strokeCount;
 
+  // Vẽ lại toàn bộ các nét đã lưu trên canvas theo màu mực của giao diện Sáng / Tối
+  const redrawCanvas = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.lineWidth = 5.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.strokeStyle = isDark ? '#f8fafc' : '#1c2536';
+
+    for (const path of strokesHistoryRef.current) {
+      if (path.length === 0) continue;
+      ctx.beginPath();
+      ctx.moveTo(path[0].x, path[0].y);
+      if (path.length === 1) {
+        ctx.lineTo(path[0].x + 0.01, path[0].y);
+      } else {
+        for (let i = 1; i < path.length; i++) {
+          ctx.lineTo(path[i].x, path[i].y);
+        }
+      }
+      ctx.stroke();
+    }
+  };
+
+  useEffect(() => {
+    strokesHistoryRef.current = [];
+    currentPathRef.current = [];
+    redrawCanvas();
+  }, [kanji]);
+
+  useEffect(() => {
+    if (tab === 'canvas') {
+      redrawCanvas();
+    }
+  }, [isDark, tab]);
+
   // Canvas vẽ nét cọ tay
   const clearCanvas = () => {
+    strokesHistoryRef.current = [];
+    currentPathRef.current = [];
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+  };
+
+  const getCanvasPoint = (
+    canvas: HTMLCanvasElement,
+    e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>
+  ) => {
+    const rect = canvas.getBoundingClientRect();
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    return {
+      x: (clientX - rect.left) * scaleX,
+      y: (clientY - rect.top) * scaleY
+    };
   };
 
   const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
@@ -393,15 +456,16 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const rect = canvas.getBoundingClientRect();
-    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
-    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
-
+    const pt = getCanvasPoint(canvas, e);
     isDrawingRef.current = true;
+    currentPathRef.current = [pt];
+
+    ctx.lineWidth = 5.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.strokeStyle = isDark ? '#f8fafc' : '#1c2536';
     ctx.beginPath();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    ctx.moveTo((clientX - rect.left) * scaleX, (clientY - rect.top) * scaleY);
+    ctx.moveTo(pt.x, pt.y);
   };
 
   const drawStroke = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
@@ -411,29 +475,32 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const rect = canvas.getBoundingClientRect();
-    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
-    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
-
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
+    const pt = getCanvasPoint(canvas, e);
+    currentPathRef.current.push(pt);
     ctx.lineWidth = 5.5; // Nét vẽ thanh mảnh thanh thoát
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
-    ctx.strokeStyle = '#1c2536';
-    ctx.lineTo((clientX - rect.left) * scaleX, (clientY - rect.top) * scaleY);
+    ctx.strokeStyle = isDark ? '#f8fafc' : '#1c2536';
+    ctx.lineTo(pt.x, pt.y);
     ctx.stroke();
   };
 
   const stopDrawing = () => {
+    if (isDrawingRef.current && currentPathRef.current.length > 0) {
+      strokesHistoryRef.current.push(currentPathRef.current);
+      if (currentPathRef.current.length === 1) {
+        redrawCanvas();
+      }
+    }
+    currentPathRef.current = [];
     isDrawingRef.current = false;
   };
 
   return (
     <div style={{
-      background: '#faf8f5',
+      background: isDark ? '#1e293b' : '#faf8f5',
       borderRadius: 14,
-      border: '1px solid #ebe7df',
+      border: isDark ? '1px solid #334155' : '1px solid #ebe7df',
       padding: '18px 20px',
       display: 'flex',
       flexDirection: 'column',
@@ -450,9 +517,9 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
             fontWeight: 800,
             border: 'none',
             cursor: 'pointer',
-            background: tab === 'diagram' ? '#c53d32' : '#ffffff',
-            color: tab === 'diagram' ? '#ffffff' : '#78716c',
-            borderBottom: tab === 'diagram' ? '2px solid #a82e24' : '1px solid #d6d3d1',
+            background: tab === 'diagram' ? '#c53d32' : (isDark ? '#0f172a' : '#ffffff'),
+            color: tab === 'diagram' ? '#ffffff' : (isDark ? '#cbd5e1' : '#78716c'),
+            borderBottom: tab === 'diagram' ? '2px solid #a82e24' : (isDark ? '1px solid #334155' : '1px solid #d6d3d1'),
             transition: 'all 0.15s ease'
           }}
         >
@@ -468,9 +535,9 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
             fontWeight: 800,
             border: 'none',
             cursor: 'pointer',
-            background: tab === 'canvas' ? '#1c2536' : '#ffffff',
-            color: tab === 'canvas' ? '#ffffff' : '#78716c',
-            borderBottom: tab === 'canvas' ? '2px solid #0f172a' : '1px solid #d6d3d1',
+            background: tab === 'canvas' ? (isDark ? '#059669' : '#1c2536') : (isDark ? '#0f172a' : '#ffffff'),
+            color: tab === 'canvas' ? '#ffffff' : (isDark ? '#cbd5e1' : '#78716c'),
+            borderBottom: tab === 'canvas' ? (isDark ? '2px solid #047857' : '2px solid #0f172a') : (isDark ? '1px solid #334155' : '1px solid #d6d3d1'),
             transition: 'all 0.15s ease'
           }}
         >
@@ -485,10 +552,10 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
         maxWidth: 260,
         height: 260,
         aspectRatio: '1 / 1',
-        background: '#ffffff',
+        background: isDark ? '#0f172a' : '#ffffff',
         borderRadius: 12,
-        border: '1.5px solid #e2e8f0',
-        boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)',
+        border: isDark ? '1.5px solid #334155' : '1.5px solid #e2e8f0',
+        boxShadow: isDark ? '0 4px 16px rgba(0, 0, 0, 0.35)' : '0 4px 16px rgba(0, 0, 0, 0.04)',
         overflow: 'hidden',
         display: 'flex',
         alignItems: 'center',
@@ -513,27 +580,27 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
                   key={`ghost-${st.id}`}
                   d={st.d}
                   fill="none"
-                  stroke="#e2e8f0"
+                  stroke={isDark ? '#334155' : '#e2e8f0'}
                   strokeWidth={1.6}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
               ))}
 
-              {/* 2. Lớp nét foreground: Nét đã vẽ (đen mực thanh mảnh 2.4px), Nét đang vẽ (đỏ thanh mảnh 2.8px chạy từ đầu đến kết) */}
+              {/* 2. Lớp nét foreground: Nét đã vẽ (đen mực / trắng sáng trong dark mode), Nét đang vẽ (đỏ chạy từ đầu đến kết) */}
               {strokes.map((st, i) => {
                 const isCompleted = i < currentStrokeIndex || currentStrokeIndex === strokes.length;
                 const isDrawingNow = i === currentStrokeIndex;
 
                 if (isCompleted) {
-                  // Nét đã hoàn thành: Nét thanh mảnh 2.4px màu đen mực
+                  // Nét đã hoàn thành: Nét thanh mảnh 2.4px đồng bộ sáng/tối
                   return (
                     <path
                       key={`done-${st.id}`}
                       d={st.d}
                       pathLength="100"
                       fill="none"
-                      stroke="#1e293b"
+                      stroke={isDark ? '#f8fafc' : '#1e293b'}
                       strokeWidth={2.4}
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -553,7 +620,7 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
                       d={st.d}
                       pathLength="100"
                       fill="none"
-                      stroke="#ef4444"
+                      stroke={isDark ? '#f87171' : '#ef4444'}
                       strokeWidth={2.8}
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -582,8 +649,12 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
                     style={{
                       fontSize: isCurrent ? '10px' : '7.5px',
                       fontWeight: isCurrent ? 900 : 700,
-                      fill: isCurrent ? '#ef4444' : (isDrawn ? '#94a3b8' : '#cbd5e1'),
-                      opacity: isCurrent ? 1 : (isDrawn ? 0.8 : 0.4),
+                      fill: isCurrent
+                        ? (isDark ? '#f87171' : '#ef4444')
+                        : isDrawn
+                          ? (isDark ? '#cbd5e1' : '#94a3b8')
+                          : (isDark ? '#64748b' : '#cbd5e1'),
+                      opacity: isCurrent ? 1 : (isDrawn ? 0.85 : 0.45),
                       transition: 'all 0.15s ease'
                     }}
                   >
@@ -596,7 +667,7 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
             <div style={{
               fontSize: 120,
               fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif",
-              color: '#1c2536',
+              color: isDark ? '#f8fafc' : '#1c2536',
               fontWeight: 600
             }}>
               {kanji}
@@ -614,7 +685,7 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
                 justifyContent: 'center',
                 fontSize: 140,
                 fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif",
-                color: 'rgba(0, 0, 0, 0.08)',
+                color: isDark ? 'rgba(248, 250, 252, 0.14)' : 'rgba(0, 0, 0, 0.08)',
                 pointerEvents: 'none',
                 userSelect: 'none'
               }}>
@@ -650,9 +721,13 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
               fontSize: 12,
               fontWeight: 600,
               borderRadius: 6,
-              background: showGhost ? '#e0f2fe' : '#ffffff',
-              color: showGhost ? '#0284c7' : '#78716c',
-              border: '1px solid #bae6fd',
+              background: showGhost
+                ? (isDark ? 'rgba(14, 165, 233, 0.2)' : '#e0f2fe')
+                : (isDark ? '#0f172a' : '#ffffff'),
+              color: showGhost
+                ? (isDark ? '#38bdf8' : '#0284c7')
+                : (isDark ? '#94a3b8' : '#78716c'),
+              border: isDark ? '1px solid #334155' : '1px solid #bae6fd',
               cursor: 'pointer'
             }}
           >
@@ -666,9 +741,9 @@ const KanjiStrokeBox: React.FC<{ kanji: string; strokeCount: number }> = ({ kanj
               fontSize: 12,
               fontWeight: 600,
               borderRadius: 6,
-              background: '#fdf2f0',
-              color: '#c53d32',
-              border: '1px solid #fecaca',
+              background: isDark ? 'rgba(220, 38, 38, 0.2)' : '#fdf2f0',
+              color: isDark ? '#fca5a5' : '#c53d32',
+              border: isDark ? '1px solid rgba(220, 38, 38, 0.45)' : '1px solid #fecaca',
               cursor: 'pointer'
             }}
           >
@@ -978,6 +1053,17 @@ export const KanjiPage: React.FC = () => {
       setIsFlipped(false);
     } else {
       setFlipFinished(true);
+      const currentUser = authService.getCurrentUser();
+      const finalMastered = mastered ? new Set(masteredIds).add(currentItem.id) : masteredIds;
+      if (finalMastered.size > 0 && currentUser?.id) {
+        const exerciseKey = `kanji_${selectedLevel}_${studyScope === 'page' ? `p${activePage}` : 'all'}_flip`;
+        void progressService.saveKanjiProgress(
+          currentUser.id,
+          Array.from(finalMastered),
+          exerciseKey,
+          finalMastered.size === flipStudyList.length
+        );
+      }
     }
   };
 
@@ -1045,6 +1131,25 @@ export const KanjiPage: React.FC = () => {
       setQuizIsSkipped(false);
     } else {
       setQuizFinished(true);
+      const currentUser = authService.getCurrentUser();
+      if (currentUser?.id) {
+        const wrongOrSkippedIds = new Set([
+          ...quizWrongQuestions.map(q => q.item.id),
+          ...quizSkippedQuestions.map(q => q.item.id)
+        ]);
+        const correctIds = quizQuestions
+          .filter(q => !wrongOrSkippedIds.has(q.item.id))
+          .map(q => q.item.id);
+        if (correctIds.length > 0) {
+          const exerciseKey = `kanji_${selectedLevel}_${studyScope === 'page' ? `p${activePage}` : 'all'}_quiz`;
+          void progressService.saveKanjiProgress(
+            currentUser.id,
+            correctIds,
+            exerciseKey,
+            quizWrongQuestions.length === 0 && quizSkippedQuestions.length === 0
+          );
+        }
+      }
     }
   };
 

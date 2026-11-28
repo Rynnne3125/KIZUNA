@@ -125,7 +125,7 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
     {
       stepIndex: 1,
       title: 'Bài 1: Thẻ Ghi Nhớ Cốt Lõi (SRS Flashcards)',
-      questType: 'SRS_FLASHCARD',
+      questType: 'FLASHCARD_SRS',
       description: 'Luyện tập và ghi nhớ từ vựng, chữ Hán trọng tâm theo chu trình lặp lại ngắt quãng SM-2.',
       xpReward: 30,
       activePointsReward: 15
@@ -141,7 +141,7 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
     {
       stepIndex: 3,
       title: 'Bài 3: Ngữ Pháp Ghép Câu Kéo Thả (Drag & Drop)',
-      questType: 'GRAMMAR_DRILL',
+      questType: 'GRAMMAR_SCRAMBLE',
       description: 'Kéo thả các thẻ từ ghép thành câu tiếng Nhật hoàn chỉnh, nhận diện cạm bẫy trợ từ người Việt hay mắc.',
       xpReward: 40,
       activePointsReward: 25
@@ -149,24 +149,28 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
     {
       stepIndex: 4,
       title: 'Bài 4: Đối Thoại Tình Huống AI Sensei (2-Way Dialogue)',
-      questType: 'PRACTICE_FINAL',
+      questType: 'CLOZE_PRACTICE',
       description: 'Hội thoại 2 chiều thực chiến theo ngữ cảnh, tự xây dựng câu trả lời và nhận phản hồi trực tiếp từ Sensei.',
       xpReward: 50,
       activePointsReward: 30
     }
   ];
 
-  // Merge Firestore quests while preserving standardized titles and types
+  // Always provide full 4 steps (1..4): merge backend/Firestore quests by stepIndex onto defaultQuests
   const displayQuests = defaultQuests.map((defQ, idx) => {
-    const matched = quests.find(q => (idx === 2 && q.questType === 'GRAMMAR_DRILL') || (idx === 3 && q.questType === 'VOCAB_KANJI_MASTERY'));
+    const stepNum = idx + 1;
+    const matched = quests.find(q => Number(q.stepIndex) === stepNum) ||
+      (quests.length === 1 && stepNum === 4 ? quests[0] : undefined);
+    if (!matched) return defQ;
     return {
-      ...(matched || {}),
-      stepIndex: idx + 1,
-      title: defQ.title,
-      questType: defQ.questType,
-      description: defQ.description,
-      xpReward: defQ.xpReward,
-      activePointsReward: defQ.activePointsReward
+      ...defQ,
+      ...matched,
+      stepIndex: stepNum,
+      title: matched.title || defQ.title,
+      questType: matched.questType || defQ.questType,
+      description: matched.description || defQ.description,
+      xpReward: matched.xpReward ?? defQ.xpReward,
+      activePointsReward: matched.activePointsReward ?? defQ.activePointsReward
     };
   });
 
@@ -270,7 +274,7 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
                 </span>
               ) : (
                 <span className="text-xs font-bold text-sky-700 dark:text-sky-300 bg-sky-50 dark:bg-sky-950/60 px-2.5 py-0.5 rounded-full border border-sky-200 dark:border-sky-800">
-                  Đang học ({completedQuestIndices.length}/4 nhiệm vụ)
+                  Đang học ({completedQuestIndices.length}/{displayQuests.length} nhiệm vụ)
                 </span>
               )}
             </div>
@@ -320,7 +324,7 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
           }`}
         >
           <BookOpen size={16} />
-          <span>Nhiệm vụ ({completedQuestIndices.length}/4)</span>
+          <span>Nhiệm vụ ({completedQuestIndices.length}/{displayQuests.length})</span>
         </button>
 
         <button
@@ -338,12 +342,14 @@ export const RoadmapMilestoneDetail: React.FC<RoadmapMilestoneDetailProps> = ({
         </button>
       </div>
 
-      {/* 4. TAB 1: 4 QUESTS LIST (Sequential Unlocking 1 -> 2 -> 3 -> 4) */}
+      {/* 4. TAB 1: 4 QUESTS LIST (Sequential Unlocking 1 -> 2 -> 3 -> 4; completed quests remain unlocked for review) */}
       {activeTab === 'quests' && (
         <div className="space-y-3.5">
           {displayQuests.map((q, idx) => {
-            const questDone = completedQuestIndices.includes(idx + 1);
-            const isUnlocked = idx === 0 || completedQuestIndices.includes(idx);
+            const stepNum = q.stepIndex || idx + 1;
+            const prevStep = idx > 0 ? (displayQuests[idx - 1]?.stepIndex || idx) : 0;
+            const questDone = completedQuestIndices.includes(stepNum);
+            const isUnlocked = isMilestoneCompleted || questDone || idx === 0 || completedQuestIndices.includes(prevStep);
 
             return (
               <div

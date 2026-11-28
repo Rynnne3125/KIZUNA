@@ -7,6 +7,8 @@ export interface RankTier {
   description: string; // Mô tả năng lực đạt được
 }
 
+export type LeaderboardMode = 'weekly' | 'all_time';
+
 export interface UserLeaderboardItem {
   id: string;
   fullName: string;
@@ -14,8 +16,13 @@ export interface UserLeaderboardItem {
   email: string;
   avatarUrl?: string;
   activePoints: number;
+  weeklyActivePoints: number;
+  weeklyPointsWeek?: string;
+  weeklyXp: number;
+  weeklyXpWeek?: string;
   totalXp: number;
   currentStreak: number;
+  streakFreezes?: number;
   rankTier: RankTier;
   position: number;
 }

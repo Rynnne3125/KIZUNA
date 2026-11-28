@@ -164,9 +164,15 @@ export const ExamPage: React.FC = () => {
   // Bắt đầu làm bài (hỗ trợ 2 chế độ: 'exam' Thi thật và 'practice' Luyện tập)
   const handleStartExam = async (examId: string, mode: ExamMode = 'exam') => {
     setLoadingExamDetail(true);
+    setLoadErrorMsg(null);
     try {
       const fullExam = await kizunaService.getExamById(examId);
-      if (fullExam) {
+      const hasQuestions = Boolean(
+        fullExam &&
+        Array.isArray(fullExam.questionSets) &&
+        fullExam.questionSets.some(qs => Array.isArray(qs.questions) && qs.questions.length > 0)
+      );
+      if (fullExam && hasQuestions) {
         setActiveExam(fullExam);
         setExamMode(mode);
         setUserAnswers({});
@@ -186,7 +192,7 @@ export const ExamPage: React.FC = () => {
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        setLoadErrorMsg('Không thể tải chi tiết đề thi. Vui lòng kiểm tra lại kết nối và thử lại!');
+        setLoadErrorMsg('Đề thi này hiện chưa có dữ liệu câu hỏi hoặc không thể tải chi tiết. Vui lòng chọn đề thi khác!');
       }
     } catch {
       setLoadErrorMsg('Đã có lỗi xảy ra khi nạp chi tiết đề thi. Vui lòng thử lại!');
@@ -254,7 +260,7 @@ export const ExamPage: React.FC = () => {
     if (!activeExam || !activeExam.questionSets) return 0;
     let count = 0;
     for (const qs of activeExam.questionSets) {
-      for (const q of qs.questions) {
+      for (const q of (qs.questions || [])) {
         if (!userAnswers[q.id]) {
           count++;
         }
@@ -274,7 +280,7 @@ export const ExamPage: React.FC = () => {
     let unanswered = 0;
 
     for (const qs of activeExam.questionSets) {
-      for (const q of qs.questions) {
+      for (const q of (qs.questions || [])) {
         total++;
         const chosen = userAnswers[q.id];
         if (!chosen) {
@@ -378,8 +384,9 @@ export const ExamPage: React.FC = () => {
     let liveWrongCount = 0;
     if (activeExam.questionSets) {
       for (const qs of activeExam.questionSets) {
-        totalQuestionsCount += qs.questions.length;
-        for (const q of qs.questions) {
+        const qsList = qs.questions || [];
+        totalQuestionsCount += qsList.length;
+        for (const q of qsList) {
           const chosen = userAnswers[q.id];
           if (chosen) {
             if (chosen === q.correctAnswer) liveCorrectCount++;
@@ -412,7 +419,7 @@ export const ExamPage: React.FC = () => {
           top: 60,
           background: 'rgba(255, 255, 255, 0.96)',
           backdropFilter: 'blur(8px)',
-          zIndex: 90,
+          zIndex: 15,
           padding: '14px 20px',
           borderRadius: 12,
           boxShadow: '0 4px 14px rgba(44, 30, 20, 0.05)',
@@ -951,7 +958,7 @@ export const ExamPage: React.FC = () => {
 
               {/* Danh sách câu hỏi */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-                {qs.questions.map((q, qIdx) => {
+                {(qs.questions || []).map((q, qIdx) => {
                   const userChoice = userAnswers[q.id];
                   const hasAnswered = !!userChoice;
                   const isGraded = isSubmitted || (examMode === 'practice' && hasAnswered);
@@ -1147,7 +1154,7 @@ export const ExamPage: React.FC = () => {
                         gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
                         gap: 10
                       }}>
-                        {q.options.map(opt => {
+                        {(q.options || []).map(opt => {
                           const isChosen = userChoice === opt.id;
                           const isOfficialCorrect = isGraded && q.correctAnswer === opt.id;
                           const isOptionLocked = isGraded;

@@ -2,10 +2,14 @@ package com.kizuna.model;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MilestoneQuest {
     private String id;
     private String milestoneId;
@@ -16,7 +20,14 @@ public class MilestoneQuest {
     private int xpReward = 50;
     private int activePointsReward = 25;
 
-    // Flexible payload for quest data (deckContent, quizQuestions, wordTokens, etc.)
+    // Structured exercise payloads configured by Admin for each questType
+    private List<String> srsCardIds = new ArrayList<>();
+    private List<Map<String, Object>> srsCards = new ArrayList<>();
+    private List<Map<String, Object>> quizQuestions = new ArrayList<>();
+    private List<Map<String, Object>> scrambleSentences = new ArrayList<>();
+    private List<Map<String, Object>> roleplayDialogues = new ArrayList<>();
+
+    // Flexible payload for legacy/extra quest data (deckContent, grammarPoints, prompts, etc.)
     private Map<String, Object> additionalData = new HashMap<>();
 
     public MilestoneQuest() {}
@@ -55,6 +66,31 @@ public class MilestoneQuest {
 
     public int getActivePointsReward() { return activePointsReward; }
     public void setActivePointsReward(int activePointsReward) { this.activePointsReward = activePointsReward; }
+
+    public List<String> getSrsCardIds() { return srsCardIds; }
+    public void setSrsCardIds(List<String> srsCardIds) {
+        this.srsCardIds = srsCardIds != null ? srsCardIds : new ArrayList<>();
+    }
+
+    public List<Map<String, Object>> getSrsCards() { return srsCards; }
+    public void setSrsCards(List<Map<String, Object>> srsCards) {
+        this.srsCards = srsCards != null ? srsCards : new ArrayList<>();
+    }
+
+    public List<Map<String, Object>> getQuizQuestions() { return quizQuestions; }
+    public void setQuizQuestions(List<Map<String, Object>> quizQuestions) {
+        this.quizQuestions = quizQuestions != null ? quizQuestions : new ArrayList<>();
+    }
+
+    public List<Map<String, Object>> getScrambleSentences() { return scrambleSentences; }
+    public void setScrambleSentences(List<Map<String, Object>> scrambleSentences) {
+        this.scrambleSentences = scrambleSentences != null ? scrambleSentences : new ArrayList<>();
+    }
+
+    public List<Map<String, Object>> getRoleplayDialogues() { return roleplayDialogues; }
+    public void setRoleplayDialogues(List<Map<String, Object>> roleplayDialogues) {
+        this.roleplayDialogues = roleplayDialogues != null ? roleplayDialogues : new ArrayList<>();
+    }
 
     @JsonAnyGetter
     public Map<String, Object> getAdditionalData() {

@@ -44,6 +44,15 @@ interface RoadmapQuestRunnerProps {
   onCompleteQuest: (questIndex: number, xp: number, activePoints: number) => Promise<void>;
 }
 
+function shuffleArray<T>(items: T[]): T[] {
+  const arr = [...items];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   milestone,
   questIndex,
@@ -56,6 +65,20 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   const [grammarList, setGrammarList] = useState<any[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const [isQuestDone, setIsQuestDone] = useState(false);
+  const [questSaved, setQuestSaved] = useState(false);
+  const autoCompletedRef = useRef(false);
+
+  const questMode = useMemo<'SRS' | 'GATEKEEPER' | 'SCRAMBLE' | 'ROLEPLAY'>(() => {
+    const t = String(questData?.questType || '').toUpperCase();
+    if (t.includes('GATEKEEPER')) return 'GATEKEEPER';
+    if (t.includes('SCRAMBLE') || t.includes('GRAMMAR')) return 'SCRAMBLE';
+    if (t.includes('CLOZE') || t.includes('PRACTICE') || t.includes('ROLEPLAY')) return 'ROLEPLAY';
+    if (t.includes('FLASHCARD') || t.includes('SRS') || t.includes('VOCAB_KANJI')) return 'SRS';
+    if (questIndex === 2) return 'GATEKEEPER';
+    if (questIndex === 3) return 'SCRAMBLE';
+    if (questIndex === 4) return 'ROLEPLAY';
+    return 'SRS';
+  }, [questData?.questType, questIndex]);
 
   // Fullscreen state
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -132,13 +155,15 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   }, [milestone.id]);
 
   // -------------------------------------------------------------
-  // QUEST 1: SRS FLASHCARDS (ĐỒNG BỘ TÍNH NĂNG NHƯ VOCABPAGE)
+  // QUEST 1: SRS FLASHCARDS (HỌC HẾT THẺ MỚI TỰ ĐỘNG TRẢ KẾT QUẢ)
   // -------------------------------------------------------------
   const [isShuffle, setIsShuffle] = useState(false);
   const [cardIndex, setCardIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [masteredCards, setMasteredCards] = useState<Set<number>>(new Set());
-  const [learningCards, setLearningCards] = useState<Set<number>>(new Set());
+  const [masteredIds, setMasteredIds] = useState<Set<string>>(new Set());
+  const [learningIds, setLearningIds] = useState<Set<string>>(new Set());
+  const [srsStudyList, setSrsStudyList] = useState<any[]>([]);
+  const [srsFinished, setSrsFinished] = useState(false);
 
   // Drag / Swipe state cho Flashcard (Áp dụng cho cả Web chuột lẫn App điện thoại)
   const [dragX, setDragX] = useState(0);
@@ -152,36 +177,127 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   });
 
   const displayVocabList = useMemo(() => {
-    if (!vocabList || vocabList.length === 0) return [];
-    if (!isShuffle) return vocabList;
-    return [...vocabList].sort(() => Math.random() - 0.5);
-  }, [vocabList, isShuffle]);
+    const customCards = Array.isArray(questData?.srsCards) && questData.srsCards.length > 0
+      ? questData.srsCards.map((c: any, idx: number) => ({
+          id: String(c.sourceItemId || c.id || `srs_${idx}`),
+          itemType: c.itemType || 'VOCABULARY',
+          term: c.term || c.kanji || '',
+          reading: c.reading || c.kana || '',
+          sinoVietnamese: c.sinoVietnamese || '',
+          vietnameseMeaning: c.meaning || c.vietnameseMeaning || '',
+          part_of_speech: c.wordType || (c.itemType === 'KANJI' ? 'Kanji' : c.itemType === 'GRAMMAR' ? 'Ngữ pháp' : 'Từ vựng'),
+          exampleSentenceJp: c.exampleJp || c.exampleSentenceJp || '',
+          exampleSentenceVi: c.exampleVi || c.exampleSentenceVi || ''
+        }))
+      : null;
 
-  const currentVocab = displayVocabList[cardIndex] || null;
-
-  const handleNextCard = (mastered?: boolean) => {
-    if (typeof mastered === 'boolean') {
-      if (mastered) {
-        setMasteredCards(prev => new Set(prev).add(cardIndex));
-        setLearningCards(prev => {
-          const next = new Set(prev);
-          next.delete(cardIndex);
-          return next;
-        });
+    let baseList = customCards;
+    if (!baseList) {
+      if (Array.isArray(questData?.srsCardIds) && questData.srsCardIds.length > 0 && vocabList.length > 0) {
+        const idSet = new Set(questData.srsCardIds);
+        const filtered = vocabList.filter(v => idSet.has(v.id));
+        baseList = filtered.length > 0 ? filtered : vocabList;
       } else {
-        setLearningCards(prev => new Set(prev).add(cardIndex));
-        setMasteredCards(prev => {
-          const next = new Set(prev);
-          next.delete(cardIndex);
-          return next;
-        });
+        baseList = vocabList;
       }
     }
+
+    if (!baseList || baseList.length === 0) return [];
+    return baseList.map((item: any, idx: number) => ({
+      ...item,
+      id: String(item.id || `card_${idx}`)
+    }));
+  }, [questData?.srsCards, questData?.srsCardIds, vocabList]);
+
+  useEffect(() => {
+    if (displayVocabList.length > 0) {
+      setSrsStudyList(isShuffle ? shuffleArray(displayVocabList) : displayVocabList);
+      setCardIndex(0);
+      setIsFlipped(false);
+      setMasteredIds(new Set());
+      setLearningIds(new Set());
+      setSrsFinished(false);
+    }
+  }, [displayVocabList, isShuffle]);
+
+  const currentVocab = srsStudyList[cardIndex] || null;
+
+  const triggerAutoSaveQuest = async () => {
+    if (autoCompletedRef.current) return;
+    autoCompletedRef.current = true;
+    setSubmitting(true);
+    const defaultXp = questMode === 'SRS' ? 30 : questMode === 'GATEKEEPER' ? 35 : questMode === 'SCRAMBLE' ? 40 : 50;
+    const defaultAp = questMode === 'SRS' ? 15 : questMode === 'GATEKEEPER' ? 20 : questMode === 'SCRAMBLE' ? 25 : 30;
+    const xp = Number(questData?.xpReward ?? defaultXp);
+    const ap = Number(questData?.activePointsReward ?? defaultAp);
+    try {
+      await onCompleteQuest(questIndex, xp, ap);
+      setQuestSaved(true);
+    } catch {
+      autoCompletedRef.current = false;
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleNextCard = (mastered?: boolean) => {
+    if (!currentVocab || srsStudyList.length === 0) return;
+    const cardId = String(currentVocab.id);
+    const nextMastered = new Set(masteredIds);
+    const nextLearning = new Set(learningIds);
+
+    if (typeof mastered === 'boolean') {
+      if (mastered) {
+        nextMastered.add(cardId);
+        nextLearning.delete(cardId);
+      } else {
+        nextLearning.add(cardId);
+        nextMastered.delete(cardId);
+      }
+      setMasteredIds(nextMastered);
+      setLearningIds(nextLearning);
+    }
+
     setIsFlipped(false);
     setDragX(0);
-    if (cardIndex < displayVocabList.length - 1) {
+    if (cardIndex < srsStudyList.length - 1) {
       setCardIndex(prev => prev + 1);
+    } else {
+      setSrsFinished(true);
+      if (displayVocabList.length > 0 && nextMastered.size >= displayVocabList.length) {
+        void triggerAutoSaveQuest();
+      }
     }
+  };
+
+  const handleFinishSrsRound = () => {
+    setIsFlipped(false);
+    setDragX(0);
+    setSrsFinished(true);
+    if (displayVocabList.length > 0 && masteredIds.size >= displayVocabList.length) {
+      void triggerAutoSaveQuest();
+    }
+  };
+
+  const handleRestartSrsAll = () => {
+    setSrsStudyList(isShuffle ? shuffleArray(displayVocabList) : displayVocabList);
+    setCardIndex(0);
+    setIsFlipped(false);
+    setMasteredIds(new Set());
+    setLearningIds(new Set());
+    setSrsFinished(false);
+  };
+
+  const handleRestartSrsUnlearned = () => {
+    const unlearned = displayVocabList.filter((item: any) => !masteredIds.has(String(item.id)));
+    if (unlearned.length === 0) {
+      handleRestartSrsAll();
+      return;
+    }
+    setSrsStudyList(isShuffle ? shuffleArray(unlearned) : unlearned);
+    setCardIndex(0);
+    setIsFlipped(false);
+    setSrsFinished(false);
   };
 
   const handlePrevCard = () => {
@@ -194,7 +310,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
 
   // Keyboard navigation for Flashcards
   useEffect(() => {
-    if (questIndex !== 1) return;
+    if (questMode !== 'SRS' || srsFinished) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
 
@@ -214,7 +330,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [questIndex, cardIndex, displayVocabList.length]);
+  }, [questMode, srsFinished, cardIndex, srsStudyList.length, currentVocab, masteredIds, learningIds]);
 
   // Pointer Drag & Swipe Handlers (Web & App)
   const handlePointerDown = (e: React.PointerEvent) => {
@@ -284,29 +400,64 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   };
 
   // -------------------------------------------------------------
-  // QUEST 2: GATEKEEPER 100% QUIZ (THUẦN TIẾNG VIỆT 100%)
+  // QUEST 2: GATEKEEPER 100% QUIZ (RANDOM A/B/C/D + ÔN CÂU SAI NHƯ QUEST 1)
   // -------------------------------------------------------------
+  const [quizAttemptSeed, setQuizAttemptSeed] = useState(0);
+  const [quizRoundSeed, setQuizRoundSeed] = useState(0);
+  const [quizStudyIndices, setQuizStudyIndices] = useState<number[] | null>(null);
+  const [masteredQuizIds, setMasteredQuizIds] = useState<Set<number>>(new Set());
+
   const gatekeeperQuestions = useMemo(() => {
-    // 1. Ưu tiên lấy trực tiếp câu hỏi chuẩn từ Firestore (milestone.gatekeeperQuiz)
-    if (Array.isArray(milestone.gatekeeperQuiz) && milestone.gatekeeperQuiz.length > 0) {
-      return milestone.gatekeeperQuiz;
+    const rawQuestions: Array<{ word: string; reading: string; correctAnswer: string; options: string[] }> = [];
+
+    // 0. Câu hỏi Admin cấu hình riêng cho Quest
+    if (Array.isArray(questData?.quizQuestions) && questData.quizQuestions.length > 0) {
+      questData.quizQuestions.forEach((q: any) => {
+        if (q.word && q.correctAnswer && Array.isArray(q.options) && q.options.length >= 2) {
+          const uniqueOpts = Array.from(new Set<string>([q.correctAnswer, ...q.options].map(String).filter(Boolean)));
+          rawQuestions.push({
+            word: q.word,
+            reading: q.reading || '',
+            correctAnswer: q.correctAnswer,
+            options: shuffleArray(uniqueOpts)
+          });
+        }
+      });
+      if (rawQuestions.length > 0) return shuffleArray(rawQuestions);
     }
 
-    // 2. Fallback sinh 10 câu hỏi thuần tiếng Việt từ vocabList
-    if (vocabList.length < 4) return [];
-    const pool = [...vocabList].sort(() => Math.random() - 0.5);
-    const selected = pool.slice(0, Math.min(10, pool.length));
+    // 1. Lấy câu hỏi chuẩn từ milestone.gatekeeperQuiz
+    if (Array.isArray(milestone.gatekeeperQuiz) && milestone.gatekeeperQuiz.length > 0) {
+      milestone.gatekeeperQuiz.forEach((q: any) => {
+        if (q.word && q.correctAnswer && Array.isArray(q.options)) {
+          const uniqueOpts = Array.from(new Set<string>([q.correctAnswer, ...q.options].map(String).filter(Boolean)));
+          rawQuestions.push({
+            word: q.word,
+            reading: q.reading || '',
+            correctAnswer: q.correctAnswer,
+            options: shuffleArray(uniqueOpts)
+          });
+        }
+      });
+      if (rawQuestions.length > 0) return shuffleArray(rawQuestions);
+    }
+
+    // 2. Fallback sinh câu hỏi từ srsCards hoặc vocabList (đảm bảo luôn có 4 đáp án A/B/C/D ngẫu nhiên)
+    const sourceItems = displayVocabList.length >= 4 ? displayVocabList : vocabList;
+    if (sourceItems.length < 2) return [];
+    const pool = shuffleArray(sourceItems);
+    const selected = pool.slice(0, Math.min(8, pool.length));
 
     return selected.map(item => {
       const correctVi = item.meaning_vi || item.vietnameseMeaning || 'Nghĩa từ vựng';
-      const wrongOptions = pool
-        .filter(w => w.id !== item.id)
-        .map(w => w.meaning_vi || w.vietnameseMeaning)
-        .filter(vi => vi && vi !== correctVi && !/^[A-Za-z\s,.\-()'\"]+$/.test(vi))
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 3);
-
-      const allOptions = [...wrongOptions, correctVi].sort(() => Math.random() - 0.5);
+      const wrongOptions = shuffleArray(
+        pool
+          .filter(w => w.id !== item.id)
+          .map(w => w.meaning_vi || w.vietnameseMeaning)
+          .filter((vi): vi is string => Boolean(vi) && vi !== correctVi)
+      );
+      const uniqueWrongs = Array.from(new Set(wrongOptions)).slice(0, 3);
+      const allOptions = shuffleArray([correctVi, ...uniqueWrongs]);
 
       return {
         word: item.term || item.kanji || item.reading,
@@ -315,86 +466,196 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
         options: allOptions
       };
     });
-  }, [milestone.gatekeeperQuiz, vocabList]);
+  }, [questData?.quizQuestions, milestone.gatekeeperQuiz, displayVocabList, vocabList, quizAttemptSeed]);
+
+  const activeQuizItems = useMemo(() => {
+    const idxs = quizStudyIndices && quizStudyIndices.length > 0
+      ? quizStudyIndices
+      : gatekeeperQuestions.map((_, i) => i);
+    return idxs
+      .map(origIdx => {
+        const q = gatekeeperQuestions[origIdx];
+        if (!q) return null;
+        return { ...q, origIdx, options: shuffleArray(q.options) };
+      })
+      .filter((x): x is { word: string; reading: string; correctAnswer: string; options: string[]; origIdx: number } => Boolean(x));
+  }, [gatekeeperQuestions, quizStudyIndices, quizRoundSeed]);
 
   const [quizIndex, setQuizIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [quizScore, setQuizScore] = useState(0);
   const [quizAnswered, setQuizAnswered] = useState(false);
   const [quizFinished, setQuizFinished] = useState(false);
+  const [quizCountdown, setQuizCountdown] = useState<number | null>(null);
 
-  const handleSelectQuizOption = (opt: string) => {
-    if (quizAnswered) return;
-    setSelectedAnswer(opt);
-    setQuizAnswered(true);
-    const currentQ = gatekeeperQuestions[quizIndex];
-    if (opt === currentQ.correctAnswer) {
-      setQuizScore(prev => prev + 1);
+  const handleFinishQuizRound = (overrideMastered?: Set<number>) => {
+    setQuizCountdown(null);
+    setQuizFinished(true);
+    const masteredSet = overrideMastered || masteredQuizIds;
+    if (gatekeeperQuestions.length > 0 && masteredSet.size >= gatekeeperQuestions.length) {
+      void triggerAutoSaveQuest();
     }
   };
 
-  const handleNextQuizQuestion = () => {
-    if (quizIndex < gatekeeperQuestions.length - 1) {
+  const handleNextQuizQuestion = (overrideMastered?: Set<number>) => {
+    setQuizCountdown(null);
+    if (quizIndex < activeQuizItems.length - 1) {
       setQuizIndex(prev => prev + 1);
       setSelectedAnswer(null);
       setQuizAnswered(false);
     } else {
-      setQuizFinished(true);
+      handleFinishQuizRound(overrideMastered);
     }
   };
 
+  const handleSelectQuizOption = (opt: string) => {
+    if (quizAnswered || !activeQuizItems[quizIndex]) return;
+    const currentQ = activeQuizItems[quizIndex];
+    setSelectedAnswer(opt);
+    setQuizAnswered(true);
+    const nextMastered = new Set(masteredQuizIds);
+    if (opt === currentQ.correctAnswer) {
+      nextMastered.add(currentQ.origIdx);
+    } else {
+      nextMastered.delete(currentQ.origIdx);
+    }
+    setMasteredQuizIds(nextMastered);
+    setQuizCountdown(5);
+  };
+
+  useEffect(() => {
+    if (questMode !== 'GATEKEEPER' || !quizAnswered || quizFinished || quizCountdown === null) return;
+    if (quizCountdown <= 0) {
+      handleNextQuizQuestion();
+      return;
+    }
+    const timer = setTimeout(() => {
+      setQuizCountdown(prev => (prev !== null ? prev - 1 : null));
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [questMode, quizAnswered, quizFinished, quizCountdown, quizIndex, masteredQuizIds, activeQuizItems.length]);
+
   const handleRetryQuiz = () => {
+    setQuizStudyIndices(null);
+    setMasteredQuizIds(new Set());
+    setQuizAttemptSeed(s => s + 1);
+    setQuizRoundSeed(s => s + 1);
     setQuizIndex(0);
     setSelectedAnswer(null);
     setQuizAnswered(false);
-    setQuizScore(0);
     setQuizFinished(false);
+    setQuizCountdown(null);
+  };
+
+  const handleRetryQuizWrong = () => {
+    const remaining = gatekeeperQuestions
+      .map((_, i) => i)
+      .filter(i => !masteredQuizIds.has(i));
+    if (remaining.length === 0) {
+      handleRetryQuiz();
+      return;
+    }
+    setQuizStudyIndices(remaining);
+    setQuizRoundSeed(s => s + 1);
+    setQuizIndex(0);
+    setSelectedAnswer(null);
+    setQuizAnswered(false);
+    setQuizFinished(false);
+    setQuizCountdown(null);
   };
 
   // -------------------------------------------------------------
-  // QUEST 3: GRAMMAR SCRAMBLE VỚI KÉO THẢ (DRAG & DROP)
+  // QUEST 3: GRAMMAR SCRAMBLE VỚI KÉO THẢ (ÔN CÂU SAI + 100% MỚI QUA)
   // -------------------------------------------------------------
-  const scrambleSentences = useMemo(() => {
+  const [scrambleAttemptSeed, setScrambleAttemptSeed] = useState(0);
+  const [scrambleStudyIndices, setScrambleStudyIndices] = useState<number[] | null>(null);
+  const [masteredScrambleIds, setMasteredScrambleIds] = useState<Set<number>>(new Set());
+
+  const allScrambleSentences = useMemo(() => {
     const list: Array<{ original: string; translation: string; tokens: string[] }> = [];
+    const seenOrig = new Set<string>();
 
-    // Từ grammar_items
-    grammarList.forEach(g => {
-      if (Array.isArray(g.examples)) {
-        g.examples.forEach((ex: any) => {
-          if (ex.sentence && ex.translation && ex.sentence.length >= 4 && ex.sentence.length <= 30) {
-            const clean = ex.sentence.replace(/。$/, '');
-            const rawTokens = clean.match(/[\u4e00-\u9faf]+|[ぁ-ん]+|[ァ-ヴー]+|[A-Za-z0-9]+|[^\s]/g) || [clean];
-            if (rawTokens.length >= 3 && rawTokens.length <= 7) {
-              list.push({
-                original: ex.sentence,
-                translation: ex.translation,
-                tokens: [...rawTokens].sort(() => Math.random() - 0.5)
-              });
-            }
-          }
-        });
-      }
-    });
+    const pushSentence = (orig: string, trans: string, presetTokens?: string[]) => {
+      const cleanOrig = String(orig || '').trim();
+      const cleanTrans = String(trans || '').trim();
+      if (!cleanOrig || !cleanTrans || seenOrig.has(cleanOrig)) return;
+      const cleanNoPunct = cleanOrig.replace(/[。？！?!]+$/, '');
+      const rawTokens = Array.isArray(presetTokens) && presetTokens.length >= 2
+        ? presetTokens
+        : cleanNoPunct.match(/[\u4e00-\u9faf]+[\u3041-\u309f]*|[ぁ-ん]+|[ァ-ヴー]+|[A-Za-z0-9]+/g) || [cleanNoPunct];
+      if (rawTokens.length < 2) return;
+      seenOrig.add(cleanOrig);
+      list.push({
+        original: cleanOrig,
+        translation: cleanTrans,
+        tokens: shuffleArray(rawTokens)
+      });
+    };
 
-    if (list.length === 0) {
-      list.push(
-        { original: '私は学生です。', translation: 'Tôi là học sinh / sinh viên.', tokens: ['です', '学生', '私は'].sort(() => Math.random() - 0.5) },
-        { original: '田中さんは先生です。', translation: 'Anh Tanaka là giáo viên.', tokens: ['先生', '田中さんは', 'です'].sort(() => Math.random() - 0.5) },
-        { original: 'これは私の本です。', translation: 'Cái này là sách của tôi.', tokens: ['本です', '私の', 'これは'].sort(() => Math.random() - 0.5) }
-      );
+    // 0. Câu ghép Admin cấu hình riêng cho Quest
+    if (Array.isArray(questData?.scrambleSentences) && questData.scrambleSentences.length > 0) {
+      questData.scrambleSentences.forEach((s: any) => {
+        pushSentence(s.original, s.translation, s.tokens);
+      });
     }
 
-    return list.slice(0, 3);
-  }, [grammarList]);
+    // 1. Từ grammar_items
+    if (list.length < 5) {
+      grammarList.forEach(g => {
+        if (Array.isArray(g.examples)) {
+          g.examples.forEach((ex: any) => {
+            if (list.length < 5 && ex.sentence && ex.translation && ex.sentence.length <= 45) {
+              pushSentence(ex.sentence, ex.translation);
+            }
+          });
+        }
+        if (list.length < 5 && g.masterExampleJp && g.masterExampleVi) {
+          pushSentence(g.masterExampleJp, g.masterExampleVi);
+        }
+      });
+    }
+
+    // 2. Bổ sung từ ví dụ của từ vựng trong mốc nếu chưa đủ 4 câu
+    if (list.length < 4) {
+      displayVocabList.forEach((v: any) => {
+        if (list.length < 5 && v.exampleSentenceJp && v.exampleSentenceVi) {
+          pushSentence(v.exampleSentenceJp, v.exampleSentenceVi);
+        }
+      });
+    }
+
+    if (list.length === 0) {
+      pushSentence('私は学生です。', 'Tôi là học sinh / sinh viên.', ['私は', '学生', 'です']);
+      pushSentence('田中さんは先生です。', 'Anh Tanaka là giáo viên.', ['田中さんは', '先生', 'です']);
+      pushSentence('これは私の本です。', 'Cái này là sách của tôi.', ['これは', '私の', '本です']);
+      pushSentence('初めまして、どうぞよろしくお願いします。', 'Rất hân hạnh được làm quen với bạn.', ['初めまして、', 'どうぞ', 'よろしく', 'お願いします']);
+    }
+
+    return list.slice(0, 6);
+  }, [questData?.scrambleSentences, grammarList, displayVocabList, scrambleAttemptSeed]);
+
+  const scrambleSentences = useMemo(() => {
+    const idxs = scrambleStudyIndices && scrambleStudyIndices.length > 0
+      ? scrambleStudyIndices
+      : allScrambleSentences.map((_, i) => i);
+    return idxs
+      .map(origIdx => {
+        const s = allScrambleSentences[origIdx];
+        if (!s) return null;
+        return { ...s, origIdx };
+      })
+      .filter((x): x is { original: string; translation: string; tokens: string[]; origIdx: number } => Boolean(x));
+  }, [allScrambleSentences, scrambleStudyIndices]);
 
   const [scrambleIndex, setScrambleIndex] = useState(0);
   const [userTokens, setUserTokens] = useState<string[]>([]);
   const [scrambleChecked, setScrambleChecked] = useState(false);
   const [scramblePassed, setScramblePassed] = useState(false);
-  const [scrambleCompletedCount, setScrambleCompletedCount] = useState(0);
+  const [scrambleFinished, setScrambleFinished] = useState(false);
+  const [scrambleCountdown, setScrambleCountdown] = useState<number | null>(null);
   const [draggedTokenIndex, setDraggedTokenIndex] = useState<number | null>(null);
 
   const currentScramble = scrambleSentences[scrambleIndex];
+  const scrambleCompletedCount = masteredScrambleIds.size;
 
   // Drag & drop handlers
   const handleDragStartToken = (e: React.DragEvent, index: number) => {
@@ -420,34 +681,98 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
     setUserTokens(prev => prev.filter((_, i) => i !== idx));
   };
 
-  const handleCheckScramble = () => {
-    if (!currentScramble) return;
-    const constructed = userTokens.join('');
-    const targetClean = currentScramble.original.replace(/。$/, '').replace(/\s+/g, '');
-    const userClean = constructed.replace(/。$/, '').replace(/\s+/g, '');
-
-    const correct = userClean === targetClean;
-    setScramblePassed(correct);
-    setScrambleChecked(true);
-
-    if (correct) {
-      setScrambleCompletedCount(prev => prev + 1);
+  const handleFinishScrambleRound = (overrideMastered?: Set<number>) => {
+    setScrambleCountdown(null);
+    setUserTokens([]);
+    setScrambleChecked(false);
+    setScramblePassed(false);
+    setScrambleFinished(true);
+    const masteredSet = overrideMastered || masteredScrambleIds;
+    if (allScrambleSentences.length > 0 && masteredSet.size >= allScrambleSentences.length) {
+      void triggerAutoSaveQuest();
     }
   };
 
-  const handleNextScramble = () => {
+  const handleNextScramble = (overrideMastered?: Set<number>) => {
+    setScrambleCountdown(null);
     setUserTokens([]);
     setScrambleChecked(false);
     setScramblePassed(false);
     if (scrambleIndex < scrambleSentences.length - 1) {
       setScrambleIndex(prev => prev + 1);
+    } else {
+      handleFinishScrambleRound(overrideMastered);
     }
+  };
+
+  const handleCheckScramble = () => {
+    if (!currentScramble) return;
+    const constructed = userTokens.join('');
+    const targetClean = currentScramble.original.replace(/[。？！?!]+$/g, '').replace(/[\s　]+/g, '');
+    const userClean = constructed.replace(/[。？！?!]+$/g, '').replace(/[\s　]+/g, '');
+
+    const correct = userClean === targetClean;
+    setScramblePassed(correct);
+    setScrambleChecked(true);
+    const nextMastered = new Set(masteredScrambleIds);
+    if (correct) {
+      nextMastered.add(currentScramble.origIdx);
+    } else {
+      nextMastered.delete(currentScramble.origIdx);
+    }
+    setMasteredScrambleIds(nextMastered);
+    setScrambleCountdown(3);
+  };
+
+  useEffect(() => {
+    if (questMode !== 'SCRAMBLE' || !scrambleChecked || scrambleFinished || scrambleCountdown === null) return;
+    if (scrambleCountdown <= 0) {
+      handleNextScramble();
+      return;
+    }
+    const timer = setTimeout(() => {
+      setScrambleCountdown(prev => (prev !== null ? prev - 1 : null));
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [questMode, scrambleChecked, scrambleFinished, scrambleCountdown, scrambleIndex, scrambleSentences.length, masteredScrambleIds]);
+
+  const handleRetryScrambleAll = () => {
+    setScrambleStudyIndices(null);
+    setMasteredScrambleIds(new Set());
+    setScrambleAttemptSeed(s => s + 1);
+    setScrambleIndex(0);
+    setUserTokens([]);
+    setScrambleChecked(false);
+    setScramblePassed(false);
+    setScrambleFinished(false);
+    setScrambleCountdown(null);
+  };
+
+  const handleRetryScrambleWrong = () => {
+    const failedIdx = allScrambleSentences
+      .map((_, i) => i)
+      .filter(i => !masteredScrambleIds.has(i));
+    if (failedIdx.length === 0) {
+      handleRetryScrambleAll();
+      return;
+    }
+    setScrambleStudyIndices(failedIdx);
+    setScrambleIndex(0);
+    setUserTokens([]);
+    setScrambleChecked(false);
+    setScramblePassed(false);
+    setScrambleFinished(false);
+    setScrambleCountdown(null);
   };
 
   // -------------------------------------------------------------
   // QUEST 4: HỘI THOẠI TÌNH HUỐNG 2 BÊN VỚI AI SENSEI (ROLEPLAY)
   // -------------------------------------------------------------
   const dialogues = useMemo(() => {
+    if (Array.isArray(questData?.roleplayDialogues) && questData.roleplayDialogues.length > 0) {
+      return questData.roleplayDialogues;
+    }
+
     if (Array.isArray(milestone.roleplayDialogues) && milestone.roleplayDialogues.length > 0) {
       return milestone.roleplayDialogues;
     }
@@ -476,7 +801,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
         requiredKeywords: ['です', 'ではありません', 'じゃありません']
       }
     ];
-  }, [milestone.roleplayDialogues]);
+  }, [questData?.roleplayDialogues, milestone.roleplayDialogues]);
 
   const [dialogueIndex, setDialogueIndex] = useState(0);
   const [learnerInput, setLearnerInput] = useState('');
@@ -484,7 +809,10 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   const [dialoguePassed, setDialoguePassed] = useState(false);
   const [showSample, setShowSample] = useState(false);
   const [showPartnerVi, setShowPartnerVi] = useState(false);
-  const [completedDialoguesCount, setCompletedDialoguesCount] = useState(0);
+  const [passedDialogueIndices, setPassedDialogueIndices] = useState<Set<number>>(new Set());
+  const [roleplayFinished, setRoleplayFinished] = useState(false);
+  const [pasteWarning, setPasteWarning] = useState<string | null>(null);
+  const completedDialoguesCount = passedDialogueIndices.size;
 
   // Stage 3 (P2): AI Sensei Whitelist evaluation & Human-in-the-loop Appeal states
   const [evaluatingSensei, setEvaluatingSensei] = useState(false);
@@ -499,13 +827,14 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   const handleEvaluateDialogue = async () => {
     if (!learnerInput.trim() || !currentDialogue || evaluatingSensei) return;
     const input = learnerInput.trim();
+    setPasteWarning(null);
 
     setEvaluatingSensei(true);
     setShowAppealForm(false);
     setAppealSubmittedId(null);
 
     try {
-      const whitelistVocab = vocabList
+      const whitelistVocab = (displayVocabList.length > 0 ? displayVocabList : vocabList)
         .map(v => v.term || v.kanji || v.reading)
         .filter((t): t is string => Boolean(t))
         .slice(0, 40);
@@ -522,7 +851,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
         learnerPrompt: currentDialogue.learnerPrompt,
         sampleAnswer: currentDialogue.sampleAnswer,
         studentInput: input,
-        requiredKeywords: currentDialogue.requiredKeywords || ['です'],
+        requiredKeywords: currentDialogue.requiredKeywords || [],
         whitelistVocabulary: whitelistVocab,
         whitelistGrammar: whitelistGram
       });
@@ -531,11 +860,31 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
       setDialogueFeedback(result.pedagogicalFeedback);
       setDialoguePassed(result.passed);
       if (result.passed) {
-        setCompletedDialoguesCount(prev => prev + 1);
+        const nextPassed = new Set(passedDialogueIndices).add(dialogueIndex);
+        setPassedDialogueIndices(nextPassed);
+        if (nextPassed.size >= dialogues.length && dialogueIndex >= dialogues.length - 1) {
+          void triggerAutoSaveQuest();
+        }
       }
     } finally {
       setEvaluatingSensei(false);
     }
+  };
+
+  const handleRetryRoleplay = () => {
+    setDialogueIndex(0);
+    setLearnerInput('');
+    setDialogueFeedback(null);
+    setDialoguePassed(false);
+    setSenseiResult(null);
+    setShowAppealForm(false);
+    setAppealReason('');
+    setAppealSubmittedId(null);
+    setShowSample(false);
+    setShowPartnerVi(false);
+    setPassedDialogueIndices(new Set());
+    setRoleplayFinished(false);
+    setPasteWarning(null);
   };
 
   const handleSubmitAppeal = async () => {
@@ -580,8 +929,10 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
   // Submit quest completion
   const handleCompleteCurrentQuest = async () => {
     setSubmitting(true);
-    const xp = questIndex === 1 ? 30 : questIndex === 2 ? 35 : questIndex === 3 ? 40 : 50;
-    const ap = questIndex === 1 ? 15 : questIndex === 2 ? 20 : questIndex === 3 ? 25 : 30;
+    const defaultXp = questMode === 'SRS' ? 30 : questMode === 'GATEKEEPER' ? 35 : questMode === 'SCRAMBLE' ? 40 : 50;
+    const defaultAp = questMode === 'SRS' ? 15 : questMode === 'GATEKEEPER' ? 20 : questMode === 'SCRAMBLE' ? 25 : 30;
+    const xp = Number(questData?.xpReward ?? defaultXp);
+    const ap = Number(questData?.activePointsReward ?? defaultAp);
     try {
       await onCompleteQuest(questIndex, xp, ap);
       setIsQuestDone(true);
@@ -594,7 +945,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
     return (
       <div style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: 48, textAlign: 'center', border: '1px solid #e2e8f0' }}>
         <Sparkles size={32} style={{ color: '#c53d32', margin: '0 auto 12px', display: 'block' }} />
-        <p style={{ color: '#64748b', fontWeight: 600 }}>Đang tải bài học từ Firestore...</p>
+        <p style={{ color: '#64748b', fontWeight: 600 }}>Đang tải bài học...</p>
       </div>
     );
   }
@@ -868,6 +1219,46 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
         .dark .roadmap-btn-send:hover {
           background-color: #047857 !important;
         }
+        .dark .roadmap-sensei-result-pass {
+          background-color: rgba(6, 78, 59, 0.35) !important;
+          border-color: #059669 !important;
+          color: #d1fae5 !important;
+        }
+        .dark .roadmap-sensei-result-warn {
+          background-color: rgba(120, 53, 15, 0.35) !important;
+          border-color: #d97706 !important;
+          color: #fef3c7 !important;
+        }
+        .dark .roadmap-sensei-particles {
+          background-color: rgba(127, 29, 29, 0.45) !important;
+          border-color: #be123c !important;
+          color: #fecdd3 !important;
+        }
+        .dark .roadmap-sensei-suggestion {
+          background-color: #0f172a !important;
+          border-color: #334155 !important;
+          color: #f8fafc !important;
+        }
+        .dark .roadmap-sensei-appeal-form {
+          background-color: #0f172a !important;
+          border-color: #b45309 !important;
+          color: #f8fafc !important;
+        }
+        .dark .roadmap-sensei-appeal-form textarea {
+          background-color: #020617 !important;
+          border-color: #334155 !important;
+          color: #f8fafc !important;
+        }
+        .dark .roadmap-sensei-appeal-submitted {
+          background-color: rgba(30, 58, 138, 0.4) !important;
+          border-color: #2563eb !important;
+          color: #bfdbfe !important;
+        }
+        .dark .roadmap-result-panel {
+          background-color: #0f172a !important;
+          border-color: #1e293b !important;
+          color: #f8fafc !important;
+        }
       `}</style>
 
       {/* Top action header */}
@@ -913,28 +1304,28 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
               gap: 5
             }}
           >
-            {questIndex === 1 && (
+            {questMode === 'SRS' && (
               <>
                 <Layers size={14} />
-                <span>Thẻ Ghi Nhớ (SRS Flashcards)</span>
+                <span>{questData?.title || 'Thẻ Ghi Nhớ (SRS Flashcards)'}</span>
               </>
             )}
-            {questIndex === 2 && (
+            {questMode === 'GATEKEEPER' && (
               <>
                 <Shield size={14} />
-                <span>Cổng Phản Xạ 100% (Gatekeeper)</span>
+                <span>{questData?.title || 'Cổng Phản Xạ 100% (Gatekeeper)'}</span>
               </>
             )}
-            {questIndex === 3 && (
+            {questMode === 'SCRAMBLE' && (
               <>
                 <Puzzle size={14} />
-                <span>Ngữ Pháp Ghép Câu Kéo Thả</span>
+                <span>{questData?.title || 'Ngữ Pháp Ghép Câu Kéo Thả'}</span>
               </>
             )}
-            {questIndex === 4 && (
+            {questMode === 'ROLEPLAY' && (
               <>
                 <MessageCircle size={14} />
-                <span>Đối Thoại Tình Huống AI Sensei</span>
+                <span>{questData?.title || 'Đối Thoại Tình Huống AI Sensei'}</span>
               </>
             )}
           </span>
@@ -978,10 +1369,10 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
         >
           <Trophy size={48} style={{ color: '#eab308', margin: '0 auto 16px', display: 'block' }} />
           <h2 className="roadmap-success-title" style={{ fontSize: 22, fontWeight: 900, color: '#065f46', marginBottom: 8 }}>
-            XUẤT SẮC! BẠN ĐÃ HOÀN THÀNH NHIỆM VỤ {questIndex}!
+            HOÀN THÀNH NHIỆM VỤ {questIndex}!
           </h2>
-          <p className="roadmap-success-desc" style={{ color: '#475569', fontSize: 14, maxWidth: 500, margin: '0 auto 24px auto', lineHeight: 1.6 }}>
-            Dữ liệu đã được lưu trực tiếp vào Firestore. Điểm năng động, kinh nghiệm XP và chuỗi ngày học Streak đã được cộng vào tài khoản của bạn!
+          <p className="roadmap-success-desc" style={{ color: '#475569', fontSize: 14, maxWidth: 460, margin: '0 auto 24px auto', lineHeight: 1.5 }}>
+            Tiến trình, XP và Streak đã được cập nhật.
           </p>
 
           <button
@@ -1004,370 +1395,513 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
       ) : (
         <>
           {/* ========================================================
-              QUEST 1: SRS FLASHCARDS (TRỘN THẺ, VUỐT TRÁI/PHẢI, 100% VIỆT HÓA)
+              QUEST 1: SRS FLASHCARDS (HỌC HẾT THẺ MỚI TỰ TRẢ KẾT QUẢ)
               ======================================================== */}
-          {questIndex === 1 && (
+          {questMode === 'SRS' && (
             <div className="roadmap-runner-card" style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
-              {/* Controls bar */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18, flexWrap: 'wrap', gap: 10 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <span className="roadmap-runner-title" style={{ fontSize: 14, fontWeight: 800, color: '#0f172a' }}>
-                    Thẻ {cardIndex + 1} / {displayVocabList.length || 1}
-                  </span>
-
-                  {/* Shuffle Button */}
-                  <button
-                    onClick={() => {
-                      setIsShuffle(!isShuffle);
-                      setCardIndex(0);
-                      setIsFlipped(false);
-                    }}
-                    className={isShuffle ? '' : 'roadmap-shuffle-btn-inactive'}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 4,
-                      padding: '4px 12px',
-                      borderRadius: 14,
-                      border: '1px solid #cbd5e1',
-                      backgroundColor: isShuffle ? '#c53d32' : '#f8fafc',
-                      color: isShuffle ? '#ffffff' : '#334155',
-                      fontSize: 12,
-                      fontWeight: 700,
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {isShuffle ? <Shuffle size={12} /> : <ArrowUpDown size={12} />}
-                    <span>{isShuffle ? 'Ngẫu nhiên' : 'Thứ tự bài'}</span>
-                  </button>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <span style={{ fontSize: 13, color: '#16a34a', fontWeight: 800 }}>
-                    Đã nhớ: {masteredCards.size}
-                  </span>
-                  <span style={{ fontSize: 13, color: '#b45309', fontWeight: 800 }}>
-                    Cần ôn: {learningCards.size}
-                  </span>
-
-                  <button
-                    onClick={handleCompleteCurrentQuest}
-                    disabled={submitting || masteredCards.size === 0}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 6,
-                      padding: '7px 16px',
-                      borderRadius: 8,
-                      backgroundColor: masteredCards.size > 0 ? '#10b981' : '#94a3b8',
-                      color: '#ffffff',
-                      border: 'none',
-                      fontWeight: 800,
-                      fontSize: 13,
-                      cursor: masteredCards.size > 0 ? 'pointer' : 'not-allowed'
-                    }}
-                  >
-                    <CheckCircle2 size={15} />
-                    <span>Hoàn thành Quest 1</span>
-                  </button>
-                </div>
-              </div>
-
-              {currentVocab ? (
-                <div>
-                  {/* Swipeable 3D Flip Card - Đồng bộ phong cách Thẻ từ vựng VocabPage */}
-                  <div
-                    className={`roadmap-flashcard-box ${isFlipped ? 'is-flipped' : ''}`}
-                    onPointerDown={handlePointerDown}
-                    onPointerMove={handlePointerMove}
-                    onPointerUp={handlePointerUp}
-                    onPointerCancel={handlePointerCancel}
-                    style={{
-                      minHeight: 280,
-                      backgroundColor: isFlipped ? '#fcfbf9' : '#ffffff',
-                      border: isFlipped ? '2px solid #c53d32' : '2px solid #e2e8f0',
-                      borderRadius: 16,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      padding: '36px 24px',
-                      cursor: isDragging ? 'grabbing' : 'pointer',
-                      position: 'relative',
-                      boxShadow: 'var(--shadow-md)',
-                      textAlign: 'center',
-                      marginBottom: 16,
-                      userSelect: 'none',
-                      touchAction: 'pan-y',
-                      transform: `translateX(${dragX}px) rotate(${dragX * 0.04}deg)`,
-                      transition: isDragging ? 'none' : 'transform 0.25s ease-out'
-                    }}
-                  >
-                    {/* Badge when dragging */}
-                    {dragX > 20 && (
-                      <span style={{ position: 'absolute', top: 16, left: 16, backgroundColor: '#16a34a', color: '#ffffff', padding: '4px 10px', borderRadius: 6, fontSize: 12, fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: 4, zIndex: 10, pointerEvents: 'none' }}>
-                        <Check size={13} strokeWidth={3} /> ĐÃ HỌC
+              {!srsFinished ? (
+                <>
+                  {/* Controls bar */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18, flexWrap: 'wrap', gap: 10 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                      <span className="roadmap-runner-title" style={{ fontSize: 14, fontWeight: 800, color: '#0f172a' }}>
+                        Thẻ {cardIndex + 1} / {srsStudyList.length || 1}
                       </span>
-                    )}
-                    {dragX < -20 && (
-                      <span style={{ position: 'absolute', top: 16, right: 16, backgroundColor: '#dc2626', color: '#ffffff', padding: '4px 10px', borderRadius: 6, fontSize: 12, fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: 4, zIndex: 10, pointerEvents: 'none' }}>
-                        ✕ CHƯA HỌC
+
+                      {/* Shuffle Button */}
+                      <button
+                        onClick={() => setIsShuffle(!isShuffle)}
+                        className={isShuffle ? '' : 'roadmap-shuffle-btn-inactive'}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 4,
+                          padding: '4px 12px',
+                          borderRadius: 14,
+                          border: '1px solid #cbd5e1',
+                          backgroundColor: isShuffle ? '#c53d32' : '#f8fafc',
+                          color: isShuffle ? '#ffffff' : '#334155',
+                          fontSize: 12,
+                          fontWeight: 700,
+                          cursor: 'pointer'
+                        }}
+                      >
+                        {isShuffle ? <Shuffle size={12} /> : <ArrowUpDown size={12} />}
+                        <span>{isShuffle ? 'Ngẫu nhiên' : 'Thứ tự bài'}</span>
+                      </button>
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                      <span style={{ fontSize: 13, color: '#16a34a', fontWeight: 800 }}>
+                        Đã thuộc: {masteredIds.size}/{displayVocabList.length}
                       </span>
-                    )}
-
-                    {/* Fuda Seal Tag & Sound Button */}
-                    <span
-                      className={isFlipped ? 'roadmap-flashcard-fuda-back' : 'roadmap-flashcard-fuda-front'}
-                      style={{
-                        position: 'absolute',
-                        top: 14,
-                        left: 16,
-                        fontSize: 11,
-                        fontWeight: 900,
-                        color: isFlipped ? '#2563eb' : '#c53d32',
-                        background: isFlipped ? 'rgba(248, 250, 255, 0.9)' : 'rgba(253, 242, 240, 0.9)',
-                        border: isFlipped ? '1px solid #bfdbfe' : '1px solid #f3d5d2',
-                        padding: '2px 8px',
-                        borderRadius: 4,
-                        fontFamily: 'serif'
-                      }}
-                    >
-                      {isFlipped ? '意味 · Ý NGHĨA' : `語 · TỪ VỰNG (${cardIndex + 1}/${displayVocabList.length})`}
-                    </span>
-
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        speakJapanese(currentVocab.term || currentVocab.reading);
-                      }}
-                      title="Phát âm"
-                      className="roadmap-flashcard-sound-btn"
-                      style={{
-                        position: 'absolute',
-                        top: 12,
-                        right: 14,
-                        background: '#faf8f5',
-                        border: '1px solid #d6d3d1',
-                        padding: '5px 12px',
-                        borderRadius: 20,
-                        cursor: 'pointer',
-                        fontSize: 12,
-                        fontWeight: 600,
-                        color: '#44403c',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: 5
-                      }}
-                    >
-                      <Volume2 size={13} />
-                      <span>Phát âm</span>
-                    </button>
-
-                    <span style={{ position: 'absolute', bottom: 12, right: 16, fontSize: 11.5, color: '#94a3b8', fontWeight: 600 }}>
-                      <RotateCw size={13} style={{ verticalAlign: 'middle', marginRight: 4 }} />
-                      Chạm để lật (Phím Space)
-                    </span>
-
-                    {!isFlipped ? (
-                      /* FRONT: JAPANESE */
-                      <div style={{ width: '100%', maxWidth: 500, margin: 'auto' }}>
-                        <div className="roadmap-flashcard-reading" style={{ fontSize: 16, color: '#78716c', marginBottom: 6, fontWeight: 700, letterSpacing: '0.5px' }}>
-                          {currentVocab.reading || currentVocab.hiragana}
-                        </div>
-                        <div
-                          className="roadmap-flashcard-term"
+                      <span style={{ fontSize: 13, color: '#b45309', fontWeight: 800 }}>
+                        Cần ôn: {Math.max(0, displayVocabList.length - masteredIds.size)}
+                      </span>
+                      {srsStudyList.length > 0 && (
+                        <button
+                          type="button"
+                          onClick={handleFinishSrsRound}
+                          className="roadmap-btn-back"
                           style={{
-                            fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif",
-                            fontSize: 38,
-                            fontWeight: 900,
-                            color: '#1c1917',
-                            marginBottom: 10,
-                            letterSpacing: '1px'
+                            padding: '4px 10px',
+                            borderRadius: 8,
+                            border: '1px solid #cbd5e1',
+                            backgroundColor: '#f8fafc',
+                            color: '#334155',
+                            fontSize: 12,
+                            fontWeight: 700,
+                            cursor: 'pointer'
                           }}
                         >
-                          {currentVocab.term || currentVocab.kanji || currentVocab.reading}
-                        </div>
-                        {currentVocab.part_of_speech && (
-                          <span className="roadmap-flashcard-pos" style={{ fontSize: 11, padding: '2px 10px', borderRadius: 4, backgroundColor: '#f5f5f4', color: '#57534e', fontWeight: 700, border: '1px solid #e7e5e4' }}>
-                            {currentVocab.part_of_speech}
+                          Tổng kết lượt
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Progress Bar */}
+                  <div style={{ width: '100%', height: 5, backgroundColor: '#e2e8f0', borderRadius: 999, marginBottom: 16, overflow: 'hidden' }}>
+                    <div
+                      style={{
+                        width: `${((cardIndex + 1) / Math.max(1, srsStudyList.length)) * 100}%`,
+                        height: '100%',
+                        backgroundColor: '#10b981',
+                        transition: 'width 0.25s ease'
+                      }}
+                    />
+                  </div>
+
+                  {currentVocab ? (
+                    <div>
+                      {/* Swipeable 3D Flip Card - Đồng bộ phong cách Thẻ từ vựng VocabPage */}
+                      <div
+                        className={`roadmap-flashcard-box ${isFlipped ? 'is-flipped' : ''}`}
+                        onPointerDown={handlePointerDown}
+                        onPointerMove={handlePointerMove}
+                        onPointerUp={handlePointerUp}
+                        onPointerCancel={handlePointerCancel}
+                        style={{
+                          minHeight: 280,
+                          backgroundColor: isFlipped ? '#fcfbf9' : '#ffffff',
+                          border: isFlipped ? '2px solid #c53d32' : '2px solid #e2e8f0',
+                          borderRadius: 16,
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          padding: '36px 24px',
+                          cursor: isDragging ? 'grabbing' : 'pointer',
+                          position: 'relative',
+                          boxShadow: 'var(--shadow-md)',
+                          textAlign: 'center',
+                          marginBottom: 16,
+                          userSelect: 'none',
+                          touchAction: 'pan-y',
+                          transform: `translateX(${dragX}px) rotate(${dragX * 0.04}deg)`,
+                          transition: isDragging ? 'none' : 'transform 0.25s ease-out'
+                        }}
+                      >
+                        {/* Badge when dragging */}
+                        {dragX > 20 && (
+                          <span style={{ position: 'absolute', top: 16, left: 16, backgroundColor: '#16a34a', color: '#ffffff', padding: '4px 10px', borderRadius: 6, fontSize: 12, fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: 4, zIndex: 10, pointerEvents: 'none' }}>
+                            <Check size={13} strokeWidth={3} /> ĐÃ THUỘC
                           </span>
                         )}
-                      </div>
-                    ) : (
-                      /* BACK: PURE VIETNAMESE */
-                      <div style={{ width: '100%', maxWidth: 500, margin: 'auto' }}>
-                        <div className="roadmap-flashcard-meaning" style={{ fontSize: 26, fontWeight: 900, color: '#9c2a2a', marginBottom: 6 }}>
-                          {currentVocab.meaning_vi || currentVocab.vietnameseMeaning}
-                        </div>
-                        {currentVocab.sinoVietnamese && (
-                          <div className="roadmap-flashcard-sino" style={{ fontSize: 13, color: '#78716c', marginBottom: 12, fontWeight: 700 }}>
-                            〔 {currentVocab.sinoVietnamese} 〕
+                        {dragX < -20 && (
+                          <span style={{ position: 'absolute', top: 16, right: 16, backgroundColor: '#dc2626', color: '#ffffff', padding: '4px 10px', borderRadius: 6, fontSize: 12, fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: 4, zIndex: 10, pointerEvents: 'none' }}>
+                            ✕ CẦN ÔN
+                          </span>
+                        )}
+
+                        {/* Fuda Seal Tag & Sound Button */}
+                        <span
+                          className={isFlipped ? 'roadmap-flashcard-fuda-back' : 'roadmap-flashcard-fuda-front'}
+                          style={{
+                            position: 'absolute',
+                            top: 14,
+                            left: 16,
+                            fontSize: 11,
+                            fontWeight: 900,
+                            color: isFlipped ? '#2563eb' : '#c53d32',
+                            background: isFlipped ? 'rgba(248, 250, 255, 0.9)' : 'rgba(253, 242, 240, 0.9)',
+                            border: isFlipped ? '1px solid #bfdbfe' : '1px solid #f3d5d2',
+                            padding: '2px 8px',
+                            borderRadius: 4,
+                            fontFamily: 'serif'
+                          }}
+                        >
+                          {isFlipped
+                            ? '意味 · Ý NGHĨA'
+                            : `${currentVocab.itemType === 'KANJI' ? '漢 · CHỮ HÁN' : currentVocab.itemType === 'GRAMMAR' ? '文 · NGỮ PHÁP' : '語 · TỪ VỰNG'} (${cardIndex + 1}/${srsStudyList.length})`}
+                        </span>
+
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            speakJapanese(currentVocab.term || currentVocab.reading);
+                          }}
+                          title="Phát âm"
+                          className="roadmap-flashcard-sound-btn"
+                          style={{
+                            position: 'absolute',
+                            top: 12,
+                            right: 14,
+                            background: '#faf8f5',
+                            border: '1px solid #d6d3d1',
+                            padding: '5px 12px',
+                            borderRadius: 20,
+                            cursor: 'pointer',
+                            fontSize: 12,
+                            fontWeight: 600,
+                            color: '#44403c',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 5
+                          }}
+                        >
+                          <Volume2 size={13} />
+                          <span>Phát âm</span>
+                        </button>
+
+                        <span style={{ position: 'absolute', bottom: 12, right: 16, fontSize: 11.5, color: '#94a3b8', fontWeight: 600 }}>
+                          <RotateCw size={13} style={{ verticalAlign: 'middle', marginRight: 4 }} />
+                          Chạm để lật (Phím Space)
+                        </span>
+
+                        {!isFlipped ? (
+                          <div style={{ width: '100%', maxWidth: 500, margin: 'auto' }}>
+                            <div className="roadmap-flashcard-reading" style={{ fontSize: 16, color: '#78716c', marginBottom: 6, fontWeight: 700, letterSpacing: '0.5px' }}>
+                              {currentVocab.reading || currentVocab.hiragana}
+                            </div>
+                            <div
+                              className="roadmap-flashcard-term"
+                              style={{
+                                fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif",
+                                fontSize: 38,
+                                fontWeight: 900,
+                                color: '#1c1917',
+                                marginBottom: 10,
+                                letterSpacing: '1px'
+                              }}
+                            >
+                              {currentVocab.term || currentVocab.kanji || currentVocab.reading}
+                            </div>
+                            {currentVocab.part_of_speech && (
+                              <span className="roadmap-flashcard-pos" style={{ fontSize: 11, padding: '2px 10px', borderRadius: 4, backgroundColor: '#f5f5f4', color: '#57534e', fontWeight: 700, border: '1px solid #e7e5e4' }}>
+                                {currentVocab.part_of_speech}
+                              </span>
+                            )}
+                          </div>
+                        ) : (
+                          <div style={{ width: '100%', maxWidth: 500, margin: 'auto' }}>
+                            <div className="roadmap-flashcard-meaning" style={{ fontSize: 26, fontWeight: 900, color: '#9c2a2a', marginBottom: 6 }}>
+                              {currentVocab.meaning_vi || currentVocab.vietnameseMeaning}
+                            </div>
+                            {currentVocab.sinoVietnamese && (
+                              <div className="roadmap-flashcard-sino" style={{ fontSize: 13, color: '#78716c', marginBottom: 12, fontWeight: 700 }}>
+                                〔 {currentVocab.sinoVietnamese} 〕
+                              </div>
+                            )}
+                            {currentVocab.exampleSentenceJp && (
+                              <div
+                                className="roadmap-flashcard-example-box"
+                                style={{
+                                  background: 'rgba(250, 248, 245, 0.95)',
+                                  padding: '12px 16px',
+                                  borderRadius: 10,
+                                  border: '1px solid #ebe7df',
+                                  borderLeft: '3px solid #c53d32',
+                                  textAlign: 'left',
+                                  marginTop: 10,
+                                  width: '100%',
+                                  boxSizing: 'border-box'
+                                }}
+                              >
+                                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 6, marginBottom: 3 }}>
+                                  <div className="roadmap-flashcard-example-jp" style={{ fontSize: 13.5, color: '#1c2536', fontWeight: 700 }}>
+                                    {currentVocab.exampleSentenceJp}
+                                  </div>
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      speakJapanese(currentVocab.exampleSentenceJp || '');
+                                    }}
+                                    style={{ background: 'transparent', border: 'none', padding: 0, color: '#78716c', cursor: 'pointer' }}
+                                  >
+                                    <Volume2 size={13} />
+                                  </button>
+                                </div>
+                                <div className="roadmap-flashcard-example-vi" style={{ fontSize: 12, color: '#57534e' }}>
+                                  {currentVocab.exampleSentenceVi || 'Câu ví dụ tiếng Nhật chuẩn.'}
+                                </div>
+                              </div>
+                            )}
                           </div>
                         )}
-                        {currentVocab.exampleSentenceJp && (
-                          <div
-                            className="roadmap-flashcard-example-box"
+                      </div>
+
+                      {/* Các nút điều hướng mũi tên & Chỉ dẫn */}
+                      <div>
+                        <div style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: 20,
+                          marginTop: 20
+                        }}>
+                          <button
+                            onClick={() => handleNextCard(false)}
+                            title="Mũi tên trái: Cần ôn lại (←)"
+                            aria-label="Cần ôn lại"
+                            className="transition-all hover:scale-105 active:scale-95"
                             style={{
-                              background: 'rgba(250, 248, 245, 0.95)',
-                              padding: '12px 16px',
-                              borderRadius: 10,
-                              border: '1px solid #ebe7df',
-                              borderLeft: '3px solid #c53d32',
-                              textAlign: 'left',
-                              marginTop: 10,
-                              width: '100%',
-                              boxSizing: 'border-box'
+                              padding: '10px 20px',
+                              borderRadius: 999,
+                              background: 'rgba(239, 68, 68, 0.08)',
+                              color: '#ef4444',
+                              border: '1.5px solid rgba(239, 68, 68, 0.25)',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              gap: 6,
+                              fontWeight: 800,
+                              fontSize: 13.5,
+                              cursor: 'pointer'
                             }}
                           >
-                            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 6, marginBottom: 3 }}>
-                              <div className="roadmap-flashcard-example-jp" style={{ fontSize: 13.5, color: '#1c2536', fontWeight: 700 }}>
-                                {currentVocab.exampleSentenceJp}
-                              </div>
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  speakJapanese(currentVocab.exampleSentenceJp || '');
-                                }}
-                                style={{ background: 'transparent', border: 'none', padding: 0, color: '#78716c', cursor: 'pointer' }}
-                              >
-                                <Volume2 size={13} />
-                              </button>
-                            </div>
-                            <div className="roadmap-flashcard-example-vi" style={{ fontSize: 12, color: '#57534e' }}>
-                              {currentVocab.exampleSentenceVi || 'Câu ví dụ tiếng Nhật chuẩn.'}
-                            </div>
+                            <ChevronLeft size={18} strokeWidth={2.5} />
+                            <span>Cần ôn lại</span>
+                          </button>
+
+                          <button
+                            onClick={() => handleNextCard(true)}
+                            title="Mũi tên phải: Đã thuộc (→)"
+                            aria-label="Đã thuộc"
+                            className="transition-all hover:scale-105 active:scale-95"
+                            style={{
+                              padding: '10px 20px',
+                              borderRadius: 999,
+                              background: 'rgba(34, 197, 94, 0.1)',
+                              color: '#16a34a',
+                              border: '1.5px solid rgba(34, 197, 94, 0.3)',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              gap: 6,
+                              fontWeight: 800,
+                              fontSize: 13.5,
+                              cursor: 'pointer'
+                            }}
+                          >
+                            <span>Đã thuộc</span>
+                            <ChevronRight size={18} strokeWidth={2.5} />
+                          </button>
+                        </div>
+
+                        <div className="roadmap-runner-muted" style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: 8,
+                          marginTop: 12,
+                          fontSize: 12,
+                          color: '#64748b',
+                          textAlign: 'center',
+                          flexWrap: 'wrap'
+                        }}>
+                          <span>Chạm lật (Space)</span>
+                          <span style={{ color: '#94a3b8' }}>·</span>
+                          <span>Vuốt / ← Cần ôn</span>
+                          <span style={{ color: '#94a3b8' }}>·</span>
+                          <span>Vuốt / → Đã thuộc</span>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="roadmap-runner-muted" style={{ textAlign: 'center', padding: 32, color: '#64748b' }}>
+                      Đang tải thẻ SRS...
+                    </div>
+                  )}
+                </>
+              ) : (
+                /* Màn hình Tổng kết Quest 1 */
+                (() => {
+                  const srsTotal = displayVocabList.length;
+                  const srsRemaining = Math.max(0, srsTotal - masteredIds.size);
+                  const srsFullPass = srsTotal > 0 && masteredIds.size >= srsTotal;
+                  return (
+                    <div style={{ maxWidth: 460, margin: '8px auto', textAlign: 'center', padding: '12px 8px' }}>
+                      <div style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: 48,
+                        height: 48,
+                        borderRadius: 24,
+                        background: srsFullPass ? 'rgba(16, 185, 129, 0.12)' : 'rgba(245, 158, 11, 0.12)',
+                        color: srsFullPass ? '#10b981' : '#d97706',
+                        fontSize: 22,
+                        fontWeight: 900,
+                        marginBottom: 10
+                      }}>
+                        {srsFullPass ? '完' : '復'}
+                      </div>
+                      <h3 className="roadmap-runner-title" style={{ fontSize: 20, fontWeight: 900, color: '#0f172a', marginBottom: 6 }}>
+                        {srsFullPass ? 'Đạt 100% Quest 1!' : 'Tổng kết lượt học SRS'}
+                      </h3>
+                      <p className="roadmap-runner-muted" style={{ fontSize: 13, color: '#64748b', marginBottom: 16 }}>
+                        {srsFullPass || questSaved
+                          ? 'Đã tự động lưu và mở khóa Quest 2.'
+                          : 'Đạt 100% thẻ để mở khóa Quest 2.'}
+                      </p>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, margin: '18px 0' }}>
+                        <div style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: 12, padding: 14 }}>
+                          <div style={{ fontSize: 11, fontWeight: 800, color: '#10b981' }}>覚えた · ĐÃ THUỘC</div>
+                          <div style={{ fontSize: 28, fontWeight: 900, color: '#10b981', marginTop: 4 }}>
+                            {masteredIds.size}
                           </div>
+                        </div>
+
+                        <div style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.25)', borderRadius: 12, padding: 14 }}>
+                          <div style={{ fontSize: 11, fontWeight: 800, color: '#ef4444' }}>まだ · CẦN ÔN</div>
+                          <div style={{ fontSize: 28, fontWeight: 900, color: '#ef4444', marginTop: 4 }}>
+                            {srsRemaining}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                        {srsRemaining > 0 && (
+                          <button
+                            onClick={handleRestartSrsUnlearned}
+                            style={{
+                              padding: '11px 16px',
+                              background: '#c53d32',
+                              color: '#ffffff',
+                              border: 'none',
+                              borderRadius: 10,
+                              fontWeight: 800,
+                              fontSize: 14,
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              gap: 8
+                            }}
+                          >
+                            <RotateCcw size={16} /> Ôn lại thẻ chưa thuộc ({srsRemaining} thẻ)
+                          </button>
+                        )}
+
+                        <button
+                          onClick={handleRestartSrsAll}
+                          className="roadmap-btn-back"
+                          style={{
+                            padding: '11px 16px',
+                            background: '#f1f5f9',
+                            color: '#0f172a',
+                            border: '1px solid #cbd5e1',
+                            borderRadius: 10,
+                            fontWeight: 800,
+                            fontSize: 14,
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: 8
+                          }}
+                        >
+                          <RotateCcw size={16} /> Làm lại tất cả ({srsTotal} thẻ)
+                        </button>
+
+                        {(srsFullPass || questSaved) && (
+                          <button
+                            onClick={handleBack}
+                            style={{
+                              padding: '12px 16px',
+                              background: '#10b981',
+                              color: '#ffffff',
+                              border: 'none',
+                              borderRadius: 10,
+                              fontWeight: 800,
+                              fontSize: 14,
+                              cursor: 'pointer',
+                              marginTop: 4
+                            }}
+                          >
+                            Tiếp tục nhiệm vụ tiếp theo ➔
+                          </button>
                         )}
                       </div>
-                    )}
-                  </div>
-
-                  {/* Các nút điều hướng mũi tên & Chỉ dẫn duy nhất */}
-                  <div>
-                    <div style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: 28,
-                      marginTop: 20
-                    }}>
-                      <button
-                        onClick={() => handleNextCard(false)}
-                        title="Mũi tên trái: Chưa học (←)"
-                        aria-label="Chưa học"
-                        className="transition-all hover:scale-110 active:scale-95"
-                        style={{
-                          width: 48,
-                          height: 48,
-                          borderRadius: '50%',
-                          background: 'rgba(239, 68, 68, 0.08)',
-                          color: '#ef4444',
-                          border: '1.5px solid rgba(239, 68, 68, 0.25)',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          cursor: 'pointer',
-                          boxShadow: '0 2px 8px rgba(239, 68, 68, 0.12)'
-                        }}
-                      >
-                        <ChevronLeft size={24} strokeWidth={2.5} />
-                      </button>
-
-                      <button
-                        onClick={() => handleNextCard(true)}
-                        title="Mũi tên phải: Đã học (→)"
-                        aria-label="Đã học"
-                        className="transition-all hover:scale-110 active:scale-95"
-                        style={{
-                          width: 48,
-                          height: 48,
-                          borderRadius: '50%',
-                          background: 'rgba(34, 197, 94, 0.08)',
-                          color: '#16a34a',
-                          border: '1.5px solid rgba(34, 197, 94, 0.25)',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          cursor: 'pointer',
-                          boxShadow: '0 2px 8px rgba(34, 197, 94, 0.12)'
-                        }}
-                      >
-                        <ChevronRight size={24} strokeWidth={2.5} />
-                      </button>
                     </div>
-
-                    {/* Chú thích duy nhất */}
-                    <div className="roadmap-runner-muted" style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: 8,
-                      marginTop: 14,
-                      fontSize: 12.5,
-                      color: '#64748b',
-                      textAlign: 'center',
-                      flexWrap: 'wrap'
-                    }}>
-                      <span>Chạm vào thẻ để lật (hoặc phím Space)</span>
-                      <span style={{ color: '#94a3b8' }}>·</span>
-                      <span>Mũi tên trái (hoặc vuốt trái) là chưa học</span>
-                      <span style={{ color: '#94a3b8' }}>·</span>
-                      <span>Mũi tên phải (hoặc vuốt phải) là đã học</span>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="roadmap-runner-muted" style={{ textAlign: 'center', padding: 32, color: '#64748b' }}>
-                  Đang đồng bộ danh sách từ vựng từ Firestore...
-                </div>
+                  );
+                })()
               )}
             </div>
           )}
 
           {/* ========================================================
-              QUEST 2: GATEKEEPER 100% (TRẮC NGHIỆM PHẢN XẠ THUẦN TIẾNG VIỆT)
+              QUEST 2: GATEKEEPER 100% (RANDOM A/B/C/D + ÔN CÂU SAI NHƯ QUEST 1)
               ======================================================== */}
-          {questIndex === 2 && (
+          {questMode === 'GATEKEEPER' && (
             <div className="roadmap-runner-card" style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
-                <div>
-                  <h3 className="roadmap-runner-title" style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <Shield size={18} style={{ color: '#047857' }} />
-                    <span>Cổng Phản Xạ 100% (Vocab Gatekeeper)</span>
-                  </h3>
-                  <div style={{ fontSize: 13, color: '#dc2626', fontWeight: 700 }}>
-                    Tiêu chuẩn Người gác cổng: Đạt 100% (10/10 câu đúng) để mở khóa mốc!
-                  </div>
-                </div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18, flexWrap: 'wrap', gap: 10 }}>
+                <h3 className="roadmap-runner-title" style={{ fontSize: 17, fontWeight: 900, color: '#0f172a', margin: 0, display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <Shield size={18} style={{ color: '#047857' }} />
+                  <span>Cổng Phản Xạ 100%</span>
+                </h3>
 
-                <div className="roadmap-runner-title" style={{ fontSize: 14, fontWeight: 800, color: '#0f172a' }}>
-                  Câu {quizIndex + 1} / {gatekeeperQuestions.length || 1} • Đúng: <b style={{ color: '#16a34a' }}>{quizScore}</b>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                  <span className="roadmap-runner-title" style={{ fontSize: 13.5, fontWeight: 800, color: '#0f172a' }}>
+                    Câu {quizIndex + 1}/{activeQuizItems.length || 1} • Đạt: <b style={{ color: '#16a34a' }}>{masteredQuizIds.size}/{gatekeeperQuestions.length}</b>
+                  </span>
+                  {!quizFinished && activeQuizItems.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => handleFinishQuizRound()}
+                      className="roadmap-btn-back"
+                      style={{
+                        padding: '4px 10px',
+                        borderRadius: 8,
+                        border: '1px solid #cbd5e1',
+                        backgroundColor: '#f8fafc',
+                        color: '#334155',
+                        fontSize: 12,
+                        fontWeight: 700,
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Tổng kết lượt
+                    </button>
+                  )}
                 </div>
               </div>
 
               {!quizFinished ? (
-                gatekeeperQuestions[quizIndex] ? (
+                activeQuizItems[quizIndex] ? (
                   <div>
                     {/* Word display card */}
-                    <div className="roadmap-gatekeeper-wordbox" style={{ backgroundColor: '#f8fafc', padding: '24px 20px', borderRadius: 12, border: '1px solid #e2e8f0', textAlign: 'center', marginBottom: 24 }}>
+                    <div className="roadmap-gatekeeper-wordbox" style={{ backgroundColor: '#f8fafc', padding: '24px 20px', borderRadius: 12, border: '1px solid #e2e8f0', textAlign: 'center', marginBottom: 20 }}>
                       <div className="roadmap-gatekeeper-reading" style={{ fontSize: 13.5, color: '#64748b', fontWeight: 700, marginBottom: 4 }}>
-                        {gatekeeperQuestions[quizIndex].reading}
+                        {activeQuizItems[quizIndex].reading}
                       </div>
                       <div className="roadmap-gatekeeper-word" style={{ fontSize: 30, fontWeight: 900, color: '#0f172a', marginBottom: 8 }}>
-                        {gatekeeperQuestions[quizIndex].word}
+                        {activeQuizItems[quizIndex].word}
                       </div>
                       <button
-                        onClick={() => speakJapanese(gatekeeperQuestions[quizIndex].word)}
+                        onClick={() => speakJapanese(activeQuizItems[quizIndex].word)}
                         style={{ background: 'none', border: 'none', color: '#3b82f6', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 13, fontWeight: 700 }}
                       >
                         <Volume2 size={16} /> Nghe phát âm
                       </button>
                     </div>
 
-                    {/* Options list: Pure Vietnamese */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 12, marginBottom: 24 }}>
-                      {gatekeeperQuestions[quizIndex].options.map((opt: string, i: number) => {
-                        const isCorrect = opt === gatekeeperQuestions[quizIndex].correctAnswer;
+                    {/* Options list: Randomized ABCD */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 12, marginBottom: 18 }}>
+                      {activeQuizItems[quizIndex].options.map((opt: string, i: number) => {
+                        const isCorrect = opt === activeQuizItems[quizIndex].correctAnswer;
                         const isChosen = opt === selectedAnswer;
 
                         let bg = '#ffffff';
@@ -1411,13 +1945,313 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     </div>
 
                     {quizAnswered && (
-                      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
+                        <span className="roadmap-runner-muted" style={{ fontSize: 13, fontWeight: 700, color: selectedAnswer === activeQuizItems[quizIndex].correctAnswer ? '#16a34a' : '#dc2626' }}>
+                          {selectedAnswer === activeQuizItems[quizIndex].correctAnswer
+                            ? `✓ Chính xác (${quizCountdown ?? 0}s)`
+                            : `✕ Đúng là: "${activeQuizItems[quizIndex].correctAnswer}" (${quizCountdown ?? 0}s)`}
+                        </span>
                         <button
-                          onClick={handleNextQuizQuestion}
+                          onClick={() => handleNextQuizQuestion()}
                           className="roadmap-btn-next"
                           style={{
-                            padding: '10px 24px',
+                            padding: '9px 20px',
                             backgroundColor: '#0f172a',
+                            color: '#ffffff',
+                            borderRadius: 8,
+                            fontWeight: 800,
+                            fontSize: 13.5,
+                            border: 'none',
+                            cursor: 'pointer'
+                          }}
+                        >
+                          {quizIndex < activeQuizItems.length - 1 ? 'Chuyển ngay ➔' : 'Xem kết quả ➔'}
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="roadmap-runner-muted" style={{ textAlign: 'center', padding: 24, color: '#64748b' }}>Đang nạp câu hỏi...</div>
+                )
+              ) : (
+                /* Quest 2 Summary (Tương tự Quest 1) */
+                (() => {
+                  const totalQ = gatekeeperQuestions.length;
+                  const wrongCount = Math.max(0, totalQ - masteredQuizIds.size);
+                  const fullPass = totalQ > 0 && masteredQuizIds.size >= totalQ;
+                  return (
+                    <div style={{ maxWidth: 460, margin: '8px auto', textAlign: 'center', padding: '12px 8px' }}>
+                      <div style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: 48,
+                        height: 48,
+                        borderRadius: 24,
+                        background: fullPass ? 'rgba(16, 185, 129, 0.12)' : 'rgba(245, 158, 11, 0.12)',
+                        color: fullPass ? '#10b981' : '#d97706',
+                        fontSize: 22,
+                        fontWeight: 900,
+                        marginBottom: 10
+                      }}>
+                        {fullPass ? '完' : '復'}
+                      </div>
+                      <h3 className="roadmap-runner-title" style={{ fontSize: 20, fontWeight: 900, color: '#0f172a', marginBottom: 6 }}>
+                        {fullPass ? 'Đạt 100% Quest 2!' : 'Tổng kết lượt trắc nghiệm'}
+                      </h3>
+                      <p className="roadmap-runner-muted" style={{ fontSize: 13, color: '#64748b', marginBottom: 16 }}>
+                        {fullPass || questSaved
+                          ? 'Đã tự động lưu và mở khóa Quest 3.'
+                          : 'Đạt 100% để mở khóa Quest 3.'}
+                      </p>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, margin: '18px 0' }}>
+                        <div style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: 12, padding: 14 }}>
+                          <div style={{ fontSize: 11, fontWeight: 800, color: '#10b981' }}>正解 · ĐÃ ĐÚNG</div>
+                          <div style={{ fontSize: 28, fontWeight: 900, color: '#10b981', marginTop: 4 }}>
+                            {masteredQuizIds.size}
+                          </div>
+                        </div>
+
+                        <div style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.25)', borderRadius: 12, padding: 14 }}>
+                          <div style={{ fontSize: 11, fontWeight: 800, color: '#ef4444' }}>復習 · CẦN ÔN</div>
+                          <div style={{ fontSize: 28, fontWeight: 900, color: '#ef4444', marginTop: 4 }}>
+                            {wrongCount}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                        {wrongCount > 0 && (
+                          <button
+                            onClick={handleRetryQuizWrong}
+                            style={{
+                              padding: '11px 16px',
+                              background: '#c53d32',
+                              color: '#ffffff',
+                              border: 'none',
+                              borderRadius: 10,
+                              fontWeight: 800,
+                              fontSize: 14,
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              gap: 8
+                            }}
+                          >
+                            <RotateCcw size={16} /> Ôn lại các câu sai ({wrongCount} câu)
+                          </button>
+                        )}
+
+                        <button
+                          onClick={handleRetryQuiz}
+                          className="roadmap-btn-back"
+                          style={{
+                            padding: '11px 16px',
+                            background: '#f1f5f9',
+                            color: '#0f172a',
+                            border: '1px solid #cbd5e1',
+                            borderRadius: 10,
+                            fontWeight: 800,
+                            fontSize: 14,
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: 8
+                          }}
+                        >
+                          <RefreshCw size={16} /> Làm lại tất cả ({totalQ} câu)
+                        </button>
+
+                        {(fullPass || questSaved) && (
+                          <button
+                            onClick={handleBack}
+                            style={{
+                              padding: '12px 16px',
+                              background: '#10b981',
+                              color: '#ffffff',
+                              border: 'none',
+                              borderRadius: 10,
+                              fontWeight: 800,
+                              fontSize: 14,
+                              cursor: 'pointer',
+                              marginTop: 4
+                            }}
+                          >
+                            Tiếp tục nhiệm vụ tiếp theo ➔
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })()
+              )}
+            </div>
+          )}
+
+          {/* ========================================================
+              QUEST 3: GRAMMAR SCRAMBLE VỚI KÉO THẢ (ÔN CÂU SAI NHƯ QUEST 1)
+              ======================================================== */}
+          {questMode === 'SCRAMBLE' && (
+            <div className="roadmap-runner-card" style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18, flexWrap: 'wrap', gap: 10 }}>
+                <h3 className="roadmap-runner-title" style={{ fontSize: 17, fontWeight: 900, color: '#0f172a', margin: 0, display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <Puzzle size={18} style={{ color: '#8b5cf6' }} />
+                  <span>Ghép Câu Ngữ Pháp</span>
+                </h3>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                  <span className="roadmap-runner-title" style={{ fontSize: 13.5, fontWeight: 800, color: '#0f172a' }}>
+                    Câu {scrambleIndex + 1}/{scrambleSentences.length || 1} • Đạt: <b style={{ color: '#16a34a' }}>{scrambleCompletedCount}/{allScrambleSentences.length}</b>
+                  </span>
+                  {!scrambleFinished && scrambleSentences.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => handleFinishScrambleRound()}
+                      className="roadmap-btn-back"
+                      style={{
+                        padding: '4px 10px',
+                        borderRadius: 8,
+                        border: '1px solid #cbd5e1',
+                        backgroundColor: '#f8fafc',
+                        color: '#334155',
+                        fontSize: 12,
+                        fontWeight: 700,
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Tổng kết lượt
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {!scrambleFinished ? (
+                currentScramble ? (
+                  <div>
+                    {/* Vietnamese target */}
+                    <div className="roadmap-scramble-target" style={{ backgroundColor: '#f0fdf4', padding: '14px 18px', borderRadius: 12, border: '1px solid #bbf7d0', marginBottom: 18 }}>
+                      <div className="roadmap-scramble-target-text" style={{ fontSize: 16, fontWeight: 800, color: '#0f172a' }}>
+                        {currentScramble.translation}
+                      </div>
+                    </div>
+
+                    {/* DROP ZONE / ANSWER TRAY */}
+                    <div
+                      onDragOver={e => e.preventDefault()}
+                      onDrop={handleDropToTray}
+                      className="roadmap-scramble-tray"
+                      style={{
+                        minHeight: 70,
+                        backgroundColor: '#f8fafc',
+                        border: scrambleChecked ? (scramblePassed ? '2px solid #16a34a' : '2px solid #ef4444') : '2px dashed #94a3b8',
+                        borderRadius: 14,
+                        padding: 16,
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        gap: 10,
+                        alignItems: 'center',
+                        marginBottom: 18
+                      }}
+                    >
+                      {userTokens.length === 0 ? (
+                        <span className="roadmap-runner-muted" style={{ color: '#94a3b8', fontSize: 13 }}>
+                          Kéo hoặc bấm thẻ từ bên dưới để ghép câu
+                        </span>
+                      ) : (
+                        userTokens.map((tok, idx) => (
+                          <span
+                            key={idx}
+                            onClick={() => handleRemoveToken(idx)}
+                            className="roadmap-scramble-tray-token"
+                            style={{
+                              padding: '8px 16px',
+                              backgroundColor: '#ffffff',
+                              border: '1.5px solid #0f172a',
+                              borderRadius: 8,
+                              fontSize: 15,
+                              fontWeight: 800,
+                              color: '#0f172a',
+                              cursor: 'pointer',
+                              boxShadow: 'var(--shadow-sm)'
+                            }}
+                          >
+                            {tok} ✕
+                          </span>
+                        ))
+                      )}
+                    </div>
+
+                    {/* Feedback */}
+                    {scrambleChecked && (
+                      <div className={scramblePassed ? 'roadmap-scramble-feedback-pass' : 'roadmap-scramble-feedback-fail'} style={{ marginBottom: 16, padding: '10px 14px', borderRadius: 8, backgroundColor: scramblePassed ? '#dcfce7' : '#fee2e2', color: scramblePassed ? '#166534' : '#991b1b', fontSize: 13.5, fontWeight: 700 }}>
+                        {scramblePassed ? (
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                            <Check size={16} strokeWidth={3} style={{ color: '#16a34a' }} />
+                            <span>Chính xác: <b>{currentScramble.original}</b> ({scrambleCountdown ?? 0}s)</span>
+                          </div>
+                        ) : (
+                          <div>✕ Đáp án đúng: <b>{currentScramble.original}</b> ({scrambleCountdown ?? 0}s)</div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Scrambled tokens pool (Draggable) */}
+                    <div className="roadmap-scramble-pool" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 20, padding: 12, backgroundColor: '#f1f5f9', borderRadius: 12 }}>
+                      {currentScramble.tokens.map((tok, idx) => (
+                        <div
+                          key={idx}
+                          draggable={!scrambleChecked}
+                          onDragStart={e => handleDragStartToken(e, idx)}
+                          onClick={() => handlePickToken(tok)}
+                          className="roadmap-scramble-pool-token"
+                          style={{
+                            padding: '10px 18px',
+                            borderRadius: 8,
+                            backgroundColor: '#ffffff',
+                            border: '1.5px solid #cbd5e1',
+                            color: '#1e293b',
+                            fontSize: 15,
+                            fontWeight: 800,
+                            cursor: 'grab',
+                            boxShadow: 'var(--shadow-sm)',
+                            userSelect: 'none'
+                          }}
+                        >
+                          {tok}
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Controls */}
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12 }}>
+                      {!scrambleChecked ? (
+                        <button
+                          onClick={handleCheckScramble}
+                          disabled={userTokens.length === 0}
+                          className="roadmap-btn-next"
+                          style={{
+                            padding: '10px 22px',
+                            backgroundColor: userTokens.length > 0 ? '#0f172a' : '#94a3b8',
+                            color: '#ffffff',
+                            borderRadius: 8,
+                            fontWeight: 800,
+                            fontSize: 14,
+                            border: 'none',
+                            cursor: userTokens.length > 0 ? 'pointer' : 'not-allowed'
+                          }}
+                        >
+                          Kiểm tra
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleNextScramble()}
+                          className="roadmap-btn-next"
+                          style={{
+                            padding: '10px 22px',
+                            backgroundColor: '#10b981',
                             color: '#ffffff',
                             borderRadius: 8,
                             fontWeight: 800,
@@ -1426,258 +2260,130 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                             cursor: 'pointer'
                           }}
                         >
-                          {quizIndex < gatekeeperQuestions.length - 1 ? 'Câu tiếp theo ➔' : 'Xem kết quả qua cổng ➔'}
+                          {scrambleIndex < scrambleSentences.length - 1 ? 'Chuyển ngay ➔' : 'Xem kết quả ➔'}
                         </button>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <div className="roadmap-runner-muted" style={{ textAlign: 'center', padding: 24, color: '#64748b' }}>Đang nạp câu hỏi trắc nghiệm...</div>
-                )
-              ) : (
-                /* Gatekeeper Finished */
-                <div style={{ textAlign: 'center', padding: '24px 16px' }}>
-                  {quizScore === gatekeeperQuestions.length ? (
-                    <div>
-                      <Crown size={56} style={{ color: '#eab308', margin: '0 auto 12px', display: 'block' }} />
-                      <h3 style={{ fontSize: 22, fontWeight: 900, color: '#16a34a', marginBottom: 8 }}>
-                        XUẤT SẮC! BẠN ĐẠT ĐIỂM TUYỆT ĐỐI 100%!
-                      </h3>
-                      <p className="roadmap-runner-muted" style={{ color: '#475569', fontSize: 14, marginBottom: 24 }}>
-                        Bạn đã trả lời đúng {quizScore}/{gatekeeperQuestions.length} câu. Cổng phản xạ từ vựng đã mở ra thành công!
-                      </p>
-                      <button
-                        onClick={handleCompleteCurrentQuest}
-                        disabled={submitting}
-                        style={{
-                          padding: '12px 32px',
-                          backgroundColor: '#10b981',
-                          color: '#ffffff',
-                          borderRadius: 10,
-                          fontSize: 15,
-                          fontWeight: 800,
-                          border: 'none',
-                          cursor: 'pointer',
-                          boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
-                        }}
-                      >
-                        {submitting ? 'Đang lưu...' : 'Lưu kết quả & Hoàn thành Quest 2 ➔'}
-                      </button>
-                    </div>
-                  ) : (
-                    <div>
-                      <Lock size={56} style={{ color: '#94a3b8', margin: '0 auto 12px', display: 'block' }} />
-                      <h3 style={{ fontSize: 22, fontWeight: 900, color: '#dc2626', marginBottom: 8 }}>
-                        CHƯA ĐẠT 100% — CỔNG VẪN ĐANG KHÓA!
-                      </h3>
-                      <p className="roadmap-runner-muted" style={{ color: '#475569', fontSize: 14, marginBottom: 24 }}>
-                        Bạn đạt {quizScore}/{gatekeeperQuestions.length} câu đúng. Người gác cổng yêu cầu 100% để đảm bảo phản xạ tiếng Nhật chuẩn mực.
-                      </p>
-                      <button
-                        onClick={handleRetryQuiz}
-                        style={{
-                          padding: '12px 28px',
-                          backgroundColor: '#f59e0b',
-                          color: '#ffffff',
-                          borderRadius: 10,
-                          fontSize: 14,
-                          fontWeight: 800,
-                          border: 'none',
-                          cursor: 'pointer'
-                        }}
-                      >
-                        <RefreshCw size={16} style={{ verticalAlign: 'middle', marginRight: 6 }} />
-                        Làm lại bài kiểm tra 100%
-                      </button>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* ========================================================
-              QUEST 3: GRAMMAR SCRAMBLE VỚI KÉO THẢ (DRAG & DROP)
-              ======================================================== */}
-          {questIndex === 3 && (
-            <div className="roadmap-runner-card" style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
-                <div>
-                  <h3 className="roadmap-runner-title" style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <Puzzle size={18} style={{ color: '#8b5cf6' }} />
-                    <span>Kéo Thả Ghép Câu & Bẫy Trợ Từ</span>
-                  </h3>
-                  <div className="roadmap-runner-muted" style={{ fontSize: 13, color: '#64748b' }}>
-                    Kéo thẻ từ hoặc nhấn vào thẻ để xếp vào khay câu tiếng Nhật ({scrambleIndex + 1}/{scrambleSentences.length || 1})
-                  </div>
-                </div>
-
-                <button
-                  onClick={handleCompleteCurrentQuest}
-                  disabled={submitting || scrambleCompletedCount === 0}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    padding: '8px 18px',
-                    borderRadius: 8,
-                    backgroundColor: scrambleCompletedCount > 0 ? '#10b981' : '#94a3b8',
-                    color: '#ffffff',
-                    border: 'none',
-                    fontWeight: 800,
-                    fontSize: 13,
-                    cursor: scrambleCompletedCount > 0 ? 'pointer' : 'not-allowed'
-                  }}
-                >
-                  <CheckCircle2 size={16} />
-                  <span>Hoàn thành Quest 3</span>
-                </button>
-              </div>
-
-              {currentScramble ? (
-                <div>
-                  {/* Vietnamese target */}
-                  <div className="roadmap-scramble-target" style={{ backgroundColor: '#f0fdf4', padding: '16px 20px', borderRadius: 12, border: '1px solid #bbf7d0', marginBottom: 20 }}>
-                    <div className="roadmap-scramble-target-title" style={{ fontSize: 12, color: '#166534', fontWeight: 800, textTransform: 'uppercase', marginBottom: 2 }}>
-                      Ý nghĩa tiếng Việt cần diễn đạt:
-                    </div>
-                    <div className="roadmap-scramble-target-text" style={{ fontSize: 16, fontWeight: 800, color: '#0f172a' }}>
-                      {currentScramble.translation}
-                    </div>
-                  </div>
-
-                  {/* DROP ZONE / ANSWER TRAY */}
-                  <div
-                    onDragOver={e => e.preventDefault()}
-                    onDrop={handleDropToTray}
-                    className="roadmap-scramble-tray"
-                    style={{
-                      minHeight: 70,
-                      backgroundColor: '#f8fafc',
-                      border: scrambleChecked ? (scramblePassed ? '2px solid #16a34a' : '2px solid #ef4444') : '2px dashed #94a3b8',
-                      borderRadius: 14,
-                      padding: 16,
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      gap: 10,
-                      alignItems: 'center',
-                      marginBottom: 20
-                    }}
-                  >
-                    {userTokens.length === 0 ? (
-                      <span className="roadmap-runner-muted" style={{ color: '#94a3b8', fontSize: 13.5 }}>
-                        Kéo thẻ từ hoặc bấm vào các thẻ bên dưới để xếp vào đây...
-                      </span>
-                    ) : (
-                      userTokens.map((tok, idx) => (
-                        <span
-                          key={idx}
-                          onClick={() => handleRemoveToken(idx)}
-                          className="roadmap-scramble-tray-token"
-                          style={{
-                            padding: '8px 16px',
-                            backgroundColor: '#ffffff',
-                            border: '1.5px solid #0f172a',
-                            borderRadius: 8,
-                            fontSize: 15,
-                            fontWeight: 800,
-                            color: '#0f172a',
-                            cursor: 'pointer',
-                            boxShadow: 'var(--shadow-sm)'
-                          }}
-                          title="Bấm để gỡ bỏ thẻ"
-                        >
-                          {tok} ✕
-                        </span>
-                      ))
-                    )}
-                  </div>
-
-                  {/* Feedback */}
-                  {scrambleChecked && (
-                    <div className={scramblePassed ? 'roadmap-scramble-feedback-pass' : 'roadmap-scramble-feedback-fail'} style={{ marginBottom: 18, padding: '12px 16px', borderRadius: 8, backgroundColor: scramblePassed ? '#dcfce7' : '#fee2e2', color: scramblePassed ? '#166534' : '#991b1b', fontSize: 13.5, fontWeight: 700 }}>
-                      {scramblePassed ? (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                          <Check size={16} strokeWidth={3} style={{ color: '#16a34a' }} />
-                          <span>Rất chính xác! Câu tiếng Nhật hoàn chỉnh: <b>{currentScramble.original}</b></span>
-                        </div>
-                      ) : (
-                        <div>✕ Chưa chính xác! Câu mẫu chuẩn là: <b>{currentScramble.original}</b></div>
                       )}
                     </div>
-                  )}
-
-                  {/* Scrambled tokens pool (Draggable) */}
-                  <div className="roadmap-scramble-pool" style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 24, padding: 12, backgroundColor: '#f1f5f9', borderRadius: 12 }}>
-                    {currentScramble.tokens.map((tok, idx) => (
-                      <div
-                        key={idx}
-                        draggable={!scrambleChecked}
-                        onDragStart={e => handleDragStartToken(e, idx)}
-                        onClick={() => handlePickToken(tok)}
-                        className="roadmap-scramble-pool-token"
-                        style={{
-                          padding: '10px 20px',
-                          borderRadius: 8,
-                          backgroundColor: '#ffffff',
-                          border: '1.5px solid #cbd5e1',
-                          color: '#1e293b',
-                          fontSize: 15,
-                          fontWeight: 800,
-                          cursor: 'grab',
-                          boxShadow: 'var(--shadow-sm)',
-                          userSelect: 'none'
-                        }}
-                      >
-                        {tok}
-                      </div>
-                    ))}
                   </div>
-
-                  {/* Controls */}
-                  <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12 }}>
-                    {!scrambleChecked ? (
-                      <button
-                        onClick={handleCheckScramble}
-                        disabled={userTokens.length === 0}
-                        className="roadmap-btn-next"
-                        style={{
-                          padding: '10px 24px',
-                          backgroundColor: userTokens.length > 0 ? '#0f172a' : '#94a3b8',
-                          color: '#ffffff',
-                          borderRadius: 8,
-                          fontWeight: 800,
-                          fontSize: 14,
-                          border: 'none',
-                          cursor: userTokens.length > 0 ? 'pointer' : 'not-allowed'
-                        }}
-                      >
-                        Kiểm tra câu ghép
-                      </button>
-                    ) : (
-                      <button
-                        onClick={handleNextScramble}
-                        className="roadmap-btn-next"
-                        style={{
-                          padding: '10px 24px',
-                          backgroundColor: '#10b981',
-                          color: '#ffffff',
-                          borderRadius: 8,
-                          fontWeight: 800,
-                          fontSize: 14,
-                          border: 'none',
-                          cursor: 'pointer'
-                        }}
-                      >
-                        Câu tiếp theo ➔
-                      </button>
-                    )}
+                ) : (
+                  <div className="roadmap-runner-muted" style={{ textAlign: 'center', padding: 24, color: '#64748b' }}>
+                    Đang tải câu mẫu...
                   </div>
-                </div>
+                )
               ) : (
-                <div className="roadmap-runner-muted" style={{ textAlign: 'center', padding: 24, color: '#64748b' }}>
-                  Đang tải câu mẫu ngữ pháp từ Firestore...
-                </div>
+                /* Quest 3 Summary (Tương tự Quest 1 & 2) */
+                (() => {
+                  const totalS = allScrambleSentences.length;
+                  const wrongS = Math.max(0, totalS - scrambleCompletedCount);
+                  const fullPass = totalS > 0 && scrambleCompletedCount >= totalS;
+                  return (
+                    <div style={{ maxWidth: 460, margin: '8px auto', textAlign: 'center', padding: '12px 8px' }}>
+                      <div style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: 48,
+                        height: 48,
+                        borderRadius: 24,
+                        background: fullPass ? 'rgba(16, 185, 129, 0.12)' : 'rgba(245, 158, 11, 0.12)',
+                        color: fullPass ? '#10b981' : '#d97706',
+                        fontSize: 22,
+                        fontWeight: 900,
+                        marginBottom: 10
+                      }}>
+                        {fullPass ? '完' : '復'}
+                      </div>
+                      <h3 className="roadmap-runner-title" style={{ fontSize: 20, fontWeight: 900, color: '#0f172a', marginBottom: 6 }}>
+                        {fullPass ? 'Đạt 100% Quest 3!' : 'Tổng kết lượt ghép câu'}
+                      </h3>
+                      <p className="roadmap-runner-muted" style={{ fontSize: 13, color: '#64748b', marginBottom: 16 }}>
+                        {fullPass || questSaved
+                          ? 'Đã tự động lưu và mở khóa Quest 4.'
+                          : 'Đạt 100% câu ghép để mở khóa Quest 4.'}
+                      </p>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, margin: '18px 0' }}>
+                        <div style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: 12, padding: 14 }}>
+                          <div style={{ fontSize: 11, fontWeight: 800, color: '#10b981' }}>正解 · ĐÃ ĐÚNG</div>
+                          <div style={{ fontSize: 28, fontWeight: 900, color: '#10b981', marginTop: 4 }}>
+                            {scrambleCompletedCount}
+                          </div>
+                        </div>
+
+                        <div style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.25)', borderRadius: 12, padding: 14 }}>
+                          <div style={{ fontSize: 11, fontWeight: 800, color: '#ef4444' }}>復習 · CẦN ÔN</div>
+                          <div style={{ fontSize: 28, fontWeight: 900, color: '#ef4444', marginTop: 4 }}>
+                            {wrongS}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                        {wrongS > 0 && (
+                          <button
+                            onClick={handleRetryScrambleWrong}
+                            style={{
+                              padding: '11px 16px',
+                              background: '#c53d32',
+                              color: '#ffffff',
+                              border: 'none',
+                              borderRadius: 10,
+                              fontWeight: 800,
+                              fontSize: 14,
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              gap: 8
+                            }}
+                          >
+                            <RotateCcw size={16} /> Ôn lại các câu sai ({wrongS} câu)
+                          </button>
+                        )}
+
+                        <button
+                          onClick={handleRetryScrambleAll}
+                          className="roadmap-btn-back"
+                          style={{
+                            padding: '11px 16px',
+                            background: '#f1f5f9',
+                            color: '#0f172a',
+                            border: '1px solid #cbd5e1',
+                            borderRadius: 10,
+                            fontWeight: 800,
+                            fontSize: 14,
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: 8
+                          }}
+                        >
+                          <RotateCcw size={16} /> Làm lại tất cả ({totalS} câu)
+                        </button>
+
+                        {(fullPass || questSaved) && (
+                          <button
+                            onClick={handleBack}
+                            style={{
+                              padding: '12px 16px',
+                              background: '#10b981',
+                              color: '#ffffff',
+                              border: 'none',
+                              borderRadius: 10,
+                              fontWeight: 800,
+                              fontSize: 14,
+                              cursor: 'pointer',
+                              marginTop: 4
+                            }}
+                          >
+                            Tiếp tục nhiệm vụ tiếp theo ➔
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })()
               )}
             </div>
           )}
@@ -1685,42 +2391,65 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
           {/* ========================================================
               QUEST 4: ĐỐI THOẠI TÌNH HUỐNG 2 BÊN VỚI AI SENSEI (ROLEPLAY)
               ======================================================== */}
-          {questIndex === 4 && (
+          {questMode === 'ROLEPLAY' && (
             <div className="roadmap-runner-card" style={{ backgroundColor: '#ffffff', borderRadius: 16, padding: '24px 28px', border: '1px solid #e2e8f0', boxShadow: 'var(--shadow-sm)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 10 }}>
                 <div>
                   <h3 className="roadmap-runner-title" style={{ fontSize: 18, fontWeight: 900, color: '#0f172a', margin: '0 0 4px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
                     <MessageCircle size={18} style={{ color: '#0284c7' }} />
                     <span>Đối Thoại Tình Huống 2 Bên & Gặp Gỡ AI Sensei</span>
                   </h3>
                   <div className="roadmap-runner-muted" style={{ fontSize: 13, color: '#64748b' }}>
-                    Tình huống thực tế {dialogueIndex + 1} / {dialogues.length}
+                    Tình huống {dialogueIndex + 1} / {dialogues.length} • Đã đạt: <b style={{ color: '#16a34a' }}>{completedDialoguesCount}/{dialogues.length}</b>
                   </div>
                 </div>
-
-                <button
-                  onClick={handleCompleteCurrentQuest}
-                  disabled={submitting || completedDialoguesCount === 0}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    padding: '8px 18px',
-                    borderRadius: 8,
-                    backgroundColor: completedDialoguesCount > 0 ? '#10b981' : '#94a3b8',
-                    color: '#ffffff',
-                    border: 'none',
-                    fontWeight: 800,
-                    fontSize: 13,
-                    cursor: completedDialoguesCount > 0 ? 'pointer' : 'not-allowed'
-                  }}
-                >
-                  <CheckCircle2 size={16} />
-                  <span>Hoàn thành Quest 4</span>
-                </button>
               </div>
 
-              {currentDialogue && (
+              {roleplayFinished ? (
+                <div style={{ textAlign: 'center', padding: '24px 16px' }}>
+                  <Crown size={56} style={{ color: '#eab308', margin: '0 auto 12px', display: 'block' }} />
+                  <h3 style={{ fontSize: 20, fontWeight: 900, color: '#16a34a', marginBottom: 8 }}>
+                    Đạt 100% Quest 4!
+                  </h3>
+                  <p className="roadmap-runner-muted" style={{ color: '#475569', fontSize: 13.5, marginBottom: 20 }}>
+                    Đã vượt qua {completedDialoguesCount}/{dialogues.length} tình huống · Đã mở khóa cột mốc tiếp theo.
+                  </p>
+                  <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
+                    <button
+                      onClick={handleRetryRoleplay}
+                      className="roadmap-btn-back"
+                      style={{
+                        padding: '11px 22px',
+                        backgroundColor: '#f1f5f9',
+                        color: '#0f172a',
+                        borderRadius: 10,
+                        fontSize: 14,
+                        fontWeight: 800,
+                        border: '1px solid #cbd5e1',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <RotateCcw size={15} style={{ verticalAlign: 'middle', marginRight: 6 }} />
+                      Luyện tập lại
+                    </button>
+                    <button
+                      onClick={handleBack}
+                      style={{
+                        padding: '12px 28px',
+                        backgroundColor: '#10b981',
+                        color: '#ffffff',
+                        borderRadius: 10,
+                        fontSize: 15,
+                        fontWeight: 800,
+                        border: 'none',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Tiếp tục lộ trình học tập ➔
+                    </button>
+                  </div>
+                </div>
+              ) : currentDialogue && (
                 <div>
                   {/* Context Header */}
                   <div style={{ fontSize: 14, fontWeight: 800, color: '#0284c7', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -1825,8 +2554,19 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     <div style={{ marginBottom: 14 }}>
                       <textarea
                         value={learnerInput}
-                        onChange={e => setLearnerInput(e.target.value)}
-                        placeholder="Nhập câu tiếng Nhật đáp lại Sensei vào đây..."
+                        onChange={e => {
+                          setLearnerInput(e.target.value);
+                          if (pasteWarning) setPasteWarning(null);
+                        }}
+                        onPaste={e => {
+                          const pasted = e.clipboardData.getData('text').trim();
+                          const sampleClean = String(currentDialogue.sampleAnswer || '').trim();
+                          if (pasted && sampleClean && (pasted === sampleClean || (pasted.length >= 6 && sampleClean.includes(pasted)))) {
+                            e.preventDefault();
+                            setPasteWarning('Hãy tự gõ câu tiếng Nhật, không dán câu mẫu.');
+                          }
+                        }}
+                        placeholder="Nhập câu tiếng Nhật..."
                         rows={3}
                         className="roadmap-learner-textarea"
                         style={{
@@ -1840,9 +2580,14 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                           boxSizing: 'border-box'
                         }}
                       />
+                      {pasteWarning && (
+                        <div style={{ marginTop: 6, fontSize: 12, fontWeight: 700, color: '#dc2626' }}>
+                          {pasteWarning}
+                        </div>
+                      )}
                     </div>
 
-                    {/* Sample Answer Toggle */}
+                    {/* Sample Answer Toggle (Anti-copy protected) */}
                     <div style={{ marginBottom: 14 }}>
                       <button
                         onClick={() => setShowSample(!showSample)}
@@ -1850,19 +2595,36 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                         style={{ background: 'none', border: 'none', color: '#64748b', fontSize: 12.5, fontWeight: 700, cursor: 'pointer', textDecoration: 'underline', display: 'inline-flex', alignItems: 'center', gap: 4 }}
                       >
                         <Lightbulb size={13} style={{ color: '#ca8a04' }} />
-                        <span>{showSample ? 'Ẩn câu mẫu ví dụ' : 'Xem câu mẫu ví dụ'}</span>
+                        <span>{showSample ? 'Ẩn câu mẫu' : 'Xem câu mẫu'}</span>
                       </button>
 
                       {showSample && (
-                        <div className="roadmap-sample-answer" style={{ marginTop: 6, padding: '8px 12px', backgroundColor: '#ffffff', borderRadius: 8, border: '1px solid #cbd5e1', fontSize: 13.5, color: '#0f172a' }}>
-                          Mẫu: <b>{currentDialogue.sampleAnswer}</b>
+                        <div
+                          className="roadmap-sample-answer"
+                          onCopy={e => e.preventDefault()}
+                          onCut={e => e.preventDefault()}
+                          onContextMenu={e => e.preventDefault()}
+                          style={{
+                            marginTop: 6,
+                            padding: '10px 14px',
+                            backgroundColor: '#ffffff',
+                            borderRadius: 8,
+                            border: '1px solid #cbd5e1',
+                            fontSize: 13.5,
+                            color: '#0f172a',
+                            userSelect: 'none',
+                            WebkitUserSelect: 'none'
+                          }}
+                        >
+                          Mẫu tham khảo: <b>{currentDialogue.sampleAnswer}</b>
                         </div>
                       )}
                     </div>
 
-                    {/* AI Sensei Evaluation Feedback + Human-in-the-loop Appeal (Stage 3 P2) */}
+                    {/* AI Sensei Evaluation Feedback + Human-in-the-loop Appeal (Dark Mode Synced) */}
                     {senseiResult && (
                       <div
+                        className={dialoguePassed ? 'roadmap-sensei-result-pass' : 'roadmap-sensei-result-warn'}
                         style={{
                           padding: '14px 18px',
                           borderRadius: 12,
@@ -1874,7 +2636,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                         }}
                       >
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, marginBottom: 8 }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 900 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 900, flexWrap: 'wrap' }}>
                             <Sparkles size={15} style={{ color: dialoguePassed ? '#059669' : '#d97706' }} />
                             <span>AI Sensei chấm: {senseiResult.evaluatedScore}/10 điểm</span>
                             <span
@@ -1889,6 +2651,18 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                             >
                               {dialoguePassed ? 'Đạt chuẩn' : 'Cần cải thiện'}
                             </span>
+                            <span
+                              style={{
+                                fontSize: 10.5,
+                                padding: '2px 8px',
+                                borderRadius: 999,
+                                backgroundColor: senseiResult.source === 'GEMINI_LIVE' ? '#dbeafe' : '#e2e8f0',
+                                color: senseiResult.source === 'GEMINI_LIVE' ? '#1e40af' : '#334155',
+                                fontWeight: 800
+                              }}
+                            >
+                              {senseiResult.source === 'GEMINI_LIVE' ? 'Gemini Live API' : 'Kiểm tra Whitelist (Fallback)'}
+                            </span>
                           </div>
                           <span style={{ fontSize: 11, opacity: 0.75, fontFamily: 'monospace' }}>
                             {senseiResult.model} • {senseiResult.latencyMs}ms
@@ -1901,6 +2675,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
 
                         {senseiResult.particleErrors.length > 0 && (
                           <div
+                            className="roadmap-sensei-particles"
                             style={{
                               padding: '8px 12px',
                               borderRadius: 8,
@@ -1922,6 +2697,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
 
                         {senseiResult.naturalExpressionSuggestion && (
                           <div
+                            className="roadmap-sensei-suggestion"
                             style={{
                               padding: '8px 12px',
                               borderRadius: 8,
@@ -1968,6 +2744,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                         {/* Human-in-the-loop Appeal Trigger */}
                         {appealSubmittedId ? (
                           <div
+                            className="roadmap-sensei-appeal-submitted"
                             style={{
                               padding: '8px 12px',
                               borderRadius: 8,
@@ -1991,10 +2768,10 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                               onClick={() => setShowAppealForm(true)}
                               style={{
                                 background: 'none',
-                                border: '1px solid rgba(180, 83, 9, 0.35)',
+                                border: '1px solid rgba(217, 119, 6, 0.45)',
                                 borderRadius: 8,
                                 padding: '5px 10px',
-                                color: '#b45309',
+                                color: '#d97706',
                                 fontSize: 12,
                                 fontWeight: 700,
                                 cursor: 'pointer',
@@ -2009,6 +2786,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                           </div>
                         ) : (
                           <div
+                            className="roadmap-sensei-appeal-form"
                             style={{
                               marginTop: 8,
                               padding: 12,
@@ -2018,7 +2796,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                               color: '#0f172a'
                             }}
                           >
-                            <div style={{ fontSize: 12, fontWeight: 800, color: '#b45309', marginBottom: 6 }}>
+                            <div style={{ fontSize: 12, fontWeight: 800, color: '#d97706', marginBottom: 6 }}>
                               Gửi phiếu phúc khảo điểm AI cho Giáo viên / Admin:
                             </div>
                             <textarea
@@ -2077,7 +2855,7 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                     )}
 
                     {/* Buttons */}
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10 }}>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, flexWrap: 'wrap' }}>
                       <button
                         onClick={handleEvaluateDialogue}
                         disabled={!learnerInput.trim() || evaluatingSensei}
@@ -2114,6 +2892,24 @@ export const RoadmapQuestRunner: React.FC<RoadmapQuestRunnerProps> = ({
                           }}
                         >
                           Tình huống tiếp theo ➔
+                        </button>
+                      )}
+
+                      {dialoguePassed && dialogueIndex >= dialogues.length - 1 && (
+                        <button
+                          onClick={() => setRoleplayFinished(true)}
+                          style={{
+                            padding: '10px 20px',
+                            backgroundColor: '#10b981',
+                            color: '#ffffff',
+                            borderRadius: 8,
+                            fontWeight: 800,
+                            fontSize: 13.5,
+                            border: 'none',
+                            cursor: 'pointer'
+                          }}
+                        >
+                          Xem tổng kết Quest 4 ➔
                         </button>
                       )}
                     </div>

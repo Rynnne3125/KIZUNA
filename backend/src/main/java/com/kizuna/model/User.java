@@ -20,6 +20,13 @@ public class User {
     private int totalXp = 0;
     private int currentStreak = 0;
     private int longestStreak = 0;
+    private Integer previousStreak;
+    private Integer previousActivePoints;
+    private int streakFreezes = 0;
+    private int weeklyActivePoints = 0;
+    private String weeklyPointsWeek;
+    private int weeklyXp = 0;
+    private String weeklyXpWeek;
     private String avatarUrl = "";
     private String level = "N5";
     private Boolean placementVerified;
@@ -87,6 +94,27 @@ public class User {
 
     public int getLongestStreak() { return longestStreak; }
     public void setLongestStreak(int longestStreak) { this.longestStreak = longestStreak; }
+
+    public Integer getPreviousStreak() { return previousStreak; }
+    public void setPreviousStreak(Integer previousStreak) { this.previousStreak = previousStreak; }
+
+    public Integer getPreviousActivePoints() { return previousActivePoints; }
+    public void setPreviousActivePoints(Integer previousActivePoints) { this.previousActivePoints = previousActivePoints; }
+
+    public int getStreakFreezes() { return streakFreezes; }
+    public void setStreakFreezes(int streakFreezes) { this.streakFreezes = streakFreezes; }
+
+    public int getWeeklyActivePoints() { return weeklyActivePoints; }
+    public void setWeeklyActivePoints(int weeklyActivePoints) { this.weeklyActivePoints = weeklyActivePoints; }
+
+    public String getWeeklyPointsWeek() { return weeklyPointsWeek; }
+    public void setWeeklyPointsWeek(String weeklyPointsWeek) { this.weeklyPointsWeek = weeklyPointsWeek; }
+
+    public int getWeeklyXp() { return weeklyXp; }
+    public void setWeeklyXp(int weeklyXp) { this.weeklyXp = weeklyXp; }
+
+    public String getWeeklyXpWeek() { return weeklyXpWeek; }
+    public void setWeeklyXpWeek(String weeklyXpWeek) { this.weeklyXpWeek = weeklyXpWeek; }
 
     public String getAvatarUrl() { return avatarUrl; }
     public void setAvatarUrl(String avatarUrl) { this.avatarUrl = avatarUrl; }

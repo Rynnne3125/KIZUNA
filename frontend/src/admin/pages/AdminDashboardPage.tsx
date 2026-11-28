@@ -276,9 +276,15 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
     try {
       const targetUser = users.find(u => u.id === anomaly.userId);
       if (action === 'RESET_STREAK') {
-        const ok = await adminService.resetUserStreak(anomaly.userId);
+        const ok = await adminService.resetUserStreak(anomaly.userId, targetUser?.currentStreak ?? anomaly.currentStreak);
         if (ok && targetUser) {
-          const updated = { ...targetUser, currentStreak: 0 };
+          const updated = {
+            ...targetUser,
+            currentStreak: 0,
+            ...((targetUser.currentStreak || anomaly.currentStreak) > 0
+              ? { previousStreak: targetUser.currentStreak || anomaly.currentStreak }
+              : {})
+          };
           handleUserUpdated(updated);
           setAnomalies(prev => prev.map(a => (a.userId === anomaly.userId ? { ...a, currentStreak: 0 } : a)));
           setAntiCheatNotice(`Đã reset chuỗi Streak của ${anomaly.fullName || anomaly.username} về 0 ngày.`);
