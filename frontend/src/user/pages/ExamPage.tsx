@@ -1,24 +1,26 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { 
-  Target, 
-  Clock, 
-  FileText, 
-  Headphones, 
-  Lightbulb, 
-  CheckCircle2, 
-  Check, 
-  X, 
-  ArrowRight, 
-  ChevronLeft, 
-  RotateCcw, 
-  Search, 
-  Award, 
-  BookOpen, 
-  AlertCircle, 
+import {
+  Target,
+  Clock,
+  FileText,
+  Headphones,
+  Lightbulb,
+  CheckCircle2,
+  Check,
+  X,
+  ArrowRight,
+  ChevronLeft,
+  RotateCcw,
+  Search,
+  Award,
+  BookOpen,
+  AlertCircle,
   Sparkles,
   FileCheck,
   Calendar,
-  Timer
+  Timer,
+  Eye,
+  EyeOff
 } from 'lucide-react';
 import { kizunaService } from '../services/kizunaService';
 import { authService } from '../services/authService';
@@ -27,11 +29,11 @@ import { Exam } from '../types/kizuna';
 
 // Thời lượng thi chuẩn chính thức theo quy định JLPT (tính bằng phút)
 const JLPT_STANDARD_DURATIONS: Record<string, number> = {
-  N5: 105, // Nhập môn: Kiến thức + Ngữ pháp/Đọc hiểu + Nghe
-  N4: 125, // Sơ cấp
-  N3: 140, // Trung cấp
-  N2: 155, // Trung thượng cấp
-  N1: 170  // Thượng cấp
+  N5: 105,
+  N4: 125,
+  N3: 140,
+  N2: 155,
+  N1: 170
 };
 
 const LEVEL_FILTERS = [
@@ -59,30 +61,40 @@ interface ScoreDetail {
 export const ExamPage: React.FC = () => {
   const currentUser = authService.getCurrentUser();
   const [exams, setExams] = useState<Exam[]>([]);
+  const [catalogTotalExams, setCatalogTotalExams] = useState<number>(105);
   const [loading, setLoading] = useState(true);
   const [levelFilter, setLevelFilter] = useState('ALL');
   const [searchQuery, setSearchQuery] = useState('');
-  
-  // Lưu lịch sử làm bài thi của người dùng từ Firestore / LocalStorage
+
+  // Lịch sử làm bài của học viên
   const [examResults, setExamResults] = useState<Record<string, UserExamResult>>({});
 
-  // Chế độ phòng thi (Exam Room): 'exam' (Thi thật) hoặc 'practice' (Luyện tập xem đáp án ngay)
+  // Phòng thi (Exam Room): 'exam' (Thi thật - ẩn furigana) hoặc 'practice' (Luyện tập - hiện đáp án & furigana)
   const [activeExam, setActiveExam] = useState<Exam | null>(null);
   const [examMode, setExamMode] = useState<ExamMode>('exam');
+  const [showPracticeFurigana, setShowPracticeFurigana] = useState<boolean>(true);
   const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [scoreResult, setScoreResult] = useState<ScoreDetail | null>(null);
   const [loadingExamDetail, setLoadingExamDetail] = useState(false);
-  
-  // Modals xác nhận nộp bài & thoát phòng thi (thay thế window.confirm / alert)
+
+  // Modals xác nhận
   const [showSubmitModal, setShowSubmitModal] = useState(false);
   const [showExitModal, setShowExitModal] = useState(false);
   const [loadErrorMsg, setLoadErrorMsg] = useState<string | null>(null);
-  
-  // Đồng hồ đếm ngược thời gian thực theo chuẩn kỳ thi JLPT
+
+  // Đồng hồ đếm ngược thời gian thực theo chuẩn JLPT
   const [secondsRemaining, setSecondsRemaining] = useState<number>(0);
   const [totalDurationSeconds, setTotalDurationSeconds] = useState<number>(0);
   const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
+
+  useEffect(() => {
+    kizunaService.getAppCatalogStats().then((stats) => {
+      if (stats?.examsCount && stats.examsCount > 0) {
+        setCatalogTotalExams(stats.examsCount);
+      }
+    }).catch(() => {});
+  }, []);
 
   // Nạp danh mục đề thi
   useEffect(() => {
@@ -91,6 +103,9 @@ export const ExamPage: React.FC = () => {
       try {
         const list = await kizunaService.getExamCatalog(levelFilter);
         setExams(list);
+        if (levelFilter === 'ALL' && list.length > 0) {
+          setCatalogTotalExams(list.length);
+        }
       } finally {
         setLoading(false);
       }
@@ -98,7 +113,7 @@ export const ExamPage: React.FC = () => {
     loadCatalog();
   }, [levelFilter]);
 
-  // Nạp lịch sử tiến trình thi của người dùng
+  // Nạp lịch sử tiến trình thi
   useEffect(() => {
     if (currentUser?.id) {
       progressService.getUserExamResults(currentUser.id).then(results => {
@@ -107,14 +122,13 @@ export const ExamPage: React.FC = () => {
     }
   }, [currentUser?.id]);
 
-  // Bộ đếm ngược thời gian thi thực chiến (chỉ chạy trong chế độ Thi thật)
+  // Bộ đếm ngược thời gian (chỉ chạy ở chế độ Thi thật)
   useEffect(() => {
     if (examMode === 'exam' && isTimerRunning && secondsRemaining > 0 && !isSubmitted) {
       const timer = setInterval(() => {
         setSecondsRemaining(prev => {
           if (prev <= 1) {
             clearInterval(timer);
-            // Hết giờ thi: Tự động nộp bài
             handleAutoSubmitOnTimeUp();
             return 0;
           }
@@ -125,7 +139,6 @@ export const ExamPage: React.FC = () => {
     }
   }, [examMode, isTimerRunning, secondsRemaining, isSubmitted]);
 
-  // Format thời gian hiển thị (MM:SS hoặc HH:MM:SS)
   const formatTime = (secs: number) => {
     const h = Math.floor(secs / 3600);
     const m = Math.floor((secs % 3600) / 60);
@@ -136,32 +149,25 @@ export const ExamPage: React.FC = () => {
     return `${m}:${s < 10 ? '0' : ''}${s}`;
   };
 
-  // Format thời lượng hoàn thành thân thiện (VD: 45 phút 20 giây)
   const formatDurationSpent = (secs: number) => {
     const h = Math.floor(secs / 3600);
     const m = Math.floor((secs % 3600) / 60);
     const s = secs % 60;
-    if (h > 0) {
-      return `${h} giờ ${m} phút ${s} giây`;
-    }
-    if (m > 0) {
-      return `${m} phút ${s} giây`;
-    }
+    if (h > 0) return `${h} giờ ${m} phút ${s} giây`;
+    if (m > 0) return `${m} phút ${s} giây`;
     return `${s} giây`;
   };
 
-  // Lọc đề thi theo tìm kiếm từ khoá
   const filteredExams = useMemo(() => {
     if (!searchQuery.trim()) return exams;
     const q = searchQuery.toLowerCase().trim();
-    return exams.filter(ex => 
+    return exams.filter(ex =>
       ex.label.toLowerCase().includes(q) ||
       ex.level.toLowerCase().includes(q) ||
       (ex.year && ex.year.toString().includes(q))
     );
   }, [exams, searchQuery]);
 
-  // Bắt đầu làm bài (hỗ trợ 2 chế độ: 'exam' Thi thật và 'practice' Luyện tập)
   const handleStartExam = async (examId: string, mode: ExamMode = 'exam') => {
     setLoadingExamDetail(true);
     setLoadErrorMsg(null);
@@ -175,11 +181,11 @@ export const ExamPage: React.FC = () => {
       if (fullExam && hasQuestions) {
         setActiveExam(fullExam);
         setExamMode(mode);
+        setShowPracticeFurigana(true);
         setUserAnswers({});
         setIsSubmitted(false);
         setScoreResult(null);
 
-        // Áp dụng giới hạn thời gian chuẩn JLPT cho từng bậc N (chạy đồng hồ khi ở chế độ Thi thật)
         const standardDurationMin = JLPT_STANDARD_DURATIONS[fullExam.level?.toUpperCase()] || 120;
         const examDurationMin = (fullExam.durationMinutes && fullExam.durationMinutes > 0)
           ? fullExam.durationMinutes
@@ -207,7 +213,6 @@ export const ExamPage: React.FC = () => {
     setUserAnswers(prev => ({ ...prev, [questionId]: optionId }));
   };
 
-  // Xóa lựa chọn của 1 câu để làm lại trong chế độ Luyện tập
   const handleRetryQuestion = (questionId: string) => {
     if (isSubmitted || examMode !== 'practice') return;
     setUserAnswers(prev => {
@@ -217,7 +222,6 @@ export const ExamPage: React.FC = () => {
     });
   };
 
-  // Chuyển đổi qua lại giữa 2 chế độ Thi thật & Luyện tập ngay trong phòng thi
   const handleSwitchExamMode = (nextMode: ExamMode) => {
     if (nextMode === examMode) return;
     if (isSubmitted) {
@@ -226,9 +230,9 @@ export const ExamPage: React.FC = () => {
     }
     if (nextMode === 'practice') {
       setExamMode('practice');
+      setShowPracticeFurigana(true);
       setIsTimerRunning(false);
     } else {
-      // Chuyển từ Luyện tập -> Thi thật: reset đáp án đã xem trước đó & khởi động đồng hồ chuẩn JLPT
       setUserAnswers({});
       setExamMode('exam');
       setSecondsRemaining(totalDurationSeconds);
@@ -236,12 +240,10 @@ export const ExamPage: React.FC = () => {
     }
   };
 
-  // Tự động nộp bài khi hết giờ
   const handleAutoSubmitOnTimeUp = () => {
     executeSubmission(true);
   };
 
-  // Học viên chủ động bấm nộp bài -> Mở modal xác nhận thay vì window.confirm
   const handleSubmitExam = () => {
     if (!activeExam || !activeExam.questionSets) return;
     setShowSubmitModal(true);
@@ -261,15 +263,12 @@ export const ExamPage: React.FC = () => {
     let count = 0;
     for (const qs of activeExam.questionSets) {
       for (const q of (qs.questions || [])) {
-        if (!userAnswers[q.id]) {
-          count++;
-        }
+        if (!userAnswers[q.id]) count++;
       }
     }
     return count;
   };
 
-  // Xử lý logic tính điểm, lưu tiến trình và cập nhật Firestore/LocalStorage
   const executeSubmission = async (isTimeExpired: boolean) => {
     if (!activeExam || !activeExam.questionSets) return;
     setIsTimerRunning(false);
@@ -295,7 +294,7 @@ export const ExamPage: React.FC = () => {
 
     const timeSpent = Math.max(1, totalDurationSeconds - secondsRemaining);
     const percentage = Math.round((correct / (total || 1)) * 100);
-    const isPassed = percentage >= 50; // Chuẩn đậu cơ bản JLPT
+    const isPassed = percentage >= 50;
 
     const scoreData: ScoreDetail = {
       total,
@@ -311,7 +310,6 @@ export const ExamPage: React.FC = () => {
     setScoreResult(scoreData);
     setIsSubmitted(true);
 
-    // Lưu tiến trình bài thi vào Firestore và LocalStorage
     if (currentUser?.id) {
       const resultPayload: UserExamResult = {
         userId: currentUser.id,
@@ -336,12 +334,14 @@ export const ExamPage: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Làm lại đề thi hiện tại
   const handleResetExam = (targetMode: ExamMode = examMode) => {
     setUserAnswers({});
     setIsSubmitted(false);
     setScoreResult(null);
     setExamMode(targetMode);
+    if (targetMode === 'practice') {
+      setShowPracticeFurigana(true);
+    }
     if (activeExam) {
       const standardDurationMin = JLPT_STANDARD_DURATIONS[activeExam.level?.toUpperCase()] || 120;
       const examDurationMin = (activeExam.durationMinutes && activeExam.durationMinutes > 0)
@@ -355,7 +355,6 @@ export const ExamPage: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Thoát khỏi phòng thi -> Mở modal xác nhận thay vì window.confirm
   const handleExitExam = () => {
     if (examMode === 'exam' && !isSubmitted && Object.keys(userAnswers).length > 0) {
       setShowExitModal(true);
@@ -400,8 +399,13 @@ export const ExamPage: React.FC = () => {
     }
     const progressPercent = Math.min(100, Math.round((answeredCount / totalQuestionsCount) * 100));
 
+    // Quy tắc Furigana:
+    // - Trong chế độ Thi thật (khi chưa nộp bài): LUÔN ẨN Furigana để mô phỏng đúng đề thi JLPT thực tế
+    // - Trong chế độ Luyện tập hoặc sau khi nộp bài: HIỂN THỊ Furigana (kèm nút bật/tắt nhanh nếu muốn)
+    const shouldHideFurigana = (examMode === 'exam' && !isSubmitted) || !showPracticeFurigana;
+
     return (
-      <div className="kizuna-exam-page" style={{ maxWidth: 960, margin: '0 auto', paddingBottom: 60 }}>
+      <div className="max-w-4xl mx-auto pb-16 space-y-5">
         <style>{`
           @keyframes kanjiSpin {
             from { transform: rotate(0deg); }
@@ -414,136 +418,101 @@ export const ExamPage: React.FC = () => {
         `}</style>
 
         {/* 1. THANH ĐIỀU HƯỚNG GHIM PHÒNG THI (STICKY HEADER) */}
-        <div style={{
-          position: 'sticky',
-          top: 60,
-          background: 'rgba(255, 255, 255, 0.96)',
-          backdropFilter: 'blur(8px)',
-          zIndex: 15,
-          padding: '14px 20px',
-          borderRadius: 12,
-          boxShadow: '0 4px 14px rgba(44, 30, 20, 0.05)',
-          border: '1px solid #ebe7df',
-          marginBottom: 20
-        }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                <span style={{
-                  background: '#fdf2f0',
-                  color: '#c53d32',
-                  border: '1px solid #f3d5d2',
-                  borderRadius: 6,
-                  padding: '2px 8px',
-                  fontSize: 12,
-                  fontWeight: 900
-                }}>
+        <div className="sticky top-14 lg:top-4 z-20 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-3.5 sm:px-5 transition-colors">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 rounded-md px-2 py-0.5 text-xs font-black">
                   {activeExam.level}
                 </span>
-                <h2 style={{
-                  fontSize: 17,
-                  fontWeight: 800,
-                  color: '#1c2536',
-                  margin: 0,
-                  fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
-                }}>
+                <h2 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white m-0 font-jp-serif truncate">
                   {activeExam.label}
                 </h2>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 12, color: '#78716c', marginTop: 4, flexWrap: 'wrap' }}>
+              <div className="flex items-center gap-2.5 text-xs text-slate-500 dark:text-slate-400 mt-1 flex-wrap">
                 {examMode === 'exam' ? (
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                    <Timer size={13} color={secondsRemaining < 300 && !isSubmitted ? '#ef4444' : '#78716c'} />
-                    Thời gian: <strong style={{ color: secondsRemaining < 300 && !isSubmitted ? '#ef4444' : '#1c2536' }}>{formatTime(secondsRemaining)}</strong>
+                  <span className="inline-flex items-center gap-1">
+                    <Timer size={13} className={secondsRemaining < 300 && !isSubmitted ? 'text-rose-500' : 'text-slate-400'} />
+                    Thời gian:{' '}
+                    <strong className={secondsRemaining < 300 && !isSubmitted ? 'text-rose-600 dark:text-rose-400' : 'text-slate-900 dark:text-slate-100'}>
+                      {formatTime(secondsRemaining)}
+                    </strong>
                   </span>
                 ) : (
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                    <Lightbulb size={13} color="#0d9488" />
-                    <span style={{ color: '#0f766e', fontWeight: 700 }}>Chế độ Luyện tập · Xem đáp án ngay</span>
+                  <span className="inline-flex items-center gap-1.5 text-teal-700 dark:text-teal-400 font-bold">
+                    <Lightbulb size={13} />
+                    <span>Chế độ Luyện tập · Xem đáp án ngay</span>
                   </span>
                 )}
                 <span>•</span>
                 <span>
-                  Tiến độ: <strong style={{ color: '#c53d32' }}>{answeredCount}</strong> / {totalQuestionsCount} câu ({progressPercent}%)
+                  Tiến độ: <strong className="text-rose-600 dark:text-rose-400">{answeredCount}</strong> / {totalQuestionsCount} câu ({progressPercent}%)
                 </span>
                 {examMode === 'practice' && answeredCount > 0 && (
                   <>
                     <span>•</span>
-                    <span style={{ color: '#15803d', fontWeight: 800 }}>Đúng: {liveCorrectCount}</span>
-                    <span style={{ color: '#b91c1c', fontWeight: 800 }}>Sai: {liveWrongCount}</span>
+                    <span className="text-emerald-700 dark:text-emerald-400 font-extrabold">Đúng: {liveCorrectCount}</span>
+                    <span className="text-rose-600 dark:text-rose-400 font-extrabold">Sai: {liveWrongCount}</span>
                   </>
                 )}
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-              {/* BỘ CHUYỂN ĐỔI 2 CHẾ ĐỘ: THI THẬT / LUYỆN TẬP */}
-              <div style={{
-                display: 'inline-flex',
-                background: '#f5f2ed',
-                padding: 3,
-                borderRadius: 9,
-                border: '1px solid #e7dfd5',
-                gap: 2
-              }}>
+            <div className="flex items-center gap-2 flex-wrap">
+              {/* Bộ chuyển đổi 2 chế độ: Thi thật / Luyện tập */}
+              <div className="inline-flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700 gap-1">
                 <button
                   type="button"
                   onClick={() => handleSwitchExamMode('exam')}
-                  style={{
-                    padding: '5px 10px',
-                    borderRadius: 6,
-                    border: 'none',
-                    fontSize: 12,
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    background: examMode === 'exam' ? '#1c2536' : 'transparent',
-                    color: examMode === 'exam' ? '#ffffff' : '#57534e',
-                    transition: 'all 0.15s ease'
-                  }}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
+                    examMode === 'exam'
+                      ? 'bg-slate-900 dark:bg-rose-600 text-white shadow-2xs'
+                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                  }`}
                 >
                   Thi thật
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSwitchExamMode('practice')}
-                  style={{
-                    padding: '5px 10px',
-                    borderRadius: 6,
-                    border: 'none',
-                    fontSize: 12,
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    background: examMode === 'practice' ? '#0d9488' : 'transparent',
-                    color: examMode === 'practice' ? '#ffffff' : '#57534e',
-                    transition: 'all 0.15s ease'
-                  }}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
+                    examMode === 'practice'
+                      ? 'bg-teal-600 text-white shadow-2xs'
+                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                  }`}
                 >
                   Luyện tập
                 </button>
               </div>
 
+              {/* Nút Bật/Tắt Furigana (chỉ hiện trong Luyện tập hoặc khi xem lại sau nộp bài; Thi thật ẩn bắt buộc) */}
+              {(examMode === 'practice' || isSubmitted) ? (
+                <button
+                  type="button"
+                  onClick={() => setShowPracticeFurigana(prev => !prev)}
+                  title={showPracticeFurigana ? 'Ẩn phiên âm Furigana' : 'Hiện phiên âm Furigana'}
+                  className={`px-2.5 py-1.5 rounded-lg text-xs font-bold border inline-flex items-center gap-1.5 cursor-pointer transition-colors ${
+                    showPracticeFurigana
+                      ? 'bg-amber-50 dark:bg-amber-950/50 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700'
+                  }`}
+                >
+                  {showPracticeFurigana ? <Eye size={13} /> : <EyeOff size={13} />}
+                  <span>Furigana: {showPracticeFurigana ? 'Bật' : 'Tắt'}</span>
+                </button>
+              ) : (
+                <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 inline-flex items-center gap-1">
+                  <EyeOff size={12} /> Ẩn Furigana
+                </span>
+              )}
+
               {!isSubmitted ? (
                 examMode === 'exam' ? (
                   <button
+                    type="button"
                     onClick={handleSubmitExam}
-                    style={{
-                      padding: '8px 18px',
-                      background: '#c53d32',
-                      color: '#ffffff',
-                      border: 'none',
-                      borderRadius: 8,
-                      fontWeight: 700,
-                      fontSize: 13,
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 6,
-                      boxShadow: '0 2px 6px rgba(197, 61, 50, 0.25)',
-                      transition: 'background 0.15s ease'
-                    }}
-                    onMouseEnter={e => e.currentTarget.style.background = '#9c2a2a'}
-                    onMouseLeave={e => e.currentTarget.style.background = '#c53d32'}
+                    className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-bold text-xs sm:text-sm flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer"
                   >
                     <CheckCircle2 size={15} /> Nộp bài chấm điểm
                   </button>
@@ -553,19 +522,7 @@ export const ExamPage: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => executeSubmission(false)}
-                        style={{
-                          padding: '8px 14px',
-                          background: '#0d9488',
-                          color: '#ffffff',
-                          border: 'none',
-                          borderRadius: 8,
-                          fontWeight: 700,
-                          fontSize: 13,
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 6
-                        }}
+                        className="px-3.5 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-xl font-bold text-xs sm:text-sm flex items-center gap-1.5 transition-colors cursor-pointer"
                       >
                         <CheckCircle2 size={15} /> Tổng kết & Lưu
                       </button>
@@ -573,19 +530,7 @@ export const ExamPage: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => handleResetExam('practice')}
-                      style={{
-                        padding: '8px 14px',
-                        background: '#1c2536',
-                        color: '#ffffff',
-                        border: 'none',
-                        borderRadius: 8,
-                        fontWeight: 700,
-                        fontSize: 13,
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 6
-                      }}
+                      className="px-3.5 py-2 bg-slate-800 dark:bg-slate-700 hover:bg-slate-900 dark:hover:bg-slate-600 text-white rounded-xl font-bold text-xs sm:text-sm flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
                       <RotateCcw size={14} /> Làm lại
                     </button>
@@ -593,127 +538,53 @@ export const ExamPage: React.FC = () => {
                 )
               ) : (
                 <button
+                  type="button"
                   onClick={() => handleResetExam()}
-                  style={{
-                    padding: '8px 16px',
-                    background: '#1c2536',
-                    color: '#ffffff',
-                    border: 'none',
-                    borderRadius: 8,
-                    fontWeight: 700,
-                    fontSize: 13,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 6,
-                    transition: 'background 0.15s ease'
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.background = '#c53d32'}
-                  onMouseLeave={e => e.currentTarget.style.background = '#1c2536'}
+                  className="px-4 py-2 bg-slate-800 dark:bg-slate-700 hover:bg-rose-600 text-white rounded-xl font-bold text-xs sm:text-sm flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <RotateCcw size={15} /> Làm lại bài thi
                 </button>
               )}
+
               <button
+                type="button"
                 onClick={handleExitExam}
-                style={{
-                  padding: '8px 14px',
-                  background: '#faf8f5',
-                  color: '#57534e',
-                  border: '1px solid #d6d3d1',
-                  borderRadius: 8,
-                  fontWeight: 600,
-                  fontSize: 13,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 4,
-                  transition: 'background 0.15s ease'
-                }}
-                onMouseEnter={e => e.currentTarget.style.background = '#ebe7df'}
-                onMouseLeave={e => e.currentTarget.style.background = '#faf8f5'}
+                className="px-3 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 rounded-xl font-semibold text-xs sm:text-sm flex items-center gap-1 transition-colors cursor-pointer"
               >
                 <ChevronLeft size={15} /> Thoát
               </button>
             </div>
           </div>
 
-          {/* Thanh tiến trình hoàn thành */}
-          <div style={{
-            width: '100%',
-            height: 4,
-            background: '#f5f5f4',
-            borderRadius: 2,
-            overflow: 'hidden',
-            marginTop: 10
-          }}>
-            <div style={{
-              width: `${progressPercent}%`,
-              height: '100%',
-              background: isSubmitted ? '#16a34a' : (examMode === 'practice' ? '#0d9488' : '#c53d32'),
-              transition: 'width 0.3s ease'
-            }} />
+          {/* Thanh tiến trình */}
+          <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden mt-2.5">
+            <div
+              className={`h-full transition-all duration-300 ${
+                isSubmitted ? 'bg-emerald-600' : examMode === 'practice' ? 'bg-teal-600' : 'bg-rose-600'
+              }`}
+              style={{ width: `${progressPercent}%` }}
+            />
           </div>
         </div>
 
-        {/* 2. BẢNG TỔNG KẾT KẾT QUẢ THI CHI TIẾT KHI NỘP BÀI */}
+        {/* 2. BẢNG TỔNG KẾT KẾT QUẢ THI KHI NỘP BÀI */}
         {isSubmitted && scoreResult && (
-          <div style={{
-            background: 'linear-gradient(135deg, #ffffff 0%, #faf8f5 100%)',
-            border: '1.5px solid #e7dfd5',
-            borderLeft: '4px solid #c53d32',
-            borderRadius: 14,
-            padding: '24px 28px',
-            marginBottom: 24,
-            boxShadow: '0 4px 16px rgba(44, 30, 20, 0.04)'
-          }}>
-            {/* Thông báo tự động thu bài nếu hết giờ */}
+          <div className="bg-gradient-to-br from-white to-stone-50 dark:from-slate-900 dark:to-slate-900/95 border border-slate-200 dark:border-slate-800 border-l-4 border-l-rose-600 rounded-2xl p-5 sm:p-7 shadow-sm">
             {scoreResult.isTimeUp && (
-              <div style={{
-                background: '#fef2f2',
-                border: '1px solid #fecaca',
-                borderRadius: 8,
-                padding: '10px 14px',
-                marginBottom: 16,
-                fontSize: 13,
-                fontWeight: 700,
-                color: '#991b1b',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8
-              }}>
-                <AlertCircle size={16} color="#ef4444" />
+              <div className="bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 rounded-xl p-3 mb-4 text-xs sm:text-sm font-bold text-rose-800 dark:text-rose-300 flex items-center gap-2">
+                <AlertCircle size={16} className="text-rose-500 shrink-0" />
                 <span>Hết thời gian thi chính thức theo chuẩn JLPT! Hệ thống đã tự động thu bài và chấm điểm của bạn.</span>
               </div>
             )}
 
-            <div style={{ textAlign: 'center', marginBottom: 20 }}>
-              {/* Đánh giá cấp độ năng lực */}
-              <div style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 6,
-                padding: '4px 14px',
-                borderRadius: 20,
-                fontSize: 12,
-                fontWeight: 800,
-                marginBottom: 12,
-                background: scoreResult.percentage >= 80
-                  ? '#fefce8'
+            <div className="text-center mb-5">
+              <div className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-extrabold mb-3 border ${
+                scoreResult.percentage >= 80
+                  ? 'bg-amber-50 dark:bg-amber-950/50 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800'
                   : scoreResult.percentage >= 50
-                    ? '#f0fdf4'
-                    : '#fef2f2',
-                color: scoreResult.percentage >= 80
-                  ? '#a16207'
-                  : scoreResult.percentage >= 50
-                    ? '#15803d'
-                    : '#b91c1c',
-                border: scoreResult.percentage >= 80
-                  ? '1px solid #fef08a'
-                  : scoreResult.percentage >= 50
-                    ? '1px solid #bbf7d0'
-                    : '1px solid #fecaca'
-              }}>
+                    ? 'bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800'
+                    : 'bg-rose-50 dark:bg-rose-950/50 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800'
+              }`}>
                 {scoreResult.percentage >= 80 ? (
                   <>
                     <Sparkles size={15} />
@@ -732,698 +603,406 @@ export const ExamPage: React.FC = () => {
                 )}
               </div>
 
-              {/* Điểm số to rõ ràng */}
-              <div style={{ fontSize: 28, fontWeight: 900, color: '#1c2536', marginBottom: 4 }}>
-                {scoreResult.correct} <span style={{ fontSize: 22, color: '#78716c' }}>/ {scoreResult.total} câu đúng</span>
-                <span style={{ fontSize: 24, color: '#c53d32', marginLeft: 10 }}>
-                  ({scoreResult.percentage}%)
-                </span>
+              <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-1">
+                {scoreResult.correct}{' '}
+                <span className="text-xl text-slate-500 dark:text-slate-400">/ {scoreResult.total} câu đúng</span>
+                <span className="text-2xl text-rose-600 dark:text-rose-400 ml-2.5">({scoreResult.percentage}%)</span>
               </div>
-              <div style={{ fontSize: 13, color: '#57534e' }}>
+              <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                 Tiến trình đã được tự động lưu vào hồ sơ học tập KIZUNA của bạn
               </div>
             </div>
 
-            {/* Lưới 4 chỉ số thực chiến: Thời gian, Tiến độ, Số câu đúng, Số câu sai */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-              gap: 12,
-              borderTop: '1px solid #ebe7df',
-              paddingTop: 16
-            }}>
-              <div style={{ background: '#ffffff', border: '1px solid #ebe7df', borderRadius: 8, padding: '12px 14px' }}>
-                <div style={{ fontSize: 11, fontWeight: 700, color: '#78716c', display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <Clock size={13} color="#78716c" /> THỜI GIAN LÀM BÀI
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 border-t border-slate-200 dark:border-slate-800 pt-4">
+              <div className="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl p-3">
+                <div className="text-[11px] font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                  <Clock size={13} /> THỜI GIAN LÀM BÀI
                 </div>
-                <div style={{ fontSize: 16, fontWeight: 800, color: '#1c2536', marginTop: 4 }}>
+                <div className="text-base font-extrabold text-slate-900 dark:text-white mt-1">
                   {formatDurationSpent(scoreResult.timeSpentSeconds)}
                 </div>
-                <div style={{ fontSize: 11, color: '#a8a29e', marginTop: 2 }}>
+                <div className="text-[11px] text-slate-400 mt-0.5">
                   Quy định: {Math.round(totalDurationSeconds / 60)} phút
                 </div>
               </div>
 
-              <div style={{ background: '#ffffff', border: '1px solid #ebe7df', borderRadius: 8, padding: '12px 14px' }}>
-                <div style={{ fontSize: 11, fontWeight: 700, color: '#78716c', display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <FileText size={13} color="#78716c" /> TIẾN ĐỘ TRẢ LỜI
+              <div className="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl p-3">
+                <div className="text-[11px] font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                  <FileText size={13} /> TIẾN ĐỘ TRẢ LỜI
                 </div>
-                <div style={{ fontSize: 16, fontWeight: 800, color: '#1c2536', marginTop: 4 }}>
+                <div className="text-base font-extrabold text-slate-900 dark:text-white mt-1">
                   {scoreResult.total - scoreResult.unanswered} / {scoreResult.total} câu
                 </div>
-                <div style={{ fontSize: 11, color: '#a8a29e', marginTop: 2 }}>
+                <div className="text-[11px] text-slate-400 mt-0.5">
                   Hoàn thành {Math.round(((scoreResult.total - scoreResult.unanswered) / (scoreResult.total || 1)) * 100)}% đề thi
                 </div>
               </div>
 
-              <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 8, padding: '12px 14px' }}>
-                <div style={{ fontSize: 11, fontWeight: 700, color: '#15803d', display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <CheckCircle2 size={13} color="#15803d" /> SỐ CÂU ĐÚNG
+              <div className="bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/70 rounded-xl p-3">
+                <div className="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
+                  <CheckCircle2 size={13} /> SỐ CÂU ĐÚNG
                 </div>
-                <div style={{ fontSize: 18, fontWeight: 900, color: '#15803d', marginTop: 4 }}>
+                <div className="text-lg font-black text-emerald-700 dark:text-emerald-300 mt-1">
                   {scoreResult.correct} câu
                 </div>
-                <div style={{ fontSize: 11, color: '#166534', marginTop: 2 }}>
+                <div className="text-[11px] text-emerald-600 dark:text-emerald-400 mt-0.5">
                   Đạt {scoreResult.percentage}% điểm
                 </div>
               </div>
 
-              <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 8, padding: '12px 14px' }}>
-                <div style={{ fontSize: 11, fontWeight: 700, color: '#b91c1c', display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <AlertCircle size={13} color="#b91c1c" /> CÂU SAI & BỎ QUA
+              <div className="bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800/70 rounded-xl p-3">
+                <div className="text-[11px] font-bold text-rose-700 dark:text-rose-400 flex items-center gap-1.5">
+                  <AlertCircle size={13} /> CÂU SAI & BỎ QUA
                 </div>
-                <div style={{ fontSize: 18, fontWeight: 900, color: '#b91c1c', marginTop: 4 }}>
+                <div className="text-lg font-black text-rose-700 dark:text-rose-300 mt-1">
                   {scoreResult.wrong + scoreResult.unanswered} câu
                 </div>
-                <div style={{ fontSize: 11, color: '#991b1b', marginTop: 2 }}>
+                <div className="text-[11px] text-rose-600 dark:text-rose-400 mt-0.5">
                   {scoreResult.wrong} câu sai · {scoreResult.unanswered} chưa chọn
                 </div>
               </div>
             </div>
 
-            {/* Thông báo hướng dẫn xem lại */}
-            <div style={{
-              marginTop: 18,
-              padding: '10px 14px',
-              background: '#f8fafc',
-              border: '1px solid #e2e8f0',
-              borderRadius: 8,
-              fontSize: 12,
-              color: '#475569',
-              textAlign: 'center'
-            }}>
-              Toàn bộ câu hỏi bên dưới đã được tự động hiển thị chi tiết: câu sai hiển thị đối chiếu đáp án đúng, câu đúng hiển thị giải thích đầy đủ.
+            <div className="mt-4 p-2.5 px-3.5 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-600 dark:text-slate-300 text-center">
+              Toàn bộ câu hỏi bên dưới đã mở khóa đầy đủ Furigana, giải thích từ vựng/ngữ pháp và kịch bản dịch nghĩa để bạn ôn tập.
             </div>
           </div>
         )}
 
-        {/* 3. AUDIO PLAYER CHO PHẦN CHOUKAI (CHỈ HIỆN Ở ĐẦU TRANG NẾU ĐỀ DÙNG 1 FILE AUDIO CHUNG) */}
+        {/* 3. AUDIO PLAYER CHUNG CHO CHOUKAI */}
         {activeExam.audioUrl && !(activeExam.questionSets || []).some(qs => Boolean(qs.audioUrl)) && (
-          <div style={{
-            padding: '16px 20px',
-            marginBottom: 24,
-            background: '#faf8f5',
-            borderRadius: 12,
-            border: '1px solid #ebe7df',
-            borderLeft: '4px solid #0d9488'
-          }}>
-            <div style={{
-              fontSize: 13,
-              fontWeight: 800,
-              color: '#0f766e',
-              marginBottom: 10,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8
-            }}>
-              <Headphones size={16} color="#0d9488" />
+          <div className="p-4 sm:p-5 bg-teal-50/70 dark:bg-teal-950/30 rounded-2xl border border-teal-200 dark:border-teal-800/70 border-l-4 border-l-teal-600 dark:border-l-teal-500">
+            <div className="text-xs sm:text-sm font-extrabold text-teal-800 dark:text-teal-300 mb-2 flex items-center gap-2">
+              <Headphones size={16} />
               <span>File Nghe Audio Chính Thức (JLPT Official Choukai Audio):</span>
             </div>
-            <audio src={activeExam.audioUrl} controls style={{ width: '100%', outline: 'none' }} />
+            <audio src={activeExam.audioUrl} controls className="w-full h-10 outline-none" />
           </div>
         )}
 
-        {/* 4. TOÀN BỘ CÁC PHẦN THI (MONDAI QUESTION SETS) VÀ CÂU HỎI */}
-        {activeExam.questionSets && activeExam.questionSets.map((qs, setIdx) => {
-          const isListeningPart = qs.part === 2;
-          const anyQuestionAnsweredInSet = qs.questions.some(q => Boolean(userAnswers[q.id]));
-          const showSetScript = Boolean(qs.script) && (isSubmitted || (examMode === 'practice' && anyQuestionAnsweredInSet));
+        {/* 4. TOÀN BỘ CÁC PHẦN THI (MONDAI QUESTION SETS) */}
+        <div className={shouldHideFurigana ? 'kizuna-hide-furigana space-y-6' : 'space-y-6'}>
+          {activeExam.questionSets && activeExam.questionSets.map((qs, setIdx) => {
+            const isListeningPart = qs.part === 2;
+            const anyQuestionAnsweredInSet = qs.questions.some(q => Boolean(userAnswers[q.id]));
+            const showSetScript = Boolean(qs.script) && (isSubmitted || (examMode === 'practice' && anyQuestionAnsweredInSet));
 
-          return (
-            <div
-              key={qs.id || setIdx}
-              style={{
-                background: '#ffffff',
-                borderRadius: 12,
-                border: '1px solid #ebe7df',
-                padding: '24px',
-                marginBottom: 24,
-                boxShadow: '0 2px 6px rgba(0,0,0,0.02)'
-              }}
-            >
-              {/* Tiêu đề Mondai */}
-              <div style={{
-                background: '#faf8f5',
-                padding: '12px 16px',
-                borderRadius: 8,
-                fontSize: 14,
-                fontWeight: 800,
-                color: '#1c2536',
-                marginBottom: 16,
-                borderLeft: isListeningPart ? '4px solid #0d9488' : '4px solid #c53d32',
-                border: '1px solid #ebe7df',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-                flexWrap: 'wrap'
-              }}>
-                <span style={{
-                  fontSize: 11,
-                  fontWeight: 900,
-                  color: isListeningPart ? '#0d9488' : '#c53d32',
-                  background: isListeningPart ? '#f0fdfa' : '#fdf2f0',
-                  padding: '2px 6px',
-                  borderRadius: 4
-                }}>
-                  {isListeningPart ? 'CHOUKAI' : 'BUNPOU / DOKKAI'}
-                </span>
-                <span>
-                  Phần {qs.part === 1 ? 'Kiến Thức Ngôn Ngữ & Đọc Hiểu' : 'Nghe Hiểu (Choukai)'}:{' '}
-                  <span dangerouslySetInnerHTML={{ __html: qs.title }} />
-                </span>
-              </div>
+            return (
+              <div
+                key={qs.id || setIdx}
+                className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 sm:p-6 shadow-xs transition-colors"
+              >
+                {/* Tiêu đề Mondai */}
+                <div className={`bg-slate-50 dark:bg-slate-800/80 p-3 px-4 rounded-xl text-sm font-extrabold text-slate-900 dark:text-slate-100 mb-4 border border-slate-200 dark:border-slate-700 border-l-4 flex items-center gap-2.5 flex-wrap ${
+                  isListeningPart ? 'border-l-teal-600 dark:border-l-teal-500' : 'border-l-rose-600 dark:border-l-rose-500'
+                }`}>
+                  <span className={`text-[11px] font-black px-2 py-0.5 rounded-md ${
+                    isListeningPart
+                      ? 'text-teal-700 dark:text-teal-300 bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800'
+                      : 'text-rose-700 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800'
+                  }`}>
+                    {isListeningPart ? 'CHOUKAI' : 'BUNPOU / DOKKAI'}
+                  </span>
+                  <span>
+                    Phần {qs.part === 1 ? 'Kiến Thức Ngôn Ngữ & Đọc Hiểu' : 'Nghe Hiểu (Choukai)'}:{' '}
+                    <span className="kizuna-passage-html" dangerouslySetInnerHTML={{ __html: qs.title }} />
+                  </span>
+                </div>
 
-              {/* Audio player riêng cho Mondai (nếu có) */}
-              {qs.audioUrl && (
-                <div style={{
-                  background: '#f0fdfa',
-                  border: '1px solid #ccfbf1',
-                  borderRadius: 10,
-                  padding: '12px 14px',
-                  marginBottom: 16
-                }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: '#0f766e', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <Headphones size={14} color="#0d9488" />
-                    <span>File nghe Mondai này:</span>
+                {/* Audio player riêng cho Mondai */}
+                {qs.audioUrl && (
+                  <div className="bg-teal-50/70 dark:bg-teal-950/30 border border-teal-200 dark:border-teal-800/70 rounded-xl p-3 mb-4">
+                    <div className="text-xs font-bold text-teal-800 dark:text-teal-300 mb-1.5 flex items-center gap-1.5">
+                      <Headphones size={14} />
+                      <span>File nghe Mondai này:</span>
+                    </div>
+                    <audio src={qs.audioUrl} controls preload="none" className="w-full h-9 outline-none" />
                   </div>
-                  <audio src={qs.audioUrl} controls preload="none" style={{ width: '100%', outline: 'none' }} />
-                </div>
-              )}
+                )}
 
-              {/* Ảnh minh họa của Mondai (nếu có) */}
-              {qs.imageUrl && (
-                <div style={{ marginBottom: 16, textAlign: 'center' }}>
-                  <img src={qs.imageUrl} alt={qs.title || 'Mondai illustration'} style={{ maxWidth: '100%', maxHeight: 420, borderRadius: 8, border: '1px solid #e7dfd5' }} />
-                </div>
-              )}
+                {/* Ảnh minh họa Mondai */}
+                {qs.imageUrl && (
+                  <div className="mb-4 text-center">
+                    <img
+                      src={qs.imageUrl}
+                      alt={qs.title || 'Mondai illustration'}
+                      className="max-w-full max-h-[420px] mx-auto rounded-xl border border-slate-200 dark:border-slate-700 bg-white"
+                    />
+                  </div>
+                )}
 
-              {/* Đoạn văn đọc hiểu nếu có */}
-              {qs.content && (
-                <div
-                  style={{
-                    background: '#fdfbf7',
-                    border: '1px solid #e7dfd5',
-                    borderRadius: 8,
-                    padding: '16px 20px',
-                    marginBottom: 20,
-                    fontSize: 14,
-                    lineHeight: 1.8,
-                    whiteSpace: 'pre-wrap',
-                    color: '#334155',
-                    fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
-                  }}
-                  dangerouslySetInnerHTML={{ __html: qs.content }}
-                />
-              )}
-
-              {/* Kịch bản nghe tổng thể của Mondai (hiện sau khi nộp hoặc khi đang luyện tập Mondai này) */}
-              {showSetScript && qs.script && (
-                <details style={{
-                  background: '#f8fafc',
-                  border: '1px solid #cbd5e1',
-                  borderRadius: 8,
-                  padding: '10px 14px',
-                  marginBottom: 18,
-                  fontSize: 13
-                }}>
-                  <summary style={{ fontWeight: 800, color: '#0f766e', cursor: 'pointer' }}>
-                    Xem kịch bản & dịch nghĩa toàn Mondai này
-                  </summary>
+                {/* Đoạn văn đọc hiểu (Dokkai) */}
+                {qs.content && (
                   <div
-                    style={{ marginTop: 10, color: '#334155', lineHeight: 1.7 }}
-                    dangerouslySetInnerHTML={{ __html: qs.script }}
+                    className="kizuna-passage-html bg-stone-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-700 rounded-xl p-4 sm:p-5 mb-5 text-sm sm:text-[15px] leading-relaxed whitespace-pre-wrap text-slate-800 dark:text-slate-100 font-jp-serif"
+                    dangerouslySetInnerHTML={{ __html: qs.content }}
                   />
-                </details>
-              )}
+                )}
 
-              {/* Danh sách câu hỏi */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-                {(qs.questions || []).map((q, qIdx) => {
-                  const userChoice = userAnswers[q.id];
-                  const hasAnswered = !!userChoice;
-                  const isGraded = isSubmitted || (examMode === 'practice' && hasAnswered);
-                  const isCorrect = isGraded && userChoice === q.correctAnswer;
-                  const isWrong = isGraded && hasAnswered && userChoice !== q.correctAnswer;
-                  const isUnanswered = isSubmitted && !hasAnswered;
-
-                  // Thiết lập khung viền: ĐỎ cho câu sai hoặc câu chưa làm, XANH LÁ cho câu đúng
-                  let cardBg = '#ffffff';
-                  let cardBorder = '1px solid #ebe7df';
-                  let cardBorderLeft = '1px solid #ebe7df';
-                  let cardShadow = '0 1px 3px rgba(0,0,0,0.02)';
-
-                  if (isGraded) {
-                    if (isCorrect) {
-                      cardBg = '#fbfdfb';
-                      cardBorder = '1.5px solid #86efac';
-                      cardBorderLeft = '5px solid #16a34a';
-                      cardShadow = '0 3px 10px rgba(22, 163, 74, 0.06)';
-                    } else {
-                      // isWrong hoặc isUnanswered: Khung đỏ nổi bật rõ ràng
-                      cardBg = '#fffafa';
-                      cardBorder = '1.5px solid #fca5a5';
-                      cardBorderLeft = '5px solid #dc2626';
-                      cardShadow = '0 3px 10px rgba(220, 38, 38, 0.06)';
-                    }
-                  }
-
-                  return (
+                {/* Kịch bản nghe tổng thể Mondai */}
+                {showSetScript && qs.script && (
+                  <details className="bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-700 rounded-xl p-3 mb-4 text-xs">
+                    <summary className="font-bold text-teal-700 dark:text-teal-400 cursor-pointer">
+                      Xem kịch bản & dịch nghĩa Mondai
+                    </summary>
                     <div
-                      key={q.id || qIdx}
-                      style={{
-                        background: cardBg,
-                        border: cardBorder,
-                        borderLeft: cardBorderLeft,
-                        borderRadius: 12,
-                        padding: '20px 22px',
-                        boxShadow: cardShadow,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: 14,
-                        transition: 'all 0.15s ease'
-                      }}
-                    >
-                      {/* Đoạn văn riêng của câu hỏi (nếu Mondai có nhiều đoạn văn) */}
-                      {q.content && (
-                        <div
-                          style={{
-                            background: '#fdfbf7',
-                            border: '1px solid #e7dfd5',
-                            borderRadius: 8,
-                            padding: '14px 18px',
-                            fontSize: 14,
-                            lineHeight: 1.8,
-                            whiteSpace: 'pre-wrap',
-                            color: '#334155',
-                            fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
-                          }}
-                          dangerouslySetInnerHTML={{ __html: q.content }}
-                        />
-                      )}
+                      className="kizuna-passage-html mt-2 text-slate-700 dark:text-slate-200 leading-relaxed whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{ __html: qs.script }}
+                    />
+                  </details>
+                )}
 
-                      {/* Ảnh minh họa hoặc file nghe riêng của câu hỏi (nếu có) */}
-                      {q.imageUrl && (
-                        <div style={{ textAlign: 'center' }}>
-                          <img src={q.imageUrl} alt={`Câu ${q.index || (qIdx + 1)}`} style={{ maxWidth: '100%', maxHeight: 380, borderRadius: 8, border: '1px solid #e7dfd5' }} />
+                {/* Danh sách câu hỏi */}
+                <div className="flex flex-col gap-5">
+                  {(qs.questions || []).map((q, qIdx) => {
+                    const userChoice = userAnswers[q.id];
+                    const hasAnswered = !!userChoice;
+                    const isGraded = isSubmitted || (examMode === 'practice' && hasAnswered);
+                    const isCorrect = isGraded && userChoice === q.correctAnswer;
+                    const isWrong = isGraded && hasAnswered && userChoice !== q.correctAnswer;
+                    const isUnanswered = isSubmitted && !hasAnswered;
+
+                    let cardCls =
+                      'bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-5 flex flex-col gap-3.5 transition-all';
+                    if (isGraded) {
+                      if (isCorrect) {
+                        cardCls =
+                          'bg-emerald-50/40 dark:bg-emerald-950/20 border-2 border-emerald-300 dark:border-emerald-800/80 border-l-4 border-l-emerald-600 dark:border-l-emerald-500 rounded-2xl p-4 sm:p-5 flex flex-col gap-3.5 transition-all';
+                      } else {
+                        cardCls =
+                          'bg-rose-50/40 dark:bg-rose-950/20 border-2 border-rose-300 dark:border-rose-800/80 border-l-4 border-l-rose-600 dark:border-l-rose-500 rounded-2xl p-4 sm:p-5 flex flex-col gap-3.5 transition-all';
+                      }
+                    }
+
+                    return (
+                      <div key={q.id || qIdx} className={cardCls}>
+                        {/* Đoạn văn riêng của câu hỏi */}
+                        {q.content && (
+                          <div
+                            className="kizuna-passage-html bg-stone-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-700 rounded-xl p-3.5 sm:p-4 text-sm leading-relaxed whitespace-pre-wrap text-slate-800 dark:text-slate-100 font-jp-serif"
+                            dangerouslySetInnerHTML={{ __html: q.content }}
+                          />
+                        )}
+
+                        {q.imageUrl && (
+                          <div className="text-center">
+                            <img
+                              src={q.imageUrl}
+                              alt={`Câu ${q.index || qIdx + 1}`}
+                              className="max-w-full max-h-96 mx-auto rounded-xl border border-slate-200 dark:border-slate-700 bg-white"
+                            />
+                          </div>
+                        )}
+                        {q.audioUrl && (
+                          <audio src={q.audioUrl} controls preload="none" className="w-full h-9 outline-none" />
+                        )}
+
+                        {/* Tiêu đề câu hỏi kèm huy hiệu đúng/sai */}
+                        <div className="flex items-start justify-between gap-3 flex-wrap">
+                          <div className="text-[15px] font-bold text-slate-900 dark:text-slate-100 leading-relaxed font-jp-serif flex-1 min-w-0">
+                            <span
+                              className={`inline-flex items-center justify-center px-2 py-0.5 rounded-md text-xs font-black mr-2 border ${
+                                isGraded
+                                  ? isCorrect
+                                    ? 'bg-emerald-100 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800'
+                                    : 'bg-rose-100 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300 border-rose-300 dark:border-rose-800'
+                                  : 'bg-rose-50 dark:bg-rose-950/50 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800'
+                              }`}
+                            >
+                              Câu {q.index || qIdx + 1}
+                            </span>
+                            <span className="kizuna-passage-html" dangerouslySetInnerHTML={{ __html: q.question }} />
+                          </div>
+
+                          {isGraded && (
+                            <div className="shrink-0 flex items-center gap-1.5 flex-wrap">
+                              {isCorrect && (
+                                <span className="inline-flex items-center gap-1 bg-emerald-100 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 px-2.5 py-1 rounded-md text-[11px] font-extrabold">
+                                  <Check size={13} strokeWidth={3} /> ĐÚNG
+                                </span>
+                              )}
+                              {isWrong && (
+                                <span className="inline-flex items-center gap-1 bg-rose-100 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300 border border-rose-300 dark:border-rose-800 px-2.5 py-1 rounded-md text-[11px] font-extrabold">
+                                  <X size={13} strokeWidth={3} /> CÂU SAI
+                                </span>
+                              )}
+                              {isUnanswered && (
+                                <span className="inline-flex items-center gap-1 bg-rose-100 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300 border border-rose-300 dark:border-rose-800 px-2.5 py-1 rounded-md text-[11px] font-extrabold">
+                                  <AlertCircle size={13} /> CHƯA LÀM
+                                </span>
+                              )}
+                              {examMode === 'practice' && hasAnswered && !isSubmitted && (
+                                <button
+                                  type="button"
+                                  onClick={() => handleRetryQuestion(q.id)}
+                                  title="Xóa chọn câu này để làm lại"
+                                  className="inline-flex items-center gap-1 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 px-2 py-1 rounded-md text-[11px] font-bold cursor-pointer transition-colors"
+                                >
+                                  <RotateCcw size={11} /> Làm lại
+                                </button>
+                              )}
+                            </div>
+                          )}
                         </div>
-                      )}
-                      {q.audioUrl && (
-                        <audio src={q.audioUrl} controls preload="none" style={{ width: '100%', outline: 'none' }} />
-                      )}
 
-                      {/* Tiêu đề câu hỏi kèm huy hiệu trạng thái đúng/sai */}
-                      <div style={{
-                        display: 'flex',
-                        alignItems: 'flex-start',
-                        justifyContent: 'space-between',
-                        gap: 12,
-                        flexWrap: 'wrap'
-                      }}>
-                        <div style={{
-                          fontSize: 15,
-                          fontWeight: 700,
-                          color: '#1c2536',
-                          lineHeight: 1.6,
-                          fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif",
-                          flex: 1
-                        }}>
-                          <span style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            background: isGraded
-                              ? (isCorrect ? '#dcfce7' : '#fee2e2')
-                              : '#fdf2f0',
-                            color: isGraded
-                              ? (isCorrect ? '#15803d' : '#b91c1c')
-                              : '#c53d32',
-                            border: isGraded
-                              ? (isCorrect ? '1px solid #86efac' : '1px solid #fca5a5')
-                              : '1px solid #f3d5d2',
-                            padding: '2px 8px',
-                            borderRadius: 4,
-                            fontSize: 12,
-                            fontWeight: 900,
-                            marginRight: 8
-                          }}>
-                            Câu {q.index || (qIdx + 1)}
-                          </span>
-                          <span dangerouslySetInnerHTML={{ __html: q.question }} />
-                        </div>
+                        {/* Các phương án lựa chọn (1, 2, 3, 4) */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                          {(q.options || []).map(opt => {
+                            const isChosen = userChoice === opt.id;
+                            const isOfficialCorrect = isGraded && q.correctAnswer === opt.id;
+                            const isOptionLocked = isGraded;
 
-                        {/* Huy hiệu đánh giá đúng/sai (sau khi nộp hoặc ngay khi chọn ở chế độ Luyện tập) */}
-                        {isGraded && (
-                          <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 6 }}>
-                            {isCorrect && (
-                              <span style={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: 4,
-                                background: '#f0fdf4',
-                                color: '#15803d',
-                                border: '1px solid #86efac',
-                                padding: '4px 10px',
-                                borderRadius: 6,
-                                fontSize: 11,
-                                fontWeight: 800
-                              }}>
-                                <Check size={13} strokeWidth={3} /> ĐÚNG
-                              </span>
-                            )}
-                            {isWrong && (
-                              <span style={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: 4,
-                                background: '#fee2e2',
-                                color: '#b91c1c',
-                                border: '1px solid #fca5a5',
-                                padding: '4px 10px',
-                                borderRadius: 6,
-                                fontSize: 11,
-                                fontWeight: 800
-                              }}>
-                                <X size={13} strokeWidth={3} /> CÂU SAI
-                              </span>
-                            )}
-                            {isUnanswered && (
-                              <span style={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: 4,
-                                background: '#fee2e2',
-                                color: '#b91c1c',
-                                border: '1px solid #fca5a5',
-                                padding: '4px 10px',
-                                borderRadius: 6,
-                                fontSize: 11,
-                                fontWeight: 800
-                              }}>
-                                <AlertCircle size={13} /> CHƯA LÀM
-                              </span>
-                            )}
-                            {examMode === 'practice' && hasAnswered && !isSubmitted && (
+                            let optCls =
+                              'text-left p-3 px-3.5 rounded-xl border text-sm flex items-center gap-2.5 transition-all ';
+                            let badgeCls =
+                              'w-6 h-6 rounded-full inline-flex items-center justify-center text-xs font-extrabold shrink-0 ';
+
+                            if (isGraded) {
+                              if (isOfficialCorrect) {
+                                optCls +=
+                                  'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-500 dark:border-emerald-600 text-emerald-800 dark:text-emerald-200 font-bold';
+                                badgeCls += 'bg-emerald-600 text-white';
+                              } else if (isChosen && !isOfficialCorrect) {
+                                optCls +=
+                                  'bg-rose-50 dark:bg-rose-950/50 border-2 border-rose-500 dark:border-rose-600 text-rose-800 dark:text-rose-200 font-bold';
+                                badgeCls += 'bg-rose-600 text-white';
+                              } else {
+                                optCls +=
+                                  'bg-slate-50/70 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 opacity-70';
+                                badgeCls += 'bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400';
+                              }
+                            } else if (isChosen) {
+                              optCls +=
+                                'bg-rose-50 dark:bg-rose-950/50 border-rose-500 dark:border-rose-500 text-rose-700 dark:text-rose-200 font-bold shadow-xs cursor-pointer';
+                              badgeCls += 'bg-rose-600 text-white';
+                            } else {
+                              optCls +=
+                                'bg-white dark:bg-slate-800/90 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 hover:border-rose-400 dark:hover:border-rose-500 hover:-translate-y-0.5 font-medium cursor-pointer';
+                              badgeCls += 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-200';
+                            }
+
+                            return (
                               <button
+                                key={opt.id}
                                 type="button"
-                                onClick={() => handleRetryQuestion(q.id)}
-                                title="Xóa chọn câu này để làm lại"
-                                style={{
-                                  display: 'inline-flex',
-                                  alignItems: 'center',
-                                  gap: 4,
-                                  background: '#ffffff',
-                                  color: '#57534e',
-                                  border: '1px solid #d6d3d1',
-                                  padding: '4px 8px',
-                                  borderRadius: 6,
-                                  fontSize: 11,
-                                  fontWeight: 700,
-                                  cursor: 'pointer'
-                                }}
+                                disabled={isOptionLocked}
+                                onClick={() => handleSelectOption(q.id, opt.id)}
+                                className={optCls}
                               >
-                                <RotateCcw size={11} /> Làm lại câu này
+                                <span className={badgeCls}>{opt.id}</span>
+
+                                <span className="flex-1 font-jp-serif leading-relaxed">
+                                  {opt.value ? (
+                                    <span className="kizuna-passage-html" dangerouslySetInnerHTML={{ __html: opt.value }} />
+                                  ) : (
+                                    <span className="text-slate-400 italic text-xs">
+                                      Phương án ({opt.id})
+                                    </span>
+                                  )}
+                                </span>
+
+                                {isGraded && isOfficialCorrect && (
+                                  <span className="inline-flex items-center gap-1 text-[11px] font-extrabold text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/70 border border-emerald-300 dark:border-emerald-700 px-2 py-0.5 rounded shrink-0">
+                                    <Check size={12} strokeWidth={3} />
+                                    <span>Đáp án đúng</span>
+                                  </span>
+                                )}
+
+                                {isGraded && isChosen && !isOfficialCorrect && (
+                                  <span className="inline-flex items-center gap-1 text-[11px] font-extrabold text-rose-700 dark:text-rose-300 bg-rose-100 dark:bg-rose-950/70 border border-rose-300 dark:border-rose-700 px-2 py-0.5 rounded shrink-0">
+                                    <X size={12} strokeWidth={3} />
+                                    <span>Bạn chọn</span>
+                                  </span>
+                                )}
                               </button>
-                            )}
+                            );
+                          })}
+                        </div>
+
+                        {/* Bảng đối chiếu đáp án & giải thích chi tiết / dịch nghĩa */}
+                        {isGraded && (
+                          <div className={`mt-1 rounded-xl p-3.5 sm:p-4 text-xs sm:text-[13px] flex flex-col gap-2.5 border border-l-4 ${
+                            isCorrect
+                              ? 'bg-emerald-50/80 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800/80 border-l-emerald-600'
+                              : 'bg-rose-50/80 dark:bg-rose-950/30 border-rose-200 dark:border-rose-800/80 border-l-rose-600'
+                          }`}>
+                            <div className="flex items-center flex-wrap gap-2 font-extrabold">
+                              {isCorrect && (
+                                <div className="text-emerald-700 dark:text-emerald-300 flex items-center gap-1.5">
+                                  <CheckCircle2 size={16} />
+                                  <span>Chính xác! Bạn đã chọn đúng phương án ({q.correctAnswer})</span>
+                                </div>
+                              )}
+                              {isWrong && (
+                                <div className="text-rose-700 dark:text-rose-300 flex items-center gap-1.5 flex-wrap">
+                                  <X size={16} strokeWidth={3} />
+                                  <span>
+                                    Bạn đã chọn sai: <strong className="line-through">Phương án ({userChoice})</strong> — Đáp án đúng:{' '}
+                                    <strong className="text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/70 px-1.5 py-0.5 rounded border border-emerald-300 dark:border-emerald-700">
+                                      Phương án ({q.correctAnswer})
+                                    </strong>
+                                  </span>
+                                </div>
+                              )}
+                              {isUnanswered && (
+                                <div className="text-rose-700 dark:text-rose-300 flex items-center gap-1.5 flex-wrap">
+                                  <AlertCircle size={16} />
+                                  <span>
+                                    Chưa chọn đáp án — Đáp án đúng:{' '}
+                                    <strong className="text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/70 px-1.5 py-0.5 rounded border border-emerald-300 dark:border-emerald-700">
+                                      Phương án ({q.correctAnswer})
+                                    </strong>
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+
+                            {q.explanation ? (
+                              <div className="flex items-start gap-2.5 text-slate-700 dark:text-slate-200 leading-relaxed bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-700/80 rounded-lg p-3">
+                                <Lightbulb size={16} className="text-amber-500 mt-0.5 shrink-0" />
+                                <div className="min-w-0 flex-1">
+                                  <div className="font-extrabold text-amber-800 dark:text-amber-400 text-xs mb-1">
+                                    Giải thích & Từ vựng / Ngữ pháp:
+                                  </div>
+                                  <div className="kizuna-passage-html" dangerouslySetInnerHTML={{ __html: q.explanation }} />
+                                </div>
+                              </div>
+                            ) : null}
+
+                            {q.script ? (
+                              <div className="flex items-start gap-2.5 text-slate-700 dark:text-slate-200 leading-relaxed bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-700/80 rounded-lg p-3">
+                                <BookOpen size={16} className="text-teal-600 dark:text-teal-400 mt-0.5 shrink-0" />
+                                <div className="min-w-0 flex-1">
+                                  <div className="font-extrabold text-teal-800 dark:text-teal-400 text-xs mb-1">
+                                    Dịch nghĩa câu & Kịch bản hội thoại:
+                                  </div>
+                                  <div className="kizuna-passage-html whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: q.script }} />
+                                </div>
+                              </div>
+                            ) : null}
                           </div>
                         )}
                       </div>
-
-                      {/* Các phương án lựa chọn (1, 2, 3, 4) */}
-                      <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                        gap: 10
-                      }}>
-                        {(q.options || []).map(opt => {
-                          const isChosen = userChoice === opt.id;
-                          const isOfficialCorrect = isGraded && q.correctAnswer === opt.id;
-                          const isOptionLocked = isGraded;
-
-                          let optBg = '#ffffff';
-                          let optBorder = '1.5px solid #e2e8f0';
-                          let optColor = '#1c2536';
-                          let badgeBg = '#f1f5f9';
-                          let badgeColor = '#475569';
-
-                          if (isGraded) {
-                            if (isOfficialCorrect) {
-                              optBg = '#f0fdf4';
-                              optBorder = '1.5px solid #16a34a';
-                              optColor = '#15803d';
-                              badgeBg = '#16a34a';
-                              badgeColor = '#ffffff';
-                            } else if (isChosen && !isOfficialCorrect) {
-                              optBg = '#fef2f2';
-                              optBorder = '2px solid #dc2626';
-                              optColor = '#991b1b';
-                              badgeBg = '#dc2626';
-                              badgeColor = '#ffffff';
-                            } else {
-                              optBg = '#ffffff';
-                              optBorder = '1px solid #e2e8f0';
-                              optColor = '#94a3b8';
-                              badgeBg = '#f8fafc';
-                              badgeColor = '#94a3b8';
-                            }
-                          } else if (isChosen) {
-                            optBg = '#fdf2f0';
-                            optBorder = '1.5px solid #c53d32';
-                            optColor = '#c53d32';
-                            badgeBg = '#c53d32';
-                            badgeColor = '#ffffff';
-                          }
-
-                          return (
-                            <button
-                              key={opt.id}
-                              type="button"
-                              onClick={() => handleSelectOption(q.id, opt.id)}
-                              style={{
-                                background: optBg,
-                                border: optBorder,
-                                color: optColor,
-                                padding: '11px 14px',
-                                borderRadius: 8,
-                                textAlign: 'left',
-                                fontSize: 14,
-                                fontWeight: isChosen || isOfficialCorrect ? 700 : 500,
-                                cursor: isOptionLocked ? 'default' : 'pointer',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: 10,
-                                transition: 'all 0.15s ease',
-                                boxShadow: isChosen && !isGraded ? '0 1px 4px rgba(197, 61, 50, 0.15)' : 'none'
-                              }}
-                              onMouseEnter={e => {
-                                if (!isOptionLocked && !isChosen) {
-                                  e.currentTarget.style.borderColor = '#c53d32';
-                                  e.currentTarget.style.transform = 'translateY(-1px)';
-                                }
-                              }}
-                              onMouseLeave={e => {
-                                if (!isOptionLocked && !isChosen) {
-                                  e.currentTarget.style.borderColor = '#e2e8f0';
-                                  e.currentTarget.style.transform = 'translateY(0)';
-                                }
-                              }}
-                            >
-                              <span style={{
-                                width: 24,
-                                height: 24,
-                                borderRadius: '50%',
-                                background: badgeBg,
-                                color: badgeColor,
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                fontSize: 12,
-                                fontWeight: 800,
-                                flexShrink: 0
-                              }}>
-                                {opt.id}
-                              </span>
-
-                              <span style={{ flex: 1, fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif" }}>
-                                {opt.value ? (
-                                  <span dangerouslySetInnerHTML={{ __html: opt.value }} />
-                                ) : (
-                                  <span style={{ color: '#94a3b8', fontStyle: 'italic', fontSize: 13 }}>
-                                    Phương án ({opt.id})
-                                  </span>
-                                )}
-                              </span>
-
-                              {isGraded && isOfficialCorrect && (
-                                <span style={{
-                                  display: 'inline-flex',
-                                  alignItems: 'center',
-                                  gap: 3,
-                                  fontSize: 11,
-                                  fontWeight: 800,
-                                  color: '#15803d',
-                                  background: '#dcfce7',
-                                  border: '1px solid #86efac',
-                                  padding: '2px 6px',
-                                  borderRadius: 4,
-                                  flexShrink: 0
-                                }}>
-                                  <Check size={12} strokeWidth={3} />
-                                  <span>Đáp án đúng</span>
-                                </span>
-                              )}
-
-                              {isGraded && isChosen && !isOfficialCorrect && (
-                                <span style={{
-                                  display: 'inline-flex',
-                                  alignItems: 'center',
-                                  gap: 3,
-                                  fontSize: 11,
-                                  fontWeight: 800,
-                                  color: '#b91c1c',
-                                  background: '#fee2e2',
-                                  border: '1px solid #fca5a5',
-                                  padding: '2px 6px',
-                                  borderRadius: 4,
-                                  flexShrink: 0
-                                }}>
-                                  <X size={12} strokeWidth={3} />
-                                  <span>Bạn đã chọn</span>
-                                </span>
-                              )}
-                            </button>
-                          );
-                        })}
-                      </div>
-
-                      {/* BẢNG ĐỐI CHIẾU KẾT QUẢ & LỜI GIẢI CHI TIẾT (HIỂN THỊ NGAY KHI CHỌN Ở CHẾ ĐỘ LUYỆN TẬP HOẶC SAU KHI NỘP) */}
-                      {isGraded && (
-                        <div style={{
-                          marginTop: 4,
-                          background: isCorrect ? '#f0fdf4' : '#fef2f2',
-                          border: isCorrect ? '1px solid #bbf7d0' : '1px solid #fecaca',
-                          borderLeft: isCorrect ? '4px solid #16a34a' : '4px solid #dc2626',
-                          borderRadius: 8,
-                          padding: '14px 16px',
-                          fontSize: 13,
-                          display: 'flex',
-                          flexDirection: 'column',
-                          gap: 10
-                        }}>
-                          {/* 1. Dòng đối chiếu bạn đã chọn vs đáp án đúng */}
-                          <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            flexWrap: 'wrap',
-                            gap: 8,
-                            fontSize: 13,
-                            fontWeight: 800
-                          }}>
-                            {isCorrect && (
-                              <div style={{ color: '#15803d', display: 'flex', alignItems: 'center', gap: 6 }}>
-                                <CheckCircle2 size={16} color="#16a34a" />
-                                <span>Chính xác! Bạn đã chọn đúng phương án ({q.correctAnswer})</span>
-                              </div>
-                            )}
-
-                            {isWrong && (
-                              <div style={{ color: '#b91c1c', display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
-                                <X size={16} color="#dc2626" strokeWidth={3} />
-                                <span>
-                                  Bạn đã chọn sai: <strong style={{ textDecoration: 'line-through' }}>Phương án ({userChoice})</strong> — Đáp án chính xác là:{' '}
-                                  <strong style={{ color: '#15803d', background: '#dcfce7', padding: '1px 6px', borderRadius: 4, border: '1px solid #86efac' }}>
-                                    Phương án ({q.correctAnswer})
-                                  </strong>
-                                </span>
-                              </div>
-                            )}
-
-                            {isUnanswered && (
-                              <div style={{ color: '#b91c1c', display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
-                                <AlertCircle size={16} color="#dc2626" />
-                                <span>
-                                  Bạn chưa chọn đáp án cho câu này — Đáp án chính xác là:{' '}
-                                  <strong style={{ color: '#15803d', background: '#dcfce7', padding: '1px 6px', borderRadius: 4, border: '1px solid #86efac' }}>
-                                    Phương án ({q.correctAnswer})
-                                  </strong>
-                                </span>
-                              </div>
-                            )}
-                          </div>
-
-                          {/* 2. Lời giải thích chi tiết */}
-                          {q.explanation ? (
-                            <div style={{
-                              display: 'flex',
-                              alignItems: 'flex-start',
-                              gap: 8,
-                              color: '#334155',
-                              lineHeight: 1.6,
-                              background: '#ffffff',
-                              border: isCorrect ? '1px solid #dcfce7' : '1px solid #fee2e2',
-                              borderRadius: 6,
-                              padding: '10px 12px'
-                            }}>
-                              <Lightbulb size={15} color="#d97706" style={{ marginTop: 2, flexShrink: 0 }} />
-                              <div>
-                                <strong style={{ color: '#92400e', marginRight: 4 }}>Giải thích chi tiết:</strong>
-                                <span dangerouslySetInnerHTML={{ __html: q.explanation }} />
-                              </div>
-                            </div>
-                          ) : null}
-
-                          {/* 3. Kịch bản Choukai / Dịch nghĩa đoạn văn */}
-                          {q.script ? (
-                            <div style={{
-                              display: 'flex',
-                              alignItems: 'flex-start',
-                              gap: 8,
-                              color: '#475569',
-                              lineHeight: 1.6,
-                              background: '#ffffff',
-                              border: '1px solid #e2e8f0',
-                              borderRadius: 6,
-                              padding: '10px 12px'
-                            }}>
-                              <BookOpen size={15} color="#475569" style={{ marginTop: 2, flexShrink: 0 }} />
-                              <div>
-                                <strong style={{ color: '#1c2536', marginRight: 4 }}>Dịch nghĩa & Kịch bản:</strong>
-                                <span dangerouslySetInnerHTML={{ __html: q.script }} />
-                              </div>
-                            </div>
-                          ) : null}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+
         {/* 5. THANH ĐIỀU HƯỚNG / NỘP BÀI CUỐI TRANG */}
         {!isSubmitted ? (
           examMode === 'exam' ? (
-            <div style={{
-              marginTop: 20,
-              padding: '20px 24px',
-              background: '#ffffff',
-              borderRadius: 12,
-              border: '1px solid #ebe7df',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              flexWrap: 'wrap',
-              gap: 16,
-              boxShadow: '0 2px 6px rgba(0,0,0,0.02)'
-            }}>
+            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 flex justify-between items-center flex-wrap gap-4 shadow-xs">
               <div>
-                <div style={{ fontSize: 16, fontWeight: 800, color: '#1c2536' }}>
+                <div className="text-base font-extrabold text-slate-900 dark:text-white">
                   Đã hoàn thành các câu hỏi của đề thi?
                 </div>
-                <div style={{ fontSize: 13, color: '#78716c', marginTop: 4 }}>
-                  Đã trả lời: <strong style={{ color: '#c53d32' }}>{answeredCount}</strong> / {totalQuestionsCount} câu ({progressPercent}%)
+                <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+                  Đã trả lời: <strong className="text-rose-600 dark:text-rose-400">{answeredCount}</strong> / {totalQuestionsCount} câu ({progressPercent}%)
                   {countUnansweredQuestions() > 0 && (
-                    <span style={{ color: '#dc2626', marginLeft: 8, fontWeight: 700 }}>
+                    <span className="text-rose-600 dark:text-rose-400 ml-2 font-bold">
                       (Còn {countUnansweredQuestions()} câu chưa làm)
                     </span>
                   )}
@@ -1433,70 +1012,29 @@ export const ExamPage: React.FC = () => {
               <button
                 type="button"
                 onClick={handleSubmitExam}
-                style={{
-                  padding: '12px 26px',
-                  background: '#c53d32',
-                  color: '#ffffff',
-                  border: 'none',
-                  borderRadius: 8,
-                  fontWeight: 800,
-                  fontSize: 14,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 8,
-                  boxShadow: '0 4px 12px rgba(197, 61, 50, 0.25)',
-                  transition: 'background 0.15s ease'
-                }}
-                onMouseEnter={e => e.currentTarget.style.background = '#9c2a2a'}
-                onMouseLeave={e => e.currentTarget.style.background = '#c53d32'}
+                className="px-6 py-3 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-extrabold text-sm flex items-center gap-2 shadow-sm transition-colors cursor-pointer"
               >
                 <CheckCircle2 size={18} /> Nộp bài chấm điểm
               </button>
             </div>
           ) : (
-            <div style={{
-              marginTop: 20,
-              padding: '20px 24px',
-              background: '#ffffff',
-              borderRadius: 12,
-              border: '1px solid #ccfbf1',
-              borderLeft: '4px solid #0d9488',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              flexWrap: 'wrap',
-              gap: 16,
-              boxShadow: '0 2px 6px rgba(0,0,0,0.02)'
-            }}>
+            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-teal-200 dark:border-teal-800/70 border-l-4 border-l-teal-600 p-5 flex justify-between items-center flex-wrap gap-4 shadow-xs">
               <div>
-                <div style={{ fontSize: 16, fontWeight: 800, color: '#1c2536' }}>
+                <div className="text-base font-extrabold text-slate-900 dark:text-white">
                   Chế độ Luyện tập · Đáp án hiển thị ngay sau khi chọn
                 </div>
-                <div style={{ fontSize: 13, color: '#57534e', marginTop: 4 }}>
-                  Đã làm: <strong style={{ color: '#0f766e' }}>{answeredCount}</strong> / {totalQuestionsCount} câu ·{' '}
-                  <strong style={{ color: '#15803d' }}>Đúng {liveCorrectCount}</strong> ·{' '}
-                  <strong style={{ color: '#b91c1c' }}>Sai {liveWrongCount}</strong>
+                <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+                  Đã làm: <strong className="text-teal-700 dark:text-teal-400">{answeredCount}</strong> / {totalQuestionsCount} câu ·{' '}
+                  <strong className="text-emerald-700 dark:text-emerald-400">Đúng {liveCorrectCount}</strong> ·{' '}
+                  <strong className="text-rose-600 dark:text-rose-400">Sai {liveWrongCount}</strong>
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+              <div className="flex gap-2.5 flex-wrap">
                 <button
                   type="button"
                   onClick={() => handleResetExam('practice')}
-                  style={{
-                    padding: '10px 18px',
-                    background: '#1c2536',
-                    color: '#ffffff',
-                    border: 'none',
-                    borderRadius: 8,
-                    fontWeight: 700,
-                    fontSize: 13,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 6
-                  }}
+                  className="px-4 py-2.5 bg-slate-800 dark:bg-slate-700 hover:bg-slate-900 text-white rounded-xl font-bold text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer transition-colors"
                 >
                   <RotateCcw size={15} /> Làm lại từ đầu
                 </button>
@@ -1504,19 +1042,7 @@ export const ExamPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => executeSubmission(false)}
-                    style={{
-                      padding: '10px 20px',
-                      background: '#0d9488',
-                      color: '#ffffff',
-                      border: 'none',
-                      borderRadius: 8,
-                      fontWeight: 800,
-                      fontSize: 13,
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 6
-                    }}
+                    className="px-5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white rounded-xl font-extrabold text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer transition-colors"
                   >
                     <CheckCircle2 size={16} /> Tổng kết & Lưu kết quả
                   </button>
@@ -1525,64 +1051,32 @@ export const ExamPage: React.FC = () => {
             </div>
           )
         ) : (
-          <div style={{
-            marginTop: 20,
-            padding: '20px 24px',
-            background: '#ffffff',
-            borderRadius: 12,
-            border: '1px solid #ebe7df',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: 16,
-            boxShadow: '0 2px 6px rgba(0,0,0,0.02)'
-          }}>
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 flex justify-between items-center flex-wrap gap-4 shadow-xs">
             <div>
-              <div style={{ fontSize: 16, fontWeight: 800, color: '#1c2536' }}>
+              <div className="text-base font-extrabold text-slate-900 dark:text-white">
                 Bạn đã xem lại xong kết quả bài thi!
               </div>
-              <div style={{ fontSize: 13, color: '#78716c', marginTop: 4 }}>
-                Đạt <strong style={{ color: scoreResult?.isPassed ? '#15803d' : '#b91c1c' }}>{scoreResult?.correct} / {scoreResult?.total}</strong> câu đúng ({scoreResult?.percentage}%)
+              <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+                Đạt{' '}
+                <strong className={scoreResult?.isPassed ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}>
+                  {scoreResult?.correct} / {scoreResult?.total}
+                </strong>{' '}
+                câu đúng ({scoreResult?.percentage}%)
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <div className="flex gap-2.5 flex-wrap">
               <button
                 type="button"
                 onClick={() => handleResetExam()}
-                style={{
-                  padding: '10px 18px',
-                  background: '#1c2536',
-                  color: '#ffffff',
-                  border: 'none',
-                  borderRadius: 8,
-                  fontWeight: 700,
-                  fontSize: 13,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 6
-                }}
+                className="px-4 py-2.5 bg-slate-800 dark:bg-slate-700 hover:bg-rose-600 text-white rounded-xl font-bold text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer transition-colors"
               >
                 <RotateCcw size={15} /> Làm lại đề này
               </button>
               <button
                 type="button"
                 onClick={handleExitExam}
-                style={{
-                  padding: '10px 18px',
-                  background: '#faf8f5',
-                  color: '#57534e',
-                  border: '1px solid #d6d3d1',
-                  borderRadius: 8,
-                  fontWeight: 700,
-                  fontSize: 13,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 6
-                }}
+                className="px-4 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer transition-colors"
               >
                 <ChevronLeft size={15} /> Trở về danh mục
               </button>
@@ -1590,175 +1084,74 @@ export const ExamPage: React.FC = () => {
           </div>
         )}
 
-        {/* MODAL XÁC NHẬN NỘP BÀI (THAY THẾ WINDOW.CONFIRM / LOCALHOST SAYS) */}
+        {/* MODAL XÁC NHẬN NỘP BÀI */}
         {showSubmitModal && (
-          <div style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'rgba(15, 23, 42, 0.65)',
-            backdropFilter: 'blur(5px)',
-            zIndex: 9999,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: 20
-          }}>
-            <div style={{
-              background: '#ffffff',
-              borderRadius: 16,
-              maxWidth: 480,
-              width: '100%',
-              padding: '28px',
-              boxShadow: '0 20px 45px rgba(0, 0, 0, 0.25)',
-              border: '1px solid #ebe7df',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 20,
-              animation: 'kizunaModalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
-            }}>
-              {/* Icon & Title */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                <div style={{
-                  width: 50,
-                  height: 50,
-                  borderRadius: 14,
-                  background: countUnansweredQuestions() > 0 ? '#fef2f2' : '#f0fdf4',
-                  border: countUnansweredQuestions() > 0 ? '1px solid #fecaca' : '1px solid #bbf7d0',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0
-                }}>
-                  {countUnansweredQuestions() > 0 ? (
-                    <AlertCircle size={26} color="#dc2626" />
-                  ) : (
-                    <FileCheck size={26} color="#16a34a" />
-                  )}
+          <div className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs z-50 flex items-center justify-center p-5">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 sm:p-7 shadow-2xl border border-slate-200 dark:border-slate-800 flex flex-col gap-5 animate-[kizunaModalIn_0.2s_cubic-bezier(0.16,1,0.3,1)]">
+              <div className="flex items-center gap-3.5">
+                <div className={`w-12 h-12 rounded-xl border flex items-center justify-center shrink-0 ${
+                  countUnansweredQuestions() > 0
+                    ? 'bg-rose-50 dark:bg-rose-950/60 border-rose-200 dark:border-rose-800 text-rose-600 dark:text-rose-400'
+                    : 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400'
+                }`}>
+                  {countUnansweredQuestions() > 0 ? <AlertCircle size={25} /> : <FileCheck size={25} />}
                 </div>
                 <div>
-                  <h3 style={{
-                    fontSize: 18,
-                    fontWeight: 800,
-                    color: '#1c2536',
-                    margin: 0,
-                    fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
-                  }}>
+                  <h3 className="text-lg font-extrabold text-slate-900 dark:text-white m-0 font-jp-serif">
                     Xác nhận nộp bài thi
                   </h3>
-                  <div style={{ fontSize: 13, color: '#78716c', marginTop: 2 }}>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                     {activeExam.label} ({activeExam.level})
                   </div>
                 </div>
               </div>
 
-              {/* Bảng tóm tắt tiến độ */}
-              <div style={{
-                background: '#faf8f5',
-                border: '1px solid #ebe7df',
-                borderRadius: 10,
-                padding: '14px 16px',
-                display: 'grid',
-                gridTemplateColumns: 'repeat(2, 1fr)',
-                gap: 12
-              }}>
+              <div className="bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 rounded-xl p-3.5 grid grid-cols-2 gap-3">
                 <div>
-                  <div style={{ fontSize: 11, fontWeight: 700, color: '#78716c' }}>TIẾN ĐỘ TRẢ LỜI</div>
-                  <div style={{ fontSize: 18, fontWeight: 900, color: '#16a34a', marginTop: 2 }}>
-                    {answeredCount} <span style={{ fontSize: 12, color: '#78716c' }}>/ {totalQuestionsCount} câu</span>
+                  <div className="text-[11px] font-bold text-slate-500 dark:text-slate-400">TIẾN ĐỘ TRẢ LỜI</div>
+                  <div className="text-lg font-black text-emerald-600 dark:text-emerald-400 mt-0.5">
+                    {answeredCount} <span className="text-xs text-slate-500 dark:text-slate-400">/ {totalQuestionsCount} câu</span>
                   </div>
                 </div>
-
                 <div>
-                  <div style={{ fontSize: 11, fontWeight: 700, color: '#78716c' }}>THỜI GIAN CÒN LẠI</div>
-                  <div style={{ fontSize: 18, fontWeight: 900, color: secondsRemaining < 300 ? '#dc2626' : '#1c2536', marginTop: 2 }}>
+                  <div className="text-[11px] font-bold text-slate-500 dark:text-slate-400">THỜI GIAN CÒN LẠI</div>
+                  <div className={`text-lg font-black mt-0.5 ${
+                    secondsRemaining < 300 ? 'text-rose-600 dark:text-rose-400' : 'text-slate-900 dark:text-white'
+                  }`}>
                     {formatTime(secondsRemaining)}
                   </div>
                 </div>
               </div>
 
-              {/* Cảnh báo nếu còn câu chưa làm */}
               {countUnansweredQuestions() > 0 ? (
-                <div style={{
-                  background: '#fef2f2',
-                  border: '1px solid #fecaca',
-                  borderRadius: 8,
-                  padding: '12px 14px',
-                  fontSize: 13,
-                  color: '#991b1b',
-                  lineHeight: 1.5,
-                  display: 'flex',
-                  gap: 10
-                }}>
-                  <AlertCircle size={18} color="#dc2626" style={{ flexShrink: 0, marginTop: 1 }} />
+                <div className="bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 rounded-xl p-3 text-xs sm:text-sm text-rose-800 dark:text-rose-200 leading-relaxed flex gap-2.5">
+                  <AlertCircle size={18} className="text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
                   <div>
-                    Bạn còn <strong style={{ color: '#dc2626' }}>{countUnansweredQuestions()} câu hỏi chưa trả lời</strong>!
-                    Các câu chưa hoàn thành sẽ được tính là 0 điểm. Bạn có chắc chắn muốn nộp bài chấm điểm ngay không?
+                    Bạn còn <strong className="text-rose-700 dark:text-rose-300">{countUnansweredQuestions()} câu hỏi chưa trả lời</strong>!
+                    Các câu chưa làm sẽ được tính là 0 điểm. Bạn có chắc chắn muốn nộp bài ngay không?
                   </div>
                 </div>
               ) : (
-                <div style={{
-                  background: '#f0fdf4',
-                  border: '1px solid #bbf7d0',
-                  borderRadius: 8,
-                  padding: '12px 14px',
-                  fontSize: 13,
-                  color: '#15803d',
-                  lineHeight: 1.5,
-                  display: 'flex',
-                  gap: 10
-                }}>
-                  <CheckCircle2 size={18} color="#16a34a" style={{ flexShrink: 0, marginTop: 1 }} />
+                <div className="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl p-3 text-xs sm:text-sm text-emerald-800 dark:text-emerald-200 leading-relaxed flex gap-2.5">
+                  <CheckCircle2 size={18} className="text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    Bạn đã hoàn thành đủ <strong>{totalQuestionsCount}</strong> câu hỏi. Hãy xác nhận để hệ thống chấm điểm và lưu tiến trình!
+                    Bạn đã hoàn thành đủ <strong>{totalQuestionsCount}</strong> câu hỏi. Hãy xác nhận để chấm điểm và lưu tiến trình!
                   </div>
                 </div>
               )}
 
-              {/* Action Buttons */}
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 4 }}>
+              <div className="flex justify-end gap-2.5 mt-1">
                 <button
                   type="button"
                   onClick={handleCancelSubmit}
-                  style={{
-                    padding: '10px 18px',
-                    background: '#ffffff',
-                    color: '#57534e',
-                    border: '1px solid #d6d3d1',
-                    borderRadius: 8,
-                    fontWeight: 700,
-                    fontSize: 13,
-                    cursor: 'pointer',
-                    transition: 'all 0.15s ease'
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.background = '#f5f5f4'}
-                  onMouseLeave={e => e.currentTarget.style.background = '#ffffff'}
+                  className="px-4 py-2.5 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 rounded-xl font-bold text-xs sm:text-sm cursor-pointer transition-colors"
                 >
                   Kiểm tra lại bài
                 </button>
-
                 <button
                   type="button"
                   onClick={handleConfirmSubmit}
-                  style={{
-                    padding: '10px 22px',
-                    background: '#c53d32',
-                    color: '#ffffff',
-                    border: 'none',
-                    borderRadius: 8,
-                    fontWeight: 800,
-                    fontSize: 13,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 6,
-                    boxShadow: '0 2px 8px rgba(197, 61, 50, 0.3)',
-                    transition: 'all 0.15s ease'
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.background = '#9c2a2a'}
-                  onMouseLeave={e => e.currentTarget.style.background = '#c53d32'}
+                  className="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-extrabold text-xs sm:text-sm flex items-center gap-1.5 shadow-sm cursor-pointer transition-colors"
                 >
                   <CheckCircle2 size={16} /> Xác nhận nộp bài
                 </button>
@@ -1767,108 +1160,40 @@ export const ExamPage: React.FC = () => {
           </div>
         )}
 
-        {/* MODAL XÁC NHẬN RỜI PHÒNG THI (THAY THẾ WINDOW.CONFIRM / LOCALHOST SAYS) */}
+        {/* MODAL XÁC NHẬN RỜI PHÒNG THI */}
         {showExitModal && (
-          <div style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'rgba(15, 23, 42, 0.65)',
-            backdropFilter: 'blur(5px)',
-            zIndex: 9999,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: 20
-          }}>
-            <div style={{
-              background: '#ffffff',
-              borderRadius: 16,
-              maxWidth: 440,
-              width: '100%',
-              padding: '28px',
-              boxShadow: '0 20px 45px rgba(0, 0, 0, 0.25)',
-              border: '1px solid #ebe7df',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 18,
-              animation: 'kizunaModalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                <div style={{
-                  width: 50,
-                  height: 50,
-                  borderRadius: 14,
-                  background: '#fffbeb',
-                  border: '1px solid #fde68a',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0
-                }}>
-                  <AlertCircle size={26} color="#d97706" />
+          <div className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs z-50 flex items-center justify-center p-5">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 sm:p-7 shadow-2xl border border-slate-200 dark:border-slate-800 flex flex-col gap-4 animate-[kizunaModalIn_0.2s_cubic-bezier(0.16,1,0.3,1)]">
+              <div className="flex items-center gap-3.5">
+                <div className="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+                  <AlertCircle size={25} />
                 </div>
                 <div>
-                  <h3 style={{
-                    fontSize: 18,
-                    fontWeight: 800,
-                    color: '#1c2536',
-                    margin: 0,
-                    fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
-                  }}>
+                  <h3 className="text-lg font-extrabold text-slate-900 dark:text-white m-0 font-jp-serif">
                     Rời khỏi phòng thi?
                   </h3>
-                  <div style={{ fontSize: 13, color: '#78716c', marginTop: 2 }}>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                     Bài làm hiện tại chưa được nộp
                   </div>
                 </div>
               </div>
 
-              <div style={{
-                background: '#fffbeb',
-                border: '1px solid #fde68a',
-                borderRadius: 8,
-                padding: '12px 14px',
-                fontSize: 13,
-                color: '#92400e',
-                lineHeight: 1.5
-              }}>
-                Bạn đã trả lời được <strong>{answeredCount}</strong> câu hỏi. Nếu rời phòng thi bây giờ, kết quả của lần thi này sẽ không được tính và lưu vào hệ thống.
+              <div className="bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded-xl p-3 text-xs sm:text-sm text-amber-900 dark:text-amber-200 leading-relaxed">
+                Bạn đã trả lời được <strong>{answeredCount}</strong> câu hỏi. Nếu rời phòng thi bây giờ, kết quả lần thi này sẽ không được lưu vào hệ thống.
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 4 }}>
+              <div className="flex justify-end gap-2.5 mt-1">
                 <button
                   type="button"
                   onClick={() => setShowExitModal(false)}
-                  style={{
-                    padding: '10px 18px',
-                    background: '#ffffff',
-                    color: '#57534e',
-                    border: '1px solid #d6d3d1',
-                    borderRadius: 8,
-                    fontWeight: 700,
-                    fontSize: 13,
-                    cursor: 'pointer'
-                  }}
+                  className="px-4 py-2.5 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 rounded-xl font-bold text-xs sm:text-sm cursor-pointer transition-colors"
                 >
                   Ở lại làm tiếp
                 </button>
-
                 <button
                   type="button"
                   onClick={performExit}
-                  style={{
-                    padding: '10px 20px',
-                    background: '#dc2626',
-                    color: '#ffffff',
-                    border: 'none',
-                    borderRadius: 8,
-                    fontWeight: 800,
-                    fontSize: 13,
-                    cursor: 'pointer'
-                  }}
+                  className="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-extrabold text-xs sm:text-sm cursor-pointer transition-colors"
                 >
                   Xác nhận rời đi
                 </button>
@@ -1884,7 +1209,7 @@ export const ExamPage: React.FC = () => {
   // GIAO DIỆN DANH MỤC ĐỀ THI JLPT (CATALOG VIEW)
   // =========================================================================
   return (
-    <div className="kizuna-exam-page" style={{ maxWidth: 1100, margin: '0 auto', paddingBottom: 60 }}>
+    <div className="max-w-6xl mx-auto pb-16 space-y-5">
       <style>{`
         @keyframes kanjiSpin {
           from { transform: rotate(0deg); }
@@ -1896,113 +1221,51 @@ export const ExamPage: React.FC = () => {
         }
       `}</style>
 
-      {/* 1. HERO BANNER CHUẨN PHONG CÁCH NHẬT BẢN */}
-      <div style={{
-        background: 'linear-gradient(135deg, #ffffff 0%, #faf8f5 100%)',
-        border: '1px solid #e7dfd5',
-        borderLeft: '4px solid #c53d32',
-        borderRadius: 14,
-        padding: '24px 28px',
-        marginBottom: 20,
-        boxShadow: '0 4px 16px -2px rgba(44, 30, 20, 0.04)'
-      }}>
-        <h1 style={{
-          fontSize: 22,
-          fontWeight: 900,
-          color: '#1c2536',
-          margin: '0 0 12px 0',
-          fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
-        }}>
-          Kho Đề Thi JLPT (N5 – N1)
-        </h1>
+      {/* 1. HERO BANNER */}
+      <div className="bg-gradient-to-br from-white to-stone-50 dark:from-slate-900 dark:to-slate-900/95 border border-slate-200 dark:border-slate-800 border-l-4 border-l-rose-600 rounded-2xl p-5 sm:p-7 shadow-xs transition-colors">
+        <div className="flex items-center justify-between flex-wrap gap-3 mb-3">
+          <h1 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white m-0 font-jp-serif">
+            Kho Đề Thi JLPT (N5 – N1)
+          </h1>
+          <span className="text-xs font-extrabold px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
+            {catalogTotalExams} bộ đề chính thức
+          </span>
+        </div>
 
-        {/* Thống kê tính năng nổi bật */}
-        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 6,
-            background: '#ffffff',
-            border: '1px solid #e7dfd5',
-            borderRadius: 8,
-            padding: '5px 12px',
-            fontSize: 12,
-            fontWeight: 700,
-            color: '#1c2536'
-          }}>
-            <Target size={14} color="#c53d32" />
-            <span>{levelFilter === 'ALL' && exams.length > 0 ? exams.length : 105} bộ đề JLPT chuẩn hóa N5 - N1</span>
+        <div className="flex gap-2.5 flex-wrap">
+          <div className="inline-flex items-center gap-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-800 dark:text-slate-200">
+            <Target size={14} className="text-rose-600 dark:text-rose-400" />
+            <span>{catalogTotalExams} bộ đề JLPT chuẩn hóa N5 – N1</span>
           </div>
 
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 6,
-            background: '#ffffff',
-            border: '1px solid #e7dfd5',
-            borderRadius: 8,
-            padding: '5px 12px',
-            fontSize: 12,
-            fontWeight: 700,
-            color: '#1c2536'
-          }}>
-            <Clock size={14} color="#0d9488" />
-            <span>2 chế độ: Thi thật (tính giờ) & Luyện tập (xem đáp án ngay)</span>
+          <div className="inline-flex items-center gap-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-800 dark:text-slate-200">
+            <Clock size={14} className="text-teal-600 dark:text-teal-400" />
+            <span>Thi thật (ẩn Furigana, tính giờ) & Luyện tập (xem đáp án, từ vựng & giải thích ngay)</span>
           </div>
 
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 6,
-            background: '#ffffff',
-            border: '1px solid #e7dfd5',
-            borderRadius: 8,
-            padding: '5px 12px',
-            fontSize: 12,
-            fontWeight: 700,
-            color: '#1c2536'
-          }}>
-            <FileCheck size={14} color="#2563eb" />
+          <div className="inline-flex items-center gap-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-800 dark:text-slate-200">
+            <FileCheck size={14} className="text-blue-600 dark:text-blue-400" />
             <span>Tự động chấm & lưu tiến trình</span>
           </div>
         </div>
       </div>
 
       {/* 2. THANH LỌC BẬC JLPT (N5 - N1) */}
-      <div style={{
-        display: 'flex',
-        gap: 8,
-        flexWrap: 'wrap',
-        marginBottom: 20
-      }}>
+      <div className="flex gap-2 flex-wrap">
         {LEVEL_FILTERS.map(lvl => {
           const isSelected = levelFilter === lvl.id;
           return (
             <button
               key={lvl.id}
+              type="button"
               onClick={() => setLevelFilter(lvl.id)}
-              style={{
-                padding: '8px 16px',
-                borderRadius: 8,
-                fontSize: 13,
-                fontWeight: 700,
-                cursor: 'pointer',
-                transition: 'all 0.15s ease',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6,
-                background: isSelected ? '#c53d32' : '#ffffff',
-                color: isSelected ? '#ffffff' : '#57534e',
-                border: isSelected ? '1px solid #c53d32' : '1px solid #e7dfd5',
-                boxShadow: isSelected ? '0 2px 6px rgba(197, 61, 50, 0.25)' : 'none'
-              }}
+              className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold cursor-pointer transition-all flex items-center gap-1.5 border ${
+                isSelected
+                  ? 'bg-rose-600 text-white border-rose-600 shadow-sm'
+                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-rose-400 dark:hover:border-rose-600'
+              }`}
             >
-              <span style={{
-                fontSize: 11,
-                fontWeight: 900,
-                opacity: isSelected ? 0.9 : 0.7,
-                fontFamily: 'serif'
-              }}>
+              <span className={`text-[11px] font-black font-jp-serif ${isSelected ? 'opacity-95' : 'opacity-70'}`}>
                 {lvl.kanji}
               </span>
               <span>{lvl.label}</span>
@@ -2012,49 +1275,25 @@ export const ExamPage: React.FC = () => {
       </div>
 
       {/* 3. THANH TÌM KIẾM & BÁO CÁO SỐ LƯỢNG */}
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 16,
-        flexWrap: 'wrap',
-        gap: 12
-      }}>
-        <div style={{ fontSize: 13, fontWeight: 700, color: '#57534e' }}>
-          Tìm thấy <span style={{ color: '#c53d32', fontWeight: 900 }}>{filteredExams.length}</span> bộ đề thi:
+      <div className="flex justify-between items-center flex-wrap gap-3">
+        <div className="text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300">
+          Tìm thấy <span className="text-rose-600 dark:text-rose-400 font-black">{filteredExams.length}</span> bộ đề thi:
         </div>
 
-        <div style={{ position: 'relative', minWidth: 260 }}>
-          <Search size={15} color="#78716c" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+        <div className="relative min-w-[260px] w-full sm:w-72">
+          <Search size={15} className="text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             placeholder="Tìm theo năm, tên đề (vd: 2024, 07)..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '8px 32px 8px 32px',
-              borderRadius: 8,
-              border: '1px solid #d6d3d1',
-              fontSize: 13,
-              outline: 'none',
-              background: '#ffffff'
-            }}
+            className="w-full py-2 pl-9 pr-8 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-xs sm:text-sm outline-none focus:border-rose-500 dark:focus:border-rose-500 transition-colors"
           />
           {searchQuery && (
             <button
+              type="button"
               onClick={() => setSearchQuery('')}
-              style={{
-                position: 'absolute',
-                right: 8,
-                top: '50%',
-                transform: 'translateY(-50%)',
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                padding: 2,
-                color: '#78716c'
-              }}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
             >
               <X size={14} />
             </button>
@@ -2064,32 +1303,12 @@ export const ExamPage: React.FC = () => {
 
       {/* 4. LƯỚI DANH SÁCH BỘ ĐỀ THI */}
       {loading || loadingExamDetail ? (
-        <div style={{
-          padding: 60,
-          textAlign: 'center',
-          color: '#78716c',
-          fontSize: 14,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: 12
-        }}>
-          <div style={{
-            width: 28,
-            height: 28,
-            border: '3px solid #e7e5e4',
-            borderTop: '3px solid #c53d32',
-            borderRadius: '50%',
-            animation: 'kanjiSpin 0.8s linear infinite'
-          }} />
+        <div className="p-14 text-center text-slate-500 dark:text-slate-400 text-sm flex flex-col items-center gap-3">
+          <div className="w-7 h-7 border-[3px] border-slate-200 dark:border-slate-700 border-t-rose-600 rounded-full animate-[kanjiSpin_0.8s_linear_infinite]" />
           <span>{loadingExamDetail ? 'Đang mở phòng thi và thiết lập đề...' : 'Đang nạp danh mục đề thi...'}</span>
         </div>
       ) : (
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-          gap: 18
-        }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredExams.map(exam => {
             const pastResult = examResults[exam.id];
             const standardDuration = JLPT_STANDARD_DURATIONS[exam.level?.toUpperCase()] || 120;
@@ -2100,174 +1319,77 @@ export const ExamPage: React.FC = () => {
             return (
               <div
                 key={exam.id}
-                style={{
-                  background: '#ffffff',
-                  borderRadius: 12,
-                  border: pastResult ? '1px solid #c6e2ce' : '1px solid #ebe7df',
-                  borderLeft: pastResult ? (pastResult.isPassed ? '4px solid #16a34a' : '4px solid #c53d32') : '1px solid #ebe7df',
-                  padding: '20px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  transition: 'all 0.15s ease',
-                  boxShadow: '0 2px 6px rgba(0,0,0,0.02)'
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = '#c53d32';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 6px 16px rgba(197, 61, 50, 0.08)';
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = pastResult ? '#c6e2ce' : '#ebe7df';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 2px 6px rgba(0,0,0,0.02)';
-                }}
+                className={`bg-white dark:bg-slate-900 rounded-2xl border p-5 flex flex-col transition-all duration-150 shadow-2xs hover:shadow-md hover:-translate-y-0.5 hover:border-rose-400 dark:hover:border-rose-500 ${
+                  pastResult
+                    ? pastResult.isPassed
+                      ? 'border-emerald-200 dark:border-emerald-800/80 border-l-4 border-l-emerald-600'
+                      : 'border-rose-200 dark:border-rose-800/80 border-l-4 border-l-rose-600'
+                    : 'border-slate-200 dark:border-slate-800'
+                }`}
               >
-                {/* Header card: Level & Thời lượng chuẩn */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                  <span style={{
-                    background: '#fdf2f0',
-                    color: '#c53d32',
-                    border: '1px solid #f3d5d2',
-                    borderRadius: 6,
-                    padding: '2px 8px',
-                    fontSize: 11,
-                    fontWeight: 900
-                  }}>
+                {/* Header card */}
+                <div className="flex justify-between items-center mb-2.5">
+                  <span className="bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 rounded-md px-2 py-0.5 text-[11px] font-black">
                     {exam.level}
                   </span>
 
-                  <span style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 4,
-                    fontSize: 12,
-                    color: '#78716c',
-                    fontWeight: 600
-                  }}>
-                    <Clock size={13} color="#78716c" /> {durationMin} phút
+                  <span className="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400 font-semibold">
+                    <Clock size={13} /> {durationMin} phút
                   </span>
                 </div>
 
                 {/* Tên đề thi */}
-                <h3 style={{
-                  fontSize: 17,
-                  fontWeight: 800,
-                  color: '#1c2536',
-                  margin: '0 0 8px 0',
-                  fontFamily: "'Hiragino Mincho ProN', 'Yu Mincho', serif"
-                }}>
+                <h3 className="text-base sm:text-[17px] font-extrabold text-slate-900 dark:text-white m-0 mb-2 font-jp-serif">
                   {exam.label}
                 </h3>
 
-                {/* Huy hiệu tiến trình nếu người dùng đã từng thi đề này */}
+                {/* Huy hiệu tiến trình */}
                 {pastResult && (
-                  <div style={{
-                    background: pastResult.isPassed ? '#f0fdf4' : '#fef2f2',
-                    border: pastResult.isPassed ? '1px solid #bbf7d0' : '1px solid #fecaca',
-                    borderRadius: 6,
-                    padding: '6px 10px',
-                    marginBottom: 12,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    fontSize: 11
-                  }}>
-                    <span style={{
-                      fontWeight: 800,
-                      color: pastResult.isPassed ? '#15803d' : '#b91c1c',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 4
-                    }}>
+                  <div className={`rounded-lg px-2.5 py-1.5 mb-3 flex items-center justify-between text-[11px] border ${
+                    pastResult.isPassed
+                      ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300'
+                      : 'bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300'
+                  }`}>
+                    <span className="font-extrabold flex items-center gap-1">
                       {pastResult.isPassed ? <Check size={13} strokeWidth={3} /> : <AlertCircle size={13} />}
                       {pastResult.score}/{pastResult.total} câu ({pastResult.percentage}%) · {pastResult.isPassed ? 'Đạt' : 'Chưa đạt'}
                     </span>
-                    <span style={{ color: '#78716c', fontSize: 10, display: 'flex', alignItems: 'center', gap: 3 }}>
+                    <span className="text-slate-500 dark:text-slate-400 text-[10px] flex items-center gap-1">
                       <Calendar size={10} />
                       {new Date(pastResult.completedAt).toLocaleDateString('vi-VN')}
                     </span>
                   </div>
                 )}
 
-                {/* Thông tin câu hỏi, audio, giải thích */}
-                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 16 }}>
-                  <span style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 4,
-                    background: '#f8fafc',
-                    color: '#475569',
-                    border: '1px solid #e2e8f0',
-                    borderRadius: 6,
-                    padding: '3px 8px',
-                    fontSize: 11,
-                    fontWeight: 600
-                  }}>
-                    <FileText size={12} color="#475569" /> {exam.actualQuestionCount || exam.totalQuestions} câu hỏi
+                {/* Meta tags */}
+                <div className="flex gap-1.5 flex-wrap mb-4">
+                  <span className="inline-flex items-center gap-1 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-md px-2 py-0.5 text-[11px] font-semibold">
+                    <FileText size={12} /> {exam.actualQuestionCount || exam.totalQuestions} câu hỏi
                   </span>
 
                   {exam.audioUrl && (
-                    <span style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 4,
-                      background: '#f0fdfa',
-                      color: '#0d9488',
-                      border: '1px solid #ccfbf1',
-                      borderRadius: 6,
-                      padding: '3px 8px',
-                      fontSize: 11,
-                      fontWeight: 600
-                    }}>
-                      <Headphones size={12} color="#0d9488" /> Choukai
+                    <span className="inline-flex items-center gap-1 bg-teal-50 dark:bg-teal-950/50 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 rounded-md px-2 py-0.5 text-[11px] font-semibold">
+                      <Headphones size={12} /> Choukai
                     </span>
                   )}
 
                   {exam.explanationCount && exam.explanationCount > 0 ? (
-                    <span style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 4,
-                      background: '#fffbeb',
-                      color: '#d97706',
-                      border: '1px solid #fef3c7',
-                      borderRadius: 6,
-                      padding: '3px 8px',
-                      fontSize: 11,
-                      fontWeight: 600
-                    }}>
-                      <Lightbulb size={12} color="#d97706" /> {exam.explanationCount} giải thích
+                    <span className="inline-flex items-center gap-1 bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800 rounded-md px-2 py-0.5 text-[11px] font-semibold">
+                      <Lightbulb size={12} /> {exam.explanationCount} giải thích
                     </span>
                   ) : null}
                 </div>
 
                 {/* 2 chế độ: Thi thật & Luyện tập */}
-                <div style={{ marginTop: 'auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                <div className="mt-auto grid grid-cols-2 gap-2">
                   <button
                     type="button"
                     onClick={() => handleStartExam(exam.id, 'exam')}
-                    style={{
-                      width: '100%',
-                      padding: '10px 8px',
-                      background: pastResult ? '#c53d32' : '#1c2536',
-                      color: '#ffffff',
-                      border: 'none',
-                      borderRadius: 8,
-                      fontWeight: 700,
-                      fontSize: 13,
-                      cursor: 'pointer',
-                      transition: 'all 0.15s ease',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: 5
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.background = pastResult ? '#9c2a2a' : '#c53d32';
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.background = pastResult ? '#c53d32' : '#1c2536';
-                    }}
+                    className={`w-full py-2.5 px-2 rounded-xl font-bold text-xs sm:text-[13px] text-white cursor-pointer transition-colors flex items-center justify-center gap-1.5 ${
+                      pastResult
+                        ? 'bg-rose-600 hover:bg-rose-700'
+                        : 'bg-slate-800 dark:bg-slate-700 hover:bg-rose-600 dark:hover:bg-rose-600'
+                    }`}
                   >
                     <span>{pastResult ? 'Thi lại' : 'Thi thật'}</span>
                     <ArrowRight size={13} />
@@ -2276,32 +1398,7 @@ export const ExamPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => handleStartExam(exam.id, 'practice')}
-                    style={{
-                      width: '100%',
-                      padding: '10px 8px',
-                      background: '#f0fdfa',
-                      color: '#0f766e',
-                      border: '1px solid #99f6e4',
-                      borderRadius: 8,
-                      fontWeight: 700,
-                      fontSize: 13,
-                      cursor: 'pointer',
-                      transition: 'all 0.15s ease',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: 5
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.background = '#0d9488';
-                      e.currentTarget.style.color = '#ffffff';
-                      e.currentTarget.style.borderColor = '#0d9488';
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.background = '#f0fdfa';
-                      e.currentTarget.style.color = '#0f766e';
-                      e.currentTarget.style.borderColor = '#99f6e4';
-                    }}
+                    className="w-full py-2.5 px-2 rounded-xl font-bold text-xs sm:text-[13px] bg-teal-50 dark:bg-teal-950/50 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 hover:bg-teal-600 hover:text-white hover:border-teal-600 dark:hover:bg-teal-600 dark:hover:text-white cursor-pointer transition-colors flex items-center justify-center gap-1.5"
                   >
                     <Lightbulb size={13} />
                     <span>Luyện tập</span>
@@ -2313,70 +1410,26 @@ export const ExamPage: React.FC = () => {
         </div>
       )}
 
-      {/* MODAL THÔNG BÁO LỖI NẠP ĐỀ (THAY THẾ WINDOW.ALERT / LOCALHOST SAYS) */}
+      {/* MODAL THÔNG BÁO LỖI NẠP ĐỀ */}
       {loadErrorMsg && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'rgba(15, 23, 42, 0.65)',
-          backdropFilter: 'blur(5px)',
-          zIndex: 9999,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: 20
-        }}>
-          <div style={{
-            background: '#ffffff',
-            borderRadius: 16,
-            maxWidth: 420,
-            width: '100%',
-            padding: '26px',
-            boxShadow: '0 20px 45px rgba(0, 0, 0, 0.25)',
-            border: '1px solid #ebe7df',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 16,
-            animation: 'kizunaModalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-              <div style={{
-                width: 44,
-                height: 44,
-                borderRadius: 12,
-                background: '#fef2f2',
-                border: '1px solid #fecaca',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0
-              }}>
-                <AlertCircle size={24} color="#dc2626" />
+        <div className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs z-50 flex items-center justify-center p-5">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 flex flex-col gap-4 animate-[kizunaModalIn_0.2s_cubic-bezier(0.16,1,0.3,1)]">
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-xl bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0">
+                <AlertCircle size={24} />
               </div>
-              <h3 style={{ fontSize: 17, fontWeight: 800, color: '#1c2536', margin: 0 }}>
+              <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white m-0">
                 Thông báo
               </h3>
             </div>
-            <p style={{ fontSize: 13, color: '#57534e', lineHeight: 1.5, margin: 0 }}>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed m-0">
               {loadErrorMsg}
             </p>
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 4 }}>
+            <div className="flex justify-end mt-1">
               <button
                 type="button"
                 onClick={() => setLoadErrorMsg(null)}
-                style={{
-                  padding: '9px 20px',
-                  background: '#1c2536',
-                  color: '#ffffff',
-                  border: 'none',
-                  borderRadius: 8,
-                  fontWeight: 700,
-                  fontSize: 13,
-                  cursor: 'pointer'
-                }}
+                className="px-5 py-2 bg-slate-900 dark:bg-slate-700 hover:bg-slate-800 text-white rounded-xl font-bold text-xs sm:text-sm cursor-pointer transition-colors"
               >
                 Đã hiểu
               </button>

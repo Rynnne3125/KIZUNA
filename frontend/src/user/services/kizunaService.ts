@@ -705,7 +705,7 @@ export const kizunaService = {
   },
 
   async getExamCatalog(levelFilter = 'ALL'): Promise<Exam[]> {
-    const cacheKey = `kizuna_exam_catalog_v4_${levelFilter.toUpperCase()}`;
+    const cacheKey = `kizuna_exam_catalog_v5_${levelFilter.toUpperCase()}`;
     const cached = getSessionCache<Exam[]>(cacheKey);
     if (cached && Array.isArray(cached) && cached.length > 0) return cached;
 
@@ -760,7 +760,7 @@ export const kizunaService = {
 
   async getExamById(id: string): Promise<Exam | null> {
     if (!id) return null;
-    const cacheKey = `kizuna_exam_detail_v3_${id}`;
+    const cacheKey = `kizuna_exam_detail_v4_${id}`;
     const cleanLabel = (raw?: string) =>
       String(raw || '').replace(/\s*Thi\s*thử\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
     const isValidExam = (ex: Exam | null | undefined): ex is Exam =>
@@ -829,7 +829,7 @@ export const kizunaService = {
       kanjiCount: 2216,
       examsCount: 105
     };
-    const CACHE_KEY = 'kizuna_app_catalog_stats_v4';
+    const CACHE_KEY = 'kizuna_app_catalog_stats_v5';
     try {
       const cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
@@ -911,7 +911,7 @@ export const kizunaService = {
    * Lấy danh sách bài nghe Choukai từ Firestore jlpt_exam_catalog
    */
   async getChoukaiAudioList(level = 'ALL'): Promise<ChoukaiAudioItem[]> {
-    const cacheKey = `kizuna_choukai_audio_cache_v3_${level}`;
+    const cacheKey = `kizuna_choukai_audio_cache_v4_${level}`;
     const cached = getSessionCache<ChoukaiAudioItem[]>(cacheKey);
     if (cached && cached.length > 0) return cached;
 
@@ -968,7 +968,7 @@ export const kizunaService = {
    * Lấy chi tiết bài thi Choukai kèm 5 Mondai câu hỏi & kịch bản nghe từ Firestore
    */
   async getChoukaiExamDetail(id: string): Promise<ChoukaiAudioItem | null> {
-    const cacheKey = `kizuna_choukai_detail_${id}`;
+    const cacheKey = `kizuna_choukai_detail_v2_${id}`;
     const cached = getSessionCache<ChoukaiAudioItem>(cacheKey);
     if (cached) return cached;
 

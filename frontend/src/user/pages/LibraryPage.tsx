@@ -786,13 +786,14 @@ export const LibraryPage: React.FC = () => {
               )}
 
               {/* 5 MONDAI CHOUKAI CÂU HỎI */}
+              <div className={choukaiMode === 'exam' && !isSubmitted ? 'kizuna-hide-furigana' : ''}>
               {activeExamDetail.questionSets && activeExamDetail.questionSets.map((qs, qsIdx) => (
                 <div
                   key={qs.id || qsIdx}
                   className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 mb-5 shadow-xs transition-colors"
                 >
                   <div className="bg-slate-50 dark:bg-slate-800/80 p-2.5 px-3.5 rounded-xl text-sm font-extrabold text-slate-900 dark:text-white mb-4 border-l-4 border-l-teal-600 dark:border-l-teal-500">
-                    Mondai {qsIdx + 1}: <span dangerouslySetInnerHTML={{ __html: qs.title }} />
+                    Mondai {qsIdx + 1}: <span className="kizuna-passage-html" dangerouslySetInnerHTML={{ __html: qs.title }} />
                   </div>
 
                   {qs.audioUrl && (
@@ -879,7 +880,7 @@ export const LibraryPage: React.FC = () => {
                           )}
                           {q.question && q.question !== '番' && (
                             <div
-                              className="text-sm text-slate-800 dark:text-slate-100 mb-3 leading-relaxed font-serif"
+                              className="kizuna-passage-html text-sm text-slate-800 dark:text-slate-100 mb-3 leading-relaxed font-serif"
                               dangerouslySetInnerHTML={{ __html: q.question.replace(/^番\s*/, '') }}
                             />
                           )}
@@ -887,7 +888,7 @@ export const LibraryPage: React.FC = () => {
                           {/* Đoạn văn/nội dung phụ nếu có */}
                           {q.content && (
                             <div
-                              className="text-xs text-slate-600 dark:text-slate-300 mb-3 leading-relaxed bg-slate-50 dark:bg-slate-800/60 p-2.5 px-3.5 rounded-lg border border-slate-200 dark:border-slate-700/60"
+                              className="kizuna-passage-html text-xs text-slate-600 dark:text-slate-300 mb-3 leading-relaxed bg-slate-50 dark:bg-slate-800/60 p-2.5 px-3.5 rounded-lg border border-slate-200 dark:border-slate-700/60"
                               dangerouslySetInnerHTML={{ __html: q.content }}
                             />
                           )}
@@ -937,34 +938,39 @@ export const LibraryPage: React.FC = () => {
                                   }`}>
                                     {optId}
                                   </span>
-                                  <span style={{ flex: 1, lineHeight: 1.5 }}>
-                                    {optText ? (
-                                      <span dangerouslySetInnerHTML={{ __html: optText }} />
-                                    ) : (
-                                      <span className="text-slate-400 italic text-xs">
-                                        Phương án ({optId})
-                                      </span>
-                                    )}
-                                  </span>
+                                    <span style={{ flex: 1, lineHeight: 1.5 }}>
+                                      {optText ? (
+                                        <span className="kizuna-passage-html" dangerouslySetInnerHTML={{ __html: optText }} />
+                                      ) : (
+                                        <span className="text-slate-400 italic text-xs">
+                                          Phương án ({optId})
+                                        </span>
+                                      )}
+                                    </span>
                                 </button>
                               );
                             })}
                           </div>
 
-                          {/* KỊCH BẢN NGHE (AUDIO SCRIPT) - MỞ KHÓA KHI NỘP BÀI HOẶC KHI CHỌN Ở CHẾ ĐỘ LUYỆN TẬP */}
-                          {isGraded && (q.script || (q as any).audioScript) && (
-                            <div className="bg-slate-50 dark:bg-slate-950/70 border border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-3.5 sm:p-4 mt-2.5">
-                              <div className="text-[11px] font-extrabold text-teal-600 dark:text-teal-400 mb-1.5 flex items-center gap-1.5">
-                                <FileText size={13} />
-                                <span>KỊCH BẢN HỘI THOẠI (AUDIO SCRIPT):</span>
-                              </div>
-                              <div
-                                className="text-xs sm:text-[13px] text-slate-800 dark:text-slate-200 leading-relaxed whitespace-pre-wrap font-serif"
-                                dangerouslySetInnerHTML={{ __html: q.script || (q as any).audioScript || '' }}
-                              />
+                          {/* KỊCH BẢN NGHE & GIẢI THÍCH - MỞ KHÓA KHI NỘP BÀI HOẶC KHI CHỌN Ở CHẾ ĐỘ LUYỆN TẬP */}
+                          {isGraded && (q.script || (q as any).audioScript || q.explanation) && (
+                            <div className="bg-slate-50 dark:bg-slate-950/70 border border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-3.5 sm:p-4 mt-2.5 space-y-2">
+                              {(q.script || (q as any).audioScript) && (
+                                <>
+                                  <div className="text-[11px] font-extrabold text-teal-600 dark:text-teal-400 flex items-center gap-1.5">
+                                    <FileText size={13} />
+                                    <span>KỊCH BẢN HỘI THOẠI & DỊCH NGHĨA:</span>
+                                  </div>
+                                  <div
+                                    className="kizuna-passage-html text-xs sm:text-[13px] text-slate-800 dark:text-slate-200 leading-relaxed whitespace-pre-wrap font-serif"
+                                    dangerouslySetInnerHTML={{ __html: q.script || (q as any).audioScript || '' }}
+                                  />
+                                </>
+                              )}
                               {q.explanation && (
-                                <div className="text-xs text-slate-500 dark:text-slate-400 mt-2 pt-2 border-t border-slate-200 dark:border-slate-800">
-                                  <strong className="text-slate-700 dark:text-slate-300">Giải thích:</strong> <span dangerouslySetInnerHTML={{ __html: q.explanation }} />
+                                <div className={`kizuna-passage-html text-xs text-slate-700 dark:text-slate-300 leading-relaxed ${(q.script || (q as any).audioScript) ? 'pt-2 border-t border-slate-200 dark:border-slate-800' : ''}`}>
+                                  <strong className="text-amber-700 dark:text-amber-400 mr-1">Giải thích:</strong>
+                                  <span dangerouslySetInnerHTML={{ __html: q.explanation }} />
                                 </div>
                               )}
                             </div>
@@ -975,6 +981,7 @@ export const LibraryPage: React.FC = () => {
                   </div>
                 </div>
               ))}
+              </div>
             </div>
           ) : (
             /* DANH MỤC 65 BỘ ĐỀ THI CHOUKAI CHÍNH THỨC */

@@ -729,4 +729,165 @@ body {
   background: #475569;
 }
 
+/* 16. JLPT Exam / Choukai External HTML, Furigana & Enriched Explanation Styling */
+.kizuna-hide-furigana rt,
+.kizuna-hide-furigana rp {
+  display: none !important;
+}
+
+.kizuna-passage-html {
+  color: #1e293b;
+  overflow-x: auto;
+}
+.kizuna-passage-html ruby rt {
+  font-size: 0.65em;
+  font-weight: 600;
+  color: #64748b;
+  user-select: none;
+}
+.kizuna-passage-html u {
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+  text-decoration-color: #c53d32;
+  font-weight: 700;
+}
+.kizuna-passage-html table {
+  border-collapse: collapse;
+  max-width: 100%;
+  margin: 8px 0;
+}
+.kizuna-passage-html td,
+.kizuna-passage-html th {
+  border: 1px solid #cbd5e1;
+  padding: 6px 10px;
+}
+
+/* Override external onjlpt inline colors (#222, #000, etc.) & borders inside Dark Mode */
+.dark .kizuna-passage-html,
+.dark .kizuna-passage-html * {
+  color: inherit;
+}
+.dark .kizuna-passage-html {
+  color: #e2e8f0 !important;
+}
+.dark .kizuna-passage-html [style*="color"] {
+  color: #e2e8f0 !important;
+}
+.dark .kizuna-passage-html [style*="border"] {
+  border-color: #475569 !important;
+}
+.dark .kizuna-passage-html [style*="background:#fff"],
+.dark .kizuna-passage-html [style*="background: #fff"],
+.dark .kizuna-passage-html [style*="background-color:#fff"],
+.dark .kizuna-passage-html [style*="background-color: #fff"],
+.dark .kizuna-passage-html [style*="background:#f"],
+.dark .kizuna-passage-html [style*="background: #f"] {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+}
+.dark .kizuna-passage-html ruby rt {
+  color: #94a3b8 !important;
+}
+.dark .kizuna-passage-html u {
+  text-decoration-color: #f87171;
+  color: #fef2f2 !important;
+}
+.dark .kizuna-passage-html td,
+.dark .kizuna-passage-html th {
+  border-color: #475569 !important;
+}
+.dark .kizuna-passage-html .jlpt-reading {
+  border-color: #475569 !important;
+  color: #e2e8f0 !important;
+}
+
+/* Transcript Vietnamese & Explanation blocks */
+.kizuna-tr-vi {
+  color: #0f766e;
+  font-weight: 500;
+}
+.dark .kizuna-tr-vi {
+  color: #2dd4bf !important;
+}
+
+.kizuna-exp-legacy {
+  color: #334155;
+  margin-bottom: 6px;
+}
+.kizuna-exp-main {
+  color: #1e293b;
+  margin-bottom: 5px;
+}
+.kizuna-exp-main code {
+  background: #f1f5f9;
+  color: #b91c1c;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.92em;
+}
+.kizuna-exp-kanji {
+  display: inline-block;
+  margin-top: 3px;
+  font-size: 12px;
+  color: #92400e;
+  background: #fef3c7;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+.kizuna-exp-ex {
+  margin-top: 4px;
+  padding-left: 8px;
+  border-left: 2px solid #cbd5e1;
+  color: #475569;
+  font-size: 12px;
+}
+.kizuna-exp-opts {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #475569;
+  line-height: 1.6;
+}
+.kizuna-opt-hit-ok {
+  color: #15803d;
+  font-weight: 700;
+}
+.kizuna-opt-hit {
+  color: #64748b;
+}
+.kizuna-exp-vocab {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed #cbd5e1;
+  font-size: 12px;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.dark .kizuna-exp-legacy,
+.dark .kizuna-exp-main {
+  color: #e2e8f0 !important;
+}
+.dark .kizuna-exp-main code {
+  background: #334155 !important;
+  color: #fca5a5 !important;
+}
+.dark .kizuna-exp-kanji {
+  background: rgba(245, 158, 11, 0.16) !important;
+  color: #fcd34d !important;
+}
+.dark .kizuna-exp-ex {
+  border-left-color: #475569 !important;
+  color: #cbd5e1 !important;
+}
+.dark .kizuna-exp-opts,
+.dark .kizuna-exp-vocab {
+  color: #cbd5e1 !important;
+  border-top-color: #334155 !important;
+}
+.dark .kizuna-opt-hit-ok {
+  color: #4ade80 !important;
+}
+.dark .kizuna-opt-hit {
+  color: #94a3b8 !important;
+}
 

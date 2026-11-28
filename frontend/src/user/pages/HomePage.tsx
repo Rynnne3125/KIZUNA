@@ -91,7 +91,7 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
     vocabCount: 13096,
     grammarCount: 605,
     kanjiCount: 2216,
-    examsCount: 85
+    examsCount: 105
   });
 
   // Tải tiến độ học tập thực tế của user từ Firestore
@@ -720,7 +720,7 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
             </div>
           </div>
 
-          {/* 4. Bộ đề bổ trợ (試 - Shiken) */}
+          {/* 4. Kho đề thi JLPT (試 - Shiken) */}
           <div
             onClick={() => onNavigate('exam')}
             className="bg-white dark:bg-slate-800/90 hover:bg-amber-50/40 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-amber-400 dark:hover:border-amber-500 rounded-2xl p-4 cursor-pointer transition-all duration-200 group shadow-2xs hover:shadow-sm"
@@ -730,12 +730,12 @@ export const HomePage: React.FC<HomePageProps> = ({ user, onNavigate, onOpenAuth
                 試
               </div>
               <span className="text-[10px] sm:text-xs font-bold bg-amber-50 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 border border-amber-200 dark:border-amber-800 px-2 py-0.5 rounded-full font-jp-sans">
-                {userProgress?.examsCompleted || 0} đề
+                {catalogStats.examsCount.toLocaleString()} đề
               </span>
             </div>
             <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1.5">
               <Target className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-              <span>Đề luyện thi (Bổ trợ)</span>
+              <span>Đề thi JLPT (N5 – N1)</span>
             </div>
             <div className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mt-1">
               {userProgress?.examsCompleted || 0}{' '}

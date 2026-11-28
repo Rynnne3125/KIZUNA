@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { User } from '../types/auth';
 import { 
   Home, BookOpen, FileText, Languages, Map, Film, 
@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { ApkDownloadModal } from './ApkDownloadModal';
 import { isNativeApp } from '../utils/platform';
+import { kizunaService } from '../services/kizunaService';
 
 export type UserNavTab = 'home' | 'vocab' | 'grammar' | 'kanji' | 'roadmap' | 'library' | 'exam' | 'profile' | 'admin' | 'login';
 
@@ -31,7 +32,18 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
 }) => {
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [internalApkModalOpen, setInternalApkModalOpen] = useState(false);
+  const [examsCount, setExamsCount] = useState<number>(105);
   const isApp = isNativeApp();
+
+  useEffect(() => {
+    kizunaService.getAppCatalogStats().then((stats) => {
+      if (stats?.examsCount && stats.examsCount > 0) {
+        setExamsCount(stats.examsCount);
+      }
+    }).catch(() => {
+      // keep default count 105
+    });
+  }, []);
 
   const handleOpenApk = () => {
     if (onOpenApkModal) {
@@ -48,7 +60,7 @@ export const UserNavbar: React.FC<UserNavbarProps> = ({
     { id: 'kanji', label: 'Kanji', icon: <Languages className="w-5 h-5" />, badge: '2k+' },
     { id: 'roadmap', label: 'Lộ trình', icon: <Map className="w-5 h-5" /> },
     { id: 'library', label: 'Thư viện', icon: <Film className="w-5 h-5" /> },
-    { id: 'exam', label: 'Ôn thi JLPT', icon: <Target className="w-5 h-5" />, badge: '95 Đề' },
+    { id: 'exam', label: 'Ôn thi JLPT', icon: <Target className="w-5 h-5" />, badge: `${examsCount} Đề` },
     { id: 'profile', label: 'Cá nhân', icon: <UserCheck className="w-5 h-5" /> },
   ];
 
